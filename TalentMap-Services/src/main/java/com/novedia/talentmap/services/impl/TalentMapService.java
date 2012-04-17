@@ -2,9 +2,9 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.Collection;
 
-import com.novedia.talentmap.model.dao.ISkillDao;
 import com.novedia.talentmap.model.entity.SkillEntity;
 import com.novedia.talentmap.services.ITalentMapService;
+import com.novedia.talentmap.store.ISkillDao;
 
 /**
  * ITalentMapService interface implementation.

@@ -3,8 +3,8 @@ package com.novedia.talentmap.store.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.novedia.talentmap.model.dao.ISkillDao;
 import com.novedia.talentmap.model.entity.SkillEntity;
+import com.novedia.talentmap.store.ISkillDao;
 
 /**
  * ISkillDao interface implementation.
