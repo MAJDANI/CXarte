@@ -9,6 +9,6 @@
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	<!-- Dao declaration -->	
-	<bean id="skillDao" class="com.novedia.talentmap.model.dao.impl.SkillDao"/>
+	<bean id="skillEntity" class="com.novedia.talentmap.model.entity.SkillEntity"/>
     
 </beans>

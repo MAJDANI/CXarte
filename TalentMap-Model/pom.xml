@@ -7,8 +7,8 @@
     <groupId>com.novedia.talentmap</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>TalentMap-BizModel</artifactId>
-  <name>TalentMap-BizModel</name>
+  <artifactId>TalentMap-Model</artifactId>
+  <name>TalentMap-Model</name>
   <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
   

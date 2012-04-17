@@ -1,6 +1,5 @@
 package com.novedia.talentmap.services.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.novedia.talentmap.model.dao.ISkillDao;

@@ -10,7 +10,7 @@
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	<!-- DAO bean declaration import -->
-	<import resource="classpath:daos-spring-context.xml"/>
+	<import resource="classpath:store-spring-context.xml"/>
 	
 	<!-- Service beans declaration -->
 	<bean id="tmServiceBean" 

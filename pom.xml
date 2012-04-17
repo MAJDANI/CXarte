@@ -56,15 +56,9 @@
     </contributor>
   </contributors>
   
-  <!-- Children modules declaration -->
-  <modules>
-    <module>TalentMap-Model</module>
-    <module>TalentMap-Services</module>
-    <module>TalentMap-Web</module>
-  </modules>
-  
   <!-- Dependencies version -->
   <properties>
+  	<project.groupId>com.novedia.talentmap</project.groupId>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.7</junit.version>
 	<mockito.version>1.8.5</mockito.version>
@@ -72,6 +66,14 @@
 	<aspectj.version>1.6.3</aspectj.version>
 	<slf4j.version>1.6.1</slf4j.version>
   </properties>
+  
+  <!-- Children modules declaration -->
+  <modules>
+    <module>TalentMap-Model</module>
+    <module>TalentMap-Services</module>
+    <module>TalentMap-Web</module>
+    <module>TalentMap-Store</module>
+  </modules>
   
   <!-- Inherited dependencies by modules -->
   <dependencies>

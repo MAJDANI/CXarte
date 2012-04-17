@@ -20,7 +20,7 @@
   	  	
   	<dependency>
   		<groupId>com.novedia.talentmap</groupId>
-  		<artifactId>TalentMap-BizModel</artifactId>
+  		<artifactId>TalentMap-Store</artifactId>
   		<version>1.0-SNAPSHOT</version>
   	</dependency>
   

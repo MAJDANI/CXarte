@@ -33,6 +33,7 @@ import com.vaadin.ui.Window;
 @Configurable
 public class MyVaadinApplication extends Application {
 
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
 
 	/**
