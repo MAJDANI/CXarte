@@ -1,0 +1,26 @@
+--------------------------
+-- TABLE DES CATEGORIES --
+--------------------------
+
+--------------------
+-- TABLE CREATION --
+--------------------
+DROP TABLE CATEGORY CASCADE CONSTRAINTS;
+CREATE TABLE CATEGORY
+(
+	CATEG_ID    VARCHAR2(10) NOT NULL,
+	CATEG_NAME  VARCHAR2(20) NOT NULL,
+)
+TABLESPACE tmp00dta;
+
+COMMENT ON TABLE CATEGORY IS 'Tables des catégories';
+
+-----------------------
+-- SEQUENCE CREATION --
+-----------------------
+CREATE SEQUENCE SEQCATEGORY MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+---------------------------
+-- PRIMARY KEYS CREATION --
+---------------------------
+ALTER TABLE CATEGORY ADD CONSTRAINT CATEGORYPK PRIMARY KEY (CATEG_ID) USING INDEX TABLESPACE TMP00IDX1;
