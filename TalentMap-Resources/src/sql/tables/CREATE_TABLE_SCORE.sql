@@ -11,9 +11,13 @@ CREATE TABLE SCORE_TOOL_COLLAB
 )
 TABLESPACE tmp00dta;
 
-COMMENT ON TABLE IS 'Table des notes par outil et par collaborateur';
+COMMENT ON TABLE SCORE_TOOL_COLLAB IS 'Table des notes par outil et par collaborateur';
 
 -----------------------
 -- SEQUENCE CREATION --
 -----------------------
+DROP SEQUENCE SEQSCORE_TOOL_COLLAB;
+
 CREATE SEQUENCE SEQSCORE_TOOL_COLLAB MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+COMMIT;

@@ -14,9 +14,13 @@ CREATE TABLE TASK
 )
 TABLESPACE tmp00dta;
 
-COMMENT ON TABLE IS 'Table des tâches relative à l''atteinte d''un objectif';
+COMMENT ON TABLE TASK IS 'Table des tâches relative à l''atteinte d''un objectif';
 
 -----------------------
 -- SEQUENCE CREATION --
 -----------------------
+DROP SEQUENCE SEQTASK;
+
 CREATE SEQUENCE SEQTASK MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+COMMIT;

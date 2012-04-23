@@ -10,9 +10,13 @@ CREATE TABLE OBJECTIVE_TASK
 )
 TABLESPACE tmp00dta;
 
-COMMENT ON TABLE IS 'Table de relation entre des objectifs et des tâches';
+COMMENT ON TABLE OBJECTIVE_TASK IS 'Table de relation entre des objectifs et des tâches';
 
 -----------------------
 -- SEQUENCE CREATION --
 -----------------------
+DROP SEQUENCE SEQOBJECTIVE_TASK;
+
 CREATE SEQUENCE SEQOBJECTIVE_TASK MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+COMMIT;

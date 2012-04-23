@@ -1,7 +1,3 @@
-----------------------------------------------------------------------
--- TABLE DE LIAISON DES MANAGER DES COLLABORATEURS ET DES OBJECTIFS --
-----------------------------------------------------------------------
-
 --------------------
 -- TABLE CREATION --
 --------------------
@@ -22,4 +18,8 @@ COMMENT ON TABLE IS 'Table de relation entre un CM, un collaborateur et un EA';
 -----------------------
 -- SEQUENCE CREATION --
 -----------------------
+DROP SEQUENCE SEQCOLLAB_MANAGER_OBJ;
+
 CREATE SEQUENCE SEQCOLLAB_MANAGER_OBJ MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+COMMIT;

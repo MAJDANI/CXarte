@@ -1,7 +1,3 @@
-----------------------------------------------------------------------
--- TABLE DE LIAISON DES MANAGER DES COLLABORATEURS ET DES OBJECTIFS --
-----------------------------------------------------------------------
-
 --------------------
 -- TABLE CREATION --
 --------------------
@@ -19,4 +15,8 @@ COMMENT ON TABLE IS 'Table des types de profil';
 -----------------------
 -- SEQUENCE CREATION --
 -----------------------
+DROP SEQUENCE SEQPROFILE;
+
 CREATE SEQUENCE SEQPROFILE MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 NOCACHE;
+
+COMMIT;
