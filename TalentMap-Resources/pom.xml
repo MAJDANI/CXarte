@@ -6,8 +6,8 @@
     <version>1.0-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
-  <artifactId>TalentMap-Ressources</artifactId>
+  <artifactId>TalentMap-Resources</artifactId>
   <packaging>pom</packaging>
-  <name>TalentMap-Ressources</name>
+  <name>TalentMap-Resources</name>
   <description>This TalentMap module contains the prooject resources such as SQL table design, scripts,etc.</description>
 </project>
