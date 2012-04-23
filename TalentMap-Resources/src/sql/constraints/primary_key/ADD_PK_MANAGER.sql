@@ -1,0 +1,6 @@
+---------------------------
+-- PRIMARY KEYS CREATION --
+---------------------------
+ALTER TABLE MANAGER ADD CONSTRAINT MANAGERPK PRIMARY KEY (MANAGER_ID) USING INDEX TABLESPACE tmp00idx;
+
+COMMIT;
