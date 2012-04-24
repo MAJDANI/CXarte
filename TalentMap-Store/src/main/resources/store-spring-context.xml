@@ -14,12 +14,18 @@
 	
 	<!-- Import all configuration to connect with database -->
 	<import resource="datasource.xml"/>
-	<import resource="hibernateProperties.xml"/>
-	<import resource="hibernateContext.xml"/>
+	
+	<bean id="sqlMap"
+          class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation">
+            <value>classpath:SqlConfigMap.xml</value>
+        </property>
+        <property name="dataSource" ref="dataSource" />
+    </bean>    
 	
 	<!--  Store beans declaration -->
-	<bean id="skillDao" class="com.novedia.talentmap.store.impl.SkillDao" p:skillOne-ref="skillEntity">
-		 <property name="sessionFactory" ref="mySessionFactory" />
+	<bean id="Collaborator" class="com.novedia.talentmap.store.impl.CollaboratorDao">
+		 <property name="sqlMap" ref="sqlMap" />
 	</bean>
 
 
