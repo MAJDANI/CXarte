@@ -10,10 +10,14 @@
           <string>WEB-INF/vaadin-spring-context.xml</string>
           <string>WEB-INF/web.xml</string>
           <string>WEB-INF/classes/builddef.lst</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/MyVaadinApplication$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/accueil.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_creation.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_modification.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/MyVaadinApplication.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringApplicationServlet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringVaadinServlet.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorForm.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorFormFieldFactory.class</string>
           <string>WEB-INF/lib/vaadin-6.7.1.jar</string>
           <string>WEB-INF/lib/TalentMap-Services-1.0-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/TalentMap-Store-1.0-SNAPSHOT.jar</string>
@@ -214,6 +218,17 @@
         <optional>false</optional>
       </dependency>
       <targetFileName>slf4j-log4j12-1.6.1.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>persistence-api</artifactId>
+        <version>1.0</version>
+        <type>jar</type>
+        <scope>provided</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
     </org.apache.maven.plugin.war.util.DependencyInfo>
   </dependenciesInfo>
 </webapp-structure>

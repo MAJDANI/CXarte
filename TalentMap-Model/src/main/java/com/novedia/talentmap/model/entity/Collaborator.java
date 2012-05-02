@@ -1,9 +1,14 @@
 package com.novedia.talentmap.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Collaborator {
+public class Collaborator implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1323210979848908088L;
 	private String id;
 	private String manager_id;
 	private String profile_id;

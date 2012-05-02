@@ -10,6 +10,7 @@
 	
 	
 	<!-- Model declaration -->	
-	<bean id="skillEntity" class="com.novedia.talentmap.model.entity.SkillEntity"/>
+	<bean id="Collaborator" class="com.novedia.talentmap.model.entity.Collaborator"/>
+    <bean id="Profile" class="com.novedia.talentmap.model.entity.Profile"/>
     
 </beans>

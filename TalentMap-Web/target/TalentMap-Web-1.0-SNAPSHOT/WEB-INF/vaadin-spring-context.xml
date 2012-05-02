@@ -12,22 +12,43 @@
 	<!-- TalentMap Services import -->
     <import resource="classpath:services-spring-context.xml"/>
     
-    <!-- Vaddin root application declaration -->    
-    <bean id="vaadinBean" 
-          class="com.novedia.talentmap.web.MyVaadinApplication" 
-          p:window-ref="windowBean"
-          p:button-ref="buttonBean"
-          p:tmService-ref="tmServiceBean" 
-          scope="session"
-    />
-	
-	<!-- Vaddin component declaration -->
-	<bean id="windowBean" 
-          class="com.vaadin.ui.Window"
-    />
+    <!-- Vaddin components declaration -->
+	<bean id="windowBean" class="com.vaadin.ui.Window"/>
+	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout"/>
+	<bean id="homeTab" class="com.vaadin.ui.TabSheet"/>
+	<bean id="subTab" class="com.vaadin.ui.TabSheet"/>
     
-	<bean id="buttonBean" 
-          class="com.vaadin.ui.Button" 
-    />
+    <!-- Vaddin root application declaration -->    
+    <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
+    	<property name="window" ref="windowBean"/>
+    	<property name="hLayout" ref="hLayoutBean" />
+    	<property name="homeTab" ref="homeTab" />
+    	<property name="subTab" ref="subTab" />
+    	<property name="collabForm" ref="CollaboratorFormBean" />
+    </bean>
+    
+    
+<!-- Vaadin Components UI -->
+    
+    <!-- Vaadin CollaboratorForm UI -->
+    <bean id="fieldOrder" class="java.util.Vector"/>
+    <bean id="save" class="com.vaadin.ui.Button" />
+	<bean id="cancel" class="com.vaadin.ui.Button" />
+	<bean id="hLayout" class="com.vaadin.ui.HorizontalLayout"/>
+	<bean id="gLayout" class="com.vaadin.ui.GridLayout"/>
+	
+    <bean id="CollaboratorFormBean" class="com.novedia.talentmap.web.ui.CollaboratorForm">
+    	<constructor-arg ref="collaboratorService"/>
+    	<constructor-arg name="profileService" ref="profileService"/>
+    	<constructor-arg name="save" ref="save"/>
+    	<constructor-arg name="cancel" ref="cancel"/>
+    	<constructor-arg name="fieldOrder" ref="fieldOrder"/>
+    	<constructor-arg name="hLayout" ref="hLayout" />
+    	<constructor-arg name="gLayout" ref="gLayout" />
+    </bean>
+    
+    <!-- Vaadin CollaboratorFormField Ui -->
+	
+	
 	
 </beans>

@@ -13,9 +13,11 @@
 	<import resource="classpath:store-spring-context.xml"/>
 	
 	<!-- Service beans declaration -->
-	<bean id="tmServiceBean" 
-	      class="com.novedia.talentmap.services.impl.TalentMapService"
-	      p:skillDao-ref="skillDao"
-	/>
-    
+	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.CollaboratorService">
+		<property name="collabDao" ref="CollaboratorDao"/>
+	</bean>
+    <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
+		<property name="profileDao" ref="ProfileDao"/>
+	</bean>
+	
 </beans>

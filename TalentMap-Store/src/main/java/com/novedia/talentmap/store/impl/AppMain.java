@@ -3,27 +3,31 @@ package com.novedia.talentmap.store.impl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.novedia.talentmap.model.entity.Collaborator;
-import com.novedia.talentmap.store.ICollaboratorDao;
+import com.novedia.talentmap.model.entity.Profile;
 
 public class AppMain {
 
 	/**
 	 * @class AppMain.java
 	 * @param args
-	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws Exception {
-		
-		/*ICollaboratorDao collabDao = new CollaboratorDao();
-		
-		Collaborator c = collabDao.getCollaborator(1);
-		
-		c.toString();*/
-		
+	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("store-spring-context.xml");
-		CollaboratorDao collab = (CollaboratorDao)context.getBean("Collaborator");
-		System.out.println(collab.getCollaborator(1));
+		
+		ProfileDao profileDao = (ProfileDao) context.getBean("ProfileDao");
+		//CollaboratorDao collaboratorDao = new CollaboratorDao();
+		
+		try {
+		//	System.out.println(collaboratorDao.getCollaborator(1).toString());
+			for(Profile p : profileDao.selectAll()){
+				System.out.println(p.getProfileType());
+			}
+			
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
