@@ -18,6 +18,11 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringVaadinServlet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorForm.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorFormFieldFactory.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollabView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ListSkill.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ProfileView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabMain.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabProfileSheet.class</string>
           <string>WEB-INF/lib/vaadin-6.7.1.jar</string>
           <string>WEB-INF/lib/TalentMap-Services-1.0-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/TalentMap-Store-1.0-SNAPSHOT.jar</string>

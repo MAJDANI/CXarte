@@ -9,17 +9,11 @@
 
     <resultMap id="profileResult" class="profile">
         <result property="id" column="PROFILE_ID"/>     
-        <result property="profileType"  column="PROFILE_TYPE"/>         
+        <result property="type"  column="PROFILE_TYPE"/>         
     </resultMap>
 	
 	<select id="getProfile" resultMap="profileResult" parameterClass="Integer">
-		SELECT 
-			PROFILE_ID,
-			PROFILE_TYPE 
-		FROM 
-			PROFILE 
-		WHERE 
-			PROFILE_ID = #id#
+		SELECT * FROM PROFILE WHERE PROFILE_ID = #id#
 	</select>
 	
     <select id="getAllProfile" resultMap="profileResult">

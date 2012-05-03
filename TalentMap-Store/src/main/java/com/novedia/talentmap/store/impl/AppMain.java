@@ -20,7 +20,7 @@ public class AppMain {
 		try {
 		//	System.out.println(collaboratorDao.getCollaborator(1).toString());
 			for(Profile p : profileDao.selectAll()){
-				System.out.println(p.getProfileType());
+				System.out.println(p.getType());
 			}
 			
 		

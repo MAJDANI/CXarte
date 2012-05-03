@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="tool">
+
+    <typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool"/> 
+
+    <resultMap id="toolResult" class="tool">
+    	<result property="id" column="TOOL_ID"/> 
+        <result property="concept_id" column="CONCEPT_ID"/>     
+        <result property="name"  column="TOOL_NAME"/>
+        <result property="use_frequency"  column="USE_FREQUENCY"/>  
+        <result property="no_using_time"  column="NO_USING_TIME"/>           
+    </resultMap>
+	
+	<select id="getTool" resultMap="toolResult" parameterClass="Integer">
+		SELECT * FROM TOOL WHERE TOOL_ID = #id#
+	</select>
+	
+    <select id="getAllTool" resultMap="toolResult">
+    	SELECT * FROM CATEGORY
+    </select>					 
+
+</sqlMap>

@@ -21,27 +21,13 @@
     </resultMap>
 
     <select id="getCollaborator" parameterClass="Integer" resultMap="collaboratorResult">
-        SELECT 
-               COLLAB_ID,				  
-               MANAGER_ID,					  
-               PROFILE_ID,					  
-               LAST_NAME,					  
-               FIRST_NAME,					 
-               EMAIL,
-               PHONE,	
-               EMPLOYMENT_DATE,	
-               EXPERIENCE,
-               BUSINESS_ENGINEER  
-        FROM 
-              COLLABORATOR 
-        WHERE 
-              COLLAB_ID = #id#
+        SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
     </select>
     <select id="getAllCollaborator" resultMap="collaboratorResult">
     	SELECT * FROM COLLABORATOR
     </select>					 
 	<update id="updateCollaborateur" parameterClass="Collaborator">
-		UPDATE COLLABORATOR SET PROFILE_ID = #prodileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE ID = #id#
+		UPDATE COLLABORATOR SET PROFILE_ID = #profile_id#, PHONE = #phone#, EXPERIENCE = #experience# WHERE ID = #id#
 	</update>
 	
 	

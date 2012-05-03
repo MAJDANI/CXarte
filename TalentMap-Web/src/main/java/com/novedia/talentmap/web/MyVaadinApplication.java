@@ -19,14 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import com.novedia.talentmap.services.ICollaboratorService;
-import com.novedia.talentmap.web.ui.CollaboratorForm;
+import com.novedia.talentmap.web.ui.TabMain;
 import com.vaadin.Application;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * The Application's "main" class
@@ -43,68 +41,34 @@ public class MyVaadinApplication extends Application {
 	 */
 	private Window window;
 	private HorizontalLayout hLayout;
-	private TabSheet homeTab;
-	private TabSheet subTab;
-
-	private String TAB_FIRST_NAME = "Profil";
-	private String TAB_SECOND_NAME = "Recherche";
-	private String SUBTAB_FIRST_NAME = "Fiche Profil";
 	
 	/**
 	 * Vaadin components UI
 	 */
-	private CollaboratorForm collabForm;
-	
-	/**
-	 * Vaadin buttons
-	 */
-	//private Button button;
-	
-	
-	/**
-	 * The talent map business service
-	 */
-	//private ICollaboratorService collaboratorService;
+	private TabMain tabMain;
+
 	
 	@Override
 	public void init(){
 		
-		//Set Theme to "Runo"
-		setTheme("runo");
+		//setTheme("runo");
 		
-		//Set Components
 		setMainWindow(window);
+		buildMainLayout();
+	}
+	
+	/**
+	 *  All Layout Build
+	 */
+	
+	private void buildMainLayout(){
 		hLayout.setSizeFull();
 		hLayout.setMargin(true);
-		initHomeTab(collabForm, new HorizontalLayout());
+		hLayout.setStyle(Reindeer.LAYOUT_WHITE);
 		
-		
-		//Add Components
-		hLayout.addComponent(homeTab);
+		hLayout.addComponent(tabMain);
 		window.addComponent(hLayout);
-		
-		
-		
 	}
-	
-	private void initHomeTab(Component ficheProfil, Component search){
-		homeTab.setSizeFull();
-		
-		VerticalLayout vLayout1 = new VerticalLayout();
-		vLayout1.addComponent(ficheProfil);
-		subTab.addTab(vLayout1, SUBTAB_FIRST_NAME);
-		homeTab.addTab(subTab,TAB_FIRST_NAME);
-		
-		VerticalLayout vLayout2 = new VerticalLayout();
-		vLayout2.addComponent(search);
-		homeTab.addTab(vLayout2, TAB_SECOND_NAME);
-	}
-	
-	//ProfilService functions
-	
-
-
-	// SETTERS
 	
 	/**
 	 * Set the main window
@@ -122,29 +86,12 @@ public class MyVaadinApplication extends Application {
 	public void sethLayout(HorizontalLayout hLayout) {
 		this.hLayout = hLayout;
 	}
-
 	/**
-	 * Set the homeTab value
-	 * @param homeTab the homeTab to set
+	 * Set the tabProfileSheet value
+	 * @param tabProfileSheet the tabProfileSheet to set
 	 */
-	public void setHomeTab(TabSheet homeTab) {
-		this.homeTab = homeTab;
-	}
-
-	/**
-	 * Set the collabForm value
-	 * @param collabForm the collabForm to set
-	 */
-	public void setCollabForm(CollaboratorForm collabForm) {
-		this.collabForm = collabForm;
-	}
-	
-	/**
-	 * Set the subTab value
-	 * @param subTab the subTab to set
-	 */
-	public void setSubTab(TabSheet subTab) {
-		this.subTab = subTab;
+	public void setTabMain(TabMain tabMain) {
+		this.tabMain = tabMain;
 	}
 	
 }

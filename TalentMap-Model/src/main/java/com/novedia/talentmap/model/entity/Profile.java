@@ -4,12 +4,9 @@ import java.io.Serializable;
 
 public class Profile implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8766946810895701286L;
 	private String id;
-	private String profileType;
+	private String type;
 	/**
 	 * Get the id value
 	 * @return the id
@@ -28,14 +25,14 @@ public class Profile implements Serializable {
 	 * Get the profileType value
 	 * @return the profileType
 	 */
-	public String getProfileType() {
-		return profileType;
+	public String getType() {
+		return type;
 	}
 	/**
 	 * Set the profileType value
 	 * @param profileType the profileType to set
 	 */
-	public void setProfileType(String profileType) {
-		this.profileType = profileType;
+	public void setType(String type) {
+		this.type = type;
 	}
 }

@@ -15,16 +15,12 @@
     <!-- Vaddin components declaration -->
 	<bean id="windowBean" class="com.vaadin.ui.Window"/>
 	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout"/>
-	<bean id="homeTab" class="com.vaadin.ui.TabSheet"/>
-	<bean id="subTab" class="com.vaadin.ui.TabSheet"/>
     
     <!-- Vaddin root application declaration -->    
     <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
     	<property name="window" ref="windowBean"/>
     	<property name="hLayout" ref="hLayoutBean" />
-    	<property name="homeTab" ref="homeTab" />
-    	<property name="subTab" ref="subTab" />
-    	<property name="collabForm" ref="CollaboratorFormBean" />
+    	<property name="tabMain" ref="tabMain" />
     </bean>
     
     
@@ -37,7 +33,7 @@
 	<bean id="hLayout" class="com.vaadin.ui.HorizontalLayout"/>
 	<bean id="gLayout" class="com.vaadin.ui.GridLayout"/>
 	
-    <bean id="CollaboratorFormBean" class="com.novedia.talentmap.web.ui.CollaboratorForm">
+    <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.CollaboratorForm">
     	<constructor-arg ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
     	<constructor-arg name="save" ref="save"/>
@@ -46,9 +42,32 @@
     	<constructor-arg name="hLayout" ref="hLayout" />
     	<constructor-arg name="gLayout" ref="gLayout" />
     </bean>
-    
-    <!-- Vaadin CollaboratorFormField Ui -->
 	
+	<!-- Vaadin ListSkill UI -->
+	<bean id="listSkillBean" class="com.novedia.talentmap.web.ui.ListSkill" scope="session" />
+	
+	<!-- Vaadin ProfileView UI -->
+	<bean id="profileViewBean" class="com.novedia.talentmap.web.ui.ProfileView" scope="session">
+		<constructor-arg name="collabForm" ref="collaboratorFormBean" />
+		<constructor-arg name="listSkill" ref="listSkillBean" />
+	</bean>
+	
+	<!-- Vaadin CollabView UI -->
+	<bean id="collabViewBean" class="com.novedia.talentmap.web.ui.CollabView" scope="session" />
+	
+	<!-- Vaadin TabProfileSheet UI -->
+	<bean id="tabProfileSheetBean" class="com.novedia.talentmap.web.ui.TabProfileSheet" scope="session" >
+		<constructor-arg name="profileView" ref="profileViewBean" />
+		<constructor-arg name="collabView" ref="collabViewBean" />
+	</bean>
+	
+	<!-- Vaadin TabMain UI -->
+	<bean id="vLayoutTabMain" class="com.vaadin.ui.VerticalLayout" scope="session" />
+	
+	<bean id="tabMain" class="com.novedia.talentmap.web.ui.TabMain" scope="session" >
+		<constructor-arg name="tabProfileSheet" ref="tabProfileSheetBean" />
+		<constructor-arg name="tabSearch" ref="vLayoutTabMain" />
+	</bean>
 	
 	
 </beans>

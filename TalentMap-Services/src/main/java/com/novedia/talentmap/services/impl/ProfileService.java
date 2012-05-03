@@ -19,7 +19,7 @@ public class ProfileService implements IProfileService {
 	@Override
 	public Profile getProfile(int id) throws Exception {
 	
-		return profileDao.getProfile(id);
+		return profileDao.getById(id);
 	}
 	
 	/**

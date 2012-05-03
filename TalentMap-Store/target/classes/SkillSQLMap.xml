@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="skill">
+
+    <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/> 
+
+    <resultMap id="skillResult" class="skill">
+    	<result property="collaborator_id" column="COLLAB_ID"/> 
+        <result property="tool_id" column="TOOL_ID"/>     
+        <result property="score"  column="SCORE"/>           
+    </resultMap>
+	
+	<select id="getSkill" resultMap="skillResult" parameterClass="Integer">
+		SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #tool_id#
+	</select>
+	
+    <select id="getAllSkill" resultMap="skillResult">
+    	SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id#
+    </select>					 
+
+</sqlMap>

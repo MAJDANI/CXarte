@@ -18,7 +18,7 @@ public class AppMain {
 		try {
 			
 			for(Profile p : profileService.getAllProfile()){
-				System.out.println(p.getProfileType());
+				System.out.println(p.getType());
 			}
 		
 		} catch (Exception e) {

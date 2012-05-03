@@ -46,7 +46,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						
 						try {
 							for(Profile p : profileService.getAllProfile()){
-								profilSelect.addItem(p.getProfileType());
+								profilSelect.addItem(p.getType());
 							}
 							
 							profilSelect.setNullSelectionAllowed(false);

@@ -13,7 +13,7 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 
-public class CollaboratorForm extends Form implements ClickListener {
+public class CollaboratorForm extends Form{
 	
 	/**
 	 * 
@@ -86,7 +86,7 @@ public class CollaboratorForm extends Form implements ClickListener {
 			
 			//Set the good value for the Select Item
 			int profileId = Integer.parseInt(this.collaboratorService.getCollaborator(1).getProfile_id());
-			getField("profile_id").setValue(this.profileService.getProfile(profileId).getProfileType());
+			getField("profile_id").setValue(this.profileService.getProfile(profileId).getType());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,10 +108,8 @@ public class CollaboratorForm extends Form implements ClickListener {
 	
 	private void buildButtons(){
 		this.save.setCaption(SAVE_CAPTION);
-		this.save.addListener((ClickListener) this);
 		
 		this.cancel.setCaption(CANCEL_CAPTION);
-		this.cancel.addListener((ClickListener) this);
 	}
 	
 	private void setOrderForm(Vector<Object> fieldOrder){
@@ -119,12 +117,6 @@ public class CollaboratorForm extends Form implements ClickListener {
 		for(Object field : FIELD_ORDER){
 			fieldOrder.add(field);
 		}
-	}
-	
-	@Override
-	public void buttonClick(ClickEvent event) {
-		
-		
 	}
 
 	/**

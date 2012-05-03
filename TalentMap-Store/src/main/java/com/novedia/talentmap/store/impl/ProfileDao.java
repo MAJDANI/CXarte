@@ -19,7 +19,7 @@ public class ProfileDao implements IProfileDao {
 	
 
 	@Override
-	public Profile getProfile(int id) throws Exception {
+	public Profile getById(int id) throws Exception {
 		
 		return (Profile) sqlMapClient.queryForObject("profile.getProfile", id);
 	}

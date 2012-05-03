@@ -6,4 +6,8 @@
     <settings useStatementNamespaces="true"/>
     <sqlMap resource="CollaboratorSQLMap.xml"/>
     <sqlMap resource="ProfileSQLMap.xml"/>
+    <sqlMap resource="CategorySQLMap.xml"/>
+    <sqlMap resource="ConceptSQLMap.xml"/>
+    <sqlMap resource="SkillSQLMap.xml"/>
+    <sqlMap resource="ToolSQLMap.xml"/>
 </sqlMapConfig>
