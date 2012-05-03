@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="collaborator">
+
+    <typeAlias alias="collaborator" type="com.novedia.talentmap.model.entity.Collaborator"/> 
+
+    <resultMap id="collaboratorResult" class="collaborator">
+        <result property="id" column="COLLAB_ID"/>     
+        <result property="manager_id"  column="MANAGER_ID"/>         
+        <result property="profile_id"  column="PROFILE_ID"/>    	    
+        <result property="last_name"   column="LAST_NAME"/>	   
+        <result property="first_name"   column="FIRST_NAME"/>	   
+        <result property="email"  column="EMAIL"/>	    
+        <result property="phone"   column="PHONE"/>
+        <result property="employment_date"  column="EMPLOYMENT_DATE"/>	    
+        <result property="experience"   column="EXPERIENCE"/>
+        <result property="business_engineer"   column="BUSINESS_ENGINEER"/>	   
+    </resultMap>
+
+    <select id="getCollaborator" parameterClass="Integer" resultMap="collaboratorResult">
+        SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
+    </select>
+    <select id="getAllCollaborator" resultMap="collaboratorResult">
+    	SELECT * FROM COLLABORATOR
+    </select>					 
+	<update id="updateCollaborateur" parameterClass="Collaborator">
+		UPDATE COLLABORATOR SET PROFILE_ID = #profile_id#, PHONE = #phone#, EXPERIENCE = #experience# WHERE ID = #id#
+	</update>
+	
+	
+</sqlMap>
