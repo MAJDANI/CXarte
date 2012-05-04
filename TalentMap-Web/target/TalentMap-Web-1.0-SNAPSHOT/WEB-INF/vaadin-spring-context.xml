@@ -44,7 +44,9 @@
     </bean>
 	
 	<!-- Vaadin ListSkill UI -->
-	<bean id="listSkillBean" class="com.novedia.talentmap.web.ui.ListSkill" scope="session" />
+	<bean id="listSkillBean" class="com.novedia.talentmap.web.ui.ListSkill" scope="session">
+		<constructor-arg name="skillService" ref="skillService" />
+	</bean>
 	
 	<!-- Vaadin ProfileView UI -->
 	<bean id="profileViewBean" class="com.novedia.talentmap.web.ui.ProfileView" scope="session">

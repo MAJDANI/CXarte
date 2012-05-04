@@ -14,10 +14,16 @@
 	
 	<!-- Service beans declaration -->
 	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.CollaboratorService">
-		<property name="collabDao" ref="CollaboratorDao"/>
+		<property name="collabDao" ref="collaboratorDao"/>
 	</bean>
     <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
-		<property name="profileDao" ref="ProfileDao"/>
+		<property name="profileDao" ref="profileDao"/>
+	</bean>
+	<bean id="skillService" class="com.novedia.talentmap.services.impl.SkillService">
+		<property name="skillDao" ref="skillDao"/>
+		<property name="toolDao" ref="toolDao"/>
+		<property name="conceptDao" ref="conceptDao"/>
+		<property name="categoryDao" ref="categoryDao"/>
 	</bean>
 	
 </beans>

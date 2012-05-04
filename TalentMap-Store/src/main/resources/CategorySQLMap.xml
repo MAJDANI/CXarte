@@ -13,7 +13,7 @@
     </resultMap>
 	
 	<select id="getCategory" resultMap="categoryResult" parameterClass="Integer">
-		SELECT * CATEGORY_NAME FROM CATEGORY WHERE CATEGORY_ID = #id#
+		SELECT * FROM CATEGORY WHERE CATEGORY_ID = #id#
 	</select>
 	
     <select id="getAllCategory" resultMap="categoryResult">

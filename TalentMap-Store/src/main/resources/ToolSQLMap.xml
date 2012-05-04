@@ -20,7 +20,7 @@
 	</select>
 	
     <select id="getAllTool" resultMap="toolResult">
-    	SELECT * FROM CATEGORY
+    	SELECT * FROM TOOL
     </select>					 
 
 </sqlMap>
