@@ -1,0 +1,5 @@
+BEGIN
+  insert into CONCEPT (CONCEPT_ID, CATEGORY_ID, CONCEPT_NAME) values (1, 1, 'IOC');
+  insert into CONCEPT (CONCEPT_ID, CATEGORY_ID, CONCEPT_NAME) values (2, 1, 'ORM');
+  insert into CONCEPT (CONCEPT_ID, CATEGORY_ID, CONCEPT_NAME) values (3, 2, 'IOC');
+END;
