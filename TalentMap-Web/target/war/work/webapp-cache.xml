@@ -6,23 +6,63 @@
         <pathsSet class="linked-hash-set">
           <string>META-INF/context.xml</string>
           <string>META-INF/MANIFEST.MF</string>
+          <string>VAADIN/themes/talentmap/styles.css</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/0A9476898799A150D840F0B1C3672921.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/396F806CD63ABD414BFBB9D57429F05B.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/56E6AE8DD29E9E6667B0227BAA46A361.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/58C3874E97D11357F08B8A5AAB86DC39.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/6F376B079E379CA1DB1C3A2848715552.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/6FB2A7DDD34A919F0AF394C2D41CA358.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/clear.cache.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/com.novedia.talentmap.web.gwt.TalentMapWidgetset.nocache.js</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DB309EC8CD13CDE2A08380A7568C057D.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DE709C1CAB0F65BCC5BEF11EDA73A925.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DF7764EEC1903CD03C9545B354D8D8E4.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/E308249BCFA8B342EBB1CD4045CF7283.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/E44767377485D18D6B6864F65BA8EF73.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/EDC7827FEEA59EE44AD790B1C6430C45.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/hosted.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ie6pngfix/blank.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/arrow_head_9x5.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_12x11.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_12x11.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_19x18.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_19x18.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_34x33.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_bg_12x11.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_bg_19x18.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_bg_34x33.gif</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/styles.css</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/rpcPolicyManifest/manifest.txt</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/56E6AE8DD29E9E6667B0227BAA46A361.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/58C3874E97D11357F08B8A5AAB86DC39.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/6F376B079E379CA1DB1C3A2848715552.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/6FB2A7DDD34A919F0AF394C2D41CA358.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/DB309EC8CD13CDE2A08380A7568C057D.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/E308249BCFA8B342EBB1CD4045CF7283.symbolMap</string>
           <string>WEB-INF/application-context.xml</string>
           <string>WEB-INF/vaadin-spring-context.xml</string>
           <string>WEB-INF/web.xml</string>
           <string>WEB-INF/classes/builddef.lst</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/data/FrequencyUse.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/data/TimeUse.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/accueil.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_creation.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_modification.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/MyVaadinApplication.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringApplicationServlet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringVaadinServlet.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/AddSkillPanel.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorForm.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorFormFieldFactory.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollabView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ListSkill.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ProfileView$1.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ProfileView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabMain.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabProfileSheet.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/IObservable.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileView.class</string>
           <string>WEB-INF/lib/vaadin-6.7.1.jar</string>
           <string>WEB-INF/lib/TalentMap-Services-1.0-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/TalentMap-Store-1.0-SNAPSHOT.jar</string>
@@ -54,6 +94,7 @@
           <string>WEB-INF/lib/ibatis2-sqlmap-2.1.7.597.jar</string>
           <string>WEB-INF/lib/ibatis2-common-2.1.7.597.jar</string>
           <string>WEB-INF/lib/ojdbc14-10.2.0.4.0.jar</string>
+          <string>WEB-INF/lib/ratingstars-1.4.jar</string>
         </pathsSet>
       </path-set>
     </entry>
@@ -93,6 +134,18 @@
         <optional>false</optional>
       </dependency>
       <targetFileName>TalentMap-Services-1.0-SNAPSHOT.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>org.vaadin.addons</groupId>
+        <artifactId>ratingstars</artifactId>
+        <version>1.4</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>ratingstars-1.4.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>

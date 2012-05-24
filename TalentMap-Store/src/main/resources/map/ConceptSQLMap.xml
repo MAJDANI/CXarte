@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="concept">
+
+    <typeAlias alias="concept" type="com.novedia.talentmap.model.entity.Concept"/> 
+
+    <resultMap id="conceptResult" class="concept">
+    	<result property="id" column="CONCEPT_ID"/> 
+        <result property="category_id" column="CATEGORY_ID"/>     
+        <result property="name"  column="CONCEPT_NAME"/>         
+    </resultMap>
+	
+	<select id="getConcept" resultMap="conceptResult" parameterClass="Integer">
+		SELECT * FROM CONCEPT WHERE CONCEPT_ID = #id#
+	</select>
+	
+    <select id="getAllConcept" resultMap="conceptResult">
+    	SELECT * FROM CONCEPT
+    </select>
+    
+    <select id="getAllConceptByCategoryId" resultMap="conceptResult" parameterClass="Integer">
+    	SELECT * FROM CONCEPT WHERE CATEGORY_ID = #categoryId#
+    </select>					 
+
+</sqlMap>

@@ -4,10 +4,11 @@
 		
 <sqlMapConfig>
     <settings useStatementNamespaces="true"/>
-    <sqlMap resource="CollaboratorSQLMap.xml"/>
-    <sqlMap resource="ProfileSQLMap.xml"/>
-    <sqlMap resource="CategorySQLMap.xml"/>
-    <sqlMap resource="ConceptSQLMap.xml"/>
-    <sqlMap resource="SkillSQLMap.xml"/>
-    <sqlMap resource="ToolSQLMap.xml"/>
+    <sqlMap resource="map/CollaboratorSQLMap.xml"/>
+    <sqlMap resource="map/ProfileSQLMap.xml"/>
+    <sqlMap resource="map/CategorySQLMap.xml"/>
+    <sqlMap resource="map/ConceptSQLMap.xml"/>
+    <sqlMap resource="map/SkillSQLMap.xml"/>
+    <sqlMap resource="map/ToolSQLMap.xml"/>
+    <sqlMap resource="map/VSkillSQLMap.xml"/>
 </sqlMapConfig>

@@ -28,19 +28,28 @@
 	<bean id="collaboratorDao" class="com.novedia.talentmap.store.impl.CollaboratorDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
+	
 	<bean id="profileDao" class="com.novedia.talentmap.store.impl.ProfileDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
+	
 	<bean id="categoryDao" class="com.novedia.talentmap.store.impl.CategoryDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
+	
 	<bean id="conceptDao" class="com.novedia.talentmap.store.impl.ConceptDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
+	
 	<bean id="toolDao" class="com.novedia.talentmap.store.impl.ToolDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
+	
 	<bean id="skillDao" class="com.novedia.talentmap.store.impl.SkillDao">
+		<property name="sqlMapClient" ref="sqlMap"/>
+	</bean>
+	
+	<bean id="vSkillDao" class="com.novedia.talentmap.store.impl.VSkillDao">
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
 	

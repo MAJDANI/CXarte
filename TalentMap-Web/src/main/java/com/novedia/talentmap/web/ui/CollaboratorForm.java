@@ -6,13 +6,16 @@ import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.IProfileService;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
 
+/**
+ * The form of Administrative Information of Collaborator
+ * @author j.collet
+ * @project TalentMap-Web
+ * @package com.novedia.talentmap.web.ui
+ * @created 21 mai 2012
+ */
 public class CollaboratorForm extends Form{
 	
 	/**
@@ -23,8 +26,7 @@ public class CollaboratorForm extends Form{
 	/**
 	 * Constants 
 	 */
-	private final String SAVE_CAPTION = new String("Enregistrer");
-	private final String CANCEL_CAPTION = new String("Annuler");
+	private int COLLAB_ID = 2;
 	private Vector<Object> fieldOrder;
 	public static final Object[] NAME_FIELD = new Object[]{"Nom", "Prénom", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire","Profil"};
 	public static final Object[] FIELD_ORDER = new Object[]{"last_name","first_name","email","phone","employment_date","experience","business_engineer","profile_id"};
@@ -32,14 +34,7 @@ public class CollaboratorForm extends Form{
 	/**
 	 * Vaadin Layout
 	 */
-	private HorizontalLayout hLayout;
 	private GridLayout gLayout;
-	
-	/**
-	 * Vaadin Buttons
-	 */
-	private Button save;
-	private Button cancel;
 	
 	/**
 	 * TalentMap service
@@ -48,26 +43,23 @@ public class CollaboratorForm extends Form{
 	private IProfileService profileService;
 	
 
-	public CollaboratorForm(ICollaboratorService collaboratorService, IProfileService profileService, Button save, Button cancel, Vector<Object> fieldOrder, HorizontalLayout hLayout, GridLayout gLayout) {
+	/**
+	 * 
+	 * Build the class CollaboratorForm.java 
+	 * @param collaboratorService
+	 * @param profileService
+	 * @param fieldOrder
+	 * @param gLayout
+	 */
+	public CollaboratorForm(ICollaboratorService collaboratorService, IProfileService profileService,Vector<Object> fieldOrder, GridLayout gLayout) {
 		
 		this.fieldOrder = fieldOrder;
-		this.hLayout = hLayout;
 		this.gLayout = gLayout;
-		this.save = save;
-		this.cancel = cancel;
 		this.collaboratorService = collaboratorService;
 		this.profileService = profileService;
 		
 		//Build Layout
-		buildHorizontalLayout();
 		buildGridLayout();
-		
-		//Build Buttons
-		buildButtons();
-		
-		//Add Component to hLayout
-		this.hLayout.addComponent(this.save);
-		this.hLayout.addComponent(this.cancel);
 		
 		//Set content form
 		setLayout(this.gLayout);
@@ -80,12 +72,12 @@ public class CollaboratorForm extends Form{
 			
 			
 			@SuppressWarnings("unchecked")
-			BeanItem<Item> collabBean = new BeanItem(this.collaboratorService.getCollaborator(1));
+			BeanItem<Item> collabBean = new BeanItem(this.collaboratorService.getCollaborator(COLLAB_ID));
 			
 			setItemDataSource(collabBean,this.fieldOrder);
 			
 			//Set the good value for the Select Item
-			int profileId = Integer.parseInt(this.collaboratorService.getCollaborator(1).getProfile_id());
+			int profileId = Integer.parseInt(this.collaboratorService.getCollaborator(COLLAB_ID).getProfile_id());
 			getField("profile_id").setValue(this.profileService.getProfile(profileId).getType());
 			
 		} catch (Exception e) {
@@ -93,12 +85,11 @@ public class CollaboratorForm extends Form{
 		}
 		
 	}
-
-	private void buildHorizontalLayout(){
-		this.hLayout.setMargin(true);
-		this.hLayout.setSpacing(true);
-	}
 	
+	/**
+	 * Build the GridLayout
+	 * @class CollaboratorForm.java
+	 */
 	private void buildGridLayout(){
 		this.gLayout.setMargin(true);
 		this.gLayout.setSpacing(true);
@@ -106,12 +97,11 @@ public class CollaboratorForm extends Form{
 		this.gLayout.setRows(2);
 	}
 	
-	private void buildButtons(){
-		this.save.setCaption(SAVE_CAPTION);
-		
-		this.cancel.setCaption(CANCEL_CAPTION);
-	}
-	
+	/**
+	 * Set the inputs order of the form
+	 * @class CollaboratorForm.java
+	 * @param fieldOrder
+	 */
 	private void setOrderForm(Vector<Object> fieldOrder){
 		
 		for(Object field : FIELD_ORDER){
@@ -126,23 +116,6 @@ public class CollaboratorForm extends Form{
 	public void setProfileService(ICollaboratorService profileService) {
 		this.collaboratorService = profileService;
 	}
-
-
-	/**
-	 * Set the save value
-	 * @param save the save to set
-	 */
-	public void setSave(Button save) {
-		this.save = save;
-	}
-
-	/**
-	 * Set the cancel value
-	 * @param cancel the cancel to set
-	 */
-	public void setCancel(Button cancel) {
-		this.cancel = cancel;
-	}
 	
 	/**
 	 * Set the fieldOrder value
@@ -150,14 +123,6 @@ public class CollaboratorForm extends Form{
 	 */
 	public void setFieldOrder(Vector<Object> fieldOrder) {
 		this.fieldOrder = fieldOrder;
-	}
-	
-	/**
-	 * Set the hLayout value
-	 * @param hLayout the hLayout to set
-	 */
-	public void sethLayout(HorizontalLayout hLayout) {
-		this.hLayout = hLayout;
 	}
 
 	/**

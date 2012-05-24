@@ -5,6 +5,13 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
+/**
+ * The main tab contains the profile tab and the search tab
+ * @author j.collet
+ * @project TalentMap-Web
+ * @package com.novedia.talentmap.web.ui
+ * @created 21 mai 2012
+ */
 public class TabMain extends TabSheet {
 	
 	private TabProfileSheet tabProfileSheet;
@@ -23,6 +30,7 @@ public class TabMain extends TabSheet {
 		this.tabSearch = tabSearch;
 		
 		setStyle(Reindeer.TABSHEET_MINIMAL);
+		setImmediate(true);
 		
 		tabSearch.addComponent(new Label("Rien pour le moment !!"));
 		addTab(tabProfileSheet, TAB_FIRST_NAME);

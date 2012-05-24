@@ -8,6 +8,7 @@ import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
@@ -17,15 +18,24 @@ import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 
+/**
+ * The Factory of the Collaborator Form
+ * @author j.collet
+ * @project TalentMap-Web
+ * @package com.novedia.talentmap.web.ui
+ * @created 21 mai 2012
+ */
 public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	
+	private static final long serialVersionUID = 1L;
+	
+	private IProfileService profileService;
+
 	/**
 	 * 
+	 * Build the class CollaboratorFormFieldFactory.java 
+	 * @param profileService
 	 */
-	private static final long serialVersionUID = 1L;
-	private IProfileService profileService;
-	private static final Logger LOGGER = LoggerFactory.getLogger(CollaboratorFormFieldFactory.class);
-
 	public CollaboratorFormFieldFactory(IProfileService profileService){
 		this.profileService = profileService;
 	}
@@ -50,12 +60,14 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 							}
 							
 							profilSelect.setNullSelectionAllowed(false);
+							profilSelect.setImmediate(true);
 							
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						
-						
+						//Add Validator
+						profilSelect.addValidator(new RegexpValidator("fonctionnel|technique", "Type de profil possible : fonctionnel ou technique."));
 						
 						return profilSelect;
 						

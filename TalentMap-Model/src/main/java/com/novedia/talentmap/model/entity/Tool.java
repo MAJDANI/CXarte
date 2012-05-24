@@ -7,8 +7,6 @@ public class Tool implements Serializable {
 	private String id;
 	private String concept_id;
 	private String name;
-	private Integer use_frequency;
-	private Integer no_using_time;
 	
 	
 	/**
@@ -53,34 +51,5 @@ public class Tool implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/**
-	 * Get the use_frequency value
-	 * @return the use_frequency
-	 */
-	public Integer getUse_frequency() {
-		return use_frequency;
-	}
-	/**
-	 * Set the use_frequency value
-	 * @param use_frequency the use_frequency to set
-	 */
-	public void setUse_frequency(Integer use_frequency) {
-		this.use_frequency = use_frequency;
-	}
-	/**
-	 * Get the no_using_time value
-	 * @return the no_using_time
-	 */
-	public Integer getNo_using_time() {
-		return no_using_time;
-	}
-	/**
-	 * Set the no_using_time value
-	 * @param no_using_time the no_using_time to set
-	 */
-	public void setNo_using_time(Integer no_using_time) {
-		this.no_using_time = no_using_time;
-	}
-	
 	
 }

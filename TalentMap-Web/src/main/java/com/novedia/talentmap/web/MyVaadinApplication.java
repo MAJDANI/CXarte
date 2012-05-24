@@ -51,7 +51,7 @@ public class MyVaadinApplication extends Application {
 	@Override
 	public void init(){
 		
-		//setTheme("runo");
+		setTheme("talentmap");
 		
 		setMainWindow(window);
 		buildMainLayout();
