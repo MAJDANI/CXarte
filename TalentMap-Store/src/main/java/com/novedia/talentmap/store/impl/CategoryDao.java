@@ -1,5 +1,7 @@
 package com.novedia.talentmap.store.impl;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -26,21 +28,87 @@ public class CategoryDao implements ICategoryDao {
 	}
 	
 	/**
+	 * Builder of a dummy category if the database is down
+	 * @class CategoryDao.java
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	private Category buildDummyCategory(int id, String name){
+		
+		Category c = new Category();
+		c.setId(String.valueOf(id));
+		c.setName(name);
+		
+		return c;
+	}
+	
+	/**
 	 * Get One Category By Id
 	 */
 	@Override
-	public Category getById(int id) throws Exception {
+	public Category getById(int id) {
 		
-		return (Category)sqlMapClient.queryForObject("category.getCategory", id);
+		try {
+			
+//			return (Category)sqlMapClient.queryForObject("category.getCategory", id);
+			return buildDummyCategory(id, "JAVA");
+			
+//		} catch (SQLException e) {
+//			
+//			//e.printStackTrace();
+//			System.err.println("Database Down !");
+//			
+//			return buildDummyCategory(id, "JAVA");
+//			
+		} catch (NullPointerException npe){
+			
+			npe.printStackTrace();
+			
+			return buildDummyCategory(id, "JAVA");
+			
+		}
+	}
+	
+	/**
+	 * Builder of a Category List if the database is down.
+	 * @class CategoryDao.java
+	 * @return
+	 */
+	private List<Category> buildListDummyCategory(){
+		
+		List<Category> lCategory = new ArrayList<Category>();
+		
+		Category c1 = buildDummyCategory(1, "JAVA");
+		Category c2 = buildDummyCategory(2, ".NET");
+		
+		lCategory.add(c1);
+		lCategory.add(c2);
+		
+		return lCategory;
 	}
 	
 	/**
 	 * Select all Categories
 	 */
 	@Override
-	public List<Category> selectAll() throws Exception {
+	public List<Category> selectAll() {
 		
-		return sqlMapClient.queryForList("category.getAllCategory");
+		try {
+			
+//			return sqlMapClient.queryForList("category.getAllCategory");
+			return buildListDummyCategory();
+			
+//		} catch (SQLException e) {
+//			
+//			//e.printStackTrace();
+//			System.err.println("Database Down !");
+//			
+//			return buildListDummyCategory();
+		} catch (NullPointerException npe){
+			
+			return buildListDummyCategory();
+		}
 	}
 	
 

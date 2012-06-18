@@ -9,6 +9,47 @@ public class Concept implements Serializable {
 	private String name;
 	
 	/**
+	 * Build the class Concept.java 
+	 * @param id
+	 * @param category_id
+	 * @param name
+	 * @param score
+	 */
+	public Concept(String id, String category_id, String name, double score) {
+		super();
+		this.id = id;
+		this.category_id = category_id;
+		this.name = name;
+		this.score = score;
+	}
+	/**
+	 * Not in database
+	 */
+	private double score;
+	
+	/**
+	 * 
+	 * Build the class Concept.java
+	 */
+	public Concept(){
+		this.score = 123.0;
+	}
+	
+	/**
+	 * Get the score value
+	 * @return the score
+	 */
+	public double getScore() {
+		return score;
+	}
+	/**
+	 * Set the score value
+	 * @param score the score to set
+	 */
+	public void setScore(double score) {
+		this.score = score;
+	}
+	/**
 	 * Get the id value
 	 * @return the id
 	 */

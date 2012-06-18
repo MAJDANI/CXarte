@@ -9,19 +9,55 @@ public class Collaborator implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1323210979848908088L;
-	private String id;
+	protected String id;
 	private String manager_id;
-	private String profile_id;
-	private String last_name;
-	private String first_name;
-	private String email;
-	private Integer phone;
-	private Date employment_date;
-	private Integer experience;
-	private String business_engineer;
+	protected String profile_id;
+	protected String last_name;
+	protected String first_name;
+	protected String email;
+	protected Integer phone;
+	protected Date employment_date;
+	protected Integer experience;
+	protected String business_engineer;
 	
 	
 	
+	/**
+	 * Build the class Collaborator.java 
+	 * @param id
+	 * @param manager_id
+	 * @param profile_id
+	 * @param last_name
+	 * @param first_name
+	 * @param email
+	 * @param phone
+	 * @param employment_date
+	 * @param experience
+	 * @param business_engineer
+	 */
+	public Collaborator(String id, String manager_id, String profile_id,
+			String last_name, String first_name, String email, Integer phone,
+			Date employment_date, Integer experience, String business_engineer) {
+		super();
+		this.id = id;
+		this.manager_id = manager_id;
+		this.profile_id = profile_id;
+		this.last_name = last_name;
+		this.first_name = first_name;
+		this.email = email;
+		this.phone = phone;
+		this.employment_date = employment_date;
+		this.experience = experience;
+		this.business_engineer = business_engineer;
+	}
+	
+	/**
+	 * Build the class Collaborator.java 
+	 */
+	public Collaborator() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -34,6 +70,7 @@ public class Collaborator implements Serializable {
 				+ ", experience=" + experience + ", business_engineer="
 				+ business_engineer + "]";
 	}
+	
 	/**
 	 * Get the id value
 	 * @return the id

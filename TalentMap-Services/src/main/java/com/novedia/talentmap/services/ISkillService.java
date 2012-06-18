@@ -3,12 +3,11 @@ package com.novedia.talentmap.services;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.EscapedErrors;
-
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
+import com.novedia.talentmap.model.entity.VSkillCollab;
 
 /**
  * Interface Skill Services
@@ -29,7 +28,16 @@ public interface ISkillService {
 	Skill getSkillByToolId(int collaboratorID, int toolId) throws Exception;
 	
 	/**
-	 * Select all Collaborator Skills By Id
+	 * Select all Collaborator Skills By id (new version)
+	 * @class ISkillService.java
+	 * @param collab_id
+	 * @return
+	 * @throws Exception
+	 */
+	List<VSkillCollab> getAllSkillCollab(int collab_id) throws Exception;
+	
+	/**
+	 * Select all Collaborator Skills By Id(old version)
 	 * @class ISkillService.java
 	 * @param collab_id
 	 * @return

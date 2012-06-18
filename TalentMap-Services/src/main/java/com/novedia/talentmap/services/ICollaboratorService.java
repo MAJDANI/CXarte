@@ -3,6 +3,8 @@ package com.novedia.talentmap.services;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Manager;
+import com.novedia.talentmap.model.entity.Mission;
 /**
  * Interface Collaborator Services
  * @author j.collet
@@ -37,4 +39,31 @@ public interface ICollaboratorService {
 	 * @throws Exception
 	 */
 	int updateCollaborator(Collaborator collaborator) throws Exception;
+	
+	/**
+	 * Update one Mission
+	 * @class ICollaboratorService.java
+	 * @param mission
+	 * @return
+	 * @throws Exception
+	 */
+	int updateMission(Mission mission) throws Exception;
+	
+	/**
+	 * Get One Mission By Collab_ID
+	 * @class ICollaboratorService.java
+	 * @param collab_id
+	 * @return
+	 * @throws Exception
+	 */
+	Mission getMission(int collab_id) throws Exception;
+	
+	/**
+	 * Get one Manager by ID
+	 * @class ICollaboratorService.java
+	 * @param manager_id
+	 * @return
+	 * @throws Exception
+	 */
+	Manager getManager(int manager_id) throws Exception;
 }

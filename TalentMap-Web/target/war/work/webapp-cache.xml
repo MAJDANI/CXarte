@@ -47,18 +47,26 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/data/FrequencyUse.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/data/TimeUse.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/accueil.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/administration.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/administration_suppression_collab.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/administration_suppression_competence.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_creation.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/fiche_profil_modification.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/MyVaadinApplication.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringApplicationServlet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringVaadinServlet.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/AddSkillPanel.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorForm.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollaboratorFormFieldFactory.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/CollabView.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ListSkill.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ProfileView$1.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/ProfileView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AddSkillContent.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminContentLayout.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/NavigationLink.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/collab/CollabView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/AddSkillPanel.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/CollaboratorForm.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/CollaboratorFormFieldFactory.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ListSkill.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/MissionFormFieldFactory.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileView$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabMain.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabProfileSheet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IObservable.class</string>

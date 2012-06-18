@@ -7,6 +7,26 @@ public class Category implements Serializable {
 	private String id;
 	private String name;
 	
+	
+	/**
+	 * Build the class Category.java 
+	 * @param id
+	 * @param name
+	 */
+	public Category(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	/**
+	 * Build the class Category.java 
+	 */
+	public Category() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * Get the category_id value
 	 * @return the category_id

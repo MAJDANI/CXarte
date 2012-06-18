@@ -1,5 +1,6 @@
 package com.novedia.talentmap.store.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -26,12 +27,45 @@ public class ConceptDao implements IConceptDao {
 	}
 	
 	/**
+	 * Builder of a dummy Concept if the database is down
+	 * @class ConceptDao.java
+	 * @param id
+	 * @return
+	 */
+	private Concept buildDummyConcept(int id){
+		
+		Concept c = new Concept();
+		c.setCategory_id("1");
+		c.setId(String.valueOf(id));
+		c.setName("IOC");
+		c.setScore(2.0);
+		
+		return c;
+	}
+	
+	/**
 	 * Get One Concept By Id
 	 */
 	@Override
-	public Concept getById(int id) throws Exception {
+	public Concept getById(int id) {
 		
-		return (Concept)sqlMapClient.queryForObject("concept.getConcept", id);
+		try {
+			
+//			return (Concept)sqlMapClient.queryForObject("concept.getConcept", id);
+			return buildDummyConcept(id);
+			
+//		} catch (SQLException e) {
+//			
+//			//e.printStackTrace();
+//			
+//			return buildDummyConcept(id);
+			
+		} catch (NullPointerException npe){
+			
+			npe.printStackTrace();
+			
+			return buildDummyConcept(id);
+		}
 	}
 	
 	/**

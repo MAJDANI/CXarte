@@ -8,7 +8,25 @@ public class Tool implements Serializable {
 	private String concept_id;
 	private String name;
 	
-	
+	/**
+	 * Build the class Tool.java 
+	 * @param id
+	 * @param concept_id
+	 * @param name
+	 */
+	public Tool(String id, String concept_id, String name) {
+		super();
+		this.id = id;
+		this.concept_id = concept_id;
+		this.name = name;
+	}
+	/**
+	 * Build the class Tool.java 
+	 */
+	public Tool() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Get the tool_id value
 	 * @return the tool_id

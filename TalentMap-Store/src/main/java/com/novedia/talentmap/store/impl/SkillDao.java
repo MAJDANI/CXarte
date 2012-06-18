@@ -1,6 +1,11 @@
 package com.novedia.talentmap.store.impl;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Skill;
@@ -26,13 +31,55 @@ public class SkillDao implements ISkillDao {
 	}
 	
 	/**
+	 * Builder of a list of skills if the database is down
+	 * @class SkillDao.java
+	 * @param id
+	 * @return
+	 */
+	private List<Skill> buildDummySkills(int id){
+		
+		List<Skill> lSkill = new ArrayList<Skill>();
+		
+		for(int i = 1; i <= 3; i++){
+			Skill skill = new Skill();
+			Random rd = new Random();
+			
+			skill.setCollaborator_id(String.valueOf(id));
+			skill.setTool_id(String.valueOf(i));
+			skill.setScore(rd.nextInt(5)+1);
+			skill.setNo_using_time(rd.nextInt(4)+1);
+			skill.setUse_frequency(rd.nextInt(3)+1);
+			
+			lSkill.add(skill);
+		}
+		
+		return lSkill;
+	}
+	
+	/**
 	 * Select all Collaborator's Skill By Collaborator_ID
 	 */
 	@Override
-	public List<Skill> getAllCollaboratorSkill(int collaborator_id)
-			throws Exception {
+	public List<Skill> getAllCollaboratorSkill(int collaborator_id) {
 		
-		return sqlMapClient.queryForList("skill.getAllCollaboratorSkill",collaborator_id);
+		try {
+			
+//			return sqlMapClient.queryForList("skill.getAllCollaboratorSkill",collaborator_id);
+			return buildDummySkills(collaborator_id);
+			
+//		} catch (SQLException e) {
+//			
+//			//e.printStackTrace();
+//			System.err.println("Database Down !");
+//			
+//			return buildDummySkills(collaborator_id);
+		} catch (NullPointerException npe){
+			
+			npe.printStackTrace();
+			
+			return buildDummySkills(collaborator_id);
+		}
+		
 	}
 
 	/**
@@ -42,7 +89,11 @@ public class SkillDao implements ISkillDao {
 	public Skill getOneCollaboratorSkill(int collaborator_id, int tool_id)
 			throws Exception {
 		
-		return (Skill)sqlMapClient.queryForObject("skill.getSkill", collaborator_id, tool_id);
+		Map<String, Integer> mapId =new HashMap<String, Integer>();
+		mapId.put("collaboratorId", collaborator_id);
+		mapId.put("toolId", tool_id);
+		
+		return (Skill)sqlMapClient.queryForObject("skill.getSkill", mapId);
 	}
 
 	/**

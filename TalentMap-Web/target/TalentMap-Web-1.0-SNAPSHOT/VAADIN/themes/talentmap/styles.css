@@ -6,6 +6,67 @@
 .v-readonly{background:#eee!important; color:gray!important;}
 .v-table-body{height:auto!important;}
 
+/* GRID DATA PROFILE*/
+.form-data-administrative div{overflow:visible!important;}
+.form-data-administrative .v-caption{float:left; width:auto!important; height:23px; line-height:23px;}
+.form-data-administrative .v-gridlayout>div>div>div{width:350px!important;}
+
+.v-caption-type-profile, .v-caption-last-name, .v-caption-first-name, .v-caption-email, .v-caption-phone, .v-caption-employment-date, .v-caption-experience,
+.v-caption-business-engineer, .v-caption-mission-start-date, .v-caption-mission-end-date, .v-caption-mission-client, .v-caption-consultant-manager
+{position: relative; margin-right: 2px;}
+
+.type-profile, .last-name, .first-name, .email, .phone, .employment-date, .experience, .business-engineer, .mission-start-date, .mission-end-date, .mission-client,
+.consultant-manager
+{position: relative;}
+	
+	/* LAST NAME */
+.form-data-administrative .v-caption-last-name{left:0px!important; bottom:0px!important;}
+.form-data-administrative .last-name{left:103px!important; bottom:0px!important;}
+
+	/* FIRST NAME */	
+.form-data-administrative .v-caption-first-name{left:-200px!important; bottom:0px!important;}
+.form-data-administrative .first-name{left:-117px!important; bottom:0px!important;}
+
+	/* PROFILE TYPE */
+.form-data-administrative .v-caption-type-profile{left:-392px!important; bottom:0px!important;}
+.form-data-administrative .type-profile{left:-392px!important; bottom:0px!important;}
+
+	/*  EMAIL */
+.form-data-administrative .v-caption-email{left:0px!important; bottom:0px!important;}
+.form-data-administrative .email{left:94px!important; bottom:0px!important;}
+
+	/* PHONE */
+.form-data-administrative .v-caption-phone{left:-202px!important; bottom:0px!important;}
+.form-data-administrative .phone{left:-91px!important; bottom:0px!important;}	
+
+	/* EMPLOYMENT DATE */
+.form-data-administrative .v-caption-employment-date{left:-770px!important; bottom:-59px!important;}
+.form-data-administrative .employment-date{left:-770px!important; bottom:-59px!important;}	
+
+	/* EXPERIENCE */
+.form-data-administrative .v-caption-experience{left:0px!important; bottom:0px!important;}
+.form-data-administrative .experience{left:4px!important; bottom:0px!important;}	
+
+	/* BUSINESS ENGINEER */
+.form-data-administrative .v-caption-business-engineer{left:-196px!important; bottom:-115px!important; z-index:9999;}
+.form-data-administrative .business-engineer{left:-181px!important; bottom:-115px!important; z-index:9999;}
+
+	/* MISSION START DATE */
+.form-data-administrative .v-caption-mission-start-date{left:-200px!important; bottom:56px!important;}
+.form-data-administrative .mission-start-date{left:-153px!important; bottom:56px!important;}
+
+	/* MISSION END DATE */
+.form-data-administrative .v-caption-mission-end-date{left:-415px!important; bottom:56px!important;}
+.form-data-administrative .mission-end-date{left:-415px!important; bottom:56px!important;}
+
+	/* MISSION CLIENT */
+.form-data-administrative .v-caption-mission-client{left:0px!important; bottom:56px!important;}
+.form-data-administrative .mission-client{left:90px!important; bottom:56px!important;}
+
+	/* CONSULTANT MANAGER */
+.form-data-administrative .v-caption-consultant-manager{left:24px!important; bottom:79px!important;}
+.form-data-administrative .consultant-manager{left:24px!important; bottom:79px!important;}
+
 /*FOOTER PROFILE*/
 .profile-footer{background: rgba(0,0,0,0.1);}
 .profile-footer .v-button{ 
@@ -15,7 +76,7 @@
 .v-label-h2, .v-caption-h2 .v-captiontext{
 	color:#3399FF!important; 
 	margin-bottom:15px; 
-	font-size:18px!important;
+	font-size:16px!important;
 	text-transform:none;
 }
 

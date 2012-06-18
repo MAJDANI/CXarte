@@ -18,6 +18,14 @@ public class ProfileService implements IProfileService {
 	private IProfileDao profileDao;
 
 	/**
+	 * Get the profileDao value
+	 * @return the profileDao
+	 */
+	public IProfileDao getProfileDao() {
+		return profileDao;
+	}
+
+	/**
 	 * Select all Profiles
 	 */
 	@Override

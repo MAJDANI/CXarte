@@ -8,7 +8,25 @@ public class VSkill  implements Serializable {
 	private String concept_name;
 	private String tool_name;
 	
-	
+	/**
+	 * Build the class VSkill.java 
+	 * @param category_name
+	 * @param concept_name
+	 * @param tool_name
+	 */
+	public VSkill(String category_name, String concept_name, String tool_name) {
+		super();
+		this.category_name = category_name;
+		this.concept_name = concept_name;
+		this.tool_name = tool_name;
+	}
+	/**
+	 * Build the class VSkill.java 
+	 */
+	public VSkill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Get the tool_name value
 	 * @return the tool_name

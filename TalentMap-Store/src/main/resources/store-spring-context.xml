@@ -53,6 +53,17 @@
 		<property name="sqlMapClient" ref="sqlMap"/>
 	</bean>
 	
-
+	<bean id="vSkillCollabDao" class="com.novedia.talentmap.store.impl.VSkillCollabDao">
+		<property name="sqlMapClient" ref="sqlMap"/>
+	</bean>
+	
+	
+	<bean id="missionDao" class="com.novedia.talentmap.store.impl.MissionDao">
+		<property name="sqlMapClient" ref="sqlMap"/>
+	</bean>
+	
+	<bean id="managerDao" class="com.novedia.talentmap.store.impl.ManagerDao">
+		<property name="sqlMapClient" ref="sqlMap"/>
+	</bean>
 
 </beans>

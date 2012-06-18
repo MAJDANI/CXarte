@@ -7,6 +7,27 @@ public class Profile implements Serializable {
 	private static final long serialVersionUID = 8766946810895701286L;
 	private String id;
 	private String type;
+	
+	
+	/**
+	 * Build the class Profile.java 
+	 * @param id
+	 * @param type
+	 */
+	public Profile(String id, String type) {
+		super();
+		this.id = id;
+		this.type = type;
+	}
+
+	/**
+	 * Build the class Profile.java 
+	 */
+	public Profile() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Get the id value
 	 * @return the id
@@ -22,6 +43,14 @@ public class Profile implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Profile [id=" + id + ", type=" + type + "]";
+	}
+
 	/**
 	 * Get the profileType value
 	 * @return the profileType

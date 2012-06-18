@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.collab.CollabView;
+import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
@@ -20,12 +23,14 @@ public class TabProfileSheet extends TabSheet {
 	 */
 	private ProfileView profileView;
 	private CollabView collabView;
+	private AdminView adminView;
 	
 	/**
 	 * Constants
 	 */
-	private final String TAB_FIRST_NAME = "Fiche Profil";
-	private final String TAB_SECOND_NAME = "Collaborateur";
+	private final String TAB_PROFILE_NAME = "Fiche Profil";
+	private final String TAB_COLLAB_NAME = "Collaborateur";
+	private final String TAB_ADMIN_NAME = "Administration";
 
 	/**
 	 * 
@@ -33,15 +38,17 @@ public class TabProfileSheet extends TabSheet {
 	 * @param profileView
 	 * @param collabView
 	 */
-	public TabProfileSheet(ProfileView profileView, CollabView collabView){
+	public TabProfileSheet(ProfileView profileView, CollabView collabView, AdminView adminView){
 		super();
 		this.profileView = profileView;
 		this.collabView = collabView;
+		this.adminView = adminView;
 		
 		setImmediate(true);
 		
-		addTab(profileView, TAB_FIRST_NAME);
+		addTab(profileView, TAB_PROFILE_NAME);
 		//addTab(cmView, TAB_SECOND_NAME);
+		addTab(adminView, TAB_ADMIN_NAME);
 	}
 	
 	/**
@@ -60,4 +67,12 @@ public class TabProfileSheet extends TabSheet {
 		this.collabView = collabView;
 	}
 	
+	/**
+	 * Set the adminView value
+	 * @param adminView the adminView to set
+	 */
+	public void setAdminView(AdminView adminView) {
+		this.adminView = adminView;
+	}
+
 }

@@ -10,6 +10,31 @@ public class Skill implements Serializable{
 	private Integer use_frequency;
 	private Integer no_using_time;
 	
+	
+	/**
+	 * Build the class Skill.java 
+	 * @param collaborator_id
+	 * @param tool_id
+	 * @param score
+	 * @param use_frequency
+	 * @param no_using_time
+	 */
+	public Skill(String collaborator_id, String tool_id, Integer score,
+			Integer use_frequency, Integer no_using_time) {
+		super();
+		this.collaborator_id = collaborator_id;
+		this.tool_id = tool_id;
+		this.score = score;
+		this.use_frequency = use_frequency;
+		this.no_using_time = no_using_time;
+	}
+	/**
+	 * Build the class Skill.java 
+	 */
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Get the use_frequency value
 	 * @return the use_frequency

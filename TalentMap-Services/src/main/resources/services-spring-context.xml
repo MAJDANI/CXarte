@@ -15,6 +15,8 @@
 	<!-- Service beans declaration -->
 	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.CollaboratorService">
 		<property name="collabDao" ref="collaboratorDao"/>
+		<property name="missionDao" ref="missionDao"/>
+		<property name="managerDao" ref="managerDao"/>
 	</bean>
     
     <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
@@ -27,6 +29,7 @@
 		<property name="conceptDao" ref="conceptDao"/>
 		<property name="categoryDao" ref="categoryDao"/>
 		<property name="vSkillDao" ref="vSkillDao"/>
+		<property name="vSkillCollabDao" ref="vSkillCollabDao" />
 	</bean>
 	
 </beans>
