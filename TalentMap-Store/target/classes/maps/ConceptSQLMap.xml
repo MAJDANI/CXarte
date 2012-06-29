@@ -23,6 +23,25 @@
     
     <select id="getAllConceptByCategoryId" resultMap="conceptResult" parameterClass="Integer">
     	SELECT * FROM CONCEPT WHERE CATEGORY_ID = #categoryId#
-    </select>					 
+    </select>	
+    
+    <insert id="insertConcept" parameterClass="Concept">
+    	
+    	<selectKey resultClass="int" keyProperty="id">
+      		SELECT SEQCONCEPT.NEXTVAL FROM DUAL
+    	</selectKey>
+    	
+    	INSERT INTO CONCEPT (
+    		CONCEPT_ID,
+    		CATEGORY_ID, 
+    		CONCEPT_NAME
+    		)values (
+    		#id#, #category_id# , upper(#name#)
+    		)
+    </insert>
+    
+    <select id="checkConcept" resultMap="conceptResult" parameterClass="java.util.HashMap">
+		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category_id#
+	</select>				 
 
 </sqlMap>

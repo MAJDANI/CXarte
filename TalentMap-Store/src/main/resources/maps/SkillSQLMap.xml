@@ -33,6 +33,11 @@
     	)values (
      		 #collaborator_id#, #tool_id#, #score#, #use_frequency#, #no_using_time#
     	)
-    </insert>						 
+    </insert>	
+    
+   	<update id="updateSkill" parameterClass="Skill">
+		UPDATE SKILL SET COLLAB_ID = #collaborator_id#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time# 
+		WHERE COLLAB_ID = #collaborator_id#
+	</update>					 
 
 </sqlMap>

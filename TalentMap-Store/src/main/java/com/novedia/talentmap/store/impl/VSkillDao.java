@@ -96,16 +96,16 @@ public class VSkillDao implements IVSkillDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("vskill.getToolByConcept", mapName);
+			return sqlMapClient.queryForList("vskill.getToolByConcept", mapName);
+			
+//			return buildListDummyToolByConcept(categoryName, conceptName);
+
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
 			
 			return buildListDummyToolByConcept(categoryName, conceptName);
-
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
-//			return buildListDummyToolByConcept(categoryName, conceptName);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -121,15 +121,15 @@ public class VSkillDao implements IVSkillDao {
 
 		try {
 			
-//			return (VSkill) sqlMapClient.queryForObject("vskill.getSkillByTool", toolName);
-			return buildDummySkill(toolName);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return (VSkill) sqlMapClient.queryForObject("vskill.getSkillByTool", toolName);
 //			return buildDummySkill(toolName);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildDummySkill(toolName);
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -146,15 +146,15 @@ public class VSkillDao implements IVSkillDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("vskill.getConceptByCategory", categoryName);
-			return buildListDummyConceptByCategory(categoryName);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return sqlMapClient.queryForList("vskill.getConceptByCategory", categoryName);
 //			return buildListDummyConceptByCategory(categoryName);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildListDummyConceptByCategory(categoryName);
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();

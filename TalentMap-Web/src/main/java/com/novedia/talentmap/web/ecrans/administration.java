@@ -83,6 +83,10 @@ public class administration extends CustomComponent {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
+	
+
+	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
+
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
@@ -138,7 +142,6 @@ public class administration extends CustomComponent {
 		// horizontalSplitPanel_2
 		horizontalSplitPanel_2 = buildHorizontalSplitPanel_2();
 		verticalLayout_1.addComponent(horizontalSplitPanel_2);
-		verticalLayout_1.setExpandRatio(horizontalSplitPanel_2, 1.0f);
 		
 		return verticalLayout_1;
 	}

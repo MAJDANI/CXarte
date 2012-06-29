@@ -104,7 +104,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	/**
 	 * Flag
 	 */
-	public static boolean isNewSkill;
+	private boolean isNewSkill;
 	
 	/**
 	 * 
@@ -331,7 +331,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					this.addOneSkill();
 				}else{
 					
-					this.updateSkill();
+					this.addOneSkill();
 				}
 
 			}
@@ -363,36 +363,34 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					noUsingTimeValue = tu.getId();
 				}
 			}
+			
+			Skill skill = new Skill();
 
-			// Check if the Collaborator already have the Skill
-			if (!hasSkill(tool.getId())) {
+			skill.setCollaborator_id(COLLAB_ID);
+			skill.setTool_id(tool.getId());
+			skill.setScore(starsValue.intValue());
+			skill.setUse_frequency(frequencyUseValue);
+			skill.setNo_using_time(noUsingTimeValue);
+			
+			// Test if it's a new skill or not
+			if(this.isNewSkill){
+				
+				// Check if the Collaborator already have the Skill
+				if (!hasSkill(tool.getId())) {
+					
+					addOneNewSkill(skill);
 
-				Skill skill = new Skill();
+				} else {
 
-				skill.setCollaborator_id(String.valueOf(COLLAB_ID));
-				skill.setTool_id(tool.getId());
-				skill.setScore(starsValue.intValue());
-				skill.setUse_frequency(frequencyUseValue);
-				skill.setNo_using_time(noUsingTimeValue);
-
-				this.skillService.addOneSkill(skill);
-
-				getWindow().showNotification("Compétence ajoutée",
-						Notification.TYPE_TRAY_NOTIFICATION);
-
-				Map<Category, Map> mapSkill = this.skillService
-						.getAllCollaboratorSkill(COLLAB_ID);
-
-				this.listSkill = new ListSkill(mapSkill);
-
-				this.updateObservateur();
-
-			} else {
-
-				getWindow().showNotification(
-						"Vous possédez déjà cette compétence",
-						Notification.TYPE_WARNING_MESSAGE);
-
+					getWindow().showNotification(
+							"Vous possédez déjà cette compétence",
+							Notification.TYPE_WARNING_MESSAGE);
+				}
+				
+			}else{
+				
+				updateOneSkill(skill);
+				
 			}
 
 		} catch (Exception e) {
@@ -401,10 +399,35 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		}
 	}
 	
-	private void updateSkill(){
-		//TODO : Attendre que la base de données soit opérationnelle pour faire les tests.
+	private void updateOneSkill(Skill skill) throws Exception{
 		
-		// Voir la méthode addOneSkill
+		this.skillService.updateOneSkill(skill);
+
+		getWindow().showNotification("Compétence modifiée",
+				Notification.TYPE_TRAY_NOTIFICATION);
+
+		this.updateMapSkill();
+	}
+	
+	private void addOneNewSkill(Skill skill) throws Exception{
+		
+		this.skillService.addOneSkill(skill);
+
+		getWindow().showNotification("Compétence ajoutée",
+				Notification.TYPE_TRAY_NOTIFICATION);
+
+		this.updateMapSkill();
+		
+	}
+	
+	private void updateMapSkill() throws Exception{
+		
+		Map<Category, Map> mapSkill = this.skillService
+				.getAllCollaboratorSkill(COLLAB_ID);
+
+		this.listSkill = new ListSkill(mapSkill);
+
+		this.updateObservateur();
 	}
 
 	/**
@@ -415,14 +438,12 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean hasSkill(String tId) {
+	private boolean hasSkill(Integer tId) {
 		Skill skill = null;
-		// TODO
+		
 		try {
 
-			int toolId = Integer.parseInt(tId);
-
-			skill = this.skillService.getSkillByToolId(COLLAB_ID, toolId);
+			skill = this.skillService.getSkillByToolId(COLLAB_ID, tId);
 
 		} catch (Exception e) {
 
@@ -611,8 +632,8 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 
 	@Override
-	public void addObservateur(IProfileView pv) {
-		this.obs = pv;
+	public void addObservateur(Object observateur) {
+		this.obs = (IProfileView) observateur;
 	}
 
 	@Override
@@ -624,5 +645,22 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	public void delObservateur() {
 		this.obs = null;
 	}
+	
+	/**
+	 * Get the isNewSkill value
+	 * @return the isNewSkill
+	 */
+	public boolean isNewSkill() {
+		return isNewSkill;
+	}
+
+	/**
+	 * Set the isNewSkill value
+	 * @param isNewSkill the isNewSkill to set
+	 */
+	public void setNewSkill(boolean isNewSkill) {
+		this.isNewSkill = isNewSkill;
+	}
+
 
 }

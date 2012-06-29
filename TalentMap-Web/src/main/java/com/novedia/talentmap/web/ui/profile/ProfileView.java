@@ -308,10 +308,10 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 
 		try {
 			
-			if(collab.getProfile_id().length()==1){
+			if(collab.getProfile_id() > 0){
 				
 				collab.setProfile_id(this.profileService.getProfile(
-						Integer.parseInt(collab.getProfile_id())).getId());
+						collab.getProfile_id()).getId());
 			}else{
 				
 				collab.setProfile_id(this.profileService.getProfile(
@@ -361,7 +361,8 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 
 		Button button = event.getButton();
-
+		
+		//Save Button
 		if (button == this.save) {
 		
 			if(saveDataCollaborator() == 1 && saveDataMission() == 1){
@@ -369,47 +370,58 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 				getWindow().showNotification("Vos données ont été modifiées", Notification.TYPE_TRAY_NOTIFICATION);
 			}
 			
+		//Edit Button
 		}else if( button == this.edit){
 			
-			this.addSkillPanel.setVisible(true);
-			this.addSkill.setEnabled(false);
-
-			this.setAddSkillPanelWithTool();
+			if(this.setAddSkillPanelWithTool()){
+				
+				this.addSkillPanel.setNewSkill(false);
+				this.addSkillPanel.setVisible(true);
+				this.addSkill.setEnabled(false);
+			}else{
+				this.edit.setEnabled(true);
+			}
 			
+		//Cancel Button
 		} else if (button == this.cancel) {
 			
 			this.addSkillPanel.setVisible(false);
 			this.addSkill.setEnabled(true);
 			this.edit.setEnabled(true);
 
+		//Add Skill Panel button
 		} else if (button == this.addSkill) {
 			
 			this.edit.setEnabled(false);
 			this.skillPanel.setVisible(false);
 			
+			this.addSkillPanel.setNewSkill(true);
 			this.addSkillPanel.setVisible(true);
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 		}
 	}
 	
-	public void setAddSkillPanelWithTool(){
-		
-//		VSkill vSkill = new VSkill();
-//		
-//		vSkill.setCategory_name(this.listSkill.getAccCategory().getSelectedTab().getClass().toString());
-//		vSkill.setConcept_name(this.listSkill.getAccConcept().getSelectedTab().getCaption());
+	public boolean setAddSkillPanelWithTool(){
 		
 		Object rowId = this.listSkill.getTableTools().getValue(); // get the selected rows id
-		String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Nom de l'outil").getValue();
-
-//		
-//		getWindow().showNotification(vSkill.getCategory_name()+" "+vSkill.getConcept_name()+" "
-//									+vSkill.getTool_name()
-//				, Notification.TYPE_TRAY_NOTIFICATION);
 		
-		this.addSkillPanel.getToolSelect().setValue(toolName);
-		this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
-		this.addSkillPanel.getToolSelect().setReadOnly(true);
+		if(rowId!=null){
+			
+			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Nom de l'outil").getValue();
+			
+			this.addSkillPanel.getToolSelect().setReadOnly(false);
+			this.addSkillPanel.getToolSelect().setValue(toolName);
+			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
+			this.addSkillPanel.getToolSelect().setReadOnly(true);
+			
+			return true;
+		}else{
+			
+			getWindow().showNotification("Veuillez sélectionner un outil dans le tableau de compétences", Notification.TYPE_WARNING_MESSAGE);
+			
+			return false;
+		}
+		
 
 	}
 

@@ -9,9 +9,9 @@ public class Collaborator implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1323210979848908088L;
-	protected String id;
-	private String manager_id;
-	protected String profile_id;
+	protected Integer id;
+	private Integer manager_id;
+	protected Integer profile_id;
 	protected String last_name;
 	protected String first_name;
 	protected String email;
@@ -35,7 +35,7 @@ public class Collaborator implements Serializable {
 	 * @param experience
 	 * @param business_engineer
 	 */
-	public Collaborator(String id, String manager_id, String profile_id,
+	public Collaborator(Integer id, Integer manager_id, Integer profile_id,
 			String last_name, String first_name, String email, Integer phone,
 			Date employment_date, Integer experience, String business_engineer) {
 		super();
@@ -75,14 +75,14 @@ public class Collaborator implements Serializable {
 	 * Get the id value
 	 * @return the id
 	 */
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * Set the id value
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
@@ -133,28 +133,28 @@ public class Collaborator implements Serializable {
 	 * Get the manager_id value
 	 * @return the manager_id
 	 */
-	public String getManager_id() {
+	public Integer getManager_id() {
 		return manager_id;
 	}
 	/**
 	 * Set the manager_id value
 	 * @param manager_id the manager_id to set
 	 */
-	public void setManager_id(String manager_id) {
+	public void setManager_id(Integer manager_id) {
 		this.manager_id = manager_id;
 	}
 	/**
 	 * Get the profil_id value
 	 * @return the profil_id
 	 */
-	public String getProfile_id() {
+	public Integer getProfile_id() {
 		return profile_id;
 	}
 	/**
 	 * Set the profil_id value
 	 * @param profil_id the profil_id to set
 	 */
-	public void setProfile_id(String profile_id) {
+	public void setProfile_id(Integer profile_id) {
 		this.profile_id = profile_id;
 	}
 	/**

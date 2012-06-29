@@ -38,4 +38,20 @@ public interface IConceptDao {
 	 * @throws Exception
 	 */
 	List<Concept> selectAllByCategoryId(int categoryId) throws Exception;
+	
+	/**
+	 * Save one concept
+	 * @class IConceptDao.java
+	 * @throws Exception
+	 */
+	int saveOne(Concept concept) throws Exception;
+	
+	/**
+	 * Check if the concept exists
+	 * @class IConceptDao.java
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	Concept checkConcept(String name, int category_id) throws Exception;
 }

@@ -38,8 +38,8 @@ public class ToolDao implements IToolDao {
 	private Tool buildDummyTool(int id, String name, int concept_id){
 		
 		Tool t = new Tool();
-		t.setId(String.valueOf(id));
-		t.setConcept_id(String.valueOf(concept_id));
+		t.setId(id);
+		t.setConcept_id(concept_id);
 		t.setName(name);
 		
 		return t;
@@ -53,16 +53,16 @@ public class ToolDao implements IToolDao {
 		
 		try {
 
-//			return (Tool)sqlMapClient.queryForObject("tool.getToolById",id);
+			return (Tool)sqlMapClient.queryForObject("tool.getToolById",id);
+			
+//			return buildDummyTool(id, "Spring", 1);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			System.err.println("Database Down !");
 			
 			return buildDummyTool(id, "Spring", 1);
-			
-//		} catch (SQLException e) {
-//			
-//			e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
-//			return buildDummyTool(id, "Spring", 1);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -78,15 +78,15 @@ public class ToolDao implements IToolDao {
 		
 		try {
 			
-//			return (Tool) sqlMapClient.queryForObject("tool.getToolByName", name);
+			return (Tool) sqlMapClient.queryForObject("tool.getToolByName", name);
+			
+//			return buildDummyTool(1, name, 1);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
 			
 			return buildDummyTool(1, name, 1);
-			
-//		} catch (SQLException e) {
-//			
-//			e.printStackTrace();
-//			
-//			return buildDummyTool(1, name, 1);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -103,15 +103,15 @@ public class ToolDao implements IToolDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("tool.getAllTool");
-			return buildListDummyTool(1);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return sqlMapClient.queryForList("tool.getAllTool");
 //			return buildListDummyTool(1);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildListDummyTool(1);
 			
 		} catch(NullPointerException npe){
 			
@@ -147,15 +147,15 @@ public class ToolDao implements IToolDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("tool.getAllToolByConceptId", conceptId);
-			return buildListDummyTool(conceptId);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database down !");
-//			
+			return sqlMapClient.queryForList("tool.getAllToolByConceptId", conceptId);
 //			return buildListDummyTool(conceptId);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database down !");
+			
+			return buildListDummyTool(conceptId);
 			
 		} catch (NullPointerException npe){
 			
@@ -163,6 +163,25 @@ public class ToolDao implements IToolDao {
 			
 			return buildListDummyTool(conceptId);
 		}
+	}
+
+	@Override
+	public int saveOne(Tool tool) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		
+		int tool_id = (Integer) this.sqlMapClient.insert("tool.insertTool", tool);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return tool_id;
+	}
+
+	@Override
+	public Tool checkTool(String name) throws Exception {
+		
+		return (Tool) this.sqlMapClient.queryForObject("tool.checkTool", name);
 	}
 
 }

@@ -30,4 +30,19 @@ public interface ICategoryDao {
 	 */
 	List<Category> selectAll() throws Exception;
 	
+	/**
+	 * Save One Category
+	 * @class ICategoryDao.java
+	 * @throws Exception
+	 */
+	int saveOne(Category category) throws Exception;
+	
+	/**
+	 * Check if the Category exists 
+	 * @class ICategoryDao.java
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	Category checkCategory(String name) throws Exception;
 }

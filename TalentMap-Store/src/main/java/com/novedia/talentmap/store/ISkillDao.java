@@ -32,4 +32,11 @@ public interface ISkillDao {
 	 * @throws Exception
 	 */
 	void addOneSkill(Skill skill) throws Exception;
+	
+	/***
+	 * Update One Skill
+	 * @class ISkillDao.java
+	 * @throws Exception
+	 */
+	void updateOneSkill(Skill skill) throws Exception;
 }

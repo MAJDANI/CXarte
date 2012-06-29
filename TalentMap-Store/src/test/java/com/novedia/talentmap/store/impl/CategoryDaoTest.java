@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.novedia.talentmap.model.entity.Category;
+
 public class CategoryDaoTest {
 	
 	private CategoryDao categoryDao;
@@ -28,5 +30,12 @@ public class CategoryDaoTest {
 	public void testSelectAll() {
 		assertNotNull(this.categoryDao.selectAll());
 	}
+	
+//	@Test
+//	public void testSaveOne() throws Exception{
+//		Category category = new Category();
+//		
+//		this.categoryDao.saveOne(category);
+//	}
 
 }

@@ -55,10 +55,12 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/MyVaadinApplication.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringApplicationServlet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/servlet/SpringVaadinServlet.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AddSkillContent.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminContentLayout.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminNavigation.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminView$1.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/AdminView.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/NavigationLink.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/ManageSkillContent$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/admin/ManageSkillContent.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/collab/CollabView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/AddSkillPanel.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/CollaboratorForm.class</string>
@@ -69,8 +71,11 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabMain.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabProfileSheet.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/CUtils.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/IAdminView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IObservable.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/Message.class</string>
           <string>WEB-INF/lib/vaadin-6.7.1.jar</string>
           <string>WEB-INF/lib/TalentMap-Services-1.0-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/TalentMap-Store-1.0-SNAPSHOT.jar</string>

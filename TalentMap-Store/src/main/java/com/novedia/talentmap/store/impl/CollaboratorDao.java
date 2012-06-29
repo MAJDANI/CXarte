@@ -29,15 +29,15 @@ public class CollaboratorDao  implements ICollaboratorDao{
 		
 		//Dummy data (d). The connection with the database cannot establish.
 		Collaborator collabFactice = new Collaborator();
-		collabFactice.setId(String.valueOf(id));
+		collabFactice.setId(id);
 		collabFactice.setFirst_name("Julien");
 		collabFactice.setLast_name("Collet");
 		collabFactice.setPhone(000000000);
 		collabFactice.setEmail("j.collet@novedia-solutions.com");
-		collabFactice.setProfile_id("1");
+		collabFactice.setProfile_id(1);
 		collabFactice.setBusiness_engineer("Ingenieur d'affaire");
 		collabFactice.setEmployment_date(new Date());
-		collabFactice.setManager_id("1");
+		collabFactice.setManager_id(1);
 		collabFactice.setExperience(5);
 		
 		return collabFactice;
@@ -51,15 +51,16 @@ public class CollaboratorDao  implements ICollaboratorDao{
 		
 		try {
 			
-			//return (Collaborator)sqlMapClient.queryForObject("collaborator.getCollaborator", id);
-			return buildDummyCollaborator(id);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return (Collaborator)sqlMapClient.queryForObject("collaborator.getCollaborator", id);
 //			return buildDummyCollaborator(id);
+			
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildDummyCollaborator(id);
 //			
 		} catch(NullPointerException npe){
 			

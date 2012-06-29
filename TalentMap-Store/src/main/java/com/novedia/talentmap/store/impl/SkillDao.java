@@ -44,8 +44,8 @@ public class SkillDao implements ISkillDao {
 			Skill skill = new Skill();
 			Random rd = new Random();
 			
-			skill.setCollaborator_id(String.valueOf(id));
-			skill.setTool_id(String.valueOf(i));
+			skill.setCollaborator_id(id);
+			skill.setTool_id(i);
 			skill.setScore(rd.nextInt(5)+1);
 			skill.setNo_using_time(rd.nextInt(4)+1);
 			skill.setUse_frequency(rd.nextInt(3)+1);
@@ -64,15 +64,15 @@ public class SkillDao implements ISkillDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("skill.getAllCollaboratorSkill",collaborator_id);
-			return buildDummySkills(collaborator_id);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return sqlMapClient.queryForList("skill.getAllCollaboratorSkill",collaborator_id);
 //			return buildDummySkills(collaborator_id);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildDummySkills(collaborator_id);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -102,7 +102,26 @@ public class SkillDao implements ISkillDao {
 	@Override
 	public void addOneSkill(Skill skill) throws Exception {
 		
+		this.sqlMapClient.startTransaction();
+		
 		this.sqlMapClient.insert("skill.insertSkill", skill);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+	}
+	
+	/**
+	 * Update One Skill
+	 */
+	@Override
+	public void updateOneSkill(Skill skill) throws Exception{
+		
+		this.sqlMapClient.startTransaction();
+		
+		this.sqlMapClient.update("skill.updateSkill", skill);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
 	}
 
 }

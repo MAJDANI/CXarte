@@ -47,4 +47,20 @@ public interface IToolDao {
 	 * @throws Exception
 	 */
 	Tool getByName(String name) throws Exception;
+	
+	/**
+	 * Save One Tool
+	 * @class IToolDao.java
+	 * @throws Exception
+	 */
+	int saveOne(Tool tool) throws Exception;
+	
+	/**
+	 * Check if the tool exists
+	 * @class IToolDao.java
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	Tool checkTool(String name) throws Exception;
 }

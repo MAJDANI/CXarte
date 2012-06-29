@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 public class Concept implements Serializable {
 	
-	private String id;
-	private String category_id;
+	private Integer id;
+	private Integer category_id;
 	private String name;
+	/**
+	 * Not in database
+	 */
+	private double score;
 	
 	/**
 	 * Build the class Concept.java 
@@ -15,17 +19,13 @@ public class Concept implements Serializable {
 	 * @param name
 	 * @param score
 	 */
-	public Concept(String id, String category_id, String name, double score) {
+	public Concept(Integer id, Integer category_id, String name, double score) {
 		super();
 		this.id = id;
 		this.category_id = category_id;
 		this.name = name;
 		this.score = score;
 	}
-	/**
-	 * Not in database
-	 */
-	private double score;
 	
 	/**
 	 * 
@@ -53,28 +53,28 @@ public class Concept implements Serializable {
 	 * Get the id value
 	 * @return the id
 	 */
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * Set the id value
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
 	 * Get the category_id value
 	 * @return the category_id
 	 */
-	public String getCategory_id() {
+	public Integer getCategory_id() {
 		return category_id;
 	}
 	/**
 	 * Set the category_id value
 	 * @param category_id the category_id to set
 	 */
-	public void setCategory_id(String category_id) {
+	public void setCategory_id(Integer category_id) {
 		this.category_id = category_id;
 	}
 	/**

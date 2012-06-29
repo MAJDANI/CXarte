@@ -35,15 +35,15 @@ public class MissionDao implements IMissionDao {
 		
 		try {
 			
-//			return (Mission) sqlMapClient.queryForObject("mission.getMission", collab_id);
-			return buildDummyMission(collab_id);
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database down !");
-//			
+			return (Mission) sqlMapClient.queryForObject("mission.getMission", collab_id);
 //			return buildDummyMission(collab_id);
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database down !");
+			
+			return buildDummyMission(collab_id);
 //			
 		} catch (NullPointerException npe){
 			

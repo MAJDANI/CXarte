@@ -18,6 +18,25 @@
 	
     <select id="getAllCategory" resultMap="categoryResult">
     	SELECT * FROM CATEGORY
-    </select>					 
+    </select>			
+    
+    <insert id="insertCategory" parameterClass="Category">
+    	
+    	<selectKey resultClass="int" keyProperty="id">
+      		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
+    	</selectKey>
+    	
+    	INSERT INTO CATEGORY (
+    		CATEGORY_ID,
+    		CATEGORY_NAME
+    		)values (
+    		#id#,
+    		upper(#name#)
+    		)
+    </insert>	
+    
+    <select id="checkCategory" resultMap="categoryResult" parameterClass="String">
+		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
+	</select>	 
 
 </sqlMap>

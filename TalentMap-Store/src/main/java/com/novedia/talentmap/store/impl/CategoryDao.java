@@ -37,7 +37,7 @@ public class CategoryDao implements ICategoryDao {
 	private Category buildDummyCategory(int id, String name){
 		
 		Category c = new Category();
-		c.setId(String.valueOf(id));
+		c.setId(id);
 		c.setName(name);
 		
 		return c;
@@ -51,15 +51,15 @@ public class CategoryDao implements ICategoryDao {
 		
 		try {
 			
-//			return (Category)sqlMapClient.queryForObject("category.getCategory", id);
-			return buildDummyCategory(id, "JAVA");
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return (Category)sqlMapClient.queryForObject("category.getCategory", id);
 //			return buildDummyCategory(id, "JAVA");
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildDummyCategory(id, "JAVA");
 //			
 		} catch (NullPointerException npe){
 			
@@ -96,19 +96,37 @@ public class CategoryDao implements ICategoryDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("category.getAllCategory");
-			return buildListDummyCategory();
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return sqlMapClient.queryForList("category.getAllCategory");
 //			return buildListDummyCategory();
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildListDummyCategory();
 		} catch (NullPointerException npe){
 			
 			return buildListDummyCategory();
 		}
+	}
+
+	@Override
+	public int saveOne(Category category) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int category_id = (Integer) this.sqlMapClient.insert("category.insertCategory", category);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return category_id;
+	}
+
+	@Override
+	public Category checkCategory(String name) throws Exception {
+		
+		return (Category) this.sqlMapClient.queryForObject("category.checkCategory", name);
 	}
 	
 

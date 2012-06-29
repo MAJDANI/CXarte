@@ -72,7 +72,7 @@ public class SkillService implements ISkillService {
 
 		// We build the Tool Map
 		for (Skill s : listSkill) {
-			Tool tool = toolDao.getById(Integer.parseInt(s.getTool_id()));
+			Tool tool = toolDao.getById(s.getTool_id());
 			
 			//We give a score to the tool
 			int score = (int) ScoreManage.ToolScore(s.getScore(),
@@ -89,14 +89,14 @@ public class SkillService implements ISkillService {
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
 			
 			
-			Concept concept = conceptDao.getById(Integer.parseInt(entry
-					.getKey().getConcept_id()));
+			Concept concept = conceptDao.getById(entry
+					.getKey().getConcept_id());
 			
 			
 			if(!mapConcept.isEmpty()){
 				
 				//We calculate the Concept Score
-				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(Integer.parseInt(conceptTMP.getId())).size());
+				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(conceptTMP.getId()).size());
 				
 				Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
 				mapConcept.remove(conceptTMP);
@@ -127,7 +127,7 @@ public class SkillService implements ISkillService {
 		
 		//We calculate the score of the last concept if it's not null
 		if(conceptTMP != null){
-			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(Integer.parseInt(conceptTMP.getId())).size());
+			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(conceptTMP.getId()).size());
 			
 			Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
 			mapConcept.remove(conceptTMP);
@@ -138,8 +138,8 @@ public class SkillService implements ISkillService {
 
 		// We build the Category Map
 		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
-			Category category = categoryDao.getById(Integer.parseInt(entry
-					.getKey().getCategory_id()));
+			Category category = categoryDao.getById(entry
+					.getKey().getCategory_id());
 
 			if (!mapCategory.containsKey(category)) {
 				mapCategory.put(category, new HashMap<Concept, Map>());
@@ -197,7 +197,16 @@ public class SkillService implements ISkillService {
 
 		this.skillDao.addOneSkill(skill);
 	}
-
+	
+	/**
+	 * Update One Skill
+	 */
+	@Override
+	public void updateOneSkill(Skill skill) throws Exception {
+		
+		this.skillDao.updateOneSkill(skill);
+	}
+	
 	/**
 	 * Get One Tool By Name
 	 */
@@ -270,4 +279,5 @@ public class SkillService implements ISkillService {
 	public void setvSkillCollabDao(IVSkillCollabDao vSkillCollabDao) {
 		this.vSkillCollabDao = vSkillCollabDao;
 	}
+
 }

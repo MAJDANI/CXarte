@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Profile implements Serializable {
 
 	private static final long serialVersionUID = 8766946810895701286L;
-	private String id;
+	private Integer id;
 	private String type;
 	
 	
@@ -14,7 +14,7 @@ public class Profile implements Serializable {
 	 * @param id
 	 * @param type
 	 */
-	public Profile(String id, String type) {
+	public Profile(Integer id, String type) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -32,7 +32,7 @@ public class Profile implements Serializable {
 	 * Get the id value
 	 * @return the id
 	 */
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	
@@ -40,7 +40,7 @@ public class Profile implements Serializable {
 	 * Set the id value
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/* (non-Javadoc)

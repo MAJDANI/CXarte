@@ -28,16 +28,16 @@ public class ManagerDao implements IManagerDao{
 	private Manager buildDummyManager(int id){
 		
 		Manager m = new Manager();
-		m.setId(String.valueOf(id));
+		m.setId(id);
 		m.setBusiness_engineer("Ingénieur d'affaire");
 		m.setEmail("consultant.mamanger@noveadi-solutions.com");
 		m.setEmployment_date(new Date());
 		m.setExperience(10);
 		m.setFirst_name("Consultant");
 		m.setLast_name("Manager");
-		m.setManager_id(String.valueOf(id));
+		m.setManager_id(id);
 		m.setPhone(0000000000);
-		m.setProfile_id("1");
+		m.setProfile_id(1);
 		
 		return m;
 	}
@@ -50,15 +50,15 @@ public class ManagerDao implements IManagerDao{
 		
 		try {
 			
-//			return (Manager) sqlMapClient.queryForObject("manager.getManager", id);
-			return buildDummyManager(id);
-			
-//		} catch (SQLException e) {
-//		
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return (Manager) sqlMapClient.queryForObject("manager.getManager", id);
 //			return buildDummyManager(id);
+			
+		} catch (SQLException e) {
+		
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildDummyManager(id);
 			
 		} catch (NullPointerException npe){
 			

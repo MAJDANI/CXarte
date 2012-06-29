@@ -46,15 +46,15 @@ public class ProfileDao implements IProfileDao {
 		
 		try {
 			
-//			return sqlMapClient.queryForList("profile.getAllProfile");
-			return buildListDummyProfile();
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database Down !");
-//			
+			return sqlMapClient.queryForList("profile.getAllProfile");
 //			return buildListDummyProfile();
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database Down !");
+			
+			return buildListDummyProfile();
 			
 		} catch (NullPointerException npe){
 			
@@ -73,7 +73,7 @@ public class ProfileDao implements IProfileDao {
 	private Profile buildDummyProfile(int id, String type){
 		
 		Profile p = new Profile();
-		p.setId(String.valueOf(id));
+		p.setId(id);
 		p.setType(type);
 		
 		return p;
@@ -87,15 +87,15 @@ public class ProfileDao implements IProfileDao {
 		
 		try {
 			
-//			return (Profile) sqlMapClient.queryForObject("profile.getProfile", profile_id);
-			return buildDummyProfile(profile_id, "technique");
-			
-//		} catch (SQLException e) {
-//			
-//			//e.printStackTrace();
-//			System.err.println("Database down !");
-//			
+			return (Profile) sqlMapClient.queryForObject("profile.getProfile", profile_id);
 //			return buildDummyProfile(profile_id, "technique");
+			
+		} catch (SQLException e) {
+			
+			//e.printStackTrace();
+			System.err.println("Database down !");
+			
+			return buildDummyProfile(profile_id, "technique");
 			
 		} catch (NullPointerException npe){
 			

@@ -32,4 +32,11 @@
 		<property name="vSkillCollabDao" ref="vSkillCollabDao" />
 	</bean>
 	
+	<bean id="adminService" class="com.novedia.talentmap.services.impl.AdminService">
+		<property name="toolDao" ref="toolDao"/>
+		<property name="conceptDao" ref="conceptDao"/>
+		<property name="categoryDao" ref="categoryDao"/>
+		<property name="vSkillDao" ref="vSkillDao"/>
+	</bean>
+	
 </beans>

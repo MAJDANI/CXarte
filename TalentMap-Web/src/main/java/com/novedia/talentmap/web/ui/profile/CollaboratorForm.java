@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.util.CUtils;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Form;
@@ -95,10 +96,10 @@ public class CollaboratorForm extends FormLayout {
 		try {
 
 			// Set the order for Collaborator Form
-			setOrderForm(this.fieldOrderCollaborator, FIELD_ORDER_COLLABORATOR);
+			CUtils.setOrderForm(this.fieldOrderCollaborator, FIELD_ORDER_COLLABORATOR);
 			
 			//Set the order for Mission Form
-			setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
+			CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
 
 			buildFormCollaborator();
 
@@ -133,10 +134,10 @@ public class CollaboratorForm extends FormLayout {
 		this.formCollaborator.setItemDataSource(collabBean, this.fieldOrderCollaborator);
 
 		// Set the good value for the Select Item
-		int profileId = Integer.parseInt(this.collaboratorService
-				.getCollaborator(COLLAB_ID).getProfile_id());
-		this.formCollaborator.getField("profile_id").setValue(
-				this.profileService.getProfile(profileId).getType());
+		int profileId = this.collaboratorService
+				.getCollaborator(COLLAB_ID).getProfile_id();
+//		this.formCollaborator.getField("profile_id").setValue(
+//				this.profileService.getProfile(profileId).getType());
 		
 		addComponent(this.formCollaborator);
 		
@@ -170,7 +171,7 @@ public class CollaboratorForm extends FormLayout {
 		this.managerField.setStyleName("consultant-manager");
 		
 		Collaborator collab = this.collaboratorService.getCollaborator(COLLAB_ID);
-		Manager manager = this.collaboratorService.getManager(Integer.parseInt(collab.getManager_id()));
+		Manager manager = this.collaboratorService.getManager(collab.getManager_id());
 		
 		this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
 		this.managerField.setReadOnly(true);
@@ -210,12 +211,12 @@ public class CollaboratorForm extends FormLayout {
 	 * @class CollaboratorForm.java
 	 * @param fieldOrder
 	 */
-	private void setOrderForm(Vector<Object> fieldOrder, Object[] order) {
-
-		for (Object field : order) {
-			fieldOrder.add(field);
-		}
-	}
+//	private void setOrderForm(Vector<Object> fieldOrder, Object[] order) {
+//
+//		for (Object field : order) {
+//			fieldOrder.add(field);
+//		}
+//	}
 
 	/**
 	 * Set the profileService value

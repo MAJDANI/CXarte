@@ -129,37 +129,58 @@
 	
 	<!-- Vaadin AdminView UI -->
 	
+	<bean id="hSplitContent" class="com.vaadin.ui.HorizontalSplitPanel"/>
+	
 	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session">
-		<constructor-arg name="navLink" ref="navigationLinkBean" />
-		<constructor-arg name="addSkillContent" ref="addSkillContentBean" />
+		<constructor-arg name="adminNav" ref="adminNavigationBean" />
+		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
+		<constructor-arg name="hSplitContent" ref="hSplitContent" />
 	</bean>
 	
 	
 	<!-- Vaadin NavigationLink UI -->
 	
-	<bean id="addSkillLink" class="com.vaadin.ui.Link"/>
-	<bean id="updateSkillLink" class="com.vaadin.ui.Link"/>
-	<bean id="deleteSkillLink" class="com.vaadin.ui.Link"/>
-	<bean id="deleteCollabLink" class="com.vaadin.ui.Link"/>
+	<bean id="addSkillButton" class="com.vaadin.ui.Button"/>
+	<bean id="visualizeSkill" class="com.vaadin.ui.Button"/>
+	<bean id="deleteCollab" class="com.vaadin.ui.Button"/>
 	
-	<bean id="navigationLinkBean" class="com.novedia.talentmap.web.ui.admin.NavigationLink" scope="session" >
-		<constructor-arg name="addSkillLink" ref="addSkillLink" />
-		<constructor-arg name="updateSkillLink" ref="updateSkillLink" />
-		<constructor-arg name="deleteSkillLink" ref="deleteSkillLink" />
-		<constructor-arg name="deleteCollabLink" ref="deleteCollabLink" />
+	<bean id="adminNavigationBean" class="com.novedia.talentmap.web.ui.admin.AdminNavigation" scope="session" >
+		<constructor-arg name="visualizeSkill" ref="visualizeSkill" />
+		<constructor-arg name="deleteCollab" ref="deleteCollab" />
+		<constructor-arg name="addSkill" ref="addSkillButton" />
 	</bean>
 	
 	
-	<!-- Vaadin AdminContentLayout UI -->
+	<!-- Vaadin AddSkillContent UI -->
 	
 	<bean id="formSkill" class="com.vaadin.ui.Form"/>
 	<bean id="treeSkill" class="com.vaadin.ui.Tree"/>
 	<bean id="adminSaveSkill" class="com.vaadin.ui.Button"/>
+	<bean id="adminEditSkill" class="com.vaadin.ui.Button"/>
+	<bean id="adminDeleteSkill" class="com.vaadin.ui.Button"/>
+	<bean id="adminCancelSkill" class="com.vaadin.ui.Button"/>
+	<bean id="listTool" class="java.util.ArrayList"/>
+	<bean id="listConcept" class="java.util.ArrayList"/>
+	<bean id="listCategory" class="java.util.ArrayList"/>
+	<bean id="fieldOrderSkill" class="java.util.Vector"/>
+	<bean id="adminTitle" class="com.vaadin.ui.Label"/>
+	<bean id="adminBody" class="com.vaadin.ui.HorizontalLayout"/>
 	
-	<bean id="addSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AddSkillContent">
+	
+	<bean id="manageSkillContentBean" class="com.novedia.talentmap.web.ui.admin.ManageSkillContent">
 		<constructor-arg name="formSkill" ref="formSkill" />
 		<constructor-arg name="treeSkill" ref="treeSkill" />
 		<constructor-arg name="save" ref="adminSaveSkill" />
+		<constructor-arg name="edit" ref="adminEditSkill" />
+		<constructor-arg name="delete" ref="adminDeleteSkill" />
+		<constructor-arg name="cancel" ref="adminCancelSkill" />
+		<constructor-arg name="listTool" ref="listTool" />
+		<constructor-arg name="listConcept" ref="listConcept" />
+		<constructor-arg name="listCategory" ref="listCategory" />
+		<constructor-arg name="adminService" ref="adminService" />
+		<constructor-arg name="fieldOrderSkill" ref="fieldOrderSkill" />
+		<constructor-arg name="title" ref="adminTitle" />
+		<constructor-arg name="body" ref="adminBody" />
 	</bean>
 	
 	<!-- Vaadin AdminContentLayout UI -->

@@ -90,6 +90,14 @@ public interface ISkillService {
 	void addOneSkill(Skill skill) throws Exception;
 	
 	/**
+	 * Update One Skill
+	 * @class ISkillService.java
+	 * @param skill
+	 * @throws Exception
+	 */
+	void updateOneSkill(Skill skill) throws Exception;
+	
+	/**
 	 * Get One Tool By Name
 	 * @class ISkillService.java
 	 * @param name

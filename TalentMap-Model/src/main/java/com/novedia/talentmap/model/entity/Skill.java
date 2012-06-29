@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Skill implements Serializable{
 	
-	private String collaborator_id;
-	private String tool_id;
+	private Integer collaborator_id;
+	private Integer tool_id;
 	private Integer score;
 	private Integer use_frequency;
 	private Integer no_using_time;
@@ -19,7 +19,7 @@ public class Skill implements Serializable{
 	 * @param use_frequency
 	 * @param no_using_time
 	 */
-	public Skill(String collaborator_id, String tool_id, Integer score,
+	public Skill(Integer collaborator_id, Integer tool_id, Integer score,
 			Integer use_frequency, Integer no_using_time) {
 		super();
 		this.collaborator_id = collaborator_id;
@@ -67,28 +67,28 @@ public class Skill implements Serializable{
 	 * Get the collaborator_id value
 	 * @return the collaborator_id
 	 */
-	public String getCollaborator_id() {
+	public Integer getCollaborator_id() {
 		return collaborator_id;
 	}
 	/**
 	 * Set the collaborator_id value
 	 * @param collaborator_id the collaborator_id to set
 	 */
-	public void setCollaborator_id(String collaborator_id) {
+	public void setCollaborator_id(Integer collaborator_id) {
 		this.collaborator_id = collaborator_id;
 	}
 	/**
 	 * Get the tool_id value
 	 * @return the tool_id
 	 */
-	public String getTool_id() {
+	public Integer getTool_id() {
 		return tool_id;
 	}
 	/**
 	 * Set the tool_id value
 	 * @param tool_id the tool_id to set
 	 */
-	public void setTool_id(String tool_id) {
+	public void setTool_id(Integer tool_id) {
 		this.tool_id = tool_id;
 	}
 	/**

@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Tool implements Serializable {
 	
-	private String id;
-	private String concept_id;
+	private Integer id;
+	private Integer concept_id;
 	private String name;
 	
 	/**
@@ -14,11 +14,19 @@ public class Tool implements Serializable {
 	 * @param concept_id
 	 * @param name
 	 */
-	public Tool(String id, String concept_id, String name) {
+	public Tool(Integer id, Integer concept_id, String name) {
 		super();
 		this.id = id;
 		this.concept_id = concept_id;
 		this.name = name;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Tool [id=" + id + ", concept_id=" + concept_id + ", name="
+				+ name + "]";
 	}
 	/**
 	 * Build the class Tool.java 
@@ -31,28 +39,28 @@ public class Tool implements Serializable {
 	 * Get the tool_id value
 	 * @return the tool_id
 	 */
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * Set the tool_id value
 	 * @param tool_id the tool_id to set
 	 */
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
 	 * Get the concept_id value
 	 * @return the concept_id
 	 */
-	public String getConcept_id() {
+	public Integer getConcept_id() {
 		return concept_id;
 	}
 	/**
 	 * Set the concept_id value
 	 * @param concept_id the concept_id to set
 	 */
-	public void setConcept_id(String concept_id) {
+	public void setConcept_id(Integer concept_id) {
 		this.concept_id = concept_id;
 	}
 	/**
