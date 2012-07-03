@@ -166,7 +166,7 @@ public class ToolDao implements IToolDao {
 	}
 
 	@Override
-	public int saveOne(Tool tool) throws Exception {
+	public int save(Tool tool) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
 		
@@ -182,6 +182,30 @@ public class ToolDao implements IToolDao {
 	public Tool checkTool(String name) throws Exception {
 		
 		return (Tool) this.sqlMapClient.queryForObject("tool.checkTool", name);
+	}
+
+	@Override
+	public int update(Tool tool) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int tool_id = (Integer) this.sqlMapClient.update("tool.updateTool", tool);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return tool_id;
+	}
+
+	@Override
+	public int delete(int tool_id) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int id = (Integer) this.sqlMapClient.delete("tool.deleteTool", tool_id);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return id;
 	}
 
 }

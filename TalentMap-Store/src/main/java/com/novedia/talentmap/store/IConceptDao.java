@@ -44,7 +44,7 @@ public interface IConceptDao {
 	 * @class IConceptDao.java
 	 * @throws Exception
 	 */
-	int saveOne(Concept concept) throws Exception;
+	int save(Concept concept) throws Exception;
 	
 	/**
 	 * Check if the concept exists
@@ -54,4 +54,22 @@ public interface IConceptDao {
 	 * @throws Exception
 	 */
 	Concept checkConcept(String name, int category_id) throws Exception;
+	
+	/**
+	 * Update one concept
+	 * @class IConceptDao.java
+	 * @param concept
+	 * @return
+	 * @throws Exception
+	 */
+	int update(Concept concept) throws Exception;
+	
+	/**
+	 * Delete one concept
+	 * @class IConceptDao.java
+	 * @param concept
+	 * @return
+	 * @throws Exception
+	 */
+	int delete(int concept_id) throws Exception;
 }

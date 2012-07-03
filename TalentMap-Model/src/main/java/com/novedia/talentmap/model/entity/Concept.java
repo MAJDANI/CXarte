@@ -29,10 +29,25 @@ public class Concept implements Serializable {
 	
 	/**
 	 * 
+	 * Build the class Concept.java 
+	 * @param id
+	 * @param category_id
+	 * @param name
+	 */
+	public Concept(Integer id, Integer category_id, String name) {
+		super();
+		this.id = id;
+		this.category_id = category_id;
+		this.name = name;
+		this.score = 0.0;
+	}
+	
+	/**
+	 * 
 	 * Build the class Concept.java
 	 */
 	public Concept(){
-		this.score = 123.0;
+		this.score = 0.0;
 	}
 	
 	/**

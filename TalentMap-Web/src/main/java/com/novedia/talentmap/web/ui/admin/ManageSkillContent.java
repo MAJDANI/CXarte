@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.Reindeer;
 
 public class ManageSkillContent extends VerticalLayout implements
@@ -58,6 +56,11 @@ public class ManageSkillContent extends VerticalLayout implements
 	private IAdminService adminService;
 
 	/**
+	 * TalentMap Object
+	 */
+	VSkill currentVSkill;
+
+	/**
 	 * JAVA Object
 	 */
 	private List<Tool> listTool;
@@ -77,11 +80,19 @@ public class ManageSkillContent extends VerticalLayout implements
 	public static final int TYPE_CATEGORY = 1;
 	public static final int TYPE_CONCEPT = 2;
 	public static final int TYPE_TOOL = 3;
+	public static final String MESSAGE_FIELD_EMPTY = "Vous devez remplir tous les champs.";
 
 	/**
 	 * Flag
 	 */
 	public static boolean isNewSkill = false;
+
+	/**
+	 * Current ID Skill
+	 */
+	private Integer currentCategoryId;
+	private Integer currentConceptId;
+	private Integer currentToolId;
 
 	// Dummy data
 	public static Object[] TOOLS = new String[] { "Spring", "tool1", "tool2",
@@ -116,6 +127,12 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.title = title;
 		this.body = body;
 		this.cancel = cancel;
+
+		// Initiate the current ID and Skill
+		this.currentCategoryId = null;
+		this.currentConceptId = null;
+		this.currentToolId = null;
+		this.currentVSkill = null;
 
 		mainBuild();
 	}
@@ -191,10 +208,10 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		this.save.setCaption("Enrergistrer");
 		this.save.addListener(this);
-		
+
 		this.cancel.setCaption("Annuler");
 		this.cancel.addListener(this);
-		
+
 		this.edit.setCaption("Modifier");
 		this.edit.addListener(this);
 
@@ -205,7 +222,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		hLayoutButton.addComponent(this.edit);
 		hLayoutButton.addComponent(this.delete);
 		hLayoutButton.addComponent(this.cancel);
-		
+
 		setManageButtonVisible(true);
 
 		this.formSkill.setFooter(hLayoutButton);
@@ -218,6 +235,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	public void buildTreeSkill() {
 
+		this.treeSkill.removeAllItems();
 		/**
 		 * We have to select all tools, all concepts and all categories
 		 */
@@ -338,10 +356,6 @@ public class ManageSkillContent extends VerticalLayout implements
 			vSkill.setConcept_name(conceptName.trim());
 			vSkill.setTool_name(toolName.trim());
 
-			// BeanItem<VSkill> vSkillItem = (BeanItem<VSkill>) this.formSkill
-			// .getItemDataSource();
-			// VSkill vSkill = vSkillItem.getBean();
-
 			try {
 
 				// Add the skill in database
@@ -359,61 +373,275 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		} else {
 
-			CUtils.showMessage("Vous devez remplir tous les champs.",
-					Message.WARNING, getWindow());
+			CUtils.showMessage(MESSAGE_FIELD_EMPTY, Message.WARNING,
+					getWindow());
 		}
 	}
-	
+
 	/**
 	 * Show the add view
+	 * 
 	 * @class ManageSkillContent.java
 	 */
-	public void addView(){
-	
+	public void addView() {
+
 		this.isNewSkill = true;
-		
+
 		this.formSkill.setVisible(true);
 		this.treeSkill.setVisible(false);
-		
-		//We initiate the form
+
+		// We initiate the form
 		VSkill newVskill = new VSkill();
 		this.formSkill.setItemDataSource(new BeanItem(newVskill));
 		this.formSkill.setReadOnly(false);
-		
+
 		setManageButtonVisible(false);
 	}
-	
+
 	/**
 	 * Update One Skikll (category, concept, tool)
+	 * 
+	 * @throws Exception
 	 * 
 	 * @class ManageSkillContent.java
 	 */
 	private void updateOneSkill() {
-		
-		
+
+		// Get the skill name
+		getSkillNameByForm();
+
+		// Test if an enabled field is empty
+		if (skillFieldAreEmpty()) {
+
+			CUtils.showMessage(MESSAGE_FIELD_EMPTY, Message.WARNING,
+					getWindow());
+		} else {
+
+			if (this.currentCategoryId != null && this.currentConceptId == null
+					&& this.currentToolId == null) {
+
+				updateSkillCategory(this.currentVSkill.getCategory_name());
+			}
+
+			if (this.currentCategoryId != null && this.currentConceptId != null
+					&& this.currentToolId == null) {
+
+				updateSkillConcept(this.currentVSkill.getCategory_name(),
+						this.currentVSkill.getConcept_name());
+			}
+
+			if (this.currentCategoryId != null && this.currentConceptId != null
+					&& this.currentToolId != null) {
+
+				updateSkillTool(this.currentVSkill.getCategory_name(),
+						this.currentVSkill.getConcept_name(),
+						this.currentVSkill.getTool_name());
+			}
+
+			// Re build the tree skill
+			buildTreeSkill();
+		}
 	}
 	
 	/**
+	 * Update a category according to the form in the database
+	 * @class ManageSkillContent.java
+	 * @param categoryName
+	 */
+	private void updateSkillCategory(String categoryName) {
+
+		Category category = new Category(this.currentCategoryId, categoryName);
+
+		try {
+
+			Map<String, Object> mapNotification = this.adminService
+					.updateOneSkill(category, null, null);
+			CUtils.showMessage(mapNotification, getWindow());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Update a concept according to the form in the database
+	 * @class ManageSkillContent.java
+	 * @param categoryName
+	 * @param conceptName
+	 */
+	private void updateSkillConcept(String categoryName, String conceptName) {
+
+		Category category = new Category(this.currentCategoryId, categoryName);
+		Concept concept = new Concept(this.currentConceptId,
+				this.currentCategoryId, conceptName);
+
+		try {
+
+			Map<String, Object> mapNotification = this.adminService
+					.updateOneSkill(category, concept, null);
+			CUtils.showMessage(mapNotification, getWindow());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Update a tool according to the form in the database
+	 * @class ManageSkillContent.java
+	 * @param categoryName
+	 * @param conceptName
+	 * @param toolName
+	 */
+	private void updateSkillTool(String categoryName, String conceptName,
+			String toolName) {
+
+		Category category = new Category(this.currentCategoryId, categoryName);
+		Concept concept = new Concept(this.currentConceptId,
+				this.currentCategoryId, conceptName);
+		Tool tool = new Tool(this.currentToolId, this.currentConceptId,
+				toolName);
+
+		try {
+
+			Map<String, Object> mapNotification = this.adminService
+					.updateOneSkill(category, concept, tool);
+			CUtils.showMessage(mapNotification, getWindow());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Show the update view
+	 * 
 	 * @class ManageSkillContent.java
 	 */
-	public void updateView(){
-		
+	public void updateView() {
+
 		this.isNewSkill = false;
-		
+
 		this.formSkill.setVisible(false);
 		this.treeSkill.setVisible(true);
-		
+
 		setManageButtonVisible(true);
 	}
 	
-	public void setManageButtonVisible(boolean isVisible){
-		
+	/**
+	 * Put the manage button (edit and delete) to visible
+	 * @class ManageSkillContent.java
+	 * @param isVisible
+	 */
+	public void setManageButtonVisible(boolean isVisible) {
+
 		this.edit.setVisible(isVisible);
 		this.delete.setVisible(isVisible);
-		
+
 		this.save.setVisible(!isVisible);
 		this.cancel.setVisible(!isVisible);
+	}
+	
+	/**
+	 * Delete one skill in the database
+	 * @throws Exception 
+	 * @class ManageSkillContent.java
+	 */
+	private void deleteOneSkill() throws Exception {
+		
+		Map<String, Object> mapNotification = null;
+		
+		// Get the skill name
+		getSkillNameByForm();
+
+		// Test if an enabled field is empty
+		if (skillFieldAreEmpty()) {
+
+			CUtils.showMessage(MESSAGE_FIELD_EMPTY, Message.WARNING,
+					getWindow());
+		} else {
+
+			if (this.currentCategoryId != null && this.currentConceptId == null
+					&& this.currentToolId == null) {
+				
+				mapNotification = this.adminService.deleteCategory(this.currentCategoryId);
+			}
+
+			if (this.currentCategoryId != null && this.currentConceptId != null
+					&& this.currentToolId == null) {
+
+				mapNotification = this.adminService.deleteConcept(this.currentCategoryId);
+			}
+
+			if (this.currentCategoryId != null && this.currentConceptId != null
+					&& this.currentToolId != null) {
+
+				mapNotification = this.adminService.deleteTool(this.currentToolId);
+			}
+			
+			CUtils.showMessage(mapNotification, getWindow());
+			
+			// Re build the tree skill
+			buildTreeSkill();
+		}
+	}
+
+	/**
+	 * Fill the field categoryName, conceptName and toolName according to the form
+	 * @class ManageSkillContent.java
+	 */
+	public void getSkillNameByForm() {
+
+		this.currentVSkill = new VSkill();
+		String categoryName = null, conceptName = null, toolName = null;
+
+		if (this.formSkill.getField(FIELD_ORDER_SKILL[0]).isEnabled()) {
+
+			categoryName = (String) this.formSkill.getField(
+					FIELD_ORDER_SKILL[0]).getValue();
+			categoryName = categoryName.trim();
+
+			this.currentVSkill.setCategory_name(categoryName);
+		}
+
+		if (this.formSkill.getField(FIELD_ORDER_SKILL[1]).isEnabled()) {
+
+			conceptName = (String) this.formSkill
+					.getField(FIELD_ORDER_SKILL[1]).getValue();
+			conceptName = conceptName.trim();
+
+			this.currentVSkill.setConcept_name(conceptName);
+		}
+
+		if (this.formSkill.getField(FIELD_ORDER_SKILL[2]).isEnabled()) {
+
+			toolName = (String) this.formSkill.getField(FIELD_ORDER_SKILL[2])
+					.getValue();
+			toolName = toolName.trim();
+
+			this.currentVSkill.setTool_name(toolName);
+		}
+	}
+
+	/**
+	 * Check if the fields which fill by the user are empty
+	 * @class ManageSkillContent.java
+	 * @return
+	 */
+	public boolean skillFieldAreEmpty() {
+
+		if ((this.formSkill.getField(FIELD_ORDER_SKILL[0]).isEnabled() && this.currentVSkill
+				.getCategory_name().length() == 0)
+				|| (this.formSkill.getField(FIELD_ORDER_SKILL[1]).isEnabled() && this.currentVSkill
+						.getConcept_name().length() == 0)
+				|| (this.formSkill.getField(FIELD_ORDER_SKILL[2]).isEnabled() && this.currentVSkill
+						.getTool_name().length() == 0)) {
+
+			return true;
+		} else {
+
+			return false;
+		}
 	}
 
 	@Override
@@ -429,21 +657,50 @@ public class ManageSkillContent extends VerticalLayout implements
 			} else {
 
 				this.updateOneSkill();
+
+				// Init the current Id to null
+				this.currentCategoryId = null;
+				this.currentConceptId = null;
+				this.currentToolId = null;
 			}
+
+			updateView();
 		}
 
 		if (button == this.edit) {
 
 			this.formSkill.setReadOnly(false);
-			
+
 			setManageButtonVisible(false);
 		}
-		
-		if(button == this.cancel){
+
+		if (button == this.cancel) {
 			
-			this.formSkill.setReadOnly(true);
+			if(isNewSkill){
+				
+				for(int i = 0; i < FIELD_ORDER_SKILL.length; i++){
+					
+					this.formSkill.getField(FIELD_ORDER_SKILL[i]).setValue(null);
+				}
+			}else{
+				
+				this.formSkill.setReadOnly(true);
+
+				setManageButtonVisible(true);
+			}
+		}
+
+		if (button == this.delete) {
 			
-			setManageButtonVisible(true);
+			try {
+				
+				this.deleteOneSkill();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+			updateView();
 		}
 
 	}
@@ -458,64 +715,103 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		this.formSkill.setVisible(true);
 		this.formSkill.setReadOnly(false);
-		
+
 		setManageButtonVisible(true);
 
 		// Test if the item clicked is a CATEGORY TYPE
 		if ((Integer) item.get("type") == TYPE_CATEGORY) {
 
-			this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
-					item.get("name"));
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(null);
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(false);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(null);
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(false);
+			updateItemCateogry(item);
 		}
 
 		// Test if the item clicked is a CONCEPT TYPE
 		if ((Integer) item.get("type") == TYPE_CONCEPT) {
 
-			String categoryItemId = (String) this.treeSkill.getParent(itemId);
-			Map<String, Object> categoryItem = splitItemTree(categoryItemId);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
-					categoryItem.get("name"));
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(
-					item.get("name"));
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(true);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(null);
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(false);
+			updateItemConcept(item, itemId);
 		}
 
 		// Test if the item clicked is a TOOL TYPE
 		if ((Integer) item.get("type") == TYPE_TOOL) {
 
-			String conceptItemId = (String) this.treeSkill.getParent(itemId);
-			Map<String, Object> conceptItem = splitItemTree(conceptItemId);
-
-			String categoryItemId = (String) this.treeSkill
-					.getParent(conceptItemId);
-			Map<String, Object> categoryItem = splitItemTree(categoryItemId);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
-					categoryItem.get("name"));
-			this.formSkill.getField(FIELD_ORDER_SKILL[0]).setEnabled(true);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(
-					conceptItem.get("name"));
-			this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(true);
-
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(
-					item.get("name"));
-			this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(true);
-
+			updateItemTool(item, itemId);
 		}
 
 		this.formSkill.setReadOnly(true);
+	}
+
+	/**
+	 * 
+	 * @class ManageSkillContent.java
+	 * @param item
+	 */
+	private void updateItemCateogry(Map<String, Object> item) {
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[0])
+				.setValue(item.get("name"));
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(null);
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(false);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(null);
+		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(false);
+
+		this.currentCategoryId = (Integer) item.get("id");
+	}
+
+	/**
+	 * 
+	 * @class ManageSkillContent.java
+	 * @param item
+	 * @param itemId
+	 */
+	private void updateItemConcept(Map<String, Object> item, String itemId) {
+
+		String categoryItemId = (String) this.treeSkill.getParent(itemId);
+		Map<String, Object> categoryItem = splitItemTree(categoryItemId);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
+				categoryItem.get("name"));
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[1])
+				.setValue(item.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(true);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(null);
+		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(false);
+
+		this.currentCategoryId = (Integer) categoryItem.get("id");
+		this.currentConceptId = (Integer) item.get("id");
+	}
+
+	/**
+	 * 
+	 * @class ManageSkillContent.java
+	 * @param item
+	 */
+	private void updateItemTool(Map<String, Object> item, String itemId) {
+
+		String conceptItemId = (String) this.treeSkill.getParent(itemId);
+		Map<String, Object> conceptItem = splitItemTree(conceptItemId);
+
+		String categoryItemId = (String) this.treeSkill
+				.getParent(conceptItemId);
+		Map<String, Object> categoryItem = splitItemTree(categoryItemId);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
+				categoryItem.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setEnabled(true);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(
+				conceptItem.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(true);
+
+		this.formSkill.getField(FIELD_ORDER_SKILL[2])
+				.setValue(item.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(true);
+
+		this.currentCategoryId = (Integer) categoryItem.get("id");
+		this.currentConceptId = (Integer) conceptItem.get("id");
+		this.currentToolId = (Integer) item.get("id");
 	}
 
 	private Map<String, Object> splitItemTree(String itemId) {
@@ -712,28 +1008,14 @@ public class ManageSkillContent extends VerticalLayout implements
 	public void setBody(HorizontalLayout body) {
 		this.body = body;
 	}
-	
+
 	/**
 	 * Set the cancel value
-	 * @param cancel the cancel to set
+	 * 
+	 * @param cancel
+	 *            the cancel to set
 	 */
 	public void setCancel(Button cancel) {
 		this.cancel = cancel;
-	}
-	
-	/**
-	 * Get the mAIN_TITLE value
-	 * @return the mAIN_TITLE
-	 */
-	public static String getMAIN_TITLE() {
-		return MAIN_TITLE;
-	}
-
-	/**
-	 * Set the mAIN_TITLE value
-	 * @param mAIN_TITLE the mAIN_TITLE to set
-	 */
-	public static void setMAIN_TITLE(String mAIN_TITLE) {
-		MAIN_TITLE = mAIN_TITLE;
 	}
 }

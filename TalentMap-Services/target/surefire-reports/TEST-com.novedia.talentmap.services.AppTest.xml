@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\dev_home\Projects\TalentMap\TalentMap-Services"/>
     <property name="java.endorsed.dirs" value="C:\dev_home\Jdk\jdk1.6.0_31\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter8137437103534804855.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter5428512732432387153.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\dev_home\Jdk\jdk1.6.0_31\jre"/>
-    <property name="sun.java.command" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter8137437103534804855.jar C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire3704907377462081319tmp C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire5490794161939301146tmp"/>
+    <property name="sun.java.command" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter5428512732432387153.jar C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire8187693842771449073tmp C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire712603015317190739tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="fr"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>

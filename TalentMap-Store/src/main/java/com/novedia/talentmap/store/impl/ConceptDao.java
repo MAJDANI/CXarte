@@ -89,7 +89,7 @@ public class ConceptDao implements IConceptDao {
 	}
 
 	@Override
-	public int saveOne(Concept concept) throws Exception {
+	public int save(Concept concept) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
 		
@@ -109,6 +109,30 @@ public class ConceptDao implements IConceptDao {
 		mapConcept.put("category_id", category_id);
 		
 		return (Concept) this.sqlMapClient.queryForObject("concept.checkConcept", mapConcept);
+	}
+
+	@Override
+	public int update(Concept concept) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int concept_id = (Integer) this.sqlMapClient.update("concept.updateConcept", concept);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return concept_id;
+	}
+
+	@Override
+	public int delete(int concept_id) throws Exception {
+
+		this.sqlMapClient.startTransaction();
+		int id = (Integer) this.sqlMapClient.delete("concept.deleteConcept", concept_id);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return id;
 	}
 
 }

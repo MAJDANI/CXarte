@@ -23,9 +23,11 @@
     <select id="getCollaborator" parameterClass="Integer" resultMap="collaboratorResult">
         SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
     </select>
+    
     <select id="getAllCollaborator" resultMap="collaboratorResult">
     	SELECT * FROM COLLABORATOR
-    </select>					 
+    </select>
+    					 
 	<update id="updateCollaborateur" parameterClass="Collaborator">
 		UPDATE COLLABORATOR SET PROFILE_ID = #profile_id#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
 	</update>

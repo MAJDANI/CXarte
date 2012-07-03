@@ -53,7 +53,7 @@ public interface IToolDao {
 	 * @class IToolDao.java
 	 * @throws Exception
 	 */
-	int saveOne(Tool tool) throws Exception;
+	int save(Tool tool) throws Exception;
 	
 	/**
 	 * Check if the tool exists
@@ -63,4 +63,22 @@ public interface IToolDao {
 	 * @throws Exception
 	 */
 	Tool checkTool(String name) throws Exception;
+	
+	/**
+	 * Update one tool
+	 * @class IToolDao.java
+	 * @param tool
+	 * @return
+	 * @throws Exception
+	 */
+	int update(Tool tool) throws Exception;
+	
+	/**
+	 * Delete one tool
+	 * @class IToolDao.java
+	 * @param tool
+	 * @return
+	 * @throws Exception
+	 */
+	int delete(int tool_id) throws Exception;
 }

@@ -42,6 +42,14 @@
     
     <select id="checkConcept" resultMap="conceptResult" parameterClass="java.util.HashMap">
 		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category_id#
-	</select>				 
+	</select>	
+	
+	<update id="updateConcept" parameterClass="Concept">
+		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category_id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
+	</update>
+	
+	<delete id="deleteConcept" parameterClass="Integer">
+		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
+	</delete>			 
 
 </sqlMap>

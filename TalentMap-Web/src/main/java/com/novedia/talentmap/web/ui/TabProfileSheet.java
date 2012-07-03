@@ -29,7 +29,7 @@ public class TabProfileSheet extends TabSheet {
 	 * Constants
 	 */
 	private final String TAB_PROFILE_NAME = "Fiche Profil";
-	private final String TAB_COLLAB_NAME = "Collaborateur";
+	private final String TAB_COLLAB_NAME = "Suivi des Collaborateur";
 	private final String TAB_ADMIN_NAME = "Administration";
 
 	/**
@@ -47,7 +47,7 @@ public class TabProfileSheet extends TabSheet {
 		setImmediate(true);
 		
 		addTab(profileView, TAB_PROFILE_NAME);
-		//addTab(cmView, TAB_SECOND_NAME);
+		addTab(collabView, TAB_COLLAB_NAME);
 		addTab(adminView, TAB_ADMIN_NAME);
 	}
 	

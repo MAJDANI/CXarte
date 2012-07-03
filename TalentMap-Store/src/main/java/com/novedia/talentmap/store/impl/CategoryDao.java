@@ -112,7 +112,7 @@ public class CategoryDao implements ICategoryDao {
 	}
 
 	@Override
-	public int saveOne(Category category) throws Exception {
+	public int save(Category category) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
 		int category_id = (Integer) this.sqlMapClient.insert("category.insertCategory", category);
@@ -127,6 +127,30 @@ public class CategoryDao implements ICategoryDao {
 	public Category checkCategory(String name) throws Exception {
 		
 		return (Category) this.sqlMapClient.queryForObject("category.checkCategory", name);
+	}
+
+	@Override
+	public int update(Category category) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int category_id = (Integer) this.sqlMapClient.update("category.updateCategory", category);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return category_id;
+	}
+
+	@Override
+	public int delete(int category_id) throws Exception {
+
+		this.sqlMapClient.startTransaction();
+		int id = (Integer) this.sqlMapClient.delete("category.deleteCategory", category_id);
+		this.sqlMapClient.commitTransaction();
+		
+		this.sqlMapClient.endTransaction();
+		
+		return id;
 	}
 	
 

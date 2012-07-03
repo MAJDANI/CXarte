@@ -37,7 +37,45 @@ public interface IAdminService {
 	/**
 	 * Add one skill
 	 * @class IAdminService.java
+	 * @param skill
+	 * @return Return an error message callback 
 	 * @throws Exception
 	 */
 	Map<String, Object> addOneSkill(VSkill skill) throws Exception;
+	
+	/**
+	 * Update one skill
+	 * @class IAdminService.java
+	 * @param skill
+	 * @return Return an error message callback
+	 * @throws Exception
+	 */
+	Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws Exception;
+	
+	/**
+	 * Delete one category (and his concepts and tools)
+	 * @class IAdminService.java
+	 * @param category_id
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String, Object> deleteCategory(int category_id) throws Exception;
+	
+	/**
+	 * Delete one concept (and his tools)
+	 * @class IAdminService.java
+	 * @param concept_id
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String , Object> deleteConcept(int concept_id) throws Exception;
+	
+	/**
+	 * Delete one tool
+	 * @class IAdminService.java
+	 * @param tool_id
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String, Object> deleteTool(int tool_id) throws Exception;
 }

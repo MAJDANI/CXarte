@@ -35,7 +35,7 @@ public interface ICategoryDao {
 	 * @class ICategoryDao.java
 	 * @throws Exception
 	 */
-	int saveOne(Category category) throws Exception;
+	int save(Category category) throws Exception;
 	
 	/**
 	 * Check if the Category exists 
@@ -45,4 +45,22 @@ public interface ICategoryDao {
 	 * @throws Exception
 	 */
 	Category checkCategory(String name) throws Exception;
+	
+	/**
+	 * Update one category
+	 * @class ICategoryDao.java
+	 * @param category
+	 * @return
+	 * @throws Exception
+	 */
+	int update(Category category) throws Exception;
+	
+	/**
+	 * Delete one category
+	 * @class ICategoryDao.java
+	 * @param category
+	 * @return
+	 * @throws Exception
+	 */
+	int delete(int category_id) throws Exception;
 }

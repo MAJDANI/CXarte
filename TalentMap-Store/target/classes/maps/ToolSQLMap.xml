@@ -49,6 +49,14 @@
     
     <select id="checkTool" resultMap="toolResult" parameterClass="String">
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
-	</select>			 
+	</select>		
+	
+	<update id="updateTool" parameterClass="Tool">
+		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept_id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
+	</update> 
+	
+	<delete id="deleteTool" parameterClass="Integer">
+		DELETE TOOL CASCADE	WHERE TOOL_ID = #id#
+	</delete>	 
 
 </sqlMap>

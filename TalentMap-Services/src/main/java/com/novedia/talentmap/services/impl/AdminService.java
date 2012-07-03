@@ -24,6 +24,8 @@ public class AdminService implements IAdminService {
 	private Category category;
 	private Concept concept;
 	private Tool tool;
+	
+	private Map<String, Object> mapNotification;
 
 	/**
 	 * Get all tools
@@ -70,7 +72,7 @@ public class AdminService implements IAdminService {
 			this.category = new Category();
 			this.category.setName(skill.getCategory_name());
 
-			categoryId = this.categoryDao.saveOne(this.category);
+			categoryId = this.categoryDao.save(this.category);
 
 		} else if(this.category != null){
 
@@ -103,7 +105,7 @@ public class AdminService implements IAdminService {
 			this.concept.setName(skill.getConcept_name());
 			this.concept.setCategory_id(this.category.getId());
 
-			conceptId = this.conceptDao.saveOne(this.concept);
+			conceptId = this.conceptDao.save(this.concept);
 
 		} else if(this.concept != null && this.category != null) {
 
@@ -131,7 +133,7 @@ public class AdminService implements IAdminService {
 			tool.setName(skill.getTool_name());
 			tool.setConcept_id(this.concept.getId());
 
-			this.toolDao.saveOne(this.tool);
+			this.toolDao.save(this.tool);
 
 			return true;
 		} else {
@@ -154,8 +156,6 @@ public class AdminService implements IAdminService {
 	@Override
 	public Map<String, Object> addOneSkill(VSkill skill) throws Exception {
 
-		Map<String, Object> mapNotification = new HashMap<String, Object>();
-		
 		this.tool = this.toolDao.checkTool(skill.getTool_name());
 		
 		saveCategory(skill);
@@ -164,12 +164,12 @@ public class AdminService implements IAdminService {
 
 		if (saveTool(skill)) {
 
-			mapNotification.put("typeError", 1);
-			mapNotification.put("messageError", "La compétence a bien été ajoutée");
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "La compétence a bien été ajoutée");
 		} else {
 
-			mapNotification.put("typeError", 2);
-			mapNotification.put(
+			this.mapNotification.put("typeError", 2);
+			this.mapNotification.put(
 					"messageError",
 					"Cet outil existe déjà pour la catégorie \""
 							+ this.category.getName()
@@ -177,8 +177,86 @@ public class AdminService implements IAdminService {
 							+ this.concept.getName() + "\" .");
 		}
 
-		return mapNotification;
+		return this.mapNotification;
 	}
+	
+	@Override
+	public Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws Exception {
+		
+		if(category != null){
+			
+			this.categoryDao.update(category);
+			
+			if(concept != null){
+				
+				this.conceptDao.update(concept);
+				
+				if(tool != null){
+					
+					this.toolDao.update(tool);
+				}
+			}
+			
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "La compétence a bien été modifiée");
+		}else{
+		
+			this.mapNotification.put("typeError", 2);
+			this.mapNotification.put("messageError", "Aucune compétence n'a été modifiée");
+		}
+		
+		
+		return this.mapNotification;
+	}
+	
+	@Override
+	public Map<String, Object> deleteCategory(int category_id) throws Exception {
+		
+		if(this.categoryDao.delete(category_id) > 0){
+			
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "La catégorie a bien été supprimée");
+		}else{
+			
+			this.mapNotification.put("typeError", 3);
+			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
+		}
+		
+		return this.mapNotification;
+	}
+
+	@Override
+	public Map<String, Object> deleteConcept(int concept_id) throws Exception {
+
+		if(this.conceptDao.delete(concept_id) > 0){
+			
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "Le concept a bien été supprimé");
+		}else{
+			
+			this.mapNotification.put("typeError", 3);
+			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
+		}
+		
+		return this.mapNotification;
+	}
+
+	@Override
+	public Map<String, Object> deleteTool(int tool_id) throws Exception {
+
+		if(this.toolDao.delete(tool_id) > 0){
+			
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "L'outil a bien été supprimé");
+		}else{
+			
+			this.mapNotification.put("typeError", 3);
+			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
+		}
+		
+		return this.mapNotification;
+	}
+
 
 	/**
 	 * Set the toolDao value
@@ -217,4 +295,13 @@ public class AdminService implements IAdminService {
 	public void setvSkillDao(IVSkillDao vSkillDao) {
 		this.vSkillDao = vSkillDao;
 	}
+	
+	/**
+	 * Set the mapNotification value
+	 * @param mapNotification the mapNotification to set
+	 */
+	public void setMapNotification(Map<String, Object> mapNotification) {
+		this.mapNotification = mapNotification;
+	}
+
 }

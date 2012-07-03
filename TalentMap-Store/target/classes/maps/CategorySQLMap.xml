@@ -37,6 +37,14 @@
     
     <select id="checkCategory" resultMap="categoryResult" parameterClass="String">
 		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
-	</select>	 
+	</select>	
+	
+	<update id="updateCategory" parameterClass="Category">
+		UPDATE CATEGORY SET CATEGORY_ID = #id#, CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
+	</update>
+	
+	<delete id="deleteCategory" parameterClass="Integer">
+		DELETE CATEGORY CASCADE WHERE CATEGORY_ID = #id#
+	</delete> 
 
 </sqlMap>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0" errors="0" skipped="0" tests="1" name="com.novedia.talentmap.store.impl.CollaboratorDaoTest">
+<testsuite failures="0" time="0.01" errors="0" skipped="0" tests="1" name="com.novedia.talentmap.store.impl.CollaboratorDaoTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\dev_home\Jdk\jdk1.6.0_31\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\dev_home\Projects\TalentMap\TalentMap-Store"/>
     <property name="java.endorsed.dirs" value="C:\dev_home\Jdk\jdk1.6.0_31\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter283767853318459955.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter8920702221254985485.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\dev_home\Jdk\jdk1.6.0_31\jre"/>
-    <property name="sun.java.command" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter283767853318459955.jar C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire2314728017228604335tmp C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire6476554640545541289tmp"/>
+    <property name="sun.java.command" value="C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefirebooter8920702221254985485.jar C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire518258409327339582tmp C:\Users\JFDE2~1.COL\AppData\Local\Temp\surefire1252370838957991697tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="fr"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0" classname="com.novedia.talentmap.store.impl.CollaboratorDaoTest" name="testGetById"/>
+  <testcase time="0.01" classname="com.novedia.talentmap.store.impl.CollaboratorDaoTest" name="testGetById"/>
 </testsuite>

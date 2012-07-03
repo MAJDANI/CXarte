@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.admin;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 public class AdminView extends HorizontalLayout {
@@ -48,11 +49,11 @@ public class AdminView extends HorizontalLayout {
 				if(addNewSkill){
 					
 					AdminView.this.manageSkillContent.addView();
-					AdminView.this.manageSkillContent.setMAIN_TITLE(ADD_SKILL_TITLE);
+					AdminView.this.manageSkillContent.getTitle().setCaption(ADD_SKILL_TITLE);
 				}else{
 					
 					AdminView.this.manageSkillContent.updateView();
-					AdminView.this.manageSkillContent.setMAIN_TITLE(UPDATE_SKILL_TITLE);
+					AdminView.this.manageSkillContent.getTitle().setCaption(UPDATE_SKILL_TITLE);
 				}
 			}
 		});
