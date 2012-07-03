@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mission">
+
+	<typeAlias alias="mission" type="com.novedia.talentmap.model.entity.Mission" />
+
+	<resultMap id="missionResult" class="mission">
+		<result property="id" column="MISSION_ID" />
+		<result property="collab_id" column="COLLAB_ID" />
+		<result property="client" column="CLIENT" />
+		<result property="start_date" column="START_DATE" />
+		<result property="end_date" column="END_DATE" />
+	</resultMap>
+
+	<select id="getMission" resultMap="missionResult"
+		parameterClass="Integer">
+		SELECT * FROM MISSION WHERE COLLAB_ID = #collab_id#
+	</select>
+
+	<update id="updateMission" parameterClass="Mission">
+		UPDATE MISSION SET
+		MISSION_ID = #id#, COLLAB_ID = #collab_id#, CLIENT = #client#,
+		START_DATE = #start_date#, END_DATE = #end_date# WHERE MISSION_ID = #id#
+	</update>
+
+</sqlMap>

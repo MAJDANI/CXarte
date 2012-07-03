@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" 
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+		
+<sqlMapConfig>
+    <settings useStatementNamespaces="true"/>
+    <sqlMap resource="maps/CollaboratorSQLMap.xml"/>
+    <sqlMap resource="maps/ProfileSQLMap.xml"/>
+    <sqlMap resource="maps/CategorySQLMap.xml"/>
+    <sqlMap resource="maps/ConceptSQLMap.xml"/>
+    <sqlMap resource="maps/SkillSQLMap.xml"/>
+    <sqlMap resource="maps/ToolSQLMap.xml"/>
+    <sqlMap resource="maps/VSkillSQLMap.xml"/>
+    <sqlMap resource="maps/VSkillCollabSQLMap.xml"/>
+    <sqlMap resource="maps/MissionSQLMap.xml"/>
+    <sqlMap resource="maps/ManagerSQLMap.xml"/>
+</sqlMapConfig>
