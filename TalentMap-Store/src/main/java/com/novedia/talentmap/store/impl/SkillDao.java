@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.store.ISkillDao;
 
@@ -123,5 +124,34 @@ public class SkillDao implements ISkillDao {
 		
 		this.sqlMapClient.endTransaction();
 	}
+
+	/**
+	 * Select all Collaborators By toolId
+	 * @param toolId : a toolId
+	 * @return all collaborators who has a competence on the tool specified
+	 * @author v.guillemain
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception {
+		
+		return (List<Collaborator>) sqlMapClient.queryForList("skill.getAllCollaboratorsByToolId",toolId);
+		
+	}
+
+	/**
+	 * Select all collaborator's Id by a list of toolId.
+	 * @param listToolId : a list of toolId
+	 * @return all collaborator's id who has a competence on each tool of the list
+	 * @author v.guillemain
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Integer> getAllCollaboratorsIdByListToolId(List<String> listToolId) throws Exception {
+		
+		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorsIdByListToolId",listToolId);
+		
+	}
+
 
 }

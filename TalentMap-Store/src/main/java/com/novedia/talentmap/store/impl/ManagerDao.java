@@ -2,8 +2,10 @@ package com.novedia.talentmap.store.impl;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.store.IManagerDao;
 
@@ -66,6 +68,20 @@ public class ManagerDao implements IManagerDao{
 			
 			return buildDummyManager(id);
 		}
+	}
+
+	/**
+	 * Select all Collaborators by managerId
+	 * @param managerId : the id of the manager
+	 * @return all collaborators who depend on the manager managerId
+	 * @author v.guillemain
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws Exception {
+		
+		return sqlMapClient.queryForList("manager.getAllCollaboratorsByManagerId", managerId);
+		
 	}
 
 }

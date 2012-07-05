@@ -39,7 +39,7 @@ public interface ICollaboratorService {
 	 * @throws Exception
 	 */
 	int updateCollaborator(Collaborator collaborator) throws Exception;
-	
+
 	/**
 	 * Update one Mission
 	 * @class ICollaboratorService.java
@@ -66,4 +66,36 @@ public interface ICollaboratorService {
 	 * @throws Exception
 	 */
 	Manager getManager(int manager_id) throws Exception;
+	
+	/**
+	 * Select all Collaborators by lastName
+	 * @author v.guillemain
+	 * @class ICollaboratorService.java
+	 * @param lastName
+	 * @return 
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception;
+
+	/**
+	 * Select all Collaborators by toolId
+	 * @author v.guillemain
+	 * @class ICollaboratorService.java
+	 * @param toolId
+	 * @return 
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception;
+
+	/**
+	 * Select all Collaborators by a list of toolId
+	 * @author v.guillemain
+	 * @class ICollaboratorService.java
+	 * @param listToolId
+	 * @return 
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByListToolId(List<String> listToolId) throws Exception;
+
+
 }

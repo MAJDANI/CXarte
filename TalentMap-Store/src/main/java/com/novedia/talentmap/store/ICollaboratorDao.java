@@ -39,4 +39,24 @@ public interface ICollaboratorDao {
 	 */
 	int update(Collaborator collaborator) throws Exception;
 	
+	/**
+	 * Select all Collaborators by lastName
+	 * @author v.guillemain
+	 * @class ICollaboratorDao.java
+	 * @param lastName : a lastName
+	 * @return all collaborators who has the lastName specified
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception;
+
+	/**
+	 * Select all Collaborators for a list of collaborator's id
+	 * @author v.guillemain
+	 * @class ICollaboratorDao.java
+	 * @param listId : a list of collaborator's id
+	 * @return all collaborators who has an id specified
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByListId(List<Integer> listId) throws Exception;
+	
 }

@@ -32,5 +32,15 @@
 		UPDATE COLLABORATOR SET PROFILE_ID = #profile_id#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
 	</update>
 	
+    <!-- v.guillemain -->
+    <select id="getAllCollaboratorByLastName" parameterClass="String" resultMap="collaboratorResult">
+        SELECT * FROM  COLLABORATOR WHERE LAST_NAME = #lastName#
+    </select>
+
+    <!-- v.guillemain -->
+    <select id="getAllCollaboratorsByListId" resultMap="skillResult">
+    	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN #listId#
+    </select>	
+
 	
 </sqlMap>

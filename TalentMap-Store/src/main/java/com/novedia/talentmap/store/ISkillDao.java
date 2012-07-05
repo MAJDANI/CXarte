@@ -2,6 +2,7 @@ package com.novedia.talentmap.store;
 
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Skill;
 
 public interface ISkillDao {
@@ -33,6 +34,26 @@ public interface ISkillDao {
 	 */
 	void addOneSkill(Skill skill) throws Exception;
 	
+	/**
+	 * Select all Collaborators by a toolId
+	 * @author v.guillemain
+	 * @class ISkillDao.java
+	 * @param toolId : a toolId
+	 * @return all collaborators who has a competence on the tool specified
+	 * @throws Exception
+	 */
+	List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception;
+	
+	/**
+	 * Select all collaborator's Id by a list of toolId.
+	 * @author v.guillemain
+	 * @class ISkillDao.java
+	 * @param listToolId : a list of toolId
+	 * @return all collaborator's id who has a competence on each tool of the list
+	 * @throws Exception
+	 */
+	List<Integer> getAllCollaboratorsIdByListToolId(List<String> listToolId) throws Exception;
+
 	/***
 	 * Update One Skill
 	 * @class ISkillDao.java

@@ -7,7 +7,6 @@ import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.store.ICollaboratorDao;
-
 /**
  * 
  * @author j.collet
@@ -104,6 +103,36 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	 */
 	public void setSqlMapClient(SqlMapClient sqlMapClient) {
 		this.sqlMapClient = sqlMapClient;
+	}
+	
+	/**
+	 * Select all Collaborators by lastName
+	 * @param lastName : a lastName
+	 * @return all collaborators who has the last_name specified
+	 * @author v.guillemain
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception {
+		
+		return sqlMapClient.queryForList("collaborator.getAllCollaboratorByLastName", lastName);
+		
+	}
+	
+	/**
+	 * Select all Collaborators for a list of collaborator's id
+	 * @author v.guillemain
+	 * @class ICollaboratorDao.java
+	 * @param listId : a list of collaborator's id
+	 * @return all collaborators who has an id specified
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Collaborator> getAllCollaboratorsByListId(List<Integer> listId) throws Exception {
+		
+		return sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId", listId);
+		
 	}
 	
 }

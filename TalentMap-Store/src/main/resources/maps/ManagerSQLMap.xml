@@ -23,4 +23,9 @@
 		SELECT * FROM MANAGER WHERE MANAGER_ID = #id#
 	</select>
 	
+    <!-- v.guillemain -->
+    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="managerResult">
+        SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
+    </select>
+	
 </sqlMap>

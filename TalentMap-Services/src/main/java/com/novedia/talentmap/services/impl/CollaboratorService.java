@@ -9,6 +9,7 @@ import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.store.ICollaboratorDao;
 import com.novedia.talentmap.store.IManagerDao;
 import com.novedia.talentmap.store.IMissionDao;
+import com.novedia.talentmap.store.ISkillDao;
 
 /**
  * Collaborator Services
@@ -22,6 +23,7 @@ public class CollaboratorService implements ICollaboratorService {
 	private ICollaboratorDao collabDao;
 	private IMissionDao missionDao;
 	private IManagerDao managerDao;
+	private ISkillDao skillDao;
 
 	/**
 	 * Select All Collaborators
@@ -49,7 +51,7 @@ public class CollaboratorService implements ICollaboratorService {
 		
 		return collabDao.update(collaborator);
 	}
-	
+
 	/**
 	 * Update one Mission
 	 */
@@ -101,5 +103,45 @@ public class CollaboratorService implements ICollaboratorService {
 		this.managerDao = managerDao;
 	}
 
+	/**
+	 * Select All Collaborators by lastName
+	 * @param lastName : a lastName
+	 * @return all collaborators who has the lastName specified
+	 * @author v.guillemain
+	 */
+	@Override
+	public List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception {
+		
+		return collabDao.getAllCollaboratorsByLastName(lastName);
+	}
+
+	/**
+	 * Select All Collaborators by toolId
+	 * @param toolId : a toolId
+	 * @return all collaborators who has a competence on the tool specified
+	 * @author v.guillemain
+	 */
+	@Override
+	public List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception {
+		
+		return skillDao.getAllCollaboratorsByToolId(toolId);
+	}
+	
+	/**
+	 * Select All Collaborators by toolId
+	 * @param listToolId : a list of toolId
+	 * @return all collaborators who has a competence on each tool of the list
+	 * @author v.guillemain
+	 */
+	@Override
+	public List<Collaborator> getAllCollaboratorsByListToolId(List<String> listToolId) throws Exception {
+		
+		/* we first get the collaborator's ID for all competences */
+		List<Integer> listId = skillDao.getAllCollaboratorsIdByListToolId(listToolId);
+		
+		/* then we get the Collaborators corresponding */
+		return (List<Collaborator>) collabDao.getAllCollaboratorsByListId(listId);
+				
+	}
 
 }

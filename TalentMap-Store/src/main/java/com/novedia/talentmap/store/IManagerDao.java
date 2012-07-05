@@ -1,5 +1,8 @@
 package com.novedia.talentmap.store;
 
+import java.util.List;
+
+import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 
 /**
@@ -19,5 +22,13 @@ public interface IManagerDao {
 	 * @throws Exception
 	 */
 	Manager getById(int id) throws Exception;
+	
+	/**
+	 * Select all Collaborators by managerId
+	 * @param managerId : the id of the manager
+	 * @return all collaborators who depend on the manager managerId
+	 * @author v.guillemain
+	 */
+	List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws Exception;
 	
 }
