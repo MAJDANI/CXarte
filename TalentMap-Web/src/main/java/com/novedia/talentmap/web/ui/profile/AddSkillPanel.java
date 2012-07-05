@@ -14,6 +14,7 @@ import com.novedia.talentmap.web.data.FrequencyUse;
 import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileView;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -177,7 +178,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		HorizontalLayout hLayoutLabel = new HorizontalLayout();
 
 		Label addSkillLabel = new Label(ADD_SKILL_LABEL);
-		addSkillLabel.setStyle(Reindeer.LABEL_H2);
+		addSkillLabel.setStyle(TalentMapCSS.H2);
 
 		hLayoutLabel.addComponent(categoryLabel);
 		hLayoutLabel.addComponent(this.conceptLabel);
@@ -632,7 +633,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 
 	@Override
-	public void addObservateur(Object observateur) {
+	public void addObservateur(Object observateur, Class<?> cl) {
 		this.obs = (IProfileView) observateur;
 	}
 

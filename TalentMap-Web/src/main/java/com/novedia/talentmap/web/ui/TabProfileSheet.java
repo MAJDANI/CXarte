@@ -1,7 +1,8 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.ui.admin.AdminContentLayout;
 import com.novedia.talentmap.web.ui.admin.AdminView;
-import com.novedia.talentmap.web.ui.collab.CollabView;
+import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
@@ -22,7 +23,7 @@ public class TabProfileSheet extends TabSheet {
 	 * All views
 	 */
 	private ProfileView profileView;
-	private CollabView collabView;
+	private MonitoringCollabView monitoringCollabView;
 	private AdminView adminView;
 	
 	/**
@@ -38,17 +39,17 @@ public class TabProfileSheet extends TabSheet {
 	 * @param profileView
 	 * @param collabView
 	 */
-	public TabProfileSheet(ProfileView profileView, CollabView collabView, AdminView adminView){
+	public TabProfileSheet(ProfileView profileView, MonitoringCollabView monitoringCollabView, AdminView adminView){
 		super();
 		this.profileView = profileView;
-		this.collabView = collabView;
+		this.monitoringCollabView = monitoringCollabView;
 		this.adminView = adminView;
 		
 		setImmediate(true);
 		
-		addTab(profileView, TAB_PROFILE_NAME);
-		addTab(collabView, TAB_COLLAB_NAME);
-		addTab(adminView, TAB_ADMIN_NAME);
+		addTab(this.profileView, TAB_PROFILE_NAME);
+		addTab(this.monitoringCollabView, TAB_COLLAB_NAME);
+		addTab(this.adminView, TAB_ADMIN_NAME);
 	}
 	
 	/**
@@ -63,8 +64,8 @@ public class TabProfileSheet extends TabSheet {
 	 * Set the cmView value
 	 * @param cmView the cmView to set
 	 */
-	public void setCmView(CollabView collabView) {
-		this.collabView = collabView;
+	public void setMonitoringCollabView(MonitoringCollabView monitoringCollabView) {
+		this.monitoringCollabView = monitoringCollabView;
 	}
 	
 	/**

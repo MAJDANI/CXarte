@@ -16,6 +16,12 @@ public class ManagerService implements IManagerService {
 		return managerDao.getAllCollaboratorsByManagerId(managerId);
 	}
 
-
+	/**
+	 * Set the managerDao value
+	 * @param managerDao the managerDao to set
+	 */
+	public void setManagerDao(IManagerDao managerDao) {
+		this.managerDao = managerDao;
+	}
 
 }

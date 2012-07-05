@@ -121,17 +121,11 @@
 		<constructor-arg name="footerLayout" ref="footerLayout"/>
 	</bean>
 	
-	
-	<!-- Vaadin CollabView UI -->
-	
-	<bean id="collabViewBean" class="com.novedia.talentmap.web.ui.collab.CollabView" scope="session" />
-	
-	
 	<!-- Vaadin AdminView UI -->
 	
 	<bean id="hSplitContent" class="com.vaadin.ui.HorizontalSplitPanel"/>
 	
-	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session">
+	<bean id="adminContentLayoutBean" class="com.novedia.talentmap.web.ui.admin.AdminContentLayout" scope="session">
 		<constructor-arg name="adminNav" ref="adminNavigationBean" />
 		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
 		<constructor-arg name="hSplitContent" ref="hSplitContent" />
@@ -143,11 +137,13 @@
 	<bean id="addSkillButton" class="com.vaadin.ui.Button"/>
 	<bean id="visualizeSkill" class="com.vaadin.ui.Button"/>
 	<bean id="deleteCollab" class="com.vaadin.ui.Button"/>
+	<bean id="logout" class="com.vaadin.ui.Button"/>
 	
 	<bean id="adminNavigationBean" class="com.novedia.talentmap.web.ui.admin.AdminNavigation" scope="session" >
 		<constructor-arg name="visualizeSkill" ref="visualizeSkill" />
 		<constructor-arg name="deleteCollab" ref="deleteCollab" />
 		<constructor-arg name="addSkill" ref="addSkillButton" />
+		<constructor-arg name="logout" ref="logout" />
 	</bean>
 	
 	
@@ -185,18 +181,77 @@
 	
 	<!-- Vaadin AdminContentLayout UI -->
 	
-
+	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" >
+		<constructor-arg name="adminContentLayout" ref="adminContentLayoutBean" />
+		<constructor-arg name="loginLayout" ref="loginLayoutBean" />
+	</bean>
 	
-	<bean id="adminContentLayoutBean" class="com.novedia.talentmap.web.ui.admin.AdminContentLayout" scope="session" >
+	<!-- Vaadin LoginLayout UI -->
+	
+	<bean id="login" class="com.vaadin.ui.TextField"/>
+	<bean id="password" class="com.vaadin.ui.TextField"/>
+	<bean id="titlePageConnection" class="com.vaadin.ui.Label"/>
+	<bean id="btnLogin" class="com.vaadin.ui.Button"/>
+	
+	<bean id="loginLayoutBean" class="com.novedia.talentmap.web.ui.admin.LoginLayout" scope="session" >
+		<constructor-arg name="login" ref="login"/>
+		<constructor-arg name="password" ref="password"/>
+		<constructor-arg name="pageTitle" ref="titlePageConnection"/>
+		<constructor-arg name="btnLogin" ref="btnLogin"/>
 	</bean>
 	
 	
+	<!-- Vaadin MonitoringCollabNavigation UI -->
+	
+	<bean id="visualizeCollab" class="com.vaadin.ui.Button"/>
+	<bean id="setUpEA" class="com.vaadin.ui.Button"/>
+	<bean id="objectiveEA" class="com.vaadin.ui.Button"/>
+	
+	<bean id="monitoringCollabNavigationBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation">
+		<constructor-arg name="visualizeCollab" ref="visualizeCollab"/>
+		<constructor-arg name="setUpEA" ref="setUpEA"/>
+		<constructor-arg name="objectiveEA" ref="objectiveEA"/>
+	</bean>
+	
+	<!-- Vaadin MonitoringCollabContent UI -->
+	
+	<bean id="collabTable" class="com.vaadin.ui.Table"/>
+	<bean id="pageTitleMonitoringCollabContent" class="com.vaadin.ui.Label"/>
+	
+	<bean id="monitoringCollabContentBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent">
+		<constructor-arg name="collabTable" ref="collabTable"/>
+		<constructor-arg name="managerService" ref="managerService" />
+		<constructor-arg name="pageTitle" ref="pageTitleMonitoringCollabContent" />
+		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
+	</bean>
+	
+	<!-- Vaadin MonitoringCollabContentLayout -->
+	<bean id="hSplitPanelMonitoringCollab" class="com.vaadin.ui.HorizontalSplitPanel"/>
+	
+	<bean id="monitoringCollabContentLayoutBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout">
+		<constructor-arg name="monitoringCollabContent" ref="monitoringCollabContentBean"/>
+		<constructor-arg name="monitoringCollabNavigation" ref="monitoringCollabNavigationBean"/>
+		<constructor-arg name="hSplitPanel" ref="hSplitPanelMonitoringCollab"/>
+	</bean>
+	
+	<!-- Vaadin MonitoringCollabView UI -->
+	
+	<bean id="monitoringCollabViewBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView">
+		<constructor-arg name="monitoringCollabContentLayout" ref="monitoringCollabContentLayoutBean"/>
+	</bean>
+	
+	
+	<!-- Vaadin ProfileCollabWindow UI -->
+	
+	<bean id="profileCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ProfileCollabWindow">
+		<constructor-arg name="profileView" ref="profileViewBean" />
+	</bean>
 	
 	<!-- Vaadin TabProfileSheet UI -->
 	
 	<bean id="tabProfileSheetBean" class="com.novedia.talentmap.web.ui.TabProfileSheet" scope="session" >
 		<constructor-arg name="profileView" ref="profileViewBean" />
-		<constructor-arg name="collabView" ref="collabViewBean" />
+		<constructor-arg name="monitoringCollabView" ref="monitoringCollabViewBean" />
 		<constructor-arg name="adminView" ref="adminViewBean" />
 	</bean>
 	

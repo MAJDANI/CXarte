@@ -1,7 +1,9 @@
 package com.novedia.talentmap.web.ui.admin;
 
+import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.IObservable;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -13,7 +15,8 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	/**
 	 * Util Observateur
 	 */
-	private IAdminView obs;
+	private IAdminContentLayout obsAdminContentLayout;
+	private IAdminView obsAdminView;
 
 	/**
 	 * Vaadin UI
@@ -26,6 +29,7 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	private Button addSkill;
 	private Button visualizeSkill;
 	private Button deleteCollab;
+	private Button logout;
 
 	/**
 	 * Constants
@@ -33,12 +37,10 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	public static final String ADD_SKILL_NAME = "Ajouter une compétence";
 	public static final String VISUALIZE_SKILL_NAME = "Visualiser les compétences";
 	public static final String DELETE_COLLAB_NAME = "Supprimer des collaborateurs";
-	public static final String STYLE_BUTTON_NAVIGATION = "admin-button";
 
 	/**
 	 * Flag
 	 */
-	public static final String STYLE_BUTTON_SELECTED = "admin-button-selected";
 	public static boolean addNewSkill = false;
 
 	/**
@@ -50,11 +52,12 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	 * @param addSkillLink
 	 */
 	public AdminNavigation(Button visualizeSkill, Button deleteCollab,
-			Button addSkill) {
+			Button addSkill, Button logout) {
 		super();
 		this.visualizeSkill = visualizeSkill;
 		this.deleteCollab = deleteCollab;
 		this.addSkill = addSkill;
+		this.logout = logout;
 
 		mainBuild();
 
@@ -65,26 +68,30 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		setMargin(true);
 		setSpacing(true);
 
-		buildLinks();
+		buildButtons();
 	}
 
-	private void buildLinks() {
+	private void buildButtons() {
 
 		this.visualizeSkill.setCaption(VISUALIZE_SKILL_NAME);
 		this.visualizeSkill.addListener(this);
-		this.visualizeSkill.addStyleName(STYLE_BUTTON_NAVIGATION);
-		this.visualizeSkill.addStyleName(STYLE_BUTTON_SELECTED);
+		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		addComponent(this.visualizeSkill);
 
 		this.addSkill.setCaption(ADD_SKILL_NAME);
 		this.addSkill.addListener(this);
-		this.addSkill.addStyleName(STYLE_BUTTON_NAVIGATION);
+		this.addSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.addSkill);
 
 		this.deleteCollab.setCaption(DELETE_COLLAB_NAME);
 		this.deleteCollab.addListener(this);
-		this.deleteCollab.addStyleName(STYLE_BUTTON_NAVIGATION);
+		this.deleteCollab.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.deleteCollab);
+		
+		this.logout.setCaption("Se déconnecter");
+		this.logout.addListener(this);
+		addComponent(this.logout);
 	}
 
 	@Override
@@ -99,11 +106,11 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 			this.updateObservateur();
 			
 			//Remove style button selected on the other button
-			this.addSkill.removeStyleName(STYLE_BUTTON_SELECTED);
-			this.deleteCollab.removeStyleName(STYLE_BUTTON_SELECTED);
+			this.addSkill.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.deleteCollab.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
 			
 			//Add the style button selected on the button clicked
-			this.visualizeSkill.addStyleName(STYLE_BUTTON_SELECTED);
+			this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		}
 		
 		if(button == this.addSkill){
@@ -113,11 +120,16 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 			this.updateObservateur();
 			
 			//Remove style button selected on the other button
-			this.visualizeSkill.removeStyleName(STYLE_BUTTON_SELECTED);
-			this.deleteCollab.removeStyleName(STYLE_BUTTON_SELECTED);
+			this.visualizeSkill.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.deleteCollab.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
 			
 			//Add the style button selected on the button clicked
-			this.addSkill.addStyleName(STYLE_BUTTON_SELECTED);
+			this.addSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+		}
+		
+		if(button == this.logout){
+			
+			this.updateAdminViewObersvateur(false);
 		}
 		
 	}
@@ -179,22 +191,42 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		this.addSkill = addSkill;
 	}
 	
+	/**
+	 * Set the logout value
+	 * @param logout the logout to set
+	 */
+	public void setLogout(Button logout) {
+		this.logout = logout;
+	}
+	
 	@Override
-	public void addObservateur(Object observateur) {
-
-		this.obs = (IAdminView) observateur;
+	public void addObservateur(Object observateur, Class<?> cl) {
+		
+		if(cl == IAdminContentLayout.class){
+			this.obsAdminContentLayout = (IAdminContentLayout) observateur;
+		}
+		
+		if(cl == IAdminView.class){
+			this.obsAdminView = (IAdminView) observateur;
+		}
 	}
 
 	@Override
 	public void updateObservateur() {
 		
-		this.obs.updateManageSkillContent(this.addNewSkill);
+		this.obsAdminContentLayout.updateManageSkillContent(this.addNewSkill);
+	}
+	
+	public void updateAdminViewObersvateur(boolean isLogged){
+		
+		this.obsAdminView.updateAdminContent(isLogged);
 	}
 
 	@Override
 	public void delObservateur() {
 		
-		this.obs = null;
+		this.obsAdminContentLayout = null;
+		this.obsAdminView = null;
 	}
 
 }

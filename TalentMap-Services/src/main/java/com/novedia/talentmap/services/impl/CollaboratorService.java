@@ -102,6 +102,15 @@ public class CollaboratorService implements ICollaboratorService {
 	public void setManagerDao(IManagerDao managerDao) {
 		this.managerDao = managerDao;
 	}
+	
+	/**
+	 * Set the skillDao value
+	 * @param skillDao the skillDao to set
+	 */
+	public void setSkillDao(ISkillDao skillDao) {
+		this.skillDao = skillDao;
+	}
+
 
 	/**
 	 * Select All Collaborators by lastName

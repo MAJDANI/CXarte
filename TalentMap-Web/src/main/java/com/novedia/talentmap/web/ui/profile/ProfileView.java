@@ -7,6 +7,7 @@ import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.util.IProfileView;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Alignment;
@@ -134,7 +135,7 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 	 * @return
 	 */
 	private void buildSkillLayout() {
-		this.skillLabel.setStyle(Reindeer.LABEL_H2);
+		this.skillLabel.setStyle(TalentMapCSS.H2);
 
 		if (this.listSkill.isVisible()) {
 
@@ -176,7 +177,7 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 
 			}
 
-		});
+		}, IProfileView.class);
 
 	}
 
@@ -248,7 +249,7 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 		VerticalLayout dataAdminLayout = new VerticalLayout();
 		Label dataAdminLabel = new Label(DATA_ADMIN_LABEL);
 
-		dataAdminLabel.setStyle(Reindeer.LABEL_H2);
+		dataAdminLabel.setStyle(TalentMapCSS.H2);
 
 		dataAdminLayout.setMargin(true);
 		dataAdminLayout.addComponent(dataAdminLabel);
@@ -287,7 +288,7 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 
 		this.footerLayout.setSizeFull();
 		this.footerLayout.setMargin(true);
-		this.footerLayout.setStyleName("profile-footer");
+		this.footerLayout.setStyleName(TalentMapCSS.FOOTER_PROFILE);
 
 		this.footerLayout.addComponent(hLayout);
 		this.footerLayout.setComponentAlignment(hLayout,

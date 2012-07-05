@@ -2,112 +2,99 @@ package com.novedia.talentmap.web.ui.admin;
 
 import com.novedia.talentmap.web.util.IAdminView;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class AdminView extends HorizontalLayout {
+public class AdminView extends VerticalLayout {
+	
+	private AdminContentLayout adminContentLayout;
+	private LoginLayout loginLayout;
 	
 	/**
-	 * All views
+	 * Flag
 	 */
-	private AdminNavigation adminNav;
-	private ManageSkillContent manageSkillContent;
-	
+	public boolean isLogged;
+
 	/**
-	 * Vaadin Components 
+	 * Build the class AdminContentLayout.java 
 	 */
-	private HorizontalSplitPanel hSplitContent;
-	
-	/**
-	 * Constants
-	 */
-	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
-	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
-	
-	/**
-	 * Build the class AdminView.java 
-	 */
-	public AdminView(AdminNavigation adminNav, ManageSkillContent manageSkillContent, HorizontalSplitPanel hSplitContent) {
+	public AdminView(AdminContentLayout adminContentLayout, LoginLayout loginLayout) {
 		super();
-		this.adminNav = adminNav;
-		this.manageSkillContent = manageSkillContent;
-		this.hSplitContent = hSplitContent;
+		this.adminContentLayout = adminContentLayout;
+		this.loginLayout = loginLayout;
+		this.isLogged = false; 
+				
+		buildObservators();
 		
 		mainBuild();
-		
-		buildObservators();
 	}
 	
-	private void buildObservators(){
+	public void mainBuild(){
+	
+		removeAllComponents();
 		
-		this.adminNav.addObservateur(new IAdminView() {
+		if(isLogged){
+			
+			addComponent(this.adminContentLayout);
+		}else{
+			
+			addComponent(this.loginLayout);
+		}
+	}
+	
+	public void buildObservators(){
+		
+		this.loginLayout.addObservateur(new IAdminView() {
 			
 			@Override
-			public void updateManageSkillContent(boolean addNewSkill) {
+			public void updateAdminContent(boolean isLogged) {
 				
-				if(addNewSkill){
-					
-					AdminView.this.manageSkillContent.addView();
-					AdminView.this.manageSkillContent.getTitle().setCaption(ADD_SKILL_TITLE);
-				}else{
-					
-					AdminView.this.manageSkillContent.updateView();
-					AdminView.this.manageSkillContent.getTitle().setCaption(UPDATE_SKILL_TITLE);
-				}
+				AdminView.this.isLogged = isLogged;
+				mainBuild();
 			}
-		});
+		}, IAdminView.class);
+		
+		this.adminContentLayout.addObservateur(new IAdminView() {
+			
+			@Override
+			public void updateAdminContent(boolean isLogged) {
+				
+				AdminView.this.isLogged = isLogged;
+				AdminView.this.loginLayout.clearField();
+				mainBuild();
+			}
+		}, IAdminView.class);
+	}
+	
+
+	/**
+	 * Set the loginLayout value
+	 * @param loginLayout the loginLayout to set
+	 */
+	public void setLoginLayout(LoginLayout loginLayout) {
+		this.loginLayout = loginLayout;
 	}
 	
 	/**
-	 * 
-	 * @class AdminView.java
+	 * Set the adminContentLayout value
+	 * @param adminContentLayout the adminContentLayout to set
 	 */
-	public void mainBuild(){
-		
-		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.setHeight(600);
-		vLayout.addComponent(this.adminNav);
-		
-		this.hSplitContent.setFirstComponent(vLayout);
-		this.hSplitContent.setSecondComponent(this.manageSkillContent);
-		this.hSplitContent.setSplitPosition(20);
-		
-		addComponent(this.hSplitContent);
-		setSizeFull();
-		setExpandRatio(this.hSplitContent, 1);
-	}
+	public void setAdminContentLayout(AdminContentLayout adminContentLayout) {
+		this.adminContentLayout = adminContentLayout;
+	}	
 	
 	/**
-	 * Set the navLink value
-	 * @param navLink the navLink to set
+	 * Get the isLogged value
+	 * @return the isLogged
 	 */
-	public void setAdminNav(AdminNavigation adminNav) {
-		this.adminNav = adminNav;
-	}
-	
-	/**
-	 * Get the addSkillContent value
-	 * @return the addSkillContent
-	 */
-	public ManageSkillContent getManageSkillContent() {
-		return manageSkillContent;
+	public boolean isLogged() {
+		return isLogged;
 	}
 
 	/**
-	 * Set the addSkillContent value
-	 * @param addSkillContent the addSkillContent to set
+	 * Set the isLogged value
+	 * @param isLogged the isLogged to set
 	 */
-	public void setManageSkillContent(ManageSkillContent manageSkillContent) {
-		this.manageSkillContent = manageSkillContent;
+	public void setLogged(boolean isLogged) {
+		this.isLogged = isLogged;
 	}
-	
-	/**
-	 * Set the hSplitContent value
-	 * @param hSplitContent the hSplitContent to set
-	 */
-	public void sethSplitContent(HorizontalSplitPanel hSplitContent) {
-		this.hSplitContent = hSplitContent;
-	}
-	
 }

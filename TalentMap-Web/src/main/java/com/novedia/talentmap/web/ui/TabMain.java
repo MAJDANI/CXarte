@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
@@ -16,8 +17,8 @@ public class TabMain extends TabSheet {
 	
 	private TabProfileSheet tabProfileSheet;
 	private VerticalLayout tabSearch;
-	private final String TAB_FIRST_NAME = "Profil";
-	private final String TAB_SECOND_NAME = "Recherche";
+	private final String TAB_PROFIL_NAME = "Profil";
+	private final String TAB_SEARCH_NAME = "Recherche";
 	
 	/**
 	 * Build the class TabMain.java 
@@ -29,12 +30,12 @@ public class TabMain extends TabSheet {
 		this.tabProfileSheet = tabProfileSheet;
 		this.tabSearch = tabSearch;
 		
-		setStyle(Reindeer.TABSHEET_MINIMAL);
+		setStyle(TalentMapCSS.TABSHEET);
 		setImmediate(true);
 		
 		tabSearch.addComponent(new Label("Rien pour le moment !!"));
-		addTab(tabProfileSheet, TAB_FIRST_NAME);
-		addTab(tabSearch, TAB_SECOND_NAME);
+		addTab(tabProfileSheet, TAB_PROFIL_NAME);
+		addTab(tabSearch, TAB_SEARCH_NAME);
 		
 	}
 	

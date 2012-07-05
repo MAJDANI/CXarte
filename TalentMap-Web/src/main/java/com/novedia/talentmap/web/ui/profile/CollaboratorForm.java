@@ -7,6 +7,7 @@ import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.util.CUtils;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Form;
@@ -201,7 +202,7 @@ public class CollaboratorForm extends FormLayout {
 		this.gLayoutMission.setColumns(3);
 		this.gLayoutMission.setRows(1);
 		
-		this.setStyleName("form-data-administrative");
+		this.setStyleName(TalentMapCSS.ADMINISTRATIVE_FORM);
 		
 	}
 

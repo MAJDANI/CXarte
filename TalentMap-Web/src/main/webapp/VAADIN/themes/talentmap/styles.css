@@ -81,9 +81,9 @@
 	text-transform:none;
 }
 
-/* BUTTON NAVIGATION IN ADMIN */
+/* BUTTON NAVIGATION IN ADMIN & MONITORING COLLAB */
 .admin-button{background: none!important;}
-.admin-button>span{background:none!important;}
+.admin-button>span{background:none!important; border-style:none!important;}
 .admin-button>span>span{font-size:12px!important; font-weight:normal!important;}
 .admin-button>span>span:hover{text-decoration:underline!important;}
 .admin-button-selected>span>span:hover{text-decoration:none!important;}

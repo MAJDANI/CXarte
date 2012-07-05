@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
@@ -49,7 +50,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 	 * Constants
 	 */
 	private int COLLAB_ID = 2;
-	private String toolSelected;
 
 	/**
 	 * 
@@ -137,7 +137,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 				tableTools.addListener(this);
 				tableTools.setSelectable(true);
 				tableTools.setNullSelectionAllowed(true);
-				tableTools.setStyleName("tool-table");
+				tableTools.setStyleName(TalentMapCSS.TABLE_TOOL);
 			
 				Map<Tool, Integer> mapTool = eConcept.getValue();
 
@@ -162,7 +162,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 				//setTableTools(tableTools);
 
 				// Set Concept tabs Style
-				accConcept.setStyleName("concept-tab");
+				accConcept.setStyleName(TalentMapCSS.TABLE_CONCEPT);
 
 				accConcept.addTab(vLayoutConcept, eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore())
 				.setCaption(eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore());
@@ -171,7 +171,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 			}
 			
 			// Set Categories tabs Style
-			setStyleName("category-tab");
+			setStyleName(TalentMapCSS.TABLE_CATEGORY);
 
 			accCategory.addTab(vLayoutCategory, eCategory.getKey().getName())
 			.setCaption(eCategory.getKey().getName());
