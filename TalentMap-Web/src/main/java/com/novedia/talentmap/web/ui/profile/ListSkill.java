@@ -67,7 +67,21 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 		setImmediate(true);
 		setMargin(true);
 
-		this.mapSkill = this.skillService.getAllCollaboratorSkill(COLLAB_ID);
+		mainBuild();
+	}
+	
+	public void mainBuild(){
+		
+		removeAllComponents();
+		
+		try {
+			
+			this.mapSkill = this.skillService.getAllCollaboratorSkill(COLLAB_ID);
+		
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 
 		// Test if the Collaborator have one skill
 		if (!mapSkill.isEmpty() && mapSkill != null) {
@@ -244,6 +258,22 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 	 */
 	public void setAccConcept(Accordion accConcept) {
 		this.accConcept = accConcept;
+	}
+	
+	/**
+	 * Get the cOLLAB_ID value
+	 * @return the cOLLAB_ID
+	 */
+	public int getCOLLAB_ID() {
+		return COLLAB_ID;
+	}
+
+	/**
+	 * Set the cOLLAB_ID value
+	 * @param cOLLAB_ID the cOLLAB_ID to set
+	 */
+	public void setCOLLAB_ID(int cOLLAB_ID) {
+		COLLAB_ID = cOLLAB_ID;
 	}
 
 }

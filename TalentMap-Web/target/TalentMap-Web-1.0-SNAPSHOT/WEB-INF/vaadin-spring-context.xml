@@ -27,7 +27,7 @@
 <!-- Vaadin Components UI -->
 
     
-    <!-- Vaadin CollaboratorForm UI -->
+    <!-- Vaadin CollaboratorForm UI used by ProfileView -->
     
     <bean id="fieldOrderCollaborator" class="java.util.Vector"/>
     <bean id="fieldOrderMission" class="java.util.Vector"/>
@@ -38,7 +38,7 @@
 	<bean id="vLayoutManager" class="com.vaadin.ui.VerticalLayout"/>
 	<bean id="managerField" class="com.vaadin.ui.TextField"/>
 	
-    <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm">
+    <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm"  scope="session">
     	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
     	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator"/>
@@ -50,9 +50,33 @@
     	<constructor-arg name="vLayoutManager" ref="vLayoutManager" />
     	<constructor-arg name="managerField" ref="managerField" />
     </bean>
+    
+    <!-- We declare another CollaboratorForm UI because it's used by two beans => ProfileCollabWindow -->
+    
+    <bean id="fieldOrderCollaborator2" class="java.util.Vector"/>
+    <bean id="fieldOrderMission2" class="java.util.Vector"/>
+	<bean id="gLayoutCollaborator2" class="com.vaadin.ui.GridLayout"/>
+	<bean id="gLayoutMission2" class="com.vaadin.ui.GridLayout"/>
+	<bean id="formCollaborator2" class="com.vaadin.ui.Form"/>
+	<bean id="formMission2" class="com.vaadin.ui.Form"/>
+	<bean id="vLayoutManager2" class="com.vaadin.ui.VerticalLayout"/>
+	<bean id="managerField2" class="com.vaadin.ui.TextField"/>
+	
+    <bean id="collaboratorFormBean2" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm"  scope="session">
+    	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+    	<constructor-arg name="profileService" ref="profileService"/>
+    	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator2"/>
+    	<constructor-arg name="fieldOrderMission" ref="fieldOrderMission2"/>
+    	<constructor-arg name="gLayoutCollaborator" ref="gLayoutCollaborator2" />
+    	<constructor-arg name="gLayoutMission" ref="gLayoutMission2" />
+    	<constructor-arg name="formCollaborator" ref="formCollaborator2" />
+    	<constructor-arg name="formMission" ref="formMission2" />
+    	<constructor-arg name="vLayoutManager" ref="vLayoutManager2" />
+    	<constructor-arg name="managerField" ref="managerField2" />
+    </bean>
 	
 	
-	<!-- Vaadin ListSkill UI -->
+	<!-- Vaadin ListSkill UI used by => ProfileView -->
 	
 	<bean id="tableTools" class="com.vaadin.ui.Table" />
 	<bean id="accCategory" class="com.vaadin.ui.Accordion"/>
@@ -63,6 +87,19 @@
 		<constructor-arg name="tableTools" ref="tableTools" />
 		<constructor-arg name="accCategory" ref="accCategory" />
 		<constructor-arg name="accConcept" ref="accConcept" />
+	</bean>
+	
+	<!-- We declare another ListSkill UI because it's used by two beans => ProfileCollabWindow -->
+	
+	<bean id="tableTools2" class="com.vaadin.ui.Table" />
+	<bean id="accCategory2" class="com.vaadin.ui.Accordion"/>
+	<bean id="accConcept2" class="com.vaadin.ui.Accordion"/>
+	
+	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
+		<constructor-arg name="skillService" ref="skillService" />
+		<constructor-arg name="tableTools" ref="tableTools2" />
+		<constructor-arg name="accCategory" ref="accCategory2" />
+		<constructor-arg name="accConcept" ref="accConcept2" />
 	</bean>
 	
 	
@@ -207,7 +244,7 @@
 	<bean id="setUpEA" class="com.vaadin.ui.Button"/>
 	<bean id="objectiveEA" class="com.vaadin.ui.Button"/>
 	
-	<bean id="monitoringCollabNavigationBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation">
+	<bean id="monitoringCollabNavigationBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation" scope="session">
 		<constructor-arg name="visualizeCollab" ref="visualizeCollab"/>
 		<constructor-arg name="setUpEA" ref="setUpEA"/>
 		<constructor-arg name="objectiveEA" ref="objectiveEA"/>
@@ -218,7 +255,7 @@
 	<bean id="collabTable" class="com.vaadin.ui.Table"/>
 	<bean id="pageTitleMonitoringCollabContent" class="com.vaadin.ui.Label"/>
 	
-	<bean id="monitoringCollabContentBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent">
+	<bean id="monitoringCollabContentBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent" scope="session">
 		<constructor-arg name="collabTable" ref="collabTable"/>
 		<constructor-arg name="managerService" ref="managerService" />
 		<constructor-arg name="pageTitle" ref="pageTitleMonitoringCollabContent" />
@@ -228,7 +265,7 @@
 	<!-- Vaadin MonitoringCollabContentLayout -->
 	<bean id="hSplitPanelMonitoringCollab" class="com.vaadin.ui.HorizontalSplitPanel"/>
 	
-	<bean id="monitoringCollabContentLayoutBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout">
+	<bean id="monitoringCollabContentLayoutBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout" scope="session">
 		<constructor-arg name="monitoringCollabContent" ref="monitoringCollabContentBean"/>
 		<constructor-arg name="monitoringCollabNavigation" ref="monitoringCollabNavigationBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelMonitoringCollab"/>
@@ -236,15 +273,16 @@
 	
 	<!-- Vaadin MonitoringCollabView UI -->
 	
-	<bean id="monitoringCollabViewBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView">
+	<bean id="monitoringCollabViewBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView" scope="session">
 		<constructor-arg name="monitoringCollabContentLayout" ref="monitoringCollabContentLayoutBean"/>
 	</bean>
 	
 	
 	<!-- Vaadin ProfileCollabWindow UI -->
 	
-	<bean id="profileCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ProfileCollabWindow">
-		<constructor-arg name="profileView" ref="profileViewBean" />
+	<bean id="profileCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ProfileCollabWindow" scope="session">
+		<constructor-arg name="listSkill" ref="listSkillBean2" />
+		<constructor-arg name="collaboratorForm" ref="collaboratorFormBean2" />
 	</bean>
 	
 	<!-- Vaadin TabProfileSheet UI -->

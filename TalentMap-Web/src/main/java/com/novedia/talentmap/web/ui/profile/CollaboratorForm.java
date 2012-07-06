@@ -91,6 +91,15 @@ public class CollaboratorForm extends FormLayout {
 		this.formMission = formMission;
 		this.managerField = managerField;
 
+		mainBuild();
+	}
+	
+	public void mainBuild(){
+		
+		cleanAll();
+		
+		System.out.println("--IN--");
+		
 		// Build Layout
 		buildGridLayout();
 
@@ -111,6 +120,20 @@ public class CollaboratorForm extends FormLayout {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void cleanAll(){
+		
+		removeAllComponents();
+		
+		this.formCollaborator = new Form();
+		
+		this.formMission = new Form();
+		
+		this.gLayoutCollaborator = new GridLayout();
+		
+		this.gLayoutMission = new GridLayout();
+		
 	}
 
 	/**
@@ -141,7 +164,6 @@ public class CollaboratorForm extends FormLayout {
 //				this.profileService.getProfile(profileId).getType());
 		
 		addComponent(this.formCollaborator);
-		
 	}
 
 	/**
@@ -335,5 +357,21 @@ public class CollaboratorForm extends FormLayout {
 	 */
 	public void setvLayoutManager(VerticalLayout vLayoutManager) {
 		this.vLayoutManager = vLayoutManager;
+	}
+	
+	/**
+	 * Get the cOLLAB_ID value
+	 * @return the cOLLAB_ID
+	 */
+	public int getCOLLAB_ID() {
+		return COLLAB_ID;
+	}
+
+	/**
+	 * Set the cOLLAB_ID value
+	 * @param cOLLAB_ID the cOLLAB_ID to set
+	 */
+	public void setCOLLAB_ID(int cOLLAB_ID) {
+		COLLAB_ID = cOLLAB_ID;
 	}
 }

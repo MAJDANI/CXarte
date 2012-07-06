@@ -211,7 +211,11 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
-
+				
+				MonitoringCollabContent.this.profileCollabWindow.setCOLLAB_ID(idCollab);
+				
+				MonitoringCollabContent.this.profileCollabWindow.mainBuild();
+				
 				getWindow().addWindow(MonitoringCollabContent.this.profileCollabWindow);
 			}
 		});

@@ -116,7 +116,7 @@ public class ProfileView extends VerticalLayout implements ClickListener {
 		this.mainBuild();
 	}
 
-	private void mainBuild() {
+	public void mainBuild() {
 
 		buildDataAdminLayout();
 
