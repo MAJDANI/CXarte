@@ -88,7 +88,6 @@ public class SkillService implements ISkillService {
 		// We build the Concept Map
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
 			
-			
 			Concept concept = conceptDao.getById(entry
 					.getKey().getConcept_id());
 			

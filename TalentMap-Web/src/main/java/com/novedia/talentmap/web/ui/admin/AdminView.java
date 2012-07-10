@@ -1,7 +1,6 @@
 package com.novedia.talentmap.web.ui.admin;
 
 import com.novedia.talentmap.web.util.IAdminView;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 public class AdminView extends VerticalLayout {
@@ -15,7 +14,10 @@ public class AdminView extends VerticalLayout {
 	public boolean isLogged;
 
 	/**
-	 * Build the class AdminContentLayout.java 
+	 * 
+	 * Build the class AdminView.java 
+	 * @param adminContentLayout
+	 * @param loginLayout
 	 */
 	public AdminView(AdminContentLayout adminContentLayout, LoginLayout loginLayout) {
 		super();
@@ -28,6 +30,10 @@ public class AdminView extends VerticalLayout {
 		mainBuild();
 	}
 	
+	/**
+	 * The main builder
+	 * @class AdminView.java
+	 */
 	public void mainBuild(){
 	
 		removeAllComponents();
@@ -41,6 +47,10 @@ public class AdminView extends VerticalLayout {
 		}
 	}
 	
+	/**
+	 * The builder for all observator
+	 * @class AdminView.java
+	 */
 	public void buildObservators(){
 		
 		this.loginLayout.addObservateur(new IAdminView() {

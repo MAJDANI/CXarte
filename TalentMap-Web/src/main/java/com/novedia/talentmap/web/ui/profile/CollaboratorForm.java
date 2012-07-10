@@ -30,13 +30,17 @@ public class CollaboratorForm extends FormLayout {
 	 * 
 	 */
 	private static final long serialVersionUID = 1195179317563179902L;
-
+	
+	/**
+	 * Java Object
+	 */
+	private Vector<Object> fieldOrderCollaborator;
+	private Vector<Object> fieldOrderMission;
+	
 	/**
 	 * Constants
 	 */
 	private int COLLAB_ID = 2;
-	private Vector<Object> fieldOrderCollaborator;
-	private Vector<Object> fieldOrderMission;
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] { "Nom", "Prénom",
 			"Profil", "Email", "Tél", "Date d'entrée Novedia",
 			"Années d'expérience", "Ingénieur d'affaire" };
@@ -94,11 +98,13 @@ public class CollaboratorForm extends FormLayout {
 		mainBuild();
 	}
 	
+	/**
+	 * The main builder
+	 * @class CollaboratorForm.java
+	 */
 	public void mainBuild(){
 		
 		cleanAll();
-		
-		System.out.println("--IN--");
 		
 		// Build Layout
 		buildGridLayout();
@@ -160,6 +166,9 @@ public class CollaboratorForm extends FormLayout {
 		// Set the good value for the Select Item
 		int profileId = this.collaboratorService
 				.getCollaborator(COLLAB_ID).getProfile_id();
+		
+		String profileType = this.profileService.getProfile(profileId).getType();
+
 //		this.formCollaborator.getField("profile_id").setValue(
 //				this.profileService.getProfile(profileId).getType());
 		

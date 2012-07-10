@@ -21,5 +21,13 @@ public interface IManagerService {
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws Exception;
-
+	
+	/**
+	 * Get One Collaborator By ID
+	 * @class IManagerService.java
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	Collaborator getCollaborator(int id) throws Exception;
 }

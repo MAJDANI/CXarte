@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.profile;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IProfileService;
 import com.vaadin.data.Item;
+import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
@@ -37,6 +38,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		
 		
+		
 		for(int i=0; i<CollaboratorForm.FIELD_ORDER_COLLABORATOR.length;i++){
 			
 			if(propertyId.equals(CollaboratorForm.FIELD_ORDER_COLLABORATOR[i])){
@@ -49,6 +51,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					field.setRequired(true);
 					field.setRequiredError("Le champs \""+ CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+"\" est obligatoire");
+					field.setNullRepresentation("Non renseigné");
 					
 					if(!propertyId.equals("phone") && !propertyId.equals("experience")){
 						field.setReadOnly(true);
@@ -89,13 +92,20 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					return datefield;
 					
 				}else if(propertyId.equals("profile_id")){
+					IndexedContainer ic = new IndexedContainer();
+			        ic.addContainerProperty("value", String.class, null);
 					
 					Select profilSelect = new Select((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
+					
 					try {
 						for(Profile p : profileService.getAllProfile()){
-							profilSelect.addItem(p.getType());
+							item = ic.addItem(p.getId());
+							item.getItemProperty("value").setValue(p.getType());
 						}
+						
+						profilSelect.setContainerDataSource(ic);
+						profilSelect.setItemCaptionPropertyId("value");
 						
 						profilSelect.setNullSelectionAllowed(false);
 						profilSelect.setImmediate(true);
@@ -105,7 +115,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					}
 					
 					//Add Validator
-					profilSelect.addValidator(new RegexpValidator("fonctionnel|technique", "Type de profil possible : fonctionnel ou technique."));
+//					profilSelect.addValidator(new RegexpValidator("fonctionnel|technique", "Type de profil possible : fonctionnel ou technique."));
 					
 					profilSelect.setStyleName("type-profile");
 					return profilSelect;

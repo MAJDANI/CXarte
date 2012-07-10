@@ -3,7 +3,9 @@ package com.novedia.talentmap.web.ui.collab;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IManagerService;
+import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
@@ -31,6 +33,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	 * TalentMap Service
 	 */
 	private IManagerService managerService;
+	private IProfileService profileService;
 
 	/**
 	 * Constants
@@ -49,10 +52,12 @@ public class MonitoringCollabContent extends VerticalLayout {
 	 */
 	public MonitoringCollabContent(Table collabTable,
 			IManagerService managerService, Label pageTitle,
-			ProfileCollabWindow profileCollabWindow) {
+			ProfileCollabWindow profileCollabWindow,
+			IProfileService profileService) {
 		super();
 		this.collabTable = collabTable;
 		this.managerService = managerService;
+		this.profileService = profileService;
 		this.pageTitle = pageTitle;
 		this.profileCollabWindow = profileCollabWindow;
 
@@ -78,52 +83,65 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 	}
 
-	public void buildCollabTable() {
+	public void addColumns() {
 
-		// We create the columns
 		this.collabTable.addContainerProperty("Prénom", String.class, null);
 		this.collabTable.addContainerProperty("Nom", String.class, null);
 		this.collabTable.addContainerProperty("Profil", String.class, null);
 		this.collabTable.addContainerProperty("Statut", String.class, null);
 		this.collabTable.addContainerProperty("Actions",
 				HorizontalLayout.class, null);
+	}
+	
+	public void fillCollabTable(List<Collaborator> listCollaborator) throws Exception{
+		
+		int idTable = 1;
+		for (Collaborator collab : listCollaborator) {
+			
+			Profile collabProfile = this.profileService.getProfile(collab.getProfile_id());
+			
+			HorizontalLayout hLayoutButton = new HorizontalLayout();
+			hLayoutButton.setSpacing(true);
+			hLayoutButton.setMargin(true);
+			Button visualizeCV = buildButton(new Button(VISUALIZE_CV_NAME));
+			Button visualizeMission = buildButton(new Button(
+					VISUALIZE_MISSION_NAME));
+			Button visualizeEA = buildButton(new Button(VISUALIZE_EA_NAME));
+			Button visualizeProfile = buildButton(new Button(
+					VISUALIZE_PROFILE_NAME));
+
+			// Set button date to collaborator id
+			visualizeCV.setData(collab.getId());
+			visualizeMission.setData(collab.getId());
+			visualizeEA.setData(collab.getId());
+			visualizeProfile.setData(collab.getId());
+
+			hLayoutButton.addComponent(visualizeCV);
+			hLayoutButton.addComponent(visualizeMission);
+			hLayoutButton.addComponent(visualizeEA);
+			hLayoutButton.addComponent(visualizeProfile);
+
+			this.collabTable.addItem(new Object[] { collab.getFirst_name(),
+					collab.getLast_name(),
+					collabProfile.getType(), "En mission",
+					hLayoutButton }, idTable);
+
+			idTable++;
+		}
+	}
+
+	public void buildCollabTable() {
+
+		// We create the columns
+		addColumns();
 
 		try {
 
 			List<Collaborator> listCollaborator = this.managerService
 					.getAllCollaboratorsByManagerId(MANAGER_ID);
-
-			int idTable = 1;
-			for (Collaborator collab : listCollaborator) {
-
-				HorizontalLayout hLayoutButton = new HorizontalLayout();
-				hLayoutButton.setSpacing(true);
-				hLayoutButton.setMargin(true);
-				Button visualizeCV = buildButton(new Button(VISUALIZE_CV_NAME));
-				Button visualizeMission = buildButton(new Button(
-						VISUALIZE_MISSION_NAME));
-				Button visualizeEA = buildButton(new Button(VISUALIZE_EA_NAME));
-				Button visualizeProfile = buildButton(new Button(
-						VISUALIZE_PROFILE_NAME));
-
-				// Set button date to collaborator id
-				visualizeCV.setData(collab.getId());
-				visualizeMission.setData(collab.getId());
-				visualizeEA.setData(collab.getId());
-				visualizeProfile.setData(collab.getId());
-
-				hLayoutButton.addComponent(visualizeCV);
-				hLayoutButton.addComponent(visualizeMission);
-				hLayoutButton.addComponent(visualizeEA);
-				hLayoutButton.addComponent(visualizeProfile);
-
-				this.collabTable.addItem(new Object[] { collab.getFirst_name(),
-						collab.getLast_name(),
-						collab.getProfile_id().toString(), "En mission",
-						hLayoutButton }, idTable);
-
-				idTable++;
-			}
+			
+			//We fill the table
+			fillCollabTable(listCollaborator);
 
 		} catch (Exception e) {
 
@@ -211,12 +229,14 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
-				
-				MonitoringCollabContent.this.profileCollabWindow.setCOLLAB_ID(idCollab);
-				
+
+				MonitoringCollabContent.this.profileCollabWindow
+						.setCOLLAB_ID(idCollab);
+
 				MonitoringCollabContent.this.profileCollabWindow.mainBuild();
-				
-				getWindow().addWindow(MonitoringCollabContent.this.profileCollabWindow);
+
+				getWindow().addWindow(
+						MonitoringCollabContent.this.profileCollabWindow);
 			}
 		});
 	}
@@ -250,12 +270,24 @@ public class MonitoringCollabContent extends VerticalLayout {
 	public void setPageTitle(Label pageTitle) {
 		this.pageTitle = pageTitle;
 	}
-	
+
 	/**
 	 * Set the profileCollabWindow value
-	 * @param profileCollabWindow the profileCollabWindow to set
+	 * 
+	 * @param profileCollabWindow
+	 *            the profileCollabWindow to set
 	 */
 	public void setProfileCollabWindow(ProfileCollabWindow profileCollabWindow) {
 		this.profileCollabWindow = profileCollabWindow;
+	}
+
+	/**
+	 * Set the profileService value
+	 * 
+	 * @param profileService
+	 *            the profileService to set
+	 */
+	public void setProfileService(IProfileService profileService) {
+		this.profileService = profileService;
 	}
 }

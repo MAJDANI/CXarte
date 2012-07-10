@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
@@ -53,9 +54,11 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * 
-	 * Build the class ListSkill.java
-	 * 
+	 * Build the class ListSkill.java 
 	 * @param skillService
+	 * @param tableTools
+	 * @param accCategory
+	 * @param accConcept
 	 * @throws Exception
 	 */
 	public ListSkill(ISkillService skillService, Table tableTools, Accordion accCategory, Accordion accConcept) throws Exception {
@@ -70,6 +73,10 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 		mainBuild();
 	}
 	
+	/**
+	 * The main builder
+	 * @class ListSkill.java
+	 */
 	public void mainBuild(){
 		
 		removeAllComponents();
@@ -114,6 +121,10 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 		}
 	}
 	
+	/**
+	 * Initialize all component
+	 * @class ListSkill.java
+	 */
 	private void initComponents(){
 		this.tableTools = new Table();
 		this.accCategory = new Accordion();
@@ -127,71 +138,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 	 */
 	public Accordion buildListSkill(Map<Category, Map> mapSkill) {
 
-		// We organize the skills in tabs and tables: Categories tabs, Concepts
-		// tabs and Tools tables
-		
-		//We build a new accordion Category
-		Accordion accCategory = new Accordion();
-		
-		for (Map.Entry<Category, Map> eCategory : mapSkill.entrySet()) {
-			VerticalLayout vLayoutCategory = new VerticalLayout();
-			vLayoutCategory.setMargin(true);
-			
-			//We build a new accordion Concept
-			Accordion accConcept = new Accordion();
-			
-			Map<Concept, Map> mapConcept = eCategory.getValue();
-
-			for (Map.Entry<Concept, Map> eConcept : mapConcept.entrySet()) {
-				VerticalLayout vLayoutConcept = new VerticalLayout();
-				vLayoutConcept.setMargin(true);
-				
-				//We build a new table Tool
-				Table tableTools = new Table();
-				tableTools.addListener(this);
-				tableTools.setSelectable(true);
-				tableTools.setNullSelectionAllowed(true);
-				tableTools.setStyleName(TalentMapCSS.TABLE_TOOL);
-			
-				Map<Tool, Integer> mapTool = eConcept.getValue();
-
-				int idTable = 1;
-				VerticalLayout vLayoutTool = new VerticalLayout();
-				
-				tableTools.addContainerProperty("Nom de l'outil", String.class,
-						null);
-				tableTools.addContainerProperty("Note", Integer.class, null);
-
-				for (Map.Entry<Tool, Integer> eTool : mapTool.entrySet()) {
-					
-					tableTools.addItem(new Object[] { eTool.getKey().getName(),
-							eTool.getValue() }, new Integer(idTable));
-					idTable++;
-				}
-				
-				vLayoutTool.addComponent(tableTools);
-				vLayoutConcept.addComponent(vLayoutTool);
-			
-				// Set Tool tables
-				//setTableTools(tableTools);
-
-				// Set Concept tabs Style
-				accConcept.setStyleName(TalentMapCSS.TABLE_CONCEPT);
-
-				accConcept.addTab(vLayoutConcept, eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore())
-				.setCaption(eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore());
-	
-				vLayoutCategory.addComponent(accConcept);
-			}
-			
-			// Set Categories tabs Style
-			setStyleName(TalentMapCSS.TABLE_CATEGORY);
-
-			accCategory.addTab(vLayoutCategory, eCategory.getKey().getName())
-			.setCaption(eCategory.getKey().getName());
-		}
-		
-		return accCategory;
+		return CUtils.MapSkillToAccordionSkill(mapSkill, this);
 	}
 	
 	@Override

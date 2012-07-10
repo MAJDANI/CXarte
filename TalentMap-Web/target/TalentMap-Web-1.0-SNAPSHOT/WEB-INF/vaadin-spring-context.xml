@@ -258,6 +258,7 @@
 	<bean id="monitoringCollabContentBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent" scope="session">
 		<constructor-arg name="collabTable" ref="collabTable"/>
 		<constructor-arg name="managerService" ref="managerService" />
+		<constructor-arg name="profileService" ref="profileService" />
 		<constructor-arg name="pageTitle" ref="pageTitleMonitoringCollabContent" />
 		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
 	</bean>
@@ -279,11 +280,22 @@
 	
 	
 	<!-- Vaadin ProfileCollabWindow UI -->
-	
+	<bean id="dataMonitoringCollab" class="com.vaadin.ui.Form" />
+	<bean id="skillMonitoringCollab" class="com.vaadin.ui.Accordion" />
+	<bean id="fieldOrderMonitoringCollab" class="java.util.Vector" />
+		
 	<bean id="profileCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ProfileCollabWindow" scope="session">
-		<constructor-arg name="listSkill" ref="listSkillBean2" />
-		<constructor-arg name="collaboratorForm" ref="collaboratorFormBean2" />
+		<constructor-arg name="skillService" ref="skillService" />
+		<constructor-arg name="managerService" ref="managerService" />
+		<constructor-arg name="profileService" ref="profileService" />
+		<constructor-arg name="dataCollab" ref="dataMonitoringCollab" />
+		<constructor-arg name="skillCollab" ref="skillMonitoringCollab" />
+		<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderMonitoringCollab" />
+
+<!-- 		<constructor-arg name="collaboratorForm" ref="collaboratorFormBean2" /> -->
+<!-- 		<constructor-arg name="listSkill" ref="listSkillBean2" /> -->
 	</bean>
+	
 	
 	<!-- Vaadin TabProfileSheet UI -->
 	
