@@ -316,4 +316,13 @@
 	</bean>
 	
 	
+	
+	<!-- Vaadin Recherche UI -->
+	
+		
+		<bean id="mainLayout" class="com.vaadin.ui.AbsoluteLayout" />
+		<bean id="ecran" class="com.vaadin.ui.HorizontalSplitPanel" />
+		<bean id="sidebar" class="com.novedia.talentmap.web.ui.recherche.Sidebar" />
+		<bean id="zonerecherche" class="com.novedia.talentmap.web.ui.recherche.Zonerecherche" />
+	
 </beans>

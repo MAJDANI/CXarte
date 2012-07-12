@@ -34,6 +34,10 @@ import com.vaadin.ui.themes.Reindeer;
 public class ProfileView extends VerticalLayout implements ClickListener {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * TalentMap Services
 	 */
 	private ICollaboratorService collabService;

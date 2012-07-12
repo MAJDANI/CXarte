@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.ui.recherche.RechercheView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
@@ -16,7 +17,7 @@ import com.vaadin.ui.themes.Reindeer;
 public class TabMain extends TabSheet {
 	
 	private TabProfileSheet tabProfileSheet;
-	private VerticalLayout tabSearch;
+	private RechercheView tabSearch;
 	private final String TAB_PROFIL_NAME = "Profil";
 	private final String TAB_SEARCH_NAME = "Recherche";
 	
@@ -25,7 +26,7 @@ public class TabMain extends TabSheet {
 	 * @param tabProfileSheet
 	 * @param tabSearch
 	 */
-	public TabMain(TabProfileSheet tabProfileSheet, VerticalLayout tabSearch) {
+	public TabMain(TabProfileSheet tabProfileSheet, RechercheView tabSearch) {
 		super();
 		this.tabProfileSheet = tabProfileSheet;
 		this.tabSearch = tabSearch;
@@ -35,7 +36,7 @@ public class TabMain extends TabSheet {
 		
 		tabSearch.addComponent(new Label("Rien pour le moment !!"));
 		addTab(tabProfileSheet, TAB_PROFIL_NAME);
-		addTab(tabSearch, TAB_SEARCH_NAME);
+		//addTab(tabSearch, TAB_SEARCH_NAME);
 		
 	}
 	
@@ -50,7 +51,7 @@ public class TabMain extends TabSheet {
 	 * Set the tabSearch value
 	 * @param tabSearch the tabSearch to set
 	 */
-	public void setTabSearch(VerticalLayout tabSearch) {
+	public void setTabSearch(RechercheView tabSearch) {
 		this.tabSearch = tabSearch;
 	}
 	
