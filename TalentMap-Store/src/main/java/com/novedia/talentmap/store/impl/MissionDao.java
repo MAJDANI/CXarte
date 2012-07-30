@@ -24,11 +24,11 @@ public class MissionDao implements IMissionDao {
 		List<Mission> listMission = new ArrayList<Mission>();
 		
 		Mission m = new Mission();
-		m.setCollab_id(String.valueOf(id));
+		m.setCollab_id(id);
 		m.setClient("SFR");
 		m.setEnd_date(new Date());
 		m.setStart_date(new Date());
-		m.setId("1");
+		m.setId(1);
 		
 		listMission.add(m);
 		
