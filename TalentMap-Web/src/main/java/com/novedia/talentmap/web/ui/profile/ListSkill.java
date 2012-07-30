@@ -26,7 +26,7 @@ import com.vaadin.ui.Window.Notification;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
-public class ListSkill extends VerticalLayout implements ItemClickListener{
+public class ListSkill extends VerticalLayout implements ItemClickListener {
 
 	private static final long serialVersionUID = 1557665108285765557L;
 
@@ -39,7 +39,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 	 * JAVA Objects
 	 */
 	private Map<Category, Map> mapSkill;
-	
+
 	/**
 	 * Vaadin Components
 	 */
@@ -54,17 +54,19 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * 
-	 * Build the class ListSkill.java 
+	 * Build the class ListSkill.java
+	 * 
 	 * @param skillService
 	 * @param tableTools
 	 * @param accCategory
 	 * @param accConcept
 	 * @throws Exception
 	 */
-	public ListSkill(ISkillService skillService, Table tableTools, Accordion accCategory, Accordion accConcept) throws Exception {
+	public ListSkill(ISkillService skillService, Table tableTools,
+			Accordion accCategory, Accordion accConcept) throws Exception {
 		this.skillService = skillService;
 		this.tableTools = tableTools;
-		this.accCategory =  accCategory;
+		this.accCategory = accCategory;
 		this.accConcept = accConcept;
 
 		setImmediate(true);
@@ -72,21 +74,23 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 		mainBuild();
 	}
-	
+
 	/**
 	 * The main builder
+	 * 
 	 * @class ListSkill.java
 	 */
-	public void mainBuild(){
-		
+	public void mainBuild() {
+
 		removeAllComponents();
-		
+
 		try {
-			
-			this.mapSkill = this.skillService.getAllCollaboratorSkill(COLLAB_ID);
-		
+
+			this.mapSkill = this.skillService
+					.getAllCollaboratorSkill(COLLAB_ID);
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -99,20 +103,21 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 			setVisible(false);
 		}
 	}
-	
+
 	/**
 	 * 
-	 * Build the class ListSkill.java 
+	 * Build the class ListSkill.java
+	 * 
 	 * @param mapSkill
 	 */
 	public ListSkill(Map<Category, Map> mapSkill) {
 		this.mapSkill = mapSkill;
-		
-		//Init the components
+
+		// Init the components
 
 		// Test if the Collaborator have one skill
 		if (!mapSkill.isEmpty() && mapSkill != null) {
-			
+
 			initComponents();
 			addComponent(buildListSkill(this.mapSkill));
 
@@ -120,12 +125,13 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 			setVisible(false);
 		}
 	}
-	
+
 	/**
 	 * Initialize all component
+	 * 
 	 * @class ListSkill.java
 	 */
-	private void initComponents(){
+	private void initComponents() {
 		this.tableTools = new Table();
 		this.accCategory = new Accordion();
 		this.accConcept = new Accordion();
@@ -140,31 +146,32 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 		return CUtils.MapSkillToAccordionSkill(mapSkill, this);
 	}
-	
+
 	@Override
 	public void itemClick(ItemClickEvent event) {
-		
+
 		this.tableTools.setValue(null);
 		setTableTools((Table) event.getSource());
 	}
-	
+
 	/**
 	 * Get the tableTools value
+	 * 
 	 * @return the tableTools
 	 */
 	public Table getTableTools() {
 		return tableTools;
 	}
-	
+
 	/**
 	 * 
 	 * @class ListSkill.java
 	 * @param tableTools
 	 */
-	private void setTableTools(Table tableTools){
+	private void setTableTools(Table tableTools) {
 		this.tableTools = tableTools;
 	}
-	
+
 	/**
 	 * Set the skillService value
 	 * 
@@ -177,6 +184,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * Get the accCategory value
+	 * 
 	 * @return the accCategory
 	 */
 	public Accordion getAccCategory() {
@@ -185,7 +193,9 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * Set the accCategory value
-	 * @param accCategory the accCategory to set
+	 * 
+	 * @param accCategory
+	 *            the accCategory to set
 	 */
 	public void setAccCategory(Accordion accCategory) {
 		this.accCategory = accCategory;
@@ -193,6 +203,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * Get the accConcept value
+	 * 
 	 * @return the accConcept
 	 */
 	public Accordion getAccConcept() {
@@ -201,14 +212,17 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * Set the accConcept value
-	 * @param accConcept the accConcept to set
+	 * 
+	 * @param accConcept
+	 *            the accConcept to set
 	 */
 	public void setAccConcept(Accordion accConcept) {
 		this.accConcept = accConcept;
 	}
-	
+
 	/**
 	 * Get the cOLLAB_ID value
+	 * 
 	 * @return the cOLLAB_ID
 	 */
 	public int getCOLLAB_ID() {
@@ -217,7 +231,9 @@ public class ListSkill extends VerticalLayout implements ItemClickListener{
 
 	/**
 	 * Set the cOLLAB_ID value
-	 * @param cOLLAB_ID the cOLLAB_ID to set
+	 * 
+	 * @param cOLLAB_ID
+	 *            the cOLLAB_ID to set
 	 */
 	public void setCOLLAB_ID(int cOLLAB_ID) {
 		COLLAB_ID = cOLLAB_ID;

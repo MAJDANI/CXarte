@@ -105,6 +105,14 @@ public class Skill implements Serializable{
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Skill [collaborator_id=" + collaborator_id + ", tool_id="
+				+ tool_id + ", score=" + score + ", use_frequency="
+				+ use_frequency + ", no_using_time=" + no_using_time + "]";
+	}
 	
 }

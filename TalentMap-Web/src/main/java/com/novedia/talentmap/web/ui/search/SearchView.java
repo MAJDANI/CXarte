@@ -1,0 +1,49 @@
+package com.novedia.talentmap.web.ui.search;
+
+import com.vaadin.ui.VerticalLayout;
+
+public class SearchView extends VerticalLayout {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1779457808036835024L;
+	/**
+	 * Vaadin UI
+	 */
+	private SearchLayout searchLayout;
+
+	/**
+	 * Build the class SearchView.java 
+	 * @param searchLayout
+	 */
+	public SearchView(SearchLayout searchLayout) {
+		super();
+		this.searchLayout = searchLayout;
+		
+		mainBuild();
+	}
+	
+	public void mainBuild(){
+		
+		addComponent(this.searchLayout);
+	}
+
+	/**
+	 * Get the searchLayout value
+	 * @return the searchLayout
+	 */
+	public SearchLayout getSearchLayout() {
+		return searchLayout;
+	}
+
+	/**
+	 * Set the searchLayout value
+	 * @param searchLayout the searchLayout to set
+	 */
+	public void setSearchLayout(SearchLayout searchLayout) {
+		this.searchLayout = searchLayout;
+	}
+	
+	
+}

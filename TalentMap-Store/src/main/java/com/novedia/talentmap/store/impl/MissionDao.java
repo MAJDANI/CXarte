@@ -1,7 +1,9 @@
 package com.novedia.talentmap.store.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Mission;
@@ -17,7 +19,9 @@ public class MissionDao implements IMissionDao {
 	 * @param id
 	 * @return
 	 */
-	private Mission buildDummyMission(int id){
+	private List<Mission> buildDummyMission(int id){
+		
+		List<Mission> listMission = new ArrayList<Mission>();
 		
 		Mission m = new Mission();
 		m.setCollab_id(String.valueOf(id));
@@ -26,16 +30,18 @@ public class MissionDao implements IMissionDao {
 		m.setStart_date(new Date());
 		m.setId("1");
 		
-		return m;
+		listMission.add(m);
+		
+		return listMission;
 	}
 	
 	@Override
-	public Mission getByCollabId(
-			int collab_id) {
+	public List<Mission> getByCollabId(
+			int collabId) {
 		
 		try {
 			
-			return (Mission) sqlMapClient.queryForObject("mission.getMission", collab_id);
+			return (List<Mission>) sqlMapClient.queryForList("mission.getAllMission", collabId);
 //			return buildDummyMission(collab_id);
 			
 		} catch (SQLException e) {
@@ -43,13 +49,13 @@ public class MissionDao implements IMissionDao {
 			//e.printStackTrace();
 			System.err.println("Database down !");
 			
-			return buildDummyMission(collab_id);
+			return buildDummyMission(collabId);
 //			
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
 			
-			return buildDummyMission(collab_id);
+			return buildDummyMission(collabId);
 		}
 	}
 	
@@ -72,6 +78,24 @@ public class MissionDao implements IMissionDao {
 	 */
 	public void setSqlMapClient(SqlMapClient sqlMapClient) {
 		this.sqlMapClient = sqlMapClient;
+	}
+
+	/**
+	 * Getting Mission by id
+	 */
+	@Override
+	public Mission getById(int missionId) throws Exception {
+		
+		return (Mission) this.sqlMapClient.queryForObject("mission.getMission", missionId);
+	}
+
+	/**
+	 * Adding mission
+	 */
+	@Override
+	public int add(Mission mission) throws Exception {
+	
+		return (Integer) this.sqlMapClient.queryForObject("mission.addMission", mission);
 	}
 
 }

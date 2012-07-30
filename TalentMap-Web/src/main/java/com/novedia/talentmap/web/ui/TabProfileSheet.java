@@ -1,12 +1,8 @@
 package com.novedia.talentmap.web.ui;
 
-import com.novedia.talentmap.web.ui.admin.AdminContentLayout;
-import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
 
 /**
  * The Profile tab contains the profile view and also the collaborator view (CM) 
@@ -24,14 +20,12 @@ public class TabProfileSheet extends TabSheet {
 	 */
 	private ProfileView profileView;
 	private MonitoringCollabView monitoringCollabView;
-	private AdminView adminView;
 	
 	/**
 	 * Constants
 	 */
 	private final String TAB_PROFILE_NAME = "Fiche Profil";
 	private final String TAB_COLLAB_NAME = "Suivi des Collaborateur";
-	private final String TAB_ADMIN_NAME = "Administration";
 
 	/**
 	 * 
@@ -39,17 +33,15 @@ public class TabProfileSheet extends TabSheet {
 	 * @param profileView
 	 * @param collabView
 	 */
-	public TabProfileSheet(ProfileView profileView, MonitoringCollabView monitoringCollabView, AdminView adminView){
+	public TabProfileSheet(ProfileView profileView, MonitoringCollabView monitoringCollabView){
 		super();
 		this.profileView = profileView;
 		this.monitoringCollabView = monitoringCollabView;
-		this.adminView = adminView;
 		
 		setImmediate(true);
 		
 		addTab(this.profileView, TAB_PROFILE_NAME);
 		addTab(this.monitoringCollabView, TAB_COLLAB_NAME);
-		addTab(this.adminView, TAB_ADMIN_NAME);
 	}
 	
 	/**
@@ -66,14 +58,6 @@ public class TabProfileSheet extends TabSheet {
 	 */
 	public void setMonitoringCollabView(MonitoringCollabView monitoringCollabView) {
 		this.monitoringCollabView = monitoringCollabView;
-	}
-	
-	/**
-	 * Set the adminView value
-	 * @param adminView the adminView to set
-	 */
-	public void setAdminView(AdminView adminView) {
-		this.adminView = adminView;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.novedia.talentmap.store;
 
+import java.util.List;
+
 import com.novedia.talentmap.model.entity.Mission;
 
 /**
@@ -12,13 +14,22 @@ import com.novedia.talentmap.model.entity.Mission;
 public interface IMissionDao {
 	
 	/**
-	 * Get one Mission By Collab_ID
+	 * Get one mission by ID
+	 * @class IMissionDao.java
+	 * @param missionId
+	 * @return
+	 * @throws Exception
+	 */
+	Mission getById(int missionId) throws Exception;
+	
+	/**
+	 * Get all Collaborators's Mission By Collab_ID
 	 * @class IMissionDao.java
 	 * @param collab_id
 	 * @return
 	 * @throws Exception
 	 */
-	Mission getByCollabId(int collab_id) throws Exception;
+	List<Mission> getByCollabId(int collabId) throws Exception;
 	
 	/**
 	 * Update one Mission
@@ -28,5 +39,14 @@ public interface IMissionDao {
 	 * @throws Exception
 	 */
 	int update(Mission mission) throws Exception;
+	
+	/**
+	 * Adding a mission in database
+	 * @class IMissionDao.java
+	 * @param mission
+	 * @return
+	 * @throws Exception
+	 */
+	int add(Mission mission) throws Exception;
 	
 }

@@ -50,13 +50,22 @@ public interface ICollaboratorService {
 	int updateMission(Mission mission) throws Exception;
 	
 	/**
-	 * Get One Mission By Collab_ID
+	 * Get one mission by the ID
+	 * @class ICollaboratorService.java
+	 * @param missionId
+	 * @return
+	 * @throws Exception
+	 */
+	Mission getMission(int missionId) throws Exception;
+	
+	/**
+	 * Get all Collaborators' Mission By Collab_ID
 	 * @class ICollaboratorService.java
 	 * @param collab_id
 	 * @return
 	 * @throws Exception
 	 */
-	Mission getMission(int collab_id) throws Exception;
+	List<Mission> getAllMission(int collabId) throws Exception;
 	
 	/**
 	 * Get one Manager by ID
@@ -65,7 +74,7 @@ public interface ICollaboratorService {
 	 * @return
 	 * @throws Exception
 	 */
-	Manager getManager(int manager_id) throws Exception;
+	Manager getManager(int managerId) throws Exception;
 	
 	/**
 	 * Select all Collaborators by lastName
@@ -95,7 +104,15 @@ public interface ICollaboratorService {
 	 * @return 
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByListToolId(List<String> listToolId) throws Exception;
+	List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws Exception;
 
-
+	/***
+	 * Adding a new Mission in database
+	 * @class ICollaboratorService.java
+	 * @param mission
+	 * @return
+	 * @throws Exception
+	 */
+	int addMission(Mission mission) throws Exception;
+	
 }

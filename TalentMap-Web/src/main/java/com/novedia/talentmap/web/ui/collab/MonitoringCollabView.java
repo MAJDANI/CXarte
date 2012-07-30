@@ -4,6 +4,9 @@ import com.vaadin.ui.VerticalLayout;
 
 public class MonitoringCollabView extends VerticalLayout {
 	
+	/**
+	 * Vaadin UI
+	 */
 	private MonitoringCollabContentLayout monitoringCollabContentLayout;
 	
 	/**
@@ -18,6 +21,10 @@ public class MonitoringCollabView extends VerticalLayout {
 		mainBuild();
 	}
 
+	/**
+	 * The main builder
+	 * @class MonitoringCollabView.java
+	 */
 	public void mainBuild(){
 		
 		addComponent(this.monitoringCollabContentLayout);

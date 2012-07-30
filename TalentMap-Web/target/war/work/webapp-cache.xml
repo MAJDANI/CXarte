@@ -7,20 +7,26 @@
           <string>META-INF/context.xml</string>
           <string>META-INF/MANIFEST.MF</string>
           <string>VAADIN/themes/talentmap/styles.css</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/06AF1CF8F3D067BAAA3B3E0A96BDC211.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/0A9476898799A150D840F0B1C3672921.cache.png</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/1C3C7F53AF930AD0A1E84401EF6D17C8.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/2D56AE69384CCC533CA85D940CEFAA56.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/396F806CD63ABD414BFBB9D57429F05B.cache.png</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/3EF10F7CD264BDC0BE7936A828791FE9.cache.html</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/972463F0394DE74CFC029E554AA4AC85.cache.html</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/A60582956653CF8B3DEE0B7D4174EE4E.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/3F079A9C5BB936F184646ECEAB7E4573.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/56E6AE8DD29E9E6667B0227BAA46A361.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/58C3874E97D11357F08B8A5AAB86DC39.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/61C14FF5F69F7D1EA311A2A1F5BF7A2C.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/6F376B079E379CA1DB1C3A2848715552.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/6FB2A7DDD34A919F0AF394C2D41CA358.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/7A0E922D3BE6CF1CC5BE20363CE50609.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/C368A30F29429A317ACE146268D302D5.cache.html</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/C6BEE4DF41B21911FD6CB13BBFA3D3AE.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/clear.cache.gif</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/com.novedia.talentmap.web.gwt.TalentMapWidgetset.nocache.js</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DB309EC8CD13CDE2A08380A7568C057D.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DE709C1CAB0F65BCC5BEF11EDA73A925.cache.png</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/DF7764EEC1903CD03C9545B354D8D8E4.cache.png</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/E308249BCFA8B342EBB1CD4045CF7283.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/E44767377485D18D6B6864F65BA8EF73.cache.png</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/EDC7827FEEA59EE44AD790B1C6430C45.cache.png</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/FA030B87EBC8CE1FD1199C315E258934.cache.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/hosted.html</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ie6pngfix/blank.gif</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/arrow_head_9x5.png</string>
@@ -34,17 +40,24 @@
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/images/star_bg_34x33.gif</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset/ratingstars/styles.css</string>
           <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/rpcPolicyManifest/manifest.txt</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/06AF1CF8F3D067BAAA3B3E0A96BDC211.symbolMap</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/1C3C7F53AF930AD0A1E84401EF6D17C8.symbolMap</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/3EF10F7CD264BDC0BE7936A828791FE9.symbolMap</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/972463F0394DE74CFC029E554AA4AC85.symbolMap</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/A60582956653CF8B3DEE0B7D4174EE4E.symbolMap</string>
-          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/FA030B87EBC8CE1FD1199C315E258934.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/2D56AE69384CCC533CA85D940CEFAA56.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/3F079A9C5BB936F184646ECEAB7E4573.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/56E6AE8DD29E9E6667B0227BAA46A361.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/58C3874E97D11357F08B8A5AAB86DC39.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/61C14FF5F69F7D1EA311A2A1F5BF7A2C.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/6F376B079E379CA1DB1C3A2848715552.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/6FB2A7DDD34A919F0AF394C2D41CA358.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/7A0E922D3BE6CF1CC5BE20363CE50609.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/C368A30F29429A317ACE146268D302D5.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/C6BEE4DF41B21911FD6CB13BBFA3D3AE.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/DB309EC8CD13CDE2A08380A7568C057D.symbolMap</string>
+          <string>VAADIN/widgetsets/com.novedia.talentmap.web.gwt.TalentMapWidgetset-deploy/symbolMaps/E308249BCFA8B342EBB1CD4045CF7283.symbolMap</string>
           <string>WEB-INF/application-context.xml</string>
           <string>WEB-INF/vaadin-spring-context.xml</string>
           <string>WEB-INF/web.xml</string>
           <string>WEB-INF/classes/builddef.lst</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/data/FrequencyUse.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/data/SearchTargetPanel.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/data/TimeUse.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/accueil.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ecrans/administration.class</string>
@@ -74,23 +87,40 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/collab/MonitoringCollabNavigation.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/collab/MonitoringCollabView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/collab/ProfileCollabWindow.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/formFactory/CollaboratorFormFieldFactory.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/formFactory/MissionFormFieldFactory.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/AddSkillPanel.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/CollaboratorForm.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/CollaboratorFormFieldFactory.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ListSkill.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/MissionFormFieldFactory.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileView$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/AddMissionPanel.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/ListMission.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionCollaboratorContent.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionContainer.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionForm.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileCollaboratorContent$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileCollaboratorContent.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileLayout$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileLayout.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileNavigation.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ProfileView.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/recherche/RechercheView.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/recherche/Sidebar.class</string>
-          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/recherche/ZoneRecherche.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchContent$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchContent.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchLayout$1.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchLayout.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchNavigation.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchResults.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchTarget.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabMain.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/TabProfileSheet.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/CUtils.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IAdminContentLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IAdminView.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IObservable.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/ISearchContent.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/ISearchLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/Message.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/TalentMapCSS.class</string>
           <string>WEB-INF/lib/vaadin-6.7.1.jar</string>

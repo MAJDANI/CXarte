@@ -30,7 +30,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
-import com.vaadin.ui.themes.Reindeer;
 
 /**
  * The Panel to add a Skill
@@ -327,14 +326,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 						Notification.TYPE_ERROR_MESSAGE);
 			} else {
 				
-				if(this.isNewSkill) {
-					
-					this.addOneSkill();
-				}else{
-					
-					this.addOneSkill();
-				}
-
+				this.addOneSkill();
 			}
 
 		}

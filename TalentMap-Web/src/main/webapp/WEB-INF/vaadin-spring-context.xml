@@ -131,31 +131,115 @@
 	
 	<!-- Vaadin ProfileView UI -->
 	
-	<bean id="save" class="com.vaadin.ui.Button" />
-	<bean id="edit" class="com.vaadin.ui.Button" />
-	<bean id="cancel" class="com.vaadin.ui.Button" />
-	<bean id="addSkill" class="com.vaadin.ui.Button" />
-	<bean id="skillPanel" class="com.vaadin.ui.Panel"/>
-	<bean id="listSkillPanel" class="com.vaadin.ui.Panel"/>
-	<bean id="skillLabel" class="com.vaadin.ui.Label"/>
-	<bean id="bodyLayout" class="com.vaadin.ui.VerticalLayout"/>
-	<bean id="footerLayout" class="com.vaadin.ui.HorizontalLayout"/>
-	
 	<bean id="profileViewBean" class="com.novedia.talentmap.web.ui.profile.ProfileView" scope="session">
-		<constructor-arg name="collabService" ref="collaboratorService" />
-		<constructor-arg name="profileService" ref="profileService" />
-		<constructor-arg name="collabForm" ref="collaboratorFormBean" />
-		<constructor-arg name="listSkill" ref="listSkillBean" />
-		<constructor-arg name="skillPanel" ref="skillPanel"/>
+		<constructor-arg name="profileLayout" ref="profileLayoutBean" />
+	</bean>
+	
+	
+	<!-- Vaadin ProfileNavigation UI -->
+	
+	<bean id="visualizeSkills" class="com.vaadin.ui.Button"/>
+	<bean id="visualizeMissions" class="com.vaadin.ui.Button"/>
+	<bean id="visualizeEA" class="com.vaadin.ui.Button"/>
+	
+	<bean id="profileNavigationBean" class="com.novedia.talentmap.web.ui.profile.ProfileNavigation" scope="session">
+		<constructor-arg name="visualizeSkills" ref="visualizeSkills"/>
+		<constructor-arg name="visualizeMissions" ref="visualizeMissions"/>
+		<constructor-arg name="visualizeEA" ref="visualizeEA"/>
+	</bean>
+	
+	<!-- Vaadin ProfileCollaboratorContent UI -->
+	
+	<bean id="listSkillPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="skillPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="bodySkillLayout" class="com.vaadin.ui.VerticalLayout"/>
+	<bean id="footerSkillLayout" class="com.vaadin.ui.HorizontalLayout"/>
+	<bean id="skillLabel" class="com.vaadin.ui.Label"/>
+	<bean id="saveSkill" class="com.vaadin.ui.Button"/>
+	<bean id="editSkill" class="com.vaadin.ui.Button"/>
+	<bean id="cancelSkill" class="com.vaadin.ui.Button"/>
+	<bean id="addSkill" class="com.vaadin.ui.Button"/>
+	
+	<bean id="profileCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent" scope="session">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+		<constructor-arg name="profileService" ref="profileService"/>
+		<constructor-arg name="collabForm" ref="collaboratorFormBean"/>
+		<constructor-arg name="listSkill" ref="listSkillBean"/>
 		<constructor-arg name="listSkillPanel" ref="listSkillPanel"/>
-		<constructor-arg name="skillLabel" ref="skillLabel"/>
-		<constructor-arg name="save" ref="save" />
-		<constructor-arg name="edit" ref="edit" />
-		<constructor-arg name="cancel" ref="cancel" />
-		<constructor-arg name="addSkill" ref="addSkill" />
+		<constructor-arg name="skillPanel" ref="skillPanel"/>
 		<constructor-arg name="addSkillPanel" ref="addSkillPanelBean"/>
-		<constructor-arg name="bodyLayout" ref="bodyLayout"/>
-		<constructor-arg name="footerLayout" ref="footerLayout"/>
+		<constructor-arg name="bodyLayout" ref="bodySkillLayout"/>
+		<constructor-arg name="footerLayout" ref="footerSkillLayout"/>
+		<constructor-arg name="skillLabel" ref="skillLabel"/>
+		<constructor-arg name="save" ref="saveSkill"/>
+		<constructor-arg name="edit" ref="editSkill"/>
+		<constructor-arg name="cancel" ref="cancelSkill"/>
+		<constructor-arg name="addSkill" ref="addSkill"/>
+	</bean>
+
+
+	<!-- Vaadin ProfileLayout UI -->
+	
+	<bean id="hSplitPanelProfileLayout" class="com.vaadin.ui.HorizontalSplitPanel"/>
+	
+	<bean id="profileLayoutBean" class="com.novedia.talentmap.web.ui.profile.ProfileLayout" scope="session">
+		<constructor-arg name="profileCollabContent" ref="profileCollaboratorContentBean"/>
+		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
+		<constructor-arg name="profileNavigation" ref="profileNavigationBean"/>
+		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
+	</bean>
+	
+	
+	<!-- Vaadin MissionContainer UI -->
+	
+	<bean id="missionContainerBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionContainer">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+	</bean>
+	
+	<!-- Vaadin ListMission UI -->
+	
+	<bean id="listMissionBean" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
+		<constructor-arg name="missionContainer" ref="missionContainerBean"/>
+	</bean>
+	
+	
+	<!-- Vaadin MissionForm UI -->
+	
+	<bean id="fieldOrderMissionFormBean" class="java.util.Vector"/>
+	<bean id="missionForm" class="com.vaadin.ui.Form"/>
+	<bean id="missionFormLayout" class="com.vaadin.ui.GridLayout"/>
+	<bean id="saveMissionButton" class="com.vaadin.ui.Button"/>
+	<bean id="cancelMissionButton" class="com.vaadin.ui.Button"/>
+	
+	<bean id="missionFormBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
+		<constructor-arg name="missionForm" ref="missionForm"/>
+		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
+		<constructor-arg name="save" ref="saveMissionButton"/>
+		<constructor-arg name="cancel" ref="cancelMissionButton"/>
+	</bean>
+	
+	
+	<!-- Vaadin AddMissionPanel -->
+	
+	<bean id="addMissionPanelBean" class="com.novedia.talentmap.web.ui.profile.mission.AddMissionPanel">
+		<constructor-arg name="missionForm" ref="missionFormBean"/>
+	</bean>
+
+
+	<!-- Vaadin MissionCollaboratorContent -->
+	
+	<bean id="listPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="addMissionButton" class="com.vaadin.ui.Button"/>
+	<bean id="pageTitleMission" class="com.vaadin.ui.Label"/>
+	
+	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
+		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
+		<constructor-arg name="listMission" ref="listMissionBean"/>
+		<constructor-arg name="listPanel" ref="listPanel"/>
+		<constructor-arg name="addMissionButton" ref="addMissionButton"/>
+		<constructor-arg name="pageTitle" ref="pageTitleMission"/>
 	</bean>
 	
 	<!-- Vaadin AdminView UI -->
@@ -296,13 +380,90 @@
 <!-- 		<constructor-arg name="listSkill" ref="listSkillBean2" /> -->
 	</bean>
 	
+	<!-- Vaadin SearchResults UI -->
+	
+	<bean id="searchResultsBean" class="com.novedia.talentmap.web.ui.search.SearchResults">
+		
+	</bean>
+	
+	<!-- Vaadin SearchTarget UI -->
+	
+	<bean id="searchByClientPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldClient" class="com.vaadin.ui.TextField"/>
+	<bean id="fieldName" class="com.vaadin.ui.TextField"/>
+	<bean id="searchButton" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator" class="java.util.ArrayList"/>
+	<bean id="listCheckBoxSkills" class="java.util.ArrayList"/>
+	
+	<bean id="searchTargetBean" class="com.novedia.talentmap.web.ui.search.SearchTarget">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator"/>
+		<constructor-arg name="listCheckBoxSkills" ref="listCheckBoxSkills"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel" />
+		<constructor-arg name="fieldClient" ref="fieldClient" />
+		<constructor-arg name="fieldName" ref="fieldName" />
+		<constructor-arg name="search" ref="searchButton" />
+	</bean>
+	
+	
+	<!-- Vaadin SearchNavigation UI -->
+	
+	<bean id="byClient" class="com.vaadin.ui.Button" />
+	<bean id="byName" class="com.vaadin.ui.Button" />
+	<bean id="bySkills" class="com.vaadin.ui.Button" />
+	
+	<bean id="searchNavigationBean" class="com.novedia.talentmap.web.ui.search.SearchNavigation">
+		<constructor-arg name="byClient" ref="byClient" />
+		<constructor-arg name="byName" ref="byName" />
+		<constructor-arg name="bySkills" ref="bySkills" />
+	</bean>
+	
+	
+	<!-- Vaadin SearchContent UI -->
+	
+	<bean id="searchTargetPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="searchResultsPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="searchTargetLabel" class="com.vaadin.ui.Label"/>
+	<bean id="searchResultsLabel" class="com.vaadin.ui.Label"/>
+	
+	<bean id="searchContentBean" class="com.novedia.talentmap.web.ui.search.SearchContent">
+		<constructor-arg name="searchTarget" ref="searchTargetBean" />
+		<constructor-arg name="searchResults" ref="searchResultsBean" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+	</bean>
+	
+	
+	<!-- Vaadin SearchLayout UI -->
+	
+	<bean id="hSplitPanelSearch" class="com.vaadin.ui.HorizontalSplitPanel"/>
+	
+	<bean id="searchLayoutBean" class="com.novedia.talentmap.web.ui.search.SearchLayout">
+		<constructor-arg name="searchContent" ref="searchContentBean"/>
+		<constructor-arg name="searchNavigation" ref="searchNavigationBean"/>
+		<constructor-arg name="hSplitPanel" ref="hSplitPanelSearch"/>
+	</bean>
+	
+	
+	<!-- Vaadin SearchView UI -->
+	
+	<bean id="searchViewBean" class="com.novedia.talentmap.web.ui.search.SearchView" scope="session">
+		<constructor-arg name="searchLayout" ref="searchLayoutBean"/>
+	</bean>
+	
 	
 	<!-- Vaadin TabProfileSheet UI -->
 	
 	<bean id="tabProfileSheetBean" class="com.novedia.talentmap.web.ui.TabProfileSheet" scope="session" >
 		<constructor-arg name="profileView" ref="profileViewBean" />
 		<constructor-arg name="monitoringCollabView" ref="monitoringCollabViewBean" />
-		<constructor-arg name="adminView" ref="adminViewBean" />
 	</bean>
 	
 	
@@ -312,17 +473,8 @@
 	
 	<bean id="tabMain" class="com.novedia.talentmap.web.ui.TabMain" scope="session" >
 		<constructor-arg name="tabProfileSheet" ref="tabProfileSheetBean" />
-		<constructor-arg name="tabSearch" ref="vLayoutTabMain" />
+		<constructor-arg name="searchView" ref="searchViewBean" />
+		<constructor-arg name="adminView" ref="adminViewBean" />
 	</bean>
-	
-	
-	
-	<!-- Vaadin Recherche UI -->
-	
-		
-		<bean id="mainLayout" class="com.vaadin.ui.AbsoluteLayout" />
-		<bean id="ecran" class="com.vaadin.ui.HorizontalSplitPanel" />
-		<bean id="sidebar" class="com.novedia.talentmap.web.ui.recherche.Sidebar" />
-		<bean id="zonerecherche" class="com.novedia.talentmap.web.ui.recherche.Zonerecherche" />
 	
 </beans>

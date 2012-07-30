@@ -7,7 +7,7 @@ import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.services.impl.ProfileService;
-import com.novedia.talentmap.web.ui.profile.CollaboratorFormFieldFactory;
+import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;

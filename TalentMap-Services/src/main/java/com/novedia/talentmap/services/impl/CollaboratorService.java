@@ -62,12 +62,12 @@ public class CollaboratorService implements ICollaboratorService {
 	}
 	
 	/**
-	 * Get One Mission By Collab_ID
+	 * Get One Mission By ID
 	 */
 	@Override
-	public Mission getMission(int collab_id) throws Exception {
+	public Mission getMission(int missionId) throws Exception {
 		
-		return missionDao.getByCollabId(collab_id);
+		return missionDao.getById(missionId);
 	}
 	
 	/**
@@ -143,7 +143,7 @@ public class CollaboratorService implements ICollaboratorService {
 	 * @author v.guillemain
 	 */
 	@Override
-	public List<Collaborator> getAllCollaboratorsByListToolId(List<String> listToolId) throws Exception {
+	public List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws Exception {
 		
 		/* we first get the collaborator's ID for all competences */
 		List<Integer> listId = skillDao.getAllCollaboratorsIdByListToolId(listToolId);
@@ -152,5 +152,23 @@ public class CollaboratorService implements ICollaboratorService {
 		return (List<Collaborator>) collabDao.getAllCollaboratorsByListId(listId);
 				
 	}
+
+	
+	@Override
+	public List<Mission> getAllMission(int collabId) throws Exception {
+		
+		return this.missionDao.getByCollabId(collabId);
+	}
+
+	/**
+	 * Adding a mission in database
+	 */
+	@Override
+	public int addMission(Mission mission) throws Exception {
+		
+		return this.missionDao.add(mission);
+	}
+	
+	
 
 }

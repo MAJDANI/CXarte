@@ -117,12 +117,7 @@ public class SkillDao implements ISkillDao {
 	@Override
 	public void updateOneSkill(Skill skill) throws Exception{
 		
-		this.sqlMapClient.startTransaction();
-		
 		this.sqlMapClient.update("skill.updateSkill", skill);
-		this.sqlMapClient.commitTransaction();
-		
-		this.sqlMapClient.endTransaction();
 	}
 
 	/**
@@ -147,9 +142,9 @@ public class SkillDao implements ISkillDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Integer> getAllCollaboratorsIdByListToolId(List<String> listToolId) throws Exception {
+	public List<Integer> getAllCollaboratorsIdByListToolId(List<Integer> listToolId) throws Exception {
 		
-		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorsIdByListToolId",listToolId);
+		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorIdByToolId",listToolId);
 		
 	}
 

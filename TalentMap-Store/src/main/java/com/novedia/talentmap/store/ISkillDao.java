@@ -52,7 +52,7 @@ public interface ISkillDao {
 	 * @return all collaborator's id who has a competence on each tool of the list
 	 * @throws Exception
 	 */
-	List<Integer> getAllCollaboratorsIdByListToolId(List<String> listToolId) throws Exception;
+	List<Integer> getAllCollaboratorsIdByListToolId(List<Integer> listToolId) throws Exception;
 
 	/***
 	 * Update One Skill

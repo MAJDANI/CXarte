@@ -6,6 +6,7 @@
 .v-textfield{width:200px!important;}
 .v-readonly{background:#eee!important; color:gray!important;}
 .v-table-body{height:auto!important;}
+.v-table-cell-content{vertical-align:middle!important;}
 
 /* GRID DATA PROFILE*/
 .form-data-administrative div{overflow:visible!important;}
@@ -74,8 +75,11 @@
 }
 
 /* LABEL H2 PROFILE */
+.v-label-h2{
+	border-bottom:1px solid #aaa; 
+}
 .v-label-h2, .v-caption-h2 .v-captiontext{
-	color:#3399FF!important; 
+	color:#aaa!important;
 	margin-bottom:15px; 
 	font-size:16px!important;
 	text-transform:none;

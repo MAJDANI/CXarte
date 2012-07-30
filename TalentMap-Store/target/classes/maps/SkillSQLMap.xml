@@ -37,7 +37,7 @@
     
    	<update id="updateSkill" parameterClass="Skill">
 		UPDATE SKILL SET COLLAB_ID = #collaborator_id#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time# 
-		WHERE COLLAB_ID = #collaborator_id#
+		WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #tool_id#
 	</update>					 
 
 	<!-- v.guillemain -->
@@ -82,14 +82,20 @@
 	<!--  intersect -->
 	<!--  SELECT collab_id FROM SKILL WHERE TOOL_ID =4;  -->
 	
-	<select id="getAllCollaboratorsIdByListToolId" resultMap="skillResult">
+	<select id="getAllCollaboratorIdByToolId" resultMap="skillResult">
 		SELECT collab_id FROM SKILL  
 		<iterate 	prepend="WHERE" 
-					property="listToolId"
-					close=";" 
-					conjunction="intersect SELECT collab_id FROM SKILL ">
+					conjunction="intersect SELECT collab_id FROM SKILL WHERE">
    			TOOL_ID=#[]#
   		</iterate>
 	</select>
 
+<!-- 	<select id="getAllCollaboratorIdByToolId" resultMap="skillResult"> -->
+	
+<!-- 		SELECT DISTINCT COLLAB_ID FROM SKILL WHERE COLLAB_ID -->
+<!-- 		<iterate prepend="IN" open="(" close=")" conjunction="IN" > -->
+<!-- 			SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #[]# AND COLLAB_ID -->
+<!-- 		</iterate> -->
+<!-- 	</select> -->
+	
 </sqlMap>

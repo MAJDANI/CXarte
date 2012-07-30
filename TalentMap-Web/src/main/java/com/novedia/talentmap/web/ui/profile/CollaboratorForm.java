@@ -6,10 +6,13 @@ import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
+import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -105,9 +108,10 @@ public class CollaboratorForm extends FormLayout {
 	public void mainBuild(){
 		
 		cleanAll();
+		setSizeFull();
 		
 		// Build Layout
-		buildGridLayout();
+		buildLayout();
 
 		try {
 
@@ -172,6 +176,8 @@ public class CollaboratorForm extends FormLayout {
 //		this.formCollaborator.getField("profile_id").setValue(
 //				this.profileService.getProfile(profileId).getType());
 		
+		
+//		this.aLayoutCollaborator.addComponent(this.formCollaborator.getField("last_name"), "top:50px;left:100px;");
 		addComponent(this.formCollaborator);
 	}
 
@@ -188,13 +194,19 @@ public class CollaboratorForm extends FormLayout {
 
 		this.formMission.setFormFieldFactory(new MissionFormFieldFactory());
 		
-		@SuppressWarnings("unchecked")
-		BeanItem<Item> missionBean = new BeanItem(
-				this.collaboratorService.getMission(COLLAB_ID));
+		//Récupérer la dernière mission ajoutée par le collaborateur
+		//Ci dessous juste un test id Mission = 1
 
-		this.formMission.setItemDataSource(missionBean, this.fieldOrderMission);
-		
-		addComponent(this.formMission);
+		if(this.collaboratorService.getMission(1) != null){
+			
+			@SuppressWarnings("unchecked")
+			BeanItem<Item> missionBean = new BeanItem(
+					this.collaboratorService.getMission(1));
+			
+			this.formMission.setItemDataSource(missionBean, this.fieldOrderMission);
+			
+			addComponent(this.formMission);
+		}
 	}
 	
 	private void buildFormManager() throws Exception{
@@ -219,7 +231,7 @@ public class CollaboratorForm extends FormLayout {
 	 * 
 	 * @class CollaboratorForm.java
 	 */
-	private void buildGridLayout() {
+	private void buildLayout() {
 
 		// Build the Grid Layout for Collaborator Form
 		this.gLayoutCollaborator.setMargin(true);
@@ -236,20 +248,7 @@ public class CollaboratorForm extends FormLayout {
 		this.setStyleName(TalentMapCSS.ADMINISTRATIVE_FORM);
 		
 	}
-
-	/**
-	 * Set the inputs order of the form
-	 * 
-	 * @class CollaboratorForm.java
-	 * @param fieldOrder
-	 */
-//	private void setOrderForm(Vector<Object> fieldOrder, Object[] order) {
-//
-//		for (Object field : order) {
-//			fieldOrder.add(field);
-//		}
-//	}
-
+	
 	/**
 	 * Set the profileService value
 	 * 
