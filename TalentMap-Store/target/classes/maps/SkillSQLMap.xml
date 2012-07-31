@@ -6,6 +6,7 @@
 <sqlMap namespace="skill">
 
     <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/> 
+    <typeAlias alias="entier" type="java.lang.Integer"/> 
 
     <resultMap id="skillResult" class="skill">
     	<result property="collaborator_id" column="COLLAB_ID"/> 
@@ -13,6 +14,10 @@
         <result property="score"  column="SCORE"/>
         <result property="use_frequency"  column="USE_FREQUENCY"/>  
         <result property="no_using_time"  column="NO_USING_TIME"/>            
+    </resultMap>
+
+    <resultMap id="collabIdResult" class="entier">
+    	<result property="collaborator_id" column="COLLAB_ID"/> 
     </resultMap>
 	
 	<select id="getSkill" resultMap="skillResult" parameterClass="java.util.HashMap">
@@ -40,62 +45,23 @@
 		WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #tool_id#
 	</update>					 
 
-	<!-- v.guillemain -->
-    <select id="getAllCollaboratorsByToolId" resultMap="skillResult" parameterClass="String">
-    	SELECT * FROM COLLABORATOR
-    	WHERE COLLAB_ID IN (
-    		SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #toolId#)
+	<!-- v.guillemain 30/07/12 -->
+    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="Integer">
+    	SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #toolId#
     </select>	
-    
-	<!-- v.guillemain 													-->
-	<!-- Cette requete de récupération de collaborateurs en fonction d'un ensemble d'outils utilise un JOIN -->
-    
-	<!-- 		SELECT s1.collab_id -->
-	<!-- 		FROM   skill s1 -->
-	<!-- 		       JOIN skill s2 -->
-	<!-- 		            ON s1.collab_id = s2.collab_id -->
-	<!-- 		              JOIN skill s3 -->
-	<!-- 		                  ON s2.collab_id = s3.collab_id -->
-	<!-- 		WHERE s1.tool_id =1 -->
-	<!-- 		and s2.tool_id = 3 -->
-	<!-- 		and s3.tool_id = 4; -->
 
-	<!-- Cette requete de récupération de collab_id en fonction d'un ensemble d'outils utilise un JOIN -->
-	<!-- Le fait de devoir donner des noms à chaque jointure sur une table skill (s1, s2, ...)		 -->
-	<!-- rend l'itération très complexe -->
-    <!-- Admettons que l'on veut faire une recherche sur les tool_id = {1 et 3 et 4} -->
-    <!-- On peut utiliser la valeur du tool_id pour postFixer le nom de substitution : -->
-    <!-- s$[]$.collab_id devrait donner s1.collab_id à la première itération -->
-    <!-- puis  s3.collab_id à la 2ème itération -->
-    <!-- puis  s4.collab_id à la 3ème itération -->
-    <!-- mais attention, les nommages sont croisés : s1 JOIN s2 ON s1.collab_id ..... -->
-    
-    <!-- la requête utilisant un intersect est à tester, elle devrait fonctionner  -->
-    
-	<!-- v.guillemain -->
-	<!-- Cette requete de récupération de collaborateurs en fonction d'un ensemble d'outils utilise un INTERSECT -->
-	<!-- Elle se base sur la requete suivante qui répond à notre besoin -->
-	
-	<!--  SELECT collab_id FROM SKILL WHERE TOOL_ID =1  -->
-	<!--  intersect -->
-	<!--  SELECT collab_id FROM SKILL WHERE TOOL_ID =3 -->
-	<!--  intersect -->
-	<!--  SELECT collab_id FROM SKILL WHERE TOOL_ID =4;  -->
-	
-	<select id="getAllCollaboratorIdByToolId" resultMap="skillResult">
-		SELECT collab_id FROM SKILL  
-		<iterate 	prepend="WHERE" 
-					conjunction="intersect SELECT collab_id FROM SKILL WHERE">
-   			TOOL_ID=#[]#
+	<!-- v.guillemain 31/07/12 -->
+	<select id="getAllCollaboratorIdByToolIdAndCollabList" resultMap="collabIdResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
+		SELECT COLLAB_ID FROM SKILL  
+		WHERE TOOL_ID = #toolId#
+		AND COLLAB_ID IN
+		<iterate 	property="listCollaborators"
+					open="(" 
+					close=")"
+					conjunction=",">
+   					#listCollaborators[]#
   		</iterate>
 	</select>
 
-<!-- 	<select id="getAllCollaboratorIdByToolId" resultMap="skillResult"> -->
-	
-<!-- 		SELECT DISTINCT COLLAB_ID FROM SKILL WHERE COLLAB_ID -->
-<!-- 		<iterate prepend="IN" open="(" close=")" conjunction="IN" > -->
-<!-- 			SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #[]# AND COLLAB_ID -->
-<!-- 		</iterate> -->
-<!-- 	</select> -->
 	
 </sqlMap>

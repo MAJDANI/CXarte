@@ -38,8 +38,25 @@
     </select>
 
     <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByListId" resultMap="collaboratorResult">
-    	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN #listId#
+    <select id="getAllCollaboratorsByListId" resultMap="collaboratorResult" parameterClass="java.util.Collection">
+    	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN
+		<iterate 	open="(" 
+					close=")"
+					conjunction=",">
+   					#[]#
+  		</iterate>
+	</select>
+	
+    <!-- v.guillemain -->
+    <select id="getAllCollaboratorsByListId2" resultMap="collaboratorResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
+    	SELECT * FROM COLLABORATOR WHERE
+    	COLLAB_ID IN
+		<iterate 	property="listCollaborators"
+					open="(" 
+					close=")"
+					conjunction=",">
+   					#listCollaborators[]#
+  		</iterate>
     </select>	
 
 	

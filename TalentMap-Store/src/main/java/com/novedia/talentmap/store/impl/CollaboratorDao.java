@@ -2,7 +2,9 @@ package com.novedia.talentmap.store.impl;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
@@ -130,9 +132,29 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Collaborator> getAllCollaboratorsByListId(List<Integer> listId) throws Exception {
-		
+
+		System.out.println("CDao ::::: 1 :::::  : entrée");
+		System.out.println("CDao ::::: 2 :::::  : listId="+listId);
+
 		return sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId", listId);
 		
 	}
 	
+	// METHODE QUI FONCTIONNE
+//	public List<Collaborator> getAllCollaboratorsByListId2(Integer toolId, List<Integer> listId) throws Exception {
+//
+//		System.out.println("CDao !!!!! 1 !!!!! entrée");
+//		System.out.println("CDao !!!!! 2 !!!!!  : listId="+listId);
+//		
+//		SkillParameter skillParameter = new SkillParameter();
+//		skillParameter.setToolId(toolId);
+//		skillParameter.setListCollaborators(listId);
+//		
+//		System.out.println("CDao !!!!! 3 !!!!! skillParameter.getToolId="+skillParameter.getToolId());
+//		System.out.println("CDao !!!!! 3 !!!!! skillParameter.getListCollaborators="+skillParameter.getListCollaborators());
+//
+//		return sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId2", skillParameter);
+//		
+//	}
+
 }

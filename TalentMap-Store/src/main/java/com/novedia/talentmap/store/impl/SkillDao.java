@@ -121,32 +121,51 @@ public class SkillDao implements ISkillDao {
 	}
 
 	/**
-	 * Select all Collaborators By toolId
+	 * Select all Collaborators Id By toolId
 	 * @param toolId : a toolId
-	 * @return all collaborators who has a competence on the tool specified
+	 * @return all collaborator's id who has a competence on the tool specified
 	 * @author v.guillemain
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception {
-		
-		return (List<Collaborator>) sqlMapClient.queryForList("skill.getAllCollaboratorsByToolId",toolId);
+	public List<Integer> getAllCollaboratorsIdByToolId(int toolId) throws Exception {
+		System.out.println("SDao ----- 1 -----  : entrée");
+		System.out.println("SDao ----- 2 -----  : toolId="+toolId);
+		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorsIdByToolId",toolId);
 		
 	}
 
 	/**
-	 * Select all collaborator's Id by a list of toolId.
-	 * @param listToolId : a list of toolId
-	 * @return all collaborator's id who has a competence on each tool of the list
+	 * Select all collaborator's Id by a toolId and a list of collaboratorId.
 	 * @author v.guillemain
+	 * @class ISkillDao.java
+	 * @param toolId : a toolId
+	 * @param listCollabId : a list of collaborator's Id
+	 * @return all collaborator's id who has the competence (toolId) and who is in the list of collaborator's id
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Integer> getAllCollaboratorsIdByListToolId(List<Integer> listToolId) throws Exception {
+	public List<Integer> getAllCollaboratorIdByToolIdAndCollabList(int toolId, List<Integer> listCollaboratorId) throws Exception {
+		System.out.println("SDao +++++ 1 +++++  : entrée");
+		System.out.println("SDao +++++ 1.1 +++++  : toolId="+toolId);
+		System.out.println("SDao +++++ 1.2 +++++  : listCollaboratorId="+listCollaboratorId);
 		
-		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorIdByToolId",listToolId);
+		//************************************************************
 		
+		//************************************************************
+		SkillParameter skillParameter = new SkillParameter();
+		skillParameter.setToolId(toolId);
+		skillParameter.setListCollaborators(listCollaboratorId);
+
+		List<Integer> listResult = sqlMapClient.queryForList("skill.getAllCollaboratorIdByToolIdAndCollabList",skillParameter);
+		for(Integer id : listResult) {
+			System.out.println("SDao +++++ 2 +++++ id = " + id);
+		}
+		return listResult;		
 	}
+
 
 
 }

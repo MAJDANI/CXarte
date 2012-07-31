@@ -33,26 +33,27 @@ public interface ISkillDao {
 	 * @throws Exception
 	 */
 	void addOneSkill(Skill skill) throws Exception;
-	
+
 	/**
-	 * Select all Collaborators by a toolId
+	 * Select all Collaborator's id by a toolId
 	 * @author v.guillemain
 	 * @class ISkillDao.java
 	 * @param toolId : a toolId
-	 * @return all collaborators who has a competence on the tool specified
+	 * @return all collaborator's id who has a competence on the tool specified
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception;
-	
+	List<Integer> getAllCollaboratorsIdByToolId(int toolId) throws Exception;
+
 	/**
-	 * Select all collaborator's Id by a list of toolId.
+	 * Select all collaborator's Id by a toolId and a list of collaboratorId.
 	 * @author v.guillemain
 	 * @class ISkillDao.java
-	 * @param listToolId : a list of toolId
-	 * @return all collaborator's id who has a competence on each tool of the list
+	 * @param toolId : a toolId
+	 * @param listCollabId : a list of collaborator's Id
+	 * @return all collaborator's id who has the competence (toolId) and who is in the list of collaborator's id
 	 * @throws Exception
 	 */
-	List<Integer> getAllCollaboratorsIdByListToolId(List<Integer> listToolId) throws Exception;
+	List<Integer> getAllCollaboratorIdByToolIdAndCollabList(int toolId, List<Integer> listCollabId) throws Exception;
 
 	/***
 	 * Update One Skill

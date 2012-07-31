@@ -236,26 +236,26 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 				//On vérifie si l'utilisateur a renseigné au moins une compétence
 				if(!this.listCheckBoxSkills.isEmpty()){
-					
 					List<Integer> listToolId = new ArrayList<Integer>();
-					
-					//On récupére tous les id des outils liés aux compétences indiquées par l'utilisateur
-					for(CheckBox checkBox : this.listCheckBoxSkills){
-						
-						listToolId.add((Integer) checkBox.getData());
-					}
+
+//					Echantillon de test
+//					listToolId.add(new Integer(3));
+//					listToolId.add(new Integer(4));
+//					=> (1,7) = OK
+//					listToolId.add(new Integer(4));
+//					listToolId.add(new Integer(22));
+//					=> (1,7,8) OK
+//					listToolId.add(new Integer(4));
+//					listToolId.add(new Integer(22));
+//					listToolId.add(new Integer(23));
+//					=> (1,8) OK
+
+					listToolId = getListTooIdChecked();
 					
 					try {
-						
 						//On récupère tous les collaborateurs correspondant aux outils indiqués par l'utilisateur
-						List<Collaborator> listCollab =  this.collabService.getAllCollaboratorsByListToolId(listToolId);
-						
-						
-						//Test la liste des collaborateurs récupérés
-						for(Collaborator collab : listCollab){
-							
-							System.out.println(collab.toString());
-						}
+						this.listCollab =  this.collabService.getAllCollaboratorsByListToolId(listToolId);
+						updateObservateur();
 						
 					} catch (Exception e) {
 					
@@ -316,7 +316,23 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void delObservateur() {
 		this.obs = null;
 	}
+	
+	
+	/**
+	 * Renvoie la liste des identifiants des outils cochés dans le Panel de checherche par Compétence
+	 * @return
+	 */
+	private List<Integer> getListTooIdChecked() {
+		List<Integer> listToolIdChecked = new ArrayList<Integer>();
 
+		if(!this.listCheckBoxSkills.isEmpty()){
+			for (CheckBox checkBox : listCheckBoxSkills) {
+				boolean checked = checkBox.booleanValue();
+				if(checked) listToolIdChecked.add((Integer)checkBox.getData());
+			}
+		}
+		return listToolIdChecked;
+	}
 	/**
 	 * Get the searchByClientPanel value
 	 * 

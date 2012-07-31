@@ -94,7 +94,7 @@ public interface ICollaboratorService {
 	 * @return 
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByToolId(String toolId) throws Exception;
+	List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws Exception;
 
 	/**
 	 * Select all Collaborators by a list of toolId
