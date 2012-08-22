@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.search;
 
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.IObservable;
+import com.novedia.talentmap.web.util.ISearchContent;
 import com.novedia.talentmap.web.util.ISearchLayout;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
@@ -14,7 +15,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	/**
 	 * Util Observator
 	 */
-	private ISearchLayout obs;
+	private ISearchLayout obsLayout;
 	
 	/**
 	 * Vaadin Components
@@ -85,7 +86,6 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 		Button button = event.getButton();
 		
 		if(button == this.byClient){
-			
 			this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
 			
 			//We set the style buttons
@@ -114,6 +114,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 			this.bySkills.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		}
 		
+		System.out.println("SearchNav **** 3 **** avant updateObs");
 		updateObservateur();
 	}
 	
@@ -123,19 +124,20 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 		
 		if(cl == ISearchLayout.class){
 			
-			this.obs = (ISearchLayout) observateur;
+			this.obsLayout = (ISearchLayout) observateur;
 		}
 	}
 
 	@Override
 	public void updateObservateur() {
-		this.obs.switchPanelTarget(this.searchTargetPanel);
+
+		this.obsLayout.switchPanelTarget(this.searchTargetPanel);
 	}
 
 	@Override
 	public void delObservateur() {
 		
-		this.obs = null;
+		this.obsLayout = null;
 	}
 
 	/**

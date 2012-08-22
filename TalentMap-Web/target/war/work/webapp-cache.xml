@@ -108,6 +108,7 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchLayout$1.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchNavigation.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchResults$1.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchResults.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchTarget.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/search/SearchView.class</string>

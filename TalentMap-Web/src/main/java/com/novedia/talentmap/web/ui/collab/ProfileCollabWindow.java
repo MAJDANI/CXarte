@@ -78,6 +78,7 @@ public class ProfileCollabWindow extends Window {
 	 */
 	public void mainBuild() {
 		
+		System.out.println("ProfileCollabWindow.mainBuild()");
 		setModal(true);
 		center();
 		setWidth(1135);
@@ -94,6 +95,7 @@ public class ProfileCollabWindow extends Window {
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildDataCollaborator() {
+		System.out.println("ProfileCollabWindow.buildDataCollaborator()");
 
 		try {
 
@@ -129,6 +131,7 @@ public class ProfileCollabWindow extends Window {
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildSkillCollaborator() {
+		System.out.println("ProfileCollabWindow.buildSkillCollaborator()");
 
 		try {
 

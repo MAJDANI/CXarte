@@ -63,16 +63,17 @@ public class SearchContent extends VerticalLayout {
 	}
 	
 	public void buildObservators(){
-		
 		this.searchTarget.addObservateur(new ISearchContent() {
 			
 			@Override
-			public void changeSearchResults(List<Collaborator> listCollab) {
+			public void changeSearchResults(List<Collaborator> listCollab, boolean clearState) {
 				
-				SearchContent.this.searchResultsPanel.setVisible(true);
-				
-				SearchContent.this.searchResults.removeAllItems();
-				SearchContent.this.searchResults.buildResultsTable(listCollab);
+				if(!clearState){
+					
+					SearchContent.this.searchResults.removeAllItems();
+					SearchContent.this.searchResults.buildResultsTable(listCollab);
+					SearchContent.this.searchResultsPanel.setVisible(true);
+				}
 			}
 		}, ISearchContent.class);
 	}
@@ -158,6 +159,14 @@ public class SearchContent extends VerticalLayout {
 			
 			this.searchTarget.switchBySkillsPanel();
 		}
+		
+		clearSearchResults();
+	}
+	
+	public void clearSearchResults(){
+		
+		this.searchResults.removeAllItems();
+		this.searchResultsPanel.setVisible(false);
 	}
 	/**
 	 * Get the searchTarget value

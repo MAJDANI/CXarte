@@ -94,7 +94,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	}
 	
 	public void fillCollabTable(List<Collaborator> listCollaborator) throws Exception{
-		
+		System.out.println("MonitoringCollabContent.fillCollabTable()");
 		int idTable = 1;
 		for (Collaborator collab : listCollaborator) {
 			
@@ -221,7 +221,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	}
 
 	private void btnProfileEvent(Button button) {
-
+		System.out.println("MonitoringCollabContent.btnProfileEvent()");
 		button.addListener(new ClickListener() {
 
 			@Override
@@ -229,6 +229,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
+				System.out.println("MonitoringCollabContent.btnProfileEvent() idCollab=" + idCollab);
 
 				MonitoringCollabContent.this.profileCollabWindow
 						.setCOLLAB_ID(idCollab);

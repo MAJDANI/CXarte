@@ -119,8 +119,9 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	public void buttonClick(ClickEvent event) {
 
 		Button button = event.getButton();
-
+		System.out.println("MissionCollaboratorContent.buttonClick()");
 		if (button == this.addMissionButton) {
+			System.out.println("MissionCollaboratorContent.buttonClick() = addMissionButton");
 
 			this.addMissionPanel.setVisible(true);
 		}

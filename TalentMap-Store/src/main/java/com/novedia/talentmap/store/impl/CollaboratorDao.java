@@ -1,10 +1,9 @@
 package com.novedia.talentmap.store.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
@@ -135,8 +134,15 @@ public class CollaboratorDao  implements ICollaboratorDao{
 
 		System.out.println("CDao ::::: 1 :::::  : entrée");
 		System.out.println("CDao ::::: 2 :::::  : listId="+listId);
-
-		return sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId", listId);
+		
+		List<Collaborator> listCollab = new ArrayList<Collaborator>(); 
+		
+		//if listId is empty calling the request will generate exception
+		if (!listId.isEmpty()) {
+			listCollab = sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId", listId);
+			System.out.println("CDao ::::: 3 :::::  : listCollab="+listCollab);
+		}
+		return listCollab;
 		
 	}
 	

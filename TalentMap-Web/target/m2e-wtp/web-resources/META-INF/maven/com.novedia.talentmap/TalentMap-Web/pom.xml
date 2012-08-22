@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+      <artifactId>TalentMap</artifactId>
+      <groupId>com.novedia.talentmap</groupId>
+      <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>TalentMap-Web</artifactId>
+  <packaging>war</packaging>
+  <name>TalentMap-Web</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <vaadin.version>6.7.1</vaadin.version>
+    <gwt.version>2.3.0</gwt.version>
+    <jetty-plugin.version>6.1.24</jetty-plugin.version>
+    <gwt.plugin.version>2.2.0</gwt.plugin.version>
+    <aspectj-maven-plugin.version>1.3</aspectj-maven-plugin.version>
+    <javax.version>2.5</javax.version>
+    <tomcat-maven-plugin.version>1.1</tomcat-maven-plugin.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Maven AspectJ plugin -->
+      <plugin>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>aspectj-maven-plugin</artifactId>
+         <version>${aspectj-maven-plugin.version}</version>
+         <dependencies>
+           <dependency>
+             <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                   <version>${aspectj.version}</version>
+           </dependency>
+           <dependency>
+             <groupId>org.aspectj</groupId>
+             <artifactId>aspectjtools</artifactId>
+             <version>${aspectj.version}</version>
+           </dependency>
+         </dependencies>
+         <executions>
+         	<execution>
+         		<goals>
+         			<goal>compile</goal>
+         			<goal>test-compile</goal>
+         		</goals>
+         	</execution>
+         </executions>
+         <configuration>
+         	<complianceLevel>1.6</complianceLevel> <!-- To avoid maven goal execution error of aspectJ plugin -->
+            <aspectLibraries>
+               <aspectLibrary>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>spring-aspects</artifactId>
+               </aspectLibrary>
+            </aspectLibraries>
+                <source>${aspectj.source.version}</source>
+                <target>${aspectj.target.version}</target>
+                <encoding>${project.build.sourceEncoding}</encoding>
+         </configuration>
+      </plugin>
+
+      <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
+      <!--
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwt.plugin.version}</version>
+        <configuration>
+          <webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
+          <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+          <runTarget>TalentMap-Web</runTarget>
+          <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+          <noServer>true</noServer>
+          <port>8080</port>
+          <compileReport>false</compileReport>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resources</goal>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-maven-plugin</artifactId>
+        <version>1.0.2</version>
+        <executions>
+          <execution>
+            <configuration>
+            </configuration>
+            <goals>
+              <goal>update-widgetset</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      -->
+      
+	  <!-- To launch embded tomcat server -->
+      <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>tomcat-maven-plugin</artifactId>
+          <version>${tomcat-maven-plugin.version}</version>
+      </plugin>
+      
+      <plugin>
+      		<groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <configuration>
+            	<scanIntervalSeconds>5</scanIntervalSeconds>
+                	<systemProperties>
+						<systemProperty>
+                        	<name>catalina.base</name>
+                            <value>${project.build.directory}</value>
+                      	</systemProperty>
+					</systemProperties>
+                    	<stopKey>toto</stopKey>
+                        <stopPort>9999</stopPort>
+				</configuration>
+				<!--  config oracle  
+                <dependencies>
+                   <dependency>
+                     <groupId>com.oracle</groupId>
+                     <artifactId>ojdbc14</artifactId>
+                     <version>${ojdbc.version}</version>
+                   </dependency>
+                </dependencies>
+				-->
+		</plugin>
+    </plugins>
+  </build>
+
+  <!-- Jar dependencies -->
+  <dependencies>
+	
+	<!-- Vaadin dependencies -->  
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin</artifactId>
+      <version>${vaadin.version}</version>
+    </dependency>
+    
+    <!-- Javax dependencies -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>${javax.version}</version>
+		<optional>true</optional>
+		<scope>provided</scope>
+	</dependency>
+    
+    <!-- Talent Map dependencies -->
+    <dependency>
+		<groupId>com.novedia.talentmap</groupId>
+		<artifactId>TalentMap-Services</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</dependency>
+	
+	<!-- Vaadin Add Ons dependency -->
+	<dependency>
+	   <groupId>org.vaadin.addons</groupId>
+	   <artifactId>ratingstars</artifactId>
+	   <version>1.4</version>
+	</dependency>
+  </dependencies>
+
+</project>

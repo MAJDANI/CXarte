@@ -127,11 +127,15 @@ public class MissionForm extends FormLayout implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		
 		Button button = event.getButton();
+		System.out.println("MissionForm.buttonClick");
 		
 		if(this.save == button){
+			System.out.println("bouton save");
 			
 			BeanItem<Mission> missionItem = (BeanItem<Mission>) this.missionForm.getItemDataSource();
+			System.out.println("missionItem=" + missionItem);
 			Mission missionAdded = missionItem.getBean();
+			System.out.println("missionAdded=" + missionAdded);
 			
 			//Voir Mission dans model  intervertir String => Integer
 			missionAdded.setCollab_id(COLLAB_ID);

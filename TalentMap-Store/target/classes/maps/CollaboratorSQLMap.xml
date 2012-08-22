@@ -34,7 +34,7 @@
 	
     <!-- v.guillemain -->
     <select id="getAllCollaboratorByLastName" parameterClass="String" resultMap="collaboratorResult">
-        SELECT * FROM  COLLABORATOR WHERE LAST_NAME LIKE '$lastName$%'
+        SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
     <!-- v.guillemain -->

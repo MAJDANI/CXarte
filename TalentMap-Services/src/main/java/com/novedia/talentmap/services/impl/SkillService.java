@@ -42,6 +42,7 @@ public class SkillService implements ISkillService {
 	 */
 	@Override
 	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws Exception {
+		System.out.println("SkillService.getAllSkillCollab() collab_id=" + collab_id);
 		
 		return this.vSkillCollabDao.getAllSkillCollab(collab_id);
 	}
@@ -52,6 +53,7 @@ public class SkillService implements ISkillService {
 	@Override
 	public Map<Category, Map> getAllCollaboratorSkill(int collab_id)
 			throws Exception {
+		System.out.println("SkillService.getAllCollaboratorSkill() collab_id=" + collab_id);
 
 		Map<String, List> skillMap = new HashMap<String, List>();
 
@@ -70,24 +72,49 @@ public class SkillService implements ISkillService {
 		// We take all Collaborators Skills
 		listSkill = skillDao.getAllCollaboratorSkill(collab_id);
 
+		System.out.println("on vient de récupérer listSkill=" + listSkill);
+		
+		System.out.println("--------------------------");
+		for (Skill s : listSkill) {
+			System.out.println("skill=" + s);
+		}
+		System.out.println("--------------------------");
+
+		System.out.println("on va construire toolMap en bouclant sur chaque skill");
+
+		System.out.println("_____________________________");
 		// We build the Tool Map
 		for (Skill s : listSkill) {
 			Tool tool = toolDao.getById(s.getTool_id());
 			
+			System.out.println("tool=" + tool);
+			
 			//We give a score to the tool
 			int score = (int) ScoreManage.ToolScore(s.getScore(),
 					s.getUse_frequency(), s.getNo_using_time());
+			System.out.println("score=" + score);
 
 			mapTool.put(tool, score);
 		}
-		
+		System.out.println("_____________________________");
+		System.out.println("mapTool=" + mapTool);
+		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
+			System.out.println("entry=" + entry);
+		}
+
+			
 		List<Integer> listToolScore = new ArrayList<Integer>();
 		Concept conceptTMP = null;
 		double conceptScore = 0;
 		
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		// We build the Concept Map
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
-			
+			//TODO : NullPointerException
+			System.out.println("++++++++++++++++++");
+			System.out.println("entry="+entry);
+			System.out.println("entry.getKey()="+entry.getKey());//devient NULL
+			System.out.println("entry.getKey().getConcept_id()="+entry.getKey().getConcept_id());
 			Concept concept = conceptDao.getById(entry
 					.getKey().getConcept_id());
 			
@@ -123,7 +150,8 @@ public class SkillService implements ISkillService {
 			//We put in the list the Tool Score
 			listToolScore.add(entry.getValue());
 		}
-		
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
 		//We calculate the score of the last concept if it's not null
 		if(conceptTMP != null){
 			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(conceptTMP.getId()).size());
@@ -158,6 +186,7 @@ public class SkillService implements ISkillService {
 	 * Select all Tools
 	 */
 	public List<Tool> getAllTools() throws Exception {
+		System.out.println("SkillService.getAllTools()");
 
 		return toolDao.selectAll();
 	}
@@ -166,6 +195,7 @@ public class SkillService implements ISkillService {
 	 * Get One VSkill By Tool Name
 	 */
 	public VSkill getSkillByTool(String toolName) throws Exception {
+		System.out.println("SkillService.getSkillByTool() toolName=" + toolName);
 
 		return vSkillDao.getSkillByTool(toolName);
 	}
@@ -175,6 +205,7 @@ public class SkillService implements ISkillService {
 	 */
 	public List<VSkill> getToolByConcept(String categoryName, String conceptName)
 			throws Exception {
+		System.out.println("SkillService.getToolByConcept() categoryName=" + categoryName + "conceptName=" +conceptName );
 
 		return vSkillDao.getToolByConcept(categoryName, conceptName);
 	}
@@ -184,6 +215,7 @@ public class SkillService implements ISkillService {
 	 */
 	public List<VSkill> getConceptByCategory(String categoryName)
 			throws Exception {
+		System.out.println("SkillService.getConceptByCategory() categoryName=" + categoryName);
 
 		return vSkillDao.getConceptByCategory(categoryName);
 	}

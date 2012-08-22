@@ -43,10 +43,11 @@ public class SearchLayout extends HorizontalLayout{
 			
 			@Override
 			public void switchPanelTarget(int searchTargetPanel) {
-				
 				SearchLayout.this.searchContent.switchPanel(searchTargetPanel);
 			}
+
 		}, ISearchLayout.class);
+		
 	}
 	
 	public void mainBuild(){

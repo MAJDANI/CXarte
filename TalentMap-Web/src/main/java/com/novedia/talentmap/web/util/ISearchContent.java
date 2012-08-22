@@ -6,5 +6,5 @@ import com.novedia.talentmap.model.entity.Collaborator;
 
 public interface ISearchContent {
 
-	public void changeSearchResults(List<Collaborator> listCollab);
+	public void changeSearchResults(List<Collaborator> listCollab, boolean clearState);
 }

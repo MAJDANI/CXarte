@@ -132,7 +132,7 @@ public class CollaboratorService implements ICollaboratorService  {
 	 */
 	@Override
 	public List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws Exception {
-
+		//TODO : cette méthode n'est appelée par personne??
 		List<Integer> listCollaboratorId = skillDao.getAllCollaboratorsIdByToolId(toolId);
 		return collabDao.getAllCollaboratorsByListId(listCollaboratorId);
 	}
@@ -149,8 +149,8 @@ public class CollaboratorService implements ICollaboratorService  {
 		List<Integer> listCollabId;
 		List<Integer> listCollabId2;
 		
-		if (listToolId != null) {
-			System.out.println("CS ***** 1 ****** dans le if");
+		if (listToolId != null && !listToolId.isEmpty()) {
+			System.out.println("CS ***** 1 ****** dans le if, listToolId=" + listToolId);
 			int borneMax = listToolId.size();
 			int firstTool = listToolId.get(0);
 			
@@ -161,22 +161,22 @@ public class CollaboratorService implements ICollaboratorService  {
 			listCollabId = skillDao.getAllCollaboratorsIdByToolId(firstTool);
 			System.out.println("CS ***** 3 ****** listCollabId="+listCollabId+"pour tool="+firstTool);
 		
+			//******************************************************************
+			// POUR LES TOOLID SUIVANTS
+			//******************************************************************
 			System.out.println("borneMax="+borneMax);
 			for(int index=1; index < borneMax; index++) {
 				System.out.println("index="+index);
-				
+				//si le premier toolId a donné un résultat
 				if(!listCollabId.isEmpty()) {
 					int toolId = listToolId.get(index);
 					System.out.println(" CS ***** 4 ****** CollabService toolId="+toolId);
 					listCollabId2 = skillDao.getAllCollaboratorIdByToolIdAndCollabList(toolId, listCollabId);
 					listCollabId.clear();
-					System.out.println("CS ***** 4.1 ****** listCollabId.isEmpty="+listCollabId.isEmpty());
 					listCollabId.addAll(listCollabId2);
-					System.out.println("CS ***** 5 ****** listCollabId="+listCollabId);
 				}
 			}
 			/* then we get the Collaborators corresponding */
-			System.out.println("CS ***** 6 ****** listCollabId="+listCollabId);
 			List<Collaborator> listCollab = collabDao.getAllCollaboratorsByListId(listCollabId);
 			
 			for(Collaborator collab : listCollab) {

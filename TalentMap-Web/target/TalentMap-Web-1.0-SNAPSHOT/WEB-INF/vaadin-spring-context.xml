@@ -382,9 +382,10 @@
 	
 	<!-- Vaadin SearchResults UI -->
 	
-	<bean id="searchResultsBean" class="com.novedia.talentmap.web.ui.search.SearchResults">
-		
+	<bean id="searchResultsBean" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
 	</bean>
+	
 	
 	<!-- Vaadin SearchTarget UI -->
 	
@@ -431,7 +432,9 @@
 	<bean id="searchTargetLabel" class="com.vaadin.ui.Label"/>
 	<bean id="searchResultsLabel" class="com.vaadin.ui.Label"/>
 	
-	<bean id="searchContentBean" class="com.novedia.talentmap.web.ui.search.SearchContent">
+	
+
+	<bean id="searchContentBean" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
 		<constructor-arg name="searchTarget" ref="searchTargetBean" />
 		<constructor-arg name="searchResults" ref="searchResultsBean" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
@@ -445,7 +448,7 @@
 	
 	<bean id="hSplitPanelSearch" class="com.vaadin.ui.HorizontalSplitPanel"/>
 	
-	<bean id="searchLayoutBean" class="com.novedia.talentmap.web.ui.search.SearchLayout">
+	<bean id="searchLayoutBean" class="com.novedia.talentmap.web.ui.search.SearchLayout" scope="session">
 		<constructor-arg name="searchContent" ref="searchContentBean"/>
 		<constructor-arg name="searchNavigation" ref="searchNavigationBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelSearch"/>

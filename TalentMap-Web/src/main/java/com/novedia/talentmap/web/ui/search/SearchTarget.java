@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Collaborator;
-import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
-import com.vaadin.data.Item.PropertySetChangeEvent;
-import com.vaadin.data.Item.PropertySetChangeListener;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
@@ -21,7 +18,6 @@ import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window.Notification;
 
 public class SearchTarget extends VerticalLayout implements ClickListener,TextChangeListener,
 		IObservable {
@@ -151,7 +147,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * @class SearchTarget.java
 	 */
 	public void initField() {
-
 		switchByNamePanel();
 	}
 
@@ -201,6 +196,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		addComponent(this.search);
 	}
 
+	/**
+	 * Gestion des événments clic sur Boutons
+	 * 
+	 */
 	@Override
 	public void buttonClick(ClickEvent event) {
 
@@ -208,13 +207,18 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 		if (button == this.search) {
 
+			//---------------------------------------------------------
+			//The Panel "Search by customer" is visible
+			//---------------------------------------------------------
 			if (this.searchByClientPanel.isVisible()) {
-
+					
 				String clientName = (String) this.fieldClient.getValue();
-				
 				
 			}
 
+			//---------------------------------------------------------
+			//The Panel "Search by name" is visible
+			//---------------------------------------------------------
 			if (this.searchByNamePanel.isVisible()) {
 
 				String collabName = (String) this.fieldName.getValue();
@@ -226,34 +230,25 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 					updateObservateur();
 					
 				} catch (Exception e) {
-					
+				
 					e.printStackTrace();
 				}
 			}
 			
-			//Cas ou le Panel "Rechercher par Compétences" est visible
+			//---------------------------------------------------------
+			//The Panel "Search by skills" is visible
+			//---------------------------------------------------------
 			if (this.searchBySkillsPanel.isVisible()) {
 
-				//On vérifie si l'utilisateur a renseigné au moins une compétence
+				//Check the skill's list isn't empty
 				if(!this.listCheckBoxSkills.isEmpty()){
 					List<Integer> listToolId = new ArrayList<Integer>();
-
-//					Echantillon de test
-//					listToolId.add(new Integer(3));
-//					listToolId.add(new Integer(4));
-//					=> (1,7) = OK
-//					listToolId.add(new Integer(4));
-//					listToolId.add(new Integer(22));
-//					=> (1,7,8) OK
-//					listToolId.add(new Integer(4));
-//					listToolId.add(new Integer(22));
-//					listToolId.add(new Integer(23));
-//					=> (1,8) OK
-
+					
+					//Get all toolIds checked by the user
 					listToolId = getListTooIdChecked();
 					
 					try {
-						//On récupère tous les collaborateurs correspondant aux outils indiqués par l'utilisateur
+						//Get all collaborators who has all skills requested
 						this.listCollab =  this.collabService.getAllCollaboratorsByListToolId(listToolId);
 						updateObservateur();
 						
@@ -266,6 +261,9 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void textChange(TextChangeEvent event) {
 		
@@ -308,8 +306,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	@Override
 	public void updateObservateur() {
-
-		this.obs.changeSearchResults(this.listCollab);
+		this.obs.changeSearchResults(this.listCollab, false);
 	}
 
 	@Override

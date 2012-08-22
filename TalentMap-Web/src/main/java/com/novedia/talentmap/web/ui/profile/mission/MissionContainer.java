@@ -10,7 +10,10 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 
 	private ICollaboratorService collabService;
 	
-	public static int COLLAB_ID;
+	/**
+	 * Temporary parameter
+	 */
+	public static int COLLAB_ID = 2;
 
 	public MissionContainer(ICollaboratorService collabService){
 		super(Mission.class);
@@ -19,22 +22,16 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 	
 	public MissionContainer fillContainer(int collabId){
 		
-		this.COLLAB_ID = collabId;
-		
+		MissionContainer.COLLAB_ID = collabId;
 		try {
-			
-			List<Mission> listMission = this.collabService.getAllMission(this.COLLAB_ID);
-			
+			List<Mission> listMission = this.collabService.getAllMission(MissionContainer.COLLAB_ID);
 			for(Mission m : listMission){
-				
-				addItem(m);
+				addBean(m);
 			}
 			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
-		
 		return this;
 	}
 	
