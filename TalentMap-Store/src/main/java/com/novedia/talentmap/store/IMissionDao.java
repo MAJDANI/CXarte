@@ -32,6 +32,15 @@ public interface IMissionDao {
 	List<Mission> getByCollabId(int collabId) throws Exception;
 	
 	/**
+	 * Inserts one Mission
+	 * @class IMissionDao.java
+	 * @param mission
+	 * @return
+	 * @throws Exception
+	 */
+	public int insert(Mission mission) throws Exception;
+
+	/**
 	 * Update one Mission
 	 * @class IMissionDao.java
 	 * @param mission
@@ -42,6 +51,7 @@ public interface IMissionDao {
 	
 	/**
 	 * Adding a mission in database
+	 * @deprecated
 	 * @class IMissionDao.java
 	 * @param mission
 	 * @return

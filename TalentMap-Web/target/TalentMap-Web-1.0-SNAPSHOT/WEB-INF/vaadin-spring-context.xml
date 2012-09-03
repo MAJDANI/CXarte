@@ -237,6 +237,7 @@
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
+		<constructor-arg name="missionForm" ref="missionFormBean"/>
 		<constructor-arg name="listPanel" ref="listPanel"/>
 		<constructor-arg name="addMissionButton" ref="addMissionButton"/>
 		<constructor-arg name="pageTitle" ref="pageTitleMission"/>

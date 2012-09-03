@@ -145,6 +145,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public Accordion buildListSkill(Map<Category, Map> mapSkill) {
 
 		return CUtils.MapSkillToAccordionSkill(mapSkill, this);
+		
 	}
 
 	@Override

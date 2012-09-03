@@ -60,7 +60,16 @@ public class CollaboratorService implements ICollaboratorService  {
 		
 		return missionDao.update(mission);
 	}
-	
+
+	/**
+	 * Inserts one Mission
+	 */
+	@Override
+	public int insertMission(Mission mission) throws Exception {
+		//TODO garder add(Mission) ou insert(Mission)
+		return missionDao.insert(mission);
+	}
+
 	/**
 	 * Get One Mission By ID
 	 */
@@ -198,10 +207,11 @@ public class CollaboratorService implements ICollaboratorService  {
 
 	/**
 	 * Adding a mission in database
+	 * @deprecated
 	 */
 	@Override
 	public int addMission(Mission mission) throws Exception {
-		
+		//TODO garder add(Mission) ou insert(Mission)
 		return this.missionDao.add(mission);
 	}
 	

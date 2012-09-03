@@ -480,7 +480,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * @throws Exception
 	 */
 	private void updateSelect(String toolName) throws Exception {
-
+		//TODO Question : un appel à la base à chaque sélection d'outil dans la combo?
 		VSkill skill = skillService.getSkillByTool(toolName);
 
 		this.conceptLabel.setValue(skill.getConcept_name());

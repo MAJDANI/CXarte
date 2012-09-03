@@ -6,8 +6,9 @@ import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.ICollaboratorService;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
+import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
+import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.Message;
-import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
@@ -17,8 +18,22 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Window.Notification;
 
-public class MissionForm extends FormLayout implements ClickListener {
+public class MissionForm extends FormLayout implements ClickListener, IObservable {
+
+	/**
+	* We add listMission in AddMissionPanel's attributes in order to
+	* be able to refresh the list listMission when a new mission is
+	* created or when a mission is modified
+	 */
+	private ListMission listMission;
+	
+	/**
+	 * Declare the observer. The observer will be used when an action
+	 * in AddMissionPanel will require update data in ListPanel
+	 */
+	private IMissionCollaboratorContent obs;
 
 	/**
 	 * Talent Map Service
@@ -112,7 +127,10 @@ public class MissionForm extends FormLayout implements ClickListener {
 	public void buildButton(){
 		
 		this.save.setCaption(SAVE_BUTTON_NAME);
+		this.save.addListener(this);
+		
 		this.cancel.setCaption(CANCEL_BUTTON_NAME);
+		this.cancel.addListener(this);
 		
 		HorizontalLayout hLayout = new HorizontalLayout();
 		hLayout.setMargin(true);
@@ -130,33 +148,108 @@ public class MissionForm extends FormLayout implements ClickListener {
 		System.out.println("MissionForm.buttonClick");
 		
 		if(this.save == button){
-			System.out.println("bouton save");
 			
 			BeanItem<Mission> missionItem = (BeanItem<Mission>) this.missionForm.getItemDataSource();
-			System.out.println("missionItem=" + missionItem);
-			Mission missionAdded = missionItem.getBean();
-			System.out.println("missionAdded=" + missionAdded);
-			
-			//Voir Mission dans model  intervertir String => Integer
-			missionAdded.setCollab_id(COLLAB_ID);
-			try {
+			Mission missionToInsert = missionItem.getBean();
+
+			if(isValidMission(missionToInsert)) {
+				//TODO si données ok, insertion en base
+
+				missionToInsert.setCollab_id(COLLAB_ID);
+				insertMission(missionToInsert);
 				
-				if(this.collabService.addMission(missionAdded)!=0){
-					CUtils.showMessage("La mission a bien été ajoutée", Message.INFO, getWindow());
-				}
-				
-			} catch (Exception e) {
-				
-				
-				e.printStackTrace();
+			} else {
+				getWindow().showNotification(
+						"Les champs ne sont pas tous remplis",
+						Notification.TYPE_ERROR_MESSAGE);
 			}
 		}
 		
 		if(this.cancel == button){
+			//TODO vider les champs du formulaire de saisie
+//			System.out.println("MissionForm.ButtonClick() = cancel");
+//			this.missionForm.setItemDataSource(null);
+			
+			
+			//TODO faire disparaître le formulaire de saisie
+//			this.missionForm.removeAllProperties();//???????
+			//TODO faire disparaître des boutons
+
+			//TODO rendre accessible addMissionButton
+//			MissionCollaboratorContent.this.addMissionButton.setEnabled(true);
 			
 			
 		}
 		
+	}
+
+	/**
+	 * Checks all mandatory mission's fields are not null
+	 * @param mission
+	 * @return false if one or more values missing
+	 */
+	private boolean isValidMission (Mission mission) {
+		if( 	!isValidField(mission.getClient()) ||
+				!isValidField(mission.getName()) ||
+				!isValidField(mission.getPlace()) ||
+				!isValidField(mission.getClient()) ||
+				!isValidField(mission.getStart_date()) ||
+				!isValidField(mission.getEnd_date()) 				
+			) return false;
+		return true;
+	}
+	
+	/**
+	 * Check null values
+	 * @param value
+	 * @return false if the parameter value is null
+	 */
+	private boolean isValidField(Object value) {
+		if (value == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	/**
+	 * Calls the CollaboratorService to insert the mission in Data Base
+	 * @param missionToInsert
+	 */
+	private void insertMission(Mission missionToInsert) {
+		try {
+			if(this.collabService.insertMission(missionToInsert)!=0){
+				//TODO centraliser les messages
+				CUtils.showMessage("La mission a bien été ajoutée", Message.INFO, getWindow());
+				
+				//creates a new list
+				refreshListMission();
+				
+			} else {
+				//TODO : que faire?
+				CUtils.showMessage("La mission N'A PAS été ajoutée", Message.INFO, getWindow());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * This method creates a new object ListMission, filled with all elements founded
+	 * in database, so a new mission created will be visible in the list 
+	 */
+	private void refreshListMission() {
+		
+		//creates a new list, filled with the elements in database
+		MissionContainer missionContainer = new MissionContainer(collabService);
+		this.listMission = new ListMission(missionContainer);
+		
+		//"sends" the new list to the observer (so the observer will be able to
+		//new list can be displayed
+		this.updateObservateur();
 	}
 	
 	/**
@@ -222,5 +315,22 @@ public class MissionForm extends FormLayout implements ClickListener {
 	public Form getMissionForm() {
 		return missionForm;
 	}
+
+	@Override
+	public void addObservateur(Object observateur, Class<?> cl) {
+		this.obs = (IMissionCollaboratorContent) observateur;
+	}
+
+	@Override
+	public void updateObservateur() {
+		System.out.println("MissionForm.updateObservateur this.listMission=" + this.listMission);
+		this.obs.updateListMission(this.listMission);
+	}
+
+	@Override
+	public void delObservateur() {
+		this.obs = null;
+	}
+	
 
 }

@@ -117,7 +117,10 @@ public class SkillDao implements ISkillDao {
 	@Override
 	public void updateOneSkill(Skill skill) throws Exception{
 		
+		this.sqlMapClient.startTransaction();
 		this.sqlMapClient.update("skill.updateSkill", skill);
+		this.sqlMapClient.commitTransaction();
+		this.sqlMapClient.endTransaction();
 	}
 
 	/**

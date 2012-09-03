@@ -310,34 +310,22 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 * @class ProfileView.java
 	 */
 	private int saveDataCollaborator(){
-		
+
 		BeanItem<Collaborator> collabItem = (BeanItem<Collaborator>) this.collabForm.getFormCollaborator()
 				.getItemDataSource();
-		
 		Collaborator collab = collabItem.getBean();
-
 		try {
-			
 			if(collab.getProfile_id() > 0){
-				
 				collab.setProfile_id(this.profileService.getProfile(
 						collab.getProfile_id()).getId());
 			}else{
-				
 				collab.setProfile_id(this.profileService.getProfile(
 						collab.getProfile_id()).getId());
 			}
-			
-			
-			
-			
 			return this.collabService.updateCollaborator(collab);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-		
 		return 0;
 	}
 	
@@ -351,13 +339,9 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 				.getItemDataSource();
 		
 		Mission mission = missionItem.getBean();
-
 		try {
-
 			return this.collabService.updateMission(mission);
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 		

@@ -41,6 +41,15 @@ public interface ICollaboratorService {
 	int updateCollaborator(Collaborator collaborator) throws Exception;
 
 	/**
+	 * Inserts one Mission
+	 * @class ICollaboratorService.java
+	 * @param mission
+	 * @return id of the mission inserted
+	 * @throws Exception
+	 */
+	int insertMission(Mission mission) throws Exception;
+
+	/**
 	 * Update one Mission
 	 * @class ICollaboratorService.java
 	 * @param mission
@@ -49,6 +58,7 @@ public interface ICollaboratorService {
 	 */
 	int updateMission(Mission mission) throws Exception;
 	
+
 	/**
 	 * Get one mission by the ID
 	 * @class ICollaboratorService.java
@@ -108,6 +118,7 @@ public interface ICollaboratorService {
 
 	/***
 	 * Adding a new Mission in database
+	 * @deprecated
 	 * @class ICollaboratorService.java
 	 * @param mission
 	 * @return

@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
+import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
+import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
+import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -16,6 +19,13 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	private AddMissionPanel addMissionPanel;
 	private ListMission listMission;
+
+	/**
+	* We add missionForm in MissionCollaboratorContent's attributes in order to
+	* be able to refresh the list listMission when a new mission is
+	* created or when a mission is modified in missionForm
+	 */
+	private MissionForm missionForm ;
 
 	/***
 	 * Vaadin Components
@@ -35,17 +45,19 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * 
 	 * @param missionForm
 	 */
-	public MissionCollaboratorContent(ListMission listMission,
+	public MissionCollaboratorContent(ListMission listMission, MissionForm missionForm,
 			Button addMissionButton, AddMissionPanel addMissionPanel,
 			Panel listPanel, Label pageTitle) {
 		super();
 		this.addMissionPanel = addMissionPanel;
 		this.listMission = listMission;
+		this.missionForm = missionForm;
 		this.addMissionButton = addMissionButton;
 		this.listPanel = listPanel;
 		this.pageTitle = pageTitle;
 
 		buildMain();
+		buildObersvators();
 	}
 
 	/**
@@ -88,8 +100,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		addComponent(this.addMissionButton);
 		addComponent(this.addMissionPanel);
 
-		this.listPanel.addComponent(this.listMission);
-		addComponent(this.listPanel);
+		buildListPanelMission();
 
 		if (this.listMission.getItemIds().isEmpty()) {
 
@@ -102,6 +113,39 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			this.listPanel.setVisible(true);
 		}
 	}
+	
+	public void buildListPanelMission() {
+		this.listPanel.addComponent(this.listMission);
+		addComponent(this.listPanel);
+	}
+	
+	/**
+	 * Builder for all observers
+	 * @class IMissionView.java
+	 */
+	private void buildObersvators() {
+		/*
+		 * Observable : AddMissionPanel
+		 */
+		this.missionForm.addObservateur(new IMissionCollaboratorContent() {
+			@Override
+			public void updateListMission(ListMission listMission) {
+				//MissionCollaboratorContent "receives" the new list updated
+				MissionCollaboratorContent.this.listMission = listMission;
+				//We remove the old listMission from the list panel
+				MissionCollaboratorContent.this.listPanel.removeAllComponents();
+				//We fill the listPanel with the new list
+				buildListPanelMission();
+				
+				//TODO  
+				MissionCollaboratorContent.this.addMissionButton.setEnabled(true);
+				MissionCollaboratorContent.this.addMissionPanel.setVisible(false);
+
+			}
+
+		}, IMissionCollaboratorContent.class);
+	}
+
 
 	/**
 	 * The button builder
@@ -117,13 +161,11 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-
-		Button button = event.getButton();
 		System.out.println("MissionCollaboratorContent.buttonClick()");
+		Button button = event.getButton();
 		if (button == this.addMissionButton) {
-			System.out.println("MissionCollaboratorContent.buttonClick() = addMissionButton");
-
 			this.addMissionPanel.setVisible(true);
+//			this.addMissionButton.setEnabled(false);
 		}
 	}
 

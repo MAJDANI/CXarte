@@ -1,10 +1,14 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
+import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
+import com.novedia.talentmap.web.util.IObservable;
+import com.novedia.talentmap.web.util.IProfileView;
 import com.vaadin.ui.Panel;
 
-public class AddMissionPanel extends Panel{
+public class AddMissionPanel extends Panel {
 	
 	private MissionForm missionForm;
+
 
 	/**
 	 * Build the class AddMissionPanel.java 
@@ -41,7 +45,7 @@ public class AddMissionPanel extends Panel{
 	public void setMissionForm(MissionForm missionForm) {
 		this.missionForm = missionForm;
 	}
-	
+
 	
 
 }

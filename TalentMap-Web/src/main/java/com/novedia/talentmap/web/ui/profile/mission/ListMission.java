@@ -42,11 +42,15 @@ public class ListMission extends Table{
 	 * Principal function filling ListMission Table
 	 */
 	public void buildContainer(){
+		System.out.println("ListMission.buildContainer()");
 		addColumns();
-		this.missionContainer.fillContainer(this.COLLAB_ID);
-		fillResultsTable(this.missionContainer);
+		fillMissionContainer();
+		fillResultsTable();
 	}
 	
+	public void fillMissionContainer() {
+		this.missionContainer.fillContainer(this.COLLAB_ID);
+	}
 	/**
 	 * Builds Headers of the Table ListMission
 	 */
@@ -64,8 +68,8 @@ public class ListMission extends Table{
 	 * With each item mission we fill the actual Table ListMission using addItem() method.  
 	 * @param missionContainer
 	 */
-	public void fillResultsTable(MissionContainer missionContainer) {
-		Collection<Mission> collectionMission = missionContainer.getItemIds();
+	public void fillResultsTable() {
+		Collection<Mission> collectionMission = this.missionContainer.getItemIds();
 		
 		int idResultsTable = 1;
 		for (Mission mission : collectionMission) {

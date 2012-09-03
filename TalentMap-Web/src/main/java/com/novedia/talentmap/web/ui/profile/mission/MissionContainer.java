@@ -20,13 +20,21 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		this.collabService = collabService;
 	}
 	
+	/**
+	 * Calls the CollaboratorService to retrieve all missions in tha Data Base
+	 * for the collaborator's id given
+	 * @param collabId
+	 * @return
+	 */
 	public MissionContainer fillContainer(int collabId){
 		
 		MissionContainer.COLLAB_ID = collabId;
 		try {
 			List<Mission> listMission = this.collabService.getAllMission(MissionContainer.COLLAB_ID);
+			System.out.println("MissionContainer.fillContainer() listMission = " + listMission);
 			for(Mission m : listMission){
 				addBean(m);
+				System.out.println("MissionContainer.fillContainer() bean m = " + m);
 			}
 			
 		} catch (Exception e) {

@@ -94,6 +94,7 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/ListSkill.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/AddMissionPanel.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/ListMission.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionCollaboratorContent$1.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionCollaboratorContent.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionContainer.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/ui/profile/mission/MissionForm.class</string>
@@ -117,6 +118,7 @@
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/CUtils.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IAdminContentLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IAdminView.class</string>
+          <string>WEB-INF/classes/com/novedia/talentmap/web/util/IMissionCollaboratorContent.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IObservable.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileLayout.class</string>
           <string>WEB-INF/classes/com/novedia/talentmap/web/util/IProfileView.class</string>

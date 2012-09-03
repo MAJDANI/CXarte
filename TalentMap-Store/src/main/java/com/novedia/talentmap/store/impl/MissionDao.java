@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.store.IMissionDao;
 
 public class MissionDao implements IMissionDao {
@@ -59,14 +60,26 @@ public class MissionDao implements IMissionDao {
 		}
 	}
 	
+	/**
+	 * Add One Mission
+	 */
+	@Override
+	public int insert(Mission mission) throws Exception {
+		//TODO garder add(Mission) ou insert(Mission)
+		this.sqlMapClient.startTransaction();
+		int missionId = (Integer) this.sqlMapClient.insert("mission.insertMission", mission);
+		this.sqlMapClient.commitTransaction();
+		this.sqlMapClient.endTransaction();
+		return missionId;
+	}
+
+	
 	@Override
 	public int update(Mission mission) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		
 		int value = this.sqlMapClient.update("mission.updateMission", mission);
 		this.sqlMapClient.commitTransaction();
-		
 		this.sqlMapClient.endTransaction();
 		
 		return value;
@@ -91,10 +104,11 @@ public class MissionDao implements IMissionDao {
 
 	/**
 	 * Adding mission
+	 * @deprecated
 	 */
 	@Override
 	public int add(Mission mission) throws Exception {
-	
+		//TODO garder add(Mission) ou insert(Mission)
 		return (Integer) this.sqlMapClient.queryForObject("mission.addMission", mission);
 	}
 

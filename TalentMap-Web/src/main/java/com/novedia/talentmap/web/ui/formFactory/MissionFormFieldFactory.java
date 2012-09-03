@@ -14,6 +14,11 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		
+		System.out.println("MissionFormFieldFactory : createFField()");
+		System.out.println("MissionFormFieldFactory : item=" + item);
+		System.out.println("MissionFormFieldFactory : propertyId=" + propertyId);
+		System.out.println("MissionFormFieldFactory : uiContext=" + uiContext);
+		
 		for (int i = 0; i < MissionForm.FIELD_ORDER_MISSION.length; i++) {
 			
 			if(propertyId.equals(MissionForm.FIELD_ORDER_MISSION[i])){
@@ -22,7 +27,11 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 				
 					TextField field = new TextField((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
 					field.setNullRepresentation("");
-				
+					
+					//TODO remmettre?
+					field.setRequired(true);
+					field.setComponentError(null);
+					
 					if(propertyId.equals("name")){
 						//Putting a condition
 					}
@@ -44,6 +53,8 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					datefield.setDateFormat("dd/MM/yyyy");
 					datefield.setCaption((String) MissionForm.NAME_FIELD_MISSION[i]+ " : ");
 					
+					//TODO remmettre?
+					datefield.setRequired(true);
 					
 					if (propertyId.equals("start_date")){
 						
