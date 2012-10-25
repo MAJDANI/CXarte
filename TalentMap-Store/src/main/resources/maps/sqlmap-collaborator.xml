@@ -12,7 +12,7 @@
         <result property="manager_id"  column="MANAGER_ID"/>         
         <result property="profile_id"  column="PROFILE_ID"/>    	    
         <result property="last_name"   column="LAST_NAME"/>	   
-        <result property="first_name"   column="FIRST_NAME"/>	   
+        <result property="first_name"  column="FIRST_NAME"/>	   
         <result property="email"  column="EMAIL"/>	    
         <result property="phone"   column="PHONE"/>
         <result property="employment_date"  column="EMPLOYMENT_DATE"/>	    
