@@ -93,8 +93,12 @@ public class SkillService implements ISkillService {
 			int score = (int) ScoreManage.ToolScore(s.getScore(),
 					s.getUse_frequency(), s.getNo_using_time());
 			System.out.println("score=" + score);
+			
+			// We put only not null tool element in mapTool
+			if(tool != null){
+				mapTool.put(tool, score);			
+			}
 
-			mapTool.put(tool, score);
 		}
 		System.out.println("_____________________________");
 		System.out.println("mapTool=" + mapTool);
