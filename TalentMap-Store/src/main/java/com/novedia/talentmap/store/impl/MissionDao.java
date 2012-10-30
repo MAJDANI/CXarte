@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.store.IMissionDao;
 
 public class MissionDao implements IMissionDao {
@@ -17,8 +16,9 @@ public class MissionDao implements IMissionDao {
 	/**
 	 * Builder of a dummy Mission if the database is down
 	 * @class MissionDao.java
-	 * @param id
-	 * @return
+	 * @param id : a collaborator's id, the collaborator concerned by the list of dummy missions
+	 * @return List<Mission>
+	 * @deprecated faut-il conserver cette fonction?
 	 */
 	private List<Mission> buildDummyMission(int id){
 		
@@ -36,6 +36,10 @@ public class MissionDao implements IMissionDao {
 		return listMission;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#getByCollabId(int collabId)
+	 */ 
 	@Override
 	public List<Mission> getByCollabId(
 			int collabId) {
@@ -43,15 +47,13 @@ public class MissionDao implements IMissionDao {
 		try {
 			
 			return (List<Mission>) sqlMapClient.queryForList("mission.getAllMission", collabId);
-//			return buildDummyMission(collab_id);
 			
 		} catch (SQLException e) {
 			
 			//e.printStackTrace();
 			System.err.println("Database down !");
-			
 			return buildDummyMission(collabId);
-//			
+			
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -60,9 +62,10 @@ public class MissionDao implements IMissionDao {
 		}
 	}
 	
-	/**
-	 * Add One Mission
-	 */
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#update(Mission mission)
+	 */ 
 	@Override
 	public int insert(Mission mission) throws Exception {
 		//TODO garder add(Mission) ou insert(Mission)
@@ -74,6 +77,10 @@ public class MissionDao implements IMissionDao {
 	}
 
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#update(Mission mission)
+	 */ 
 	@Override
 	public int update(Mission mission) throws Exception {
 		
@@ -84,7 +91,22 @@ public class MissionDao implements IMissionDao {
 		
 		return value;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#delete(int idMission)
+	 */ 
+	@Override
+	public int delete(int idMission) throws Exception {
+		
+		this.sqlMapClient.startTransaction();
+		int id = (Integer) this.sqlMapClient.delete("mission.deleteMission", idMission);
+		this.sqlMapClient.commitTransaction();
+		this.sqlMapClient.endTransaction();
+		
+		return id;
+	}
+
 	/**
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
@@ -93,19 +115,20 @@ public class MissionDao implements IMissionDao {
 		this.sqlMapClient = sqlMapClient;
 	}
 
-	/**
-	 * Getting Mission by id
-	 */
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#getById(int missionId)
+	 */ 
 	@Override
 	public Mission getById(int missionId) throws Exception {
 		
 		return (Mission) this.sqlMapClient.queryForObject("mission.getMission", missionId);
 	}
 
-	/**
-	 * Adding mission
-	 * @deprecated
-	 */
+	/*
+	 * (non-Javadoc)
+	 * @see com.novedia.talentmap.store.IMissionDao#add(Mission mission)
+	 */ 
 	@Override
 	public int add(Mission mission) throws Exception {
 		//TODO garder add(Mission) ou insert(Mission)

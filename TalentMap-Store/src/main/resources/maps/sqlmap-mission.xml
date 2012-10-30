@@ -58,4 +58,8 @@
    		</selectKey>
     </insert>	
 
+    <delete id="deleteMission" parameterClass="Integer">
+		DELETE MISSION WHERE MISSION_ID = #id#
+	</delete> 
+
 </sqlMap>
