@@ -16,17 +16,17 @@ public interface IMissionDao {
 	/**
 	 * Get one mission by ID
 	 * @class IMissionDao.java
-	 * @param missionId
-	 * @return
+	 * @param missionId : the id of the mission to search
+	 * @return Mission : the mission found with the missionId parameter
 	 * @throws Exception
 	 */
 	Mission getById(int missionId) throws Exception;
 	
 	/**
-	 * Get all Collaborators's Mission By Collab_ID
+	 * Get all Collaborators's Missions By Collab_ID
 	 * @class IMissionDao.java
-	 * @param collab_id
-	 * @return
+	 * @param collab_id : the collaborator's id
+	 * @return List<Mission>
 	 * @throws Exception
 	 */
 	List<Mission> getByCollabId(int collabId) throws Exception;
@@ -34,8 +34,8 @@ public interface IMissionDao {
 	/**
 	 * Inserts one Mission
 	 * @class IMissionDao.java
-	 * @param mission
-	 * @return
+	 * @param mission : the mission to be inserted
+	 * @return int : id of the mission inserted (id generated)
 	 * @throws Exception
 	 */
 	public int insert(Mission mission) throws Exception;
@@ -43,18 +43,27 @@ public interface IMissionDao {
 	/**
 	 * Update one Mission
 	 * @class IMissionDao.java
-	 * @param mission
-	 * @return
+	 * @param mission : the mission to be updated
+	 * @return int TODO
 	 * @throws Exception
 	 */
 	int update(Mission mission) throws Exception;
+
+	/**
+	 * Delete one Mission identified by the parameter idMission
+	 * @class IMissionDao.java
+	 * @param idMission the id of the mission to delete
+	 * @return int TODO
+	 * @throws Exception
+	 */
+	int delete(int idMission) throws Exception;
 	
 	/**
 	 * Adding a mission in database
-	 * @deprecated
+	 * @deprecated : use insert(Mission mission)
 	 * @class IMissionDao.java
 	 * @param mission
-	 * @return
+	 * @return int TODO
 	 * @throws Exception
 	 */
 	int add(Mission mission) throws Exception;
