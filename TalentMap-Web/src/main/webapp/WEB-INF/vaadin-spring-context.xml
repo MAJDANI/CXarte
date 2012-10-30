@@ -220,13 +220,11 @@
 		<constructor-arg name="cancel" ref="cancelMissionButton"/>
 	</bean>
 	
-	
 	<!-- Vaadin AddMissionPanel -->
 	
 	<bean id="addMissionPanelBean" class="com.novedia.talentmap.web.ui.profile.mission.AddMissionPanel">
 		<constructor-arg name="missionForm" ref="missionFormBean"/>
 	</bean>
-
 
 	<!-- Vaadin MissionCollaboratorContent -->
 	
