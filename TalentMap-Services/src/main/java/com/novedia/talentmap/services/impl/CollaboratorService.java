@@ -214,6 +214,11 @@ public class CollaboratorService implements ICollaboratorService  {
 		//TODO garder add(Mission) ou insert(Mission)
 		return this.missionDao.add(mission);
 	}
+
+	@Override
+	public int deleteMission(int idMission) throws Exception {
+		return missionDao.delete(idMission);
+	}
 	
 
 }

@@ -17,7 +17,7 @@ public interface ICollaboratorService {
 	/**
 	 * Select all Collaborators
 	 * @class ICollaboratorService.java
-	 * @return
+	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaborator() throws Exception;
@@ -26,7 +26,7 @@ public interface ICollaboratorService {
 	 * Get One Collaborator By Id
 	 * @class ICollaboratorService.java
 	 * @param id
-	 * @return
+	 * @return Collaborator
 	 * @throws Exception
 	 */
 	Collaborator getCollaborator(int id) throws Exception;
@@ -35,11 +35,21 @@ public interface ICollaboratorService {
 	 * Update One Collaborator
 	 * @class ICollaboratorService.java
 	 * @param collaborator
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 */
 	int updateCollaborator(Collaborator collaborator) throws Exception;
 
+	/**
+	 * Delete one Mission
+	 * @class ICollaboratorService.java
+	 * @param missionId : mission'id to delete
+	 * @return int 
+	 * @throws Exception
+	 */
+	int deleteMission(int idMission) throws Exception;
+	
+	
 	/**
 	 * Inserts one Mission
 	 * @class ICollaboratorService.java
@@ -53,7 +63,7 @@ public interface ICollaboratorService {
 	 * Update one Mission
 	 * @class ICollaboratorService.java
 	 * @param mission
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 */
 	int updateMission(Mission mission) throws Exception;
@@ -63,7 +73,7 @@ public interface ICollaboratorService {
 	 * Get one mission by the ID
 	 * @class ICollaboratorService.java
 	 * @param missionId
-	 * @return
+	 * @return Mission
 	 * @throws Exception
 	 */
 	Mission getMission(int missionId) throws Exception;
@@ -72,7 +82,7 @@ public interface ICollaboratorService {
 	 * Get all Collaborators' Mission By Collab_ID
 	 * @class ICollaboratorService.java
 	 * @param collab_id
-	 * @return
+	 * @return List<Mission>
 	 * @throws Exception
 	 */
 	List<Mission> getAllMission(int collabId) throws Exception;
@@ -81,7 +91,7 @@ public interface ICollaboratorService {
 	 * Get one Manager by ID
 	 * @class ICollaboratorService.java
 	 * @param manager_id
-	 * @return
+	 * @return Manager
 	 * @throws Exception
 	 */
 	Manager getManager(int managerId) throws Exception;
@@ -91,7 +101,7 @@ public interface ICollaboratorService {
 	 * @author v.guillemain
 	 * @class ICollaboratorService.java
 	 * @param lastName
-	 * @return 
+	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception;
@@ -101,7 +111,7 @@ public interface ICollaboratorService {
 	 * @author v.guillemain
 	 * @class ICollaboratorService.java
 	 * @param toolId
-	 * @return 
+	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws Exception;
@@ -111,7 +121,7 @@ public interface ICollaboratorService {
 	 * @author v.guillemain
 	 * @class ICollaboratorService.java
 	 * @param listToolId
-	 * @return 
+	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws Exception;
@@ -121,7 +131,7 @@ public interface ICollaboratorService {
 	 * @deprecated
 	 * @class ICollaboratorService.java
 	 * @param mission
-	 * @return
+	 * @return int
 	 * @throws Exception
 	 */
 	int addMission(Mission mission) throws Exception;
