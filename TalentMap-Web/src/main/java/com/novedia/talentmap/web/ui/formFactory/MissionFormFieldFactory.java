@@ -1,7 +1,9 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
 import com.novedia.talentmap.web.ui.profile.mission.MissionForm;
+import com.novedia.talentmap.web.ui.profile.mission.MissionValidator;
 import com.vaadin.data.Item;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
@@ -11,13 +13,22 @@ import com.vaadin.ui.TextField;
 
 public class MissionFormFieldFactory implements FormFieldFactory {
 
+	public static final String FIELD_MUST_BE_FILLED = "Le champ est obligatoire";
+	public static final int MIN_LENGTH_STRING = 1;
+	public static final int MAX_LENGTH_STRING = 100;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8213744445391942619L;
+
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
+		boolean allowNull = false;
 		
-		System.out.println("MissionFormFieldFactory : createFField()");
-		System.out.println("MissionFormFieldFactory : item=" + item);
-		System.out.println("MissionFormFieldFactory : propertyId=" + propertyId);
-		System.out.println("MissionFormFieldFactory : uiContext=" + uiContext);
+		StringLengthValidator stringLengthValidator = new StringLengthValidator(
+				FIELD_MUST_BE_FILLED, MIN_LENGTH_STRING,
+                MAX_LENGTH_STRING, allowNull);
 		
 		for (int i = 0; i < MissionForm.FIELD_ORDER_MISSION.length; i++) {
 			
@@ -28,7 +39,6 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					TextField field = new TextField((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
 					field.setNullRepresentation("");
 					
-					//TODO remmettre?
 					field.setRequired(true);
 					field.setComponentError(null);
 					
@@ -85,4 +95,5 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 		return null;
 	}
 
+		 
 }
