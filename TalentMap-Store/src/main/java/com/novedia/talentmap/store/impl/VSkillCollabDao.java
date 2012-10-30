@@ -2,11 +2,14 @@ package com.novedia.talentmap.store.impl;
 
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.VSkillCollab;
 import com.novedia.talentmap.store.IVSkillCollabDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-public class VSkillCollabDao implements IVSkillCollabDao {
+public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCollabDao {
 
 	private SqlMapClient sqlMapClient;
 	
@@ -14,8 +17,8 @@ public class VSkillCollabDao implements IVSkillCollabDao {
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public void VSkillCollabDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -23,8 +26,7 @@ public class VSkillCollabDao implements IVSkillCollabDao {
 	 */
 	@Override
 	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws Exception {
-		
-		return sqlMapClient.queryForList("vskillCollab.getAllSkillCollab", collab_id);
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
 	}
 
 }

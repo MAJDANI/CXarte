@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.store.IManagerDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-public class ManagerDao implements IManagerDao{
+public class ManagerDao  extends SqlMapClientDaoSupport implements IManagerDao{
 	
 	private SqlMapClient sqlMapClient;
 	
@@ -17,8 +20,8 @@ public class ManagerDao implements IManagerDao{
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public ManagerDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -48,19 +51,11 @@ public class ManagerDao implements IManagerDao{
 	 * Get one Manager By ID
 	 */
 	@Override
-	public Manager getById(int id){
+	public Manager getById(int id) throws SQLException{
 		
 		try {
 			
-			return (Manager) sqlMapClient.queryForObject("manager.getManager", id);
-//			return buildDummyManager(id);
-			
-		} catch (SQLException e) {
-		
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummyManager(id);
+			return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MANAGER, id);
 			
 		} catch (NullPointerException npe){
 			

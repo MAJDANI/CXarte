@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.store.IMissionDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-public class MissionDao implements IMissionDao {
+public class MissionDao extends SqlMapClientDaoSupport  implements IMissionDao {
 
 	private SqlMapClient sqlMapClient;
+	private int missionId;
+	private int value;
 	
 	/**
 	 * Builder of a dummy Mission if the database is down
@@ -42,25 +47,19 @@ public class MissionDao implements IMissionDao {
 	 */ 
 	@Override
 	public List<Mission> getByCollabId(
-			int collabId) {
+			int collabId) throws SQLException {
 		
-		try {
-			
-			return (List<Mission>) sqlMapClient.queryForList("mission.getAllMission", collabId);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database down !");
-			return buildDummyMission(collabId);
-			
+		try {			
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MISSION, collabId);
+		
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
-			
+		
 			return buildDummyMission(collabId);
 		}
 	}
+		
 	
 	/*
 	 * (non-Javadoc)
@@ -70,7 +69,7 @@ public class MissionDao implements IMissionDao {
 	public int insert(Mission mission) throws Exception {
 		//TODO garder add(Mission) ou insert(Mission)
 		this.sqlMapClient.startTransaction();
-		int missionId = (Integer) this.sqlMapClient.insert("mission.insertMission", mission);
+		missionId = (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_MISSION_REQUEST, mission);
 		this.sqlMapClient.commitTransaction();
 		this.sqlMapClient.endTransaction();
 		return missionId;
@@ -85,7 +84,7 @@ public class MissionDao implements IMissionDao {
 	public int update(Mission mission) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		int value = this.sqlMapClient.update("mission.updateMission", mission);
+		int value = this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_MISSION_REQUEST, mission);
 		this.sqlMapClient.commitTransaction();
 		this.sqlMapClient.endTransaction();
 		
@@ -111,8 +110,8 @@ public class MissionDao implements IMissionDao {
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public MissionDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 
 	/*
@@ -122,7 +121,7 @@ public class MissionDao implements IMissionDao {
 	@Override
 	public Mission getById(int missionId) throws Exception {
 		
-		return (Mission) this.sqlMapClient.queryForObject("mission.getMission", missionId);
+		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MISSION, missionId);
 	}
 
 	/*
@@ -132,7 +131,6 @@ public class MissionDao implements IMissionDao {
 	@Override
 	public int add(Mission mission) throws Exception {
 		//TODO garder add(Mission) ou insert(Mission)
-		return (Integer) this.sqlMapClient.queryForObject("mission.addMission", mission);
+		return(Integer)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.ADD_MISSION_REQUEST,mission);
 	}
-
 }

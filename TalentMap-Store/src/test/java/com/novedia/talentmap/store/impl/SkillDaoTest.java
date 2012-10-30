@@ -2,6 +2,8 @@ package com.novedia.talentmap.store.impl;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +22,7 @@ public class SkillDaoTest {
 //	}
 
 	@Test
-	public void testGetAllCollaboratorSkill() {
+	public void testGetAllCollaboratorSkill() throws SQLException {
 	 
 		assertNotNull(this.skillDao.getAllCollaboratorSkill(2));
 	}

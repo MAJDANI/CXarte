@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.store.ISkillDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * 
@@ -19,7 +22,7 @@ import com.novedia.talentmap.store.ISkillDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class SkillDao implements ISkillDao {
+public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao {
 	
 	private SqlMapClient sqlMapClient;
 
@@ -27,8 +30,8 @@ public class SkillDao implements ISkillDao {
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public void  SkillDao (SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -61,19 +64,11 @@ public class SkillDao implements ISkillDao {
 	 * Select all Collaborator's Skill By Collaborator_ID
 	 */
 	@Override
-	public List<Skill> getAllCollaboratorSkill(int collaborator_id) {
+	public List<Skill> getAllCollaboratorSkill(int collaborator_id) throws SQLException {
 		
 		try {
 			
-			return sqlMapClient.queryForList("skill.getAllCollaboratorSkill",collaborator_id);
-//			return buildDummySkills(collaborator_id);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummySkills(collaborator_id);
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR_SKILL,collaborator_id);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -94,7 +89,7 @@ public class SkillDao implements ISkillDao {
 		mapId.put("collaboratorId", collaborator_id);
 		mapId.put("toolId", tool_id);
 		
-		return (Skill)sqlMapClient.queryForObject("skill.getSkill", mapId);
+		return (Skill)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_ALL_SKILL, mapId);
 	}
 
 	/**
@@ -104,8 +99,9 @@ public class SkillDao implements ISkillDao {
 	public void addOneSkill(Skill skill) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
+
+		this.getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_SKILL_REQUEST,skill);
 		
-		this.sqlMapClient.insert("skill.insertSkill", skill);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -118,7 +114,7 @@ public class SkillDao implements ISkillDao {
 	public void updateOneSkill(Skill skill) throws Exception{
 		
 		this.sqlMapClient.startTransaction();
-		this.sqlMapClient.update("skill.updateSkill", skill);
+		this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_SKILL_REQUEST,skill);
 		this.sqlMapClient.commitTransaction();
 		this.sqlMapClient.endTransaction();
 	}
@@ -135,7 +131,7 @@ public class SkillDao implements ISkillDao {
 	public List<Integer> getAllCollaboratorsIdByToolId(int toolId) throws Exception {
 		System.out.println("SDao ----- 1 -----  : entrée");
 		System.out.println("SDao ----- 2 -----  : toolId="+toolId);
-		return (List<Integer>) sqlMapClient.queryForList("skill.getAllCollaboratorsIdByToolId",toolId);
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATORS_BY_TOOLIB_REQUEST,toolId);
 		
 	}
 
@@ -161,14 +157,11 @@ public class SkillDao implements ISkillDao {
 		SkillParameter skillParameter = new SkillParameter();
 		skillParameter.setToolId(toolId);
 		skillParameter.setListCollaborators(listCollaboratorId);
-
-		List<Integer> listResult = sqlMapClient.queryForList("skill.getAllCollaboratorIdByToolIdAndCollabList",skillParameter);
+		
+		List<Integer> listResult = this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATORID_BY_TOOL_REQUEST,skillParameter);
 		for(Integer id : listResult) {
 			System.out.println("SDao +++++ 2 +++++ id = " + id);
 		}
 		return listResult;		
 	}
-
-
-
 }

@@ -14,10 +14,11 @@ import com.novedia.talentmap.model.entity.Collaborator;
 public class CollaboratorDaoTest{
 	
 	private CollaboratorDao collabDao;
+	private SqlMapClient sqlMapClient;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.collabDao = new CollaboratorDao();
+		this.collabDao = new CollaboratorDao(sqlMapClient);
 	}
 
 	@Test

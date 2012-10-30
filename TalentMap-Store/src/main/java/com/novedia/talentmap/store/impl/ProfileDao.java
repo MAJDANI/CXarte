@@ -4,9 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
+import com.ibatis.common.jdbc.DbcpConfiguration;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.store.IProfileDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * 
@@ -15,7 +19,7 @@ import com.novedia.talentmap.store.IProfileDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class ProfileDao implements IProfileDao {
+public class ProfileDao  extends SqlMapClientDaoSupport  implements IProfileDao {
 	
 	private SqlMapClient sqlMapClient;
 	
@@ -42,19 +46,11 @@ public class ProfileDao implements IProfileDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Profile> selectAll(){
+	public List<Profile> selectAll() throws SQLException{
 		
 		try {
 			
-			return sqlMapClient.queryForList("profile.getAllProfile");
-//			return buildListDummyProfile();
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildListDummyProfile();
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_PROFIL);
 			
 		} catch (NullPointerException npe){
 			
@@ -83,20 +79,10 @@ public class ProfileDao implements IProfileDao {
 	 * Get One Profile By Id
 	 */
 	@Override
-	public Profile getById(int profile_id) {
+	public Profile getById(int profile_id) throws SQLException {
 		
-		try {
-			
-			return (Profile) sqlMapClient.queryForObject("profile.getProfile", profile_id);
-//			return buildDummyProfile(profile_id, "technique");
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database down !");
-			
-			return buildDummyProfile(profile_id, "technique");
-			
+		try {			
+			return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFIL, profile_id);			
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -110,15 +96,14 @@ public class ProfileDao implements IProfileDao {
 	 */
 	public Profile getByType(String type) throws Exception{
 		
-		return (Profile) sqlMapClient.queryForObject("profile.getByType", type);
+		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFIL_BYTYPE, type);
 	}
 	
 	/**
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public ProfileDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
-
 }

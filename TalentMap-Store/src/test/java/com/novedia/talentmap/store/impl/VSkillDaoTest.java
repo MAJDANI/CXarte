@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ibatis.sqlmap.client.SqlMapClient;
+
 public class VSkillDaoTest {
 	
 	private VSkillDao vSkillDao;
+	private SqlMapClient sqlMapClient;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.vSkillDao = new VSkillDao();
+		this.vSkillDao = new VSkillDao(sqlMapClient);
 	}
 
 	@Test

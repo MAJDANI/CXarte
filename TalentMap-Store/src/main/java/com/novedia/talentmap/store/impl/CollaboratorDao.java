@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.store.ICollaboratorDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 /**
  * 
  * @author j.collet
@@ -15,9 +18,10 @@ import com.novedia.talentmap.store.ICollaboratorDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class CollaboratorDao  implements ICollaboratorDao{
+public class CollaboratorDao extends SqlMapClientDaoSupport implements ICollaboratorDao{
 	
 	private SqlMapClient sqlMapClient;
+	private int value ;
 	
 	/**
 	 * Builder of a dummy collaborator if the database is down
@@ -47,21 +51,11 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	 * Get One Collaborator By Id
 	 */
 	@Override
-	public Collaborator getById(int id) {
+	public Collaborator getById(int id) throws SQLException {
 		
 		try {
+			return (Collaborator)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLABORATOR_REQUEST,id);
 			
-			return (Collaborator)sqlMapClient.queryForObject("collaborator.getCollaborator", id);
-//			return buildDummyCollaborator(id);
-			
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummyCollaborator(id);
-//			
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -78,8 +72,7 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Collaborator> selectAll() throws Exception {
-		
-		return sqlMapClient.queryForList("collaborator.getAllCollaborator");
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR_REQUEST);
 	}
 	
 	/**
@@ -89,8 +82,7 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	public int update(Collaborator collaborator) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		
-		int value = this.sqlMapClient.update("collaborator.updateCollaborateur", collaborator);
+		value = this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_COLLABORATOR_REQUEST,collaborator);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -102,8 +94,8 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	 public CollaboratorDao(final SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -115,9 +107,7 @@ public class CollaboratorDao  implements ICollaboratorDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception {
-		
-		return sqlMapClient.queryForList("collaborator.getAllCollaboratorByLastName", lastName);
-		
+		return (List<Collaborator>) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_ALL_COLLABORATOR_BYLASTNAME_REQUEST,lastName);		
 	}
 	
 	/**
@@ -139,7 +129,7 @@ public class CollaboratorDao  implements ICollaboratorDao{
 		
 		//if listId is empty calling the request will generate exception
 		if (!listId.isEmpty()) {
-			listCollab = sqlMapClient.queryForList("collaborator.getAllCollaboratorsByListId", listId);
+			listCollab = this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR_BYLISTID_REQUEST,listId);
 			System.out.println("CDao ::::: 3 :::::  : listCollab="+listCollab);
 		}
 		return listCollab;

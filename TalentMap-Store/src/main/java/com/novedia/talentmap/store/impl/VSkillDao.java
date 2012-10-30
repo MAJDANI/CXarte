@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.store.IVSkillDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * 
@@ -17,7 +20,7 @@ import com.novedia.talentmap.store.IVSkillDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class VSkillDao implements IVSkillDao {
+public class VSkillDao extends SqlMapClientDaoSupport implements IVSkillDao {
 	
 	private SqlMapClient sqlMapClient;
 	
@@ -87,25 +90,16 @@ public class VSkillDao implements IVSkillDao {
 	/**
 	 * Select all Tools By Concept_Name and the Category_Name
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<VSkill> getToolByConcept(String categoryName, String conceptName) {
+	public List<VSkill> getToolByConcept(String categoryName, String conceptName) throws SQLException {
 		
 		Map<String, String> mapName = new HashMap<String, String>();
 		mapName.put("categoryName", categoryName);
 		mapName.put("conceptName", conceptName);
 		
 		try {
-			
-			return sqlMapClient.queryForList("vskill.getToolByConcept", mapName);
-			
-//			return buildListDummyToolByConcept(categoryName, conceptName);
-
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildListDummyToolByConcept(categoryName, conceptName);
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_TOOL_BY_CONCEPT, mapName);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -117,19 +111,10 @@ public class VSkillDao implements IVSkillDao {
 	/**
 	 * Get One VSkill By Tool_Name
 	 */
-	public VSkill getSkillByTool(String toolName) {
+	public VSkill getSkillByTool(String toolName) throws SQLException {
 
 		try {
-			
-			return (VSkill) sqlMapClient.queryForObject("vskill.getSkillByTool", toolName);
-//			return buildDummySkill(toolName);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummySkill(toolName);
+			return (VSkill) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_SKILL_BY_TOOL,toolName);			
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -142,19 +127,13 @@ public class VSkillDao implements IVSkillDao {
 	 * Get One Concept By Category_Name
 	 */
 	@Override
-	public List<VSkill> getConceptByCategory(String categoryName) {
+	public List<VSkill> getConceptByCategory(String categoryName) throws SQLException {
 		
 		try {
+			// GET_CONCEPT_BY_CATEGORY 
+			//vskill.getConceptByCategory
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CONCEPT_BY_CATEGORY , categoryName);
 			
-			return sqlMapClient.queryForList("vskill.getConceptByCategory", categoryName);
-//			return buildListDummyConceptByCategory(categoryName);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildListDummyConceptByCategory(categoryName);
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -168,8 +147,8 @@ public class VSkillDao implements IVSkillDao {
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public VSkillDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.novedia.talentmap.store.impl;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,12 +22,12 @@ public class ToolDaoTest {
 //	}
 
 	@Test
-	public void testGetById() {
+	public void testGetById() throws SQLException {
 		assertNotNull(this.toolDao.getById(2));
 	}
 
 	@Test
-	public void testGetByName() {
+	public void testGetByName() throws SQLException {
 		
 		assertNotNull(this.toolDao.getByName("Spring"));
 	}
@@ -36,7 +38,7 @@ public class ToolDaoTest {
 //	}
 //
 	@Test
-	public void testSelectAllByConceptId() {
+	public void testSelectAllByConceptId() throws SQLException {
 		
 		assertNotNull(this.toolDao.selectAllByConceptId(1));
 		assertEquals(false, this.toolDao.selectAllByConceptId(1).size() == 0);

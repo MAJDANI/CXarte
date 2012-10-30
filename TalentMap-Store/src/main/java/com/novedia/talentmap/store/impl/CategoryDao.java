@@ -4,9 +4,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.store.ICategoryDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * Category DAO
@@ -14,19 +19,23 @@ import com.novedia.talentmap.store.ICategoryDao;
  * @project TalentMap-Store
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
+ * 
  */
-public class CategoryDao implements ICategoryDao {
+public class CategoryDao extends SqlMapClientDaoSupport implements ICategoryDao {
 	
 	private SqlMapClient sqlMapClient;
+	private SqlMapClientTemplate sqlMapClientTemplate;
+	private int category_id;
+	private int id;
 
 	/**
-	 * Set the sqlMapClient value
-	 * @param sqlMapClient the sqlMapClient to set
+	 * Class builder based on sqlMapClient
+	 * @param sqlMapClient
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	@Autowired
+	public CategoryDao(final SqlMapClient sqlMapClient){
+		setSqlMapClient(sqlMapClient);
 	}
-	
 	/**
 	 * Builder of a dummy category if the database is down
 	 * @class CategoryDao.java
@@ -47,20 +56,13 @@ public class CategoryDao implements ICategoryDao {
 	 * Get One Category By Id
 	 */
 	@Override
-	public Category getById(int id) {
+	public Category getById(int id) throws SQLException {
 		
 		try {
 			
-			return (Category)sqlMapClient.queryForObject("category.getCategory", id);
-//			return buildDummyCategory(id, "JAVA");
+			return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_REQUEST);
 			
-		} catch (SQLException e) {
 			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummyCategory(id, "JAVA");
-//			
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -91,31 +93,26 @@ public class CategoryDao implements ICategoryDao {
 	/**
 	 * Select all Categories
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Category> selectAll() {
 		
 		try {
+			return (List<Category>) getSqlMapClientTemplate().queryForObject("category.getAllCategory", DBRequestsConstants.GET_ALL_CATEGORY_REQUEST);
 			
-			return sqlMapClient.queryForList("category.getAllCategory");
-//			return buildListDummyCategory();
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildListDummyCategory();
 		} catch (NullPointerException npe){
-			
+			System.err.println("Database Down !");
+			logger.info("npe"+npe.getMessage());
 			return buildListDummyCategory();
 		}
 	}
 
 	@Override
 	public int save(Category category) throws Exception {
+
 		
 		this.sqlMapClient.startTransaction();
-		int category_id = (Integer) this.sqlMapClient.insert("category.insertCategory", category);
+		category_id  = (Integer) getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_CATEGORY_REQUEST, category);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -125,17 +122,15 @@ public class CategoryDao implements ICategoryDao {
 
 	@Override
 	public Category checkCategory(String name) throws Exception {
-		
-		return (Category) this.sqlMapClient.queryForObject("category.checkCategory", name);
+		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CATEGORY_REQUEST_CHECK,name);
 	}
 
 	@Override
 	public int update(Category category) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		int category_id = (Integer) this.sqlMapClient.update("category.updateCategory", category);
-		this.sqlMapClient.commitTransaction();
-		
+		category_id =  (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.CATEGORY_REQUEST_UPDATE,category);
+		this.sqlMapClient.commitTransaction();		
 		this.sqlMapClient.endTransaction();
 		
 		return category_id;
@@ -145,7 +140,8 @@ public class CategoryDao implements ICategoryDao {
 	public int delete(int category_id) throws Exception {
 
 		this.sqlMapClient.startTransaction();
-		int id = (Integer) this.sqlMapClient.delete("category.deleteCategory", category_id);
+		id = (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.CATEGORY_REQUEST_DELETE,category_id);
+		
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();

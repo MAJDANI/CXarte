@@ -4,9 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IToolDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * 
@@ -15,16 +18,18 @@ import com.novedia.talentmap.store.IToolDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class ToolDao implements IToolDao {
+public class ToolDao extends SqlMapClientDaoSupport implements IToolDao {
 	
 	private SqlMapClient sqlMapClient;
+	private int tool_id; 
+	private int id ;
 
 	/**
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public void ToolDao(SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -49,20 +54,12 @@ public class ToolDao implements IToolDao {
 	 * Get One Tool By Id
 	 */
 	@Override
-	public Tool getById(int id){
+	public Tool getById(int id) throws SQLException{
 		
 		try {
 
-			return (Tool)sqlMapClient.queryForObject("tool.getToolById",id);
-			
-//			return buildDummyTool(id, "Spring", 1);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildDummyTool(id, "Spring", 1);
+			return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL_BY_ID_REQUEST,id);
+
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -74,19 +71,13 @@ public class ToolDao implements IToolDao {
 	/**
 	 * Get One Tool By Name
 	 */
-	public Tool getByName(String name) {
+	public Tool getByName(String name) throws SQLException {
 		
 		try {
 			
-			return (Tool) sqlMapClient.queryForObject("tool.getToolByName", name);
+			//return (Tool) sqlMapClient.queryForObject("tool.getToolByName", name);
+			return(Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL_BY_NAME_REQUEST,name);
 			
-//			return buildDummyTool(1, name, 1);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-			return buildDummyTool(1, name, 1);
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -99,20 +90,10 @@ public class ToolDao implements IToolDao {
 	 * Select All Tools 
 	 */
 	@Override
-	public List<Tool> selectAll() {
+	public List<Tool> selectAll() throws SQLException {
 		
-		try {
-			
-			return sqlMapClient.queryForList("tool.getAllTool");
-//			return buildListDummyTool(1);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database Down !");
-			
-			return buildListDummyTool(1);
-			
+		try {		
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_TOOL_REQUEST);			
 		} catch(NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -143,19 +124,11 @@ public class ToolDao implements IToolDao {
 	/**
 	 * Select All Tools By Concept_ID
 	 */
-	public List<Tool> selectAllByConceptId(int conceptId) {
+	public List<Tool> selectAllByConceptId(int conceptId) throws SQLException {
 		
 		try {
-			
-			return sqlMapClient.queryForList("tool.getAllToolByConceptId", conceptId);
-//			return buildListDummyTool(conceptId);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			System.err.println("Database down !");
-			
-			return buildListDummyTool(conceptId);
+
+			return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_TOOL_BYCONCEPTID_REQUEST,conceptId);
 			
 		} catch (NullPointerException npe){
 			
@@ -170,7 +143,7 @@ public class ToolDao implements IToolDao {
 		
 		this.sqlMapClient.startTransaction();
 		
-		int tool_id = (Integer) this.sqlMapClient.insert("tool.insertTool", tool);
+		tool_id = (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.TOOL_INSERT_REQUEST, tool);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -181,14 +154,14 @@ public class ToolDao implements IToolDao {
 	@Override
 	public Tool checkTool(String name) throws Exception {
 		
-		return (Tool) this.sqlMapClient.queryForObject("tool.checkTool", name);
+		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.TOOL_REQUEST_CHECK, name);
 	}
 
 	@Override
 	public int update(Tool tool) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		int tool_id = (Integer) this.sqlMapClient.update("tool.updateTool", tool);
+		 tool_id = (Integer) this.getSqlMapClientTemplate().update(DBRequestsConstants.TOOL_UPDATE_REQUEST, tool);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -200,12 +173,11 @@ public class ToolDao implements IToolDao {
 	public int delete(int tool_id) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		int id = (Integer) this.sqlMapClient.delete("tool.deleteTool", tool_id);
+		id = (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.TOOL_DELETE_REQUEST, tool_id);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
 		
 		return id;
 	}
-
 }

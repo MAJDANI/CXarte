@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.store.IConceptDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * 
@@ -16,16 +19,19 @@ import com.novedia.talentmap.store.IConceptDao;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class ConceptDao implements IConceptDao {
+public class ConceptDao extends SqlMapClientDaoSupport implements IConceptDao {
 	
 	private SqlMapClient sqlMapClient;
+	private int concept_id;
+	private int id;
+
 	
 	/**
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public void setSqlMapClient(SqlMapClient sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
+	public ConceptDao (SqlMapClient sqlMapClient){
+		setSqlMapClient(sqlMapClient);
 	}
 	
 	/**
@@ -49,18 +55,10 @@ public class ConceptDao implements IConceptDao {
 	 * Get One Concept By Id
 	 */
 	@Override
-	public Concept getById(int id) {
+	public Concept getById(int id) throws SQLException {
 		
 		try {
-			
-			return (Concept)sqlMapClient.queryForObject("concept.getConcept", id);
-//			return buildDummyConcept(id);
-			
-		} catch (SQLException e) {
-			
-			//e.printStackTrace();
-			
-			return buildDummyConcept(id);
+			return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT,id);
 			
 		} catch (NullPointerException npe){
 			
@@ -75,25 +73,22 @@ public class ConceptDao implements IConceptDao {
 	 */
 	@Override
 	public List<Concept> selectAll() throws Exception {
-		
-		return sqlMapClient.queryForList("concept.getAllConcept");
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CONCEPT);
 	}
 	
 	/**
 	 * Select all Concepts By the Category_ID
 	 */
 	@Override
-	public List<Concept> selectAllByCategoryId(int categoryId) throws Exception {
-		
-		return sqlMapClient.queryForList("concept.getAllConceptByCategoryId", categoryId);
+	public List<Concept> selectAllByCategoryId(int categoryId) throws Exception {		
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CONCEPT_BY_CATEGORYID,categoryId);
 	}
 
 	@Override
 	public int save(Concept concept) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		
-		int concept_id = (Integer) this.sqlMapClient.insert("concept.insertConcept", concept);
+		concept_id = (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.CONCEPT_INSERT_REQUEST,concept);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
@@ -107,15 +102,14 @@ public class ConceptDao implements IConceptDao {
 		Map<String, Object> mapConcept = new HashMap<String, Object>();
 		mapConcept.put("name", name);
 		mapConcept.put("category_id", category_id);
-		
-		return (Concept) this.sqlMapClient.queryForObject("concept.checkConcept", mapConcept);
+		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CONCEPT_REQUEST_CHECK,mapConcept);
 	}
 
 	@Override
 	public int update(Concept concept) throws Exception {
 		
 		this.sqlMapClient.startTransaction();
-		int concept_id = (Integer) this.sqlMapClient.update("concept.updateConcept", concept);
+		concept_id = (Integer) this.getSqlMapClientTemplate().update(DBRequestsConstants.CONCEPT_UPDATE_REQUEST, concept);
 		this.sqlMapClient.commitTransaction();
 		
 		this.sqlMapClient.endTransaction();
