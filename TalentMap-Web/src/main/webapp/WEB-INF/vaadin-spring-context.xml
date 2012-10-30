@@ -231,18 +231,22 @@
 	<!-- Vaadin MissionCollaboratorContent -->
 	
 	<bean id="listPanel" class="com.vaadin.ui.Panel"/>
-	<bean id="addMissionButton" class="com.vaadin.ui.Button"/>
+	<bean id="btnAddMission" class="com.vaadin.ui.Button"/>
 	<bean id="pageTitleMission" class="com.vaadin.ui.Label"/>
+	<bean id="btnModifyMission" class="com.vaadin.ui.Button"/>
+	<bean id="btnDeleteMission" class="com.vaadin.ui.Button"/>
 	
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
 		<constructor-arg name="missionForm" ref="missionFormBean"/>
 		<constructor-arg name="listPanel" ref="listPanel"/>
-		<constructor-arg name="addMissionButton" ref="addMissionButton"/>
+		<constructor-arg name="btnAddMission" ref="btnAddMission"/>
 		<constructor-arg name="pageTitle" ref="pageTitleMission"/>
+		<constructor-arg name="btnModifyMission" ref="btnModifyMission"/>
+		<constructor-arg name="btnDeleteMission" ref="btnDeleteMission"/>
 	</bean>
-	
+		
 	<!-- Vaadin AdminView UI -->
 	
 	<bean id="hSplitContent" class="com.vaadin.ui.HorizontalSplitPanel"/>

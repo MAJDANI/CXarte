@@ -6,4 +6,5 @@ public interface IMissionCollaboratorContent {
 
 	public void updateListMission(ListMission listMission);
 
+	public void cancelAddMission();
 }
