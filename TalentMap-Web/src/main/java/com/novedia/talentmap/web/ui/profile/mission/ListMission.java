@@ -1,14 +1,15 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
 import com.novedia.talentmap.model.entity.Mission;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Table;
 
-public class ListMission extends Table{
+public class ListMission extends Table implements ItemClickListener {
 
 	protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -21,6 +22,11 @@ public class ListMission extends Table{
 	 * Temporary Constant 
 	 */
 	public static final int COLLAB_ID = 2;
+
+	/**
+	 * the mission witch was clicked for modification 
+	 */
+	private Mission missionSelected;
 	
 	/**
 	 * Build the class ListMission.java 
@@ -44,6 +50,8 @@ public class ListMission extends Table{
 	public void buildContainer(){
 		System.out.println("ListMission.buildContainer()");
 		addColumns();
+		setSelectable(true);
+		setNullSelectionAllowed(true);
 		fillMissionContainer();
 		fillResultsTable();
 	}
@@ -55,13 +63,12 @@ public class ListMission extends Table{
 	 * Builds Headers of the Table ListMission
 	 */
 	public void addColumns() {
-		addContainerProperty("Intitulé", String.class, null);
-		addContainerProperty("Client", String.class, null);
-		addContainerProperty("Lieu", String.class, null);
-		addContainerProperty("Date début", String.class, null);
-		addContainerProperty("Date fin", String.class, null);
-		addContainerProperty("Commentaire", String.class, null);
-	}
+		addContainerProperty(MissionForm.INTITULE, String.class, null);
+		addContainerProperty(MissionForm.CLIENT, String.class, null);
+		addContainerProperty(MissionForm.LIEU, String.class, null);
+		addContainerProperty(MissionForm.DATE_DEBUT, String.class, null);
+		addContainerProperty(MissionForm.DATE_FIN, String.class, null);
+		addContainerProperty(MissionForm.COMMENTAIRE, String.class, null);	}
 
 	/**
 	 * Gets each item mission in the MissionContainer given in parameter.
@@ -71,16 +78,18 @@ public class ListMission extends Table{
 	public void fillResultsTable() {
 		Collection<Mission> collectionMission = this.missionContainer.getItemIds();
 		
-		int idResultsTable = 1;
+		//int idResultsTable = 1;
 		for (Mission mission : collectionMission) {
 			String dateDebut = formatterDate(mission.getStart_date());
 			String dateFin = formatterDate(mission.getEnd_date());
-			
-			addItem(new Object[] { mission.getName(),
+			Integer idMission = mission.getId();
+			System.out.println("idMission=" + idMission);
+			addItem(new Object[] { 
+					mission.getName(),
 					mission.getClient(), mission.getPlace(),
 					dateDebut, dateFin,
-					mission.getNotes()}, idResultsTable);
-			idResultsTable++;
+					mission.getNotes()}, mission.getId()); //idResultsTable);//test 2012/09/24
+			//idResultsTable++;
 		}
 	}
 
@@ -108,4 +117,16 @@ public class ListMission extends Table{
 	public MissionContainer getMissionContainer() {
 		return missionContainer;
 	}
+
+	@Override
+	public void itemClick(ItemClickEvent event) {
+		// TODO Auto-generated method stub
+		this.setValue(null);
+		this.missionSelected = ((Mission) event.getSource());
+	}
+	
+	public Mission getMissionSelected() {
+		return missionSelected;
+	}
+
 }
