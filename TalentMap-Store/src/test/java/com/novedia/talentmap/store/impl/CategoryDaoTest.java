@@ -1,6 +1,6 @@
 package com.novedia.talentmap.store.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
 
@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.entity.Category;
 
 public class CategoryDaoTest {
 	
