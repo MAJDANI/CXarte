@@ -10,19 +10,20 @@ import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
 
 /**
+ * This class is the servlet mapped in the web.xml file.
+ * This is the entry point for the web context of the application.
  * 
  * @author j.marie-sainte
- * 
  */
 public class SpringApplicationServlet extends AbstractApplicationServlet {
 
 	/**
-	 * 
+	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * spring bean name in init of servlet
+	 * Spring bean name in init of servlet
 	 */
 	public static final String PARAMETER_APPLICATION_BEAN_NAME = "applicationBean";
 	
@@ -35,37 +36,7 @@ public class SpringApplicationServlet extends AbstractApplicationServlet {
 		if (applicationBeanName == null) {
 			throw new ServletException("Failed to load application class because bean name is null");
 		}
-		//checkSpringBean();
 	}
-	
-	/**
-	 * Check the main Spring bean
-	 * @throws Exception 
-	 */
-//	private void checkSpringBean() throws Exception{
-//		
-//		if(applicationBeanName != null){
-//			if(getSpringContext() == null){
-//				throw new ServletException("Failed to load application. Spring context is null");
-//			}
-//			
-//			if(!getSpringContext().containsBean(this.applicationBeanName)){
-////				String[] beanDefinitionNames = getSpringContext().getBeanDefinitionNames();
-////				StringBuilder sb = new StringBuilder();
-////				
-////				for (String string : beanDefinitionNames) {
-////					if(string.equals("vaadinBean") || string.equals("tmServiceBean")){
-////						sb.append(string);					
-////					}
-////				}
-////				throw new ServletException("Succeed to load application bean : " + sb.toString() );
-//				// Mocked implementation for skill DAO
-//				CollaboratorService serviceBean= (CollaboratorService)getSpringContext().getBean("profileService");
-//				throw new ServletException("Value of bean : " +  serviceBean.getCollaborator(1).toString());
-////				throw new ServletException("Failed to load application bean : " +  this.applicationBeanName);
-//			}
-//		}
-//	}
 	
 	/**
 	 * Get the Spring web application context
