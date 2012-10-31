@@ -58,5 +58,4 @@ public interface ICollaboratorDao {
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByListId(List<Integer> listId) throws Exception;
-	
 }

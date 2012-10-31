@@ -5,23 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.store.ICategoryDao;
+import com.novedia.talentmap.store.generiques.IGenericDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * Category DAO
  * @author j.collet
+ * @param <E>
+ * @param <E>
  * @project TalentMap-Store
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  * 
  */
-public class CategoryDao extends SqlMapClientDaoSupport implements ICategoryDao {
+public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<Category> {
 	
 	private SqlMapClient sqlMapClient;
 	private SqlMapClientTemplate sqlMapClientTemplate;
@@ -43,8 +46,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements ICategoryDao 
 	 * @param name
 	 * @return
 	 */
-	private Category buildDummyCategory(int id, String name){
-		
+	private Category buildDummyCategory(int id, String name){	
 		Category c = new Category();
 		c.setId(id);
 		c.setName(name);
@@ -56,7 +58,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements ICategoryDao 
 	 * Get One Category By Id
 	 */
 	@Override
-	public Category getById(int id) throws SQLException {
+	public Category getById(int id) throws DataAccessException {
 		
 		try {
 			
@@ -108,46 +110,58 @@ public class CategoryDao extends SqlMapClientDaoSupport implements ICategoryDao 
 	}
 
 	@Override
-	public int save(Category category) throws Exception {
+	public int save(Category category) throws DataAccessException {
 
 		
-		this.sqlMapClient.startTransaction();
-		category_id  = (Integer) getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_CATEGORY_REQUEST, category);
-		this.sqlMapClient.commitTransaction();
+		try {
+			this.sqlMapClient.startTransaction();
+			category_id  = (Integer) getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_CATEGORY_REQUEST, category);
+			this.sqlMapClient.commitTransaction();
+			
+			this.sqlMapClient.endTransaction();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		this.sqlMapClient.endTransaction();
 		
 		return category_id;
 	}
 
 	@Override
-	public Category checkCategory(String name) throws Exception {
+	public Category checkCategory(String name) throws DataAccessException {
 		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CATEGORY_REQUEST_CHECK,name);
 	}
 
 	@Override
-	public int update(Category category) throws Exception {
+	public int update(Category category) throws DataAccessException {
 		
-		this.sqlMapClient.startTransaction();
-		category_id =  (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.CATEGORY_REQUEST_UPDATE,category);
-		this.sqlMapClient.commitTransaction();		
-		this.sqlMapClient.endTransaction();
+		try {
+			this.sqlMapClient.startTransaction();
+			category_id =  (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.CATEGORY_REQUEST_UPDATE,category);
+			this.sqlMapClient.commitTransaction();		
+			this.sqlMapClient.endTransaction();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return category_id;
 	}
 
 	@Override
-	public int delete(int category_id) throws Exception {
+	public int delete(int category_id) throws DataAccessException {
 
-		this.sqlMapClient.startTransaction();
-		id = (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.CATEGORY_REQUEST_DELETE,category_id);
-		
-		this.sqlMapClient.commitTransaction();
-		
-		this.sqlMapClient.endTransaction();
-		
+		try {
+			this.sqlMapClient.startTransaction();
+			id = (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.CATEGORY_REQUEST_DELETE,category_id);			
+			this.sqlMapClient.commitTransaction();			
+			this.sqlMapClient.endTransaction();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return id;
 	}
-	
-
 }
