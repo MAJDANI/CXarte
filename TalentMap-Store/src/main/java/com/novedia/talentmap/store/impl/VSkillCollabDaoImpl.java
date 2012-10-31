@@ -9,7 +9,7 @@ import com.novedia.talentmap.model.entity.VSkillCollab;
 import com.novedia.talentmap.store.IVSkillCollabDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCollabDao {
+public class VSkillCollabDaoImpl extends SqlMapClientDaoSupport implements IVSkillCollabDao {
 
 	private SqlMapClient sqlMapClient;
 	

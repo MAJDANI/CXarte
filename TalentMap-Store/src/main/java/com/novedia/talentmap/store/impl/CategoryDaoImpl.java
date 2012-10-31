@@ -11,7 +11,9 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.store.generiques.IGenericDao;
+import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.store.IGenericDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
@@ -24,7 +26,7 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * @created 21 mai 2012
  * 
  */
-public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<Category> {
+public class CategoryDaoImpl extends SqlMapClientDaoSupport implements IGenericDao<Category> {
 	
 	private SqlMapClient sqlMapClient;
 	private SqlMapClientTemplate sqlMapClientTemplate;
@@ -36,7 +38,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 	 * @param sqlMapClient
 	 */
 	@Autowired
-	public CategoryDao(final SqlMapClient sqlMapClient){
+	public CategoryDaoImpl(final SqlMapClient sqlMapClient){
 		setSqlMapClient(sqlMapClient);
 	}
 	/**
@@ -60,11 +62,8 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 	@Override
 	public Category getById(int id) throws DataAccessException {
 		
-		try {
-			
-			return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_REQUEST);
-			
-			
+		try {		
+			return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_REQUEST);						
 		} catch (NullPointerException npe){
 			
 			npe.printStackTrace();
@@ -111,7 +110,6 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 
 	@Override
 	public int save(Category category) throws DataAccessException {
-
 		
 		try {
 			this.sqlMapClient.startTransaction();
@@ -121,9 +119,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 			this.sqlMapClient.endTransaction();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}				
 		return category_id;
 	}
 
@@ -142,10 +138,8 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 			this.sqlMapClient.endTransaction();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 		return category_id;
 	}
 
@@ -163,5 +157,69 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IGenericDao<C
 		}
 	
 		return id;
+	}
+	@Override
+	public List<Category> getAllCollaboratorsByLastName(String lastName)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+	@Override
+	public List<Category> getAllCollaboratorsByListId(List<Integer> listId)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Concept> selectAllByCategoryId(int categoryId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Category checkConcept(String name, int category_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Category> getAllCollaboratorsByManagerId(Integer managerId)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int insert(Category object) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<Category> getByCollabId(int collabId)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int add(Category object) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public Category getByType(String type) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Category> selectAllByConceptId(int conceptId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Category getByName(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Tool checkTool(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

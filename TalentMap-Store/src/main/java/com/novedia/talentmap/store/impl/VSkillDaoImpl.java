@@ -20,7 +20,7 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * @package com.novedia.talentmap.store.impl
  * @created 21 mai 2012
  */
-public class VSkillDao extends SqlMapClientDaoSupport implements IVSkillDao {
+public class VSkillDaoImpl extends SqlMapClientDaoSupport implements IVSkillDao {
 	
 	private SqlMapClient sqlMapClient;
 	
@@ -147,7 +147,7 @@ public class VSkillDao extends SqlMapClientDaoSupport implements IVSkillDao {
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public VSkillDao(SqlMapClient sqlMapClient) {
+	public VSkillDaoImpl(SqlMapClient sqlMapClient) {
 		setSqlMapClient(sqlMapClient);
 	}
 
