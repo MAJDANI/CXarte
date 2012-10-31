@@ -9,7 +9,7 @@
 	<groupId>com.novedia.talentmap</groupId>
 	<artifactId>TalentMap</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>2.0-SNAPSHOT</version>
 	<description>
     TalentMap is a useful application giving some view on Novedia people skills
   </description>
@@ -193,6 +193,7 @@
 
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
 					<configuration>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
