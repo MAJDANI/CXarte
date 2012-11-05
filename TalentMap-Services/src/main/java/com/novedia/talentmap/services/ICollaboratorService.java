@@ -2,6 +2,8 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
@@ -20,7 +22,7 @@ public interface ICollaboratorService {
 	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaborator() throws Exception;
+	List<Collaborator> getAllCollaborator() throws DataAccessException;
 	
 	/**
 	 * Get One Collaborator By Id
@@ -29,7 +31,7 @@ public interface ICollaboratorService {
 	 * @return Collaborator
 	 * @throws Exception
 	 */
-	Collaborator getCollaborator(int id) throws Exception;
+	Collaborator getCollaborator(Collaborator collaborator) throws DataAccessException;
 	
 	/**
 	 * Update One Collaborator
@@ -38,7 +40,7 @@ public interface ICollaboratorService {
 	 * @return int
 	 * @throws Exception
 	 */
-	int updateCollaborator(Collaborator collaborator) throws Exception;
+	int updateCollaborator(Collaborator collaborator) throws DataAccessException;
 
 	/**
 	 * Delete one Mission
@@ -47,7 +49,7 @@ public interface ICollaboratorService {
 	 * @return int 
 	 * @throws Exception
 	 */
-	int deleteMission(int idMission) throws Exception;
+	int deleteMission(int idMission) throws DataAccessException;
 	
 	
 	/**
@@ -57,7 +59,7 @@ public interface ICollaboratorService {
 	 * @return id of the mission inserted
 	 * @throws Exception
 	 */
-	int insertMission(Mission mission) throws Exception;
+	int insertMission(Mission mission) throws DataAccessException;
 
 	/**
 	 * Update one Mission
@@ -66,7 +68,7 @@ public interface ICollaboratorService {
 	 * @return int
 	 * @throws Exception
 	 */
-	int updateMission(Mission mission) throws Exception;
+	int updateMission(Mission mission) throws DataAccessException;
 	
 
 	/**
@@ -76,7 +78,7 @@ public interface ICollaboratorService {
 	 * @return Mission
 	 * @throws Exception
 	 */
-	Mission getMission(int missionId) throws Exception;
+	Mission getMission(int missionId) throws DataAccessException;
 	
 	/**
 	 * Get all Collaborators' Mission By Collab_ID
@@ -85,7 +87,7 @@ public interface ICollaboratorService {
 	 * @return List<Mission>
 	 * @throws Exception
 	 */
-	List<Mission> getAllMission(int collabId) throws Exception;
+	List<Mission> getAllMission(int collabId) throws DataAccessException;
 	
 	/**
 	 * Get one Manager by ID
@@ -94,7 +96,7 @@ public interface ICollaboratorService {
 	 * @return Manager
 	 * @throws Exception
 	 */
-	Manager getManager(int managerId) throws Exception;
+	Manager getManager(int managerId) throws DataAccessException;
 	
 	/**
 	 * Select all Collaborators by lastName
@@ -104,7 +106,7 @@ public interface ICollaboratorService {
 	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception;
+	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws DataAccessException;
 
 	/**
 	 * Select all Collaborators by toolId
@@ -114,7 +116,7 @@ public interface ICollaboratorService {
 	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws Exception;
+	List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws DataAccessException;
 
 	/**
 	 * Select all Collaborators by a list of toolId
@@ -124,7 +126,7 @@ public interface ICollaboratorService {
 	 * @return List<Collaborator>
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws Exception;
+	List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws DataAccessException;
 
 	/***
 	 * Adding a new Mission in database
@@ -134,6 +136,6 @@ public interface ICollaboratorService {
 	 * @return int
 	 * @throws Exception
 	 */
-	int addMission(Mission mission) throws Exception;
+	int addMission(Mission mission) throws DataAccessException;
 	
 }
