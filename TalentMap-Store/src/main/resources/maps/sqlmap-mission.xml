@@ -18,17 +18,17 @@
 		<result property="end_date" column="END_DATE" />
 	</resultMap>
 
-	<select id="getMission" resultMap="missionResult"
+	<select id="get" resultMap="missionResult"
 		parameterClass="Integer">
 		SELECT * FROM MISSION WHERE MISSION_ID = #id#
 	</select>
 
-	<select id="getAllMission" resultMap="missionResult"
+	<select id="getAll" resultMap="missionResult"
 		parameterClass="Integer">
 		SELECT * FROM MISSION WHERE COLLAB_ID = #collab_id# ORDER BY MISSION_ID
 	</select>
 
-	<update id="updateMission" parameterClass="Mission">
+	<update id="save" parameterClass="Mission">
 		UPDATE MISSION SET
 		MISSION_ID = #id#, COLLAB_ID = #collab_id#, NAME = #name#, PLACE =
 		#place#, CLIENT = #client#,
@@ -37,13 +37,7 @@
 		MISSION_ID = #id#
 	</update>
 
-	<insert id="addMision">
-		INSERT INTO MISSION (MISSION_ID, COLLAB_ID, NAME,
-		PLACE, CLIENT, NOTES, START_DATE, END_DATE) values (#id#, #collab_id#,
-		#name#, #place#, #client#, #notes#, #start_date#, #end_date#)
-	</insert>
-
-    <insert id="insertMission" parameterClass="Mission">
+    <insert id="add" parameterClass="Mission">
     	
     	<selectKey resultClass="int" keyProperty="id">
       		SELECT SEQMISSION.NEXTVAL FROM DUAL
@@ -58,7 +52,7 @@
    		</selectKey>
     </insert>	
 
-    <delete id="deleteMission" parameterClass="Integer">
+    <delete id="delete" parameterClass="Integer">
 		DELETE MISSION WHERE MISSION_ID = #id#
 	</delete> 
 

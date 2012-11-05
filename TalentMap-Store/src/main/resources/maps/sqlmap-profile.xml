@@ -12,11 +12,11 @@
         <result property="type"  column="PROFILE_TYPE"/>         
     </resultMap>
 	
-	<select id="getProfile" resultMap="profileResult" parameterClass="Integer">
+	<select id="get" resultMap="profileResult" parameterClass="Integer">
 		SELECT * FROM PROFILE WHERE PROFILE_ID = #id#
 	</select>
 	
-    <select id="getAllProfile" resultMap="profileResult">
+    <select id="getAll" resultMap="profileResult">
     	SELECT * FROM PROFILE
     </select>
     

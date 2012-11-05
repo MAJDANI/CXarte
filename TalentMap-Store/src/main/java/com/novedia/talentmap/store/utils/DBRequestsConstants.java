@@ -6,81 +6,282 @@ package com.novedia.talentmap.store.utils;
  */
 public final class DBRequestsConstants {
 	
+	// COLLABORATOR REQUESTS
+	
 	/**
-	* Request used to get a category in TMP data base model.
-	*/
-	public final static String GET_CATEGORY_REQUEST = "category.getCategory";
+	 * Constant request id to get all the collaborators 
+	 */
+	public final static String GET_ALL_COLLABORATOR = "collaborator.getAllCollaborator";
+	
+	/**
+	 * Constant request id to update a collaborator 
+	 */
+	public final static String UPDATE_COLLABORATOR = "collaborator.updateCollaborator";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllCollaboratorByLastName";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_COLLABORATOR_BY_LIST_ID="collaborator.getAllCollaboratorsByListId";
+	
+	// CATEGORY REQUESTS
+	/**
+	 * Constant request id to get a category.
+	 */
+	public final static String GET_CATEGORY = "category.getCategory";
 
 	/**
-	* Request used to get all category in TMP data base model.
-	*/
-	public final static String GET_ALL_CATEGORY_REQUEST = "category.getAllCategory";
+	 * Constant request id to get all category.
+	 */
+	public final static String GET_ALL_CATEGORY = "category.getAllCategory";
 	
 	/**
-	 * Request isert the category
+	 * Constant request id to insert the category
 	 */
-	public final static String  INSERT_CATEGORY_REQUEST = "category.insertCategory";
+	public final static String  INSERT_CATEGORY = "category.insert";
 	/**
-	 * check category
+	 * Constant request id to check a category
 	 */
-	public final static String CATEGORY_REQUEST_CHECK = "category.checkCategory";
+	public final static String CHECK_CATEGORY = "category.check";
 	
 	/**
-	 * update category
+	 * Constant request id to update category
 	 */
-	public final static String  CATEGORY_REQUEST_UPDATE ="category.updateCategory";
-	/**
-	 * delete category
-	 */
-	public final static String CATEGORY_REQUEST_DELETE ="category.deleteCategory";
-	/**
-	 * 
-	 */
-	public final static String GET_COLLABORATOR_REQUEST = "collaborator.getCollaborator";
-	public final static String GET_ALL_COLLABORATOR_REQUEST = "collaborator.getAllCollaborator";
-	public final static String UPDATE_COLLABORATOR_REQUEST = "collaborator.updateCollaborateur";
-	public final static String GET_ALL_COLLABORATOR_BYLASTNAME_REQUEST="collaborator.getAllCollaboratorByLastName";
-	public final static String GET_ALL_COLLABORATOR_BYLISTID_REQUEST="collaborator.getAllCollaboratorsByListId";
+	public final static String  SAVE_CATEGORY ="category.save";
 	
-	public final static String GET_CONCEPT = "concept.getConcept";
-	public final static String GET_ALL_CONCEPT = "concept.getAllConcept";
+	/**
+	 * Constant request id to delete category
+	 */
+	public final static String DELETE_CATEGORY ="category.delete";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_COLLABORATOR = "collaborator.get";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_CONCEPT = "concept.get";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_CONCEPT = "concept.getAll";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
 	public final static String GET_ALL_CONCEPT_BY_CATEGORYID = "concept.getAllConceptByCategoryId";
-	public final static String CONCEPT_INSERT_REQUEST = "concept.insertConcept";
-	public final static String CONCEPT_UPDATE_REQUEST = "concept.updateConcept";
-	public final static String CONCEPT_DELETE_REQUEST = "concept.deleteConcept";
-	public final static String CONCEPT_REQUEST_CHECK ="concept.checkConcept";
 	
-	public final static String GET_MANAGER = "manager.getManager";
-	public final static String GET_ALL_COLLABORATOR_MANAGERID="manager.getAllCollaboratorsByManagerId";
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_CONCEPT = "concept.add";
 	
-	public final static String GET_ALL_MISSION = "mission.getAllMission";
-	public final static String GET_MISSION ="mission.getMission";
-	public final static String INSERT_MISSION_REQUEST = "mission.insertMission";
-	public final static String UPDATE_MISSION_REQUEST = "mission.updateMission";
-	public final static String ADD_MISSION_REQUEST = "mission.addMission";	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String SAVE_CONCEPT = "concept.save";
 	
-	public final static String GET_ALL_PROFIL = "profile.getAllProfile";
-	public final static String GET_PROFIL ="profile.getProfile";
-	public final static String GET_PROFIL_BYTYPE = "profile.getByType";
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String DELETE_CONCEPT = "concept.delete";
 	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String CHECK_CONCEPT ="concept.check";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_MANAGER = "manager.get";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_COLLABORATORS_BY_MANAGER_ID="manager.getAllCollaboratorsByManagerId";
+	
+	// MISSION REQUEST
+	
+	/**
+	 * Constant request id to get mission 
+	 */
+	public final static String GET_MISSION ="mission.get";
+	
+	/**
+	 * Constant request id to get all missions 
+	 */
+	public final static String GET_ALL_MISSION = "mission.getAll";
+	
+	/**
+	 * Constant request id to insert mission 
+	 */
+	public final static String INSERT_MISSION = "mission.insert";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String UPDATE_MISSION = "mission.update";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_MISSION = "mission.add";	
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_PROFILE = "profile.getAll";
+	
+	/**
+	 * Constant request 
+	 */
+	public static final String CHECK_PROFILE = "profile.check";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_PROFILE ="profile.get";
+	
+
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	
+	public static final String DELETE_PROFILE = "profile.delete";
+	
+
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static  String SAVE_PROFILE = "profile.save";
+	
+
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public  final static String INSERT_PROFILE = "profile.add";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_PROFILE_BY_TYPE = "profile.getByType";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
 	public final static String GET_ALL_COLLABORATOR_SKILL ="skill.getAllCollaboratorSkill";
-	public final static String GET_ALL_SKILL ="skill.getSkill";
-	public final static String INSERT_SKILL_REQUEST = "skill.insertSkill";
-	public final static String UPDATE_SKILL_REQUEST = "skill.updateSkill";
-	public final static String GET_ALL_COLLABORATORS_BY_TOOLIB_REQUEST = "skill.getAllCollaboratorsIdByToolId";
-	public final static String GET_ALL_COLLABORATORID_BY_TOOL_REQUEST ="skill.getAllCollaboratorIdByToolIdAndCollabList";
 	
-	public final static String TOOL_INSERT_REQUEST = "tool.insertTool";
-	public final static String TOOL_UPDATE_REQUEST = "tool.updateTool";
-	public final static String TOOL_REQUEST_CHECK = "tool.checkTool";
-	public final static String TOOL_DELETE_REQUEST = "tool.deleteTool";
-	public final static String GET_ALL_TOOL_BYCONCEPTID_REQUEST = "tool.getAllToolByConceptId";
-	public final static String GET_ALL_TOOL_REQUEST ="tool.getAllTool";
-	public final static String GET_TOOL_BY_NAME_REQUEST ="tool.getToolByName";
-	public final static String GET_TOOL_BY_ID_REQUEST ="tool.getToolById";
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_SKILL ="skill.getAll";
 	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_SKILL = "skill.add";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String SAVE_SKILL = "skill.save";
+	
+	/**
+	 * Constant request id to get all collaborators by tool 
+	 */
+	public final static String GET_ALL_COLLABORATORS_BY_TOOL = "skill.getAllCollaboratorsIdByTool";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
+	
+	
+	// TOOL REQUEST
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_TOOL = "tool.add";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String SAVE_TOOL = "tool.save";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String CHECK_TOOL = "tool.check";
+		
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_TOOL_BY_CONCEPT = "tool.getAllToolByConcept";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_ALL_TOOL = "tool.getAll";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public static final String DELETE_TOOL = "tool.delete";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_TOOL_BY_NAME ="tool.getToolByName";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_TOOL ="tool.get";
+	
+	
+	// VSKILL REQUEST
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
 	public final static String GET_ALL_SKILL_COLLAB = "vskillCollab.getAllSkillCollab";
-	public final static String GET_SKILL_BY_TOOL = "vskill.getSkillByTool";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_SKILL_BY_TOOL = "vskill.getByTool";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
 	public final static String GET_CONCEPT_BY_CATEGORY = "vskill.getConceptByCategory";
-	public final static String GET_TOOL_BY_CONCEPT = "vskill.getToolByConcept";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_TOOL_BY_CONCEPT = "vskill.getToolByConcept";	
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String DELETE_MISSION = "mission.delete";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_COLLABORATOR = "collaborator.add";
+	
+	/**
+	 * Constant request id to delete a collaborator 
+	 */
+	public final static String DELETE_COLLABORATOR = "collaborator.delete";
 }

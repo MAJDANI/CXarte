@@ -13,23 +13,23 @@
         <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
 	
-	<select id="getToolById" resultMap="toolResult" parameterClass="Integer">
+	<select id="get" resultMap="toolResult" parameterClass="Integer">
 		SELECT * FROM TOOL WHERE TOOL_ID = #id#
 	</select>
 	
-	<select id="getToolByName" resultMap="toolResult" parameterClass="String">
+	<select id="getByName" resultMap="toolResult" parameterClass="String">
 		SELECT * FROM TOOL WHERE TOOL_NAME = #name#
 	</select>
 	
-    <select id="getAllTool" resultMap="toolResult">
+    <select id="getAll" resultMap="toolResult">
     	SELECT * FROM TOOL
     </select>
     
-    <select id="getAllToolByConceptId" resultMap="toolResult" parameterClass="Integer">
+    <select id="getAllByConcept" resultMap="toolResult" parameterClass="Integer">
     	SELECT * FROM TOOL WHERE CONCEPT_ID = #conceptId#
     </select>	
     
-    <insert id="insertTool" parameterClass="Tool">
+    <insert id="add" parameterClass="Tool">
     	
     	<selectKey resultClass="int" keyProperty="id">
       		SELECT SEQTOOL.NEXTVAL FROM DUAL
@@ -47,15 +47,15 @@
     		</selectKey>
     </insert>	
     
-    <select id="checkTool" resultMap="toolResult" parameterClass="String">
+    <select id="check" resultMap="toolResult" parameterClass="String">
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
 	</select>		
 	
-	<update id="updateTool" parameterClass="Tool">
+	<update id="save" parameterClass="Tool">
 		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept_id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
 	</update> 
 	
-	<delete id="deleteTool" parameterClass="Integer">
+	<delete id="delete" parameterClass="Integer">
 		DELETE TOOL CASCADE	WHERE TOOL_ID = #id#
 	</delete>	 
 

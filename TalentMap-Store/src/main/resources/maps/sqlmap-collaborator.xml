@@ -20,15 +20,15 @@
         <result property="business_engineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 
-    <select id="getCollaborator" parameterClass="Integer" resultMap="collaboratorResult">
+    <select id="get" parameterClass="Integer" resultMap="collaboratorResult">
         SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
     </select>
     
-    <select id="getAllCollaborator" resultMap="collaboratorResult">
+    <select id="getAll" resultMap="collaboratorResult">
     	SELECT * FROM COLLABORATOR
     </select>
     					 
-	<update id="updateCollaborateur" parameterClass="Collaborator">
+	<update id="save" parameterClass="Collaborator">
 		UPDATE COLLABORATOR SET PROFILE_ID = #profile_id#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
 	</update>
 	

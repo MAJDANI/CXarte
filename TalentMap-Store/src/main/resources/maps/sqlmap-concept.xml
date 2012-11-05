@@ -13,11 +13,11 @@
         <result property="name"  column="CONCEPT_NAME"/>         
     </resultMap>
 	
-	<select id="getConcept" resultMap="conceptResult" parameterClass="Integer">
+	<select id="get" resultMap="conceptResult" parameterClass="Integer">
 		SELECT * FROM CONCEPT WHERE CONCEPT_ID = #id#
 	</select>
 	
-    <select id="getAllConcept" resultMap="conceptResult">
+    <select id="getAll" resultMap="conceptResult">
     	SELECT * FROM CONCEPT
     </select>
     
@@ -25,7 +25,7 @@
     	SELECT * FROM CONCEPT WHERE CATEGORY_ID = #categoryId#
     </select>	
     
-    <insert id="insertConcept" parameterClass="Concept">
+    <insert id="add" parameterClass="Concept">
     	
     	<selectKey resultClass="int" keyProperty="id">
       		SELECT SEQCONCEPT.NEXTVAL FROM DUAL
@@ -40,15 +40,15 @@
     		)
     </insert>
     
-    <select id="checkConcept" resultMap="conceptResult" parameterClass="java.util.HashMap">
+    <select id="check" resultMap="conceptResult" parameterClass="java.util.HashMap">
 		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category_id#
 	</select>	
 	
-	<update id="updateConcept" parameterClass="Concept">
+	<update id="save" parameterClass="Concept">
 		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category_id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
 	</update>
 	
-	<delete id="deleteConcept" parameterClass="Integer">
+	<delete id="delete" parameterClass="Integer">
 		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
 	</delete>			 
 

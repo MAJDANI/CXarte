@@ -20,7 +20,7 @@
     	<result property="collaborator_id" column="COLLAB_ID"/> 
     </resultMap>
 	
-	<select id="getSkill" resultMap="skillResult" parameterClass="java.util.HashMap">
+	<select id="get" resultMap="skillResult" parameterClass="java.util.HashMap">
 		SELECT * FROM SKILL WHERE COLLAB_ID = #collaboratorId# AND TOOL_ID = #toolId#
 	</select>
 	
@@ -28,7 +28,7 @@
     	SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id#
     </select>	
     
-    <insert id="insertSkill" parameterClass="Skill">
+    <insert id="add" parameterClass="Skill">
     	INSERT into SKILL (
       		COLLAB_ID,
       		TOOL_ID,
@@ -40,7 +40,7 @@
     	)
     </insert>	
     
-   	<update id="updateSkill" parameterClass="Skill">
+   	<update id="save" parameterClass="Skill">
 		UPDATE SKILL SET COLLAB_ID = #collaborator_id#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time# 
 		WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #tool_id#
 	</update>					 

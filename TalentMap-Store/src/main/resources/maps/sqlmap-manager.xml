@@ -32,7 +32,7 @@
         <result property="business_engineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 	
-	<select id="getManager" resultMap="managerResult" parameterClass="Integer">
+	<select id="get" resultMap="managerResult" parameterClass="Integer">
 		SELECT * FROM MANAGER WHERE MANAGER_ID = #id#
 	</select>
 	

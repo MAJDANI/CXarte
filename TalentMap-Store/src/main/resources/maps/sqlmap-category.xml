@@ -12,15 +12,15 @@
         <result property="name"  column="CATEGORY_NAME"/>         
     </resultMap>
 	
-	<select id="getCategory" resultMap="categoryResult" parameterClass="Integer">
+	<select id="get" resultMap="categoryResult" parameterClass="Integer">
 		SELECT * FROM CATEGORY WHERE CATEGORY_ID = #id#
 	</select>
 	
-    <select id="getAllCategory" resultMap="categoryResult">
+    <select id="getAll" resultMap="categoryResult">
     	SELECT * FROM CATEGORY
     </select>			
     
-    <insert id="insertCategory" parameterClass="Category">
+    <insert id="insert" parameterClass="Category">
     	
     	<selectKey resultClass="int" keyProperty="id">
       		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
@@ -35,15 +35,15 @@
     		)
     </insert>	
     
-    <select id="checkCategory" resultMap="categoryResult" parameterClass="String">
+    <select id="check" resultMap="categoryResult" parameterClass="String">
 		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
 	</select>	
 	
-	<update id="updateCategory" parameterClass="Category">
+	<update id="save" parameterClass="Category">
 		UPDATE CATEGORY SET CATEGORY_ID = #id#, CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
 	</update>
 	
-	<delete id="deleteCategory" parameterClass="Integer">
+	<delete id="delete" parameterClass="Integer">
 		DELETE CATEGORY CASCADE WHERE CATEGORY_ID = #id#
 	</delete> 
 

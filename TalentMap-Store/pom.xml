@@ -63,4 +63,5 @@
 		</dependency>
 		
 	</dependencies>
+	<name>TalentMap-Store</name>
 </project>
