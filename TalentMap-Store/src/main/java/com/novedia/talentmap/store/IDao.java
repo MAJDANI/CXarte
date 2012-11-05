@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
  * 
  * @author j.marie-sainte
  *
- * @param <E>
+ * @param <E> generic parameter
  */
 public interface IDao<E> {
 	
