@@ -17,6 +17,10 @@
 		SELECT * FROM CONCEPT WHERE CONCEPT_ID = #id#
 	</select>
 	
+	<select id="getByName" resultMap="conceptResult" parameterClass="String">
+		SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name#
+	</select>
+	
     <select id="getAll" resultMap="conceptResult">
     	SELECT * FROM CONCEPT
     </select>
