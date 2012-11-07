@@ -33,12 +33,12 @@
 	</update>
 	
     <!-- v.guillemain -->
-    <select id="getAllCollaboratorByLastName" parameterClass="String" resultMap="collaboratorResult">
+    <select id="getAllByLastName" parameterClass="String" resultMap="collaboratorResult">
         SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
     <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByListId" resultMap="collaboratorResult" parameterClass="java.util.Collection">
+    <select id="getAllByListId" resultMap="collaboratorResult" parameterClass="java.util.Collection">
     	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN
 		<iterate 	open="(" 
 					close=")"
