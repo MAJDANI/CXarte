@@ -16,54 +16,50 @@
 	<!-- Import all configuration to connect with database -->
 	<import resource="datasource.xml"/>
 	
-	<bean id="sqlMap"
-          class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation">
-            <value>classpath:sqlmap-config.xml</value>
-        </property>
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:sqlmap-config.xml" />
         <property name="dataSource" ref="dataSource" />
     </bean>    
 	
 	<!--  Store beans declaration -->
 	<bean id="collaboratorDao" class="com.novedia.talentmap.store.impl.CollaboratorDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="profileDao" class="com.novedia.talentmap.store.impl.ProfileDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="categoryDao" class="com.novedia.talentmap.store.impl.CategoryDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="conceptDao" class="com.novedia.talentmap.store.impl.ConceptDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="toolDao" class="com.novedia.talentmap.store.impl.ToolDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="skillDao" class="com.novedia.talentmap.store.impl.SkillDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="vSkillDao" class="com.novedia.talentmap.store.impl.VSkillDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="vSkillCollabDao" class="com.novedia.talentmap.store.impl.VSkillCollabDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
-	
 	<bean id="missionDao" class="com.novedia.talentmap.store.impl.MissionDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
 	<bean id="managerDao" class="com.novedia.talentmap.store.impl.ManagerDao">
-		<property name="sqlMapClient" ref="sqlMap"/>
+		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 
 </beans>
