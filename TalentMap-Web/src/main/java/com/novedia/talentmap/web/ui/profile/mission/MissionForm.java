@@ -287,7 +287,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 */
 	private void insertMission(Mission missionToInsert) {
 		try {
-			int result = this.collabService.insertMission(missionToInsert); 
+			int result = this.collabService.addMission(missionToInsert); 
 			if(result !=0){
 				//TODO centraliser les messages
 				CUtils.showMessage("La mission a bien été ajoutée. Result =" + result, Message.INFO, getWindow());
@@ -313,7 +313,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 */
 	private void updateMission(Mission missionToUpdate) {
 		try {
-			int result = this.collabService.updateMission(missionToUpdate);
+			int result = this.collabService.saveMission(missionToUpdate);
 			if(result !=0){
 				//TODO centraliser les messages
 				CUtils.showMessage("La mission a bien été mise à jour. Result =" + result, Message.INFO, getWindow());
@@ -337,26 +337,26 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param missionToDelete
 	 */
 	public void deleteMission(int idMissionToDelete) {
-		try {
-//			int result = this.collabService.deleteMission(idMissionToDelete);
-			
-			if(this.collabService.deleteMission(idMissionToDelete)!=0){
-				setCurrentAction(ACTION_DELETE);
-
-				//TODO centraliser les messages
-				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
-				
-				//creates a new list
-				refreshListMission();
-				
-			} else {
-				//TODO : que faire?
-				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+////			int result = this.collabService.deleteMission(idMissionToDelete);
+//			
+//			if(this.collabService.deleteMission(idMissionToDelete)!=0){
+//				setCurrentAction(ACTION_DELETE);
+//
+//				//TODO centraliser les messages
+//				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
+//				
+//				//creates a new list
+//				refreshListMission();
+//				
+//			} else {
+//				//TODO : que faire?
+//				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	private void cancelInsertMission() {
