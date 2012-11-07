@@ -359,8 +359,7 @@ public class ManageSkillContent extends VerticalLayout implements
 			try {
 
 				// Add the skill in database
-				Map<String, Object> mapNotification = this.adminService
-						.addOneSkill(vSkill);
+				Map<String, Object> mapNotification = this.adminService.addSkill(vSkill);
 				CUtils.showMessage(mapNotification, getWindow());
 
 				// Re build the tree skill

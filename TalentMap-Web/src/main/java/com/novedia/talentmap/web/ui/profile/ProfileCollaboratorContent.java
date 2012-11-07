@@ -322,7 +322,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 				collab.setProfile_id(this.profileService.getProfile(
 						collab.getProfile_id()).getId());
 			}
-			return this.collabService.updateCollaborator(collab);
+			return this.collabService.saveCollaborator(collab);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -340,7 +340,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		Mission mission = missionItem.getBean();
 		try {
-			return this.collabService.updateMission(mission);
+			return this.collabService.saveMission(mission);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

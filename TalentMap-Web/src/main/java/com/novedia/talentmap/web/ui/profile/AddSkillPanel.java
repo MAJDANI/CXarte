@@ -394,7 +394,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	
 	private void updateOneSkill(Skill skill) throws Exception{
 		
-		this.skillService.updateOneSkill(skill);
+		this.skillService.saveSkill(skill);
 
 		getWindow().showNotification("Compétence modifiée",
 				Notification.TYPE_TRAY_NOTIFICATION);
@@ -404,7 +404,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	
 	private void addOneNewSkill(Skill skill) throws Exception{
 		
-		this.skillService.addOneSkill(skill);
+		this.skillService.addSkill(skill);
 
 		getWindow().showNotification("Compétence ajoutée",
 				Notification.TYPE_TRAY_NOTIFICATION);
