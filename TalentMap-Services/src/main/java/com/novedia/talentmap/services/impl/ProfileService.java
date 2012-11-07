@@ -2,9 +2,11 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IProfileService;
-import com.novedia.talentmap.store.IProfileDao;
+import com.novedia.talentmap.store.IDao;
 
 /**
  * Profile Services
@@ -15,48 +17,32 @@ import com.novedia.talentmap.store.IProfileDao;
  */
 public class ProfileService implements IProfileService {
 	
-	private IProfileDao profileDao;
-
 	/**
-	 * Get the profileDao value
-	 * @return the profileDao
+	 * profile DAO
 	 */
-	public IProfileDao getProfileDao() {
+	private IDao<Profile> profileDao;
+
+	public IDao<Profile> getProfileDao() {
 		return profileDao;
 	}
 
-	/**
-	 * Select all Profiles
-	 */
-	@Override
-	public List<Profile> getAllProfile() throws Exception {
-		
-		return profileDao.selectAll();
-	}
-	
-	/**
-	 * Get One Profile By Id
-	 */
-	@Override
-	public Profile getProfile(int id) throws Exception {
-	
-		return profileDao.getById(id);
-	}
-	
-	/**
-	 * Get One Profile By Type
-	 */
-	public Profile getProfile(String type) throws Exception{
-		
-		return this.profileDao.getByType(type);
-	}
-	
-	/**
-	 * Set the profileDao value
-	 * @param profileDao the profileDao to set
-	 */
-	public void setProfileDao(IProfileDao profileDao) {
+	public void setProfileDao(IDao<Profile> profileDao) {
 		this.profileDao = profileDao;
 	}
 
+	@Override
+	public List<Profile> getAllProfile() throws DataAccessException {
+		return profileDao.getAll();
+	}
+
+	@Override
+	public Profile getProfile(Integer id) throws DataAccessException {	
+		return profileDao.get(id);
+	}
+
+	@Override
+	public Profile getProfile(String type) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -44,8 +44,7 @@ public abstract class ScoreManage {
 		return result/nbTool; 
 	}
 
-	public static double ToolScore(double toolScore, double frequencyUseScore,
-			double noUsingTimeScore) {
+	public static double ToolScore(double toolScore, double frequencyUseScore, double noUsingTimeScore) {
 		
 		int j = 4;
 		int noUsingTimeInverse = 0;

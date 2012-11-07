@@ -2,6 +2,8 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Collaborator;
 
 /**
@@ -20,7 +22,7 @@ public interface IManagerService {
 	 * @return all collaborators who depend on the manager 
 	 * @throws Exception
 	 */
-	List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws Exception;
+	List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws DataAccessException;
 	
 	/**
 	 * Get One Collaborator By ID
@@ -29,5 +31,5 @@ public interface IManagerService {
 	 * @return
 	 * @throws Exception
 	 */
-	Collaborator getCollaborator(int id) throws Exception;
+	Collaborator getCollaborator(int id) throws DataAccessException;
 }

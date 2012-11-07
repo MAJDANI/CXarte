@@ -2,6 +2,8 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Profile;
 /**
  * Interface Profile Services
@@ -18,7 +20,7 @@ public interface IProfileService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Profile> getAllProfile() throws Exception;
+	List<Profile> getAllProfile() throws DataAccessException;
 	
 	/**
 	 * Get One Profile By Id
@@ -27,7 +29,7 @@ public interface IProfileService {
 	 * @return
 	 * @throws Exception
 	 */
-	Profile getProfile(int id) throws Exception;
+	Profile getProfile(Integer id) throws DataAccessException;
 	
 	/**
 	 * Get One Profile By Type
@@ -36,5 +38,5 @@ public interface IProfileService {
 	 * @return
 	 * @throws Exception
 	 */
-	Profile getProfile(String type) throws Exception;
+	Profile getProfile(String type) throws DataAccessException;
 }

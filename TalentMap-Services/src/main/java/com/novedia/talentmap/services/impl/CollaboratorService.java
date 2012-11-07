@@ -2,223 +2,110 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.ICollaboratorService;
-import com.novedia.talentmap.store.ICollaboratorDao;
-import com.novedia.talentmap.store.IManagerDao;
-import com.novedia.talentmap.store.IMissionDao;
-import com.novedia.talentmap.store.ISkillDao;
+import com.novedia.talentmap.store.IDao;
+
 
 /**
  * Collaborator Services
+ * 
  * @author j.collet
  * @project TalentMap-Services
  * @package com.novedia.talentmap.services.impl
  * @created 21 mai 2012
  */
-public class CollaboratorService implements ICollaboratorService  {
-	
-	private ICollaboratorDao collabDao;
-	private IMissionDao missionDao;
-	private IManagerDao managerDao;
-	private ISkillDao skillDao;
-
-	/**
-	 * Select All Collaborators
-	 */
-	@Override
-	public List<Collaborator> getAllCollaborator() throws Exception {
-		
-		return collabDao.selectAll();
-	}
+public class CollaboratorService implements ICollaboratorService{
 	
 	/**
-	 * Get One Collaborator By ID
+	 * The collaborator DAO
 	 */
-	@Override
-	public Collaborator getCollaborator(int id) throws Exception {
-		
-		return collabDao.getById(id);
-	}
+	private IDao<Collaborator> collaboratorDao;
 	
 	/**
-	 * Update One Collaborator
+	 * The mission DAO
 	 */
+	private IDao<Mission> missionDao;
+	
 	@Override
-	public int updateCollaborator(Collaborator collaborator) throws Exception {
-		
-		return collabDao.update(collaborator);
+	public List<Collaborator> getAllCollaborator() throws DataAccessException {
+		return collaboratorDao.getAll();
 	}
 
-	/**
-	 * Update one Mission
-	 */
 	@Override
-	public int updateMission(Mission mission) throws Exception {
-		
-		return missionDao.update(mission);
+	public Collaborator getCollaborator(Integer id) throws DataAccessException {
+		return collaboratorDao.get(id);
 	}
 
-	/**
-	 * Inserts one Mission
-	 */
 	@Override
-	public int insertMission(Mission mission) throws Exception {
-		//TODO garder add(Mission) ou insert(Mission)
-		return missionDao.insert(mission);
+	public int saveCollaborator(Collaborator collaborator) throws DataAccessException {
+		return collaboratorDao.save(collaborator);
 	}
 
-	/**
-	 * Get One Mission By ID
-	 */
 	@Override
-	public Mission getMission(int missionId) throws Exception {
-		
-		return missionDao.getById(missionId);
-	}
-	
-	/**
-	 * Get One Manager By ID
-	 */
-	@Override
-	public Manager getManager(int manager_id) throws Exception {
-		
-		return managerDao.getById(manager_id);
-	}
-	
-	/**
-	 * Set the collabDao value
-	 * @param collabDao the collabDao to set
-	 */
-	public void setCollabDao(ICollaboratorDao collabDao) {
-		this.collabDao = collabDao;
-	}
-	
-	/**
-	 * Set the missionDao value
-	 * @param missionDao the missionDao to set
-	 */
-	public void setMissionDao(IMissionDao missionDao) {
-		this.missionDao = missionDao;
-	}
-	
-	/**
-	 * Set the managerDao value
-	 * @param managerDao the managerDao to set
-	 */
-	public void setManagerDao(IManagerDao managerDao) {
-		this.managerDao = managerDao;
-	}
-	
-	/**
-	 * Set the skillDao value
-	 * @param skillDao the skillDao to set
-	 */
-	public void setSkillDao(ISkillDao skillDao) {
-		this.skillDao = skillDao;
+	public int deleteMission(Mission mission) throws DataAccessException {
+		return missionDao.delete(mission);
 	}
 
-
-	/**
-	 * Select All Collaborators by lastName
-	 * @param lastName : a lastName
-	 * @return all collaborators who has the lastName specified
-	 * @author v.guillemain
-	 */
 	@Override
-	public List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws Exception {
-		
-		return collabDao.getAllCollaboratorsByLastName(lastName);
+	public int addMission(Mission mission) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	/**
-	 * Select All Collaborators by toolId
-	 * @param toolId : a toolId
-	 * @return all collaborators who has a competence on the tool specified
-	 * @author v.guillemain
-	 */
 	@Override
-	public List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws Exception {
-		//TODO : cette méthode n'est appelée par personne??
-		List<Integer> listCollaboratorId = skillDao.getAllCollaboratorsIdByToolId(toolId);
-		return collabDao.getAllCollaboratorsByListId(listCollaboratorId);
+	public int saveMission(Mission mission) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	/**
-	 * Select All Collaborators for a list of toolId
-	 * @param listToolId : a list of toolId
-	 * @return all collaborators who has a competence on each tool of the list
-	 * @author v.guillemain
-	 */
+
 	@Override
-	public List<Collaborator> getAllCollaboratorsByListToolId (List<Integer> listToolId) throws Exception {
-		System.out.println("CollaboratorService.getAllCollaboratorsByListToolId");
-		List<Integer> listCollabId;
-		List<Integer> listCollabId2;
-		
-		if (listToolId != null && !listToolId.isEmpty()) {
-			System.out.println("CS ***** 1 ****** dans le if, listToolId=" + listToolId);
-			int borneMax = listToolId.size();
-			int firstTool = listToolId.get(0);
-			
-			//******************************************************************
-			// POUR LE PREMIER TOOLID
-			//******************************************************************
-			System.out.println("CS ***** 2 ****** first tool ="+firstTool);
-			listCollabId = skillDao.getAllCollaboratorsIdByToolId(firstTool);
-			System.out.println("CS ***** 3 ****** listCollabId="+listCollabId+"pour tool="+firstTool);
-		
-			//******************************************************************
-			// POUR LES TOOLID SUIVANTS
-			//******************************************************************
-			System.out.println("borneMax="+borneMax);
-			for(int index=1; index < borneMax; index++) {
-				System.out.println("index="+index);
-				//si le premier toolId a donné un résultat
-				if(!listCollabId.isEmpty()) {
-					int toolId = listToolId.get(index);
-					System.out.println(" CS ***** 4 ****** CollabService toolId="+toolId);
-					listCollabId2 = skillDao.getAllCollaboratorIdByToolIdAndCollabList(toolId, listCollabId);
-					listCollabId.clear();
-					listCollabId.addAll(listCollabId2);
-				}
-			}
-			/* then we get the Collaborators corresponding */
-			List<Collaborator> listCollab = collabDao.getAllCollaboratorsByListId(listCollabId);
-			
-			for(Collaborator collab : listCollab) {
-				System.out.println("CS ***** 4 ****** : collab ="+collab);
-			}
-			
-			return listCollab;
-		}
+	public Mission getMission(int missionId) throws DataAccessException {
+		// TODO Auto-generated method stub
 		return null;
-
 	}
+
+	@Override
+	public List<Mission> getAllMission(int collabId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Manager getManager(int managerId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Collaborator> getAllCollaboratorsByToolId(int toolId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setCollaboratorDao(IDao<Collaborator> collaboratorDao) {
+		this.collaboratorDao = collaboratorDao;
+	}
+
+	public void setMissionDao(IDao<Mission> missionDao) {
+		this.missionDao = missionDao;
+	}	
 
 	
-	@Override
-	public List<Mission> getAllMission(int collabId) throws Exception {
-		
-		return this.missionDao.getByCollabId(collabId);
-	}
-
-	/**
-	 * Adding a mission in database
-	 * @deprecated
-	 */
-	@Override
-	public int addMission(Mission mission) throws Exception {
-		//TODO garder add(Mission) ou insert(Mission)
-		return this.missionDao.add(mission);
-	}
-
-	@Override
-	public int deleteMission(int idMission) throws Exception {
-		return missionDao.delete(idMission);
-	}
-	
-
 }

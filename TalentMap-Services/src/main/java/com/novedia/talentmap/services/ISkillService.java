@@ -3,6 +3,8 @@ package com.novedia.talentmap.services;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
@@ -25,7 +27,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	Skill getSkillByToolId(int collaboratorID, int toolId) throws Exception;
+	Skill getSkillByToolId(int collaboratorID, int toolId) throws DataAccessException;
 	
 	/**
 	 * Select all Collaborator Skills By id (new version)
@@ -34,7 +36,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<VSkillCollab> getAllSkillCollab(int collab_id) throws Exception;
+	List<VSkillCollab> getAllSkillCollab(int collab_id) throws DataAccessException;
 	
 	/**
 	 * Select all Collaborator Skills By Id(old version)
@@ -43,7 +45,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	Map<Category, Map> getAllCollaboratorSkill(int collabId) throws Exception;
+	Map<Category, Map> getAllCollaboratorSkill(int collabId) throws DataAccessException;
 	
 	/**
 	 * Select All Tools
@@ -61,7 +63,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<VSkill> getToolByConcept(String categoryName, String conceptName) throws Exception;
+	List<VSkill> getToolByConcept(String categoryName, String conceptName) throws DataAccessException;
 	
 	/**
 	 * Get One VSkill By Tool_Name
@@ -70,7 +72,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	VSkill getSkillByTool(String toolName) throws Exception;
+	VSkill getSkillByTool(String toolName) throws DataAccessException;
 	
 	/**
 	 * Select all VSkill By Category_Name
@@ -79,7 +81,7 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<VSkill> getConceptByCategory(String categoryName) throws Exception;
+	List<VSkill> getConceptByCategory(String categoryName) throws DataAccessException;
 	
 	/**
 	 * Add One Skill
@@ -87,7 +89,7 @@ public interface ISkillService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	void addOneSkill(Skill skill) throws Exception;
+	void addSkill(Skill skill) throws DataAccessException;
 	
 	/**
 	 * Update One Skill
@@ -95,7 +97,7 @@ public interface ISkillService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	void updateOneSkill(Skill skill) throws Exception;
+	void saveSkill(Skill skill) throws DataAccessException;
 	
 	/**
 	 * Get One Tool By Name
@@ -104,6 +106,6 @@ public interface ISkillService {
 	 * @return
 	 * @throws Exception
 	 */
-	Tool getToolByName(String name) throws Exception;
+	Tool getToolByName(String name) throws DataAccessException;
 	
 }

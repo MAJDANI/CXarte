@@ -1,57 +1,82 @@
 package com.novedia.talentmap.services.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.IAdminService;
-import com.novedia.talentmap.store.ICategoryDao;
-import com.novedia.talentmap.store.IConceptDao;
-import com.novedia.talentmap.store.IToolDao;
+import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 
 public class AdminService implements IAdminService {
 
-	private IToolDao toolDao;
-	private IConceptDao conceptDao;
-	private ICategoryDao categoryDao;
+	/**
+	 * The tool DAO
+	 */
+	private IDao<Tool> toolDao;
+	
+	/**
+	 * The category DAO
+	 */
+	private IDao<Category> categoryDao;
+	
+	/**
+	 * The concept DAO
+	 */
+	private IDao<Concept> conceptDao;
+	
+	/**
+	 * The skill DAO
+	 */
 	private IVSkillDao vSkillDao;
-
+	
+	/**
+	 * 
+	 */
 	private Category category;
+	
+	/**
+	 * 
+	 */
 	private Concept concept;
+	
+	/**
+	 * 
+	 */
 	private Tool tool;
 	
+	/**
+	 * 
+	 */
 	private Map<String, Object> mapNotification;
 
 	/**
 	 * Get all tools
 	 */
 	@Override
-	public List<Tool> getAllTools() throws Exception {
-
-		return toolDao.selectAll();
+	public List<Tool> getAllTools() throws DataAccessException{ 
+		return toolDao.getAll();
 	}
 
 	/**
 	 * Get all concepts
 	 */
 	@Override
-	public List<Concept> getAllConcepts() throws Exception {
-
-		return conceptDao.selectAll();
+	public List<Concept> getAllConcepts() throws DataAccessException {
+		return conceptDao.getAll();
 	}
 
 	/**
 	 * Get all categories
 	 */
 	@Override
-	public List<Category> getAllCategories() throws Exception {
-
-		return categoryDao.selectAll();
+	public List<Category> getAllCategories() throws DataAccessException {
+		return categoryDao.getAll();
 	}
 
 	/**
@@ -61,11 +86,10 @@ public class AdminService implements IAdminService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	private void saveCategory(VSkill skill) throws Exception {
+	private void saveCategory(VSkill skill) throws DataAccessException {
 
 		int categoryId;
-		this.category = this.categoryDao
-				.checkCategory(skill.getCategory_name());
+		this.category = this.categoryDao.check(skill.getCategory_name());
 
 		if (this.category == null && this.tool == null) {
 
@@ -90,17 +114,19 @@ public class AdminService implements IAdminService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	private void saveConcept(VSkill skill) throws Exception {
+	private void saveConcept(VSkill skill) throws DataAccessException {
 
 		int conceptId;
 		
 		if(this.category != null){
-			this.concept = this.conceptDao.checkConcept(skill.getConcept_name(),
-					this.category.getId());
+			// TODO : vérifier dans la précédente version du fichier la définition de cette méthode
+			//this.concept = this.conceptDao.checkConcept(skill.getConcept_name(), this.category.getId());
+			this.concept = this.conceptDao.check(skill.getConcept_name());
 		}
 
 		if (this.concept == null && this.tool == null) {
-
+			
+			// TODO : A virer !!!
 			this.concept = new Concept();
 			this.concept.setName(skill.getConcept_name());
 			this.concept.setCategory_id(this.category.getId());
@@ -113,8 +139,6 @@ public class AdminService implements IAdminService {
 			
 			this.concept.setId(conceptId);
 		}
-
-		
 	}
 
 	/**
@@ -125,48 +149,43 @@ public class AdminService implements IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean saveTool(VSkill skill) throws Exception {
+	private Tool saveTool(VSkill skill) throws DataAccessException {
 
 		if (this.tool == null) {
-
 			this.tool = new Tool();
 			tool.setName(skill.getTool_name());
 			tool.setConcept_id(this.concept.getId());
-
-			this.toolDao.save(this.tool);
-
-			return true;
-		} else {
-			VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());
-			
+			int toolId = this.toolDao.save(this.tool);
+			tool.setId(toolId);
+		} 
+		else {
+			VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
 			this.category = new Category();
 			this.category.setName(sk.getCategory_name());
-			
 			this.concept = new Concept();
 			this.concept.setName(sk.getConcept_name());
-			
-			return false;
-
 		}
+		
+		return tool;
 	}
 
 	/**
 	 * Add one Skill
 	 */
 	@Override
-	public Map<String, Object> addOneSkill(VSkill skill) throws Exception {
+	public Map<String, Object> addSkill(VSkill skill) throws DataAccessException {
 
-		this.tool = this.toolDao.checkTool(skill.getTool_name());
+		this.tool = this.toolDao.check(skill.getTool_name());
 		
 		saveCategory(skill);
 
 		saveConcept(skill);
 
-		if (saveTool(skill)) {
-
+		if (saveTool(skill) !=null) {
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "La compétence a bien été ajoutée");
-		} else {
+		}
+		else {
 
 			this.mapNotification.put("typeError", 2);
 			this.mapNotification.put(
@@ -181,42 +200,42 @@ public class AdminService implements IAdminService {
 	}
 	
 	@Override
-	public Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws Exception {
+	public Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws DataAccessException {
 		
 		if(category != null){
 			
-			this.categoryDao.update(category);
+			this.categoryDao.save(category);
 			
 			if(concept != null){
 				
-				this.conceptDao.update(concept);
+				this.conceptDao.save(concept);
 				
 				if(tool != null){
 					
-					this.toolDao.update(tool);
+					this.toolDao.save(tool);
 				}
 			}
 			
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "La compétence a bien été modifiée");
-		}else{
-		
+		}
+		else {
 			this.mapNotification.put("typeError", 2);
 			this.mapNotification.put("messageError", "Aucune compétence n'a été modifiée");
 		}
-		
 		
 		return this.mapNotification;
 	}
 	
 	@Override
-	public Map<String, Object> deleteCategory(int category_id) throws Exception {
-		
-		if(this.categoryDao.delete(category_id) > 0){
-			
+	public Map<String, Object> deleteCategory(int category_id) throws DataAccessException {
+		Category category = new Category();
+		category.setId(category_id);
+		if(this.categoryDao.delete(category) > 0){
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "La catégorie a bien été supprimée");
-		}else{
+		}
+		else{
 			
 			this.mapNotification.put("typeError", 3);
 			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
@@ -226,9 +245,12 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Map<String, Object> deleteConcept(int concept_id) throws Exception {
+	public Map<String, Object> deleteConcept(int concept_id) throws DataAccessException {
 
-		if(this.conceptDao.delete(concept_id) > 0){
+		Concept concept = new Concept();
+		concept.setId(concept_id);
+		
+		if(this.conceptDao.delete(concept) > 0){
 			
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "Le concept a bien été supprimé");
@@ -242,14 +264,16 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Map<String, Object> deleteTool(int tool_id) throws Exception {
+	public Map<String, Object> deleteTool(int tool_id) throws DataAccessException {
 
-		if(this.toolDao.delete(tool_id) > 0){
-			
+		Tool tool = new Tool();
+		tool.setId(tool_id);
+		
+		if(this.toolDao.delete(tool) > 0){	
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "L'outil a bien été supprimé");
-		}else{
-			
+		}
+		else{
 			this.mapNotification.put("typeError", 3);
 			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
 		}
@@ -259,33 +283,27 @@ public class AdminService implements IAdminService {
 
 
 	/**
-	 * Set the toolDao value
-	 * 
-	 * @param toolDao
-	 *            the toolDao to set
-	 */
-	public void setToolDao(IToolDao toolDao) {
-		this.toolDao = toolDao;
-	}
-
-	/**
-	 * Set the conceptDao value
-	 * 
-	 * @param conceptDao
-	 *            the conceptDao to set
-	 */
-	public void setConceptDao(IConceptDao conceptDao) {
-		this.conceptDao = conceptDao;
-	}
-
-	/**
-	 * Set the categoryDao value
 	 * 
 	 * @param categoryDao
-	 *            the categoryDao to set
 	 */
-	public void setCategoryDao(ICategoryDao categoryDao) {
+	public void setCategoryDao(IDao<Category> categoryDao) {
 		this.categoryDao = categoryDao;
+	}
+	
+	/**
+	 * 
+	 * @param conceptDao
+	 */
+	public void setConceptDao(IDao<Concept> conceptDao) {
+		this.conceptDao = conceptDao;
+	}
+	
+	/**
+	 * 
+	 * @param toolDao
+	 */
+	public void setToolDao(IDao<Tool> toolDao) {
+		this.toolDao = toolDao;
 	}
 	
 	/**
@@ -304,4 +322,28 @@ public class AdminService implements IAdminService {
 		this.mapNotification = mapNotification;
 	}
 
+	/**
+	 * 
+	 * @param category
+	 */
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	/**
+	 * 
+	 * @param concept
+	 */
+	public void setConcept(Concept concept) {
+		this.concept = concept;
+	}
+	
+	/**
+	 * 
+	 * @param tool
+	 */
+	public void setTool(Tool tool) {
+		this.tool = tool;
+	}
+	
 }

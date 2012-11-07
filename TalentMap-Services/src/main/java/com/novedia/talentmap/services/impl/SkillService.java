@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
@@ -13,12 +15,10 @@ import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.model.entity.VSkillCollab;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.services.ScoreManage;
-import com.novedia.talentmap.store.ICategoryDao;
-import com.novedia.talentmap.store.IConceptDao;
-import com.novedia.talentmap.store.ISkillDao;
-import com.novedia.talentmap.store.IToolDao;
+import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillCollabDao;
 import com.novedia.talentmap.store.IVSkillDao;
+import com.novedia.talentmap.store.impl.SkillDao;
 
 /**
  * Skill Services
@@ -30,32 +30,50 @@ import com.novedia.talentmap.store.IVSkillDao;
  */
 public class SkillService implements ISkillService {
 
-	private ISkillDao skillDao;
-	private IToolDao toolDao;
-	private IConceptDao conceptDao;
-	private ICategoryDao categoryDao;
+	/**
+	 * skill DAO
+	 */
+	private SkillDao skillDao;
+
+	/**
+	 * tool DAO
+	 */
+	private IDao<Tool> toolDao;
+
+	/**
+	 * concept DAO
+	 */
+	private IDao<Concept> conceptDao;
+
+	/**
+	 * category DAO
+	 */
+	private IDao<Category> categoryDao;
+
+	/**
+	 * VSkill DAO
+	 */
 	private IVSkillDao vSkillDao;
+
+	/**
+	 * VSkillCollaborator DAO
+	 */
 	private IVSkillCollabDao vSkillCollabDao;
 
-	/**
-	 * We take all Collaborator Skills By ID (new version)
-	 */
+	
 	@Override
-	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws Exception {
-		System.out.println("SkillService.getAllSkillCollab() collab_id=" + collab_id);
-		
+	public Skill getSkillByToolId(int collaboratorID, int toolId) throws DataAccessException {
+		return this.skillDao.getOneCollaboratorSkill(collaboratorID, toolId);
+	}
+
+	@Override
+	public List<VSkillCollab> getAllSkillCollab(int collab_id)throws DataAccessException {
 		return this.vSkillCollabDao.getAllSkillCollab(collab_id);
 	}
-	
-	/**
-	 * We take all Collaborator Skills By ID (old version)
-	 */
-	@Override
-	public Map<Category, Map> getAllCollaboratorSkill(int collab_id)
-			throws Exception {
-		System.out.println("SkillService.getAllCollaboratorSkill() collab_id=" + collab_id);
 
-		Map<String, List> skillMap = new HashMap<String, List>();
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAccessException {
 
 		List<Skill> listSkill = new ArrayList<Skill>();
 
@@ -70,33 +88,34 @@ public class SkillService implements ISkillService {
 		Map<Category, Map> mapCategory = new HashMap<Category, Map>();
 
 		// We take all Collaborators Skills
-		listSkill = skillDao.getAllCollaboratorSkill(collab_id);
+		listSkill = skillDao.getAllCollaboratorSkill(collabId);
 
 		System.out.println("on vient de récupérer listSkill=" + listSkill);
-		
+
 		System.out.println("--------------------------");
 		for (Skill s : listSkill) {
 			System.out.println("skill=" + s);
 		}
 		System.out.println("--------------------------");
 
-		System.out.println("on va construire toolMap en bouclant sur chaque skill");
+		System.out
+				.println("on va construire toolMap en bouclant sur chaque skill");
 
 		System.out.println("_____________________________");
 		// We build the Tool Map
 		for (Skill s : listSkill) {
-			Tool tool = toolDao.getById(s.getTool_id());
-			
-			System.out.println("tool=" + tool);
-			
-			//We give a score to the tool
+			Tool tool1 = toolDao.get(s.getTool_id());
+
+			System.out.println("tool=" + tool1);
+
+			// We give a score to the tool
 			int score = (int) ScoreManage.ToolScore(s.getScore(),
 					s.getUse_frequency(), s.getNo_using_time());
 			System.out.println("score=" + score);
-			
+
 			// We put only not null tool element in mapTool
-			if(tool != null){
-				mapTool.put(tool, score);			
+			if (tool1 != null) {
+				mapTool.put(tool1, score);
 			}
 
 		}
@@ -106,71 +125,83 @@ public class SkillService implements ISkillService {
 			System.out.println("entry=" + entry);
 		}
 
-			
 		List<Integer> listToolScore = new ArrayList<Integer>();
 		Concept conceptTMP = null;
 		double conceptScore = 0;
-		
+
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		// We build the Concept Map
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
-			//TODO : NullPointerException
+			// TODO : NullPointerException
 			System.out.println("++++++++++++++++++");
-			System.out.println("entry="+entry);
-			System.out.println("entry.getKey()="+entry.getKey());//devient NULL
-			System.out.println("entry.getKey().getConcept_id()="+entry.getKey().getConcept_id());
-			Concept concept = conceptDao.getById(entry
-					.getKey().getConcept_id());
-			
-			
-			if(!mapConcept.isEmpty()){
-				
-				//We calculate the Concept Score
-				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-				
+			System.out.println("entry=" + entry);
+			System.out.println("entry.getKey()=" + entry.getKey());// devient
+																	// NULL
+			System.out.println("entry.getKey().getConcept_id()="
+					+ entry.getKey().getConcept_id());
+			Integer concept_id = entry.getKey().getConcept_id();
+
+			Concept concept = getConceptById(concept_id);
+
+			if (!mapConcept.isEmpty()) {
+
+				// We calculate the Concept Score
+				// TODO : CODE à MODIFIER nécessitant de récupérer
+				// programatiquement les outil correspondant à ce concept
+
+				// conceptScore = ScoreManage.ConceptScore(listToolScore,
+				// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
+				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao
+						.getAll().size());
+
 				Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
 				mapConcept.remove(conceptTMP);
-				
+
 				conceptTMP.setScore(conceptScore);
 				mapConcept.put(conceptTMP, mapTMP);
-				
+
 				conceptTMP = concept;
-			}else{
+			} else {
 				conceptTMP = concept;
 			}
-			
+
 			if (!mapConcept.containsKey(concept)) {
-				
+
 				listToolScore.clear();
-				
+
 				mapConcept.put(concept, new HashMap<Tool, Integer>());
 				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
-				
+
 			} else {
-				
+
 				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
 			}
-			
-			//We put in the list the Tool Score
+
+			// We put in the list the Tool Score
 			listToolScore.add(entry.getValue());
 		}
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
-		//We calculate the score of the last concept if it's not null
-		if(conceptTMP != null){
-			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-			
+		// We calculate the score of the last concept if it's not null
+		if (conceptTMP != null) {
+
+			// TODO : A refactorer - idem précédent
+			// conceptScore = ScoreManage.ConceptScore(listToolScore,
+			// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
+			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao
+					.getAll().size());
+
 			Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
 			mapConcept.remove(conceptTMP);
-			
+
 			conceptTMP.setScore(conceptScore);
 			mapConcept.put(conceptTMP, mapTMP);
 		}
 
 		// We build the Category Map
 		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
-			Category category = categoryDao.getById(entry
-					.getKey().getCategory_id());
+
+			Category category = getCategoryById(entry.getKey().getCategory_id());
 
 			if (!mapCategory.containsKey(category)) {
 				mapCategory.put(category, new HashMap<Concept, Map>());
@@ -186,133 +217,128 @@ public class SkillService implements ISkillService {
 		return mapCategory;
 	}
 
-	/**
-	 * Select all Tools
-	 */
-	public List<Tool> getAllTools() throws Exception {
-		System.out.println("SkillService.getAllTools()");
-
-		return toolDao.selectAll();
+	@Override
+	public List<Tool> getAllTools() throws DataAccessException {
+		return toolDao.getAll();
 	}
 
-	/**
-	 * Get One VSkill By Tool Name
-	 */
-	public VSkill getSkillByTool(String toolName) throws Exception {
-		System.out.println("SkillService.getSkillByTool() toolName=" + toolName);
-
-		return vSkillDao.getSkillByTool(toolName);
-	}
-
-	/**
-	 * Select all VSkill By Category_Name and Concept_Name
-	 */
+	@Override
 	public List<VSkill> getToolByConcept(String categoryName, String conceptName)
-			throws Exception {
-		System.out.println("SkillService.getToolByConcept() categoryName=" + categoryName + "conceptName=" +conceptName );
-
+			throws DataAccessException {
 		return vSkillDao.getToolByConcept(categoryName, conceptName);
 	}
 
-	/**
-	 * Select all VSkill By Category_Name
-	 */
-	public List<VSkill> getConceptByCategory(String categoryName)
-			throws Exception {
-		System.out.println("SkillService.getConceptByCategory() categoryName=" + categoryName);
+	@Override
+	public VSkill getSkillByTool(String toolName) throws DataAccessException {
+		return vSkillDao.getSkillByTool(toolName);
+	}
 
+	@Override
+	public List<VSkill> getConceptByCategory(String categoryName)
+			throws DataAccessException {
 		return vSkillDao.getConceptByCategory(categoryName);
 	}
 
-	/**
-	 * Add One Skill
-	 */
 	@Override
-	public void addOneSkill(Skill skill) throws Exception {
+	public void addSkill(Skill skill) throws DataAccessException {
+		this.skillDao.add(skill);
 
-		this.skillDao.addOneSkill(skill);
 	}
-	
-	/**
-	 * Update One Skill
-	 */
+
 	@Override
-	public void updateOneSkill(Skill skill) throws Exception {
-		
-		this.skillDao.updateOneSkill(skill);
+	public void saveSkill(Skill skill) throws DataAccessException {
+		skillDao.save(skill);
 	}
-	
-	/**
-	 * Get One Tool By Name
-	 */
-	public Tool getToolByName(String name) throws Exception {
 
+	@Override
+	public Tool getToolByName(String name) throws DataAccessException {
 		return toolDao.getByName(name);
 	}
 
+	// INTERNAL METHODS
+
 	/**
-	 * Set the skillDao value
+	 * Get a concept by the value of its id
 	 * 
-	 * @param skillDao
-	 *            the skillDao to set
+	 * @param concept_id
 	 */
-	public void setSkillDao(ISkillDao skillDao) {
-		this.skillDao = skillDao;
+	private Concept getConceptById(Integer concept_id) {
+
+		List<Concept> conceptList = conceptDao.getAll();
+		Concept currentConcept = null;
+		for (Concept concept : conceptList) {
+			if (concept.getId().equals(concept_id)) {
+				currentConcept = concept;
+			}
+		}
+		return currentConcept;
 	}
 
 	/**
-	 * Set the toolDao value
+	 * Get a concept by the value of its id
 	 * 
+	 * @param concept_id
+	 */
+	private Category getCategoryById(Integer category_id) {
+
+		List<Category> categoryList = categoryDao.getAll();
+		Category currentCategory = null;
+		for (Category category : categoryList) {
+			if (category.getId().equals(category_id)) {
+				currentCategory = category;
+			}
+		}
+		return currentCategory;
+	}
+
+	// SETTERS
+	
+	/**
+	 * Set the tool DAO
 	 * @param toolDao
-	 *            the toolDao to set
 	 */
-	public void setToolDao(IToolDao toolDao) {
+	public void setToolDao(IDao<Tool> toolDao) {
 		this.toolDao = toolDao;
-	}
-
-	/**
-	 * Set the conceptDao value
-	 * 
-	 * @param conceptDao
-	 *            the conceptDao to set
-	 */
-	public void setConceptDao(IConceptDao conceptDao) {
-		this.conceptDao = conceptDao;
-	}
-
-	/**
-	 * Set the categoryDao value
-	 * 
-	 * @param categoryDao
-	 *            the categoryDao to set
-	 */
-	public void setCategoryDao(ICategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
-
-	/**
-	 * Set the vconceptDao value
-	 * 
-	 * @param vconceptDao
-	 *            the vconceptDao to set
-	 */
-	public void setVSkillDao(IVSkillDao vSkillDao) {
-		this.vSkillDao = vSkillDao;
-	}
-
-	@Override
-	public Skill getSkillByToolId(int collaboratorId, int toolId)
-			throws Exception {
-
-		return this.skillDao.getOneCollaboratorSkill(collaboratorId, toolId);
 	}
 	
 	/**
-	 * Set the vSkillCollabDao value
-	 * @param vSkillCollabDao the vSkillCollabDao to set
+	 * Set the concept DAO 
+	 * @param conceptDao
+	 */
+	public void setConceptDao(IDao<Concept> conceptDao) {
+		this.conceptDao = conceptDao;
+	}
+	
+	/**
+	 * Set the category DAO 
+	 * @param categoryDao
+	 */
+	public void setCategoryDao(IDao<Category> categoryDao) {
+		this.categoryDao = categoryDao;
+	}
+	
+	/**
+	 * Set the vSkill DAO 
+	 * @param vSkillDao
+	 */
+	public void setvSkillDao(IVSkillDao vSkillDao) {
+		this.vSkillDao = vSkillDao;
+	}
+	
+	/**
+	 * Set the vSkillCollaborator DAO 
+	 * @param vSkillCollabDao
 	 */
 	public void setvSkillCollabDao(IVSkillCollabDao vSkillCollabDao) {
 		this.vSkillCollabDao = vSkillCollabDao;
+	}
+	
+	/**
+	 * Set the skill DAO 
+	 * @param skillDao
+	 */
+	public void setSkillDao(SkillDao skillDao) {
+		this.skillDao = skillDao;
 	}
 
 }

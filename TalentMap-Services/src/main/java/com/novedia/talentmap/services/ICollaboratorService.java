@@ -8,7 +8,8 @@ import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 /**
- * Interface Collaborator Services
+ * Collaborator Service Interface.
+ * 
  * @author j.collet
  * @project TalentMap-Services
  * @package com.novedia.talentmap.services
@@ -17,7 +18,8 @@ import com.novedia.talentmap.model.entity.Mission;
 public interface ICollaboratorService {
 	
 	/**
-	 * Select all Collaborators
+	 * Get all collaborators
+	 * 
 	 * @class ICollaboratorService.java
 	 * @return List<Collaborator>
 	 * @throws Exception
@@ -25,41 +27,32 @@ public interface ICollaboratorService {
 	List<Collaborator> getAllCollaborator() throws DataAccessException;
 	
 	/**
-	 * Get One Collaborator By Id
+	 * Get a Collaborator
+	 * 
 	 * @class ICollaboratorService.java
 	 * @param id
 	 * @return Collaborator
 	 * @throws Exception
 	 */
-	Collaborator getCollaborator(Collaborator collaborator) throws DataAccessException;
+	Collaborator getCollaborator(Integer id) throws DataAccessException;
 	
 	/**
-	 * Update One Collaborator
+	 * Save a collaborator
 	 * @class ICollaboratorService.java
 	 * @param collaborator
 	 * @return int
 	 * @throws Exception
 	 */
-	int updateCollaborator(Collaborator collaborator) throws DataAccessException;
-
-	/**
-	 * Delete one Mission
-	 * @class ICollaboratorService.java
-	 * @param missionId : mission'id to delete
-	 * @return int 
-	 * @throws Exception
-	 */
-	int deleteMission(int idMission) throws DataAccessException;
-	
+	int saveCollaborator(Collaborator collaborator) throws DataAccessException;
 	
 	/**
-	 * Inserts one Mission
+	 * Add a mission
 	 * @class ICollaboratorService.java
 	 * @param mission
 	 * @return id of the mission inserted
 	 * @throws Exception
 	 */
-	int insertMission(Mission mission) throws DataAccessException;
+	int addMission(Mission mission) throws DataAccessException;
 
 	/**
 	 * Update one Mission
@@ -68,11 +61,21 @@ public interface ICollaboratorService {
 	 * @return int
 	 * @throws Exception
 	 */
-	int updateMission(Mission mission) throws DataAccessException;
+	int saveMission(Mission mission) throws DataAccessException;
 	
-
 	/**
-	 * Get one mission by the ID
+	 * Delete a mission
+	 * 
+	 * @class ICollaboratorService.java
+	 * @param missionId : mission'id to delete
+	 * @return int 
+	 * @throws Exception
+	 */
+	int deleteMission(Mission mission) throws DataAccessException;
+	
+	/**
+	 * Get a mission
+	 * 
 	 * @class ICollaboratorService.java
 	 * @param missionId
 	 * @return Mission
@@ -82,6 +85,7 @@ public interface ICollaboratorService {
 	
 	/**
 	 * Get all Collaborators' Mission By Collab_ID
+	 * 
 	 * @class ICollaboratorService.java
 	 * @param collab_id
 	 * @return List<Mission>
@@ -127,15 +131,4 @@ public interface ICollaboratorService {
 	 * @throws Exception
 	 */
 	List<Collaborator> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws DataAccessException;
-
-	/***
-	 * Adding a new Mission in database
-	 * @deprecated
-	 * @class ICollaboratorService.java
-	 * @param mission
-	 * @return int
-	 * @throws Exception
-	 */
-	int addMission(Mission mission) throws DataAccessException;
-	
 }

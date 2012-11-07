@@ -3,11 +3,19 @@ package com.novedia.talentmap.services;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 
+/**
+ * Administration Service Interface.
+ * 
+ * @author j.marie-sainte
+ *
+ */
 public interface IAdminService {
 
 	/**
@@ -16,7 +24,7 @@ public interface IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Tool> getAllTools() throws Exception; 
+	List<Tool> getAllTools() throws DataAccessException; 
 	
 	/**
 	 * Get all concepts
@@ -24,7 +32,7 @@ public interface IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Concept> getAllConcepts() throws Exception; 
+	List<Concept> getAllConcepts() throws DataAccessException; 
 
 	/**
 	 * Get all categories
@@ -32,7 +40,7 @@ public interface IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Category> getAllCategories() throws Exception; 
+	List<Category> getAllCategories() throws DataAccessException; 
 	
 	/**
 	 * Add one skill
@@ -41,7 +49,7 @@ public interface IAdminService {
 	 * @return Return an error message callback 
 	 * @throws Exception
 	 */
-	Map<String, Object> addOneSkill(VSkill skill) throws Exception;
+	Map<String, Object> addSkill(VSkill skill) throws DataAccessException;
 	
 	/**
 	 * Update one skill
@@ -50,7 +58,7 @@ public interface IAdminService {
 	 * @return Return an error message callback
 	 * @throws Exception
 	 */
-	Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws Exception;
+	Map<String, Object> updateOneSkill(Category category, Concept concept, Tool tool) throws DataAccessException;
 	
 	/**
 	 * Delete one category (and his concepts and tools)
@@ -68,7 +76,7 @@ public interface IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	Map<String , Object> deleteConcept(int concept_id) throws Exception;
+	Map<String , Object> deleteConcept(int concept_id) throws DataAccessException;
 	
 	/**
 	 * Delete one tool
@@ -77,5 +85,5 @@ public interface IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	Map<String, Object> deleteTool(int tool_id) throws Exception;
+	Map<String, Object> deleteTool(int tool_id) throws DataAccessException;
 }

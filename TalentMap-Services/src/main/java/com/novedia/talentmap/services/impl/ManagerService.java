@@ -2,44 +2,61 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.IManagerService;
-import com.novedia.talentmap.store.ICollaboratorDao;
-import com.novedia.talentmap.store.IManagerDao;
+import com.novedia.talentmap.store.IDao;
 
+/**
+ * The manager service
+ * 
+ * @author j.marie-sainte
+ *
+ */
 public class ManagerService implements IManagerService {
-
-	private IManagerDao managerDao;
-	private ICollaboratorDao collabDao;
+	
+	/**
+	 * manager DAO
+	 */
+	private IDao<Manager> managerDao;
+	
+	/**
+	 * collaborator DAO
+	 */
+	private  IDao<Collaborator> collaboratorDao;
+	
 
 	@Override
 	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId)
-			throws Exception {
-		return managerDao.getAllCollaboratorsByManagerId(managerId);
+			throws DataAccessException {
+		return ((IManagerService) managerDao).getAllCollaboratorsByManagerId(managerId);
 	}
 	
 	/**
 	 * Get One Collaborator By ID
-	 */
+	 */	
 	@Override
-	public Collaborator getCollaborator(int id) throws Exception {
-		
-		return collabDao.getById(id);
+	public Collaborator getCollaborator(int id) throws DataAccessException {
+		return collaboratorDao.get(id);
 	}
 	
 	/**
-	 * Set the managerDao value
-	 * @param managerDao the managerDao to set
+	 * Set the manager DAO
+	 * @param managerDao
 	 */
-	public void setManagerDao(IManagerDao managerDao) {
+	public void setManagerDao(IDao<Manager> managerDao) {
 		this.managerDao = managerDao;
 	}
 	
 	/**
-	 * Set the collabDao value
-	 * @param collabDao the collabDao to set
+	 * Set the collaborator DAO
+	 * @param collaboratorDao
 	 */
-	public void setCollabDao(ICollaboratorDao collabDao) {
-		this.collabDao = collabDao;
+	public void setCollaboratorDao(IDao<Collaborator> collaboratorDao) {
+		this.collaboratorDao = collaboratorDao;
 	}
+	
+	
 }
