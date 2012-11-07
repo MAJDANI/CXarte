@@ -1,6 +1,7 @@
 package com.novedia.talentmap.store.utils;
 /**
- * This class contains static constants representing the request used to fetch TMP datas.
+ * This class provides static constants ids matching the sqlmap-[entity].xml requests used by IBATIS.
+ * 
  * @author j.marie-sainte
  *
  */
@@ -9,24 +10,40 @@ public final class DBRequestsConstants {
 	// COLLABORATOR REQUESTS
 	
 	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String GET_COLLABORATOR = "collaborator.get";
+	
+	/**
 	 * Constant request id to get all the collaborators 
 	 */
-	public final static String GET_ALL_COLLABORATOR = "collaborator.getAllCollaborator";
+	public final static String GET_ALL_COLLABORATOR = "collaborator.getAll";
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
+	public final static String ADD_COLLABORATOR = "collaborator.add";
+	
+	/**
+	 * Constant request id to delete a collaborator 
+	 */
+	public final static String DELETE_COLLABORATOR = "collaborator.delete";
 	
 	/**
 	 * Constant request id to update a collaborator 
 	 */
-	public final static String UPDATE_COLLABORATOR = "collaborator.updateCollaborator";
+	public final static String SAVE_COLLABORATOR = "collaborator.save";
 	
 	/**
 	 * Constant request id to get a collaborator 
 	 */
-	public final static String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllCollaboratorByLastName";
+	public final static String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllByLastName";
 	
 	/**
 	 * Constant request id to get a collaborator 
 	 */
-	public final static String GET_ALL_COLLABORATOR_BY_LIST_ID="collaborator.getAllCollaboratorsByListId";
+	public final static String GET_ALL_COLLABORATOR_BY_LIST_ID="collaborator.getAllByListId";
+	
 	
 	// CATEGORY REQUESTS
 	/**
@@ -42,7 +59,7 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request id to insert the category
 	 */
-	public final static String  INSERT_CATEGORY = "category.insert";
+	public final static String  ADD_CATEGORY = "category.add";
 	/**
 	 * Constant request id to check a category
 	 */
@@ -61,8 +78,10 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request id to get a collaborator 
 	 */
-	public final static String GET_COLLABORATOR = "collaborator.get";
+	public static final String GET_CATEGORY_BY_NAME = "category.getByName";
 	
+	
+	// CONCEPT REQUEST
 	/**
 	 * Constant request id to get a collaborator 
 	 */
@@ -101,6 +120,13 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request id to get a collaborator 
 	 */
+	public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
+	
+	// MANAGER REQUESTS
+	
+	/**
+	 * Constant request id to get a collaborator 
+	 */
 	public final static String GET_MANAGER = "manager.get";
 	
 	/**
@@ -108,7 +134,8 @@ public final class DBRequestsConstants {
 	 */
 	public final static String GET_COLLABORATORS_BY_MANAGER_ID="manager.getAllCollaboratorsByManagerId";
 	
-	// MISSION REQUEST
+	
+	// MISSION REQUESTS
 	
 	/**
 	 * Constant request id to get mission 
@@ -123,17 +150,15 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request id to insert mission 
 	 */
-	public final static String INSERT_MISSION = "mission.insert";
+	public final static String ADD_MISSION = "mission.add";
 	
 	/**
 	 * Constant request id to get a collaborator 
 	 */
-	public final static String UPDATE_MISSION = "mission.update";
+	public final static String SAVE_MISSION = "mission.save";
 	
-	/**
-	 * Constant request id to get a collaborator 
-	 */
-	public final static String ADD_MISSION = "mission.add";	
+	
+	// PROFILE REQUESTS
 	
 	/**
 	 * Constant request id to get a collaborator 
@@ -149,7 +174,6 @@ public final class DBRequestsConstants {
 	 * Constant request id to get a collaborator 
 	 */
 	public final static String GET_PROFILE ="profile.get";
-	
 
 	/**
 	 * Constant request id to get a collaborator 
@@ -157,17 +181,20 @@ public final class DBRequestsConstants {
 	
 	public static final String DELETE_PROFILE = "profile.delete";
 	
-
 	/**
 	 * Constant request id to get a collaborator 
 	 */
 	public final static  String SAVE_PROFILE = "profile.save";
-	
 
 	/**
 	 * Constant request id to get a collaborator 
 	 */
-	public  final static String INSERT_PROFILE = "profile.add";
+	public  final static String ADD_PROFILE = "profile.add";
+	
+	/**
+	 * Constant request id to get a profile by name
+	 */
+	public static final String GET_PROFILE_BY_NAME = "profile.getByName";
 	
 	/**
 	 * Constant request id to get a collaborator 
@@ -205,7 +232,7 @@ public final class DBRequestsConstants {
 	public final static String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
 	
 	
-	// TOOL REQUEST
+	// TOOL REQUESTS
 	
 	/**
 	 * Constant request id to get a collaborator 
@@ -248,7 +275,7 @@ public final class DBRequestsConstants {
 	public final static String GET_TOOL ="tool.get";
 	
 	
-	// VSKILL REQUEST
+	// VSKILL REQUESTS
 	
 	/**
 	 * Constant request id to get a collaborator 
@@ -274,14 +301,4 @@ public final class DBRequestsConstants {
 	 * Constant request id to get a collaborator 
 	 */
 	public final static String DELETE_MISSION = "mission.delete";
-	
-	/**
-	 * Constant request id to get a collaborator 
-	 */
-	public final static String ADD_COLLABORATOR = "collaborator.add";
-	
-	/**
-	 * Constant request id to delete a collaborator 
-	 */
-	public final static String DELETE_COLLABORATOR = "collaborator.delete";
 }
