@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Skill;
+import com.novedia.talentmap.model.entity.Tool;
 
 /**
  * The skill DAO interface.
@@ -52,4 +53,13 @@ public interface ISkillDao {
 	 * @throws Exception
 	 */
 	List<Integer> getAllCollaboratorIdByToolIdAndCollabList(int toolId, List<Integer> listCollabId) throws DataAccessException;
+	
+	/**
+	 * Get One Tool By Name
+	 * @class ISkillService.java
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	Tool getToolByName(String name) throws DataAccessException;
 }

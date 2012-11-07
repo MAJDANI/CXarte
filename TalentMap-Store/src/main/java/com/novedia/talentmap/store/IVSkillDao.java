@@ -3,6 +3,8 @@ package com.novedia.talentmap.store;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.entity.VSkill;
 
 /**
@@ -22,7 +24,7 @@ public interface IVSkillDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<VSkill> getToolByConcept(String categoryName, String conceptName) throws SQLException;
+	List<VSkill> getToolByConcept(String categoryName, String conceptName) throws DataAccessException;
 	
 	/**
 	 * Get One VSkill By Tool_Name
@@ -31,7 +33,7 @@ public interface IVSkillDao {
 	 * @return
 	 * @throws Exception
 	 */
-	VSkill getSkillByTool(String toolName) throws Exception;
+	VSkill getSkillByTool(String toolName) throws DataAccessException;
 	
 	/**
 	 * Select all VSkill By Category_Name
@@ -40,6 +42,6 @@ public interface IVSkillDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<VSkill> getConceptByCategory(String categoryName) throws SQLException;
+	List<VSkill> getConceptByCategory(String categoryName) throws DataAccessException;
 	
 }

@@ -20,7 +20,7 @@ public interface IDao<E> {
 	 * @return
 	 * @throws DataAccessException
 	 */
-	E get(E element) throws DataAccessException;
+	E get(Integer id) throws DataAccessException;
 	
 	/**
 	 * Get all Categories
@@ -53,6 +53,15 @@ public interface IDao<E> {
 	 * @throws DataAccessException
 	 */
 	int delete(E element) throws DataAccessException;
+	
+	/**
+	 * Get the element by name
+	 * 
+	 * @param name
+	 * @return
+	 * @throws DataAccessException
+	 */
+	E getByName(String name) throws DataAccessException;
 	
 	/**
 	 * Check if the element exists 
