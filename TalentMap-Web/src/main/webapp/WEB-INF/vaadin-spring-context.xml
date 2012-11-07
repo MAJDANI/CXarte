@@ -38,7 +38,7 @@
 	<bean id="vLayoutManager" class="com.vaadin.ui.VerticalLayout"/>
 	<bean id="managerField" class="com.vaadin.ui.TextField"/>
 	
-    <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm"  scope="session">
+    <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm" scope="session">
     	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
     	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator"/>
