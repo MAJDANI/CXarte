@@ -33,8 +33,8 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 	 * Get One Concept By Id
 	 */
 	@Override
-	public Concept get(Concept concept) throws DataAccessException {
-		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT,concept.getId());
+	public Concept get(Integer id) throws DataAccessException {
+		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT, id);
 	}
 	
 	/**
@@ -64,6 +64,12 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 	@Override
 	public Concept check(String name) throws DataAccessException {
 		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_CONCEPT, name);
+	}
+
+
+	@Override
+	public Concept getByName(String name) throws DataAccessException {
+		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT_BY_NAME, name);
 	}
 	
 }

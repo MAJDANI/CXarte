@@ -2,7 +2,6 @@ package com.novedia.talentmap.store.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -12,6 +11,7 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
+ * The collaborator DAO.
  * 
  * @author j.collet
  * @project TalentMap-Store
@@ -24,14 +24,13 @@ public class CollaboratorDao extends SqlMapClientDaoSupport implements IDao<Coll
 	 * Class builder based on sqlMapClient
 	 * @param sqlMapClient
 	 */
-	@Autowired
 	public CollaboratorDao(final SqlMapClient sqlMapClient){
 		setSqlMapClient(sqlMapClient);
 	}
 	
 	@Override
-	public Collaborator get(Collaborator collaborator) throws DataAccessException {
-		return (Collaborator) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLABORATOR, collaborator.getId());
+	public Collaborator get(Integer id) throws DataAccessException {
+		return (Collaborator) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLABORATOR, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,9 +55,14 @@ public class CollaboratorDao extends SqlMapClientDaoSupport implements IDao<Coll
 	}
 
 	@Override
-	public Collaborator check(String name) throws DataAccessException {
+	public Collaborator getByName(String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
+	public Collaborator check(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
+
 
 }

@@ -28,10 +28,9 @@ public class ProfileDao  extends SqlMapClientDaoSupport  implements IDao<Profile
 		setSqlMapClient(sqlMapClient);
 	}
 	
-	
 	@Override
-	public Profile get(Profile profile) throws DataAccessException {
-		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, profile);
+	public Profile get(Integer id) throws DataAccessException {
+		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,6 +68,12 @@ public class ProfileDao  extends SqlMapClientDaoSupport  implements IDao<Profile
 	 */
 	Profile getByType(String type) throws DataAccessException{
 		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE_BY_TYPE, type);
+	}
+
+
+	@Override
+	public Profile getByName(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
 	}
 
 }

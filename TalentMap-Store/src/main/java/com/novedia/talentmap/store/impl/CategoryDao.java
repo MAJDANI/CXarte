@@ -2,7 +2,6 @@ package com.novedia.talentmap.store.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -28,14 +27,13 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	 * Class builder based on sqlMapClient
 	 * @param sqlMapClient
 	 */
-	@Autowired
 	public CategoryDao(final SqlMapClient sqlMapClient){
 		setSqlMapClient(sqlMapClient);
 	}
 	
 	@Override
-	public Category get(Category category) throws DataAccessException {
-		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY, category.getId());
+	public Category get(Integer id) throws DataAccessException {
+		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -63,6 +61,11 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	@Override
 	public Category check(String name) throws DataAccessException {
 		return (Category)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_CATEGORY, name);
+	}
+
+	@Override
+	public Category getByName(String name) throws DataAccessException {
+		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_BY_NAME, name);
 	}
 
 }

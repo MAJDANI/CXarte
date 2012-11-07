@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Skill;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.ISkillDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
@@ -23,6 +24,11 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
 public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao, IDao<Skill> {
 	
 	/**
+	 * Tool DAO
+	 */
+	private IDao<Tool> toolDao;
+	
+	/**
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
@@ -31,7 +37,7 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao, IDao<
 	}
 		
 	@Override
-	public Skill get(Skill element) throws DataAccessException {
+	public Skill get(Integer id) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -117,5 +123,21 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao, IDao<
 			System.out.println("SDao +++++ 2 +++++ id = " + id);
 		}
 		return listResult;		
+	}
+
+	@Override
+	public Tool getToolByName(String name) throws DataAccessException {
+		return toolDao.getByName(name);
+	}
+
+	public void setToolDao(IDao<Tool> toolDao) {
+		this.toolDao = toolDao;
+	}
+
+	@Override
+	public Skill getByName(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
 	}	
+	
+	
 }

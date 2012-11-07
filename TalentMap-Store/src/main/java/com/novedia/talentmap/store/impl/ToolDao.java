@@ -32,8 +32,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 * Get Tool by id
 	 */
 	@Override
-	public Tool get(Tool tool) throws DataAccessException{
-		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL, tool.getId());
+	public Tool get(Integer id) throws DataAccessException{
+		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL, id);
 	}
 	
 	/**
@@ -63,5 +63,10 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	@Override
 	public int add(Tool tool) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.ADD_TOOL, tool.getId());
+	}
+
+	@Override
+	public Tool getByName(String name) throws DataAccessException {
+		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL_BY_NAME, name);
 	}
 }

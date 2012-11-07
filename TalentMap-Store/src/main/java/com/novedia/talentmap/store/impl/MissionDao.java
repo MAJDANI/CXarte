@@ -2,7 +2,6 @@ package com.novedia.talentmap.store.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -23,14 +22,13 @@ public class MissionDao extends SqlMapClientDaoSupport  implements IDao<Mission>
 	 * Class builder based on sqlMapClient
 	 * @param sqlMapClient
 	 */
-	@Autowired
 	public MissionDao(final SqlMapClient sqlMapClient){
 		setSqlMapClient(sqlMapClient);
 	}
 	
 	@Override
-	public Mission get(Mission mission) throws DataAccessException {
-		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MISSION, mission.getId());
+	public Mission get(Integer id) throws DataAccessException {
+		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MISSION, id);
 	}
 
 	@Override
@@ -55,6 +53,11 @@ public class MissionDao extends SqlMapClientDaoSupport  implements IDao<Mission>
 
 	@Override
 	public Mission check(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Mission getByName(String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
 }

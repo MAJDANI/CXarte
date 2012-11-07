@@ -12,6 +12,7 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
+ * Manager DAO.
  * 
  * @author j.marie-sainte
  *
@@ -22,13 +23,13 @@ public class ManagerDao  extends SqlMapClientDaoSupport implements IDao<Manager>
 	 * Set the sqlMapClient value
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
-	public ManagerDao(SqlMapClient sqlMapClient) {
+	public ManagerDao(final SqlMapClient sqlMapClient) {
 		setSqlMapClient(sqlMapClient);
 	}
 
 	@Override
-	public Manager get(Manager manager) throws DataAccessException {
-		return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, manager);
+	public Manager get(Integer id) throws DataAccessException {
+		return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -68,6 +69,11 @@ public class ManagerDao  extends SqlMapClientDaoSupport implements IDao<Manager>
 	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws DataAccessException {
 		return (List<Collaborator>) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_ALL_COLLABORATOR, managerId);
 				
+	}
+
+	@Override
+	public Manager getByName(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
 	}
 
 	
