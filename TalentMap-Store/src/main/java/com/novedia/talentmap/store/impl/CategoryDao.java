@@ -44,7 +44,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	
 	@Override
 	public int add(Category category) throws DataAccessException {
-		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_CATEGORY, category);
+		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_CATEGORY, category);
 	}
 
 	@Override

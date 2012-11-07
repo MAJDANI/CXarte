@@ -38,12 +38,12 @@ public class MissionDao extends SqlMapClientDaoSupport  implements IDao<Mission>
 
 	@Override
 	public int save(Mission mission) throws DataAccessException {
-		return this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_MISSION, mission);
+		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_MISSION, mission);
 	}
 
 	@Override
 	public int add(Mission mission) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.INSERT_MISSION, mission);
+		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_MISSION, mission);
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class CollaboratorDao extends SqlMapClientDaoSupport implements IDao<Coll
 
 	@Override
 	public int save(Collaborator collaborator) throws DataAccessException {
-		return this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_COLLABORATOR, collaborator.getId());
+		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_COLLABORATOR, collaborator.getId());
 	}
 
 	@Override
