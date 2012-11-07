@@ -32,9 +32,14 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		try {
 			List<Mission> listMission = this.collabService.getAllMission(MissionContainer.COLLAB_ID);
 			System.out.println("MissionContainer.fillContainer() listMission = " + listMission);
-			for(Mission m : listMission){
-				addBean(m);
-				System.out.println("MissionContainer.fillContainer() bean m = " + m);
+			
+			// TODO : Rustine pour éviter la NPE au démarrage de l'application
+			if(listMission!=null){
+				for(Mission m : listMission){
+					addBean(m);
+					System.out.println("MissionContainer.fillContainer() bean m = " + m);
+				}
+				
 			}
 			
 		} catch (Exception e) {
