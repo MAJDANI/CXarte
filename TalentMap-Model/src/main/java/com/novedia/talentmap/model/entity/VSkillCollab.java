@@ -2,11 +2,30 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class VSkillCollab implements Serializable{
 	
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = 8936460447975401894L;
+	/**
+	 * collaborator id associated the VSkillCollab
+	 */
 	private String collab_id;
+	/**
+	 * category name associated the VSkillCollab
+	 */
 	private String category_name;
+	/**
+	 * concept name associated the VSkillCollab
+	 */
 	private String concept_name;
+	/**
+	 * tool name associated the VSkillCollab
+	 */
 	private String tool_name;
 	
 	/**
@@ -30,6 +49,44 @@ public class VSkillCollab implements Serializable{
 	public VSkillCollab() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * allowed to display attribute of the object VSkill
+	 */
+	@Override
+	public String toString() {
+
+		StringBuilder strBld = new StringBuilder(); 
+		strBld.append("[category_name=").append(getCategory_name()).append(", ");
+		strBld.append("[tool_name=").append(getTool_name()).append(", ");
+		strBld.append("[concept_name=").append(getConcept_name()).append("]");
+		return strBld.toString();	
+	}
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+		hashBuilder.append(this.getCategory_name());
+		hashBuilder.append(this.getTool_name());
+		hashBuilder.append(this.getConcept_name());
+		return hashBuilder.hashCode();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null){
+			return false;			
+		}
+
+		if(!(obj instanceof VSkill)){
+			return false;
+		}
+	
+		VSkill comparedObj = (VSkill)obj;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getCategory_name(), comparedObj.getCategory_name());
+		ebuilder.append(this.getTool_name(), comparedObj.getTool_name());
+		ebuilder.append(this.getConcept_name(), comparedObj.getConcept_name());
+		return ebuilder.isEquals();
 	}
 	/**
 	 * Get the collab_id value

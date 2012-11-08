@@ -2,12 +2,34 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Skill implements Serializable{
 	
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = -4155288579083068658L;
+	/**
+	 * collaborator id associated the skill
+	 */
 	private Integer collaborator_id;
+	/**
+	 * tool id associated the skill
+	 */
 	private Integer tool_id;
+	/**
+	 * th score associated the skill
+	 */
 	private Integer score;
+	/**
+	 * Frequency of competence
+	 */
 	private Integer use_frequency;
+	/**
+	 * Frequency of competence not use
+	 */
 	private Integer no_using_time;
 	
 	
@@ -105,14 +127,49 @@ public class Skill implements Serializable{
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
+	/**
+	 * allowed to display attribute of the object Skill
+	 */	
 	@Override
 	public String toString() {
-		return "Skill [collaborator_id=" + collaborator_id + ", tool_id="
-				+ tool_id + ", score=" + score + ", use_frequency="
-				+ use_frequency + ", no_using_time=" + no_using_time + "]";
+		StringBuilder strBld = new StringBuilder(); 
+		strBld.append("[tool_id=").append(getTool_id()).append(", ");
+		strBld.append("[collaborator_id=").append(getCollaborator_id()).append(", ");
+		strBld.append("[use_frequency=").append(getUse_frequency()).append("]");
+		return strBld.toString();	
 	}
+
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+		hashBuilder.append(this.getTool_id());
+		hashBuilder.append(this.getCollaborator_id());
+		hashBuilder.append(this.getUse_frequency());
+		return hashBuilder.hashCode();
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null){
+			return false;			
+		}
+
+		if(!(obj instanceof Profile)){
+			return false;
+		}
+	
+		Skill comparedObj = (Skill)obj;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getTool_id(), comparedObj.getTool_id());
+		ebuilder.append(this.getCollaborator_id(), comparedObj.getCollaborator_id());
+		ebuilder.append(this.getUse_frequency(), comparedObj.getUse_frequency());
+		return ebuilder.isEquals();
+	}
 }

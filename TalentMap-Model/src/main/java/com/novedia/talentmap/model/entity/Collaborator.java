@@ -1,26 +1,63 @@
 package com.novedia.talentmap.model.entity;
 
+import java.awt.List;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Collaborator implements Serializable {
 	
 	/**
-	 * 
+	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -1323210979848908088L;
+	/**
+	 * entity indentify
+	 */
 	protected Integer id;
+	/**
+	 * manager id
+	 */
 	private Integer manager_id;
+	/**
+	 * profile id
+	 */
 	protected Integer profile_id;
+	/**
+	 * collaborator last nane
+	 */
 	protected String last_name;
+	/**
+	 * collaborator first nane
+	 */
 	protected String first_name;
+	/**
+	 * collaborator email
+	 */
 	protected String email;
+	/**
+	 * collaborator phone number
+	 */
 	protected Integer phone;
+	/**
+	 * collaborator employement date
+	 */
 	protected Date employment_date;
+	/**
+	 * collaborator experience
+	 */
 	protected Integer experience;
+	/**
+	 * collaborator job name
+	 */
 	protected String business_engineer;
 	
-	
+	private ArrayList<Mission> mission;
+	private ArrayList<Tool> tool;
 	
 	/**
 	 * Build the class Collaborator.java 
@@ -63,14 +100,50 @@ public class Collaborator implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Collaborator [id=" + id + ", manager_id=" + manager_id
-				+ ", profil_id=" + profile_id + ", last_name=" + last_name
-				+ ", first_name=" + first_name + ", email=" + email
-				+ ", phone=" + phone + ", employment_date=" + employment_date
-				+ ", experience=" + experience + ", business_engineer="
-				+ business_engineer + "]";
+		StringBuilder strBld = new StringBuilder(); 
+		strBld.append("[profil_id=").append(getId()).append(", ");
+		strBld.append("[first_name=").append(getFirst_name()).append(", ");
+		strBld.append("[last_name=").append(getLast_name()).append(", ");
+		strBld.append("[email=").append(getEmail()).append(", ");
+		strBld.append("[business_engineer=").append(getBusiness_engineer()).append(", ");
+		strBld.append("experience").append(getExperience()).append("] ");
+		return strBld.toString();		
 	}
+	/**
+	 * hash code method	
+	 */
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+		hashBuilder.append(this.getFirst_name());
+		hashBuilder.append(this.getLast_name());
+		hashBuilder.append(this.getEmail());
+		hashBuilder.append(this.getExperience());
+		return hashBuilder.hashCode();
+	}
+	/**
+	 * equals method
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null){
+			return false;			
+		}
+
+		if(!(obj instanceof Collaborator)){
+			return false;
+		}
 	
+		Collaborator comparedObj = (Collaborator)obj;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getEmail(), comparedObj.getEmail());
+		ebuilder.append(this.getFirst_name(), comparedObj.getFirst_name());
+		ebuilder.append(this.getLast_name(), comparedObj.getLast_name());
+		ebuilder.append(this.getExperience(), comparedObj.getExperience());
+		return ebuilder.isEquals();
+	}
+
+
 	/**
 	 * Get the id value
 	 * @return the id
@@ -213,5 +286,48 @@ public class Collaborator implements Serializable {
 	public void setBusiness_engineer(String business_engineer) {
 		this.business_engineer = business_engineer;
 	}
+
+	public ArrayList<Mission> getMission() {
+		return mission;
+	}
+
+	public void setMission(ArrayList<Mission> mission) {
+		this.mission = mission;
+	}
 	
+	
+	public ArrayList<Tool> getTool() {
+		return tool;
+	}
+
+	public void setTool(ArrayList<Tool> tool) {
+		this.tool = tool;
+	}
+
+	/**
+	 * create a List of Mission for Collaborator
+	 * @param mission
+	 * @return
+	 */
+	@SuppressWarnings("null")
+	public ArrayList<Mission> addMission( ArrayList<Mission> mission){
+		if(mission == null){
+			Mission m =  new Mission();
+			mission.add(m);
+		}
+		return mission;		
+	}
+	/**
+	 * create a List of Tool for Collaborator
+	 * @param mission
+	 * @return
+	 */
+	@SuppressWarnings("null")
+	public ArrayList<Tool> addTools( ArrayList<Tool> tool){
+		if(tool == null){
+			Tool t =  new Tool();
+			tool.add(t);
+		}
+		return tool;		
+	}
 }

@@ -2,9 +2,23 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+
 public class Category implements Serializable {
 	
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = 2472787207640474467L;
+	/**
+	 * id of Category
+	 */
 	private Integer id;
+	/**
+	 * category name
+	 */
 	private String name;
 	
 	
@@ -61,36 +75,35 @@ public class Category implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		HashCodeBuilder hBuilder =  new HashCodeBuilder();
+		hBuilder.append(this.getId());
+		hBuilder.append(this.getName());
+		return hBuilder.hashCode();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if (obj == null){
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if(!(obj instanceof Category)){
 			return false;
-		Category other = (Category) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+		}
+		Category comparedObj = (Category)obj;
+		EqualsBuilder equalsBuilder =  new EqualsBuilder();
+		equalsBuilder.append(this.getId(), comparedObj.getId());
+		return equalsBuilder.isEquals();		
 	}
-	
-	
+	/**
+	 * allowed to display attribute of the object Category
+	 */
+	@Override
+	public String toString() {		
+		StringBuilder strBld = new StringBuilder(); 
+		strBld.append("[id=").append(getId()).append(", ");
+		strBld.append("name").append(getName()).append("] ");
+		return strBld.toString();		
+	}	
 }

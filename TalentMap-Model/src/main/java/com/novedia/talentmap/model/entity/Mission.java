@@ -3,15 +3,46 @@ package com.novedia.talentmap.model.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Mission implements Serializable {
 
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = 9017307044050321040L;
+	/**
+	 * mission id
+	 */
 	private Integer id;
+	/**
+	 * collaborator id associated the mission
+	 */
 	private Integer collab_id;
+	/**
+	 * mission name
+	 */
 	private String name;
+	/**
+	 * mission take place
+	 */
 	private String place;
+	/**
+	 * mission id associated the client
+	 */
 	private String client;
+	/**
+	 * mission id associated the notes
+	 */
 	private String notes;
+	/**
+	 * date of start the mission
+	 */
 	private Date start_date;
+	/**
+	 * date of end the mission
+	 */
 	private Date end_date;
 	
 	/**
@@ -45,38 +76,52 @@ public class Mission implements Serializable {
 		super();
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * allowed to display attribute of the object Concept
 	 */
 	@Override
 	public String toString() {
-		return "Mission [id=" + id + ", collab_id=" + collab_id + ", name="
-				+ name + ", place=" + place + ", client=" + client + ", notes="
-				+ notes + ", start_date=" + start_date + ", end_date="
-				+ end_date + "]";
+		StringBuilder strBld = new StringBuilder(); 
+		strBld.append("[collab_id=").append(getCollab_id()).append(", ");
+		strBld.append("[name=").append(getName()).append(", ");
+		strBld.append("[client=").append(getClient()).append("]");
+		return strBld.toString();	
 	}
 
 	/**
-	 * Get the id value
-	 * @return the id
+	 * hash code method
 	 */
-	public Integer getId() {
-		return id;
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hBuilder =  new HashCodeBuilder();
+		hBuilder.append(this.getId());
+		hBuilder.append(this.getCollab_id());
+		hBuilder.append(this.getName());
+		hBuilder.append(this.getClient());
+		return hBuilder.hashCode();
 	}
+	
 	/**
-	 * Set the id value
-	 * @param id the id to set
+	 * equals method
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null){
+			return false;			
+		}
+
+		if(!(obj instanceof Mission)){
+			return false;
+		}	
+		Mission comparedObj = (Mission)obj;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getId(), comparedObj.getId());
+		ebuilder.append(this.getClient(), comparedObj.getClient());
+		ebuilder.append(this.getName(), comparedObj.getName());
+		return ebuilder.isEquals();
 	}
-	/**
-	 * Get the collab_id value
-	 * @return the collab_id
-	 */
-	public Integer getCollab_id() {
-		return collab_id;
-	}
+	
+	
 	/**
 	 * Set the collab_id value
 	 * @param collab_id the collab_id to set
@@ -141,6 +186,28 @@ public class Mission implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 *Get the name value
+	 * @return
+	 */
+	public Integer getId() {
+		return id;
+	}
+	/**
+	 * Set the name value
+	 * @param id
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	/**
+	 * Get the name value
+	 * @return
+	 */
+	public Integer getCollab_id() {
+		return collab_id;
 	}
 
 	/**
