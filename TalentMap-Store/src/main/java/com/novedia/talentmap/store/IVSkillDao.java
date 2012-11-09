@@ -22,8 +22,11 @@ public interface IVSkillDao {
 	 * @param categoryName
 	 * @param conceptName
 	 * @return
-	 * @throws SQLException
+	 * 
+	 * @throws DataAccessException
 	 */
+	// TODO : Avec le rafectoring de TalentMap-Model la signature de la méthode change
+	// ATTENTION le type de retour n'est pas 
 	List<VSkill> getToolByConcept(String categoryName, String conceptName) throws DataAccessException;
 	
 	/**
@@ -31,7 +34,7 @@ public interface IVSkillDao {
 	 * @class IVSkillDao.java
 	 * @param toolName
 	 * @return
-	 * @throws Exception
+	 * @throws DataAccessException
 	 */
 	VSkill getSkillByTool(String toolName) throws DataAccessException;
 	
@@ -40,7 +43,7 @@ public interface IVSkillDao {
 	 * @class IVSkillDao.java
 	 * @param categoryName
 	 * @return
-	 * @throws SQLException
+	 * @throws DataAccessException
 	 */
 	List<VSkill> getConceptByCategory(String categoryName) throws DataAccessException;
 	
