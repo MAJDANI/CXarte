@@ -1,5 +1,0 @@
-BEGIN
-  insert into SKILL (COLLAB_ID, TOOL_ID, USE_FREQUENCY, NO_USING_TIME, SCORE) values (1, 1, 1, 1, 4);
-  insert into SKILL (COLLAB_ID, TOOL_ID, USE_FREQUENCY, NO_USING_TIME, SCORE) values (1, 2, 1, 1, 1);
-  insert into SKILL (COLLAB_ID, TOOL_ID, USE_FREQUENCY, NO_USING_TIME, SCORE) values (1, 3, 1, 1, 2);
-END;

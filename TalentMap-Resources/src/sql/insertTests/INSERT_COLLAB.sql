@@ -1,5 +1,0 @@
-BEGIN
-  FOR i IN 1..5 LOOP
-  insert into COLLABORATOR (COLLAB_ID, MANAGER_ID, PROFILE_ID, LAST_NAME, FIRST_NAME, EMAIL, PHONE, EMPLOYMENT_DATE, EXPERIENCE, BUSINESS_ENGINEER) values (i,1,1,'Collet','Julien','j.collet@novedia-solution.com',0102030405,'23/04/2012',5,'Dupont François');
-  END LOOP;
-END;
