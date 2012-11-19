@@ -217,7 +217,11 @@ public class CollaboratorForm extends FormLayout {
 		Collaborator collab = this.collaboratorService.getCollaborator(COLLAB_ID);
 		Manager manager = this.collaboratorService.getManager(collab.getManager_id());
 		
-		this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
+		if (manager != null) {
+			//TODO: J'ai rajouté le test sur le manager à la demande de JM
+			//TODO: pour que l'application ne plante pas.
+			this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
+		}
 		this.managerField.setReadOnly(true);
 		
 		this.vLayoutManager.addComponent(this.managerField);
