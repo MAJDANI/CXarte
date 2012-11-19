@@ -6,7 +6,6 @@ import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
-import com.novedia.talentmap.services.impl.ProfileService;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -18,6 +17,13 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+/**
+ * The {@link ProfileCollabWindow} is the main window for render 
+ *  profile of collabs.
+ *  
+ * @author moumbe
+ *
+ */
 public class ProfileCollabWindow extends Window {
 
 	/**
