@@ -3,7 +3,6 @@ package com.novedia.talentmap.web.ui.admin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Category;
@@ -31,9 +30,19 @@ import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
+/**
+ * This class populate 3 lists (tool, concept, category) 
+ * @author moumbe
+ *
+ */
 public class ManageSkillContent extends VerticalLayout implements
 		ClickListener, ItemClickListener {
 
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Vaadin Components
 	 */
@@ -69,14 +78,14 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Vector<Object> fieldOrderSkill;
 	public static String MAIN_TITLE = "Visualisation des compétences";
 
-	/**
-	 * Constants
-	 */
-
+	//Constant
 	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Catégorie",
 			"Concept", "Outil" };
+	
 	public static final Object[] FIELD_ORDER_SKILL = new Object[] {
 			"category_name", "concept_name", "tool_name" };
+	
+	// Constant
 	public static final int TYPE_CATEGORY = 1;
 	public static final int TYPE_CONCEPT = 2;
 	public static final int TYPE_TOOL = 3;
@@ -148,7 +157,9 @@ public class ManageSkillContent extends VerticalLayout implements
 		setSpacing(true);
 
 		this.title.setCaption(MAIN_TITLE);
-		this.title.setStyle(Reindeer.LABEL_H2);
+		this.title.setStyleName(Reindeer.LABEL_H2);
+		//Deprecated
+//		this.title.setStyle(Reindeer.LABEL_H2);
 
 		addComponent(this.title);
 		addComponent(this.body);
@@ -165,7 +176,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	public void buildFormSkill() {
 
-		BeanItem<Item> skillBean = new BeanItem(new VSkill());
+		BeanItem<VSkill> skillBean = new BeanItem<VSkill> (new VSkill());
 
 		CUtils.setOrderForm(this.fieldOrderSkill, FIELD_ORDER_SKILL);
 
@@ -256,20 +267,20 @@ public class ManageSkillContent extends VerticalLayout implements
 
 			for (Concept co : this.listConcept) {
 
-				if (ca.getId().equals(co.getCategory_id())) {
+				if (ca.getId().equals(co.getCategory().getId())) {
 
 					for (Tool t : this.listTool) {
 
-						if (co.getId().equals(t.getConcept_id())) {
+						if (co.getConcept_id().equals(t.getConcept().getConcept_id())) {
 
-							this.treeSkill.addItem(co.getId() + ":"
+							this.treeSkill.addItem(co.getConcept_id() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName());
-							this.treeSkill.setItemCaption(co.getId() + ":"
+							this.treeSkill.setItemCaption(co.getConcept_id() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName(),
 									co.getName());
 
 							this.treeSkill.setParent(
-									co.getId() + ":" + TYPE_CONCEPT + ":"
+									co.getConcept_id() + ":" + TYPE_CONCEPT + ":"
 											+ co.getName(),
 									ca.getId() + ":" + TYPE_CATEGORY + ":"
 											+ ca.getName());
@@ -281,7 +292,7 @@ public class ManageSkillContent extends VerticalLayout implements
 									t.getName());
 
 							this.treeSkill.setParent(t.getId() + ":"
-									+ TYPE_TOOL + ":" + t.getName(), co.getId()
+									+ TYPE_TOOL + ":" + t.getName(), co.getConcept_id()
 									+ ":" + TYPE_CONCEPT + ":" + co.getName());
 
 							this.treeSkill.setChildrenAllowed(t.getId() + ":"
@@ -300,37 +311,41 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.body.addComponent(this.treeSkill);
 	}
 
+	/**
+	 * Populate listTool
+	 * listConcept and listCategory
+	 */
 	private void buildAllList() {
 
-		try {
+		this.listTool = this.adminService.getAllTools();
+		this.listConcept = this.adminService.getAllConcepts();
+		this.listCategory = this.adminService.getAllCategories();
 
-			this.listTool = this.adminService.getAllTools();
-			this.listConcept = this.adminService.getAllConcepts();
-			this.listCategory = this.adminService.getAllCategories();
-
-		} catch (Exception e) {
+//		try {
+//		} catch (Exception e) {
 
 			// Build all lists, dummy data if database is down !
 
-			for (int i = 0; i < 5; i++) {
-				Tool t = new Tool(i + 1, i + 1, (String) TOOLS[i]);
-				this.listTool.add(t);
-			}
-
-			for (int i = 0; i < 5; i++) {
-				Random r = new Random();
-				int categoryId = r.nextInt(2);
-				Concept c = new Concept(i + 1, categoryId,
-						(String) CONCEPTS[i], 3.0);
-				this.listConcept.add(c);
-			}
-
-			for (int i = 0; i < 2; i++) {
-
-				Category c = new Category(i, (String) CATEGORIES[i]);
-				this.listCategory.add(c);
-			}
-		}
+//			for (int i = 0; i < 5; i++) {
+////				Tool t = new Tool(i + 1, i + 1, (String) TOOLS[i]);
+//				Tool t = Tool.Builder.builder().id(i+1).concept((Concept.Builder.builder().id(i+1).build())).name(TOOLS[i].toString()).build();
+//				this.listTool.add(t);
+//			}
+//
+//			for (int i = 0; i < 5; i++) {
+//				Random r = new Random();
+//				int categoryId = r.nextInt(2);
+//				Concept c = new Concept(i + 1, categoryId,
+//						(String) CONCEPTS[i], 3.0);
+//				this.listConcept.add(c);
+//			}
+//
+//			for (int i = 0; i < 2; i++) {
+//
+//				Category c = new Category(i, (String) CATEGORIES[i]);
+//				this.listCategory.add(c);
+//			}
+//		}
 	}
 
 	/**
@@ -449,8 +464,9 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillCategory(String categoryName) {
 
-		Category category = new Category(this.currentCategoryId, categoryName);
-
+//		Category category = new Category(this.currentCategoryId, categoryName);
+		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
+		
 		try {
 
 			Map<String, Object> mapNotification = this.adminService
@@ -470,9 +486,12 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillConcept(String categoryName, String conceptName) {
 
-		Category category = new Category(this.currentCategoryId, categoryName);
-		Concept concept = new Concept(this.currentConceptId,
-				this.currentCategoryId, conceptName);
+//		Category category = new Category(this.currentCategoryId, categoryName);
+		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
+//		Concept concept = new Concept(this.currentConceptId,
+//				this.currentCategoryId, conceptName);
+		
+		Concept concept = Concept.Builder.builder().id(this.currentConceptId).category(category).name(categoryName).build();
 
 		try {
 
@@ -495,11 +514,12 @@ public class ManageSkillContent extends VerticalLayout implements
 	private void updateSkillTool(String categoryName, String conceptName,
 			String toolName) {
 
-		Category category = new Category(this.currentCategoryId, categoryName);
-		Concept concept = new Concept(this.currentConceptId,
-				this.currentCategoryId, conceptName);
-		Tool tool = new Tool(this.currentToolId, this.currentConceptId,
-				toolName);
+//		Category category = new Category(this.currentCategoryId, categoryName);
+		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
+//		Concept concept = new Concept(this.currentConceptId, this.currentCategoryId, conceptName);
+		Concept concept = Concept.Builder.builder().id(this.currentConceptId).category(category).name(categoryName).build();
+//		Tool tool = new Tool(this.currentToolId, this.currentConceptId, toolName);
+		Tool tool = Tool.Builder.builder().id(this.currentToolId).concept(concept).name(toolName).build();
 
 		try {
 
