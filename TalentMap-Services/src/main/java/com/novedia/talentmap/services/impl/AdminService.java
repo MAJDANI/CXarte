@@ -13,6 +13,12 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 
+/**
+ * @test AdminServiceTest
+ * 
+ * @author v.dibi
+ *
+ */
 public class AdminService implements IAdminService {
 
 	/**
@@ -86,7 +92,7 @@ public class AdminService implements IAdminService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	private void saveCategory(VSkill skill) throws DataAccessException {
+	void saveCategory(VSkill skill) throws DataAccessException {
 
 		int categoryId;
 		this.category = this.categoryDao.check(skill.getCategory_name());
@@ -97,14 +103,7 @@ public class AdminService implements IAdminService {
 			this.category.setName(skill.getCategory_name());
 
 			categoryId = this.categoryDao.save(this.category);
-
-		} else if(this.category != null){
-
-			categoryId = this.category.getId();
-			
-			this.category.setId(categoryId);
-		}
-		
+		} 
 	}
 
 	/**
@@ -114,33 +113,25 @@ public class AdminService implements IAdminService {
 	 * @param skill
 	 * @throws Exception
 	 */
-	private void saveConcept(VSkill skill) throws DataAccessException {
+	void saveConcept(VSkill skill) throws DataAccessException {
 
 		int conceptId;
 		
 		if(this.category != null){
-			// TODO : vérifier dans la précédente version du fichier la définition de cette méthode
-			//this.concept = this.conceptDao.checkConcept(skill.getConcept_name(), this.category.getId());
 			this.concept = this.conceptDao.check(skill.getConcept_name());
+		
+			if (this.concept == null && this.tool == null ) {
+				
+				this.concept = Concept.Builder.builder().build();
+				this.concept.setName(skill.getConcept_name());
+				this.concept.setCategory(category);
+	
+				conceptId = this.conceptDao.save(this.concept);
+	
+			}
 		}
-
-		if (this.concept == null && this.tool == null) {
-			
-			// TODO : A virer !!!
-			this.concept = Concept.Builder.builder().build();
-			this.concept.setName(skill.getConcept_name());
-			this.concept.setCategory(category);
-
-			conceptId = this.conceptDao.save(this.concept);
-
-		} else if(this.concept != null && this.category != null) {
-
-			conceptId = this.concept.getConcept_id();
-			
-			this.concept.setConcept_id(conceptId);
-		}
+		
 	}
-
 	/**
 	 * Add one tool
 	 * 
@@ -149,10 +140,10 @@ public class AdminService implements IAdminService {
 	 * @return
 	 * @throws Exception
 	 */
-	private Tool saveTool(VSkill skill) throws DataAccessException {
+	Tool saveTool(VSkill skill) throws DataAccessException {
 
 		if (this.tool == null) {
-			//this.tool = Tool.Builder.builder().build();
+			this.tool = Tool.Builder.builder().build();
 			tool.setName(skill.getTool_name());
 			tool.setConcept(concept);
 			int toolId = this.toolDao.save(this.tool);
@@ -163,8 +154,7 @@ public class AdminService implements IAdminService {
 			this.category = Category.Builder.builder().build();
 			this.category.setName(sk.getCategory_name());
 			this.concept.setName(sk.getConcept_name());
-		}
-		
+		}		
 		return tool;
 	}
 
@@ -194,7 +184,6 @@ public class AdminService implements IAdminService {
 							+ "\" et le concept \""
 							+ this.concept.getName() + "\" .");
 		}
-
 		return this.mapNotification;
 	}
 	
@@ -213,16 +202,14 @@ public class AdminService implements IAdminService {
 					
 					this.toolDao.save(tool);
 				}
-			}
-			
+			}			
 			this.mapNotification.put("typeError", 1);
 			this.mapNotification.put("messageError", "La compétence a bien été modifiée");
 		}
 		else {
 			this.mapNotification.put("typeError", 2);
 			this.mapNotification.put("messageError", "Aucune compétence n'a été modifiée");
-		}
-		
+		}		
 		return this.mapNotification;
 	}
 	
@@ -238,8 +225,7 @@ public class AdminService implements IAdminService {
 			
 			this.mapNotification.put("typeError", 3);
 			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
-		}
-		
+		}		
 		return this.mapNotification;
 	}
 
@@ -275,8 +261,7 @@ public class AdminService implements IAdminService {
 		else{
 			this.mapNotification.put("typeError", 3);
 			this.mapNotification.put("messageError", "Un problème s'est produit lors de la suppression");
-		}
-		
+		}		
 		return this.mapNotification;
 	}
 
@@ -343,6 +328,5 @@ public class AdminService implements IAdminService {
 	 */
 	public void setTool(Tool tool) {
 		this.tool = tool;
-	}
-	
+	}	
 }
