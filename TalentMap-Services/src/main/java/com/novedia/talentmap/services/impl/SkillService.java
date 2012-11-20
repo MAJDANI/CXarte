@@ -138,8 +138,8 @@ public class SkillService implements ISkillService {
 			System.out.println("entry.getKey()=" + entry.getKey());// devient
 																	// NULL
 			System.out.println("entry.getKey().getConcept_id()="
-					+ entry.getKey().getConcept_id());
-			Integer concept_id = entry.getKey().getConcept_id();
+					+ entry.getKey().getConcept().getConcept_id());
+			Integer concept_id = entry.getKey().getConcept().getConcept_id();
 
 			Concept concept = getConceptById(concept_id);
 
@@ -201,7 +201,7 @@ public class SkillService implements ISkillService {
 		// We build the Category Map
 		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
 
-			Category category = getCategoryById(entry.getKey().getCategory_id());
+			Category category = getCategoryById(entry.getKey().getCategory().getId());
 
 			if (!mapCategory.containsKey(category)) {
 				mapCategory.put(category, new HashMap<Concept, Map>());
@@ -267,7 +267,7 @@ public class SkillService implements ISkillService {
 		List<Concept> conceptList = conceptDao.getAll();
 		Concept currentConcept = null;
 		for (Concept concept : conceptList) {
-			if (concept.getId().equals(concept_id)) {
+			if (concept.getConcept_id().equals(concept_id)) {
 				currentConcept = concept;
 			}
 		}
