@@ -11,13 +11,62 @@
     <artifactId>TalentMap-Store</artifactId>
     <packaging>jar</packaging>
 
+	<name>TalentMap-Store</name>
+
     <properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	    <slf4j.version>1.5.5</slf4j.version>
+        <logback.version>1.0.7</logback.version>
+        <unitils.version>3.3</unitils.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	  
 	<!-- Module dependencies -->
-	<dependencies>
-	  	  	
+	<dependencies>	
+	  	<dependency> 
+		    <groupId>org.unitils</groupId> 
+		    <artifactId>unitils-spring</artifactId> 
+		    <version>3.3</version> 
+		    <scope>test</scope> 
+		</dependency>
+
+	  	<dependency>
+	  		<groupId>org.unitils</groupId>
+	  		<artifactId>unitils-dbunit</artifactId>
+	  		<version>${unitils.version}</version>
+	  		<scope>test</scope>
+	  	</dependency>
+	  	
+	  	<!-- Dependencies for logs -->
+	  	<dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+      		<version>${logback.version}</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.0.4</version>
+    	</dependency>
+    
+        <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-api</artifactId>
+	        <version>${slf4j.version}</version>
+      	</dependency>
+<!-- 		<dependency> -->
+<!-- 		  <groupId>org.slf4j</groupId> -->
+<!-- 		  <artifactId>log4j-over-slf4j</artifactId> -->
+<!-- 		  <version>${slf4j.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  <groupId>org.slf4j</groupId> -->
+<!-- 		  <artifactId>jcl-over-slf4j</artifactId> -->
+<!-- 		  <version>${slf4j.version}</version> -->
+<!-- 		</dependency> -->
+		
+		<!-- Dependency for talent map model -->
 	  	<dependency>
 	  		<groupId>com.novedia.talentmap</groupId>
 	  		<artifactId>TalentMap-Model</artifactId>
@@ -63,5 +112,35 @@
 		</dependency>
 		
 	</dependencies>
-	<name>TalentMap-Store</name>
+	
+	<build>
+		
+	    <sourceDirectory>src/main/java</sourceDirectory>
+	    
+	    <resources>
+	      <resource>
+	        <directory>src/main/resources</directory>
+	      </resource>
+	    </resources>
+	    
+	    <testSourceDirectory>src/test/java</testSourceDirectory>
+	   
+	   <testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</testResource>
+			<testResource>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</testResource>
+		</testResources>
+		
+	</build>
+	
 </project>
