@@ -93,7 +93,7 @@ public class AdminService implements IAdminService {
 
 		if (this.category == null && this.tool == null) {
 
-			this.category = new Category();
+			this.category = Category.Builder.builder().build();
 			this.category.setName(skill.getCategory_name());
 
 			categoryId = this.categoryDao.save(this.category);
@@ -127,17 +127,17 @@ public class AdminService implements IAdminService {
 		if (this.concept == null && this.tool == null) {
 			
 			// TODO : A virer !!!
-			this.concept = new Concept();
+			this.concept = Concept.Builder.builder().build();
 			this.concept.setName(skill.getConcept_name());
-			this.concept.setCategory_id(this.category.getId());
+			this.concept.setCategory(category);
 
 			conceptId = this.conceptDao.save(this.concept);
 
 		} else if(this.concept != null && this.category != null) {
 
-			conceptId = this.concept.getId();
+			conceptId = this.concept.getConcept_id();
 			
-			this.concept.setId(conceptId);
+			this.concept.setConcept_id(conceptId);
 		}
 	}
 
@@ -152,17 +152,16 @@ public class AdminService implements IAdminService {
 	private Tool saveTool(VSkill skill) throws DataAccessException {
 
 		if (this.tool == null) {
-			this.tool = new Tool();
+			//this.tool = Tool.Builder.builder().build();
 			tool.setName(skill.getTool_name());
-			tool.setConcept_id(this.concept.getId());
+			tool.setConcept(concept);
 			int toolId = this.toolDao.save(this.tool);
 			tool.setId(toolId);
 		} 
 		else {
 			VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
-			this.category = new Category();
+			this.category = Category.Builder.builder().build();
 			this.category.setName(sk.getCategory_name());
-			this.concept = new Concept();
 			this.concept.setName(sk.getConcept_name());
 		}
 		
@@ -229,7 +228,7 @@ public class AdminService implements IAdminService {
 	
 	@Override
 	public Map<String, Object> deleteCategory(int category_id) throws DataAccessException {
-		Category category = new Category();
+		Category category = Category.Builder.builder().build();
 		category.setId(category_id);
 		if(this.categoryDao.delete(category) > 0){
 			this.mapNotification.put("typeError", 1);
@@ -247,8 +246,8 @@ public class AdminService implements IAdminService {
 	@Override
 	public Map<String, Object> deleteConcept(int concept_id) throws DataAccessException {
 
-		Concept concept = new Concept();
-		concept.setId(concept_id);
+		Concept concept = Concept.Builder.builder().build();
+		concept.setConcept_id(concept_id);
 		
 		if(this.conceptDao.delete(concept) > 0){
 			
@@ -266,7 +265,7 @@ public class AdminService implements IAdminService {
 	@Override
 	public Map<String, Object> deleteTool(int tool_id) throws DataAccessException {
 
-		Tool tool = new Tool();
+		Tool tool = Tool.Builder.builder().build();
 		tool.setId(tool_id);
 		
 		if(this.toolDao.delete(tool) > 0){	
