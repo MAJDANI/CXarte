@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+  <CONCEPT CONCEPT_ID="1" CATEGORY_ID="1" CONCEPT_NAME="CONCEPT1"/>
+  <TOOL TOOL_ID="1" CONCEPT_ID="1" TOOL_NAME="TOOL"/>
+</dataset>
