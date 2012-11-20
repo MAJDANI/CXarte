@@ -18,6 +18,9 @@ import com.vaadin.ui.VerticalLayout;
 
 public class MonitoringCollabContent extends VerticalLayout {
 
+	/** UID */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Vaadin UI
 	 */
@@ -94,7 +97,9 @@ public class MonitoringCollabContent extends VerticalLayout {
 	}
 	
 	public void fillCollabTable(List<Collaborator> listCollaborator) throws Exception{
+		
 		System.out.println("MonitoringCollabContent.fillCollabTable()");
+		
 		int idTable = 1;
 		for (Collaborator collab : listCollaborator) {
 			
@@ -139,8 +144,6 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 			List<Collaborator> listCollaborator = this.managerService
 					.getAllCollaboratorsByManagerId(MANAGER_ID);
-			
-			//We fill the table
 			fillCollabTable(listCollaborator);
 
 		} catch (Exception e) {
