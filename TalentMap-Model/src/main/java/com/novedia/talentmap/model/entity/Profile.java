@@ -19,6 +19,9 @@ public class Profile implements Serializable {
 	 */
 	private String type;
 	
+	public Profile() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * Build the class Profile.java 
@@ -26,17 +29,8 @@ public class Profile implements Serializable {
 	 * @param type
 	 */
 	public Profile(Integer id, String type) {
-		super();
 		this.id = id;
 		this.type = type;
-	}
-
-	/**
-	 * Build the class Profile.java 
-	 */
-	public Profile() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

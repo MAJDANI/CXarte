@@ -5,127 +5,200 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
+/**
+ * This class represents the finest level of skill. A tool could be, from a
+ * technical view, a Framework like Spring, Vaadin an so on, it could be also
+ * any kind of software using in the realization of a project (ERP, BDD, etc.)
+ * 
+ * @author j.marie-sainte 
+ */
 public class Tool implements Serializable {
-	
+
 	/**
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -6638545060221928596L;
+
 	/**
-	 * tool id
+	 * Identifier of this tool.
 	 */
 	private Integer id;
+
 	/**
-	 * collaborator id associated the tool
-	 */
-	private Integer concept_id;
-	/**
-	 * tool name
+	 * The tool name.
 	 */
 	private String name;
-	
-	/**
-	 * Build the class Tool.java 
-	 * @param id
-	 * @param concept_id
-	 * @param name
-	 */
-	public Tool(Integer id, Integer concept_id, String name) {
-		super();
-		this.id = id;
-		this.concept_id = concept_id;
-		this.name = name;
-	}
-		
-	/**
-	 * allowed to display attribute of the object Skill
-	 */	
-	@Override
-	public String toString() {
-		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[concept_id=").append(getConcept_id()).append(", ");
-		strBld.append("[name=").append(getName()).append("]");
-		return strBld.toString();	
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getConcept_id());
-		hashBuilder.append(this.getName());
-		return hashBuilder.hashCode();
-	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null){
-			return false;			
-		}
 
-		if(!(obj instanceof Profile)){
-			return false;
-		}
-	
-		Tool comparedObj = (Tool)obj;
-		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getConcept_id(), comparedObj.getConcept_id());
-		ebuilder.append(this.getName(), comparedObj.getName());
-		return ebuilder.isEquals();
-	}
-	
 	/**
-	 * Build the class Tool.java 
+	 * The concept this tool is a part of.
 	 */
-	public Tool() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private Concept concept;
+	
 	/**
-	 * Get the tool_id value
-	 * @return the tool_id
+	 * Default constructor
+	 */
+	public Tool(){
+		
+	}
+	
+	/**
+	 * Build an immutable tool entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	public Tool(final Builder builder) {
+		this.id = builder.id;
+		this.name = builder.name;
+		this.concept = builder.concept;
+	}
+	
+	/**
+	 * Get the identifier.
+	 * 
+	 * @return id
 	 */
 	public Integer getId() {
 		return id;
 	}
+	
 	/**
-	 * Set the tool_id value
-	 * @param tool_id the tool_id to set
+	 * Set the identifier.
+	 * 
+	 * @param id
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	/**
-	 * Get the concept_id value
-	 * @return the concept_id
+	 * Get the matching concept.
+	 * 
+	 * @return concept
 	 */
-	public Integer getConcept_id() {
-		return concept_id;
+	public Concept getConcept() {
+		return concept;
 	}
+	
 	/**
-	 * Set the concept_id value
-	 * @param concept_id the concept_id to set
+	 * Set the matching concept.
+	 * 
+	 * @param concept
 	 */
-	public void setConcept_id(Integer concept_id) {
-		this.concept_id = concept_id;
+	public void setConcept(Concept concept) {
+		this.concept = concept;
 	}
+
 	/**
-	 * Get the name value
+	 * Get the name value.
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
-	 * Set the name value
-	 * @param name the name to set
+	 * Set the name value.
+	 * 
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
+
+	// ------------------------------------------
+	// ------------ OVERRIDEN METHODS -----------
+	// ------------------------------------------
+
+	@Override
+	public String toString() {
+
+		StringBuilder strBld = new StringBuilder();
+		strBld.append("[id=").append(getId()).append(", ").append("name=")
+				.append(getName()).append(", ").append("Concept=")
+				.append(getConcept().getName()).append("]");
+		return strBld.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (o == null) {
+			return false;
+		}
+
+		if (!(o instanceof Tool)) {
+			return false;
+		}
+
+		Tool comparedObj = (Tool) o;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getId(), comparedObj.getId());
+		return ebuilder.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+
+		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+		hashBuilder.append(this.getId());
+		return hashBuilder.hashCode();
+	}
+
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	public static class Builder {
+
+		/**
+		 * The tool identifier.
+		 */
+		private Integer id;
+
+		/**
+		 * The tool name.
+		 */
+		private String name;
+		
+		/**
+		 * The concept this tool is a part of.
+		 */
+		private Concept concept;
+
+		public Builder id(final Integer id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder name(final String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public Builder concept(final Concept concept){
+			this.concept = concept;
+			return this;
+		}
+		
+		/**
+		 * Build an immutable instance of tool.
+		 * 
+		 * @return a tool
+		 */
+		public Tool build() {
+			return new Tool(this);
+		}
+		
+		/**
+		 * Static constructor for this class.
+		 * 
+		 * @return a builder instance
+		 */
+		public static Builder builder() {
+			return new Builder();
+		}
+	}
 }

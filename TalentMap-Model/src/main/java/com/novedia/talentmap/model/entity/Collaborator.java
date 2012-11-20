@@ -1,8 +1,6 @@
 package com.novedia.talentmap.model.entity;
 
-import java.awt.List;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -56,8 +54,15 @@ public class Collaborator implements Serializable {
 	 */
 	protected String business_engineer;
 	
+	/** Mission */
 	private ArrayList<Mission> mission;
+	
+	/** Tool */
 	private ArrayList<Tool> tool;
+	
+	public Collaborator() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * Build the class Collaborator.java 
@@ -88,13 +93,6 @@ public class Collaborator implements Serializable {
 		this.business_engineer = business_engineer;
 	}
 	
-	/**
-	 * Build the class Collaborator.java 
-	 */
-	public Collaborator() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -325,7 +323,7 @@ public class Collaborator implements Serializable {
 	@SuppressWarnings("null")
 	public ArrayList<Tool> addTools( ArrayList<Tool> tool){
 		if(tool == null){
-			Tool t =  new Tool();
+			Tool t =  Tool.Builder.builder().build();
 			tool.add(t);
 		}
 		return tool;		

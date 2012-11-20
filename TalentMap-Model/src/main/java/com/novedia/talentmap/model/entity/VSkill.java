@@ -5,6 +5,11 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * The class VSkill
+ * @author moumbe
+ *
+ */
 public class VSkill  implements Serializable {
 
 	/**
@@ -41,7 +46,6 @@ public class VSkill  implements Serializable {
 	 */
 	public VSkill() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * Get the tool_name value

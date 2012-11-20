@@ -32,6 +32,9 @@ public class Skill implements Serializable{
 	 */
 	private Integer no_using_time;
 	
+	public Skill() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * Build the class Skill.java 
@@ -50,13 +53,7 @@ public class Skill implements Serializable{
 		this.use_frequency = use_frequency;
 		this.no_using_time = no_using_time;
 	}
-	/**
-	 * Build the class Skill.java 
-	 */
-	public Skill() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	/**
 	 * Get the use_frequency value
 	 * @return the use_frequency
