@@ -8,6 +8,7 @@ import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.store.IDao;
+import com.novedia.talentmap.store.impl.ManagerDao;
 
 /**
  * The manager service
@@ -31,7 +32,8 @@ public class ManagerService implements IManagerService {
 	@Override
 	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId)
 			throws DataAccessException {
-		return ((IManagerService) managerDao).getAllCollaboratorsByManagerId(managerId);
+		return ((ManagerDao) managerDao)
+				.getAllCollaboratorsByManagerId(managerId);
 	}
 	
 	/**
