@@ -54,7 +54,7 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request id to get all category.
 	 */
-	public final static String GET_ALL_CATEGORY = "category.getAllCategory";
+	public final static String GET_ALL_CATEGORY = "category.getAll";
 	
 	/**
 	 * Constant request id to insert the category
@@ -123,7 +123,6 @@ public final class DBRequestsConstants {
 	public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 	
 	// MANAGER REQUESTS
-	
 	/**
 	 * Constant request id to get a collaborator 
 	 */
