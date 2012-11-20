@@ -20,7 +20,8 @@
     </resultMap>
 	
 	<select id="get" resultMap="toolResult" parameterClass="Integer">
-		SELECT * FROM TOOL WHERE TOOL_ID = #id#
+		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id#
+				AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
 	
 	<select id="getByName" resultMap="toolResult" parameterClass="String">
