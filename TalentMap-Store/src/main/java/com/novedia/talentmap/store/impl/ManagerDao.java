@@ -67,7 +67,7 @@ public class ManagerDao  extends SqlMapClientDaoSupport implements IDao<Manager>
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws DataAccessException {
-		return (List<Collaborator>) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_ALL_COLLABORATOR, managerId);
+		return (List<Collaborator>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR, managerId);
 				
 	}
 
