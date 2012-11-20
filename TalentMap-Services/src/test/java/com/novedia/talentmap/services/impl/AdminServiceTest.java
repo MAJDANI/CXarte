@@ -215,8 +215,7 @@ public class AdminServiceTest {
 	}
 
 	@Test
-	public void getAllCategoriesCallCategoryDaoOneTime()
-			throws DataAccessException {
+	public void getAllCategoriesCallCategoryDaoOneTime(){
 		// Given
 		Category category = Category.Builder.builder().build();
 		category.setId(1);
