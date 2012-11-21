@@ -11,8 +11,9 @@ import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.AbsoluteLayout;
+import com.vaadin.terminal.ErrorMessage;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -52,6 +53,8 @@ public class CollaboratorForm extends FormLayout {
 			"experience", "business_engineer" };
 	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "start_date", "end_date"};
+
+	public static final String MESSAGE_COLLABORATOR_ID_NOT_FOUND = "Collaborator Id Not Found";
 
 	/**
 	 * Vaddin Components
@@ -162,22 +165,23 @@ public class CollaboratorForm extends FormLayout {
 						this.profileService));
 
 		@SuppressWarnings("unchecked")
-		BeanItem<Item> collabBean = new BeanItem(
-				this.collaboratorService.getCollaborator(COLLAB_ID));
-
-		this.formCollaborator.setItemDataSource(collabBean, this.fieldOrderCollaborator);
-
-		// Set the good value for the Select Item
-		int profileId = this.collaboratorService
-				.getCollaborator(COLLAB_ID).getProfile_id();
+		Collaborator collaborator = this.collaboratorService.getCollaborator(COLLAB_ID);
 		
-		String profileType = this.profileService.getProfile(profileId).getType();
-
-//		this.formCollaborator.getField("profile_id").setValue(
-//				this.profileService.getProfile(profileId).getType());
-		
-		
-//		this.aLayoutCollaborator.addComponent(this.formCollaborator.getField("last_name"), "top:50px;left:100px;");
+		if (collaborator != null){
+			BeanItem<Item> collabBean = new BeanItem(collaborator);
+			this.formCollaborator.setItemDataSource(collabBean, this.fieldOrderCollaborator);
+	
+			// Set the good value for the Select Item
+			int profileId = this.collaboratorService
+					.getCollaborator(COLLAB_ID).getProfile_id();
+			
+			String profileType = this.profileService.getProfile(profileId).getType();
+			
+		}
+		else {
+			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			this.formCollaborator.setComponentError(invalidVE);
+		}
 		addComponent(this.formCollaborator);
 	}
 
@@ -215,12 +219,16 @@ public class CollaboratorForm extends FormLayout {
 		this.managerField.setStyleName("consultant-manager");
 		
 		Collaborator collab = this.collaboratorService.getCollaborator(COLLAB_ID);
-		Manager manager = this.collaboratorService.getManager(collab.getManager_id());
-		
-		if (manager != null) {
-			//TODO: J'ai rajouté le test sur le manager à la demande de JM
-			//TODO: pour que l'application ne plante pas.
-			this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
+		if (collab != null){
+			Manager manager = this.collaboratorService.getManager(collab.getManager_id());
+			if (manager != null) {
+				//TODO: J'ai rajouté le test sur le manager à la demande de JM
+				//TODO: pour que l'application ne plante pas.
+				this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
+			}
+		} else {
+			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			this.managerField.setComponentError(invalidVE);
 		}
 		this.managerField.setReadOnly(true);
 		
