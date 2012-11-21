@@ -15,7 +15,8 @@
     
     <resultMap id="toolResult" class="tool">
     	<result property="id" column="TOOL_ID"/> 
-        <result property="concept.concept_id" column="CONCEPT_ID"/>     
+        <result property="concept.concept_id" column="CONCEPT_ID"/>
+        <result property="concept.name" column="CONCEPT_NAME"/>     
         <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
 	
