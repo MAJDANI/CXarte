@@ -1,6 +1,10 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
+import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
+import com.novedia.talentmap.web.util.Message;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.ui.Button;
@@ -10,10 +14,21 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
 public class MissionCollaboratorContent extends VerticalLayout implements
 		ClickListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8997879738001974821L;
+
+	/**
+	 * Talent Map Service
+	 */
+	private ICollaboratorService collaboratorService;
 
 	/**
 	 * Vaadin UI
@@ -27,6 +42,12 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	* created or when a mission is modified in missionForm
 	 */
 	private MissionForm missionForm ;
+	
+	/**
+	 * The missionId the user selected before the action click
+	 */
+	private Object missionIdSelected;
+
 
 	/***
 	 * Vaadin Components
@@ -43,9 +64,21 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * Constants
 	 */
 	public static final String PAGE_TITLE = "Liste des missions";
-	public static final String ADD_MISSION_BUTTON_NAME = "Ajouter une mission";
-	public static final String MODIFY_MISSION_BUTTON_NAME = "Modifier la mission";
-	public static final String DELETE_MISSION_BUTTON_NAME = "Supprimer la mission";
+	public static final String LABEL_BUTTON_ADD_MISSION = "Ajouter une mission";
+	public static final String LABEL_BUTTON_MODIFY_MISSION = "Modifier la mission";
+	public static final String LABEL_BUTTON_DELETE_MISSION = "Supprimer la mission";
+
+	/**
+	 * SubWindow to confirm or cancel a delete mission action
+	 */
+	private Window windowConfirmDelete;
+
+	/**
+	 * Labels form confirmation delete window
+	 */
+	private static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation de Suppression de mission";
+	private static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Supprimer la mission";
+	private static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "NE PAS Supprimer la mission";
 
 	/**
 	 * Build the class MissionCollaboratorContent.java
@@ -53,12 +86,13 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @param missionForm
 	 */
 	
-	public MissionCollaboratorContent(ListMission listMission, MissionForm missionForm,
+	public MissionCollaboratorContent(ICollaboratorService collaboratorService, ListMission listMission, MissionForm missionForm,
 			Button btnAddMission, AddMissionPanel addMissionPanel,
 			Panel listPanel, Label pageTitle
 			, Button btnModifyMission, Button btnDeleteMission
 			) {
 		super();
+		this.collaboratorService = collaboratorService;
 		this.listMission = listMission;
 		this.missionForm = missionForm;
 		this.btnAddMission = btnAddMission;
@@ -114,15 +148,14 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @class MissionCollaboratorContent.java
 	 */
 	public void buildButton() {
-		this.btnAddMission.setCaption(ADD_MISSION_BUTTON_NAME);
+		this.btnAddMission.setCaption(LABEL_BUTTON_ADD_MISSION);
 		this.btnAddMission.addListener(this);
 		
-		this.btnModifyMission.setCaption(MODIFY_MISSION_BUTTON_NAME);
+		this.btnModifyMission.setCaption(LABEL_BUTTON_MODIFY_MISSION);
 		this.btnModifyMission.addListener(this);
 	
-		this.btnDeleteMission.setCaption(DELETE_MISSION_BUTTON_NAME);
+		this.btnDeleteMission.setCaption(LABEL_BUTTON_DELETE_MISSION);
 		this.btnDeleteMission.addListener(this);
-		
 	}
 
 	/**
@@ -224,11 +257,11 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		if (button == this.btnAddMission) { 
 			enableAddMissionPanel();
 			//On indique que l'action courante est une crÃƒÂ©ation (pas une modification de mission)
-			this.missionForm.setCurrentSaveMode(this.missionForm.SAVE_MODE_INSERT);
+			this.missionForm.setCurrentSaveMode(MissionForm.SAVE_MODE_INSERT);
 		}
 		// MODIFY OR DELETE EXISTING MISSION
 		else {
-			Object missionIdSelected = this.listMission.getValue();
+			this.missionIdSelected = this.listMission.getValue();
 			System.out.println("missionId=" + missionIdSelected);
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if(null == missionIdSelected) {
@@ -237,21 +270,101 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			else {
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
-					fillAddMissionPanelWithMission((Integer)missionIdSelected);
+					fillAddMissionPanelWithMission((Integer)this.missionIdSelected);
 					//On indique que l'action courante est une modification de mission (pas une crÃƒÂ©ation)
-					this.missionForm.setCurrentSaveMode(this.missionForm.SAVE_MODE_UPDATE);
+					this.missionForm.setCurrentSaveMode(MissionForm.SAVE_MODE_UPDATE);
 				} 
 				// DELETE MISSION
 				if (button == this.btnDeleteMission) {
-
-					//TODO
-					message("buttonClick : delete");
-					deleteMission((Integer)missionIdSelected);
+					openConfirmWindow();
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Calls the CollaboratorService to delete the mission in Data Base. After the insert
+	 * the list of missions in the table is updated with fresh data.
+	 * @param missionToDelete
+	 */
+	public void deleteMission(int idMissionToDelete) {
+		try {
+			Mission missionToDelete = new Mission();
+			missionToDelete.setId(idMissionToDelete);
+			int result = this.collaboratorService.deleteMission(missionToDelete);
+			if(result!=0){
+				this.missionForm.setCurrentAction(MissionForm.ACTION_DELETE);
+				
+				//TODO centralize messages
+				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
+				
+				//creates a new list
+				missionForm.refreshListMission();
+				
+			} else {
+				//TODO : what to do?
+				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Opens a subWindow to ask the user to confirm or cancel delete the selected mission
+	 */
+	private void openConfirmWindow() {
+		windowConfirmDelete = new Window(LABEL_WINDOW_CONFIRM_DELETE);
+		windowConfirmDelete.center();
+
+// 		Debut : Au lien de ces 2 lignes, les lignes suivantes
+//		Button confirmDeleteButton = new Button(LABEL_BUTTON_CONFIRM_DELETE_MISSION, this, "confirmDeleteButtonClick");
+//		Button cancelDeleteButton = new Button(LABEL_BUTTON_CANCEL_DELETE_MISSION, this, "cancelDeleteButtonClick");
+		Button confirmDeleteButton = new Button(LABEL_BUTTON_CONFIRM_DELETE_MISSION);
+		Button cancelDeleteButton = new Button(LABEL_BUTTON_CANCEL_DELETE_MISSION);
+		confirmDeleteButton.addListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 8938851452280879463L;
+			public void buttonClick(ClickEvent event) {
+				confirmDeleteButtonClick(event);
+			}
+		});
+		cancelDeleteButton.addListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 8312230721392985816L;
+			public void buttonClick(ClickEvent event) {
+				cancelDeleteButtonClick(event);
+			}
+		});
+// 		Fin : Au lien de ces 2 lignes, les lignes suivantes
+		
+		
+		confirmDeleteButton.addListener(missionForm);
+		cancelDeleteButton.addListener(missionForm);
+		
+		windowConfirmDelete.addComponent(confirmDeleteButton);
+		windowConfirmDelete.addComponent(cancelDeleteButton);
+		windowConfirmDelete.setReadOnly(true);
+		windowConfirmDelete.setModal(true);
+		
+		getWindow().addWindow(windowConfirmDelete);
+	}
+	
+	/**
+	 * Handles user confirmation to delete the selected mission
+	 * @param event
+	 */
+	public void confirmDeleteButtonClick(Button.ClickEvent event) {
+		getWindow().removeWindow(windowConfirmDelete);
+		deleteMission((Integer)missionIdSelected);
+	}
+
+	/**
+	 * Handles user cancel delete the selected mission
+	 * @param event
+	 */
+	public void cancelDeleteButtonClick(Button.ClickEvent event) {
+		getWindow().removeWindow(windowConfirmDelete);
+	}
 	
 	/**
 	 * Shows the form and fills it with the properties of the mission the user wants to update
@@ -266,28 +379,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 		this.missionForm.fillMissionFormWithMission(itemMissionSelected, missionId);
 		
-	}
-	
-
-	/**
-	 * Asks the user if he really wants to delete the mission, then if ok the mission is deleted
-	 * @param missionId : id of the mission to delete
-	 */
-	private void deleteMission(Integer missionId) {
-		
-		System.out.println("deleteMission  missionId=" + missionId);
-		//TODO
-		this.missionForm.deleteMission(missionId);
-		
-	}
-
-	/**
-	 * Temporary test method
-	 * @deprecated
-	 * @param message
-	 */
-	private void message(String message) {
-		 getWindow().showNotification(message, Notification.TYPE_TRAY_NOTIFICATION);		
 	}
 	
 	/**

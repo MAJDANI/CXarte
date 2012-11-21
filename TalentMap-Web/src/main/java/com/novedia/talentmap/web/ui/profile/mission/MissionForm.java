@@ -89,6 +89,11 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final String SAVE_MODE_UPDATE = "UPDATE";
 	public static final String SAVE_MODE_INSERT = "INSERT";
 	
+	//3 constants to validate fields in MissionForm
+	public static final int VALIDATION_FIELD_MISSING = 0;
+	public static final int VALIDATION_INVALID_PERIOD = 1;
+	public static final int VALIDATION_VALID_FORM = 2;
+	
 	private String currentAction;
 	private String currentSaveMode;
 	
@@ -179,8 +184,19 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			BeanItem<Mission> missionItem = (BeanItem<Mission>) this.missionForm.getItemDataSource();
 			Mission missionToInsert = missionItem.getBean();
 			
-			
-			if(isValidMission(missionToInsert)) {
+			int formValidation = validatedMissionForm(missionToInsert);
+			switch (formValidation) {
+			case VALIDATION_FIELD_MISSING :
+				getWindow().showNotification(
+						"Les champs ne sont pas tous remplis",
+						Notification.TYPE_ERROR_MESSAGE);
+				break;
+			case VALIDATION_INVALID_PERIOD :
+				getWindow().showNotification(
+						"La période est invalide",
+						Notification.TYPE_ERROR_MESSAGE);
+				break;
+			case VALIDATION_VALID_FORM :
 				//TODO si données ok, insertion en base
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
 					missionToInsert.setCollab_id(COLLAB_ID);
@@ -189,11 +205,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
 					updateMission(missionToInsert);
 				}
-			} else {
-				getWindow().showNotification(
-						"Les champs ne sont pas tous remplis",
-						Notification.TYPE_ERROR_MESSAGE);
+				break;
 			}
+			
 		}
 		
 		if(this.cancel == button){
@@ -250,19 +264,35 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	
 	
 	/**
-	 * Checks all mandatory mission's fields are not null
+	 * Checks all mandatory mission's fields are not null and
+	 * period is valid (begin date before end date)
 	 * @param mission
-	 * @return boolean false if one or more values missing
+	 * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD
+	 * or VALIDATION_VALID_FORM
 	 */
-	private boolean isValidMission (Mission mission) {
+	private int validatedMissionForm (Mission mission) {
 		
-		if( 	!isValidField(mission.getClient()) ||
-				!isValidField(mission.getName()) ||
-				!isValidField(mission.getPlace()) ||
-				!isValidField(mission.getClient()) ||
-				!isValidField(mission.getStart_date()) ||
-				!isValidField(mission.getEnd_date()) 				
-			) return false;
+		if( 	!isNotEmpty(mission.getClient()) ||
+				!isNotEmpty(mission.getName()) ||
+				!isNotEmpty(mission.getPlace()) ||
+				!isNotEmpty(mission.getClient()) ||
+				!isNotEmpty(mission.getStart_date()) ||
+				!isNotEmpty(mission.getEnd_date()) 				
+			) return VALIDATION_FIELD_MISSING;
+		if(!isAValidPeriod(mission.getStart_date(),mission.getEnd_date())
+			) return VALIDATION_INVALID_PERIOD;
+				
+		return VALIDATION_VALID_FORM;
+	}
+	
+	/**
+	 * Checks if begin date is before end date
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	private boolean isAValidPeriod(Date startDate, Date endDate) {
+		if(startDate.after(endDate)) return false;
 		return true;
 	}
 	
@@ -271,8 +301,8 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param value
 	 * @return false if the parameter value is null
 	 */
-	private boolean isValidField(Object value) {
-		if (value == null || value.toString() == "" || value.toString().length() <2) {
+	private boolean isNotEmpty(Object value) {
+		if (value == null || value.toString() == "") {
 			return false;
 		} else {
 			return true;
@@ -331,6 +361,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		}
 	}
 
+
 	/**
 	 * Calls the CollaboratorService to delete the mission in Data Base. After the insert
 	 * the list of missions in the table is updated with fresh data.
@@ -367,7 +398,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * This method creates a new object ListMission, filled with all elements founded
 	 * in database, so a new mission created will be visible in the list 
 	 */
-	private void refreshListMission() {
+	public void refreshListMission() {
 		
 		//creates a new list, filled with the elements in database
 		MissionContainer missionContainer = new MissionContainer(collabService);
@@ -456,8 +487,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.obs = (IMissionCollaboratorContent) observateur;
 	}
 
-	@Override
-	public void updateObservateur() {
+	public void updateObservateur(String currentAction) {
 		if(ACTION_CANCEL == currentAction) {
 			this.obs.cancelAddMission();
 		}
@@ -468,6 +498,19 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			this.obs.updateListMission(this.listMission);
 		}
 	}
+
+	@Override
+	public void updateObservateur() {
+		if(ACTION_CANCEL == this.currentAction) {
+			this.obs.cancelAddMission();
+		}
+		if(ACTION_SAVE == this.currentAction) {
+			this.obs.updateListMission(this.listMission);
+		}
+		if(ACTION_DELETE == this.currentAction) {
+			this.obs.updateListMission(this.listMission);
+		}
+	}
 	
 	@Override
 	public void delObservateur() {
@@ -475,7 +518,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 	
 	public String getCurrentAction() {
-		return currentAction;
+		return this.currentAction;
 	}
 
 	public void setCurrentAction(String currentAction) {
