@@ -116,7 +116,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		// Init the components
 
 		// Test if the Collaborator have one skill
-		if (!mapSkill.isEmpty() && mapSkill != null) {
+		if (mapSkill != null && !mapSkill.isEmpty()) {
 
 			initComponents();
 			addComponent(buildListSkill(this.mapSkill));
