@@ -45,6 +45,5 @@ public interface IVSkillDao {
 	 * @return
 	 * @throws DataAccessException
 	 */
-	List<VSkill> getConceptByCategory(String categoryName) throws DataAccessException;
-	
+	List<VSkill> getConceptByCategory(String categoryName) throws DataAccessException;	
 }

@@ -1,6 +1,6 @@
 package com.novedia.talentmap.services.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Collaborator;
-import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -123,8 +120,7 @@ public class CollaboratorServiceTest {
 		service.deleteMission(new Mission());
 		
 		//Then
-		Mockito.verify(missionDaoMock, Mockito.times(1)).delete(Mockito.any(Mission.class));
-		
+		Mockito.verify(missionDaoMock, Mockito.times(1)).delete(Mockito.any(Mission.class));		
 	}
 	
 	@Test(expected = DataAccessException.class)
@@ -134,5 +130,4 @@ public class CollaboratorServiceTest {
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(missionDaoMock).delete(Mockito.any(Mission.class));
 		service.deleteMission(new Mission());
 	}
-
 }

@@ -32,6 +32,7 @@ public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCo
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws DataAccessException {
+		String t="";
 		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
 	}
 

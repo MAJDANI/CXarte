@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,6 +34,7 @@ import com.novedia.talentmap.store.impl.ConceptDao;
  * Test class for administration service.
  * 
  * @author v.dibi
+ * @author v.guillemain
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AdminServiceTest {
@@ -364,8 +366,7 @@ public class AdminServiceTest {
 		//Then
 		Mockito.verify(conceptDaoMock, Mockito.times(0)).save(Mockito.any(Concept.class));
 	}
-	
-	
+		
 	@Test(expected = DataAccessException.class)
 	public void saveConceptThrowsDataAccessException() throws DataAccessException{
 		//Given
@@ -575,7 +576,6 @@ public class AdminServiceTest {
 		service.deleteConcept(conceptId);		
 	}
 	
-
 	@Test
 	public void deleteToolCallsDelete() {
 		//Given
@@ -589,7 +589,6 @@ public class AdminServiceTest {
 		//Then
 		Mockito.verify(toolDaoMock, Mockito.times(1)).delete(Mockito.any(Tool.class));
 	}
-
 	
 	@Test(expected=DataAccessException.class)
 	public void deleteToolThrowsDataAccessException() throws DataAccessException {
@@ -600,4 +599,17 @@ public class AdminServiceTest {
 		//Then
 		service.deleteTool(toolId);	
 	}
+	
+//	@Test
+//	public void buildCategory(){
+//		//Given
+//		Category category = new Category();
+//		category.setId(1);
+//		category.setName("categoryName");
+//		
+//		//When
+//		
+//		//Then
+//		
+//	}
 }

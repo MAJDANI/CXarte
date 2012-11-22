@@ -14,7 +14,7 @@ public class VSkillCollab implements Serializable{
 	/**
 	 * collaborator id associated the VSkillCollab
 	 */
-	private String collab_id;
+	private int collab_id;
 	/**
 	 * category name associated the VSkillCollab
 	 */
@@ -35,7 +35,7 @@ public class VSkillCollab implements Serializable{
 	 * @param concept_name
 	 * @param tool_name
 	 */
-	public VSkillCollab(String collab_id, String category_name,
+	public VSkillCollab(int collab_id, String category_name,
 			String concept_name, String tool_name) {
 		super();
 		this.collab_id = collab_id;
@@ -92,14 +92,14 @@ public class VSkillCollab implements Serializable{
 	 * Get the collab_id value
 	 * @return the collab_id
 	 */
-	public String getCollab_id() {
+	public int getCollab_id() {
 		return collab_id;
 	}
 	/**
 	 * Set the collab_id value
 	 * @param collab_id the collab_id to set
 	 */
-	public void setCollab_id(String collab_id) {
+	public void setCollab_id(int collab_id) {
 		this.collab_id = collab_id;
 	}
 	/**

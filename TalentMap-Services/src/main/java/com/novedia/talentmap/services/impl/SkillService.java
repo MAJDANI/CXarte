@@ -90,47 +90,69 @@ public class SkillService implements ISkillService {
 		// We take all Collaborators Skills
 		listSkill = skillDao.getAllCollaboratorSkill(collabId);
 
-		System.out.println("on vient de récupérer listSkill=" + listSkill);
-
-		System.out.println("--------------------------");
-		for (Skill s : listSkill) {
-			System.out.println("skill=" + s);
-		}
-		System.out.println("--------------------------");
-
-		System.out
-				.println("on va construire toolMap en bouclant sur chaque skill");
-
-		System.out.println("_____________________________");
 		// We build the Tool Map
-		for (Skill s : listSkill) {
-			Tool tool1 = toolDao.get(s.getTool_id());
-
-			System.out.println("tool=" + tool1);
-
-			// We give a score to the tool
-			int score = (int) ScoreManage.ToolScore(s.getScore(),
-					s.getUse_frequency(), s.getNo_using_time());
-			System.out.println("score=" + score);
-
-			// We put only not null tool element in mapTool
-			if (tool1 != null) {
-				mapTool.put(tool1, score);
-			}
-
-		}
-		System.out.println("_____________________________");
-		System.out.println("mapTool=" + mapTool);
-		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
-			System.out.println("entry=" + entry);
-		}
-
+		buildTool(listSkill, mapTool);
+		
 		List<Integer> listToolScore = new ArrayList<Integer>();
 		Concept conceptTMP = null;
 		double conceptScore = 0;
 
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		// We build the Concept Map
+		conceptTMP = buildConcept(mapTool, mapConcept, listToolScore,conceptTMP);
+		
+		// We calculate the score of the last concept if it's not null
+		if (conceptTMP != null) {
+			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.getAll().size());
+
+			Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
+			mapConcept.remove(conceptTMP);
+
+			conceptTMP.setScore(conceptScore);
+			mapConcept.put(conceptTMP, mapTMP);
+		}
+
+		// We build the Category Map
+		return buildCategory(mapConcept, mapCategory);
+	}
+	
+	/**
+	 * build category
+	 * @param mapConcept
+	 * @param mapCategory
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	 Map<Category, Map> buildCategory(Map<Concept, Map> mapConcept,
+			Map<Category, Map> mapCategory) {
+		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
+
+			Category category = getCategoryById(entry.getKey().getCategory().getId());
+
+			if (!mapCategory.containsKey(category)) {
+				mapCategory.put(category, new HashMap<Concept, Map>());
+				mapCategory.get(category).put(entry.getKey(), entry.getValue());
+
+			} else {
+				mapCategory.containsKey(category);
+				mapCategory.get(category).put(entry.getKey(), entry.getValue());
+			}
+		}
+		return mapCategory;
+	}
+
+	/**
+	 * build concept
+	 * @param mapTool
+	 * @param mapConcept
+	 * @param listToolScore
+	 * @param conceptTMP
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	Concept buildConcept(Map<Tool, Integer> mapTool,
+			Map<Concept, Map> mapConcept, List<Integer> listToolScore,
+			Concept conceptTMP) {
+		double conceptScore;
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
 			// TODO : NullPointerException
 			System.out.println("++++++++++++++++++");
@@ -151,8 +173,7 @@ public class SkillService implements ISkillService {
 
 				// conceptScore = ScoreManage.ConceptScore(listToolScore,
 				// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao
-						.getAll().size());
+				conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao.getAll().size());
 
 				Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
 				mapConcept.remove(conceptTMP);
@@ -171,50 +192,38 @@ public class SkillService implements ISkillService {
 
 				mapConcept.put(concept, new HashMap<Tool, Integer>());
 				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
-
 			} else {
 
 				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
 			}
-
 			// We put in the list the Tool Score
 			listToolScore.add(entry.getValue());
 		}
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		return conceptTMP;
+	}
+	
+	/**
+	 * build tool
+	 * @param listSkill
+	 * @param mapTool
+	 */
+	 void buildTool(List<Skill> listSkill, Map<Tool, Integer> mapTool) {
+		for (Skill s : listSkill) {
+			Tool tool1 = toolDao.get(s.getTool_id());
 
-		// We calculate the score of the last concept if it's not null
-		if (conceptTMP != null) {
+			System.out.println("tool=" + tool1);
 
-			// TODO : A refactorer - idem précédent
-			// conceptScore = ScoreManage.ConceptScore(listToolScore,
-			// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-			conceptScore = ScoreManage.ConceptScore(listToolScore, toolDao
-					.getAll().size());
+			// We give a score to the tool
+			int score = (int) ScoreManage.ToolScore(s.getScore(),
+					s.getUse_frequency(), s.getNo_using_time());
+			System.out.println("score=" + score);
 
-			Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
-			mapConcept.remove(conceptTMP);
-
-			conceptTMP.setScore(conceptScore);
-			mapConcept.put(conceptTMP, mapTMP);
-		}
-
-		// We build the Category Map
-		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
-
-			Category category = getCategoryById(entry.getKey().getCategory().getId());
-
-			if (!mapCategory.containsKey(category)) {
-				mapCategory.put(category, new HashMap<Concept, Map>());
-				mapCategory.get(category).put(entry.getKey(), entry.getValue());
-
-			} else {
-				mapCategory.containsKey(category);
-				mapCategory.get(category).put(entry.getKey(), entry.getValue());
+			// We put only not null tool element in mapTool
+			if (tool1 != null) {
+				mapTool.put(tool1, score);
 			}
 
 		}
-
-		return mapCategory;
 	}
 
 	@Override
@@ -262,7 +271,7 @@ public class SkillService implements ISkillService {
 	 * 
 	 * @param concept_id
 	 */
-	private Concept getConceptById(Integer concept_id) {
+	Concept getConceptById(Integer concept_id) {
 
 		List<Concept> conceptList = conceptDao.getAll();
 		Concept currentConcept = null;
@@ -279,7 +288,7 @@ public class SkillService implements ISkillService {
 	 * 
 	 * @param concept_id
 	 */
-	private Category getCategoryById(Integer category_id) {
+	Category getCategoryById(Integer category_id) {
 
 		List<Category> categoryList = categoryDao.getAll();
 		Category currentCategory = null;
