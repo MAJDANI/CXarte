@@ -29,7 +29,7 @@ public class ManagerDao  extends SqlMapClientDaoSupport implements IDao<Manager>
 
 	@Override
 	public Manager get(Integer id) throws DataAccessException {
-		return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, id);
+		return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MANAGER, id);
 	}
 
 	@SuppressWarnings("unchecked")
