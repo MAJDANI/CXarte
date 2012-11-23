@@ -5,6 +5,11 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * The bean {@link Profile}
+ * @author moumbe
+ *
+ */
 public class Profile implements Serializable {
 	/**
 	 * Serialization identifier
@@ -19,8 +24,10 @@ public class Profile implements Serializable {
 	 */
 	private String type;
 	
+	/**
+	 * Default constructor
+	 */
 	public Profile() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
