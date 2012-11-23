@@ -206,6 +206,11 @@ public final class DBRequestsConstants {
 	public final static String GET_ALL_COLLABORATOR_SKILL ="skill.getAllCollaboratorSkill";
 	
 	/**
+	 * Constant key for query get all skills by collaborator
+	 */
+	public final static String GET_ALL_SKILLS_BY_COLLABORATOR = "skill.getAllSkillsByCollaborator";
+	
+	/**
 	 * Constant request id to get a collaborator 
 	 */
 	public final static String GET_ALL_SKILL ="skill.getAll";
@@ -300,4 +305,8 @@ public final class DBRequestsConstants {
 	 * Constant request id to get a collaborator 
 	 */
 	public final static String DELETE_MISSION = "mission.delete";
+	
+	// TASK
+	
+	public final static String GET_TASK_BY_ID = "task.get";
 }
