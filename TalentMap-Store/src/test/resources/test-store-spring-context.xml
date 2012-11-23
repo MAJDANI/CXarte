@@ -61,5 +61,9 @@
 	<bean id="managerDao" class="com.novedia.talentmap.store.impl.ManagerDao">
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
+	
+	<bean id="taskDao" class="com.novedia.talentmap.store.impl.TaskDao">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
 
 </beans>
