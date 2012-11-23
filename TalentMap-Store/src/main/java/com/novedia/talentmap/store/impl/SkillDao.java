@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Collaborator;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
@@ -137,6 +138,16 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao, IDao<
 	@Override
 	public Skill getByName(String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * Get alls skills by {@link Collaborator}
+	 * @param collab
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Skill> getAllSkillsByCollaborator(Collaborator collab) {
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILLS_BY_COLLABORATOR, collab);
 	}	
 	
 	
