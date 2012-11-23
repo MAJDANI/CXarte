@@ -3,6 +3,11 @@ package com.novedia.talentmap.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class contains data from table Manager
+ * @author moumbe
+ *
+ */
 public class Manager extends Collaborator implements Serializable {
 
 	/**
@@ -10,7 +15,10 @@ public class Manager extends Collaborator implements Serializable {
 	 */
 	private static final long serialVersionUID = -5987763744641087415L;
 	
-	private ArrayList<Collaborator> collaborator;
+	/**
+	 * Lists collaborator
+	 */
+	private ArrayList<Collaborator> collaborators = new ArrayList<Collaborator>();
 
 	/**
 	 * Build the class Manager.java 
@@ -19,26 +27,28 @@ public class Manager extends Collaborator implements Serializable {
 		super();
 	}
 
-	public ArrayList<Collaborator> getCollaborator() {
-		return collaborator;
-	}
-
-	public void setCollaborator(ArrayList<Collaborator> collaborator) {
-		this.collaborator = collaborator;
-	}
-	
 	/**
-	 * create a List of Tool for Collaborator
+	 * Add collaborator in the list collaborators
 	 * @param mission
 	 * @return
 	 */
-	@SuppressWarnings("null")
-	public ArrayList<Collaborator> addCollaborator( ArrayList<Collaborator> collaborator){
-		if(collaborator == null){
-			Collaborator c =  new Collaborator();
-			collaborator.add(c);
-		}
-		return collaborator;		
+	public ArrayList<Collaborator> addListCollaborators( Collaborator collaborator){
+		collaborators.add(collaborator);
+		return collaborators;		
+	}
+
+	/**
+	 * @return the collaborators
+	 */
+	public ArrayList<Collaborator> getCollaborators() {
+		return collaborators;
+	}
+
+	/**
+	 * @param collaborators the collaborators to set
+	 */
+	public void setCollaborators(ArrayList<Collaborator> collaborators) {
+		this.collaborators = collaborators;
 	}
 	
 	
