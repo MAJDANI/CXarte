@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <MISSION MISSION_ID="1" COLLAB_ID="1" NAME="TESTS" PLACE="TEST" CLIENT="TEST@TEST.COM" START_DATE="2012-10-01" END_DATE="2012-11-01"/>
+</dataset>
