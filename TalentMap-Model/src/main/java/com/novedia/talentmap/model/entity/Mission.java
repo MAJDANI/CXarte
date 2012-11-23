@@ -6,40 +6,50 @@ import java.util.Date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * Bean Mission
+ * 
+ * @author moumbe
+ *
+ */
 public class Mission implements Serializable {
+	
+	/**UID*/
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Serialization identifier
-	 */
-	private static final long serialVersionUID = 9017307044050321040L;
-	/**
-	 * mission id
-	 */
+	/**mission id*/
 	private Integer id;
+	
 	/**
 	 * collaborator id associated the mission
 	 */
 	private Integer collab_id;
+	
 	/**
 	 * mission name
 	 */
 	private String name;
+	
 	/**
 	 * mission take place
 	 */
 	private String place;
+	
 	/**
 	 * mission id associated the client
 	 */
 	private String client;
+	
 	/**
 	 * mission id associated the notes
 	 */
 	private String notes;
+	
 	/**
 	 * date of start the mission
 	 */
 	private Date start_date;
+	
 	/**
 	 * date of end the mission
 	 */
@@ -227,7 +237,6 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Get the notes value
 	 * @return the notes
 	 */
 	public String getNotes() {
@@ -235,10 +244,11 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the notes value
 	 * @param notes the notes to set
 	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+
 }
