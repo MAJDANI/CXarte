@@ -40,5 +40,5 @@ public interface ICollaborator {
 	 * @return all collaborators who has the lastName specified
 	 * @throws Exception
 	 */
-	List<Collaborator>  getAllCollaboratorsByLastName(String lastName) throws DataAccessException;
+	List<Collaborator> getAllCollaboratorsByLastName(String lastName) throws DataAccessException;
 }
