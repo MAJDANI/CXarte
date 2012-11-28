@@ -137,15 +137,6 @@
                     	<stopKey>toto</stopKey>
                         <stopPort>9999</stopPort>
 				</configuration>
-				<!--  config oracle  
-                <dependencies>
-                   <dependency>
-                     <groupId>com.oracle</groupId>
-                     <artifactId>ojdbc14</artifactId>
-                     <version>${ojdbc.version}</version>
-                   </dependency>
-                </dependencies>
-				-->
 		</plugin>
     </plugins>
   </build>
