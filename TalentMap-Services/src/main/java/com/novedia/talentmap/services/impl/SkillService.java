@@ -117,31 +117,49 @@ public class SkillService implements ISkillService {
 	
 	/**
 	 * build category
+	 * This method returns a map.
+	 * This map contains an object "Category" and a map of the "Concept" 
+	 * It takes two parameters maps "Concept" and "Category"
+	 * The mapConcept : contains an object "Concept" and a map of the "Tool"
+	 * The mapCategory : contains an object "Concept" and a map of the "Concept"
 	 * @param mapConcept
 	 * @param mapCategory
 	 * @return
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	 Map<Category, Map> buildCategory(Map<Concept, Map> mapConcept,
-			Map<Category, Map> mapCategory) {
-		for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
 
-			Category category = getCategoryById(entry.getKey().getCategory().getId());
+	 @SuppressWarnings("rawtypes")
+	Map<Category, Map> buildCategory(Map<Concept, Map> mapConcept, Map<Category, Map> mapCategory) {
+		
+		if(mapConcept != null){
+			for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()){
+				
+				Category category = getCategoryById(entry.getKey().getCategory().getId());
+				//tester si on peut écrire ce qui suit :
+				//Category category = entry.getKey().getCategory();
 
-			if (!mapCategory.containsKey(category)) {
-				mapCategory.put(category, new HashMap<Concept, Map>());
-				mapCategory.get(category).put(entry.getKey(), entry.getValue());
-
-			} else {
-				mapCategory.containsKey(category);
-				mapCategory.get(category).put(entry.getKey(), entry.getValue());
+				if (!mapCategory.containsKey(category)) {
+					//mapCategory.put(category, new HashMap<Concept, Map>());
+					//mapCategory.get(category).put(entry.getKey(), entry.getValue());
+					Map<Concept, Map> newConceptMap = new HashMap<Concept, Map>();
+					newConceptMap.put(entry.getKey(), entry.getValue());
+					mapCategory.put(category, newConceptMap);
+				} else {
+					//mapCategory.containsKey(category);
+					mapCategory.get(category).put(entry.getKey(), entry.getValue());
+				}
 			}
-		}
+		}	
 		return mapCategory;
 	}
 
 	/**
 	 * build concept
+	 * This method returns an object "Concept".
+	 * It takes four parameters maps "mapTool","mapConcept","listToolScore" and "Concept"
+	 * The mapTool : contains an object "Concept" and a map of the "Tool"
+	 * The mapConcept : contains an object "Concept" and a map of the "Tool"
+	 * The listToolScore : is a list of Integer
+	 * An object Concept
 	 * @param mapTool
 	 * @param mapConcept
 	 * @param listToolScore
@@ -149,20 +167,12 @@ public class SkillService implements ISkillService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	Concept buildConcept(Map<Tool, Integer> mapTool,
-			Map<Concept, Map> mapConcept, List<Integer> listToolScore,
+	Concept buildConcept(Map<Tool, Integer> mapTool,Map<Concept, Map> mapConcept, List<Integer> listToolScore,
 			Concept conceptTMP) {
 		double conceptScore;
 		for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
 			// TODO : NullPointerException
-			System.out.println("++++++++++++++++++");
-			System.out.println("entry=" + entry);
-			System.out.println("entry.getKey()=" + entry.getKey());// devient
-																	// NULL
-			System.out.println("entry.getKey().getConcept_id()="
-					+ entry.getKey().getConcept().getConcept_id());
 			Integer concept_id = entry.getKey().getConcept().getConcept_id();
-
 			Concept concept = getConceptById(concept_id);
 
 			if (!mapConcept.isEmpty()) {
@@ -211,18 +221,12 @@ public class SkillService implements ISkillService {
 		for (Skill s : listSkill) {
 			Tool tool1 = toolDao.get(s.getTool_id());
 
-			System.out.println("tool=" + tool1);
-
-			// We give a score to the tool
-			int score = (int) ScoreManage.ToolScore(s.getScore(),
-					s.getUse_frequency(), s.getNo_using_time());
-			System.out.println("score=" + score);
-
 			// We put only not null tool element in mapTool
 			if (tool1 != null) {
+				// We give a score to the tool
+				int score = (int) ScoreManage.ToolScore(s.getScore(),s.getUse_frequency(), s.getNo_using_time());
 				mapTool.put(tool1, score);
 			}
-
 		}
 	}
 
@@ -272,6 +276,7 @@ public class SkillService implements ISkillService {
 	 * @param concept_id
 	 */
 	Concept getConceptById(Integer concept_id) {
+//		return conceptDao.get(concept_id);
 
 		List<Concept> conceptList = conceptDao.getAll();
 		Concept currentConcept = null;
@@ -298,6 +303,7 @@ public class SkillService implements ISkillService {
 			}
 		}
 		return currentCategory;
+		
 	}
 
 	// SETTERS
@@ -349,5 +355,4 @@ public class SkillService implements ISkillService {
 	public void setSkillDao(SkillDao skillDao) {
 		this.skillDao = skillDao;
 	}
-
 }
