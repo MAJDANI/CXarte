@@ -278,17 +278,17 @@
 
 
 	<distributionManagement>
-		<!-- use the following if you're not using a snapshot version. -->
+		<!-- Use the following if you're not using a snapshot version. -->
 		<repository>
 			<id>nexus</id>
 			<name>RepositoryProxy</name>
-			<url>http://ncipjava.smart-up.net:8083/nexus/content/repositories/releases</url>
+			<url>http://nsltsiv-ncipjava.smart-up.net:8083/nexus/content/repositories/releases</url>
 		</repository>
-		<!-- use the following if you ARE using a snapshot version. -->
+		<!-- Use the following if you ARE using a snapshot version. -->
 		<snapshotRepository>
 			<id>nexus</id>
 			<name>RepositoryProxy</name>
-			<url>http://ncipjava.smart-up.net:8083/nexus/content/repositories/snapshots</url>
+			<url>http://nsltsiv-ncipjava.smart-up.net:8083/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
