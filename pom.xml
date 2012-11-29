@@ -280,14 +280,14 @@
 	<distributionManagement>
 		<!-- Use the following if you're not using a snapshot version. -->
 		<repository>
-			<id>nexus</id>
-			<name>RepositoryProxy</name>
+			<id>releases</id>
+			<name>Releases</name>
 			<url>http://nsltsiv-ncipjava.smart-up.net:8083/nexus/content/repositories/releases</url>
 		</repository>
 		<!-- Use the following if you ARE using a snapshot version. -->
 		<snapshotRepository>
-			<id>nexus</id>
-			<name>RepositoryProxy</name>
+			<id>snapshots</id>
+			<name>Snapshots</name>
 			<url>http://nsltsiv-ncipjava.smart-up.net:8083/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
