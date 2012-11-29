@@ -470,7 +470,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		try {
 
 			Map<String, Object> mapNotification = this.adminService
-					.updateOneSkill(category, null, null);
+					.updateASkill(category, null, null);
 			CUtils.showMessage(mapNotification, getWindow());
 		} catch (Exception e) {
 
@@ -496,7 +496,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		try {
 
 			Map<String, Object> mapNotification = this.adminService
-					.updateOneSkill(category, concept, null);
+					.updateASkill(category, concept, null);
 			CUtils.showMessage(mapNotification, getWindow());
 		} catch (Exception e) {
 
@@ -524,7 +524,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		try {
 
 			Map<String, Object> mapNotification = this.adminService
-					.updateOneSkill(category, concept, tool);
+					.updateASkill(category, concept, tool);
 			CUtils.showMessage(mapNotification, getWindow());
 		} catch (Exception e) {
 

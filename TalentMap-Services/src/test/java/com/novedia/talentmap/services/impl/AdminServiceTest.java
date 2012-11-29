@@ -390,7 +390,7 @@ public class AdminServiceTest {
 
 		//When
 		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenReturn(0);	
-		service.updateOneSkill(category, null, null);
+		service.updateASkill(category, null, null);
 		
 		//Then		
 		Mockito.verify(categoryDaoMock, Mockito.times(1)).save(category);
@@ -413,7 +413,7 @@ public class AdminServiceTest {
 		//When
 		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenReturn(0);	
 		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(0);	
-		service.updateOneSkill(category, concept, null);
+		service.updateASkill(category, concept, null);
 		
 		//Then		
 		//Mockito.verify(conceptDaoMock, Mockito.times(1)).save(concept);
@@ -444,7 +444,7 @@ public class AdminServiceTest {
 		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenReturn(0);	
 		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(0);	
 		Mockito.when(toolDaoMock.save(Mockito.any(Tool.class))).thenReturn(0);	
-		service.updateOneSkill(category, concept, tool);
+		service.updateASkill(category, concept, tool);
 				
 		//Then		
 		Mockito.verify(toolDaoMock, Mockito.times(1)).save(Mockito.any(Tool.class));
@@ -471,7 +471,7 @@ public class AdminServiceTest {
 		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
 		
 		//Then
-		service.updateOneSkill(category, concept, tool);
+		service.updateASkill(category, concept, tool);
 		
 	}
 
@@ -496,7 +496,7 @@ public class AdminServiceTest {
 		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
 		
 		//Then
-		service.updateOneSkill(category, concept, tool);
+		service.updateASkill(category, concept, tool);
 		
 	}
 	
@@ -522,7 +522,7 @@ public class AdminServiceTest {
 		Mockito.when(toolDaoMock.save(Mockito.any(Tool.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
 		
 		//Then
-		service.updateOneSkill(category, concept, tool);
+		service.updateASkill(category, concept, tool);
 		
 	}
 	
