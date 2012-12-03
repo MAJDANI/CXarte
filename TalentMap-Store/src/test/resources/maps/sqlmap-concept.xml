@@ -6,15 +6,9 @@
 <sqlMap namespace="concept">
 
     <typeAlias alias="concept" type="com.novedia.talentmap.model.entity.Concept"/> 
-	
-<!--     <resultMap id="conceptResult" class="concept"> -->
-<!--     	<result property="id" column="CONCEPT_ID"/>  -->
-<!--         <result property="category" column="CATEGORY_ID" select="selectCategory"/> -->
-<!--         <result property="name"  column="CONCEPT_NAME"/>          -->
-<!--     </resultMap> -->
-    
+	  
 	<resultMap id="conceptResult" class="concept">
-	  <result property="concept_id" column="CONCEPT_ID"/>
+	  <result property="id" column="CONCEPT_ID"/>
 	  <result property="name" column="CONCEPT_NAME"/>
 	  <result property="category.id" column="CATEGORY_ID" />
 	  <result property="category.name" column="CATEGORY_NAME" />
@@ -47,16 +41,16 @@
     
     <insert id="add" parameterClass="Concept">
     	
-    	<selectKey resultClass="int" keyProperty="concept_id">
+    	<selectKey resultClass="Integer" keyProperty="id">
       		SELECT SEQCONCEPT.NEXTVAL FROM DUAL
     	</selectKey>
-    	
+ 	
     	INSERT INTO CONCEPT (
     		CONCEPT_ID,
     		CATEGORY_ID, 
     		CONCEPT_NAME
     		)values (
-    		#concept_id#, #category.id# , upper(#name#)
+    		#id#, #category.id# , upper(#name#)
     		)
     </insert>
     
@@ -65,11 +59,11 @@
 	</select>	
 	
 	<update id="save" parameterClass="Concept">
-		UPDATE CONCEPT SET CONCEPT_ID = #concept_id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #concept_id#
+		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
 	</update>
 	
 	<delete id="delete" parameterClass="Integer">
-		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #concept_id#
+		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
 	</delete>			 
 
 </sqlMap>
