@@ -140,16 +140,30 @@ public class Category implements Serializable {
 		 */
 		private String name;
 
+		/**
+		 * Constructor with parameter id
+		 * @param id
+		 * @return
+		 */
 		public Builder id(final Integer id) {
 			this.id = id;
 			return this;
 		}
 
+		/**
+		 * Constructor with parameter name
+		 * @param name
+		 * @return
+		 */
 		public Builder name(final String name) {
 			this.name = name;
 			return this;
 		}
 
+		/**
+		 * Build category
+		 * @return
+		 */
 		public Category build() {
 			return new Category(this);
 		}
