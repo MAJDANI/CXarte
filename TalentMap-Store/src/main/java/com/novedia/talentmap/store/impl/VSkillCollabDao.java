@@ -36,4 +36,12 @@ public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCo
 		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
 	}
 
+	/**
+	 * Get VSkillCollab by id
+	 */
+	@Override
+	public VSkillCollab get(int id) throws DataAccessException {
+		return (VSkillCollab) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_ALL_SKILL_COLLAB, id);
+	}
+
 }
