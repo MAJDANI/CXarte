@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import com.novedia.talentmap.model.entity.Category;
-
 /**
  * This entity represents a Talent Map concept.
  * 
@@ -14,15 +12,15 @@ import com.novedia.talentmap.model.entity.Category;
  */
 public class Concept implements Serializable {
 
-	/**
-	 * Serialization identifier.
+	/** 
+	 * Serialization identifier 
 	 */
 	private static final long serialVersionUID = 2105607383674477226L;
 
 	/**
-	 * The concept identifier.
+	 *  The concept identifier.
 	 */
-	private Integer concept_id;
+	private Integer id;
 
 	/**
 	 * The concept name.
@@ -43,7 +41,7 @@ public class Concept implements Serializable {
 	 * default constructor
 	 */
 	public Concept(){
-		
+		super ();
 	}
 	
 	/**
@@ -53,7 +51,7 @@ public class Concept implements Serializable {
 	 *            the builder inner class for this entity
 	 */
 	public Concept(final Builder builder) {
-		this.concept_id = builder.id;
+		this.id = builder.id;
 		this.name = builder.name;
 		this.category = builder.category;
 	}
@@ -120,7 +118,7 @@ public class Concept implements Serializable {
 	public String toString() {
 		
 		StringBuilder strBld = new StringBuilder();
-		strBld.append("[id=").append(getConcept_id()).append(", ").append("name=")
+		strBld.append("[id=").append(getId()).append(", ").append("name=")
 				.append(getName()).append(", ").append("category=")
 				.append(getCategory().getName()).append("]");
 		return strBld.toString();
@@ -139,7 +137,7 @@ public class Concept implements Serializable {
 
 		Concept comparedObj = (Concept) o;
 		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getConcept_id(), comparedObj.getConcept_id());
+		ebuilder.append(this.getId(), comparedObj.getId());
 		return ebuilder.isEquals();
 	}
 
@@ -147,7 +145,7 @@ public class Concept implements Serializable {
 	public int hashCode() {
 		
 		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getConcept_id());
+		hashBuilder.append(this.getId());
 		return hashBuilder.hashCode();
 	}
 
@@ -172,21 +170,31 @@ public class Concept implements Serializable {
 		 */
 		private Category category;
 		
+		/**
+		 * set id
+		 * @param id
+		 * @return
+		 */
 		public Builder id(final Integer id) {
 			this.id = id;
 			return this;
 		}
 
+		/**
+		 * set name
+		 * @param name
+		 * @return
+		 */
 		public Builder name(final String name) {
 			this.name = name;
 			return this;
 		}
 		
-		public Builder categoryId(final String name) {
-			this.name = name;
-			return this;
-		}
-		
+		/**
+		 * set category
+		 * @param category
+		 * @return
+		 */
 		public Builder category (final Category category) {
 			this.category = category;
 			return this;
@@ -212,17 +220,16 @@ public class Concept implements Serializable {
 	}
 
 	/**
-	 * @return the concept_id
+	 * @return the id
 	 */
-	public Integer getConcept_id() {
-		return concept_id;
+	public Integer getId() {
+		return id;
 	}
 
 	/**
-	 * @param concept_id the concept_id to set
+	 * @param id the id to set
 	 */
-	public void setConcept_id(Integer concept_id) {
-		this.concept_id = concept_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
 }
