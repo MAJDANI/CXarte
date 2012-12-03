@@ -78,7 +78,7 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Save concept");
 		}
-		return (Integer) this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_CONCEPT, concept.getConcept_id());
+		return (Integer) this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_CONCEPT, concept);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Delete concept");
 		}
-		return  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CONCEPT, concept.getConcept_id());
+		return  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CONCEPT, concept.getId());
 	}
 
 	/**
