@@ -16,6 +16,10 @@
 	
 	<select id="getAllSkillCollab" resultMap="vskillCollabResult" parameterClass="Integer">
 		SELECT * FROM VSKILL_COLLAB WHERE COLLAB_ID = #collab_id#
+	</select>
+	
+	<select id="get" resultMap="vskillCollabResult" parameterClass="Integer">
+		SELECT * FROM VSKILL_COLLAB WHERE COLLAB_ID = #id#
 	</select>		 
 
 </sqlMap>
