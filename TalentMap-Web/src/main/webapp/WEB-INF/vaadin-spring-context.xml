@@ -235,6 +235,7 @@
 	<bean id="btnDeleteMission" class="com.vaadin.ui.Button"/>
 	
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
+	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
 		<constructor-arg name="missionForm" ref="missionFormBean"/>

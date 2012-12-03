@@ -6,68 +6,58 @@ import org.springframework.dao.DataAccessException;
 
 /**
  * The generic interface DAO.
- * 
  * @author j.marie-sainte
  *
  * @param <E> generic parameter
  */
 public interface IDao<E> {
-	
-	
-	/**
-	 * Get element by Id
-	 * @param id
-	 * @return
-	 * @throws DataAccessException
-	 */
-	E get(Integer id) throws DataAccessException;
-	
-	/**
-	 * Get all Categories
-	 * @return
-	 * @throws DataAccessException
-	 */
-	List<E> getAll() throws DataAccessException;
-	
-	/**
-	 * Save a category
-	 * @class ICategoryDao.java
-	 * @throws DataAccessException
-	 */
-	int save(E element) throws DataAccessException;
-	
-	/**
-	 * Inserts element
-	 * 
-	 * @param mission : the mission to be inserted
-	 * @return id of the element inserted
-	 * @throws DataAccessException
-	 */
-	public int add(E element) throws DataAccessException;
-		
-	/**
-	 * Delete element
-	 * 
-	 * @param element
-	 * @return id of the element deleted
-	 * @throws DataAccessException
-	 */
-	int delete(E element) throws DataAccessException;
-	
-	/**
-	 * Get the element by name
-	 * 
-	 * @param name
-	 * @return
-	 * @throws DataAccessException
-	 */
-	E getByName(String name) throws DataAccessException;
-	
-	/**
-	 * Check if the element exists 
-	 * @param name
-	 * @return the existing element or null
-	 * @throws Exception
-	 */
-	E check(String name) throws DataAccessException;
+
+/**
+ * Get element by Id.
+ * @param id a id
+ * @return <E>
+ */
+E get(Integer id);
+
+/**
+ * Get all Categories.
+ * @return a list <E>
+ */
+List<E> getAll();
+
+/**
+ * Save a category.
+ * @class ICategoryDao.java
+ * @return id a id
+ * @param element of type <E>
+ */
+int save(E element);
+
+/**
+ * Inserts element.
+ * @param element of type <E>
+ * @return id of the element inserted
+ */
+int add(E element);
+
+/**
+ * Delete element.
+ * @param element of type <E>
+ * @return id of the element deleted
+ */
+int delete(E element);
+
+/**
+ * Get the element by name.
+ * @param name a name
+ * @return name
+ */
+E getByName(String name);
+
+/**
+ * Check if the element exists.
+ * @param name a name
+ * @return the existing element or null
+ */
+E check(String name);
 }

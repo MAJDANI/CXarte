@@ -32,40 +32,56 @@ import com.novedia.talentmap.store.impl.ConceptDao;
 
 /**
  * Test class for administration service.
- * 
  * @author v.dibi
  * @author v.guillemain
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AdminServiceTest {
+/**
+ * class AdminService.
+ */
+private AdminService service;
+/**
+ *  IVSkillDao.
+ */
+@Mock
+private IVSkillDao vSkillDaoMock;
+/**
+ * toolDaoMock.
+ */
+@Mock
+private IDao<Tool> toolDaoMock;
 
-	private AdminService service;
-	
-	@Mock
-	private IVSkillDao vSkillDaoMock;
+/**
+ * conceptDaoMock.
+ */
+@Mock
+private IDao<Concept> conceptDaoMock;
 
-	@Mock
-	private IDao<Tool> toolDaoMock;
+/**
+ * categoryDaoMock.
+ */
+@Mock
+private IDao<Category> categoryDaoMock;
 
-	@Mock
-	private IDao<Concept> conceptDaoMock;
-
-	@Mock
-	private IDao<Category> categoryDaoMock;
-
-
-	@Before
-	public void setUp() throws Exception {
-		service = new AdminService();
-		service.setToolDao(toolDaoMock);
-		service.setConceptDao(conceptDaoMock);
-		service.setCategoryDao(categoryDaoMock);
-		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
-		service.setConcept(concept );
-		service.setvSkillDao(vSkillDaoMock);
-	}
-
+/**
+ * This method allow initialize the object.
+ * @throws Exception
+ */
+@Before
+public void setUp() throws Exception {
+service = new AdminService();
+service.setToolDao(toolDaoMock);
+service.setConceptDao(conceptDaoMock);
+service.setCategoryDao(categoryDaoMock);
+Concept concept = Concept.Builder.builder().build();
+concept.setConcept_id(1);
+service.setConcept(concept );
+service.setvSkillDao(vSkillDaoMock);
+}
+/**
+ * This method allow to get all tool and return a list of tools.
+ */
 	@Test
 	public void getAllToolsReturnAListOfTools() {
 
