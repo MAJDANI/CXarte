@@ -67,7 +67,7 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Add concept");
 		}
-		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_CONCEPT, concept.getConcept_id());
+		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_CONCEPT, concept.getId());
 	}
 	
 	/**
