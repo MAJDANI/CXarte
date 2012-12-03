@@ -151,7 +151,7 @@ public class SkillServiceTest {
 		// Given
 		Tool tool1 = new Tool();
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		tool1.setConcept(concept);
 		tool1.setId(1);
 		tool1.setName("Spring");
@@ -329,7 +329,7 @@ public class SkillServiceTest {
 		String conceptName = "conceptName";
 		
 		Concept conceptExpected = new Concept();
-		conceptExpected.setConcept_id(conceptId);
+		conceptExpected.setId(conceptId);
 		conceptExpected.setName(conceptName);
 		
 		List<Concept> conceptListExpected = new ArrayList<Concept>();

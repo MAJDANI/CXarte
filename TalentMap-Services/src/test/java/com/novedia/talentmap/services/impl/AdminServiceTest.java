@@ -75,7 +75,7 @@ service.setToolDao(toolDaoMock);
 service.setConceptDao(conceptDaoMock);
 service.setCategoryDao(categoryDaoMock);
 Concept concept = Concept.Builder.builder().build();
-concept.setConcept_id(1);
+concept.setId(1);
 service.setConcept(concept );
 service.setvSkillDao(vSkillDaoMock);
 }
@@ -88,7 +88,7 @@ service.setvSkillDao(vSkillDaoMock);
 		// Given
 		Tool tool1 = new Tool();
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		tool1.setConcept(concept);
 		tool1.setId(1);
 		tool1.setName("Spring");
@@ -124,7 +124,7 @@ service.setvSkillDao(vSkillDaoMock);
 		Tool tool1 = Tool.Builder.builder().build();
 		
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		
 		tool1.setConcept(concept);
 		tool1.setId(1);
@@ -150,7 +150,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setId(1);
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 		
@@ -185,7 +185,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setId(1);
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -342,7 +342,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setId(1);
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -368,7 +368,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setId(1);
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -420,7 +420,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setName("JAVA");
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -445,7 +445,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setName("JAVA");
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -474,7 +474,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setName("JAVA");
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -499,7 +499,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setName("JAVA");
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
@@ -524,7 +524,7 @@ service.setvSkillDao(vSkillDaoMock);
 		category.setName("JAVA");
 
 		Concept concept = Concept.Builder.builder().build();
-		concept.setConcept_id(1);
+		concept.setId(1);
 		concept.setCategory(category);
 		concept.setName("ORM");
 
