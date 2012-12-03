@@ -271,16 +271,16 @@ public class ManageSkillContent extends VerticalLayout implements
 
 					for (Tool t : this.listTool) {
 
-						if (co.getConcept_id().equals(t.getConcept().getConcept_id())) {
+						if (co.getId().equals(t.getConcept().getId())) {
 
-							this.treeSkill.addItem(co.getConcept_id() + ":"
+							this.treeSkill.addItem(co.getId() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName());
-							this.treeSkill.setItemCaption(co.getConcept_id() + ":"
+							this.treeSkill.setItemCaption(co.getId() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName(),
 									co.getName());
 
 							this.treeSkill.setParent(
-									co.getConcept_id() + ":" + TYPE_CONCEPT + ":"
+									co.getId() + ":" + TYPE_CONCEPT + ":"
 											+ co.getName(),
 									ca.getId() + ":" + TYPE_CATEGORY + ":"
 											+ ca.getName());
@@ -292,7 +292,7 @@ public class ManageSkillContent extends VerticalLayout implements
 									t.getName());
 
 							this.treeSkill.setParent(t.getId() + ":"
-									+ TYPE_TOOL + ":" + t.getName(), co.getConcept_id()
+									+ TYPE_TOOL + ":" + t.getName(), co.getId()
 									+ ":" + TYPE_CONCEPT + ":" + co.getName());
 
 							this.treeSkill.setChildrenAllowed(t.getId() + ":"
