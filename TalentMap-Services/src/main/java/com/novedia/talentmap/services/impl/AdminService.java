@@ -236,7 +236,7 @@ public Map<String, Object> deleteCategory(int categoryId) throws DataAccessExcep
 public Map<String, Object> deleteConcept(int conceptId) throws DataAccessException {
 
 	Concept concept = Concept.Builder.builder().build();
-	concept.setConcept_id(conceptId);
+	concept.setId(conceptId);
 
 	if (this.conceptDao.delete(concept) > 0) {
 		this.mapNotification.put("typeError", 1);

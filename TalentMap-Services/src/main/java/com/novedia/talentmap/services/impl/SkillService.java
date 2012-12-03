@@ -178,7 +178,7 @@ Concept buildConcept(Map<Tool, Integer> mapTool,Map<Concept, Map> mapConcept, Li
 	double conceptScore;
 	for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
 		// TODO : NullPointerException
-		Integer conceptId = entry.getKey().getConcept().getConcept_id();
+		Integer conceptId = entry.getKey().getConcept().getId();
 		Concept concept = getConceptById(conceptId);
 
 		if (!mapConcept.isEmpty()) {
@@ -327,7 +327,7 @@ Concept getConceptById(Integer conceptId) {
 	List<Concept> conceptList = conceptDao.getAll();
 	Concept currentConcept = null;
 	for (Concept concept : conceptList) {
-		if (concept.getConcept_id().equals(conceptId)) {
+		if (concept.getId().equals(conceptId)) {
 			currentConcept = concept;
 		}
 	}
