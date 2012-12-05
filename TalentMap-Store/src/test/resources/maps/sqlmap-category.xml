@@ -24,9 +24,9 @@
     	SELECT * FROM CATEGORY
     </select>			
     
-    <insert id="insert" parameterClass="Category">
+    <insert id="add" parameterClass="Category">
     	
-    	<selectKey resultClass="int" keyProperty="id">
+    	<selectKey resultClass="Integer" keyProperty="id">
       		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
     	</selectKey>
     	
@@ -44,7 +44,7 @@
 	</select>	
 	
 	<update id="save" parameterClass="Category">
-		UPDATE CATEGORY SET CATEGORY_ID = #id#, CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
+		UPDATE CATEGORY SET CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
 	</update>
 	
 	<delete id="delete" parameterClass="Integer">
