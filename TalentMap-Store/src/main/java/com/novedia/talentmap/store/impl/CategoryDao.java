@@ -10,96 +10,62 @@ import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
+
 /**
- * Category DAO.
+ * Category DAO
+ * 
  * @author j.collet
+ * @param <E>
+ * @param <E>
+ * @project TalentMap-Store
+ * @package com.novedia.talentmap.store.impl
+ * @created 21 mai 2012
  */
-public class CategoryDao extends SqlMapClientDaoSupport implements
-IDao<Category> {
-/**
- * Class builder based on sqlMapClient.
- * @param sqlMapClient
- * a sqlmapclient
- */
-public CategoryDao(final SqlMapClient sqlMapClient) {
-setSqlMapClient(sqlMapClient);
-}
+public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category> {
+	
+	/**
+	 * Class builder based on sqlMapClient
+	 * @param sqlMapClient
+	 */
+	public CategoryDao(final SqlMapClient sqlMapClient){
+		setSqlMapClient(sqlMapClient);
+	}
+	
+	@Override
+	public Category get(Integer id) throws DataAccessException {
+		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY, id);
+	}
 
-/**
- * This method allow to get a category.
- * @param id a id
- * @throws DataAccessException
- */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> getAll() {
+		return (List<Category>) getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CATEGORY);
+	}
+	
+	@Override
+	public int add(Category category) throws DataAccessException {
+		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_CATEGORY, category);
+	}
 
-@Override
-public Category get(final Integer id) throws DataAccessException {
-return (Category) this.getSqlMapClientTemplate().queryForObject(
-DBRequestsConstants.GET_CATEGORY, id);
-}
+	@Override
+	public int save(Category category) throws DataAccessException {
+		return (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_CATEGORY, category);
+	}
 
-/**
- * This method allow to get a list of category.
- */
-@SuppressWarnings("unchecked")
-@Override
-public List<Category> getAll() {
-return (List<Category>) getSqlMapClientTemplate().queryForList(
-DBRequestsConstants.GET_ALL_CATEGORY);
-}
-/**
- * This method allow to add a category.
- * @param category a category
- * @throws DataAccessException
- */
-@Override
-public int add(final Category category) throws DataAccessException {
-return (Integer) this.getSqlMapClientTemplate().insert(
-DBRequestsConstants.ADD_CATEGORY, category);
-}
+	@Override
+	public int delete(Category category) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CATEGORY, category.getId());			
+	}
 
-/**
- *This method allow to update a category.
- *@param category a category
- *@throws DataAccessException
- */
-@Override
-public int save(final Category category) throws DataAccessException {
-return (Integer) this.getSqlMapClientTemplate().update(
-DBRequestsConstants.SAVE_CATEGORY, category);
-}
 
-/**
- * This method allow to delete a category.
- * @param category a category
- * @throws DataAccessException
- */
-@Override
-public int delete(final Category category) throws DataAccessException {
-return (Integer) this.getSqlMapClientTemplate().delete(
-DBRequestsConstants.DELETE_CATEGORY, category);
-}
+	@Override
+	public Category check(String name) throws DataAccessException {
+		return (Category)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_CATEGORY, name);
+	}
 
-/**
- * This method allow to check a category.
- * @return {@link Category}
- * @param name a category name
- * @throws DataAccessException
- */
-@Override
-public Category check(final String name) throws DataAccessException {
-return (Category) this.getSqlMapClientTemplate().queryForObject(
-DBRequestsConstants.CHECK_CATEGORY, name);
-}
-
-/**
- * @return {@link Category}
- * @param name a name
- * @throws DataAccessException
- */
-@Override
-public Category getByName(final String name) throws DataAccessException {
-return (Category) this.getSqlMapClientTemplate().queryForObject(
-DBRequestsConstants.GET_CATEGORY_BY_NAME, name);
-}
+	@Override
+	public Category getByName(String name) throws DataAccessException {
+		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_BY_NAME, name);
+	}
 
 }
