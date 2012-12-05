@@ -52,7 +52,7 @@ public class ManagerServiceTest {
 		//Given
 		Integer managerId = 1;
 		Collaborator collaborator = new Collaborator();
-		collaborator.setManager_id(managerId);
+		collaborator.setManagerId(managerId);
 		
 		List<Collaborator> listCollaboratorRequested = new ArrayList<Collaborator>();
 		listCollaboratorRequested.add(collaborator);

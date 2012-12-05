@@ -41,7 +41,7 @@ public class CollaboratorServiceTest {
 	public void getAllCollaboratorReturnAListOfCollaborators(){
 		// Given
 		Collaborator collaborator = new Collaborator();
-		collaborator.setFirst_name("toto");
+		collaborator.setFirstName("toto");
 		collaborator.setId(1);
 		
 		List<Collaborator> expectedCollaboratorsList = new ArrayList<Collaborator>();
@@ -70,7 +70,7 @@ public class CollaboratorServiceTest {
 		// Given
 		Integer collaboratorId = 1;
 		Collaborator collaboratorExpected = new Collaborator();
-		collaboratorExpected.setFirst_name("toto");
+		collaboratorExpected.setFirstName("toto");
 		collaboratorExpected.setId(collaboratorId);
 
 		// When

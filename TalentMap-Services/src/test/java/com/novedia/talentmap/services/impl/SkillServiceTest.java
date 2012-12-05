@@ -87,7 +87,7 @@ public class SkillServiceTest {
 		skillExpected.setCollaborator_id(collaboratorId);
 		
 		Collaborator collaboratorExpected = new Collaborator();
-		collaboratorExpected.setFirst_name("toto");
+		collaboratorExpected.setFirstName("toto");
 		collaboratorExpected.setId(collaboratorId);
 							
 		//When
