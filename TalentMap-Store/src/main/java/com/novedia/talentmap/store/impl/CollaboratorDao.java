@@ -2,6 +2,8 @@ package com.novedia.talentmap.store.impl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
@@ -12,85 +14,63 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * The collaborator DAO.
+ * 
  * @author j.collet
+ * @project TalentMap-Store
+ * @package com.novedia.talentmap.store.impl
+ * @created 21 mai 2012
  */
 public class CollaboratorDao extends SqlMapClientDaoSupport implements IDao<Collaborator>{
-/**
- * Class builder based on sqlMapClient.
- * @param sqlMapClient a sqlmapclient
- */
-public CollaboratorDao(final SqlMapClient sqlMapClient) {
-setSqlMapClient(sqlMapClient);
-}
+	
+	/** For log management */
+	private static Log logger = LogFactory.getLog(CollaboratorDao.class);
+	
+	/**
+	 * Class builder based on sqlMapClient
+	 * @param sqlMapClient
+	 */
+	public CollaboratorDao(final SqlMapClient sqlMapClient){
+		setSqlMapClient(sqlMapClient);
+	}
+	
+	@Override
+	public Collaborator get(Integer id) throws DataAccessException {
+		return (Collaborator) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLABORATOR, id);
+	}
 
-/**
- * This method allow to get a collaborator.
- * @param id a id
- * @throws DataAccessException
- */
-@Override
-public Collaborator get(final Integer id) throws DataAccessException {
-return (Collaborator) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLABORATOR, id);
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Collaborator> getAll() throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR);
+	}
 
-/**
- * This method allow to get a list of collaborator.
- *  @return a list of collaborator
- *  @throws DataAccessException
- */
-@Override
-public List<Collaborator> getAll() throws DataAccessException {
-return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR);
-}
+	@Override
+	public int save(Collaborator collaborator) throws DataAccessException {
+		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_COLLABORATOR, collaborator);
+	}
 
-/**
- * This method allow to update a collaborator.
- * @return a integer
- * @param collaborator
- * @throws DataAccessException
- */
-@Override
-public int save(Collaborator collaborator) throws DataAccessException {
-return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_COLLABORATOR, collaborator.getId());
-}
+	@Override
+	public int add(Collaborator collaborator) throws DataAccessException {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Add collaborator");
+		}
+		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_COLLABORATOR, collaborator);
+	}
 
-/**
- * This method allow to add a collaborator.
- * @param collaborator a collaborator
- * @throws DataAccessException
- */
-@Override
-public int add(final Collaborator collaborator) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	@Override
+	public int delete(Collaborator collaborator) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * This method allow to delete a collaborator.
- * @param collaborator a collaborator
- * @throws DataAccessException
- */
-@Override
-public int delete(final Collaborator collaborator) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
-/**
- * This method allow to get a collaborator by name.
- * @param name , collaborator name
- * @throws DataAccessException
- */
-@Override
-public Collaborator getByName(final String name) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	@Override
+	public Collaborator getByName(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public Collaborator check(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * This method allow to check a collaborator by name.
- * @param name a collaborator name
- * @throws DataAccessException
- */
-@Override
-public Collaborator check(final String name) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
 
 }
