@@ -2,8 +2,6 @@ package com.novedia.talentmap.store;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 

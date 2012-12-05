@@ -1,24 +1,42 @@
 package com.novedia.talentmap.store.impl;
 
 import java.util.List;
-
+/**
+ *SkillParameter.
+ */
 public class SkillParameter {
-
-	private Integer toolId;
-	private List<Integer> listCollaborators;
-	public Integer getToolId() {
-		return toolId;
-	}
-	public void setToolId(Integer toolId) {
-		this.toolId = toolId;
-	}
-	public List<Integer> getListCollaborators() {
-		return listCollaborators;
-	}
-	public void setListCollaborators(List<Integer> listCollaborators) {
-		this.listCollaborators = listCollaborators;
-	}
-	
-	
-	
+/**
+ * toolId.
+ */
+private Integer toolId;
+/**
+ * listCollaborators.
+ */
+private List<Integer> listCollaborators;
+/**
+ * get tool by integer.
+ * @return int
+ */
+public Integer getToolId() {
+return toolId;
+}
+/**
+ * set tool id.
+ * @param toolId
+ */
+public void setToolId(Integer toolId) {
+this.toolId = toolId;
+}
+/**
+ * @return a list id of collaborator.
+ */
+public List<Integer> getListCollaborators() {
+return listCollaborators;
+}
+/**
+ * @param listCollaborators.
+ */
+public void setListCollaborators(List<Integer> listCollaborators) {
+this.listCollaborators = listCollaborators;
+}
 }

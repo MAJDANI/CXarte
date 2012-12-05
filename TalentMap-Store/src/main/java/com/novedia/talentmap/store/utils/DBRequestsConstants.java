@@ -5,307 +5,300 @@ package com.novedia.talentmap.store.utils;
  * @author j.marie-sainte
  */
 public final class DBRequestsConstants {
-	
 // COLLABORATOR REQUESTS
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request id to get a collaborator.
  */
-public final static String GET_COLLABORATOR = "collaborator.get";
+public static final String GET_COLLABORATOR = "collaborator.get";
 
 /**
- * Constant request id to get all the collaborators 
+ * Constant request id to get all the collaborators.
  */
-public final static String GET_ALL_COLLABORATOR = "collaborator.getAll";
+public static final String GET_ALL_COLLABORATOR = "collaborator.getAll";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to add a collaborator.
  */
-public final static String ADD_COLLABORATOR = "collaborator.add";
+public static final String ADD_COLLABORATOR = "collaborator.add";
 
 /**
- * Constant request id to delete a collaborator 
+ * Constant request to delete a collaborator.
  */
-public final static String DELETE_COLLABORATOR = "collaborator.delete";
+public static final String DELETE_COLLABORATOR = "collaborator.delete";
 
 /**
- * Constant request id to update a collaborator 
+ * Constant request to update a collaborator.
  */
-public final static String SAVE_COLLABORATOR = "collaborator.save";
+public static final String SAVE_COLLABORATOR = "collaborator.save";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to get a collaborator by lastName.
  */
-public final static String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllByLastName";
-
-/**
- * Constant request id to get a collaborator 
- */
-public final static String GET_ALL_COLLABORATOR_BY_LIST_ID="collaborator.getAllByListId";
-
+public static final String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllByLastName";
 
 // CATEGORY REQUESTS
 /**
- * Constant request id to get a category.
+ * Constant request to get a category.
  */
-public final static String GET_CATEGORY = "category.getCategory";
+public static final String GET_CATEGORY = "category.getCategory";
 
 /**
- * Constant request id to get all category.
+ * This constant is used to retrieve all category.
  */
-public final static String GET_ALL_CATEGORY = "category.getAll";
+public static final String GET_ALL_CATEGORY = "category.getAll";
 
 /**
- * Constant request id to insert the category
+ * Constant request to insert the category.
  */
-public final static String  ADD_CATEGORY = "category.add";
+public static final String  ADD_CATEGORY = "category.add";
 /**
- * Constant request id to check a category
+ * Constant request to check a category.
  */
-public final static String CHECK_CATEGORY = "category.check";
+public static final String CHECK_CATEGORY = "category.check";
 
 /**
- * Constant request id to update category
+ * Constant request to update category.
  */
-public final static String  SAVE_CATEGORY ="category.save";
+public static final String  SAVE_CATEGORY = "category.save";
 
 /**
- * Constant request id to delete category
+ * Constant request to delete category.
  */
-public final static String DELETE_CATEGORY ="category.delete";
+public static final String DELETE_CATEGORY = "category.delete";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a category.
  */
 public static final String GET_CATEGORY_BY_NAME = "category.getByName";
 
 
 // CONCEPT REQUEST
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a concept.
  */
-public final static String GET_CONCEPT = "concept.get";
+public static final String GET_CONCEPT = "concept.get";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all concept.
  */
-public final static String GET_ALL_CONCEPT = "concept.getAll";
+public static final String GET_ALL_CONCEPT = "concept.getAll";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a concept by category id.
  */
-public final static String GET_ALL_CONCEPT_BY_CATEGORYID = "concept.getAllConceptByCategoryId";
+public static final String GET_ALL_CONCEPT_BY_CATEGORYID = "concept.getAllConceptByCategoryId";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request id to add a concept.
  */
-public final static String ADD_CONCEPT = "concept.add";
+public static final String ADD_CONCEPT = "concept.add";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to update a concept.
  */
-public final static String SAVE_CONCEPT = "concept.save";
+public static final String SAVE_CONCEPT = "concept.save";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to delete concept.
  */
-public final static String DELETE_CONCEPT = "concept.delete";
+public static final String DELETE_CONCEPT = "concept.delete";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to check a concept.
  */
-public final static String CHECK_CONCEPT ="concept.check";
+public static final String CHECK_CONCEPT = "concept.check";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a concept by name.
  */
 public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 
 // MANAGER REQUESTS
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a manager.
  */
-public final static String GET_MANAGER = "manager.get";
+public static final String GET_MANAGER = "manager.get";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a collaborator by manager id.
  */
-public final static String GET_COLLABORATORS_BY_MANAGER_ID="manager.getAllCollaboratorsByManagerId";
+public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllCollaboratorsByManagerId";
 
 
 // MISSION REQUESTS
 
 /**
- * Constant request id to get mission 
+ * This constant is used to retrieve a mission.
  */
-public final static String GET_MISSION ="mission.get";
+public static final String GET_MISSION = "mission.get";
 
 /**
- * Constant request id to get all missions 
+ * Constant request id to get all missions.
+ * This constant is used to retrieve all mission.
  */
-public final static String GET_ALL_MISSION = "mission.getAll";
+public static final String GET_ALL_MISSION = "mission.getAll";
 
 /**
- * Constant request id to insert mission 
+ * Constant request to add a mission.
  */
-public final static String ADD_MISSION = "mission.add";
+public static final String ADD_MISSION = "mission.add";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to update a collaborator.
  */
-public final static String SAVE_MISSION = "mission.save";
+public static final String SAVE_MISSION = "mission.save";
 
 
 // PROFILE REQUESTS
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all profile.
  */
-public final static String GET_ALL_PROFILE = "profile.getAll";
+public static final String GET_ALL_PROFILE = "profile.getAll";
 
 /**
- * Constant request 
+ * Constant request to check a profile.
  */
 public static final String CHECK_PROFILE = "profile.check";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a profile.
  */
-public final static String GET_PROFILE ="profile.get";
+public static final String GET_PROFILE = "profile.get";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to delete a profile.
  */
-
 public static final String DELETE_PROFILE = "profile.delete";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to update a profile.
  */
-public final static  String SAVE_PROFILE = "profile.save";
+public static final  String SAVE_PROFILE = "profile.save";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to add a profile.
  */
-public  final static String ADD_PROFILE = "profile.add";
+public static final String ADD_PROFILE = "profile.add";
 
 /**
- * Constant request id to get a profile by name
+ * This constant is used to retrieve a profile by name.
  */
 public static final String GET_PROFILE_BY_NAME = "profile.getByName";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a collaborator by type.
  */
-public final static String GET_PROFILE_BY_TYPE = "profile.getByType";
+public static final String GET_PROFILE_BY_TYPE = "profile.getByType";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all collaborator skill.
  */
-public final static String GET_ALL_COLLABORATOR_SKILL ="skill.getAllCollaboratorSkill";
+public static final String GET_ALL_COLLABORATOR_SKILL ="skill.getAllCollaboratorSkill";
 
 /**
- * Constant key for query get all skills by collaborator
+ * This constant is used to retrieve all skills by collaborator.
  */
-public final static String GET_ALL_SKILLS_BY_COLLABORATOR = "skill.getAllSkillsByCollaborator";
+public static final String GET_ALL_SKILLS_BY_COLLABORATOR = "skill.getAllSkillsByCollaborator";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all skill.
  */
-public final static String GET_ALL_SKILL ="skill.getAll";
+public static final String GET_ALL_SKILL = "skill.getAll";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to add a skill.
  */
-public final static String ADD_SKILL = "skill.add";
+public static final String ADD_SKILL = "skill.add";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to update a collaborator.
  */
-public final static String SAVE_SKILL = "skill.save";
+public static final String SAVE_SKILL = "skill.save";
 
 /**
- * Constant request id to get all collaborators by tool 
+ * Constant request to get all collaborators by tool.
  */
-public final static String GET_ALL_COLLABORATORS_BY_TOOL = "skill.getAllCollaboratorsIdByTool";
+public static final String GET_ALL_COLLABORATORS_BY_TOOL = "skill.getAllCollaboratorsIdByTool";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all collaborator by tool.
  */
-public final static String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
+public static final String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
 
 
 // TOOL REQUESTS
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to add a tool.
  */
-public final static String ADD_TOOL = "tool.add";
+public static final String ADD_TOOL = "tool.add";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to update a collaborator.
  */
-public final static String SAVE_TOOL = "tool.save";
+public static final String SAVE_TOOL = "tool.save";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request id to check a tool.
  */
-public final static String CHECK_TOOL = "tool.check";
-	
+public static final String CHECK_TOOL = "tool.check";
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all tool by concept.
  */
-public final static String GET_ALL_TOOL_BY_CONCEPT = "tool.getAllToolByConcept";
+public static final String GET_ALL_TOOL_BY_CONCEPT = "tool.getAllToolByConcept";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all tool.
  */
-public final static String GET_ALL_TOOL = "tool.getAll";
+public static final String GET_ALL_TOOL = "tool.getAll";
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to delete a tool.
  */
 public static final String DELETE_TOOL = "tool.delete";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a tool by name.
  */
-public final static String GET_TOOL_BY_NAME ="tool.getToolByName";
+public static final String GET_TOOL_BY_NAME = "tool.getToolByName";
 
 /**
- * Constant request id to get a collaborator 
+ *This constant is used to retrieve a tool.
  */
-public final static String GET_TOOL ="tool.get";
+public static final String GET_TOOL = "tool.get";
 
 
 // VSKILL REQUESTS
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve all skill by collaborator.
  */
-public final static String GET_ALL_SKILL_COLLAB = "vskillCollab.getAllSkillCollab";
+public static final String GET_ALL_SKILL_COLLAB = "vskillCollab.getAllSkillCollab";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a skill by tool.
  */
-public final static String GET_SKILL_BY_TOOL = "vskill.getByTool";
+public static final String GET_SKILL_BY_TOOL = "vskill.getByTool";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a concept by category.
  */
-public final static String GET_CONCEPT_BY_CATEGORY = "vskill.getConceptByCategory";
+public static final String GET_CONCEPT_BY_CATEGORY = "vskill.getConceptByCategory";
 
 /**
- * Constant request id to get a collaborator 
+ * This constant is used to retrieve a tool by concept.
  */
-public final static String GET_TOOL_BY_CONCEPT = "vskill.getToolByConcept";	
+public static final String GET_TOOL_BY_CONCEPT = "vskill.getToolByConcept";	
 
 /**
- * Constant request id to get a collaborator 
+ * Constant request to delete a collaborator.
  */
-public final static String DELETE_MISSION = "mission.delete";
+public static final String DELETE_MISSION = "mission.delete";
 
-// TASK
-
-public final static String GET_TASK_BY_ID = "task.get";
+/**
+ * This constant is used to retrieve a task by id.
+ */
+public static final String GET_TASK_BY_ID = "task.get";
 }

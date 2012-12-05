@@ -19,17 +19,14 @@
 	<select id="getByName" resultMap="categoryResult" parameterClass="String">
 		SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name#
 	</select>
-	
     <select id="getAll" resultMap="categoryResult">
     	SELECT * FROM CATEGORY
     </select>			
     
     <insert id="insert" parameterClass="Category">
-    	
     	<selectKey resultClass="int" keyProperty="id">
       		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
     	</selectKey>
-    	
     	INSERT INTO CATEGORY (
     		CATEGORY_ID,
     		CATEGORY_NAME
@@ -42,11 +39,10 @@
     <select id="check" resultMap="categoryResult" parameterClass="String">
 		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
 	</select>	
-	
+
 	<update id="save" parameterClass="Category">
 		UPDATE CATEGORY SET CATEGORY_ID = #id#, CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
 	</update>
-	
 	<delete id="delete" parameterClass="Integer">
 		DELETE CATEGORY CASCADE WHERE CATEGORY_ID = #id#
 	</delete> 

@@ -2,8 +2,6 @@ package com.novedia.talentmap.store;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
 /**
  * The generic interface DAO.
  * @author j.marie-sainte

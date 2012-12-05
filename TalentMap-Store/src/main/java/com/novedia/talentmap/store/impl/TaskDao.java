@@ -11,53 +11,74 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
- * The {@link TaskDao} handles query for table Task
+ * The {@link TaskDao} handles query for table Task.
  * @author moumbe
  *
  */
 public class TaskDao extends SqlMapClientDaoSupport implements IDao<Task> {
 
-	/**
-	 * Constructor
-	 * @param sqlMapClient
-	 */
-	public TaskDao (final SqlMapClient sqlMapClient){
-		setSqlMapClient(sqlMapClient);
-	}
-	
-	@Override
-	public Task get(Integer id) throws DataAccessException {
-		return (Task) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TASK_BY_ID, id);
-	}
+/**
+ * Constructor.
+ * @param sqlMapClient a SqlMapClient
+ */
+public TaskDao(final SqlMapClient sqlMapClient) {
+setSqlMapClient(sqlMapClient);
+}
 
-	@Override
-	public List<Task> getAll() throws DataAccessException {
-		return null;
-	}
+/**
+ * @return id a id.
+ * @param id a id
+ * @throws DataAccessException
+ */
+@Override
+public Task get(final Integer id) throws DataAccessException {
+return (Task) this.getSqlMapClientTemplate()
+.queryForObject(DBRequestsConstants.GET_TASK_BY_ID, id);
+}
 
-	@Override
-	public int save(Task element) throws DataAccessException {
-		return 0;
-	}
+/**
+ * @return list of Task.
+ * @throws DataAccessException
+ */
+@Override
+public List<Task> getAll() throws DataAccessException {
+return null;
+}
 
-	@Override
-	public int add(Task element) throws DataAccessException {
-		return 0;
-	}
+/**
+ * @param element of type task.
+ * @throws DataAccessException
+ */
+@Override
+public int save(Task element) throws DataAccessException {
+return 0;
+}
 
-	@Override
-	public int delete(Task element) throws DataAccessException {
-		return 0;
-	}
+/**
+ * @param element task
+ * @throws DataAccessException
+ */
+@Override
+public int add(final Task element) throws DataAccessException {
+return 0;
+}
 
-	@Override
-	public Task getByName(String name) throws DataAccessException {
-		return null;
-	}
+/**
+ * @param element task.
+ * @throws DataAccessException
+ */
+@Override
+public int delete(final Task element) throws DataAccessException {
+return 0;
+}
 
-	@Override
-	public Task check(String name) throws DataAccessException {
-		return null;
-	}
+@Override
+public Task getByName(String name) throws DataAccessException {
+	return null;
+}
 
+@Override
+public Task check(String name) throws DataAccessException {
+	return null;
+}
 }

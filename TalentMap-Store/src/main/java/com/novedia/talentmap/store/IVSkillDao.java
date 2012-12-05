@@ -1,11 +1,6 @@
 package com.novedia.talentmap.store;
 
-import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.dao.DataAccessException;
-
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.VSkill;
 
 /**

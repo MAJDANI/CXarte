@@ -9,52 +9,86 @@ import com.novedia.talentmap.model.entity.Objective;
 import com.novedia.talentmap.store.IDao;
 
 /**
- * The {@link ObjectiveDao} handles query for table Objective 
+ * The {@link ObjectiveDao} handles query for table Objective.
  * @author moumbe
  *
  */
 public class ObjectiveDao extends SqlMapClientDaoSupport implements IDao<Objective>{
 
-	@Override
-	public Objective get(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+/**
+ * This method allow to delete a mission.
+ * @param id a id
+ * @throws DataAccessException
+ */
+@Override
+public Objective get(final Integer id) throws DataAccessException {
+// TODO Auto-generated method stub
+return null;
+}
 
-	@Override
-	public List<Objective> getAll() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+/**
+ * This method allow to get all objective.
+ * @return a list of objective
+ * @throws DataAccessException
+ */
+@Override
+public List<Objective> getAll() throws DataAccessException {
+// TODO Auto-generated method stub
+return null;
+}
 
-	@Override
-	public int save(Objective element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+/**
+ * This method allow to save a objective.
+ * @param element of type objective
+ * @throws DataAccessException
+ */
+@Override
+public int save(final Objective element) throws DataAccessException {
+// TODO Auto-generated method stub
+return 0;
+}
 
-	@Override
-	public int add(Objective element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+/**
+ * This method allow to add a objective.
+ * @param element of type objective
+ * @throws DataAccessException
+ */
+@Override
+public int add(final Objective element) throws DataAccessException {
+// TODO Auto-generated method stub
+return 0;
+}
 
-	@Override
-	public int delete(Objective element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+/**
+ * This method allow to delete a objective.
+ * @param element of type objective
+ * @throws DataAccessException
+ */
+@Override
+public int delete(final Objective element) throws DataAccessException {
+// TODO Auto-generated method stub
+return 0;
+}
 
-	@Override
-	public Objective getByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+/**
+ * This method allow to get a objective by name.
+ * @param name of objective
+ * @throws DataAccessException
+ */
+@Override
+public Objective getByName(final String name) throws DataAccessException {
+// TODO Auto-generated method stub
+return null;
+}
 
-	@Override
-	public Objective check(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+/**
+ * This method allow to check a objective.
+ * @param name of type objective
+ * @throws DataAccessException
+ */
+@Override
+public Objective check(final String name) throws DataAccessException {
+// TODO Auto-generated method stub
+return null;
+}
 }
