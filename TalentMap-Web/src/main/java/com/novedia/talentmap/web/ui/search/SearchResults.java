@@ -86,8 +86,8 @@ public class SearchResults extends Table {
 			
 			hLayout.addComponent(visualizeProfile);
 			
-			addItem(new Object[] { collab.getLast_name(),
-					collab.getFirst_name(), collab.getEmail(), hLayout}, idResultsTable);
+			addItem(new Object[] { collab.getLastName(),
+					collab.getFirstName(), collab.getEmail(), hLayout}, idResultsTable);
 			idResultsTable++;
 		}
 	}
