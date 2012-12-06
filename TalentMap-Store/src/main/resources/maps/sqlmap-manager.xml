@@ -9,27 +9,27 @@
 
     <resultMap id="managerResult" class="manager">
     	<result property="id" column="MANAGER_ID"/>        
-        <result property="profile_id"  column="PROFILE_ID"/>    	    
-        <result property="last_name"   column="LAST_NAME"/>	   
-        <result property="first_name"   column="FIRST_NAME"/>	   
+        <result property="profileId"  column="PROFILE_ID"/>    	    
+        <result property="lastName"   column="LAST_NAME"/>	   
+        <result property="firstName"   column="FIRST_NAME"/>	   
         <result property="email"  column="EMAIL"/>	    
         <result property="phone"   column="PHONE"/>
-        <result property="employment_date"  column="EMPLOYMENT_DATE"/>	    
+        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
         <result property="experience"   column="EXPERIENCE"/>
-        <result property="business_engineer"   column="BUSINESS_ENGINEER"/>	   
+        <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 	
 	<resultMap id="collaboratorResult" class="collaborator">
         <result property="id" column="COLLAB_ID"/>     
-        <result property="manager_id"  column="MANAGER_ID"/>         
-        <result property="profile_id"  column="PROFILE_ID"/>    	    
-        <result property="last_name"   column="LAST_NAME"/>	   
-        <result property="first_name"   column="FIRST_NAME"/>	   
+        <result property="managerId"  column="MANAGER_ID"/>         
+        <result property="profileId"  column="PROFILE_ID"/>    	    
+        <result property="lastName"   column="LAST_NAME"/>	   
+        <result property="firstName"   column="FIRST_NAME"/>	   
         <result property="email"  column="EMAIL"/>	    
         <result property="phone"   column="PHONE"/>
-        <result property="employment_date"  column="EMPLOYMENT_DATE"/>	    
+        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
         <result property="experience"   column="EXPERIENCE"/>
-        <result property="business_engineer"   column="BUSINESS_ENGINEER"/>	   
+        <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 	
 	<select id="get" resultMap="managerResult" parameterClass="Integer">
