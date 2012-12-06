@@ -103,7 +103,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 		int idTable = 1;
 		for (Collaborator collab : listCollaborator) {
 			
-			Profile collabProfile = this.profileService.getProfile(collab.getProfile_id());
+			Profile collabProfile = this.profileService.getProfile(collab.getProfileId());
 			
 			HorizontalLayout hLayoutButton = new HorizontalLayout();
 			hLayoutButton.setSpacing(true);
@@ -126,8 +126,8 @@ public class MonitoringCollabContent extends VerticalLayout {
 			hLayoutButton.addComponent(visualizeEA);
 			hLayoutButton.addComponent(visualizeProfile);
 
-			this.collabTable.addItem(new Object[] { collab.getFirst_name(),
-					collab.getLast_name(),
+			this.collabTable.addItem(new Object[] { collab.getFirstName(),
+					collab.getLastName(),
 					collabProfile.getType(), "En mission",
 					hLayoutButton }, idTable);
 
