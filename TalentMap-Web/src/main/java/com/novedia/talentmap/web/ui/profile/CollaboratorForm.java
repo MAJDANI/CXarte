@@ -173,7 +173,7 @@ public class CollaboratorForm extends FormLayout {
 	
 			// Set the good value for the Select Item
 			int profileId = this.collaboratorService
-					.getCollaborator(COLLAB_ID).getProfile_id();
+					.getCollaborator(COLLAB_ID).getProfileId();
 			
 			String profileType = this.profileService.getProfile(profileId).getType();
 			
@@ -220,11 +220,11 @@ public class CollaboratorForm extends FormLayout {
 		
 		Collaborator collab = this.collaboratorService.getCollaborator(COLLAB_ID);
 		if (collab != null){
-			Manager manager = this.collaboratorService.getManager(collab.getManager_id());
+			Manager manager = this.collaboratorService.getManager(collab.getManagerId());
 			if (manager != null) {
 				//TODO: J'ai rajouté le test sur le manager à la demande de JM
 				//TODO: pour que l'application ne plante pas.
-				this.managerField.setValue(manager.getFirst_name()+ " " + manager.getLast_name());
+				this.managerField.setValue(manager.getFirstName()+ " " + manager.getLastName());
 			}
 		} else {
 			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
