@@ -13,7 +13,7 @@
 		<result property="name" column="NAME" />
 		<result property="place" column="PLACE" />
 		<result property="client" column="CLIENT" />
-		<result property="notes" column="NOTES" />
+		<result property="notes" column="NOTES" jdbcType="String"/>
 		<result property="start_date" column="START_DATE" />
 		<result property="end_date" column="END_DATE" />
 	</resultMap>
