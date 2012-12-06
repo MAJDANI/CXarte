@@ -315,12 +315,12 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 				.getItemDataSource();
 		Collaborator collab = collabItem.getBean();
 		try {
-			if(collab.getProfile_id() > 0){
-				collab.setProfile_id(this.profileService.getProfile(
-						collab.getProfile_id()).getId());
+			if(collab.getProfileId() > 0){
+				collab.setProfileId(this.profileService.getProfile(
+						collab.getProfileId()).getId());
 			}else{
-				collab.setProfile_id(this.profileService.getProfile(
-						collab.getProfile_id()).getId());
+				collab.setProfileId(this.profileService.getProfile(
+						collab.getProfileId()).getId());
 			}
 			return this.collabService.saveCollaborator(collab);
 		} catch (Exception e) {
