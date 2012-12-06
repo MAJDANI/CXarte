@@ -6,11 +6,11 @@
 <sqlMap namespace="concept">
 
     <typeAlias alias="concept" type="com.novedia.talentmap.model.entity.Concept"/> 
-
+	  
 	<resultMap id="conceptResult" class="concept">
 	  <result property="id" column="CONCEPT_ID"/>
 	  <result property="name" column="CONCEPT_NAME"/>
-	  <result property="category.id" column="CATEGORY_ID" />
+	  <result property="category.id" column="CATEGORY_ID"  />
 	  <result property="category.name" column="CATEGORY_NAME" />
 	</resultMap>
 
@@ -41,10 +41,10 @@
     
     <insert id="add" parameterClass="Concept">
     	
-    	<selectKey resultClass="int" keyProperty="id">
+    	<selectKey resultClass="Integer" keyProperty="id">
       		SELECT SEQCONCEPT.NEXTVAL FROM DUAL
     	</selectKey>
-    	
+ 	
     	INSERT INTO CONCEPT (
     		CONCEPT_ID,
     		CATEGORY_ID, 
