@@ -7,6 +7,11 @@ import java.util.Date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * The bean that map table collaborator
+ * @author moumbe
+ *
+ */
 public class Collaborator implements Serializable {
 	
 	/**
@@ -20,19 +25,19 @@ public class Collaborator implements Serializable {
 	/**
 	 * manager id
 	 */
-	private Integer manager_id;
+	private Integer managerId;
 	/**
 	 * profile id
 	 */
-	protected Integer profile_id;
+	protected Integer profileId;
 	/**
 	 * collaborator last nane
 	 */
-	protected String last_name;
+	protected String lastName;
 	/**
 	 * collaborator first nane
 	 */
-	protected String first_name;
+	protected String firstName;
 	/**
 	 * collaborator email
 	 */
@@ -40,11 +45,11 @@ public class Collaborator implements Serializable {
 	/**
 	 * collaborator phone number
 	 */
-	protected Integer phone;
+	protected String phone;
 	/**
 	 * collaborator employement date
 	 */
-	protected Date employment_date;
+	protected Date employmentDate;
 	/**
 	 * collaborator experience
 	 */
@@ -52,7 +57,7 @@ public class Collaborator implements Serializable {
 	/**
 	 * collaborator job name
 	 */
-	protected String business_engineer;
+	protected String businessEngineer;
 	
 	/** Mission */
 	private ArrayList<Mission> mission;
@@ -60,272 +65,432 @@ public class Collaborator implements Serializable {
 	/** Tool */
 	private ArrayList<Tool> tool;
 	
+	/**
+	 * Default Constructor
+	 */
 	public Collaborator() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * Build the class Collaborator.java.
-	 * @param id
-	 * @param manager_id
-	 * @param profile_id
-	 * @param last_name
-	 * @param first_name
-	 * @param email
-	 * @param phone
-	 * @param employment_date
-	 * @param experience
-	 * @param business_engineer
+	 * Build an immutable category entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
 	 */
-	public Collaborator(Integer id, Integer manager_id, Integer profile_id,
-			String last_name, String first_name, String email, Integer phone,
-			Date employment_date, Integer experience, String business_engineer) {
-		super();
-		this.id = id;
-		this.manager_id = manager_id;
-		this.profile_id = profile_id;
-		this.last_name = last_name;
-		this.first_name = first_name;
-		this.email = email;
-		this.phone = phone;
-		this.employment_date = employment_date;
-		this.experience = experience;
-		this.business_engineer = business_engineer;
+	public Collaborator(final Builder builder) {
+		this.id = builder.id;
+		this.firstName = builder.firstName;
+		this.profileId = builder.profileId;
+		this.phone = builder.phone;
+		this.experience = builder.experience;
+		this.managerId = builder.managerId;
+		this.lastName = builder.lastName;
+		this.employmentDate = builder.employmentDate;
+		this.businessEngineer = builder.businessEngineer;
+		this.email = builder.email;
+	}
+	
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+
+	public static class Builder {
+
+		/**
+		 * The collab identifier
+		 */
+		private Integer id;
+
+		/**
+		 * The collab firstName
+		 */
+		private String firstName;
+
+		/**
+		 * Profile id
+		 */
+		private Integer profileId;
+
+		/**
+		 * Phone
+		 */
+		private String phone;
+		
+		/**
+		 * Experience
+		 */
+		private Integer experience;
+
+		/**
+		 * manager id
+		 */
+		private Integer managerId;
+
+		/**
+		 * collaborator last nane
+		 */
+		protected String lastName;
+
+		/**
+		 * collaborator employement date
+		 */
+		protected Date employmentDate;
+
+		/**
+		 * collaborator job name
+		 */
+		protected String businessEngineer;
+
+		/**
+		 * collaborator email
+		 */
+		protected String email;
+		
+		/**
+		 * set id
+		 * @param id
+		 * @return
+		 */
+		public Builder id(final Integer id) {
+			this.id = id;
+			return this;
+		}
+
+		/**
+		 * set first name
+		 * @param firstName
+		 * @return
+		 */
+		public Builder firstName(final String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		/**
+		 * set profileId
+		 * @param id
+		 * @return
+		 */
+		public Builder profileId(final Integer profileId) {
+			this.profileId = profileId;
+			return this;
+		}
+		
+		/**
+		 * set phone
+		 * @param phone
+		 * @return
+		 */
+		public Builder phone (final String phone) {
+			this.phone = phone;
+			return this;
+		}
+		
+		/**
+		 * set experience
+		 * @param experience
+		 * @return
+		 */
+		public Builder experience (final Integer experience) {
+			this.experience = experience;
+			return this;
+		}
+		
+		/**
+		 * set manager id
+		 * @param managerId
+		 * @return
+		 */
+		public Builder managerId (final Integer managerId) {
+			this.managerId = managerId;
+			return this;
+		}
+		
+		/**
+		 * set last name
+		 * @param lastName
+		 * @return
+		 */
+		public Builder lastName (final String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+		
+		/**
+		 * set employment date
+		 * @param employmentDate
+		 * @return
+		 */
+		public Builder employmentDate (final Date employmentDate) {
+			this.employmentDate = employmentDate;
+			return this;
+		}
+		
+		/**
+		 * set business engineer
+		 * @param businessEngineer
+		 * @return
+		 */
+		public Builder businessEngineer (final String businessEngineer) {
+			this.businessEngineer = businessEngineer;
+			return this;
+		}
+		
+		/**
+		 * set email
+		 * @param email
+		 * @return
+		 */
+		public Builder email (final String email) {
+			this.email = email;
+			return this;
+		}
+		
+		/**
+		 * Build an immutable instance of concept.
+		 * 
+		 * @return concept
+		 */
+		public Collaborator build() {
+			return new Collaborator(this);
+		}
+	
+		/**
+		 * Static constructor for this class.
+		 * 
+		 * @return a builder instance
+		 */
+		public static Builder builder() {
+			return new Builder();
+		}
 	}
 
 	/**
-	 * method toString.
+	 * @return the mission
+	 */
+	public ArrayList<Mission> getMission() {
+		return mission;
+	}
+
+	/**
+	 * @param mission
+	 *            the mission to set
+	 */
+	public void setMission(ArrayList<Mission> mission) {
+		this.mission = mission;
+	}
+
+	/**
+	 * @return the tool
+	 */
+	public ArrayList<Tool> getTool() {
+		return tool;
+	}
+
+	/**
+	 * @param tool
+	 *            the tool to set
+	 */
+	public void setTool(ArrayList<Tool> tool) {
+		this.tool = tool;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		StringBuilder strBld = new StringBuilder(); 
+		StringBuilder strBld = new StringBuilder();
 		strBld.append("[profil_id=").append(getId()).append(", ");
-		strBld.append("[first_name=").append(getFirst_name()).append(", ");
-		strBld.append("[last_name=").append(getLast_name()).append(", ");
+		strBld.append("[first_name=").append(getFirstName()).append(", ");
+		strBld.append("[last_name=").append(getLastName()).append(", ");
 		strBld.append("[email=").append(getEmail()).append(", ");
-		strBld.append("[business_engineer=").append(getBusiness_engineer()).append(", ");
+		strBld.append("[business_engineer=").append(getBusinessEngineer())
+				.append(", ");
 		strBld.append("experience").append(getExperience()).append("] ");
-		return strBld.toString();		
+		return strBld.toString();
 	}
+		
 	/**
-	 * hash code method	
+	 * hash code method
 	 */
 	@Override
 	public int hashCode() {
-		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getFirst_name());
-		hashBuilder.append(this.getLast_name());
-		hashBuilder.append(this.getEmail());
-		hashBuilder.append(this.getExperience());
-		return hashBuilder.hashCode();
+//		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+//		hashBuilder.append(this.getFirst_name());
+//		hashBuilder.append(this.getLast_name());
+//		hashBuilder.append(this.getEmail());
+//		hashBuilder.append(this.getExperience());
+//		return hashBuilder.hashCode();
+		return new HashCodeBuilder(17, 37).append(this.getId()).toHashCode();
 	}
+
 	/**
-	 * equals method
+	 * Override equals, because we are need to compare collab by id
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		
+		if (obj != null && !(obj instanceof Collaborator)) {
+			return false;
+		}
+
 		if (obj == null) {
 			return false;
 		}
-
-		if(!(obj instanceof Collaborator)){
+		if (obj == this) {
+			return true;
+		}
+		if (obj.getClass() != getClass()) {
 			return false;
 		}
-	
-		Collaborator comparedObj = (Collaborator)obj;
-		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getEmail(), comparedObj.getEmail());
-		ebuilder.append(this.getFirst_name(), comparedObj.getFirst_name());
-		ebuilder.append(this.getLast_name(), comparedObj.getLast_name());
-		ebuilder.append(this.getExperience(), comparedObj.getExperience());
-		return ebuilder.isEquals();
+		
+		Collaborator collab = (Collaborator) obj;
+		return new EqualsBuilder().appendSuper(super.equals(obj))
+				.append(this.getId(), collab.getId()).isEquals();
 	}
 
-
 	/**
-	 * Get the id value
 	 * @return the id
 	 */
 	public Integer getId() {
 		return id;
 	}
+
 	/**
-	 * Set the id value
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	/**
-	 * Get the last_name value
-	 * @return the last_name
+	 * @return the managerId
 	 */
-	public String getLast_name() {
-		return last_name;
+	public Integer getManagerId() {
+		return managerId;
 	}
+
 	/**
-	 * Set the last_name value
-	 * @param last_name the last_name to set
+	 * @param managerId the managerId to set
 	 */
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setManagerId(Integer managerId) {
+		this.managerId = managerId;
 	}
+
 	/**
-	 * Get the first_name value
-	 * @return the first_name
+	 * @return the profileId
 	 */
-	public String getFirst_name() {
-		return first_name;
+	public Integer getProfileId() {
+		return profileId;
 	}
+
 	/**
-	 * Set the first_name value
-	 * @param first_name the first_name to set
+	 * @param profileId the profileId to set
 	 */
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setProfileId(Integer profileId) {
+		this.profileId = profileId;
 	}
+
 	/**
-	 * Get the email value
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
 	 * @return the email
 	 */
 	public String getEmail() {
 		return email;
 	}
+
 	/**
-	 * Set the email value
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the employmentDate
+	 */
+	public Date getEmploymentDate() {
+		return employmentDate;
+	}
 
 	/**
-	 * Get the manager_id value
-	 * @return the manager_id
+	 * @param employmentDate the employmentDate to set
 	 */
-	public Integer getManager_id() {
-		return manager_id;
+	public void setEmploymentDate(Date employmentDate) {
+		this.employmentDate = employmentDate;
 	}
+
 	/**
-	 * Set the manager_id value
-	 * @param manager_id the manager_id to set
-	 */
-	public void setManager_id(Integer manager_id) {
-		this.manager_id = manager_id;
-	}
-	/**
-	 * Get the profil_id value
-	 * @return the profil_id
-	 */
-	public Integer getProfile_id() {
-		return profile_id;
-	}
-	/**
-	 * Set the profil_id value
-	 * @param profil_id the profil_id to set
-	 */
-	public void setProfile_id(Integer profile_id) {
-		this.profile_id = profile_id;
-	}
-	/**
-	 * Get the phone value
-	 * @return the phone
-	 */
-	public Integer getPhone() {
-		return phone;
-	}
-	/**
-	 * Set the phone value
-	 * @param phone the phone to set
-	 */
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
-	/**
-	 * Get the employment_date value
-	 * @return the employment_date
-	 */
-	public Date getEmployment_date() {
-		return employment_date;
-	}
-	/**
-	 * Set the employment_date value
-	 * @param employment_date the employment_date to set
-	 */
-	public void setEmployment_date(Date employment_date) {
-		this.employment_date = employment_date;
-	}
-	/**
-	 * Get the experience value
 	 * @return the experience
 	 */
 	public Integer getExperience() {
 		return experience;
 	}
+
 	/**
-	 * Set the experience value
 	 * @param experience the experience to set
 	 */
 	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
+
 	/**
-	 * Get the business_engineer value
-	 * @return the business_engineer
+	 * @return the businessEngineer
 	 */
-	public String getBusiness_engineer() {
-		return business_engineer;
-	}
-	/**
-	 * Set the business_engineer value
-	 * @param business_engineer the business_engineer to set
-	 */
-	public void setBusiness_engineer(String business_engineer) {
-		this.business_engineer = business_engineer;
-	}
-
-	public ArrayList<Mission> getMission() {
-		return mission;
-	}
-
-	public void setMission(ArrayList<Mission> mission) {
-		this.mission = mission;
-	}
-	
-	
-	public ArrayList<Tool> getTool() {
-		return tool;
-	}
-
-	public void setTool(ArrayList<Tool> tool) {
-		this.tool = tool;
+	public String getBusinessEngineer() {
+		return businessEngineer;
 	}
 
 	/**
-	 * create a List of Mission for Collaborator
-	 * @param mission
-	 * @return
+	 * @param businessEngineer the businessEngineer to set
 	 */
-	@SuppressWarnings("null")
-	public ArrayList<Mission> addMission( ArrayList<Mission> mission){
-		if(mission == null){
-			Mission m =  new Mission();
-			mission.add(m);
-		}
-		return mission;		
+	public void setBusinessEngineer(String businessEngineer) {
+		this.businessEngineer = businessEngineer;
 	}
+
 	/**
-	 * create a List of Tool for Collaborator
-	 * @param mission
-	 * @return
+	 * @return the phone
 	 */
-	@SuppressWarnings("null")
-	public ArrayList<Tool> addTools( ArrayList<Tool> tool){
-		if(tool == null){
-			Tool t =  Tool.Builder.builder().build();
-			tool.add(t);
-		}
-		return tool;		
+	public String getPhone() {
+		return phone;
 	}
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 }
