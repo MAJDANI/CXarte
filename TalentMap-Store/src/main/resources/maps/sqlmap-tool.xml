@@ -15,13 +15,13 @@
     
     <resultMap id="toolResult" class="tool">
     	<result property="id" column="TOOL_ID"/> 
-        <result property="concept.id" column="CONCEPT_ID"/>     
+        <result property="concept.id" column="CONCEPT_ID"/>
+        <result property="concept.name" column="CONCEPT_NAME"/>     
         <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
 	
 	<select id="get" resultMap="toolResult" parameterClass="Integer">
-		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id#
-				AND tool.CONCEPT_ID = concept.CONCEPT_ID
+		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
 	
 	<select id="getByName" resultMap="toolResult" parameterClass="String">
