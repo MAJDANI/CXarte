@@ -19,6 +19,10 @@
     <resultMap id="collabIdResult" class="entier">
     	<result property="collaborator_id" column="COLLAB_ID"/> 
     </resultMap>
+
+	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="Collaborator">
+		SELECT * FROM SKILL WHERE COLLAB_ID = #id#
+	</select>	
 	
 	<select id="get" resultMap="skillResult" parameterClass="java.util.HashMap">
 		SELECT * FROM SKILL WHERE COLLAB_ID = #collaboratorId# AND TOOL_ID = #toolId#
