@@ -116,7 +116,7 @@ public class ProfileCollabWindow extends Window {
 			BeanItem<Item> collaboratorBean = new BeanItem(collab);
 			
 			//We give a name for the window
-			setCaption("Fiche profil de : "+ collab.getLast_name() +" "+ collab.getFirst_name());
+			setCaption("Fiche profil de : "+ collab.getLastName() +" "+ collab.getFirstName());
 			
 			//Data Binding
 			this.dataCollab.setItemDataSource(collaboratorBean,
