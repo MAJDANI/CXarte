@@ -3,7 +3,6 @@ package com.novedia.talentmap.store.impl;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.CleanInsertLoadStrategy;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByName;
@@ -16,7 +15,6 @@ import com.novedia.talentmap.model.entity.Mission;
  * @author moumbe
  *
  */
-@DataSet (loadStrategy = CleanInsertLoadStrategy.class)
 @SpringApplicationContext("test-store-spring-context.xml")
 public class MissionDaoTest extends UnitilsJUnit4 {
 
@@ -30,7 +28,11 @@ public class MissionDaoTest extends UnitilsJUnit4 {
 		missionDao.setSqlMapClient(sqlMapClient);
 	}
 	
+	/**
+	 * Test get Mission by id
+	 */
 	@Test
+	@DataSet("MissionDaoTest.xml")
 	public void testGet () {
 		Mission mission = missionDao.get(1);
 		ReflectionAssert.assertPropertyReflectionEquals("id", 1, mission);

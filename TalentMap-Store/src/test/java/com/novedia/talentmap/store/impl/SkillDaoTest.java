@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.CleanInsertLoadStrategy;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
 
@@ -22,7 +21,6 @@ import com.novedia.talentmap.model.entity.Skill;
  * @author moumbe
  *
  */
-@DataSet (loadStrategy = CleanInsertLoadStrategy.class)
 @SpringApplicationContext("test-store-spring-context.xml")
 public class SkillDaoTest extends UnitilsJUnit4 {
 
@@ -42,6 +40,7 @@ public class SkillDaoTest extends UnitilsJUnit4 {
 	 * outilss
 	 */
 	@Test
+	@DataSet("SkillDaoTest.xml")
 	public void testGetAllSkillsByCollaborator() {
 		Collaborator collab = new Collaborator();
 		collab.setId(1);

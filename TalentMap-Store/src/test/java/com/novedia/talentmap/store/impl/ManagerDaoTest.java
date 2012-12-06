@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.CleanInsertLoadStrategy;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByName;
@@ -17,7 +16,6 @@ import com.novedia.talentmap.model.entity.Manager;
  * @author moumbe
  *
  */
-@DataSet (loadStrategy = CleanInsertLoadStrategy.class)
 @SpringApplicationContext("test-store-spring-context.xml")
 public class ManagerDaoTest extends UnitilsJUnit4 {
 
@@ -32,7 +30,11 @@ public class ManagerDaoTest extends UnitilsJUnit4 {
 		managerDao.setSqlMapClient(sqlMapClient);
 	}
 	
+	/**
+	 * Test get Manager by id
+	 */
 	@Test
+	@DataSet("ManagerDaoTest.xml")
 	public void testGet () {
 		Manager manager = managerDao.get(1);
 		ReflectionAssert.assertPropertyReflectionEquals("id", 1, manager);
