@@ -7,6 +7,7 @@ import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.VerticalLayout;
 
 public class ProfileNavigation extends VerticalLayout implements ClickListener, IObservable {
@@ -73,7 +74,7 @@ public class ProfileNavigation extends VerticalLayout implements ClickListener, 
 		
 		
 		this.visualizeMissions.setCaption(VISUALIZE_MISSIONS_NAME);
-		this.visualizeMissions.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+		this.visualizeMissions.addStyleName(Reindeer.BUTTON_DEFAULT);
 		this.visualizeMissions.addListener(this);
 		addComponent(this.visualizeMissions);
 		

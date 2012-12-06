@@ -139,10 +139,10 @@ Tool saveTool(final VSkill skill) throws DataAccessException {
 		tool.setId(toolId);
 	} 
 	else {
-		VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
-		this.category = Category.Builder.builder().build();
-		this.category.setName(sk.getCategory_name());
-		this.concept.setName(sk.getConcept_name());
+	VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
+	this.category = Category.Builder.builder().build();
+	this.category.setName(sk.getCategory_name());
+	this.concept.setName(sk.getConcept_name());
 	}
 	return tool;
 }

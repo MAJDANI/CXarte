@@ -15,7 +15,7 @@
     
     <resultMap id="toolResult" class="tool">
     	<result property="id" column="TOOL_ID"/> 
-        <result property="concept.concept_id" column="CONCEPT_ID"/>     
+        <result property="concept.id" column="CONCEPT_ID"/>     
         <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
 	
@@ -47,7 +47,7 @@
     		CONCEPT_ID, 
     		TOOL_NAME
     		)values (
-    		#id#, #concept.concept_id# , #name#
+    		#id#, #concept.id# , #name#
     		)
     		<selectKey keyProperty="id" resultClass="Integer">
     			SELECT LAST_INSERT_ID() AS id  
@@ -59,7 +59,7 @@
 	</select>		
 	
 	<update id="save" parameterClass="Tool">
-		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.concept_id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
+		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
 	</update> 
 	
 	<delete id="delete" parameterClass="Integer">

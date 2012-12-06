@@ -38,7 +38,7 @@
 		   <param-name>widgetset</param-name>
 		   <param-value>com.novedia.talentmap.web.gwt.TalentMapWidgetset</param-value>
 	   </init-param>
-<!--        <load-on-startup>1</load-on-startup> -->
+	<!--<load-on-startup>1</load-on-startup> -->
     </servlet>
     
     <servlet-mapping>

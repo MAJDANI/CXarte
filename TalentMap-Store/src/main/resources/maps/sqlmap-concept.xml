@@ -50,7 +50,7 @@
     		CATEGORY_ID, 
     		CONCEPT_NAME
     		)values (
-    		#concept_id#, #category.id# , upper(#name#)
+    		#id#, #category.id# , upper(#name#)
     		)
     </insert>
     
@@ -59,11 +59,11 @@
 	</select>	
 	
 	<update id="save" parameterClass="Concept">
-		UPDATE CONCEPT SET CONCEPT_ID = #concept_id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #concept_id#
+		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
 	</update>
 	
 	<delete id="delete" parameterClass="Integer">
-		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #concept_id#
+		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
 	</delete>			 
 
 </sqlMap>

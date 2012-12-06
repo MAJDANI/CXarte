@@ -65,7 +65,7 @@ public class Collaborator implements Serializable {
 	}
 	
 	/**
-	 * Build the class Collaborator.java 
+	 * Build the class Collaborator.java.
 	 * @param id
 	 * @param manager_id
 	 * @param profile_id
@@ -92,9 +92,9 @@ public class Collaborator implements Serializable {
 		this.experience = experience;
 		this.business_engineer = business_engineer;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+
+	/**
+	 * method toString.
 	 */
 	@Override
 	public String toString() {
@@ -124,8 +124,8 @@ public class Collaborator implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null){
-			return false;			
+		if (obj == null) {
+			return false;
 		}
 
 		if(!(obj instanceof Collaborator)){
