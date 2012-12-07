@@ -103,6 +103,7 @@ public class Skill implements Serializable{
 	public Integer getTool_id() {
 		return tool_id;
 	}
+	
 	/**
 	 * Set the tool_id value
 	 * @param tool_id the tool_id to set
@@ -110,6 +111,7 @@ public class Skill implements Serializable{
 	public void setTool_id(Integer tool_id) {
 		this.tool_id = tool_id;
 	}
+	
 	/**
 	 * Get the score value
 	 * @return the score
@@ -117,6 +119,7 @@ public class Skill implements Serializable{
 	public Integer getScore() {
 		return score;
 	}
+	
 	/**
 	 * Set the score value
 	 * @param score the score to set
@@ -125,9 +128,10 @@ public class Skill implements Serializable{
 		this.score = score;
 	}
 	
-	/**
-	 * allowed to display attribute of the object Skill
-	 */	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
@@ -149,6 +153,7 @@ public class Skill implements Serializable{
 		hashBuilder.append(this.getUse_frequency());
 		return hashBuilder.hashCode();
 	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -158,7 +163,7 @@ public class Skill implements Serializable{
 			return false;			
 		}
 
-		if(!(obj instanceof Profile)){
+		if(!(obj instanceof Skill)){
 			return false;
 		}
 	
