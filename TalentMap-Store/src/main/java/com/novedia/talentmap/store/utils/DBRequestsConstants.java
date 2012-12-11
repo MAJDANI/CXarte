@@ -37,6 +37,11 @@ public static final String SAVE_COLLABORATOR = "collaborator.save";
  */
 public static final String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllByLastName";
 
+/**
+ * Constant request to get collaborator by manager id
+ */
+public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "collaborator.getAllCollaboratorsByManagerId";
+
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.
