@@ -98,8 +98,7 @@ throw new UnsupportedOperationException();
  */
 @SuppressWarnings("unchecked")
 public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId) throws DataAccessException {
-return (List<Collaborator>) this.getSqlMapClientTemplate()
-.queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR, managerId);
+return (List<Collaborator>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLABORATOR_BY_MANAGER_ID, managerId);
 }
 
 /**
