@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="authentification">
+
+ <typeAlias alias="authentification" type="com.novedia.talentmap.model.entity.Authentification"/> 
+
+<resultMap id="authentificationResult" class="authentification">
+        <result property="id" column="AUTHENTIFICATION_ID"/>     
+        <result property="idCollab" column="COLLAB_ID"/> 
+        <result property="login"  column="LOGIN"/>         
+        <result property="password"  column="PASSWORD"/>    
+    </resultMap>
+	
+	<select id="getAuthentification" resultMap="authentificationResult" parameterClass="Integer">
+		SELECT * FROM AUTHENTIFICATION WHERE AUTHENTIFICATION_ID = #id#
+	</select>
+	
+	<select id="getByLogin" resultMap="authentificationResult" parameterClass="String">
+		SELECT * FROM AUTHENTIFICATION WHERE LOGIN = #login#
+	</select>
+	
+    <select id="getAll" resultMap="authentificationResult">
+    	SELECT * FROM AUTHENTIFICATION
+    </select>			
+    
+    <insert id="add" parameterClass="Authentification">
+    	
+    	<selectKey resultClass="Integer" keyProperty="id">
+      		SELECT SEQAUTH.NEXTVAL FROM DUAL
+    	</selectKey>
+    	
+    	INSERT INTO AUTHENTIFICATION (
+    		AUTHENTIFICATION_ID,
+    		LOGIN,
+    		PASSWORD
+    		)values (
+    		#id#,
+    		#login#,
+    		#password#
+    		)
+    </insert>	
+    
+    <select id="check" resultMap="authentificationResult" parameterClass="String">
+		SELECT * FROM AUTHENTIFICATION WHERE LOGIN = #login# AND PASSWORD = #password#
+	</select>	
+	
+	<update id="save" parameterClass="Authentification">
+		UPDATE AUTHENTIFICATION SET LOGIN = #login# , PASSWORD = #password#
+								WHERE AUTHENTIFICATION_ID = #id# 
+	</update>
+</sqlMap>

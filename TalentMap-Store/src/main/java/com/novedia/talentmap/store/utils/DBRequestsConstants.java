@@ -306,4 +306,21 @@ public static final String DELETE_MISSION = "mission.delete";
  * This constant is used to retrieve a task by id.
  */
 public static final String GET_TASK_BY_ID = "task.get";
+
+// AUTHENTIFICATION REQUESTS
+public static final String GET_AUTHENTIFICATION = "authentification.getAuthentification";
+
+public static final String GET_ALL_AUTHENTIFICATION = "authentification.getAll";
+
+public static String SAVE_AUTHENTIFICATION = "authentification.save";
+
+public static final String ADD_AUTHENTIFICATION = "authentification.add";
+
+public static final String CHECK_AUTHENTIFICATION = "authentification.check";
+
+public static final String GET_COLLAB_BY_LOGIN = "authentification.getCollabByLogin";
+
+
+
+
 }

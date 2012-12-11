@@ -26,4 +26,6 @@
     
     <bean id="skill" class="com.novedia.talentmap.model.entity.Skill"/>
     
+     <bean id="Authentification" class="com.novedia.talentmap.model.entity.Authentification"/>
+    
 </beans>

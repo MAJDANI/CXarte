@@ -38,7 +38,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Category> getAll() {
+	public List<Category> getAll() throws DataAccessException {
 		return (List<Category>) getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CATEGORY);
 	}
 	

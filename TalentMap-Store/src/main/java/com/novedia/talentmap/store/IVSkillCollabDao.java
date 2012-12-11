@@ -15,19 +15,18 @@ public interface IVSkillCollabDao {
 	
 	/**
 	 * Get Skill by Id
-	 * @param id
-	 * @return
+	 * @param id a id
+	 * @return VSkillCollab
 	 * @throws DataAccessException
 	 */
-	public VSkillCollab get(int id) throws DataAccessException;
+	VSkillCollab get(int id) throws DataAccessException;
 	
 	/**
 	 * Get all Collaborators' Skill by ID 
 	 * @class IVSkillCollabDao.java
-	 * @param collab_id
-	 * @return
-	 * @throws Exception
+	 * @param collabId a {@link Collaborator}
+	 * @return a list VSkillCollab
+	 * @throws DataAccessException
 	 */
-	List<VSkillCollab> getAllSkillCollab(int collab_id) throws DataAccessException;
-	
+	List<VSkillCollab> getAllSkillCollab(int collabId) throws DataAccessException;
 }
