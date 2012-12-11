@@ -16,6 +16,11 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * 
+ * @author e.moumbe
+ *
+ */
 public class MonitoringCollabContent extends VerticalLayout {
 
 	/** UID */
@@ -135,6 +140,9 @@ public class MonitoringCollabContent extends VerticalLayout {
 		}
 	}
 
+	/**
+	 * Build table that containt list of collab
+	 */
 	public void buildCollabTable() {
 
 		// We create the columns
