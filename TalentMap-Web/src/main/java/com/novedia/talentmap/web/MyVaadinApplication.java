@@ -17,13 +17,13 @@ package com.novedia.talentmap.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import com.novedia.talentmap.web.ui.TabMain;
+import com.novedia.talentmap.web.ui.admin.LogForm;
 import com.vaadin.Application;
+import com.vaadin.service.ApplicationContext;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.Reindeer;
 
@@ -32,17 +32,18 @@ import com.vaadin.ui.themes.Reindeer;
  */
 @SuppressWarnings("serial")
 @Configurable
-public class MyVaadinApplication extends Application {
+public class MyVaadinApplication extends Application implements ApplicationContext.TransactionListener{
 
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
+	
+	 private static ThreadLocal<MyVaadinApplication> currentApplication = new ThreadLocal<MyVaadinApplication> ();
 
 	/**
 	 * Vaadin components
 	 */
 	private Window window;
 	private HorizontalLayout hLayout;
-	
 	/**
 	 * Vaadin components UI
 	 */
@@ -52,9 +53,9 @@ public class MyVaadinApplication extends Application {
 	@Override
 	public void init(){
 		
-		setTheme("talentmap");
-		
+		setTheme("talentmap");		
 		setMainWindow(window);
+		setMainWindow(new LogForm());
 		buildMainLayout();
 	}
 	
@@ -94,5 +95,15 @@ public class MyVaadinApplication extends Application {
 	public void setTabMain(TabMain tabMain) {
 		this.tabMain = tabMain;
 	}
-	
+
+	@Override
+	public void transactionStart(Application application, Object transactionData) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void transactionEnd(Application application, Object transactionData) {
+		// TODO Auto-generated method stub	
+	}	
 }
