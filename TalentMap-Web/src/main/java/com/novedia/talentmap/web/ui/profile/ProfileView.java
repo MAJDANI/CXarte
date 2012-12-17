@@ -2,10 +2,15 @@ package com.novedia.talentmap.web.ui.profile;
 
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * The profile View
+ * @author e.moumbe
+ *
+ */
 public class ProfileView extends VerticalLayout{
 
 	/**
-	 * 
+	 * UID
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
