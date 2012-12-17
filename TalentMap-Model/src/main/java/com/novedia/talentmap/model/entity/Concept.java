@@ -35,7 +35,7 @@ public class Concept implements Serializable {
 	/** 
 	 * The score 
 	 */
-	private double score;
+	private Double score;
 	
 	/**
 	 * default constructor
@@ -54,6 +54,7 @@ public class Concept implements Serializable {
 		this.id = builder.id;
 		this.name = builder.name;
 		this.category = builder.category;
+		this.score = builder.score;
 	}
 
 	/**
@@ -76,23 +77,25 @@ public class Concept implements Serializable {
 	}
 	
 	/**
-	 * set score
-	 * @param conceptScore
+	 * Set the score linked to this concept
+	 * 
+	 * @param score
 	 */
-	public void setScore(double conceptScore) {
-		this.score = conceptScore;
+	public void setScore(double score) {
+		this.score = score;
 	}
 	
 	/**
-	 * Get score
-	 * @return
+	 * Get score linked to this concept
+	 * 
+	 * @return score
 	 */
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
 	/**
-	 * Get the category value
+	 * Get the category
 	 * 
 	 * @return the category
 	 */
@@ -101,7 +104,7 @@ public class Concept implements Serializable {
 	}
 
 	/**
-	 * Set the category value
+	 * Set the category
 	 * 
 	 * @param category
 	 *            the category to set
@@ -113,7 +116,11 @@ public class Concept implements Serializable {
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		
@@ -123,7 +130,12 @@ public class Concept implements Serializable {
 				.append(getCategory().getName()).append("]");
 		return strBld.toString();
 	}
-
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object o) {
 		
@@ -141,6 +153,10 @@ public class Concept implements Serializable {
 		return ebuilder.isEquals();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		
@@ -152,8 +168,14 @@ public class Concept implements Serializable {
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-
+	
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author j.marie-sainte
+	 */
 	public static class Builder {
+		
 
 		/**
 		 * The concept identifier
@@ -171,8 +193,14 @@ public class Concept implements Serializable {
 		private Category category;
 		
 		/**
-		 * set id
-		 * @param id
+		 * The concept score
+		 */
+		public Double score;
+		
+		/**
+		 * Set the concept id
+		 * 
+		 * @param id concept identifier
 		 * @return
 		 */
 		public Builder id(final Integer id) {
@@ -181,9 +209,10 @@ public class Concept implements Serializable {
 		}
 
 		/**
-		 * set name
+		 * Set the concept name
+		 * 
 		 * @param name
-		 * @return
+		 * @return the builder
 		 */
 		public Builder name(final String name) {
 			this.name = name;
@@ -191,12 +220,24 @@ public class Concept implements Serializable {
 		}
 		
 		/**
-		 * set category
+		 * Set category matching this concept 
+		 * 
 		 * @param category
-		 * @return
+		 * @return the builder
 		 */
 		public Builder category (final Category category) {
 			this.category = category;
+			return this;
+		}
+		
+		/**
+		 * Set the score of this concept
+		 * 
+		 * @param score
+		 * @return the builder
+		 */
+		public Builder score(final Double score){
+			this.score = score;
 			return this;
 		}
 		
@@ -220,6 +261,8 @@ public class Concept implements Serializable {
 	}
 
 	/**
+	 * Get the concept identifier
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -227,6 +270,8 @@ public class Concept implements Serializable {
 	}
 
 	/**
+	 * Set the concept identifier
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
