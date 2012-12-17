@@ -185,6 +185,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   <artifactId>ratingstars</artifactId>
 	   <version>1.4</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.shiro</groupId>
+		<artifactId>shiro-core</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+	
   </dependencies>
 
 </project>
