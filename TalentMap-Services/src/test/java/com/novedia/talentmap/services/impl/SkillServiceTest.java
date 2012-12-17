@@ -23,7 +23,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
@@ -86,7 +86,7 @@ public class SkillServiceTest {
 		skillExpected.setTool_id(toolId);
 		skillExpected.setCollaborator_id(collaboratorId);
 		
-		Collaborator collaboratorExpected = new Collaborator();
+		Colleague collaboratorExpected = new Colleague();
 		collaboratorExpected.setFirstName("toto");
 		collaboratorExpected.setId(collaboratorId);
 							

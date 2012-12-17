@@ -16,24 +16,27 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.ManagerDao;
 
 /**
+ * Manager service test
+ * {@link ManagerService}
+ * 
  * @author v.guillemain
  *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ManagerServiceTest {
-
+	
 	private ManagerService service;
 
 	@Mock
 	private ManagerDao managerDaoMock;
 	
 	@Mock
-	private  IDao<Collaborator> collaboratorDaoMock;
+	private  IDao<Colleague> colleagueDaoMock;
 	
 	private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
 	
@@ -44,25 +47,25 @@ public class ManagerServiceTest {
 	public void setUp() throws Exception {
 		service = new ManagerService();
 		service.setManagerDao(managerDaoMock);
-		service.setCollaboratorDao(collaboratorDaoMock);
+		service.setColleagueDaoDao(colleagueDaoMock);
 	}
 
 	@Test
 	public void getAllCollaboratorsByManagerIdReturnsAListOfCollaborators() {
 		//Given
 		Integer managerId = 1;
-		Collaborator collaborator = new Collaborator();
+		Colleague collaborator = new Colleague();
 		collaborator.setManagerId(managerId);
 		
-		List<Collaborator> listCollaboratorRequested = new ArrayList<Collaborator>();
+		List<Colleague> listCollaboratorRequested = new ArrayList<Colleague>();
 		listCollaboratorRequested.add(collaborator);
 		
 		//When
-		Mockito.when(managerDaoMock.getAllCollaboratorsByManagerId(managerId)).thenReturn(listCollaboratorRequested);
-		List<Collaborator> listCollaboratorActual = service.getAllCollaboratorsByManagerId(managerId);
+		Mockito.when(managerDaoMock.getAllCollaborators(managerId)).thenReturn(listCollaboratorRequested);
+		List<Colleague> listCollaboratorActual = service.getAllColleagues(managerId);
 		
 		//Then
-		Mockito.verify(managerDaoMock, Mockito.times(1)).getAllCollaboratorsByManagerId(managerId);
+		Mockito.verify(managerDaoMock, Mockito.times(1)).getAllCollaborators(managerId);
 		Assert.assertNotNull(listCollaboratorActual);
 		Assert.assertSame(listCollaboratorRequested, listCollaboratorActual);
 		
@@ -74,8 +77,8 @@ public class ManagerServiceTest {
 		Integer managerId = 1;
 		
 		//When
-		Mockito.when(managerDaoMock.getAllCollaboratorsByManagerId(managerId)).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
-		service.getAllCollaboratorsByManagerId(managerId);
+		Mockito.when(managerDaoMock.getAllCollaborators(managerId)).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
+		service.getAllColleagues(managerId);
 		
 	}
 	
@@ -83,15 +86,15 @@ public class ManagerServiceTest {
 	public void getCollaboratorReturnsACollaborator() {
 		 //Given
 		 Integer collaboratorId = 1;
-		 Collaborator collaboratorExpected = new Collaborator();
+		 Colleague collaboratorExpected = new Colleague();
 		 collaboratorExpected.setId(collaboratorId);
 		 
 		 //When
-		 Mockito.when(collaboratorDaoMock.get(collaboratorId)).thenReturn(collaboratorExpected);
-		 Collaborator collaboratorActual = service.getCollaborator(collaboratorId);
+		 Mockito.when(colleagueDaoMock.get(collaboratorId)).thenReturn(collaboratorExpected);
+		 Colleague collaboratorActual = service.getCollaborator(collaboratorId);
 		
 		 //Test
-		 Mockito.verify(collaboratorDaoMock, Mockito.times(1)).get(collaboratorId);
+		 Mockito.verify(colleagueDaoMock, Mockito.times(1)).get(collaboratorId);
 		 Assert.assertNotNull(collaboratorActual);
 		 Assert.assertSame(collaboratorExpected, collaboratorActual);
 		 
@@ -103,7 +106,7 @@ public class ManagerServiceTest {
 		 Integer collaboratorId = 1;
 
 		 //When
-		 Mockito.when(collaboratorDaoMock.get(collaboratorId)).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
+		 Mockito.when(colleagueDaoMock.get(collaboratorId)).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		 service.getCollaborator(collaboratorId);
 		 
 	} 
