@@ -6,7 +6,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * This class represents the finest level of skill. A tool could be, from a
+ * This entity represents a Talent Map tool.
+ * 
+ * A tool is the finest level of skill. A tool could be, from a
  * technical view, a Framework like Spring, Vaadin an so on, it could be also
  * any kind of software using in the realization of a project (ERP, BDD, etc.)
  * 
@@ -111,7 +113,11 @@ public class Tool implements Serializable {
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 
@@ -121,7 +127,11 @@ public class Tool implements Serializable {
 				.append(getConcept().getName()).append("]");
 		return strBld.toString();
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object o) {
 
@@ -138,7 +148,11 @@ public class Tool implements Serializable {
 		ebuilder.append(this.getId(), comparedObj.getId());
 		return ebuilder.isEquals();
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 
@@ -151,6 +165,11 @@ public class Tool implements Serializable {
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
 	
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author j.marie-sainte
+	 */
 	public static class Builder {
 
 		/**
@@ -167,17 +186,35 @@ public class Tool implements Serializable {
 		 * The concept this tool is a part of.
 		 */
 		private Concept concept;
-
+		
+		/**
+		 * Set the tool identifier
+		 * 
+		 * @param id
+		 * @return the builder
+		 */
 		public Builder id(final Integer id) {
 			this.id = id;
 			return this;
 		}
-
+		
+		/**
+		 * Set the tool name
+		 * 
+		 * @param name
+		 * @return the builder
+		 */
 		public Builder name(final String name) {
 			this.name = name;
 			return this;
 		}
 		
+		/**
+		 * Set the concept 
+		 * 
+		 * @param concept
+		 * @return the builder
+		 */
 		public Builder concept(final Concept concept){
 			this.concept = concept;
 			return this;
