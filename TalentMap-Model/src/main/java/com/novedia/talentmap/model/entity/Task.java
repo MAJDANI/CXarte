@@ -4,34 +4,60 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Contient les tâches à executer pour atteindre un objectif
- * @author moumbe
+ * This entity represents a task.
+ * 
+ * @author e.moumbe
  *
  */
 public class Task implements Serializable {
 
-	/**UID*/
-	private static final long serialVersionUID = 1L;
-	/**The id*/
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = -7087384888388014250L;
+	
+	/**
+	 * The id
+	 */
 	private Integer id;
-	/**The name*/
+	
+	/**
+	 * The name
+	 */
 	private String name;
-	/**The Task type*/
+	
+	/**
+	 * The Task type
+	 */
 	private String taskType;
-	/**The targetDate*/
+	
+	/**
+	 * The targetDate
+	 */
 	private Date targetDate;
-	/**The priority*/
+	
+	/** The priority 
+	 * 
+	 */
 	private Integer priority;
-	/**The effort*/
+	
+	/**
+	 * The effort
+	 */
 	private Integer effort;
 	
 	/**
-	 * @return the id
+	 * Get the task identifier
+	 * 
+	 * @return id
 	 */
 	public Integer getId() {
 		return id;
 	}
+	
 	/**
+	 * Set the task identifier
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
