@@ -15,6 +15,10 @@ import com.vaadin.ui.TabSheet;
 public class TabMain extends TabSheet {
 	
 	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * All view
 	 */
 	private TabProfileSheet tabProfileSheet;
@@ -34,14 +38,21 @@ public class TabMain extends TabSheet {
 	 * @param tabSearch
 	 */
 	public TabMain(TabProfileSheet tabProfileSheet, SearchView searchView, AdminView adminView) {
+		
 		super();
 		this.tabProfileSheet = tabProfileSheet;
 		this.searchView = searchView;
 		this.adminView = adminView;
 		
-		setStyle(TalentMapCSS.TABSHEET);
+		//TODO: give explicit name of tabprofile
+//		this.tabProfileSheet.getWindow().getu
+		//Deprecated
+//		setStyle(TalentMapCSS.TABSHEET);
+		setStyleName(TalentMapCSS.TABSHEET);
 		setImmediate(true);
 		
+		
+		//TODO : filter tab panel en fonction du role ??
 		addTab(this.tabProfileSheet, TAB_PROFIL_NAME);
 		addTab(this.searchView, TAB_SEARCH_NAME);
 		addTab(this.adminView, TAB_ADMIN_NAME);
@@ -54,6 +65,7 @@ public class TabMain extends TabSheet {
 	public void setTabProfileSheet(TabProfileSheet tabProfileSheet) {
 		this.tabProfileSheet = tabProfileSheet;
 	}
+	
 	/**
 	 * Set the tabSearch value
 	 * @param tabSearch the tabSearch to set
@@ -76,5 +88,19 @@ public class TabMain extends TabSheet {
 	 */
 	public void setAdminView(AdminView adminView) {
 		this.adminView = adminView;
+	}
+
+	/**
+	 * @return the tabProfileSheet
+	 */
+	public TabProfileSheet getTabProfileSheet() {
+		return tabProfileSheet;
+	}
+
+	/**
+	 * @return the searchView
+	 */
+	public SearchView getSearchView() {
+		return searchView;
 	}
 }
