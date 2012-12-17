@@ -2,7 +2,17 @@ package com.novedia.talentmap.web.ui.collab;
 
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * The view for Collab
+ * @author e.moumbe
+ *
+ */
 public class MonitoringCollabView extends VerticalLayout {
+	
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Vaadin UI
@@ -17,7 +27,7 @@ public class MonitoringCollabView extends VerticalLayout {
 			MonitoringCollabContentLayout monitoringCollabContentLayout) {
 		super();
 		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
-	
+
 		mainBuild();
 	}
 
