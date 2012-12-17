@@ -8,7 +8,8 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 
 /**
- * Administration Service Interface.
+ * The Administration Service Interface.
+ * 
  * @author j.marie-sainte
  *
  */
