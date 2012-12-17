@@ -6,8 +6,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * The class VSkill
- * @author moumbe
+ * This entity represents a vSkill
+ * 
+ * @author e.moumbe
  *
  */
 public class VSkill  implements Serializable {
@@ -16,14 +17,17 @@ public class VSkill  implements Serializable {
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = 1160292151144778521L;
+	
 	/**
 	 * category name associated the VSKill
 	 */
 	private String category_name;
+	
 	/**
 	 * concept name associated the VSKill
 	 */
 	private String concept_name;
+	
 	/**
 	 * tool name associated the VSKill
 	 */
