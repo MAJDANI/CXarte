@@ -7,7 +7,8 @@ import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Profile;
 /**
- * Interface Profile Services.
+ * The Profile Service Interface.
+ * 
  * @author j.collet
  */
 

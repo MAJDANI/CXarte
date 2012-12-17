@@ -2,25 +2,26 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 
 /**
- * Interface Manager Services.
+ * The Manager Service Interface.
+ * 
  * @author v.guillemain
  */
 public interface IManagerService {
 
 /**
- * @param managerId a id
+ * Get all colleagues
+ * @param managerId the manager id
  * @return List<Collaborator>
  */
-List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId);
+List<Colleague> getAllColleagues(Integer managerId);
 
 /**
- * Get One Collaborator By ID.
- * @class IManagerService.java
+ * Get a colleague.
  * @param id a id
  * @return collaborator
  */
-Collaborator getCollaborator(int id);
+Colleague getCollaborator(int id);
 }

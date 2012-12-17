@@ -12,7 +12,8 @@ import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.model.entity.VSkillCollab;
 
 /**
- * Interface Skill Services.
+ * The Skill Service Interface.
+ * 
  * @author j.collet
  */
 public interface ISkillService {
