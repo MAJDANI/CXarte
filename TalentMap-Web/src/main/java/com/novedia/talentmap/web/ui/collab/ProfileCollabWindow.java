@@ -87,7 +87,9 @@ public class ProfileCollabWindow extends Window {
 		System.out.println("ProfileCollabWindow.mainBuild()");
 		setModal(true);
 		center();
-		setWidth(1135);
+		this.setWidth("1135");
+		//Deprecated method
+//		setWidth(1135);
 
 		removeAllComponents();
 
