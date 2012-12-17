@@ -5,35 +5,47 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+/**
+ * This entity represents a skill.
+ * 
+ * @author j.marie-sainte
+ *
+ */
 public class Skill implements Serializable{
 	
 	/**
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -4155288579083068658L;
+	
 	/**
 	 * collaborator id associated the skill
 	 */
 	private Integer collaborator_id;
+	
 	/**
 	 * tool id associated the skill
 	 */
 	private Integer tool_id;
+	
 	/**
 	 * th score associated the skill
 	 */
 	private Integer score;
+	
 	/**
 	 * Frequency of competence
 	 */
 	private Integer use_frequency;
+	
 	/**
 	 * Frequency of competence not use
 	 */
 	private Integer no_using_time;
 	
+	
 	public Skill() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	/**
