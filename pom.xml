@@ -72,10 +72,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.7</junit.version>
 		<mockito.version>1.8.5</mockito.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
 		<aspectj.version>1.6.3</aspectj.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<commons-lang.version>2.6</commons-lang.version>
+		<spring.security.version>3.1.2.RELEASE</spring.security.version>
 	</properties>
 
 	<!-- Inherited dependencies by modules -->
@@ -133,6 +134,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<!-- AspectJ dependencies -->
