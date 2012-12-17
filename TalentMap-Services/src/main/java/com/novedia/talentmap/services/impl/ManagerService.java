@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.store.IDao;
@@ -25,7 +25,7 @@ public class ManagerService implements IManagerService {
 	/**
 	 * collaborator DAO
 	 */
-	private IDao<Collaborator> collaboratorDao;
+	private IDao<Colleague> colleagueDao;
 
 	/**
 	 * This method allow to return all collaborator by manager.
@@ -35,10 +35,8 @@ public class ManagerService implements IManagerService {
 	 * @throws DataAccessException
 	 */
 	@Override
-	public List<Collaborator> getAllCollaboratorsByManagerId(Integer managerId)
-			throws DataAccessException {
-		return ((ManagerDao) managerDao)
-				.getAllCollaboratorsByManagerId(managerId);
+	public List<Colleague> getAllColleagues(Integer managerId) throws DataAccessException {
+		return ((ManagerDao) managerDao).getAllCollaborators(managerId);
 	}
 
 	/**
@@ -49,8 +47,8 @@ public class ManagerService implements IManagerService {
 	 * @throws DataAccessException
 	 */
 	@Override
-	public Collaborator getCollaborator(int id) throws DataAccessException {
-		return collaboratorDao.get(id);
+	public Colleague getCollaborator(int id) throws DataAccessException {
+		return colleagueDao.get(id);
 	}
 
 	/**
@@ -65,9 +63,9 @@ public class ManagerService implements IManagerService {
 	/**
 	 * This method allowd to make the spring injection. Set the collaborator DAO
 	 * 
-	 * @param collaboratorDao
+	 * @param colleagueDao
 	 */
-	public void setCollaboratorDao(IDao<Collaborator> collaboratorDao) {
-		this.collaboratorDao = collaboratorDao;
+	public void setColleagueDaoDao(IDao<Colleague> colleagueDao) {
+		this.colleagueDao = colleagueDao;
 	}
 }
