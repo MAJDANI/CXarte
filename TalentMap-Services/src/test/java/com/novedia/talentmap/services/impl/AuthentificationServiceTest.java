@@ -3,22 +3,18 @@
  */
 package com.novedia.talentmap.services.impl;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 
-import com.novedia.talentmap.model.entity.Authentification;
-import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.model.entity.Collaborator;
-import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.store.IDao;
 
 /**
@@ -29,34 +25,21 @@ import com.novedia.talentmap.store.IDao;
 @RunWith(MockitoJUnitRunner.class)
 public class AuthentificationServiceTest {
 
-	private AuthentificationService service;
+	private AuthenticationService service;
 
 	@Mock
-	private IDao<Authentification> authentificationDaoMock;
+	private IDao<Authentication> authenticationDaoMock;
+	
+	@Mock
+	private CredentialToken credantialMock;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		service = new AuthentificationService();
-		service.setAuthentificationDao(authentificationDaoMock);
-	}
-
-	/**
-	 * If authentification exist
-	 */
-	@Ignore
-	public void testAddAuthentificationWhenAuthentificationExist() {
-	//Given
-		//Authentification auth = Authentification.Builder.builder().login("v.dibi").password("toocool").idCollab(1).id(1).build();
-		Authentification auth = new Authentification();
-		Integer returnExpected = -1;	
-	//when
-		Mockito.when(authentificationDaoMock.add(auth)).thenReturn(returnExpected);
-		Integer returnActual = service.addAuthentification(auth);				
-	//Then
-		Assert.assertEquals(returnExpected, returnActual);
+		service = new AuthenticationService();
+		service.setAuthenticationDao(authenticationDaoMock);
 	}
 
 	@Ignore
@@ -78,7 +61,7 @@ public class AuthentificationServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.novedia.talentmap.services.impl.AuthentificationService#getAuthentification(java.lang.Integer)}
+	 * {@link com.novedia.talentmap.services.impl.AuthenticationService#getAuthentification(java.lang.Integer)}
 	 * .
 	 */
 	@Ignore
@@ -88,7 +71,7 @@ public class AuthentificationServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.novedia.talentmap.services.impl.AuthentificationService#getAllAuthentification()}
+	 * {@link com.novedia.talentmap.services.impl.AuthenticationService#getAllAuthentification()}
 	 * .
 	 */
 	@Ignore
@@ -98,7 +81,7 @@ public class AuthentificationServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.novedia.talentmap.services.impl.AuthentificationService#checkAuthentification(java.lang.String, java.lang.String)}
+	 * {@link com.novedia.talentmap.services.impl.AuthenticationService#checkAuthentification(java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Ignore
@@ -108,7 +91,7 @@ public class AuthentificationServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.novedia.talentmap.services.impl.AuthentificationService#getCollaboratorByLogin(java.lang.String)}
+	 * {@link com.novedia.talentmap.services.impl.AuthenticationService#getCollaboratorByLogin(java.lang.String)}
 	 * .
 	 */
 	@Ignore
