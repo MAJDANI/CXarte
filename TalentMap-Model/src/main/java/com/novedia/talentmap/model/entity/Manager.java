@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Class contains data from table Manager
- * @author moumbe
+ * This entity represents a manager.
+ * 
+ * @author e.moumbe
  *
  */
-public class Manager extends Collaborator implements Serializable {
+public class Manager extends Colleague implements Serializable {
 
 	/**
 	 * Serialization identifier
@@ -18,10 +19,10 @@ public class Manager extends Collaborator implements Serializable {
 	/**
 	 * Lists collaborator
 	 */
-	private ArrayList<Collaborator> collaborators = new ArrayList<Collaborator>();
+	private ArrayList<Colleague> colleagues = new ArrayList<Colleague>();
 
 	/**
-	 * Build the class Manager.java 
+	 * Build an instance of manager
 	 */
 	public Manager() {
 		super();
@@ -32,24 +33,27 @@ public class Manager extends Collaborator implements Serializable {
 	 * @param mission
 	 * @return
 	 */
-	public ArrayList<Collaborator> addListCollaborators( Collaborator collaborator){
-		collaborators.add(collaborator);
-		return collaborators;		
+	public ArrayList<Colleague> addListCollaborators( Colleague collaborator){
+		colleagues.add(collaborator);
+		return colleagues;		
 	}
 
 	/**
+	 * Get the manager's colleagues list
+	 * 
 	 * @return the collaborators
 	 */
-	public ArrayList<Collaborator> getCollaborators() {
-		return collaborators;
+	public ArrayList<Colleague> getCollaborators() {
+		return colleagues;
 	}
 
 	/**
-	 * @param collaborators the collaborators to set
+	 * Set the manager's colleagues list
+	 * 
+	 * @param colleagues the colleagues to set
 	 */
-	public void setCollaborators(ArrayList<Collaborator> collaborators) {
-		this.collaborators = collaborators;
+	public void setCollaborators(ArrayList<Colleague> colleagues) {
+		this.colleagues = colleagues;
 	}
-	
 	
 }
