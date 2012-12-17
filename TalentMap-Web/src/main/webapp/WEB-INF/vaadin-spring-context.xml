@@ -5,28 +5,37 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                            http://www.springframework.org/schema/context 
-                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+                           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- TalentMap Services import -->
     <import resource="classpath:services-spring-context.xml"/>
     
     <!-- Vaddin components declaration -->
 	<bean id="windowBean" class="com.vaadin.ui.Window"/>
-	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout"/>
+	<bean id="mainLayout" class="com.vaadin.ui.HorizontalLayout"/>
     
     <!-- Vaddin root application declaration -->    
     <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
     	<property name="window" ref="windowBean"/>
-    	<property name="hLayout" ref="hLayoutBean" />
-    	<property name="tabMain" ref="tabMain" />
+    	<property name="mainLayout" ref="mainLayout" />
+    	<property name="mainTab" ref="mainTab" />
+    	<property name="authenticationService" ref="authenticationService" />
     </bean>
     
+    <!-- The login form -->
+    <bean id="loginForm" class="com.vaadin.ui.LoginForm"/>
     
-<!-- Vaadin Components UI -->
-
-    
+	<!-- Vaadin Components UI -->
+	<bean id="loginScreen" class="com.novedia.talentmap.web.ui.login.LoginScreen" scope="session" >
+		<constructor-arg name="application" ref="vaadinBean"/>
+	</bean>
+	
+<!-- 	<bean id="authenticatedScreen" class="com.novedia.talentmap.web.ui.login.AuthenticatedScreen" scope="session"> -->
+<!-- 		<constructor-arg name="application" ref="vaadinBean"/> -->
+<!-- 	</bean> -->
+	    
     <!-- Vaadin CollaboratorForm UI used by ProfileView -->
     
     <bean id="fieldOrderCollaborator" class="java.util.Vector"/>
@@ -478,7 +487,7 @@
 	
 	<bean id="vLayoutTabMain" class="com.vaadin.ui.VerticalLayout" scope="session" />
 	
-	<bean id="tabMain" class="com.novedia.talentmap.web.ui.TabMain" scope="session" >
+	<bean id="mainTab" class="com.novedia.talentmap.web.ui.TabMain" scope="session" >
 		<constructor-arg name="tabProfileSheet" ref="tabProfileSheetBean" />
 		<constructor-arg name="searchView" ref="searchViewBean" />
 		<constructor-arg name="adminView" ref="adminViewBean" />
