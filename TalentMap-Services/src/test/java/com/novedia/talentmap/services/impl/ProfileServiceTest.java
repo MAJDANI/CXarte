@@ -21,6 +21,8 @@ import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.store.IDao;
 
 /**
+ * Profile service test.
+ * 
  * @author v.guillemain
  *
  */
