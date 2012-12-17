@@ -15,12 +15,19 @@
  */
 package com.novedia.talentmap.web;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.dao.DataAccessException;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.web.ui.TabMain;
-import com.novedia.talentmap.web.ui.admin.LogForm;
+import com.novedia.talentmap.web.ui.login.LoginScreen;
+import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
 import com.vaadin.ui.HorizontalLayout;
@@ -32,46 +39,110 @@ import com.vaadin.ui.themes.Reindeer;
  */
 @SuppressWarnings("serial")
 @Configurable
-public class MyVaadinApplication extends Application implements ApplicationContext.TransactionListener{
+public class MyVaadinApplication extends Application implements ApplicationContext.TransactionListener {
 
-	
+	/**
+	 * The logger
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
-	
-	 private static ThreadLocal<MyVaadinApplication> currentApplication = new ThreadLocal<MyVaadinApplication> ();
 
 	/**
 	 * Vaadin components
 	 */
 	private Window window;
-	private HorizontalLayout hLayout;
+	
+	/**
+	 * Horizontal layout
+	 */
+	private HorizontalLayout mainLayout;
+	
 	/**
 	 * Vaadin components UI
 	 */
-	private TabMain tabMain;
-
+	private TabMain mainTab;
 	
+	/**
+	 * The athentication service
+	 */
+	private AuthenticationService authenticationService;
+
+//	/**
+//	 * The login screen
+//	 */
+//	private LoginScreen loginScreen;
+	
+	/**
+	 * The init
+	 */
 	@Override
 	public void init(){
 		
-		setTheme("talentmap");		
-		setMainWindow(window);
-		setMainWindow(new LogForm());
-		buildMainLayout();
+		//Set the main window
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Init application");
+		}
+		this.setTheme("talentmap");
+		this.setMainWindow(window);
+		window.addComponent(buildMainLayout());
 	}
 	
 	/**
-	 *  All Layout Build
+	 *  Decore Layout
 	 */
-	
-	private void buildMainLayout(){
-		hLayout.setSizeFull();
-		hLayout.setMargin(true);
-		hLayout.setStyle(Reindeer.LAYOUT_WHITE);
+	public HorizontalLayout buildMainLayout() {
+		//Set the main window
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("build the main component container");
+		}
+		mainLayout.setSizeFull();
+		mainLayout.setMargin(true);
+		mainLayout.setStyleName(Reindeer.LAYOUT_WHITE);
+		mainLayout.addComponent(new LoginScreen(this));
 		
-		hLayout.addComponent(tabMain);
-		window.addComponent(hLayout);
+		return mainLayout;
 	}
 	
+	/**
+	 * Login method
+	 * 
+	 * @param login
+	 * @param password
+	 */
+	public Authentication login(String login, String password) throws TalentMapSecurityException{
+		
+		Authentication authenticate = null;
+		try {
+			CredentialToken credential = new CredentialToken();
+			credential.setLogin(login);
+			credential.setPassword(password);
+			authenticate = authenticationService.checkUser(credential);
+			
+			if (authenticate == null || (authenticate !=null && authenticate.getAuthorization() == null)) {
+				throw new TalentMapSecurityException ("User unknown");
+			}
+		}
+		catch (DataAccessException ex) {
+			if (LOGGER.isErrorEnabled()) {
+				LOGGER.error("Technical Exception : ", ex.getMessage());
+			}
+		}
+		
+		return authenticate;
+	}
+	
+	/**
+	 * Log out method 
+	 */
+	public void logout() {
+		
+		getMainWindow().getApplication().close();
+		
+		Subject currentUser = SecurityUtils.getSubject();
+		if (currentUser.isAuthenticated()) {
+			currentUser.logout();
+		}
+	}
+
 	/**
 	 * Set the main window
 	 * 
@@ -86,24 +157,60 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 	 * @param hLayout the hLayout to set
 	 */
 	public void sethLayout(HorizontalLayout hLayout) {
-		this.hLayout = hLayout;
+		this.mainLayout = hLayout;
 	}
 	/**
 	 * Set the tabProfileSheet value
 	 * @param tabProfileSheet the tabProfileSheet to set
 	 */
 	public void setTabMain(TabMain tabMain) {
-		this.tabMain = tabMain;
+		this.mainTab = tabMain;
 	}
 
 	@Override
 	public void transactionStart(Application application, Object transactionData) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void transactionEnd(Application application, Object transactionData) {
-		// TODO Auto-generated method stub	
-	}	
+	}
+
+	/**
+	 * @param authenticationService the authenticationService to set
+	 */
+	public void setAuthenticationService(
+			AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
+
+	/**
+	 * @return the hLayout
+	 */
+	public HorizontalLayout gethLayout() {
+		return mainLayout;
+	}
+
+	/**
+	 * @return the mainTab
+	 */
+	public TabMain getMainTab() {
+		return mainTab;
+	}
+
+	/**
+	 * @param mainTab the mainTab to set
+	 */
+	public void setMainTab(TabMain mainTab) {
+		this.mainTab = mainTab;
+	}
+
+	/**
+	 * @param mainLayout the mainLayout to set
+	 */
+	public void setMainLayout(HorizontalLayout mainLayout) {
+		this.mainLayout = mainLayout;
+	}
+	
+	
 }
