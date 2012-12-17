@@ -14,6 +14,8 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 
 /**
+ * The Administration Service implementation.
+ * 
  * @test AdminServiceTest.
  * @author v.dibi
  *
