@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -60,6 +61,7 @@ public class ConceptDaoTest {
 	 * Test add concept
 	 */
 	@Test
+	@Ignore
 	public void testAdd() {
 		Category category = Category.Builder.builder().id(1).name("CATEGORY1").build();
 		Concept concept = Concept.Builder.builder().name("CONCEPT10").category(category).build();
