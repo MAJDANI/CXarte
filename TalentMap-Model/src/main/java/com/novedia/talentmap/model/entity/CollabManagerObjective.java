@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * The {@link CollabManagerObjective} contient les données qui lie.
- * le {@link Collaborator}, les objectifs fixés et son {@link Manager}
+ * le {@link Colleague}, les objectifs fixés et son {@link Manager}
  * @author moumbe
  *
  */
