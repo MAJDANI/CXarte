@@ -6,19 +6,23 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * The bean {@link Profile}
- * @author moumbe
+ * This entity represents a Talent Map tool.
+ * 
+ * @author e.moumbe
  *
  */
 public class Profile implements Serializable {
+	
 	/**
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = 8766946810895701286L;
+	
 	/**
 	 * profile id
 	 */
 	private Integer id;
+	
 	/**
 	 * profile type
 	 */
@@ -28,6 +32,7 @@ public class Profile implements Serializable {
 	 * Default constructor
 	 */
 	public Profile() {
+		
 	}
 	
 	/**
@@ -71,9 +76,10 @@ public class Profile implements Serializable {
 		this.type = type;
 	}
 	
-	/**
-	 * allowed to display attribute of the object Profile
-	 */	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
