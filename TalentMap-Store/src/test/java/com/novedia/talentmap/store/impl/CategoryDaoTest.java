@@ -62,6 +62,7 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	 * Test add category
 	 */
 	@Test
+	@Ignore
 	public void testAdd () {
 		Category cat = Category.Builder.builder().name("CATEGORY4").build();
 		int addIndex = categoryDao.add(cat);
