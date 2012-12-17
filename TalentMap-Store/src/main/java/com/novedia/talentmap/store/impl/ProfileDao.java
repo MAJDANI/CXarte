@@ -11,101 +11,89 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
+ * The profile DAO handles query for table Profile.
+ * 
  * @author j.collet.
  */
-public class ProfileDao  extends SqlMapClientDaoSupport  implements IDao<Profile> {
+public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> {
 
-/**
- * Set the sqlMapClient value.
- * @param sqlMapClient the sqlMapClient to set
- */
-public ProfileDao(final SqlMapClient sqlMapClient) {
-setSqlMapClient(sqlMapClient);
-}
+	/**
+	 * Set the sqlMapClient value.
+	 * 
+	 * @param sqlMapClient
+	 *            the sqlMapClient to set
+	 */
+	public ProfileDao(final SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
+	}
 
-/**
- * This method allow to get a profile.
- * @param id a id
- * @throws DataAccessException
- */
-@Override
-public Profile get(final Integer id) throws DataAccessException {
-return (Profile) this.getSqlMapClientTemplate()
-.queryForObject(DBRequestsConstants.GET_PROFILE, id);
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile get(final Integer id) throws DataAccessException {
+		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE, id);
+	}
 
-/**
- * This method allow to get all profile.
- * @return a list of profile
- * @throws DataAccessException
- */
-@SuppressWarnings("unchecked")
-@Override
-public List<Profile> getAll() throws DataAccessException {
-return this.getSqlMapClientTemplate()
-.queryForList(DBRequestsConstants.GET_ALL_PROFILE);
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Profile> getAll() throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_PROFILE);
+	}
 
-/**
- * This method allow to save a profile.
- * @param profile a profile
- * @throws DataAccessException
- */
-@Override
-public int save(final Profile profile) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int save(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * This method allow to add a profile.
- * @param profile a profile
- * @throws DataAccessException
- */
-@Override
-public int add(final Profile profile) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int add(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * This method allow to delete a profile.
- * @param profile a profile
- * @throws DataAccessException
- */
-@Override
-public int delete(final Profile profile) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int delete(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * This method allow to check a profile.
- * @param name a name
- * @throws DataAccessException
- */
-@Override
-public Profile check(final String name) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile check(final String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-/**
- * Get One Profile By Type.
- * @class IProfileDao.java
- * @param type
- * @return profile
- * @throws DataAccessException
- */
-Profile getByType(final String type) throws DataAccessException{
-return (Profile) this.getSqlMapClientTemplate()
-.queryForObject(DBRequestsConstants.GET_PROFILE_BY_TYPE, type);
-}
+	/**
+	 * Get One Profile By Type.
+	 * 
+	 * @class IProfileDao.java
+	 * @param type
+	 * @return profile
+	 * @throws DataAccessException
+	 */
+	Profile getByType(final String type) throws DataAccessException {
+		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE_BY_TYPE, type);
+	}
 
-/**
- * This method allow to add a profile.
- * @param name a name
- * @throws DataAccessException
- */
-@Override
-public Profile getByName(final String name) throws DataAccessException {
-throw new UnsupportedOperationException();
-}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile getByName(final String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
 }
