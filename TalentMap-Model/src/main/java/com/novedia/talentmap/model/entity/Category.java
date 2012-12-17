@@ -119,13 +119,14 @@ public class Category implements Serializable {
 	}
 
 	/**
-	 * BUILDER PART.
+	 * Inner builder class.
 	 * 
+	 * @author j.marie-sainte
 	 */
 	public static class Builder {
 
 		/**
-		 * The profile identifier.
+		 * The category identifier.
 		 */
 		private Integer id;
 
@@ -137,8 +138,8 @@ public class Category implements Serializable {
 		/**
 		 * Constructor with parameter id.
 		 * 
-		 * @param id
-		 * @return
+		 * @param id the category identifier
+		 * @return the builder
 		 */
 		public Builder id(final Integer id) {
 			this.id = id;
@@ -148,8 +149,8 @@ public class Category implements Serializable {
 		/**
 		 * Constructor with parameter name
 		 * 
-		 * @param name
-		 * @return
+		 * @param name the category name
+		 * @return the builder
 		 */
 		public Builder name(final String name) {
 			this.name = name;
@@ -159,7 +160,7 @@ public class Category implements Serializable {
 		/**
 		 * Build category
 		 * 
-		 * @return
+		 * @return category
 		 */
 		public Category build() {
 			return new Category(this);
