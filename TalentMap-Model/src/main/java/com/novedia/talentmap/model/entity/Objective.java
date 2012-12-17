@@ -3,13 +3,16 @@ package com.novedia.talentmap.model.entity;
 import java.io.Serializable;
 
 /**
- * The {@link Objective} holds data from table Objective
- * @author moumbe
+ * This entity represent an objective
+ * 
+ * @author e.moumbe
  *
  */
 public class Objective implements Serializable {
 
-	/**UID*/
-	private static final long serialVersionUID = 1L;
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = 4940722058013124579L;
 
 }
