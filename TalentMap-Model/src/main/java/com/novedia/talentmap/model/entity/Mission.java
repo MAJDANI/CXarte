@@ -7,56 +7,64 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * Bean Mission
+ * This entity represents a mission.
  * 
- * @author moumbe
+ * @author e.moumbe
  *
  */
 public class Mission implements Serializable {
 	
-	/**UID*/
-	private static final long serialVersionUID = 1L;
 
-	/**mission id*/
+	/**
+	 * Serialization identifier
+	 */
+	private static final long serialVersionUID = 6695477652936529697L;
+
+	/**
+	 * The mission id
+	 */
 	private Integer id;
 	
 	/**
-	 * collaborator id associated the mission
+	 * TODO : à supprimer
+	 * 
+	 * Colleague associated the mission
 	 */
-	private Integer collab_id;
+	private Integer colleague;
 	
 	/**
-	 * mission name
+	 * Mission name
 	 */
 	private String name;
 	
 	/**
-	 * mission take place
+	 * Mission take place
 	 */
 	private String place;
 	
 	/**
-	 * mission id associated the client
+	 * The mission customer
 	 */
 	private String client;
 	
 	/**
-	 * mission id associated the notes
+	 * Information on this mission
 	 */
 	private String notes;
 	
 	/**
-	 * date of start the mission
+	 * Start date of the mission
 	 */
-	private Date start_date;
+	private Date startDate;
 	
 	/**
-	 * date of end the mission
+	 * End date of the mission
 	 */
-	private Date end_date;
+	private Date endDate;
 	
 	/**
-	 * Build the class Mission.java 
+	 * Build the class Mission.java
+	 * 
 	 * @param id
 	 * @param collab_id
 	 * @param name
@@ -66,17 +74,17 @@ public class Mission implements Serializable {
 	 * @param start_date
 	 * @param end_date
 	 */
-	public Mission(Integer id, Integer collab_id, String name, String place,
-			String client, String notes, Date start_date, Date end_date) {
+	public Mission(Integer id, Integer colleague, String name, String place,
+			String client, String notes, Date startDate, Date endDate) {
 		super();
 		this.id = id;
-		this.collab_id = collab_id;
+		this.colleague = colleague;
 		this.name = name;
 		this.place = place;
 		this.client = client;
 		this.notes = notes;
-		this.start_date = start_date;
-		this.end_date = end_date;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	/**
@@ -86,33 +94,36 @@ public class Mission implements Serializable {
 		super();
 	}
 	
-	/**
-	 * allowed to display attribute of the object Concept
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[collab_id=").append(getCollab_id()).append(", ");
+		strBld.append("[collab_id=").append(getColleague()).append(", ");
 		strBld.append("[name=").append(getName()).append(", ");
 		strBld.append("[client=").append(getClient()).append("]");
 		return strBld.toString();	
 	}
 
-	/**
-	 * hash code method
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		HashCodeBuilder hBuilder =  new HashCodeBuilder();
 		hBuilder.append(this.getId());
-		hBuilder.append(this.getCollab_id());
+		hBuilder.append(this.getColleague());
 		hBuilder.append(this.getName());
 		hBuilder.append(this.getClient());
 		return hBuilder.hashCode();
 	}
 	
-	/**
-	 * equals method
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -137,10 +148,11 @@ public class Mission implements Serializable {
 	 * @param collab_id the collab_id to set
 	 */
 	public void setCollab_id(Integer collab_id) {
-		this.collab_id = collab_id;
+		this.colleague = collab_id;
 	}
 	/**
 	 * Get the client value
+	 * 
 	 * @return the client
 	 */
 	public String getClient() {
@@ -148,6 +160,7 @@ public class Mission implements Serializable {
 	}
 	/**
 	 * Set the client value
+	 * 
 	 * @param client the client to set
 	 */
 	public void setClient(String client) {
@@ -155,35 +168,42 @@ public class Mission implements Serializable {
 	}
 	/**
 	 * Get the start_date value
+	 * 
 	 * @return the start_date
 	 */
-	public Date getStart_date() {
-		return start_date;
+	public Date getStartDate() {
+		return startDate;
 	}
 	/**
 	 * Set the start_date value
+	 * 
 	 * @param start_date the start_date to set
 	 */
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
+	
 	/**
 	 * Get the end_date value
+	 * 
 	 * @return the end_date
 	 */
-	public Date getEnd_date() {
-		return end_date;
+	public Date getEndDate() {
+		return endDate;
 	}
+	
 	/**
 	 * Set the end_date value
+	 * 
 	 * @param end_date the end_date to set
 	 */
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 	/**
 	 * Get the name value
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -192,6 +212,7 @@ public class Mission implements Serializable {
 
 	/**
 	 * Set the name value
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -199,29 +220,33 @@ public class Mission implements Serializable {
 	}
 	
 	/**
-	 *Get the name value
-	 * @return
+	 * Get the id value
+	 *
+	 * @return id
 	 */
 	public Integer getId() {
 		return id;
 	}
 	/**
 	 * Set the name value
+	 * 
 	 * @param id
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
-	 * Get the name value
-	 * @return
+	 * Get the colleague value
+	 * 
+	 * @return colleague
 	 */
-	public Integer getCollab_id() {
-		return collab_id;
+	public Integer getColleague() {
+		return colleague;
 	}
 
 	/**
 	 * Get the place value
+	 * 
 	 * @return the place
 	 */
 	public String getPlace() {
@@ -230,6 +255,7 @@ public class Mission implements Serializable {
 
 	/**
 	 * Set the place value
+	 * 
 	 * @param place the place to set
 	 */
 	public void setPlace(String place) {
@@ -237,6 +263,8 @@ public class Mission implements Serializable {
 	}
 
 	/**
+	 * Get the notes 
+	 * 
 	 * @return the notes
 	 */
 	public String getNotes() {
@@ -244,11 +272,12 @@ public class Mission implements Serializable {
 	}
 
 	/**
+	 * Set the notes
+	 * 
 	 * @param notes the notes to set
 	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-
 
 }
