@@ -6,7 +6,8 @@
 <sqlMap namespace="manager">
 
     <typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager"/> 
-
+	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
+	
     <resultMap id="managerResult" class="manager">
     	<result property="id" column="MANAGER_ID"/>        
         <result property="profileId"  column="PROFILE_ID"/>    	    
@@ -19,7 +20,7 @@
         <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 	
-	<resultMap id="collaboratorResult" class="collaborator">
+	<resultMap id="colleagueResult" class="colleague">
         <result property="id" column="COLLAB_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
@@ -37,7 +38,7 @@
 	</select>
 	
     <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="collaboratorResult">
+    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
     </select>
 	
