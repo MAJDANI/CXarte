@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
@@ -21,6 +22,7 @@ import com.novedia.talentmap.model.entity.Skill;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 public class SkillDaoTest extends UnitilsJUnit4 {
 

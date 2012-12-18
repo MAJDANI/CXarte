@@ -25,6 +25,7 @@ import com.novedia.talentmap.model.entity.Category;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class CategoryDaoTest {

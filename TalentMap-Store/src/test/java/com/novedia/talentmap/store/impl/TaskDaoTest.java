@@ -3,6 +3,7 @@ package com.novedia.talentmap.store.impl;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
@@ -17,6 +18,7 @@ import com.novedia.talentmap.model.entity.Task;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 public class TaskDaoTest extends UnitilsJUnit4 {
 

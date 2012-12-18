@@ -1,5 +1,6 @@
 package com.novedia.talentmap.store.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -16,6 +17,7 @@ import com.novedia.talentmap.model.entity.Profile;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class ProfileDaoTest {

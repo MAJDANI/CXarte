@@ -29,6 +29,7 @@ import com.novedia.talentmap.model.entity.Concept;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class ConceptDaoTest {

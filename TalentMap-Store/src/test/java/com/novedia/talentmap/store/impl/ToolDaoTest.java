@@ -1,6 +1,7 @@
 package com.novedia.talentmap.store.impl;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
@@ -16,6 +17,7 @@ import com.novedia.talentmap.model.entity.Tool;
  * @author moumbe
  *
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 public class ToolDaoTest extends UnitilsJUnit4 {
 
