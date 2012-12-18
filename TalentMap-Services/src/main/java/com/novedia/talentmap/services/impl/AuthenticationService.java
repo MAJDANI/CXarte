@@ -21,7 +21,6 @@ public class AuthenticationService implements IAuthenticationService {
 	 */
 	private IDao<Authentication> authenticationDao;
 
-
 	/*
 	 * (non-Javadoc)
 	 * @see com.novedia.talentmap.services.IAuthentificationService#checkAuthentification(java.lang.String, java.lang.String)
@@ -32,13 +31,12 @@ public class AuthenticationService implements IAuthenticationService {
 		return authentificationDao.check(token);
 	}
 
-
 	/**
+	 * Set the authentication DAO
 	 * @param authenticationDao the authenticationDao to set
 	 */
 	public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
 		this.authenticationDao = authenticationDao;
 	}
-
 
 }
