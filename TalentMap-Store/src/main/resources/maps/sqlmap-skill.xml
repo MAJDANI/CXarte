@@ -5,19 +5,19 @@
 
 <sqlMap namespace="skill">
 
-    <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/> 
-    <typeAlias alias="entier" type="java.lang.Integer"/> 
+    <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/>
+    <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
 
     <resultMap id="skillResult" class="skill">
-    	<result property="collaborator_id" column="COLLAB_ID"/> 
-        <result property="tool_id" column="TOOL_ID"/>     
-        <result property="score"  column="SCORE"/>
-        <result property="use_frequency"  column="USE_FREQUENCY"/>  
-        <result property="no_using_time"  column="NO_USING_TIME"/>            
+    	<result property="colleagueId"        column="COLLAB_ID"/> 
+        <result property="tool_id"            column="TOOL_ID"/>     
+        <result property="score"              column="SCORE"/>
+        <result property="use_frequency"      column="USE_FREQUENCY"/>  
+        <result property="no_using_time"      column="NO_USING_TIME"/>            
     </resultMap>
 
-    <resultMap id="collabIdResult" class="entier">
-    	<result property="collaborator_id" column="COLLAB_ID"/> 
+    <resultMap id="collabIdResult" class="java.lang.Integer">
+    	<result property="colleagueId" column="COLLAB_ID"/> 
     </resultMap>
 
 	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="Colleague">
@@ -25,11 +25,11 @@
 	</select>	
 	
 	<select id="get" resultMap="skillResult" parameterClass="java.util.HashMap">
-		SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #toolId#
+		SELECT * FROM SKILL WHERE COLLAB_ID = #collaboratorId# AND TOOL_ID = #toolId#
 	</select>
 	
-    <select id="getAllCollaboratorSkill" resultMap="skillResult">
-    	SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id#
+    <select id="getAllCollaboratorSkill" parameterClass="java.lang.Integer" resultMap="skillResult">
+    	SELECT * FROM SKILL WHERE COLLAB_ID = #colleagueId#
     </select>	
     
     <insert id="add" parameterClass="Skill">
@@ -40,17 +40,17 @@
       		USE_FREQUENCY,
       		NO_USING_TIME
     	)values (
-     		 #collaborator_id#, #tool_id#, #score#, #use_frequency#, #no_using_time#
+     		 #colleagueId#, #tool_id#, #score#, #use_frequency#, #no_using_time#
     	)
     </insert>	
     
    	<update id="save" parameterClass="Skill">
-		UPDATE SKILL SET COLLAB_ID = #collaborator_id#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time# 
-		WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #tool_id#
+		UPDATE SKILL SET COLLAB_ID = #colleagueId#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time# 
+		WHERE COLLAB_ID = #colleagueId# AND TOOL_ID = #tool_id#
 	</update>					 
 
 	<!-- v.guillemain 30/07/12 -->
-    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="Integer">
+    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="java.lang.Integer">
     	SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #toolId#
     </select>	
 
