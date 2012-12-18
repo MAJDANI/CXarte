@@ -80,8 +80,8 @@ public class ListMission extends Table implements ItemClickListener {
 		
 		//int idResultsTable = 1;
 		for (Mission mission : collectionMission) {
-			String dateDebut = formatterDate(mission.getStart_date());
-			String dateFin = formatterDate(mission.getEnd_date());
+			String dateDebut = formatterDate(mission.getStartDate());
+			String dateFin = formatterDate(mission.getEndDate());
 			Integer idMission = mission.getId();
 			System.out.println("idMission=" + idMission);
 			addItem(new Object[] { 

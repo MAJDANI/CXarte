@@ -1,7 +1,7 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
 import com.novedia.talentmap.web.util.Message;
@@ -28,7 +28,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	/**
 	 * Talent Map Service
 	 */
-	private ICollaboratorService collaboratorService;
+	private IColleagueService collaboratorService;
 
 	/**
 	 * Vaadin UI
@@ -86,7 +86,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @param missionForm
 	 */
 	
-	public MissionCollaboratorContent(ICollaboratorService collaboratorService, ListMission listMission, MissionForm missionForm,
+	public MissionCollaboratorContent(IColleagueService collaboratorService, ListMission listMission, MissionForm missionForm,
 			Button btnAddMission, AddMissionPanel addMissionPanel,
 			Panel listPanel, Label pageTitle
 			, Button btnModifyMission, Button btnDeleteMission

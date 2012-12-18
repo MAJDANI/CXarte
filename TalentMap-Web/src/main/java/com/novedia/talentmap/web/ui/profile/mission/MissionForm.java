@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
@@ -44,7 +44,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	/**
 	 * Talent Map Service
 	 */
-	private ICollaboratorService collabService;
+	private IColleagueService collabService;
 
 	/**
 	 * POJO
@@ -105,7 +105,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param missionFormLayout
 	 */
 	public MissionForm(Vector<Object> fieldOrderMission, Form missionForm,
-			GridLayout missionFormLayout, ICollaboratorService collabService,
+			GridLayout missionFormLayout, IColleagueService collabService,
 			Button save, Button cancel) {
 		super();
 		this.fieldOrderMission = fieldOrderMission;
@@ -276,10 +276,10 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				!isNotEmpty(mission.getName()) ||
 				!isNotEmpty(mission.getPlace()) ||
 				!isNotEmpty(mission.getClient()) ||
-				!isNotEmpty(mission.getStart_date()) ||
-				!isNotEmpty(mission.getEnd_date()) 				
+				!isNotEmpty(mission.getStartDate()) ||
+				!isNotEmpty(mission.getEndDate()) 				
 			) return VALIDATION_FIELD_MISSING;
-		if(!isAValidPeriod(mission.getStart_date(),mission.getEnd_date())
+		if(!isAValidPeriod(mission.getStartDate(),mission.getEndDate())
 			) return VALIDATION_INVALID_PERIOD;
 				
 		return VALIDATION_VALID_FORM;
@@ -454,7 +454,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param collabService
 	 *            the collabService to set
 	 */
-	public void setCollabService(ICollaboratorService collabService) {
+	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
 	}
 	

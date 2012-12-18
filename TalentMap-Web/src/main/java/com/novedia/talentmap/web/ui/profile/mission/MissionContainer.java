@@ -3,19 +3,19 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.vaadin.data.util.BeanItemContainer;
 
 public class MissionContainer extends BeanItemContainer<Mission> {
 
-	private ICollaboratorService collabService;
+	private IColleagueService collabService;
 	
 	/**
 	 * Temporary parameter
 	 */
 	public static int COLLAB_ID = 2;
 
-	public MissionContainer(ICollaboratorService collabService){
+	public MissionContainer(IColleagueService collabService){
 		super(Mission.class);
 		this.collabService = collabService;
 	}
@@ -30,7 +30,7 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		
 		MissionContainer.COLLAB_ID = collabId;
 		try {
-			List<Mission> listMission = this.collabService.getAllMission(MissionContainer.COLLAB_ID);
+			List<Mission> listMission = this.collabService.getAllMissions(MissionContainer.COLLAB_ID);
 			System.out.println("MissionContainer.fillContainer() listMission = " + listMission);
 			
 			// TODO : Rustine pour éviter la NPE au démarrage de l'application
@@ -52,7 +52,7 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 	 * Get the collabService value
 	 * @return the collabService
 	 */
-	public ICollaboratorService getCollabService() {
+	public IColleagueService getCollabService() {
 		return collabService;
 	}
 
@@ -60,7 +60,7 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 	 * Set the collabService value
 	 * @param collabService the collabService to set
 	 */
-	public void setCollabService(ICollaboratorService collabService) {
+	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
 	}
 
