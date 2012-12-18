@@ -28,7 +28,7 @@ import com.novedia.talentmap.model.entity.Colleague;
  */
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
-public class ColleagueDaoTest{
+public class ColleagueDaoTest {
 
 	@SpringBean("sqlMapClient")
 	private SqlMapClient sqlMapClient;
@@ -53,14 +53,22 @@ public class ColleagueDaoTest{
 		ReflectionAssert.assertPropertyLenientEquals("id", 1, colleague);
 		ReflectionAssert.assertPropertyLenientEquals("managerId", 1, colleague);
 		ReflectionAssert.assertPropertyLenientEquals("profileId", 1, colleague);
-		ReflectionAssert.assertPropertyLenientEquals("lastName", "collab1", colleague);
-		ReflectionAssert.assertPropertyLenientEquals("firstName", "collab1", colleague);
-		ReflectionAssert.assertPropertyLenientEquals("email", "collab1@gmail.com", colleague);
-		ReflectionAssert.assertPropertyLenientEquals("phone", "6010101010", colleague);
-		ReflectionAssert.assertPropertyLenientEquals("employmentDate", new DateTime("2011-12-12"), colleague);
-		ReflectionAssert.assertPropertyLenientEquals("experience", 5, colleague);
-		ReflectionAssert.assertPropertyLenientEquals("businessEngineer", "Colombe Tramond", colleague);
-		ReflectionAssert.assertPropertyLenientEquals("mission", null, colleague);
+		ReflectionAssert.assertPropertyLenientEquals("lastName", "collab1",
+				colleague);
+		ReflectionAssert.assertPropertyLenientEquals("firstName", "collab1",
+				colleague);
+		ReflectionAssert.assertPropertyLenientEquals("email",
+				"collab1@gmail.com", colleague);
+		ReflectionAssert.assertPropertyLenientEquals("phone", "6010101010",
+				colleague);
+		ReflectionAssert.assertPropertyLenientEquals("employmentDate",
+				new DateTime("2011-12-12"), colleague);
+		ReflectionAssert
+				.assertPropertyLenientEquals("experience", 5, colleague);
+		ReflectionAssert.assertPropertyLenientEquals("businessEngineer",
+				"Colombe Tramond", colleague);
+		ReflectionAssert
+				.assertPropertyLenientEquals("mission", null, colleague);
 		ReflectionAssert.assertPropertyLenientEquals("tool", null, colleague);
 	}
 
@@ -70,7 +78,8 @@ public class ColleagueDaoTest{
 	@Test
 	public void testGetAll() {
 		List<Colleague> listCollabs = colleagueDao.getAll();
-		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1, 2), listCollabs);
+		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1, 2),                                                                                                    
+				listCollabs);
 	}
 
 	/**
@@ -78,8 +87,9 @@ public class ColleagueDaoTest{
 	 */
 	@Test
 	public void testSave() {
-		Colleague colleague = Colleague.Builder.builder().id(1).profileId(1).phone("060000").experience(5)
-				.firstName("MODIFCOLLAB2").build();
+		Colleague colleague = Colleague.Builder.builder().id(1).profileId(1)
+				.phone("060000").experience(5).firstName("MODIFCOLLAB2")
+				.build();
 		int updateId = colleagueDao.save(colleague);
 		Assert.assertEquals(1, updateId);
 	}
@@ -87,22 +97,23 @@ public class ColleagueDaoTest{
 	/**
 	 * Test add collab
 	 */
+	@DataSet("ColleagueDaoTest.testAdd.xml")
 	@Test
 	public void testAdd() {
-		Colleague collaborator = Colleague.Builder.builder()
-				.managerId(1).profileId(1).lastName("collab3")
-				.firstName("collab3").email("collab3@mail.com").employmentDate(new Date()).experience(4)
-				.businessEngineer("no").build();
+		Colleague collaborator = Colleague.Builder.builder().managerId(1)
+				.profileId(1).lastName("collab3").firstName("collab3")
+				.email("collab3@mail.com").employmentDate(new Date())
+				.experience(4).businessEngineer("no").build();
 		int addIndex = colleagueDao.add(collaborator);
 		Assert.assertEquals(collaborator.getId().intValue(), addIndex);
 	}
-	
+
 	/**
 	 * Test delete
 	 */
 	@Test
 	@ExpectedException(UnsupportedOperationException.class)
-	public void testDelete () {
-		//TODO: implements skeletton
+	public void testDelete() {
+		// TODO: implements skeletton
 	}
 }
