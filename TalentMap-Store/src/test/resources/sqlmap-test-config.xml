@@ -4,15 +4,15 @@
 		
 <sqlMapConfig>
     <settings useStatementNamespaces="true"/>
-    <sqlMap resource="maps/sqlmap-collaborator.xml"/>
+    <sqlMap resource="maps/sqlmap-colleague.xml"/>
     <sqlMap resource="maps/sqlmap-profile.xml"/>
     <sqlMap resource="maps/sqlmap-category.xml"/>
     <sqlMap resource="maps/sqlmap-concept.xml"/>
-    <sqlMap resource="maps/sqlmap-skill.xml"/>
+<!--     <sqlMap resource="maps/sqlmap-skill.xml"/> -->
     <sqlMap resource="maps/sqlmap-tool.xml"/>
-    <sqlMap resource="maps/sqlmap-vskill.xml"/>
-    <sqlMap resource="maps/sqlmap-vskillcollab.xml"/>
-    <sqlMap resource="maps/sqlmap-mission.xml"/>
-    <sqlMap resource="maps/sqlmap-manager.xml"/>
-    <sqlMap resource="maps/sqlmap-task.xml"/>
+<!--     <sqlMap resource="maps/sqlmap-vskill.xml"/> -->
+<!--     <sqlMap resource="maps/sqlmap-vskillcollab.xml"/> -->
+<!--     <sqlMap resource="maps/sqlmap-mission.xml"/> -->
+<!--     <sqlMap resource="maps/sqlmap-manager.xml"/> -->
+<!--     <sqlMap resource="maps/sqlmap-task.xml"/> -->
 </sqlMapConfig>

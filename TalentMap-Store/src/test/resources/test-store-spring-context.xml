@@ -22,7 +22,7 @@
     </bean>    
 	
 	<!--  Store beans declaration -->
-	<bean id="collaboratorDao" class="com.novedia.talentmap.store.impl.CollaboratorDao">
+	<bean id="colleagueDao" class="com.novedia.talentmap.store.impl.ColleagueDao">
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
