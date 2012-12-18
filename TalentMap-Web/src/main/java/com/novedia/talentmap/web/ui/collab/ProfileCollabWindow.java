@@ -2,7 +2,7 @@ package com.novedia.talentmap.web.ui.collab;
 
 import java.util.Vector;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
@@ -112,7 +112,7 @@ public class ProfileCollabWindow extends Window {
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
 					FIELD_ORDER_COLLABORATOR);
 			
-			Collaborator collab = this.managerService.getCollaborator(COLLAB_ID);
+			Colleague collab = this.managerService.getCollaborator(COLLAB_ID);
 			
 			//We create a bean with the POJO Collaborator
 			BeanItem<Item> collaboratorBean = new BeanItem(collab);

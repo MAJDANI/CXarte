@@ -2,7 +2,7 @@ package com.novedia.talentmap.web.ui.collab;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
@@ -101,12 +101,12 @@ public class MonitoringCollabContent extends VerticalLayout {
 				HorizontalLayout.class, null);
 	}
 	
-	public void fillCollabTable(List<Collaborator> listCollaborator) throws Exception{
+	public void fillCollabTable(List<Colleague> listCollaborator) throws Exception{
 		
 		System.out.println("MonitoringCollabContent.fillCollabTable()");
 		
 		int idTable = 1;
-		for (Collaborator collab : listCollaborator) {
+		for (Colleague collab : listCollaborator) {
 			
 			Profile collabProfile = this.profileService.getProfile(collab.getProfileId());
 			
@@ -150,8 +150,8 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 		try {
 
-			List<Collaborator> listCollaborator = this.managerService
-					.getAllCollaboratorsByManagerId(MANAGER_ID);
+			List<Colleague> listCollaborator = this.managerService
+					.getAllColleagues(MANAGER_ID);
 			fillCollabTable(listCollaborator);
 
 		} catch (Exception e) {
