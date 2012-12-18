@@ -21,10 +21,6 @@
     </bean>
  	   
 	<!--  Store beans declaration -->
-	<bean id="authenticationDao" class="com.novedia.talentmap.store.impl.AuthenticationDao">
-		<constructor-arg ref="sqlMapClient"/>
-	</bean>
-	
 	<bean id="colleagueDao" class="com.novedia.talentmap.store.impl.ColleagueDao">
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
@@ -68,5 +64,9 @@
 	<bean id="taskDao" class="com.novedia.talentmap.store.impl.TaskDao">
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
-
+	
+	<bean id="authenticationDao" class="com.novedia.talentmap.store.impl.AuthenticationDao">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
+	
 </beans>
