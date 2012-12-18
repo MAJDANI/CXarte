@@ -5,8 +5,8 @@
 
 <sqlMap namespace="skill">
 
-    <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/> 
-    <typeAlias alias="entier" type="java.lang.Integer"/> 
+    <typeAlias alias="skill" type="com.novedia.talentmap.model.entity.Skill"/>
+    <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/>
 
     <resultMap id="skillResult" class="skill">
     	<result property="collaborator_id" column="COLLAB_ID"/> 
@@ -16,11 +16,11 @@
         <result property="no_using_time"  column="NO_USING_TIME"/>            
     </resultMap>
 
-    <resultMap id="collabIdResult" class="entier">
+    <resultMap id="collabIdResult" class="java.lang.Integer">
     	<result property="collaborator_id" column="COLLAB_ID"/> 
     </resultMap>
 
-	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="Collaborator">
+	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="colleague">
 		SELECT * FROM SKILL WHERE COLLAB_ID = #id#
 	</select>	
 	
@@ -50,7 +50,7 @@
 	</update>					 
 
 	<!-- v.guillemain 30/07/12 -->
-    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="Integer">
+    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="java.lang.Integer">
     	SELECT COLLAB_ID FROM SKILL WHERE TOOL_ID = #toolId#
     </select>	
 
