@@ -3,11 +3,11 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
 	"http://www.ibatis.com/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="collaborator">
+<sqlMap namespace="colleague">
 
-    <typeAlias alias="collaborator" type="com.novedia.talentmap.model.entity.Collaborator"/> 
+    <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
 
-    <resultMap id="collaboratorResult" class="collaborator">
+    <resultMap id="colleagueResult" class="colleague">
         <result property="id" column="COLLAB_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
@@ -20,25 +20,25 @@
         <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 
-    <select id="get" parameterClass="Integer" resultMap="collaboratorResult">
+    <select id="get" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
     </select>
     
-    <select id="getAll" resultMap="collaboratorResult">
+    <select id="getAll" resultMap="colleagueResult">
     	SELECT * FROM COLLABORATOR
     </select>
     					 
-	<update id="save" parameterClass="Collaborator">
+	<update id="save" parameterClass="Colleague">
 		UPDATE COLLABORATOR SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
 	</update>
 	
     <!-- v.guillemain -->
-    <select id="getAllByLastName" parameterClass="String" resultMap="collaboratorResult">
+    <select id="getAllByLastName" parameterClass="String" resultMap="colleagueResult">
         SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
     <!-- v.guillemain -->
-    <select id="getAllByListId" resultMap="collaboratorResult" parameterClass="java.util.Collection">
+    <select id="getAllByListId" resultMap="colleagueResult" parameterClass="java.util.Collection">
     	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN
 		<iterate 	open="(" 
 					close=")"
@@ -48,7 +48,7 @@
 	</select>
 	
     <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByListId2" resultMap="collaboratorResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
+    <select id="getAllCollaboratorsByListId2" resultMap="colleagueResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
     	SELECT * FROM COLLABORATOR WHERE
     	COLLAB_ID IN
 		<iterate 	property="listCollaborators"
@@ -81,7 +81,7 @@
 	</insert>
 	
 	<!-- v.guillemain -->
-    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="collaboratorResult">
+    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
     </select>
     
