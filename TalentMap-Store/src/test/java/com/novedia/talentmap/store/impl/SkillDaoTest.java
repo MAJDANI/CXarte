@@ -39,14 +39,14 @@ public class SkillDaoTest extends UnitilsJUnit4 {
 	
 	/**
 	 * Test de récupération de toutes les notes attribuées par un collaborateur aux différents
-	 * outilss
+	 * outils
 	 */
-	@Test
-	@DataSet("SkillDaoTest.xml")
-	public void testGetAllSkillsByCollaborator() {
-		Colleague collab = new Colleague();
-		collab.setId(1);
-		List<Skill> skills = skillDao.getAllSkillsByCollaborator(collab);
-		assertNotNull(skills);
-	}
+//	@Test
+//	@DataSet("SkillDaoTest.xml")
+//	public void testGetAllSkillsByCollaborator() {
+//		Colleague collab = new Colleague();
+//		collab.setId(1);
+//		List<Skill> skills = skillDao.getAllSkillsByCollaborator(collab);
+//        assertNotNull(skills);
+//	}
 }
