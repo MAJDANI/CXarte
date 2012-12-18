@@ -92,8 +92,8 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Skill> getAllCollaboratorSkill(int collaboratorId) throws DataAccessException {
-		return this.getSqlMapClientTemplate().queryForList("skill.getAllCollaboratorSkill", collaboratorId);
+	public List<Skill> getAllCollaboratorSkill(int colleagueId) throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList("skill.getAllCollaboratorSkill", colleagueId);
 	}
 
 	/**
@@ -190,8 +190,8 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 *            a colleague
 	 * @return a list of skill
 	 */
-	@SuppressWarnings("unchecked")
-	public List<Skill> getAllSkillsByCollaborator(final Colleague colleague) {
-		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILLS_BY_COLLABORATOR, colleague);
-	}
+//	@SuppressWarnings("unchecked")
+//	public List<Skill> getAllSkillsByCollaborator(final Colleague colleague) {
+//		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILLS_BY_COLLABORATOR, colleague);
+//	}
 }
