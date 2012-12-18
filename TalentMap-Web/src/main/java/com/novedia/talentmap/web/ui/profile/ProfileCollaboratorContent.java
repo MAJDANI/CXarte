@@ -1,8 +1,8 @@
 package com.novedia.talentmap.web.ui.profile;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -31,7 +31,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	/**
 	 * TalentMap Services
 	 */
-	private ICollaboratorService collabService;
+	private IColleagueService collabService;
 	private IProfileService profileService;
 
 	/**
@@ -87,7 +87,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 * @param footerLayout
 	 * @param edit
 	 */
-	public ProfileCollaboratorContent(ICollaboratorService collabService,
+	public ProfileCollaboratorContent(IColleagueService collabService,
 			IProfileService profileService, CollaboratorForm collabForm,
 			ListSkill listSkill, Panel skillPanel, Panel listSkillPanel,
 			Label skillLabel, Button save, Button cancel, Button addSkill,
@@ -311,9 +311,9 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 */
 	private int saveDataCollaborator(){
 
-		BeanItem<Collaborator> collabItem = (BeanItem<Collaborator>) this.collabForm.getFormCollaborator()
+		BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm.getFormCollaborator()
 				.getItemDataSource();
-		Collaborator collab = collabItem.getBean();
+		Colleague collab = collabItem.getBean();
 		try {
 			if(collab.getProfileId() > 0){
 				collab.setProfileId(this.profileService.getProfile(
@@ -322,7 +322,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 				collab.setProfileId(this.profileService.getProfile(
 						collab.getProfileId()).getId());
 			}
-			return this.collabService.saveCollaborator(collab);
+			return this.collabService.saveColleague(collab);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -430,7 +430,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 * @param collabService
 	 *            the collabService to set
 	 */
-	public void setCollabService(ICollaboratorService collabService) {
+	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
 	}
 

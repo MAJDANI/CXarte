@@ -2,9 +2,9 @@ package com.novedia.talentmap.web.ui.profile;
 
 import java.util.Vector;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
@@ -13,7 +13,6 @@ import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.terminal.ErrorMessage;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -73,7 +72,7 @@ public class CollaboratorForm extends FormLayout {
 	/**
 	 * TalentMap service
 	 */
-	private ICollaboratorService collaboratorService;
+	private IColleagueService collaboratorService;
 	private IProfileService profileService;
 
 	/**
@@ -85,7 +84,7 @@ public class CollaboratorForm extends FormLayout {
 	 * @param fieldOrder
 	 * @param gLayoutCollaborator
 	 */
-	public CollaboratorForm(ICollaboratorService collaboratorService,
+	public CollaboratorForm(IColleagueService collaboratorService,
 			IProfileService profileService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
 			GridLayout gLayoutCollaborator, GridLayout gLayoutMission, VerticalLayout vLayoutManager,
 			Form formCollaborator, Form formMission, TextField managerField) {
@@ -165,7 +164,7 @@ public class CollaboratorForm extends FormLayout {
 						this.profileService));
 
 		@SuppressWarnings("unchecked")
-		Collaborator collaborator = this.collaboratorService.getCollaborator(COLLAB_ID);
+		Colleague collaborator = this.collaboratorService.getColleague(COLLAB_ID);
 		
 		if (collaborator != null){
 			BeanItem<Item> collabBean = new BeanItem(collaborator);
@@ -173,7 +172,7 @@ public class CollaboratorForm extends FormLayout {
 	
 			// Set the good value for the Select Item
 			int profileId = this.collaboratorService
-					.getCollaborator(COLLAB_ID).getProfileId();
+					.getColleague(COLLAB_ID).getProfileId();
 			
 			String profileType = this.profileService.getProfile(profileId).getType();
 			
@@ -218,7 +217,7 @@ public class CollaboratorForm extends FormLayout {
 		this.managerField.setCaption("Consultant Manager : ");
 		this.managerField.setStyleName("consultant-manager");
 		
-		Collaborator collab = this.collaboratorService.getCollaborator(COLLAB_ID);
+		Colleague collab = this.collaboratorService.getColleague(COLLAB_ID);
 		if (collab != null){
 			Manager manager = this.collaboratorService.getManager(collab.getManagerId());
 			if (manager != null) {
@@ -267,7 +266,7 @@ public class CollaboratorForm extends FormLayout {
 	 * @param profileService
 	 *            the profileService to set
 	 */
-	public void setProfileService(ICollaboratorService profileService) {
+	public void setProfileService(IColleagueService profileService) {
 		this.collaboratorService = profileService;
 	}
 
@@ -291,7 +290,7 @@ public class CollaboratorForm extends FormLayout {
 	 * Set the collaboratorService value
 	 * @param collaboratorService the collaboratorService to set
 	 */
-	public void setCollaboratorService(ICollaboratorService collaboratorService) {
+	public void setCollaboratorService(IColleagueService collaboratorService) {
 		this.collaboratorService = collaboratorService;
 	}
 
