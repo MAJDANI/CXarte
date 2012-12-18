@@ -20,6 +20,7 @@ public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCo
 	
 	/**
 	 * Set the sqlMapClient value
+	 * 
 	 * @param sqlMapClient the sqlMapClient to set
 	 */
 	public VSkillCollabDao(final SqlMapClient sqlMapClient) {
@@ -27,17 +28,16 @@ public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCo
 	}
 	
 	/**
-	 * Get All Collaborators' Skill by ID
+	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws DataAccessException {
-		String t="";
 		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
 	}
 
 	/**
-	 * Get VSkillCollab by id
+	 * {@inheritDoc}
 	 */
 	@Override
 	public VSkillCollab get(int id) throws DataAccessException {
