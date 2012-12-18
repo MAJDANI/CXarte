@@ -10,7 +10,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
@@ -20,8 +20,7 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * @author v.guillemain
  * 
  */
-public class AuthenticationDao extends SqlMapClientDaoSupport implements
-		IDao<Authentication> {
+public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Authentication> {
 
 	/**
 	 * Class builder based on sqlMapClient
@@ -92,10 +91,8 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements
 	 * @return
 	 * @throws DataAccessException
 	 */
-	public Collaborator getCollaboratorByLogin(String login)
-			throws DataAccessException {
-		return (Collaborator) this.getSqlMapClientTemplate().queryForObject(
-				DBRequestsConstants.GET_COLLAB_BY_LOGIN, login);
+	public Colleague getCollaboratorByLogin(String login) throws DataAccessException {
+		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLAB_BY_LOGIN, login);
 	}
 
 }
