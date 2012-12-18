@@ -62,7 +62,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	/**
 	 * Constants
 	 */
-	public static final int COLLAB_ID = 2;
+	public static final int COLLEAGUE_ID = 2;
 	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Intitulé", "Client",
 			"Lieu", "Début mission", "Fin mission", "Commentaire" };
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] { "name", "client",
@@ -199,7 +199,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			case VALIDATION_VALID_FORM :
 				//TODO si données ok, insertion en base
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setColleague(COLLAB_ID);
+					missionToInsert.setColleagueId(COLLEAGUE_ID);
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
