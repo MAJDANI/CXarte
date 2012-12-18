@@ -30,7 +30,7 @@ public class Mission implements Serializable {
 	 * 
 	 * Colleague associated the mission
 	 */
-	private Integer colleague;
+	private Integer colleagueId;
 	
 	/**
 	 * Mission name
@@ -66,7 +66,7 @@ public class Mission implements Serializable {
 	 * Build the class Mission.java
 	 * 
 	 * @param id
-	 * @param collab_id
+	 * @param colleagueId
 	 * @param name
 	 * @param place
 	 * @param client
@@ -74,11 +74,11 @@ public class Mission implements Serializable {
 	 * @param start_date
 	 * @param end_date
 	 */
-	public Mission(Integer id, Integer colleague, String name, String place,
+	public Mission(Integer id, Integer colleagueId, String name, String place,
 			String client, String notes, Date startDate, Date endDate) {
 		super();
 		this.id = id;
-		this.colleague = colleague;
+		this.colleagueId = colleagueId;
 		this.name = name;
 		this.place = place;
 		this.client = client;
@@ -101,7 +101,7 @@ public class Mission implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[collab_id=").append(getColleague()).append(", ");
+		strBld.append("[collab_id=").append(getColleagueId()).append(", ");
 		strBld.append("[name=").append(getName()).append(", ");
 		strBld.append("[client=").append(getClient()).append("]");
 		return strBld.toString();	
@@ -115,7 +115,7 @@ public class Mission implements Serializable {
 	public int hashCode() {
 		HashCodeBuilder hBuilder =  new HashCodeBuilder();
 		hBuilder.append(this.getId());
-		hBuilder.append(this.getColleague());
+		hBuilder.append(this.getColleagueId());
 		hBuilder.append(this.getName());
 		hBuilder.append(this.getClient());
 		return hBuilder.hashCode();
@@ -143,13 +143,6 @@ public class Mission implements Serializable {
 	}
 	
 	
-	/**
-	 * Set the collab_id value
-	 * @param collab_id the collab_id to set
-	 */
-	public void setColleague(Integer collab_id) {
-		this.colleague = collab_id;
-	}
 	/**
 	 * Get the client value
 	 * 
@@ -240,8 +233,17 @@ public class Mission implements Serializable {
 	 * 
 	 * @return colleague
 	 */
-	public Integer getColleague() {
-		return colleague;
+	public Integer getColleagueId() {
+		return colleagueId;
+	}
+	
+	
+	/**
+	 * Set the colleague id
+	 * @param colleague
+	 */
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
 	}
 
 	/**
