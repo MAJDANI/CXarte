@@ -84,7 +84,7 @@ public class SkillServiceTest {
 		
 		Skill skillExpected = new Skill();
 		skillExpected.setTool_id(toolId);
-		skillExpected.setCollaborator_id(collaboratorId);
+		skillExpected.setColleagueId(collaboratorId);
 		
 		Colleague collaboratorExpected = new Colleague();
 		collaboratorExpected.setFirstName("toto");
@@ -277,7 +277,7 @@ public class SkillServiceTest {
 		
 		//Given
 		Skill skill = new Skill();
-		skill.setCollaborator_id(1);
+		skill.setColleagueId(1);
 		skill.setScore(2);
 		skill.setTool_id(1);
 		
@@ -301,7 +301,7 @@ public class SkillServiceTest {
 	public void saveSkillOneSkillToInsertet(){
 		//Given
 		Skill skill = new Skill();
-		skill.setCollaborator_id(1);
+		skill.setColleagueId(1);
 		skill.setScore(2);
 		skill.setTool_id(1);
 		
