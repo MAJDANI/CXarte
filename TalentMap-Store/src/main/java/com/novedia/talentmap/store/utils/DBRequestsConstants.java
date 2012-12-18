@@ -5,42 +5,43 @@ package com.novedia.talentmap.store.utils;
  * @author j.marie-sainte
  */
 public final class DBRequestsConstants {
-// COLLABORATOR REQUESTS
+
+	// COLLEAGUE REQUESTS
 
 /**
  * Constant request id to get a collaborator.
  */
-public static final String GET_COLLABORATOR = "collaborator.get";
+public static final String GET_COLLEAGUE = "colleague.get";
 
 /**
  * Constant request id to get all the collaborators.
  */
-public static final String GET_ALL_COLLABORATOR = "collaborator.getAll";
+public static final String GET_ALL_COLLEAGUES = "colleague.getAll";
 
 /**
- * Constant request to add a collaborator.
+ * Constant request to add a colleague.
  */
-public static final String ADD_COLLABORATOR = "collaborator.add";
+public static final String ADD_COLLEAGUE = "colleague.add";
 
 /**
- * Constant request to delete a collaborator.
+ * Constant request to delete a colleague.
  */
-public static final String DELETE_COLLABORATOR = "collaborator.delete";
+public static final String DELETE_colleague = "colleague.delete";
 
 /**
- * Constant request to update a collaborator.
+ * Constant request to update a colleague.
  */
-public static final String SAVE_COLLABORATOR = "collaborator.save";
+public static final String SAVE_COLLEAGUE = "colleague.save";
 
 /**
- * Constant request to get a collaborator by lastName.
+ * Constant request to get a colleague by lastName.
  */
-public static final String GET_ALL_COLLABORATOR_BY_LASTNAME="collaborator.getAllByLastName";
+public static final String GET_ALL_COLLABORATOR_BY_LASTNAME="colleague.getAllByLastName";
 
 /**
- * Constant request to get collaborator by manager id
+ * Constant request to get colleague by manager id
  */
-public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "collaborator.getAllCollaboratorsByManagerId";
+public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
 // CATEGORY REQUESTS
 /**
@@ -126,7 +127,7 @@ public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 public static final String GET_MANAGER = "manager.get";
 
 /**
- * This constant is used to retrieve a collaborator by manager id.
+ * This constant is used to retrieve a colleague by manager id.
  */
 public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllCollaboratorsByManagerId";
 
@@ -150,7 +151,7 @@ public static final String GET_ALL_MISSION = "mission.getAll";
 public static final String ADD_MISSION = "mission.add";
 
 /**
- * Constant request to update a collaborator.
+ * Constant request to update a colleague.
  */
 public static final String SAVE_MISSION = "mission.save";
 
@@ -193,7 +194,7 @@ public static final String ADD_PROFILE = "profile.add";
 public static final String GET_PROFILE_BY_NAME = "profile.getByName";
 
 /**
- * This constant is used to retrieve a collaborator by type.
+ * This constant is used to retrieve a profile by type.
  */
 public static final String GET_PROFILE_BY_TYPE = "profile.getByType";
 
