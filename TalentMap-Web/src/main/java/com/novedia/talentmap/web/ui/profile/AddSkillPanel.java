@@ -359,7 +359,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			
 			Skill skill = new Skill();
 
-			skill.setCollaborator_id(COLLAB_ID);
+			skill.setColleagueId(COLLAB_ID);
 			skill.setTool_id(tool.getId());
 			skill.setScore(starsValue.intValue());
 			skill.setUse_frequency(frequencyUseValue);

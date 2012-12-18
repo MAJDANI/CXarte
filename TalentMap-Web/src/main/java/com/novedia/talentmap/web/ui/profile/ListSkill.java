@@ -86,8 +86,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 
 		try {
 
-			this.mapSkill = this.skillService
-					.getAllCollaboratorSkill(COLLAB_ID);
+			this.mapSkill = this.skillService.getAllCollaboratorSkill(COLLAB_ID);
 
 		} catch (Exception e) {
 
