@@ -21,8 +21,8 @@ public class Skill implements Serializable{
 	/**
 	 * collaborator id associated the skill
 	 */
-	private Integer collaborator_id;
-	
+	private Integer colleagueId;
+
 	/**
 	 * tool id associated the skill
 	 */
@@ -56,10 +56,10 @@ public class Skill implements Serializable{
 	 * @param use_frequency
 	 * @param no_using_time
 	 */
-	public Skill(Integer collaborator_id, Integer tool_id, Integer score,
-			Integer use_frequency, Integer no_using_time) {
+	public Skill(Integer colleagueId, Integer tool_id, Integer score, Integer use_frequency, Integer no_using_time) {
+		
 		super();
-		this.collaborator_id = collaborator_id;
+		this.colleagueId = colleagueId;
 		this.tool_id = tool_id;
 		this.score = score;
 		this.use_frequency = use_frequency;
@@ -94,20 +94,7 @@ public class Skill implements Serializable{
 	public void setNo_using_time(Integer no_using_time) {
 		this.no_using_time = no_using_time;
 	}
-	/**
-	 * Get the collaborator_id value
-	 * @return the collaborator_id
-	 */
-	public Integer getCollaborator_id() {
-		return collaborator_id;
-	}
-	/**
-	 * Set the collaborator_id value
-	 * @param collaborator_id the collaborator_id to set
-	 */
-	public void setCollaborator_id(Integer collaborator_id) {
-		this.collaborator_id = collaborator_id;
-	}
+
 	/**
 	 * Get the tool_id value
 	 * @return the tool_id
@@ -140,6 +127,15 @@ public class Skill implements Serializable{
 		this.score = score;
 	}
 	
+	
+	public Integer getColleagueId() {
+		return colleagueId;
+	}
+
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -148,7 +144,7 @@ public class Skill implements Serializable{
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
 		strBld.append("[tool_id=").append(getTool_id()).append(", ");
-		strBld.append("[collaborator_id=").append(getCollaborator_id()).append(", ");
+		strBld.append("[collaborator_id=").append(getColleagueId()).append(", ");
 		strBld.append("[use_frequency=").append(getUse_frequency()).append("]");
 		return strBld.toString();	
 	}
@@ -161,7 +157,7 @@ public class Skill implements Serializable{
 	public int hashCode() {
 		HashCodeBuilder hashBuilder = new HashCodeBuilder();
 		hashBuilder.append(this.getTool_id());
-		hashBuilder.append(this.getCollaborator_id());
+		hashBuilder.append(this.getColleagueId());
 		hashBuilder.append(this.getUse_frequency());
 		return hashBuilder.hashCode();
 	}
@@ -182,7 +178,7 @@ public class Skill implements Serializable{
 		Skill comparedObj = (Skill)obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
 		ebuilder.append(this.getTool_id(), comparedObj.getTool_id());
-		ebuilder.append(this.getCollaborator_id(), comparedObj.getCollaborator_id());
+		ebuilder.append(this.getColleagueId(), comparedObj.getColleagueId());
 		ebuilder.append(this.getUse_frequency(), comparedObj.getUse_frequency());
 		return ebuilder.isEquals();
 	}
