@@ -6,18 +6,12 @@
 <sqlMap namespace="tool">
 
     <typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool"/> 
-
-<!--     <resultMap id="toolResult" class="tool"> -->
-<!--     	<result property="id" column="TOOL_ID"/>  -->
-<!--         <result property="concept" column="CONCEPT_ID" jdbcType="com.novedia.talentmap.model.entity.Concept"/>      -->
-<!--         <result property="name"  column="TOOL_NAME"/>           -->
-<!--     </resultMap> -->
     
     <resultMap id="toolResult" class="tool">
     	<result property="id" column="TOOL_ID"/> 
+        <result property="name"  column="TOOL_NAME"/>          
         <result property="concept.id" column="CONCEPT_ID"/>
         <result property="concept.name" column="CONCEPT_NAME"/>     
-        <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
 	
 	<select id="get" resultMap="toolResult" parameterClass="Integer">
@@ -28,9 +22,10 @@
 		SELECT * FROM TOOL WHERE TOOL_NAME = #name#
 	</select>
 	
-    <select id="getAll" resultClass="tool">
-    	SELECT * FROM TOOL
-    </select>
+    <statement id="getAll" resultMap="toolResult">
+    	SELECT * FROM TOOL tool, CONCEPT concept 
+    	WHERE tool.CONCEPT_ID = concept.CONCEPT_ID
+    </statement>
     
     <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
     	SELECT * FROM TOOL WHERE CONCEPT_ID = #conceptId#

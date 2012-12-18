@@ -14,42 +14,10 @@
         <result property="authorization.roleId" column="ROLE_ID"/>
         <result property="authorization.label" column="LABEL"/>    
     </resultMap>
-	
-<!-- 	<select id="getAuthentification" resultMap="authenticationResult" parameterClass="Integer"> -->
-<!-- 		SELECT * FROM AUTHENTICATION WHERE AUTHENTIFICATION_ID = #id# -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="getByLogin" resultMap="authenticationResult" parameterClass="String"> -->
-<!-- 		SELECT * FROM AUTHENTICATION WHERE LOGIN = #login# -->
-<!-- 	</select> -->
-	
-<!--     <select id="getAll" resultMap="authenticationResult"> -->
-<!--     	SELECT * FROM AUTHENTICATION -->
-<!--     </select>			 -->
-    
-<!--     <insert id="add" parameterClass="Authentication"> -->
-    	
-<!--     	<selectKey resultClass="Integer" keyProperty="id"> -->
-<!--       		SELECT SEQAUTH.NEXTVAL FROM DUAL -->
-<!--     	</selectKey> -->
-    	
-<!--     	INSERT INTO AUTHENTICATION ( -->
-<!--     		AUTHENTIFICATION_ID, -->
-<!--     		LOGIN, -->
-<!--     		PASSWORD -->
-<!--     		)values ( -->
-<!--     		#id#, -->
-<!--     		#login#, -->
-<!--     		#password# -->
-<!--     		) -->
-<!--     </insert>	 -->
     
     <select id="check" resultMap="authenticationResult" parameterClass="com.novedia.talentmap.model.entity.CredentialToken">
 		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE auth.LOGIN = #login# AND auth.PASSWORD = #password#
 				AND auth.ROLE_ID = role.ROLE_ID
 	</select>	
 	
-<!-- 	<update id="save" parameterClass="Authentication"> -->
-<!-- 		UPDATE AUTHENTICATION SET LOGIN = #login# , PASSWORD = #password# WHERE AUTHENTIFICATION_ID = #id#  -->
-<!-- 	</update> -->
 </sqlMap>
