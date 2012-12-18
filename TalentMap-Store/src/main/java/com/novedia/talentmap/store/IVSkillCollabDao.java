@@ -24,7 +24,7 @@ public interface IVSkillCollabDao {
 	/**
 	 * Get all Collaborators' Skill by ID 
 	 * @class IVSkillCollabDao.java
-	 * @param collabId a {@link Collaborator}
+	 * @param collabId a {@link Colleague}
 	 * @return a list VSkillCollab
 	 * @throws DataAccessException
 	 */
