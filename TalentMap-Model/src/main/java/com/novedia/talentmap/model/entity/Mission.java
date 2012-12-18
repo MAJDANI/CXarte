@@ -147,7 +147,7 @@ public class Mission implements Serializable {
 	 * Set the collab_id value
 	 * @param collab_id the collab_id to set
 	 */
-	public void setCollab_id(Integer collab_id) {
+	public void setColleague(Integer collab_id) {
 		this.colleague = collab_id;
 	}
 	/**

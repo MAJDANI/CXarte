@@ -65,7 +65,7 @@ public class ManagerService implements IManagerService {
 	 * 
 	 * @param colleagueDao
 	 */
-	public void setColleagueDaoDao(IDao<Colleague> colleagueDao) {
+	public void setColleagueDao(IDao<Colleague> colleagueDao) {
 		this.colleagueDao = colleagueDao;
 	}
 }

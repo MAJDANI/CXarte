@@ -33,7 +33,7 @@ public class ColleagueServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		service = new ColleagueService();
-		service.setCollaboratorDao(colleagueDaoMock);
+		service.setColleagueDao(colleagueDaoMock);
 		service.setMissionDao(missionDaoMock);
 	}
 

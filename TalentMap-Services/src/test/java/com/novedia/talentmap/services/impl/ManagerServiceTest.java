@@ -47,7 +47,7 @@ public class ManagerServiceTest {
 	public void setUp() throws Exception {
 		service = new ManagerService();
 		service.setManagerDao(managerDaoMock);
-		service.setColleagueDaoDao(colleagueDaoMock);
+		service.setColleagueDao(colleagueDaoMock);
 	}
 
 	@Test

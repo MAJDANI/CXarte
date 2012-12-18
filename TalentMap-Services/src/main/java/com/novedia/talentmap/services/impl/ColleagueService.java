@@ -134,8 +134,8 @@ public class ColleagueService implements IColleagueService {
 	 * 
 	 * @param collaboratorDao
 	 */
-	public void setCollaboratorDao(IDao<Colleague> collaboratorDao) {
-		this.colleagueDao = collaboratorDao;
+	public void setColleagueDao(IDao<Colleague> colleagueDao) {
+		this.colleagueDao = colleagueDao;
 	}
 
 	/**

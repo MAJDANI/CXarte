@@ -199,7 +199,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			case VALIDATION_VALID_FORM :
 				//TODO si données ok, insertion en base
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setCollab_id(COLLAB_ID);
+					missionToInsert.setColleague(COLLAB_ID);
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {

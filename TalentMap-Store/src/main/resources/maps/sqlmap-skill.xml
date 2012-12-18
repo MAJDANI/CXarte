@@ -20,12 +20,12 @@
     	<result property="collaborator_id" column="COLLAB_ID"/> 
     </resultMap>
 
-	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="Collaborator">
+	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="Colleague">
 		SELECT * FROM SKILL WHERE COLLAB_ID = #id#
 	</select>	
 	
 	<select id="get" resultMap="skillResult" parameterClass="java.util.HashMap">
-		SELECT * FROM SKILL WHERE COLLAB_ID = #collaboratorId# AND TOOL_ID = #toolId#
+		SELECT * FROM SKILL WHERE COLLAB_ID = #collaborator_id# AND TOOL_ID = #toolId#
 	</select>
 	
     <select id="getAllCollaboratorSkill" resultMap="skillResult">

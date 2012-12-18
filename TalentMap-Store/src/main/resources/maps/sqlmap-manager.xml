@@ -19,7 +19,7 @@
         <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
     </resultMap>
 	
-	<resultMap id="collaboratorResult" class="collaborator">
+	<resultMap id="colleagueResult" class="colleague">
         <result property="id" column="COLLAB_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
