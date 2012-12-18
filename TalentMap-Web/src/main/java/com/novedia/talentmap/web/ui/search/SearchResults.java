@@ -2,7 +2,7 @@ package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabContent;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -61,17 +61,17 @@ public class SearchResults extends Table {
 		addContainerProperty("Actions", HorizontalLayout.class, null);
 	}
 
-	public void buildResultsTable(List<Collaborator> listCollab) {
+	public void buildResultsTable(List<Colleague> listCollab) {
 	
 		addColumns();
 		fillResultsTable(listCollab);
 	}
 
-	public void fillResultsTable(List<Collaborator> listCollab) {
+	public void fillResultsTable(List<Colleague> listCollab) {
 		System.out.println("SearchResults.fillResultsTable()");
 
 		int idResultsTable = 1;
-		for (Collaborator collab : listCollab) {
+		for (Colleague collab : listCollab) {
 
 			HorizontalLayout hLayout = new HorizontalLayout();
 			hLayout.setMargin(true);

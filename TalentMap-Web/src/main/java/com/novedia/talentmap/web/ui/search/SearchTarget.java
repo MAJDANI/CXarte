@@ -3,9 +3,9 @@ package com.novedia.talentmap.web.ui.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Tool;
-import com.novedia.talentmap.services.ICollaboratorService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
@@ -30,7 +30,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	/**
 	 * TalentMap Services
 	 */
-	private ICollaboratorService collabService;
+	private IColleagueService collabService;
 	private ISkillService skillService;
 
 	/**
@@ -49,7 +49,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	/**
 	 * POJO
 	 */
-	private List<Collaborator> listCollab;
+	private List<Colleague> listCollab;
 	private List<CheckBox> listCheckBoxSkills;
 
 	/**
@@ -67,8 +67,8 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
 			Panel searchBySkillsPanel, TextField fieldClient,
-			TextField fieldName, Button search, List<Collaborator> listCollab,
-			ICollaboratorService collabService, ISkillService skillService, List<CheckBox> listCheckBoxSkills) {
+			TextField fieldName, Button search, List<Colleague> listCollab,
+			IColleagueService collabService, ISkillService skillService, List<CheckBox> listCheckBoxSkills) {
 		super();
 		this.searchByClientPanel = searchByClientPanel;
 		this.searchByNamePanel = searchByNamePanel;
@@ -448,7 +448,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * Get the collabService value
 	 * @return the collabService
 	 */
-	public ICollaboratorService getCollabService() {
+	public IColleagueService getCollabService() {
 		return collabService;
 	}
 
@@ -456,7 +456,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * Set the collabService value
 	 * @param collabService the collabService to set
 	 */
-	public void setCollabService(ICollaboratorService collabService) {
+	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
 	}
 
@@ -480,7 +480,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * Get the listCollab value
 	 * @return the listCollab
 	 */
-	public List<Collaborator> getListCollab() {
+	public List<Colleague> getListCollab() {
 		return listCollab;
 	}
 
@@ -488,7 +488,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * Set the listCollab value
 	 * @param listCollab the listCollab to set
 	 */
-	public void setListCollab(List<Collaborator> listCollab) {
+	public void setListCollab(List<Colleague> listCollab) {
 		this.listCollab = listCollab;
 	}
 	

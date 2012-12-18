@@ -2,7 +2,7 @@ package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.ISearchContent;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -66,7 +66,7 @@ public class SearchContent extends VerticalLayout {
 		this.searchTarget.addObservateur(new ISearchContent() {
 			
 			@Override
-			public void changeSearchResults(List<Collaborator> listCollab, boolean clearState) {
+			public void changeSearchResults(List<Colleague> listCollab, boolean clearState) {
 				
 				if(!clearState){
 					
