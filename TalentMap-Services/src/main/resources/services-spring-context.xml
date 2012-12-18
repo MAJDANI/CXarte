@@ -13,8 +13,8 @@
 	<import resource="classpath:store-spring-context.xml"/>
 	
 	<!-- Service beans declaration -->
-	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.CollaboratorService">
-		 <property name="collaboratorDao" ref="collaboratorDao"/>
+	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.ColleagueService">
+		 <property name="colleagueDao" ref="colleagueDao"/>
 		 <property name="missionDao" ref="missionDao"/>
 	</bean>
     
@@ -43,7 +43,7 @@
 
 	<bean id="managerService" class="com.novedia.talentmap.services.impl.ManagerService">
 		<property name="managerDao" ref="managerDao"/>
-		<property name="collaboratorDao" ref="collaboratorDao"/>
+		<property name="colleagueDao" ref="colleagueDao"/>
 	</bean>
 	
 	<bean id="authenticationService" class="com.novedia.talentmap.services.impl.AuthenticationService">
