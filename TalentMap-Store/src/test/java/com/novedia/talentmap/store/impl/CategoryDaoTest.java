@@ -46,6 +46,7 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	public void testGet () {
 		Category category = categoryDao.get(1);
 		ReflectionAssert.assertPropertyLenientEquals("id", 1 ,category);
+		ReflectionAssert.assertPropertyLenientEquals("name", "CATEGORY1" ,category);
 	}
 	
 	/**
@@ -54,15 +55,14 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	@Test
 	public void testGetAll () {
 		List<Category> listCategory = categoryDao.getAll();
-//		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1,2,3), listCategory);
-		Assert.assertNotNull(listCategory);
+		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1,2,3), listCategory);
+		ReflectionAssert.assertPropertyLenientEquals("name", Arrays.asList("CATEGORY1","CATEGORY2","CATEGORY3"), listCategory);
 	}
 	
 	/**
 	 * Test add category
 	 */
 	@Test
-	@Ignore
 	public void testAdd () {
 		Category cat = Category.Builder.builder().name("CATEGORY4").build();
 		int addIndex = categoryDao.add(cat);
@@ -77,7 +77,9 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	@Ignore
 	public void testSave () {
 		Category cat = Category.Builder.builder().id(3).name("MODIFCATEGORY3").build();
-		categoryDao.save(cat);
+		int updateIndex = categoryDao.save(cat);
+		
+		// TODO : définir les assertions
 	}
 	
 	/**
