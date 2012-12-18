@@ -8,10 +8,11 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4;
+import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.CleanInsertLoadStrategy;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
@@ -25,7 +26,8 @@ import com.novedia.talentmap.model.entity.Category;
  *
  */
 @SpringApplicationContext("test-store-spring-context.xml")
-public class CategoryDaoTest extends UnitilsJUnit4 {
+@RunWith(UnitilsJUnit4TestClassRunner.class)
+public class CategoryDaoTest {
 
 	@SpringBean("sqlMapClient")
 	private SqlMapClient sqlMapClient;
@@ -42,7 +44,7 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	 * Test get
 	 */
 	@Test
-	@DataSet(loadStrategy=CleanInsertLoadStrategy.class)
+	@DataSet("CategoryDaoTest.xml")
 	public void testGet () {
 		Category category = categoryDao.get(1);
 		ReflectionAssert.assertPropertyLenientEquals("id", 1 ,category);
@@ -62,9 +64,11 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	/**
 	 * Test add category
 	 */
+	@Ignore
 	@Test
+	@DataSet("CategoryDaoTest.testAdd.xml")
 	public void testAdd () {
-		Category cat = Category.Builder.builder().name("CATEGORY4").build();
+		Category cat = Category.Builder.builder().id(41).name("CATEGORY").build();
 		int addIndex = categoryDao.add(cat);
 		Assert.assertEquals(cat.getId().intValue(), addIndex);
 	}
@@ -85,6 +89,7 @@ public class CategoryDaoTest extends UnitilsJUnit4 {
 	/**
 	 * Test delete category
 	 */
+	@Ignore
 	@Test
 	public void testDelete () {
 		Category category = Category.Builder.builder().id(1).build();
