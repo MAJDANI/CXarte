@@ -12,7 +12,7 @@ import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.entity.Collaborator;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Skill;
 
 
@@ -42,7 +42,7 @@ public class SkillDaoTest extends UnitilsJUnit4 {
 	@Test
 	@DataSet("SkillDaoTest.xml")
 	public void testGetAllSkillsByCollaborator() {
-		Collaborator collab = new Collaborator();
+		Colleague collab = new Colleague();
 		collab.setId(1);
 		List<Skill> skills = skillDao.getAllSkillsByCollaborator(collab);
 		assertNotNull(skills);
