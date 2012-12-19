@@ -9,6 +9,7 @@ import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.store.IDao;
+import com.novedia.talentmap.store.impl.MissionDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 
 /**
@@ -27,6 +28,12 @@ public class ColleagueService implements IColleagueService {
 	 * The mission DAO.
 	 */
 	private IDao<Mission> missionDao;
+	
+	/**
+	 * The manager DAO.
+	 */
+	private IDao<Manager> managerDao;
+
 
 	/**
 	 * {@inheritDoc}
@@ -90,8 +97,8 @@ public class ColleagueService implements IColleagueService {
 	 */
 	@Override
 	public List<Mission> getAllMissions(final Integer collabId)throws DataAccessException {
-		// TODO : A implémenter
-		return null;
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		return missionDao.getAllByColleagueId(collabId);
 	}
 
 	/**
@@ -99,8 +106,7 @@ public class ColleagueService implements IColleagueService {
 	 */
 	@Override
 	public Manager getManager(final Integer managerId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return managerDao.get(managerId);
 	}
 
 	/**
@@ -152,5 +158,14 @@ public class ColleagueService implements IColleagueService {
 	 */
 	public void setMissionDao(IDao<Mission> missionDao) {
 		this.missionDao = missionDao;
+	}
+
+	/**
+	 * This method allows to make the spring injection.
+	 * 
+	 * @param managerDao
+	 */
+	public void setManagerDao(IDao<Manager> managerDao) {
+		this.managerDao = managerDao;
 	}
 }
