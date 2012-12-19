@@ -114,6 +114,13 @@ public class ColleagueService implements IColleagueService {
 	/**
 	 * {@inheritDoc}
 	 */
+	public List<Colleague> getAllColleaguesByClientName(String clientName) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByClientName(clientName);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Colleague> getAllCollaboratorsByToolId(Integer toolId) throws DataAccessException {
 		// TODO Auto-generated method stub

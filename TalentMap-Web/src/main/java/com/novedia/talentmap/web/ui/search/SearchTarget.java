@@ -214,6 +214,16 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 					
 				String clientName = (String) this.fieldClient.getValue();
 				
+				try {
+					
+					this.listCollab = this.collabService.getAllColleaguesByClientName(clientName);
+					
+					updateObservateur();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 
 			//---------------------------------------------------------

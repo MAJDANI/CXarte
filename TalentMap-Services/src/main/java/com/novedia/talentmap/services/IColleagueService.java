@@ -78,23 +78,30 @@ List<Mission> getAllMissions(Integer collabId);
 Manager getManager(Integer managerId);
 
 /**
- * Get all Collaborators by lastName.
+ * Get all Colleagues by lastName.
  * @param lastName a lastName
- * @return List<Collaborator>
+ * @return List<Colleague>
  */
 List<Colleague> getAllColleaguesByLastName(String lastName);
 
 /**
+ * Get all Colleagues by client name
+ * @param clientName
+ * @return List<Colleague>
+ */
+List<Colleague> getAllColleaguesByClientName(String clientName);
+
+/**
  * Get all Collaborators by toolId.
  * @param toolId a toolId
- * @return List<Collaborator>
+ * @return List<Colleague>
  */
 List<Colleague> getAllCollaboratorsByToolId(Integer toolId);
 
 /**
  * Select all Collaborators by a list of toolId.
  * @param listToolId a listTool
- * @return List<Collaborator>
+ * @return List<Colleague>
  */
 List<Colleague> getAllCollaboratorsByListToolId(List<Integer> listToolId);
 }

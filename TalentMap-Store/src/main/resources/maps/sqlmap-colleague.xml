@@ -37,6 +37,12 @@
         SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
+    <select id="getAllColleaguesByClientName" parameterClass="string" resultMap="colleagueResult">
+        SELECT DISTINCT c.* FROM  MISSION m, COLLABORATOR c 
+        WHERE m.COLLAB_ID = c.COLLAB_ID
+        AND UPPER(m.CLIENT) LIKE UPPER('$clientName$')
+    </select>
+
     <!-- v.guillemain -->
     <select id="getAllByListId" resultMap="colleagueResult" parameterClass="java.util.Collection">
     	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN
