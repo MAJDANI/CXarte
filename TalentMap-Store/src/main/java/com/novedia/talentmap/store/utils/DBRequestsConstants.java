@@ -132,6 +132,11 @@ public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 public static final String GET_MANAGER = "manager.get";
 
 /**
+ * This constant is used to retrieve all managers.
+ */
+public static final String GET_ALL_MANAGER = "manager.getAll";
+
+/**
  * This constant is used to retrieve a colleague by manager id.
  */
 public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllCollaboratorsByManagerId";
@@ -145,10 +150,10 @@ public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllColl
 public static final String GET_MISSION = "mission.get";
 
 /**
- * Constant request id to get all missions.
- * This constant is used to retrieve all mission.
+ * This constant is used to retrieve all missions for a clolleagueId, 
+ * ordered by START_DATE.
  */
-public static final String GET_ALL_MISSION = "mission.getAll";
+public static final String GET_ALL_MISSION_BY_COLLEAGUE_ID = "mission.getAll";
 
 /**
  * Constant request to add a mission.
