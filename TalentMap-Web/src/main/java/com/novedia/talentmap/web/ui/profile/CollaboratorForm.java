@@ -1,9 +1,11 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
+import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
@@ -40,6 +42,14 @@ public class CollaboratorForm extends FormLayout {
 	private Vector<Object> fieldOrderCollaborator;
 	private Vector<Object> fieldOrderMission;
 	
+	/**
+	 * Current Colleague connected
+	 */
+	private Colleague currentColleague;
+	private Manager currentColleaguesManager; 
+	private List<Mission> currentColleaguesMissions;
+	private Mission currentColleaguesLastMission;
+
 	/**
 	 * Constants
 	 */
@@ -123,6 +133,8 @@ public class CollaboratorForm extends FormLayout {
 			//Set the order for Mission Form
 			CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
 
+			buildCurrentCollaboratorDatas();
+			
 			buildFormCollaborator();
 
 			buildFormMission();
@@ -149,6 +161,25 @@ public class CollaboratorForm extends FormLayout {
 	}
 
 	/**
+	 * Gets the current collaborator connected, his manager, his missions 
+	 * @class CollaboratorForm.java
+	 * @throws Exception
+	 */
+	private void buildCurrentCollaboratorDatas() throws Exception {
+		this.currentColleague = this.collaboratorService.getColleague(COLLAB_ID);
+		if(currentColleague != null) {
+			this.currentColleaguesManager = this.collaboratorService.getManager(currentColleague.getManagerId());
+			//TODO : ajouter une méthode getAllMissionsOrderByStartDate
+			this.currentColleaguesMissions = this.collaboratorService.getAllMissions(COLLAB_ID);
+			//Récupérer la dernière mission en date du collaborateur
+			int nbMissions = this.currentColleaguesMissions.size();
+			if(nbMissions > 0) {
+				this.currentColleaguesLastMission = this.currentColleaguesMissions.get(nbMissions-1);
+			}
+		}
+	}
+	
+	/**
 	 * Build the Collaborator Form
 	 * 
 	 * @class CollaboratorForm.java
@@ -163,16 +194,13 @@ public class CollaboratorForm extends FormLayout {
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
 						this.profileService));
 
-		@SuppressWarnings("unchecked")
-		Colleague collaborator = this.collaboratorService.getColleague(COLLAB_ID);
 		
-		if (collaborator != null){
-			BeanItem<Item> collabBean = new BeanItem(collaborator);
+		if (this.currentColleague != null){
+			BeanItem<Item> collabBean = new BeanItem(this.currentColleague);
 			this.formCollaborator.setItemDataSource(collabBean, this.fieldOrderCollaborator);
 	
 			// Set the good value for the Select Item
-			int profileId = this.collaboratorService
-					.getColleague(COLLAB_ID).getProfileId();
+			int profileId = this.currentColleague.getProfileId();
 			
 			String profileType = this.profileService.getProfile(profileId).getType();
 			
@@ -197,33 +225,28 @@ public class CollaboratorForm extends FormLayout {
 
 		this.formMission.setFormFieldFactory(new MissionFormFieldFactory());
 		
-		//Récupérer la dernière mission ajoutée par le collaborateur
-		//Ci dessous juste un test id Mission = 1
-
-		if(this.collaboratorService.getMission(1) != null){
-			
+		if(currentColleaguesLastMission != null){
 			@SuppressWarnings("unchecked")
-			BeanItem<Item> missionBean = new BeanItem(
-					this.collaboratorService.getMission(1));
-			
+			BeanItem<Item> missionBean = new BeanItem(currentColleaguesLastMission);
 			this.formMission.setItemDataSource(missionBean, this.fieldOrderMission);
-			
 			addComponent(this.formMission);
 		}
 	}
 	
+	/**
+	 * Builds the Manager Form
+	 * @throws Exception
+	 */
 	private void buildFormManager() throws Exception{
 		
 		this.managerField.setCaption("Consultant Manager : ");
 		this.managerField.setStyleName("consultant-manager");
 		
-		Colleague collab = this.collaboratorService.getColleague(COLLAB_ID);
-		if (collab != null){
-			Manager manager = this.collaboratorService.getManager(collab.getManagerId());
-			if (manager != null) {
+		if (this.currentColleague != null){
+			if (currentColleaguesManager != null) {
 				//TODO: J'ai rajouté le test sur le manager à la demande de JM
 				//TODO: pour que l'application ne plante pas.
-				this.managerField.setValue(manager.getFirstName()+ " " + manager.getLastName());
+				this.managerField.setValue(currentColleaguesManager.getFirstName()+ " " + currentColleaguesManager.getLastName());
 			}
 		} else {
 			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);

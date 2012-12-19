@@ -16,6 +16,7 @@
 	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.ColleagueService">
 		 <property name="colleagueDao" ref="colleagueDao"/>
 		 <property name="missionDao" ref="missionDao"/>
+		 <property name="managerDao" ref="managerDao"/>
 	</bean>
     
     <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">

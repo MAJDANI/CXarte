@@ -45,7 +45,7 @@ return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstan
 @SuppressWarnings("unchecked")
 @Override
 public List<Manager> getAll() throws DataAccessException {
-return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MISSION);
+return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MANAGER);
 }
 
 /**

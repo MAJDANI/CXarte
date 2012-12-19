@@ -24,7 +24,7 @@
 
 	<select id="getAll" resultMap="missionResult" parameterClass="Integer">
 		SELECT * FROM MISSION WHERE COLLAB_ID = #colleagueId# 
-		ORDER BY MISSION_ID
+		ORDER BY START_DATE
 	</select>
 
 	<update id="save" parameterClass="Mission">
