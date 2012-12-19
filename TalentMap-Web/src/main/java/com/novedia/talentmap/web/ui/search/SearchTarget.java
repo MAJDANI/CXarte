@@ -225,7 +225,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 				
 				try {
 					
-					this.listCollab = this.collabService.getAllCollaboratorsByLastName(collabName);
+					this.listCollab = this.collabService.getAllColleaguesByLastName(collabName);
 				
 					updateObservateur();
 					
@@ -280,7 +280,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 				
 				try {
 					
-					this.listCollab = this.collabService.getAllCollaboratorsByLastName(valueField);
+					this.listCollab = this.collabService.getAllColleaguesByLastName(valueField);
 					
 					updateObservateur();
 					

@@ -70,5 +70,9 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	public Colleague check(String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
+	
+	public List<Colleague> getAllColleaguesByLastName(String name) throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LASTNAME, name);
+	}
 
 }

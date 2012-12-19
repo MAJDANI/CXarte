@@ -9,6 +9,7 @@ import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.store.IDao;
+import com.novedia.talentmap.store.impl.ColleagueDao;
 
 /**
  * The colleague Service implementation.
@@ -106,9 +107,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllCollaboratorsByLastName(String lastName) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Colleague> getAllColleaguesByLastName(String lastName) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByLastName(lastName);
 	}
 
 	/**

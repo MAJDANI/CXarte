@@ -82,7 +82,7 @@ Manager getManager(Integer managerId);
  * @param lastName a lastName
  * @return List<Collaborator>
  */
-List<Colleague> getAllCollaboratorsByLastName(String lastName);
+List<Colleague> getAllColleaguesByLastName(String lastName);
 
 /**
  * Get all Collaborators by toolId.

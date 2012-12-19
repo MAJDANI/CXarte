@@ -36,7 +36,7 @@ public static final String SAVE_COLLEAGUE = "colleague.save";
 /**
  * Constant request to get a colleague by lastName.
  */
-public static final String GET_ALL_COLLABORATOR_BY_LASTNAME="colleague.getAllByLastName";
+public static final String GET_ALL_COLLEAGUES_BY_LASTNAME="colleague.getAllColleaguesByLastName";
 
 /**
  * Constant request to get colleague by manager id
