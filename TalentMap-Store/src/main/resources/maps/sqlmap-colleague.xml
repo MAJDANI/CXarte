@@ -43,26 +43,20 @@
         AND UPPER(m.CLIENT) LIKE UPPER('$clientName$')
     </select>
 
-    <!-- v.guillemain -->
-    <select id="getAllByListId" resultMap="colleagueResult" parameterClass="java.util.Collection">
-    	SELECT * FROM COLLABORATOR WHERE COLLAB_ID IN
-		<iterate 	open="(" 
-					close=")"
-					conjunction=",">
-   					#[]#
-  		</iterate>
-	</select>
-	
-    <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByListId2" resultMap="colleagueResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
-    	SELECT * FROM COLLABORATOR WHERE
-    	COLLAB_ID IN
-		<iterate 	property="listCollaborators"
+	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
+  		SELECT c.* FROM 
+		(SELECT s.COLLAB_ID, COUNT(*) as nbTool FROM SKILL s, TOOL t
+		WHERE s.TOOL_ID = t.TOOL_ID
+		AND s.TOOL_ID IN 
+		<iterate 	property = "listId"
 					open="(" 
 					close=")"
 					conjunction=",">
-   					#listCollaborators[]#
+   					#listId[]#
   		</iterate>
+		GROUP BY s.COLLAB_ID) a, COLLABORATOR c
+		WHERE a.COLLAB_ID = c.COLLAB_ID
+		AND a.nbTool = #listSize[0]#
     </select>	
 
 	<insert id="add">

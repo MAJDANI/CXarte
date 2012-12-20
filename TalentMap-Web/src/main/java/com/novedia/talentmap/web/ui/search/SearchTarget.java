@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Colleague;
@@ -253,13 +254,22 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 				//Check the skill's list isn't empty
 				if(!this.listCheckBoxSkills.isEmpty()){
 					List<Integer> listToolId = new ArrayList<Integer>();
+					List<Integer> listSize = new ArrayList<Integer>();
 					
 					//Get all toolIds checked by the user
 					listToolId = getListTooIdChecked();
+					listSize.add(listToolId.size());
 					
+					//We create a Map with 2 keys : 
+					//         - listSize = the list size
+					//         - listId = the tools id list
+					//This map is used for the request by ibatis (see sqlmap-colleague.xml)
+					Hashtable<String,List<Integer>> mapToolId = new Hashtable<String,List<Integer>>();
+					mapToolId.put("listSize", listSize);
+					mapToolId.put("listId", listToolId);
 					try {
 						//Get all collaborators who has all skills requested
-						this.listCollab =  this.collabService.getAllCollaboratorsByListToolId(listToolId);
+						this.listCollab =  this.collabService.getAllColleaguesByListToolId(mapToolId);
 						updateObservateur();
 						
 					} catch (Exception e) {

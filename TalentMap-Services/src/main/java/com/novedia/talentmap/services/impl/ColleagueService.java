@@ -1,6 +1,7 @@
 package com.novedia.talentmap.services.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -137,9 +138,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllCollaboratorsByListToolId(List<Integer> listToolId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Colleague> getAllColleaguesByListToolId(Map toolIdMap) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByListToolId(toolIdMap);
 	}
 
 	/**

@@ -1,7 +1,9 @@
 package com.novedia.talentmap.store.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -117,5 +119,28 @@ public class ColleagueDaoTest {
 	@ExpectedException(UnsupportedOperationException.class)
 	public void testDelete() {
 		// TODO: implements skeletton
+	}
+	
+	/**
+	 * Test getAllColleaguesByListToolId
+	 */
+	@Test
+	public void testGetAllColleaguesByListToolId(){
+
+		List<Integer> listSize = new ArrayList<Integer>();
+		List<Integer> listId = new ArrayList<Integer>();
+		
+		listId.add(5);
+		listId.add(18);
+		listId.add(32);
+		listSize.add(listId.size());
+		
+		Hashtable<String,List<Integer>> mapToolId = new Hashtable<String,List<Integer>>();
+		
+		mapToolId.put("listSize", listSize);
+		mapToolId.put("listId", listId);
+		List<Colleague> colleagueList = colleagueDao.getAllColleaguesByListToolId(mapToolId);
+		
+		Assert.assertNotNull(colleagueList);			
 	}
 }

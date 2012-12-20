@@ -48,6 +48,11 @@ public static final String GET_ALL_COLLEAGUES_BY_CLIENTNAME="colleague.getAllCol
  */
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
+/**
+ * Constant request to get colleague by a list of tool id
+ */
+public static final String GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID = "colleague.getAllColleaguesByListToolId";
+
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.

@@ -1,6 +1,7 @@
 package com.novedia.talentmap.store.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,6 +78,10 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	
 	public List<Colleague> getAllColleaguesByClientName(String clientName) throws DataAccessException {
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_CLIENTNAME, clientName);
+	}
+	
+	public List<Colleague> getAllColleaguesByListToolId(Map ToolIdMap) throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID, ToolIdMap);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.novedia.talentmap.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -103,5 +104,5 @@ List<Colleague> getAllCollaboratorsByToolId(Integer toolId);
  * @param listToolId a listTool
  * @return List<Colleague>
  */
-List<Colleague> getAllCollaboratorsByListToolId(List<Integer> listToolId);
+List<Colleague> getAllColleaguesByListToolId(Map toolIdMap);
 }
