@@ -14,7 +14,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * 
  * @author j.marie-sainte 
  */
-public class Tool implements Serializable {
+public class Tool implements Serializable, Comparable {
 
 	/**
 	 * Serialization identifier
@@ -161,6 +161,15 @@ public class Tool implements Serializable {
 		return hashBuilder.hashCode();
 	}
 
+	/**
+	 * Method to compare two Tools (name comparison)
+	 */
+	@Override
+	public int compareTo(Object o) {
+		Tool toolToCompare = (Tool)o; 
+		int result = this.getName().compareToIgnoreCase(toolToCompare.getName());
+		return result;
+	}
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
@@ -238,4 +247,5 @@ public class Tool implements Serializable {
 			return new Builder();
 		}
 	}
+
 }

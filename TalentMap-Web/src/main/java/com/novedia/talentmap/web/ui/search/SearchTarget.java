@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -125,6 +126,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		
 		//Build the Skills Panel
 		List<Tool> listTools = this.skillService.getAllTools();
+		Collections.sort(listTools);
 		
 		for(Tool tool : listTools){
 			
@@ -134,6 +136,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			this.listCheckBoxSkills.add(checkBox);
 			this.searchBySkillsPanel.addComponent(checkBox);
 		}
+		this.searchBySkillsPanel.
 		
 		addComponent(this.searchByClientPanel);
 		addComponent(this.searchByNamePanel);
