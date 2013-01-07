@@ -45,9 +45,8 @@
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
   		SELECT c.* FROM 
-		(SELECT s.COLLAB_ID, COUNT(*) as nbTool FROM SKILL s, TOOL t
-		WHERE s.TOOL_ID = t.TOOL_ID
-		AND s.TOOL_ID IN 
+		(SELECT s.COLLAB_ID, COUNT(*) as nbTool FROM SKILL s
+		WHERE s.TOOL_ID IN 
 		<iterate 	property = "listId"
 					open="(" 
 					close=")"
