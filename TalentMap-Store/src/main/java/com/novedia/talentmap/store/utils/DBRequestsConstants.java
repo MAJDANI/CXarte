@@ -9,6 +9,12 @@ public final class DBRequestsConstants {
 	// COLLEAGUE REQUESTS
 
 /**
+ * Constant request to get colleague by a list of tool id
+ */
+public static final String GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID = "colleague.getAllColleaguesByListToolId";
+
+
+/**
  * Constant request id to get a collaborator.
  */
 public static final String GET_COLLEAGUE = "colleague.get";
