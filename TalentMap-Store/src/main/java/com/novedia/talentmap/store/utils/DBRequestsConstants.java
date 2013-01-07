@@ -48,11 +48,6 @@ public static final String GET_ALL_COLLEAGUES_BY_CLIENTNAME="colleague.getAllCol
  */
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
-/**
- * Constant request to get colleague by a list of tool id
- */
-public static final String GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID = "colleague.getAllColleaguesByListToolId";
-
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.
@@ -335,6 +330,10 @@ public static final String ADD_AUTHENTIFICATION = "authentication.add";
 public static final String CHECK_AUTHENTIFICATION = "authentication.check";
 
 public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogin";
+
+public static final String GET_AUTHENTICATE = "authentication.get";
+
+public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.getbyid";
 
 
 

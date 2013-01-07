@@ -12,31 +12,39 @@
         <result property="token.login"  column="LOGIN"/>         
         <result property="token.password"  column="PASSWORD"/>
         <result property="authorization.roleId" column="ROLE_ID"/>
-        <result property="authorization.label" column="LABEL"/>    
+       <!--  <result property="authorization.label" column="LABEL"/>  -->   
     </resultMap>
     
     <select id="check" resultMap="authenticationResult" parameterClass="com.novedia.talentmap.model.entity.CredentialToken">
 		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE auth.LOGIN = #login# AND auth.PASSWORD = #password#
 				AND auth.ROLE_ID = role.ROLE_ID
 	</select>	
+	
+	<select id="get" resultMap="authenticationResult" parameterClass="Integer">
+		SELECT * FROM AUTHENTICATION WHERE AUTHENTICATION_ID = #id#
+	</select>
     
-     <!-- <insert id="add" parameterClass="Authentication"> 
-    	
+     <insert id="add" parameterClass="Authentication">    	
      	<selectKey resultClass="Integer" keyProperty="id"> 
       		SELECT SEQAUTH.NEXTVAL FROM DUAL 
      	</selectKey> 
+     	
     	INSERT INTO AUTHENTICATION (
-    		AUTHENTIFICATION_ID,
+    		AUTHENTICATION_ID,
     		COLLAB_ID,
     		ROLE_ID,
     		LOGIN,
     		PASSWORD
     		)values (
     		#id#,
-    		#collabid#,
-    		#roleid#,
-    		#login#,
-    		#password#
+    		#colleagueId#,
+    		#authorization.roleId#,
+    		#token.login#,
+    		#token.password#
     		)
-    </insert>	 -->
+    </insert>	
+    
+    <update id="save" parameterClass="Authentication">
+		UPDATE AUTHENTICATION SET LOGIN = #token.login# WHERE AUTHENTICATION_ID = #id#
+	</update>
 </sqlMap>

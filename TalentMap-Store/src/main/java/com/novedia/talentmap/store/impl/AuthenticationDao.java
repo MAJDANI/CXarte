@@ -10,7 +10,6 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
@@ -31,50 +30,32 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 		setSqlMapClient(sqlMapClient);
 	}
 
-	@Override
-	public Authentication get(Integer id) throws DataAccessException {
-		return (Authentication) this.getSqlMapClientTemplate().queryForObject(
-				DBRequestsConstants.GET_AUTHENTIFICATION, id);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Authentication> getAll() throws DataAccessException {
-		return (List<Authentication>) getSqlMapClientTemplate().queryForList(
-				DBRequestsConstants.GET_ALL_AUTHENTIFICATION);
-	}
-
+	/**
+	 * Update password
+	 */
 	@Override
 	public int save(Authentication element) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().update(
 				DBRequestsConstants.SAVE_AUTHENTIFICATION, element);
 	}
 
+	/**
+	 * Add login/password
+	 */
 	@Override
 	public int add(Authentication element) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().insert(
 				DBRequestsConstants.ADD_AUTHENTIFICATION, element);
 	}
 
+	/**
+	 * Delete login/password
+	 */
 	@Override
-	public int delete(Authentication authentification)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
+	public int delete(Authentication authentification) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
-
-	@Override
-	public Authentication getByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Authentication check(String password) throws DataAccessException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
+	
 	/**
 	 * This method check if credentials info exists in table
 	 * @param token
@@ -84,15 +65,24 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 	public Authentication check(CredentialToken token) throws DataAccessException {
 		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_AUTHENTIFICATION, token);
 	}
-
-	/**
-	 * This method return a collaborator by login
-	 * @param login
-	 * @return
-	 * @throws DataAccessException
-	 */
-	public Colleague getCollaboratorByLogin(String login) throws DataAccessException {
-		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLAB_BY_LOGIN, login);
+	
+	@Override
+	public Authentication getByName(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Authentication get(Integer id) throws DataAccessException {
+		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BY_ID_AUTHENTIFICATION, id);
+	}
+
+	@Override
+	public List<Authentication> getAll() throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Authentication check(String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 }
