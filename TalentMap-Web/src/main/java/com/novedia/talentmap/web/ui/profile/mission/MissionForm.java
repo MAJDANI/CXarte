@@ -66,7 +66,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Intitulé", "Client",
 			"Lieu", "Début mission", "Fin mission", "Commentaire" };
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] { "name", "client",
-			"place", "start_date", "end_date", "notes" };
+			"place", "startDate", "endDate", "notes" };
 	public static final String SAVE_BUTTON_NAME = "Enregistrer";
 	public static final String CANCEL_BUTTON_NAME = "Annuler";
 

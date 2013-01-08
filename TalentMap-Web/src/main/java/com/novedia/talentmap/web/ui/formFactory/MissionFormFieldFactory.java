@@ -34,7 +34,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(MissionForm.FIELD_ORDER_MISSION[i])){
 				
-				if(!propertyId.equals("notes") && !propertyId.equals("start_date") && !propertyId.equals("end_date")){
+				if(!propertyId.equals("notes") && !propertyId.equals("startDate") && !propertyId.equals("endDate")){
 				
 					TextField field = new TextField((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
 					field.setNullRepresentation("");
@@ -57,7 +57,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					return field;
 				}
 				
-				if (propertyId.equals("start_date") || propertyId.equals("end_date")) {
+				if (propertyId.equals("startDate") || propertyId.equals("endDate")) {
 
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
@@ -66,10 +66,10 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					//TODO remmettre?
 					datefield.setRequired(true);
 					
-					if (propertyId.equals("start_date")){
+					if (propertyId.equals("startDate")){
 						
 						datefield.setStyleName("mission-start-date");
-					}else if (propertyId.equals("end_date")){
+					}else if (propertyId.equals("endDate")){
 						
 						datefield.setStyleName("mission-end-date");
 					}

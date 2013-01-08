@@ -354,11 +354,11 @@ public class Colleague implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
-		strBld.append("[profil_id=").append(getId()).append(", ");
-		strBld.append("[first_name=").append(getFirstName()).append(", ");
-		strBld.append("[last_name=").append(getLastName()).append(", ");
+		strBld.append("[id=").append(getId()).append(", ");
+		strBld.append("[firstName=").append(getFirstName()).append(", ");
+		strBld.append("[lastName=").append(getLastName()).append(", ");
 		strBld.append("[email=").append(getEmail()).append(", ");
-		strBld.append("[business_engineer=").append(getBusinessEngineer())
+		strBld.append("[businessEngineer=").append(getBusinessEngineer())
 				.append(", ");
 		strBld.append("experience").append(getExperience()).append("] ");
 		return strBld.toString();

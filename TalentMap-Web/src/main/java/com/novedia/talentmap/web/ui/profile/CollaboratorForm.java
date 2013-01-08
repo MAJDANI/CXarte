@@ -57,11 +57,11 @@ public class CollaboratorForm extends FormLayout {
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] { "Nom", "Prénom",
 			"Profil", "Email", "Tél", "Date d'entrée Novedia",
 			"Années d'expérience", "Ingénieur d'affaire" };
-	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] { "last_name",
-			"first_name", "profile_id", "email", "phone", "employment_date",
-			"experience", "business_engineer" };
+	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] { "lastName",
+			"firstName", "profileId", "email", "phone", "employmentDate",
+			"experience", "businessEngineer" };
 	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
-	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "start_date", "end_date"};
+	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "startDate", "endDate"};
 
 	public static final String MESSAGE_COLLABORATOR_ID_NOT_FOUND = "Collaborator Id Not Found";
 

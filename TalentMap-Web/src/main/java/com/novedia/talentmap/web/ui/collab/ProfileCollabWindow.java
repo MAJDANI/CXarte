@@ -52,8 +52,8 @@ public class ProfileCollabWindow extends Window {
 			"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",
 			"Années d'expérience", "Ingénieur d'affaire" };
 	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
-			"last_name", "first_name", "profile_id", "email", "phone",
-			"employment_date", "experience", "business_engineer" };
+			"lastName", "firstName", "profileId", "email", "phone",
+			"employmentDate", "experience", "businessEngineer" };
 
 	/**
 	 * 

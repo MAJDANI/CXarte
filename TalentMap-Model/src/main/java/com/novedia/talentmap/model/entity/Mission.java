@@ -71,8 +71,8 @@ public class Mission implements Serializable {
 	 * @param place
 	 * @param client
 	 * @param notes
-	 * @param start_date
-	 * @param end_date
+	 * @param startDate
+	 * @param endDate
 	 */
 	public Mission(Integer id, Integer colleagueId, String name, String place,
 			String client, String notes, Date startDate, Date endDate) {
@@ -160,35 +160,35 @@ public class Mission implements Serializable {
 		this.client = client;
 	}
 	/**
-	 * Get the start_date value
+	 * Get the startDate value
 	 * 
-	 * @return the start_date
+	 * @return the startDate
 	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	/**
-	 * Set the start_date value
+	 * Set the startDate value
 	 * 
-	 * @param start_date the start_date to set
+	 * @param startDate the startDate to set
 	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	
 	/**
-	 * Get the end_date value
+	 * Get the endDate value
 	 * 
-	 * @return the end_date
+	 * @return the endDate
 	 */
 	public Date getEndDate() {
 		return endDate;
 	}
 	
 	/**
-	 * Set the end_date value
+	 * Set the endDate value
 	 * 
-	 * @param end_date the end_date to set
+	 * @param endDate the endDate to set
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;

@@ -44,9 +44,9 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(CollaboratorForm.FIELD_ORDER_COLLABORATOR[i])){
 				
-				//We give a default format for all input except the employment_date and the profile_id input
+				//We give a default format for all input except the employmentDate and the profileId input
 				
-				if(!propertyId.equals("employment_date") && !propertyId.equals("profile_id")){
+				if(!propertyId.equals("employmentDate") && !propertyId.equals("profileId")){
 					
 					TextField field = new TextField((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
@@ -60,10 +60,10 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					//We test every input name
 					
-					if(propertyId.equals("last_name")){
+					if(propertyId.equals("lastName")){
 						field.setStyleName("last-name");
 						
-					}else if(propertyId.equals("first_name")){
+					}else if(propertyId.equals("firstName")){
 						field.setStyleName("first-name");
 						
 					}else if(propertyId.equals("email")){
@@ -76,13 +76,13 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					}else if(propertyId.equals("experience")){
 						field.setStyleName("experience");
 						
-					}else if(propertyId.equals("business_engineer")){
+					}else if(propertyId.equals("businessEngineer")){
 						field.setStyleName("business-engineer");
 					}
 
 					return field;
 					
-				}else if(propertyId.equals("employment_date")){
+				}else if(propertyId.equals("employmentDate")){
 					
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
@@ -92,7 +92,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					return datefield;
 					
-				}else if(propertyId.equals("profile_id")){
+				}else if(propertyId.equals("profileId")){
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty("value", String.class, null);
 					
