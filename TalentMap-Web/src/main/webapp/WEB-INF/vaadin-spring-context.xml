@@ -405,8 +405,8 @@
 	<bean id="searchByClientPanel" class="com.vaadin.ui.Panel"/>
 	<bean id="searchByNamePanel" class="com.vaadin.ui.Panel"/>
 	<bean id="searchBySkillsPanel" class="com.vaadin.ui.Panel"/>
-	<bean id="fieldClient" class="com.vaadin.ui.TextField"/>
 	<bean id="fieldName" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect" class="com.vaadin.ui.Select"/>
 	<bean id="searchButton" class="com.vaadin.ui.Button"/>
 	<bean id="listSearchCollaborator" class="java.util.ArrayList"/>
 	<bean id="listCheckBoxSkills" class="java.util.ArrayList"/>
@@ -416,10 +416,11 @@
 		<constructor-arg name="listCheckBoxSkills" ref="listCheckBoxSkills"/>
 		<constructor-arg name="collabService" ref="collaboratorService" />
 		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="missionService" ref="missionService"/>
 		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel" />
 		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel" />
 		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel" />
-		<constructor-arg name="fieldClient" ref="fieldClient" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect" />
 		<constructor-arg name="fieldName" ref="fieldName" />
 		<constructor-arg name="search" ref="searchButton" />
 	</bean>

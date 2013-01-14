@@ -54,6 +54,7 @@ public static final String GET_ALL_COLLEAGUES_BY_CLIENTNAME="colleague.getAllCol
  */
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
+
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.
@@ -170,6 +171,11 @@ public static final String ADD_MISSION = "mission.add";
  * Constant request to update a colleague.
  */
 public static final String SAVE_MISSION = "mission.save";
+
+/**
+ *  Constant request to get all clients name
+ */
+public static final String GET_ALL_CLIENTS_NAME = "mission.getAllClientsName";
 
 
 // PROFILE REQUESTS

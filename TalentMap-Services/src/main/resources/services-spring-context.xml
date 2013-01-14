@@ -47,6 +47,10 @@
 		<property name="colleagueDao" ref="colleagueDao"/>
 	</bean>
 	
+	<bean id="missionService" class="com.novedia.talentmap.services.impl.MissionService">
+		<property name="missionDao" ref="missionDao"/>
+	</bean>
+	
 	<bean id="authenticationService" class="com.novedia.talentmap.services.impl.AuthenticationService">
 		<property name="authenticationDao" ref="authenticationDao"/>
 	</bean>

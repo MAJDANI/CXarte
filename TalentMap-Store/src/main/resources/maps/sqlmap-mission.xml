@@ -26,6 +26,10 @@
 		SELECT * FROM MISSION WHERE COLLAB_ID = #colleagueId# 
 		ORDER BY START_DATE
 	</select>
+	
+    <select id="getAllClientsName" resultClass="string">
+     	SELECT DISTINCT client FROM MISSION
+    </select>
 
 	<update id="save" parameterClass="Mission">
 		UPDATE MISSION 

@@ -8,6 +8,7 @@ import java.util.List;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.IMissionService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
@@ -18,6 +19,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -34,6 +36,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	private IColleagueService collabService;
 	private ISkillService skillService;
+	private IMissionService missionService;
 
 	/**
 	 * Vaadin Components
@@ -42,7 +45,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	private Panel searchByNamePanel;
 	private Panel searchBySkillsPanel;
 
-	private TextField fieldClient;
+	private Select clientNameSelect;
 	private TextField fieldName;
 	// Il manque les Skills !!! ??
 
@@ -68,19 +71,20 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * @param skillService
 	 */
 	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
-			Panel searchBySkillsPanel, TextField fieldClient,
+			Panel searchBySkillsPanel, Select clientNameSelect,
 			TextField fieldName, Button search, List<Colleague> listCollab,
-			IColleagueService collabService, ISkillService skillService, List<CheckBox> listCheckBoxSkills) {
+			IColleagueService collabService, ISkillService skillService,IMissionService missionService, List<CheckBox> listCheckBoxSkills) {
 		super();
 		this.searchByClientPanel = searchByClientPanel;
 		this.searchByNamePanel = searchByNamePanel;
 		this.searchBySkillsPanel = searchBySkillsPanel;
-		this.fieldClient = fieldClient;
+		this.clientNameSelect = clientNameSelect;
 		this.fieldName = fieldName;
 		this.search = search;
 		this.listCollab = listCollab;
 		this.collabService = collabService;
 		this.skillService = skillService;
+		this.missionService = missionService;
 		this.listCheckBoxSkills = listCheckBoxSkills;
 
 		buildMain();
@@ -116,10 +120,20 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	public void buildField() throws Exception {
 
-		this.fieldClient.setCaption("Nom du client : ");
-		this.fieldClient.addListener(this);
-		this.searchByClientPanel.addComponent(this.fieldClient);
-
+		//Build the Client Panel
+		List<String> listClient = this.missionService.getAllClientsName();
+		Collections.sort(listClient);
+		
+		this.clientNameSelect = new Select();
+		this.clientNameSelect.setCaption("Nom du Client");
+		
+		for(String client : listClient){
+			this.clientNameSelect.addItem(client);
+		}
+		
+		this.searchByClientPanel.addComponent(clientNameSelect);
+		
+		//Build the Name Panel
 		this.fieldName.setCaption("Nom du collaborateur : ");
 		this.fieldName.addListener(this);
 		this.searchByNamePanel.addComponent(this.fieldName);
@@ -215,7 +229,8 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			//---------------------------------------------------------
 			if (this.searchByClientPanel.isVisible()) {
 					
-				String clientName = (String) this.fieldClient.getValue();
+				
+				String clientName = (String) this.clientNameSelect.getValue();
 				
 				try {
 					
@@ -410,22 +425,22 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	}
 
 	/**
-	 * Get the fieldClient value
+	 * Get the select client Name
 	 * 
 	 * @return the fieldClient
 	 */
-	public TextField getFieldClient() {
-		return fieldClient;
+	public Select getClientNameSelect() {
+		return clientNameSelect;
 	}
 
 	/**
-	 * Set the fieldClient value
+	 * Set the client name select
 	 * 
 	 * @param fieldClient
 	 *            the fieldClient to set
 	 */
-	public void setFieldClient(TextField fieldClient) {
-		this.fieldClient = fieldClient;
+	public void setClientNameSelect(Select clientNameSelect) {
+		this.clientNameSelect = clientNameSelect;
 	}
 
 	/**
