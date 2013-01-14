@@ -136,7 +136,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			this.listCheckBoxSkills.add(checkBox);
 			this.searchBySkillsPanel.addComponent(checkBox);
 		}
-		this.searchBySkillsPanel.
 		
 		addComponent(this.searchByClientPanel);
 		addComponent(this.searchByNamePanel);
