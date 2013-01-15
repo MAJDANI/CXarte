@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.formFactory;
 
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.profile.CollaboratorForm;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
@@ -51,11 +52,12 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					TextField field = new TextField((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					field.setRequired(true);
-					field.setRequiredError("Le champs \""+ CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+"\" est obligatoire");
-					field.setNullRepresentation("Non renseigné");
+					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + CollaboratorForm.NAME_FIELD_COLLABORATOR[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
 					
 					if(!propertyId.equals("phone") && !propertyId.equals("experience")){
 						field.setReadOnly(true);
+						field.setRequired(false);
 					}
 					
 					//We test every input name

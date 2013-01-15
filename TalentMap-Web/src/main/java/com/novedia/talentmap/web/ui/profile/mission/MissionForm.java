@@ -286,7 +286,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 	
 	/**
-	 * Checks if begin date is before end date
+	 * Checks if startDate is before endDate
 	 * @param startDate
 	 * @param endDate
 	 * @return

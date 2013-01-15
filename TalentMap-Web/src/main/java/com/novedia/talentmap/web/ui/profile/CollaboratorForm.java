@@ -209,6 +209,12 @@ public class CollaboratorForm extends FormLayout {
 			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
 			this.formCollaborator.setComponentError(invalidVE);
 		}
+		// VGU
+		// Set the form to act immediately on user input. This is
+		// necessary for the validation of the fields to occur immediately
+		// when the input focus changes and not just on commit.	
+		this.formCollaborator.setImmediate(true);
+
 		addComponent(this.formCollaborator);
 	}
 
@@ -224,11 +230,18 @@ public class CollaboratorForm extends FormLayout {
 		this.formMission.setLayout(this.gLayoutMission);
 
 		this.formMission.setFormFieldFactory(new MissionFormFieldFactory());
+		//TODO vérifier si currentColleaguesLastMission == null, le setImmediate est utile
+		// VGU
+		// Set the form to act immediately on user input. This is
+		// necessary for the validation of the fields to occur immediately
+		// when the input focus changes and not just on commit.	
+		this.formMission.setImmediate(true);
 		
 		if(currentColleaguesLastMission != null){
 			@SuppressWarnings("unchecked")
 			BeanItem<Item> missionBean = new BeanItem(currentColleaguesLastMission);
 			this.formMission.setItemDataSource(missionBean, this.fieldOrderMission);
+
 			addComponent(this.formMission);
 		}
 	}

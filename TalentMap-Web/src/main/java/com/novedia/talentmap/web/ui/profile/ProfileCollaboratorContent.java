@@ -4,13 +4,16 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -262,6 +265,10 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 
 		dataAdminLayout.setMargin(true);
 		dataAdminLayout.addComponent(dataAdminLabel);
+		
+		//VGU por test
+		this.collabForm.setImmediate(true);
+		
 		dataAdminLayout.addComponent(this.collabForm);
 
 		this.bodyLayout.addComponent(dataAdminLayout);
@@ -306,46 +313,54 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	}
 	
 	/**
-	 * Save the Collaborator Data
-	 * @class ProfileView.java
+	 * Sauvegarde toutes les données présentes dans la fiche Profil du collaborateur
+	 * (données personnelles et données de la dernière mission)
+	 */
+	private void saveColleagueProfileDatas(){
+		if(saveDataCollaborator() == 1 && saveDataMission() == 1){
+			getWindow().showNotification(Constants.PROFILE_MSG_DATA_SAVED_OK, Notification.TYPE_TRAY_NOTIFICATION);
+		}
+		else {
+			getWindow().showNotification(Constants.PROFILE_MSG_DATA_SAVED_KO, Notification.TYPE_ERROR_MESSAGE);
+		}
+	}
+
+
+	/**
+	 * Save the Collaborator Data : Les données administratives concernant le collaborateur
+	 * dans la fiche Profil (pas les données relatives à la dernière mission en date)
+	 * @class ProfileColaboratorContent.java
+	 * @return : int : code permettant de savoir si l'opération s'est bien passée (int=1) ou pas (int=0) 
 	 */
 	private int saveDataCollaborator(){
-
-		BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm.getFormCollaborator()
-				.getItemDataSource();
-		Colleague collab = collabItem.getBean();
 		try {
-			if(collab.getProfileId() > 0){
-				collab.setProfileId(this.profileService.getProfile(
-						collab.getProfileId()).getId());
-			}else{
-				collab.setProfileId(this.profileService.getProfile(
-						collab.getProfileId()).getId());
-			}
+			this.collabForm.getFormCollaborator().commit();
+			BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm.getFormCollaborator()
+				.getItemDataSource();
+			Colleague collab = collabItem.getBean();
 			return this.collabService.saveColleague(collab);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (InvalidValueException invalidVE) {
+			return 0;
 		}
-		return 0;
 	}
 	
 	/**
-	 * Save the Mission Data
-	 * @class ProfileView.java
+	 * Save the Mission Data : Les données administratives concernant la dernière mission
+	 * du collaborateur (pas les données "personnelles" du collaborateur)
+	 * @class ProfileColaboratorContent.java
+	 * @return : int : code permettant de savoir si l'opération s'est bien passée (int=1) ou pas (int=0) 
 	 */
 	private int saveDataMission(){
-		
-		BeanItem<Mission> missionItem = (BeanItem<Mission>) this.collabForm.getFormMission()
-				.getItemDataSource();
-		
-		Mission mission = missionItem.getBean();
 		try {
-			return this.collabService.saveMission(mission);
-		} catch (Exception e) {
-			e.printStackTrace();
+			this.collabForm.getFormMission().commit();
+				BeanItem<Mission> missionItem = (BeanItem<Mission>) this.collabForm.getFormMission()
+						.getItemDataSource();
+				Mission mission = missionItem.getBean();
+				return this.collabService.saveMission(mission);
+		} catch (InvalidValueException invalidVE) {
+			return 0;
 		}
 		
-		return 0;
 	}
 
 	/**
@@ -358,11 +373,8 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		//Save Button
 		if (button == this.save) {
-		
-			if(saveDataCollaborator() == 1 && saveDataMission() == 1){
-				
-				getWindow().showNotification("Vos données ont été modifiées", Notification.TYPE_TRAY_NOTIFICATION);
-			}
+			
+			saveColleagueProfileDatas();
 			
 		//Edit Button
 		}else if( button == this.edit){

@@ -88,13 +88,9 @@ public class ProfileCollabWindow extends Window {
 		setModal(true);
 		center();
 		this.setWidth("1135");
-		//Deprecated method
-//		setWidth(1135);
 
 		removeAllComponents();
-
 		buildDataCollaborator();
-
 		buildSkillCollaborator();
 	}
 	

@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.profile.mission.MissionForm;
 import com.novedia.talentmap.web.ui.profile.mission.MissionValidator;
 import com.vaadin.data.Item;
@@ -26,10 +27,6 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		boolean allowNull = false;
 		
-		StringLengthValidator stringLengthValidator = new StringLengthValidator(
-				FIELD_MUST_BE_FILLED, MIN_LENGTH_STRING,
-                MAX_LENGTH_STRING, allowNull);
-		
 		for (int i = 0; i < MissionForm.FIELD_ORDER_MISSION.length; i++) {
 			
 			if(propertyId.equals(MissionForm.FIELD_ORDER_MISSION[i])){
@@ -37,10 +34,11 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 				if(!propertyId.equals("notes") && !propertyId.equals("startDate") && !propertyId.equals("endDate")){
 				
 					TextField field = new TextField((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
-					field.setNullRepresentation("");
+					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
 					
 					field.setRequired(true);
-					field.setComponentError(null);
+					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + MissionForm.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setValidationVisible(true);
 					
 					if(propertyId.equals("name")){
 						//Putting a condition
@@ -63,14 +61,13 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					datefield.setDateFormat("dd/MM/yyyy");
 					datefield.setCaption((String) MissionForm.NAME_FIELD_MISSION[i]+ " : ");
 					
-					//TODO remmettre?
 					datefield.setRequired(true);
-					
+					datefield.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + MissionForm.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					datefield.setValidationVisible(true);
+
 					if (propertyId.equals("startDate")){
-						
 						datefield.setStyleName("mission-start-date");
 					}else if (propertyId.equals("endDate")){
-						
 						datefield.setStyleName("mission-end-date");
 					}
 					
