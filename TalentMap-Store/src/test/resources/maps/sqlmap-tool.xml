@@ -9,47 +9,25 @@
     
     <resultMap id="toolResult" class="tool">
     	<result property="id" column="TOOL_ID"/> 
+        <result property="name"  column="TOOL_NAME"/>          
         <result property="concept.id" column="CONCEPT_ID"/>
         <result property="concept.name" column="CONCEPT_NAME"/>     
-        <result property="name"  column="TOOL_NAME"/>          
     </resultMap>
-
-
-<!-- 	<resultMap id="select-tool-result" class="tool"> -->
-<!-- 		<result property="id" column="TOOL_ID"/>  -->
-<!--         <result property="name"  column="TOOL_NAME"/>          -->
-<!--         <result property="concept.id" column="CONCEPT_ID" select="selectCategory"/> -->
-<!-- 	</resultMap> -->
-
-<!-- 	<resultMap id=”select-category-result” class=”category”> -->
-<!-- 		<result property=”id” column=”CAT_ID” /> -->
-<!-- 		<result property=”description” column=”CAT_DESCRIPTION” /> -->
-<!-- 	</resultMap> -->
-
-<!-- 	<select id=”selectProduct” parameterClass=”int” -->
-<!-- 		resultMap=”select-product-result”> -->
-<!-- 		select * from PRODUCT where PRD_ID = #value# -->
-<!-- 	</select> -->
-
-<!-- 	<select id=”selectCategory” parameterClass=”int” -->
-<!-- 		resultMap=”select-category-result”> -->
-<!-- 		select * from CATEGORY where CAT_ID = #value# -->
-<!-- 	</select> -->
-   
-    
+	
 	<select id="get" resultMap="toolResult" parameterClass="Integer">
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
 	
-	<select id="getByName" resultMap="toolResult" parameterClass="String">
-		SELECT * FROM TOOL WHERE TOOL_NAME = #name#
+	<select id="getByName" parameterClass="String" resultClass="tool">
+		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
 	
-    <select id="getAll" resultMap="toolResult">
-    	SELECT * FROM TOOL
-    </select>
+    <statement id="getAll" resultMap="toolResult">
+    	SELECT * FROM TOOL tool, CONCEPT concept 
+    	WHERE tool.CONCEPT_ID = concept.CONCEPT_ID
+    </statement>
     
-    <select id="getAllByConcept" resultMap="toolResult" parameterClass="Integer">
+    <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
     	SELECT * FROM TOOL WHERE CONCEPT_ID = #conceptId#
     </select>	
     
@@ -71,7 +49,7 @@
     		</selectKey>
     </insert>	
     
-    <select id="check" resultMap="toolResult" parameterClass="String">
+    <select id="check" resultClass="tool" parameterClass="String">
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
 	</select>		
 	
