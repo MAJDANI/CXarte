@@ -23,8 +23,7 @@
 	</select>
 	
     <statement id="getAll" resultMap="toolResult">
-    	SELECT * FROM TOOL tool, CONCEPT concept 
-    	WHERE tool.CONCEPT_ID = concept.CONCEPT_ID
+    	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = concept.CONCEPT_ID
     </statement>
     
     <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
