@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
@@ -63,10 +64,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Constants
 	 */
 	public static final int COLLEAGUE_ID = 2;
-	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Intitulé", "Client",
-			"Lieu", "Début mission", "Fin mission", "Commentaire" };
-	public static final Object[] FIELD_ORDER_MISSION = new Object[] { "name", "client",
-			"place", "startDate", "endDate", "notes" };
 	public static final String SAVE_BUTTON_NAME = "Enregistrer";
 	public static final String CANCEL_BUTTON_NAME = "Annuler";
 
@@ -133,7 +130,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 
 		this.missionForm.setLayout(this.missionFormLayout);
 
-		CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
+		CUtils.setOrderForm(this.fieldOrderMission, Constants.FIELD_ORDER_MISSION);
 		
 		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory());
 		

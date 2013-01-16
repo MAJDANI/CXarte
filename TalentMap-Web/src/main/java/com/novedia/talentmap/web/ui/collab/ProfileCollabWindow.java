@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -48,12 +49,7 @@ public class ProfileCollabWindow extends Window {
 	 * Constants
 	 */
 	private int COLLAB_ID = 2;
-	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-			"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",
-			"Années d'expérience", "Ingénieur d'affaire" };
-	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
-			"lastName", "firstName", "profileId", "email", "phone",
-			"employmentDate", "experience", "businessEngineer" };
+
 
 	/**
 	 * 
@@ -106,7 +102,7 @@ public class ProfileCollabWindow extends Window {
 			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
-					FIELD_ORDER_COLLABORATOR);
+					Constants.FIELD_ORDER_COLLABORATOR);
 			
 			Colleague collab = this.managerService.getCollaborator(COLLAB_ID);
 			

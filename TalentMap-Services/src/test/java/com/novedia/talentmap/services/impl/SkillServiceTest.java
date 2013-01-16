@@ -91,7 +91,7 @@ public class SkillServiceTest {
 		collaboratorExpected.setId(collaboratorId);
 							
 		//When
-		Mockito.when(skillDaoMock.getOneCollaboratorSkill(collaboratorId, toolId)).thenReturn(skillExpected);
+		Mockito.when(skillDaoMock.getCollaboratorSkillByTool(collaboratorId, toolId)).thenReturn(skillExpected);
 		Skill skillActuel = service.getSkillByToolId(collaboratorId, toolId);
 		//Then
 		Assert.assertNotNull(skillActuel);
@@ -106,7 +106,7 @@ public class SkillServiceTest {
 		Integer toolId = 1;	
 		
 		//When
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(skillDaoMock).getOneCollaboratorSkill(collaboratorId, toolId);
+		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(skillDaoMock).getCollaboratorSkillByTool(collaboratorId, toolId);
 		service.getSkillByToolId(collaboratorId, toolId);		
 	}
 	

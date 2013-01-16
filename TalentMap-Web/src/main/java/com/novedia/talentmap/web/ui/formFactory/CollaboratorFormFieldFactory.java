@@ -41,44 +41,44 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 		
 		
 		
-		for(int i=0; i<CollaboratorForm.FIELD_ORDER_COLLABORATOR.length;i++){
+		for(int i=0; i<Constants.FIELD_ORDER_COLLABORATOR.length;i++){
 			
-			if(propertyId.equals(CollaboratorForm.FIELD_ORDER_COLLABORATOR[i])){
+			if(propertyId.equals(Constants.FIELD_ORDER_COLLABORATOR[i])){
 				
 				//We give a default format for all input except the employmentDate and the profileId input
 				
-				if(!propertyId.equals("employmentDate") && !propertyId.equals("profileId")){
+				if(!propertyId.equals(Constants.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(Constants.FIELD_COLLAB_PROFILE_ID)){
 					
-					TextField field = new TextField((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
+					TextField field = new TextField((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					field.setRequired(true);
-					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + CollaboratorForm.NAME_FIELD_COLLABORATOR[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + Constants.NAME_FIELD_COLLABORATOR[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
 					
-					if(!propertyId.equals("phone") && !propertyId.equals("experience")){
+					if(!propertyId.equals(Constants.FIELD_COLLAB_PHONE) && !propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
 						field.setReadOnly(true);
 						field.setRequired(false);
 					}
 					
 					//We test every input name
 					
-					if(propertyId.equals("lastName")){
+					if(propertyId.equals(Constants.FIELD_COLLAB_LAST_NAME)){
 						field.setStyleName("last-name");
 						
-					}else if(propertyId.equals("firstName")){
+					}else if(propertyId.equals(Constants.FIELD_COLLAB_FIRST_NAME)){
 						field.setStyleName("first-name");
 						
-					}else if(propertyId.equals("email")){
+					}else if(propertyId.equals(Constants.FIELD_COLLAB_EMAIL)){
 						field.setStyleName("email");
 						
-					}else if(propertyId.equals("phone")){
+					}else if(propertyId.equals(Constants.FIELD_COLLAB_PHONE)){
 						field.setStyleName("phone");
 						field.setRequired(false);
 						
-					}else if(propertyId.equals("experience")){
+					}else if(propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
 						field.setStyleName("experience");
 						
-					}else if(propertyId.equals("businessEngineer")){
+					}else if(propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
 						field.setStyleName("business-engineer");
 					}
 
@@ -88,7 +88,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
-					datefield.setCaption((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
+					datefield.setCaption((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
 					datefield.setReadOnly(true);
 					datefield.setStyleName("employment-date");
 					
@@ -98,7 +98,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty("value", String.class, null);
 					
-					Select profilSelect = new Select((String) CollaboratorForm.NAME_FIELD_COLLABORATOR[i]+" : ");
+					Select profilSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					
 					try {

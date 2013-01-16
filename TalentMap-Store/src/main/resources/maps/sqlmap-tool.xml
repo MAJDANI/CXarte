@@ -18,7 +18,7 @@
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</statement>
 	
-	<statement id="getByName" parameterClass="String" resultClass="tool">
+	<statement id="getByName" resultMap="toolResult" parameterClass="String">
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</statement>
 	
@@ -27,7 +27,8 @@
     </statement>
     
     <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
-    	SELECT * FROM TOOL WHERE CONCEPT_ID = #conceptId#
+    	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = #conceptId#
+    	AND tool.CONCEPT_ID = concept.CONCEPT_ID 
     </select>	
     
     <insert id="add" parameterClass="Tool">

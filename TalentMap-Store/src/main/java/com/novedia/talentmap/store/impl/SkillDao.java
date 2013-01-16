@@ -65,7 +65,15 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 */
 	@Override
 	public int add(final Skill skill) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_SKILL, skill);
+		// La méthode insert(DBRequestsConstants.ADD_SKILL, skill) revoie habituellement
+		// l'identifiant du nouvel enregistrement créé. Dans ce cas précis, la table
+		// Skill est une table de jointure, il n'y a pas d'identifiant de Skill créé
+		// au moment de la création d'un nouvel enregistrement,
+		// alors la méthode (DBRequestsConstants.ADD_SKILL, skill) renvoie null.
+		// Par soucis de compatibilité avec les autres méthodes add(), on force
+		// un return 1.
+		this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_SKILL, skill);
+		return 1; 
 	}
 
 	/**

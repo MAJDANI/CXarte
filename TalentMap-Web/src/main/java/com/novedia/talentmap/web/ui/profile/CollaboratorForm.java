@@ -8,6 +8,7 @@ import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
@@ -54,12 +55,7 @@ public class CollaboratorForm extends FormLayout {
 	 * Constants
 	 */
 	private int COLLAB_ID = 2;
-	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] { "Nom", "Prénom",
-			"Profil", "Email", "Tél", "Date d'entrée Novedia",
-			"Années d'expérience", "Ingénieur d'affaire" };
-	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] { "lastName",
-			"firstName", "profileId", "email", "phone", "employmentDate",
-			"experience", "businessEngineer" };
+
 	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "startDate", "endDate"};
 
@@ -128,7 +124,7 @@ public class CollaboratorForm extends FormLayout {
 		try {
 
 			// Set the order for Collaborator Form
-			CUtils.setOrderForm(this.fieldOrderCollaborator, FIELD_ORDER_COLLABORATOR);
+			CUtils.setOrderForm(this.fieldOrderCollaborator, Constants.FIELD_ORDER_COLLABORATOR);
 			
 			//Set the order for Mission Form
 			CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);

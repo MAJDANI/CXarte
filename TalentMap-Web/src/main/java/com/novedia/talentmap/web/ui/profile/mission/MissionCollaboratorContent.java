@@ -170,13 +170,13 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 		if (this.listMission.getItemIds().isEmpty()) {
 
-			showAddMissionPanel();
+			this.addMissionPanel.setVisible(true);
 			this.btnAddMission.setEnabled(false);
 			this.listPanel.setVisible(false);
 			this.missionForm.setCurrentSaveMode(MissionForm.SAVE_MODE_INSERT);
 		} else {
 
-			hideAddMissionPanel();
+			this.addMissionPanel.setVisible(false);
 			this.listPanel.setVisible(true);
 		}
 	}
@@ -193,15 +193,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		addComponent(this.listPanel);
 	}
 
-	// TODO VGU : utile?
-	private void showAddMissionPanel() {
-		this.addMissionPanel.setVisible(true);
-	}
-
-	// TODO VGU : utile?
-	private void hideAddMissionPanel() {
-		this.addMissionPanel.setVisible(false);
-	}
 
 	/**
 	 * Builder for all observers
@@ -234,7 +225,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 
 	/**
-	 * Shows the form to add missions and disables the button "add"
+	 * Shows the form to add missions and disables the button "add".
+	 * The form must be emptied.
 	 */
 	private void enableAddMissionPanel() {
 		btnAddMission.setEnabled(false);
@@ -255,6 +247,9 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		Button button = event.getButton();
 		// ADD NEW MISSION
 		if (button == this.btnAddMission) {
+			//On vide le contenu de MissionForm
+			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
+			//On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
 			// On indique que l'action courante est une création (pas une
 			// modification de mission)

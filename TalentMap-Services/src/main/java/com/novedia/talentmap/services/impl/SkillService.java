@@ -312,9 +312,7 @@ public void saveSkill(Skill skill) throws DataAccessException {
  */
 @Override
 public Tool getToolByName(String name) throws DataAccessException {
-	Tool tool = toolDao.getByName(name);
-	System.out.println("tool=" + tool);
-	return tool; //toolDao.getByName(name);
+	return toolDao.getByName(name);
 }
 
 // INTERNAL METHODS

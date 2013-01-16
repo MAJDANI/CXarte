@@ -27,56 +27,56 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		boolean allowNull = false;
 		
-		for (int i = 0; i < MissionForm.FIELD_ORDER_MISSION.length; i++) {
+		for (int i = 0; i < Constants.FIELD_ORDER_MISSION.length; i++) {
 			
-			if(propertyId.equals(MissionForm.FIELD_ORDER_MISSION[i])){
+			if(propertyId.equals(Constants.FIELD_ORDER_MISSION[i])){
 				
-				if(!propertyId.equals("notes") && !propertyId.equals("startDate") && !propertyId.equals("endDate")){
+				if(propertyId.equals(Constants.FIELD_MISSION_NAME) || propertyId.equals(Constants.FIELD_MISSION_CLIENT) || propertyId.equals(Constants.FIELD_MISSION_PLACE)){
 				
-					TextField field = new TextField((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
+					TextField field = new TextField((String) Constants.NAME_FIELD_MISSION[i]+" : ");
 					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
 					
 					field.setRequired(true);
-					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + MissionForm.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + Constants.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setValidationVisible(true);
 					
-					if(propertyId.equals("name")){
+					if(propertyId.equals(Constants.FIELD_MISSION_NAME)){
 						//Putting a condition
 					}
 					
-					if(propertyId.equals("client")){
+					if(propertyId.equals(Constants.FIELD_MISSION_CLIENT)){
 						field.setStyleName("mission-client");
 					}
 					
-					if(propertyId.equals("place")){
+					if(propertyId.equals(Constants.FIELD_MISSION_PLACE)){
 						//Putting a condition
 					}
 					
 					return field;
 				}
 				
-				if (propertyId.equals("startDate") || propertyId.equals("endDate")) {
+				if (propertyId.equals(Constants.FIELD_MISSION_START_DATE) || propertyId.equals(Constants.FIELD_MISSION_END_DATE)) {
 
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
-					datefield.setCaption((String) MissionForm.NAME_FIELD_MISSION[i]+ " : ");
+					datefield.setCaption((String) Constants.NAME_FIELD_MISSION[i]+ " : ");
 					
 					datefield.setRequired(true);
-					datefield.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + MissionForm.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					datefield.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + Constants.NAME_FIELD_MISSION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					datefield.setValidationVisible(true);
 
-					if (propertyId.equals("startDate")){
+					if (propertyId.equals(Constants.FIELD_MISSION_START_DATE)){
 						datefield.setStyleName("mission-start-date");
-					}else if (propertyId.equals("endDate")){
+					}else if (propertyId.equals(Constants.FIELD_MISSION_END_DATE)){
 						datefield.setStyleName("mission-end-date");
 					}
 					
 					return datefield;
 				}
 				
-				if(propertyId.equals("notes")){
+				if(propertyId.equals(Constants.FIELD_MISSION_NOTES)){
 					
-					TextArea textarea = new TextArea((String) MissionForm.NAME_FIELD_MISSION[i]+" : ");
+					TextArea textarea = new TextArea((String) Constants.NAME_FIELD_MISSION[i]+" : ");
 					textarea.setNullRepresentation("");
 					
 					textarea.setColumns(25);
