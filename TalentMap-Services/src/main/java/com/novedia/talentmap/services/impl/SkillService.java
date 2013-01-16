@@ -64,7 +64,7 @@ private IVSkillCollabDao vSkillCollabDao;
  */
 @Override
 public Skill getSkillByToolId(int collaboratorID, int toolId) throws DataAccessException {
-return this.skillDao.getOneCollaboratorSkill(collaboratorID, toolId);
+return this.skillDao.getCollaboratorSkillByTool(collaboratorID, toolId);
 }
 
 /**
@@ -312,7 +312,9 @@ public void saveSkill(Skill skill) throws DataAccessException {
  */
 @Override
 public Tool getToolByName(String name) throws DataAccessException {
-	return toolDao.getByName(name);
+	Tool tool = toolDao.getByName(name);
+	System.out.println("tool=" + tool);
+	return tool; //toolDao.getByName(name);
 }
 
 // INTERNAL METHODS

@@ -27,7 +27,7 @@ List<Skill> getAllCollaboratorSkill(int collaboratorId);
  * @param toolId a id
  * @return a skill
  */
-Skill getOneCollaboratorSkill(int collaboratorId, int toolId);
+Skill getCollaboratorSkillByTool(int collaboratorId, int toolId);
 
 /**
  * Select all Collaborator's id by a toolId.

@@ -15,6 +15,7 @@ import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -279,9 +280,13 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 		// We fill only the Tool Select
 		List<Tool> listTool = skillService.getAllTools();
+		System.out.println("***listTool*** : "+ listTool);
 
 		for (Tool t : listTool) {
 			this.toolSelect.addItem(t.getName());
+			//Item i = this.toolSelect.addItem(t.getName());
+			//Item i2 = this.toolSelect.addItem(t);
+//			i.addItemProperty(t.getId(), t.getName());
 		}
 
 		// We fill the Frequency Use
@@ -338,6 +343,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 			Tool tool = skillService.getToolByName(this.toolSelect.getValue()
 					.toString());
+			System.out.println(" **tool** = " + tool);
 
 			Double starsValue = (Double) this.stars.getValue();
 			int frequencyUseValue = 0;
@@ -364,6 +370,8 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			skill.setScore(starsValue.intValue());
 			skill.setUse_frequency(frequencyUseValue);
 			skill.setNo_using_time(noUsingTimeValue);
+			
+			System.out.println(" **skill** = " + skill);
 			
 			// Test if it's a new skill or not
 			if(this.isNewSkill){

@@ -220,6 +220,14 @@ public static final String GET_PROFILE_BY_NAME = "profile.getByName";
  */
 public static final String GET_PROFILE_BY_TYPE = "profile.getByType";
 
+
+// SKILL REQUEST
+
+/**
+ * Constant request to get a skill.
+ */
+public static final String GET_SKILL = "skill.get";
+
 /**
  * This constant is used to retrieve all collaborator skill.
  */
@@ -241,7 +249,7 @@ public static final String GET_ALL_SKILL = "skill.getAll";
 public static final String ADD_SKILL = "skill.add";
 
 /**
- * Constant request to update a collaborator.
+ * Constant request to update a skill.
  */
 public static final String SAVE_SKILL = "skill.save";
 
@@ -290,7 +298,7 @@ public static final String DELETE_TOOL = "tool.delete";
 /**
  * This constant is used to retrieve a tool by name.
  */
-public static final String GET_TOOL_BY_NAME = "tool.getToolByName";
+public static final String GET_TOOL_BY_NAME = "tool.getByName";
 
 /**
  *This constant is used to retrieve a tool.
@@ -308,7 +316,7 @@ public static final String GET_ALL_SKILL_COLLAB = "vskillCollab.getAllSkillColla
 /**
  * This constant is used to retrieve a skill by tool.
  */
-public static final String GET_SKILL_BY_TOOL = "vskill.getByTool";
+public static final String GET_SKILL_BY_TOOL = "vskill.getSkillByTool";
 
 /**
  * This constant is used to retrieve a concept by category.

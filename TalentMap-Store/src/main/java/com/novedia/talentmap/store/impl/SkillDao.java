@@ -8,7 +8,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
@@ -58,8 +57,7 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 */
 	@Override
 	public int save(Skill skill) throws DataAccessException {
-		return this.getSqlMapClientTemplate().update(
-				DBRequestsConstants.SAVE_SKILL, skill);
+		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_SKILL, skill);
 	}
 
 	/**
@@ -67,8 +65,7 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 */
 	@Override
 	public int add(final Skill skill) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(
-				DBRequestsConstants.ADD_SKILL, skill);
+		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_SKILL, skill);
 	}
 
 	/**
@@ -100,13 +97,11 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Skill getOneCollaboratorSkill(int collaborator_id, int tool_id)
-			throws DataAccessException {
+	public Skill getCollaboratorSkillByTool(int collaboratorId, int toolId) throws DataAccessException {
 		Map<String, Integer> mapId = new HashMap<String, Integer>();
-		mapId.put("collaboratorId", collaborator_id);
-		mapId.put("toolId", tool_id);
-		return (Skill) this.getSqlMapClientTemplate().queryForObject(
-				"skill.getSkill", mapId);
+		mapId.put("collaboratorId", collaboratorId);
+		mapId.put("toolId", toolId);
+		return (Skill) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_SKILL, mapId);
 	}
 	
 	/**
