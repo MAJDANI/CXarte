@@ -15,6 +15,8 @@
     <!-- Vaddin components declaration -->
 	<bean id="windowBean" class="com.vaadin.ui.Window"/>
 	<bean id="mainLayout" class="com.vaadin.ui.HorizontalLayout"/>
+    <bean id="closeButton" class="com.vaadin.ui.Button"/>
+    <bean id="mainVerticalLayout" class="com.vaadin.ui.VerticalLayout"/>
     
     <!-- Vaddin root application declaration -->    
     <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
@@ -22,6 +24,8 @@
     	<property name="mainLayout" ref="mainLayout" />
     	<property name="mainTab" ref="mainTab" />
     	<property name="authenticationService" ref="authenticationService" />
+    	<property name="closeButton" ref="closeButton"/>
+    	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
     </bean>
     
     <!-- The login form -->
@@ -83,7 +87,6 @@
     	<constructor-arg name="vLayoutManager" ref="vLayoutManager2" />
     	<constructor-arg name="managerField" ref="managerField2" />
     </bean>
-	
 	
 	<!-- Vaadin ListSkill UI used by => ProfileView -->
 	
@@ -185,7 +188,6 @@
 		<constructor-arg name="cancel" ref="cancelSkill"/>
 		<constructor-arg name="addSkill" ref="addSkill"/>
 	</bean>
-
 
 	<!-- Vaadin ProfileLayout UI -->
 	
