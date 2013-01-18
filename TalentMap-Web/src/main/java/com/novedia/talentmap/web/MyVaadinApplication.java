@@ -15,8 +15,6 @@
  */
 package com.novedia.talentmap.web;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -30,7 +28,10 @@ import com.novedia.talentmap.web.ui.login.LoginScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.Reindeer;
 
@@ -39,58 +40,85 @@ import com.vaadin.ui.themes.Reindeer;
  */
 @SuppressWarnings("serial")
 @Configurable
-public class MyVaadinApplication extends Application implements ApplicationContext.TransactionListener {
+public class MyVaadinApplication extends Application implements
+		ApplicationContext.TransactionListener {
 
 	/**
 	 * The logger
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MyVaadinApplication.class);
 
 	/**
 	 * Vaadin components
 	 */
 	private Window window;
-	
+
 	/**
 	 * Horizontal layout
 	 */
 	private HorizontalLayout mainLayout;
-	
+
+	/**
+	 * Vertical Layout
+	 */
+	private VerticalLayout mainVerticalLayout;
+
 	/**
 	 * Vaadin components UI
 	 */
 	private TabMain mainTab;
-	
+
 	/**
 	 * The athentication service
 	 */
 	private AuthenticationService authenticationService;
 
-//	/**
-//	 * The login screen
-//	 */
-//	private LoginScreen loginScreen;
-	
+	/**
+	 * The button close
+	 */
+	private Button closeButton;
+
+	// /**
+	// * The login screen
+	// */
+	// private LoginScreen loginScreen;
+
 	/**
 	 * The init
 	 */
 	@Override
-	public void init(){
-		
-		//Set the main window
+	public void init() {
+
+		// Set the main window
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Init application");
 		}
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
-		window.addComponent(buildMainLayout());
+
+		// Add close button
+		this.closeButton.setCaption("LogOut");
+		this.closeButton.addListener(new Button.ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				logout();
+			}
+		});
+
+		//See internet: allows to fix bug : show twice window component.
+		window.setContent(new LoginScreen(this));
 	}
-	
+
 	/**
-	 *  Decore Layout
+	 * Build Horizontal layout
 	 */
 	public HorizontalLayout buildMainLayout() {
-		//Set the main window
+		
+		//TODO: Not use, because component extends layout
+		
+		// Set the main window
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("build the main component container");
 		}
@@ -98,49 +126,78 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 		mainLayout.setMargin(true);
 		mainLayout.setStyleName(Reindeer.LAYOUT_WHITE);
 		mainLayout.addComponent(new LoginScreen(this));
-		
+
 		return mainLayout;
 	}
-	
+
+	/**
+	 * Build vertical layout
+	 * 
+	 * @return
+	 */
+	public VerticalLayout buildMainVerticalLayout() {
+
+		//TODO: Not use, because component extends layout
+		
+		// Set the main window
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("build the vertical layout");
+		}
+		mainVerticalLayout.setSizeFull();
+		mainVerticalLayout.setMargin(true);
+		mainVerticalLayout.setStyleName(Reindeer.LAYOUT_WHITE);
+		mainVerticalLayout.addComponent(new LoginScreen(this));
+
+		return mainVerticalLayout;
+	}
+
 	/**
 	 * Login method
 	 * 
 	 * @param login
 	 * @param password
 	 */
-	public Authentication login(String login, String password) throws TalentMapSecurityException{
-		
+	public Authentication login(String login, String password)
+			throws TalentMapSecurityException {
+
 		Authentication authenticate = null;
 		try {
 			CredentialToken credential = new CredentialToken();
 			credential.setLogin(login);
 			credential.setPassword(password);
 			authenticate = authenticationService.checkUser(credential);
-			
-			if (authenticate == null || (authenticate !=null && authenticate.getAuthorization() == null)) {
-				throw new TalentMapSecurityException ("User unknown");
+
+			if (authenticate == null
+					|| (authenticate != null && authenticate.getAuthorization() == null)) {
+				throw new TalentMapSecurityException("User unknown");
 			}
-		}
-		catch (DataAccessException ex) {
+		} catch (DataAccessException ex) {
 			if (LOGGER.isErrorEnabled()) {
 				LOGGER.error("Technical Exception : ", ex.getMessage());
 			}
 		}
-		
+
 		return authenticate;
 	}
-	
+
 	/**
-	 * Log out method 
+	 * Log out method
 	 */
 	public void logout() {
-		
-		getMainWindow().getApplication().close();
-		
-		Subject currentUser = SecurityUtils.getSubject();
-		if (currentUser.isAuthenticated()) {
-			currentUser.logout();
-		}
+
+		// Fix bug: show twice a window component -> firefox
+		this.getMainVerticalLayout().removeAllComponents();
+		this.window.removeAllComponents();
+		close();
+
+		// Subject currentUser = SecurityUtils.getSubject();
+		// if (currentUser.isAuthenticated()) {
+		// currentUser.logout();
+		// }
+
+		// After closing, redirect user back to login
+		//Set null, redirect to login page
+		setLogoutURL(null);
 	}
 
 	/**
@@ -154,14 +211,19 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 
 	/**
 	 * Set the hLayout value
-	 * @param hLayout the hLayout to set
+	 * 
+	 * @param hLayout
+	 *            the hLayout to set
 	 */
 	public void sethLayout(HorizontalLayout hLayout) {
 		this.mainLayout = hLayout;
 	}
+
 	/**
 	 * Set the tabProfileSheet value
-	 * @param tabProfileSheet the tabProfileSheet to set
+	 * 
+	 * @param tabProfileSheet
+	 *            the tabProfileSheet to set
 	 */
 	public void setTabMain(TabMain tabMain) {
 		this.mainTab = tabMain;
@@ -169,7 +231,7 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 
 	@Override
 	public void transactionStart(Application application, Object transactionData) {
-		
+
 	}
 
 	@Override
@@ -177,7 +239,8 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 	}
 
 	/**
-	 * @param authenticationService the authenticationService to set
+	 * @param authenticationService
+	 *            the authenticationService to set
 	 */
 	public void setAuthenticationService(
 			AuthenticationService authenticationService) {
@@ -199,18 +262,48 @@ public class MyVaadinApplication extends Application implements ApplicationConte
 	}
 
 	/**
-	 * @param mainTab the mainTab to set
+	 * @param mainTab
+	 *            the mainTab to set
 	 */
 	public void setMainTab(TabMain mainTab) {
 		this.mainTab = mainTab;
 	}
 
 	/**
-	 * @param mainLayout the mainLayout to set
+	 * @param mainLayout
+	 *            the mainLayout to set
 	 */
 	public void setMainLayout(HorizontalLayout mainLayout) {
 		this.mainLayout = mainLayout;
 	}
-	
-	
+
+	/**
+	 * @param closeButton
+	 *            the closeButton to set
+	 */
+	public void setCloseButton(Button closeButton) {
+		this.closeButton = closeButton;
+	}
+
+	/**
+	 * @return the closeButton
+	 */
+	public Button getCloseButton() {
+		return closeButton;
+	}
+
+	/**
+	 * @return the mainVerticalLayout
+	 */
+	public VerticalLayout getMainVerticalLayout() {
+		return mainVerticalLayout;
+	}
+
+	/**
+	 * @param mainVerticalLayout the mainVerticalLayout to set
+	 */
+	public void setMainVerticalLayout(VerticalLayout mainVerticalLayout) {
+		this.mainVerticalLayout = mainVerticalLayout;
+	}
+
 }
