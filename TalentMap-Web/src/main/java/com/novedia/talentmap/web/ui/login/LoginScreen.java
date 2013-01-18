@@ -11,6 +11,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
@@ -51,8 +52,11 @@ public class LoginScreen extends VerticalLayout {
 			LOGGER.debug("Call Login Screen constructor");
 		}
 		
+		setSizeFull();
+		setMargin(true);
+		setStyleName(Reindeer.LAYOUT_WHITE);
+		
 		this.application = application;
-//		setSizeFull();
 
 		//Panel for login
 		Panel loginPanel = new Panel("Login");
@@ -79,7 +83,8 @@ public class LoginScreen extends VerticalLayout {
 	}
 	
 	/**
-	 * Inner listener class
+	 * Inner Login Listener.
+	 * Handle event from login form
 	 * @author e.moumbe
 	 *
 	 */
@@ -117,9 +122,16 @@ public class LoginScreen extends VerticalLayout {
 			Authentication authentication = null;
 			try {
 				authentication = application.login(username, password);
+				
+				//See javado: Application has attribute User (See how we can integrate this capability
+				//in yours conception
+				if (authentication != null) {
+					this.application.setUser(authentication);
+				}
 			}catch (TalentMapSecurityException tmpex) {
 				application.getMainWindow().showNotification("User Unknown");
 			}
+			//Sets new Vertical Layout
 			application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));
 		}
 
