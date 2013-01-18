@@ -1,20 +1,31 @@
 package com.novedia.talentmap.web.ui.login;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
- * Main screen of the application
+ * Show view according to user's role
  * 
  * @author e.moumbe
  */
-public class AuthenticatedScreen extends VerticalLayout{
+public class AuthenticatedScreen extends VerticalLayout {
+	
+	/**
+	 * The logger
+	 */
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(AuthenticatedScreen.class);
 	
 	/**
 	 * UID
@@ -36,9 +47,17 @@ public class AuthenticatedScreen extends VerticalLayout{
 	 * @param application
 	 */
 	public AuthenticatedScreen (MyVaadinApplication application, Authentication authentication) {
+		
 		super();
+		
+		//Set style
+		setSizeFull();
+		setMargin(true);
+		setStyleName(Reindeer.LAYOUT_WHITE);
+		
 		this.application = application;
 		this.authentication = authentication;
+		
 		selectedViewAccordingToUserRoles();
 	}
 	
@@ -46,10 +65,13 @@ public class AuthenticatedScreen extends VerticalLayout{
 	 * Select view
 	 */
 	public void selectedViewAccordingToUserRoles () {
-		
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Call selectedViewAccordingToUserRoles ()");
+		}
 		// Checks user role
 		if (Authorization.Role.CL.getId().equals(this.authentication.getAuthorization().getRoleId())) {
-			this.addComponent(buildMainLayout(this.application, Authorization.Role.CL));
+			buildMainLayout(this.application, Authorization.Role.CL);
 		} 
 		else if (this.authentication.getAuthorization().getRoleId() == Authorization.Role.AD.getId()) {
 
@@ -60,7 +82,6 @@ public class AuthenticatedScreen extends VerticalLayout{
 		// this.application.getMainWindow().setContent(buildMainLayout());
 	}
 	
-	
 	/**
 	 * Builds all layout
 	 * @param application
@@ -69,13 +90,10 @@ public class AuthenticatedScreen extends VerticalLayout{
 	 */
 	private ComponentContainer buildMainLayout(MyVaadinApplication application, Role role ) {
 		
-		// Delete all components
-		application.gethLayout().removeAllComponents();
 		TabMain mainTab = application.getMainTab();
 		
 		// Select the views to display
 		if(role.equals(Role.AD)){
-			
 			mainTab.removeComponent(mainTab.getSearchView());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
 		}
@@ -83,9 +101,14 @@ public class AuthenticatedScreen extends VerticalLayout{
 			AdminView adminView = mainTab.getAdminView();
 			mainTab.removeComponent(adminView);			
 		}
+		//Show logOut button
+		this.addComponent(application.getCloseButton());
+		this.addComponent(mainTab);
+		//Align component on window
+		this.setComponentAlignment(this.application.getCloseButton(), Alignment.TOP_RIGHT);
+		this.setComponentAlignment(mainTab, Alignment.TOP_CENTER);
 		
-		application.gethLayout().addComponent(mainTab);
-		
-		return application.gethLayout(); 
+		return this;
 	}
+
 }
