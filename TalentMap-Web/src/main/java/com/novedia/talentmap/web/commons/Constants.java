@@ -3,6 +3,11 @@ package com.novedia.talentmap.web.commons;
 public class Constants {
 
 	/**
+	 * Général - Messages
+	 */
+	public static final String MSG_MISSING_FIELDS = "Les champs ne sont pas tous remplis";
+
+	/**
 	 * Données Profil - Messages
 	 */
 	public static final String PROFILE_MSG_DATA_SAVED_OK = "Vos données ont été enregistrées";
@@ -62,4 +67,13 @@ public class Constants {
 		FIELD_MISSION_END_DATE, 
 		FIELD_MISSION_NOTES };
 
+	/**
+	 * Données Mission - Messages
+	 */
+	public static final String MISSION_MSG_DATA_SAVED_OK = "La mission a bien été mise à jour";
+	public static final String MISSION_MSG_DATA_SAVED_KO = "Attention, la mission n'a pas été mise à jour";
+	public static final String MISSION_MSG_DATA_INSERTED_OK = "La mission a bien été ajoutée";
+	public static final String MISSION_MSG_DATA_INSERTED_KO = "Attention, la mission n'a pas été ajoutée";
+
+	public static final String MISSION_MSG_INVALID_PERIOD = "La période est invalide";
 }

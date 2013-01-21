@@ -12,6 +12,7 @@ import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.Message;
 import com.vaadin.data.Item;
+import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -184,17 +185,15 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			int formValidation = validatedMissionForm(missionToInsert);
 			switch (formValidation) {
 			case VALIDATION_FIELD_MISSING :
-				getWindow().showNotification(
-						"Les champs ne sont pas tous remplis",
+				getWindow().showNotification(Constants.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
 			case VALIDATION_INVALID_PERIOD :
-				getWindow().showNotification(
-						"La période est invalide",
+				getWindow().showNotification(Constants.MISSION_MSG_INVALID_PERIOD,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
 			case VALIDATION_VALID_FORM :
-				//TODO si données ok, insertion en base
+				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
 					missionToInsert.setColleagueId(COLLEAGUE_ID);
 					insertMission(missionToInsert);
@@ -316,15 +315,13 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		try {
 			int result = this.collabService.addMission(missionToInsert); 
 			if(result !=0){
-				//TODO centraliser les messages
-				CUtils.showMessage("La mission a bien été ajoutée. Result =" + result, Message.INFO, getWindow());
-				
+				getWindow().showNotification(Constants.MISSION_MSG_DATA_INSERTED_OK, Notification.TYPE_TRAY_NOTIFICATION);
 				//creates a new list
 				refreshListMission();
 				
 			} else {
-				//TODO : que faire?
-				CUtils.showMessage("La mission N'A PAS été ajoutée. Result =" + result, Message.INFO, getWindow());
+				//TODO :  What to do in this case?
+				getWindow().showNotification(Constants.MISSION_MSG_DATA_INSERTED_KO, Notification.TYPE_TRAY_NOTIFICATION);
 			}
 			
 		} catch (Exception e) {
@@ -340,22 +337,23 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 */
 	private void updateMission(Mission missionToUpdate) {
 		try {
+			this.missionForm.commit();
 			int result = this.collabService.saveMission(missionToUpdate);
 			if(result !=0){
-				//TODO centraliser les messages
-				CUtils.showMessage("La mission a bien été mise à jour. Result =" + result, Message.INFO, getWindow());
+				getWindow().showNotification(Constants.MISSION_MSG_DATA_SAVED_OK, Notification.TYPE_TRAY_NOTIFICATION);
 				
 				//creates a new list
 				refreshListMission();
 				
 			} else {
-				//TODO : que faire?
-				CUtils.showMessage("La mission N'A PAS été mise à jour. Result =" + result, Message.INFO, getWindow());
+				//TODO : What to do in this case?
+				getWindow().showNotification(Constants.MISSION_MSG_DATA_SAVED_KO, Notification.TYPE_ERROR_MESSAGE);
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+				
+		} catch (InvalidValueException invalidVE) {
+
 		}
+		
 	}
 
 
