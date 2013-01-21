@@ -9,7 +9,6 @@ import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.admin.AdminView;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
@@ -54,6 +53,7 @@ public class AuthenticatedScreen extends VerticalLayout {
 		setSizeFull();
 		setMargin(true);
 		setStyleName(Reindeer.LAYOUT_WHITE);
+		
 		
 		this.application = application;
 		this.authentication = authentication;
@@ -102,11 +102,24 @@ public class AuthenticatedScreen extends VerticalLayout {
 			mainTab.removeComponent(adminView);			
 		}
 		//Show logOut button
-		this.addComponent(application.getCloseButton());
+		
+		//TODO:
+		/*
+		 * J'ai désactivé le code logout car les boutons enregistrer, modifier, valider, n'étaient plus
+		 * visibles.
+		 * Pour le remettre, il faudra au préalable mener une ébtude sur le positionnement des composants
+		 * sru les écrans.
+		 * ceci a été fait à la demande de jean max.
+		 * D'autre part, Vanessa m'a fait remanqué une regression de la scroll bar horizontal qui ne 
+		 * s'affiche plus.
+		 * Bon courage!!!
+		 */
+		
+//		this.addComponent(application.getCloseButton());
 		this.addComponent(mainTab);
 		//Align component on window
-		this.setComponentAlignment(this.application.getCloseButton(), Alignment.TOP_RIGHT);
-		this.setComponentAlignment(mainTab, Alignment.TOP_CENTER);
+//		this.setComponentAlignment(this.application.getCloseButton(), Alignment.TOP_RIGHT);
+//		this.setComponentAlignment(mainTab, Alignment.TOP_CENTER);
 		
 		return this;
 	}
