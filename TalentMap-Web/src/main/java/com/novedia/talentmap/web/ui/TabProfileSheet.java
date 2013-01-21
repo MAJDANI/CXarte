@@ -13,6 +13,9 @@ import com.vaadin.ui.TabSheet;
  */
 public class TabProfileSheet extends TabSheet {
 	
+	/**
+	 * Serial Version Number
+	 */
 	private static final long serialVersionUID = 2112120532020200846L;
 	
 	/**
