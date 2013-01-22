@@ -47,8 +47,18 @@ public interface IRegistrationService {
 	/**
 	 * Get All colleague
 	 * @return
-	 * @throws DataAccessException
 	 */
 	List<Colleague> getAllColleagues();
+	
+	/**
+	 * Get all Consultant Manager
+	 */
+	List<Colleague> getAllConsultantManager();
+	
+	/**
+	 * Get all Business Engineer
+	 */
+	List<Colleague> getAllBusinessEngineer();
+	
 	
 }

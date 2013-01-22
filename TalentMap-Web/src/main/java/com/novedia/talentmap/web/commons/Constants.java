@@ -76,4 +76,26 @@ public class Constants {
 	public static final String MISSION_MSG_DATA_INSERTED_KO = "Attention, la mission n'a pas été ajoutée";
 
 	public static final String MISSION_MSG_INVALID_PERIOD = "La période est invalide";
+	
+	/**
+	 * Données Registration
+	 */
+	public static final String REGISTRATION_EMPLOYMENT_DATE_FIELD = "employmentDate";
+	public static final String REGISTRATION_BUSINESS_ENGINEER_FIELD = "businessEngineer";
+	public static final String REGISTRATION_PROFILE_FIELD = "profileId";
+	public static final String REGISTRATION_MANAGER_FIELD = "managerId";
+	public static final String REGISTRATION_PASSWORD_FIELD = "password";
+	public static final String REGISTRATION_PASSWORD_CONFIRM_FIELD = "passwordConfirm";
+	public static final String REGISTRATION_PHONE_FIELD = "phone";
+	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
+	
+	public static final String REGISTRATION_NULL_REPRESENTATION = "";
+	public static final String REGISTRATION_DATE_FORMAT = "dd/MM/yyyy";
+	public static final String REGISTRATION_SELECT_VALUE = "value";
+	public static final String REGISTRATION_SELECT_STYLE = "type-profile";
+	public static final String REGISTRATION_NUMBER_REGEXP = "[0-9]+";
+	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Numéro de téléphone incorrecte";
+	public static final String REGISTRATION_ERROR_EXPERIENCE = "Années d'expérience incorrectes";
+	
+	
 }

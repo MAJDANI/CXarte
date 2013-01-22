@@ -142,12 +142,11 @@ public class LoginScreen extends VerticalLayout {
 				//in yours conception
 				if (authentication != null) {
 					this.application.setUser(authentication);
+					application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));
 				}
-			}catch (TalentMapSecurityException tmpex) {
-				application.getMainWindow().showNotification("User Unknown");
+			} catch (TalentMapSecurityException tmpex) {
+				application.getMainWindow().showNotification("Bad user name/password");
 			}
-			//Sets new Vertical Layout
-			application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));
 		}
 
 		@Override

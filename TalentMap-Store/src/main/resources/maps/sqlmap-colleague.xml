@@ -83,6 +83,19 @@
         SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
     </select>
     
+    <select id="getAllConsultantManager" resultMap="colleagueResult">
+        SELECT c.* FROM COLLABORATOR c, AUTHENTICATION a
+        WHERE c.COLLAB_ID = a.COLLAB_ID
+        AND a.ROLE_ID = 2
+    </select>
+    
+    <select id="getAllBusinessEngineer" resultMap="colleagueResult">
+        SELECT c.* FROM COLLABORATOR c, AUTHENTICATION a
+        WHERE c.COLLAB_ID = a.COLLAB_ID
+        AND a.ROLE_ID = 3
+    </select>
+    
+    
     <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">
         SELECT * FROM COLLABORATOR WHERE EMAIL = #email#
     </select>

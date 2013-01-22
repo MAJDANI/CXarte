@@ -92,5 +92,14 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	public List<Colleague> getAllColleaguesByListToolId(Map ToolIdMap) throws DataAccessException {
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID, ToolIdMap);
 	}
+	
+	public List<Colleague> getAllConsultantManager() throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CONSULTANT_MANAGER);
+	}
+	
+	public List<Colleague> getAllBusinessEngineer() throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_BUSINESS_ENGINEER);
+	}
+	
 
 }

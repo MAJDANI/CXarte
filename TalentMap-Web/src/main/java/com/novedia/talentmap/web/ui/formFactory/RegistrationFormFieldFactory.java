@@ -5,8 +5,10 @@ import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
+import com.novedia.talentmap.web.commons.Constants;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
@@ -26,25 +28,10 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 	private IRegistrationService registrationService;
 	
 	
-	public static final String EMPLOYMENT_DATE_FIELD = "employmentDate";
-	public static final String BUSINESS_ENGINEER_FIELD = "businessEngineer";
-	public static final String PROFILE_FIELD = "profileId";
-	public static final String MANAGER_FIELD = "managerId";
-	public static final String PASSWORD_FIELD = "password";
-	public static final String PASSWORD_CONFIRM_FIELD = "passwordConfirm";
-	public static final String PHONE_FIELD = "phone";
-	
-	public static final String NULL_REPRESENTATION = "";
-	public static final String DATE_FORMAT = "dd/MM/yyyy";
-	public static final String SELECT_VALUE = "value";
-	public static final String SELECT_STYLE = "type-profile";
-	
-	
 	
 	/**
 	 * 
-	 * @param profileService
-	 * @param colleagueService
+	 * @param registration Service
 	 */
 	public RegistrationFormFieldFactory(IRegistrationService registrationService){
 		this.registrationService = registrationService;
@@ -58,38 +45,48 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(RegistrationForm.FIELD_ORDER_REGISTRATION[i])){
 				
-				if(!propertyId.equals(EMPLOYMENT_DATE_FIELD) && !propertyId.equals(BUSINESS_ENGINEER_FIELD) 
-						&& !propertyId.equals(PROFILE_FIELD) && !propertyId.equals(MANAGER_FIELD) &&!propertyId.equals(PASSWORD_FIELD) && !propertyId.equals(PASSWORD_CONFIRM_FIELD) ){
+				if(!propertyId.equals(Constants.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
+						&& !propertyId.equals(Constants.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
+						&& !propertyId.equals(Constants.REGISTRATION_PROFILE_FIELD) 
+						&& !propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD) 
+						&&!propertyId.equals(Constants.REGISTRATION_PASSWORD_FIELD)
+						&& !propertyId.equals(Constants.REGISTRATION_PASSWORD_CONFIRM_FIELD) ){
 					
 					TextField field = new TextField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					
 					field.setRequired(true);
 					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setValidationVisible(true);
-					field.setNullRepresentation(NULL_REPRESENTATION);
+					field.setNullRepresentation(Constants.REGISTRATION_NULL_REPRESENTATION);
 					
-					if(propertyId.equals(PHONE_FIELD)){
+					
+					if(propertyId.equals(Constants.REGISTRATION_PHONE_FIELD)){
 						field.setRequired(false);
+						field.addValidator(new RegexpValidator("[0-9]+","Numéro de téléphone incorrecte"));
+					}
+					
+					if(propertyId.equals(Constants.REGISTRATION_EXPERIENCE_FIELD)){
+						field.addValidator(new RegexpValidator("[0-9]+","Années d'expérience incorrectes"));
 					}
 					
 					return field;
 					
 				}
-				else if(propertyId.equals(PASSWORD_FIELD) || propertyId.equals(PASSWORD_CONFIRM_FIELD)){
+				else if(propertyId.equals(Constants.REGISTRATION_PASSWORD_FIELD) || propertyId.equals(Constants.REGISTRATION_PASSWORD_CONFIRM_FIELD)){
 					PasswordField passwordField = new PasswordField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					passwordField.setRequired(true);
 					passwordField.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					passwordField.setValidationVisible(true);
-					passwordField.setNullRepresentation(NULL_REPRESENTATION);
+					passwordField.setNullRepresentation(Constants.REGISTRATION_NULL_REPRESENTATION);
 
 					return passwordField;
 				}
 				
-				else if(propertyId.equals(EMPLOYMENT_DATE_FIELD)){
+				else if(propertyId.equals(Constants.REGISTRATION_EMPLOYMENT_DATE_FIELD)){
 					
 					PopupDateField datefield = new PopupDateField();
 					
-					datefield.setDateFormat(DATE_FORMAT);
+					datefield.setDateFormat(Constants.REGISTRATION_DATE_FORMAT);
 					datefield.setCaption((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+ " : ");					
 					datefield.setRequired(true);
 					datefield.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
@@ -98,9 +95,9 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					return datefield;
 				}			
 				
-				else if(propertyId.equals(PROFILE_FIELD)){
+				else if(propertyId.equals(Constants.REGISTRATION_PROFILE_FIELD)){
 					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(SELECT_VALUE, String.class, null);
+			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
 					Select profilSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					
@@ -108,11 +105,12 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					try {
 						for(Profile p : registrationService.getAllProfile()){
 							item = ic.addItem(p.getId());
-							item.getItemProperty(SELECT_VALUE).setValue(p.getType());
+							item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(p.getType());
 						}
 						
 						profilSelect.setContainerDataSource(ic);
-						profilSelect.setItemCaptionPropertyId(SELECT_VALUE);
+						profilSelect.setRequired(true);
+						profilSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
 						profilSelect.setNullSelectionAllowed(false);
 						profilSelect.setImmediate(true);
 						
@@ -120,32 +118,32 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						e.printStackTrace();
 					}	
 					
-					profilSelect.setStyleName(SELECT_STYLE);
+					profilSelect.setStyleName(Constants.REGISTRATION_SELECT_STYLE);
 					return profilSelect;
 				}
 				
-				else if(propertyId.equals(BUSINESS_ENGINEER_FIELD) || propertyId.equals(MANAGER_FIELD)){
+				else if(propertyId.equals(Constants.REGISTRATION_BUSINESS_ENGINEER_FIELD) || propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
 					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(SELECT_VALUE, String.class, null);
+			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
 					Select colleagueSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					
 					
 					try {
-						if(propertyId.equals(MANAGER_FIELD)){
-							for(Colleague colleague : registrationService.getAllColleagues()){
+						if(propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
+							for(Colleague colleague : registrationService.getAllConsultantManager()){
 								item = ic.addItem(colleague.getId());
-								item.getItemProperty(SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
+								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
 							}
 						} else {
-							for(Colleague colleague : registrationService.getAllColleagues()){
+							for(Colleague colleague : registrationService.getAllBusinessEngineer()){
 								item = ic.addItem(colleague.getFirstName() + " " + colleague.getLastName());
-								item.getItemProperty(SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
+								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
 							}
 						}
 						colleagueSelect.setContainerDataSource(ic);
-						colleagueSelect.setItemCaptionPropertyId(SELECT_VALUE);
-						if(propertyId.equals(MANAGER_FIELD)){
+						colleagueSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
+						if(propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
 							colleagueSelect.setNullSelectionAllowed(false);
 							colleagueSelect.setRequired(true);
 						}
@@ -155,7 +153,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						e.printStackTrace();
 					}	
 					
-					colleagueSelect.setStyleName(SELECT_STYLE);
+					colleagueSelect.setStyleName(Constants.REGISTRATION_SELECT_STYLE);
 					return colleagueSelect;
 				}
 		

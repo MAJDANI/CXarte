@@ -85,6 +85,16 @@ public class RegistrationService implements IRegistrationService {
 	public void setProfileDao(IDao<Profile> profileDao) {
 		this.profileDao = profileDao;
 	}
+
+	@Override
+	public List<Colleague> getAllConsultantManager() {
+		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
+	}
+
+	@Override
+	public List<Colleague> getAllBusinessEngineer() {
+		return ((ColleagueDao) colleagueDao).getAllBusinessEngineer();
+	}
 	
 
 	

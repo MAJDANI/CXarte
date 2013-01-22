@@ -64,6 +64,16 @@ public static final String CHECK_REGISTRATION = "colleague.check";
  */
 public static final String ADD_COLLEAGUE_FROM_REGISTRATION = "colleague.addColleagueFromRegistration";
 
+/**
+ * Constant request to get all consultant manager
+ */
+public static final String GET_ALL_CONSULTANT_MANAGER = "colleague.getAllConsultantManager";
+
+/**
+ * Constant request to get all Business Engineer
+ */
+public static final String GET_ALL_BUSINESS_ENGINEER = "colleague.getAllBusinessEngineer";
+
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.
