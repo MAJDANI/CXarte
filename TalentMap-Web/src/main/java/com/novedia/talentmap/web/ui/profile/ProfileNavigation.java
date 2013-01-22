@@ -4,13 +4,14 @@ import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileLayout;
 import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
-public class ProfileNavigation extends VerticalLayout implements ClickListener, IObservable {
+public class ProfileNavigation extends VerticalLayout implements
+IObservable,ItemClickListener {
 
 	/**
 	 * Utils Observateur
@@ -36,6 +37,15 @@ public class ProfileNavigation extends VerticalLayout implements ClickListener, 
 	public static final String VISUALIZE_MISSIONS_NAME = "Historique des missions";
 	public static final String VISUALIZE_EA_NAME = "Historique EA";
 	
+	public Tree root = new Tree();
+	public static final Object [][] subItems = new Object[][]{
+			new Object[]{"Menu",VISUALIZE_SKILLS_NAME,VISUALIZE_MISSIONS_NAME,VISUALIZE_EA_NAME}
+		};
+	
+	
+	String firstElement ;
+	String firstEl;
+	
 	/**
 	 * Build the class CollaboratorNavigation.java 
 	 * @param visualizeSkills
@@ -60,68 +70,73 @@ public class ProfileNavigation extends VerticalLayout implements ClickListener, 
 		
 		setMargin(true);
 		setSpacing(true);
-		
-		buildButton();
+		playTree();
+
 	}
 	
-	public void buildButton(){
-		
-		this.visualizeSkills.setCaption(VISUALIZE_SKILLS_NAME);
-		this.visualizeSkills.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-		this.visualizeSkills.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-		this.visualizeSkills.addListener(this);
-		addComponent(this.visualizeSkills);
-		
-		
-		this.visualizeMissions.setCaption(VISUALIZE_MISSIONS_NAME);
-		this.visualizeMissions.addStyleName(Reindeer.BUTTON_DEFAULT);
-		this.visualizeMissions.addListener(this);
-		addComponent(this.visualizeMissions);
-		
-		this.visualizeEA.setCaption(VISUALIZE_EA_NAME);
-		this.visualizeEA.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-		this.visualizeEA.addListener(this);
-		addComponent(this.visualizeEA);
+	
+	/**
+	 * allowed unfolding the tree
+	 */
+	public void playTree(){
+		for (int i = 0; i < subItems.length; i++) {			
+			firstEl = (String) subItems[i][0];
+			System.out.println("firstEl = " + firstEl);
+			root.addItem(firstEl);
+			
+			//au moins 1 élément dans le tableau
+			if(subItems[i].length == 1){
+				root.setChildrenAllowed(subItems, false);
+			}
+			else{
+				//On remplit le Menu
+				for (int j = 1; j < subItems[i].length; j++) {	
+					firstElement = (String)subItems[i][j];						
+					root.addItem(firstElement);
+					root.setParent(firstElement, firstEl);
+					root.setChildrenAllowed(firstElement, false);
+				}
+				root.expandItemsRecursively(firstEl);	
+			}
+		}
+		root.addListener((ItemClickListener) this);
+		addComponent(this.root);		
 	}
+
+	/**
+	 * This method allowed to do event, when the item selected
+	 */
 	
 	@Override
-	public void buttonClick(ClickEvent event) {
+	public void itemClick(ItemClickEvent event) {
 		
-		Button button = event.getButton();
+		root.addListener((ItemClickListener) this);
+		addComponent(this.root);		
 		
-		if(button == this.visualizeSkills){
-			
-			this.cl = ProfileCollaboratorContent.class;
-			
-			updateObservateur();
-			
-			//We set the style buttons
-			this.visualizeSkills.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeMissions.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeEA.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-		}
-		
-		if(button == this.visualizeMissions){
-			
-			this.cl = MissionCollaboratorContent.class;
-			
-			updateObservateur();
-			
-			//We set the style buttons
-			this.visualizeSkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeMissions.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeEA.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-		}
-		
-		if(button == this.visualizeEA){
-			
-			//We set the style buttons
-			this.visualizeSkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeMissions.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.visualizeEA.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+		if(event.getSource() == root){
+			//get the item in the root
+			Object itemId = event.getItemId();
+			if(itemId != null){
+				if(itemId.equals(VISUALIZE_SKILLS_NAME)){
+					//allowed to forward the view page
+					this.cl = ProfileCollaboratorContent.class;
+					updateObservateur();				
+				}
+				else if(itemId.equals(VISUALIZE_MISSIONS_NAME)){
+					
+					this.cl = MissionCollaboratorContent.class;					
+					updateObservateur();				
+				}
+				else if(itemId.equals(VISUALIZE_EA_NAME)){
+					//TODO: vue à implémenter
+					//We set the style buttons
+//					this.visualizeSkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+//					this.visualizeMissions.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+//					this.visualizeEA.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+				}
+			}				
 		}
 	}
-	
 	/**
 	 * Get the visualizeSkills value
 	 * @return the visualizeSkills
