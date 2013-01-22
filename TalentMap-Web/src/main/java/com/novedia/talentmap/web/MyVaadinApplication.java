@@ -22,7 +22,9 @@ import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.login.LoginScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
@@ -70,10 +72,15 @@ public class MyVaadinApplication extends Application implements
 	private TabMain mainTab;
 
 	/**
-	 * The athentication service
+	 * The authentication service
 	 */
 	private AuthenticationService authenticationService;
-
+	
+	/**
+	 * The registration service
+	 */
+	private RegistrationService registrationService;
+	
 	/**
 	 * The button close
 	 */
@@ -180,8 +187,68 @@ public class MyVaadinApplication extends Application implements
 		return authenticate;
 	}
 
+	
 	/**
-	 * Log out method
+	 * Register method
+	 * 
+	 * @param registration
+	 */
+	public Authentication register(Registration registration) throws TalentMapSecurityException{
+		
+		Authentication authenticate = null;
+		
+		registration.setLogin(getLogin(registration));
+		try {
+			
+			//We check if the user is already existing in Database (Collaborator table)
+			if (registrationService.check(registration) == null){
+				registrationService.addColleagueFromRegistration(registration);
+			} else {
+				throw new TalentMapSecurityException ("Email already used");
+			}
+			/*
+			CredentialToken credential = new CredentialToken();
+			credential.setLogin(login);
+			credential.setPassword(registration.getPassword());
+			authenticate = authenticationService.checkUser(credential);
+			*/
+			
+			//if (authenticate == null) {
+			registrationService.addUserFromRegistration(registration);
+			
+			CredentialToken credential = new CredentialToken();
+			credential.setLogin(registration.getLogin());
+			credential.setPassword(registration.getPassword());
+			authenticate = authenticationService.checkUser(credential);
+		}
+		catch (DataAccessException ex) {
+			if (LOGGER.isErrorEnabled()) {
+				LOGGER.error("Technical Exception : ", ex.getMessage());
+			}
+		}
+		
+		return authenticate;
+	}
+	
+	/**
+	 * 
+	 * @param registration
+	 * @return
+	 */
+	private String getLogin(Registration registration){
+		
+		String firstName = registration.getFirstName();
+		
+		String lastName = registration.getLastName();
+		
+		String login = firstName.substring(0, 1) + "." + lastName;
+		
+		return login.toLowerCase();
+	}
+	
+	
+	/**
+	 * Log out method 
 	 */
 	public void logout() {
 
@@ -276,6 +343,19 @@ public class MyVaadinApplication extends Application implements
 	public void setMainLayout(HorizontalLayout mainLayout) {
 		this.mainLayout = mainLayout;
 	}
+
+	public AuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+
+	public RegistrationService getRegistrationService() {
+		return registrationService;
+	}
+
+	public void setRegistrationService(RegistrationService registrationService) {
+		this.registrationService = registrationService;
+	}
+
 
 	/**
 	 * @param closeButton

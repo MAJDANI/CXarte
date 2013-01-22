@@ -8,6 +8,9 @@ import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.util.LabelConstants;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
@@ -37,6 +40,14 @@ public class LoginScreen extends VerticalLayout {
 	private MyVaadinApplication application;
 	
 	/**
+	 * Vaadin component
+	 */
+	private Button signIn;
+	private LoginForm loginForm;
+	private Panel loginPanel;
+	
+	
+	/**
 	 * Default constructor
 	 */
 	public LoginScreen() {
@@ -59,23 +70,27 @@ public class LoginScreen extends VerticalLayout {
 		this.application = application;
 
 		//Panel for login
-		Panel loginPanel = new Panel("Login");
+		this.loginPanel = new Panel("Login");
 		
-		loginPanel.setWidth("400px");
+		this.loginPanel.setWidth("400px");
 		
 		//The form
-		LoginForm loginForm = new LoginForm();
-		loginForm.setUsernameCaption(LabelConstants.USER_LOGIN);
-		loginForm.setPasswordCaption(LabelConstants.USER_PASSWORD);
-		loginForm.setLoginButtonCaption(LabelConstants.LOGIN_BUTTON);
+		this.loginForm = new LoginForm();
+		this.loginForm.setUsernameCaption(LabelConstants.USER_LOGIN);
+		this.loginForm.setPasswordCaption(LabelConstants.USER_PASSWORD);
+		this.loginForm.setLoginButtonCaption(LabelConstants.LOGIN_BUTTON);
 
-		loginForm.setHeight("150px");
-		loginForm.addListener(new MyLoginListener(this.application));
+		this.loginForm.setHeight("150px");
+		MyLoginListener myLoginListener = new MyLoginListener(this.application);
+		this.loginForm.addListener(myLoginListener);
 
-		loginPanel.addComponent(loginForm);
-
-		addComponent(loginPanel);
-		setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
+		this.loginPanel.addComponent(this.loginForm);
+		
+		this.signIn = new Button("Sign in");
+		this.signIn.addListener(myLoginListener);
+		this.loginPanel.addComponent(this.signIn);
+		addComponent(this.loginPanel);
+		setComponentAlignment(this.loginPanel, Alignment.MIDDLE_CENTER);
 
 		HorizontalLayout footer = new HorizontalLayout();
 		footer.setHeight("50px");
@@ -88,7 +103,7 @@ public class LoginScreen extends VerticalLayout {
 	 * @author e.moumbe
 	 *
 	 */
-	private static class MyLoginListener implements LoginForm.LoginListener {
+	private static class MyLoginListener implements LoginForm.LoginListener, ClickListener {
 		
 		/**
 		 * UID
@@ -133,6 +148,15 @@ public class LoginScreen extends VerticalLayout {
 			}
 			//Sets new Vertical Layout
 			application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));
+		}
+
+		@Override
+		public void buttonClick(ClickEvent event) {
+			
+			String button = event.getButton().getCaption();		
+			if (button.equalsIgnoreCase("Sign In")){
+				application.getMainWindow().setContent(new RegistrationScreen(application));
+			}
 		}
 
 	}

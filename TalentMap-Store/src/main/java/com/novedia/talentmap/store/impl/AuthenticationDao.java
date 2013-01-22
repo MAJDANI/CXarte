@@ -11,6 +11,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
@@ -47,6 +48,15 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 		return (Integer) this.getSqlMapClientTemplate().insert(
 				DBRequestsConstants.ADD_AUTHENTIFICATION, element);
 	}
+	
+	/**
+	 * Add login/password
+	 */
+	public int addUser(CredentialToken element) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.ADD_USER_AUTHENTIFICATION, element);
+	}
+	
 
 	/**
 	 * Delete login/password
@@ -64,6 +74,11 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 	 */
 	public Authentication check(CredentialToken token) throws DataAccessException {
 		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_AUTHENTIFICATION, token);
+	}
+	
+	public int addUserFromRegistration(Registration registration) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.ADD_USER_FROM_REGISTRATION, registration);
 	}
 	
 	@Override

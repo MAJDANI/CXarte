@@ -55,4 +55,10 @@
 		<property name="authenticationDao" ref="authenticationDao"/>
 	</bean>
 	
+	<bean id="registrationService" class="com.novedia.talentmap.services.impl.RegistrationService">
+		<property name="authenticationDao" ref="authenticationDao"/>
+		<property name="colleagueDao" ref="colleagueDao"/>	
+		<property name="profileDao" ref="profileDao"/>
+	</bean>
+	
 </beans>

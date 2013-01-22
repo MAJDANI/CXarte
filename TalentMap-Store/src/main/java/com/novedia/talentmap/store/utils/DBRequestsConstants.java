@@ -54,6 +54,15 @@ public static final String GET_ALL_COLLEAGUES_BY_CLIENTNAME="colleague.getAllCol
  */
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
+/**
+ * Constant request to check if the user who wants to register is already existing in db
+ */
+public static final String CHECK_REGISTRATION = "colleague.check";
+
+/**
+ * Constant request to add a colleague from a registration
+ */
+public static final String ADD_COLLEAGUE_FROM_REGISTRATION = "colleague.addColleagueFromRegistration";
 
 // CATEGORY REQUESTS
 /**
@@ -347,6 +356,8 @@ public static String SAVE_AUTHENTIFICATION = "authentication.save";
 
 public static final String ADD_AUTHENTIFICATION = "authentication.add";
 
+public static final String ADD_USER_AUTHENTIFICATION = "authentication.addUser";
+
 public static final String CHECK_AUTHENTIFICATION = "authentication.check";
 
 public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogin";
@@ -354,6 +365,9 @@ public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogi
 public static final String GET_AUTHENTICATE = "authentication.get";
 
 public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.getbyid";
+
+public static final String ADD_USER_FROM_REGISTRATION = "authentication.addUserFromRegistration";
+
 
 
 

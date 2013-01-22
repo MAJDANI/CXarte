@@ -64,7 +64,6 @@
     	</selectKey>
  	
     	INSERT INTO COLLABORATOR (
-    		COLLAB_ID,
     		MANAGER_ID,
     		PROFILE_ID,
     		LAST_NAME,
@@ -75,7 +74,7 @@
     		EXPERIENCE,
     		BUSINESS_ENGINEER
     		)values (
-    		#id#, #managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer#
+			#managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer#
     		)
 	</insert>
 	
@@ -83,5 +82,30 @@
     <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
     </select>
+    
+    <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">
+        SELECT * FROM COLLABORATOR WHERE EMAIL = #email#
+    </select>
+    
+    <insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
+	    <selectKey resultClass="Integer" keyProperty="colleagueId">
+      		SELECT SEQCOLLABORATOR.NEXTVAL FROM DUAL
+    	</selectKey>
+ 	
+    	INSERT INTO COLLABORATOR (
+    		COLLAB_ID,
+    		MANAGER_ID,
+    		PROFILE_ID,
+    		LAST_NAME,
+    		FIRST_NAME, 
+    		EMAIL,
+    		PHONE,
+    		EMPLOYMENT_DATE,
+    		EXPERIENCE,
+    		BUSINESS_ENGINEER
+    		)values (#colleagueId#,
+			#managerId#, #profileId#, UPPER(#lastName#), #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer#
+    		)
+	</insert>
     
 </sqlMap>

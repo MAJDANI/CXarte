@@ -31,5 +31,7 @@
 	<bean id="token" class="com.novedia.talentmap.model.entity.CredentialToken"/>
 	
 	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization" />
+	
+	<bean id="registration" class="com.novedia.talentmap.model.entity.Registration" />
     
 </beans>

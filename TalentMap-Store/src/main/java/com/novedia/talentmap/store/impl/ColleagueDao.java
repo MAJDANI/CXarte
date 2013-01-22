@@ -10,6 +10,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
@@ -70,6 +71,14 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	@Override
 	public Colleague check(String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
+	}
+	
+	public Colleague check(Registration registration) throws DataAccessException{
+		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_REGISTRATION, registration);
+	}
+	
+	public Integer addColleagueFromRegistration(Registration registration) throws DataAccessException{
+		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_COLLEAGUE_FROM_REGISTRATION, registration);
 	}
 	
 	public List<Colleague> getAllColleaguesByLastName(String lastName) throws DataAccessException {

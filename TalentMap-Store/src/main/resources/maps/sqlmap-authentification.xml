@@ -20,23 +20,24 @@
 				AND auth.ROLE_ID = role.ROLE_ID
 	</select>	
     
-     <!-- <insert id="add" parameterClass="Authentication"> 
+    <insert id="addUserFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration"> 
+   		<selectKey resultClass="Integer" keyProperty="authenticationId">
+      		SELECT SEQAUTH.NEXTVAL FROM DUAL
+    	</selectKey>
     	
-     	<selectKey resultClass="Integer" keyProperty="id"> 
-      		SELECT SEQAUTH.NEXTVAL FROM DUAL 
-     	</selectKey> 
     	INSERT INTO AUTHENTICATION (
-    		AUTHENTIFICATION_ID,
+    		AUTHENTICATION_ID,
     		COLLAB_ID,
     		ROLE_ID,
     		LOGIN,
     		PASSWORD
     		)values (
-    		#id#,
-    		#collabid#,
-    		#roleid#,
+    		#authenticationId#,
+    		#colleagueId#,
+    		4,
     		#login#,
     		#password#
     		)
-    </insert>	 -->
+    </insert>	
+    
 </sqlMap>

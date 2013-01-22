@@ -24,6 +24,7 @@
     	<property name="mainLayout" ref="mainLayout" />
     	<property name="mainTab" ref="mainTab" />
     	<property name="authenticationService" ref="authenticationService" />
+    	<property name="registrationService" ref="registrationService" />
     	<property name="closeButton" ref="closeButton"/>
     	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
     </bean>
@@ -256,6 +257,24 @@
 		<constructor-arg name="btnModifyMission" ref="btnModifyMission"/>
 		<constructor-arg name="btnDeleteMission" ref="btnDeleteMission"/>
 	</bean>
+	
+	
+	<!-- Vaadin RegistrationForm UI -->
+	
+	<bean id="fieldOrderRegistrationFormBean" class="java.util.Vector"/>
+	<bean id="registrationForm" class="com.vaadin.ui.Form"/>
+	<bean id="registrationFormLayout" class="com.vaadin.ui.GridLayout"/>
+	
+	<bean id="registrationFormBean" class="com.novedia.talentmap.web.ui.registration.RegistrationForm" scope="session">
+		<constructor-arg name="registrationForm" ref="registrationForm"/>
+		<constructor-arg name="registrationFormLayout" ref="registrationFormLayout"/>
+		<constructor-arg name="registrationService" ref="registrationService"/>
+	</bean>
+	
+	<bean id="registrationScreen" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >
+		<constructor-arg name="application" ref="vaadinBean"/>
+	</bean>
+	
 		
 	<!-- Vaadin AdminView UI -->
 	
