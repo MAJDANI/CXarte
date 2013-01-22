@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
@@ -27,6 +28,7 @@ import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.login.LoginScreen;
+import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
@@ -171,7 +173,7 @@ public class MyVaadinApplication extends Application implements
 		try {
 			CredentialToken credential = new CredentialToken();
 			credential.setLogin(login);
-			credential.setPassword(password);
+			credential.setPassword(CUtils.encodePassword(password));
 			authenticate = authenticationService.checkUser(credential);
 
 			if (authenticate == null
@@ -206,14 +208,10 @@ public class MyVaadinApplication extends Application implements
 			} else {
 				throw new TalentMapSecurityException ("Email already used");
 			}
-			/*
-			CredentialToken credential = new CredentialToken();
-			credential.setLogin(login);
-			credential.setPassword(registration.getPassword());
-			authenticate = authenticationService.checkUser(credential);
-			*/
-			
-			//if (authenticate == null) {
+
+			//Password encoding
+			String encodedPassword = CUtils.encodePassword(registration.getPassword());
+			registration.setPassword(encodedPassword);
 			registrationService.addUserFromRegistration(registration);
 			
 			CredentialToken credential = new CredentialToken();
@@ -385,5 +383,6 @@ public class MyVaadinApplication extends Application implements
 	public void setMainVerticalLayout(VerticalLayout mainVerticalLayout) {
 		this.mainVerticalLayout = mainVerticalLayout;
 	}
+
 
 }

@@ -3,8 +3,11 @@ package com.novedia.talentmap.web.util;
 import java.util.Map;
 import java.util.Vector;
 
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.model.entity.Tool;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Accordion;
@@ -134,6 +137,16 @@ public abstract class CUtils {
 	public static void showMessage(String messageError, int typeError, Window mainWindow){
 		Message msg = new Message(messageError, typeError, mainWindow);
 		msg.show();
+	}
+	
+	/**
+	 * Method used to encode password
+	 */
+	public static String encodePassword(String password){
+		Md5PasswordEncoder md5Encoder = new Md5PasswordEncoder();		
+		String encodedPassword = md5Encoder.encodePassword(password, null);
+		
+		return encodedPassword;
 	}
 	
 }
