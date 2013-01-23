@@ -62,13 +62,16 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					
 					if(propertyId.equals(Constants.REGISTRATION_PHONE_FIELD)){
 						field.setRequired(false);
-						field.addValidator(new RegexpValidator("[0-9]+","Numéro de téléphone incorrecte"));
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,Constants.REGISTRATION_ERROR_PHONE_NUMBER));
 					}
 					
 					if(propertyId.equals(Constants.REGISTRATION_EXPERIENCE_FIELD)){
-						field.addValidator(new RegexpValidator("[0-9]+","Années d'expérience incorrectes"));
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,Constants.REGISTRATION_ERROR_EXPERIENCE));
 					}
 					
+					if(propertyId.equals(Constants.REGISTRATION_EMAIL_FIELD)){
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,Constants.REGISTRATION_ERROR_EMAIL));
+					}
 					return field;
 					
 				}
@@ -99,8 +102,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
-					Select profilSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
-					
+					Select profilSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : "); 
 					
 					try {
 						for(Profile p : registrationService.getAllProfile()){

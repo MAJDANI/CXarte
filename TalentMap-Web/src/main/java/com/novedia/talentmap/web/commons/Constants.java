@@ -88,14 +88,17 @@ public class Constants {
 	public static final String REGISTRATION_PASSWORD_CONFIRM_FIELD = "passwordConfirm";
 	public static final String REGISTRATION_PHONE_FIELD = "phone";
 	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
+	public static final String REGISTRATION_EMAIL_FIELD = "email";
 	
 	public static final String REGISTRATION_NULL_REPRESENTATION = "";
 	public static final String REGISTRATION_DATE_FORMAT = "dd/MM/yyyy";
 	public static final String REGISTRATION_SELECT_VALUE = "value";
 	public static final String REGISTRATION_SELECT_STYLE = "type-profile";
 	public static final String REGISTRATION_NUMBER_REGEXP = "[0-9]+";
+	public static final String REGISTRATION_EMAIL_REGEXP = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$";
 	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Numéro de téléphone incorrecte";
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Années d'expérience incorrectes";
+	public static final String REGISTRATION_ERROR_EMAIL = "Email non valide";
 	
 	
 }
