@@ -58,8 +58,13 @@ public class RegistrationService implements IRegistrationService {
 	}
 	
 	@Override
-	public List<Colleague> getAllColleagues() throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getAll();
+	public List<Colleague> getAllConsultantManager() {
+		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
+	}
+
+	@Override
+	public List<Colleague> getAllBusinessEngineer() {
+		return ((ColleagueDao) colleagueDao).getAllBusinessEngineer();
 	}
 	
 	public IDao<Colleague> getColleagueDao() {
@@ -86,16 +91,4 @@ public class RegistrationService implements IRegistrationService {
 		this.profileDao = profileDao;
 	}
 
-	@Override
-	public List<Colleague> getAllConsultantManager() {
-		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
-	}
-
-	@Override
-	public List<Colleague> getAllBusinessEngineer() {
-		return ((ColleagueDao) colleagueDao).getAllBusinessEngineer();
-	}
-	
-
-	
 }

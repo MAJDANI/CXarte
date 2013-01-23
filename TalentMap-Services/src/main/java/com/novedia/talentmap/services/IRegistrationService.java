@@ -43,12 +43,6 @@ public interface IRegistrationService {
 	 * @return
 	 */
 	List<Profile> getAllProfile();
-
-	/**
-	 * Get All colleague
-	 * @return
-	 */
-	List<Colleague> getAllColleagues();
 	
 	/**
 	 * Get all Consultant Manager
