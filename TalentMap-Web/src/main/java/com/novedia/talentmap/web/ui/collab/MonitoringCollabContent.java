@@ -102,12 +102,9 @@ public class MonitoringCollabContent extends VerticalLayout {
 	}
 	
 	public void fillCollabTable(List<Colleague> listCollaborator) throws Exception{
-		
-		System.out.println("MonitoringCollabContent.fillCollabTable()");
-		
+	
 		int idTable = 1;
-		for (Colleague collab : listCollaborator) {
-			
+		for (Colleague collab : listCollaborator) {	
 			Profile collabProfile = this.profileService.getProfile(collab.getProfileId());
 			
 			HorizontalLayout hLayoutButton = new HorizontalLayout();
@@ -133,7 +130,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 			this.collabTable.addItem(new Object[] { collab.getFirstName(),
 					collab.getLastName(),
-					collabProfile.getType(), "En mission",
+					collabProfile.getType(), "En mission tttt",
 					hLayoutButton }, idTable);
 
 			idTable++;
@@ -150,10 +147,8 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 		try {
 
-			List<Colleague> listCollaborator = this.managerService
-					.getAllColleagues(MANAGER_ID);
+			List<Colleague> listCollaborator = this.managerService.getAllColleagues(MANAGER_ID);
 			fillCollabTable(listCollaborator);
-
 		} catch (Exception e) {
 
 			e.printStackTrace();

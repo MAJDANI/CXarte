@@ -2,15 +2,16 @@ package com.novedia.talentmap.web.ui.search;
 
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.IObservable;
-import com.novedia.talentmap.web.util.ISearchContent;
 import com.novedia.talentmap.web.util.ISearchLayout;
-import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
-public class SearchNavigation extends VerticalLayout implements ClickListener, IObservable {
+public class SearchNavigation extends VerticalLayout implements ClickListener, IObservable,ItemClickListener {
 
 	/**
 	 * Util Observator
@@ -28,6 +29,12 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	 * POJO
 	 */
 	private int searchTargetPanel = SearchTargetPanel.BY_NAME;
+	
+
+	/**
+	 * POJO
+	 */
+	private Class<?> cl = SearchContent.class;
 
 	/**
 	 * Constants
@@ -35,6 +42,11 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	public static final String BY_CLIENT_BUTTON_NAME = "Par client";
 	public static final String BY_NAME_BUTTON_NAME = "Par nom";
 	public static final String BY_SKILLS_BUTTON_NAME = "Par compétences";
+	
+	public Tree root = new Tree();
+	public static final Object [][] subItems = new Object[][]{
+			new Object[]{"Menu",BY_CLIENT_BUTTON_NAME,BY_NAME_BUTTON_NAME,BY_SKILLS_BUTTON_NAME}
+		};
 	
 	/**
 	 * Build the class SearchNavigation.java 
@@ -56,69 +68,63 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 		setMargin(true);
 		setSpacing(true);
 		
-		buildButton();
+		constructTree();
 	}
 	
-	public void buildButton(){
-		
-		this.byClient.setCaption(BY_CLIENT_BUTTON_NAME);
-		this.byClient.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-		this.byClient.addListener(this);
-		
-		this.byName.setCaption(BY_NAME_BUTTON_NAME);
-		this.byName.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-		this.byName.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-		this.byName.addListener(this);
-		
-		this.bySkills.setCaption(BY_SKILLS_BUTTON_NAME);
-		this.bySkills.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-		this.bySkills.addListener(this);
 	
-		//Add Component to the Navigation
-		addComponent(this.byName);
-		addComponent(this.byClient);
-		addComponent(this.bySkills);
+	/**
+	 * allowed unfolding the tree
+	 */
+	public void constructTree(){
+		 String firstElement ;
+		 String firstEl;
+		 
+		for (int i = 0; i < subItems.length; i++) {			
+			firstEl = (String) subItems[i][0];
+			root.addItem(firstEl);
+			
+			//au moins 1 élément dans le tableau
+			if(subItems[i].length == 1){
+				root.setChildrenAllowed(subItems, false);
+			}
+			else{
+				//On remplit le Menu
+				for (int j = 1; j < subItems[i].length; j++) {	
+					firstElement = (String)subItems[i][j];						
+					root.addItem(firstElement);
+					root.setParent(firstElement, firstEl);
+					root.setChildrenAllowed(firstElement, false);
+				}
+				root.expandItemsRecursively(firstEl);	
+			}
+		}
+		root.addListener((ItemClickListener) this);
+		addComponent(this.root);		
+	}
+	
+	@Override
+	public void itemClick(ItemClickEvent event) {		
+		if(event.getSource() == root){
+			//get the item in the root
+			Object itemId = event.getItemId();
+			
+			if(itemId != null){
+				if(itemId.equals(BY_CLIENT_BUTTON_NAME)){
+					this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
+					updateObservateur();
+				}
+				else if(itemId.equals(BY_NAME_BUTTON_NAME)){
+					this.searchTargetPanel = SearchTargetPanel.BY_NAME;
+					updateObservateur();
+				}
+				else if(itemId.equals(BY_SKILLS_BUTTON_NAME)){
+					this.searchTargetPanel = SearchTargetPanel.BY_SKILLS;
+					updateObservateur();
+				}
+			}				
+		}		
 	}
 
-	@Override
-	public void buttonClick(ClickEvent event) {
-		
-		Button button = event.getButton();
-		
-		if(button == this.byClient){
-			this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
-			
-			//We set the style buttons
-			this.byClient.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.byName.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.bySkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-		}
-		
-		if(button == this.byName){
-			
-			this.searchTargetPanel = SearchTargetPanel.BY_NAME;
-			
-			//We set the style buttons
-			this.byClient.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.byName.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.bySkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-		}
-		
-		if(button == this.bySkills){
-			
-			this.searchTargetPanel = SearchTargetPanel.BY_SKILLS;
-			
-			//We set the style buttons
-			this.byClient.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.byName.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.bySkills.addStyleName(TalentMapCSS.BUTTON_SELECTED);
-		}
-		
-		System.out.println("SearchNav **** 3 **** avant updateObs");
-		updateObservateur();
-	}
-	
-	
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
 		
@@ -188,4 +194,9 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 		this.bySkills = bySkills;
 	}
 
+	@Override
+	public void buttonClick(ClickEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
 }

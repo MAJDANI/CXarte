@@ -11,7 +11,7 @@
 	  <result property="id" column="CONCEPT_ID"/>
 	  <result property="name" column="CONCEPT_NAME"/>
 	  <result property="category.id" column="CATEGORY_ID"  />
-	  <result property="category.name" column="CATEGORY_NAME" />
+	  <!-- <result property="category.name" column="CATEGORY_NAME" /> -->
 	</resultMap>
 
 
