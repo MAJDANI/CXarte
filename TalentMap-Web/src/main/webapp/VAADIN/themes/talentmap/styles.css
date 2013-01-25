@@ -8,6 +8,9 @@
 .v-table-body{height:auto!important;}
 .v-table-cell-content{vertical-align:middle!important;}
 
+/*by:v.dibi : Page vide */
+.mystyle {font-style: italic;color:black;background-color:green;font-size: 25px;width:350px}
+
 /* GRID DATA PROFILE*/
 .form-data-administrative div{overflow:visible!important;}
 .form-data-administrative .v-caption{float:left; width:auto!important; height:23px; line-height:23px;}

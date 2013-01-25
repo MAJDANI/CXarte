@@ -148,7 +148,12 @@
 		<constructor-arg name="profileLayout" ref="profileLayoutBean" />
 	</bean>
 	
+	<!-- <bean id="collaboratorSkillContent" class="com.novedia.talentmap.web.ui.profile.CollaboratorSkillContent" scope="session"/>
+
+	<bean id="historyMissionColab" class="com.novedia.talentmap.web.ui.profile.HistoryMissionColab" scope="session"/>
 	
+	<bean id="objectiveEa" class="com.novedia.talentmap.web.ui.profile.ObjectiveEa" scope="session"/>
+	 -->
 	<!-- Vaadin ProfileNavigation UI -->
 	
 	<bean id="visualizeSkills" class="com.vaadin.ui.Button"/>
@@ -199,8 +204,12 @@
 		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
 		<constructor-arg name="profileNavigation" ref="profileNavigationBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
+		<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/>
+		
 	</bean>
-	
+	<!--History EA -->
+	<bean id="eaContentHistoriqueBean" class="com.novedia.talentmap.web.ui.ea.EaContentHistorique"/>
+
 	
 	<!-- Vaadin MissionContainer UI -->
 	

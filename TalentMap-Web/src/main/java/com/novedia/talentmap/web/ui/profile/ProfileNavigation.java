@@ -1,16 +1,16 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileLayout;
-import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
-public class ProfileNavigation extends VerticalLayout implements
+public class ProfileNavigation extends VerticalLayout implements 
 IObservable,ItemClickListener {
 
 	/**
@@ -41,10 +41,9 @@ IObservable,ItemClickListener {
 	public static final Object [][] subItems = new Object[][]{
 			new Object[]{"Menu",VISUALIZE_SKILLS_NAME,VISUALIZE_MISSIONS_NAME,VISUALIZE_EA_NAME}
 		};
-	
-	
-	String firstElement ;
-	String firstEl;
+		
+	public String firstElement ;
+	public String firstEl;
 	
 	/**
 	 * Build the class CollaboratorNavigation.java 
@@ -66,12 +65,10 @@ IObservable,ItemClickListener {
 	 * The main builder
 	 * @class MonitoringCollabNavigation.java
 	 */
-	public void mainBuild(){
-		
+	public void mainBuild(){		
 		setMargin(true);
 		setSpacing(true);
 		playTree();
-
 	}
 	
 	
@@ -81,7 +78,6 @@ IObservable,ItemClickListener {
 	public void playTree(){
 		for (int i = 0; i < subItems.length; i++) {			
 			firstEl = (String) subItems[i][0];
-			System.out.println("firstEl = " + firstEl);
 			root.addItem(firstEl);
 			
 			//au moins 1 élément dans le tableau
@@ -109,10 +105,6 @@ IObservable,ItemClickListener {
 	
 	@Override
 	public void itemClick(ItemClickEvent event) {
-		
-		root.addListener((ItemClickListener) this);
-		addComponent(this.root);		
-		
 		if(event.getSource() == root){
 			//get the item in the root
 			Object itemId = event.getItemId();
@@ -122,17 +114,13 @@ IObservable,ItemClickListener {
 					this.cl = ProfileCollaboratorContent.class;
 					updateObservateur();				
 				}
-				else if(itemId.equals(VISUALIZE_MISSIONS_NAME)){
-					
+				else if(itemId.equals(VISUALIZE_MISSIONS_NAME)){					
 					this.cl = MissionCollaboratorContent.class;					
 					updateObservateur();				
 				}
 				else if(itemId.equals(VISUALIZE_EA_NAME)){
-					//TODO: vue à implémenter
-					//We set the style buttons
-//					this.visualizeSkills.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-//					this.visualizeMissions.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-//					this.visualizeEA.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+					this.cl = EaContentHistorique.class;
+					updateObservateur();
 				}
 			}				
 		}
