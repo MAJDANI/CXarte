@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
 import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
@@ -67,13 +68,20 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
-					Select clientSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
+					Select clientSelect = new Select("Client : "); 
 					
+				
 					for(Client client : clientService.getAllClients()){
 						item = ic.addItem(client.getId());
 						item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(client.getName());
 					}
 					
+					clientSelect.setContainerDataSource(ic);
+					clientSelect.setRequired(true);
+					clientSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
+					clientSelect.setNullSelectionAllowed(false);
+					clientSelect.setImmediate(true);
+
 					return clientSelect;
 				}
 				
