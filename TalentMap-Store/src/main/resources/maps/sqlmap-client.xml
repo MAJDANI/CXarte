@@ -9,7 +9,7 @@
 
     <resultMap id="clientResult" class="client">
         <result property="id" column="CLIENT_ID"/>     
-        <result property="name"  column="NAME"/>         
+        <result property="name"  column="CLIENT_NAME"/>         
     </resultMap>
     
     <select id="getAll" resultMap="clientResult">
