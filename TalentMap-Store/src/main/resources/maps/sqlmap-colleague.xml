@@ -37,10 +37,10 @@
         SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
-    <select id="getAllColleaguesByClientName" parameterClass="string" resultMap="colleagueResult">
+    <select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client" resultMap="colleagueResult">
         SELECT DISTINCT c.* FROM  MISSION m, COLLABORATOR c 
         WHERE m.COLLAB_ID = c.COLLAB_ID
-        AND UPPER(m.CLIENT) LIKE UPPER('$clientName$')
+        AND m.CLIENT_ID = #id#
     </select>
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
