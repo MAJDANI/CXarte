@@ -55,6 +55,7 @@
     <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm" scope="session">
     	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
+    	<constructor-arg name="clientService" ref="clientService"/>
     	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator"/>
     	<constructor-arg name="fieldOrderMission" ref="fieldOrderMission"/>
     	<constructor-arg name="gLayoutCollaborator" ref="gLayoutCollaborator" />
@@ -79,6 +80,7 @@
     <bean id="collaboratorFormBean2" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm"  scope="session">
     	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
+    	<constructor-arg name="clientService" ref="clientService"/>
     	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator2"/>
     	<constructor-arg name="fieldOrderMission" ref="fieldOrderMission2"/>
     	<constructor-arg name="gLayoutCollaborator" ref="gLayoutCollaborator2" />
@@ -204,7 +206,7 @@
 		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
 		<constructor-arg name="profileNavigation" ref="profileNavigationBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
-		<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/>
+	<!--	<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/> -->
 		
 	</bean>
 	<!--History EA -->
@@ -234,6 +236,7 @@
 	
 	<bean id="missionFormBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
 		<constructor-arg name="collabService" ref="collaboratorService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
 		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
 		<constructor-arg name="missionForm" ref="missionForm"/>
 		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
@@ -446,7 +449,7 @@
 		<constructor-arg name="listCheckBoxSkills" ref="listCheckBoxSkills"/>
 		<constructor-arg name="collabService" ref="collaboratorService" />
 		<constructor-arg name="skillService" ref="skillService"/>
-		<constructor-arg name="missionService" ref="missionService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
 		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel" />
 		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel" />
 		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel" />

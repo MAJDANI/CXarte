@@ -5,13 +5,18 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IMissionService;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
+import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
@@ -36,7 +41,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	private IColleagueService collabService;
 	private ISkillService skillService;
-	private IMissionService missionService;
+	private IClientService clientService;
 
 	/**
 	 * Vaadin Components
@@ -73,7 +78,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
 			Panel searchBySkillsPanel, Select clientNameSelect,
 			TextField fieldName, Button search, List<Colleague> listCollab,
-			IColleagueService collabService, ISkillService skillService,IMissionService missionService, List<CheckBox> listCheckBoxSkills) {
+			IColleagueService collabService, ISkillService skillService,IClientService clientService, List<CheckBox> listCheckBoxSkills) {
 		super();
 		this.searchByClientPanel = searchByClientPanel;
 		this.searchByNamePanel = searchByNamePanel;
@@ -84,7 +89,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		this.listCollab = listCollab;
 		this.collabService = collabService;
 		this.skillService = skillService;
-		this.missionService = missionService;
+		this.clientService = clientService;
 		this.listCheckBoxSkills = listCheckBoxSkills;
 
 		buildMain();
@@ -121,13 +126,17 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void buildField() throws Exception {
 
 		//Build the Client Panel
-		List<String> listClient = this.missionService.getAllClientsName();
+		List<Client> listClient = this.clientService.getAllClients();
 		Collections.sort(listClient);
+			
 		
 		this.clientNameSelect = new Select();
 		this.clientNameSelect.setCaption("Nom du Client");
+		this.clientNameSelect.setItemCaptionMode(
+	            Select.ITEM_CAPTION_MODE_PROPERTY);
+		this.clientNameSelect.setItemCaptionPropertyId("name");
 		
-		for(String client : listClient){
+		for(Client client : listClient){
 			this.clientNameSelect.addItem(client);
 		}
 		
@@ -230,11 +239,11 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			if (this.searchByClientPanel.isVisible()) {
 					
 				
-				String clientName = (String) this.clientNameSelect.getValue();
+				Client client = (Client) this.clientNameSelect.getValue();
 				
 				try {
 					
-					this.listCollab = this.collabService.getAllColleaguesByClientName(clientName);
+					this.listCollab = this.collabService.getAllColleaguesByClient(client);
 					
 					updateObservateur();
 					

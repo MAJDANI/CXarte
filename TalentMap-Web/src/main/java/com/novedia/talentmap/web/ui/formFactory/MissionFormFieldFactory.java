@@ -1,14 +1,16 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
+import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.web.commons.Constants;
-import com.novedia.talentmap.web.ui.profile.mission.MissionForm;
-import com.novedia.talentmap.web.ui.profile.mission.MissionValidator;
+import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.vaadin.data.Item;
-import com.vaadin.data.validator.StringLengthValidator;
+import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
 import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.Select;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 
@@ -22,6 +24,16 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	 * 
 	 */
 	private static final long serialVersionUID = -8213744445391942619L;
+	
+	private IClientService clientService;
+	
+	/**
+	 * 
+	 * @param  client Service
+	 */
+	public MissionFormFieldFactory(IClientService clientService){
+		this.clientService = clientService;
+	}
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
@@ -31,7 +43,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(Constants.FIELD_ORDER_MISSION[i])){
 				
-				if(propertyId.equals(Constants.FIELD_MISSION_NAME) || propertyId.equals(Constants.FIELD_MISSION_CLIENT) || propertyId.equals(Constants.FIELD_MISSION_PLACE)){
+				if(propertyId.equals(Constants.FIELD_MISSION_NAME) || propertyId.equals(Constants.FIELD_MISSION_PLACE)){
 				
 					TextField field = new TextField((String) Constants.NAME_FIELD_MISSION[i]+" : ");
 					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
@@ -43,16 +55,26 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					if(propertyId.equals(Constants.FIELD_MISSION_NAME)){
 						//Putting a condition
 					}
-					
-					if(propertyId.equals(Constants.FIELD_MISSION_CLIENT)){
-						field.setStyleName("mission-client");
-					}
-					
+
 					if(propertyId.equals(Constants.FIELD_MISSION_PLACE)){
 						//Putting a condition
 					}
 					
 					return field;
+				}
+				
+				if(propertyId.equals(Constants.FIELD_MISSION_CLIENT)){
+					IndexedContainer ic = new IndexedContainer();
+			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
+					
+					Select clientSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
+					
+					for(Client client : clientService.getAllClients()){
+						item = ic.addItem(client.getId());
+						item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(client.getName());
+					}
+					
+					return clientSelect;
 				}
 				
 				if (propertyId.equals(Constants.FIELD_MISSION_START_DATE) || propertyId.equals(Constants.FIELD_MISSION_END_DATE)) {

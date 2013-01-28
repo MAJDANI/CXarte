@@ -3,14 +3,15 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.Date;
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
-import com.novedia.talentmap.web.util.Message;
 import com.vaadin.data.Item;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
@@ -47,6 +48,8 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Talent Map Service
 	 */
 	private IColleagueService collabService;
+	
+	private IClientService clientService;
 
 	/**
 	 * POJO
@@ -103,13 +106,15 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param missionFormLayout
 	 */
 	public MissionForm(Vector<Object> fieldOrderMission, Form missionForm,
-			GridLayout missionFormLayout, IColleagueService collabService,
+			GridLayout missionFormLayout, IColleagueService collabService, 
+			IClientService clientService,
 			Button save, Button cancel) {
 		super();
 		this.fieldOrderMission = fieldOrderMission;
 		this.missionForm = missionForm;
 		this.missionFormLayout = missionFormLayout;
 		this.collabService = collabService;
+		this.clientService = clientService;
 		this.save = save;
 		this.cancel = cancel;
 
@@ -133,7 +138,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 
 		CUtils.setOrderForm(this.fieldOrderMission, Constants.FIELD_ORDER_MISSION);
 		
-		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory());
+		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
 		
 		BeanItem<Item> missionBean = new BeanItem(new Mission());
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
@@ -223,7 +228,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public Mission buildMissionFromItem(Item itemMission, Integer missionId) {
 
 		String intitule = itemMission.getItemProperty(INTITULE).getValue().toString();
-		String client = itemMission.getItemProperty(CLIENT).getValue().toString();
+		Client client = (Client) itemMission.getItemProperty(CLIENT).getValue();
 		String lieu = itemMission.getItemProperty(LIEU).getValue().toString();
 		String dateDebut = itemMission.getItemProperty(DATE_DEBUT).getValue().toString();
 		String dateFin = itemMission.getItemProperty(DATE_FIN).getValue().toString();

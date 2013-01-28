@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.commons.Constants;
@@ -80,6 +81,7 @@ public class CollaboratorForm extends FormLayout {
 	 */
 	private IColleagueService collaboratorService;
 	private IProfileService profileService;
+	private IClientService clientService;
 
 	/**
 	 * 
@@ -91,7 +93,7 @@ public class CollaboratorForm extends FormLayout {
 	 * @param gLayoutCollaborator
 	 */
 	public CollaboratorForm(IColleagueService collaboratorService,
-			IProfileService profileService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
+			IProfileService profileService, IClientService clientService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
 			GridLayout gLayoutCollaborator, GridLayout gLayoutMission, VerticalLayout vLayoutManager,
 			Form formCollaborator, Form formMission, TextField managerField) {
 
@@ -102,6 +104,7 @@ public class CollaboratorForm extends FormLayout {
 		this.vLayoutManager = vLayoutManager;
 		this.collaboratorService = collaboratorService;
 		this.profileService = profileService;
+		this.clientService = clientService;
 		this.formCollaborator = formCollaborator;
 		this.formMission = formMission;
 		this.managerField = managerField;
@@ -225,7 +228,7 @@ public class CollaboratorForm extends FormLayout {
 		// Set the content form
 		this.formMission.setLayout(this.gLayoutMission);
 
-		this.formMission.setFormFieldFactory(new MissionFormFieldFactory());
+		this.formMission.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
 		//TODO vérifier si currentColleaguesLastMission == null, le setImmediate est utile
 		// VGU
 		// Set the form to act immediately on user input. This is
