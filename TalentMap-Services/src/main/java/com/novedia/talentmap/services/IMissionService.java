@@ -10,10 +10,5 @@ import java.util.List;
  */
 public interface IMissionService {
 
-/**
- * Get all clients name;
- * @return List<String>
- */
-List<String> getAllClientsName();
 
 }

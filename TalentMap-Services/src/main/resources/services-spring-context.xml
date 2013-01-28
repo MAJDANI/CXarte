@@ -18,6 +18,10 @@
 		 <property name="missionDao" ref="missionDao"/>
 		 <property name="managerDao" ref="managerDao"/>
 	</bean>
+	
+	<bean id="clientService" class="com.novedia.talentmap.services.impl.ClientService">
+		<property name="clientDao" ref="clientDao"/>
+	</bean>
     
     <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
 		<property name="profileDao" ref="profileDao"/>

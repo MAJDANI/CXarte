@@ -3,6 +3,7 @@ package com.novedia.talentmap.services;
 import java.util.List;
 import java.util.Map;
 
+import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
@@ -90,7 +91,7 @@ List<Colleague> getAllColleaguesByLastName(String lastName);
  * @param clientName
  * @return List<Colleague>
  */
-List<Colleague> getAllColleaguesByClientName(String clientName);
+List<Colleague> getAllColleaguesByClient(Client client);
 
 /**
  * Get all Collaborators by toolId.

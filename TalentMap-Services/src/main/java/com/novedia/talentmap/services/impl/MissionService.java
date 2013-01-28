@@ -21,13 +21,6 @@ public class MissionService implements IMissionService {
 	 * mission DAO.
 	 */
 	private IDao<Mission> missionDao;
-
-	/**
-	 * get All clients name
-	 */
-	public List<String> getAllClientsName() throws DataAccessException {
-		return ((MissionDao) missionDao).getAllClientsName();
-	}
 	
 	/**
 	 * This method allows to make the spring injection. Set the manager DAO.
