@@ -94,14 +94,4 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 		throw new UnsupportedOperationException();
 	}
 	
-	/**
-	 * Get all clients name
-	 * @return
-	 * @throws DataAccessException
-	 */
-	public List<String> getAllClientsName() throws DataAccessException {
-		return (List<String>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CLIENTS_NAME);
-	}
-	
-	
 }

@@ -11,6 +11,7 @@
     <sqlMap resource="maps/sqlmap-skill.xml"/>
     <sqlMap resource="maps/sqlmap-tool.xml"/>
     <sqlMap resource="maps/sqlmap-vskill.xml"/>
+    <sqlMap resource="maps/sqlmap-client.xml"/>
 <!--     <sqlMap resource="maps/sqlmap-vskillcollab.xml"/> -->
     <sqlMap resource="maps/sqlmap-mission.xml"/>
     <sqlMap resource="maps/sqlmap-manager.xml"/>

@@ -47,7 +47,7 @@ public static final String GET_ALL_COLLEAGUES_BY_LASTNAME="colleague.getAllColle
 /**
  * Constant request to get a colleague by client name.
  */
-public static final String GET_ALL_COLLEAGUES_BY_CLIENTNAME="colleague.getAllColleaguesByClientName";
+public static final String GET_ALL_COLLEAGUES_BY_CLIENT="colleague.getAllColleaguesByClient";
 
 /**
  * Constant request to get colleague by manager id
@@ -166,6 +166,11 @@ public static final String GET_ALL_MANAGER = "manager.getAll";
  * This constant is used to retrieve a colleague by manager id.
  */
 public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllCollaboratorsByManagerId";
+
+// CLIENT REQUESTS
+
+public static final String GET_ALL_CLIENTS = "client.getAll";
+
 
 
 // MISSION REQUESTS
@@ -374,7 +379,7 @@ public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogi
 
 public static final String GET_AUTHENTICATE = "authentication.get";
 
-public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.getbyid";
+public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.get";
 
 public static final String ADD_USER_FROM_REGISTRATION = "authentication.addUserFromRegistration";
 

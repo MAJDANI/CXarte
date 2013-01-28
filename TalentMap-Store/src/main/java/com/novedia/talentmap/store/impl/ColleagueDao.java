@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.store.IDao;
@@ -85,8 +86,8 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LASTNAME, lastName);
 	}
 	
-	public List<Colleague> getAllColleaguesByClientName(String clientName) throws DataAccessException {
-		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_CLIENTNAME, clientName);
+	public List<Colleague> getAllColleaguesByClient(Client client) throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_CLIENT, client);
 	}
 	
 	public List<Colleague> getAllColleaguesByListToolId(Map ToolIdMap) throws DataAccessException {
