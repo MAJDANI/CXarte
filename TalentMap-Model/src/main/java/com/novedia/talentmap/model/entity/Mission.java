@@ -45,7 +45,7 @@ public class Mission implements Serializable {
 	/**
 	 * The mission customer
 	 */
-	private String client;
+	private Client client;
 	
 	/**
 	 * Information on this mission
@@ -75,7 +75,7 @@ public class Mission implements Serializable {
 	 * @param endDate
 	 */
 	public Mission(Integer id, Integer colleagueId, String name, String place,
-			String client, String notes, Date startDate, Date endDate) {
+			Client client, String notes, Date startDate, Date endDate) {
 		super();
 		this.id = id;
 		this.colleagueId = colleagueId;
@@ -148,7 +148,7 @@ public class Mission implements Serializable {
 	 * 
 	 * @return the client
 	 */
-	public String getClient() {
+	public Client getClient() {
 		return client;
 	}
 	/**
@@ -156,7 +156,7 @@ public class Mission implements Serializable {
 	 * 
 	 * @param client the client to set
 	 */
-	public void setClient(String client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
 	/**

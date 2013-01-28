@@ -10,6 +10,8 @@
 	
 	<bean id="colleague" class="com.novedia.talentmap.model.entity.Colleague"/>
 	
+	<bean id="client" class="com.novedia.talentmap.model.entity.Client"/>
+	
     <bean id="profile" class="com.novedia.talentmap.model.entity.Profile"/>
     
     <bean id="category" class="com.novedia.talentmap.model.entity.Category"/>

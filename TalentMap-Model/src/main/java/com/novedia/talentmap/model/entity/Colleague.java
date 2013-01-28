@@ -20,7 +20,7 @@ public class Colleague implements Serializable {
 	private static final long serialVersionUID = -1323210979848908088L;
 	
 	/**
-	 * entity indentify
+	 * entity identify
 	 */
 	protected Integer id;
 	
