@@ -6,6 +6,7 @@ import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.vaadin.data.Item;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
@@ -65,20 +66,19 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 				}
 				
 				if(propertyId.equals(Constants.FIELD_MISSION_CLIENT)){
-					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
-					Select clientSelect = new Select("Client : "); 
-					
+					BeanItemContainer<Client> container =
+					        new BeanItemContainer<Client>(Client.class);
 				
 					for(Client client : clientService.getAllClients()){
-						item = ic.addItem(client.getId());
-						item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(client.getName());
+						container.addItem(client);
 					}
 					
-					clientSelect.setContainerDataSource(ic);
+					Select clientSelect = new Select("Client : ",container); 
+					clientSelect.setItemCaptionMode(
+				            Select.ITEM_CAPTION_MODE_PROPERTY);
+					clientSelect.setItemCaptionPropertyId("name");
 					clientSelect.setRequired(true);
-					clientSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
 					clientSelect.setNullSelectionAllowed(false);
 					clientSelect.setImmediate(true);
 
