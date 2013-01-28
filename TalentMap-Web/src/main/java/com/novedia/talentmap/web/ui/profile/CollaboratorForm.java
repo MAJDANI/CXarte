@@ -291,7 +291,7 @@ public class CollaboratorForm extends FormLayout {
 		this.gLayoutMission.setColumns(3);
 		this.gLayoutMission.setRows(1);
 		
-		this.setStyleName(TalentMapCSS.ADMINISTRATIVE_FORM);
+		//this.setStyleName(TalentMapCSS.ADMINISTRATIVE_FORM);
 		
 	}
 	
