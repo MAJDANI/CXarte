@@ -49,7 +49,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public int save(final Tool tool) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.SAVE_TOOL, tool);
+		return (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.SAVE_TOOL, tool);
 	}
 
 	/**
@@ -65,7 +66,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public Tool check(final String name) throws DataAccessException {
-		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_TOOL, name);
+		return (Tool) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.CHECK_TOOL, name);
 	}
 
 	/**
@@ -73,7 +75,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public int add(final Tool tool) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.ADD_TOOL, tool);
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.ADD_TOOL, tool.getId());
 	}
 
 	/**
@@ -81,6 +84,7 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public Tool getByName(final String name) throws DataAccessException {
-		return (Tool) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_TOOL_BY_NAME, name);
+		return (Tool) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_TOOL_BY_NAME, name);
 	}
 }
