@@ -1,4 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <MISSION MISSION_ID="1" COLLAB_ID="1" NAME="TESTS" PLACE="TEST" CLIENT="TEST@TEST.COM" START_DATE="2012-10-01" END_DATE="2012-11-01"/>
+<MISSION/>
+  <MISSION MISSION_ID="1"
+  		   COLLEAGUE_ID="1"
+  		   TITLE="Senior Java Architect" 
+  		   PLACE="10, rue Vésale 75005 Paris" 
+  		   CLIENT="VSCT" 
+  		   START_DATE="2013-01-01" 
+  		   END_DATE="2013-12-01"
+  />
+  <MISSION MISSION_ID="2"
+  		   COLLEAGUE_ID="1"
+  		   TITLE="BO Component Developer" 
+  		   PLACE="10, rue Vésale 75005 Paris" 
+  		   CLIENT="PSA" 
+  		   START_DATE="2012-02-20" 
+  		   END_DATE="2012-12-23"
+  />
 </dataset>

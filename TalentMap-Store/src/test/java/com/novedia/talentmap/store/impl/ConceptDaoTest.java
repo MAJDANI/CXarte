@@ -1,24 +1,18 @@
 package com.novedia.talentmap.store.impl;
 
-import static org.junit.Assert.assertNotNull;
-
+import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
-import org.unitils.dbunit.datasetloadstrategy.impl.CleanInsertLoadStrategy;
-import org.unitils.dbunit.datasetloadstrategy.impl.RefreshLoadStrategy;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBean;
+import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
@@ -26,21 +20,18 @@ import com.novedia.talentmap.model.entity.Concept;
 
 /**
  * Test conceptDao
- * @author moumbe
- *
+ * 
+ * @author j.marie-sainte
  */
-@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
+@DataSet("ConceptDaoTest.xml")
 public class ConceptDaoTest {
-	
-	/** For log management */
-	private static Log logger = LogFactory.getLog(ConceptDaoTest.class);
-	
-	@SpringBean("sqlMapClient")
+		
+	@SpringBeanByName
 	private SqlMapClient sqlMapClient;
 	
-	@SpringBean("conceptDao")
+	@SpringBeanByName
 	private ConceptDao conceptDao;
 	
 	@Before
@@ -49,27 +40,12 @@ public class ConceptDaoTest {
 	}
 	
 	/**
-	 * Test get concetp by id
+	 * Test get concept by id
 	 */
 	@Test
-	@DataSet(loadStrategy=CleanInsertLoadStrategy.class)
-	public void testGet() {
+	public void testGetById() {
 		Concept concept = conceptDao.get(1);
 		ReflectionAssert.assertPropertyLenientEquals("id", 1 ,concept);
-	}
-	
-	/**
-	 * Test add concept
-	 */
-	@Test
-	@Ignore
-	public void testAdd() {
-		Category category = Category.Builder.builder().id(1).name("CATEGORY1").build();
-		Concept concept = Concept.Builder.builder().name("CONCEPT10").category(category).build();
-		int actual = conceptDao.add(concept);
-		//Test est ok, si l'attribut id de concept est populate et 
-		//égale à la valeur de actual qui est la clé primaire retournée par ibatis
-		Assert.assertEquals(concept.getId().intValue(), actual);
 	}
 	
 	/**
@@ -77,38 +53,69 @@ public class ConceptDaoTest {
 	 */
 	@Test
 	public void testGetAll() {
+		
+		// Given
+		Category expectedCat = Category.builder().id(1).name("CATEGORY1").build();
+		
+		// When
 		List<Concept> concepts = conceptDao.getAll();
-//		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1,2,3,4,5), concepts);
-		assertNotNull(concepts);
+		
+		// Then
+		ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1,2,3,4), concepts);
+		ReflectionAssert.assertPropertyLenientEquals("category", Arrays.asList(expectedCat, expectedCat, expectedCat, expectedCat), concepts);
+		ReflectionAssert.assertPropertyLenientEquals("name", Arrays.asList("CONCEPT1","CONCEPT2","CONCEPT3","CONCEPT4"), concepts);
 	}
 	
 	/**
-	 * Test update row
+	 * Test update concept
 	 */
 	@Test
-	@DataSet(loadStrategy = RefreshLoadStrategy.class)
 	@ExpectedDataSet("ConceptDaoTest.testSave-result.xml")
 	public void testSave () {
 		
-		Concept concept = Concept.Builder.builder().build();
-		concept.setId(2);
-		concept.setName("TOTO");
+		// Given
+		Category category = Category.builder().id(1).name("CATEGORY1").build();
+		Concept concept = Concept.builder().id(2).name("MODIFIED").category(category).build();
 		
-		Category category = Category.Builder.builder().id(1).build();
-		concept.setCategory(category);
-		conceptDao.save(concept);
+		// When
+		int updateIndex = conceptDao.save(concept);
+		
+		// Then
+		Assert.assertTrue(updateIndex > 0);
+	}
+		
+	/**
+	 * Test delete concept
+	 */
+	@Test
+	public void testDelete () {
+		
+		// Given
+		Category category = Category.builder().id(1).name("CATEGORY1").build();
+		Concept concept = Concept.builder().id(4).name("CONCEPT4").category(category).build();
+		
+		// When
+		int deleteIndex = conceptDao.delete(concept);
+		
+		// Then
+		Assert.assertTrue(deleteIndex > 0);
 	}
 	
 	/**
-	 * Test delete
+	 * Test add concept
 	 */
 	@Test
-	@DataSet ("ConceptDaoTest.deleteConcept.xml")
-	public void testDelete () {
-		logger.debug("testDelete !!!!!!!!!!!!!!!");
-		Concept concept = Concept.Builder.builder().id(1).build();
-//		conceptDao.add(concept);
-		int index = conceptDao.delete(concept);
-		assertNotNull(index);
+	@DataSet("ConceptDaoTest.testAdd.xml")
+	public void testAdd() {
+		
+		// Given
+		Category category = Category.builder().id(1).name("CATEGORY1").build();
+		Concept concept = Concept.builder().name("CONCEPT_ADDED").category(category).build();
+		
+		// When
+		int addIndex = conceptDao.add(concept);
+		
+		// Then
+		Assert.assertTrue(addIndex > 0);
 	}
 }

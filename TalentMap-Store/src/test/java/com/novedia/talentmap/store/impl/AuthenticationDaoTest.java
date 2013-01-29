@@ -27,12 +27,9 @@ public class AuthenticationDaoTest {
 	@SpringBean("sqlMapClient")
 	private SqlMapClient sqlMapClient;
 	
-	@SpringBeanByName
+	@SpringBean("authenticationDao")
 	private AuthenticationDao authenticationDao;
 		
-	private CredentialToken credantial = new CredentialToken();
-	
-	private Authentication authentication = new Authentication();
 
 	@SpringBeanByName
 	private Authorization authorization;
@@ -42,6 +39,10 @@ public class AuthenticationDaoTest {
 		authenticationDao.setSqlMapClient(sqlMapClient);
 	}
 
+	private CredentialToken credential = new CredentialToken();
+	private Authentication authentication = new Authentication();
+	
+	
 	/**
 	 * Add the authentication
 	 */
@@ -52,13 +53,13 @@ public class AuthenticationDaoTest {
 		authorization.setLabel("Consultant");
 		authorization.setRoleId(4);
 		
-		credantial.setLogin("v.dibi");
-		credantial.setPassword("v.dibi");
+		credential.setLogin("v.dibi");
+		credential.setPassword("v.dibi");
 		
 		authentication.setId(1);
 		authentication.setColleagueId(1);
 		authentication.setAuthorization(authorization);
-		authentication.setToken(credantial);
+		authentication.setToken(credential);
 		
 		int addAuth = authenticationDao.add(authentication);
 		Assert.assertEquals(authentication.getId().intValue(), addAuth);
@@ -73,16 +74,15 @@ public class AuthenticationDaoTest {
 		authorization.setLabel("Consultant");
 		authorization.setRoleId(4);
 		
-		credantial.setLogin("o.chauvie");
-		credantial.setPassword("testUpdate");
+		credential.setLogin("o.chauvie");
+		credential.setPassword("testUpdate");
 		
-		//authentication.setId(1);
 		authentication.setColleagueId(1);
 		authentication.setAuthorization(authorization);
-		authentication.setToken(credantial);
+		authentication.setToken(credential);
 		
 		int updateAuth = authenticationDao.save(authentication);
-		//Assert.assertEquals(1, updateAuth);	
+		Assert.assertEquals(1, updateAuth);	
 	}
 	/**
 	 * check the authentication exist

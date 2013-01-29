@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<MISSION MISSION_ID="1" 
+			 COLLEAGUE_ID="1" 
+			 TITLE="Functionnal Analyst" 
+			 PLACE="10, rue Blénac, Paris" 
+			 CLIENT="GMF" 
+			 START_DATE="2012-05-26" 
+			 END_DATE="2013-07-16"
+	/>
+</dataset>

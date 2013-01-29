@@ -3,7 +3,8 @@ package com.novedia.talentmap.store.impl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.unitils.UnitilsJUnit4;
+import org.junit.runner.RunWith;
+import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
@@ -19,7 +20,8 @@ import com.novedia.talentmap.model.entity.Manager;
  */
 @Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
-public class ManagerDaoTest extends UnitilsJUnit4 {
+@RunWith(UnitilsJUnit4TestClassRunner.class)
+public class ManagerDaoTest {
 
 	@SpringBeanByName
 	private SqlMapClient sqlMapClient;

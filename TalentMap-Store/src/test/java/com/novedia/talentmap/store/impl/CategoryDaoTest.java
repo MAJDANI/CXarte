@@ -6,16 +6,14 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.unitils.UnitilsJUnit4;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBean;
+import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
@@ -25,15 +23,15 @@ import com.novedia.talentmap.model.entity.Category;
  * @author moumbe
  *
  */
-@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
+@DataSet("CategoryDaoTest.xml")
 public class CategoryDaoTest {
 
-	@SpringBean("sqlMapClient")
+	@SpringBeanByName
 	private SqlMapClient sqlMapClient;
 	
-	@SpringBean("categoryDao")
+	@SpringBeanByName
 	private CategoryDao categoryDao;
 	
 	@Before
@@ -45,8 +43,7 @@ public class CategoryDaoTest {
 	 * Test get
 	 */
 	@Test
-	@DataSet("CategoryDaoTest.xml")
-	public void testGet () {
+	public void testGetById () {
 		Category category = categoryDao.get(1);
 		ReflectionAssert.assertPropertyLenientEquals("id", 1 ,category);
 		ReflectionAssert.assertPropertyLenientEquals("name", "CATEGORY1" ,category);
@@ -63,39 +60,41 @@ public class CategoryDaoTest {
 	}
 	
 	/**
-	 * Test add category
-	 */
-	@Ignore
-	@Test
-	@DataSet("CategoryDaoTest.testAdd.xml")
-	public void testAdd () {
-		Category cat = Category.Builder.builder().id(41).name("CATEGORY").build();
-		int addIndex = categoryDao.add(cat);
-		Assert.assertEquals(cat.getId().intValue(), addIndex);
-	}
-	
-	/**
-	 * Test save category (update)
+	 * Test save category
 	 */
 	@Test
 	@ExpectedDataSet("CategoryDaoTest.testSave-result.xml")
-	@Ignore
 	public void testSave () {
-		Category cat = Category.Builder.builder().id(3).name("MODIFCATEGORY3").build();
-		int updateIndex = categoryDao.save(cat);
-		
-		// TODO : définir les assertions
+		Category category = Category.builder().id(3).name("MODIFCATEGORY3").build();
+		int updateIndex = categoryDao.save(category);
+		Assert.assertTrue(updateIndex > 0);
 	}
 	
 	/**
 	 * Test delete category
 	 */
-	@Ignore
 	@Test
 	public void testDelete () {
-		Category category = Category.Builder.builder().id(1).build();
+		
+		// Given
+		Category category = Category.builder().id(1).build();
+		
+		//When
 		int deleteIndex = categoryDao.delete(category);
-		//If succeed, delete return 1
-		Assert.assertEquals(1, deleteIndex);
+		
+		// Then
+		Assert.assertTrue(deleteIndex > 0);
 	}
+	
+	/**
+	 * Test add category
+	 */
+	@Test
+	@DataSet("CategoryDaoTest.testAdd.xml")
+	public void testAdd () {
+		Category cat = Category.builder().name("CATEGORY").build();
+		int addIndex = categoryDao.add(cat);
+		Assert.assertTrue(addIndex > 0);
+	}
+	
 }
