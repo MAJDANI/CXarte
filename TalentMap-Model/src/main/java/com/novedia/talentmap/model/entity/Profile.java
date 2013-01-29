@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import com.novedia.talentmap.model.entity.Concept.Builder;
+
 /**
  * This entity represents a Talent Map tool.
  * 
@@ -57,7 +59,7 @@ public class Profile implements Serializable {
 	 * Set the id value
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	private void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -72,13 +74,16 @@ public class Profile implements Serializable {
 	 * Set the profileType value
 	 * @param profileType the profileType to set
 	 */
-	public void setType(String type) {
+	private void setType(String type) {
 		this.type = type;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	// ------------------------------------------
+	// ------------ OVERRIDEN METHODS -----------
+	// ------------------------------------------
+	
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
@@ -89,8 +94,8 @@ public class Profile implements Serializable {
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode() {
@@ -98,8 +103,10 @@ public class Profile implements Serializable {
 		hashBuilder.append(this.getId());
 		return hashBuilder.hashCode();
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	
+	
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -116,5 +123,78 @@ public class Profile implements Serializable {
 		ebuilder.append(this.getId(), comparedObj.getId());
 		ebuilder.append(this.getType(), comparedObj.getType());
 		return ebuilder.isEquals();
+	}
+	
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+	
+	/**
+	 * Build an immutable profile entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	private Profile(final Builder builder) {
+		this.id = builder.id;
+		this.type = builder.type;
+	}
+	
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author j.marie-sainte
+	 */
+	public static final class Builder {
+		
+		/**
+		 * The concept identifier
+		 */
+		private Integer id;
+
+		/**
+		 * The concept name
+		 */
+		private String type;
+		
+		/**
+		 * Set the concept id
+		 * 
+		 * @param id concept identifier
+		 * @return
+		 */
+		public Builder id(final Integer id) {
+			this.id = id;
+			return this;
+		}
+		
+		/**
+		 * Set the concept id
+		 * 
+		 * @param id concept identifier
+		 * @return the builder
+		 */
+		public Builder type(final String type) {
+			this.type = type;
+			return this;
+		}
+		
+		/**
+		 * Build an immutable profile instance
+		 * 
+		 * @return  profile
+		 */
+		public Profile build() {
+			return new Profile(this);
+		}
 	}
 }
