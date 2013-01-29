@@ -464,8 +464,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillCategory(String categoryName) {
 
-//		Category category = new Category(this.currentCategoryId, categoryName);
-		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
 		
 		try {
 
@@ -486,12 +485,15 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillConcept(String categoryName, String conceptName) {
 
-//		Category category = new Category(this.currentCategoryId, categoryName);
-		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
-//		Concept concept = new Concept(this.currentConceptId,
-//				this.currentCategoryId, conceptName);
-		
-		Concept concept = Concept.Builder.builder().id(this.currentConceptId).category(category).name(categoryName).build();
+		// Category category = new Category(this.currentCategoryId,
+		// categoryName);
+		Category category = Category.builder().id(this.currentCategoryId)
+				.name(categoryName).build();
+		// Concept concept = new Concept(this.currentConceptId,
+		// this.currentCategoryId, conceptName);
+
+		Concept concept = Concept.builder().id(this.currentConceptId)
+				.category(category).name(categoryName).build();
 
 		try {
 
@@ -511,23 +513,21 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @param conceptName
 	 * @param toolName
 	 */
-	private void updateSkillTool(String categoryName, String conceptName,
-			String toolName) {
+	private void updateSkillTool(String categoryName, String conceptName, String toolName) {
 
 //		Category category = new Category(this.currentCategoryId, categoryName);
-		Category category = Category.Builder.builder().id(this.currentCategoryId).name(categoryName).build();
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
 //		Concept concept = new Concept(this.currentConceptId, this.currentCategoryId, conceptName);
-		Concept concept = Concept.Builder.builder().id(this.currentConceptId).category(category).name(categoryName).build();
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(categoryName).build();
 //		Tool tool = new Tool(this.currentToolId, this.currentConceptId, toolName);
-		Tool tool = Tool.Builder.builder().id(this.currentToolId).concept(concept).name(toolName).build();
+		Tool tool = Tool.builder().id(this.currentToolId).concept(concept).name(toolName).build();
 
 		try {
 
-			Map<String, Object> mapNotification = this.adminService
-					.updateASkill(category, concept, tool);
+			Map<String, Object> mapNotification = this.adminService.updateASkill(category, concept, tool);
 			CUtils.showMessage(mapNotification, getWindow());
-		} catch (Exception e) {
-
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
