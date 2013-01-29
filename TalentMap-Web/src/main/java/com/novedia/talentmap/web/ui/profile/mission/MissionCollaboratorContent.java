@@ -289,24 +289,21 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public void deleteMission(int idMissionToDelete) {
 		try {
-			Mission missionToDelete = new Mission();
-			missionToDelete.setId(idMissionToDelete);
-			int result = this.collaboratorService
-					.deleteMission(missionToDelete);
+			Mission missionToDelete = Mission.builder().id(idMissionToDelete).build();
+			int result = this.collaboratorService.deleteMission(missionToDelete);
+
 			if (result != 0) {
 				this.missionForm.setCurrentAction(MissionForm.ACTION_DELETE);
 
 				// TODO centralize messages
-				CUtils.showMessage("La mission a bien été supprimée",
-						Message.INFO, getWindow());
+				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
 
 				// creates a new list
 				missionForm.refreshListMission();
 
 			} else {
 				// TODO : what to do?
-				CUtils.showMessage("La mission N'A PAS été supprimée",
-						Message.INFO, getWindow());
+				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
 			}
 
 		} catch (Exception e) {
