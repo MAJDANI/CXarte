@@ -45,13 +45,9 @@ public class TabMain extends TabSheet {
 		this.adminView = adminView;
 		
 		//TODO: give explicit name of tabprofile
-//		this.tabProfileSheet.getWindow().getu
-		//Deprecated
-//		setStyle(TalentMapCSS.TABSHEET);
 		setStyleName(TalentMapCSS.TABSHEET);
 		setImmediate(true);
-		
-		
+				
 		//TODO : filter tab panel en fonction du role ??
 		addTab(this.tabProfileSheet, TAB_PROFIL_NAME);
 		addTab(this.searchView, TAB_SEARCH_NAME);
