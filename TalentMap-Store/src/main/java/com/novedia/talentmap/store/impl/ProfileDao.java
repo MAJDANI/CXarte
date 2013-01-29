@@ -14,6 +14,7 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * The profile DAO handles query for table Profile.
  * 
  * @author j.collet.
+ * @author j.marie-sainte
  */
 public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> {
 
@@ -24,7 +25,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 *            the sqlMapClient to set
 	 */
 	public ProfileDao(final SqlMapClient sqlMapClient) {
-		setSqlMapClient(sqlMapClient);
+		this.setSqlMapClient(sqlMapClient);
 	}
 
 	/**
@@ -49,7 +50,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int save(final Profile profile) throws DataAccessException {
-		throw new UnsupportedOperationException();
+		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_PROFILE, profile);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int add(final Profile profile) throws DataAccessException {
-		throw new UnsupportedOperationException();
+		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_PROFILE, profile);
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int delete(final Profile profile) throws DataAccessException {
-		throw new UnsupportedOperationException();
+		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_PROFILE, profile);
 	}
 
 	/**
