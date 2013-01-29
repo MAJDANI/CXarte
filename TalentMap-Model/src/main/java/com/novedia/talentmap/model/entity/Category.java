@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * 
  * @author j.marie-sainte
  */
+@SuppressWarnings( { "unused" })
 public class Category implements Serializable {
 
 	/**
@@ -27,22 +28,11 @@ public class Category implements Serializable {
 	 */
 	private String name;
 
+	
 	/**
-	 * Build an immutable category entity. the builder inner class for this
-	 * entity
+	 * Default constructor
 	 */
 	public Category() {
-	}
-
-	/**
-	 * Build an immutable category entity.
-	 * 
-	 * @param builder
-	 *            the builder inner class for this entity
-	 */
-	public Category(final Builder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
 	}
 
 	/**
@@ -60,7 +50,7 @@ public class Category implements Serializable {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Integer id) {
+	private void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,7 +69,7 @@ public class Category implements Serializable {
 	 * @param name
 	 *            the name to set
 	 */
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -91,7 +81,7 @@ public class Category implements Serializable {
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ");
-		strBld.append("name").append(getName()).append("]");
+		strBld.append("name=").append(getName()).append("]");
 		return strBld.toString();
 	}
 
@@ -117,13 +107,37 @@ public class Category implements Serializable {
 		hashBuilder.append(this.getId());
 		return hashBuilder.hashCode();
 	}
-
+	
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+	
+	/**
+	 * Build a category entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	private Category(final Builder builder) {
+		this.id = builder.id;
+		this.name = builder.name;
+	}
+	
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author j.marie-sainte
 	 */
-	public static class Builder {
+	public static final class Builder {
 
 		/**
 		 * The category identifier.
@@ -164,15 +178,6 @@ public class Category implements Serializable {
 		 */
 		public Category build() {
 			return new Category(this);
-		}
-
-		/**
-		 * Static constructor for this class.
-		 * 
-		 * @return a builder instance
-		 */
-		public static Builder builder() {
-			return new Builder();
 		}
 	}
 }
