@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 
+
 /**
  * Entity Client
  * @author y.rohr
@@ -108,5 +109,16 @@ public class Client implements Serializable, Comparable {
 	public int compareTo(Object o) {
 		return this.getName().compareTo(((Client)o).getName());
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof Client)){
+			return false;
+		} else {
+			Client client = (Client) obj;
+			return (this.id.equals(client.getId()) && this.name.equals(client.getName()));
+		}
+	}
+		
+	    
 }
