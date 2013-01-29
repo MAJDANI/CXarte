@@ -11,7 +11,7 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
- * Mission DAO handles query for table Mission..
+ * Mission DAO handles query for table Mission.
  * 
  * @author j.marie-sainte
  */
@@ -37,8 +37,9 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 
 	/**
 	 * Gets all mission for a colleague identifies by colleagueId, ordered by START_DATE.
-	 * @param colleagueId
-	 * @return
+	 * 
+	 * @param colleagueId colleague identifier
+	 * @return List<Mission> mission list
 	 * @throws DataAccessException
 	 */
 	@SuppressWarnings("unchecked")
@@ -75,7 +76,7 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	 */
 	@Override
 	public int delete(final Mission mission) throws DataAccessException {
-		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION, mission.getId());
+		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION, mission);
 	}
 
 	/**
