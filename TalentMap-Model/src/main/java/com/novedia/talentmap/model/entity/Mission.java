@@ -328,7 +328,7 @@ public class Mission implements Serializable {
 		/**
 		 * The mission customer
 		 */
-		private String client;
+		private Client client;
 
 		/**
 		 * Information on this mission
@@ -404,7 +404,7 @@ public class Mission implements Serializable {
 		 * 
 		 * @return the builder
 		 */
-		public Builder client(final String client) {
+		public Builder client(final Client client) {
 			this.client = client;
 			return this;
 		}
