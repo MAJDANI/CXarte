@@ -52,10 +52,10 @@ public class ManagerServiceTest {
 
 	@Test
 	public void getAllCollaboratorsByManagerIdReturnsAListOfCollaborators() {
+		
 		//Given
 		Integer managerId = 1;
-		Colleague collaborator = new Colleague();
-		collaborator.setManagerId(managerId);
+		Colleague collaborator = Colleague.builder().managerId(managerId).build();
 		
 		List<Colleague> listCollaboratorRequested = new ArrayList<Colleague>();
 		listCollaboratorRequested.add(collaborator);
@@ -68,7 +68,6 @@ public class ManagerServiceTest {
 		Mockito.verify(managerDaoMock, Mockito.times(1)).getAllCollaborators(managerId);
 		Assert.assertNotNull(listCollaboratorActual);
 		Assert.assertSame(listCollaboratorRequested, listCollaboratorActual);
-		
 	}
 	
 	@Test (expected=DataAccessException.class)
@@ -84,17 +83,17 @@ public class ManagerServiceTest {
 	
 	 @Test
 	public void getCollaboratorReturnsACollaborator() {
+		 
 		 //Given
-		 Integer collaboratorId = 1;
-		 Colleague collaboratorExpected = new Colleague();
-		 collaboratorExpected.setId(collaboratorId);
+		 Integer colleague = 1;
+		 Colleague collaboratorExpected = Colleague.builder().id(colleague).build();
 		 
 		 //When
-		 Mockito.when(colleagueDaoMock.get(collaboratorId)).thenReturn(collaboratorExpected);
-		 Colleague collaboratorActual = service.getCollaborator(collaboratorId);
+		 Mockito.when(colleagueDaoMock.get(colleague)).thenReturn(collaboratorExpected);
+		 Colleague collaboratorActual = service.getCollaborator(colleague);
 		
 		 //Test
-		 Mockito.verify(colleagueDaoMock, Mockito.times(1)).get(collaboratorId);
+		 Mockito.verify(colleagueDaoMock, Mockito.times(1)).get(colleague);
 		 Assert.assertNotNull(collaboratorActual);
 		 Assert.assertSame(collaboratorExpected, collaboratorActual);
 		 
@@ -102,7 +101,8 @@ public class ManagerServiceTest {
 	 
 	 @Test(expected=DataAccessException.class)
 	public void getCollaboratorThrowsDataAccessException () throws DataAccessException {
-		//Given
+		
+		 //Given
 		 Integer collaboratorId = 1;
 
 		 //When

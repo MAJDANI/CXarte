@@ -19,6 +19,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.store.IDao;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class ColleagueServiceTest {
 	
@@ -39,11 +40,9 @@ public class ColleagueServiceTest {
 
 	@Test
 	public void getAllCollaboratorReturnAListOfCollaborators(){
-		// Given
-		Colleague collaborator = new Colleague();
-		collaborator.setFirstName("toto");
-		collaborator.setId(1);
 		
+		// Given
+		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
 		List<Colleague> expectedCollaboratorsList = new ArrayList<Colleague>();
 		expectedCollaboratorsList.add(collaborator);
 
@@ -66,16 +65,15 @@ public class ColleagueServiceTest {
 	}
 	
 	@Test
-	public void getCollaboratorReturnsACollaborator() {
+	public void getCollaboratorReturnsCollaborator() {
+		
 		// Given
-		Integer collaboratorId = 1;
-		Colleague collaboratorExpected = new Colleague();
-		collaboratorExpected.setFirstName("toto");
-		collaboratorExpected.setId(collaboratorId);
+		Integer colleagueId = 1;
+		Colleague collaboratorExpected = Colleague.builder().id(colleagueId).firstName("toto").build();
 
 		// When
-		Mockito.when(colleagueDaoMock.get(collaboratorId)).thenReturn(collaboratorExpected);
-		Colleague collaboratorActual = service.getColleague(collaboratorId);
+		Mockito.when(colleagueDaoMock.get(colleagueId)).thenReturn(collaboratorExpected);
+		Colleague collaboratorActual = service.getColleague(colleagueId);
 
 		// Then
 		Assert.assertNotNull(collaboratorActual);
@@ -95,7 +93,8 @@ public class ColleagueServiceTest {
 	public void saveCollaboratorCallsSaveOneTime() {
 		
 		// Given
-		Colleague collaborator  = new Colleague();		
+		Colleague collaborator = Colleague.builder().build();
+		
 		// When
 		Mockito.when(colleagueDaoMock.save(Mockito.any(Colleague.class))).thenReturn(1);
 		service.saveColleague(collaborator);
@@ -106,8 +105,10 @@ public class ColleagueServiceTest {
 	
 	@Test(expected = DataAccessException.class)
 	public void saveCollaboratorThrowsDataAccessException() throws DataAccessException {
+		
 		// Given
-				Colleague collaborator  = new Colleague();	
+		Colleague collaborator = Colleague.builder().build();	
+		
 		// When
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(colleagueDaoMock).save(Mockito.any(Colleague.class));
 		service.saveColleague(collaborator);
@@ -115,6 +116,7 @@ public class ColleagueServiceTest {
 
 	@Test
 	public void deleteMissionCallsDeleteOneTime(){
+		
 		//When
 		Mockito.when(missionDaoMock.delete(Mockito.any(Mission.class))).thenReturn(1);
 		service.deleteMission(new Mission());
