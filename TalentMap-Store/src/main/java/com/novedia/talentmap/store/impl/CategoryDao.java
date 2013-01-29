@@ -75,7 +75,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	 */
 	@Override
 	public int delete(Category category) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CATEGORY, category.getId());			
+		return (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CATEGORY, category);			
 	}
 
 	/**
