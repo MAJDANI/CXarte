@@ -6,14 +6,14 @@ import java.util.Date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+
 /**
  * This entity represents a mission.
  * 
  * @author e.moumbe
- *
+ * 
  */
 public class Mission implements Serializable {
-	
 
 	/**
 	 * Serialization identifier
@@ -24,125 +24,85 @@ public class Mission implements Serializable {
 	 * The mission id
 	 */
 	private Integer id;
-	
+
 	/**
-	 * TODO : à supprimer
-	 * 
 	 * Colleague associated the mission
 	 */
-	private Integer colleagueId;
-	
+	private Colleague colleague;
+
 	/**
-	 * Mission name
+	 * Mission title
 	 */
-	private String name;
-	
+	private String title;
+
 	/**
 	 * Mission take place
 	 */
 	private String place;
-	
+
 	/**
 	 * The mission customer
 	 */
 	private Client client;
-	
+
 	/**
 	 * Information on this mission
 	 */
 	private String notes;
-	
+
 	/**
 	 * Start date of the mission
 	 */
 	private Date startDate;
-	
+
 	/**
 	 * End date of the mission
 	 */
 	private Date endDate;
-	
+
 	/**
 	 * Build the class Mission.java
+	 */
+	public Mission() {
+	}
+	
+	
+	/**
+	 * Get the mission id
+	 * 
+	 * @return id
+	 */
+	public Integer getId() {
+		return id;
+	}
+	
+	/**
+	 * Set the mission id
 	 * 
 	 * @param id
-	 * @param colleagueId
-	 * @param name
-	 * @param place
-	 * @param client
-	 * @param notes
-	 * @param startDate
-	 * @param endDate
 	 */
-	public Mission(Integer id, Integer colleagueId, String name, String place,
-			Client client, String notes, Date startDate, Date endDate) {
-		super();
+	private void setId(Integer id) {
 		this.id = id;
-		this.colleagueId = colleagueId;
-		this.name = name;
-		this.place = place;
-		this.client = client;
-		this.notes = notes;
-		this.startDate = startDate;
-		this.endDate = endDate;
 	}
 
 	/**
-	 * Build the class Mission.java 
+	 * Get the colleague
+	 * 
+	 * @return the colleague entity
 	 */
-	public Mission() {
-		super();
+	public Colleague getColleague() {
+		return colleague;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Set colleague value
+	 * 
+	 * @param colleague
 	 */
-	@Override
-	public String toString() {
-		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[collab_id=").append(getColleagueId()).append(", ");
-		strBld.append("[name=").append(getName()).append(", ");
-		strBld.append("[client=").append(getClient()).append("]");
-		return strBld.toString();	
+	public void setColleague(Colleague colleague) {
+		this.colleague = colleague;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		HashCodeBuilder hBuilder =  new HashCodeBuilder();
-		hBuilder.append(this.getId());
-		hBuilder.append(this.getColleagueId());
-		hBuilder.append(this.getName());
-		hBuilder.append(this.getClient());
-		return hBuilder.hashCode();
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null){
-			return false;			
-		}
-
-		if(!(obj instanceof Mission)){
-			return false;
-		}	
-		Mission comparedObj = (Mission)obj;
-		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getId(), comparedObj.getId());
-		ebuilder.append(this.getClient(), comparedObj.getClient());
-		ebuilder.append(this.getName(), comparedObj.getName());
-		return ebuilder.isEquals();
-	}
-	
-	
 	/**
 	 * Get the client value
 	 * 
@@ -151,14 +111,17 @@ public class Mission implements Serializable {
 	public Client getClient() {
 		return client;
 	}
+
 	/**
 	 * Set the client value
 	 * 
-	 * @param client the client to set
+	 * @param client
+	 *            the client to set
 	 */
-	public void setClient(Client client) {
+	private void setClient(Client client) {
 		this.client = client;
 	}
+
 	/**
 	 * Get the startDate value
 	 * 
@@ -167,15 +130,17 @@ public class Mission implements Serializable {
 	public Date getStartDate() {
 		return startDate;
 	}
+
 	/**
 	 * Set the startDate value
 	 * 
-	 * @param startDate the startDate to set
+	 * @param startDate
+	 *            the startDate to set
 	 */
-	public void setStartDate(Date startDate) {
+	private void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	
+
 	/**
 	 * Get the endDate value
 	 * 
@@ -184,68 +149,36 @@ public class Mission implements Serializable {
 	public Date getEndDate() {
 		return endDate;
 	}
-	
+
 	/**
 	 * Set the endDate value
 	 * 
-	 * @param endDate the endDate to set
+	 * @param endDate
+	 *            the endDate to set
 	 */
-	public void setEndDate(Date endDate) {
+	private void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	/**
 	 * Get the name value
 	 * 
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
 	 * Set the name value
 	 * 
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	private void setTitle(String title) {
+		this.title = title;
 	}
 	
-	/**
-	 * Get the id value
-	 *
-	 * @return id
-	 */
-	public Integer getId() {
-		return id;
-	}
-	/**
-	 * Set the name value
-	 * 
-	 * @param id
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	/**
-	 * Get the colleague value
-	 * 
-	 * @return colleague
-	 */
-	public Integer getColleagueId() {
-		return colleagueId;
-	}
-	
-	
-	/**
-	 * Set the colleague id
-	 * @param colleague
-	 */
-	public void setColleagueId(Integer colleagueId) {
-		this.colleagueId = colleagueId;
-	}
-
 	/**
 	 * Get the place value
 	 * 
@@ -258,14 +191,15 @@ public class Mission implements Serializable {
 	/**
 	 * Set the place value
 	 * 
-	 * @param place the place to set
+	 * @param place
+	 *            the place to set
 	 */
-	public void setPlace(String place) {
+	private void setPlace(String place) {
 		this.place = place;
 	}
 
 	/**
-	 * Get the notes 
+	 * Get the notes
 	 * 
 	 * @return the notes
 	 */
@@ -276,10 +210,248 @@ public class Mission implements Serializable {
 	/**
 	 * Set the notes
 	 * 
-	 * @param notes the notes to set
+	 * @param notes
+	 *            the notes to set
 	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	
+	// ------------------------------------------
+	// ------------ OVERRIDEN METHODS -----------
+	// ------------------------------------------
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		StringBuilder strBld = new StringBuilder();
+		strBld.append("[colleague=").append(getColleague()).append(", ");
+		strBld.append("[name=").append(getTitle()).append(", ");
+		strBld.append("[client=").append(getClient()).append("]");
+		return strBld.toString();
+	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hBuilder = new HashCodeBuilder();
+		hBuilder.append(this.getId());
+		hBuilder.append(this.getColleague().getId());
+		hBuilder.append(this.getTitle());
+		hBuilder.append(this.getClient());
+		return hBuilder.hashCode();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (!(obj instanceof Mission)) {
+			return false;
+		}
+		Mission comparedObj = (Mission) obj;
+		EqualsBuilder ebuilder = new EqualsBuilder();
+		ebuilder.append(this.getId(), comparedObj.getId());
+		ebuilder.append(this.getClient(), comparedObj.getClient());
+		ebuilder.append(this.getTitle(), comparedObj.getTitle());
+		return ebuilder.isEquals();
+	}
+	
+	//--------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+	
+	/**
+	 * Build an immutable mission entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	private Mission(final Builder builder) {
+		
+		this.id = builder.id;
+		this.colleague = builder.colleague;
+		this.title = builder.title;
+		this.place = builder.place;
+		this.client = builder.client;
+		this.notes = builder.notes;
+		this.startDate = builder.startDate;
+		this.endDate = builder.endDate;
+	}
+	
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author j.marie-sainte
+	 */
+	public static final class Builder {
+
+		/**
+		 * The mission id
+		 */
+		private Integer id;
+
+		/**
+		 * Colleague associated the mission
+		 */
+		private Colleague colleague;
+
+		/**
+		 * Mission name
+		 */
+		private String title;
+
+		/**
+		 * Mission take place
+		 */
+		private String place;
+
+		/**
+		 * The mission customer
+		 */
+		private String client;
+
+		/**
+		 * Information on this mission
+		 */
+		private String notes;
+
+		/**
+		 * Start date of the mission
+		 */
+		private Date startDate;
+
+		/**
+		 * End date of the mission
+		 */
+		private Date endDate;
+
+		/**
+		 * Set the mission id
+		 * 
+		 * @param id
+		 *            mission identifier
+		 *            
+		 * @return the builder
+		 */
+		public Builder id(final Integer id) {
+			this.id = id;
+			return this;
+		}
+		
+		/**
+		 * Set the colleague
+		 * 
+		 * @param colleague
+		 *            the linked colleague
+		 *            
+		 * @return the builder
+		 */
+		public Builder colleague(final Colleague colleague) {
+			this.colleague = colleague;
+			return this;
+		}
+
+		/**
+		 * Set the mission title
+		 * 
+		 * @param title
+		 *            the mission title
+		 *            
+		 * @return the builder
+		 */
+		public Builder title(final String title) {
+			this.title = title;
+			return this;
+		}
+
+		/**
+		 * Set place of the mission
+		 * 
+		 * @param place
+		 *            the mission's place
+		 * 
+		 * @return the builder
+		 */
+		public Builder place(final String place) {
+			this.place = place;
+			return this;
+		}
+
+		/**
+		 * Set the client name
+		 * 
+		 * @param client the client name
+		 * 
+		 * @return the builder
+		 */
+		public Builder client(final String client) {
+			this.client = client;
+			return this;
+		}
+		
+		/**
+		 * Set the notes about the mission
+		 * 
+		 * @param notes
+		 *            the comments about the mission
+		 * @return the builder
+		 */
+		public Builder notes(final String notes) {
+			this.notes = notes;
+			return this;
+		}
+		
+		/**
+		 * Set the start date
+		 * 
+		 * @param startDate
+		 *            the mission's start date
+		 * @return the builder
+		 */
+		public Builder startDate(final Date startDate) {
+			this.startDate = startDate;
+			return this;
+		}
+		
+		/**
+		 * Set the end date
+		 * 
+		 * @param endDate
+		 *            the mission's end date
+		 * @return the builder
+		 */
+		public Builder endDate(final Date endDate) {
+			this.endDate = endDate;
+			return this;
+		}
+		
+		/**
+		 * Build an immutable instance of mission.
+		 * 
+		 * @return mission
+		 */
+		public Mission build() {
+			return new Mission(this);
+		}
+	}
 }
