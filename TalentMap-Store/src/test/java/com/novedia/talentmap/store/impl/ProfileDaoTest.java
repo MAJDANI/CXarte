@@ -106,7 +106,7 @@ public class ProfileDaoTest {
 	public void testAdd() throws Exception {
 		
 		// Given
-		Profile profile = Profile.builder().type("Build Manager").build();
+		Profile profile = Profile.builder().id(1).type("Build Manager").build();
 		
 		// When
 		int addIndex = profileDao.add(profile);
