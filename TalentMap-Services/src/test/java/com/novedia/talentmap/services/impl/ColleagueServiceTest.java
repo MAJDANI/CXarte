@@ -19,7 +19,6 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.store.IDao;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class ColleagueServiceTest {
 	
@@ -40,9 +39,9 @@ public class ColleagueServiceTest {
 
 	@Test
 	public void getAllCollaboratorReturnAListOfCollaborators(){
-		
 		// Given
 		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
+		
 		List<Colleague> expectedCollaboratorsList = new ArrayList<Colleague>();
 		expectedCollaboratorsList.add(collaborator);
 
@@ -65,8 +64,7 @@ public class ColleagueServiceTest {
 	}
 	
 	@Test
-	public void getCollaboratorReturnsCollaborator() {
-		
+	public void getCollaboratorReturnsACollaborator() {
 		// Given
 		Integer colleagueId = 1;
 		Colleague collaboratorExpected = Colleague.builder().id(colleagueId).firstName("toto").build();
@@ -86,15 +84,13 @@ public class ColleagueServiceTest {
 		// When
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(colleagueDaoMock).get(Mockito.anyInt());
 		service.getColleague(1);
-
 	}
 	
 	@Test
 	public void saveCollaboratorCallsSaveOneTime() {
 		
 		// Given
-		Colleague collaborator = Colleague.builder().build();
-		
+		Colleague collaborator  = new Colleague();		
 		// When
 		Mockito.when(colleagueDaoMock.save(Mockito.any(Colleague.class))).thenReturn(1);
 		service.saveColleague(collaborator);
@@ -105,10 +101,8 @@ public class ColleagueServiceTest {
 	
 	@Test(expected = DataAccessException.class)
 	public void saveCollaboratorThrowsDataAccessException() throws DataAccessException {
-		
 		// Given
-		Colleague collaborator = Colleague.builder().build();	
-		
+				Colleague collaborator  = new Colleague();	
 		// When
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(colleagueDaoMock).save(Mockito.any(Colleague.class));
 		service.saveColleague(collaborator);
@@ -127,7 +121,6 @@ public class ColleagueServiceTest {
 	
 	@Test(expected = DataAccessException.class)
 	public void deleteMissionThrowsDataAccessException() throws DataAccessException {
-		
 		// When
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(missionDaoMock).delete(Mockito.any(Mission.class));
 		service.deleteMission(new Mission());

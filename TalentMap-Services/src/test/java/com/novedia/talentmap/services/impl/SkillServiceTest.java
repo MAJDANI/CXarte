@@ -35,7 +35,6 @@ import com.novedia.talentmap.store.IVSkillDao;
 import com.novedia.talentmap.store.impl.SkillDao;
 
 /**
- * 
  * @author v.dibi
  *
  */
@@ -86,9 +85,7 @@ public class SkillServiceTest {
 		Skill skillExpected = new Skill();
 		skillExpected.setTool_id(toolId);
 		skillExpected.setColleagueId(collaboratorId);
-		
-		Colleague collaboratorExpected = Colleague.builder().id(collaboratorId).firstName("toto").build();
-							
+											
 		//When
 		Mockito.when(skillDaoMock.getCollaboratorSkillByTool(collaboratorId, toolId)).thenReturn(skillExpected);
 		Skill skillActuel = service.getSkillByToolId(collaboratorId, toolId);
@@ -120,6 +117,7 @@ public class SkillServiceTest {
 		vSkillCollab.setCategory_name("java");
 		vSkillCollab.setTool_name("tool_name");
 			
+	
 		List<VSkillCollab> expetedvSkillCollabList = new ArrayList<VSkillCollab>();
 		expetedvSkillCollabList.add(vSkillCollab);
 		
@@ -147,15 +145,12 @@ public class SkillServiceTest {
 	public void getAllToolsReturnAListOfTools(){
 		
 		// Given
-		Tool tool1 = Tool.builder().build();
-		Concept concept = Concept.builder().build();
-//		concept.setId(1);
-//		tool1.setConcept(concept);
-//		tool1.setId(1);
-//		tool1.setName("Spring");
+		Category category = Category.builder().id(1).name("JAVA").build();
+		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
+		Tool tool = Tool.builder().id(1).concept(concept).name("Spring").build();
 
 		List<Tool> expectedToolsList = new ArrayList<Tool>();
-		expectedToolsList.add(tool1);
+		expectedToolsList.add(tool);
 
 		// When
 		Mockito.when(toolDaoMock.getAll()).thenReturn(expectedToolsList);
@@ -320,16 +315,14 @@ public class SkillServiceTest {
 	}
 	
 	@Test
-	@Ignore
 	public void getConceptByIdReturnAConcept(){
 		
 		//Given
 		Integer conceptId = 1;
-		String conceptName = "conceptName";
+		String conceptName = "ORM";
 		
-		Concept conceptExpected = Concept.builder().build();
-//		conceptExpected.setId(conceptId);
-//		conceptExpected.setName(conceptName);
+		Category category = Category.builder().id(1).name("JAVA").build();
+		Concept conceptExpected = Concept.builder().id(conceptId).category(category).name("ORM").build();
 		
 		List<Concept> conceptListExpected = new ArrayList<Concept>();
 		conceptListExpected.add(conceptExpected);
@@ -357,16 +350,13 @@ public class SkillServiceTest {
 	}
 
 	@Test
-	@Ignore
 	public void getCategoryByIdReturnACategory(){
-		
 		//Given
 		Integer categoryId = 1;
-		String categoryName = "conceptName";
+		String categoryName = "JAVA";
 		
-		Category categoryExpected = Category.builder().build();
-//		categoryExpected.setName(categoryName);
-//		categoryExpected.setId(categoryId);
+		
+		Category categoryExpected = Category.builder().id(categoryId).name(categoryName).build();
 		
 		List<Category> categoryListExpected = new ArrayList<Category>();
 		categoryListExpected.add(categoryExpected);
@@ -415,10 +405,9 @@ public class SkillServiceTest {
 	}
 	
 	@Test 
-	public void buildToolATool() {		
-		
+	public void buildToolATool(){		
 		//Given
-		Tool tool = Tool.builder().build();
+		Tool tool = new Tool();
 		Integer tooId = 1;
 				
 		//When
@@ -434,7 +423,7 @@ public class SkillServiceTest {
 	public void buildConceptReturnAConcept(){
 		//Given
 	
-		Tool tool = Tool.builder().build();
+		Tool tool = new Tool();
 		List<Tool> listToolExpected =  new ArrayList<Tool>();
 		listToolExpected.add(tool);
 	

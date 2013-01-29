@@ -46,13 +46,13 @@ public class RegistrationServiceTest {
 	
 	@Test
 	public void checkRegistrationReturnAColleague(){
+		
 		// Given
-		Colleague collaborator = new Colleague();
-		collaborator.setFirstName("toto");
-		collaborator.setId(1);
+		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
+		
+		// TODO : rendre les instances de registration immutables
 		Registration registration  = new Registration();
 		
-
 		// When
 		Mockito.when(colleagueDaoMock.check(registration)).thenReturn(collaborator);
 		Colleague result = service.check(registration);
@@ -65,10 +65,9 @@ public class RegistrationServiceTest {
 	
 	@Test
 	public void getAllConsultantManagerReturnAListOfColleagues(){
+		
 		// Given
-		Colleague collaborator = new Colleague();
-		collaborator.setFirstName("toto");
-		collaborator.setId(1);
+		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
 		
 		List<Colleague> expectedCollaboratorsList = new ArrayList<Colleague>();
 		expectedCollaboratorsList.add(collaborator);
@@ -85,9 +84,7 @@ public class RegistrationServiceTest {
 	@Test
 	public void getAllBusinessEngineerReturnAListOfColleagues(){
 		// Given
-		Colleague collaborator = new Colleague();
-		collaborator.setFirstName("toto");
-		collaborator.setId(1);
+		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
 		
 		List<Colleague> expectedCollaboratorsList = new ArrayList<Colleague>();
 		expectedCollaboratorsList.add(collaborator);
@@ -103,10 +100,9 @@ public class RegistrationServiceTest {
 	
 	@Test
 	public void getAllProfileReturnAListOfProfile(){
+		
 		// Given
-		Profile profile = new Profile();
-		profile.setType("Développeur");
-		profile.setId(1);
+		Profile profile = Profile.builder().id(1).type("Développeur").build();
 		
 		List<Profile> expectedProfilesList = new ArrayList<Profile>();
 		expectedProfilesList.add(profile);

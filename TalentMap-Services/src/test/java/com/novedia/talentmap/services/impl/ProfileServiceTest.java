@@ -73,8 +73,7 @@ public class ProfileServiceTest {
 	}
 	
 	@Test
-	public void getProfileByIdReturnsProfileWithRightId() {
-		
+	public void getProfileReturnsAProfile() {
 		//Given
 		Integer profileId = 1;
 		Profile profileExpected = Profile.builder().id(profileId).build();
@@ -87,6 +86,7 @@ public class ProfileServiceTest {
 		Mockito.verify(profileDaoMock, Mockito.times(1)).get(profileId);
 		Assert.assertNotNull(profileActual);
 		Assert.assertSame(profileExpected, profileActual);
+		
 	}
 	
 	@Test(expected=DataAccessException.class)
@@ -97,5 +97,6 @@ public class ProfileServiceTest {
 		//When
 		Mockito.when(profileDaoMock.get(profileId)).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		service.getProfile(profileId);
+		
 	}
 }
