@@ -9,10 +9,6 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
-   	
-	<!-- Model beans declaration import -->
-	<import resource="classpath:model-spring-context.xml"/>
-	
 	<!-- Import all configuration to connect with database -->
 	<import resource="datasource-test.xml"/>
 	
