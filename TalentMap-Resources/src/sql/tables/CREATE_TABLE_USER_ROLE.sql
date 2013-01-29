@@ -10,7 +10,7 @@ CREATE TABLE USER_ROLE
 )
 TABLESPACE tmp00dta;
 
-COMMENT ON TABLE AUTHORIZATION IS 'Table des autorisations';
+COMMENT ON TABLE USER_ROLE IS 'Table des rôles';
 
 -----------------------
 -- SEQUENCE CREATION --
