@@ -273,6 +273,7 @@ private IDao<Category> categoryDaoMock;
 		service.saveTool(vSkill);
 	}
 	
+	@Ignore
 	@Test
 	public void saveToolCreateNewToolWhenToolIsNull(){
 
