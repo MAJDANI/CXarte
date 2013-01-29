@@ -74,11 +74,13 @@ public static final String GET_ALL_CONSULTANT_MANAGER = "colleague.getAllConsult
  */
 public static final String GET_ALL_BUSINESS_ENGINEER = "colleague.getAllBusinessEngineer";
 
+
+
 // CATEGORY REQUESTS
 /**
  * Constant request to get a category.
  */
-public static final String GET_CATEGORY = "category.getCategory";
+public static final String GET_CATEGORY = "category.get";
 
 /**
  * This constant is used to retrieve all category.
@@ -172,7 +174,6 @@ public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllColl
 public static final String GET_ALL_CLIENTS = "client.getAll";
 
 
-
 // MISSION REQUESTS
 
 /**
@@ -184,7 +185,7 @@ public static final String GET_MISSION = "mission.get";
  * This constant is used to retrieve all missions for a clolleagueId, 
  * ordered by START_DATE.
  */
-public static final String GET_ALL_MISSION_BY_COLLEAGUE_ID = "mission.getAll";
+public static final String GET_ALL_MISSION_BY_COLLEAGUE_ID = "mission.getAllByColleague";
 
 /**
  * Constant request to add a mission.
@@ -208,11 +209,6 @@ public static final String GET_ALL_CLIENTS_NAME = "mission.getAllClientsName";
  * This constant is used to retrieve all profile.
  */
 public static final String GET_ALL_PROFILE = "profile.getAll";
-
-/**
- * Constant request to check a profile.
- */
-public static final String CHECK_PROFILE = "profile.check";
 
 /**
  * This constant is used to retrieve a profile.
