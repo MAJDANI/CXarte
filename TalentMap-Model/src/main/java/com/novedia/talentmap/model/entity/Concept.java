@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * 
  * @author j.marie-sainte
  */
+@SuppressWarnings("unused")
 public class Concept implements Serializable {
 
 	/** 
@@ -36,27 +37,31 @@ public class Concept implements Serializable {
 	 * The score 
 	 */
 	private Double score;
-	
+
 	/**
-	 * default constructor
+	 * Default constructor
 	 */
 	public Concept(){
-		super ();
 	}
 	
 	/**
-	 * Build an immutable concept entity.
+	 * Get the concept id
 	 * 
-	 * @param builder
-	 *            the builder inner class for this entity
+	 * @return id
 	 */
-	public Concept(final Builder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
-		this.category = builder.category;
-		this.score = builder.score;
+	public Integer getId() {
+		return id;
 	}
-
+	
+	/**
+	 * Set the concept id.
+	 * 
+	 * @param id
+	 */
+	private void setId(Integer id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Get the name value
 	 * 
@@ -72,17 +77,8 @@ public class Concept implements Serializable {
 	 * @param name
 	 *            the name to set
 	 */
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
-	}
-	
-	/**
-	 * Set the score linked to this concept
-	 * 
-	 * @param score
-	 */
-	public void setScore(double score) {
-		this.score = score;
 	}
 	
 	/**
@@ -93,7 +89,16 @@ public class Concept implements Serializable {
 	public Double getScore() {
 		return score;
 	}
-
+	
+	/**
+	 * Set the score for the concept
+	 * 
+	 * @param score
+	 */
+	public void setScore(Double score) {
+		this.score = score;
+	}
+	
 	/**
 	 * Get the category
 	 * 
@@ -109,7 +114,7 @@ public class Concept implements Serializable {
 	 * @param category
 	 *            the category to set
 	 */
-	public void setCategory(Category category) {
+	private void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -117,9 +122,8 @@ public class Concept implements Serializable {
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
@@ -132,9 +136,8 @@ public class Concept implements Serializable {
 	}
 	
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -153,9 +156,8 @@ public class Concept implements Serializable {
 		return ebuilder.isEquals();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode() {
@@ -170,11 +172,33 @@ public class Concept implements Serializable {
 	// -------------------------------------
 	
 	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+	
+	/**
+	 * Build an immutable concept entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	private Concept(final Builder builder) {
+		this.id = builder.id;
+		this.name = builder.name;
+		this.category = builder.category;
+		this.score = builder.score;
+	}
+	
+	/**
 	 * Inner builder class.
 	 * 
 	 * @author j.marie-sainte
 	 */
-	public static class Builder {
+	public static final class Builder {
 		
 
 		/**
@@ -249,32 +273,5 @@ public class Concept implements Serializable {
 		public Concept build() {
 			return new Concept(this);
 		}
-		
-		/**
-		 * Static constructor for this class.
-		 * 
-		 * @return a builder instance
-		 */
-		public static Builder builder() {
-			return new Builder();
-		}
-	}
-
-	/**
-	 * Get the concept identifier
-	 * 
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * Set the concept identifier
-	 * 
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 }

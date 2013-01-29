@@ -2,11 +2,18 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
  * This entity represents a manager.
  * 
- * @author e.moumbe
+ * @author j.marie-sainte
  *
  */
 public class Manager extends Colleague implements Serializable {
@@ -17,33 +24,24 @@ public class Manager extends Colleague implements Serializable {
 	private static final long serialVersionUID = -5987763744641087415L;
 	
 	/**
-	 * Lists collaborator
+	 * Colleagues list
 	 */
-	private ArrayList<Colleague> colleagues = new ArrayList<Colleague>();
+	private List<Colleague> colleagues = new ArrayList<Colleague>();
 
-	/**
-	 * Build an instance of manager
-	 */
-	public Manager() {
-		super();
-	}
-
-	/**
-	 * Add collaborator in the list collaborators
-	 * @param mission
-	 * @return
-	 */
-	public ArrayList<Colleague> addListCollaborators( Colleague collaborator){
-		colleagues.add(collaborator);
-		return colleagues;		
-	}
+// TODO : A supprimer car constructeur par défaut
+//	/**
+//	 * Build an instance of manager
+//	 */
+//	public Manager() {
+//		super();
+//	}
 
 	/**
 	 * Get the manager's colleagues list
 	 * 
 	 * @return the collaborators
 	 */
-	public ArrayList<Colleague> getCollaborators() {
+	public List<Colleague> getColleagues() {
 		return colleagues;
 	}
 
@@ -52,8 +50,95 @@ public class Manager extends Colleague implements Serializable {
 	 * 
 	 * @param colleagues the colleagues to set
 	 */
-	public void setCollaborators(ArrayList<Colleague> colleagues) {
+	public void setColleagues(List<Colleague> colleagues) {
 		this.colleagues = colleagues;
 	}
 	
-}
+	// ------------------------------------------
+	// ------------ OVERRIDEN METHODS -----------
+	// ------------------------------------------
+		
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		StringBuilder strBld = new StringBuilder();
+		strBld.append(super.toString());
+		strBld.append("->[Colleagues List").append(getColleagues()).append("] ");
+
+		return strBld.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hashBuilder = new HashCodeBuilder();
+		hashBuilder.append(this.getId());
+		hashBuilder.append(this.getFirstName());
+		hashBuilder.append(this.getLastName());
+
+		return hashBuilder.hashCode();
+	}
+		
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+		
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder(){
+		return new Builder() ;
+	} 
+	
+	/**
+	 * 
+	 * @param builder
+	 */
+	private Manager(final Builder builder){
+		super(builder);
+		this.colleagues = builder.colleagues;
+	}
+	
+	
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author j.marie-sainte
+	 */
+	public static final class Builder extends Colleague.Builder{
+		
+		/**
+		 * Colleagues list bind to this manager
+		 */
+		private List<Colleague> colleagues = Lists.newArrayList();
+		
+		/**
+		 * Set the colleagues list
+		 * 
+		 * @param colleagues
+		 * @return the builder
+		 */
+		public Builder colleagues(Colleague... colleagues){
+			this.colleagues.addAll(Arrays.asList(colleagues));
+			return this;
+		}
+		
+		/**
+		 * Build an immutable instance of tool.
+		 * 
+		 * @return a manager
+		 */
+		public Manager build() {
+			this.colleagues = ImmutableList.copyOf(this.colleagues);
+			return new Manager(this);
+		}
+				
+	}
+	
+}		
