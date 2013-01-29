@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
-	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="tool">
 
     <typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool"/> 
     
-    <resultMap id="toolResult" class="tool">
-    	<result property="id" column="TOOL_ID"/> 
-        <result property="name"  column="TOOL_NAME"/>          
-        <result property="concept.id" column="CONCEPT_ID"/>
-        <result property="concept.name" column="CONCEPT_NAME"/>     
+    <resultMap id="toolResult"                    class="tool">
+    	<result property="id"                     column="TOOL_ID"/> 
+        <result property="name"                   column="TOOL_NAME"/>          
+        <result property="concept.id"             column="CONCEPT_ID"/>
+        <result property="concept.name"           column="CONCEPT_NAME"/> 
     </resultMap>
 	
-	<statement id="get" resultMap="toolResult" parameterClass="Integer">
+	<select id="get" resultMap="toolResult" parameterClass="Integer">
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND tool.CONCEPT_ID = concept.CONCEPT_ID
-	</statement>
+	</select>
 	
 	<statement id="getByName" resultMap="toolResult" parameterClass="String">
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND tool.CONCEPT_ID = concept.CONCEPT_ID
@@ -30,7 +29,7 @@
     	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = #conceptId#
     	AND tool.CONCEPT_ID = concept.CONCEPT_ID 
     </select>	
-    
+        
     <insert id="add" parameterClass="Tool">
     	
     	<selectKey resultClass="int" keyProperty="id">
@@ -47,7 +46,7 @@
     		<selectKey keyProperty="id" resultClass="Integer">
     			SELECT LAST_INSERT_ID() AS id  
     		</selectKey>
-    </insert>	
+    </insert>
     
     <select id="check" resultClass="tool" parameterClass="String">
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
@@ -57,7 +56,7 @@
 		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
 	</update> 
 	
-	<delete id="delete" parameterClass="Integer">
+	<delete id="delete" parameterClass="Tool">
 		DELETE TOOL CASCADE	WHERE TOOL_ID = #id#
 	</delete>	 
 
