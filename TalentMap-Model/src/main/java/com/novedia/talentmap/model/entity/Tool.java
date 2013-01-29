@@ -7,13 +7,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * This entity represents a Talent Map tool.
- * 
- * A tool is the finest level of skill. A tool could be, from a
- * technical view, a Framework like Spring, Vaadin an so on, it could be also
- * any kind of software using in the realization of a project (ERP, BDD, etc.)
- * 
+ * <ul>
+ * <li>A tool is the finest level of skill.</li> 
+ * <li>A tool could be, from a technical point of view, a Framework like Spring, Vaadin an so on.</li> 
+ * <li>It could be also any kind of software using in the realization of a project (ERP, BDD, etc.)</li>
+ * </ul>
  * @author j.marie-sainte 
  */
+@SuppressWarnings({"rawtypes", "unused"})
 public class Tool implements Serializable, Comparable {
 
 	/**
@@ -35,24 +36,11 @@ public class Tool implements Serializable, Comparable {
 	 * The concept this tool is a part of.
 	 */
 	private Concept concept;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public Tool(){
-		
-	}
-	
-	/**
-	 * Build an immutable tool entity.
-	 * 
-	 * @param builder
-	 *            the builder inner class for this entity
-	 */
-	public Tool(final Builder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
-		this.concept = builder.concept;
+	public Tool(){	
 	}
 	
 	/**
@@ -69,7 +57,7 @@ public class Tool implements Serializable, Comparable {
 	 * 
 	 * @param id
 	 */
-	public void setId(Integer id) {
+	private void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -87,7 +75,7 @@ public class Tool implements Serializable, Comparable {
 	 * 
 	 * @param concept
 	 */
-	public void setConcept(Concept concept) {
+	private void setConcept(Concept concept) {
 		this.concept = concept;
 	}
 
@@ -106,7 +94,7 @@ public class Tool implements Serializable, Comparable {
 	 * @param name
 	 *            the name to set
 	 */
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -114,9 +102,8 @@ public class Tool implements Serializable, Comparable {
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
@@ -128,9 +115,8 @@ public class Tool implements Serializable, Comparable {
 		return strBld.toString();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -149,9 +135,8 @@ public class Tool implements Serializable, Comparable {
 		return ebuilder.isEquals();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode() {
@@ -170,16 +155,39 @@ public class Tool implements Serializable, Comparable {
 		int result = this.getName().compareToIgnoreCase(toolToCompare.getName());
 		return result;
 	}
+	
+	
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
+	
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+	
+	/**
+	 * Build an immutable tool entity.
+	 * 
+	 * @param builder
+	 *            the builder inner class for this entity
+	 */
+	private Tool(final Builder builder) {
+		this.id = builder.id;
+		this.name = builder.name;
+		this.concept = builder.concept;
+	}
 	
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author j.marie-sainte
 	 */
-	public static class Builder {
+	public static final class Builder {
 
 		/**
 		 * The tool identifier.
@@ -236,15 +244,6 @@ public class Tool implements Serializable, Comparable {
 		 */
 		public Tool build() {
 			return new Tool(this);
-		}
-		
-		/**
-		 * Static constructor for this class.
-		 * 
-		 * @return a builder instance
-		 */
-		public static Builder builder() {
-			return new Builder();
 		}
 	}
 
