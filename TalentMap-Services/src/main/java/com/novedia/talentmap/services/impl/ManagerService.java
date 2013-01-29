@@ -28,7 +28,7 @@ public class ManagerService implements IManagerService {
 	private IDao<Colleague> colleagueDao;
 
 	/**
-	 * This method allow to return all collaborator by manager.
+	 * This method allow to return all Colleagues by manager.
 	 * 
 	 * @return a list of collaborator
 	 * @param managerId

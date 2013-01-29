@@ -99,29 +99,24 @@ void saveCategory(final VSkill skill) throws DataAccessException {
 	this.category = this.categoryDao.check(skill.getCategory_name());
 
 	if (this.category == null && this.tool == null) {
-		this.category = Category.Builder.builder().build();
-		this.category.setName(skill.getCategory_name());
+		this.category = Category.builder().name(skill.getCategory_name()).build();
 		categoryId = this.categoryDao.save(this.category);
 	} 
 }
 
+// TODO : Retourner la valeur d'insertion type integer
 /**
  * Save a concept.
  * @param skill
  */
 void saveConcept(final VSkill skill) {
 
-	int conceptId;
 	if (this.category != null) {
 		this.concept = this.conceptDao.check(skill.getConcept_name());
 
 		if (this.concept == null && this.tool == null) {
-
-			this.concept = Concept.Builder.builder().build();
-			this.concept.setName(skill.getConcept_name());
-			this.concept.setCategory(category);
-
-			conceptId = this.conceptDao.save(this.concept);
+			this.concept = Concept.builder().name(skill.getConcept_name()).category(this.category).build();
+			this.conceptDao.save(this.concept);
 		}
 	}
 }
@@ -134,17 +129,15 @@ void saveConcept(final VSkill skill) {
 Tool saveTool(final VSkill skill) throws DataAccessException {
 
 	if (this.tool == null) {
-		this.tool = Tool.Builder.builder().build();
-		tool.setName(skill.getTool_name());
-		tool.setConcept(concept);
-		int toolId = this.toolDao.save(this.tool);
-		tool.setId(toolId);
+		this.tool = Tool.builder().name(skill.getTool_name()).concept(this.concept).build();
+		Tool.builder().id(this.toolDao.save(this.tool)).build();
 	} 
 	else {
-	VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
-	this.category = Category.Builder.builder().build();
-	this.category.setName(sk.getCategory_name());
-	this.concept.setName(sk.getConcept_name());
+		VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
+		this.category = Category.builder().name(sk.getCategory_name()).build();
+		
+		// TODO : vérifier la nécessité de ce code
+		//this.concept.setName(sk.getConcept_name());
 	}
 	return tool;
 }
@@ -215,8 +208,7 @@ public Map<String, Object> updateASkill(Category category, Concept concept, Tool
 @Override
 public Map<String, Object> deleteCategory(int categoryId) throws DataAccessException {
 
-	Category category = Category.Builder.builder().build();
-	category.setId(categoryId);
+	Category category = Category.builder().id(categoryId).build();
 	if (this.categoryDao.delete(category) > 0) {
 		this.mapNotification.put("typeError", 1);
 		this.mapNotification.put("messageError", "successful delete");
@@ -237,9 +229,7 @@ public Map<String, Object> deleteCategory(int categoryId) throws DataAccessExcep
 @Override
 public Map<String, Object> deleteConcept(int conceptId) throws DataAccessException {
 
-	Concept concept = Concept.Builder.builder().build();
-	concept.setId(conceptId);
-
+	Concept concept = Concept.builder().id(conceptId).build();
 	if (this.conceptDao.delete(concept) > 0) {
 		this.mapNotification.put("typeError", 1);
 		this.mapNotification.put("messageError", "successful delete");
@@ -259,8 +249,7 @@ public Map<String, Object> deleteConcept(int conceptId) throws DataAccessExcepti
 @Override
 public Map<String, Object> deleteTool(int toolId) throws DataAccessException {
 
-	Tool tool = Tool.Builder.builder().build();
-	tool.setId(toolId);
+	Tool tool = Tool.builder().id(toolId).build();
 	if (this.toolDao.delete(tool) > 0) {
 		this.mapNotification.put("typeError", 1);
 		this.mapNotification.put("messageError", "successful delete");
