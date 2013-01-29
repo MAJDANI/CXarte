@@ -16,6 +16,7 @@ import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
@@ -130,15 +131,20 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		Collections.sort(listClient);
 			
 		
-		this.clientNameSelect = new Select();
-		this.clientNameSelect.setCaption("Nom du Client");
+		BeanItemContainer<Client> container =
+		        new BeanItemContainer<Client>(Client.class);
+	
+		for(Client client : listClient){
+			container.addItem(client);
+		}
+		
+		this.clientNameSelect = new Select("Client : ",container); 
 		this.clientNameSelect.setItemCaptionMode(
 	            Select.ITEM_CAPTION_MODE_PROPERTY);
 		this.clientNameSelect.setItemCaptionPropertyId("name");
-		
-		for(Client client : listClient){
-			this.clientNameSelect.addItem(client);
-		}
+		this.clientNameSelect.setNullSelectionAllowed(false);
+		this.clientNameSelect.setImmediate(true);
+
 		
 		this.searchByClientPanel.addComponent(clientNameSelect);
 		
