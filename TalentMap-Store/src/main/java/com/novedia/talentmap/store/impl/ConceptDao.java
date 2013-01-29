@@ -65,7 +65,7 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 	 */
 	@Override
 	public int delete(Concept concept) throws DataAccessException {
-		return  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CONCEPT, concept.getId());
+		return  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CONCEPT, concept);
 	}
 
 	/**
