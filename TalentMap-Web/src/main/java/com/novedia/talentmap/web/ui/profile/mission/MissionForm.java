@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
@@ -200,7 +201,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			case VALIDATION_VALID_FORM :
 				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setColleagueId(COLLEAGUE_ID);
+					missionToInsert.setColleague(Colleague.builder().id(COLLEAGUE_ID).build());
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
@@ -236,7 +237,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		if(itemMission.getItemProperty(COMMENTAIRE) != null && itemMission.getItemProperty(COMMENTAIRE).getValue() != null)
 			commentaire = itemMission.getItemProperty(COMMENTAIRE).getValue().toString();
 		//TODO MISSION
-		Mission mission = new Mission(missionId, new Integer(2), intitule, lieu, client, commentaire, new Date(dateDebut), new Date(dateFin));
+		// Mission mission = new Mission(missionId, new Integer(2), intitule, lieu, client, commentaire, new Date(dateDebut), new Date(dateFin));
+		Colleague colleague = Colleague.builder().id(2).build();
+		Mission mission = Mission.builder().id(missionId).colleague(colleague).build();
 		return mission;
 	}
 	
@@ -274,7 +277,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	private int validatedMissionForm (Mission mission) {
 		
 		if( 	!isNotEmpty(mission.getClient()) ||
-				!isNotEmpty(mission.getName()) ||
+				!isNotEmpty(mission.getTitle()) ||
 				!isNotEmpty(mission.getPlace()) ||
 				!isNotEmpty(mission.getClient()) ||
 				!isNotEmpty(mission.getStartDate()) ||
