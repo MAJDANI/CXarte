@@ -66,9 +66,9 @@ public class Registration {
 	private Integer experience;
 	
 	/**
-	 * Id of the business Engineer
+	 * The business Engineer
 	 */
-	private String businessEngineer;
+	private BusinessEngineer businessEngineer;
 	
 	/**
 	 * Profile id
@@ -140,7 +140,7 @@ public class Registration {
 			
 			private Integer experience;
 			
-			private String businessEngineer;
+			private BusinessEngineer businessEngineer;
 			
 			private Integer profileId;
 			
@@ -286,7 +286,7 @@ public class Registration {
 			 * 
 			 * @return the builder
 			 */
-			public Builder businessEngineer (final String businessEngineer) {
+			public Builder businessEngineer (final BusinessEngineer businessEngineer) {
 				this.businessEngineer= businessEngineer;
 				return this;
 			}
@@ -428,17 +428,17 @@ public class Registration {
 	}
 
 	/**
-	 * @return the businessEngineerId
+	 * @return the businessEngineer
 	 */
-	public String getBusinessEngineer() {
+	public BusinessEngineer getBusinessEngineer() {
 		return businessEngineer;
 	}
 
 
 	/**
-	 * @param businessEngineerId the businessEngineerId to set
+	 * @param businessEngineer the businessEngineer to set
 	 */
-	public void setBusinessEngineer(String businessEngineer) {
+	public void setBusinessEngineer(BusinessEngineer businessEngineer) {
 		this.businessEngineer = businessEngineer;
 	}
 

@@ -6,9 +6,10 @@
 <sqlMap namespace="colleague">
 
     <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
+    <typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager"/> 
 
     <resultMap id="colleagueResult" class="colleague">
-        <result property="id" column="COLLAB_ID"/>     
+        <result property="id" column="COLLEAGUE_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
         <result property="lastName"   column="LAST_NAME"/>	   
@@ -17,35 +18,62 @@
         <result property="phone"      column="PHONE"/>
         <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
         <result property="experience"   column="EXPERIENCE"/>
-        <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	   
+		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
     </resultMap>
 
+<!-- TODO : en attente de débug de la gestion du manager -->
+<!--    <resultMap id="managerResult" class="manager"> -->
+<!--         <result property="id" column="COLLEAGUE_ID"/>      -->
+<!--         <result property="managerId"  column="MANAGER_ID"/>          -->
+<!--         <result property="profileId"  column="PROFILE_ID"/>    	     -->
+<!--         <result property="lastName"   column="LAST_NAME"/>	    -->
+<!--         <result property="firstName"  column="FIRST_NAME"/>	    -->
+<!--         <result property="email"      column="EMAIL"/>	     -->
+<!--         <result property="phone"      column="PHONE"/> -->
+<!--         <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	     -->
+<!--         <result property="experience"   column="EXPERIENCE"/> -->
+<!-- 		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" /> -->
+<!--     </resultMap> -->
+
+	<resultMap id="businessEngineerResult" class="com.novedia.talentmap.model.entity.BusinessEngineer">
+		<result property="id" column="B_ENGINEER_ID"/>
+		<result property="name" column="NAME"/>
+	</resultMap>
+	
+	<select id="getBusinessEngineer" parameterClass="int" resultMap="businessEngineerResult">
+		select * from BUSINESS_ENGINEER where B_ENGINEER_ID = #value#
+	</select>
+
     <select id="get" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
+        SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id#
     </select>
     
     <select id="getAll" resultMap="colleagueResult">
-    	SELECT * FROM COLLABORATOR
+    	SELECT * FROM COLLEAGUE
     </select>
     					 
 	<update id="save" parameterClass="Colleague">
-		UPDATE COLLABORATOR SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
+		UPDATE COLLEAGUE SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLEAGUE_ID = #id#
 	</update>
+
+<!-- TODO : remettre après débug de la gestion du manager -->
+<!--     <select id="getManager" parameterClass="Integer" resultMap="managerResult"> -->
+<!--         SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id# -->
+<!--     </select> -->
 	
-    <!-- v.guillemain -->
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">
-        SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
+        SELECT * FROM  COLLEAGUE WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
 
     <select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client" resultMap="colleagueResult">
-        SELECT DISTINCT c.* FROM  MISSION m, COLLABORATOR c 
-        WHERE m.COLLAB_ID = c.COLLAB_ID
+        SELECT DISTINCT c.* FROM  MISSION m, COLLEAGUE c 
+        WHERE m.COLLEAGUE_ID = c.COLLEAGUE_ID
         AND m.CLIENT_ID = #id#
     </select>
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
   		SELECT c.* FROM 
-		(SELECT s.COLLAB_ID, COUNT(*) as nbTool FROM SKILL s
+		(SELECT s.COLLEAGUE_ID, COUNT(*) as nbTool FROM SKILL s
 		WHERE s.TOOL_ID IN 
 		<iterate 	property = "listId"
 					open="(" 
@@ -53,17 +81,17 @@
 					conjunction=",">
    					#listId[]#
   		</iterate>
-		GROUP BY s.COLLAB_ID) a, COLLABORATOR c
-		WHERE a.COLLAB_ID = c.COLLAB_ID
+		GROUP BY s.COLLEAGUE_ID) a, COLLEAGUE c
+		WHERE a.COLLEAGUE_ID = c.COLLEAGUE_ID
 		AND a.nbTool = #listSize[0]#
     </select>	
 
 	<insert id="add">
 		<selectKey resultClass="Integer" keyProperty="id">
-      		SELECT SEQCOLLABORATOR.NEXTVAL FROM DUAL
+      		SELECT SEQCOLLEAGUE.NEXTVAL FROM DUAL
     	</selectKey>
  	
-    	INSERT INTO COLLABORATOR (
+    	INSERT INTO COLLEAGUE (
     		MANAGER_ID,
     		PROFILE_ID,
     		LAST_NAME,
@@ -72,41 +100,33 @@
     		PHONE,
     		EMPLOYMENT_DATE,
     		EXPERIENCE,
-    		BUSINESS_ENGINEER
+    		B_ENGINEER_ID
     		)values (
-			#managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer#
+			#managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer.id#
     		)
 	</insert>
 	
-	<!-- v.guillemain -->
     <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM COLLABORATOR WHERE MANAGER_ID = #id#
+        SELECT * FROM COLLEAGUE WHERE MANAGER_ID = #id#
     </select>
     
     <select id="getAllConsultantManager" resultMap="colleagueResult">
-        SELECT c.* FROM COLLABORATOR c, AUTHENTICATION a
-        WHERE c.COLLAB_ID = a.COLLAB_ID
+        SELECT c.* FROM COLLEAGUE c, AUTHENTICATION a
+        WHERE c.COLLEAGUE_ID = a.COLLEAGUE_ID
         AND a.ROLE_ID = 2
     </select>
     
-    <select id="getAllBusinessEngineer" resultMap="colleagueResult">
-        SELECT c.* FROM COLLABORATOR c, AUTHENTICATION a
-        WHERE c.COLLAB_ID = a.COLLAB_ID
-        AND a.ROLE_ID = 3
-    </select>
-    
-    
     <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">
-        SELECT * FROM COLLABORATOR WHERE EMAIL = #email#
+        SELECT * FROM COLLEAGUE WHERE EMAIL = #email#
     </select>
     
     <insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
 	    <selectKey resultClass="Integer" keyProperty="colleagueId">
-      		SELECT SEQCOLLABORATOR.NEXTVAL FROM DUAL
+      		SELECT SEQCOLLEAGUE.NEXTVAL FROM DUAL
     	</selectKey>
  	
-    	INSERT INTO COLLABORATOR (
-    		COLLAB_ID,
+    	INSERT INTO COLLEAGUE (
+    		COLLEAGUE_ID,
     		MANAGER_ID,
     		PROFILE_ID,
     		LAST_NAME,
@@ -115,9 +135,9 @@
     		PHONE,
     		EMPLOYMENT_DATE,
     		EXPERIENCE,
-    		BUSINESS_ENGINEER
+    		B_ENGINEER_ID
     		)values (#colleagueId#,
-			#managerId#, #profileId#, UPPER(#lastName#), #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer#
+			#managerId#, #profileId#, UPPER(#lastName#), #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer.id#
     		)
 	</insert>
     

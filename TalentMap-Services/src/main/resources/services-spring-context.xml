@@ -22,6 +22,10 @@
 	<bean id="clientService" class="com.novedia.talentmap.services.impl.ClientService">
 		<property name="clientDao" ref="clientDao"/>
 	</bean>
+
+	<bean id="businessEngineerService" class="com.novedia.talentmap.services.impl.BusinessEngineerService">
+		<property name="businessEngineerDao" ref="businessEngineerDao"/>
+	</bean>
     
     <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
 		<property name="profileDao" ref="profileDao"/>

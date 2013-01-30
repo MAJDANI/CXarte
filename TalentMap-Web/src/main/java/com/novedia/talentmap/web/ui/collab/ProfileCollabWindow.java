@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.collab;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
@@ -39,6 +40,7 @@ public class ProfileCollabWindow extends Window {
 	private ISkillService skillService;
 	private IManagerService managerService;
 	private IProfileService profileService;
+	private IBusinessEngineerService businessEngineerService;
 
 	/**
 	 * Java Object
@@ -95,7 +97,7 @@ public class ProfileCollabWindow extends Window {
 	public void buildDataCollaborator() {
 		try {
 
-			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService));
+			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
 					Constants.FIELD_ORDER_COLLABORATOR);

@@ -404,6 +404,9 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			this.addSkillPanel.setNewSkill(true);
 			this.addSkillPanel.setVisible(true);
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
+			
+			this.addSkillPanel.eraseAllSelects();
+			
 		}
 	}
 	
@@ -422,6 +425,8 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			this.addSkillPanel.getToolSelect().setValue(toolName);
+			// TODO : Rajouter les critères d'usage
+			
 			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
 			this.addSkillPanel.getToolSelect().setReadOnly(true);
 			

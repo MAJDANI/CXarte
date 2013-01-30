@@ -75,7 +75,7 @@ public class Tool implements Serializable, Comparable {
 	 * 
 	 * @param concept
 	 */
-	private void setConcept(Concept concept) {
+	public void setConcept(Concept concept) {
 		this.concept = concept;
 	}
 

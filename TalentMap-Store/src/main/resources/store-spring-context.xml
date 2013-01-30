@@ -73,4 +73,7 @@
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 	
+	<bean id="businessEngineerDao" class="com.novedia.talentmap.store.impl.BusinessEngineerDao">
+		<constructor-arg ref="sqlMapClient"/>
+	</bean>
 </beans>

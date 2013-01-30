@@ -14,7 +14,8 @@
     <sqlMap resource="maps/sqlmap-client.xml"/>
 <!--     <sqlMap resource="maps/sqlmap-vskillcollab.xml"/> -->
     <sqlMap resource="maps/sqlmap-mission.xml"/>
-    <sqlMap resource="maps/sqlmap-manager.xml"/>
+<!--     <sqlMap resource="maps/sqlmap-manager.xml"/> -->
 <!--     <sqlMap resource="maps/sqlmap-task.xml"/> -->
     <sqlMap resource="maps/sqlmap-authentification.xml"/>
+    <sqlMap resource="maps/sqlmap-businessengineer.xml"/>
 </sqlMapConfig>

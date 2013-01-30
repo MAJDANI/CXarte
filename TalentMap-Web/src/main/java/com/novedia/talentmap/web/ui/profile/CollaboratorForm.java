@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
@@ -82,6 +83,7 @@ public class CollaboratorForm extends FormLayout {
 	private IColleagueService collaboratorService;
 	private IProfileService profileService;
 	private IClientService clientService;
+	private IBusinessEngineerService businessEngineerService;
 
 	/**
 	 * 
@@ -93,7 +95,7 @@ public class CollaboratorForm extends FormLayout {
 	 * @param gLayoutCollaborator
 	 */
 	public CollaboratorForm(IColleagueService collaboratorService,
-			IProfileService profileService, IClientService clientService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
+			IProfileService profileService, IClientService clientService, IBusinessEngineerService businessEngineerService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
 			GridLayout gLayoutCollaborator, GridLayout gLayoutMission, VerticalLayout vLayoutManager,
 			Form formCollaborator, Form formMission, TextField managerField) {
 
@@ -105,6 +107,7 @@ public class CollaboratorForm extends FormLayout {
 		this.collaboratorService = collaboratorService;
 		this.profileService = profileService;
 		this.clientService = clientService;
+		this.businessEngineerService = businessEngineerService;
 		this.formCollaborator = formCollaborator;
 		this.formMission = formMission;
 		this.managerField = managerField;
@@ -191,7 +194,7 @@ public class CollaboratorForm extends FormLayout {
 
 		this.formCollaborator
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
-						this.profileService));
+						this.profileService, this.businessEngineerService));
 
 		
 		if (this.currentColleague != null){

@@ -12,6 +12,8 @@
 	
 	<bean id="client" class="com.novedia.talentmap.model.entity.Client"/>
 	
+ 	<bean id="businessEngineer" class="com.novedia.talentmap.model.entity.BusinessEngineer"/>
+ 
     <bean id="profile" class="com.novedia.talentmap.model.entity.Profile"/>
     
     <bean id="category" class="com.novedia.talentmap.model.entity.Category"/>

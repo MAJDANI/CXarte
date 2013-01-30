@@ -34,7 +34,9 @@ setSqlMapClient(sqlMapClient);
  */
 @Override
 public Manager get(final Integer id) throws DataAccessException {
-return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MANAGER, id);
+	//TODO en attente de debug de la gestion du manager
+//return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MANAGER, id);
+	return Manager.builder().build();
 }
 
 /**

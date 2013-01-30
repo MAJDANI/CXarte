@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.AuthenticationDao;
+import com.novedia.talentmap.store.impl.BusinessEngineerDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.ProfileDao;
 
@@ -36,6 +38,10 @@ public class RegistrationService implements IRegistrationService {
 	 */
 	private IDao<Profile> profileDao;
 	
+	/**
+	 * The businessEngineer DAO.
+	 */
+	private IDao<BusinessEngineer> businessEngineerDao;
 	
 	@Override
 	public Colleague check(Registration registration) {
@@ -62,11 +68,6 @@ public class RegistrationService implements IRegistrationService {
 		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
 	}
 
-	@Override
-	public List<Colleague> getAllBusinessEngineer() {
-		return ((ColleagueDao) colleagueDao).getAllBusinessEngineer();
-	}
-	
 	public IDao<Colleague> getColleagueDao() {
 		return colleagueDao;
 	}

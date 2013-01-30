@@ -9,8 +9,8 @@
 
 	<resultMap id="missionResult"         class="mission">
 		<result property="id"             column="MISSION_ID" />
-		<result property="colleagueId"    column="COLLEAGUE_ID" />
-		<result property="name"           column="NAME" />
+		<result property="colleague"      column="COLLEAGUE_ID" select="mission.getColleague"/>
+		<result property="title"           column="NAME" />
 		<result property="place"     	  column="PLACE" />
 		<result property="client"         column="CLIENT_ID" select="mission.getClient" />
 		<result property="notes"          column="NOTES" jdbcType="String" />
@@ -22,9 +22,26 @@
 		<result property="id" column="CLIENT_ID"/>
 		<result property="name" column="CLIENT_NAME"/>
 	</resultMap>
+
+    <resultMap id="colleagueResult" class="colleague">
+        <result property="id" column="COLLAB_ID"/>     
+        <result property="managerId"  column="MANAGER_ID"/>         
+        <result property="profileId"  column="PROFILE_ID"/>    	    
+        <result property="lastName"   column="LAST_NAME"/>	   
+        <result property="firstName"  column="FIRST_NAME"/>	   
+        <result property="email"      column="EMAIL"/>	    
+        <result property="phone"      column="PHONE"/>
+        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
+        <result property="experience"   column="EXPERIENCE"/>
+		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
+    </resultMap>
 	
 	<select id="getClient" parameterClass="int" resultMap="clientResult">
 		select * from CLIENT where CLIENT_ID = #value#
+	</select>
+
+	<select id="getColleague" parameterClass="int" resultMap="colleagueResult">
+		select * from COLLEAGUE where COLLEAGUE_ID = #value#
 	</select>
 
 	<select id="get" resultMap="missionResult" parameterClass="Integer">
@@ -32,14 +49,14 @@
 	</select>
 
 	<select id="getAllByColleague" resultMap="missionResult" parameterClass="Integer">
-		SELECT * FROM MISSION WHERE COLLEAGUE_ID = #colleagueId# 
+		SELECT * FROM MISSION WHERE COLLEAGUE_ID = #value# 
 		ORDER BY START_DATE
 	</select>
 	
 	<update id="save" parameterClass="Mission">
 		UPDATE MISSION 
 		SET
-		MISSION_ID = #id#, COLLEAGUE_ID = #colleagueId#, NAME = #name#, PLACE = #place#, 
+		MISSION_ID = #id#, COLLEAGUE_ID = #colleague.id#, NAME = #title#, PLACE = #place#, 
 		CLIENT_ID = #client.id#, NOTES = #notes#, START_DATE = #startDate#, END_DATE = #endDate# 
 		WHERE MISSION_ID = #id#
 	</update>
@@ -53,7 +70,7 @@
 		INSERT INTO MISSION 
 		(MISSION_ID, COLLEAGUE_ID, NAME, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE) 
 		values 
-		(#id#, #colleagueId#, #name#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
+		(#id#, #colleague.id#, #title#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
 
 		<selectKey keyProperty="id" resultClass="Integer">
 			SELECT LAST_INSERT_ID() AS id

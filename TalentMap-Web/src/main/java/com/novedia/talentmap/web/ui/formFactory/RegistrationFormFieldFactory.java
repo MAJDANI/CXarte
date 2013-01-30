@@ -1,11 +1,12 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.model.entity.Profile;
+import com.novedia.talentmap.services.IBusinessEngineerService;
+import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
-import com.novedia.talentmap.web.commons.Constants;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.validator.RegexpValidator;
@@ -27,14 +28,16 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 	
 	private IRegistrationService registrationService;
 	
+	private IBusinessEngineerService businessEngineerService;
 	
 	
 	/**
 	 * 
 	 * @param registration Service
 	 */
-	public RegistrationFormFieldFactory(IRegistrationService registrationService){
+	public RegistrationFormFieldFactory(IRegistrationService registrationService, IBusinessEngineerService businessEngineerService){
 		this.registrationService = registrationService;
+		this.businessEngineerService = businessEngineerService;
 	}
 	
 	
@@ -138,9 +141,9 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
 							}
 						} else {
-							for(Colleague colleague : registrationService.getAllBusinessEngineer()){
-								item = ic.addItem(colleague.getFirstName() + " " + colleague.getLastName());
-								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
+							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
+								item = ic.addItem(businessEngineer.getName());
+								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(businessEngineer.getName());
 							}
 						}
 						colleagueSelect.setContainerDataSource(ic);

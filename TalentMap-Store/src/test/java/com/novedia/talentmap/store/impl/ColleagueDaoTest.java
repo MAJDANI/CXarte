@@ -17,6 +17,7 @@ import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 
 /**
@@ -78,11 +79,12 @@ public class ColleagueDaoTest {
 	@Test
 	@DataSet("ColleagueDaoTest.testSave-result.xml")
 	public void testSave() {
+		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(3).name("Julie Vigneron").build(); 
 		Colleague colleague = Colleague.builder().id(1).profileId(1)
 				.phone("6020202020").experience(7)
 				.firstName("modifiedColleague")
 				.lastName("modifiedLastName")
-				.businessEngineer("Julie Vigneron")
+				.businessEngineer(businessEngineer)
 				.email("modifiedemail@novediagroup.com")
 				.employmentDate(new Date())
 				.build();
@@ -100,9 +102,10 @@ public class ColleagueDaoTest {
 	public void testAdd() throws Exception {
 
 		// Given
+		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(5).name("Renaud Migne").build(); 
 		Colleague colleague = Colleague.builder().managerId(1).profileId(1)
 				.phone("6020202020").experience(7).firstName("Johan")
-				.lastName("RONDOUDOUX").businessEngineer("Renaud Migne")
+				.lastName("RONDOUDOUX").businessEngineer(businessEngineer)
 				.email(".rondoudoux@novediagroup.com").employmentDate(new Date())
 				.build();
 		

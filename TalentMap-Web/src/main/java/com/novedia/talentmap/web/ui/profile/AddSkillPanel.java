@@ -10,12 +10,12 @@ import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.data.FrequencyUse;
 import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
-import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -276,7 +276,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * @class AddSkillPanel.java
 	 * @throws Exception
 	 */
-	private void fillSelect() throws Exception {
+	private void fillSelect() {
 
 		// We fill only the Tool Select
 		List<Tool> listTool = skillService.getAllTools();
@@ -293,7 +293,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		for (FrequencyUse fu : FrequencyUse.values()) {
 			this.frequencyUseSelect.addItem(fu.getValue());
 		}
-
+		
 		// We fill the No Using Time
 		for (TimeUse tu : TimeUse.values()) {
 			this.noUsingTimeSelect.addItem(tu.getValue());
@@ -327,7 +327,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					|| !isValid(noUsingTimeSelect.getValue())) {
 
 				getWindow().showNotification(
-						"Les champs ne sont pas tous remplis",
+						Constants.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 			} else {
 				
@@ -632,6 +632,22 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		return toolSelect;
 	}
 
+	/**
+	 * This Methods empties all selections in the Add Skill Panel : The tool selected,
+	 * Stars given, no using time and frequency use. 
+	 * The first idea was to select an "empty" choice in each Select, but as it didn't
+	 * work, here we empty each select and refill completely in order to have
+	 * the expected behavior. 
+	 * TODO : change the solution
+	 */
+	public void eraseAllSelects()  {
+		toolSelect.removeAllItems();
+		frequencyUseSelect.removeAllItems(); 
+		noUsingTimeSelect.removeAllItems();
+		fillSelect();
+		stars.setValue(0);
+	}
+	
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
 		this.obs = (IProfileView) observateur;

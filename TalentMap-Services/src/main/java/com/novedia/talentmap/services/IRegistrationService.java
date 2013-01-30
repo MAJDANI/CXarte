@@ -3,8 +3,7 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
@@ -48,11 +47,5 @@ public interface IRegistrationService {
 	 * Get all Consultant Manager
 	 */
 	List<Colleague> getAllConsultantManager();
-	
-	/**
-	 * Get all Business Engineer
-	 */
-	List<Colleague> getAllBusinessEngineer();
-	
 	
 }

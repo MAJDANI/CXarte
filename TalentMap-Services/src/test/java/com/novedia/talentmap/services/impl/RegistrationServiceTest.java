@@ -13,13 +13,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
-import com.novedia.talentmap.store.IDao;
-import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.AuthenticationDao;
+import com.novedia.talentmap.store.impl.BusinessEngineerDao;
+import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.ProfileDao;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +28,10 @@ public class RegistrationServiceTest {
 	
 	@Mock
 	private ColleagueDao colleagueDaoMock;
-	
+
+	@Mock
+	private BusinessEngineerDao businessEngineerDaoMock;
+
 	@Mock
 	private ProfileDao profileDaoMock;
 	
@@ -81,22 +83,6 @@ public class RegistrationServiceTest {
 		assertSame(expectedCollaboratorsList, collaborators);
 	}
 	
-	@Test
-	public void getAllBusinessEngineerReturnAListOfColleagues(){
-		// Given
-		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
-		
-		List<Colleague> expectedCollaboratorsList = new ArrayList<Colleague>();
-		expectedCollaboratorsList.add(collaborator);
-
-		// When
-		Mockito.when(colleagueDaoMock.getAllBusinessEngineer()).thenReturn(expectedCollaboratorsList);
-		List<Colleague> collaborators = service.getAllBusinessEngineer();
-
-		// Then
-		Assert.assertNotNull(collaborators);
-		assertSame(expectedCollaboratorsList, collaborators);
-	}
 	
 	@Test
 	public void getAllProfileReturnAListOfProfile(){

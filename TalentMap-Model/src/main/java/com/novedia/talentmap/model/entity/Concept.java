@@ -114,7 +114,7 @@ public class Concept implements Serializable {
 	 * @param category
 	 *            the category to set
 	 */
-	private void setCategory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

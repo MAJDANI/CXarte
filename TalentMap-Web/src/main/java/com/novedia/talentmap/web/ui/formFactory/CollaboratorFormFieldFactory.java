@@ -1,12 +1,14 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
+import com.novedia.talentmap.model.entity.BusinessEngineer;
+import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Profile;
+import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.commons.Constants;
-import com.novedia.talentmap.web.ui.profile.CollaboratorForm;
 import com.vaadin.data.Item;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
-import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
@@ -26,14 +28,16 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	private static final long serialVersionUID = 1L;
 	
 	private IProfileService profileService;
+	private IBusinessEngineerService businessEngineerService;
 
 	/**
 	 * 
 	 * Build the class CollaboratorFormFieldFactory.java 
 	 * @param profileService
 	 */
-	public CollaboratorFormFieldFactory(IProfileService profileService){
+	public CollaboratorFormFieldFactory(IProfileService profileService, IBusinessEngineerService businessEngineerService){
 		this.profileService = profileService;
+		this.businessEngineerService = businessEngineerService;
 	}
 	
 	@Override
@@ -79,7 +83,25 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						field.setStyleName("experience");
 						
 					}else if(propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
+						
+						BeanItemContainer<BusinessEngineer> container =
+						        new BeanItemContainer<BusinessEngineer>(BusinessEngineer.class);
+					
+						for(BusinessEngineer b : businessEngineerService.getAllBusinessEngineer()){
+							container.addItem(b);
+						}
+						
+						Select bEngineerSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ",container); 
+						bEngineerSelect.setItemCaptionMode(
+					            Select.ITEM_CAPTION_MODE_PROPERTY);
+						bEngineerSelect.setItemCaptionPropertyId("name");
+						bEngineerSelect.setRequired(true);
+						bEngineerSelect.setNullSelectionAllowed(false);
+						bEngineerSelect.setImmediate(true);
+
+						
 						field.setStyleName("business-engineer");
+						return bEngineerSelect;
 					}
 
 					return field;
@@ -136,6 +158,14 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	 */
 	public void setProfileService(IProfileService profileService) {
 		this.profileService = profileService;
+	}
+	
+	/**
+	 * Set the businessEngineerService value
+	 * @param businessEngineerService the businessEngineerService to set
+	 */
+	public void setBusinessEngineerService(IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
 	}
 
 }

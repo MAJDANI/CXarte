@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.registration;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Registration;
+import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.ui.formFactory.RegistrationFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
@@ -36,6 +37,7 @@ public class RegistrationForm extends FormLayout{
 	 * TalentMap service
 	 */
 	private IRegistrationService registrationService;
+	private IBusinessEngineerService businessEngineerService;
 
 	
 	
@@ -91,7 +93,7 @@ public class RegistrationForm extends FormLayout{
 		this.fieldOrderRegistration = new Vector<Object>(FIELD_ORDER_REGISTRATION.length);
 		CUtils.setOrderForm(this.fieldOrderRegistration, FIELD_ORDER_REGISTRATION);
 		
-		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService));
+		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService, this.businessEngineerService));
 		
 		BeanItem<Item> registrationBean = new BeanItem(new Registration());
 		this.registrationForm.setItemDataSource(registrationBean, this.fieldOrderRegistration);

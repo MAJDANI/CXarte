@@ -238,6 +238,26 @@ conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 }
 
  /**
+  * builds mapSkill given in second parameter : a map of skills the colleague has.  
+  * Uses listSkill, the list of skills of the colleague, and gets for each skill
+  * the tool.
+  * @param listSkill
+  * @param mapSkill : the map to build
+  */
+  void buildSkill(List<Skill> listSkill, Map<Skill, Integer> mapSkill) {
+ 	for (Skill skill : listSkill) {
+ 		Tool tool1 = toolDao.get(skill.getTool_id());
+
+ 		// We put only not null tool element in mapTool
+ 		if (tool1 != null) {
+ 			// We give a note to the tool
+ 			int note = (int) ScoreManage.toolScore(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
+ 			mapSkill.put(skill, note);
+ 		}
+ 	}
+ }
+
+ /**
   * This method allow to get all tools.
   * @return a list of Tool
   * @throws DataAccessException

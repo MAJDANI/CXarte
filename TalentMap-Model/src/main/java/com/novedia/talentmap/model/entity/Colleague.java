@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 /**
  * This entity represents a colleague.
  * 
@@ -69,9 +69,9 @@ public class Colleague implements Serializable {
 	protected Integer experience;
 	
 	/**
-	 * Colleague job name
+	 * Colleague business Engineer
 	 */
-	protected String businessEngineer;
+	protected BusinessEngineer businessEngineer;
 		
 	/**
 	 *  Missions
@@ -241,7 +241,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @return the businessEngineer
 	 */
-	public String getBusinessEngineer() {
+	public BusinessEngineer getBusinessEngineer() {
 		return businessEngineer;
 	}
 
@@ -250,7 +250,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param businessEngineer the businessEngineer to set
 	 */
-	private void setBusinessEngineer(String businessEngineer) {
+	private void setBusinessEngineer(BusinessEngineer businessEngineer) {
 		this.businessEngineer = businessEngineer;
 	}
 
@@ -454,7 +454,7 @@ public class Colleague implements Serializable {
 		/**
 		 * Colleague business engineer
 		 */
-		protected String businessEngineer;
+		protected BusinessEngineer businessEngineer;
 
 		/**
 		 * Colleague email
@@ -566,7 +566,7 @@ public class Colleague implements Serializable {
 		 * 
 		 * @return the builder
 		 */
-		public Builder businessEngineer (final String businessEngineer) {
+		public Builder businessEngineer (final BusinessEngineer businessEngineer) {
 			this.businessEngineer = businessEngineer;
 			return this;
 		}

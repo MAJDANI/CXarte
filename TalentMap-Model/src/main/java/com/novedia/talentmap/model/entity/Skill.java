@@ -22,11 +22,17 @@ public class Skill implements Serializable{
 	 * collaborator id associated the skill
 	 */
 	private Integer colleagueId;
+	
+	// TODO : référence aux objets entant dans la relation
+	// private Colleague colleague;
 
 	/**
 	 * tool id associated the skill
 	 */
 	private Integer tool_id;
+	
+	// TODO : référence aux objets entrant dans la relation
+	// private Tool tool;
 	
 	/**
 	 * th score associated the skill
@@ -143,9 +149,11 @@ public class Skill implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[tool_id=").append(getTool_id()).append(", ");
-		strBld.append("[collaborator_id=").append(getColleagueId()).append(", ");
-		strBld.append("[use_frequency=").append(getUse_frequency()).append("]");
+		strBld.append("[colleagueId=").append(getColleagueId()).append(", ");
+		strBld.append("tool_id=").append(getTool_id()).append(", ");
+		strBld.append("score=").append(getScore()).append(", ");
+		strBld.append("use_frequency=").append(getUse_frequency()).append(", ");
+		strBld.append("no_using_time=").append(getNo_using_time()).append("]");
 		return strBld.toString();	
 	}
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="businessEngineer">
+
+    <typeAlias alias="businessEngineer" type="com.novedia.talentmap.model.entity.BusinessEngineer"/> 
+
+    <resultMap id="businessEngineerResult" class="BusinessEngineer">
+        <result property="id" column="B_ENGINEER_ID"/>     
+        <result property="name"   column="NAME"/>	   
+    </resultMap>
+
+    <select id="get" parameterClass="Integer" resultMap="businessEngineerResult">
+        SELECT * FROM  BUSINESS_ENGINEER WHERE B_ENGINEER_ID = #id#
+    </select>
+    
+    <select id="getAll" resultMap="businessEngineerResult">
+    	SELECT * FROM BUSINESS_ENGINEER
+    </select>
+    					 
+    
+</sqlMap>

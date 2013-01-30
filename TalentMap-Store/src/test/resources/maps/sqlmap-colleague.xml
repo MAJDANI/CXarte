@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="colleague">
+
+    <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
+
+    <resultMap id="colleagueResult" class="colleague">
+        <result property="id" column="COLLAB_ID"/>     
+        <result property="managerId"  column="MANAGER_ID"/>         
+        <result property="profileId"  column="PROFILE_ID"/>    	    
+        <result property="lastName"   column="LAST_NAME"/>	   
+        <result property="firstName"  column="FIRST_NAME"/>	   
+        <result property="email"  column="EMAIL"/>	    
+        <result property="phone"   column="PHONE"/>
+        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
+        <result property="experience"   column="EXPERIENCE"/>
+        <result property="businessEngineer.id" column="B_ENGINEER_ID"/>
+        <result property="businessEngineer.lastName" column="LAST_NAME"/>     
+    </resultMap>
+
+    <select id="get" parameterClass="Integer" resultMap="colleagueResult">
+        SELECT * FROM  COLLABORATOR WHERE COLLAB_ID = #id#
+    </select>
+    
+    <!-- Un manager EST-UN colleague. Cette requete permet de récupérer un Manager par son identifiant -->
+    <select id="getManager" resultMap="managerResult" parameterClass="Integer">
+		SELECT * FROM COLLABORATOR WHERE COLLAB_ID = #id#
+	</select>
+    
+    <select id="getAll" resultMap="colleagueResult">
+    	SELECT * FROM COLLABORATOR
+    </select>
+    					 
+	<update id="save" parameterClass="Colleague">
+		UPDATE COLLABORATOR SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLAB_ID = #id#
+	</update>
+	
+    <!-- v.guillemain -->
+    <select id="getAllByLastName" parameterClass="String" resultMap="colleagueResult">
+        SELECT * FROM  COLLABORATOR WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
+    </select>
+   
+    <select id="getAllColleaguesByClientName" parameterClass="string" resultMap="colleagueResult">
+        SELECT DISTINCT c.* FROM  MISSION m, COLLABORATOR c 
+        WHERE m.COLLAB_ID = c.COLLAB_ID
+        AND UPPER(m.CLIENT) LIKE UPPER('$clientName$')
+    </select>
+
+	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
+  		SELECT c.* FROM 
+		(SELECT s.COLLAB_ID, COUNT(*) as nbTool FROM SKILL s, TOOL t
+		WHERE s.TOOL_ID = t.TOOL_ID
+		AND s.TOOL_ID IN 
+		<iterate 	property = "listId"
+					open="(" 
+					close=")"
+					conjunction=",">
+   					#listId[]#
+  		</iterate>
+		GROUP BY s.COLLAB_ID) a, COLLABORATOR c
+		WHERE a.COLLAB_ID = c.COLLAB_ID
+		AND a.nbTool = #listSize[0]#
+    </select>	
+
+	<insert id="add">
+		<selectKey resultClass="Integer" keyProperty="id">
+      		SELECT SEQCOLLABORATOR.NEXTVAL FROM DUAL
+    	</selectKey>
+ 	
+    	INSERT INTO COLLABORATOR (
+    		COLLAB_ID,
+    		MANAGER_ID,
+    		PROFILE_ID,
+    		LAST_NAME,
+    		FIRST_NAME, 
+    		EMAIL,
+    		PHONE,
+    		EMPLOYMENT_DATE,
+    		EXPERIENCE,
+    		B_ENGINEER_ID
+    		)values (
+    		#id#, #managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer.id#
+    		)
+	</insert>
+</sqlMap>

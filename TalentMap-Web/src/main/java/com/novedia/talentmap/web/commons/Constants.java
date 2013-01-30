@@ -21,7 +21,7 @@ public class Constants {
 	public static final String FIELD_NULL_REPRESENTATION = "Non renseigné";
 
 	/**
-	 * Données Profil - Collaborateur
+	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
 		"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",

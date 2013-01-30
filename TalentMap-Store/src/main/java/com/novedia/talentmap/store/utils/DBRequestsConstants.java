@@ -63,7 +63,6 @@ public static final String CHECK_REGISTRATION = "colleague.check";
  * Constant request to add a colleague from a registration
  */
 public static final String ADD_COLLEAGUE_FROM_REGISTRATION = "colleague.addColleagueFromRegistration";
-
 /**
  * Constant request to get all consultant manager
  */
@@ -72,11 +71,15 @@ public static final String GET_ALL_CONSULTANT_MANAGER = "colleague.getAllConsult
 /**
  * Constant request to get all Business Engineer
  */
-public static final String GET_ALL_BUSINESS_ENGINEER = "colleague.getAllBusinessEngineer";
+public static final String GET_ALL_BUSINESS_ENGINEER = "businessEngineer.getAll";
+
+/**
+ * Constant request to get all Business Engineer
+ */
+public static final String GET_BUSINESS_ENGINEER_BY_ID = "businessEngineer.get";
 
 
 
-// CATEGORY REQUESTS
 /**
  * Constant request to get a category.
  */
@@ -155,21 +158,21 @@ public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 
 // MANAGER REQUESTS
 /**
- * This constant is used to retrieve a manager.
+ * This constant is used to retrieve a manager by the id.
  */
-public static final String GET_MANAGER = "manager.get";
+public static final String GET_MANAGER = "colleague.getManager";
 
 /**
  * This constant is used to retrieve all managers.
  */
-public static final String GET_ALL_MANAGER = "manager.getAll";
+public static final String GET_ALL_MANAGER = "colleague.getAllManagers";
 
 /**
  * This constant is used to retrieve a colleague by manager id.
  */
-public static final String GET_COLLABORATORS_BY_MANAGER_ID = "manager.getAllCollaboratorsByManagerId";
+public static final String GET_COLLABORATORS_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
-// CLIENT REQUESTS
+//CLIENT REQUESTS
 
 public static final String GET_ALL_CLIENTS = "client.getAll";
 
@@ -256,7 +259,7 @@ public static final String GET_ALL_COLLABORATOR_SKILL ="skill.getAllCollaborator
 /**
  * This constant is used to retrieve all skills by collaborator.
  */
-public static final String GET_ALL_SKILLS_BY_COLLABORATOR = "skill.getAllSkillsByCollaborator";
+//public static final String GET_ALL_SKILLS_BY_COLLABORATOR = "skill.getAllSkillsByCollaborator";
 
 /**
  * This constant is used to retrieve all skill.
