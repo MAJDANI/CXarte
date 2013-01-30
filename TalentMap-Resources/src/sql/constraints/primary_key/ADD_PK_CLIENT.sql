@@ -1,0 +1,6 @@
+---------------------------
+-- PRIMARY KEYS CREATION --
+---------------------------
+ALTER TABLE CLIENT ADD CONSTRAINT CLIENTPK PRIMARY KEY (CLIENT_ID) USING INDEX TABLESPACE tmp00idx;
+
+COMMIT;
