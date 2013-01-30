@@ -21,19 +21,18 @@
 		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
     </resultMap>
 
-<!-- TODO : en attente de débug de la gestion du manager -->
-<!--    <resultMap id="managerResult" class="manager"> -->
-<!--         <result property="id" column="COLLEAGUE_ID"/>      -->
-<!--         <result property="managerId"  column="MANAGER_ID"/>          -->
-<!--         <result property="profileId"  column="PROFILE_ID"/>    	     -->
-<!--         <result property="lastName"   column="LAST_NAME"/>	    -->
-<!--         <result property="firstName"  column="FIRST_NAME"/>	    -->
-<!--         <result property="email"      column="EMAIL"/>	     -->
-<!--         <result property="phone"      column="PHONE"/> -->
-<!--         <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	     -->
-<!--         <result property="experience"   column="EXPERIENCE"/> -->
-<!-- 		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" /> -->
-<!--     </resultMap> -->
+   <resultMap id="managerResult" class="com.novedia.talentmap.model.entity.Manager">
+        <result property="id" column="COLLEAGUE_ID"/>     
+        <result property="managerId"  column="MANAGER_ID"/>         
+        <result property="profileId"  column="PROFILE_ID"/>    	    
+        <result property="lastName"   column="LAST_NAME"/>	   
+        <result property="firstName"  column="FIRST_NAME"/>	   
+        <result property="email"      column="EMAIL"/>	    
+        <result property="phone"      column="PHONE"/>
+        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
+        <result property="experience"   column="EXPERIENCE"/>
+		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
+    </resultMap>
 
 	<resultMap id="businessEngineerResult" class="com.novedia.talentmap.model.entity.BusinessEngineer">
 		<result property="id" column="B_ENGINEER_ID"/>
@@ -56,10 +55,9 @@
 		UPDATE COLLEAGUE SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLEAGUE_ID = #id#
 	</update>
 
-<!-- TODO : remettre après débug de la gestion du manager -->
-<!--     <select id="getManager" parameterClass="Integer" resultMap="managerResult"> -->
-<!--         SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id# -->
-<!--     </select> -->
+    <select id="getManager" parameterClass="Integer" resultMap="managerResult">
+        SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id#
+    </select>
 	
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">
         SELECT * FROM  COLLEAGUE WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
