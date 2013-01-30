@@ -10,7 +10,7 @@
 	<resultMap id="missionResult"         class="mission">
 		<result property="id"             column="MISSION_ID" />
 		<result property="colleague"      column="COLLEAGUE_ID" select="mission.getColleague"/>
-		<result property="title"           column="NAME" />
+		<result property="title"           column="TITLE" />
 		<result property="place"     	  column="PLACE" />
 		<result property="client"         column="CLIENT_ID" select="mission.getClient" />
 		<result property="notes"          column="NOTES" jdbcType="String" />
@@ -24,7 +24,7 @@
 	</resultMap>
 
     <resultMap id="colleagueResult" class="colleague">
-        <result property="id" column="COLLAB_ID"/>     
+        <result property="id" column="COLLEAGUE_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
         <result property="lastName"   column="LAST_NAME"/>	   
@@ -56,7 +56,7 @@
 	<update id="save" parameterClass="Mission">
 		UPDATE MISSION 
 		SET
-		MISSION_ID = #id#, COLLEAGUE_ID = #colleague.id#, NAME = #title#, PLACE = #place#, 
+		MISSION_ID = #id#, COLLEAGUE_ID = #colleague.id#, TITLE = #title#, PLACE = #place#, 
 		CLIENT_ID = #client.id#, NOTES = #notes#, START_DATE = #startDate#, END_DATE = #endDate# 
 		WHERE MISSION_ID = #id#
 	</update>
@@ -68,7 +68,7 @@
 		</selectKey>
 
 		INSERT INTO MISSION 
-		(MISSION_ID, COLLEAGUE_ID, NAME, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE) 
+		(MISSION_ID, COLLEAGUE_ID, TITLE, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE) 
 		values 
 		(#id#, #colleague.id#, #title#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
 
