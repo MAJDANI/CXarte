@@ -86,7 +86,7 @@ public class ListMission extends Table implements ItemClickListener {
 			System.out.println("idMission=" + idMission);
 			addItem(new Object[] { 
 					mission.getTitle(),
-					mission.getClient(), mission.getPlace(),
+					mission.getClient().getName(), mission.getPlace(),
 					dateDebut, dateFin,
 					mission.getNotes()}, mission.getId()); //idResultsTable);//test 2012/09/24
 			//idResultsTable++;
