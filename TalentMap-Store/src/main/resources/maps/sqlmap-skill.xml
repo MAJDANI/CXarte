@@ -21,7 +21,7 @@
     </resultMap>
 
 <!-- 	<select id="getAllSkillsByCollaborator" resultMap="skillResult" parameterClass="java.lang.Integer"> -->
-<!-- 		SELECT * FROM SKILL WHERE COLLAB_ID = #id# -->
+<!-- 		SELECT * FROM SKILL WHERE COLLEAGUE_ID = #id# -->
 <!-- 	</select>	 -->
 	
 	<select id="get" resultMap="skillResult" parameterClass="java.util.HashMap">

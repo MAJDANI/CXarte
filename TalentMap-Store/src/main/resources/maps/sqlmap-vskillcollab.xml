@@ -8,18 +8,18 @@
     <typeAlias alias="vskillCollab" type="com.novedia.talentmap.model.entity.VSkillCollab"/> 
 
     <resultMap id="vskillCollabResult" class="vskillCollab">
-    <result property="collab_id" column="COLLAB_ID"/>
+    <result property="collab_id" column="COLLEAGUE_ID"/>
     	<result property="category_name" column="CATEGORY_NAME"/>     
         <result property="concept_name"  column="CONCEPT_NAME"/>  
         <result property="tool_name"  column="TOOL_NAME"/>         
     </resultMap>
 	
 	<select id="getAllSkillCollab" resultMap="vskillCollabResult" parameterClass="Integer">
-		SELECT * FROM VSKILL_COLLAB WHERE COLLAB_ID = #collab_id#
+		SELECT * FROM VSKILL_COLLAB WHERE COLLEAGUE_ID = #collab_id#
 	</select>
 	
 	<select id="get" resultMap="vskillCollabResult" parameterClass="Integer">
-		SELECT * FROM VSKILL_COLLAB WHERE COLLAB_ID = #id#
+		SELECT * FROM VSKILL_COLLAB WHERE COLLEAGUE_ID = #id#
 	</select>		 
 
 </sqlMap>

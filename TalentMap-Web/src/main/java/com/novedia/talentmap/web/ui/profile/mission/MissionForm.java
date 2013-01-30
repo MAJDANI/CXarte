@@ -229,7 +229,8 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public Mission buildMissionFromItem(Item itemMission, Integer missionId) {
 
 		String intitule = itemMission.getItemProperty(INTITULE).getValue().toString();
-		Client client = (Client) itemMission.getItemProperty(CLIENT).getValue();
+		//TODO MISSION : pb de cast
+		//Client client = (Client) itemMission.getItemProperty(CLIENT).getValue();
 		String lieu = itemMission.getItemProperty(LIEU).getValue().toString();
 		String dateDebut = itemMission.getItemProperty(DATE_DEBUT).getValue().toString();
 		String dateFin = itemMission.getItemProperty(DATE_FIN).getValue().toString();

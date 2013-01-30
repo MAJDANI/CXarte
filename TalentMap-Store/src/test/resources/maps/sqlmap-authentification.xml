@@ -8,7 +8,7 @@
 
 	<resultMap id="authenticationResult" class="authentication">
         <result property="id" column="AUTHENTICATION_ID"/>     
-        <result property="colleagueId" column="COLLAB_ID"/> 
+        <result property="colleagueId" column="COLLEAGUE_ID"/> 
         <result property="token.login"  column="LOGIN"/>         
         <result property="token.password"  column="PASSWORD"/>
         <result property="authorization.roleId" column="ROLE_ID"/>
@@ -31,7 +31,7 @@
      	
     	INSERT INTO AUTHENTICATION (
     		AUTHENTICATION_ID,
-    		COLLAB_ID,
+    		COLLEAGUE_ID,
     		ROLE_ID,
     		LOGIN,
     		PASSWORD

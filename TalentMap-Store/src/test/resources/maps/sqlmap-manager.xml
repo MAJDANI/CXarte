@@ -23,7 +23,7 @@
     </resultMap>
 	
 	<resultMap id="colleagueResult" class="colleague">
-        <result property="id" column="COLLAB_ID"/>     
+        <result property="id" column="COLLEAGUE_ID"/>     
         <result property="managerId"  column="MANAGER_ID"/>         
         <result property="profileId"  column="PROFILE_ID"/>    	    
         <result property="lastName"   column="LAST_NAME"/>	   
@@ -45,7 +45,7 @@
 	
     <!-- v.guillemain -->
     <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM COLLABORATOR c, BUSINESS_ERNGINEER b 
+        SELECT * FROM COLLEAGUE c, BUSINESS_ERNGINEER b 
         WHERE MANAGER_ID = #id#
         AND c.B_ENGINEER_ID = B.B_ENGINEER_ID 
     </select>

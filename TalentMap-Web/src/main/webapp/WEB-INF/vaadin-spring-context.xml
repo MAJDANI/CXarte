@@ -419,6 +419,7 @@
 		<constructor-arg name="skillService" ref="skillService" />
 		<constructor-arg name="managerService" ref="managerService" />
 		<constructor-arg name="profileService" ref="profileService" />
+		<constructor-arg name="businessEngineerService" ref="businessEngineerService" />
 		<constructor-arg name="dataCollab" ref="dataMonitoringCollab" />
 		<constructor-arg name="skillCollab" ref="skillMonitoringCollab" />
 		<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderMonitoringCollab" />

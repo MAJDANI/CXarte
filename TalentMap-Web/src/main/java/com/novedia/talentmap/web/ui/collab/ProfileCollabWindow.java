@@ -66,7 +66,7 @@ public class ProfileCollabWindow extends Window {
 	public ProfileCollabWindow(Form dataCollab, Accordion skillCollab,
 			ISkillService skillService, IManagerService managerService,
 			Vector<Object> fieldOrderCollaborator,
-			IProfileService profileService) {
+			IProfileService profileService, IBusinessEngineerService businessEngineerService) {
 		super();
 		this.dataCollab = dataCollab;
 		this.skillCollab = skillCollab;
@@ -74,6 +74,7 @@ public class ProfileCollabWindow extends Window {
 		this.managerService = managerService;
 		this.fieldOrderCollaborator = fieldOrderCollaborator;
 		this.profileService = profileService;
+		this.businessEngineerService = businessEngineerService;
 	}
 	
 	/**
