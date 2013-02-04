@@ -76,7 +76,7 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	 */
 	@Override
 	public int delete(final Mission mission) throws DataAccessException {
-		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION, mission);
+		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION, mission.getId());
 	}
 
 	/**
