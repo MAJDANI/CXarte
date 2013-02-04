@@ -39,7 +39,19 @@ import com.novedia.talentmap.store.impl.SkillDao;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("rawtypes")
 public class SkillServiceTest {
+	
+	/**
+	 * Static Constant ORM
+	 */
+	private static final String ORM = "ORM";
+	
+	/**
+	 * Static Constant JAVA
+	 */
+	private static final String JAVA = "JAVA";
+	
 
 	private SkillService service;
 	
@@ -145,8 +157,8 @@ public class SkillServiceTest {
 	public void getAllToolsReturnAListOfTools(){
 		
 		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
+		Category category = Category.builder().id(1).name(JAVA).build();
+		Concept concept = Concept.builder().id(1).category(category).name(ORM).build();
 		Tool tool = Tool.builder().id(1).concept(concept).name("Spring").build();
 
 		List<Tool> expectedToolsList = new ArrayList<Tool>();
@@ -319,10 +331,9 @@ public class SkillServiceTest {
 		
 		//Given
 		Integer conceptId = 1;
-		String conceptName = "ORM";
 		
-		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept conceptExpected = Concept.builder().id(conceptId).category(category).name("ORM").build();
+		Category category = Category.builder().id(1).name(JAVA).build();
+		Concept conceptExpected = Concept.builder().id(conceptId).category(category).name(ORM).build();
 		
 		List<Concept> conceptListExpected = new ArrayList<Concept>();
 		conceptListExpected.add(conceptExpected);
@@ -353,7 +364,7 @@ public class SkillServiceTest {
 	public void getCategoryByIdReturnACategory(){
 		//Given
 		Integer categoryId = 1;
-		String categoryName = "JAVA";
+		String categoryName = JAVA;
 		
 		
 		Category categoryExpected = Category.builder().id(categoryId).name(categoryName).build();
