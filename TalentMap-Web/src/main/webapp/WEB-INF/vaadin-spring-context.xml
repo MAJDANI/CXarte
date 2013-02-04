@@ -25,6 +25,7 @@
     	<property name="mainTab" ref="mainTab" />
     	<property name="authenticationService" ref="authenticationService" />
     	<property name="registrationService" ref="registrationService" />
+    	<property name="businessEngineerService" ref="businessEngineerService" />
     	<property name="closeButton" ref="closeButton"/>
     	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
     </bean>
@@ -282,6 +283,7 @@
 		<constructor-arg name="registrationForm" ref="registrationForm"/>
 		<constructor-arg name="registrationFormLayout" ref="registrationFormLayout"/>
 		<constructor-arg name="registrationService" ref="registrationService"/>
+		<constructor-arg name="businessEngineerService" ref="businessEngineerService"/>
 	</bean>
 	
 	<bean id="registrationScreen" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >

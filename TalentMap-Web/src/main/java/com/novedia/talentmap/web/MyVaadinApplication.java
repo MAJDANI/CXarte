@@ -19,12 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.impl.BusinessEngineerService;
 import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.login.LoginScreen;
@@ -82,7 +82,12 @@ public class MyVaadinApplication extends Application implements
 	 * The registration service
 	 */
 	private RegistrationService registrationService;
-	
+
+	/**
+	 * The business engineer service
+	 */
+	private BusinessEngineerService businessEngineerService;
+
 	/**
 	 * The button close
 	 */
@@ -354,6 +359,14 @@ public class MyVaadinApplication extends Application implements
 		this.registrationService = registrationService;
 	}
 
+	public BusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			BusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
+	}
 
 	/**
 	 * @param closeButton

@@ -109,9 +109,10 @@
     </select>
     
     <select id="getAllConsultantManager" resultMap="colleagueResult">
-        SELECT c.* FROM COLLEAGUE c, AUTHENTICATION a
-        WHERE c.COLLEAGUE_ID = a.COLLEAGUE_ID
-        AND a.ROLE_ID = 2
+		SELECT DISTINCT C1.* 
+		FROM COLLEAGUE C1, COLLEAGUE c2 
+		WHERE C1.COLLEAGUE_ID = C2.MANAGER_ID
+		ORDER BY C1.LAST_NAME
     </select>
     
     <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">

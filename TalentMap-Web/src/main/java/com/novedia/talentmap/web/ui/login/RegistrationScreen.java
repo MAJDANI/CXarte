@@ -93,7 +93,7 @@ public class RegistrationScreen extends VerticalLayout {
 		
 		 // Create a form and use FormLayout as its layout. 
 		this.registrationForm = new RegistrationForm(new Form(),this.registrationFormLayout,
-				application.getRegistrationService());  
+				application.getRegistrationService(), application.getBusinessEngineerService());  
 		MyRegistrationListener myRegistrationListener = new MyRegistrationListener(this.application,this.registrationForm);
 		
 		buildButton(myRegistrationListener);

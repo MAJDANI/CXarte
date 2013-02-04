@@ -60,11 +60,13 @@ public class RegistrationForm extends FormLayout{
 	 */
 	public RegistrationForm(Form registrationForm,
 			GridLayout registrationFormLayout,
-			IRegistrationService registrationService) {
+			IRegistrationService registrationService,
+			IBusinessEngineerService businessEngineerService) {
 		super();
 		this.registrationForm = registrationForm;
 		this.registrationFormLayout = registrationFormLayout;
 		this.registrationService = registrationService;
+		this.businessEngineerService = businessEngineerService;
 
 		buildMain();
 	}
