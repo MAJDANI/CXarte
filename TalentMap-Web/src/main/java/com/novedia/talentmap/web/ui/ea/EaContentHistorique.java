@@ -3,6 +3,11 @@ package com.novedia.talentmap.web.ui.ea;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * 
+ * @author v.dibi
+ *
+ */
 public class EaContentHistorique extends VerticalLayout{
 
 	/**
