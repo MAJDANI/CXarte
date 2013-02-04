@@ -3,6 +3,7 @@
  */
 package com.novedia.talentmap.services.impl;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
@@ -19,90 +20,87 @@ import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.store.impl.AuthenticationDao;
 
 /**
+ * Test class for authentication service.
+ * 
  * @author v.dibi
  *
  */
-
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticationServiceTest {
 	
+	/**
+	 * Class under test
+	 */
 	private AuthenticationService service;
-	
-	private CredentialToken credantialActual;
 
 	@Mock
 	private AuthenticationDao authenticationDaoMock;
+		
 	
-	private Authentication authenticationActual;
-	
-	private Authorization authorization;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		service = new AuthenticationService();
-		service.setAuthenticationDao(authenticationDaoMock);
-		credantialActual = new CredentialToken();
-		authenticationActual = new Authentication();
-		authorization = new Authorization(); 
-		
+		service.setAuthenticationDao(authenticationDaoMock);	
 	}
 
 	/**
-	 * Test method for {@link com.novedia.talentmap.services.impl.AuthenticationService#checkUser(com.novedia.talentmap.model.entity.CredentialToken)}.
+	 * Test method for
+	 * {@link com.novedia.talentmap.services.impl.AuthenticationService#checkUser(com.novedia.talentmap.model.entity.CredentialToken)}
 	 */
 	@Test
-	public void checkUserWhenToExist() {	
-	//Given
+	public void checkAuthenticationWhenUserExist() {
 		
+		// Given
+		CredentialToken credentialToken = new CredentialToken();
+		credentialToken.setLogin("v.dibi");
+		credentialToken.setPassword("v.dibi");
+		
+		Authorization authorization = new Authorization();
 		authorization.setLabel("Consultant");
 		authorization.setRoleId(4);
-		
-		credantialActual.setLogin("v.dibi");
-		credantialActual.setPassword("v.dibi");
-		
-		authenticationActual.setId(1);
-		authenticationActual.setColleagueId(35);
-		authenticationActual.setAuthorization(authorization);
-		authenticationActual.setToken(credantialActual);
-		
-		
-					
-	//When
-		Mockito.when(authenticationDaoMock.check(credantialActual)).thenReturn(authenticationActual);
-		Authentication authExpected = service.checkUser(credantialActual);
-		
-	//Then	
-		Mockito.verify(authenticationDaoMock, Mockito.times(1)).check(credantialActual);		
-		assertNotNull(credantialActual);
-		assertSame(authExpected, authenticationActual);
-	}
 
-//	/**
-//	 * TODO : car à quel moment doit ton enregistrer un login et password d'un collaborateur???
-//	 */
-//	@Test
-//	public void checkUserWhenNotExist(){
-//		
-//		//Given
-//		authorization.setLabel("Consultant");
-//		authorization.setRoleId(4);
-//		
-//		credantialActual.setLogin("d.julien");
-//		credantialActual.setPassword("d.julien");
-//		
-//		authenticationActual.setId(2);
-//		authenticationActual.setColleagueId(24);
-//		authenticationActual.setAuthorization(authorization);
-//		authenticationActual.setToken(credantialActual);
-//		
-//		int addAuth = authenticationDaoMock.add(authenticationActual);
-//		
-//		//When
-//		
-//		
-//		
-//		//Then
-//	}
+		Authentication userAuthentication = new Authentication();
+		userAuthentication.setId(1);
+		userAuthentication.setColleagueId(35);
+		userAuthentication.setAuthorization(authorization);
+		userAuthentication.setToken(credentialToken);
+
+		// When
+		Mockito.when(authenticationDaoMock.check(credentialToken)).thenReturn(userAuthentication);
+		Authentication returnedAuthentication = service.checkUser(credentialToken);
+
+		// Then
+		Mockito.verify(authenticationDaoMock, Mockito.times(1)).check(credentialToken);
+		assertSame(returnedAuthentication, userAuthentication);
+	}
+	
+	@Test
+	public void checkAuthenticationWhenUserNotExist() throws Exception {
+		
+		// Given
+		CredentialToken credentialToken = new CredentialToken();
+		credentialToken.setLogin("unknow_user");
+		credentialToken.setPassword("unknow password");
+		
+		Authorization authorization = new Authorization();
+		authorization.setLabel("Consultant");
+		authorization.setRoleId(4);
+
+		Authentication userAuthentication = new Authentication();
+		userAuthentication.setId(1);
+		userAuthentication.setColleagueId(35);
+		userAuthentication.setAuthorization(authorization);
+		userAuthentication.setToken(credentialToken);
+		
+		// When
+		Mockito.when(authenticationDaoMock.check(credentialToken)).thenReturn(null);
+		Authentication returnedAuthentication = service.checkUser(credentialToken);
+		
+		// Then
+		Mockito.verify(authenticationDaoMock, Mockito.times(1)).check(credentialToken);
+		assertNull(returnedAuthentication);
+	}
 }
