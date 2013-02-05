@@ -19,7 +19,7 @@ public class Skill implements Serializable{
 	private static final long serialVersionUID = -4155288579083068658L;
 	
 	/**
-	 * collaborator id associated the skill
+	 * colleague id associated the skill
 	 */
 	private Integer colleagueId;
 	
@@ -56,7 +56,7 @@ public class Skill implements Serializable{
 	
 	/**
 	 * Build the class Skill.java 
-	 * @param collaborator_id
+	 * @param colleagueId
 	 * @param tool_id
 	 * @param score
 	 * @param use_frequency
