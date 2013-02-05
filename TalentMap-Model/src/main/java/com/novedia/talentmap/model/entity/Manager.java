@@ -42,7 +42,7 @@ public class Manager extends Colleague implements Serializable {
 	/**
 	 * Get the manager's colleagues list
 	 * 
-	 * @return the collaborators
+	 * @return the colleagues
 	 */
 	public List<Colleague> getColleagues() {
 		return colleagues;
