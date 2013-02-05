@@ -106,7 +106,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param id the id to set
 	 */
-	private void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -124,7 +124,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param managerId the managerId to set
 	 */
-	private void setManagerId(Integer managerId) {
+	public void setManagerId(Integer managerId) {
 		this.managerId = managerId;
 	}
 
@@ -142,7 +142,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param profileId the profileId to set
 	 */
-	private void setProfileId(Integer profileId) {
+	public void setProfileId(Integer profileId) {
 		this.profileId = profileId;
 	}
 
@@ -160,7 +160,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param lastName the lastName to set
 	 */
-	private void setLastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -178,7 +178,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param firstName the firstName to set
 	 */
-	private void setFirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -196,7 +196,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param email the email to set
 	 */
-	private void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -214,7 +214,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param employmentDate the employmentDate to set
 	 */
-	private void setEmploymentDate(Date employmentDate) {
+	public void setEmploymentDate(Date employmentDate) {
 		this.employmentDate = employmentDate;
 	}
 
@@ -232,7 +232,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param experience the experience to set
 	 */
-	private void setExperience(Integer experience) {
+	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
 
@@ -250,7 +250,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param businessEngineer the businessEngineer to set
 	 */
-	private void setBusinessEngineer(BusinessEngineer businessEngineer) {
+	public void setBusinessEngineer(BusinessEngineer businessEngineer) {
 		this.businessEngineer = businessEngineer;
 	}
 
@@ -268,7 +268,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param phone the phone to set
 	 */
-	private void setPhone(String phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	
@@ -288,7 +288,7 @@ public class Colleague implements Serializable {
 	 * @param mission
 	 *            the mission to set
 	 */
-	private void setMission(List<Mission> mission) {
+	public void setMission(List<Mission> mission) {
 		this.missions = mission;
 	}
 
@@ -307,7 +307,7 @@ public class Colleague implements Serializable {
 	 * @param tool
 	 *            the tool to set
 	 */
-	private void setTool(List<Tool> tool) {
+	public void setTool(List<Tool> tool) {
 		this.tools = tool;
 	}
 	

@@ -81,7 +81,7 @@ public class Mission implements Serializable {
 	 * 
 	 * @param id
 	 */
-	private void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -118,7 +118,7 @@ public class Mission implements Serializable {
 	 * @param client
 	 *            the client to set
 	 */
-	private void setClient(Client client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
 
@@ -137,7 +137,7 @@ public class Mission implements Serializable {
 	 * @param startDate
 	 *            the startDate to set
 	 */
-	private void setStartDate(Date startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -156,7 +156,7 @@ public class Mission implements Serializable {
 	 * @param endDate
 	 *            the endDate to set
 	 */
-	private void setEndDate(Date endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -175,7 +175,7 @@ public class Mission implements Serializable {
 	 * @param name
 	 *            the name to set
 	 */
-	private void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 	
@@ -194,7 +194,7 @@ public class Mission implements Serializable {
 	 * @param place
 	 *            the place to set
 	 */
-	private void setPlace(String place) {
+	public void setPlace(String place) {
 		this.place = place;
 	}
 
