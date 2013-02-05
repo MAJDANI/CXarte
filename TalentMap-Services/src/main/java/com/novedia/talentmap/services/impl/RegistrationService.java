@@ -24,7 +24,7 @@ import com.novedia.talentmap.store.impl.ProfileDao;
 public class RegistrationService implements IRegistrationService {
 	
 	/**
-	 * The collaborator DAO.
+	 * The colleague DAO.
 	 */
 	private IDao<Colleague> colleagueDao;
 	
