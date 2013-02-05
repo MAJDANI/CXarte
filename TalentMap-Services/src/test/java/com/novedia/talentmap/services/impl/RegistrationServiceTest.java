@@ -21,6 +21,11 @@ import com.novedia.talentmap.store.impl.BusinessEngineerDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.ProfileDao;
 
+/**
+ * 
+ * @author y.rohr
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationServiceTest {
 	
@@ -46,6 +51,9 @@ public class RegistrationServiceTest {
 		service.setAuthenticationDao(authenticationDaoMock);
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void checkRegistrationReturnAColleague(){
 		
@@ -64,7 +72,9 @@ public class RegistrationServiceTest {
 		assertSame(result, collaborator);
 	}
 	
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void getAllConsultantManagerReturnAListOfColleagues(){
 		
@@ -83,7 +93,9 @@ public class RegistrationServiceTest {
 		assertSame(expectedCollaboratorsList, collaborators);
 	}
 	
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void getAllProfileReturnAListOfProfile(){
 		
@@ -102,6 +114,9 @@ public class RegistrationServiceTest {
 		assertSame(expectedProfilesList, profiles);
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void addColleagueFromRegistrationCallsOneTime() {
 		
@@ -115,6 +130,9 @@ public class RegistrationServiceTest {
 		Mockito.verify(colleagueDaoMock, Mockito.times(1)).addColleagueFromRegistration(registration);		
 	}
 	
+	/**
+	 * Test the add user registration
+	 */
 	@Test
 	public void addUserFromRegistrationCallsOneTime() {
 		
