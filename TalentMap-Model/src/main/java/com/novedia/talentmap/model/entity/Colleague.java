@@ -346,7 +346,7 @@ public class Colleague implements Serializable {
 	}
 
 	/**
-	 * Override equals, because we are need to compare collab by id
+	 * Override equals, because we are need to compare colleague by id
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -365,8 +365,8 @@ public class Colleague implements Serializable {
 			return false;
 		}
 		
-		Colleague collab = (Colleague) obj;
-		return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.getId(), collab.getId()).isEquals();
+		Colleague colleague = (Colleague) obj;
+		return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.getId(), colleague.getId()).isEquals();
 	}
 	
 	
