@@ -60,7 +60,7 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	}
 
 	@Override
-	public int delete(Colleague collaborator) throws DataAccessException {
+	public int delete(Colleague colleague) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
 
