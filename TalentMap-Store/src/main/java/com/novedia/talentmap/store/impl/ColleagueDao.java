@@ -20,6 +20,7 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * 
  * @author j.collet
  */
+@SuppressWarnings({"unchecked","rawtypes"})
 public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleague>{
 	
 	/**
@@ -40,7 +41,6 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLEAGUE, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Colleague> getAll() throws DataAccessException {
 		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES);
