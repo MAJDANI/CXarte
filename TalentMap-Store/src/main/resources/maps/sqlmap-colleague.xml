@@ -18,7 +18,8 @@
         <result property="phone"      column="PHONE"/>
         <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
         <result property="experience"   column="EXPERIENCE"/>
-		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
+		<result property="businessEngineer"   column="B_ENGINEER_ID" select="colleague.getBusinessEngineer"/>
+		<result property="missions"   column="COLLEAGUE_ID" select="colleague.selectMissionsByColleagueId"/>
     </resultMap>
 
    <resultMap id="managerResult" class="com.novedia.talentmap.model.entity.Manager">
@@ -31,8 +32,20 @@
         <result property="phone"      column="PHONE"/>
         <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
         <result property="experience"   column="EXPERIENCE"/>
-		<result property="businessEngineer" column="B_ENGINEER_ID" select="colleague.getBusinessEngineer" />
+		<result property="businessEngineer"   column="B_ENGINEER_ID" select="colleague.getBusinessEngineer"/>
+		<result property="missions"   column="COLLEAGUE_ID" select="colleague.selectMissionsByColleagueId"/>
     </resultMap>
+
+	<resultMap id="select-mission-result" class="com.novedia.talentmap.model.entity.Mission">
+		<result property="id"             					column="MISSION_ID" />
+		<result property="title"           					column="TITLE" />
+		<result property="place"     	  					column="PLACE" />
+		<result property="notes"          					column="NOTES" jdbcType="String" />
+		<result property="startDate"      					column="START_DATE" />
+		<result property="endDate"       					column="END_DATE" />
+		<result property="client.id" 						column="CLIENT_ID"/>
+		<result property="client.name" 						column="CLIENT_NAME"/>
+	</resultMap>
 
 	<resultMap id="businessEngineerResult" class="com.novedia.talentmap.model.entity.BusinessEngineer">
 		<result property="id" column="B_ENGINEER_ID"/>
@@ -43,12 +56,21 @@
 		select * from BUSINESS_ENGINEER where B_ENGINEER_ID = #value#
 	</select>
 
+
+	<statement id="selectMissionsByColleagueId" parameterClass="int" resultMap="select-mission-result">
+		SELECT * FROM MISSION mission, CLIENT client
+		WHERE mission.CLIENT_ID = client.CLIENT_ID AND mission.MISSION_ID = #id# 
+	</statement>
+
+
     <select id="get" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id#
+        SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
+        WHERE colleague.COLLEAGUE_ID = #id# AND colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
     </select>
     
     <select id="getAll" resultMap="colleagueResult">
-    	SELECT * FROM COLLEAGUE
+    	SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business 
+    	WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
     </select>
     					 
 	<update id="save" parameterClass="Colleague">
@@ -56,7 +78,8 @@
 	</update>
 
     <select id="getManager" parameterClass="Integer" resultMap="managerResult">
-        SELECT * FROM  COLLEAGUE WHERE COLLEAGUE_ID = #id#
+         SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
+        WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID AND colleague.COLLEAGUE_ID = #id# 
     </select>
 	
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">

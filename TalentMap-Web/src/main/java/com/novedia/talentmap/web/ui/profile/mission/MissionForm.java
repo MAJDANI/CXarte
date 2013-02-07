@@ -128,9 +128,15 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			buildMissionLayout();
 			buildMissionForm();
 			buildButton();
+			initMissionList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void initMissionList(){
+		MissionContainer missionContainer = new MissionContainer(collabService);
+		this.listMission = new ListMission(missionContainer);
 	}
 
 	public void buildMissionForm() throws Exception {
@@ -201,7 +207,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			case VALIDATION_VALID_FORM :
 				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setColleague(Colleague.builder().id(COLLEAGUE_ID).build());
+					missionToInsert.setColleagueId(COLLEAGUE_ID);
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
@@ -219,30 +225,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		
 	}
 
-	/**
-	 * Builds a TODO
-	 * @author v.guillemain
-	 * 
-	 * @param itemMission
-	 * @return Mission
-	 */
-	public Mission buildMissionFromItem(Item itemMission, Integer missionId) {
-
-		String intitule = itemMission.getItemProperty(INTITULE).getValue().toString();
-		//TODO MISSION : pb de cast
-		//Client client = (Client) itemMission.getItemProperty(CLIENT).getValue();
-		String lieu = itemMission.getItemProperty(LIEU).getValue().toString();
-		String dateDebut = itemMission.getItemProperty(DATE_DEBUT).getValue().toString();
-		String dateFin = itemMission.getItemProperty(DATE_FIN).getValue().toString();
-		String commentaire = null;
-		if(itemMission.getItemProperty(COMMENTAIRE) != null && itemMission.getItemProperty(COMMENTAIRE).getValue() != null)
-			commentaire = itemMission.getItemProperty(COMMENTAIRE).getValue().toString();
-		//TODO MISSION
-		// Mission mission = new Mission(missionId, new Integer(2), intitule, lieu, client, commentaire, new Date(dateDebut), new Date(dateFin));
-		Colleague colleague = Colleague.builder().id(2).build();
-		Mission mission = Mission.builder().id(missionId).colleague(colleague).build();
-		return mission;
-	}
 	
 	/**
 	 * Builds an object Mission whith data given in parameters: itemMission and MissionId.
@@ -250,12 +232,10 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param itemMission 
 	 * @param missionId
 	 */
-	public void fillMissionFormWithMission(Item itemMission, Integer missionId) {
-		Mission missionToModify = buildMissionFromItem(itemMission, missionId);
-		BeanItem<Mission> beanMissionToModify = new BeanItem<Mission>(missionToModify);
-		this.missionForm.setItemDataSource(beanMissionToModify, this.fieldOrderMission);
+	public void fillMissionFormWithMission(Mission mission) {
 
-		System.out.println(itemMission);
+		BeanItem<Mission> beanMissionToModify = new BeanItem<Mission>(mission);
+		this.missionForm.setItemDataSource(beanMissionToModify, this.fieldOrderMission);
 
 	}
 	

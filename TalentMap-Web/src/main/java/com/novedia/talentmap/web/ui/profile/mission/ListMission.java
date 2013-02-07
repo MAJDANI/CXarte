@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.novedia.talentmap.model.entity.Mission;
-import com.vaadin.event.ItemClickEvent;
-import com.vaadin.event.ItemClickEvent.ItemClickListener;
+
 import com.vaadin.ui.Table;
 
-public class ListMission extends Table implements ItemClickListener {
+public class ListMission extends Table {
 
 	protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -23,10 +22,6 @@ public class ListMission extends Table implements ItemClickListener {
 	 */
 	public static final int COLLAB_ID = 2;
 
-	/**
-	 * the mission witch was clicked for modification 
-	 */
-	private Mission missionSelected;
 	
 	/**
 	 * Build the class ListMission.java 
@@ -44,6 +39,7 @@ public class ListMission extends Table implements ItemClickListener {
 		setWidth(850);
 		buildContainer();
 	}
+
 	/**
 	 * Principal function filling ListMission Table
 	 */
@@ -78,18 +74,15 @@ public class ListMission extends Table implements ItemClickListener {
 	public void fillResultsTable() {
 		Collection<Mission> collectionMission = this.missionContainer.getItemIds();
 		
-		//int idResultsTable = 1;
 		for (Mission mission : collectionMission) {
 			String dateDebut = formatterDate(mission.getStartDate());
 			String dateFin = formatterDate(mission.getEndDate());
-			Integer idMission = mission.getId();
-			System.out.println("idMission=" + idMission);
+			
 			addItem(new Object[] { 
 					mission.getTitle(),
 					mission.getClient().getName(), mission.getPlace(),
 					dateDebut, dateFin,
-					mission.getNotes()}, mission.getId()); //idResultsTable);//test 2012/09/24
-			//idResultsTable++;
+					mission.getNotes()}, mission);
 		}
 	}
 
@@ -118,15 +111,6 @@ public class ListMission extends Table implements ItemClickListener {
 		return missionContainer;
 	}
 
-	@Override
-	public void itemClick(ItemClickEvent event) {
-		// TODO Auto-generated method stub
-		this.setValue(null);
-		this.missionSelected = ((Mission) event.getSource());
-	}
-	
-	public Mission getMissionSelected() {
-		return missionSelected;
-	}
+
 
 }

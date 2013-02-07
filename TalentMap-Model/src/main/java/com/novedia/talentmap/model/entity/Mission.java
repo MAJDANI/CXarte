@@ -26,9 +26,9 @@ public class Mission implements Serializable {
 	private Integer id;
 
 	/**
-	 * Colleague associated the mission
+	 * The colleague id
 	 */
-	private Colleague colleague;
+	private Integer colleagueId;
 
 	/**
 	 * Mission title
@@ -85,23 +85,6 @@ public class Mission implements Serializable {
 		this.id = id;
 	}
 
-	/**
-	 * Get the colleague
-	 * 
-	 * @return the colleague entity
-	 */
-	public Colleague getColleague() {
-		return colleague;
-	}
-	
-	/**
-	 * Set colleague value
-	 * 
-	 * @param colleague
-	 */
-	public void setColleague(Colleague colleague) {
-		this.colleague = colleague;
-	}
 
 	/**
 	 * Get the client value
@@ -217,6 +200,21 @@ public class Mission implements Serializable {
 		this.notes = notes;
 	}
 	
+	/**
+	 * Get the colleague id
+	 * @return
+	 */
+	public Integer getColleagueId() {
+		return colleagueId;
+	}
+
+	/**
+	 * Set the colleague id
+	 * @param colleagueId
+	 */
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
+	}
 	
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
@@ -228,7 +226,6 @@ public class Mission implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
-		strBld.append("[colleague=").append(getColleague()).append(", ");
 		strBld.append("[name=").append(getTitle()).append(", ");
 		strBld.append("[client=").append(getClient()).append("]");
 		return strBld.toString();
@@ -241,9 +238,8 @@ public class Mission implements Serializable {
 	public int hashCode() {
 		HashCodeBuilder hBuilder = new HashCodeBuilder();
 		hBuilder.append(this.getId());
-		hBuilder.append(this.getColleague().getId());
-		hBuilder.append(this.getTitle());
-		hBuilder.append(this.getClient());
+		//hBuilder.append(this.getTitle());
+		//hBuilder.append(this.getClient());
 		return hBuilder.hashCode();
 	}
 
@@ -262,8 +258,8 @@ public class Mission implements Serializable {
 		Mission comparedObj = (Mission) obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
 		ebuilder.append(this.getId(), comparedObj.getId());
-		ebuilder.append(this.getClient(), comparedObj.getClient());
-		ebuilder.append(this.getTitle(), comparedObj.getTitle());
+		//ebuilder.append(this.getClient(), comparedObj.getClient());
+		//ebuilder.append(this.getTitle(), comparedObj.getTitle());
 		return ebuilder.isEquals();
 	}
 	
@@ -289,7 +285,7 @@ public class Mission implements Serializable {
 	private Mission(final Builder builder) {
 		
 		this.id = builder.id;
-		this.colleague = builder.colleague;
+		this.colleagueId = builder.colleagueId;
 		this.title = builder.title;
 		this.place = builder.place;
 		this.client = builder.client;
@@ -298,6 +294,7 @@ public class Mission implements Serializable {
 		this.endDate = builder.endDate;
 	}
 	
+
 	/**
 	 * Inner builder class.
 	 * 
@@ -313,7 +310,7 @@ public class Mission implements Serializable {
 		/**
 		 * Colleague associated the mission
 		 */
-		private Colleague colleague;
+		private Integer colleagueId;
 
 		/**
 		 * Mission name
@@ -366,8 +363,8 @@ public class Mission implements Serializable {
 		 *            
 		 * @return the builder
 		 */
-		public Builder colleague(final Colleague colleague) {
-			this.colleague = colleague;
+		public Builder colleagueId(final Integer colleagueId) {
+			this.colleagueId = colleagueId;
 			return this;
 		}
 

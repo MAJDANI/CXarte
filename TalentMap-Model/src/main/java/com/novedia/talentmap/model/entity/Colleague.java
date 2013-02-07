@@ -278,7 +278,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @return the mission
 	 */
-	public List<Mission> getMission() {
+	public List<Mission> getMissions() {
 		return missions;
 	}
 
@@ -288,8 +288,8 @@ public class Colleague implements Serializable {
 	 * @param mission
 	 *            the mission to set
 	 */
-	public void setMission(List<Mission> mission) {
-		this.missions = mission;
+	public void setMissions(List<Mission> missions) {
+		this.missions = missions;
 	}
 
 	/**

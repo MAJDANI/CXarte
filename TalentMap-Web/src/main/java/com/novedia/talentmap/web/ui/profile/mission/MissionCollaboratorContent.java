@@ -43,11 +43,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	private MissionForm missionForm;
 
-	/**
-	 * The missionId the user selected before the action click
-	 */
-	private Object missionIdSelected;
-
 	/***
 	 * Vaadin Components
 	 */
@@ -257,17 +252,16 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		}
 		// MODIFY OR DELETE EXISTING MISSION
 		else {
-			this.missionIdSelected = this.listMission.getValue();
-			System.out.println("missionId=" + missionIdSelected);
+			Mission selectedMission = (Mission) this.listMission.getValue();
 			// CHECK USER SELECTED A MISSION IN THE TABLE
-			if (null == missionIdSelected) {
+			if (null == selectedMission) {
 				getWindow().showNotification(
 						"Veuillez sélectionner une mission",
 						Notification.TYPE_WARNING_MESSAGE);
 			} else {
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
-					fillAddMissionPanelWithMission((Integer) this.missionIdSelected);
+					fillAddMissionPanelWithMission(selectedMission);
 					// On indique que l'action courante est une modification de
 					// mission (pas une création)
 					this.missionForm
@@ -364,7 +358,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public void confirmDeleteButtonClick(Button.ClickEvent event) {
 		getWindow().removeWindow(windowConfirmDelete);
-		deleteMission((Integer) missionIdSelected);
 	}
 
 	/**
@@ -383,16 +376,10 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @param missionId
 	 *            : the id of the mission selected in the table
 	 */
-	private void fillAddMissionPanelWithMission(Integer missionId) {
+	private void fillAddMissionPanelWithMission(Mission mission) {
 
-		System.out.println("fillAddMissionPanelWithMission  missionId="
-				+ missionId);
 		enableAddMissionPanel();
-		Item itemMissionSelected = this.listMission.getItem(missionId);
-		System.out.println("itemMissionSelected=" + itemMissionSelected);
-
-		this.missionForm.fillMissionFormWithMission(itemMissionSelected,
-				missionId);
+		this.missionForm.fillMissionFormWithMission(mission);
 
 	}
 
