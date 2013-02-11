@@ -22,7 +22,7 @@ import com.novedia.talentmap.store.impl.ColleagueDao;
 public class ColleagueService implements IColleagueService {
 	
 	/**
-	 * The collaborator DAO.
+	 * The colleague DAO.
 	 */
 	private IDao<Colleague> colleagueDao;
 
@@ -57,8 +57,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer saveColleague(Colleague collaborator) throws DataAccessException {
-		return colleagueDao.save(collaborator);
+	public Integer saveColleague(Colleague colleague) throws DataAccessException {
+		return colleagueDao.save(colleague);
 	}
 
 	/**
@@ -90,17 +90,16 @@ public class ColleagueService implements IColleagueService {
 	 */
 	@Override
 	public Mission getMission(Integer missionId) throws DataAccessException {
-		// TODO : A implémenter
-		return null;
+		return missionDao.get(missionId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Mission> getAllMissions(final Integer collabId)throws DataAccessException {
+	public List<Mission> getAllMissions(final Integer colleagueId)throws DataAccessException {
 		MissionDao missionDao = (MissionDao) this.missionDao;
-		return missionDao.getAllByColleagueId(collabId);
+		return missionDao.getAllByColleagueId(colleagueId);
 	}
 
 	/**
@@ -144,16 +143,16 @@ public class ColleagueService implements IColleagueService {
 	}
 
 	/**
-	 * This method allowd to make the spring injection.
+	 * This method allows to make the spring injection.
 	 * 
-	 * @param collaboratorDao
+	 * @param colleagueDao
 	 */
 	public void setColleagueDao(IDao<Colleague> colleagueDao) {
 		this.colleagueDao = colleagueDao;
 	}
 
 	/**
-	 * This method allowd to make the spring injection.
+	 * This method allows to make the spring injection.
 	 * 
 	 * @param missionDao
 	 */
