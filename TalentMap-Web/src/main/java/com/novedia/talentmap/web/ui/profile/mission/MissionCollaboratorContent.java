@@ -68,6 +68,11 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	private Window windowConfirmDelete;
 
 	/**
+	 * The mission selected by the user, in order to modify or delete it.
+	 */
+	private Mission selectedMission;
+	
+	/**
 	 * Labels form confirmation delete window
 	 */
 	private static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation de Suppression de mission";
@@ -252,7 +257,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		}
 		// MODIFY OR DELETE EXISTING MISSION
 		else {
-			Mission selectedMission = (Mission) this.listMission.getValue();
+			selectedMission = (Mission) this.listMission.getValue();
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if (null == selectedMission) {
 				getWindow().showNotification(
@@ -358,6 +363,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public void confirmDeleteButtonClick(Button.ClickEvent event) {
 		getWindow().removeWindow(windowConfirmDelete);
+		deleteMission((Integer) selectedMission.getId());
 	}
 
 	/**
