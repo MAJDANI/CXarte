@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import com.novedia.talentmap.model.entity.Category.Builder;
+
 /**
  * This entity represents a vSkill
  * 
@@ -136,5 +138,91 @@ public class VSkill  implements Serializable {
 		strBld.append("[tool_name=").append(getTool_name()).append(", ");
 		strBld.append("[concept_name=").append(getConcept_name()).append("]");
 		return strBld.toString();	
+	}	
+	
+	
+	
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	/**
+	 * Static constructor for this class.
+	 * @return a builder instance
+	 */
+	public static Builder builder(){
+		return new Builder();
+	}
+	
+	/**
+	 * Build a VSkill entity.
+	 * @param builder
+	 * the builder inner class for this entity
+	 */
+	@SuppressWarnings("unused")
+	private VSkill(final Builder builder){
+		this.category_name = builder.category_name;
+		this.concept_name = builder.concept_name;
+		this.tool_name = builder.tool_name;
+	}
+	
+	/**
+	 * Inner builder class.
+	 * @author v.dibi
+	 *
+	 */
+	public static final class Builder{
+		/**
+		 * category name associated the VSKill
+		 */
+		private String category_name;
+		
+		/**
+		 * concept name associated the VSKill
+		 */
+		private String concept_name;
+		
+		/**
+		 * tool name associated the VSKill
+		 */
+		private String tool_name;
+		
+		/**
+		 * Constructor with parameter category_name.
+		 * @param category_name
+		 * @return the builder
+		 */
+		public Builder categoryName(final String category_name) {
+			this.category_name = category_name;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter concept_name.
+		 * @param concept_name
+		 * @return the builder
+		 */
+		public Builder conceptName(final String concept_name) {
+			this.concept_name = concept_name;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter tool_name.
+		 * @param tool_name
+		 * @return the builder
+		 */
+		public Builder toolName(final String tool_name) {
+			this.tool_name = tool_name;
+			return this;
+		}
+		
+		/**
+		 * Build VSkill
+		 * @return VSkill
+		 */
+		public VSkill build (){
+			return new VSkill(this);
+		}				
 	}	
 }

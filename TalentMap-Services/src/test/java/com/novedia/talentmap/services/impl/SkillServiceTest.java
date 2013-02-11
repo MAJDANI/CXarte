@@ -3,6 +3,7 @@
  */
 package com.novedia.talentmap.services.impl;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -94,16 +95,17 @@ public class SkillServiceTest {
 		Integer collaboratorId = 1;
 		Integer toolId = 1;	
 		
-		Skill skillExpected = new Skill();
-		skillExpected.setTool_id(toolId);
-		skillExpected.setColleagueId(collaboratorId);
+		Skill skillExpected = Skill.builder().tool_id(1).colleagueId(2).score(2).build();
 											
 		//When
 		Mockito.when(skillDaoMock.getCollaboratorSkillByTool(collaboratorId, toolId)).thenReturn(skillExpected);
 		Skill skillActuel = service.getSkillByToolId(collaboratorId, toolId);
 		//Then
-		Assert.assertNotNull(skillActuel);
-		assertSame(skillExpected, skillActuel);			
+		
+		assertNotNull(skillActuel);
+		assertEquals(skillExpected, skillActuel);
+		
+		
 	}
 	
 	@Test(expected = DataAccessException.class)

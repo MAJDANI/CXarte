@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.profile;
 import java.util.List;
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
@@ -10,11 +11,11 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
-import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
@@ -32,7 +33,7 @@ import com.vaadin.ui.VerticalLayout;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
-public class CollaboratorForm extends FormLayout {
+public class CollaboratorForm extends FormLayout{
 
 	/**
 	 * 
@@ -56,7 +57,9 @@ public class CollaboratorForm extends FormLayout {
 	/**
 	 * Constants
 	 */
-	private int COLLAB_ID = 2;
+	public static int COLLAB_ID ;
+	
+	Authentication curentAuthentication = new Authentication();
 
 	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "startDate", "endDate"};
@@ -84,7 +87,7 @@ public class CollaboratorForm extends FormLayout {
 	private IProfileService profileService;
 	private IClientService clientService;
 	private IBusinessEngineerService businessEngineerService;
-
+	MyVaadinApplication app;
 	/**
 	 * 
 	 * Build the class CollaboratorForm.java
@@ -168,11 +171,18 @@ public class CollaboratorForm extends FormLayout {
 	 * @throws Exception
 	 */
 	private void buildCurrentCollaboratorDatas() throws Exception {
+		app.getContext();
+		System.out.println("app.getContext() : " +app.getContext() );
 		this.currentColleague = this.collaboratorService.getColleague(COLLAB_ID);
+		
+		//System.out.println(" COLLAB_ID : " + curentAuthentication.getColleagueId());
+		
+		//this.currentColleague = this.collaboratorService.getColleague(curentAuthentication.getColleagueId());
 		if(currentColleague != null) {
 			this.currentColleaguesManager = this.collaboratorService.getManager(currentColleague.getManagerId());
 			//TODO : ajouter une méthode getAllMissionsOrderByStartDate
 			this.currentColleaguesMissions = this.collaboratorService.getAllMissions(COLLAB_ID);
+			//this.currentColleaguesMissions = this.collaboratorService.getAllMissions(curentAuthentication.getColleagueId());
 			//Récupérer la dernière mission en date du collaborateur
 			int nbMissions = this.currentColleaguesMissions.size();
 			if(nbMissions > 0) {

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import com.novedia.talentmap.model.entity.VSkill.Builder;
+
 /**
  * This entity represents a skill.
  * 
@@ -190,4 +192,134 @@ public class Skill implements Serializable{
 		ebuilder.append(this.getUse_frequency(), comparedObj.getUse_frequency());
 		return ebuilder.isEquals();
 	}
+	
+	// -------------------------------------
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
+	
+	
+	/**
+	 * Static constructor for this class.
+	 * @return a builder instance
+	 */
+	public static Builder builder(){
+		return new Builder();
+	}
+	
+	
+	private Skill(final Builder builder){
+		this.colleagueId = builder.colleagueId;
+		this.tool_id = builder.tool_id;
+		this.score = builder.score;
+		this.use_frequency = builder.use_frequency;
+		this.no_using_time = builder.no_using_time;
+	}
+	
+	
+	public static final class Builder{
+		/**
+		 * colleague id associated the skill
+		 */
+		private Integer colleagueId;
+		/**
+		 * tool id associated the skill
+		 */
+		private Integer tool_id;
+		
+		/**
+		 * th score associated the skill
+		 */
+		private Integer score;
+		
+		/**
+		 * Frequency of competence
+		 */
+		private Integer use_frequency;
+		
+		/**
+		 * Frequency of competence not use
+		 */
+		private Integer no_using_time;
+
+		
+		
+		/**
+		 * Constructor with parameter colleagueId.
+		 * @param colleagueId
+		 * @return the builder
+		 */
+		public Builder colleagueId(final int colleagueId) {
+			this.colleagueId = colleagueId;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter tool_id.
+		 * @param tool_id
+		 * @return the builder
+		 */
+		public Builder tool_id(final int tool_id) {
+			this.tool_id = tool_id;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter score.
+		 * @param score
+		 * @return the builder
+		 */
+		public Builder score(final int score) {
+			this.score = score;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter use_frequency.
+		 * @param use_frequency
+		 * @return the builder
+		 */
+		public Builder use_frequency(final int use_frequency) {
+			this.use_frequency = use_frequency;
+			return this;
+		}
+		
+		/**
+		 * Constructor with parameter no_using_time.
+		 * @param no_using_time
+		 * @return the builder
+		 */
+		public Builder no_using_time(final int no_using_time) {
+			this.no_using_time = no_using_time;
+			return this;
+		}
+		
+		
+		
+		
+		/**
+		 * Build Skill
+		 * @return Skill
+		 */
+		public Skill build (){
+			return new Skill(this);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 }

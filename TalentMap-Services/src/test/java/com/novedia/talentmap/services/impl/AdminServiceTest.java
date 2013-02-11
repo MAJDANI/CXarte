@@ -1,34 +1,29 @@
 package com.novedia.talentmap.services.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.verification.Times;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.runners.VerboseMockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
-import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
-import com.novedia.talentmap.store.impl.ConceptDao;
 
 /**
  * Test class for administration service.
@@ -65,6 +60,10 @@ private IDao<Concept> conceptDaoMock;
 private IDao<Category> categoryDaoMock;
 
 /**
+ * Message constant
+ */
+private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
+/**
  * This method allow initialize the object.
  * @throws Exception
  */
@@ -74,9 +73,6 @@ private IDao<Category> categoryDaoMock;
 		service.setToolDao(toolDaoMock);
 		service.setConceptDao(conceptDaoMock);
 		service.setCategoryDao(categoryDaoMock);
-//		Concept concept = Concept.Builder.builder().build();
-//		concept.setId(1);
-//		service.setConcept(concept);
 		service.setvSkillDao(vSkillDaoMock);
 	}
 /**
@@ -95,11 +91,11 @@ private IDao<Category> categoryDaoMock;
 
 		// When
 		Mockito.when(toolDaoMock.getAll()).thenReturn(expectedToolsList);
-		List<Tool> tools = service.getAllTools();
+		List<Tool> toolsListActual = service.getAllTools();
 
 		// Then
-		Assert.assertNotNull(tools);
-		Assert.assertEquals(expectedToolsList, tools);
+		Assert.assertNotNull(toolsListActual);
+		Assert.assertEquals(expectedToolsList, toolsListActual);
 	}
 
 	@Test(expected = DataAccessException.class)
@@ -108,7 +104,7 @@ private IDao<Category> categoryDaoMock;
 
 		// When
 		Mockito.doThrow(
-				new DataAccessResourceFailureException("Resource failure"))
+				new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE))
 				.when(toolDaoMock).getAll();
 		service.getAllTools();
 
@@ -118,18 +114,14 @@ private IDao<Category> categoryDaoMock;
 	public void getAllToolsCallToolDaoOneTime() {
 
 		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
-		Tool tool = Tool.builder().id(1).name("Spring").concept(concept).build();
-
-		List<Tool> expectedToolsList = new ArrayList<Tool>();
-		expectedToolsList.add(tool);
-
+		List<Tool> toolsListExpected = new ArrayList<Tool>();
+		
 		// When
-		Mockito.when(toolDaoMock.getAll()).thenReturn(expectedToolsList);
-		List<Tool> tools = service.getAllTools();
+		Mockito.when(toolDaoMock.getAll()).thenReturn(toolsListExpected);
+		List<Tool> toolsListActual = service.getAllTools();
 
 		// Then
+		assertNotNull(toolsListActual);
 		Mockito.verify(toolDaoMock, Mockito.times(1)).getAll();
 	}
 
@@ -149,7 +141,7 @@ private IDao<Category> categoryDaoMock;
 
 		// Then
 		assertNotNull(conceptsListActuel);
-		assertSame(conceptListRequested, conceptsListActuel);
+		assertEquals(conceptListRequested, conceptsListActuel);
 	}
 
 	@Test(expected = DataAccessException.class)
@@ -157,9 +149,8 @@ private IDao<Category> categoryDaoMock;
 
 		// when
 		Mockito.when(conceptDaoMock.getAll()).thenThrow(
-				new DataAccessResourceFailureException("Resource failure"));
+				new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		service.getAllConcepts();
-
 	}
 
 	@Test
@@ -167,15 +158,12 @@ private IDao<Category> categoryDaoMock;
 			throws DataAccessException {
 
 		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
-		
-		List<Concept> conceptListRequested = new ArrayList<Concept>();
-		conceptListRequested.add(concept);
+	
+		List<Concept> conceptListExpected = new ArrayList<Concept>();	
 
 		// When
-		Mockito.when(conceptDaoMock.getAll()).thenReturn(conceptListRequested);
-		List<Concept> conceptsListActuel = service.getAllConcepts();
+		Mockito.when(conceptDaoMock.getAll()).thenReturn(conceptListExpected);
+		List<Concept> conceptsListActual = service.getAllConcepts();
 
 		// Then
 		Mockito.verify(conceptDaoMock, Mockito.times(1)).getAll();
@@ -185,8 +173,7 @@ private IDao<Category> categoryDaoMock;
 	public void getAllCategoriesReturnAListOfCategories() throws DataAccessException {
 
 		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();
-		
+		Category category = Category.builder().id(1).name("JAVA").build();		
 		List<Category> categoryListExpected = new ArrayList<Category>();
 		categoryListExpected.add(category);
 
@@ -204,18 +191,15 @@ private IDao<Category> categoryDaoMock;
 			throws DataAccessException {
 
 		// When
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(categoryDaoMock).getAll();
+		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(categoryDaoMock).getAll();
 		service.getAllCategories();
 	}
 
 	@Test
 	public void getAllCategoriesCallCategoryDaoOneTime(){
 		
-		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();
-	
+		// Given	
 		List<Category> categoryListExpected = new ArrayList<Category>();
-		categoryListExpected.add(category);
 
 		// When
 		Mockito.when(categoryDaoMock.getAll()).thenReturn(categoryListExpected);
@@ -227,9 +211,11 @@ private IDao<Category> categoryDaoMock;
 	
 	@Test(expected = DataAccessException.class)
 	public void saveCategoryThrowsDataAccessException() throws DataAccessException {
-		VSkill vSkill =new VSkill("category_name", "concept_name",	"tool_name");
+		
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
+		
 		//When
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(categoryDaoMock).save(Mockito.any(Category.class));
+		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(categoryDaoMock).save(Mockito.any(Category.class));
 		service.saveCategory(vSkill);
 	}
 
@@ -237,86 +223,77 @@ private IDao<Category> categoryDaoMock;
 	public void saveCategoryWhenCategoryIsNull(){
 
 		// Given
-		Integer categoryId = 1;
-
-		VSkill vSkill = new VSkill("category_name", "concept_name",
-				"tool_name");
-
+		Category category = Category.builder().id(1).name("JAVA").build();		
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
+		
 		// When
-		Mockito.when(categoryDaoMock.check(Mockito.anyString())).thenReturn(
-				null);
-		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class)))
-				.thenReturn(categoryId);
+		Mockito.when(categoryDaoMock.check(Mockito.anyString())).thenReturn(null);
+		//Mockito.when(categoryDaoMock.save(category)).thenReturn(1);
 		service.saveCategory(vSkill);
 
 		// Then
-		Mockito.verify(categoryDaoMock, Mockito.times(1)).save(
-				Mockito.any(Category.class));
+		assertNotNull(vSkill);
+		Mockito.verify(categoryDaoMock, Mockito.times(1)).save(Mockito.any(Category.class));				
 	}
 
-	@Ignore
+	@Test
 	public void saveCategoryWhenCategoryNotNull(){
 
 		// Given
 		Category category = Category.builder().id(1).name("JAVA").build();
 		
 		// When
-		Mockito.when(categoryDaoMock.check(Mockito.anyString())).thenReturn(category);
+		Mockito.when(categoryDaoMock.save(category)).thenReturn(1);
 		// Then
+		
 	}
 	
 	@Test(expected = DataAccessException.class)
 	public void saveToolThrowsDataAccessException()throws DataAccessException{
 		VSkill vSkill = new VSkill();
 		//When
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(toolDaoMock).save(Mockito.any(Tool.class));
+		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(toolDaoMock).save(Mockito.any(Tool.class));
 		service.saveTool(vSkill);
 	}
 	
-	@Ignore
 	@Test
 	public void saveToolCreateNewToolWhenToolIsNull(){
 
 		// Given
 		Integer toolId = 1;
-		VSkill vSkill = new VSkill("category_name", "concept_name",	"tool_name");
-
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
+		
 		// When
 		Mockito.when(toolDaoMock.save(Mockito.any(Tool.class))).thenReturn(toolId);
 		Tool tool = service.saveTool(vSkill);
 
 		// Then
-		assertNotNull(tool);
-		assertEquals(toolId, tool.getId());
-		
+		assertNotNull(tool);		
 		Mockito.verify(toolDaoMock, Mockito.times(1)).save(Mockito.any(Tool.class));
 	}
 	
+
 	@Test
 	public void saveToolCreateNewToolWhenToolNotNull() {
 		
 		//Given
-		VSkill vSkill = new VSkill("category_name", "concept_name",	"tool_name");
-		
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
 		//When
 		Mockito.when(vSkillDaoMock.getSkillByTool(Mockito.anyString())).thenReturn(vSkill);
-		Tool tool = service.saveTool(vSkill);
+		Tool toolActual = service.saveTool(vSkill);
 		
 		//Then
-		assertNotNull(tool);		
+		assertNotNull(toolActual);		
 	}
 	
 	@Test
 	public void saveConceptCallsConceptDaoWhenCategoryNotNullAndConceptNull() {
+		
 		//Given
 		Integer conceptId = 1;
-		VSkill vSkill = new VSkill("category_name", "concept_name",	"tool_name");
-		
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("").toolName("HIBERNATE").build();
+				
 		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
-		
-		// Bizarre non ???
-		//service.setCategory(new Category());
 		service.setCategory(category);
 		
 		//When
@@ -326,32 +303,24 @@ private IDao<Category> categoryDaoMock;
 		
 		//Then
 		Mockito.verify(conceptDaoMock, Mockito.times(1)).save(Mockito.any(Concept.class));
-
 	}
 	
 	@Test
-	public void saveConceptCallsConceptDaoWhenCategoryNotNullAndConceptNotNull() {
+	public void saveConceptCallsConceptDaoWhenCategoryNullAndConceptNull() {
 		//Given
-		Integer conceptId = 1;
-		VSkill vSkill = new VSkill("category_name", "concept_name",	"tool_name");
-		
+		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("").toolName("HIBERNATE").build();			
 		Category category = Category.builder().id(1).name("JAVA").build();
-		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
-
-		// TODO : ??? Bizarre ce test
-		//service.setCategory(new Category());
-		
 		service.setCategory(category);
 		
 		//When
-		Mockito.when(conceptDaoMock.check(Mockito.anyString())).thenReturn(concept);
-		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(conceptId);
+		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(0);
 		service.saveConcept(vSkill);
 		
 		//Then
-		Mockito.verify(conceptDaoMock, Mockito.times(0)).save(Mockito.any(Concept.class));
+		Mockito.verify(conceptDaoMock, Mockito.times(1)).save(Mockito.any(Concept.class));
 	}
-		
+	
+
 	@Test(expected = DataAccessException.class)
 	public void saveConceptThrowsDataAccessException() throws DataAccessException{
 		//Given
@@ -360,12 +329,12 @@ private IDao<Category> categoryDaoMock;
 		
 		//When
 		Mockito.when(conceptDaoMock.check(Mockito.anyString())).thenReturn(null);
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(conceptDaoMock).save(Mockito.any(Concept.class));
+		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(conceptDaoMock).save(Mockito.any(Concept.class));
 		service.saveConcept(vSkill);
 	}
 	
 	@Test
-	public void updateOneSkillDoSaveIfCategoryNotNull(){
+	public void updateOneSkillDoaSaveIfCategoryNotNull(){
 		
 		//Given
 		Category category = Category.builder().id(1).name("JAVA").build();
@@ -384,13 +353,14 @@ private IDao<Category> categoryDaoMock;
 		//Given
 		Category category = Category.builder().id(1).name("JAVA").build();
 		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
+		Tool tool = Tool.builder().id(1).name("Spring").concept(concept).build();
 
 		service.setMapNotification(new HashMap<String, Object>());
 		
 		//When
 		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenReturn(0);	
 		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(0);	
-		service.updateASkill(category, concept, null);
+		service.updateASkill(category, concept, tool);
 		
 		//Then		
 		//Mockito.verify(conceptDaoMock, Mockito.times(1)).save(concept);
@@ -427,7 +397,7 @@ private IDao<Category> categoryDaoMock;
 		Tool tool = Tool.builder().id(1).concept(concept).name("Spring").build();
 		
 		//When
-		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(categoryDaoMock.save(Mockito.any(Category.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		
 		//Then
 		service.updateASkill(category, concept, tool);
@@ -441,7 +411,7 @@ private IDao<Category> categoryDaoMock;
 		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
 		Tool tool = Tool.builder().id(1).concept(concept).name("Spring").build();
 		//When
-		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		
 		//Then
 		service.updateASkill(category, concept, tool);
@@ -454,16 +424,14 @@ private IDao<Category> categoryDaoMock;
 		Category category = Category.builder().id(1).name("JAVA").build();
 		Concept concept = Concept.builder().id(1).category(category).name("ORM").build();
 		Tool tool = Tool.builder().id(1).concept(concept).name("Spring").build();
-		
-			
+					
 		//When
-		Mockito.when(toolDaoMock.save(Mockito.any(Tool.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(toolDaoMock.save(Mockito.any(Tool.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		
 		//Then
-		service.updateASkill(category, concept, tool);
-		
+		service.updateASkill(category, concept, tool);		
 	}
-	
+
 	@Test
 	public void deleteCategoryCallsDelete() {
 		//Given
@@ -484,11 +452,11 @@ private IDao<Category> categoryDaoMock;
 		Integer categoryId = 1;
 		
 		//When
-		Mockito.when(categoryDaoMock.delete(Mockito.any(Category.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(categoryDaoMock.delete(Mockito.any(Category.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		//Then
 		service.deleteCategory(categoryId);		
 	}
-		
+	
 	@Test
 	public void deleteConceptCallsDelete() {
 		//Given
@@ -503,13 +471,14 @@ private IDao<Category> categoryDaoMock;
 		Mockito.verify(conceptDaoMock, Mockito.times(1)).delete(Mockito.any(Concept.class));
 	}
 	
+
 	@Test(expected=DataAccessException.class)
 	public void deleteConceptThrowsDataAccessException() throws DataAccessException {
 		//Given
 		Integer conceptId = 1;
 		
 		//When
-		Mockito.when(conceptDaoMock.delete(Mockito.any(Concept.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(conceptDaoMock.delete(Mockito.any(Concept.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		//Then
 		service.deleteConcept(conceptId);		
 	}
@@ -533,21 +502,8 @@ private IDao<Category> categoryDaoMock;
 		//Given
 		Integer toolId = 1;		
 		//When
-		Mockito.when(toolDaoMock.delete(Mockito.any(Tool.class))).thenThrow(new DataAccessResourceFailureException("Access Failure"));
+		Mockito.when(toolDaoMock.delete(Mockito.any(Tool.class))).thenThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE));
 		//Then
 		service.deleteTool(toolId);	
 	}
-	
-//	@Test
-//	public void buildCategory(){
-//		//Given
-//		Category category = new Category();
-//		category.setId(1);
-//		category.setName("categoryName");
-//		
-//		//When
-//		
-//		//Then
-//		
-//	}
 }
