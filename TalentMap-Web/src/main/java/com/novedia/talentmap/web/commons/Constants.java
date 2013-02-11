@@ -52,7 +52,7 @@ public class Constants {
 	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Intitulé", "Client",
 		"Lieu", "Début mission", "Fin mission", "Commentaire" };
 
-	public static final String FIELD_MISSION_NAME = "name";
+	public static final String FIELD_MISSION_NAME = "title";
 	public static final String FIELD_MISSION_CLIENT = "client";
 	public static final String FIELD_MISSION_PLACE = "place";
 	public static final String FIELD_MISSION_START_DATE = "startDate";
