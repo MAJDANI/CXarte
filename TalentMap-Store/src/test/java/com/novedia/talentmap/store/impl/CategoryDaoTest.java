@@ -92,7 +92,7 @@ public class CategoryDaoTest {
 	@Test
 	@DataSet("CategoryDaoTest.testAdd.xml")
 	public void testAdd () {
-		Category cat = Category.builder().name("CATEGORY").build();
+		Category cat = Category.builder().id(1).name("CATEGORY").build();
 		int addIndex = categoryDao.add(cat);
 		Assert.assertTrue(addIndex > 0);
 	}
