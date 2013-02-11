@@ -8,6 +8,7 @@ import junit.framework.Assert;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -26,6 +27,7 @@ import com.novedia.talentmap.model.entity.Colleague;
  * @author j.marie-sainte
  * 
  */
+@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("ColleagueDaoTest.xml")
