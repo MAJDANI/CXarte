@@ -57,7 +57,8 @@ public class CollaboratorForm extends FormLayout{
 	/**
 	 * Constants
 	 */
-	public static int COLLAB_ID ;
+	//TODO remis la valeur 2 pour que l'application puisse tourner en attendant qu'on enlève le bouchon
+	public static int COLLAB_ID = 2;
 	
 	Authentication curentAuthentication = new Authentication();
 
@@ -171,8 +172,6 @@ public class CollaboratorForm extends FormLayout{
 	 * @throws Exception
 	 */
 	private void buildCurrentCollaboratorDatas() throws Exception {
-		app.getContext();
-		System.out.println("app.getContext() : " +app.getContext() );
 		this.currentColleague = this.collaboratorService.getColleague(COLLAB_ID);
 		
 		//System.out.println(" COLLAB_ID : " + curentAuthentication.getColleagueId());

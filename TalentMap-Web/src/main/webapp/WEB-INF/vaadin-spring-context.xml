@@ -208,7 +208,7 @@
 		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
 		<constructor-arg name="profileNavigation" ref="profileNavigationBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
-	<!--	<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/> -->
+		<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/>
 		
 	</bean>
 	<!--History EA -->
