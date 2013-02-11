@@ -2,6 +2,7 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
+import com.novedia.talentmap.model.entity.Concept.Builder;
 
 
 
@@ -47,6 +48,15 @@ public class Client implements Serializable, Comparable {
 	}
 	
 	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
 	 * Inner builder class.
 	 * 
 	 * @author y.rohr
@@ -87,6 +97,15 @@ public class Client implements Serializable, Comparable {
 			return this;
 		}
 		
+		/**
+		 * Build an immutable instance of client.
+		 * 
+		 * @return Client
+		 */
+		public Client build() {
+			return new Client(this);
+		}
+
 	}
 
 	public Integer getId() {
