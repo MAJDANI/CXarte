@@ -47,7 +47,5 @@ public class MonitoringCollabView extends VerticalLayout {
 	public void setMonitoringCollabContentLayout(
 			MonitoringCollabContentLayout monitoringCollabContentLayout) {
 		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
-	}
-	
-	
+	}		
 }

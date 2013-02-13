@@ -1,19 +1,23 @@
 package com.novedia.talentmap.web.ui.collab;
 
-import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.CollaboratorSkillContent;
+import com.novedia.talentmap.web.ui.profile.HistoryMissionColab;
+import com.novedia.talentmap.web.ui.profile.ObjectiveEa;
+import com.novedia.talentmap.web.util.ICollabLayout;
 import com.novedia.talentmap.web.util.IObservable;
-import com.novedia.talentmap.web.util.IProfileLayout;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
 public class MonitoringCollabNavigation extends VerticalLayout implements ItemClickListener,
-ClickListener,IObservable{
+IObservable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Vaadin Components
 	 */
@@ -21,15 +25,13 @@ ClickListener,IObservable{
 	private Button setUpEA;
 	private Button objectiveEA;
 	
-	/**
-	 * Utils Observateur
-	 */
-	private IProfileLayout obs;
+	private Class<?> cl = CollaboratorSkillContent.class;
 	
 	/**
-	 * POJO
+	 * Util Observator
 	 */
-	private Class<?> cl = ProfileCollaboratorContent.class;
+	private ICollabLayout obsLayout;
+	
 	
 	/**
 	 * Constants
@@ -37,9 +39,6 @@ ClickListener,IObservable{
 	public static final String VISUALIZE_COLLAB_NAME = "Vue synthétique";
 	public static final String SETUP_EA_NAME = "Saisir un EA";
 	public static final String OBJECTIVE_NAME = "Objectifs d'un EA";
-	
-	public String firstItem ;
-	public String secondItem;
 	public static Tree root = new Tree();
 	public static final Object [][] subItems = new Object[][]{
 			new Object[]{"Menu",VISUALIZE_COLLAB_NAME,SETUP_EA_NAME,OBJECTIVE_NAME}
@@ -58,8 +57,7 @@ ClickListener,IObservable{
 		this.setUpEA = setUpEA;
 		this.objectiveEA = objectiveEA;
 		
-		mainBuild();
-		
+		mainBuild();		
 	}
 	
 	/**
@@ -74,6 +72,8 @@ ClickListener,IObservable{
 	}
 	
 	public void buildTree(){
+		String firstItem ;
+		String secondItem;
 		for (int i = 0; i < subItems.length; i++) {			
 			secondItem = (String) subItems[i][0];
 			root.addItem(secondItem);
@@ -99,36 +99,42 @@ ClickListener,IObservable{
 	@Override
 	public void itemClick(ItemClickEvent event) {
 		if(event.getSource() == root){
-			//get the item in the root
-			Object itemId = event.getItemId();
-			
+			Object itemId = event.getItemId();			
 			System.out.println(" itemId : " + itemId);
 			
 			if(itemId != null){
 				if(itemId.equals(VISUALIZE_COLLAB_NAME)){		
-					getWindow().showNotification("toto1");
+					//this.cl = CollaboratorSkillContent.class;
+					this.cl = MonitoringCollabContent.class;
+					updateObservateur();
 				}
 				else if(itemId.equals(SETUP_EA_NAME)){
-					//TODO: vue à implémenter
-					//We set the style buttons	
-					getWindow().showNotification("toto2");
+					this.cl = HistoryMissionColab.class;
+					updateObservateur();	
 				}
 				else if(itemId.equals(OBJECTIVE_NAME)){
-					//TODO: vue à implémenter
-					//We set the style buttons
-					getWindow().showNotification("toto3");
+					this.cl = ObjectiveEa.class;
+					updateObservateur();	
 				}
 			}				
 		}		
 	}
+		
 	
-	@Override
-	public void buttonClick(ClickEvent event) {
-		
-		
-		
+	/**
+	 * @param cl the cl to set
+	 */
+	public void setCl(Class<?> cl) {
+		this.cl = cl;
 	}
-	
+	 
+	/**
+	 * @param obsLayout the obsLayout to set
+	 */
+	public void setObsLayout(ICollabLayout obsLayout) {
+		this.obsLayout = obsLayout;
+	}
+
 	/**
 	 * Set the visualizeCollab value
 	 * @param visualizeCollab the visualizeCollab to set
@@ -153,20 +159,18 @@ ClickListener,IObservable{
 
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
-		if(cl == IProfileLayout.class){
-			this.obs = (IProfileLayout) observateur;
-		}	
+		if(cl == ICollabLayout.class){
+			this.obsLayout = (ICollabLayout) observateur;
+		}
 	}
 
 	@Override
 	public void updateObservateur() {
-		// TODO Auto-generated method stub
-		
+		this.obsLayout.updateCollabLayout(this.cl);		
 	}
 
 	@Override
 	public void delObservateur() {
-		// TODO Auto-generated method stub
-		
+		this.obsLayout = null;		
 	}	
 }

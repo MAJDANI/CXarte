@@ -130,7 +130,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 			this.collabTable.addItem(new Object[] { collab.getFirstName(),
 					collab.getLastName(),
-					collabProfile.getType(), "En mission tttt",
+					collabProfile.getType(), "En mission",
 					hLayoutButton }, idTable);
 
 			idTable++;
