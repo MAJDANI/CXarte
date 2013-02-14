@@ -7,9 +7,11 @@
 
     <typeAlias alias="businessEngineer" type="com.novedia.talentmap.model.entity.BusinessEngineer"/> 
 
-    <resultMap id="businessEngineerResult" class="BusinessEngineer">
-        <result property="id" column="B_ENGINEER_ID"/>     
-        <result property="name"   column="NAME"/>	   
+    <resultMap id="businessEngineerResult" class="businessEngineer">
+        <result property="id"              column="B_ENGINEER_ID"/>     
+        <result property="firstName"       column="FIRST_NAME"/>
+        <result property="lastName"        column="LAST_NAME"/>
+        <result property="businessUnit"    column="BUSINESS_UNIT"/>	   
     </resultMap>
 
     <select id="get" parameterClass="Integer" resultMap="businessEngineerResult">

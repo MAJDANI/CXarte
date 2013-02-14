@@ -6,7 +6,8 @@
 <sqlMap namespace="colleague">
 
     <typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
-    <typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager"/> 
+    <typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager"/>
+    <typeAlias alias="businessEngineer" type="com.novedia.talentmap.model.entity.BusinessEngineer"/> 
 
     <resultMap id="colleagueResult" class="colleague">
         <result property="id" column="COLLEAGUE_ID"/>     
@@ -48,10 +49,12 @@
 		<result property="client.name" 						column="CLIENT_NAME"/>
 	</resultMap>
 
-	<resultMap id="businessEngineerResult" class="com.novedia.talentmap.model.entity.BusinessEngineer">
-		<result property="id" column="B_ENGINEER_ID"/>
-		<result property="name" column="NAME"/>
-	</resultMap>
+	<resultMap id="businessEngineerResult" class="businessEngineer">
+        <result property="id"              column="B_ENGINEER_ID"/>     
+        <result property="firstName"       column="FIRST_NAME"/>
+        <result property="lastName"        column="LAST_NAME"/>
+        <result property="businessUnit"    column="BUSINESS_UNIT"/>	   
+    </resultMap>
 	
 	<select id="getBusinessEngineer" parameterClass="int" resultMap="businessEngineerResult">
 		select * from BUSINESS_ENGINEER where B_ENGINEER_ID = #value#
