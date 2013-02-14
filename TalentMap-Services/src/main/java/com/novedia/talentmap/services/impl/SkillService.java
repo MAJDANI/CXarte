@@ -89,7 +89,7 @@ public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAcces
 	List<Skill> listSkill = new ArrayList<Skill>();
 
 	// A Tool Map (Tool Object, Integer:Score)
-	Map<Tool, Integer> mapTool = new HashMap<Tool, Integer>();
+	Map<Tool, Skill> mapTool = new HashMap<Tool, Skill>();
 
 	// A Concept Map (Concept, Tool Map which matches with the Concept)
 	Map<Concept, Map> mapConcept = new HashMap<Concept, Map>();
@@ -113,7 +113,7 @@ public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAcces
 	if (conceptTMP != null) {
 		conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 
-		Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
+		Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
 		mapConcept.remove(conceptTMP);
 
 		conceptTMP.setScore(conceptScore);
@@ -173,10 +173,10 @@ Category category = getCategoryById(entry.getKey().getCategory().getId());
  * @return
  */
 @SuppressWarnings("unchecked")
-Concept buildConcept(Map<Tool, Integer> mapTool,Map<Concept, Map> mapConcept, List<Integer> listToolScore,
+Concept buildConcept(Map<Tool, Skill> mapTool,Map<Concept, Map> mapConcept, List<Integer> listToolScore,
 		Concept conceptTMP) {
 	double conceptScore;
-	for (Map.Entry<Tool, Integer> entry : mapTool.entrySet()) {
+	for (Map.Entry<Tool, Skill> entry : mapTool.entrySet()) {
 		// TODO : NullPointerException
 		Integer conceptId = entry.getKey().getConcept().getId();
 		Concept concept = getConceptById(conceptId);
@@ -192,7 +192,7 @@ Concept buildConcept(Map<Tool, Integer> mapTool,Map<Concept, Map> mapConcept, Li
 // toolDao.selectAllByConceptId(conceptTMP.getId()).size());
 conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 
-			Map<Tool, Integer> mapTMP = mapConcept.get(conceptTMP);
+			Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
 			mapConcept.remove(conceptTMP);
 
 			conceptTMP.setScore(conceptScore);
@@ -207,14 +207,14 @@ conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 
 			listToolScore.clear();
 
-			mapConcept.put(concept, new HashMap<Tool, Integer>());
+			mapConcept.put(concept, new HashMap<Tool, Skill>());
 			mapConcept.get(concept).put(entry.getKey(), entry.getValue());
 		} else {
 
 			mapConcept.get(concept).put(entry.getKey(), entry.getValue());
 		}
 		// We put in the list the Tool Score
-		listToolScore.add(entry.getValue());
+		listToolScore.add(entry.getValue().getAverageScore());
 	}
 	return conceptTMP;
 }
@@ -224,15 +224,16 @@ conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
  * @param listSkill
  * @param mapTool
  */
- void buildTool(List<Skill> listSkill, Map<Tool, Integer> mapTool) {
-	for (Skill s : listSkill) {
-		Tool tool1 = toolDao.get(s.getTool_id());
+ void buildTool(List<Skill> listSkill, Map<Tool, Skill> mapTool) {
+	for (Skill skill : listSkill) {
+		Tool tool1 = toolDao.get(skill.getTool_id());
 
 		// We put only not null tool element in mapTool
 		if (tool1 != null) {
 			// We give a score to the tool
-			int score = (int) ScoreManage.toolScore(s.getScore(),s.getUse_frequency(), s.getNo_using_time());
-			mapTool.put(tool1, score);
+			int score = (int) ScoreManage.toolScore(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
+			skill.setAverageScore(score);
+			mapTool.put(tool1, skill);
 		}
 	}
 }

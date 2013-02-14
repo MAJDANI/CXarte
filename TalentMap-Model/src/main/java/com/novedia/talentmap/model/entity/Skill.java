@@ -51,6 +51,14 @@ public class Skill implements Serializable{
 	 */
 	private Integer no_using_time;
 	
+	/**
+	 * Average Score : calculated field
+	 * TODO : champ provisoire, le temps de définir des objets (DTO)
+	 * optimisés pour la vue. score, use_frequency, no_using_time
+	 * et averageScore sont utilisés dans l'écran qui gère les compétences
+	 * collaborateur
+	 */
+	private Integer averageScore;
 	
 	public Skill() {
 
@@ -142,6 +150,14 @@ public class Skill implements Serializable{
 
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;
+	}
+
+	public Integer getAverageScore() {
+		return averageScore;
+	}
+
+	public void setAverageScore(Integer averageScore) {
+		this.averageScore = averageScore;
 	}
 
 	/*

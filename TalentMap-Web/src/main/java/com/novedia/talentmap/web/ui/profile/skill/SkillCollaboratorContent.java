@@ -1,17 +1,19 @@
 package com.novedia.talentmap.web.ui.profile.skill;
 
+import com.novedia.talentmap.web.data.FrequencyUse;
+import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.ui.profile.AddSkillPanel;
 import com.novedia.talentmap.web.ui.profile.ListSkill;
 import com.novedia.talentmap.web.util.IProfileView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Window.Notification;
 
 public class SkillCollaboratorContent extends VerticalLayout implements
@@ -269,24 +271,53 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	public boolean setAddSkillPanelWithTool(){
 		
-		Object rowId = this.listSkill.getTableTools().getValue(); // get the selected rows id
+	Object rowId = this.listSkill.getTableTools().getValue(); // get the selected rows id
 		
 		if(rowId!=null){
-			
+			//-------------------
+			// ToolName
+			//-------------------
 			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Nom de l'outil").getValue();
-			
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			this.addSkillPanel.getToolSelect().setValue(toolName);
-			// TODO : Rajouter les critères d'usage
-			
 			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
 			this.addSkillPanel.getToolSelect().setReadOnly(true);
+
+			//-------------------
+			// toolScore
+			//-------------------
+			Integer toolScore = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"score").getValue();
+			this.addSkillPanel.getStars().setValue(toolScore);
 			
+			//-------------------
+			// toolUseFrequency
+			//-------------------
+			//TODO : trouver comment faire plus simplement, par exemple :
+			//this.addSkillPanel.getFrequencyUseSelect().setValue(toolUseFrequency);
+			Integer toolUseFrequency = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"use_frequency").getValue();
+			for (FrequencyUse fu : FrequencyUse.values()) {
+				if (fu.getId() == toolUseFrequency) {
+					this.addSkillPanel.getFrequencyUseSelect().setValue(fu.getValue());
+					break;
+				}
+			}
+
+			//-------------------
+			// toolNoUsingTime
+			//-------------------
+			//TODO : trouver comment faire plus simplement, par exemple :
+			//this.addSkillPanel.getNoUsingTimeSelect().setValue(toolNoUsingTime);
+			Integer toolNoUsingTime = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"no_using_time").getValue();
+			for (TimeUse tu : TimeUse.values()) {
+				if (tu.getId() == toolNoUsingTime) {
+					this.addSkillPanel.getNoUsingTimeSelect().setValue(tu.getValue());
+					break;
+				}
+			}
 			return true;
+
 		}else{
-			
 			getWindow().showNotification("Veuillez sélectionner un outil dans le tableau de compétences", Notification.TYPE_WARNING_MESSAGE);
-			
 			return false;
 		}
 		

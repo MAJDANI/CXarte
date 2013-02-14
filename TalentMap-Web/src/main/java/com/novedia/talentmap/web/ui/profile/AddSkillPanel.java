@@ -574,6 +574,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.stars = stars;
 	}
 
+	public RatingStars getStars() {
+		return stars;
+	}
+
 	/**
 	 * Set the valueOptions value
 	 * 
@@ -594,6 +598,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.frequencyUseSelect = frequencyUseSelect;
 	}
 
+	public Select getFrequencyUseSelect() {
+		return frequencyUseSelect;
+	}
+
 	/**
 	 * Set the noUsingTimeSelect value
 	 * 
@@ -602,6 +610,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	public void setNoUsingTimeSelect(Select noUsingTimeSelect) {
 		this.noUsingTimeSelect = noUsingTimeSelect;
+	}
+
+	public Select getNoUsingTimeSelect() {
+		return noUsingTimeSelect;
 	}
 
 	/**

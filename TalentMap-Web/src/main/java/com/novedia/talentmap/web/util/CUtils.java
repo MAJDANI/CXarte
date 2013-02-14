@@ -7,11 +7,14 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
-import com.novedia.talentmap.model.entity.Registration;
+import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
+import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Accordion;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -47,28 +50,33 @@ public abstract class CUtils {
 						
 						if(_this != null){ tableTools.addListener((ItemClickListener) _this); }
 					
-						Map<Tool, Integer> mapTool = eConcept.getValue();
+						Map<Tool, Skill> mapTool = eConcept.getValue();
 
 						int idTable = 1;
 						VerticalLayout vLayoutTool = new VerticalLayout();
 						
-						tableTools.addContainerProperty("Nom de l'outil", String.class,
-								null);
+						tableTools.addContainerProperty("Nom de l'outil", String.class, null);
 						tableTools.addContainerProperty("Note", Integer.class, null);
+						tableTools.addContainerProperty("score", Integer.class, null);
+						tableTools.addContainerProperty("use_frequency", Integer.class, null);
+						tableTools.addContainerProperty("no_using_time", Integer.class, null);
 
-						for (Map.Entry<Tool, Integer> eTool : mapTool.entrySet()) {
-							
-							tableTools.addItem(new Object[] { eTool.getKey().getName(),
-									eTool.getValue() }, new Integer(idTable));
+						for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
+							tableTools.addItem(new Object[] { 
+									eTool.getKey().getName(),
+									eTool.getValue().getAverageScore(),
+									eTool.getValue().getScore(),
+									eTool.getValue().getUse_frequency(),
+									eTool.getValue().getNo_using_time()
+							}, new Integer(idTable));
 							idTable++;
 						}
+						
+						tableTools.setVisibleColumns(new Object[] {"Nom de l'outil", "Note"});
 						
 						vLayoutTool.addComponent(tableTools);
 						vLayoutConcept.addComponent(vLayoutTool);
 					
-						// Set Tool tables
-						//setTableTools(tableTools);
-
 						// Set Concept tabs Style
 						accConcept.setStyleName(TalentMapCSS.TABLE_CONCEPT);
 
