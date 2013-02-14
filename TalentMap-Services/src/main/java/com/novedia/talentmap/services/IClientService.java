@@ -8,6 +8,7 @@ import com.novedia.talentmap.model.entity.Client;
  * Client Service Interface.
  * 
  * @author y.rohr
+ * TODO : Must create a data referential interface
  */
 public interface IClientService {
 	
