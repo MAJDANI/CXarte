@@ -2,16 +2,13 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
-import com.novedia.talentmap.model.entity.Concept.Builder;
-
-
 
 /**
  * Entity Client
+ * 
  * @author y.rohr
- *
  */
-public class Client implements Serializable, Comparable {
+public class Client implements Serializable, Comparable<Client> {
 
 	/**
 	 * 
@@ -55,7 +52,7 @@ public class Client implements Serializable, Comparable {
 	public static Builder builder() {
 		return new Builder();
 	}
-
+	
 	/**
 	 * Inner builder class.
 	 * 
@@ -97,15 +94,6 @@ public class Client implements Serializable, Comparable {
 			return this;
 		}
 		
-		/**
-		 * Build an immutable instance of client.
-		 * 
-		 * @return Client
-		 */
-		public Client build() {
-			return new Client(this);
-		}
-
 	}
 
 	public Integer getId() {
@@ -125,8 +113,8 @@ public class Client implements Serializable, Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		return this.getName().compareTo(((Client)o).getName());
+	public int compareTo(Client otherClient) {
+		return this.getName().compareTo((otherClient).getName());
 	}
 	
 	@Override
@@ -137,7 +125,5 @@ public class Client implements Serializable, Comparable {
 			Client client = (Client) obj;
 			return (this.id.equals(client.getId()) && this.name.equals(client.getName()));
 		}
-	}
-		
-	    
+	}   
 }
