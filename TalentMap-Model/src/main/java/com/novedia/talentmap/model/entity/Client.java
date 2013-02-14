@@ -94,6 +94,16 @@ public class Client implements Serializable, Comparable<Client> {
 			return this;
 		}
 		
+		/**
+		 * Build an immutable instance of tool.
+		 * 
+		 * @return a tool
+		 */
+		public Client build() {
+			return new Client(this);
+		}
+		
+		
 	}
 
 	public Integer getId() {
