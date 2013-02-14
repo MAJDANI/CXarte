@@ -226,11 +226,15 @@ public class CollaboratorForm extends VerticalLayout{
 	}	
 	
 	/**
-	 * refresh all the forms whith default values (Mission and AdminData)
+	 * Refresh all the forms with default values (Mission and AdminData)
 	 */
 	public void refreshAllFormsToDefault(){
 		Colleague currentColleague = collaboratorService.getColleague(COLLAB_ID);
 		Mission currentColleaguesLastMission = collaboratorService.getLastMission(COLLAB_ID);
+		//Workaround to solve a gridLayout bug vaadin with method SetItemDataSource
+		this.formMission.getLayout().removeAllComponents();
+		this.formCollaborator.getLayout().removeAllComponents();
+		
 		initFormCollaborator(currentColleague);
 		initFormMission(currentColleaguesLastMission);
 	}
