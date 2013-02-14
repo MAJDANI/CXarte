@@ -21,9 +21,8 @@ public class AuthenticationService implements IAuthenticationService {
 	 */
 	private IDao<Authentication> authenticationDao;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.novedia.talentmap.services.IAuthentificationService#checkAuthentification(java.lang.String, java.lang.String)
+	/**
+	 * Inherited
 	 */
 	@Override
 	public Authentication checkUser(CredentialToken token) {
