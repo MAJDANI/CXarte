@@ -38,17 +38,6 @@ return (Manager) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstan
 }
 
 /**
- * This method allow to get all manager.
- * @return a list of manager
- * @throws DataAccessException
- */
-@SuppressWarnings("unchecked")
-@Override
-public List<Manager> getAll() throws DataAccessException {
-return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MANAGER);
-}
-
-/**
  * This method to update a manager.
  * @param element of type a manager
  * @throws DataAccessException
@@ -66,6 +55,8 @@ throw new UnsupportedOperationException();
 public int add(final Manager element) throws DataAccessException {
 throw new UnsupportedOperationException();
 }
+
+
 
 /**
  * This method to delete a manager.
@@ -107,6 +98,11 @@ return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsC
  */
 @Override
 public Manager getByName(final String name) throws DataAccessException {
+throw new UnsupportedOperationException();
+}
+
+@Override
+public List<Manager> getAll() throws DataAccessException {
 throw new UnsupportedOperationException();
 }
 }

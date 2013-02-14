@@ -26,11 +26,4 @@ List<Colleague> getAllColleagues(Integer managerId);
  */
 Colleague getCollaborator(int id);
 
-/**
- * Get all Manager.
- * @param id a id
- * @return list of manager
- */
-List<Manager> getAll();
-
 }

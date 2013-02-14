@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IBusinessEngineerService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
@@ -38,9 +39,9 @@ public class ProfileCollabWindow extends Window {
 	 * Talent Map Services
 	 */
 	private ISkillService skillService;
-	private IManagerService managerService;
 	private IProfileService profileService;
 	private IBusinessEngineerService businessEngineerService;
+	private IColleagueService colleagueService;
 
 	/**
 	 * Java Object
@@ -64,17 +65,19 @@ public class ProfileCollabWindow extends Window {
 	 * @param profileService
 	 */
 	public ProfileCollabWindow(Form dataCollab, Accordion skillCollab,
-			ISkillService skillService, IManagerService managerService,
+			ISkillService skillService,
 			Vector<Object> fieldOrderCollaborator,
-			IProfileService profileService, IBusinessEngineerService businessEngineerService) {
+			IProfileService profileService, 
+			IBusinessEngineerService businessEngineerService,
+			IColleagueService colleagueService) {
 		super();
 		this.dataCollab = dataCollab;
 		this.skillCollab = skillCollab;
 		this.skillService = skillService;
-		this.managerService = managerService;
 		this.fieldOrderCollaborator = fieldOrderCollaborator;
 		this.profileService = profileService;
 		this.businessEngineerService = businessEngineerService;
+		this.colleagueService = colleagueService;
 	}
 	
 	/**
@@ -98,12 +101,12 @@ public class ProfileCollabWindow extends Window {
 	public void buildDataCollaborator() {
 		try {
 
-			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService));
+			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService, this.colleagueService));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
 					Constants.FIELD_ORDER_COLLABORATOR);
 			
-			Colleague collab = this.managerService.getCollaborator(COLLAB_ID);
+			Colleague collab = this.colleagueService.getColleague(COLLAB_ID);
 			
 			//We create a bean with the POJO Collaborator
 			BeanItem<Item> collaboratorBean = new BeanItem(collab);
@@ -227,8 +230,8 @@ public class ProfileCollabWindow extends Window {
 	 * @param managerService
 	 *            the managerService to set
 	 */
-	public void setManagerService(IManagerService managerService) {
-		this.managerService = managerService;
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
 	}
 
 	/**

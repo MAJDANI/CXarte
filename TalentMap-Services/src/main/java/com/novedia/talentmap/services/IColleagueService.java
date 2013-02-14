@@ -88,6 +88,13 @@ Mission getLastMission(Integer collabId);
 Manager getManager(Integer managerId);
 
 /**
+ * Get all Manager.
+ * @return list of manager
+ */
+List<Manager> getAllManagers();
+
+
+/**
  * Get all Colleagues by lastName.
  * @param lastName a lastName
  * @return List<Colleague>

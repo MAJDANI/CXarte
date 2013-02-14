@@ -11,6 +11,7 @@ import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.store.IDao;
+import com.novedia.talentmap.store.impl.ManagerDao;
 import com.novedia.talentmap.store.impl.MissionDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 
@@ -120,6 +121,15 @@ public class ColleagueService implements IColleagueService {
 		return managerDao.get(managerId);
 	}
 
+
+	/**
+	 * Get all managers
+	 */
+	@Override
+	public List<Manager> getAllManagers() {
+		return ((ColleagueDao) colleagueDao).getAllManagers();
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

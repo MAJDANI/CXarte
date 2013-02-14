@@ -65,7 +65,7 @@ public class CollaboratorForm extends VerticalLayout{
 	/**
 	 * TalentMap service
 	 */
-	private IColleagueService collaboratorService;
+	private IColleagueService colleagueService;
 	private IProfileService profileService;
 	private IClientService clientService;
 	private IBusinessEngineerService businessEngineerService;
@@ -79,7 +79,7 @@ public class CollaboratorForm extends VerticalLayout{
 	 * @param fieldOrder
 	 * @param gLayoutCollaborator
 	 */
-	public CollaboratorForm(IColleagueService collaboratorService,
+	public CollaboratorForm(IColleagueService colleagueService,
 			IProfileService profileService, 
 			IClientService clientService, 
 			IBusinessEngineerService businessEngineerService,
@@ -89,7 +89,7 @@ public class CollaboratorForm extends VerticalLayout{
 
 		this.fieldOrderCollaborator = fieldOrderCollaborator;
 		this.fieldOrderMission = fieldOrderMission;
-		this.collaboratorService = collaboratorService;
+		this.colleagueService = colleagueService;
 		this.profileService = profileService;
 		this.clientService = clientService;
 		this.businessEngineerService = businessEngineerService;
@@ -139,9 +139,9 @@ public class CollaboratorForm extends VerticalLayout{
 		// Création des différents champs du formulaire "Données administratives"
 		this.formCollaborator
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
-						this.profileService, this.businessEngineerService));
+						this.profileService, this.businessEngineerService, this.colleagueService));
 		
-		Colleague currentColleague = collaboratorService.getColleague(COLLAB_ID);
+		Colleague currentColleague = colleagueService.getColleague(COLLAB_ID);
 		initFormCollaborator(currentColleague);
 
 		// VGU
@@ -199,7 +199,7 @@ public class CollaboratorForm extends VerticalLayout{
 		// Création des différents champs du formulaire "Dernière mission"
 		this.formMission.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
 		
-		Mission currentColleaguesLastMission = collaboratorService.getLastMission(COLLAB_ID);
+		Mission currentColleaguesLastMission = colleagueService.getLastMission(COLLAB_ID);
 		initFormMission(currentColleaguesLastMission);
 		// VGU
 		// Set the form to act immediately on user input. This is
@@ -229,8 +229,8 @@ public class CollaboratorForm extends VerticalLayout{
 	 * Refresh all the forms with default values (Mission and AdminData)
 	 */
 	public void refreshAllFormsToDefault(){
-		Colleague currentColleague = collaboratorService.getColleague(COLLAB_ID);
-		Mission currentColleaguesLastMission = collaboratorService.getLastMission(COLLAB_ID);
+		Colleague currentColleague = colleagueService.getColleague(COLLAB_ID);
+		Mission currentColleaguesLastMission = colleagueService.getLastMission(COLLAB_ID);
 		//Workaround to solve a gridLayout bug vaadin with method SetItemDataSource
 		this.formMission.getLayout().removeAllComponents();
 		this.formCollaborator.getLayout().removeAllComponents();
@@ -246,8 +246,8 @@ public class CollaboratorForm extends VerticalLayout{
 	 * @param profileService
 	 *            the profileService to set
 	 */
-	public void setProfileService(IColleagueService profileService) {
-		this.collaboratorService = profileService;
+	public void setProfileService(IProfileService profileService) {
+		this.profileService = profileService;
 	}
 
 	/**
@@ -267,21 +267,13 @@ public class CollaboratorForm extends VerticalLayout{
 	}
 
 	/**
-	 * Set the collaboratorService value
-	 * @param collaboratorService the collaboratorService to set
-	 */
-	public void setCollaboratorService(IColleagueService collaboratorService) {
-		this.collaboratorService = collaboratorService;
-	}
-
-	/**
 	 * Set the profileService value
 	 * 
 	 * @param profileService
 	 *            the profileService to set
 	 */
-	public void setProfileService(IProfileService profileService) {
-		this.profileService = profileService;
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
 	}
 
 	/**

@@ -5,6 +5,7 @@ import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IBusinessEngineerService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.commons.Constants;
@@ -31,15 +32,19 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	
 	private IProfileService profileService;
 	private IBusinessEngineerService businessEngineerService;
+	private IColleagueService colleagueService;
 
 	/**
 	 * 
 	 * Build the class CollaboratorFormFieldFactory.java 
 	 * @param profileService
 	 */
-	public CollaboratorFormFieldFactory(IProfileService profileService, IBusinessEngineerService businessEngineerService){
+	public CollaboratorFormFieldFactory(IProfileService profileService, 
+			IBusinessEngineerService businessEngineerService,
+			IColleagueService colleagueService){
 		this.profileService = profileService;
 		this.businessEngineerService = businessEngineerService;
+		this.colleagueService = colleagueService;
 	}
 	
 	@Override
@@ -54,7 +59,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 				//We give a default format for all input except the employmentDate and the profileId input
 				
 				if(!propertyId.equals(Constants.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(Constants.FIELD_COLLAB_PROFILE_ID)
-						&& !propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
+						&& !propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER) && !propertyId.equals(Constants.FIELD_COLLAB_MANAGER)){
 					
 					TextField field = new TextField((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
@@ -143,7 +148,31 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					profilSelect.setStyleName("type-profile");
 					return profilSelect;
 					
-				} 
+				}else if(propertyId.equals(Constants.FIELD_COLLAB_MANAGER)){
+					IndexedContainer ic = new IndexedContainer();
+			        ic.addContainerProperty("value", String.class, null);
+					
+					Select managerSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
+					
+					
+					try {
+						for(Manager manager : colleagueService.getAllManagers()){
+							item = ic.addItem(manager.getId());
+							item.getItemProperty("value").setValue(manager.getFirstName() + " " +manager.getLastName());
+						}
+						
+						managerSelect.setContainerDataSource(ic);
+						managerSelect.setItemCaptionPropertyId("value");
+						
+						managerSelect.setNullSelectionAllowed(false);
+						managerSelect.setImmediate(true);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					return managerSelect;		
+				}  
 				
 			}
 		}

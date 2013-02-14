@@ -39,14 +39,6 @@ public class ManagerService implements IManagerService {
 		return ((ManagerDao) managerDao).getAllCollaborators(managerId);
 	}
 
-
-	/**
-	 * Get all managers
-	 */
-	@Override
-	public List<Manager> getAll() {
-		return ((ManagerDao) managerDao).getAll();
-	}
 	
 	/**
 	 * Get One Collaborator By ID.

@@ -63,7 +63,7 @@
 	<bean id="managerField" class="com.vaadin.ui.TextField"/>
 	
     <bean id="collaboratorFormBean" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm" scope="session">
-    	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+    	<constructor-arg name="colleagueService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
     	<constructor-arg name="clientService" ref="clientService"/>
     	<constructor-arg name="businessEngineerService" ref="businessEngineerService"/>
@@ -85,7 +85,7 @@
 	<bean id="managerField2" class="com.vaadin.ui.TextField"/>
 	
     <bean id="collaboratorFormBean2" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm"  scope="session">
-    	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+    	<constructor-arg name="colleagueService" ref="collaboratorService"/>
     	<constructor-arg name="profileService" ref="profileService"/>
     	<constructor-arg name="clientService" ref="clientService"/>
     	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator2"/>
@@ -199,7 +199,7 @@
 	<bean id="hLayout" class="com.vaadin.ui.HorizontalLayout"/>
 	
 	<bean id="profileCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent" scope="session">
-		<constructor-arg name="collabService" ref="collaboratorService"/>
+		<constructor-arg name="colleagueService" ref="collaboratorService"/>
 		<constructor-arg name="collabForm" ref="collaboratorFormBean"/>
 	</bean>
 
@@ -428,15 +428,12 @@
 		
 	<bean id="profileCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ProfileCollabWindow" scope="session">
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="managerService" ref="managerService" />
 		<constructor-arg name="profileService" ref="profileService" />
 		<constructor-arg name="businessEngineerService" ref="businessEngineerService" />
 		<constructor-arg name="dataCollab" ref="dataMonitoringCollab" />
 		<constructor-arg name="skillCollab" ref="skillMonitoringCollab" />
 		<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderMonitoringCollab" />
-
-<!-- 		<constructor-arg name="collaboratorForm" ref="collaboratorFormBean2" /> -->
-<!-- 		<constructor-arg name="listSkill" ref="listSkillBean2" /> -->
+		<constructor-arg name="colleagueService" ref="collaboratorService" />
 	</bean>
 	
 	<!-- Vaadin SearchResults UI -->

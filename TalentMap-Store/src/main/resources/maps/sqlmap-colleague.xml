@@ -34,6 +34,7 @@
         <result property="experience"   column="EXPERIENCE"/>
 		<result property="businessEngineer"   column="B_ENGINEER_ID" select="colleague.getBusinessEngineer"/>
 		<result property="missions"   column="COLLEAGUE_ID" select="colleague.selectMissionsByColleagueId"/>
+		<result property="colleagues" column="MANAGER_ID" select="colleague.selectColleagueByManagerId"/>
     </resultMap>
 
 	<resultMap id="select-mission-result" class="com.novedia.talentmap.model.entity.Mission">
@@ -56,6 +57,10 @@
 		select * from BUSINESS_ENGINEER where B_ENGINEER_ID = #value#
 	</select>
 
+	<statement id="selectColleagueByManagerId" parameterClass="int" resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE colleague
+        WHERE colleague.MANAGER_ID = #id#
+	</statement>
 
 	<statement id="selectMissionsByColleagueId" parameterClass="int" resultMap="select-mission-result">
 		SELECT * FROM MISSION mission, CLIENT client
@@ -64,13 +69,12 @@
 
 
     <select id="get" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
-        WHERE colleague.COLLEAGUE_ID = #id# AND colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
+        SELECT * FROM COLLEAGUE colleague
+        WHERE colleague.COLLEAGUE_ID = #id#
     </select>
     
     <select id="getAll" resultMap="colleagueResult">
-    	SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business 
-    	WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
+    	SELECT * FROM COLLEAGUE colleague
     </select>
     					 
 	<update id="save" parameterClass="Colleague">
@@ -78,8 +82,14 @@
 	</update>
 
     <select id="getManager" parameterClass="Integer" resultMap="managerResult">
-         SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
-        WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID AND colleague.COLLEAGUE_ID = #id# 
+         SELECT * FROM COLLEAGUE colleague
+        WHERE colleague.COLLEAGUE_ID = #id# 
+    </select>
+	
+	<select id="getAllManagers" resultMap="managerResult">
+         SELECT * FROM COLLEAGUE colleague
+        WHERE colleague.COLLEAGUE_ID IN
+        (SELECT colleague2.MANAGER_ID FROM COLLEAGUE colleague2)  
     </select>
 	
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">

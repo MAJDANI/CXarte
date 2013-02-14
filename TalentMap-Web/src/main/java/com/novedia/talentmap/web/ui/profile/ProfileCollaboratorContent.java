@@ -28,7 +28,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	/**
 	 * TalentMap Services
 	 */
-	private IColleagueService collabService;
+	private IColleagueService colleagueService;
 
 	/**
 	 * All views
@@ -55,10 +55,10 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 * @param footerLayout
 	 * @param edit
 	 */
-	public ProfileCollaboratorContent(IColleagueService collabService,
+	public ProfileCollaboratorContent(IColleagueService colleagueService,
 			CollaboratorForm collabForm) {
 		super();
-		this.collabService = collabService;
+		this.colleagueService = colleagueService;
 		this.collabForm = collabForm;
 
 		this.mainBuild();
@@ -143,7 +143,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm.getFormCollaborator()
 				.getItemDataSource();
 			Colleague collab = collabItem.getBean();
-			return this.collabService.saveColleague(collab);
+			return this.colleagueService.saveColleague(collab);
 		} catch (InvalidValueException invalidVE) {
 			return 0;
 		}
@@ -161,7 +161,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 				BeanItem<Mission> missionItem = (BeanItem<Mission>) this.collabForm.getFormMission()
 						.getItemDataSource();
 				Mission mission = missionItem.getBean();
-				return this.collabService.saveMission(mission);
+				return this.colleagueService.saveMission(mission);
 		} catch (InvalidValueException invalidVE) {
 			return 0;
 		}
@@ -209,8 +209,8 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 * @param collabService
 	 *            the collabService to set
 	 */
-	public void setCollabService(IColleagueService collabService) {
-		this.collabService = collabService;
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
 	}
 
 	/**
