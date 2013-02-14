@@ -46,13 +46,16 @@
 		<result property="client.id" 			   column="CLIENT_ID"/>
 		<result property="client.name" 			   column="CLIENT_NAME"/>
 	</resultMap>
-
+	
+	<!-- Business engineer result mapping -->
 	<resultMap id="businessEngineerResult" class="com.novedia.talentmap.model.entity.BusinessEngineer">
-		<result property="id" column="B_ENGINEER_ID"/>
-		<result property="name" column="NAME"/>
+		<result property="id"              column="B_ENGINEER_ID"/>
+		<result property="firstName"       column="FIRSTNAME"/>
+		<result property="lastName"        column="LASTNAME"/>
+		<result property="businessUnit"    column="BUSINESS_UNIT"/>
 	</resultMap>
 	
-	<select id="getBusinessEngineer" parameterClass="int" resultMap="businessEngineerResult">
+	<select id="getBusinessEngineer" parameterClass="Integer" resultMap="businessEngineerResult">
 		select * from BUSINESS_ENGINEER where B_ENGINEER_ID = #value#
 	</select>
 
@@ -60,26 +63,31 @@
 		SELECT * FROM MISSION mission, CLIENT client
 		WHERE mission.CLIENT_ID = client.CLIENT_ID AND mission.MISSION_ID = #id# 
 	</statement>
-
+	
+	<!-- Get a colleague by id -->
     <select id="get" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
         WHERE colleague.COLLEAGUE_ID = #id# AND colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
     </select>
     
+    <!-- Get all colleagues -->
     <select id="getAll" resultMap="colleagueResult">
     	SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business 
     	WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID
     </select>
-    					 
+    
+    <!-- Save a colleague information -->					 
 	<update id="save" parameterClass="Colleague">
 		UPDATE COLLEAGUE SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLEAGUE_ID = #id#
 	</update>
-
+	
+	<!-- Get the collague manager TODO : Request is not correct -->
     <select id="getManager" parameterClass="Integer" resultMap="managerResult">
          SELECT * FROM COLLEAGUE colleague, BUSINESS_ENGINEER business
         WHERE colleague.B_ENGINEER_ID = business.B_ENGINEER_ID AND colleague.COLLEAGUE_ID = #id# 
     </select>
 	
+	<!-- Get a colleague by lastname -->
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">
         SELECT * FROM  COLLEAGUE WHERE UPPER(LAST_NAME) LIKE UPPER('$lastName$%')
     </select>
