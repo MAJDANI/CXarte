@@ -18,16 +18,27 @@ import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 
+/**
+ * Create field instance for {@link RegistrationForm}
+ * @author y.rohr
+ * TODO : Must be refactored because of methods complexity
+ *
+ */
 public class RegistrationFormFieldFactory implements FormFieldFactory {
 
 	/**
-	 * 
+	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -6912883483308852687L;
 
-	
+	/**
+	 * The registration service
+	 */
 	private IRegistrationService registrationService;
 	
+	/**
+	 * The business Engineer service
+	 */
 	private IBusinessEngineerService businessEngineerService;
 	
 	
@@ -142,8 +153,8 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 							}
 						} else {
 							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
-								item = ic.addItem(businessEngineer.getName());
-								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(businessEngineer.getName());
+								item = ic.addItem(businessEngineer.getLastName());
+								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(businessEngineer.getFirstName() + " " + (businessEngineer.getLastName()));
 							}
 						}
 						colleagueSelect.setContainerDataSource(ic);
