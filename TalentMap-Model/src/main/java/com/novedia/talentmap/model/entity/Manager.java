@@ -28,10 +28,6 @@ public class Manager extends Colleague implements Serializable {
 	 */
 	private List<Colleague> colleagues = new ArrayList<Colleague>();
 
-	// TODO : A supprimer car constructeur par défaut
-	//NON, ne pas supprimer, iBatis a besoin du constructeur par défaut 
-	//pour instancier l'objet ManagerResult dans sqlmap-colleague 
-	//(cf http://0guzhan.blogspot.fr/2011/12/ibatis-with-spring-javabeansdataexchang.html)
 	/**
 	 * Build an instance of manager
 	 */
