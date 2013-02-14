@@ -24,7 +24,7 @@ public class Colleague implements Serializable {
 	private static final long serialVersionUID = -1323210979848908088L;
 	
 	/**
-	 * entity indentify
+	 * entity indentifier
 	 */
 	protected Integer id;
 	
@@ -59,7 +59,7 @@ public class Colleague implements Serializable {
 	protected String phone;
 	
 	/**
-	 * Colleague employement date
+	 * Colleague employment date
 	 */
 	protected Date employmentDate;
 	
@@ -74,12 +74,12 @@ public class Colleague implements Serializable {
 	protected BusinessEngineer businessEngineer;
 		
 	/**
-	 *  Missions
+	 *  List of missions
 	 */
 	private List<Mission> missions;
 	
 	/** 
-	 * Tools 
+	 * List of tools 
 	 */
 	private List<Tool> tools;
 
