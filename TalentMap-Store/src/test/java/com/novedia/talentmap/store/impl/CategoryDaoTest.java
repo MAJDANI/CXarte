@@ -6,6 +6,7 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -26,6 +27,7 @@ import com.novedia.talentmap.model.entity.Category;
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("CategoryDaoTest.xml")
+@Ignore
 public class CategoryDaoTest {
 
 	@SpringBeanByName

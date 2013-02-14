@@ -27,10 +27,10 @@ import com.novedia.talentmap.model.entity.Colleague;
  * @author j.marie-sainte
  * 
  */
-@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("ColleagueDaoTest.xml")
+@Ignore
 public class ColleagueDaoTest {
 
 	@SpringBeanByName
@@ -49,10 +49,9 @@ public class ColleagueDaoTest {
 	 */
 	@Test
 	public void testGetById() {
-		Integer id = 1;
-		Colleague expectedColleague = colleagueDao.get(id);
+		Colleague expectedColleague = colleagueDao.get(1);
 		Assert.assertNotNull(expectedColleague);
-		ReflectionAssert.assertPropertyLenientEquals("id", id, expectedColleague);
+		ReflectionAssert.assertPropertyLenientEquals("id", 1, expectedColleague);
 	}
 
 	/**
@@ -60,6 +59,9 @@ public class ColleagueDaoTest {
 	 */
 	@Test
 	public void testGetAll() {
+		
+		// Given
+		BusinessEngineer bizEngineer = BusinessEngineer.builder().id(1).firstName("Julie").lastName("VIGNERON").businessUnit("INDUSTRIE").build();
 		
 		// When
 		List<Colleague> listCollabs = colleagueDao.getAll();
@@ -72,7 +74,7 @@ public class ColleagueDaoTest {
 		ReflectionAssert.assertPropertyLenientEquals("employmentDate", Arrays.asList(new DateTime("2011-12-12").toDate(), new DateTime("2011-12-12").toDate()),listCollabs);
 		ReflectionAssert.assertPropertyLenientEquals("phone", Arrays.asList("6010101010", "6010101010"),listCollabs);
 		ReflectionAssert.assertPropertyLenientEquals("experience", Arrays.asList(5, 5),listCollabs);
-		ReflectionAssert.assertPropertyLenientEquals("businessEngineer", Arrays.asList("Colombe Tramond", "Colombe Tramond"),listCollabs);
+		ReflectionAssert.assertPropertyLenientEquals("businessEngineer", Arrays.asList(bizEngineer.getId(), bizEngineer.getId()),listCollabs);
 	}
 
 	/**
@@ -81,7 +83,7 @@ public class ColleagueDaoTest {
 	@Test
 	@DataSet("ColleagueDaoTest.testSave-result.xml")
 	public void testSave() {
-		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(3).name("Julie Vigneron").build(); 
+		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(3).firstName("Julie").lastName("Vigneron").build(); 
 		Colleague colleague = Colleague.builder().id(1).profileId(1)
 				.phone("6020202020").experience(7)
 				.firstName("modifiedColleague")
@@ -104,7 +106,7 @@ public class ColleagueDaoTest {
 	public void testAdd() throws Exception {
 
 		// Given
-		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(5).name("Renaud Migne").build(); 
+		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(5).firstName("Renaud").lastName("Migne").build(); 
 		Colleague colleague = Colleague.builder().managerId(1).profileId(1)
 				.phone("6020202020").experience(7).firstName("Johan")
 				.lastName("RONDOUDOUX").businessEngineer(businessEngineer)
