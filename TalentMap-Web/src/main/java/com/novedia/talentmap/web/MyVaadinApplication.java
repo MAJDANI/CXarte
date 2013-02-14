@@ -50,8 +50,7 @@ public class MyVaadinApplication extends Application implements
 	/**
 	 * The logger
 	 */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(MyVaadinApplication.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
 
 	/**
 	 * Vaadin components
@@ -106,7 +105,7 @@ public class MyVaadinApplication extends Application implements
 
 		// Set the main window
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Init application");
+			LOGGER.debug("Talent Map Front initialization");
 		}
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
