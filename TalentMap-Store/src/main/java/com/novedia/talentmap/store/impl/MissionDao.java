@@ -46,6 +46,18 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	public List<Mission> getAllByColleagueId(final Integer colleagueId) throws DataAccessException {
 		return (List<Mission>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MISSION_BY_COLLEAGUE_ID, colleagueId);
 	}
+	
+	/**
+	 * Gets the last Mission for a colleague identifies by colleagueId
+	 * 
+	 * @param colleagueId colleague identifier
+	 * @return List<Mission> mission list
+	 * @throws DataAccessException
+	 */
+	@SuppressWarnings("unchecked")
+	public Mission getLastMissionByColleagueId(final Integer colleagueId) throws DataAccessException {
+		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_LAST_MISSION_BY_COLLEAGUE_ID, colleagueId);
+	}
 
 	/**
 	 * {@inheritDoc}

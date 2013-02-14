@@ -3,26 +3,23 @@ package com.novedia.talentmap.web.ui.profile;
 import java.util.List;
 import java.util.Vector;
 
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
-import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
+import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Item;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Form;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -33,7 +30,7 @@ import com.vaadin.ui.VerticalLayout;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
-public class CollaboratorForm extends FormLayout{
+public class CollaboratorForm extends VerticalLayout{
 
 	/**
 	 * 
@@ -46,21 +43,12 @@ public class CollaboratorForm extends FormLayout{
 	private Vector<Object> fieldOrderCollaborator;
 	private Vector<Object> fieldOrderMission;
 	
-	/**
-	 * Current Colleague connected
-	 */
-	private Colleague currentColleague;
-	private Manager currentColleaguesManager; 
-	private List<Mission> currentColleaguesMissions;
-	private Mission currentColleaguesLastMission;
 
 	/**
 	 * Constants
 	 */
 	//TODO remis la valeur 2 pour que l'application puisse tourner en attendant qu'on enlève le bouchon
 	public static int COLLAB_ID = 2;
-	
-	Authentication curentAuthentication = new Authentication();
 
 	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "startDate", "endDate"};
@@ -72,14 +60,7 @@ public class CollaboratorForm extends FormLayout{
 	 */
 	private Form formCollaborator;
 	private Form formMission;
-	private TextField managerField;
 
-	/**
-	 * Vaadin Layout
-	 */
-	private GridLayout gLayoutCollaborator;
-	private GridLayout gLayoutMission;
-	private VerticalLayout vLayoutManager;
 
 	/**
 	 * TalentMap service
@@ -88,7 +69,7 @@ public class CollaboratorForm extends FormLayout{
 	private IProfileService profileService;
 	private IClientService clientService;
 	private IBusinessEngineerService businessEngineerService;
-	MyVaadinApplication app;
+	
 	/**
 	 * 
 	 * Build the class CollaboratorForm.java
@@ -99,22 +80,21 @@ public class CollaboratorForm extends FormLayout{
 	 * @param gLayoutCollaborator
 	 */
 	public CollaboratorForm(IColleagueService collaboratorService,
-			IProfileService profileService, IClientService clientService, IBusinessEngineerService businessEngineerService, Vector<Object> fieldOrderCollaborator, Vector<Object> fieldOrderMission,
-			GridLayout gLayoutCollaborator, GridLayout gLayoutMission, VerticalLayout vLayoutManager,
-			Form formCollaborator, Form formMission, TextField managerField) {
+			IProfileService profileService, 
+			IClientService clientService, 
+			IBusinessEngineerService businessEngineerService,
+			Vector<Object> fieldOrderCollaborator, 
+			Vector<Object> fieldOrderMission,
+			Form formCollaborator, Form formMission) {
 
 		this.fieldOrderCollaborator = fieldOrderCollaborator;
 		this.fieldOrderMission = fieldOrderMission;
-		this.gLayoutCollaborator = gLayoutCollaborator;
-		this.gLayoutMission = gLayoutMission;
-		this.vLayoutManager = vLayoutManager;
 		this.collaboratorService = collaboratorService;
 		this.profileService = profileService;
 		this.clientService = clientService;
 		this.businessEngineerService = businessEngineerService;
 		this.formCollaborator = formCollaborator;
 		this.formMission = formMission;
-		this.managerField = managerField;
 
 		mainBuild();
 	}
@@ -125,71 +105,20 @@ public class CollaboratorForm extends FormLayout{
 	 */
 	public void mainBuild(){
 		
-		cleanAll();
 		setSizeFull();
-		
-		// Build Layout
-		buildLayout();
 
 		try {
-
 			// Set the order for Collaborator Form
 			CUtils.setOrderForm(this.fieldOrderCollaborator, Constants.FIELD_ORDER_COLLABORATOR);
-			
 			//Set the order for Mission Form
 			CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
-
-			buildCurrentCollaboratorDatas();
-			
 			buildFormCollaborator();
-
 			buildFormMission();
-			
-			buildFormManager();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void cleanAll(){
-		
-		removeAllComponents();
-		
-		this.formCollaborator = new Form();
-		
-		this.formMission = new Form();
-		
-		this.gLayoutCollaborator = new GridLayout();
-		
-		this.gLayoutMission = new GridLayout();
-		
-	}
 
-	/**
-	 * Gets the current collaborator connected, his manager, his missions 
-	 * @class CollaboratorForm.java
-	 * @throws Exception
-	 */
-	private void buildCurrentCollaboratorDatas() throws Exception {
-		this.currentColleague = this.collaboratorService.getColleague(COLLAB_ID);
-		
-		//System.out.println(" COLLAB_ID : " + curentAuthentication.getColleagueId());
-		
-		//this.currentColleague = this.collaboratorService.getColleague(curentAuthentication.getColleagueId());
-		if(currentColleague != null) {
-			this.currentColleaguesManager = this.collaboratorService.getManager(currentColleague.getManagerId());
-			//TODO : ajouter une méthode getAllMissionsOrderByStartDate
-			this.currentColleaguesMissions = this.collaboratorService.getAllMissions(COLLAB_ID);
-			//this.currentColleaguesMissions = this.collaboratorService.getAllMissions(curentAuthentication.getColleagueId());
-			//Récupérer la dernière mission en date du collaborateur
-			int nbMissions = this.currentColleaguesMissions.size();
-			if(nbMissions > 0) {
-				this.currentColleaguesLastMission = this.currentColleaguesMissions.get(nbMissions-1);
-			}
-		}
-	}
-	
 	/**
 	 * Build the Collaborator Form
 	 * 
@@ -197,38 +126,53 @@ public class CollaboratorForm extends FormLayout{
 	 * @throws Exception
 	 */
 	private void buildFormCollaborator() throws Exception {
+		
+		// Label "Données administratives"
+		Label dataAdminLabel = new Label();
+		dataAdminLabel.setCaption(Constants.ADMIN_DATA_LABEL);
+		dataAdminLabel.setStyle(TalentMapCSS.H2);
+		addComponent(dataAdminLabel);
+		
+		// Layout des données administratives (2 colonnes)
+		GridLayout adminDatasLayout = new GridLayout();
 
-		// Set the content form
-		this.formCollaborator.setLayout(this.gLayoutCollaborator);
-
+		// Création des différents champs du formulaire "Données administratives"
 		this.formCollaborator
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
 						this.profileService, this.businessEngineerService));
-
 		
-		if (this.currentColleague != null){
-			BeanItem<Item> collabBean = new BeanItem(this.currentColleague);
-			this.formCollaborator.setItemDataSource(collabBean, this.fieldOrderCollaborator);
-	
-			// Set the good value for the Select Item
-			int profileId = this.currentColleague.getProfileId();
-			
-			String profileType = this.profileService.getProfile(profileId).getType();
-			
-		}
-		else {
-			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
-			this.formCollaborator.setComponentError(invalidVE);
-		}
+		Colleague currentColleague = collaboratorService.getColleague(COLLAB_ID);
+		initFormCollaborator(currentColleague);
+
 		// VGU
 		// Set the form to act immediately on user input. This is
 		// necessary for the validation of the fields to occur immediately
 		// when the input focus changes and not just on commit.	
 		this.formCollaborator.setImmediate(true);
-
+		
+		adminDatasLayout.setMargin(true);
+		adminDatasLayout.setSpacing(true);
+		adminDatasLayout.setColumns(3);
+		this.formCollaborator.setLayout(adminDatasLayout);
+		
 		addComponent(this.formCollaborator);
 	}
 
+	
+	/**
+	 * Init the value of the collaborator form with current colleague datas
+	 * @param currentColleague
+	 */
+	private void initFormCollaborator(Colleague currentColleague){
+		if(currentColleague != null){
+			BeanItem<Item> collaboratorBean = new BeanItem(currentColleague);
+			this.formCollaborator.setItemDataSource(collaboratorBean, this.fieldOrderCollaborator);
+		} else {
+			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			this.formCollaborator.setComponentError(invalidVE);
+		}
+	}
+	
 	/**
 	 * Build the Mission Form
 	 * 
@@ -237,75 +181,60 @@ public class CollaboratorForm extends FormLayout{
 	 */
 	private void buildFormMission() throws Exception {
 
-		// Set the content form
-		this.formMission.setLayout(this.gLayoutMission);
+		// Label "Données administratives"
+		Label lastMissionLabel = new Label();
+		lastMissionLabel.setCaption(Constants.LAST_MISSION_LABEL);
+		lastMissionLabel.setStyle(TalentMapCSS.H2);
 
+		addComponent(lastMissionLabel);
+		
+		// Layout de la dernière mission
+		GridLayout lastMissionDatasLayout = new GridLayout();
+		
+		lastMissionDatasLayout.setMargin(true);
+		lastMissionDatasLayout.setSpacing(true);
+		lastMissionDatasLayout.setColumns(3);
+		lastMissionDatasLayout.setRows(1);
+		
+		// Création des différents champs du formulaire "Dernière mission"
 		this.formMission.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
-		//TODO vérifier si currentColleaguesLastMission == null, le setImmediate est utile
+		
+		Mission currentColleaguesLastMission = collaboratorService.getLastMission(COLLAB_ID);
+		initFormMission(currentColleaguesLastMission);
 		// VGU
 		// Set the form to act immediately on user input. This is
 		// necessary for the validation of the fields to occur immediately
 		// when the input focus changes and not just on commit.	
 		this.formMission.setImmediate(true);
-		
-		if(currentColleaguesLastMission != null){
-			@SuppressWarnings("unchecked")
-			BeanItem<Item> missionBean = new BeanItem(currentColleaguesLastMission);
-			this.formMission.setItemDataSource(missionBean, this.fieldOrderMission);
+		this.formMission.setLayout(lastMissionDatasLayout);
 
-			addComponent(this.formMission);
-		}
+		addComponent(this.formMission);
 	}
 	
 	/**
-	 * Builds the Manager Form
-	 * @throws Exception
+	 * Init the value of the mission form with last mission datas
+	 * @param lastMission
 	 */
-	private void buildFormManager() throws Exception{
-		
-		this.managerField.setCaption("Consultant Manager : ");
-		this.managerField.setStyleName("consultant-manager");
-		
-		if (this.currentColleague != null){
-			if (currentColleaguesManager != null) {
-				//TODO: J'ai rajouté le test sur le manager à la demande de JM
-				//TODO: pour que l'application ne plante pas.
-				this.managerField.setValue(currentColleaguesManager.getFirstName()+ " " + currentColleaguesManager.getLastName());
-			}
+	private void initFormMission(Mission lastMission){
+		if(lastMission != null){
+			BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
+			this.formMission.setItemDataSource(lastMissionBean, this.fieldOrderMission);
 		} else {
 			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
-			this.managerField.setComponentError(invalidVE);
+			this.formCollaborator.setComponentError(invalidVE);
 		}
-		this.managerField.setReadOnly(true);
-		
-		this.vLayoutManager.addComponent(this.managerField);
-		
-		addComponent(this.vLayoutManager);
-		
-	}
-
+	}	
+	
 	/**
-	 * Build the GridLayout
-	 * 
-	 * @class CollaboratorForm.java
+	 * refresh all the forms whith default values (Mission and AdminData)
 	 */
-	private void buildLayout() {
-
-		// Build the Grid Layout for Collaborator Form
-		this.gLayoutCollaborator.setMargin(true);
-		this.gLayoutCollaborator.setSpacing(true);
-		this.gLayoutCollaborator.setColumns(3);
-		this.gLayoutCollaborator.setRows(4);
-
-		// Build the Grid Layout for Mission Form
-		this.gLayoutMission.setMargin(true);
-		this.gLayoutMission.setSpacing(true);
-		this.gLayoutMission.setColumns(3);
-		this.gLayoutMission.setRows(1);
-		
-		//this.setStyleName(TalentMapCSS.ADMINISTRATIVE_FORM);
-		
+	public void refreshAllFormsToDefault(){
+		Colleague currentColleague = collaboratorService.getColleague(COLLAB_ID);
+		Mission currentColleaguesLastMission = collaboratorService.getLastMission(COLLAB_ID);
+		initFormCollaborator(currentColleague);
+		initFormMission(currentColleaguesLastMission);
 	}
+	
 	
 	/**
 	 * Set the profileService value
@@ -342,26 +271,6 @@ public class CollaboratorForm extends FormLayout{
 	}
 
 	/**
-	 * Set the gLayoutCollaborator value
-	 * 
-	 * @param gLayoutCollaborator
-	 *            the gLayoutCollaborator to set
-	 */
-	public void setgLayoutCollaborator(GridLayout gLayoutCollaborator) {
-		this.gLayoutCollaborator = gLayoutCollaborator;
-	}
-
-	/**
-	 * Set the gLayoutMission value
-	 * 
-	 * @param gLayoutMission
-	 *            the gLayoutMission to set
-	 */
-	public void setgLayoutMission(GridLayout gLayoutMission) {
-		this.gLayoutMission = gLayoutMission;
-	}
-
-	/**
 	 * Set the profileService value
 	 * 
 	 * @param profileService
@@ -381,15 +290,6 @@ public class CollaboratorForm extends FormLayout{
 	}
 
 	/**
-	 * Get the formMission value
-	 * 
-	 * @return the formMission
-	 */
-	public Form getFormMission() {
-		return formMission;
-	}
-
-	/**
 	 * Set the formCollaborator value
 	 * 
 	 * @param formCollaborator
@@ -397,32 +297,6 @@ public class CollaboratorForm extends FormLayout{
 	 */
 	public void setFormCollaborator(Form formCollaborator) {
 		this.formCollaborator = formCollaborator;
-	}
-
-	/**
-	 * Set the formMission value
-	 * 
-	 * @param formMission
-	 *            the formMission to set
-	 */
-	public void setFormMission(Form formMission) {
-		this.formMission = formMission;
-	}
-	
-	/**
-	 * Set the managerField value
-	 * @param managerField the managerField to set
-	 */
-	public void setManagerField(TextField managerField) {
-		this.managerField = managerField;
-	}
-
-	/**
-	 * Set the vLayoutManager value
-	 * @param vLayoutManager the vLayoutManager to set
-	 */
-	public void setvLayoutManager(VerticalLayout vLayoutManager) {
-		this.vLayoutManager = vLayoutManager;
 	}
 	
 	/**
@@ -439,5 +313,18 @@ public class CollaboratorForm extends FormLayout{
 	 */
 	public void setCOLLAB_ID(int cOLLAB_ID) {
 		COLLAB_ID = cOLLAB_ID;
+	}
+	
+
+	public Form getFormMission() {
+		return formMission;
+	}
+
+	public void setFormMission(Form formMission) {
+		this.formMission = formMission;
+	}
+	
+	public void discard(){
+		
 	}
 }

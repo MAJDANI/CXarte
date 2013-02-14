@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.profile;
 
 import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileLayout;
 import com.vaadin.event.ItemClickEvent;
@@ -24,6 +25,7 @@ IObservable,ItemClickListener {
 	private Button visualizeSkills;
 	private Button visualizeMissions;
 	private Button visualizeEA;
+	private Button vizualiseProfile;
 	
 	/**
 	 * POJO
@@ -36,10 +38,11 @@ IObservable,ItemClickListener {
 	public static final String VISUALIZE_SKILLS_NAME = "Compétences";
 	public static final String VISUALIZE_MISSIONS_NAME = "Historique des missions";
 	public static final String VISUALIZE_EA_NAME = "Historique EA";
+	public static final String VISUALIZE_PROFILE_NAME = "Données administratives";
 	
 	public Tree root = new Tree();
 	public static final Object [][] subItems = new Object[][]{
-			new Object[]{"Menu",VISUALIZE_SKILLS_NAME,VISUALIZE_MISSIONS_NAME,VISUALIZE_EA_NAME}
+			new Object[]{"Menu",VISUALIZE_PROFILE_NAME,VISUALIZE_SKILLS_NAME,VISUALIZE_MISSIONS_NAME,VISUALIZE_EA_NAME}
 		};
 		
 	public String firstElement ;
@@ -52,11 +55,13 @@ IObservable,ItemClickListener {
 	 * @param visualizeEA
 	 */
 	public ProfileNavigation(Button visualizeSkills,
-			Button visualizeMissions, Button visualizeEA) {
+			Button visualizeMissions, Button visualizeEA, Button visualizeProfile) {
 		super();
+		this.vizualiseProfile = visualizeProfile;
 		this.visualizeSkills = visualizeSkills;
 		this.visualizeMissions = visualizeMissions;
 		this.visualizeEA = visualizeEA;
+		
 	
 		mainBuild();
 	}
@@ -109,7 +114,7 @@ IObservable,ItemClickListener {
 			//get the item in the root
 			Object itemId = event.getItemId();
 			if(itemId != null){
-				if(itemId.equals(VISUALIZE_SKILLS_NAME)){
+				if(itemId.equals(VISUALIZE_PROFILE_NAME)){
 					//allowed to forward the view page
 					this.cl = ProfileCollaboratorContent.class;
 					updateObservateur();				
@@ -120,6 +125,10 @@ IObservable,ItemClickListener {
 				}
 				else if(itemId.equals(VISUALIZE_EA_NAME)){
 					this.cl = EaContentHistorique.class;
+					updateObservateur();
+				}
+				else if(itemId.equals(VISUALIZE_SKILLS_NAME)){
+					this.cl = SkillCollaboratorContent.class;
 					updateObservateur();
 				}
 			}				
@@ -188,5 +197,13 @@ IObservable,ItemClickListener {
 	@Override
 	public void delObservateur() {
 		this.obs = null;
+	}
+
+	public Button getVizualiseProfile() {
+		return vizualiseProfile;
+	}
+
+	public void setVizualiseProfile(Button vizualiseProfile) {
+		this.vizualiseProfile = vizualiseProfile;
 	}
 }

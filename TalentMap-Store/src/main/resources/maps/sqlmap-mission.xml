@@ -31,6 +31,13 @@
 		ORDER BY START_DATE
 	</select>
 	
+	<select id="getLastMissionByColleague" resultMap="missionResult" parameterClass="Integer">
+		SELECT * FROM MISSION mission, CLIENT client WHERE COLLEAGUE_ID = #value# 
+		AND mission.CLIENT_ID = client.CLIENT_ID
+		AND mission.END_DATE = (SELECT MAX(END_DATE) FROM MISSION mission WHERE COLLEAGUE_ID = #value#)
+	</select>
+	
+	
 	<update id="save" parameterClass="Mission">
 		UPDATE MISSION 
 		SET

@@ -191,6 +191,11 @@ public static final String GET_MISSION = "mission.get";
 public static final String GET_ALL_MISSION_BY_COLLEAGUE_ID = "mission.getAllByColleague";
 
 /**
+ * Constant request to get the last mission from a colleague id
+ */
+public static final String GET_LAST_MISSION_BY_COLLEAGUE_ID = "mission.getLastMissionByColleague";
+
+/**
  * Constant request to add a mission.
  */
 public static final String ADD_MISSION = "mission.add";

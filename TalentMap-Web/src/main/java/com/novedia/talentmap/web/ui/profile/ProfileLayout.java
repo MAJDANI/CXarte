@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.profile;
 
 import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IProfileLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
@@ -14,6 +15,7 @@ public class ProfileLayout extends HorizontalLayout {
 	 */
 	private ProfileCollaboratorContent profileCollabContent;
 	private MissionCollaboratorContent missionCollabContent;
+	private SkillCollaboratorContent skillCollabContent;
 	private ProfileNavigation profileNavigation;
 	private EaContentHistorique eaContentHistorique;
 
@@ -31,10 +33,13 @@ public class ProfileLayout extends HorizontalLayout {
 	public ProfileLayout(ProfileCollaboratorContent profileCollabContent,
 			ProfileNavigation profileNavigation,
 			HorizontalSplitPanel hSplitPanel,
-			MissionCollaboratorContent missionCollabContent,EaContentHistorique eaContentHistorique) {
+			MissionCollaboratorContent missionCollabContent,
+			SkillCollaboratorContent skillCollabContent,
+			EaContentHistorique eaContentHistorique) {
 		super();
 		this.profileCollabContent = profileCollabContent;
 		this.profileNavigation = profileNavigation;
+		this.skillCollabContent = skillCollabContent;
 		this.hSplitPanel = hSplitPanel;
 		this.missionCollabContent = missionCollabContent;
 		this.eaContentHistorique = eaContentHistorique;
@@ -55,6 +60,7 @@ public class ProfileLayout extends HorizontalLayout {
 					
 					ProfileLayout.this.profileCollabContent.setVisible(true);
 					ProfileLayout.this.missionCollabContent.setVisible(false);
+					ProfileLayout.this.skillCollabContent.setVisible(false);
 					ProfileLayout.this.eaContentHistorique.setVisible(false);
 					
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.profileCollabContent);
@@ -64,14 +70,24 @@ public class ProfileLayout extends HorizontalLayout {
 					
 					ProfileLayout.this.profileCollabContent.setVisible(false);
 					ProfileLayout.this.missionCollabContent.setVisible(true);
+					ProfileLayout.this.skillCollabContent.setVisible(false);
 					ProfileLayout.this.eaContentHistorique.setVisible(false);
-					
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.missionCollabContent);
+				}
+				
+				if(cl == SkillCollaboratorContent.class){
+					
+					ProfileLayout.this.profileCollabContent.setVisible(false);
+					ProfileLayout.this.missionCollabContent.setVisible(false);
+					ProfileLayout.this.skillCollabContent.setVisible(true);
+					ProfileLayout.this.eaContentHistorique.setVisible(false);
+					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.skillCollabContent);
 				}
 				if(cl == EaContentHistorique.class){
 					ProfileLayout.this.eaContentHistorique.setVisible(true);
 					ProfileLayout.this.profileCollabContent.setVisible(false);
 					ProfileLayout.this.missionCollabContent.setVisible(false);
+					ProfileLayout.this.skillCollabContent.setVisible(false);
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.eaContentHistorique);
 					
 				
@@ -107,6 +123,7 @@ public class ProfileLayout extends HorizontalLayout {
 		
 		this.profileCollabContent.setVisible(true);
 		this.missionCollabContent.setVisible(false);
+		this.skillCollabContent.setVisible(false);
 		this.eaContentHistorique.setVisible(false);
 	}
 	
@@ -200,6 +217,14 @@ public class ProfileLayout extends HorizontalLayout {
 	public void setMissionCollabContent(
 			MissionCollaboratorContent missionCollabContent) {
 		this.missionCollabContent = missionCollabContent;
+	}
+
+	public SkillCollaboratorContent getSkillCollabContent() {
+		return skillCollabContent;
+	}
+
+	public void setSkillCollabContent(SkillCollaboratorContent skillCollabContent) {
+		this.skillCollabContent = skillCollabContent;
 	}
 
 }

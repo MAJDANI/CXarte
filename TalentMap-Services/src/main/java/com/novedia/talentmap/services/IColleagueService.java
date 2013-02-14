@@ -72,6 +72,14 @@ Mission getMission(Integer missionId);
 List<Mission> getAllMissions(Integer collabId);
 
 /**
+ * Get last mission for a Collab_ID.
+ * @class ICollaboratorService.java
+ * @param collabId a id
+ * @return List<Mission>
+ */
+Mission getLastMission(Integer collabId);
+
+/**
  * Get manager.
  * @class ICollaboratorService.java
  * @param managerId a id

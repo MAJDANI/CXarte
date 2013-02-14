@@ -106,6 +106,16 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Mission getLastMission(final Integer colleagueId)throws DataAccessException {
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		return missionDao.getLastMissionByColleagueId(colleagueId);
+	}
+	
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Manager getManager(final Integer managerId) throws DataAccessException {
 		return managerDao.get(managerId);
 	}

@@ -21,6 +21,11 @@ public class TalentMapCSS {
 	public static final String H2 = Reindeer.LABEL_H2;
 	
 	/**
+	 * light
+	 */
+	public static final String LIGHT = Reindeer.LABEL_SMALL;
+	
+	/**
 	 * FORM
 	 */
 	//Form Data Administrative

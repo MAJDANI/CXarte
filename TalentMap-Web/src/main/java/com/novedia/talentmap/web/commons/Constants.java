@@ -25,7 +25,7 @@ public class Constants {
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
 		"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",
-		"Années d'expérience", "Ingénieur d'affaire" };
+		"Années d'expérience", "Ingénieur d'affaire", "Manager" };
 
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";
 	public static final String FIELD_COLLAB_FIRST_NAME = "firstName";
@@ -35,6 +35,7 @@ public class Constants {
 	public static final String FIELD_COLLAB_EMPLOYMENT_DATE = "employmentDate";
 	public static final String FIELD_COLLAB_EXPERIENCE = "experience";
 	public static final String FIELD_COLLAB_BUISINESS_ENGINEER = "businessEngineer";
+	public static final String FIELD_COLLAB_MANAGER = "managerId";
 
 	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
 		FIELD_COLLAB_LAST_NAME, 
@@ -44,7 +45,8 @@ public class Constants {
 		FIELD_COLLAB_PHONE,
 		FIELD_COLLAB_EMPLOYMENT_DATE, 
 		FIELD_COLLAB_EXPERIENCE, 
-		FIELD_COLLAB_BUISINESS_ENGINEER };
+		FIELD_COLLAB_BUISINESS_ENGINEER,
+		FIELD_COLLAB_MANAGER};
 
 	/**
 	 * Données Profil - Mission
@@ -67,6 +69,13 @@ public class Constants {
 		FIELD_MISSION_END_DATE, 
 		FIELD_MISSION_NOTES };
 
+	public static final String ADMIN_DATA_LABEL = "Données administratives";
+	public static final String LAST_MISSION_LABEL = "Dernière mission";
+	public static final String ADMIN_DATA_SAVE_BUTTON = "Enregistrer";
+	public static final String ADMIN_DATA_CANCEL_BUTTON = "Annuler";
+	public static final String ADMIN_DATA_EDIT_BUTTON = "Editer";
+	
+	
 	/**
 	 * Données Mission - Messages
 	 */

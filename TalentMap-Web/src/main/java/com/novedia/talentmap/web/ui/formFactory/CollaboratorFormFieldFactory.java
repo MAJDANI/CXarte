@@ -2,8 +2,10 @@ package com.novedia.talentmap.web.ui.formFactory;
 
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IBusinessEngineerService;
+import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.vaadin.data.Item;
@@ -51,7 +53,8 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 				
 				//We give a default format for all input except the employmentDate and the profileId input
 				
-				if(!propertyId.equals(Constants.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(Constants.FIELD_COLLAB_PROFILE_ID)){
+				if(!propertyId.equals(Constants.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(Constants.FIELD_COLLAB_PROFILE_ID)
+						&& !propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
 					
 					TextField field = new TextField((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
@@ -60,7 +63,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
 					
 					if(!propertyId.equals(Constants.FIELD_COLLAB_PHONE) && !propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
-						field.setReadOnly(true);
 						field.setRequired(false);
 					}
 					
@@ -82,7 +84,11 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					}else if(propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
 						field.setStyleName("experience");
 						
-					}else if(propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
+					}
+
+					return field;
+					
+				} else if(propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
 						
 						BeanItemContainer<BusinessEngineer> container =
 						        new BeanItemContainer<BusinessEngineer>(BusinessEngineer.class);
@@ -99,19 +105,14 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						bEngineerSelect.setNullSelectionAllowed(false);
 						bEngineerSelect.setImmediate(true);
 
-						
-						field.setStyleName("business-engineer");
 						return bEngineerSelect;
-					}
-
-					return field;
+					
 					
 				}else if(propertyId.equals("employmentDate")){
 					
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
 					datefield.setCaption((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
-					datefield.setReadOnly(true);
 					datefield.setStyleName("employment-date");
 					
 					return datefield;
@@ -139,12 +140,10 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						e.printStackTrace();
 					}
 					
-					//Add Validator
-//					profilSelect.addValidator(new RegexpValidator("fonctionnel|technique", "Type de profil possible : fonctionnel ou technique."));
-					
 					profilSelect.setStyleName("type-profile");
 					return profilSelect;
-				}
+					
+				} 
 				
 			}
 		}

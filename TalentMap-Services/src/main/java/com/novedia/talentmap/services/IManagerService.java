@@ -3,6 +3,7 @@ package com.novedia.talentmap.services;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Manager;
 
 /**
  * The Manager Service Interface.
@@ -24,4 +25,12 @@ List<Colleague> getAllColleagues(Integer managerId);
  * @return collaborator
  */
 Colleague getCollaborator(int id);
+
+/**
+ * Get all Manager.
+ * @param id a id
+ * @return list of manager
+ */
+List<Manager> getAll();
+
 }
