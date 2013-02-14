@@ -171,7 +171,7 @@ public class ColleagueServiceTest {
 	 * 					- the missionId returned is correct.  
 	 */
 	@Test
-	public void addMission(){
+	public void addMissionReturnsACorrectId(){
 		
 		//Given
 		Integer missionForTestsId = 1;
@@ -192,7 +192,7 @@ public class ColleagueServiceTest {
 	 * 					- the missionId returned is correct.  
 	 */
 	@Test
-	public void saveMission() {
+	public void saveMissionReturnsACorrectId() {
 
 		//Given
 		Integer missionForTestsId = 1;
@@ -214,7 +214,7 @@ public class ColleagueServiceTest {
 	 * 					- the mission returned is correct.  
 	 */
 	@Test
-	public void getMission() {
+	public void getMissionReturnsACorrectMission() {
 
 		//Given
 		Integer missionForTestsId = 1;
@@ -236,7 +236,7 @@ public class ColleagueServiceTest {
 	 * 					- the list of missions returned is correct.  
 	 */
 	@Test
-	public void getAllMissions() {
+	public void getAllMissionsReturnsACorrectListOfMissions() {
 
 		//Given
 		Mission missionForTests = Mission.builder().build();
@@ -268,7 +268,7 @@ public class ColleagueServiceTest {
 	 * 					- the manager returned is correct.  
 	 */
 	@Test
-	public void getManager() {
+	public void getManagerReturnsACorrectManager() {
 
 		//Given
 		Integer managerForTestsId = 1;
@@ -290,7 +290,7 @@ public class ColleagueServiceTest {
 	 * 					- the list of colleague returned is correct.  
 	 */
 	@Test
-	public void getAllColleaguesByLastName() {
+	public void getAllColleaguesByLastNameReturnsACorrectListOfColleagues() {
 
 		//Given
 		Integer colleagueForTestId = 1;
@@ -320,7 +320,7 @@ public class ColleagueServiceTest {
 	 * 					- the list of colleague returned is correct.  
 	 */
 	@Test
-	public void getAllColleaguesByClient() {
+	public void getAllColleaguesByClientReturnsACorrectListOfColleague() {
 		
 		//Given
 		Client client = Client.builder().id(1).name("ClientName").build();
@@ -351,7 +351,7 @@ public class ColleagueServiceTest {
 	 * Result tested :    
 	 */
 	@Ignore
-	public void getAllColleaguesByToolId() {
+	public void getAllColleaguesByToolIdReturnsACorrectListOfColleague() {
 		fail("Not yet implemented");
 	}
 	
@@ -361,7 +361,7 @@ public class ColleagueServiceTest {
 	 * 					- the list of colleague returned is correct.  
 	 */
 	@Test
-	public void getAllColleaguesByListToolId() {
+	public void getAllColleaguesByListToolIdReturnsACorrectListOfColleagues() {
 		
 		//Given
 		List<Integer> listToolId = new ArrayList<Integer>();
