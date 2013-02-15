@@ -9,6 +9,10 @@ import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.role.CmContentLayout;
+import com.novedia.talentmap.web.ui.role.IaContentLayout;
+import com.novedia.talentmap.web.ui.role.RhContentLayout;
+import com.novedia.talentmap.web.ui.search.SearchNavigation;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Panel;
@@ -82,12 +86,18 @@ public class AuthenticatedScreen extends VerticalLayout {
 		if (Authorization.Role.CL.getId().equals(this.authentication.getAuthorization().getRoleId())) {
 			buildMainLayout(this.application, Authorization.Role.CL);
 		} 
+		else if(Authorization.Role.RH.getId().equals(this.authentication.getAuthorization().getRoleId())){
+			buildMainLayout(this.application, Authorization.Role.RH);			
+		}
+		else if(Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())){
+			buildMainLayout(this.application, Authorization.Role.CM);			
+		}
+		else if(Authorization.Role.IA.getId().equals(this.authentication.getAuthorization().getRoleId())){
+			buildMainLayout(this.application, Authorization.Role.IA);			
+		}
 		else if (this.authentication.getAuthorization().getRoleId() == Authorization.Role.AD.getId()) {
 			
 		} 
-		else {
-
-		}
 		// this.application.getMainWindow().setContent(buildMainLayout());
 	}
 	
@@ -100,19 +110,38 @@ public class AuthenticatedScreen extends VerticalLayout {
 	private ComponentContainer buildMainLayout(MyVaadinApplication application, Role role ) {
 		
 		TabMain mainTab = application.getMainTab();
+
+		AdminView adminView = mainTab.getAdminView();
+		CmContentLayout cmContentLayout = application.getCmContentLayout();
+		RhContentLayout rhContentLayout = application.getRhContentLayout();
 		Panel vpanel = new Panel();
 		VerticalLayout vert = new VerticalLayout();
 		        
-
 		// Select the views to display
 		if(role.equals(Role.AD)){
 			mainTab.removeComponent(mainTab.getSearchView());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
 		}
-		else{
-			AdminView adminView = mainTab.getAdminView();
-			mainTab.removeComponent(adminView);			
+		else if(role.equals(Role.IA)){
+			mainTab.removeComponent(mainTab.getTabProfileSheet());
+			mainTab.removeComponent(adminView);	
 		}
+		else if(role.equals(Role.RH)){		
+			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabProfileSheet());
+			mainTab.removeComponent(adminView);		
+			addComponent(rhContentLayout);
+		}
+		else if(role.equals(Role.CM)){
+			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabProfileSheet());
+			mainTab.removeComponent(adminView);		
+			addComponent(cmContentLayout);
+		}
+		
+//		else{
+//			mainTab.removeComponent(adminView);			
+//		}
 		//Show logOut button
 		
 		//TODO:

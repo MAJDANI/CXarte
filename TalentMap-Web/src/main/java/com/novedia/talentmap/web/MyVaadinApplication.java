@@ -15,6 +15,10 @@
  */
 package com.novedia.talentmap.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -27,11 +31,17 @@ import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.services.impl.BusinessEngineerService;
 import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.ui.TabMain;
+import com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout;
 import com.novedia.talentmap.web.ui.login.LoginScreen;
+import com.novedia.talentmap.web.ui.role.CmContentLayout;
+import com.novedia.talentmap.web.ui.role.IaContentLayout;
+import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
+import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
@@ -45,7 +55,7 @@ import com.vaadin.ui.themes.Reindeer;
 @SuppressWarnings("serial")
 @Configurable
 public class MyVaadinApplication extends Application implements
-		ApplicationContext.TransactionListener {
+		ApplicationContext.TransactionListener, HttpServletRequestListener {
 
 	/**
 	 * The logger
@@ -76,7 +86,7 @@ public class MyVaadinApplication extends Application implements
 	 * The authentication service
 	 */
 	private AuthenticationService authenticationService;
-	
+
 	/**
 	 * The registration service
 	 */
@@ -88,9 +98,38 @@ public class MyVaadinApplication extends Application implements
 	private BusinessEngineerService businessEngineerService;
 
 	/**
+	 * monitoringCollabContentLayout
+	 */
+	private MonitoringCollabContentLayout monitoringCollabContentLayout;
+
+	/**
+	 * RH view
+	 */
+	private RhContentLayout rhContentLayout;
+
+	/**
+	 * CM view
+	 */
+	private CmContentLayout cmContentLayout;
+	
+	/**
+	 * IA (commercial) view
+	 */
+	IaContentLayout iaContentLayout;
+
+	/**
 	 * The button close
 	 */
 	private Button closeButton;
+
+	/**
+	 * 
+	 */
+	MyVaadinApplication ctx;
+
+	public void applicationContex() {
+		this.ctx = (MyVaadinApplication) getContext();
+	}
 
 	// /**
 	// * The login screen
@@ -120,17 +159,18 @@ public class MyVaadinApplication extends Application implements
 			}
 		});
 
-		//See internet: allows to fix bug : show twice window component.
+		// See internet: allows to fix bug : show twice window component.
 		window.setContent(new LoginScreen(this));
+
 	}
 
 	/**
 	 * Build Horizontal layout
 	 */
 	public HorizontalLayout buildMainLayout() {
-		
-		//TODO: Not use, because component extends layout
-		
+
+		// TODO: Not use, because component extends layout
+
 		// Set the main window
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("build the main component container");
@@ -150,8 +190,8 @@ public class MyVaadinApplication extends Application implements
 	 */
 	public VerticalLayout buildMainVerticalLayout() {
 
-		//TODO: Not use, because component extends layout
-		
+		// TODO: Not use, because component extends layout
+
 		// Set the main window
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("build the vertical layout");
@@ -193,64 +233,64 @@ public class MyVaadinApplication extends Application implements
 		return authenticate;
 	}
 
-	
 	/**
 	 * Register method
 	 * 
 	 * @param registration
 	 */
-	public Authentication register(Registration registration) throws TalentMapSecurityException{
-		
+	public Authentication register(Registration registration)
+			throws TalentMapSecurityException {
+
 		Authentication authenticate = null;
-		
+
 		registration.setLogin(getLogin(registration));
 		try {
-			
-			//We check if the user is already existing in Database (Collaborator table)
-			if (registrationService.check(registration) == null){
+
+			// We check if the user is already existing in Database
+			// (Collaborator table)
+			if (registrationService.check(registration) == null) {
 				registrationService.addColleagueFromRegistration(registration);
 			} else {
-				throw new TalentMapSecurityException ("Email already used");
+				throw new TalentMapSecurityException("Email already used");
 			}
 
-			//Password encoding
-			String encodedPassword = CUtils.encodePassword(registration.getPassword());
+			// Password encoding
+			String encodedPassword = CUtils.encodePassword(registration
+					.getPassword());
 			registration.setPassword(encodedPassword);
 			registrationService.addUserFromRegistration(registration);
-			
+
 			CredentialToken credential = new CredentialToken();
 			credential.setLogin(registration.getLogin());
 			credential.setPassword(registration.getPassword());
 			authenticate = authenticationService.checkUser(credential);
-		}
-		catch (DataAccessException ex) {
+		} catch (DataAccessException ex) {
 			if (LOGGER.isErrorEnabled()) {
 				LOGGER.error("Technical Exception : ", ex.getMessage());
 			}
 		}
-		
+
 		return authenticate;
 	}
-	
+
 	/**
 	 * 
 	 * @param registration
 	 * @return
 	 */
-	private String getLogin(Registration registration){
-		
+	private String getLogin(Registration registration) {
+
 		String firstName = registration.getFirstName();
-		
+
 		String lastName = registration.getLastName();
-		
+
 		String login = firstName.substring(0, 1) + "." + lastName;
-		
+
 		return login.toLowerCase();
 	}
-	
-	
+
 	/**
-	 * Log out method 
+	 * Log out method
 	 */
 	public void logout() {
 
@@ -265,7 +305,7 @@ public class MyVaadinApplication extends Application implements
 		// }
 
 		// After closing, redirect user back to login
-		//Set null, redirect to login page
+		// Set null, redirect to login page
 		setLogoutURL(null);
 	}
 
@@ -368,11 +408,34 @@ public class MyVaadinApplication extends Application implements
 	}
 
 	/**
+	 * @param monitoringCollabContentLayout
+	 *            the monitoringCollabContentLayout to set
+	 */
+	public void setMonitoringCollabContentLayout(
+			MonitoringCollabContentLayout monitoringCollabContentLayout) {
+		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
+	}
+
+	/**
 	 * @param closeButton
-	 *            the closeButton to set
+	 * the closeButton to set
 	 */
 	public void setCloseButton(Button closeButton) {
 		this.closeButton = closeButton;
+	}
+	
+	/**
+	 * @return the iaContentLayout
+	 */
+	public IaContentLayout getIaContentLayout() {
+		return iaContentLayout;
+	}
+
+	/**
+	 * @param iaContentLayout the iaContentLayout to set
+	 */
+	public void setIaContentLayout(IaContentLayout iaContentLayout) {
+		this.iaContentLayout = iaContentLayout;
 	}
 
 	/**
@@ -390,11 +453,53 @@ public class MyVaadinApplication extends Application implements
 	}
 
 	/**
-	 * @param mainVerticalLayout the mainVerticalLayout to set
+	 * @param mainVerticalLayout
+	 *            the mainVerticalLayout to set
 	 */
 	public void setMainVerticalLayout(VerticalLayout mainVerticalLayout) {
 		this.mainVerticalLayout = mainVerticalLayout;
 	}
+	
+	
+	/**
+	 * @return the rhContentLayout
+	 */
+	public RhContentLayout getRhContentLayout() {
+		return rhContentLayout;
+	}
 
+	/**
+	 * @param rhContentLayout the rhContentLayout to set
+	 */
+	public void setRhContentLayout(RhContentLayout rhContentLayout) {
+		this.rhContentLayout = rhContentLayout;
+	}
 
+	/**
+	 * @return the cmContentLayout
+	 */
+	public CmContentLayout getCmContentLayout() {
+		return cmContentLayout;
+	}
+
+	/**
+	 * @param cmContentLayout the cmContentLayout to set
+	 */
+	public void setCmContentLayout(CmContentLayout cmContentLayout) {
+		this.cmContentLayout = cmContentLayout;
+	}
+
+	@Override
+	public void onRequestStart(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onRequestEnd(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
@@ -35,18 +37,9 @@ IObservable,ItemClickListener {
 	/**
 	 * Constants
 	 */
-	public static final String VISUALIZE_SKILLS_NAME = "Compétences";
-	public static final String VISUALIZE_MISSIONS_NAME = "Historique des missions";
-	public static final String VISUALIZE_EA_NAME = "Historique EA";
-	public static final String VISUALIZE_PROFILE_NAME = "Données administratives";
+	private ConstantsForMenuInglish constantsForMenuInglish;
 	
 	public Tree root = new Tree();
-	public static final Object [][] subItems = new Object[][]{
-			new Object[]{"Menu",VISUALIZE_PROFILE_NAME,VISUALIZE_SKILLS_NAME,VISUALIZE_MISSIONS_NAME,VISUALIZE_EA_NAME}
-		};
-		
-	public String firstElement ;
-	public String firstEl;
 	
 	/**
 	 * Build the class CollaboratorNavigation.java 
@@ -80,7 +73,10 @@ IObservable,ItemClickListener {
 	/**
 	 * allowed unfolding the tree
 	 */
-	public void playTree(){
+	public void playTree(){		
+		String firstElement ;
+		String firstEl;
+		Object[][] subItems = constantsForMenuInglish.subItemProfilNav;
 		for (int i = 0; i < subItems.length; i++) {			
 			firstEl = (String) subItems[i][0];
 			root.addItem(firstEl);
@@ -114,20 +110,20 @@ IObservable,ItemClickListener {
 			//get the item in the root
 			Object itemId = event.getItemId();
 			if(itemId != null){
-				if(itemId.equals(VISUALIZE_PROFILE_NAME)){
+				if(itemId.equals(constantsForMenuInglish.VISUALIZE_PROFILE_NAME)){
 					//allowed to forward the view page
 					this.cl = ProfileCollaboratorContent.class;
 					updateObservateur();				
 				}
-				else if(itemId.equals(VISUALIZE_MISSIONS_NAME)){					
+				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_MISSIONS_NAME)){					
 					this.cl = MissionCollaboratorContent.class;					
 					updateObservateur();				
 				}
-				else if(itemId.equals(VISUALIZE_EA_NAME)){
+				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_EA_NAME)){
 					this.cl = EaContentHistorique.class;
 					updateObservateur();
 				}
-				else if(itemId.equals(VISUALIZE_SKILLS_NAME)){
+				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_SKILLS_NAME)){
 					this.cl = SkillCollaboratorContent.class;
 					updateObservateur();
 				}

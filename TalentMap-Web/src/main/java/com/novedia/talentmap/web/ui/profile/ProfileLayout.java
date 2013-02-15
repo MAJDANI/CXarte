@@ -52,7 +52,7 @@ public class ProfileLayout extends HorizontalLayout {
 	public void buildObservators(){
 		
 		this.profileNavigation.addObservateur(new IProfileLayout() {
-			
+
 			@Override
 			public void updateProfileLayout(Class<?> cl) {
 				
@@ -87,10 +87,8 @@ public class ProfileLayout extends HorizontalLayout {
 					ProfileLayout.this.eaContentHistorique.setVisible(true);
 					ProfileLayout.this.profileCollabContent.setVisible(false);
 					ProfileLayout.this.missionCollabContent.setVisible(false);
-					ProfileLayout.this.skillCollabContent.setVisible(false);
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.eaContentHistorique);
-					
-				
+
+					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.eaContentHistorique);									
 				}
 			}
 		}, IProfileLayout.class);

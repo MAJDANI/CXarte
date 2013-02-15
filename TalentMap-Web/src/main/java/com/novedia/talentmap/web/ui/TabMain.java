@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -25,12 +26,6 @@ public class TabMain extends TabSheet {
 	private SearchView searchView;
 	private AdminView adminView;
 	
-	/**
-	 * Constants
-	 */
-	private final String TAB_PROFIL_NAME = "Profil";
-	private final String TAB_SEARCH_NAME = "Recherche";
-	private final String TAB_ADMIN_NAME = "Administration";
 	
 	/**
 	 * Build the class TabMain.java 
@@ -49,9 +44,9 @@ public class TabMain extends TabSheet {
 		setImmediate(true);
 				
 		//TODO : filter tab panel en fonction du role ??
-		addTab(this.tabProfileSheet, TAB_PROFIL_NAME);
-		addTab(this.searchView, TAB_SEARCH_NAME);
-		addTab(this.adminView, TAB_ADMIN_NAME);
+		addTab(this.tabProfileSheet, ConstantsForMenuInglish.TAB_PROFIL_NAME);
+		addTab(this.searchView, ConstantsForMenuInglish.TAB_SEARCH_NAME);
+		addTab(this.adminView, ConstantsForMenuInglish.TAB_ADMIN_NAME);
 	}
 	
 	/**
@@ -98,5 +93,5 @@ public class TabMain extends TabSheet {
 	 */
 	public SearchView getSearchView() {
 		return searchView;
-	}
+	}	
 }

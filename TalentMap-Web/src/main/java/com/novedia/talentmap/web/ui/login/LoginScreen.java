@@ -1,12 +1,21 @@
 package com.novedia.talentmap.web.ui.login;
 
+import java.nio.channels.GatheringByteChannel;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.MyVaadinApplication;
+import com.novedia.talentmap.web.ui.profile.CollaboratorForm;
 import com.novedia.talentmap.web.util.LabelConstants;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
+import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -22,7 +31,8 @@ import com.vaadin.ui.VerticalLayout;
  * Login Screen
  * @author e.moumbe
  */
-public class LoginScreen extends VerticalLayout {
+
+public class LoginScreen extends VerticalLayout implements HttpServletRequestListener {
 	
 	/**
 	 * UID
@@ -45,6 +55,8 @@ public class LoginScreen extends VerticalLayout {
 	private Button signIn;
 	private LoginForm loginForm;
 	private Panel loginPanel;
+	
+	private static  int ID ;
 	
 	
 	/**
@@ -133,16 +145,21 @@ public class LoginScreen extends VerticalLayout {
 			//Credentials infos
 			String username = event.getLoginParameter("username");
 			String password = event.getLoginParameter("password");
+			HttpSession session = null;
 			
 			Authentication authentication = null;
 			try {
 				authentication = application.login(username, password);
 				
+				WebApplicationContext ctx = (WebApplicationContext) application.getContext();
+				session = ctx.getHttpSession();
+				session.setAttribute("id", authentication.getToken());
+				
 				//See javado: Application has attribute User (See how we can integrate this capability
 				//in yours conception
 				if (authentication != null) {
 					this.application.setUser(authentication);
-					application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));
+					application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));					
 				}
 			} catch (TalentMapSecurityException tmpex) {
 				application.getMainWindow().showNotification("Bad user name/password");
@@ -158,5 +175,19 @@ public class LoginScreen extends VerticalLayout {
 			}
 		}
 
+	}
+
+	@Override
+	public void onRequestStart(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+				
+	}
+
+	@Override
+	public void onRequestEnd(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 }

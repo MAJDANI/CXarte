@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.ui.search;
 
+import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchLayout;
@@ -29,25 +31,11 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	 * POJO
 	 */
 	private int searchTargetPanel = SearchTargetPanel.BY_NAME;
-	
-
 	/**
-	 * POJO
+	 * root
 	 */
-	private Class<?> cl = SearchContent.class;
-
-	/**
-	 * Constants
-	 */
-	public static final String BY_CLIENT_BUTTON_NAME = "Par client";
-	public static final String BY_NAME_BUTTON_NAME = "Par nom";
-	public static final String BY_SKILLS_BUTTON_NAME = "Par compétences";
-	
 	public Tree root = new Tree();
-	public static final Object [][] subItems = new Object[][]{
-			new Object[]{"Menu",BY_CLIENT_BUTTON_NAME,BY_NAME_BUTTON_NAME,BY_SKILLS_BUTTON_NAME}
-		};
-	
+	private ConstantsForMenuInglish constantsForMenuInglish;
 	/**
 	 * Build the class SearchNavigation.java 
 	 * @param byClient
@@ -78,6 +66,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	public void constructTree(){
 		 String firstElement ;
 		 String firstEl;
+		 Object[][] subItems = constantsForMenuInglish.subItemsOfSearch;
 		 
 		for (int i = 0; i < subItems.length; i++) {			
 			firstEl = (String) subItems[i][0];
@@ -109,15 +98,15 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 			Object itemId = event.getItemId();
 			
 			if(itemId != null){
-				if(itemId.equals(BY_CLIENT_BUTTON_NAME)){
+				if(itemId.equals(constantsForMenuInglish.BY_CLIENT_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
 					updateObservateur();
 				}
-				else if(itemId.equals(BY_NAME_BUTTON_NAME)){
+				else if(itemId.equals(constantsForMenuInglish.BY_NAME_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_NAME;
 					updateObservateur();
 				}
-				else if(itemId.equals(BY_SKILLS_BUTTON_NAME)){
+				else if(itemId.equals(constantsForMenuInglish.BY_SKILLS_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_SKILLS;
 					updateObservateur();
 				}

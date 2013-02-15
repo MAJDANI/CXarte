@@ -25,6 +25,13 @@
 		<constructor-arg name="adminView" ref="adminViewBean" />
 	</bean>
 	
+	<!-- <bean id="rhContentLayout" class="com.novedia.talentmap.web.ui.role.RhContentLayout" scope="session">
+		<constructor-arg name="application" ref="myapplication"/>
+	</bean> -->
+	<bean id="rhContentLayout" class="com.novedia.talentmap.web.ui.role.RhContentLayout"/>
+	<bean id="cmContentLayout" class="com.novedia.talentmap.web.ui.role.CmContentLayout"/>
+	<bean id="iaContentLayout" class="com.novedia.talentmap.web.ui.role.IaContentLayout"/>	
+	
     
     <!-- Vaddin root application declaration -->    
     <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
@@ -36,7 +43,11 @@
     	<property name="businessEngineerService" ref="businessEngineerService" />
     	<property name="closeButton" ref="closeButton"/>
     	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
-    <!-- 	<property name="monitoringCollabContentLayout" ref="monitoringCollabContentLayoutBean"/> -->
+    	<property name="rhContentLayout" ref="rhContentLayout"/>
+    	<property name="cmContentLayout" ref="cmContentLayout"/>
+    	<property name="iaContentLayout" ref="iaContentLayout"/>
+    	
+    <!--<property name="monitoringCollabContentLayout" ref="monitoringCollabContentLayoutBean"/> -->
     </bean>
     
     <!-- The login form -->
@@ -159,10 +170,10 @@
 	 <bean id="objectiveEA" class="com.vaadin.ui.Button"/>
 	 
 	 
-	 <bean id="monitoringCollabNavigationBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation" scope="session">	
-		<constructor-arg name="visualizeCollab" ref="visualizeCollab"/>
-		<constructor-arg name="setUpEA" ref="setUpEA"/>
-		<constructor-arg name="objectiveEA" ref="objectiveEA"/>
+	 <bean id="monitoringCollabNavigationBean" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation" scope="session">
+	 	<constructor-arg name="visualizeCollab" ref="visualizeCollab" />	
+	 	<constructor-arg name="setUpEA" ref="setUpEA" />	
+	 	<constructor-arg name="objectiveEA" ref="objectiveEA" />	
 	</bean>
 		
 	<!-- Vaadin ProfileNavigation UI -->
@@ -185,7 +196,7 @@
 	</bean>
 	
 	<!-- Vaadin ProfileCollaboratorContent UI -->
-		<bean id="listSkillPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="listSkillPanel" class="com.vaadin.ui.Panel"/>
 	<bean id="skillPanel" class="com.vaadin.ui.Panel"/>
 	<bean id="bodySkillLayout" class="com.vaadin.ui.VerticalLayout"/>
 	<bean id="footerSkillLayout" class="com.vaadin.ui.HorizontalLayout"/>
