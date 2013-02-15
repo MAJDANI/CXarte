@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.vaadin.teemu.ratingstars.RatingStars;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
@@ -13,6 +14,8 @@ import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
@@ -28,7 +31,9 @@ public abstract class CUtils {
 				
 				//We build a new accordion Category
 				Accordion accCategory = new Accordion();
-				
+				final String LABEL_NOTE_CONCEPT = "Niveau : ";
+				final String FAIL_LABEL_NOTE_CONCEPT = "improve your skill";
+				RatingStars rateConcept ;
 				for (Map.Entry<Category, Map> eCategory : mapSkill.entrySet()) {
 					VerticalLayout vLayoutCategory = new VerticalLayout();
 					vLayoutCategory.setMargin(true);
@@ -40,7 +45,14 @@ public abstract class CUtils {
 
 					for (Map.Entry<Concept, Map> eConcept : mapConcept.entrySet()) {
 						VerticalLayout vLayoutConcept = new VerticalLayout();
+						HorizontalLayout hLayoutConcept = new HorizontalLayout();  //layout de  la note du concept
+						hLayoutConcept.setSpacing(true);
+						
 						vLayoutConcept.setMargin(true);
+						rateConcept = new RatingStars();
+						rateConcept.addStyleName(TalentMapCSS.RATING_START);
+						rateConcept.setReadOnly(true);
+						
 						
 						//We build a new table Tool
 						Table tableTools = new Table();
@@ -75,13 +87,27 @@ public abstract class CUtils {
 						tableTools.setVisibleColumns(new Object[] {"Nom de l'outil", "Note"});
 						
 						vLayoutTool.addComponent(tableTools);
+						
+						int noteconcept = (int) Math.round(eConcept.getKey().getScore());
+						if (noteconcept != 0) {
+							rateConcept.setMaxValue(noteconcept);
+							hLayoutConcept.addComponent(new Label(LABEL_NOTE_CONCEPT));
+							hLayoutConcept.addComponent(rateConcept);
+							
+						} else {
+							hLayoutConcept.addComponent(new Label(FAIL_LABEL_NOTE_CONCEPT));
+						}
+						
+						vLayoutConcept.addComponent(hLayoutConcept);
 						vLayoutConcept.addComponent(vLayoutTool);
 					
 						// Set Concept tabs Style
 						accConcept.setStyleName(TalentMapCSS.TABLE_CONCEPT);
-
-						accConcept.addTab(vLayoutConcept, eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore())
-						.setCaption(eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore());
+						accConcept.addTab(vLayoutConcept,eConcept.getKey().getName());
+						
+						
+//						accConcept.addTab(vLayoutConcept, eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore())
+//						.setCaption(eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore());
 			
 						vLayoutCategory.addComponent(accConcept);
 					}

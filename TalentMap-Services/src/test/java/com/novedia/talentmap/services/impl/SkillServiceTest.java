@@ -138,10 +138,11 @@ public class SkillServiceTest {
 		//When
 		Mockito.when(vSkillCollabDaoMock.getAllSkillCollab(collabId)).thenReturn(expetedvSkillCollabList);
 		List<VSkillCollab> vSkillCollabListActuel = service.getAllSkillCollab(collabId); 
-			
+		
 		//Then
-		Assert.assertNotNull(vSkillCollabListActuel);
-		assertSame(expetedvSkillCollabList, vSkillCollabListActuel);
+		
+		assertNotNull(vSkillCollabListActuel);
+		assertEquals(expetedvSkillCollabList, vSkillCollabListActuel);
 	}
 	
 	@Test(expected = DataAccessException.class)
@@ -154,6 +155,30 @@ public class SkillServiceTest {
 		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(vSkillCollabDaoMock).getAllSkillCollab(collaboratorId);
 		service.getAllSkillCollab(collaboratorId);	
 	}
+	
+	
+	@Test
+	public void buildCategoryReturnMapCategoryConcept(){
+		
+		//Given
+		Category category = Category.builder().id(1).name("categoryName").build();
+		Concept concept = Concept.builder().id(1).name("conceptName").category(category).build();
+				
+		Map<Category, Map> categoryMap = new HashMap<Category, Map>();
+		Map<Concept, Map> conceptMap = new HashMap<Concept, Map>();
+		conceptMap.put(concept, new HashMap<Tool, String>());	
+		List<Category> categories = new ArrayList<Category>();
+		categories.add(category);
+		
+		//When
+		Mockito.when(categoryDaoMock.getAll()).thenReturn(categories);
+		Map<Category, Map> categoryMapActuel = service.buildCategory(conceptMap,categoryMap);
+			
+		//Then
+		Assert.assertNotNull(categoryMapActuel);
+		Assert.assertTrue(categoryMapActuel.containsKey(category));			
+	}
+	
 	
 	@Test
 	public void getAllToolsReturnAListOfTools(){
@@ -395,27 +420,7 @@ public class SkillServiceTest {
 		service.getCategoryById(categoryId);
 	}	
 
-	@Test
-	public void buildCategoryReturnMapCategoryConcept(){
-		
-		//Given
-		Category category = Category.builder().id(1).name("categoryName").build();
-		Concept concept = Concept.builder().id(1).name("conceptName").category(category).build();
-				
-		Map<Category, Map> categoryMap = new HashMap<Category, Map>();
-		Map<Concept, Map> conceptMap = new HashMap<Concept, Map>();
-		conceptMap.put(concept, new HashMap<Tool, String>());	
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(category);
-		
-		//When
-		Mockito.when(categoryDaoMock.getAll()).thenReturn(categories);
-		Map<Category, Map> categoryMapActuel = service.buildCategory(conceptMap,categoryMap);
-			
-		//Then
-		Assert.assertNotNull(categoryMapActuel);
-		Assert.assertTrue(categoryMapActuel.containsKey(category));			
-	}
+	
 	
 	@Test 
 	public void buildToolATool(){		
@@ -450,6 +455,30 @@ public class SkillServiceTest {
 		Mockito.verify(toolDaoMock, Mockito.times(1)).getAll();
 		assertSame(listToolExpected, toolActual);
 		Assert.assertNotNull(conceptMap);
+	}
+	
+	
+	@Test
+	public void getToolByNameReturnTool(){
+		
+		//Given
+		Category categ = Category.builder().id(1).name("category_name").build();
+		Concept c = Concept.builder().id(1).score(1.0).category(categ).build();
+		Tool  expectedTool = Tool.builder().concept(c).id(1).name("tool_name").build();
+		
+		//when
+		Mockito.when(toolDaoMock.getByName("name")).thenReturn(expectedTool);
+		Tool toolactuel = service.getToolByName("name");
+		
+		//then
+		
+		assertNotNull(toolactuel);
+		assertSame(expectedTool, toolactuel);
+	
+		
+		
+		
+		
 	}
 	
 }

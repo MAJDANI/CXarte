@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.dao.DataAccessException;
 
@@ -105,23 +106,30 @@ public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAcces
 	buildTool(listSkill, mapTool);
 	List<Integer> listToolScore = new ArrayList<Integer>();
 	Concept conceptTMP = null;
-	double conceptScore = 0;
+	//double conceptScore = 0;
 
 	// We build the Concept Map
 	conceptTMP = buildConcept(mapTool, mapConcept, listToolScore,conceptTMP);
 	// We calculate the score of the last concept if it's not null
 	if (conceptTMP != null) {
-		conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
+		//conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 
 		Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
 		mapConcept.remove(conceptTMP);
 
-		conceptTMP.setScore(conceptScore);
+		//conceptTMP.setScore(conceptScore);
 		mapConcept.put(conceptTMP, mapTMP);
 	}
 
 	// We build the Category Map
-	return buildCategory(mapConcept, mapCategory);
+	mapCategory = buildCategory(mapConcept, mapCategory);
+//	for(Entry<Category, Map> cat : mapCategory.entrySet()) {
+//		System.out.println("concept : "+cat.getValue());
+//		
+//	}
+	mapCategory = ScoreManage.scoreConcept(mapCategory, listSkill.size(), toolDao.getAll().size());
+	//return buildCategory(mapConcept, mapCategory);
+	return mapCategory;
 }
 
 /**
@@ -175,7 +183,7 @@ Category category = getCategoryById(entry.getKey().getCategory().getId());
 @SuppressWarnings("unchecked")
 Concept buildConcept(Map<Tool, Skill> mapTool,Map<Concept, Map> mapConcept, List<Integer> listToolScore,
 		Concept conceptTMP) {
-	double conceptScore;
+	//double conceptScore;
 	for (Map.Entry<Tool, Skill> entry : mapTool.entrySet()) {
 		// TODO : NullPointerException
 		Integer conceptId = entry.getKey().getConcept().getId();
@@ -183,19 +191,19 @@ Concept buildConcept(Map<Tool, Skill> mapTool,Map<Concept, Map> mapConcept, List
 
 		if (!mapConcept.isEmpty()) {
 
-// We calculate the Concept Score
-// TODO : CODE à MODIFIER nécessitant de récupérer
-// programatiquement les outil 
-//correspondant à ce concept
-
-// conceptScore = ScoreManage.ConceptScore(listToolScore,
-// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
+		// We calculate the Concept Score
+		// TODO : CODE à MODIFIER nécessitant de récupérer
+		// programatiquement les outil 
+		//correspondant à ce concept
+		
+		// conceptScore = ScoreManage.ConceptScore(listToolScore,
+		// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
+		//conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
 
 			Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
 			mapConcept.remove(conceptTMP);
 
-			conceptTMP.setScore(conceptScore);
+			//conceptTMP.setScore(conceptScore);
 			mapConcept.put(conceptTMP, mapTMP);
 
 			conceptTMP = concept;

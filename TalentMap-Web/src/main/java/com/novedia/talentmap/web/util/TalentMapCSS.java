@@ -46,4 +46,12 @@ public class TalentMapCSS {
 	 */
 	//Profile
 	public static final String FOOTER_PROFILE = "profile-footer";
+	
+	
+	/**
+	 * rating start
+	 */
+	public static final String RATING_START = "rating-start";
+	
+	
 }

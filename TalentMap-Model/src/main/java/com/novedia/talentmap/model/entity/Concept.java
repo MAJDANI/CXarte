@@ -130,7 +130,7 @@ public class Concept implements Serializable {
 		
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ").append("name=")
-				.append(getName()).append(", ").append("category=")
+				.append(getName()).append(", ").append("score=").append(getScore()).append(", ").append("category=")
 				.append(getCategory().getName()).append("]");
 		return strBld.toString();
 	}

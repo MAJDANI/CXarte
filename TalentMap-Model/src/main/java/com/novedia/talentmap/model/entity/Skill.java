@@ -171,7 +171,8 @@ public class Skill implements Serializable{
 		strBld.append("tool_id=").append(getTool_id()).append(", ");
 		strBld.append("score=").append(getScore()).append(", ");
 		strBld.append("use_frequency=").append(getUse_frequency()).append(", ");
-		strBld.append("no_using_time=").append(getNo_using_time()).append("]");
+		strBld.append("no_using_time=").append(getNo_using_time()).append(", ");
+		strBld.append("average_score=").append(getAverageScore()).append("]");
 		return strBld.toString();	
 	}
 
@@ -229,6 +230,7 @@ public class Skill implements Serializable{
 		this.score = builder.score;
 		this.use_frequency = builder.use_frequency;
 		this.no_using_time = builder.no_using_time;
+		this.averageScore = builder.averageScore;
 	}
 	
 	
@@ -256,6 +258,16 @@ public class Skill implements Serializable{
 		 * Frequency of competence not use
 		 */
 		private Integer no_using_time;
+		
+		
+		/**
+		 * Average Score : calculated field
+		 * TODO : champ provisoire, le temps de définir des objets (DTO)
+		 * optimisés pour la vue. score, use_frequency, no_using_time
+		 * et averageScore sont utilisés dans l'écran qui gère les compétences
+		 * collaborateur
+		 */
+		private Integer averageScore;
 
 		
 		
@@ -308,6 +320,18 @@ public class Skill implements Serializable{
 			this.no_using_time = no_using_time;
 			return this;
 		}
+		
+		/**
+		 * Constructor with parameter averageScore.
+		 * @param averageScore
+		 * @return the builder
+		 */
+		
+		public Builder averageScore(final int averageScore) {
+			this.averageScore = averageScore;
+			return this;
+		}
+		
 		
 		
 		
