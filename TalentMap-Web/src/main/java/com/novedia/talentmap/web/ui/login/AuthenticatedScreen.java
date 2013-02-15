@@ -9,7 +9,9 @@ import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
@@ -41,6 +43,11 @@ public class AuthenticatedScreen extends VerticalLayout {
 	 */
 	private MyVaadinApplication application;
 	
+	//
+	//private TabMain mainTab;
+	
+	//
+	
 	/**
 	 * Constructor
 	 * @param application
@@ -58,6 +65,8 @@ public class AuthenticatedScreen extends VerticalLayout {
 		this.application = application;
 		this.authentication = authentication;
 		
+		
+		
 		selectedViewAccordingToUserRoles();
 	}
 	
@@ -74,7 +83,7 @@ public class AuthenticatedScreen extends VerticalLayout {
 			buildMainLayout(this.application, Authorization.Role.CL);
 		} 
 		else if (this.authentication.getAuthorization().getRoleId() == Authorization.Role.AD.getId()) {
-
+			
 		} 
 		else {
 
@@ -91,7 +100,10 @@ public class AuthenticatedScreen extends VerticalLayout {
 	private ComponentContainer buildMainLayout(MyVaadinApplication application, Role role ) {
 		
 		TabMain mainTab = application.getMainTab();
-		
+		Panel vpanel = new Panel();
+		VerticalLayout vert = new VerticalLayout();
+		        
+
 		// Select the views to display
 		if(role.equals(Role.AD)){
 			mainTab.removeComponent(mainTab.getSearchView());
@@ -115,8 +127,17 @@ public class AuthenticatedScreen extends VerticalLayout {
 		 * Bon courage!!!
 		 */
 		
-//		this.addComponent(application.getCloseButton());
-		this.addComponent(mainTab);
+		Button logout = application.getCloseButton();
+		logout.addStyleName(Reindeer.BUTTON_LINK);   //rendre le bouton sous forme d'un lien
+		//logout.addStyleName("logoutstyle");	
+		vert.addComponent(logout);		
+		vpanel.addComponent(vert);
+		
+		vpanel.addComponent(mainTab);
+	
+		//this.addComponent(application.getCloseButton());
+		this.addComponent(vpanel);
+		//this.addComponent(mainTab);
 		//Align component on window
 //		this.setComponentAlignment(this.application.getCloseButton(), Alignment.TOP_RIGHT);
 //		this.setComponentAlignment(mainTab, Alignment.TOP_CENTER);
