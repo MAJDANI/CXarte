@@ -178,7 +178,7 @@ public class administration extends CustomComponent {
 		
 		// link_2
 		link_2 = new Link();
-		link_2.setCaption("Ajouter des compétences");
+		link_2.setCaption("Add skills");
 		link_2.setImmediate(false);
 		link_2.setWidth("-1px");
 		link_2.setHeight("-1px");
@@ -186,7 +186,7 @@ public class administration extends CustomComponent {
 		
 		// link_5
 		link_5 = new Link();
-		link_5.setCaption("Supprimer des compétences");
+		link_5.setCaption("Remove skills");
 		link_5.setImmediate(false);
 		link_5.setWidth("-1px");
 		link_5.setHeight("-1px");
@@ -194,7 +194,7 @@ public class administration extends CustomComponent {
 		
 		// link_4
 		link_4 = new Link();
-		link_4.setCaption("Modifier des compétences");
+		link_4.setCaption("Change skill");
 		link_4.setImmediate(false);
 		link_4.setWidth("-1px");
 		link_4.setHeight("-1px");
@@ -202,7 +202,7 @@ public class administration extends CustomComponent {
 		
 		// link_6
 		link_6 = new Link();
-		link_6.setCaption("Supprimer un collaborateur");
+		link_6.setCaption("Remove a collaborator");
 		link_6.setImmediate(false);
 		link_6.setWidth("-1px");
 		link_6.setHeight("-1px");
@@ -272,7 +272,7 @@ public class administration extends CustomComponent {
 		label_3.setImmediate(false);
 		label_3.setWidth("-1px");
 		label_3.setHeight("-1px");
-		label_3.setValue("Catégorie : ");
+		label_3.setValue("Category : ");
 		absoluteLayout_3.addComponent(label_3, "top:23.0px;left:23.0px;");
 		
 		// textField_2

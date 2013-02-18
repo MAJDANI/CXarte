@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
@@ -42,16 +43,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	 */
 	private IManagerService managerService;
 	private IProfileService profileService;
-
-	/**
-	 * Constants
-	 */
 	private Integer MANAGER_ID = 1;
-	public static final String VISUALIZE_CV_NAME = "CV";
-	public static final String VISUALIZE_MISSION_NAME = "Historique Mission";
-	public static final String VISUALIZE_EA_NAME = "Historique EA";
-	public static final String VISUALIZE_PROFILE_NAME = "Visualiser Profil";
-	public static final String PAGE_TITLE = "Liste de vos Collaborateurs";
 
 	/**
 	 * Build the class MonitoringCollabContent.java
@@ -85,7 +77,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 	public void buildTitle() {
 
-		this.pageTitle.setCaption(PAGE_TITLE);
+		this.pageTitle.setCaption(ConstantsEnglish.PAGE_TITLE);
 		this.pageTitle.setStyleName(TalentMapCSS.H2);
 		addComponent(this.pageTitle);
 
@@ -93,9 +85,9 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 	public void addColumns() {
 
-		this.collabTable.addContainerProperty("Prénom", String.class, null);
-		this.collabTable.addContainerProperty("Nom", String.class, null);
-		this.collabTable.addContainerProperty("Profil", String.class, null);
+		this.collabTable.addContainerProperty("First name", String.class, null);
+		this.collabTable.addContainerProperty("Name", String.class, null);
+		this.collabTable.addContainerProperty("Profile", String.class, null);
 		this.collabTable.addContainerProperty("Statut", String.class, null);
 		this.collabTable.addContainerProperty("Actions",
 				HorizontalLayout.class, null);
@@ -110,12 +102,12 @@ public class MonitoringCollabContent extends VerticalLayout {
 			HorizontalLayout hLayoutButton = new HorizontalLayout();
 			hLayoutButton.setSpacing(true);
 			hLayoutButton.setMargin(true);
-			Button visualizeCV = buildButton(new Button(VISUALIZE_CV_NAME));
+			Button visualizeCV = buildButton(new Button(ConstantsEnglish.VISUALIZE_CV_NAME));
 			Button visualizeMission = buildButton(new Button(
-					VISUALIZE_MISSION_NAME));
-			Button visualizeEA = buildButton(new Button(VISUALIZE_EA_NAME));
+					ConstantsEnglish.VISUALIZE_MISSION_NAME));
+			Button visualizeEA = buildButton(new Button(ConstantsEnglish.VISUALIZE_EA_NAME));
 			Button visualizeProfile = buildButton(new Button(
-					VISUALIZE_PROFILE_NAME));
+					ConstantsEnglish.VISUALIZE_PROFILE_NAME));
 
 			// Set button date to collaborator id
 			visualizeCV.setData(collab.getId());
@@ -130,7 +122,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 			this.collabTable.addItem(new Object[] { collab.getFirstName(),
 					collab.getLastName(),
-					collabProfile.getType(), "En mission",
+					collabProfile.getType(), "In mission",
 					hLayoutButton }, idTable);
 
 			idTable++;
@@ -159,22 +151,22 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 		button.setStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 
-		if (button.getCaption().equals(VISUALIZE_CV_NAME)) {
+		if (button.getCaption().equals(ConstantsEnglish.VISUALIZE_CV_NAME)) {
 
 			btnCVEvent(button);
 		}
 
-		if (button.getCaption().equals(VISUALIZE_EA_NAME)) {
+		if (button.getCaption().equals(ConstantsEnglish.VISUALIZE_EA_NAME)) {
 
 			btnEAEvent(button);
 		}
 
-		if (button.getCaption().equals(VISUALIZE_MISSION_NAME)) {
+		if (button.getCaption().equals(ConstantsEnglish.VISUALIZE_MISSION_NAME)) {
 
 			btnMissionEvent(button);
 		}
 
-		if (button.getCaption().equals(VISUALIZE_PROFILE_NAME)) {
+		if (button.getCaption().equals(ConstantsEnglish.VISUALIZE_PROFILE_NAME)) {
 
 			btnProfileEvent(button);
 		}

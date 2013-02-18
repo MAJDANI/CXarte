@@ -135,7 +135,7 @@ public class BusinessEngineer implements Serializable {
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ");
-		strBld.append("name=").append(getFirstName()).append("] ");
+		strBld.append("firstName=").append(getFirstName()).append("] ");
 		return strBld.toString();
 	}
 	

@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.vaadin.ui.TabSheet;
@@ -23,12 +24,6 @@ public class TabProfileSheet extends TabSheet {
 	 */
 	private ProfileView profileView;
 	private MonitoringCollabView monitoringCollabView;
-	
-	/**
-	 * Constants
-	 */
-	private final String TAB_PROFILE_NAME = "Fiche Profil";
-	private final String TAB_COLLAB_NAME = "Suivi des Collaborateur";
 
 	/**
 	 * 
@@ -43,8 +38,8 @@ public class TabProfileSheet extends TabSheet {
 		
 		setImmediate(true);
 		
-		addTab(this.profileView, TAB_PROFILE_NAME);
-		addTab(this.monitoringCollabView, TAB_COLLAB_NAME);
+		addTab(this.profileView, ConstantsEnglish.TAB_PROFILE_NAME);
+		addTab(this.monitoringCollabView, ConstantsEnglish.TAB_COLLAB_NAME);
 	}
 	
 	/**

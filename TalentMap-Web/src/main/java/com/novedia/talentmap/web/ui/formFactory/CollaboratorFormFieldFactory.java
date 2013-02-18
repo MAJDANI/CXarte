@@ -8,7 +8,7 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
-import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
@@ -52,48 +52,48 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 		
 		
 		
-		for(int i=0; i<Constants.FIELD_ORDER_COLLABORATOR.length;i++){
+		for(int i=0; i<ConstantsEnglish.FIELD_ORDER_COLLABORATOR.length;i++){
 			
-			if(propertyId.equals(Constants.FIELD_ORDER_COLLABORATOR[i])){
+			if(propertyId.equals(ConstantsEnglish.FIELD_ORDER_COLLABORATOR[i])){
 				
 				//We give a default format for all input except the employmentDate and the profileId input
 				
-				if(!propertyId.equals(Constants.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(Constants.FIELD_COLLAB_PROFILE_ID)
-						&& !propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER) && !propertyId.equals(Constants.FIELD_COLLAB_MANAGER)){
+				if(!propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PROFILE_ID)
+						&& !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_BUISINESS_ENGINEER) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_MANAGER)){
 					
-					TextField field = new TextField((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
+					TextField field = new TextField((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					field.setRequired(true);
-					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + Constants.NAME_FIELD_COLLABORATOR[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
-					field.setNullRepresentation(Constants.FIELD_NULL_REPRESENTATION);
+					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_COLLABORATOR[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setNullRepresentation(ConstantsEnglish.FIELD_NULL_REPRESENTATION);
 					
-					if(!propertyId.equals(Constants.FIELD_COLLAB_PHONE) && !propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
+					if(!propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PHONE) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EXPERIENCE)){
 						field.setRequired(false);
 					}
 					
 					//We test every input name
 					
-					if(propertyId.equals(Constants.FIELD_COLLAB_LAST_NAME)){
+					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_LAST_NAME)){
 						field.setStyleName("last-name");
 						
-					}else if(propertyId.equals(Constants.FIELD_COLLAB_FIRST_NAME)){
+					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_FIRST_NAME)){
 						field.setStyleName("first-name");
 						
-					}else if(propertyId.equals(Constants.FIELD_COLLAB_EMAIL)){
+					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMAIL)){
 						field.setStyleName("email");
 						
-					}else if(propertyId.equals(Constants.FIELD_COLLAB_PHONE)){
+					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PHONE)){
 						field.setStyleName("phone");
 						field.setRequired(false);
 						
-					}else if(propertyId.equals(Constants.FIELD_COLLAB_EXPERIENCE)){
+					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EXPERIENCE)){
 						field.setStyleName("experience");
 						
 					}
 
 					return field;
 					
-				} else if(propertyId.equals(Constants.FIELD_COLLAB_BUISINESS_ENGINEER)){
+				} else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_BUISINESS_ENGINEER)){
 						
 						BeanItemContainer<BusinessEngineer> container =
 						        new BeanItemContainer<BusinessEngineer>(BusinessEngineer.class);
@@ -102,7 +102,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 							container.addItem(b);
 						}
 						
-						Select bEngineerSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ",container); 
+						Select bEngineerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ",container); 
 						bEngineerSelect.setItemCaptionMode(
 					            Select.ITEM_CAPTION_MODE_PROPERTY);
 						bEngineerSelect.setItemCaptionPropertyId("name");
@@ -117,7 +117,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
-					datefield.setCaption((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
+					datefield.setCaption((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					datefield.setStyleName("employment-date");
 					
 					return datefield;
@@ -126,7 +126,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty("value", String.class, null);
 					
-					Select profilSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
+					Select profilSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					
 					try {
@@ -148,11 +148,11 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					profilSelect.setStyleName("type-profile");
 					return profilSelect;
 					
-				}else if(propertyId.equals(Constants.FIELD_COLLAB_MANAGER)){
+				}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_MANAGER)){
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty("value", String.class, null);
 					
-					Select managerSelect = new Select((String) Constants.NAME_FIELD_COLLABORATOR[i]+" : ");
+					Select managerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					
 					try {

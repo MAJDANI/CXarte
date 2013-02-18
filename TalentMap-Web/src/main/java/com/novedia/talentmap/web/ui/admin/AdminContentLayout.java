@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.admin;
 
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.IObservable;
@@ -26,12 +27,6 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 	 */
 	private HorizontalSplitPanel hSplitContent;
 
-	/**
-	 * Constants
-	 */
-	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
-	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
-	
 	/**
 	 * Flag
 	 */
@@ -64,12 +59,12 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 
 					AdminContentLayout.this.manageSkillContent.addView();
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
-							ADD_SKILL_TITLE);
+							ConstantsEnglish.ADD_SKILL_TITLE);
 				} else {
 
 					AdminContentLayout.this.manageSkillContent.updateView();
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
-							UPDATE_SKILL_TITLE);
+							ConstantsEnglish.UPDATE_SKILL_TITLE);
 				}
 			}
 		}, IAdminContentLayout.class);

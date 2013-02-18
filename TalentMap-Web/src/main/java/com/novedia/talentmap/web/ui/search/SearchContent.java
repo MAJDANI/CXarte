@@ -33,8 +33,8 @@ public class SearchContent extends VerticalLayout {
 	/**
 	 * Constants
 	 */
-	public static final String PANEL_TARGET_NAME = "Rechercher un collaborateur";
-	public static final String PANEL_RESULTS_NAME = "Liste des collaborateurs de la recherche";
+	public static final String PANEL_TARGET_NAME = "Find an employee";
+	public static final String PANEL_RESULTS_NAME = "List of collaborators of the research";
 
 	/**
 	 * Build the class SearchContent.java

@@ -1,6 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
-import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
@@ -37,7 +37,7 @@ IObservable,ItemClickListener {
 	/**
 	 * Constants
 	 */
-	private ConstantsForMenuInglish constantsForMenuInglish;
+	private ConstantsForMenuEnglish constantsForMenuInglish;
 	
 	public Tree root = new Tree();
 	

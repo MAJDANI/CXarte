@@ -9,6 +9,7 @@ import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -104,7 +105,7 @@ public class ProfileCollabWindow extends Window {
 			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService, this.colleagueService));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
-					Constants.FIELD_ORDER_COLLABORATOR);
+					ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
 			
 			Colleague collab = this.colleagueService.getColleague(COLLAB_ID);
 			
@@ -145,7 +146,8 @@ public class ProfileCollabWindow extends Window {
 		} catch (Exception e) {
 			
 			VerticalLayout vLayout = new VerticalLayout();
-			Label noSkillLabel = new Label("Pas de compétences enregistrées !");
+			//Label noSkillLabel = new Label("Pas de compétences enregistrées !");
+			Label noSkillLabel = new Label("there is no skill saved !");
 			noSkillLabel.setStyleName(TalentMapCSS.H2);
 			
 			vLayout.addComponent(noSkillLabel);

@@ -1,6 +1,6 @@
 package com.novedia.talentmap.web.ui.search;
 
-import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.IObservable;
@@ -35,7 +35,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	 * root
 	 */
 	public Tree root = new Tree();
-	private ConstantsForMenuInglish constantsForMenuInglish;
+	private ConstantsForMenuEnglish constantsForMenuEnglish;
 	/**
 	 * Build the class SearchNavigation.java 
 	 * @param byClient
@@ -66,7 +66,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	public void constructTree(){
 		 String firstElement ;
 		 String firstEl;
-		 Object[][] subItems = constantsForMenuInglish.subItemsOfSearch;
+		 Object[][] subItems = constantsForMenuEnglish.subItemsOfSearch;
 		 
 		for (int i = 0; i < subItems.length; i++) {			
 			firstEl = (String) subItems[i][0];
@@ -98,15 +98,15 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 			Object itemId = event.getItemId();
 			
 			if(itemId != null){
-				if(itemId.equals(constantsForMenuInglish.BY_CLIENT_BUTTON_NAME)){
+				if(itemId.equals(constantsForMenuEnglish.BY_CLIENT_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
 					updateObservateur();
 				}
-				else if(itemId.equals(constantsForMenuInglish.BY_NAME_BUTTON_NAME)){
+				else if(itemId.equals(constantsForMenuEnglish.BY_NAME_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_NAME;
 					updateObservateur();
 				}
-				else if(itemId.equals(constantsForMenuInglish.BY_SKILLS_BUTTON_NAME)){
+				else if(itemId.equals(constantsForMenuEnglish.BY_SKILLS_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_SKILLS;
 					updateObservateur();
 				}

@@ -138,7 +138,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			container.addItem(client);
 		}
 		
-		this.clientNameSelect = new Select("Client : ",container); 
+		this.clientNameSelect = new Select("Customer : ",container); 
 		this.clientNameSelect.setItemCaptionMode(
 	            Select.ITEM_CAPTION_MODE_PROPERTY);
 		this.clientNameSelect.setItemCaptionPropertyId("name");
@@ -149,7 +149,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		this.searchByClientPanel.addComponent(clientNameSelect);
 		
 		//Build the Name Panel
-		this.fieldName.setCaption("Nom du collaborateur : ");
+		this.fieldName.setCaption("Name of collaborator: ");
 		this.fieldName.addListener(this);
 		this.searchByNamePanel.addComponent(this.fieldName);
 		

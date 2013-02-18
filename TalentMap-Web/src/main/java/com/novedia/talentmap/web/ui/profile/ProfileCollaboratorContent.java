@@ -3,14 +3,14 @@ package com.novedia.talentmap.web.ui.profile;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
-import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
@@ -102,20 +102,20 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		//Bouton "Editer"
 		edit = new Button();
-		edit.setCaption(Constants.ADMIN_DATA_EDIT_BUTTON);
+		edit.setCaption(ConstantsEnglish.ADMIN_DATA_EDIT_BUTTON);
 		edit.addListener(this);
 		buttonLayout.addComponent(edit);
 		
 		//Bouton "Enregistrer"
 		save = new Button();
-		save.setCaption(Constants.ADMIN_DATA_SAVE_BUTTON);
+		save.setCaption(ConstantsEnglish.ADMIN_DATA_SAVE_BUTTON);
 		save.addListener(this);
 		save.setEnabled(false);
 		buttonLayout.addComponent(save);
 
 		//Bouton "Annuler"
 		cancel = new Button();
-		cancel.setCaption(Constants.ADMIN_DATA_CANCEL_BUTTON);
+		cancel.setCaption(ConstantsEnglish.ADMIN_DATA_CANCEL_BUTTON);
 		cancel.addListener(this);
 		buttonLayout.addComponent(cancel);
 		
@@ -176,7 +176,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			Button button = event.getButton();
 		
 		//Save Button
-		if (button.getCaption().equals(Constants.ADMIN_DATA_SAVE_BUTTON)) {
+		if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_SAVE_BUTTON)) {
 			saveDataCollaborator();
 			saveDataMission();
 			this.collabForm.getFormCollaborator().setReadOnly(true);
@@ -185,14 +185,14 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			this.edit.setEnabled(true);
 			this.cancel.setEnabled(false);
 			
-		} else if (button.getCaption().equals(Constants.ADMIN_DATA_EDIT_BUTTON)){
+		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_EDIT_BUTTON)){
 			this.collabForm.getFormCollaborator().setReadOnly(false);
 			this.collabForm.getFormMission().setReadOnly(false);
 			this.save.setEnabled(true);
 			this.edit.setEnabled(false);
 			this.cancel.setEnabled(true);
 			
-		} else if (button.getCaption().equals(Constants.ADMIN_DATA_CANCEL_BUTTON)){
+		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_CANCEL_BUTTON)){
 			this.collabForm.refreshAllFormsToDefault();
 			this.collabForm.getFormCollaborator().setReadOnly(true);
 			this.collabForm.getFormMission().setReadOnly(true);

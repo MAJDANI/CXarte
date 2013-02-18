@@ -9,9 +9,9 @@ package com.novedia.talentmap.web.data;
  */
 public enum FrequencyUse {
 	
-	FEW(1, "Très peu"),
-	OFTEN(2,"Assez souvent"),
-	REGULARLY(3, "Régulièrement");
+	FEW(1, "very little"),
+	OFTEN(2,"Often enough"),
+	REGULARLY(3, "Regularly");
 	
 	private int id;
 	private String value;

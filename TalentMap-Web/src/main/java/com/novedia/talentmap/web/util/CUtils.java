@@ -67,7 +67,7 @@ public abstract class CUtils {
 						int idTable = 1;
 						VerticalLayout vLayoutTool = new VerticalLayout();
 						
-						tableTools.addContainerProperty("Nom de l'outil", String.class, null);
+						tableTools.addContainerProperty("Tool Name", String.class, null);
 						tableTools.addContainerProperty("Note", Integer.class, null);
 						tableTools.addContainerProperty("score", Integer.class, null);
 						tableTools.addContainerProperty("use_frequency", Integer.class, null);
@@ -84,7 +84,7 @@ public abstract class CUtils {
 							idTable++;
 						}
 						
-						tableTools.setVisibleColumns(new Object[] {"Nom de l'outil", "Note"});
+						tableTools.setVisibleColumns(new Object[] {"Tool Name", "Note"});
 						
 						vLayoutTool.addComponent(tableTools);
 						

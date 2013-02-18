@@ -3,12 +3,10 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.Date;
 import java.util.Vector;
 
-import com.novedia.talentmap.model.entity.Client;
-import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
-import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
@@ -69,18 +67,18 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Constants
 	 */
 	public static final int COLLEAGUE_ID = 2;
-	public static final String SAVE_BUTTON_NAME = "Enregistrer";
-	public static final String CANCEL_BUTTON_NAME = "Annuler";
+	public static final String SAVE_BUTTON_NAME = "Save";
+	public static final String CANCEL_BUTTON_NAME = "Cancel";
 
 	/**
 	 *  Properties in Table ListMission
 	 */
-	public static final String INTITULE = "Intitulé";
-	public static final String CLIENT = "Client";
-	public static final String LIEU = "Lieu";
-	public static final String DATE_DEBUT = "Date début";
-	public static final String DATE_FIN = "Date fin";
-	public static final String COMMENTAIRE = "Commentaire";
+	public static final String INTITULE = "Title";
+	public static final String CLIENT = "Customer";
+	public static final String LIEU = "Place";
+	public static final String DATE_DEBUT = "start Date";
+	public static final String DATE_FIN = "End date";
+	public static final String COMMENTAIRE = "Comment";
 
 	//3	constants to identify which action is source of calling updateObservators()
 	public static final String ACTION_CANCEL = "CANCEL";
@@ -143,7 +141,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 
 		this.missionForm.setLayout(this.missionFormLayout);
 
-		CUtils.setOrderForm(this.fieldOrderMission, Constants.FIELD_ORDER_MISSION);
+		CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
 		
 		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
 		
@@ -197,11 +195,11 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			int formValidation = validatedMissionForm(missionToInsert);
 			switch (formValidation) {
 			case VALIDATION_FIELD_MISSING :
-				getWindow().showNotification(Constants.MSG_MISSING_FIELDS,
+				getWindow().showNotification(ConstantsEnglish.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
 			case VALIDATION_INVALID_PERIOD :
-				getWindow().showNotification(Constants.MISSION_MSG_INVALID_PERIOD,
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_PERIOD,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
 			case VALIDATION_VALID_FORM :
@@ -304,13 +302,13 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		try {
 			int result = this.collabService.addMission(missionToInsert); 
 			if(result !=0){
-				getWindow().showNotification(Constants.MISSION_MSG_DATA_INSERTED_OK, Notification.TYPE_TRAY_NOTIFICATION);
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_INSERTED_OK, Notification.TYPE_TRAY_NOTIFICATION);
 				//creates a new list
 				refreshListMission();
 				
 			} else {
 				//TODO :  What to do in this case?
-				getWindow().showNotification(Constants.MISSION_MSG_DATA_INSERTED_KO, Notification.TYPE_TRAY_NOTIFICATION);
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_INSERTED_KO, Notification.TYPE_TRAY_NOTIFICATION);
 			}
 			
 		} catch (Exception e) {
@@ -329,14 +327,14 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			this.missionForm.commit();
 			int result = this.collabService.saveMission(missionToUpdate);
 			if(result !=0){
-				getWindow().showNotification(Constants.MISSION_MSG_DATA_SAVED_OK, Notification.TYPE_TRAY_NOTIFICATION);
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_SAVED_OK, Notification.TYPE_TRAY_NOTIFICATION);
 				
 				//creates a new list
 				refreshListMission();
 				
 			} else {
 				//TODO : What to do in this case?
-				getWindow().showNotification(Constants.MISSION_MSG_DATA_SAVED_KO, Notification.TYPE_ERROR_MESSAGE);
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_SAVED_KO, Notification.TYPE_ERROR_MESSAGE);
 			}
 				
 		} catch (InvalidValueException invalidVE) {

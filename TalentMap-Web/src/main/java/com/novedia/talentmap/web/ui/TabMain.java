@@ -1,6 +1,6 @@
 package com.novedia.talentmap.web.ui;
 
-import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -44,9 +44,9 @@ public class TabMain extends TabSheet {
 		setImmediate(true);
 				
 		//TODO : filter tab panel en fonction du role ??
-		addTab(this.tabProfileSheet, ConstantsForMenuInglish.TAB_PROFIL_NAME);
-		addTab(this.searchView, ConstantsForMenuInglish.TAB_SEARCH_NAME);
-		addTab(this.adminView, ConstantsForMenuInglish.TAB_ADMIN_NAME);
+		addTab(this.tabProfileSheet, ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+		addTab(this.searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
+		addTab(this.adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
 	}
 	
 	/**

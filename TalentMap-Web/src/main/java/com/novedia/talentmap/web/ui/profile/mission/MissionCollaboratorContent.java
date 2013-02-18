@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.profile.mission;
 
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
 import com.novedia.talentmap.web.util.Message;
@@ -53,15 +54,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	private Button btnAddMission;
 	private Button btnModifyMission;
 	private Button btnDeleteMission;
-
-	/**
-	 * Constants
-	 */
-	public static final String PAGE_TITLE = "Liste des missions";
-	public static final String LABEL_BUTTON_ADD_MISSION = "Ajouter une mission";
-	public static final String LABEL_BUTTON_MODIFY_MISSION = "Modifier la mission";
-	public static final String LABEL_BUTTON_DELETE_MISSION = "Supprimer la mission";
-
+	
 	/**
 	 * SubWindow to confirm or cancel a delete mission action
 	 */
@@ -71,13 +64,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * The mission selected by the user, in order to modify or delete it.
 	 */
 	private Mission selectedMission;
-	
-	/**
-	 * Labels form confirmation delete window
-	 */
-	private static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation de Suppression de mission";
-	private static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Supprimer la mission";
-	private static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "NE PAS Supprimer la mission";
 
 	/**
 	 * Build the class MissionCollaboratorContent.java
@@ -135,7 +121,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public void buildTitle() {
 
-		this.pageTitle.setCaption(PAGE_TITLE);
+		this.pageTitle.setCaption(ConstantsEnglish.PAGE_TITLE);
 		this.pageTitle.setStyle(TalentMapCSS.H2);
 		addComponent(this.pageTitle);
 	}
@@ -146,13 +132,13 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @class MissionCollaboratorContent.java
 	 */
 	public void buildButton() {
-		this.btnAddMission.setCaption(LABEL_BUTTON_ADD_MISSION);
+		this.btnAddMission.setCaption(ConstantsEnglish.LABEL_BUTTON_ADD_MISSION);
 		this.btnAddMission.addListener(this);
 
-		this.btnModifyMission.setCaption(LABEL_BUTTON_MODIFY_MISSION);
+		this.btnModifyMission.setCaption(ConstantsEnglish.LABEL_BUTTON_MODIFY_MISSION);
 		this.btnModifyMission.addListener(this);
 
-		this.btnDeleteMission.setCaption(LABEL_BUTTON_DELETE_MISSION);
+		this.btnDeleteMission.setCaption(ConstantsEnglish.LABEL_BUTTON_DELETE_MISSION);
 		this.btnDeleteMission.addListener(this);
 	}
 
@@ -261,7 +247,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if (null == selectedMission) {
 				getWindow().showNotification(
-						"Veuillez sélectionner une mission",
+						"Please select a mission",
 						Notification.TYPE_WARNING_MESSAGE);
 			} else {
 				// MODIFY MISSION
@@ -295,14 +281,14 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 				this.missionForm.setCurrentAction(MissionForm.ACTION_DELETE);
 
 				// TODO centralize messages
-				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
+				CUtils.showMessage("The mission has been deleted", Message.INFO, getWindow());
 
 				// creates a new list
 				missionForm.refreshListMission();
 
 			} else {
 				// TODO : what to do?
-				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
+				CUtils.showMessage("The mission was not deleted", Message.INFO, getWindow());
 			}
 
 		} catch (Exception e) {
@@ -315,7 +301,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * selected mission
 	 */
 	private void openConfirmWindow() {
-		windowConfirmDelete = new Window(LABEL_WINDOW_CONFIRM_DELETE);
+		windowConfirmDelete = new Window(ConstantsEnglish.LABEL_WINDOW_CONFIRM_DELETE);
 		windowConfirmDelete.center();
 
 		// Debut : Au lien de ces 2 lignes, les lignes suivantes
@@ -326,9 +312,9 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		// Button(LABEL_BUTTON_CANCEL_DELETE_MISSION, this,
 		// "cancelDeleteButtonClick");
 		Button confirmDeleteButton = new Button(
-				LABEL_BUTTON_CONFIRM_DELETE_MISSION);
+				ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
 		Button cancelDeleteButton = new Button(
-				LABEL_BUTTON_CANCEL_DELETE_MISSION);
+				ConstantsEnglish.LABEL_BUTTON_CANCEL_DELETE_MISSION);
 		confirmDeleteButton.addListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 8938851452280879463L;
 

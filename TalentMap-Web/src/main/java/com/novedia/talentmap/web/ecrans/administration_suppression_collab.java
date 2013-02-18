@@ -204,7 +204,7 @@ public class administration_suppression_collab extends CustomComponent {
 		
 		// link_6
 		link_6 = new Link();
-		link_6.setCaption("Supprimer un collaborateur");
+		link_6.setCaption("Delete collaborator");
 		link_6.setImmediate(false);
 		link_6.setWidth("-1px");
 		link_6.setHeight("-1px");

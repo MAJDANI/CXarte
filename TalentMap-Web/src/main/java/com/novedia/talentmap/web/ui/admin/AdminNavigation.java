@@ -1,6 +1,6 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.IObservable;
@@ -68,18 +68,18 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 
 	private void buildButtons() {
 
-		this.visualizeSkill.setCaption(ConstantsForMenuInglish.VISUALIZE_SKILL_NAME);
+		this.visualizeSkill.setCaption(ConstantsForMenuEnglish.VISUALIZE_SKILL_NAME);
 		this.visualizeSkill.addListener(this);
 		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		addComponent(this.visualizeSkill);
 
-		this.addSkill.setCaption(ConstantsForMenuInglish.ADD_SKILL_NAME);
+		this.addSkill.setCaption(ConstantsForMenuEnglish.ADD_SKILL_NAME);
 		this.addSkill.addListener(this);
 		this.addSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.addSkill);
 
-		this.deleteCollab.setCaption(ConstantsForMenuInglish.DELETE_COLLAB_NAME);
+		this.deleteCollab.setCaption(ConstantsForMenuEnglish.DELETE_COLLAB_NAME);
 		this.deleteCollab.addListener(this);
 		this.deleteCollab.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.deleteCollab);

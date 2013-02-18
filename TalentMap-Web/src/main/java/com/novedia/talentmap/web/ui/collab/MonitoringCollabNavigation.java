@@ -1,6 +1,6 @@
 package com.novedia.talentmap.web.ui.collab;
 
-import com.novedia.talentmap.web.commons.ConstantsForMenuInglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.ui.profile.CollaboratorSkillContent;
 import com.novedia.talentmap.web.ui.profile.HistoryMissionColab;
@@ -34,7 +34,7 @@ IObservable{
 	 */
 	private ICollabLayout obsLayout;
 	public static Tree root = new Tree();
-	private ConstantsForMenuInglish constantsForMenuInglish;
+	private ConstantsForMenuEnglish constantsForMenuInglish;
 	
 		
 	/**

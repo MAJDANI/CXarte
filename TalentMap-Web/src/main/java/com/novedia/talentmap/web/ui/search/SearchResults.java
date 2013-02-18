@@ -28,7 +28,7 @@ public class SearchResults extends Table {
 	 * Factoriser cette constante qui est aussi utilisée dans MonitoringCollabContent
 	 * VGU TODO
 	 */
-	public static final String VISUALIZE_PROFILE_NAME = "Visualiser Profil";
+	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
 
 	/**
 	 * Vaadin UI
@@ -55,8 +55,8 @@ public class SearchResults extends Table {
 
 	public void addColumns() {
 
-		addContainerProperty("Nom", String.class, null);
-		addContainerProperty("Prénom", String.class, null);
+		addContainerProperty("Name", String.class, null);
+		addContainerProperty("First name", String.class, null);
 		addContainerProperty("Email", String.class, null);
 		addContainerProperty("Actions", HorizontalLayout.class, null);
 	}

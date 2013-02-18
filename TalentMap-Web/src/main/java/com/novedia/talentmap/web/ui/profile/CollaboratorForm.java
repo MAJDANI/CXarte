@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.profile;
 
-import java.util.List;
 import java.util.Vector;
 
 import com.novedia.talentmap.model.entity.Colleague;
@@ -9,7 +8,7 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
-import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
@@ -45,15 +44,10 @@ public class CollaboratorForm extends VerticalLayout{
 	
 
 	/**
-	 * Constants
+	 * ConstantsEnglish
 	 */
 	//TODO remis la valeur 2 pour que l'application puisse tourner en attendant qu'on enlève le bouchon
 	public static int COLLAB_ID = 2;
-
-	public static final Object[] NAME_FIELD_MISSION = new Object[] {"Client", "Début mission", "Fin mission"};
-	public static final Object[] FIELD_ORDER_MISSION = new Object[] {"client", "startDate", "endDate"};
-
-	public static final String MESSAGE_COLLABORATOR_ID_NOT_FOUND = "Collaborator Id Not Found";
 
 	/**
 	 * Vaddin Components
@@ -109,9 +103,9 @@ public class CollaboratorForm extends VerticalLayout{
 
 		try {
 			// Set the order for Collaborator Form
-			CUtils.setOrderForm(this.fieldOrderCollaborator, Constants.FIELD_ORDER_COLLABORATOR);
+			CUtils.setOrderForm(this.fieldOrderCollaborator, ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
 			//Set the order for Mission Form
-			CUtils.setOrderForm(this.fieldOrderMission, FIELD_ORDER_MISSION);
+			CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
 			buildFormCollaborator();
 			buildFormMission();
 		} catch (Exception e) {
@@ -129,7 +123,7 @@ public class CollaboratorForm extends VerticalLayout{
 		
 		// Label "Données administratives"
 		Label dataAdminLabel = new Label();
-		dataAdminLabel.setCaption(Constants.ADMIN_DATA_LABEL);
+		dataAdminLabel.setCaption(ConstantsEnglish.ADMIN_DATA_LABEL);
 		dataAdminLabel.setStyle(TalentMapCSS.H2);
 		addComponent(dataAdminLabel);
 		
@@ -168,7 +162,7 @@ public class CollaboratorForm extends VerticalLayout{
 			BeanItem<Item> collaboratorBean = new BeanItem(currentColleague);
 			this.formCollaborator.setItemDataSource(collaboratorBean, this.fieldOrderCollaborator);
 		} else {
-			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			InvalidValueException invalidVE = new InvalidValueException(ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
 			this.formCollaborator.setComponentError(invalidVE);
 		}
 	}
@@ -183,7 +177,7 @@ public class CollaboratorForm extends VerticalLayout{
 
 		// Label "Données administratives"
 		Label lastMissionLabel = new Label();
-		lastMissionLabel.setCaption(Constants.LAST_MISSION_LABEL);
+		lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
 		lastMissionLabel.setStyle(TalentMapCSS.H2);
 
 		addComponent(lastMissionLabel);
@@ -220,7 +214,7 @@ public class CollaboratorForm extends VerticalLayout{
 			BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
 			this.formMission.setItemDataSource(lastMissionBean, this.fieldOrderMission);
 		} else {
-			InvalidValueException invalidVE = new InvalidValueException(MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			InvalidValueException invalidVE = new InvalidValueException(ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
 			this.formCollaborator.setComponentError(invalidVE);
 		}
 	}	

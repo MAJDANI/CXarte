@@ -188,7 +188,7 @@ public class administration_suppression_competence extends CustomComponent {
 		
 		// link_2
 		link_2 = new Link();
-		link_2.setCaption("Ajouter des compétences");
+		link_2.setCaption("Add skills");
 		link_2.setImmediate(false);
 		link_2.setWidth("-1px");
 		link_2.setHeight("-1px");
@@ -196,7 +196,7 @@ public class administration_suppression_competence extends CustomComponent {
 		
 		// link_5
 		link_5 = new Link();
-		link_5.setCaption("Supprimer des compétences");
+		link_5.setCaption("Delete skills");
 		link_5.setImmediate(false);
 		link_5.setWidth("-1px");
 		link_5.setHeight("-1px");
@@ -204,7 +204,7 @@ public class administration_suppression_competence extends CustomComponent {
 		
 		// link_4
 		link_4 = new Link();
-		link_4.setCaption("Modifier des compétences");
+		link_4.setCaption("Change skills");
 		link_4.setImmediate(false);
 		link_4.setWidth("-1px");
 		link_4.setHeight("-1px");
@@ -212,7 +212,7 @@ public class administration_suppression_competence extends CustomComponent {
 		
 		// link_6
 		link_6 = new Link();
-		link_6.setCaption("Supprimer un collaborateur");
+		link_6.setCaption("Remove a collaborator");
 		link_6.setImmediate(false);
 		link_6.setWidth("-1px");
 		link_6.setHeight("-1px");
@@ -295,7 +295,7 @@ public class administration_suppression_competence extends CustomComponent {
 		
 		// nativeButton_1
 		nativeButton_1 = new NativeButton();
-		nativeButton_1.setCaption("Supprimer");
+		nativeButton_1.setCaption("Delete");
 		nativeButton_1.setImmediate(true);
 		nativeButton_1.setWidth("-1px");
 		nativeButton_1.setHeight("-1px");

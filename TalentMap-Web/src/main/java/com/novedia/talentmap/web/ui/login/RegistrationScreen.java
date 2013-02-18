@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.web.MyVaadinApplication;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.data.Validator.InvalidValueException;
@@ -52,15 +53,6 @@ public class RegistrationScreen extends VerticalLayout {
 	private Button cancel;
 	private GridLayout registrationFormLayout;
 	
-	public static final String SAVE_BUTTON_NAME = "Enregistrer";
-	public static final String CANCEL_BUTTON_NAME = "Annuler";
-	public static final String REGISTRATION_PANEL_NAME = "Registration";
-	public static final String REGISTRATION_PANEL_WIDTH = "800px";
-	public static final String REGISTRATION_PANEL_FOOTER_HEIGHT = "50px";
-	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
-	public static final String REGISTRATION_PANEL_PASSWORD_ERROR = "Error on your password confirmation";
-	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error when creating user";
-	
 	
 	/**
 	 * Default constructor
@@ -81,9 +73,9 @@ public class RegistrationScreen extends VerticalLayout {
 		this.application = application;
 
 		//Panel for Registration
-		this.registrationPanel = new Panel(REGISTRATION_PANEL_NAME);
+		this.registrationPanel = new Panel(ConstantsEnglish.REGISTRATION_PANEL_NAME);
 		
-		this.registrationPanel.setWidth(REGISTRATION_PANEL_WIDTH);
+		this.registrationPanel.setWidth(ConstantsEnglish.REGISTRATION_PANEL_WIDTH);
 		
 		//components initialisation
 		this.registrationFormLayout = new GridLayout();
@@ -106,7 +98,7 @@ public class RegistrationScreen extends VerticalLayout {
 		setComponentAlignment(this.registrationPanel, Alignment.MIDDLE_CENTER);
 
 		HorizontalLayout footer = new HorizontalLayout();
-		footer.setHeight(REGISTRATION_PANEL_FOOTER_HEIGHT);
+		footer.setHeight(ConstantsEnglish.REGISTRATION_PANEL_FOOTER_HEIGHT);
 		addComponent(footer);
 	}
 	
@@ -115,10 +107,10 @@ public class RegistrationScreen extends VerticalLayout {
 	 */
 	public void buildButton(MyRegistrationListener myRegistrationListener){
 		
-		this.save.setCaption(SAVE_BUTTON_NAME);
+		this.save.setCaption(ConstantsEnglish.SAVE_BUTTON_NAME);
 		this.save.addListener(myRegistrationListener);
 		
-		this.cancel.setCaption(CANCEL_BUTTON_NAME);
+		this.cancel.setCaption(ConstantsEnglish.CANCEL_BUTTON_NAME);
 		this.cancel.addListener(myRegistrationListener);
 		
 		HorizontalLayout hLayout = new HorizontalLayout();
@@ -174,23 +166,23 @@ public class RegistrationScreen extends VerticalLayout {
 			
 			String button = event.getButton().getCaption();
 			Authentication authenticate = null;
-			if (button.equalsIgnoreCase(SAVE_BUTTON_NAME)){
+			if (button.equalsIgnoreCase(ConstantsEnglish.SAVE_BUTTON_NAME)){
 				if(!validateRegistrationForm()){
-					application.getMainWindow().showNotification(REGISTRATION_PANEL_MISSING_FIELDS);
+					application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS);
 				} else if ((!validatePassword())){
-					application.getMainWindow().showNotification(REGISTRATION_PANEL_PASSWORD_ERROR);
+					application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR);
 				} else {
 
 					try {
 						authenticate = application.register(registration);
 						application.getMainWindow().setContent(new AuthenticatedScreen(application, authenticate));
 					} catch (TalentMapSecurityException e) {
-						application.getMainWindow().showNotification(REGISTRATION_PANEL_USER_CREATION_ERROR);
+						application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
 					}
 				}
 			}
 			
-			else if (button.equalsIgnoreCase(CANCEL_BUTTON_NAME)){
+			else if (button.equalsIgnoreCase(ConstantsEnglish.CANCEL_BUTTON_NAME)){
 				application.getMainWindow().setContent(new LoginScreen(application));
 			}
 		
@@ -231,8 +223,6 @@ public class RegistrationScreen extends VerticalLayout {
 			}
 			
 			return isValidPassword;
-		}
-		
-
+		}		
 	}
 }

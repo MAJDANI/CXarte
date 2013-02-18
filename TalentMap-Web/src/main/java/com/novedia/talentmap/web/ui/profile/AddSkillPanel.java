@@ -10,7 +10,7 @@ import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ISkillService;
-import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.data.FrequencyUse;
 import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.util.IObservable;
@@ -88,19 +88,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * Vaadin Buttons
 	 */
 	private Button validSkill;
-
-	/**
-	 * Constants
-	 */
+	
 	private int COLLAB_ID = 2;
-	private final String ADD_SKILL_LABEL = "Ajouter une compétence";
-	private final String CATEGORY_LABEL = "Catégorie :";
-	private final String CONCEPT_LABEL = "Concept :";
-	private final String TOOL_LABEL = "Outil :";
-	private final String FREQUENCY_USE = "Usage de l'outil :";
-	private final String NO_TIME_USING = "Durée de non utilisation de l'outil :";
-	private static final String[] OPTIONS = new String[] { "Débutant",
-			"Intermédiare", "Professionnel", "Maitrise", "Expert" };
+
 	
 	/**
 	 * Flag
@@ -177,7 +167,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		HorizontalLayout hLayout = new HorizontalLayout();
 		HorizontalLayout hLayoutLabel = new HorizontalLayout();
 
-		Label addSkillLabel = new Label(ADD_SKILL_LABEL);
+		Label addSkillLabel = new Label(ConstantsEnglish.ADD_SKILL_LABEL);
 		addSkillLabel.setStyle(TalentMapCSS.H2);
 
 		hLayoutLabel.addComponent(categoryLabel);
@@ -216,17 +206,17 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	private void buildSelect() throws Exception {
 
 		// We build the Category Select
-		this.categoryLabel.setCaption(CATEGORY_LABEL);
+		this.categoryLabel.setCaption(ConstantsEnglish.CATEGORY_LABEL);
 		this.categoryLabel.setImmediate(true);
 		this.categoryLabel.setStyleName("category-select");
 
 		// We build the Concept Select
-		this.conceptLabel.setCaption(CONCEPT_LABEL);
+		this.conceptLabel.setCaption(ConstantsEnglish.CONCEPT_LABEL);
 		this.conceptLabel.setImmediate(true);
 		this.conceptLabel.setStyleName("concept-select");
 
 		// We build the Tool Select
-		this.toolSelect.setCaption(TOOL_LABEL);
+		this.toolSelect.setCaption(ConstantsEnglish.TOOL_LABEL);
 		this.toolSelect.setNullSelectionAllowed(false);
 		this.toolSelect.addListener(this);
 		this.toolSelect.addValidator(this);
@@ -234,13 +224,13 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.toolSelect.setStyleName("tool-select");
 
 		// We build the Frequency Use Select
-		this.frequencyUseSelect.setCaption(FREQUENCY_USE);
+		this.frequencyUseSelect.setCaption(ConstantsEnglish.FREQUENCY_USE);
 		this.frequencyUseSelect.setNullSelectionAllowed(false);
 		this.frequencyUseSelect.setImmediate(true);
 		this.frequencyUseSelect.setStyleName("frequency-use-select");
 
 		// We build the No Using Time Select
-		this.noUsingTimeSelect.setCaption(NO_TIME_USING);
+		this.noUsingTimeSelect.setCaption(ConstantsEnglish.NO_TIME_USING);
 		this.noUsingTimeSelect.setNullSelectionAllowed(false);
 		this.noUsingTimeSelect.setImmediate(true);
 		this.noUsingTimeSelect.setStyleName("no-using-time-select");
@@ -264,8 +254,8 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		stars.setMaxValue(5);
 		stars.setWidth(150);
 
-		for (int i = 0; i < OPTIONS.length; i++) {
-			stars.setValueCaption(i + 1, OPTIONS[i]);
+		for (int i = 0; i < ConstantsEnglish.OPTIONS.length; i++) {
+			stars.setValueCaption(i + 1, ConstantsEnglish.OPTIONS[i]);
 		}
 
 	}
@@ -327,7 +317,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					|| !isValid(noUsingTimeSelect.getValue())) {
 
 				getWindow().showNotification(
-						Constants.MSG_MISSING_FIELDS,
+						ConstantsEnglish.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 			} else {
 				
@@ -384,7 +374,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 				} else {
 
 					getWindow().showNotification(
-							"Vous possédez déjà cette compétence",
+							"You already have this skill",
 							Notification.TYPE_WARNING_MESSAGE);
 				}
 				
@@ -404,7 +394,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		
 		this.skillService.saveSkill(skill);
 
-		getWindow().showNotification("Compétence modifiée",
+		getWindow().showNotification("Skill changed",
 				Notification.TYPE_TRAY_NOTIFICATION);
 
 		this.updateMapSkill();
@@ -414,7 +404,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		
 		this.skillService.addSkill(skill);
 
-		getWindow().showNotification("Compétence ajoutée",
+		getWindow().showNotification("Skill added",
 				Notification.TYPE_TRAY_NOTIFICATION);
 
 		this.updateMapSkill();

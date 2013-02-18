@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import com.novedia.talentmap.model.entity.Concept.Builder;
-
 /**
  * This entity represents a Talent Map tool.
  * 
@@ -34,19 +32,8 @@ public class Profile implements Serializable {
 	 * Default constructor
 	 */
 	public Profile() {
-		
 	}
 	
-	/**
-	 * Build the class Profile.java 
-	 * @param id
-	 * @param type
-	 */
-	public Profile(Integer id, String type) {
-		this.id = id;
-		this.type = type;
-	}
-
 	/**
 	 * Get the id value
 	 * @return the id
@@ -59,7 +46,7 @@ public class Profile implements Serializable {
 	 * Set the id value
 	 * @param id the id to set
 	 */
-	private void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -74,7 +61,7 @@ public class Profile implements Serializable {
 	 * Set the profileType value
 	 * @param profileType the profileType to set
 	 */
-	private void setType(String type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	

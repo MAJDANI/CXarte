@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile.skill;
 
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.data.FrequencyUse;
 import com.novedia.talentmap.web.data.TimeUse;
 import com.novedia.talentmap.web.ui.profile.AddSkillPanel;
@@ -48,13 +49,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * Constants
 	 */
 	private final int COLLAB_ID = 2;
-	private final String EDIT_CAPTION =  "Modifier";
-	private final String SAVE_CAPTION = "Enregistrer";
-	private final String CANCEL_CAPTION = "Annnuler";
-	private final String SKILL_LABEL = "Liste des compétences";
-	private final String ADD_SKILL_LABEL = "Ajout de compétences";
-	
-	
+		
 	/**
 	 * Constructor
 	 * @param listSkill
@@ -135,11 +130,11 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		HorizontalLayout hLayout2 = new HorizontalLayout();
 
 		this.skillPanel.addComponent(skillLabel);
-		skillLabel.setCaption(ADD_SKILL_LABEL);
+		skillLabel.setCaption(ConstantsEnglish.ADD_SKILL_LABEL);
 
-		Label question = new Label("Voulez-vous choisir vos compétences ?");
+		Label question = new Label("Would you choose your skills?");
 
-		this.addSkill.setCaption("Oui");
+		this.addSkill.setCaption("Yes");
 
 		vLayout.setSpacing(true);
 		vLayout.addComponent(question);
@@ -168,10 +163,10 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	private void buildListSkillPanel() {
 
-		this.addSkill.setCaption("Ajouter une compétence");
+		this.addSkill.setCaption("Add skill");
 		this.addSkill.setEnabled(true);
 
-		this.skillLabel = new Label(SKILL_LABEL);
+		this.skillLabel = new Label(ConstantsEnglish.SKILL_LABEL);
 		this.listSkillPanel.addComponent(this.skillLabel);
 		this.listSkillPanel.addComponent(this.addSkill);
 		this.listSkillPanel.addComponent(this.listSkill);
@@ -190,14 +185,14 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	private void buildButtonLayout() {
 		HorizontalLayout hLayout = new HorizontalLayout();
 
-		this.save.setCaption(SAVE_CAPTION);
+		this.save.setCaption(ConstantsEnglish.SAVE_CAPTION);
 		this.save.addListener(this);
 		
-		this.edit.setCaption(EDIT_CAPTION);
+		this.edit.setCaption(ConstantsEnglish.EDIT_CAPTION);
 		this.edit.setDisableOnClick(true);
 		this.edit.addListener(this);
 
-		this.cancel.setCaption(CANCEL_CAPTION);
+		this.cancel.setCaption(ConstantsEnglish.CANCEL_CAPTION);
 		this.cancel.addListener(this);
 
 		this.addSkill.setDisableOnClick(true);
@@ -277,7 +272,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			//-------------------
 			// ToolName
 			//-------------------
-			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Nom de l'outil").getValue();
+			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Tool name").getValue();
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			this.addSkillPanel.getToolSelect().setValue(toolName);
 			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
@@ -317,7 +312,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			return true;
 
 		}else{
-			getWindow().showNotification("Veuillez sélectionner un outil dans le tableau de compétences", Notification.TYPE_WARNING_MESSAGE);
+			getWindow().showNotification("Please select a tool in the array of skills", Notification.TYPE_WARNING_MESSAGE);
 			return false;
 		}
 		

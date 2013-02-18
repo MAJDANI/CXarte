@@ -109,5 +109,76 @@ public class Constants {
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Années d'expérience incorrectes";
 	public static final String REGISTRATION_ERROR_EMAIL = "Email non valide";
 	
+	/**
+	 *For Registration
+	 */
+	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Nom", "Prénom","Mot de passe","Confirmer le mot de passe",
+		"Email", "Téléphone", "Date d'embauche", "Profile", "Années d'expérience", "Ingénieur d'affaire",
+		 "Manager" };
+	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm","email",
+		"phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
 	
+	/**
+	 * Constants for MissionCollaboratorContent
+	 */
+	public static final String PAGE_TITLE = "Liste des missions";
+	public static final String LABEL_BUTTON_ADD_MISSION = "Ajouter une mission";
+	public static final String LABEL_BUTTON_MODIFY_MISSION = "Modifier la mission";
+	public static final String LABEL_BUTTON_DELETE_MISSION = "Supprimer la mission";
+
+	/**
+	 * Labels form confirmation delete window (Classe : MissionCollaboratorContent)  
+	 */
+	public static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation de Suppression de mission";
+	public static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Supprimer la mission";
+	public static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "NE PAS Supprimer la mission";
+	
+	/**
+	 * Constants for AddSkillPanel
+	 */
+	public static final String ADD_SKILL_LABEL = "Ajouter une compétence";
+	public static final String CATEGORY_LABEL = "Catégorie :";
+	public static final String CONCEPT_LABEL = "Concept :";
+	public static final String TOOL_LABEL = "Outil :";
+	public static final String FREQUENCY_USE = "Usage de l'outil :";
+	public static final String NO_TIME_USING = "Durée de non utilisation de l'outil :";
+	public static final String[] OPTIONS = new String[] { "Débutant",
+			"Intermédiare", "Professionnel", "Maitrise", "Expert" };
+	
+	/**
+	 * Constant for RegistrationScreen
+	 */
+	public static final String SAVE_BUTTON_NAME = "Enregistrer";
+	public static final String CANCEL_BUTTON_NAME = "Annuler";
+	public static final String REGISTRATION_PANEL_NAME = "Registration";
+	public static final String REGISTRATION_PANEL_WIDTH = "800px";
+	public static final String REGISTRATION_PANEL_FOOTER_HEIGHT = "50px";
+	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
+	public static final String REGISTRATION_PANEL_PASSWORD_ERROR = "Error on your password confirmation";
+	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error when creating user";
+	
+	
+	/**
+	 * Constants for MonitoringCollabContent
+	 */
+	public static final String VISUALIZE_CV_NAME = "CV";
+	public static final String VISUALIZE_MISSION_NAME = "Historique Mission";
+	public static final String VISUALIZE_EA_NAME = "Historique EA";
+	public static final String VISUALIZE_PROFILE_NAME = "Visualiser Profil";
+	public static final String PAGE_TITLE_COLAB = "Liste de vos Collaborateurs";
+	
+	/**
+	 * Constants for AdminContentLayout
+	 */
+	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
+	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
+	
+	/**
+	 * Constants for TabProfileSheet
+	 */
+	public static final String TAB_PROFILE_NAME = "Fiche Profil";
+	public static final String TAB_COLLAB_NAME = "Suivi des Collaborateur";
+
+
+
 }

@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.commons.Constants;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.IndexedContainer;
@@ -59,62 +60,62 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(RegistrationForm.FIELD_ORDER_REGISTRATION[i])){
 				
-				if(!propertyId.equals(Constants.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
-						&& !propertyId.equals(Constants.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
-						&& !propertyId.equals(Constants.REGISTRATION_PROFILE_FIELD) 
-						&& !propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD) 
-						&&!propertyId.equals(Constants.REGISTRATION_PASSWORD_FIELD)
-						&& !propertyId.equals(Constants.REGISTRATION_PASSWORD_CONFIRM_FIELD) ){
+				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
+						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
+						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD) 
+						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD) 
+						&&!propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD)
+						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD) ){
 					
 					TextField field = new TextField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					
 					field.setRequired(true);
-					field.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setValidationVisible(true);
-					field.setNullRepresentation(Constants.REGISTRATION_NULL_REPRESENTATION);
+					field.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
 					
 					
-					if(propertyId.equals(Constants.REGISTRATION_PHONE_FIELD)){
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_PHONE_FIELD)){
 						field.setRequired(false);
-						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,Constants.REGISTRATION_ERROR_PHONE_NUMBER));
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_PHONE_NUMBER));
 					}
 					
-					if(propertyId.equals(Constants.REGISTRATION_EXPERIENCE_FIELD)){
-						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,Constants.REGISTRATION_ERROR_EXPERIENCE));
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_EXPERIENCE_FIELD)){
+						field.addValidator(new RegexpValidator(ConstantsEnglish.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EXPERIENCE));
 					}
 					
-					if(propertyId.equals(Constants.REGISTRATION_EMAIL_FIELD)){
-						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,Constants.REGISTRATION_ERROR_EMAIL));
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_EMAIL_FIELD)){
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EMAIL));
 					}
 					return field;
 					
 				}
-				else if(propertyId.equals(Constants.REGISTRATION_PASSWORD_FIELD) || propertyId.equals(Constants.REGISTRATION_PASSWORD_CONFIRM_FIELD)){
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD) || propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD)){
 					PasswordField passwordField = new PasswordField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
 					passwordField.setRequired(true);
-					passwordField.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					passwordField.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					passwordField.setValidationVisible(true);
-					passwordField.setNullRepresentation(Constants.REGISTRATION_NULL_REPRESENTATION);
+					passwordField.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
 
 					return passwordField;
 				}
 				
-				else if(propertyId.equals(Constants.REGISTRATION_EMPLOYMENT_DATE_FIELD)){
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD)){
 					
 					PopupDateField datefield = new PopupDateField();
 					
-					datefield.setDateFormat(Constants.REGISTRATION_DATE_FORMAT);
+					datefield.setDateFormat(ConstantsEnglish.REGISTRATION_DATE_FORMAT);
 					datefield.setCaption((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+ " : ");					
 					datefield.setRequired(true);
-					datefield.setRequiredError(Constants.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + Constants.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					datefield.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					datefield.setValidationVisible(true);
 					
 					return datefield;
 				}			
 				
-				else if(propertyId.equals(Constants.REGISTRATION_PROFILE_FIELD)){
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD)){
 					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
+			        ic.addContainerProperty(ConstantsEnglish.REGISTRATION_SELECT_VALUE, String.class, null);
 					
 					Select profilSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : "); 
 					
@@ -126,7 +127,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						
 						profilSelect.setContainerDataSource(ic);
 						profilSelect.setRequired(true);
-						profilSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
+						profilSelect.setItemCaptionPropertyId(ConstantsEnglish.REGISTRATION_SELECT_VALUE);
 						profilSelect.setNullSelectionAllowed(false);
 						profilSelect.setImmediate(true);
 						
@@ -134,11 +135,11 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						e.printStackTrace();
 					}	
 					
-					profilSelect.setStyleName(Constants.REGISTRATION_SELECT_STYLE);
+					profilSelect.setStyleName(ConstantsEnglish.REGISTRATION_SELECT_STYLE);
 					return profilSelect;
 				}
 				
-				else if(propertyId.equals(Constants.REGISTRATION_BUSINESS_ENGINEER_FIELD) || propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) || propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
@@ -146,7 +147,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					
 					
 					try {
-						if(propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
+						if(propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
 							for(Colleague colleague : registrationService.getAllConsultantManager()){
 								item = ic.addItem(colleague.getId());
 								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
@@ -158,8 +159,8 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 							}
 						}
 						colleagueSelect.setContainerDataSource(ic);
-						colleagueSelect.setItemCaptionPropertyId(Constants.REGISTRATION_SELECT_VALUE);
-						if(propertyId.equals(Constants.REGISTRATION_MANAGER_FIELD)){
+						colleagueSelect.setItemCaptionPropertyId(ConstantsEnglish.REGISTRATION_SELECT_VALUE);
+						if(propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
 							colleagueSelect.setNullSelectionAllowed(false);
 							colleagueSelect.setRequired(true);
 						}
@@ -169,7 +170,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						e.printStackTrace();
 					}	
 					
-					colleagueSelect.setStyleName(Constants.REGISTRATION_SELECT_STYLE);
+					colleagueSelect.setStyleName(ConstantsEnglish.REGISTRATION_SELECT_STYLE);
 					return colleagueSelect;
 				}
 		
