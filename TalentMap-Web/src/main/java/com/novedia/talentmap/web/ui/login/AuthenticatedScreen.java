@@ -86,6 +86,9 @@ public class AuthenticatedScreen extends VerticalLayout {
 		if (Authorization.Role.CL.getId().equals(this.authentication.getAuthorization().getRoleId())) {
 			buildMainLayout(this.application, Authorization.Role.CL);
 		} 
+		else if (this.authentication.getAuthorization().getRoleId().equals(Authorization.Role.AD.getId())) {
+			buildMainLayout(this.application, Authorization.Role.AD);
+		}
 		else if(Authorization.Role.RH.getId().equals(this.authentication.getAuthorization().getRoleId())){
 			buildMainLayout(this.application, Authorization.Role.RH);			
 		}
@@ -95,9 +98,6 @@ public class AuthenticatedScreen extends VerticalLayout {
 		else if(Authorization.Role.IA.getId().equals(this.authentication.getAuthorization().getRoleId())){
 			buildMainLayout(this.application, Authorization.Role.IA);			
 		}
-		else if (this.authentication.getAuthorization().getRoleId() == Authorization.Role.AD.getId()) {
-			
-		} 
 		// this.application.getMainWindow().setContent(buildMainLayout());
 	}
 	
