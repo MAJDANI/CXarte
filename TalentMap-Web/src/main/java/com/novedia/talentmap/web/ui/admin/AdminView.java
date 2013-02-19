@@ -1,17 +1,10 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import com.novedia.talentmap.web.util.IAdminView;
 import com.vaadin.ui.VerticalLayout;
 
 public class AdminView extends VerticalLayout {
 	
 	private AdminContentLayout adminContentLayout;
-	private LoginLayout loginLayout;
-	
-	/**
-	 * Flag
-	 */
-	public boolean isLogged;
 
 	/**
 	 * 
@@ -19,14 +12,9 @@ public class AdminView extends VerticalLayout {
 	 * @param adminContentLayout
 	 * @param loginLayout
 	 */
-	public AdminView(AdminContentLayout adminContentLayout, LoginLayout loginLayout) {
+	public AdminView(AdminContentLayout adminContentLayout) {
 		super();
 		this.adminContentLayout = adminContentLayout;
-		this.loginLayout = loginLayout;
-		this.isLogged = false; 
-				
-		buildObservators();
-		
 		mainBuild();
 	}
 	
@@ -37,52 +25,11 @@ public class AdminView extends VerticalLayout {
 	public void mainBuild(){
 	
 		removeAllComponents();
-		
-		if(isLogged){
-			
-			addComponent(this.adminContentLayout);
-		}else{
-			
-			addComponent(this.loginLayout);
-		}
-	}
-	
-	/**
-	 * The builder for all observator
-	 * @class AdminView.java
-	 */
-	public void buildObservators(){
-		
-		this.loginLayout.addObservateur(new IAdminView() {
-			
-			@Override
-			public void updateAdminContent(boolean isLogged) {
-				
-				AdminView.this.isLogged = isLogged;
-				mainBuild();
-			}
-		}, IAdminView.class);
-		
-		this.adminContentLayout.addObservateur(new IAdminView() {
-			
-			@Override
-			public void updateAdminContent(boolean isLogged) {
-				
-				AdminView.this.isLogged = isLogged;
-				AdminView.this.loginLayout.clearField();
-				mainBuild();
-			}
-		}, IAdminView.class);
+		addComponent(this.adminContentLayout);
+
 	}
 	
 
-	/**
-	 * Set the loginLayout value
-	 * @param loginLayout the loginLayout to set
-	 */
-	public void setLoginLayout(LoginLayout loginLayout) {
-		this.loginLayout = loginLayout;
-	}
 	
 	/**
 	 * Set the adminContentLayout value
@@ -91,20 +38,6 @@ public class AdminView extends VerticalLayout {
 	public void setAdminContentLayout(AdminContentLayout adminContentLayout) {
 		this.adminContentLayout = adminContentLayout;
 	}	
-	
-	/**
-	 * Get the isLogged value
-	 * @return the isLogged
-	 */
-	public boolean isLogged() {
-		return isLogged;
-	}
 
-	/**
-	 * Set the isLogged value
-	 * @param isLogged the isLogged to set
-	 */
-	public void setLogged(boolean isLogged) {
-		this.isLogged = isLogged;
-	}
+
 }

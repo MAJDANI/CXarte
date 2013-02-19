@@ -3,6 +3,6 @@ package com.novedia.talentmap.web.util;
 
 public interface IAdminContentLayout {
 	
-	public void updateManageSkillContent(boolean addNewSkill);
+	public void updateAdminContentLayout(Class<?> cl);
 	
 }

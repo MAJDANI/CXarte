@@ -326,6 +326,7 @@
 	<bean id="adminContentLayoutBean" class="com.novedia.talentmap.web.ui.admin.AdminContentLayout" scope="session">
 		<constructor-arg name="adminNav" ref="adminNavigationBean" />
 		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
+		<constructor-arg name="addSkillContent" ref="adminAddSkillContentBean" />
 		<constructor-arg name="hSplitContent" ref="hSplitContent" />
 	</bean>
 	
@@ -335,19 +336,18 @@
 	<bean id="addSkillButton" class="com.vaadin.ui.Button"/>
 	<bean id="visualizeSkill" class="com.vaadin.ui.Button"/>
 	<bean id="deleteCollab" class="com.vaadin.ui.Button"/>
-	<bean id="logout" class="com.vaadin.ui.Button"/>
 	
 	<bean id="adminNavigationBean" class="com.novedia.talentmap.web.ui.admin.AdminNavigation" scope="session" >
 		<constructor-arg name="visualizeSkill" ref="visualizeSkill" />
 		<constructor-arg name="deleteCollab" ref="deleteCollab" />
 		<constructor-arg name="addSkill" ref="addSkillButton" />
-		<constructor-arg name="logout" ref="logout" />
 	</bean>
 	
 	
 	<!-- Vaadin AddSkillContent UI -->
 	
 	<bean id="formSkill" class="com.vaadin.ui.Form"/>
+	<bean id="formAddSkill" class="com.vaadin.ui.Form"/>
 	<bean id="treeSkill" class="com.vaadin.ui.Tree"/>
 	<bean id="adminSaveSkill" class="com.vaadin.ui.Button"/>
 	<bean id="adminEditSkill" class="com.vaadin.ui.Button"/>
@@ -377,26 +377,17 @@
 		<constructor-arg name="body" ref="adminBody" />
 	</bean>
 	
+	<bean id="adminAddSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AdminAddSkillContent">
+		<constructor-arg name="adminService" ref="adminService" />
+	</bean>
+	
+	
 	<!-- Vaadin AdminContentLayout UI -->
 	
 	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" >
 		<constructor-arg name="adminContentLayout" ref="adminContentLayoutBean" />
-		<constructor-arg name="loginLayout" ref="loginLayoutBean" />
 	</bean>
 	
-	<!-- Vaadin LoginLayout UI -->
-	
-	<bean id="login" class="com.vaadin.ui.TextField"/>
-	<bean id="password" class="com.vaadin.ui.TextField"/>
-	<bean id="titlePageConnection" class="com.vaadin.ui.Label"/>
-	<bean id="btnLogin" class="com.vaadin.ui.Button"/>
-	
-	<bean id="loginLayoutBean" class="com.novedia.talentmap.web.ui.admin.LoginLayout" scope="session" >
-		<constructor-arg name="login" ref="login"/>
-		<constructor-arg name="password" ref="password"/>
-		<constructor-arg name="pageTitle" ref="titlePageConnection"/>
-		<constructor-arg name="btnLogin" ref="btnLogin"/>
-	</bean>
 	
 	<!-- Vaadin MonitoringCollabContent UI -->
 	

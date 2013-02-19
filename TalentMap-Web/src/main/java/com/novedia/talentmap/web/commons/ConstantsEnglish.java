@@ -196,4 +196,44 @@ public class ConstantsEnglish {
 	//private final String TAB_PROFILE_NAME = "Fiche Profil";
 	public static final String TAB_PROFILE_NAME = "Profile Data";
 	public static final String TAB_COLLAB_NAME = "Monitoring";
+	
+	/**
+	 * Constants for AdminAddSkillContent
+	 */
+	public static final String ADMIN_CATEGORY_SELECT_NAME = "Category :";
+	public static final String ADMIN_CONCEPT_SELECT_NAME = "Concept :";
+	public static final String ADMIN_TOOL_SELECT_NAME = "Tool :";
+	public static final String ADMIN_CAPTION_PROPERTY = "name";
+	public static final String ADMIN_NULL_REPRESENTATION = "";
+	public static final String ADMIN_CATEGORY_NAME = "category";
+	public static final String ADMIN_CONCEPT_NAME = "concept";
+	public static final String ADMIN_TOOL_NAME = "tool";
+	public static final String ADMIN_NEW_CATEGORY_BUTTON = "New Category";
+	public static final String ADMIN_NEW_CONCEPT_BUTTON = "New Concept";
+	public static final String ADMIN_NEW_TOOL_CONFIRMATION = "New Tool created";
+	public static final String ADMIN_NEW_CONCEPT_CONFIRMATION = "New Concept created";
+	public static final String ADMIN_NEW_CATEGORY_CONFIRMATION = "New Category created";
+	public static final String ADMIN_NEW_TOOL_ERROR = "Please fill all the fields";
+	
+	/**
+	 * Constants for NewCategoryWindow
+	 */
+	public static final String NEW_CATEGORY_WINDOW_WIDTH = "500";
+	public static final String NEW_CATEGORY_WINDOW_TITLE = "New Category";
+	public static final String NEW_CATEGORY_WINDOW_FIELD_LABEL = "Enter Category name:";
+	public static final String NEW_CATEGORY_WINDOW_CATEGORY = "category";
+	public static final String NEW_CATEGORY_WINDOW_ERROR = "Please enter a name for the new category";
+	
+	/**
+	 * Constants for NewConceptWindow
+	 */
+	public static final String NEW_CONCEPT_WINDOW_WIDTH = "500";
+	public static final String NEW_CONCEPT_WINDOW_TITLE = "New Concept";
+	public static final String NEW_CONCEPT_WINDOW_FIELD_CONCEPT = "Enter Concept name:";
+	public static final String NEW_CONCEPT_WINDOW_FIELD_CATEGORY = "Category :";
+	public static final String NEW_CONCEPT_WINDOW_CATEGORY = "category";
+	public static final String NEW_CONCEPT_WINDOW_CONCEPT = "concept";
+	public static final String NEW_CONCEPT_WINDOW_ERROR = "Please enter a name for the new concept";
+	public static final String NEW_CONCEPT_WINDOW_CAPTION_PROPERTY = "name";
+	
 }

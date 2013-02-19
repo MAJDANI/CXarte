@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
@@ -82,6 +83,13 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 	@Override
 	public Concept getByName(String name) throws DataAccessException {
 		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT_BY_NAME, name);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Concept> getAllConceptByCategory(Category category) throws DataAccessException {
+		return (List<Concept>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CONCEPT_BY_CATEGORY, category);
 	}
 	
 }

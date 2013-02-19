@@ -11,7 +11,7 @@
 	  <result property="id" column="CONCEPT_ID"/>
 	  <result property="name" column="CONCEPT_NAME"/>
 	  <result property="category.id" column="CATEGORY_ID"  />
-	  <!-- <result property="category.name" column="CATEGORY_NAME" /> -->
+	  <!--<result property="category.name" column="CATEGORY_NAME" />-->
 	</resultMap>
 
 
@@ -26,7 +26,7 @@
 	</select>
 	
     <select id="getAll" resultMap="conceptResult">
-    	SELECT * FROM CONCEPT concept, CATEGORY category WHERE concept.CATEGORY_ID = category.CATEGORY_ID
+    	SELECT DISTINCT * FROM CONCEPT concept, CATEGORY category WHERE concept.CATEGORY_ID = category.CATEGORY_ID
     </select>
 	
 	<statement id="getAllConceptByCategoryId" parameterClass="Integer" resultMap="conceptResult">
@@ -65,5 +65,9 @@
 	<delete id="delete" parameterClass="Integer">
 		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
 	</delete>			 
+	
+	<select id="getByCategory" resultMap="conceptResult" parameterClass="com.novedia.talentmap.model.entity.Category">
+		SELECT * FROM CONCEPT WHERE CATEGORY_ID = #id#
+	</select>	
 
 </sqlMap>

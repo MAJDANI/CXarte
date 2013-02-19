@@ -1,12 +1,7 @@
 package com.novedia.talentmap.web.ui.admin;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
-import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
-import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
-import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
-import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.event.ItemClickEvent;
@@ -24,12 +19,6 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	 * Util Observateur
 	 */
 	private IAdminContentLayout obsAdminContentLayout;
-	private IAdminView obsAdminView;
-
-	/**
-	 * Vaadin UI
-	 */
-//	private ManageSkillContent manageSkillContent;
 
 	/**
 	 * Vaddin Components
@@ -37,13 +26,12 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	private Button addSkill;
 	private Button visualizeSkill;
 	private Button deleteCollab;
-	//private Button logout;
 
 	
 	/**
-	 * Flag
+	 * POJO
 	 */
-	public static boolean addNewSkill = false;
+	private Class<?> cl = ManageSkillContent.class;
 	
 	/**
 	 * 
@@ -59,12 +47,11 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	 * @param addSkillLink
 	 */
 	public AdminNavigation(Button visualizeSkill, Button deleteCollab,
-			Button addSkill, Button logout) {
+			Button addSkill) {
 		super();
 		this.visualizeSkill = visualizeSkill;
 		this.deleteCollab = deleteCollab;
 		this.addSkill = addSkill;
-		//this.logout = logout;
 
 		mainBuild();
 
@@ -149,10 +136,6 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		this.deleteCollab.addListener(this);
 		this.deleteCollab.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.deleteCollab);
-		
-//		this.logout.setCaption("Se déconnecter");
-//		this.logout.addListener(this);
-//		addComponent(this.logout);
 	}
 
 	@Override
@@ -163,36 +146,23 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		if(button == this.visualizeSkill){
 			
 			//Update the view : visualize view
-			this.addNewSkill = false;
-			this.updateObservateur();
-			
-			//Remove style button selected on the other button
-			this.addSkill.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			this.deleteCollab.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
-			
+			this.cl = ManageSkillContent.class;
 			//Add the style button selected on the button clicked
 			this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.updateObservateur();				
 		}
 		
-		if(button == this.addSkill){
+		else if(button == this.addSkill){
 			
-			//Update the view : add view
-			this.addNewSkill = true;
-			this.updateObservateur();
-			
+			this.cl = AdminAddSkillContent.class;
 			//Remove style button selected on the other button
 			this.visualizeSkill.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
 			this.deleteCollab.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
 			
 			//Add the style button selected on the button clicked
 			this.addSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.updateObservateur();
 		}
-		
-//		if(button == this.logout){
-//			
-//			this.updateAdminViewObersvateur(false);
-//		}
-		
 	}
 
 	/**
@@ -252,42 +222,22 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		this.addSkill = addSkill;
 	}
 	
-	/**
-	 * Set the logout value
-	 * @param logout the logout to set
-	 */
-//	public void setLogout(Button logout) {
-//		this.logout = logout;
-//	}
-	
+
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
-		
 		if(cl == IAdminContentLayout.class){
 			this.obsAdminContentLayout = (IAdminContentLayout) observateur;
-		}
-		
-		if(cl == IAdminView.class){
-			this.obsAdminView = (IAdminView) observateur;
 		}
 	}
 
 	@Override
 	public void updateObservateur() {
-		
-		this.obsAdminContentLayout.updateManageSkillContent(this.addNewSkill);
-	}
-	
-	public void updateAdminViewObersvateur(boolean isLogged){
-		
-		this.obsAdminView.updateAdminContent();
+		this.obsAdminContentLayout.updateAdminContentLayout(this.cl);
 	}
 
 	@Override
 	public void delObservateur() {
-		
 		this.obsAdminContentLayout = null;
-		this.obsAdminView = null;
 	}
 
 }

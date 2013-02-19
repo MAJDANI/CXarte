@@ -3,13 +3,11 @@ package com.novedia.talentmap.web.ui.admin;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
-import com.novedia.talentmap.web.util.IObservable;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-public class AdminContentLayout extends HorizontalLayout implements IObservable {
+public class AdminContentLayout extends HorizontalLayout {
 
 	/**
 	 * Util Observateur
@@ -21,6 +19,8 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 	 */
 	private AdminNavigation adminNav;
 	private ManageSkillContent manageSkillContent;
+	private AdminAddSkillContent addSkillContent;
+
 
 	/**
 	 * Vaadin Components
@@ -28,20 +28,22 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 	private HorizontalSplitPanel hSplitContent;
 
 	/**
-	 * Flag
+	 * Constants
 	 */
-	public boolean isLogged;
+	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
+	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
+
 
 	/**
 	 * Build the class AdminView.java
 	 */
-	public AdminContentLayout(AdminNavigation adminNav, ManageSkillContent manageSkillContent,
-			HorizontalSplitPanel hSplitContent) {
+	public AdminContentLayout(AdminNavigation adminNav, ManageSkillContent manageSkillContent, 
+			AdminAddSkillContent addSkillContent, HorizontalSplitPanel hSplitContent) {
 		super();
 		this.adminNav = adminNav;
 		this.manageSkillContent = manageSkillContent;
+		this.addSkillContent = addSkillContent;
 		this.hSplitContent = hSplitContent;
-		this.isLogged = false;
 
 		mainBuild();
 
@@ -53,31 +55,30 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 		this.adminNav.addObservateur(new IAdminContentLayout() {
 
 			@Override
-			public void updateManageSkillContent(boolean addNewSkill) {
+			public void updateAdminContentLayout(Class<?> cl) {
 
-				if (addNewSkill) {
+				if(cl == ManageSkillContent.class){
 
-					AdminContentLayout.this.manageSkillContent.addView();
+					AdminContentLayout.this.manageSkillContent.setVisible(true);
+					AdminContentLayout.this.addSkillContent.setVisible(false);
+					
+					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.manageSkillContent);
+					
+					
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
 							ConstantsEnglish.ADD_SKILL_TITLE);
 				} else {
 
-					AdminContentLayout.this.manageSkillContent.updateView();
+					AdminContentLayout.this.manageSkillContent.setVisible(false);
+					AdminContentLayout.this.addSkillContent.setVisible(true);
+					
+					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
 							ConstantsEnglish.UPDATE_SKILL_TITLE);
 				}
 			}
 		}, IAdminContentLayout.class);
 		
-		this.adminNav.addObservateur(new IAdminView() {
-			
-			@Override
-			public void updateAdminContent(boolean isLogged) {
-				
-				AdminContentLayout.this.isLogged = isLogged;
-				AdminContentLayout.this.updateObservateur();
-			}
-		}, IAdminView.class);
 	}
 
 	/**
@@ -86,6 +87,8 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 	 */
 	public void mainBuild() {
 
+		initView();
+		
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setHeight(600);
 		vLayout.addComponent(this.adminNav);
@@ -97,6 +100,12 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 		addComponent(this.hSplitContent);
 		setSizeFull();
 		setExpandRatio(this.hSplitContent, 1);
+	}
+	
+	public void initView(){
+		
+		this.manageSkillContent.setVisible(true);
+		this.addSkillContent.setVisible(false);
 	}
 
 	/**
@@ -128,6 +137,16 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 		this.manageSkillContent = manageSkillContent;
 	}
 
+	
+	public AdminAddSkillContent getAddSkillContent() {
+		return addSkillContent;
+	}
+
+	public void setAddSkillContent(AdminAddSkillContent addSkillContent) {
+		this.addSkillContent = addSkillContent;
+	}
+
+	
 	/**
 	 * Set the hSplitContent value
 	 * 
@@ -138,19 +157,5 @@ public class AdminContentLayout extends HorizontalLayout implements IObservable 
 		this.hSplitContent = hSplitContent;
 	}
 
-	@Override
-	public void addObservateur(Object observateur, Class<?> cl) {
-		this.obs = (IAdminView) observateur;
-	}
-
-	@Override
-	public void updateObservateur() {
-		this.obs.updateAdminContent(this.isLogged);
-	}
-
-	@Override
-	public void delObservateur() {
-		this.obs = null;
-	}
 
 }

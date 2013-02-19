@@ -87,6 +87,18 @@ public class Constants {
 	public static final String MISSION_MSG_INVALID_PERIOD = "La période est invalide";
 	
 	/**
+	 * Données Skill management
+	 */
+	public static final Object[] FIELD_ORDER_SKILL = new Object[] {
+		"category_name", "concept_name", "tool_name" };
+	
+	public static final String SKILL_MANAGEMENT_CATEGORY = "category_name";
+	public static final String SKILL_MANAGEMENT_CONCEPT = "concept_name";
+	public static final String SKILL_MANAGEMENT_TOOL = "tool_name";
+	
+	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Catégorie",
+		"Concept", "Outil" };
+	/**
 	 * Données Registration
 	 */
 	public static final String REGISTRATION_EMPLOYMENT_DATE_FIELD = "employmentDate";

@@ -45,6 +45,34 @@ List<Category> getAllCategories();
 Map<String, Object> addSkill(VSkill skill);
 
 /**
+ * Get all concepts available for a category
+ * @param category
+ * @return List of concept
+ */
+List<Concept> getAllConceptByCategory(Category category);
+
+/**
+ * Add one tool
+ * @param tool
+ * @return
+ */
+Integer addTool(Tool tool);
+
+/**
+ * Add one Category
+ * @param category
+ * @return
+ */
+Integer addCategory(Category category);
+
+/**
+ * Add one Concept
+ * @param concept
+ * @return
+ */
+Integer addConcept(Concept concept);
+
+/**
 * Update one skill.
 * @class IAdminService.java. 'category'
 * @param cat a category

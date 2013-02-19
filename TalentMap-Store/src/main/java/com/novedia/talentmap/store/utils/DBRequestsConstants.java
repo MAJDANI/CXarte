@@ -156,6 +156,11 @@ public static final String CHECK_CONCEPT = "concept.check";
  */
 public static final String GET_CONCEPT_BY_NAME = "concept.getByName";
 
+/**
+ * This constant is used to retrieve a concept by name.
+ */
+public static final String GET_ALL_CONCEPT_BY_CATEGORY = "concept.getByCategory";
+
 // MANAGER REQUESTS
 /**
  * This constant is used to retrieve a manager by the id.

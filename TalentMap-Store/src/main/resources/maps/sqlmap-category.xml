@@ -21,7 +21,7 @@
 	</select>
 	
     <select id="getAll" resultMap="categoryResult">
-    	SELECT * FROM CATEGORY
+    	SELECT DISTINCT * FROM CATEGORY
     </select>			
     
     <insert id="add" parameterClass="Category">

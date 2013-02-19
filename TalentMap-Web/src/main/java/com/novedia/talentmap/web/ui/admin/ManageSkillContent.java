@@ -106,13 +106,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Integer currentConceptId;
 	private Integer currentToolId;
 
-	// Dummy data
-	public static Object[] TOOLS = new String[] { "Spring", "tool1", "tool2",
-			"tool3", "tool4" };
-	public static Object[] CONCEPTS = new String[] { "IOC", "concept1",
-			"concept2", "concept3", "concept4" };
-	public static Object[] CATEGORIES = new String[] { "JAVA", ".NET" };
-
 	/**
 	 * Build the class AddSkillContent.java
 	 * 
@@ -220,7 +213,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		hLayoutButton.setMargin(true);
 		hLayoutButton.setSpacing(true);
 
-		this.save.setCaption("Enrergistrer");
+		this.save.setCaption("Enregistrer");
 		this.save.addListener(this);
 
 		this.cancel.setCaption("Annuler");
@@ -323,32 +316,6 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.listTool = this.adminService.getAllTools();
 		this.listConcept = this.adminService.getAllConcepts();
 		this.listCategory = this.adminService.getAllCategories();
-
-//		try {
-//		} catch (Exception e) {
-
-			// Build all lists, dummy data if database is down !
-
-//			for (int i = 0; i < 5; i++) {
-////				Tool t = new Tool(i + 1, i + 1, (String) TOOLS[i]);
-//				Tool t = Tool.Builder.builder().id(i+1).concept((Concept.Builder.builder().id(i+1).build())).name(TOOLS[i].toString()).build();
-//				this.listTool.add(t);
-//			}
-//
-//			for (int i = 0; i < 5; i++) {
-//				Random r = new Random();
-//				int categoryId = r.nextInt(2);
-//				Concept c = new Concept(i + 1, categoryId,
-//						(String) CONCEPTS[i], 3.0);
-//				this.listConcept.add(c);
-//			}
-//
-//			for (int i = 0; i < 2; i++) {
-//
-//				Category c = new Category(i, (String) CATEGORIES[i]);
-//				this.listCategory.add(c);
-//			}
-//		}
 	}
 
 	/**
@@ -395,25 +362,6 @@ public class ManageSkillContent extends VerticalLayout implements
 		}
 	}
 
-	/**
-	 * Show the add view
-	 * 
-	 * @class ManageSkillContent.java
-	 */
-	public void addView() {
-
-		this.isNewSkill = true;
-
-		this.formSkill.setVisible(true);
-		this.treeSkill.setVisible(false);
-
-		// We initiate the form
-		VSkill newVskill = new VSkill();
-		this.formSkill.setItemDataSource(new BeanItem(newVskill));
-		this.formSkill.setReadOnly(false);
-
-		setManageButtonVisible(false);
-	}
 
 	/**
 	 * Update One Skikll (category, concept, tool)
@@ -639,21 +587,16 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		if (button == this.save) {
 
-			if (isNewSkill) {
-
-				this.addOneSkill();
-			} else {
-
 				this.updateOneSkill();
 
 				// Init the current Id to null
 				this.currentCategoryId = null;
 				this.currentConceptId = null;
 				this.currentToolId = null;
+				
+				updateView();
 			}
 
-			updateView();
-		}
 
 		if (button == this.edit) {
 
@@ -663,20 +606,11 @@ public class ManageSkillContent extends VerticalLayout implements
 		}
 
 		if (button == this.cancel) {
-			
-			if(isNewSkill){
-				
-				for(int i = 0; i < FIELD_ORDER_SKILL.length; i++){
-					
-					this.formSkill.getField(FIELD_ORDER_SKILL[i]).setValue(null);
-				}
-			}else{
 				
 				this.formSkill.setReadOnly(true);
 
 				setManageButtonVisible(true);
 			}
-		}
 
 		if (button == this.delete) {
 			

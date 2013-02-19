@@ -75,8 +75,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public int add(final Tool tool) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().queryForObject(
-				DBRequestsConstants.ADD_TOOL, tool.getId());
+		return (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.ADD_TOOL,tool);
 	}
 
 	/**
