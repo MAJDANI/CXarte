@@ -1,17 +1,24 @@
 package com.novedia.talentmap.web.ui.admin;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
+import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
+import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.VerticalLayout;
 
 public class AdminNavigation extends VerticalLayout implements ClickListener,
-		IObservable {
+		IObservable,ItemClickListener {
 
 	/**
 	 * Util Observateur
@@ -30,13 +37,18 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	private Button addSkill;
 	private Button visualizeSkill;
 	private Button deleteCollab;
-	private Button logout;
+	//private Button logout;
 
 	
 	/**
 	 * Flag
 	 */
 	public static boolean addNewSkill = false;
+	
+	/**
+	 * 
+	 */
+	public Tree root = new Tree();
 
 	/**
 	 * 
@@ -52,7 +64,7 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 		this.visualizeSkill = visualizeSkill;
 		this.deleteCollab = deleteCollab;
 		this.addSkill = addSkill;
-		this.logout = logout;
+		//this.logout = logout;
 
 		mainBuild();
 
@@ -62,31 +74,85 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 
 		setMargin(true);
 		setSpacing(true);
-
+		//displayTree();
 		buildButtons();
 	}
 
+	
+	public void displayTree(){
+		String firstElement ;
+		String firstEl;
+		Object[][] menuAdmin = ConstantsForMenuEnglish.ADMIN_MENU_NAVIGATION;
+		int nbItems = menuAdmin.length;
+		for (int i = 0; i < nbItems; i++) {		
+			firstEl = (String) menuAdmin[i][0];
+			root.addItem(firstEl);
+			//au moins 1 élément dans le tableau
+			if(menuAdmin[i].length == 1){
+				root.setChildrenAllowed(menuAdmin, false);
+			}
+			else{
+				//On remplit le Menu
+				for (int j = 1; j < nbItems; j++) {	
+					firstElement = (String) menuAdmin[i][j]; 
+					root.addItem(firstElement);
+					root.setParent(firstElement, firstEl);
+					root.setChildrenAllowed(firstElement, false);
+				}
+				root.expandItemsRecursively(firstEl);	
+			}
+		}
+		root.addListener((ItemClickListener) this);
+		addComponent(this.root);	
+	}
+	
+	
+	
+	@Override
+	public void itemClick(ItemClickEvent event) {
+		
+		if(event.getSource() == root){
+			//get the item in the root
+			Object itemId = event.getItemId();
+			if(itemId != null){
+				if(itemId.equals(ConstantsForMenuEnglish.ADMIN_ADD_SKILL_NAME)){
+					//allowed to forward the view page
+					updateObservateur();				
+				}
+				else if(itemId.equals(ConstantsForMenuEnglish.ADMIN_VIEW_SKILL_NAME)){					
+					updateObservateur();				
+				}
+				else if(itemId.equals(ConstantsForMenuEnglish.ADMIN_DELETE_COLLAB_NAME)){
+					updateObservateur();
+				}
+			}				
+		}
+			
+	}
+	
+	
+	
 	private void buildButtons() {
 
-		this.visualizeSkill.setCaption(ConstantsForMenuEnglish.VISUALIZE_SKILL_NAME);
+		this.visualizeSkill.setCaption(ConstantsForMenuEnglish.ADMIN_VIEW_SKILL_NAME);
 		this.visualizeSkill.addListener(this);
 		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		addComponent(this.visualizeSkill);
 
-		this.addSkill.setCaption(ConstantsForMenuEnglish.ADD_SKILL_NAME);
+		this.addSkill.setCaption(ConstantsForMenuEnglish.ADMIN_ADD_SKILL_NAME);
 		this.addSkill.addListener(this);
 		this.addSkill.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.addSkill);
 
-		this.deleteCollab.setCaption(ConstantsForMenuEnglish.DELETE_COLLAB_NAME);
+		this.deleteCollab.setCaption(ConstantsForMenuEnglish.ADMIN_DELETE_COLLAB_NAME);
 		this.deleteCollab.addListener(this);
 		this.deleteCollab.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 		addComponent(this.deleteCollab);
 		
-		this.logout.setCaption("Se déconnecter");
-		this.logout.addListener(this);
-		addComponent(this.logout);
+//		this.logout.setCaption("Se déconnecter");
+//		this.logout.addListener(this);
+//		addComponent(this.logout);
 	}
 
 	@Override
@@ -122,10 +188,10 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 			this.addSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
 		}
 		
-		if(button == this.logout){
-			
-			this.updateAdminViewObersvateur(false);
-		}
+//		if(button == this.logout){
+//			
+//			this.updateAdminViewObersvateur(false);
+//		}
 		
 	}
 
@@ -190,9 +256,9 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	 * Set the logout value
 	 * @param logout the logout to set
 	 */
-	public void setLogout(Button logout) {
-		this.logout = logout;
-	}
+//	public void setLogout(Button logout) {
+//		this.logout = logout;
+//	}
 	
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
@@ -214,7 +280,7 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 	
 	public void updateAdminViewObersvateur(boolean isLogged){
 		
-		this.obsAdminView.updateAdminContent(isLogged);
+		this.obsAdminView.updateAdminContent();
 	}
 
 	@Override
