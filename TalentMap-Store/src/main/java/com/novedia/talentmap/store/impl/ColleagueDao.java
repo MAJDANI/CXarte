@@ -99,6 +99,11 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CONSULTANT_MANAGER);
 	}
 	
+	public List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId) throws DataAccessException {
+		SkillParameter skillParameter = new SkillParameter();
+		skillParameter.setListCollaborators(listColleagueId);
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUE_BY_COLL_ID_LIST, skillParameter);
+	}
 
 	/**
 	 * This method allow to get all manager.

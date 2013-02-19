@@ -176,4 +176,15 @@
     		)
 	</insert>
     
+	<statement id="getAllColleagueByColleagueIdList" parameterClass="com.novedia.talentmap.store.impl.SkillParameter" resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE
+        WHERE COLLEAGUE_ID IN
+        <iterate 	property = "listCollaborators"
+					open="(" 
+					close=")"
+					conjunction=",">
+   					#listCollaborators[]#
+  		</iterate>
+	</statement>
+    
 </sqlMap>

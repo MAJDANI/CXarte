@@ -83,9 +83,9 @@ public class VSkillCollab implements Serializable{
 	
 		VSkill comparedObj = (VSkill)obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getCategory_name(), comparedObj.getCategory_name());
-		ebuilder.append(this.getTool_name(), comparedObj.getTool_name());
-		ebuilder.append(this.getConcept_name(), comparedObj.getConcept_name());
+		ebuilder.append(this.getCategory_name(), comparedObj.getCategoryName());
+		ebuilder.append(this.getTool_name(), comparedObj.getToolName());
+		ebuilder.append(this.getConcept_name(), comparedObj.getConceptName());
 		return ebuilder.isEquals();
 	}
 	/**

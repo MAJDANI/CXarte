@@ -49,9 +49,19 @@
 		WHERE COLLEAGUE_ID = #colleagueId# AND TOOL_ID = #tool_id#
 	</update>					 
 
-	<!-- v.guillemain 30/07/12 -->
-    <select id="getAllCollaboratorsIdByToolId" resultMap="collabIdResult" parameterClass="java.lang.Integer">
+    <select id="getAllColleagueIdByToolId" resultMap="collabIdResult" parameterClass="java.lang.Integer">
     	SELECT COLLEAGUE_ID FROM SKILL WHERE TOOL_ID = #toolId#
+    </select>	
+
+    <select id="getAllColleagueIdByListToolId" resultMap="collabIdResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
+    	SELECT DISTINCT COLLEAGUE_ID FROM SKILL 
+    	WHERE TOOL_ID IN 
+		<iterate 	property = "listTools"
+					open="(" 
+					close=")"
+					conjunction=",">
+   					#listTools[]#
+  		</iterate>
     </select>	
 
 	<!-- v.guillemain 31/07/12 -->

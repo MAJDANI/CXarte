@@ -20,6 +20,7 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillCollabDao;
 import com.novedia.talentmap.store.IVSkillDao;
 import com.novedia.talentmap.store.impl.SkillDao;
+import com.novedia.talentmap.store.impl.VSkillDao;
 
 /**
  * Skill Services.
@@ -66,6 +67,26 @@ private IVSkillCollabDao vSkillCollabDao;
 @Override
 public Skill getSkillByToolId(int collaboratorID, int toolId) throws DataAccessException {
 return this.skillDao.getCollaboratorSkillByTool(collaboratorID, toolId);
+}
+
+/**
+ * @return List<Integer>.
+ * @param toolId
+ * @throws DataAccessException
+ */
+@Override
+public List<Integer> getAllColleagueIdByToolId(Integer toolId) throws DataAccessException {
+	return this.skillDao.getAllColleagueIdByToolId(toolId);
+}
+
+/**
+ * @return List<Integer>.
+ * @param listToolId
+ * @throws DataAccessException
+ */
+@Override
+public List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId) throws DataAccessException {
+	return this.skillDao.getAllColleagueIdByListToolId(listToolId);
 }
 
 /**
@@ -277,16 +298,13 @@ public List<Tool> getAllTools() throws DataAccessException {
 }
 
 /**
- * This method allow to get all tool by concept.
+ * This method allow to get all VSkill ordered by category and concept
  * @return a list of VSkill
- * @param categoryName a category name
- * @param conceptName a concept name
  * @throws DataAccessException
  */
-@Override
-public List<VSkill> getToolByConcept(final String categoryName, final String conceptName)
-		throws DataAccessException {
-	return vSkillDao.getToolByConcept(categoryName, conceptName);
+public List<VSkill> getAllVSkillOrdered() throws DataAccessException {
+	VSkillDao vSkillDao = (VSkillDao) this.vSkillDao;
+	return vSkillDao.getAllVSkillOrdered();
 }
 
 /**
@@ -298,18 +316,6 @@ public List<VSkill> getToolByConcept(final String categoryName, final String con
 @Override
 public VSkill getSkillByTool(final String toolName) throws DataAccessException {
 	return vSkillDao.getSkillByTool(toolName);
-}
-
-/**
- * This method allow to get concept by category.
- * @return a list of Tool
- * @param categoryName a category name
- * @throws DataAccessException
- */
-@Override
-public List<VSkill> getConceptByCategory(final String categoryName)
-		throws DataAccessException {
-	return vSkillDao.getConceptByCategory(categoryName);
 }
 
 /**

@@ -30,15 +30,6 @@ List<Skill> getAllCollaboratorSkill(int collaboratorId);
 Skill getCollaboratorSkillByTool(int collaboratorId, int toolId);
 
 /**
- * Select all Collaborator's id by a toolId.
- * @author v.guillemain
- * @class ISkillDao.java
- * @param toolId : a toolId
- * @return all collaborator's id who has a competence on the tool specified
- */
-List<Integer> getAllCollaboratorsIdByToolId(int toolId);
-
-/**
  * Select all collaborator's Id by a toolId and a list of collaboratorId.
  * @author v.guillemain
  * @class ISkillDao.java

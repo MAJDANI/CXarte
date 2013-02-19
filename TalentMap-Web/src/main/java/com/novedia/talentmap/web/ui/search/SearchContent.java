@@ -56,7 +56,6 @@ public class SearchContent extends VerticalLayout {
 		this.searchTargetLabel = searchTargetLabel;
 		this.searchResultsLabel = searchResultsLabel;
 		
-		
 		buildObservators();
 		
 		mainBuild();

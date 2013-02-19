@@ -14,6 +14,10 @@ private Integer toolId;
  */
 private List<Integer> listCollaborators;
 /**
+ * listTools.
+ */
+private List<Integer> listTools;
+/**
  * get tool by integer.
  * @return int
  */
@@ -39,4 +43,18 @@ return listCollaborators;
 public void setListCollaborators(List<Integer> listCollaborators) {
 this.listCollaborators = listCollaborators;
 }
+/**
+ * @return a list id of tool's id.
+ */
+public List<Integer> getListTools() {
+	return listTools;
+}
+/**
+ * set a list of tool's id.
+ * @param listTools
+ */
+public void setListTools(List<Integer> listTools) {
+	this.listTools = listTools;
+}
+
 }

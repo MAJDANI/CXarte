@@ -28,6 +28,22 @@ public interface ISkillService {
 Skill getSkillByToolId(int collaboratorID, int toolId);
 
 /**
+ * Select all colleague's id who have skill with the tool id.
+ * @class ISkillService.java
+ * @param listToolId a tool Id
+ * @return List<Integer> a list of colleague's id
+ */
+List<Integer> getAllColleagueIdByToolId(Integer toolId);
+
+/**
+ * Select all colleague's id who have skill with one ore more tool id of the list.
+ * @class ISkillService.java
+ * @param listToolId a list of toolId
+ * @return List<Integer> a list of colleague's id
+ */
+List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId);
+
+/**
  * Select all Collaborator Skills By id (new version).
  * @class ISkillService.java
  * @param collabId a collabId
@@ -50,13 +66,11 @@ Map<Category, Map> getAllCollaboratorSkill(int collabId);
 List<Tool> getAllTools();
 
 /**
- * Select all VSkill By Category_Name and Concept_Name.
+ * Select all VSkills ordered by category and concept
  * @class ISkillService.java
- * @param categoryName a categoryName
- * @param conceptName a concept name
  * @return a list of VSkill
  */
-List<VSkill> getToolByConcept(String categoryName, String conceptName);
+List<VSkill> getAllVSkillOrdered(); 
 
 /**
  * Get One VSkill By Tool_Name.
@@ -65,15 +79,6 @@ List<VSkill> getToolByConcept(String categoryName, String conceptName);
  * @return a VSkill
  */
 VSkill getSkillByTool(String toolName);
-
-/**
- * Select all VSkill By Category_Name.
- * @class ISkillService.java
- * @param categoryName a category name
- * @return a list of VSkill
- * @throws DataAccessException
- */
-List<VSkill> getConceptByCategory(String categoryName);
 
 /**
  * Add One Skill.

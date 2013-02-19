@@ -196,6 +196,7 @@ public class ConstantsEnglish {
 	//private final String TAB_PROFILE_NAME = "Fiche Profil";
 	public static final String TAB_PROFILE_NAME = "Profile Data";
 	public static final String TAB_COLLAB_NAME = "Monitoring";
+
 	
 	/**
 	 * Constants for AdminAddSkillContent
@@ -236,4 +237,9 @@ public class ConstantsEnglish {
 	public static final String NEW_CONCEPT_WINDOW_ERROR = "Please enter a name and a category for the new concept";
 	public static final String NEW_CONCEPT_WINDOW_CAPTION_PROPERTY = "name";
 	
+
+	/**
+	 * Constants for Search by Skills
+	 */
+	public static final String SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND = "No colleague found";
 }

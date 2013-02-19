@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
-
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
@@ -60,7 +58,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Button edit;
 	private Button delete;
 	private Button cancel;
-	
 
 	/**
 	 * TalentMap Service
@@ -86,7 +83,7 @@ public class ManageSkillContent extends VerticalLayout implements
 			"Concept", "Outil" };
 	
 	public static final Object[] FIELD_ORDER_SKILL = new Object[] {
-			"category_name", "concept_name", "tool_name" };
+		"categoryName", "conceptName", "toolName" };
 	
 	// Constant
 	public static final int TYPE_CATEGORY = 1;
@@ -105,6 +102,13 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Integer currentCategoryId;
 	private Integer currentConceptId;
 	private Integer currentToolId;
+
+	// Dummy data
+	public static Object[] TOOLS = new String[] { "Spring", "tool1", "tool2",
+			"tool3", "tool4" };
+	public static Object[] CONCEPTS = new String[] { "IOC", "concept1",
+			"concept2", "concept3", "concept4" };
+	public static Object[] CATEGORIES = new String[] { "JAVA", ".NET" };
 
 	/**
 	 * Build the class AddSkillContent.java
@@ -213,7 +217,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		hLayoutButton.setMargin(true);
 		hLayoutButton.setSpacing(true);
 
-		this.save.setCaption("Enregistrer");
+		this.save.setCaption("Enrergistrer");
 		this.save.addListener(this);
 
 		this.cancel.setCaption("Annuler");
@@ -242,7 +246,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	public void buildTreeSkill() {
 
-		treeSkill.removeAllItems();
+		this.treeSkill.removeAllItems();
 		/**
 		 * We have to select all tools, all concepts and all categories
 		 */
@@ -250,48 +254,48 @@ public class ManageSkillContent extends VerticalLayout implements
 		buildAllList();
 
 		// Build the tree
-		treeSkill.setSelectable(true);
-		treeSkill.setNullSelectionAllowed(false);
-		treeSkill.addListener(this);
+		this.treeSkill.setSelectable(true);
+		this.treeSkill.setNullSelectionAllowed(false);
+		this.treeSkill.addListener(this);
 
-		for (Category ca : listCategory) {
+		for (Category ca : this.listCategory) {
 
-			treeSkill.addItem(ca.getId() + ":" + TYPE_CATEGORY + ":"
+			this.treeSkill.addItem(ca.getId() + ":" + TYPE_CATEGORY + ":"
 					+ ca.getName());
-			treeSkill.setItemCaption(ca.getId() + ":" + TYPE_CATEGORY
+			this.treeSkill.setItemCaption(ca.getId() + ":" + TYPE_CATEGORY
 					+ ":" + ca.getName(), ca.getName());
 
-			for (Concept co : listConcept) {
+			for (Concept co : this.listConcept) {
 
 				if (ca.getId().equals(co.getCategory().getId())) {
 
-					for (Tool t : listTool) {
+					for (Tool t : this.listTool) {
 
 						if (co.getId().equals(t.getConcept().getId())) {
 
-							treeSkill.addItem(co.getId() + ":"
+							this.treeSkill.addItem(co.getId() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName());
-							treeSkill.setItemCaption(co.getId() + ":"
+							this.treeSkill.setItemCaption(co.getId() + ":"
 									+ TYPE_CONCEPT + ":" + co.getName(),
 									co.getName());
 
-							treeSkill.setParent(
+							this.treeSkill.setParent(
 									co.getId() + ":" + TYPE_CONCEPT + ":"
 											+ co.getName(),
 									ca.getId() + ":" + TYPE_CATEGORY + ":"
 											+ ca.getName());
 
-							treeSkill.addItem(t.getId() + ":" + TYPE_TOOL
+							this.treeSkill.addItem(t.getId() + ":" + TYPE_TOOL
 									+ ":" + t.getName());
-							treeSkill.setItemCaption(t.getId() + ":"
+							this.treeSkill.setItemCaption(t.getId() + ":"
 									+ TYPE_TOOL + ":" + t.getName(),
 									t.getName());
 
-							treeSkill.setParent(t.getId() + ":"
+							this.treeSkill.setParent(t.getId() + ":"
 									+ TYPE_TOOL + ":" + t.getName(), co.getId()
 									+ ":" + TYPE_CONCEPT + ":" + co.getName());
 
-							treeSkill.setChildrenAllowed(t.getId() + ":"
+							this.treeSkill.setChildrenAllowed(t.getId() + ":"
 									+ TYPE_TOOL + ":" + t.getName(), false);
 
 						}
@@ -304,7 +308,7 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		}
 
-		body.addComponent(this.treeSkill);
+		this.body.addComponent(this.treeSkill);
 	}
 
 	/**
@@ -316,6 +320,32 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.listTool = this.adminService.getAllTools();
 		this.listConcept = this.adminService.getAllConcepts();
 		this.listCategory = this.adminService.getAllCategories();
+
+//		try {
+//		} catch (Exception e) {
+
+			// Build all lists, dummy data if database is down !
+
+//			for (int i = 0; i < 5; i++) {
+////				Tool t = new Tool(i + 1, i + 1, (String) TOOLS[i]);
+//				Tool t = Tool.Builder.builder().id(i+1).concept((Concept.Builder.builder().id(i+1).build())).name(TOOLS[i].toString()).build();
+//				this.listTool.add(t);
+//			}
+//
+//			for (int i = 0; i < 5; i++) {
+//				Random r = new Random();
+//				int categoryId = r.nextInt(2);
+//				Concept c = new Concept(i + 1, categoryId,
+//						(String) CONCEPTS[i], 3.0);
+//				this.listConcept.add(c);
+//			}
+//
+//			for (int i = 0; i < 2; i++) {
+//
+//				Category c = new Category(i, (String) CATEGORIES[i]);
+//				this.listCategory.add(c);
+//			}
+//		}
 	}
 
 	/**
@@ -337,9 +367,9 @@ public class ManageSkillContent extends VerticalLayout implements
 		if (categoryName != null && conceptName != null && toolName != null) {
 
 			VSkill vSkill = new VSkill();
-			vSkill.setCategory_name(categoryName.trim());
-			vSkill.setConcept_name(conceptName.trim());
-			vSkill.setTool_name(toolName.trim());
+			vSkill.setCategoryName(categoryName.trim());
+			vSkill.setConceptName(conceptName.trim());
+			vSkill.setToolName(toolName.trim());
 
 			try {
 
@@ -362,6 +392,25 @@ public class ManageSkillContent extends VerticalLayout implements
 		}
 	}
 
+	/**
+	 * Show the add view
+	 * 
+	 * @class ManageSkillContent.java
+	 */
+	public void addView() {
+
+		this.isNewSkill = true;
+
+		this.formSkill.setVisible(true);
+		this.treeSkill.setVisible(false);
+
+		// We initiate the form
+		VSkill newVskill = new VSkill();
+		this.formSkill.setItemDataSource(new BeanItem(newVskill));
+		this.formSkill.setReadOnly(false);
+
+		setManageButtonVisible(false);
+	}
 
 	/**
 	 * Update One Skikll (category, concept, tool)
@@ -384,20 +433,23 @@ public class ManageSkillContent extends VerticalLayout implements
 
 			if (this.currentCategoryId != null && this.currentConceptId == null
 					&& this.currentToolId == null) {
-				updateSkillCategory(this.currentVSkill.getCategory_name());
+
+				updateSkillCategory(this.currentVSkill.getCategoryName());
 			}
 
 			if (this.currentCategoryId != null && this.currentConceptId != null
 					&& this.currentToolId == null) {
-				updateSkillConcept(this.currentVSkill.getCategory_name(),
-						this.currentVSkill.getConcept_name());
+
+				updateSkillConcept(this.currentVSkill.getCategoryName(),
+						this.currentVSkill.getConceptName());
 			}
 
 			if (this.currentCategoryId != null && this.currentConceptId != null
 					&& this.currentToolId != null) {
-				updateSkillTool(this.currentVSkill.getCategory_name(),
-						this.currentVSkill.getConcept_name(),
-						this.currentVSkill.getTool_name());
+
+				updateSkillTool(this.currentVSkill.getCategoryName(),
+						this.currentVSkill.getConceptName(),
+						this.currentVSkill.getToolName());
 			}
 
 			// Re build the tree skill
@@ -411,9 +463,13 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @param categoryName
 	 */
 	private void updateSkillCategory(String categoryName) {
+
 		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
+		
 		try {
-			Map<String, Object> mapNotification = this.adminService.updateASkill(category, null, null);
+
+			Map<String, Object> mapNotification = this.adminService
+					.updateASkill(category, null, null);
 			CUtils.showMessage(mapNotification, getWindow());
 		} catch (Exception e) {
 
@@ -429,10 +485,20 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillConcept(String categoryName, String conceptName) {
 
-		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
-		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
+		// Category category = new Category(this.currentCategoryId,
+		// categoryName);
+		Category category = Category.builder().id(this.currentCategoryId)
+				.name(categoryName).build();
+		// Concept concept = new Concept(this.currentConceptId,
+		// this.currentCategoryId, conceptName);
+
+		Concept concept = Concept.builder().id(this.currentConceptId)
+				.category(category).name(categoryName).build();
+
 		try {
-			Map<String, Object> mapNotification = this.adminService.updateASkill(category, concept, null);
+
+			Map<String, Object> mapNotification = this.adminService
+					.updateASkill(category, concept, null);
 			CUtils.showMessage(mapNotification, getWindow());
 		} catch (Exception e) {
 
@@ -448,11 +514,16 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @param toolName
 	 */
 	private void updateSkillTool(String categoryName, String conceptName, String toolName) {
-		
+
+//		Category category = new Category(this.currentCategoryId, categoryName);
 		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
-		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
+//		Concept concept = new Concept(this.currentConceptId, this.currentCategoryId, conceptName);
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(categoryName).build();
+//		Tool tool = new Tool(this.currentToolId, this.currentConceptId, toolName);
 		Tool tool = Tool.builder().id(this.currentToolId).concept(concept).name(toolName).build();
+
 		try {
+
 			Map<String, Object> mapNotification = this.adminService.updateASkill(category, concept, tool);
 			CUtils.showMessage(mapNotification, getWindow());
 		} 
@@ -467,9 +538,12 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @class ManageSkillContent.java
 	 */
 	public void updateView() {
+
 		this.isNewSkill = false;
+
 		this.formSkill.setVisible(false);
 		this.treeSkill.setVisible(true);
+
 		setManageButtonVisible(true);
 	}
 	
@@ -543,19 +617,19 @@ public class ManageSkillContent extends VerticalLayout implements
 		if (this.formSkill.getField(FIELD_ORDER_SKILL[0]).isEnabled()) {
 			categoryName = (String) this.formSkill.getField(FIELD_ORDER_SKILL[0]).getValue();
 			categoryName = categoryName.trim();
-			this.currentVSkill.setCategory_name(categoryName);
+			this.currentVSkill.setCategoryName(categoryName);
 		}
 
 		if (this.formSkill.getField(FIELD_ORDER_SKILL[1]).isEnabled()) {
 			conceptName = (String) this.formSkill.getField(FIELD_ORDER_SKILL[1]).getValue();
 			conceptName = conceptName.trim();
-			this.currentVSkill.setConcept_name(conceptName);
+			this.currentVSkill.setConceptName(conceptName);
 		}
 
 		if (this.formSkill.getField(FIELD_ORDER_SKILL[2]).isEnabled()) {
 			toolName = (String) this.formSkill.getField(FIELD_ORDER_SKILL[2]).getValue();
 			toolName = toolName.trim();
-			this.currentVSkill.setTool_name(toolName);
+			this.currentVSkill.setToolName(toolName);
 		}
 	}
 
@@ -567,11 +641,11 @@ public class ManageSkillContent extends VerticalLayout implements
 	public boolean skillFieldAreEmpty() {
 
 		if ((this.formSkill.getField(FIELD_ORDER_SKILL[0]).isEnabled() && this.currentVSkill
-				.getCategory_name().length() == 0)
+				.getCategoryName().length() == 0)
 				|| (this.formSkill.getField(FIELD_ORDER_SKILL[1]).isEnabled() && this.currentVSkill
-						.getConcept_name().length() == 0)
+						.getConceptName().length() == 0)
 				|| (this.formSkill.getField(FIELD_ORDER_SKILL[2]).isEnabled() && this.currentVSkill
-						.getTool_name().length() == 0)) {
+						.getToolName().length() == 0)) {
 
 			return true;
 		} else {
@@ -587,16 +661,21 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		if (button == this.save) {
 
+			if (isNewSkill) {
+
+				this.addOneSkill();
+			} else {
+
 				this.updateOneSkill();
 
 				// Init the current Id to null
 				this.currentCategoryId = null;
 				this.currentConceptId = null;
 				this.currentToolId = null;
-				
-				updateView();
 			}
 
+			updateView();
+		}
 
 		if (button == this.edit) {
 
@@ -606,11 +685,20 @@ public class ManageSkillContent extends VerticalLayout implements
 		}
 
 		if (button == this.cancel) {
+			
+			if(isNewSkill){
+				
+				for(int i = 0; i < FIELD_ORDER_SKILL.length; i++){
+					
+					this.formSkill.getField(FIELD_ORDER_SKILL[i]).setValue(null);
+				}
+			}else{
 				
 				this.formSkill.setReadOnly(true);
 
 				setManageButtonVisible(true);
 			}
+		}
 
 		if (button == this.delete) {
 			
@@ -715,16 +803,20 @@ public class ManageSkillContent extends VerticalLayout implements
 		String conceptItemId = (String) this.treeSkill.getParent(itemId);
 		Map<String, Object> conceptItem = splitItemTree(conceptItemId);
 
-		String categoryItemId = (String) this.treeSkill.getParent(conceptItemId);
+		String categoryItemId = (String) this.treeSkill
+				.getParent(conceptItemId);
 		Map<String, Object> categoryItem = splitItemTree(categoryItemId);
 
-		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(categoryItem.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setValue(
+				categoryItem.get("name"));
 		this.formSkill.getField(FIELD_ORDER_SKILL[0]).setEnabled(true);
 
-		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(conceptItem.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setValue(
+				conceptItem.get("name"));
 		this.formSkill.getField(FIELD_ORDER_SKILL[1]).setEnabled(true);
 
-		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setValue(item.get("name"));
+		this.formSkill.getField(FIELD_ORDER_SKILL[2])
+				.setValue(item.get("name"));
 		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(true);
 
 		this.currentCategoryId = (Integer) categoryItem.get("id");

@@ -111,7 +111,7 @@ public class Tool implements Serializable, Comparable {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ").append("name=")
 				.append(getName()).append(", ").append("Concept=")
-				.append(getConcept().getName()).append("]");
+				.append(getConcept()).append("]");
 		return strBld.toString();
 	}
 	

@@ -26,20 +26,12 @@ setSqlMapClient(sqlMapClient);
 }
 
 /**
- * This method allow to get the tool by concept.
- * @param categoryName
- * @param conceptName
- * @return list of VSkill
+ * @return all VSkill ordered by category and concept
  * @throws DataAccessException
  */
 @SuppressWarnings("unchecked")
-public List<VSkill> getToolByConcept(String categoryName, String conceptName) throws DataAccessException {
-	// TODO : A REVOIR un tableau de String devrait suffire
-	Map<String, String> mapName = new HashMap<String, String>();
-	mapName.put("categoryName", categoryName);
-	mapName.put("conceptName", conceptName);
-return this.getSqlMapClientTemplate()
-.queryForList(DBRequestsConstants.GET_TOOL_BY_CONCEPT, mapName);
+public List<VSkill> getAllVSkillOrdered() throws DataAccessException {
+	return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_VSKILL_ORDERED);
 }
 
 /**
@@ -53,15 +45,4 @@ return (VSkill) this.getSqlMapClientTemplate()
 .queryForObject(DBRequestsConstants.GET_SKILL_BY_TOOL, toolName);
 }
 
-/**
- * @return a list of VSkill
- * @param categoryName a categoryName
- * @throws DataAccessException
- */
-@SuppressWarnings("unchecked")
-@Override
-public List<VSkill> getConceptByCategory(final String categoryName) throws DataAccessException {
-return this.getSqlMapClientTemplate()
-.queryForList(DBRequestsConstants.GET_CONCEPT_BY_CATEGORY, categoryName);
-}
 }

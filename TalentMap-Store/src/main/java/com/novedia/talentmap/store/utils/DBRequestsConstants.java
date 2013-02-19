@@ -64,6 +64,10 @@ public static final String CHECK_REGISTRATION = "colleague.check";
  */
 public static final String ADD_COLLEAGUE_FROM_REGISTRATION = "colleague.addColleagueFromRegistration";
 /**
+ * Constant request to get all colleagues by a list of colleague's id
+ */
+public static final String GET_ALL_COLLEAGUE_BY_COLL_ID_LIST = "colleague.getAllColleagueByColleagueIdList";
+/**
  * Constant request to get all consultant manager
  */
 public static final String GET_ALL_CONSULTANT_MANAGER = "colleague.getAllConsultantManager";
@@ -287,9 +291,14 @@ public static final String ADD_SKILL = "skill.add";
 public static final String SAVE_SKILL = "skill.save";
 
 /**
- * Constant request to get all collaborators by tool.
+ * Constant request to get all collaborators by a list of tool.
  */
-public static final String GET_ALL_COLLABORATORS_BY_TOOL = "skill.getAllCollaboratorsIdByTool";
+public static final String GET_ALL_COLLEAGUE_ID_BY_TOOL_ID = "skill.getAllColleagueIdByToolId";
+
+/**
+ * Constant request to get all collaborators by a list of tool.
+ */
+public static final String GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID = "skill.getAllColleagueIdByListToolId";
 
 /**
  * This constant is used to retrieve all collaborator by tool.
@@ -352,14 +361,14 @@ public static final String GET_ALL_SKILL_COLLAB = "vskillCollab.getAllSkillColla
 public static final String GET_SKILL_BY_TOOL = "vskill.getSkillByTool";
 
 /**
+ * This constant is used to retrieve all VSkill ordered by category and concept.
+ */
+public static final String GET_ALL_VSKILL_ORDERED = "vskill.getAllVSkillOrdered";
+
+/**
  * This constant is used to retrieve a concept by category.
  */
 public static final String GET_CONCEPT_BY_CATEGORY = "vskill.getConceptByCategory";
-
-/**
- * This constant is used to retrieve a tool by concept.
- */
-public static final String GET_TOOL_BY_CONCEPT = "vskill.getToolByConcept";	
 
 /**
  * Constant request to delete a collaborator.

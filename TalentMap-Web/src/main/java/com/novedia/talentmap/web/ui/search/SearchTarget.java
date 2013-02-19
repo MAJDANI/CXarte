@@ -1,32 +1,33 @@
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
-import com.novedia.talentmap.services.IMissionService;
 import com.novedia.talentmap.services.ISkillService;
-import com.novedia.talentmap.web.commons.Constants;
-import com.novedia.talentmap.web.ui.registration.RegistrationForm;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchContent;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.CheckBox;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
 public class SearchTarget extends VerticalLayout implements ClickListener,TextChangeListener,
@@ -61,7 +62,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * POJO
 	 */
 	private List<Colleague> listCollab;
-	private List<CheckBox> listCheckBoxSkills;
+	private Tree treeSkills;
 
 	/**
 	 * 
@@ -79,7 +80,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
 			Panel searchBySkillsPanel, Select clientNameSelect,
 			TextField fieldName, Button search, List<Colleague> listCollab,
-			IColleagueService collabService, ISkillService skillService,IClientService clientService, List<CheckBox> listCheckBoxSkills) {
+			IColleagueService collabService, ISkillService skillService,IClientService clientService, Tree treeSkills) {
 		super();
 		this.searchByClientPanel = searchByClientPanel;
 		this.searchByNamePanel = searchByNamePanel;
@@ -91,8 +92,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		this.collabService = collabService;
 		this.skillService = skillService;
 		this.clientService = clientService;
-		this.listCheckBoxSkills = listCheckBoxSkills;
-
+		this.treeSkills = treeSkills;
 		buildMain();
 	}
 
@@ -154,18 +154,59 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		this.searchByNamePanel.addComponent(this.fieldName);
 		
 		//Build the Skills Panel
-		List<Tool> listTools = this.skillService.getAllTools();
-		Collections.sort(listTools);
+		List<VSkill> listVSkill = this.skillService.getAllVSkillOrdered();
+		treeSkills = new Tree("Skills");
+		treeSkills.setMultiSelect(true);
 		
-		for(Tool tool : listTools){
+		Integer currentCategoryId;
+		Integer currentConceptId;
+		Integer lastCategoryId = -1;
+		Integer lastConceptId = -1;
+
+		for(VSkill vSkill : listVSkill){
 			
-			CheckBox checkBox = new CheckBox(tool.getName());
-			checkBox.setData(tool.getId());
+			currentCategoryId = vSkill.getCategoryId();
+			currentConceptId = vSkill.getConceptId();
+			Category categorie = Category.builder().build();
+			Concept concept = Concept.builder().build();
+			Tool tool = Tool.builder().build();
 			
-			this.listCheckBoxSkills.add(checkBox);
-			this.searchBySkillsPanel.addComponent(checkBox);
+			//Si on a une nouvelle catégorie à traiter
+			if(currentCategoryId != lastCategoryId) {
+				//On ajoute la categorie
+				String catName = vSkill.getCategoryName();
+				categorie = Category.builder().id(currentCategoryId).name(catName).build();
+				treeSkills.addItem(categorie);
+				treeSkills.setItemCaption(categorie, catName);
+				lastCategoryId = currentCategoryId;
+			}	
+			
+			//Si on a un nouveau concept à traiter
+			if(currentConceptId != lastConceptId) {
+				String conceptName = vSkill.getConceptName();
+				concept = Concept.builder().id(currentConceptId).name(conceptName).build();
+				// On ajoute le concept en tant que nouvel Item.
+				treeSkills.addItem(concept);
+				treeSkills.setItemCaption(concept, conceptName);
+
+	            // On le positionne comme enfant de la categorie
+				treeSkills.setParent(concept, categorie);
+	            lastConceptId = currentConceptId;
+			} 
+			String toolName = vSkill.getToolName();
+			tool = Tool.builder().id(vSkill.getToolId()).name(toolName).build();
+			// On ajoute le tool en tant que nouvel Item.
+			treeSkills.addItem(tool);
+			treeSkills.setItemCaption(tool, toolName);
+            // On le positionne comme enfant de la categorie
+			treeSkills.setParent(tool, concept);
+				
+            // Make the moons look like leaves.
+			treeSkills.setChildrenAllowed(tool, false);
+			
 		}
 		
+		this.searchBySkillsPanel.addComponent(treeSkills);
 		addComponent(this.searchByClientPanel);
 		addComponent(this.searchByNamePanel);
 		addComponent(this.searchBySkillsPanel);
@@ -283,32 +324,36 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			//---------------------------------------------------------
 			if (this.searchBySkillsPanel.isVisible()) {
 
+				//Get all collaborators who has all skills requested
+				this.listCollab =  getListTooIdChecked();
+				updateObservateur();
+				
 				//Check the skill's list isn't empty
-				if(!this.listCheckBoxSkills.isEmpty()){
-					List<Integer> listToolId = new ArrayList<Integer>();
-					List<Integer> listSize = new ArrayList<Integer>();
-					
-					//Get all toolIds checked by the user
-					listToolId = getListTooIdChecked();
-					listSize.add(listToolId.size());
-					
-					//We create a Map with 2 keys : 
-					//         - listSize = the list size
-					//         - listId = the tools id list
-					//This map is used for the request by ibatis (see sqlmap-colleague.xml)
-					Hashtable<String,List<Integer>> mapToolId = new Hashtable<String,List<Integer>>();
-					mapToolId.put("listSize", listSize);
-					mapToolId.put("listId", listToolId);
-					try {
-						//Get all collaborators who has all skills requested
-						this.listCollab =  this.collabService.getAllColleaguesByListToolId(mapToolId);
-						updateObservateur();
-						
-					} catch (Exception e) {
-					
-						e.printStackTrace();
-					}
-				}
+//				if(!this.listCheckBoxSkills.isEmpty()){
+//					List<Integer> listToolId = new ArrayList<Integer>();
+//					List<Integer> listSize = new ArrayList<Integer>();
+//					
+//					//Get all toolIds checked by the user
+//					listToolId = getListTooIdChecked();
+//					listSize.add(listToolId.size());
+//					
+//					//We create a Map with 2 keys : 
+//					//         - listSize = the list size
+//					//         - listId = the tools id list
+//					//This map is used for the request by ibatis (see sqlmap-colleague.xml)
+//					Hashtable<String,List<Integer>> mapToolId = new Hashtable<String,List<Integer>>();
+//					mapToolId.put("listSize", listSize);
+//					mapToolId.put("listId", listToolId);
+//					try {
+//						//Get all collaborators who has all skills requested
+//						this.listCollab =  this.collabService.getAllColleaguesByListToolId(mapToolId);
+//						updateObservateur();
+//						
+//					} catch (Exception e) {
+//					
+//						e.printStackTrace();
+//					}
+//				}
 			}
 		}
 	}
@@ -371,16 +416,109 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * Renvoie la liste des identifiants des outils cochés dans le Panel de checherche par Compétence
 	 * @return
 	 */
-	private List<Integer> getListTooIdChecked() {
-		List<Integer> listToolIdChecked = new ArrayList<Integer>();
+	private List<Colleague> getListTooIdChecked() {
+		List<Integer> listToolId = new ArrayList<Integer>();
+		List<Integer> listSize = new ArrayList<Integer>();
+		
+		List<Colleague> listColleague = new ArrayList<Colleague>();
+		List<Integer> listColleagueId = new ArrayList<Integer>();
+		List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
+		
+		Collection<Object> lesItemId =(Collection<Object>)this.treeSkills.getContainerDataSource().getItemIds();
+		Boolean noColleagueFound = false;
+		Boucle: for( Object item : lesItemId ) {
+			
+			if(treeSkills.isSelected(item)) {
+				System.out.println("item selected" + item);
+				if (item  instanceof Category) {
+					//On veut des comptétences sur une catégorie entière
+					//On va collecter tous les outils de la catégorie
+					//et identifier les id collaborateur qui ont une compétence sur
+					//au moins un de ces outils
+					Collection lesConceptsFils = this.treeSkills.getChildren(item);
+					System.out.println("lesFils de la catégorie=" + lesConceptsFils);
+					
+					List<Integer> listToolIdForCategory = new ArrayList<Integer>();
+					
+					for( Object concepFils : lesConceptsFils ) {
+						Collection lesToolsPetitsFils = this.treeSkills.getChildren(concepFils);
+						for(Object toolPetitFils : lesToolsPetitsFils ) {
+							Tool tool = (Tool)toolPetitFils;
+							listToolIdForCategory.add(tool.getId());
+						}
+					}
+					//Récupérer les id collab ayant au moins un tool de la catégorie
+					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByListToolId(listToolIdForCategory));
+					//Si notre liste résultat listColleagueId contenait déjà des id collab, on ne garde que les
+					//id collab en commun dans les 2 listes
+					//sinon, on ajoute simplement les éléments de listColleagueIdTemp à la liste résultat
+					if(!listColleagueId.isEmpty()) {
+						listColleagueId.retainAll(listColleagueIdTemp);
+					} else {
+						listColleagueId.addAll(listColleagueIdTemp);
+					}
+					//Si la séléction utilisateur ne donne déjà pas de résultat, on sort
+					//de la boucle
+					if (listColleagueId.isEmpty()) {
+						noColleagueFound = true;
+						break Boucle;
+					}
+					listColleagueIdTemp.clear();
+					System.out.println("listColleagueId=" + listColleagueId);
+					
+				} else if (item  instanceof Concept) {
+					Collection lesToolFils = this.treeSkills.getChildren(item);
+					System.out.println("lesFils du concept=" + lesToolFils);
 
-		if(!this.listCheckBoxSkills.isEmpty()){
-			for (CheckBox checkBox : listCheckBoxSkills) {
-				boolean checked = checkBox.booleanValue();
-				if(checked) listToolIdChecked.add((Integer)checkBox.getData());
+					//On veut des comptétences sur un concept entier
+					//On va collecter tous les outils du concept
+					//et identifier les id collaborateur qui ont une compétence sur
+					//au moins un de ces outils
+					List<Integer> listToolIdForConcept = new ArrayList<Integer>();
+					for(Object toolFils : lesToolFils ) {
+						Tool tool = (Tool)toolFils;
+						listToolIdForConcept.add(tool.getId());
+					}
+					//Récupérer les id collab ayant au moins un tool du concept
+					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByListToolId(listToolIdForConcept));
+					if(!listColleagueId.isEmpty()) {
+						listColleagueId.retainAll(listColleagueIdTemp);
+					}else {
+						listColleagueId.addAll(listColleagueIdTemp);
+					}
+					if (listColleagueId.isEmpty()) {
+						noColleagueFound = true;
+						break Boucle;
+					}
+					listColleagueIdTemp.clear();
+					System.out.println("listColleagueId=" + listColleagueId);
+				
+				} else {
+					//C'est un Tool qui est sélectionné
+					Tool toolSelected = (Tool)item;
+					//Récupérer les id collab ayant une compétence sur ce tool
+					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByToolId(toolSelected.getId()));
+					if(!listColleagueId.isEmpty()) {
+						listColleagueId.retainAll(listColleagueIdTemp);
+					} else {
+						listColleagueId.addAll(listColleagueIdTemp);
+					}
+					if (listColleagueId.isEmpty()) {
+						noColleagueFound = true;
+						break Boucle;
+					}
+					listColleagueIdTemp.clear();
+					System.out.println("listColleagueId=" + listColleagueId);
+				}
 			}
 		}
-		return listToolIdChecked;
+		//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
+		if(noColleagueFound == false) {
+			listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
+		} else {
+			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
+		}
+		return listColleague;
 	}
 	/**
 	 * Get the searchByClientPanel value
@@ -543,20 +681,13 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void setListCollab(List<Colleague> listCollab) {
 		this.listCollab = listCollab;
 	}
-	
-	/**
-	 * Get the listCheckBoxSkills value
-	 * @return the listCheckBoxSkills
-	 */
-	public List<CheckBox> getListCheckBoxSkills() {
-		return listCheckBoxSkills;
+
+	public Tree getTreeSkills() {
+		return treeSkills;
 	}
 
-	/**
-	 * Set the listCheckBoxSkills value
-	 * @param listCheckBoxSkills the listCheckBoxSkills to set
-	 */
-	public void setListCheckBoxSkills(List<CheckBox> listCheckBoxSkills) {
-		this.listCheckBoxSkills = listCheckBoxSkills;
+	public void setTreeSkills(Tree treeSkills) {
+		this.treeSkills = treeSkills;
 	}
+	
 }

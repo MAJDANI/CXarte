@@ -481,8 +481,8 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		//TODO Question : un appel à la base à chaque sélection d'outil dans la combo?
 		VSkill skill = skillService.getSkillByTool(toolName);
 
-		this.conceptLabel.setValue(skill.getConcept_name());
-		this.categoryLabel.setValue(skill.getCategory_name());
+		this.conceptLabel.setValue(skill.getConceptName());
+		this.categoryLabel.setValue(skill.getCategoryName());
 
 	}
 

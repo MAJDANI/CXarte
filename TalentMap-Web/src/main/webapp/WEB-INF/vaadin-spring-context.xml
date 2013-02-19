@@ -454,11 +454,11 @@
 	<bean id="clientNameSelect" class="com.vaadin.ui.Select"/>
 	<bean id="searchButton" class="com.vaadin.ui.Button"/>
 	<bean id="listSearchCollaborator" class="java.util.ArrayList"/>
-	<bean id="listCheckBoxSkills" class="java.util.ArrayList"/>
+	<bean id="treeSkills" class="com.vaadin.ui.Tree"/>
 	
 	<bean id="searchTargetBean" class="com.novedia.talentmap.web.ui.search.SearchTarget">
 		<constructor-arg name="listCollab" ref="listSearchCollaborator"/>
-		<constructor-arg name="listCheckBoxSkills" ref="listCheckBoxSkills"/>
+		<constructor-arg name="treeSkills" ref="treeSkills"/>
 		<constructor-arg name="collabService" ref="collaboratorService" />
 		<constructor-arg name="skillService" ref="skillService"/>
 		<constructor-arg name="clientService" ref="clientService"/>

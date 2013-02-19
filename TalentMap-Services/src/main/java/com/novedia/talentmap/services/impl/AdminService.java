@@ -134,10 +134,10 @@ public List<Concept> getAllConceptByCategory(Category category) throws DataAcces
 void saveCategory(final VSkill skill) throws DataAccessException {
 
 	int categoryId;
-	this.category = this.categoryDao.check(skill.getCategory_name());
+	this.category = this.categoryDao.check(skill.getCategoryName());
 
 	if (this.category == null && this.tool == null) {
-		this.category = Category.builder().name(skill.getCategory_name()).build();
+		this.category = Category.builder().name(skill.getCategoryName()).build();
 		categoryId = this.categoryDao.save(this.category);
 	} 
 }
@@ -150,10 +150,10 @@ void saveCategory(final VSkill skill) throws DataAccessException {
 void saveConcept(final VSkill skill) {
 
 	if (this.category != null) {
-		this.concept = this.conceptDao.check(skill.getConcept_name());
+		this.concept = this.conceptDao.check(skill.getConceptName());
 
 		if (this.concept == null && this.tool == null) {
-			this.concept = Concept.builder().name(skill.getConcept_name()).category(this.category).build();
+			this.concept = Concept.builder().name(skill.getConceptName()).category(this.category).build();
 			this.conceptDao.save(this.concept);
 		}
 	}
@@ -167,12 +167,12 @@ void saveConcept(final VSkill skill) {
 Tool saveTool(final VSkill skill) throws DataAccessException {
 
 	if (this.tool == null) {
-		this.tool = Tool.builder().name(skill.getTool_name()).concept(this.concept).build();
+		this.tool = Tool.builder().name(skill.getToolName()).concept(this.concept).build();
 		Tool.builder().id(this.toolDao.save(this.tool)).build();
 	} 
 	else {
 		VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());	
-		this.category = Category.builder().name(sk.getCategory_name()).build();
+		this.category = Category.builder().name(sk.getCategoryName()).build();
 		
 		// TODO : vérifier la nécessité de ce code
 		//this.concept.setName(sk.getConcept_name());
@@ -188,7 +188,7 @@ Tool saveTool(final VSkill skill) throws DataAccessException {
 @Override
 public Map<String, Object> addSkill(VSkill skill) throws DataAccessException {
 
-	this.tool = this.toolDao.check(skill.getTool_name());
+	this.tool = this.toolDao.check(skill.getToolName());
 	saveCategory(skill);
 	saveConcept(skill);
 

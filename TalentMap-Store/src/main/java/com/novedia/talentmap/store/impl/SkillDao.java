@@ -129,16 +129,31 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	}
 
 	/**
-	 * Select all Collaborators Id By toolId.
+	 * Select all Collaborators Id By a toolId.
 	 * 
 	 * @param toolId
-	 *            : a toolId
+	 *            : a tool Id
 	 * @return all collaborator's id who has a competence on the tool specified
 	 * @author v.guillemain
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Integer> getAllCollaboratorsIdByToolId(int toolId) throws DataAccessException {
-		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLABORATORS_BY_TOOL, toolId);
+	public List<Integer> getAllColleagueIdByToolId(Integer toolId) throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_TOOL_ID, toolId);
+	}
+
+	/**
+	 * Select all Collaborators Id By a list of toolId.
+	 * 
+	 * @param listToolId
+	 *            : a list of toolId
+	 * @return all collaborator's id who has a competence on one or more of the tools specified
+	 * @author v.guillemain
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId) throws DataAccessException {
+		SkillParameter skillParameter = new SkillParameter();
+		skillParameter.setListTools(listToolId);
+		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID, skillParameter);
 	}
 
 	/**

@@ -109,16 +109,23 @@ List<Colleague> getAllColleaguesByLastName(String lastName);
 List<Colleague> getAllColleaguesByClient(Client client);
 
 /**
- * Get all Collaborators by toolId.
+ * Get all Colleagues by toolId.
  * @param toolId a toolId
  * @return List<Colleague>
  */
 List<Colleague> getAllCollaboratorsByToolId(Integer toolId);
 
 /**
- * Select all Collaborators by a list of toolId.
+ * Select all Colleagues by a list of toolId.
  * @param listToolId a listTool
  * @return List<Colleague>
  */
 List<Colleague> getAllColleaguesByListToolId(Map toolIdMap);
+
+/**
+ * Select all Colleagues by a list of colleagueId.
+ * @param listColleagueId a list of colleague's Id
+ * @return List<Colleague>
+ */
+List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId);
 }

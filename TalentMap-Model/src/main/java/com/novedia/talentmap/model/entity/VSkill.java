@@ -21,31 +21,51 @@ public class VSkill  implements Serializable {
 	private static final long serialVersionUID = 1160292151144778521L;
 	
 	/**
+	 * category id associated the VSKill
+	 */
+	private Integer categoryId;
+	
+	/**
 	 * category name associated the VSKill
 	 */
-	private String category_name;
+	private String categoryName;
 	
+	/**
+	 * concept id associated the VSKill
+	 */
+	private Integer conceptId;
+
 	/**
 	 * concept name associated the VSKill
 	 */
-	private String concept_name;
+	private String conceptName;
+	
+	/**
+	 * tool id associated the VSKill
+	 */
+	private Integer toolId;
 	
 	/**
 	 * tool name associated the VSKill
 	 */
-	private String tool_name;
+	private String toolName;
 	
 	/**
 	 * Build the class VSkill.java 
-	 * @param category_name
-	 * @param concept_name
-	 * @param tool_name
+	 * @param categoryName
+	 * @param conceptName
+	 * @param toolName
 	 */
-	public VSkill(String category_name, String concept_name, String tool_name) {
+	public VSkill(Integer categoryId, String categoryName, 
+			Integer conceptId, String conceptName, 
+			Integer toolId, String toolName) {
 		super();
-		this.category_name = category_name;
-		this.concept_name = concept_name;
-		this.tool_name = tool_name;
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.conceptId = conceptId;
+		this.conceptName = conceptName;
+		this.toolId = toolId;
+		this.toolName = toolName;
 	}
 	/**
 	 * Build the class VSkill.java 
@@ -53,47 +73,90 @@ public class VSkill  implements Serializable {
 	public VSkill() {
 		super();
 	}
+	
 	/**
-	 * Get the tool_name value
-	 * @return the tool_name
+	 * Get the toolId value
+	 * @return the toolId
 	 */
-	public String getTool_name() {
-		return tool_name;
+	public Integer getToolId() {
+		return toolId;
 	}
 	/**
-	 * Set the tool_name value
-	 * @param tool_name the tool_name to set
+	 * Set the toolId value
+	 * @param toolId the toolId to set
 	 */
-	public void setTool_name(String tool_name) {
-		this.tool_name = tool_name;
+	public void setToolId(Integer toolId) {
+		this.toolId = toolId;
 	}
 	/**
-	 * Get the category_name value
-	 * @return the category_name
+	 * Get the toolName value
+	 * @return the toolName
 	 */
-	public String getCategory_name() {
-		return category_name;
+	public String getToolName() {
+		return toolName;
 	}
 	/**
-	 * Set the category_name value
-	 * @param category_name the category_name to set
+	 * Set the toolName value
+	 * @param toolName the toolName to set
 	 */
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setToolName(String toolName) {
+		this.toolName = toolName;
 	}
 	/**
-	 * Get the concept_name value
-	 * @return the concept_name
+	 * Get the CategoryId value
+	 * @return the CategoryId
 	 */
-	public String getConcept_name() {
-		return concept_name;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 	/**
-	 * Set the concept_name value
-	 * @param concept_name the concept_name to set
+	 * Set the CategoryId value
+	 * @param CategoryId the CategoryId to set
 	 */
-	public void setConcept_name(String concept_name) {
-		this.concept_name = concept_name;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	/**
+	 * Get the CategoryName value
+	 * @return the CategoryName
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+	/**
+	 * Set the CategoryName value
+	 * @param CategoryName the CategoryName to set
+	 */
+	public void setCategoryName(String CategoryName) {
+		this.categoryName = CategoryName;
+	}
+	/**
+	 * Get the conceptId value
+	 * @return the conceptId
+	 */
+	public Integer getConceptId() {
+		return conceptId;
+	}
+	/**
+	 * Set the conceptId value
+	 * @param conceptId the conceptId to set
+	 */
+	public void setConceptId(Integer conceptId) {
+		this.conceptId = conceptId;
+	}
+	/**
+	 * Get the conceptName value
+	 * @return the conceptName
+	 */
+	public String getConceptName() {
+		return conceptName;
+	}
+	/**
+	 * Set the conceptName value
+	 * @param conceptName the conceptName to set
+	 */
+	public void setConceptName(String conceptName) {
+		this.conceptName = conceptName;
 	}
 	/**
 	 * hash code method
@@ -101,9 +164,9 @@ public class VSkill  implements Serializable {
 	@Override
 	public int hashCode() {
 		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getCategory_name());
-		hashBuilder.append(this.getTool_name());
-		hashBuilder.append(this.getConcept_name());
+		hashBuilder.append(this.getCategoryName());
+		hashBuilder.append(this.getToolName());
+		hashBuilder.append(this.getConceptName());
 		return hashBuilder.hashCode();
 	}
 	/**
@@ -121,9 +184,9 @@ public class VSkill  implements Serializable {
 	
 		VSkill comparedObj = (VSkill)obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getCategory_name(), comparedObj.getCategory_name());
-		ebuilder.append(this.getTool_name(), comparedObj.getTool_name());
-		ebuilder.append(this.getConcept_name(), comparedObj.getConcept_name());
+		ebuilder.append(this.getCategoryName(), comparedObj.getCategoryName());
+		ebuilder.append(this.getToolName(), comparedObj.getToolName());
+		ebuilder.append(this.getConceptName(), comparedObj.getConceptName());
 		return ebuilder.isEquals();
 	}
 
@@ -134,9 +197,12 @@ public class VSkill  implements Serializable {
 	public String toString() {
 	
 		StringBuilder strBld = new StringBuilder(); 
-		strBld.append("[category_name=").append(getCategory_name()).append(", ");
-		strBld.append("[tool_name=").append(getTool_name()).append(", ");
-		strBld.append("[concept_name=").append(getConcept_name()).append("]");
+		strBld.append("[categoryId=").append(getCategoryId()).append(", ");
+		strBld.append("categoryName=").append(getCategoryName()).append(", ");
+		strBld.append("toolId=").append(getToolId()).append(", ");
+		strBld.append("toolName=").append(getToolName()).append(", ");
+		strBld.append("conceptId=").append(getConceptId()).append(",");
+		strBld.append("conceptName=").append(getConceptName()).append("]");
 		return strBld.toString();	
 	}	
 	
@@ -161,9 +227,12 @@ public class VSkill  implements Serializable {
 	 */
 	@SuppressWarnings("unused")
 	private VSkill(final Builder builder){
-		this.category_name = builder.category_name;
-		this.concept_name = builder.concept_name;
-		this.tool_name = builder.tool_name;
+		this.categoryId = builder.categoryId;
+		this.categoryName = builder.categoryName;
+		this.conceptId = builder.conceptId;
+		this.conceptName = builder.conceptName;
+		this.toolId = builder.toolId;
+		this.toolName = builder.toolName;
 	}
 	
 	/**
@@ -172,51 +241,92 @@ public class VSkill  implements Serializable {
 	 *
 	 */
 	public static final class Builder{
+		
+		/**
+		 * category id associated the VSKill
+		 */
+		private Integer categoryId;
 		/**
 		 * category name associated the VSKill
 		 */
-		private String category_name;
-		
+		private String categoryName;
+		/**
+		 * concept id associated the VSKill
+		 */
+		private Integer conceptId;
 		/**
 		 * concept name associated the VSKill
 		 */
-		private String concept_name;
-		
+		private String conceptName;
+		/**
+		 * tool id associated the VSKill
+		 */
+		private Integer toolId;
 		/**
 		 * tool name associated the VSKill
 		 */
-		private String tool_name;
-		
+		private String toolName;
+
 		/**
-		 * Constructor with parameter category_name.
-		 * @param category_name
+		 * Constructor with parameter categoryId.
+		 * @param categoryId
 		 * @return the builder
 		 */
-		public Builder categoryName(final String category_name) {
-			this.category_name = category_name;
+		public Builder categoryId(final Integer categoryId) {
+			this.categoryId = categoryId;
+			return this;
+		}
+
+		/**
+		 * Constructor with parameter categoryName.
+		 * @param categoryName
+		 * @return the builder
+		 */
+		public Builder categoryName(final String categoryName) {
+			this.categoryName = categoryName;
+			return this;
+		}
+
+		/**
+		 * Constructor with parameter conceptName.
+		 * @param conceptName
+		 * @return the builder
+		 */
+		public Builder conceptName(final String conceptName) {
+			this.conceptName = conceptName;
 			return this;
 		}
 		
 		/**
-		 * Constructor with parameter concept_name.
-		 * @param concept_name
+		 * Constructor with parameter conceptId.
+		 * @param conceptId
 		 * @return the builder
 		 */
-		public Builder conceptName(final String concept_name) {
-			this.concept_name = concept_name;
+		public Builder conceptId(final Integer conceptId) {
+			this.conceptId = conceptId;
 			return this;
 		}
-		
+
 		/**
-		 * Constructor with parameter tool_name.
-		 * @param tool_name
+		 * Constructor with parameter toolName.
+		 * @param toolName
 		 * @return the builder
 		 */
-		public Builder toolName(final String tool_name) {
-			this.tool_name = tool_name;
+		public Builder toolName(final String toolName) {
+			this.toolName = toolName;
 			return this;
 		}
-		
+
+		/**
+		 * Constructor with parameter toolId.
+		 * @param toolId
+		 * @return the builder
+		 */
+		public Builder toolId(final Integer toolId) {
+			this.toolId = toolId;
+			return this;
+		}
+
 		/**
 		 * Build VSkill
 		 * @return VSkill

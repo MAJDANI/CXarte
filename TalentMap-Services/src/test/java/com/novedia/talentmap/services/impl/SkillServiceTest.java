@@ -200,30 +200,7 @@ public class SkillServiceTest {
 		Assert.assertEquals(expectedToolsList, tools);		
 	}
 	
-	@Test
-	public void getToolByConceptReturnAListOfVSkill(){
-		
-		//Given
-		String categoryName = "categoryName";
-		String conceptName =  "conceptName";
-		
-		VSkill vskill = new VSkill();
-		vskill.setCategory_name("Java");
-		vskill.setConcept_name("concept_name");
-		vskill.setTool_name("tool_name");
-		
-		List<VSkill> vskillExpected = new ArrayList<VSkill>();
-		vskillExpected.add(vskill);
-		
-		//When 
-		Mockito.when(vSkillDaoMock.getToolByConcept(categoryName, conceptName)).thenReturn(vskillExpected);
-		List<VSkill> vskillActuel = service.getToolByConcept(categoryName, conceptName);
-		
-		//Then
-		Assert.assertNotNull(vskillActuel);
-		assertSame(vskillExpected, vskillActuel);	
-	}
-	
+
 	@Test(expected = DataAccessException.class)
 	public void getToolByConceptDataAccessException() throws DataAccessException{
 		
@@ -243,7 +220,7 @@ public class SkillServiceTest {
 		String toolName = "toolName";
 		
 		VSkill vskillExpected = new VSkill();
-		vskillExpected.setTool_name("tool_name");
+		vskillExpected.setToolName("tool_name");
 		
 		//When
 		Mockito.when(vSkillDaoMock.getSkillByTool(toolName)).thenReturn(vskillExpected);
@@ -266,44 +243,6 @@ public class SkillServiceTest {
 		service.getSkillByTool(toolName);	
 	}
 	
-	@Test
-	public void getConceptByCategoryReturnAListOfVSkill(){
-		
-		//Given
-		String categoryName = "categoryName";
-		String toolName = "tool_name";
-		String conceptName = "conceptName";
-		
-		VSkill vskill = new VSkill();
-		vskill.setTool_name(toolName);
-		vskill.setCategory_name(categoryName);
-		vskill.setConcept_name(conceptName);
-		
-		List<VSkill> vskillExpected = new ArrayList<VSkill>();
-		vskillExpected.add(vskill);
-		
-		//When
-		Mockito.when(vSkillDaoMock.getConceptByCategory(categoryName)).thenReturn(vskillExpected);
-		List<VSkill> vskillActuel = service.getConceptByCategory(categoryName); 
-		
-		//Then
-		Assert.assertNotNull(vskillActuel);
-		assertSame(vskillExpected, vskillActuel);
-		//la methode getConceptByCategory(String categoryName) est exactement appellé UNE fois
-		Mockito.verify(vSkillDaoMock,Mockito.times(1)).getConceptByCategory(categoryName);
-	}
-
-	@Test(expected = DataAccessException.class)
-	public void getConceptByCategoryDataAccessException() throws DataAccessException{
-		
-		//Given
-		String categoryName = "categoryName";
-		
-		//Then
-		Mockito.doThrow(new DataAccessResourceFailureException("Resource failure")).when(vSkillDaoMock).getConceptByCategory(categoryName);
-		service.getConceptByCategory(categoryName);
-	}
-
 	@Test
 	public void addSkillOneSkillToUpdate(){
 		
