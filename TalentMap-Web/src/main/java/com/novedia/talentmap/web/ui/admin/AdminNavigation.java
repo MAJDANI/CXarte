@@ -149,6 +149,9 @@ public class AdminNavigation extends VerticalLayout implements ClickListener,
 			this.cl = ManageSkillContent.class;
 			//Add the style button selected on the button clicked
 			this.visualizeSkill.addStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.addSkill.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+			this.deleteCollab.removeStyleName(TalentMapCSS.BUTTON_SELECTED);
+			
 			this.updateObservateur();				
 		}
 		
