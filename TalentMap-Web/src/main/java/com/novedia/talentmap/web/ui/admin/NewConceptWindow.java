@@ -110,12 +110,10 @@ public class NewConceptWindow extends Window implements ClickListener{
 			Concept newConcept = Concept.builder().category(categorySelected).name(newConceptName).build();
 			adminService.addConcept(newConcept);
 			CUtils.showMessage(ConstantsEnglish.ADMIN_NEW_CONCEPT_CONFIRMATION, getWindow());
+			this.close();
 		} catch (InvalidValueException e){
 			getWindow().showNotification(ConstantsEnglish.NEW_CONCEPT_WINDOW_ERROR, Notification.TYPE_WARNING_MESSAGE);
 		}
-
-		this.close();
-		
 	}
 
 	public Form getNewConceptForm() {
