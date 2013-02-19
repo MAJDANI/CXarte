@@ -54,8 +54,10 @@ import com.vaadin.ui.themes.Reindeer;
  */
 @SuppressWarnings("serial")
 @Configurable
+
 public class MyVaadinApplication extends Application implements
 		ApplicationContext.TransactionListener, HttpServletRequestListener {
+
 
 	/**
 	 * The logger
@@ -121,6 +123,8 @@ public class MyVaadinApplication extends Application implements
 	 * The button close
 	 */
 	private Button closeButton;
+	
+	
 
 	/**
 	 * 
@@ -146,11 +150,17 @@ public class MyVaadinApplication extends Application implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Talent Map Front initialization");
 		}
+        
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
-
+		
+		// Create the application data instance
+//        AppData sessionData = new AppData(this);
+//        getContext().addTransactionListener(sessionData);
+        
 		// Add close button
 		this.closeButton.setCaption("LogOut");
+	
 		this.closeButton.addListener(new Button.ClickListener() {
 
 			@Override
@@ -161,7 +171,6 @@ public class MyVaadinApplication extends Application implements
 
 		// See internet: allows to fix bug : show twice window component.
 		window.setContent(new LoginScreen(this));
-
 	}
 
 	/**
@@ -328,24 +337,15 @@ public class MyVaadinApplication extends Application implements
 		this.mainLayout = hLayout;
 	}
 
-	/**
-	 * Set the tabProfileSheet value
-	 * 
-	 * @param tabProfileSheet
-	 *            the tabProfileSheet to set
-	 */
-	public void setTabMain(TabMain tabMain) {
-		this.mainTab = tabMain;
-	}
 
-	@Override
-	public void transactionStart(Application application, Object transactionData) {
-
-	}
-
-	@Override
-	public void transactionEnd(Application application, Object transactionData) {
-	}
+//	@Override
+//	public void transactionStart(Application application, Object transactionData) {
+//
+//	}
+//
+//	@Override
+//	public void transactionEnd(Application application, Object transactionData) {
+//	}
 
 	/**
 	 * @param authenticationService
@@ -501,5 +501,17 @@ public class MyVaadinApplication extends Application implements
 			HttpServletResponse response) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void transactionStart(Application application, Object transactionData) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void transactionEnd(Application application, Object transactionData) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -10,14 +10,11 @@ import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
-import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Accordion;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -31,7 +28,7 @@ public abstract class CUtils {
 				
 				//We build a new accordion Category
 				Accordion accCategory = new Accordion();
-				final String LABEL_NOTE_CONCEPT = "Niveau : ";
+				final String LABEL_NOTE_CONCEPT = "Level : ";
 				final String FAIL_LABEL_NOTE_CONCEPT = "improve your skill";
 				RatingStars rateConcept ;
 				for (Map.Entry<Category, Map> eCategory : mapSkill.entrySet()) {

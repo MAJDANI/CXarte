@@ -127,7 +127,7 @@ public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAcces
 //		System.out.println("concept : "+cat.getValue());
 //		
 //	}
-	mapCategory = ScoreManage.scoreConcept(mapCategory, listSkill.size(), toolDao.getAll().size());
+	mapCategory = ScoreManage.computeConceptScore(mapCategory, listSkill.size(), toolDao.getAll().size());
 	//return buildCategory(mapConcept, mapCategory);
 	return mapCategory;
 }
@@ -239,7 +239,7 @@ Concept buildConcept(Map<Tool, Skill> mapTool,Map<Concept, Map> mapConcept, List
 		// We put only not null tool element in mapTool
 		if (tool1 != null) {
 			// We give a score to the tool
-			int score = (int) ScoreManage.toolScore(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
+			int score = (int) ScoreManage.computeToolAverage(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
 			skill.setAverageScore(score);
 			mapTool.put(tool1, skill);
 		}
@@ -260,7 +260,7 @@ Concept buildConcept(Map<Tool, Skill> mapTool,Map<Concept, Map> mapConcept, List
  		// We put only not null tool element in mapTool
  		if (tool1 != null) {
  			// We give a note to the tool
- 			int note = (int) ScoreManage.toolScore(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
+ 			int note = (int) ScoreManage.computeToolAverage(skill.getScore(),skill.getUse_frequency(), skill.getNo_using_time());
  			mapSkill.put(skill, note);
  		}
  	}

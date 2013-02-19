@@ -42,11 +42,16 @@ public class ConstantsForMenuEnglish {
 	public static final String TAB_ADMIN_NAME = "Administration";
 	
 	/**
-	 * Constants for admin
+	 * Tree for admin navigation
 	 */
-	public static final String ADD_SKILL_NAME = "Add skill";
-	public static final String VISUALIZE_SKILL_NAME = "View skills";
-	public static final String DELETE_COLLAB_NAME = "delete collaborator";
+	public static final String ADMIN_ADD_SKILL_NAME = "Add skill";
+	public static final String ADMIN_VIEW_SKILL_NAME = "View skills";
+	public static final String ADMIN_DELETE_COLLAB_NAME = "delete collaborator";
+	public static final Object[][] ADMIN_MENU_NAVIGATION = new Object[][] { new Object[] {
+			"Menu", ADMIN_VIEW_SKILL_NAME, ADMIN_ADD_SKILL_NAME,
+			ADMIN_DELETE_COLLAB_NAME} };
+	
+	
 
 
 }

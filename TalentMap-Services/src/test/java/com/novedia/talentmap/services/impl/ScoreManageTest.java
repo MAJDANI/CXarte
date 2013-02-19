@@ -45,7 +45,7 @@ public class ScoreManageTest {
 		Integer sommeExpected = 5;
 		
 		//When
-		Integer resultSumAverageOfTool = ScoreManage.sumAverageToolOfConcept(mapTool);
+		Integer resultSumAverageOfTool = ScoreManage.sumAverageToolConcept(mapTool);
 		
 		//Then
 		Assert.assertEquals(sommeExpected, resultSumAverageOfTool);
@@ -102,7 +102,7 @@ public class ScoreManageTest {
 		givenMapCateg.put(category, givenConceptMap);
 		
 		//When
-		givenMapCateg = ScoreManage.scoreConcept(givenMapCateg, nbToolKnown, nbAllTools);
+		givenMapCateg = ScoreManage.computeConceptScore(givenMapCateg, nbToolKnown, nbAllTools);
 		Map<Concept, Map> resultMapconcept =  givenMapCateg.get(category);
 		Set<Concept> setConcepts = resultMapconcept.keySet();
 		int count = 0;
