@@ -233,7 +233,7 @@ public class ConstantsEnglish {
 	public static final String NEW_CONCEPT_WINDOW_FIELD_CATEGORY = "Category :";
 	public static final String NEW_CONCEPT_WINDOW_CATEGORY = "category";
 	public static final String NEW_CONCEPT_WINDOW_CONCEPT = "concept";
-	public static final String NEW_CONCEPT_WINDOW_ERROR = "Please enter a name for the new concept";
+	public static final String NEW_CONCEPT_WINDOW_ERROR = "Please enter a name and a category for the new concept";
 	public static final String NEW_CONCEPT_WINDOW_CAPTION_PROPERTY = "name";
 	
 }
