@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.ui.login;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +15,9 @@ import com.novedia.talentmap.web.ui.role.CmContentLayout;
 import com.novedia.talentmap.web.ui.role.IaContentLayout;
 import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.ui.search.SearchNavigation;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -57,20 +61,13 @@ public class AuthenticatedScreen extends VerticalLayout {
 	 * @param application
 	 */
 	public AuthenticatedScreen (MyVaadinApplication application, Authentication authentication) {
-		
 		super();
-		
 		//Set style
 		setSizeFull();
 		setMargin(true);
 		setStyleName(Reindeer.LAYOUT_WHITE);
-		
-		
 		this.application = application;
 		this.authentication = authentication;
-		
-		
-		
 		selectedViewAccordingToUserRoles();
 	}
 	
@@ -115,7 +112,7 @@ public class AuthenticatedScreen extends VerticalLayout {
 		CmContentLayout cmContentLayout = application.getCmContentLayout();
 		RhContentLayout rhContentLayout = application.getRhContentLayout();
 		Panel vpanel = new Panel();
-		VerticalLayout vert = new VerticalLayout();
+		VerticalLayout verticalLayout = new VerticalLayout();
 		        
 		// Select the views to display
 		if(role.equals(Role.AD)){
@@ -139,23 +136,35 @@ public class AuthenticatedScreen extends VerticalLayout {
 			addComponent(cmContentLayout);
 		}
 		
+		// logout button
+		Button logout = new Button("LogOut");
+		logout.addStyleName(Reindeer.BUTTON_LINK); //transformer le bouton en lien
+		logout.addListener(new Button.ClickListener(){
+			@Override
+			public void buttonClick(ClickEvent event) {
+				logout();
+			}
+		});
 		
-		Button logout = application.getCloseButton();
-		logout.addStyleName(Reindeer.BUTTON_LINK);   //rendre le bouton sous forme d'un lien
-		//logout.addStyleName("logoutstyle");	
-		vert.addComponent(logout);		
-		vpanel.addComponent(vert);
-		
+		verticalLayout.addComponent(logout);		
+		vpanel.addComponent(verticalLayout);
 		vpanel.addComponent(mainTab);
 	
-		//this.addComponent(application.getCloseButton());
 		this.addComponent(vpanel);
-		//this.addComponent(mainTab);
-		//Align component on window
-//		this.setComponentAlignment(this.application.getCloseButton(), Alignment.TOP_RIGHT);
-//		this.setComponentAlignment(mainTab, Alignment.TOP_CENTER);
-		
 		return this;
+	}
+	
+	/**
+	 * manage the logout buton
+	 */
+	public void logout() {
+		application.getMainVerticalLayout().removeAllComponents();
+		application.getWindow().removeAllComponents();
+		application.close();
+		WebApplicationContext webCtx = (WebApplicationContext)  application.getContext();
+        HttpSession session = webCtx.getHttpSession();
+        session.invalidate();
+        application.setLogoutURL(null);
 	}
 
 }

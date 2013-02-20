@@ -41,7 +41,7 @@
     	<property name="authenticationService" ref="authenticationService" />
     	<property name="registrationService" ref="registrationService" />
     	<property name="businessEngineerService" ref="businessEngineerService" />
-    	<property name="closeButton" ref="closeButton"/>
+<!--     	<property name="closeButton" ref="closeButton"/> -->
     	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
     	<property name="rhContentLayout" ref="rhContentLayout"/>
     	<property name="cmContentLayout" ref="cmContentLayout"/>

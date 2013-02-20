@@ -122,9 +122,6 @@ public class MyVaadinApplication extends Application implements
 	/**
 	 * The button close
 	 */
-	private Button closeButton;
-	
-	
 
 	/**
 	 * 
@@ -135,10 +132,6 @@ public class MyVaadinApplication extends Application implements
 		this.ctx = (MyVaadinApplication) getContext();
 	}
 
-	// /**
-	// * The login screen
-	// */
-	// private LoginScreen loginScreen;
 
 	/**
 	 * The init
@@ -154,22 +147,6 @@ public class MyVaadinApplication extends Application implements
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
 		
-		// Create the application data instance
-//        AppData sessionData = new AppData(this);
-//        getContext().addTransactionListener(sessionData);
-        
-		// Add close button
-		this.closeButton.setCaption("LogOut");
-	
-		this.closeButton.addListener(new Button.ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				logout();
-			}
-		});
-
-		// See internet: allows to fix bug : show twice window component.
 		window.setContent(new LoginScreen(this));
 	}
 
@@ -299,32 +276,16 @@ public class MyVaadinApplication extends Application implements
 	}
 
 	/**
-	 * Log out method
-	 */
-	public void logout() {
-
-		// Fix bug: show twice a window component -> firefox
-		this.getMainVerticalLayout().removeAllComponents();
-		this.window.removeAllComponents();
-		close();
-
-		// Subject currentUser = SecurityUtils.getSubject();
-		// if (currentUser.isAuthenticated()) {
-		// currentUser.logout();
-		// }
-
-		// After closing, redirect user back to login
-		// Set null, redirect to login page
-		setLogoutURL(null);
-	}
-
-	/**
 	 * Set the main window
 	 * 
 	 * @param window
 	 */
 	public void setWindow(Window window) {
 		this.window = window;
+	}
+	
+	public Window getWindow() {
+		return window;
 	}
 
 	/**
@@ -337,15 +298,6 @@ public class MyVaadinApplication extends Application implements
 		this.mainLayout = hLayout;
 	}
 
-
-//	@Override
-//	public void transactionStart(Application application, Object transactionData) {
-//
-//	}
-//
-//	@Override
-//	public void transactionEnd(Application application, Object transactionData) {
-//	}
 
 	/**
 	 * @param authenticationService
@@ -417,14 +369,6 @@ public class MyVaadinApplication extends Application implements
 	}
 
 	/**
-	 * @param closeButton
-	 * the closeButton to set
-	 */
-	public void setCloseButton(Button closeButton) {
-		this.closeButton = closeButton;
-	}
-	
-	/**
 	 * @return the iaContentLayout
 	 */
 	public IaContentLayout getIaContentLayout() {
@@ -438,12 +382,6 @@ public class MyVaadinApplication extends Application implements
 		this.iaContentLayout = iaContentLayout;
 	}
 
-	/**
-	 * @return the closeButton
-	 */
-	public Button getCloseButton() {
-		return closeButton;
-	}
 
 	/**
 	 * @return the mainVerticalLayout

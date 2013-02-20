@@ -44,7 +44,9 @@ public class AdminNavigation extends VerticalLayout implements IObservable , Ite
 		displayTree();
 	}
 
-	
+	/**
+	 * build menu tree 
+	 */
 	public void displayTree(){
 		String firstElement ;
 		String firstEl;
