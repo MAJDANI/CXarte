@@ -1,7 +1,5 @@
 package com.novedia.talentmap.store.impl;
 
-import static org.junit.Assert.*;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,8 +15,6 @@ import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Profile;
 
 /**
@@ -30,7 +26,6 @@ import com.novedia.talentmap.model.entity.Profile;
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("ProfileDaoTest.xml")
-@Ignore
 public class ProfileDaoTest {
 
 	@SpringBeanByName
