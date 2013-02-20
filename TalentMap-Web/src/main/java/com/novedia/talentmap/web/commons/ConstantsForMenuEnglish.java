@@ -44,8 +44,8 @@ public class ConstantsForMenuEnglish {
 	/**
 	 * Tree for admin navigation
 	 */
-	public static final String ADMIN_ADD_SKILL_NAME = "Add tool";
-	public static final String ADMIN_VIEW_SKILL_NAME = "View tools";
+	public static final String ADMIN_ADD_SKILL_NAME = "Add Category/Concept/Tool";
+	public static final String ADMIN_VIEW_SKILL_NAME = "View Category/Concept/Tool";
 	public static final String ADMIN_DELETE_COLLAB_NAME = "delete collaborator";
 	public static final Object[][] ADMIN_MENU_NAVIGATION = new Object[][] { new Object[] {
 			"Menu", ADMIN_VIEW_SKILL_NAME, ADMIN_ADD_SKILL_NAME,
