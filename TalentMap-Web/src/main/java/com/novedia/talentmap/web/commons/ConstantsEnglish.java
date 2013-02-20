@@ -186,8 +186,9 @@ public class ConstantsEnglish {
 	/**
 	 * Constants for AdminContentLayout
 	 */
-	public static final String ADD_SKILL_TITLE = "Add a skill to the list";
-	public static final String UPDATE_SKILL_TITLE = "Display skills";
+	public static final String ADD_TOOL_TITLE = "Add a tool";
+	public static final String UPDATE_TOOL_TITLE = "Display tools";
+	public static final String LIST_TOOL_TITLE = "List of tools";
 	
 	
 	/**

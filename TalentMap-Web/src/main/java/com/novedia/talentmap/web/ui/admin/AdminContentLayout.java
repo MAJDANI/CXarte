@@ -27,12 +27,6 @@ public class AdminContentLayout extends HorizontalLayout {
 	 */
 	private HorizontalSplitPanel hSplitContent;
 
-	/**
-	 * Constants
-	 */
-	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
-	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
-
 
 	/**
 	 * Build the class AdminView.java
@@ -64,17 +58,15 @@ public class AdminContentLayout extends HorizontalLayout {
 					
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.manageSkillContent);
 					
+					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(ConstantsEnglish.LIST_TOOL_TITLE);
 					
-					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
-							ConstantsEnglish.ADD_SKILL_TITLE);
 				} else {
 
 					AdminContentLayout.this.manageSkillContent.setVisible(false);
 					AdminContentLayout.this.addSkillContent.setVisible(true);
 					
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
-					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(
-							ConstantsEnglish.UPDATE_SKILL_TITLE);
+					AdminContentLayout.this.addSkillContent.getTitle().setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
 				}
 			}
 		}, IAdminContentLayout.class);

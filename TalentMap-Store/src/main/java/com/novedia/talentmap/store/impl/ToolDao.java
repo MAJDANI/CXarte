@@ -49,7 +49,7 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	 */
 	@Override
 	public int save(final Tool tool) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(
+		return (Integer) this.getSqlMapClientTemplate().update(
 				DBRequestsConstants.SAVE_TOOL, tool);
 	}
 

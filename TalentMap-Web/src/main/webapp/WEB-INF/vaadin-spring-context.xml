@@ -337,11 +337,7 @@
 	<bean id="visualizeSkill" class="com.vaadin.ui.Button"/>
 	<bean id="deleteCollab" class="com.vaadin.ui.Button"/>
 	
-	<bean id="adminNavigationBean" class="com.novedia.talentmap.web.ui.admin.AdminNavigation" scope="session" >
-		<constructor-arg name="visualizeSkill" ref="visualizeSkill" />
-		<constructor-arg name="deleteCollab" ref="deleteCollab" />
-		<constructor-arg name="addSkill" ref="addSkillButton" />
-	</bean>
+	<bean id="adminNavigationBean" class="com.novedia.talentmap.web.ui.admin.AdminNavigation" scope="session" />
 	
 	
 	<!-- Vaadin AddSkillContent UI -->

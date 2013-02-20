@@ -10,6 +10,7 @@ import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.Message;
 import com.vaadin.data.Item;
@@ -76,7 +77,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	private List<Concept> listConcept;
 	private List<Category> listCategory;
 	private Vector<Object> fieldOrderSkill;
-	public static String MAIN_TITLE = "Visualisation des compétences";
 
 	//Constant
 	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Catégorie",
@@ -156,7 +156,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		setMargin(true);
 		setSpacing(true);
 
-		this.title.setCaption(MAIN_TITLE);
+		this.title.setCaption(ConstantsEnglish.LIST_TOOL_TITLE);
 		this.title.setStyleName(Reindeer.LABEL_H2);
 		//Deprecated
 //		this.title.setStyle(Reindeer.LABEL_H2);

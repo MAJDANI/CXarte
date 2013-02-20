@@ -139,22 +139,6 @@ public class AuthenticatedScreen extends VerticalLayout {
 			addComponent(cmContentLayout);
 		}
 		
-//		else{
-//			mainTab.removeComponent(adminView);			
-//		}
-		//Show logOut button
-		
-		//TODO:
-		/*
-		 * J'ai désactivé le code logout car les boutons enregistrer, modifier, valider, n'étaient plus
-		 * visibles.
-		 * Pour le remettre, il faudra au préalable mener une ébtude sur le positionnement des composants
-		 * sru les écrans.
-		 * ceci a été fait à la demande de jean max.
-		 * D'autre part, Vanessa m'a fait remanqué une regression de la scroll bar horizontal qui ne 
-		 * s'affiche plus.
-		 * Bon courage!!!
-		 */
 		
 		Button logout = application.getCloseButton();
 		logout.addStyleName(Reindeer.BUTTON_LINK);   //rendre le bouton sous forme d'un lien

@@ -19,12 +19,14 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.Window.Notification;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Add Tool (tool, concept and category) page in the administrator view
@@ -43,6 +45,8 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 	 * Form
 	 */
 	Form formAddSkill;
+	
+	Label title = new Label();
 
 	/**
 	 * Sub Windows used for concept and category creation
@@ -87,6 +91,10 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		
 		setMargin(true);
 		setSpacing(true);
+		
+		title.setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
+		title.setStyleName(Reindeer.LABEL_H2);
+		addComponent(title);
 
 		buildFormSkill();
 		buildButton();
@@ -350,5 +358,14 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		this.newConceptWindow = newConceptWindow;
 	}
 
+	public Label getTitle() {
+		return title;
+	}
+
+	public void setTitle(Label title) {
+		this.title = title;
+	}
+
+	
 
 }
