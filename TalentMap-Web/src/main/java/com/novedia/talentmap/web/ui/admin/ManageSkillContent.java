@@ -321,31 +321,6 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.listConcept = this.adminService.getAllConcepts();
 		this.listCategory = this.adminService.getAllCategories();
 
-//		try {
-//		} catch (Exception e) {
-
-			// Build all lists, dummy data if database is down !
-
-//			for (int i = 0; i < 5; i++) {
-////				Tool t = new Tool(i + 1, i + 1, (String) TOOLS[i]);
-//				Tool t = Tool.Builder.builder().id(i+1).concept((Concept.Builder.builder().id(i+1).build())).name(TOOLS[i].toString()).build();
-//				this.listTool.add(t);
-//			}
-//
-//			for (int i = 0; i < 5; i++) {
-//				Random r = new Random();
-//				int categoryId = r.nextInt(2);
-//				Concept c = new Concept(i + 1, categoryId,
-//						(String) CONCEPTS[i], 3.0);
-//				this.listConcept.add(c);
-//			}
-//
-//			for (int i = 0; i < 2; i++) {
-//
-//				Category c = new Category(i, (String) CATEGORIES[i]);
-//				this.listCategory.add(c);
-//			}
-//		}
 	}
 
 	/**
@@ -485,15 +460,9 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillConcept(String categoryName, String conceptName) {
 
-		// Category category = new Category(this.currentCategoryId,
-		// categoryName);
-		Category category = Category.builder().id(this.currentCategoryId)
-				.name(categoryName).build();
-		// Concept concept = new Concept(this.currentConceptId,
-		// this.currentCategoryId, conceptName);
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
 
-		Concept concept = Concept.builder().id(this.currentConceptId)
-				.category(category).name(categoryName).build();
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
 
 		try {
 
@@ -515,11 +484,8 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillTool(String categoryName, String conceptName, String toolName) {
 
-//		Category category = new Category(this.currentCategoryId, categoryName);
 		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
-//		Concept concept = new Concept(this.currentConceptId, this.currentCategoryId, conceptName);
-		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(categoryName).build();
-//		Tool tool = new Tool(this.currentToolId, this.currentConceptId, toolName);
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
 		Tool tool = Tool.builder().id(this.currentToolId).concept(concept).name(toolName).build();
 
 		try {
