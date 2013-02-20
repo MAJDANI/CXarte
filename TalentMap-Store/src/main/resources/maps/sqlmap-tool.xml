@@ -49,6 +49,10 @@
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
 	</select>		
 	
+	<select id="checkObject" resultClass="tool" parameterClass="tool">
+		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#) AND CONCEPT_ID = #concept.id#
+	</select>
+	
 	<update id="save" parameterClass="Tool">
 		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
 	</update> 

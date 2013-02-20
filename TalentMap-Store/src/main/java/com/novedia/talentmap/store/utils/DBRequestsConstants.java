@@ -104,6 +104,11 @@ public static final String  ADD_CATEGORY = "category.add";
 public static final String CHECK_CATEGORY = "category.check";
 
 /**
+ * Constant request to check a category.
+ */
+public static final String CHECK_CATEGORY_OBJECT = "category.checkObject";
+
+/**
  * Constant request to update category.
  */
 public static final String  SAVE_CATEGORY = "category.save";
@@ -154,6 +159,11 @@ public static final String DELETE_CONCEPT = "concept.delete";
  * Constant request to check a concept.
  */
 public static final String CHECK_CONCEPT = "concept.check";
+
+/**
+ * Constant request to check a concept.
+ */
+public static final String CHECK_CONCEPT_OBJECT = "concept.checkObject";
 
 /**
  * This constant is used to retrieve a concept by name.
@@ -322,6 +332,12 @@ public static final String SAVE_TOOL = "tool.save";
  * Constant request id to check a tool.
  */
 public static final String CHECK_TOOL = "tool.check";
+
+/**
+ * Constant request id to check a tool.
+ */
+public static final String CHECK_TOOL_OBJECT = "tool.checkObject";
+
 /**
  * This constant is used to retrieve all tool by concept.
  */

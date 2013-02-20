@@ -128,7 +128,6 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		}
 		
 		Select categorySelect = new Select(ConstantsEnglish.ADMIN_CATEGORY_SELECT_NAME,containerCategory);
-		categorySelect.setNullSelectionAllowed(false);
 		categorySelect.setRequired(true);
 		categorySelect.setImmediate(true);
 		categorySelect.setItemCaptionMode(
@@ -144,7 +143,6 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		}
 		
 		Select conceptSelect = new Select(ConstantsEnglish.ADMIN_CONCEPT_SELECT_NAME,containerConcept); 
-		conceptSelect.setNullSelectionAllowed(false);
 		conceptSelect.setImmediate(true);
 		conceptSelect.setItemCaptionMode(
 	            Select.ITEM_CAPTION_MODE_PROPERTY);
@@ -193,7 +191,7 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 	/**
 	 * Refresh the category select list
 	 */
-	private void refreshCategoriesAvailable(){
+	public void refreshCategoriesAvailable(){
 		
 		Select categorySelect = (Select) this.formAddSkill.getField(ConstantsEnglish.ADMIN_CATEGORY_NAME);
 		BeanItemContainer<Category> containerCategory =
@@ -204,19 +202,6 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		categorySelect.setContainerDataSource(containerCategory);
 	}
 
-	/**
-	 * Refresh the concept select list
-	 */
-	private void refreshConceptsAvailable(){
-		
-		Select conceptSelect = (Select) this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME);
-		BeanItemContainer<Concept> containerConcept =
-		        new BeanItemContainer<Concept>(Concept.class);
-		for(Concept concept : adminService.getAllConcepts()){
-			containerConcept.addItem(concept);
-		}
-		conceptSelect.setContainerDataSource(containerConcept);
-	}
 	
 	/**
 	 * Events when the user click on a Button
@@ -229,18 +214,28 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 			try{
 				this.formAddSkill.validate();
 				
-				Concept conceptSelected = (Concept) this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).getValue();	
+				Concept conceptSelected = (Concept) this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).getValue();
+				if(conceptSelected == null){
+					throw new InvalidValueException("Concept is null");
+				}
 				String toolName = (String) this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME).getValue();
 				Tool newTool = Tool.builder().name(toolName).concept(conceptSelected).build();
 				
-				//Appelle du service d'ajout de tool
-				adminService.addTool(newTool);
+				if(adminService.checkTool(newTool) == null){
+					//Appelle du service d'ajout de tool
+					adminService.addTool(newTool);
+					getWindow().showNotification(ConstantsEnglish.ADMIN_NEW_TOOL_CONFIRMATION, Notification.TYPE_HUMANIZED_MESSAGE);
+				} else {
+					getWindow().showNotification(ConstantsEnglish.ADMIN_NEW_TOOL_EXISTING, Notification.TYPE_WARNING_MESSAGE);
+				}
 				
-				CUtils.showMessage(ConstantsEnglish.ADMIN_NEW_TOOL_CONFIRMATION, getWindow());
+				this.formAddSkill.getField(ConstantsEnglish.ADMIN_CATEGORY_NAME).setValue(null);
+				this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).setValue(null);
+				this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME).setValue(null);
 				this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME).setEnabled(false);
 				this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).setEnabled(false);
 			} catch (InvalidValueException e){
-				getWindow().showNotification(ConstantsEnglish.ADMIN_NEW_TOOL_ERROR, Notification.TYPE_WARNING_MESSAGE);
+				getWindow().showNotification(ConstantsEnglish.ADMIN_NEW_TOOL_ERROR, Notification.TYPE_ERROR_MESSAGE);
 			}
 			
 		} else if(button.getCaption().equals(ConstantsEnglish.ADMIN_NEW_CATEGORY_BUTTON)){
@@ -296,9 +291,11 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 	public void windowClose(CloseEvent e) {
 		if(e.getWindow() instanceof NewCategoryWindow){
 			refreshCategoriesAvailable();
-		} else {
-			refreshConceptsAvailable();
-		}
+		} 
+		this.formAddSkill.getField(ConstantsEnglish.ADMIN_CATEGORY_NAME).setValue(null);
+		this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME).setEnabled(false);
+		this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).setEnabled(false);
+		this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME).setValue(null);
 	}
 	
 	
@@ -365,7 +362,5 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 	public void setTitle(Label title) {
 		this.title = title;
 	}
-
-	
 
 }

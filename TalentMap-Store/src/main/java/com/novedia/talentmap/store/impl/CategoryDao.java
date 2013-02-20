@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
@@ -84,6 +85,14 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	@Override
 	public Category check(String name) throws DataAccessException {
 		return (Category)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_CATEGORY, name);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Category check(Category category) throws DataAccessException {
+		return (Category) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.CHECK_CATEGORY_OBJECT, category);
 	}
 	
 	/**

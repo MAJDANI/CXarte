@@ -8,6 +8,7 @@ import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -92,12 +93,16 @@ public class NewCategoryWindow extends Window implements ClickListener{
 			String newCategoryName =(String) this.newCategoryForm.getField(ConstantsEnglish.NEW_CATEGORY_WINDOW_CATEGORY).getValue();
 			Category newCategory = Category.builder().name(newCategoryName).build();
 			
-			// on appelle le service d'ajout d'une catégorie
-			adminService.addCategory(newCategory);
-			CUtils.showMessage(ConstantsEnglish.ADMIN_NEW_CATEGORY_CONFIRMATION, getWindow());
-			this.close();
+			if(adminService.checkCategory(newCategory) == null){
+				// on appelle le service d'ajout d'une catégorie
+				adminService.addCategory(newCategory);
+				CUtils.showMessage(ConstantsEnglish.ADMIN_NEW_CATEGORY_CONFIRMATION, getWindow());
+				this.close();
+			} else {
+				getWindow().showNotification(ConstantsEnglish.ADMIN_NEW_CATEGORY_EXISTING, Notification.TYPE_WARNING_MESSAGE);
+			}
 		} catch (InvalidValueException e){
-			getWindow().showNotification(ConstantsEnglish.NEW_CATEGORY_WINDOW_ERROR, Notification.TYPE_WARNING_MESSAGE);
+			getWindow().showNotification(ConstantsEnglish.NEW_CATEGORY_WINDOW_ERROR, Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 	

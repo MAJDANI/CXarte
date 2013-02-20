@@ -92,11 +92,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	public static final String MESSAGE_FIELD_EMPTY = "Vous devez remplir tous les champs.";
 
 	/**
-	 * Flag
-	 */
-	public static boolean isNewSkill = false;
-
-	/**
 	 * Current ID Skill
 	 */
 	private Integer currentCategoryId;
@@ -268,23 +263,23 @@ public class ManageSkillContent extends VerticalLayout implements
 			for (Concept co : this.listConcept) {
 
 				if (ca.getId().equals(co.getCategory().getId())) {
+					
+					this.treeSkill.addItem(co.getId() + ":"
+							+ TYPE_CONCEPT + ":" + co.getName());
+					this.treeSkill.setItemCaption(co.getId() + ":"
+							+ TYPE_CONCEPT + ":" + co.getName(),
+							co.getName());
+
+					this.treeSkill.setParent(
+							co.getId() + ":" + TYPE_CONCEPT + ":"
+									+ co.getName(),
+							ca.getId() + ":" + TYPE_CATEGORY + ":"
+									+ ca.getName());
 
 					for (Tool t : this.listTool) {
 
 						if (co.getId().equals(t.getConcept().getId())) {
-
-							this.treeSkill.addItem(co.getId() + ":"
-									+ TYPE_CONCEPT + ":" + co.getName());
-							this.treeSkill.setItemCaption(co.getId() + ":"
-									+ TYPE_CONCEPT + ":" + co.getName(),
-									co.getName());
-
-							this.treeSkill.setParent(
-									co.getId() + ":" + TYPE_CONCEPT + ":"
-											+ co.getName(),
-									ca.getId() + ":" + TYPE_CATEGORY + ":"
-											+ ca.getName());
-
+							
 							this.treeSkill.addItem(t.getId() + ":" + TYPE_TOOL
 									+ ":" + t.getName());
 							this.treeSkill.setItemCaption(t.getId() + ":"
@@ -320,7 +315,6 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.listTool = this.adminService.getAllTools();
 		this.listConcept = this.adminService.getAllConcepts();
 		this.listCategory = this.adminService.getAllCategories();
-
 	}
 
 	/**
@@ -373,8 +367,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @class ManageSkillContent.java
 	 */
 	public void addView() {
-
-		this.isNewSkill = true;
 
 		this.formSkill.setVisible(true);
 		this.treeSkill.setVisible(false);
@@ -504,9 +496,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @class ManageSkillContent.java
 	 */
 	public void updateView() {
-
-		this.isNewSkill = false;
-
+		
 		this.formSkill.setVisible(false);
 		this.treeSkill.setVisible(true);
 
@@ -534,6 +524,13 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void deleteOneSkill() throws Exception {
 		
+		Field category = this.formSkill.getField(
+				FIELD_ORDER_SKILL[0]);
+		Field concept = this.formSkill.getField(
+				FIELD_ORDER_SKILL[1]);
+		Field tool = this.formSkill
+				.getField(FIELD_ORDER_SKILL[2]);
+		
 		Map<String, Object> mapNotification = null;
 		
 		// Get the skill name
@@ -546,20 +543,20 @@ public class ManageSkillContent extends VerticalLayout implements
 					getWindow());
 		} else {
 
-			if (this.currentCategoryId != null && this.currentConceptId == null
-					&& this.currentToolId == null) {
+			if (category.isEnabled() && !concept.isEnabled()
+					&& !tool.isEnabled()) {
 				
 				mapNotification = this.adminService.deleteCategory(this.currentCategoryId);
 			}
 
-			if (this.currentCategoryId != null && this.currentConceptId != null
-					&& this.currentToolId == null) {
+			if (category.isEnabled() && concept.isEnabled()
+					&& !tool.isEnabled()) {
 
-				mapNotification = this.adminService.deleteConcept(this.currentCategoryId);
+				mapNotification = this.adminService.deleteConcept(this.currentConceptId);
 			}
 
-			if (this.currentCategoryId != null && this.currentConceptId != null
-					&& this.currentToolId != null) {
+			if (category.isEnabled() && concept.isEnabled()
+					&& tool.isEnabled()) {
 
 				mapNotification = this.adminService.deleteTool(this.currentToolId);
 			}
@@ -627,18 +624,12 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		if (button == this.save) {
 
-			if (isNewSkill) {
-
-				this.addOneSkill();
-			} else {
-
 				this.updateOneSkill();
 
 				// Init the current Id to null
 				this.currentCategoryId = null;
 				this.currentConceptId = null;
 				this.currentToolId = null;
-			}
 
 			updateView();
 		}
@@ -651,19 +642,10 @@ public class ManageSkillContent extends VerticalLayout implements
 		}
 
 		if (button == this.cancel) {
-			
-			if(isNewSkill){
-				
-				for(int i = 0; i < FIELD_ORDER_SKILL.length; i++){
-					
-					this.formSkill.getField(FIELD_ORDER_SKILL[i]).setValue(null);
-				}
-			}else{
-				
-				this.formSkill.setReadOnly(true);
+			this.formSkill.setReadOnly(true);
 
-				setManageButtonVisible(true);
-			}
+			setManageButtonVisible(true);
+	
 		}
 
 		if (button == this.delete) {

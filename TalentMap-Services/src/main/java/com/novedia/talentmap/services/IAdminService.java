@@ -73,6 +73,28 @@ Integer addCategory(Category category);
 Integer addConcept(Concept concept);
 
 /**
+ * Check the tool existence
+ * @param tool
+ * @return
+ */
+Tool checkTool(Tool tool);
+
+/**
+ *  Check the Category existence
+ * @param category
+ * @return
+ */
+Category checkCategory(Category category);
+
+/**
+ *  Check the Concept existence
+ * @param concept
+ * @return
+ */
+Concept checkConcept(Concept concept);
+
+
+/**
 * Update one skill.
 * @class IAdminService.java. 'category'
 * @param cat a category

@@ -58,11 +58,15 @@
 		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category.id#
 	</select>	
 	
+	<select id="checkObject" resultMap="conceptResult" parameterClass="concept">
+		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category.id#
+	</select>	
+	
 	<update id="save" parameterClass="Concept">
 		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
 	</update>
 	
-	<delete id="delete" parameterClass="Integer">
+	<delete id="delete" parameterClass="concept">
 		DELETE CONCEPT CASCADE WHERE CONCEPT_ID = #id#
 	</delete>			 
 	

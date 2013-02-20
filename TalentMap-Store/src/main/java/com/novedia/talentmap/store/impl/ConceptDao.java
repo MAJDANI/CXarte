@@ -80,6 +80,14 @@ public class ConceptDao extends SqlMapClientDaoSupport implements IDao<Concept> 
 	/**
 	 * {@inheritDoc}
 	 */
+	public Concept check(Concept concept) throws DataAccessException {
+		return (Concept) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.CHECK_CONCEPT_OBJECT, concept);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Concept getByName(String name) throws DataAccessException {
 		return (Concept) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CONCEPT_BY_NAME, name);

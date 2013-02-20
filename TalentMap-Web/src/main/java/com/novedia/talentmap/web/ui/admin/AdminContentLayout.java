@@ -55,7 +55,8 @@ public class AdminContentLayout extends HorizontalLayout {
 
 					AdminContentLayout.this.manageSkillContent.setVisible(true);
 					AdminContentLayout.this.addSkillContent.setVisible(false);
-					
+					//Rafraichit l'arbre
+					AdminContentLayout.this.manageSkillContent.buildTreeSkill();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.manageSkillContent);
 					
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(ConstantsEnglish.LIST_TOOL_TITLE);
@@ -64,7 +65,8 @@ public class AdminContentLayout extends HorizontalLayout {
 
 					AdminContentLayout.this.manageSkillContent.setVisible(false);
 					AdminContentLayout.this.addSkillContent.setVisible(true);
-					
+					//Rafraichit les catégories disponibles
+					AdminContentLayout.this.addSkillContent.refreshCategoriesAvailable();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
 					AdminContentLayout.this.addSkillContent.getTitle().setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
 				}

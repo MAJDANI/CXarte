@@ -13,6 +13,8 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 import com.novedia.talentmap.store.impl.ConceptDao;
+import com.novedia.talentmap.store.impl.ToolDao;
+import com.novedia.talentmap.store.impl.CategoryDao;
 
 /**
  * The Administration Service implementation.
@@ -96,6 +98,33 @@ public Integer addCategory(Category category) throws DataAccessException {
 public Integer addConcept(Concept concept) throws DataAccessException { 
 	return conceptDao.add(concept);
 }
+
+/**
+ * 
+ * {@inheritDoc}
+ */
+public Tool checkTool(Tool tool) throws DataAccessException { 
+	return ((ToolDao)toolDao).check(tool);
+}
+
+/**
+ * Add one Category
+ * @param category
+ * @return
+ */
+public Category checkCategory(Category category) throws DataAccessException { 
+	return ((CategoryDao)categoryDao).check(category);
+}
+
+/**
+ * Add one Concept
+ * @param concept
+ * @return
+ */
+public Concept checkConcept(Concept concept) throws DataAccessException { 
+	return ((ConceptDao)conceptDao).check(concept);
+}
+
 /**
  * {@inheritDoc}.
  */

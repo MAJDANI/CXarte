@@ -213,8 +213,11 @@ public class ConstantsEnglish {
 	public static final String ADMIN_NEW_CATEGORY_BUTTON = "New Category";
 	public static final String ADMIN_NEW_CONCEPT_BUTTON = "New Concept";
 	public static final String ADMIN_NEW_TOOL_CONFIRMATION = "New Tool created";
+	public static final String ADMIN_NEW_TOOL_EXISTING = "New Tool already existing";
 	public static final String ADMIN_NEW_CONCEPT_CONFIRMATION = "New Concept created";
+	public static final String ADMIN_NEW_CONCEPT_EXISTING = "New Concept already existing";
 	public static final String ADMIN_NEW_CATEGORY_CONFIRMATION = "New Category created";
+	public static final String ADMIN_NEW_CATEGORY_EXISTING = "New Category already existing";
 	public static final String ADMIN_NEW_TOOL_ERROR = "Please fill all the fields";
 	
 	/**
