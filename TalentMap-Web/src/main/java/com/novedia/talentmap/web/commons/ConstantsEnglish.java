@@ -55,7 +55,7 @@ public class ConstantsEnglish {
 		"Place", "Start mission", "End mission", "Comment" };
 
 	public static final String FIELD_MISSION_NAME = "title";
-	public static final String FIELD_MISSION_CLIENT = "Customer";
+	public static final String FIELD_MISSION_CLIENT = "client";
 	public static final String FIELD_MISSION_PLACE = "place";
 	public static final String FIELD_MISSION_START_DATE = "startDate";
 	public static final String FIELD_MISSION_END_DATE = "endDate";
