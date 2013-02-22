@@ -154,7 +154,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 							}
 						} else {
 							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
-								item = ic.addItem(businessEngineer.getLastName());
+								item = ic.addItem(businessEngineer);
 								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(businessEngineer.getFirstName() + " " + (businessEngineer.getLastName()));
 							}
 						}
