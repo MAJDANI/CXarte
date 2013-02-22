@@ -201,6 +201,7 @@ public class CollaboratorForm extends VerticalLayout{
 		// when the input focus changes and not just on commit.	
 		this.formMission.setImmediate(true);
 		this.formMission.setLayout(lastMissionDatasLayout);
+		this.formMission.setReadOnly(true);
 
 		addComponent(this.formMission);
 	}

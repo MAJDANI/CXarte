@@ -178,7 +178,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		//Save Button
 		if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_SAVE_BUTTON)) {
 			saveDataCollaborator();
-			saveDataMission();
+			//saveDataMission();
 			this.collabForm.getFormCollaborator().setReadOnly(true);
 			this.collabForm.getFormMission().setReadOnly(true);
 			this.save.setEnabled(false);
@@ -187,7 +187,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			
 		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_EDIT_BUTTON)){
 			this.collabForm.getFormCollaborator().setReadOnly(false);
-			this.collabForm.getFormMission().setReadOnly(false);
+			this.collabForm.getFormMission().setReadOnly(true);
 			this.save.setEnabled(true);
 			this.edit.setEnabled(false);
 			this.cancel.setEnabled(true);
