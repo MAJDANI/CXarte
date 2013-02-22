@@ -272,7 +272,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			//-------------------
 			// ToolName
 			//-------------------
-			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Tool name").getValue();
+			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Tool Name").getValue();
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			this.addSkillPanel.getToolSelect().setValue(toolName);
 			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
