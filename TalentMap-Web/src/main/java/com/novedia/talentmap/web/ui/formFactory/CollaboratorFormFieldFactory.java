@@ -93,24 +93,30 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 
 					return field;
 					
-				} else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_BUISINESS_ENGINEER)){
+				} else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_BUISINESS_ENGINEER)){		
+						IndexedContainer ic = new IndexedContainer();
+				        ic.addContainerProperty("value", String.class, null);
 						
-						BeanItemContainer<BusinessEngineer> container =
-						        new BeanItemContainer<BusinessEngineer>(BusinessEngineer.class);
-					
-						for(BusinessEngineer b : businessEngineerService.getAllBusinessEngineer()){
-							container.addItem(b);
+						Select bEngineerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
+						
+						
+						try {
+							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
+								item = ic.addItem(businessEngineer);
+								item.getItemProperty("value").setValue(businessEngineer.getFirstName() + " " +businessEngineer.getLastName());
+							}
+							
+							bEngineerSelect.setContainerDataSource(ic);
+							bEngineerSelect.setItemCaptionPropertyId("value");
+							
+							bEngineerSelect.setNullSelectionAllowed(false);
+							bEngineerSelect.setImmediate(true);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 						
-						Select bEngineerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ",container); 
-						bEngineerSelect.setItemCaptionMode(
-					            Select.ITEM_CAPTION_MODE_PROPERTY);
-						bEngineerSelect.setItemCaptionPropertyId("name");
-						bEngineerSelect.setRequired(true);
-						bEngineerSelect.setNullSelectionAllowed(false);
-						bEngineerSelect.setImmediate(true);
-
-						return bEngineerSelect;
+						return bEngineerSelect;		
 					
 					
 				}else if(propertyId.equals("employmentDate")){

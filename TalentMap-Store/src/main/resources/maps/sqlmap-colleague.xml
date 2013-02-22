@@ -81,7 +81,10 @@
     </select>
     					 
 	<update id="save" parameterClass="Colleague">
-		UPDATE COLLEAGUE SET PROFILE_ID = #profileId#, PHONE = #phone#, EXPERIENCE = #experience# WHERE COLLEAGUE_ID = #id#
+		UPDATE COLLEAGUE SET MANAGER_ID = #managerId#, LAST_NAME = #lastName#, 
+		FIRST_NAME = #firstName#, EMAIL = #email#, PROFILE_ID = #profileId#,
+		PHONE = #phone#, EXPERIENCE = #experience#, EMPLOYMENT_DATE = #employmentDate#, 
+		B_ENGINEER_ID = #businessEngineer.id# WHERE COLLEAGUE_ID = #id#
 	</update>
 
     <select id="getManager" parameterClass="Integer" resultMap="managerResult">
