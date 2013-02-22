@@ -151,7 +151,7 @@ public class AuthenticatedScreen extends VerticalLayout  {
 
 		// logout button
 		Button logout = new Button("LogOut");
-		logout.addStyleName(Reindeer.BUTTON_LINK); //transformer le bouton en lien
+		logout.addStyleName(Reindeer.BUTTON_LINK); //transformation du bouton en lien
 		logout.addListener(new Button.ClickListener(){
 			@Override
 			public void buttonClick(ClickEvent event) {

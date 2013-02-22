@@ -26,6 +26,7 @@ import com.novedia.talentmap.model.entity.Profile;
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("ProfileDaoTest.xml")
+@Ignore
 public class ProfileDaoTest {
 
 	@SpringBeanByName

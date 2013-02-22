@@ -275,7 +275,7 @@
 	<bean id="btnDeleteMission" class="com.vaadin.ui.Button"/>
 	
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
-		<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
 		<constructor-arg name="missionForm" ref="missionFormBean"/>
@@ -328,6 +328,7 @@
 		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
 		<constructor-arg name="addSkillContent" ref="adminAddSkillContentBean" />
 		<constructor-arg name="hSplitContent" ref="hSplitContent" />
+		<constructor-arg name="deleteColleagueContent" ref="adminDeleteColleagueContentBean" />
 	</bean>
 	
 	
@@ -357,7 +358,7 @@
 	<bean id="adminBody" class="com.vaadin.ui.HorizontalLayout"/>
 	
 	
-	<bean id="manageSkillContentBean" class="com.novedia.talentmap.web.ui.admin.ManageSkillContent">
+	<bean id="manageSkillContentBean" class="com.novedia.talentmap.web.ui.admin.ManageSkillContent" scope="session">
 		<constructor-arg name="formSkill" ref="formSkill" />
 		<constructor-arg name="treeSkill" ref="treeSkill" />
 		<constructor-arg name="save" ref="adminSaveSkill" />
@@ -373,10 +374,14 @@
 		<constructor-arg name="body" ref="adminBody" />
 	</bean>
 	
-	<bean id="adminAddSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AdminAddSkillContent">
+	<bean id="adminAddSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AdminAddSkillContent" scope="session">
 		<constructor-arg name="adminService" ref="adminService" />
 	</bean>
 	
+	<bean id="adminDeleteColleagueContentBean" class="com.novedia.talentmap.web.ui.admin.AdminDeleteColleagueContent" scope="session">
+		<constructor-arg name="colleagueService" ref="collaboratorService" />
+		<constructor-arg name="adminService" ref="adminService" />
+	</bean>
 	
 	<!-- Vaadin AdminContentLayout UI -->
 	

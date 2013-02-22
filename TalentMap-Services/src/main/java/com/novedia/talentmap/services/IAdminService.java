@@ -129,4 +129,19 @@ Map<String, Object> deleteConcept(int conceptId);
  * @return a map a object
  */
 Map<String, Object> deleteTool(int toolId);
+
+
+/**
+ * Delete a colleague
+ * @param ColleagueId  colleague's id to delete
+ * @return a map object
+ */
+Map<String, Object> deleteColleague(int ColleagueId);
+
+void updateManagerColleague(int ColleagueID);
+
 }
+
+
+
+

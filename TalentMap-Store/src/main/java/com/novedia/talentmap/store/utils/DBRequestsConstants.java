@@ -8,6 +8,11 @@ public final class DBRequestsConstants {
 
 	// COLLEAGUE REQUESTS
 
+	/**
+	 * Constant request to delete colleague
+	 */
+	public static final String DELETE_COLLEAGUE = "colleague.delete";
+	
 /**
  * Constant request to get colleague by a list of tool id
  */
@@ -38,6 +43,8 @@ public static final String DELETE_colleague = "colleague.delete";
  * Constant request to update a colleague.
  */
 public static final String SAVE_COLLEAGUE = "colleague.save";
+
+public static final String UPDATE_MANAGER_COLLEAGUE = "colleague.updateManager";
 
 /**
  * Constant request to get a colleague by lastName.

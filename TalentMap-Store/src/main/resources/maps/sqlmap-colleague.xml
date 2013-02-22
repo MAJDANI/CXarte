@@ -107,6 +107,14 @@
         WHERE m.COLLEAGUE_ID = c.COLLEAGUE_ID
         AND m.CLIENT_ID = #id#
     </select>
+    
+    <delete id="delete"  parameterClass="com.novedia.talentmap.model.entity.Colleague">
+    	DELETE FROM COLLEAGUE WHERE COLLEAGUE_ID = #id#
+    </delete>
+    
+     <update id="updateManager"  parameterClass="com.novedia.talentmap.model.entity.Colleague">
+    	UPDATE COLLEAGUE SET MANAGER_ID = '' WHERE MANAGER_ID = #id#
+    </update>
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult" parameterClass="java.util.Hashtable">
   		SELECT c.* FROM 

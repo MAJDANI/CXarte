@@ -48,6 +48,7 @@
 		<property name="categoryDao" ref="categoryDao"/>
 		<property name="vSkillDao" ref="vSkillDao"/>
 		<property name="mapNotification" ref="mapNotification" />
+		<property name="colleagueDao" ref="colleagueDao" />
 	</bean>
 
 	<bean id="managerService" class="com.novedia.talentmap.services.impl.ManagerService">

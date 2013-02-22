@@ -20,6 +20,7 @@ public class AdminContentLayout extends HorizontalLayout {
 	private AdminNavigation adminNav;
 	private ManageSkillContent manageSkillContent;
 	private AdminAddSkillContent addSkillContent;
+	private AdminDeleteColleagueContent deleteColleagueContent;
 
 
 	/**
@@ -32,12 +33,14 @@ public class AdminContentLayout extends HorizontalLayout {
 	 * Build the class AdminView.java
 	 */
 	public AdminContentLayout(AdminNavigation adminNav, ManageSkillContent manageSkillContent, 
-			AdminAddSkillContent addSkillContent, HorizontalSplitPanel hSplitContent) {
+			AdminAddSkillContent addSkillContent, HorizontalSplitPanel hSplitContent,AdminDeleteColleagueContent deleteColleagueContent) {
 		super();
 		this.adminNav = adminNav;
 		this.manageSkillContent = manageSkillContent;
 		this.addSkillContent = addSkillContent;
 		this.hSplitContent = hSplitContent;
+		
+		this.deleteColleagueContent = deleteColleagueContent;
 
 		mainBuild();
 
@@ -55,20 +58,29 @@ public class AdminContentLayout extends HorizontalLayout {
 
 					AdminContentLayout.this.manageSkillContent.setVisible(true);
 					AdminContentLayout.this.addSkillContent.setVisible(false);
+					AdminContentLayout.this.deleteColleagueContent.setVisible(false);
 					//Rafraichit l'arbre
 					AdminContentLayout.this.manageSkillContent.buildTreeSkill();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.manageSkillContent);
 					
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(ConstantsEnglish.LIST_TOOL_TITLE);
 					
-				} else {
+				} else if(cl == AdminAddSkillContent.class){
 
 					AdminContentLayout.this.manageSkillContent.setVisible(false);
 					AdminContentLayout.this.addSkillContent.setVisible(true);
+					AdminContentLayout.this.deleteColleagueContent.setVisible(false);
 					//Rafraichit les catégories disponibles
 					AdminContentLayout.this.addSkillContent.refreshCategoriesAvailable();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
 					AdminContentLayout.this.addSkillContent.getTitle().setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
+				} else if(cl == AdminDeleteColleagueContent.class){
+					AdminContentLayout.this.deleteColleagueContent.setVisible(true);
+					AdminContentLayout.this.deleteColleagueContent.mainBuild();
+					AdminContentLayout.this.manageSkillContent.setVisible(false);
+					AdminContentLayout.this.addSkillContent.setVisible(false);
+					
+					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.deleteColleagueContent);
 				}
 			}
 		}, IAdminContentLayout.class);
@@ -100,6 +112,7 @@ public class AdminContentLayout extends HorizontalLayout {
 		
 		this.manageSkillContent.setVisible(true);
 		this.addSkillContent.setVisible(false);
+		this.deleteColleagueContent.setVisible(false);
 	}
 
 	/**
@@ -151,5 +164,14 @@ public class AdminContentLayout extends HorizontalLayout {
 		this.hSplitContent = hSplitContent;
 	}
 
+	public AdminDeleteColleagueContent getDeleteColleague() {
+		return deleteColleagueContent;
+	}
+
+	public void setDeleteColleague(AdminDeleteColleagueContent deleteColleagueContent) {
+		this.deleteColleagueContent = deleteColleagueContent;
+	}
+
+	
 
 }

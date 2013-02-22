@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
@@ -39,6 +40,9 @@ private IDao<Category> categoryDao;
  */
 private IDao<Concept> conceptDao;
 
+
+private IDao<Colleague> colleagueDao;
+
 /**
  * The vskill DAO.
  */
@@ -58,6 +62,7 @@ private Concept concept;
  * Entity:Tool.
  */
 private Tool tool;
+
 
 /**
  * Map of notification.
@@ -329,6 +334,26 @@ public Map<String, Object> deleteTool(int toolId) throws DataAccessException {
 }
 
 
+	@Override
+	public Map<String, Object> deleteColleague(int colleagueId){
+		Colleague colleague = Colleague.builder().id(colleagueId).build();
+		if(colleagueDao.delete(colleague) > 0){ 
+			this.mapNotification.put("typeError", 1);
+			this.mapNotification.put("messageError", "successful delete");
+		} else {
+			this.mapNotification.put("typeError", 3);
+			this.mapNotification.put("messageError", "unsuccessful delete");
+		}
+		return mapNotification;
+	}
+
+	@Override
+	public void updateManagerColleague(int colleagueID){
+		
+	}
+
+
+
 /**
  * This method allow to make the spring injection.
  * @param categoryDao.
@@ -394,4 +419,16 @@ public void setConcept(Concept concept) {
 public void setTool(Tool tool) {
 	this.tool = tool;
 }
+
+/**
+ * 
+ * @param colleagueDao
+ */
+public void setColleagueDao(IDao<Colleague> colleagueDao) {
+	this.colleagueDao = colleagueDao;
+}
+
+
+
+
 }

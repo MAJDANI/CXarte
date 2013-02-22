@@ -51,7 +51,7 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	public int save(Colleague colleague) throws DataAccessException {
 		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_COLLEAGUE, colleague);
 	}
-
+	
 	@Override
 	public int add(Colleague colleague) throws DataAccessException {
 		if (logger.isDebugEnabled()) {
@@ -62,7 +62,15 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 
 	@Override
 	public int delete(Colleague colleague) throws DataAccessException {
-		throw new UnsupportedOperationException();
+		if (logger.isDebugEnabled()) {
+			logger.debug("Delete colleague ID :" +colleague.getId());
+		}
+		Integer DeletResult =  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_colleague, colleague); 
+		if(DeletResult > 0){
+			this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_MANAGER_COLLEAGUE, colleague);
+		}
+		return DeletResult;
+		//throw new UnsupportedOperationException();
 	}
 
 	@Override

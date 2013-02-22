@@ -93,6 +93,7 @@ public class AdminNavigation extends VerticalLayout implements IObservable , Ite
 					this.updateObservateur();				
 				}
 				else if(itemId.equals(ConstantsForMenuEnglish.ADMIN_DELETE_COLLAB_NAME)){
+					this.cl = AdminDeleteColleagueContent.class;
 					this.updateObservateur();
 				}
 			}				
