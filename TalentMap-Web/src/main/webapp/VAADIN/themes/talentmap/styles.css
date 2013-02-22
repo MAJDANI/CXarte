@@ -6,6 +6,7 @@
 .v-textfield{width:200px!important;}
 /*.v-readonly{}*/
 .v-textfield.v-readonly{background:#eee!important; color:gray!important;}
+.v-textarea.v-readonly{background:#eee!important; color:gray!important;}
 .v-filterselect.v-readonly{background:#eee!important; color:gray!important;}
 .v-table-body{height:auto!important;}
 .v-table-cell-content{vertical-align:middle!important;}
