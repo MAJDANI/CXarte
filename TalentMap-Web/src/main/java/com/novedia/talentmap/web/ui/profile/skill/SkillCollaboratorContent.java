@@ -99,7 +99,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @class ProfileView.java
 	 * @return
 	 */
-	private void buildSkillLayout() {
+	public void buildSkillLayout() {
 		this.skillLabel.setStyle(TalentMapCSS.H2);
 
 		if (this.listSkill.isVisible()) {
@@ -123,7 +123,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @class ProfileView.java
 	 * @param skillPanel
 	 */
-	private void buildAddSkillPanel() {
+	public void buildAddSkillPanel() {
 
 		VerticalLayout vLayout = new VerticalLayout();
 		HorizontalLayout hLayout = new HorizontalLayout();
@@ -161,7 +161,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @class ProfileView.java
 	 * @param skillPanel
 	 */
-	private void buildListSkillPanel() {
+	public void buildListSkillPanel() {
 
 		this.addSkill.setCaption("Add skill");
 		this.addSkill.setEnabled(true);
@@ -182,7 +182,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @return
 	 */
 
-	private void buildButtonLayout() {
+	public void buildButtonLayout() {
 		HorizontalLayout hLayout = new HorizontalLayout();
 
 		this.save.setCaption(ConstantsEnglish.SAVE_CAPTION);

@@ -11,10 +11,9 @@ import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.role.CmContentLayout;
-import com.novedia.talentmap.web.ui.role.IaContentLayout;
 import com.novedia.talentmap.web.ui.role.RhContentLayout;
-import com.novedia.talentmap.web.ui.search.SearchNavigation;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -28,7 +27,7 @@ import com.vaadin.ui.themes.Reindeer;
  * 
  * @author e.moumbe
  */
-public class AuthenticatedScreen extends VerticalLayout {
+public class AuthenticatedScreen extends VerticalLayout  {
 	
 	/**
 	 * The logger
@@ -50,9 +49,10 @@ public class AuthenticatedScreen extends VerticalLayout {
 	 * My Vaadin app
 	 */
 	private MyVaadinApplication application;
+	private ProfileView profileView;
 	
 	//
-	//private TabMain mainTab;
+	private TabMain mainTab;
 	
 	//
 	
@@ -95,6 +95,9 @@ public class AuthenticatedScreen extends VerticalLayout {
 		else if(Authorization.Role.IA.getId().equals(this.authentication.getAuthorization().getRoleId())){
 			buildMainLayout(this.application, Authorization.Role.IA);			
 		}
+		else if(Authorization.Role.CL.getId().equals(this.authentication.getAuthorization().getRoleId())){
+			buildMainLayout(this.application, Authorization.Role.CL);			
+		}
 		// this.application.getMainWindow().setContent(buildMainLayout());
 	}
 	
@@ -113,6 +116,7 @@ public class AuthenticatedScreen extends VerticalLayout {
 		RhContentLayout rhContentLayout = application.getRhContentLayout();
 		Panel vpanel = new Panel();
 		VerticalLayout verticalLayout = new VerticalLayout();
+		
 		        
 		// Select the views to display
 		if(role.equals(Role.AD)){
@@ -135,7 +139,16 @@ public class AuthenticatedScreen extends VerticalLayout {
 			mainTab.removeComponent(adminView);		
 			addComponent(cmContentLayout);
 		}
+		else if(role.equals(Role.CL)){
+			mainTab.removeComponent(adminView);		
+			mainTab.removeComponent(mainTab.getSearchView());
+		}
 		
+//		else{
+//			mainTab.removeComponent(adminView);			
+//		}
+		//Show logOut button
+
 		// logout button
 		Button logout = new Button("LogOut");
 		logout.addStyleName(Reindeer.BUTTON_LINK); //transformer le bouton en lien
@@ -153,7 +166,7 @@ public class AuthenticatedScreen extends VerticalLayout {
 		this.addComponent(vpanel);
 		return this;
 	}
-	
+
 	/**
 	 * manage the logout buton
 	 */

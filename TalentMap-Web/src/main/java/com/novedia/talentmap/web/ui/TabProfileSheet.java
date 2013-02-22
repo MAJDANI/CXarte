@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui;
 
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
+import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.vaadin.ui.TabSheet;
@@ -12,7 +13,7 @@ import com.vaadin.ui.TabSheet;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
-public class TabProfileSheet extends TabSheet {
+public class TabProfileSheet extends TabSheet{
 	
 	/**
 	 * Serial Version Number
@@ -24,22 +25,34 @@ public class TabProfileSheet extends TabSheet {
 	 */
 	private ProfileView profileView;
 	private MonitoringCollabView monitoringCollabView;
-
+	private TabProfileSkills tabProfileSkills;
+	private TabProfileAdminstrativeData tabProfileAdminstratveData;
+	private TabProfileHistoricMission tabProfileHistoricMission;
+	
 	/**
 	 * 
 	 * Build the class TabProfileSheet.java 
 	 * @param profileView
 	 * @param collabView
 	 */
-	public TabProfileSheet(ProfileView profileView, MonitoringCollabView monitoringCollabView){
+	public TabProfileSheet(ProfileView profileView,
+			MonitoringCollabView monitoringCollabView,
+			TabProfileSkills tabProfileSkills,
+			TabProfileAdminstrativeData tabProfileAdminstratveData,
+			TabProfileHistoricMission tabProfileHistoricMission){
 		super();
 		this.profileView = profileView;
 		this.monitoringCollabView = monitoringCollabView;
-		
+		this.tabProfileSkills = tabProfileSkills;
+		this.tabProfileAdminstratveData = tabProfileAdminstratveData;
+		this.tabProfileHistoricMission = tabProfileHistoricMission;
+	
 		setImmediate(true);
-		
 		addTab(this.profileView, ConstantsEnglish.TAB_PROFILE_NAME);
-		addTab(this.monitoringCollabView, ConstantsEnglish.TAB_COLLAB_NAME);
+		//addTab(this.monitoringCollabView, ConstantsEnglish.TAB_COLLAB_NAME);
+		addTab(this.tabProfileSkills, ConstantsForMenuEnglish.VISUALIZE_SKILLS_NAME);
+		addTab(this.tabProfileAdminstratveData, ConstantsForMenuEnglish.VISUALIZE_ADMINISTRATIVE_DATA);
+		addTab(this.tabProfileHistoricMission, ConstantsForMenuEnglish.VISUALIZE_MISSIONS_NAME);	
 	}
 	
 	/**
@@ -58,4 +71,33 @@ public class TabProfileSheet extends TabSheet {
 		this.monitoringCollabView = monitoringCollabView;
 	}
 
+	/**
+	 * @return the tabProfileSkills
+	 */
+	public TabProfileSkills getTabProfileSkills() {
+		return tabProfileSkills;
+	}
+
+	/**
+	 * @param tabProfileSkills the tabProfileSkills to set
+	 */
+	public void setTabProfileSkills(TabProfileSkills tabProfileSkills) {
+		this.tabProfileSkills = tabProfileSkills;
+	}
+
+	/**
+	 * @param tabProfileAdminstratveData the tabProfileAdminstratveData to set
+	 */
+	public void setTabProfileAdminstratveData(
+			TabProfileAdminstrativeData tabProfileAdminstratveData) {
+		this.tabProfileAdminstratveData = tabProfileAdminstratveData;
+	}
+
+	/**
+	 * @param tabProfileHistoricMission the tabProfileHistoricMission to set
+	 */
+	public void setTabProfileHistoricMission(
+			TabProfileHistoricMission tabProfileHistoricMission) {
+		this.tabProfileHistoricMission = tabProfileHistoricMission;
+	}
 }

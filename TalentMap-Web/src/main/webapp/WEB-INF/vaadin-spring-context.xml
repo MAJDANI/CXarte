@@ -124,12 +124,12 @@
 	<bean id="accCategory2" class="com.vaadin.ui.Accordion"/>
 	<bean id="accConcept2" class="com.vaadin.ui.Accordion"/>
 	
-	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
+	<!-- <bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
 		<constructor-arg name="skillService" ref="skillService" />
 		<constructor-arg name="tableTools" ref="tableTools2" />
 		<constructor-arg name="accCategory" ref="accCategory2" />
 		<constructor-arg name="accConcept" ref="accConcept2" />
-	</bean>
+	</bean> -->
 	
 	
 	<!-- Vaadin AddSkillWindow UI  -->
@@ -220,11 +220,12 @@
 	
 	<bean id="profileLayoutBean" class="com.novedia.talentmap.web.ui.profile.ProfileLayout" scope="session">
 		<constructor-arg name="profileCollabContent" ref="profileCollaboratorContentBean"/>
-		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
-		<constructor-arg name="skillCollabContent" ref="skillCollaboratorContentBean"/>
 		<constructor-arg name="profileNavigation" ref="profileNavigationBean"/>
+		<constructor-arg name="skillCollabContent" ref="skillCollaboratorContentBean"/>
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
+		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
 		<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/>	
+
 	</bean>
 	<!--History EA -->
 	<bean id="eaContentHistoriqueBean" class="com.novedia.talentmap.web.ui.ea.EaContentHistorique"/>
@@ -274,7 +275,7 @@
 	<bean id="btnDeleteMission" class="com.vaadin.ui.Button"/>
 	
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
-	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+		<constructor-arg name="collaboratorService" ref="collaboratorService"/>
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
 		<constructor-arg name="missionForm" ref="missionFormBean"/>
@@ -298,8 +299,7 @@
 		<constructor-arg name="cancel" ref="cancelSkill"/>
 		<constructor-arg name="addSkill" ref="addSkill"/>
 	</bean>
-	
-	
+		
 	
 	<!-- Vaadin RegistrationForm UI -->
 	
@@ -518,14 +518,146 @@
 	
 	
 	<!-- Vaadin TabProfileSheet UI -->
+	<bean id="bodyLayoutBean" class="com.vaadin.ui.VerticalLayout" scope="session" />
+	
+	<bean id="tabProfileSkillsBean" class="com.novedia.talentmap.web.ui.TabProfileSkills" scope="session">
+	 <constructor-arg name="skillCollaboratorContent" ref="skillCollaboratorContentBean2"/>  
+	</bean>
+	<bean id="tabProfileAdminstrativeDataBean" class="com.novedia.talentmap.web.ui.TabProfileAdminstrativeData" scope="session">
+		<constructor-arg name="profileCollabContent" ref="profileCollaboratorContentBean2"/>  
+	</bean>
+	
+	<bean id="tabProfileHistoricMissionBean" class="com.novedia.talentmap.web.ui.TabProfileHistoricMission" scope="session">
+		<constructor-arg name ="missionCollabContent" ref="missionCollaboratorContentBean2"/>
+	</bean>  
+	<bean id="tabSheetBean" class="com.vaadin.ui.TabSheet"/>
+	
 	
 	<bean id="tabProfileSheetBean" class="com.novedia.talentmap.web.ui.TabProfileSheet" scope="session" >
 		<constructor-arg name="profileView" ref="profileViewBean" />
 		<constructor-arg name="monitoringCollabView" ref="monitoringCollabViewBean"/>
+		<constructor-arg name="tabProfileSkills" ref="tabProfileSkillsBean"/>
+		<constructor-arg name="tabProfileAdminstratveData" ref="tabProfileAdminstrativeDataBean"/>
+		<constructor-arg name="tabProfileHistoricMission" ref="tabProfileHistoricMissionBean"/>
 	</bean>
-	
-	
+
 	<!-- Vaadin TabMain UI -->
 	
 	<bean id="vLayoutTabMain" class="com.vaadin.ui.VerticalLayout" scope="session" />
+<!--***************************************************************************************************************************
+		TODO : méthode pas très propre, car déclaration 2 fois des beans :A REVOIR
+*************************************************************************************************************************** -->
+	<bean id="skillCollaboratorContentBean2" class="com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent" scope="session">
+		<constructor-arg name="listSkill" ref="listSkillBean2"/>
+		<constructor-arg name="listSkillPanel" ref="listSkillPanel2"/>
+		<constructor-arg name="skillPanel" ref="skillPanel2"/>
+		<constructor-arg name="addSkillPanel" ref="addSkillPanelBean2"/>
+		<constructor-arg name="bodyLayout" ref="bodySkillLayout2"/>
+		<constructor-arg name="footerLayout" ref="footerSkillLayout2"/>
+		<constructor-arg name="skillLabel" ref="skillLabel2"/>
+		<constructor-arg name="save" ref="saveSkill2"/>
+		<constructor-arg name="edit" ref="editSkill2"/>
+		<constructor-arg name="cancel" ref="cancelSkill2"/>
+		<constructor-arg name="addSkill" ref="addSkill2"/>
+	</bean>
+	<bean id="profileCollaboratorContentBean2" class="com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent" scope="session">
+		<constructor-arg name="colleagueService" ref="collaboratorService"/>
+		<constructor-arg name="collabForm" ref="collaboratorFormBean3"/>
+	</bean>
+	
+	<bean id="collaboratorFormBean3" class="com.novedia.talentmap.web.ui.profile.CollaboratorForm" scope="session">
+    	<constructor-arg name="colleagueService" ref="collaboratorService"/>
+    	<constructor-arg name="profileService" ref="profileService"/>
+    	<constructor-arg name="clientService" ref="clientService"/>
+    	<constructor-arg name="businessEngineerService" ref="businessEngineerService"/>
+    	
+    	<constructor-arg name="fieldOrderCollaborator" ref="fieldOrderCollaborator3"/>
+    	<constructor-arg name="fieldOrderMission" ref="fieldOrderMission3"/>
+    	<constructor-arg name="formCollaborator" ref="formCollaborator3" />
+    	<constructor-arg name="formMission" ref="formMission3" />
+    </bean>
+    
+     <bean id="fieldOrderCollaborator3" class="java.util.Vector"/>
+    <bean id="fieldOrderMission3" class="java.util.Vector"/>
+	<bean id="formCollaborator3" class="com.vaadin.ui.Form"/>
+	<bean id="formMission3" class="com.vaadin.ui.Form"/>
+    
+    
+	<bean id="missionCollaboratorContentBean2" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
+		<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean3"/>
+		<constructor-arg name="listMission" ref="listMissionBean3"/>
+		<constructor-arg name="missionForm" ref="missionFormBean3"/>
+		<constructor-arg name="listPanel" ref="listPanel3"/>
+		<constructor-arg name="btnAddMission" ref="btnAddMission3"/>
+		<constructor-arg name="pageTitle" ref="pageTitleMission3"/>
+		<constructor-arg name="btnModifyMission" ref="btnModifyMission3"/>
+		<constructor-arg name="btnDeleteMission" ref="btnDeleteMission3"/>
+	</bean>
+	
+	<bean id="addMissionPanelBean3" class="com.novedia.talentmap.web.ui.profile.mission.AddMissionPanel">
+		<constructor-arg name="missionForm" ref="missionFormBean3"/>
+	</bean>
+	<bean id="listMissionBean3" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
+		<constructor-arg name="missionContainer" ref="missionContainerBean"/>
+	</bean>
+	<bean id="listPanel3" class="com.vaadin.ui.Panel"/>
+	<bean id="missionFormBean3" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
+		<constructor-arg name="missionForm" ref="missionForm"/>
+		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
+		<constructor-arg name="save" ref="saveMissionButton"/>
+		<constructor-arg name="cancel" ref="cancelMissionButton"/>
+	</bean>
+	
+	<bean id="btnAddMission3" class="com.vaadin.ui.Button"/>
+	<bean id="pageTitleMission3" class="com.vaadin.ui.Label"/>
+	<bean id="btnModifyMission3" class="com.vaadin.ui.Button"/>
+	<bean id="btnDeleteMission3" class="com.vaadin.ui.Button"/>
+		
+	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
+		<constructor-arg name="skillService" ref="skillService" />
+		<constructor-arg name="tableTools" ref="tableTools" />
+		<constructor-arg name="accCategory" ref="accCategory" />
+		<constructor-arg name="accConcept" ref="accConcept" />
+	</bean>
+	<bean id="listSkillPanel2" class="com.vaadin.ui.Panel"/>
+	<bean id="skillPanel2" class="com.vaadin.ui.Panel"/>
+	<bean id="addSkillPanelBean2" class="com.novedia.talentmap.web.ui.profile.AddSkillPanel" scope="session">
+		<constructor-arg name="skillTab" ref="skillTab2"/>
+		<constructor-arg name="skillService" ref="skillService" />
+		<constructor-arg name="listSkill" ref="listSkillBean" />
+		<constructor-arg name="categoryLabel" ref="categoryLabel2" />
+		<constructor-arg name="conceptLabel" ref="conceptLabel2" />
+		<constructor-arg name="frequencyUseSelect" ref="frequencyUseSelect2" />
+		<constructor-arg name="noUsingTimeSelect" ref="noUsingTimeSelect2" />
+		<constructor-arg name="toolSelect" ref="toolSelect2" />
+		<constructor-arg name="validSkill" ref="validSkill2" />
+		<constructor-arg name="valueOptions" ref="valueOptions2" />
+		<constructor-arg name="stars" ref="stars2" />
+	</bean>
+	
+	<bean id="skillTab2" class="com.vaadin.ui.Accordion"/>
+	<bean id="categoryLabel2" class="com.vaadin.ui.Label"/>
+	<bean id="conceptLabel2" class="com.vaadin.ui.Label"/>
+	<bean id="toolSelect2" class="com.vaadin.ui.Select"/>
+	<bean id="frequencyUseSelect2" class="com.vaadin.ui.Select"/>
+	<bean id="noUsingTimeSelect2" class="com.vaadin.ui.Select"/>
+	<bean id="validSkill2" class="com.vaadin.ui.Button" />
+	<bean id="valueOptions2" class="java.util.HashMap"/>
+	<bean id="stars2" class="org.vaadin.teemu.ratingstars.RatingStars"/>
+	
+	
+	<bean id="bodySkillLayout2" class="com.vaadin.ui.VerticalLayout"/>
+	<bean id="footerSkillLayout2" class="com.vaadin.ui.HorizontalLayout"/>
+	
+	<bean id="skillLabel2" class="com.vaadin.ui.Label"/>
+	<bean id="saveSkill2" class="com.vaadin.ui.Button"/>
+	<bean id="editSkill2" class="com.vaadin.ui.Button"/>
+	<bean id="cancelSkill2" class="com.vaadin.ui.Button"/>
+	<bean id="addSkill2" class="com.vaadin.ui.Button"/>
+	
+	
 </beans>

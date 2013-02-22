@@ -1,8 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
-import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
@@ -110,7 +108,7 @@ IObservable,ItemClickListener {
 			//get the item in the root
 			Object itemId = event.getItemId();
 			if(itemId != null){
-				if(itemId.equals(constantsForMenuInglish.VISUALIZE_PROFILE_NAME)){
+				if(itemId.equals(constantsForMenuInglish.VISUALIZE_ADMINISTRATIVE_DATA)){
 					//allowed to forward the view page
 					this.cl = ProfileCollaboratorContent.class;
 					updateObservateur();				
@@ -118,15 +116,15 @@ IObservable,ItemClickListener {
 				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_MISSIONS_NAME)){					
 					this.cl = MissionCollaboratorContent.class;					
 					updateObservateur();				
-				}
-				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_EA_NAME)){
-					this.cl = EaContentHistorique.class;
-					updateObservateur();
-				}
+				}				
 				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_SKILLS_NAME)){
 					this.cl = SkillCollaboratorContent.class;
 					updateObservateur();
 				}
+//				else if(itemId.equals(constantsForMenuInglish.VISUALIZE_EA_NAME)){
+//					this.cl = EaContentHistorique.class;
+//					updateObservateur();
+//				}
 			}				
 		}
 	}
