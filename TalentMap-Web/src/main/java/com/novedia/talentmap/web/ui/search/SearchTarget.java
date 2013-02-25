@@ -277,44 +277,30 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void buttonClick(ClickEvent event) {
 
 		Button button = event.getButton();
-
 		if (button == this.search) {
 
 			//---------------------------------------------------------
 			//The Panel "Search by customer" is visible
 			//---------------------------------------------------------
 			if (this.searchByClientPanel.isVisible()) {
-					
-				
 				Client client = (Client) this.clientNameSelect.getValue();
-				
 				try {
-					
 					this.listCollab = this.collabService.getAllColleaguesByClient(client);
-					
 					updateObservateur();
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 			}
 
 			//---------------------------------------------------------
 			//The Panel "Search by name" is visible
 			//---------------------------------------------------------
 			if (this.searchByNamePanel.isVisible()) {
-
 				String collabName = (String) this.fieldName.getValue();
-				
 				try {
-					
 					this.listCollab = this.collabService.getAllColleaguesByLastName(collabName);
-				
 					updateObservateur();
-					
 				} catch (Exception e) {
-				
 					e.printStackTrace();
 				}
 			}
@@ -325,35 +311,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			if (this.searchBySkillsPanel.isVisible()) {
 
 				//Get all collaborators who has all skills requested
-				this.listCollab =  getListTooIdChecked();
-				updateObservateur();
-				
-				//Check the skill's list isn't empty
-//				if(!this.listCheckBoxSkills.isEmpty()){
-//					List<Integer> listToolId = new ArrayList<Integer>();
-//					List<Integer> listSize = new ArrayList<Integer>();
-//					
-//					//Get all toolIds checked by the user
-//					listToolId = getListTooIdChecked();
-//					listSize.add(listToolId.size());
-//					
-//					//We create a Map with 2 keys : 
-//					//         - listSize = the list size
-//					//         - listId = the tools id list
-//					//This map is used for the request by ibatis (see sqlmap-colleague.xml)
-//					Hashtable<String,List<Integer>> mapToolId = new Hashtable<String,List<Integer>>();
-//					mapToolId.put("listSize", listSize);
-//					mapToolId.put("listId", listToolId);
-//					try {
-//						//Get all collaborators who has all skills requested
-//						this.listCollab =  this.collabService.getAllColleaguesByListToolId(mapToolId);
-//						updateObservateur();
-//						
-//					} catch (Exception e) {
-//					
-//						e.printStackTrace();
-//					}
-//				}
+				this.listCollab =  getListColleagueForTooIdChecked();
+				if(!this.listCollab.isEmpty()) {
+					updateObservateur();
+				}
 			}
 		}
 	}
@@ -413,22 +374,23 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	
 	
 	/**
-	 * Renvoie la liste des identifiants des outils cochés dans le Panel de checherche par Compétence
-	 * @return
+	 * Renvoie la liste des Colleagues correspondant aux outils cochés dans le Panel de checherche par Compétence
+	 * @return List<Colleague> la liste des colleagues. Elle peut être vide si l'utilisateur n'a rien coché
+	 * (pa de requête effectuée) ou si la sélection d'outils ne renvoie pas de résultat
 	 */
-	private List<Colleague> getListTooIdChecked() {
-		List<Integer> listToolId = new ArrayList<Integer>();
-		List<Integer> listSize = new ArrayList<Integer>();
+	private List<Colleague> getListColleagueForTooIdChecked() {
 		
 		List<Colleague> listColleague = new ArrayList<Colleague>();
 		List<Integer> listColleagueId = new ArrayList<Integer>();
 		List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
+		Boolean atLeastOneIsSelected = false;
 		
 		Collection<Object> lesItemId =(Collection<Object>)this.treeSkills.getContainerDataSource().getItemIds();
 		Boolean noColleagueFound = false;
 		Boucle: for( Object item : lesItemId ) {
 			
 			if(treeSkills.isSelected(item)) {
+				atLeastOneIsSelected = true;
 				System.out.println("item selected" + item);
 				if (item  instanceof Category) {
 					//On veut des comptétences sur une catégorie entière
@@ -512,11 +474,15 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 				}
 			}
 		}
-		//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
-		if(noColleagueFound == false) {
-			listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
+		if (!atLeastOneIsSelected) {
+			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_PLEASE_SELECT, Notification.TYPE_WARNING_MESSAGE);
 		} else {
-			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
+			//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
+			if(noColleagueFound == false) {
+				listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
+			} else {
+				getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
+			}
 		}
 		return listColleague;
 	}
