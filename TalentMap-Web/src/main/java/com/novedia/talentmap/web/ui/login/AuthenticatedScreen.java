@@ -111,7 +111,6 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		
 		TabMain mainTab = application.getMainTab();
 
-		AdminView adminView = mainTab.getAdminView();
 		CmContentLayout cmContentLayout = application.getCmContentLayout();
 		RhContentLayout rhContentLayout = application.getRhContentLayout();
 		Panel vpanel = new Panel();
@@ -125,23 +124,26 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		}
 		else if(role.equals(Role.IA)){
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
-			mainTab.removeComponent(adminView);	
+			mainTab.removeComponent(mainTab.getAdminView());	
 		}
 		else if(role.equals(Role.RH)){		
 			mainTab.removeComponent(mainTab.getSearchView());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
-			mainTab.removeComponent(adminView);		
+			mainTab.removeComponent(mainTab.getAdminView());		
 			addComponent(rhContentLayout);
 		}
 		else if(role.equals(Role.CM)){
 			mainTab.removeComponent(mainTab.getSearchView());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
-			mainTab.removeComponent(adminView);		
+			mainTab.removeComponent(mainTab.getAdminView());		
 			addComponent(cmContentLayout);
 		}
 		else if(role.equals(Role.CL)){
-			mainTab.removeComponent(adminView);		
+			mainTab.removeComponent(mainTab.getAdminView());		
 			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabReachByName());
+			mainTab.removeComponent(mainTab.getTabSearchByCustomer());
+			mainTab.removeComponent(mainTab.getTabReachBySkills());
 		}
 		
 //		else{

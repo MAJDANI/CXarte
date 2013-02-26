@@ -19,6 +19,7 @@ public class ProfileLayout extends HorizontalLayout {
 	private ProfileNavigation profileNavigation;
 	private EaContentHistorique eaContentHistorique;
 
+
 	/**
 	 * Vaadin Components
 	 */
@@ -72,6 +73,7 @@ public class ProfileLayout extends HorizontalLayout {
 					ProfileLayout.this.missionCollabContent.setVisible(true);
 					ProfileLayout.this.skillCollabContent.setVisible(false);
 					ProfileLayout.this.eaContentHistorique.setVisible(false);
+				
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.missionCollabContent);
 				}
 				
@@ -81,15 +83,19 @@ public class ProfileLayout extends HorizontalLayout {
 					ProfileLayout.this.missionCollabContent.setVisible(false);
 					ProfileLayout.this.skillCollabContent.setVisible(true);
 					ProfileLayout.this.eaContentHistorique.setVisible(false);
+				
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.skillCollabContent);
 				}
 				if(cl == EaContentHistorique.class){
 					ProfileLayout.this.eaContentHistorique.setVisible(true);
 					ProfileLayout.this.profileCollabContent.setVisible(false);
+					ProfileLayout.this.skillCollabContent.setVisible(false);
 					ProfileLayout.this.missionCollabContent.setVisible(false);
+					ProfileLayout.this.eaContentHistorique.setVisible(false);
+					
 
 					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.eaContentHistorique);									
-				}
+				}				
 			}
 		}, IProfileLayout.class);
 	}
@@ -225,4 +231,18 @@ public class ProfileLayout extends HorizontalLayout {
 		this.skillCollabContent = skillCollabContent;
 	}
 
+	/**
+	 * @return the tabProfileSkills
+	 */
+//	public TabProfileSkills getTabProfileSkills() {
+//		return tabProfileSkills;
+//	}
+//
+//	/**
+//	 * @param tabProfileSkills the tabProfileSkills to set
+//	 */
+//	public void setTabProfileSkills(TabProfileSkills tabProfileSkills) {
+//		this.tabProfileSkills = tabProfileSkills;
+//	}
+		
 }

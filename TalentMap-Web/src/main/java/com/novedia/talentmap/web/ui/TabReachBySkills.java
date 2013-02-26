@@ -3,16 +3,35 @@
  */
 package com.novedia.talentmap.web.ui;
 
-import com.vaadin.ui.TabSheet;
+import com.novedia.talentmap.web.ui.search.SearchContent;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
  *
  */
-public class TabReachBySkills extends TabSheet{
+public class TabReachBySkills extends VerticalLayout{
+	private SearchContent searchContentSkil;
 
-	public TabReachBySkills() {
+	public TabReachBySkills(SearchContent searchContentSkil) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.searchContentSkil = searchContentSkil;
+		this.searchContentSkil.getSearchTarget().switchBySkillsPanel();
+		addComponent(this.searchContentSkil);
 	}
+
+	/**
+	 * @return the searchContentSkil
+	 */
+	public SearchContent getSearchContentSkil() {
+		return searchContentSkil;
+	}
+
+	/**
+	 * @param searchContentSkil the searchContentSkil to set
+	 */
+	public void setSearchContentSkil(SearchContent searchContentSkil) {
+		this.searchContentSkil = searchContentSkil;
+	}
+		
 }

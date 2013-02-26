@@ -20,9 +20,25 @@
     
     
     <bean id="mainTab" class="com.novedia.talentmap.web.ui.TabMain" scope="session" >
-		<constructor-arg name="tabProfileSheet" ref="tabProfileSheetBean" /> 
-		<constructor-arg name="searchView" ref="searchViewBean" />
-		<constructor-arg name="adminView" ref="adminViewBean" />
+		<constructor-arg name="tabProfileSheet" ref="tabProfileSheetBean"/> 
+		<constructor-arg name="searchView" ref="searchViewBean"/>
+		<constructor-arg name="adminView" ref="adminViewBean"/>
+		 <constructor-arg name="tabSearchByCustomer" ref="TabSearchByCustomerBean"/>
+		<constructor-arg name="tabReachByName" ref="TabReachByNameBean" />
+		<constructor-arg name="tabReachBySkills" ref="TabReachBySkillsBean" />	 
+	</bean>
+	
+	<bean id="searchTargetPanel3" class="com.vaadin.ui.Panel"/>
+	
+	<bean id="TabSearchByCustomerBean" class="com.novedia.talentmap.web.ui.TabSearchByCustomer" scope="session">	  		
+		<constructor-arg  name="searchContent" ref="searchContentBean4"/>    	 
+	</bean>
+		
+	<bean id="TabReachByNameBean" class="com.novedia.talentmap.web.ui.TabReachByName" scope="session">
+		<constructor-arg  name="searchContentName" ref="searchContentBean5"/>
+	</bean>
+	<bean id="TabReachBySkillsBean" class="com.novedia.talentmap.web.ui.TabReachBySkills" scope="session">
+		<constructor-arg  name="searchContentSkil" ref="searchContentSkillBean"/> 
 	</bean>
 	
 	<!-- <bean id="rhContentLayout" class="com.novedia.talentmap.web.ui.role.RhContentLayout" scope="session">
@@ -41,7 +57,7 @@
     	<property name="authenticationService" ref="authenticationService" />
     	<property name="registrationService" ref="registrationService" />
     	<property name="businessEngineerService" ref="businessEngineerService" />
-<!--     	<property name="closeButton" ref="closeButton"/> -->
+<!--     <property name="closeButton" ref="closeButton"/> -->
     	<property name="mainVerticalLayout" ref="mainVerticalLayout"/>
     	<property name="rhContentLayout" ref="rhContentLayout"/>
     	<property name="cmContentLayout" ref="cmContentLayout"/>
@@ -117,7 +133,6 @@
 		<constructor-arg name="accCategory" ref="accCategory" />
 		<constructor-arg name="accConcept" ref="accConcept" />
 	</bean>
-	
 	
 	<!-- We declare another ListSkill UI because it's used by two beans => ProfileCollabWindow -->
 	
@@ -226,7 +241,6 @@
 		<constructor-arg name="hSplitPanel" ref="hSplitPanelProfileLayout"/>
 		<constructor-arg name="missionCollabContent" ref="missionCollaboratorContentBean"/>
 		<constructor-arg name="eaContentHistorique" ref="eaContentHistoriqueBean"/>	
-
 	</bean>
 	<!--History EA -->
 	<bean id="eaContentHistoriqueBean" class="com.novedia.talentmap.web.ui.ea.EaContentHistorique"/>
@@ -237,9 +251,6 @@
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 	</bean>
 	
-	<bean id="missionContainerBean2" class="com.novedia.talentmap.web.ui.profile.mission.MissionContainer">
-		<constructor-arg name="collabService" ref="collaboratorService"/>
-	</bean>
 	<!-- Vaadin ListMission UI -->
 	
 	<bean id="listMissionBean" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
@@ -279,7 +290,7 @@
 	<bean id="btnDeleteMission" class="com.vaadin.ui.Button"/>
 	
 	<bean id="missionCollaboratorContentBean" class="com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent">
-	<constructor-arg name="collaboratorService" ref="collaboratorService"/>
+		<constructor-arg name="collaboratorService" ref="collaboratorService"/>
 		<constructor-arg name="addMissionPanel" ref="addMissionPanelBean"/>
 		<constructor-arg name="listMission" ref="listMissionBean"/>
 		<constructor-arg name="missionForm" ref="missionFormBean"/>
@@ -298,6 +309,7 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout"/>
 		<constructor-arg name="skillLabel" ref="skillLabel"/>
+		<constructor-arg name="save" ref="saveSkill"/>
 		<constructor-arg name="edit" ref="editSkill"/>
 		<constructor-arg name="cancel" ref="cancelSkill"/>
 		<constructor-arg name="addSkill" ref="addSkill"/>
@@ -320,8 +332,7 @@
 	<bean id="registrationScreen" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >
 		<constructor-arg name="application" ref="vaadinBean"/>
 	</bean>
-	
-		
+			
 	<!-- Vaadin AdminView UI -->
 	
 	<bean id="hSplitContent" class="com.vaadin.ui.HorizontalSplitPanel"/>
@@ -331,10 +342,8 @@
 		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
 		<constructor-arg name="addSkillContent" ref="adminAddSkillContentBean" />
 		<constructor-arg name="hSplitContent" ref="hSplitContent" />
-		<constructor-arg name="deleteColleagueContent" ref="adminDeleteColleagueContentBean" />
 	</bean>
-	
-	
+		
 	<!-- Vaadin NavigationLink UI -->
 	
 	<bean id="addSkillButton" class="com.vaadin.ui.Button"/>
@@ -359,9 +368,8 @@
 	<bean id="fieldOrderSkill" class="java.util.Vector"/>
 	<bean id="adminTitle" class="com.vaadin.ui.Label"/>
 	<bean id="adminBody" class="com.vaadin.ui.HorizontalLayout"/>
-	
-	
-	<bean id="manageSkillContentBean" class="com.novedia.talentmap.web.ui.admin.ManageSkillContent" scope="session">
+		
+	<bean id="manageSkillContentBean" class="com.novedia.talentmap.web.ui.admin.ManageSkillContent">
 		<constructor-arg name="formSkill" ref="formSkill" />
 		<constructor-arg name="treeSkill" ref="treeSkill" />
 		<constructor-arg name="save" ref="adminSaveSkill" />
@@ -377,14 +385,10 @@
 		<constructor-arg name="body" ref="adminBody" />
 	</bean>
 	
-	<bean id="adminAddSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AdminAddSkillContent" scope="session">
+	<bean id="adminAddSkillContentBean" class="com.novedia.talentmap.web.ui.admin.AdminAddSkillContent">
 		<constructor-arg name="adminService" ref="adminService" />
 	</bean>
 	
-	<bean id="adminDeleteColleagueContentBean" class="com.novedia.talentmap.web.ui.admin.AdminDeleteColleagueContent" scope="session">
-		<constructor-arg name="colleagueService" ref="collaboratorService" />
-		<constructor-arg name="adminService" ref="adminService" />
-	</bean>
 	
 	<!-- Vaadin AdminContentLayout UI -->
 	
@@ -563,6 +567,7 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout2"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout2"/>
 		<constructor-arg name="skillLabel" ref="skillLabel2"/>
+		<constructor-arg name="save" ref="saveSkill2"/>
 		<constructor-arg name="edit" ref="editSkill2"/>
 		<constructor-arg name="cancel" ref="cancelSkill2"/>
 		<constructor-arg name="addSkill" ref="addSkill2"/>
@@ -606,44 +611,36 @@
 		<constructor-arg name="missionForm" ref="missionFormBean3"/>
 	</bean>
 	<bean id="listMissionBean3" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
-		<constructor-arg name="missionContainer" ref="missionContainerBean2"/>
+		<constructor-arg name="missionContainer" ref="missionContainerBean"/>
 	</bean>
 	<bean id="listPanel3" class="com.vaadin.ui.Panel"/>
-	<bean id="missionFormLayout2" class="com.vaadin.ui.GridLayout"/>
-	<bean id="fieldOrderMissionFormBean2" class="java.util.Vector"/>
-	<bean id="saveMissionButton2" class="com.vaadin.ui.Button"/>
-	<bean id="cancelMissionButton2" class="com.vaadin.ui.Button"/>
-	<bean id="missionForm2" class="com.vaadin.ui.Form"/>
-	
 	<bean id="missionFormBean3" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 		<constructor-arg name="clientService" ref="clientService"/>
-		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean2"/>
-		<constructor-arg name="missionForm" ref="missionForm2"/>
-		<constructor-arg name="missionFormLayout" ref="missionFormLayout2"/>
-		<constructor-arg name="save" ref="saveMissionButton2"/>
-		<constructor-arg name="cancel" ref="cancelMissionButton2"/>
+		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
+		<constructor-arg name="missionForm" ref="missionForm"/>
+		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
+		<constructor-arg name="save" ref="saveMissionButton"/>
+		<constructor-arg name="cancel" ref="cancelMissionButton"/>
 	</bean>
-
 	
 	<bean id="btnAddMission3" class="com.vaadin.ui.Button"/>
 	<bean id="pageTitleMission3" class="com.vaadin.ui.Label"/>
 	<bean id="btnModifyMission3" class="com.vaadin.ui.Button"/>
 	<bean id="btnDeleteMission3" class="com.vaadin.ui.Button"/>
 		
-		
 	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="tableTools" ref="tableTools2" />
-		<constructor-arg name="accCategory" ref="accCategory2" />
-		<constructor-arg name="accConcept" ref="accConcept2" />
+		<constructor-arg name="tableTools" ref="tableTools" />
+		<constructor-arg name="accCategory" ref="accCategory" />
+		<constructor-arg name="accConcept" ref="accConcept" />
 	</bean>
 	<bean id="listSkillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="skillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="addSkillPanelBean2" class="com.novedia.talentmap.web.ui.profile.AddSkillPanel" scope="session">
 		<constructor-arg name="skillTab" ref="skillTab2"/>
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="listSkill" ref="listSkillBean2" />
+		<constructor-arg name="listSkill" ref="listSkillBean" />
 		<constructor-arg name="categoryLabel" ref="categoryLabel2" />
 		<constructor-arg name="conceptLabel" ref="conceptLabel2" />
 		<constructor-arg name="frequencyUseSelect" ref="frequencyUseSelect2" />
@@ -673,6 +670,250 @@
 	<bean id="editSkill2" class="com.vaadin.ui.Button"/>
 	<bean id="cancelSkill2" class="com.vaadin.ui.Button"/>
 	<bean id="addSkill2" class="com.vaadin.ui.Button"/>
+	
+	
+	<bean id="searchContentBean2" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
+		<constructor-arg name="searchTarget" ref="searchTargetBean" />
+		<constructor-arg name="searchResults" ref="searchResultsBean" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+	</bean>
+	<bean id="searchContentBean3" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
+		<constructor-arg name="searchTarget" ref="searchTargetBean" />
+		<constructor-arg name="searchResults" ref="searchResultsBean" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+	</bean>
+	<!-- *************************Affichage contenu ongle horizontal : By NAME****************************************************************** -->
+	<bean id="searchContentBean5" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
+		<constructor-arg name="searchTarget" ref="searchTargetBean9" />
+		<constructor-arg name="searchResults" ref="searchResultsBean5" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel5"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel5"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel5"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel5"/>
+	</bean>
+	<bean id="searchByClientPanel5" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel5" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel5" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldName5" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect5" class="com.vaadin.ui.Select"/>
+	<bean id="searchButton5" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator5" class="java.util.ArrayList"/>
+	<bean id="treeSkills5" class="com.vaadin.ui.Tree"/>
+	
+	<bean id="searchTargetBean9" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator5"/>
+		<constructor-arg name="treeSkills" ref="treeSkills5"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel5" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel5" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel5" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect5" />
+		<constructor-arg name="fieldName" ref="fieldName5" />
+		<constructor-arg name="search" ref="searchButton5" />
+	</bean>
+	<bean id="searchResultsBean5" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
+	</bean>
+	<bean id="searchTargetPanel5" class="com.vaadin.ui.Panel"/>
+	<bean id="searchResultsPanel5" class="com.vaadin.ui.Panel"/>
+	<bean id="searchTargetLabel5" class="com.vaadin.ui.Label"/>
+	<bean id="searchResultsLabel5" class="com.vaadin.ui.Label"/>
+	 
+	 <!-- *************************************************Double navigation Onglet : Search****************************************************** -->
+	 <bean id="searchLayoutBean2" class="com.novedia.talentmap.web.ui.search.SearchLayout" scope="session">
+		<constructor-arg name="searchContent" ref="searchContentBean2"/>
+		<constructor-arg name="searchNavigation" ref="searchNavigationBean2"/>
+		<constructor-arg name="hSplitPanel" ref="hSplitPanelSearch2"/>
+	</bean>
+	
+	<bean id="searchByClientPanel2" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel2" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel2" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldName2" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect2" class="com.vaadin.ui.Select"/>
+	<bean id="searchButton2" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator2" class="java.util.ArrayList"/>
+	<bean id="treeSkills2" class="com.vaadin.ui.Tree"/>
+	
+	<bean id="searchTargetBean2" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator2"/>
+		<constructor-arg name="treeSkills" ref="treeSkills2"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel2" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel2" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel2" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect2" />
+		<constructor-arg name="fieldName" ref="fieldName2" />
+		<constructor-arg name="search" ref="searchButton2" />
+	</bean>
+	
+	<bean id="searchByClientPanel3" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel3" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel3" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldName3" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect3" class="com.vaadin.ui.Select"/>
+	<bean id="searchButton3" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator3" class="java.util.ArrayList"/>
+	<bean id="treeSkills3" class="com.vaadin.ui.Tree"/>
+	
+	<bean id="searchTargetBean3" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator3"/>
+		<constructor-arg name="treeSkills" ref="treeSkills3"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel3"/>
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel3"/>
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel3"/>
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect3"/>
+		<constructor-arg name="fieldName" ref="fieldName3" />
+		<constructor-arg name="search" ref="searchButton3" />
+	</bean>
+				
+	 <bean id="byClient2" class="com.vaadin.ui.Button" />
+	<bean id="byName2" class="com.vaadin.ui.Button" />
+	<bean id="bySkills2" class="com.vaadin.ui.Button" />
+	<bean id="searchNavigationBean2" class="com.novedia.talentmap.web.ui.search.SearchNavigation" scope="session">
+		<constructor-arg name="byClient" ref="byClient2" />
+		<constructor-arg name="byName" ref="byName2" />
+		<constructor-arg name="bySkills" ref="bySkills2" />
+	</bean>
+	<bean id="hSplitPanelSearch2" class="com.vaadin.ui.HorizontalSplitPanel"/> 
+	
+	<!-- *************************Affichage contenu ongle horizontal : By CUCTOMER****************************************************************** -->
+	<bean id="searchResultsBean6" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
+	</bean>
+	<bean id="searchByClientPanel6" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel6" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel6" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldName6" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect6" class="com.vaadin.ui.Select"/>
+	<bean id="searchButton6" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator6" class="java.util.ArrayList"/>
+	<bean id="treeSkills6" class="com.vaadin.ui.Tree"/>
+	
+	<bean id="searchTargetBean6" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator6"/>
+		<constructor-arg name="treeSkills" ref="treeSkills6"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel6" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel6" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel6" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect6" />
+		<constructor-arg name="fieldName" ref="fieldName6" />
+		<constructor-arg name="search" ref="searchButton6" />
+	</bean>
+	
+	
+	<bean id="searchTargetPanel4" class="com.vaadin.ui.Panel"/>
+	<bean id="searchResultsPanel4" class="com.vaadin.ui.Panel"/>
+	<bean id="searchTargetLabel4" class="com.vaadin.ui.Label"/>
+	<bean id="searchResultsLabel4" class="com.vaadin.ui.Label"/>
+	
+	<bean id="searchContentBean4" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
+		<constructor-arg name="searchTarget" ref="searchTargetBean4" />
+		<constructor-arg name="searchResults" ref="searchResultsBean6" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel4"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel4"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel4"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel4"/>
+	</bean>
+	<bean id="searchTargetBean4" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaborator4"/>
+		<constructor-arg name="treeSkills" ref="treeSkills4"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanel4" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanel4" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanel4" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelect4" />
+		<constructor-arg name="fieldName" ref="fieldName4" />
+		<constructor-arg name="search" ref="searchButton4" />
+	</bean>
+	<bean id="fieldName4" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelect4" class="com.vaadin.ui.Select"/>
+	<bean id="searchButton4" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaborator4" class="java.util.ArrayList"/>
+	<bean id="treeSkills4" class="com.vaadin.ui.Tree"/>
+	<bean id="searchByClientPanel4" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanel4" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanel4" class="com.vaadin.ui.Panel"/>
+	
+	<!-- ***********************************Onglet by Skill*************************************************************** -->
+	<bean id="searchByClientPanelSkill" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanelSkill1" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanelSkill" class="com.vaadin.ui.Panel"/>
+	<bean id="fieldNameByTarget" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameSelectSkill" class="com.vaadin.ui.Select"/>
+	<bean id="searchButtonByTarget" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaboratorSkill1" class="java.util.ArrayList"/>
+	<bean id="treeSkillViewSkill" class="com.vaadin.ui.Tree"/>
+	<bean id="searchTargetPanelSkill" class="com.vaadin.ui.Panel"/>
+	<bean id="searchResultsPanelSkill" class="com.vaadin.ui.Panel"/>
+	<bean id="searchTargetLabelSkill" class="com.vaadin.ui.Label"/>
+	<bean id="searchResultsLabelSkill" class="com.vaadin.ui.Label"/>
+	<bean id="fieldNameSkills" class="com.vaadin.ui.TextField"/>
+	<bean id="clientNameFomSkillSelect" class="com.vaadin.ui.Select"/>
+	<bean id="searchButtonSkills" class="com.vaadin.ui.Button"/>
+	<bean id="listSearchCollaboratorSkill" class="java.util.ArrayList"/>
+	<bean id="treeSkillsSkill" class="com.vaadin.ui.Tree"/>
+	<bean id="searchByClientPanelSkill1" class="com.vaadin.ui.Panel"/>
+	<bean id="searchByNamePanelSkill" class="com.vaadin.ui.Panel"/>
+	<bean id="searchBySkillsPanelSkill1" class="com.vaadin.ui.Panel"/>
+	
+	<bean id="searchResultssKillBean" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+		<constructor-arg name="profileCollabWindow" ref="profileCollabWindowBean" />
+	</bean>
+	
+	<bean id="searchTargetSkillsBean" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaboratorSkill"/>
+		<constructor-arg name="treeSkills" ref="treeSkillViewSkill"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanelSkill1" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanelSkill1" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanelSkill1" />
+		<constructor-arg name="clientNameSelect" ref="clientNameSelectSkill" />
+		<constructor-arg name="fieldName" ref="fieldNameByTarget" />
+		<constructor-arg name="search" ref="searchButtonByTarget" />
+	</bean>
+		
+	<bean id="searchContentSkillBean" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
+		<constructor-arg name="searchTarget" ref="searchTargetSkillBean" />
+		<constructor-arg name="searchResults" ref="searchResultssKillBean" />
+		<constructor-arg name="searchTargetPanel" ref="searchTargetPanelSkill"/>
+		<constructor-arg name="searchResultsPanel" ref="searchResultsPanelSkill"/>
+		<constructor-arg name="searchTargetLabel" ref="searchTargetLabelSkill"/>
+		<constructor-arg name="searchResultsLabel" ref="searchResultsLabelSkill"/>
+	</bean>
+	<bean id="searchTargetSkillBean" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
+		<constructor-arg name="listCollab" ref="listSearchCollaboratorSkill1"/>
+		<constructor-arg name="treeSkills" ref="treeSkillsSkill"/>
+		<constructor-arg name="collabService" ref="collaboratorService" />
+		<constructor-arg name="skillService" ref="skillService"/>
+		<constructor-arg name="clientService" ref="clientService"/>
+		<constructor-arg name="searchByClientPanel" ref="searchByClientPanelSkill" />
+		<constructor-arg name="searchByNamePanel" ref="searchByNamePanelSkill" />
+		<constructor-arg name="searchBySkillsPanel" ref="searchBySkillsPanelSkill" />
+		<constructor-arg name="clientNameSelect" ref="clientNameFomSkillSelect" />
+		<constructor-arg name="fieldName" ref="fieldNameSkills" />
+		<constructor-arg name="search" ref="searchButtonSkills" />
+	</bean>
 	
 	
 </beans>

@@ -25,6 +25,9 @@ public class TabMain extends TabSheet {
 	private TabProfileSheet tabProfileSheet;
 	private SearchView searchView;
 	private AdminView adminView;
+	private TabSearchByCustomer tabSearchByCustomer;
+	private TabReachByName tabReachByName;
+	private TabReachBySkills tabReachBySkills;
 	
 	
 	/**
@@ -32,12 +35,17 @@ public class TabMain extends TabSheet {
 	 * @param tabProfileSheet
 	 * @param tabSearch
 	 */
-	public TabMain(TabProfileSheet tabProfileSheet, SearchView searchView, AdminView adminView) {
+	public TabMain(TabProfileSheet tabProfileSheet, SearchView searchView, AdminView adminView,
+			TabSearchByCustomer tabSearchByCustomer,TabReachByName tabReachByName,
+			TabReachBySkills tabReachBySkills) {
 		
 		super();
 		this.tabProfileSheet = tabProfileSheet;
 		this.searchView = searchView;
 		this.adminView = adminView;
+		this.tabSearchByCustomer =  tabSearchByCustomer;
+		this.tabReachByName = tabReachByName;
+		this.tabReachBySkills = tabReachBySkills;
 		
 		//TODO: give explicit name of tabprofile
 		setStyleName(TalentMapCSS.TABSHEET);
@@ -47,6 +55,9 @@ public class TabMain extends TabSheet {
 		addTab(this.tabProfileSheet, ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 		addTab(this.searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 		addTab(this.adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
+		addTab(this.tabSearchByCustomer, ConstantsForMenuEnglish.TAB_SEARCH_BY_CUSTOMER);
+		addTab(this.tabReachByName, ConstantsForMenuEnglish.TAB_SEARCH_BY_NAME);
+		addTab(this.tabReachBySkills, ConstantsForMenuEnglish.TAB_SEARCH_BY_SKILLS);		
 	}
 	
 	/**
@@ -93,5 +104,47 @@ public class TabMain extends TabSheet {
 	 */
 	public SearchView getSearchView() {
 		return searchView;
-	}	
+	}
+
+	/**
+	 * @return the tabSearchByCustomer
+	 */
+	public TabSearchByCustomer getTabSearchByCustomer() {
+		return tabSearchByCustomer;
+	}
+
+	/**
+	 * @param tabSearchByCustomer the tabSearchByCustomer to set
+	 */
+	public void setTabSearchByCustomer(TabSearchByCustomer tabSearchByCustomer) {
+		this.tabSearchByCustomer = tabSearchByCustomer;
+	}
+
+	/**
+	 * @return the tabReachByName
+	 */
+	public TabReachByName getTabReachByName() {
+		return tabReachByName;
+	}
+
+	/**
+	 * @param tabReachByName the tabReachByName to set
+	 */
+	public void setTabReachByName(TabReachByName tabReachByName) {
+		this.tabReachByName = tabReachByName;
+	}
+
+	/**
+	 * @return the tabReachBySkills
+	 */
+	public TabReachBySkills getTabReachBySkills() {
+		return tabReachBySkills;
+	}
+
+	/**
+	 * @param tabReachBySkills the tabReachBySkills to set
+	 */
+	public void setTabReachBySkills(TabReachBySkills tabReachBySkills) {
+		this.tabReachBySkills = tabReachBySkills;
+	}		
 }
