@@ -458,8 +458,13 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		if (property == this.toolSelect) {
 
 			try {
-
-				updateSelect(this.toolSelect.getValue().toString());
+				//TODO : this.toolSelect.getValue().toString() lance une NPE quand on est dans le cas où on fait 
+				//un "Add Skill" : il n'y a pas de value dans toolSelect
+				String toolValue = "";
+				if (this.toolSelect.getValue() != null) {
+					toolValue = this.toolSelect.getValue().toString();
+				}
+				updateSelect(toolValue);
 
 			} catch (Exception e) {
 
@@ -472,18 +477,24 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 	/**
 	 * The Concept Select is updated by the choice of the Category
-	 * 
+	 * TODO : a revoir !!
 	 * @class AddSkillPanel.java
 	 * @param categorytName
 	 * @throws Exception
 	 */
 	private void updateSelect(String toolName) throws Exception {
-		//TODO Question : un appel à la base à chaque sélection d'outil dans la combo?
-		VSkill skill = skillService.getSkillByTool(toolName);
-
-		this.conceptLabel.setValue(skill.getConceptName());
-		this.categoryLabel.setValue(skill.getCategoryName());
-
+		VSkill skill = null;
+		if (toolName != "" && toolName != null) {
+			//TODO Question : un appel à la base à chaque sélection d'outil dans la combo?
+			skill = skillService.getSkillByTool(toolName);
+		}
+		if (skill != null) {
+			this.conceptLabel.setValue(skill.getConceptName());
+			this.categoryLabel.setValue(skill.getCategoryName());
+		} else {
+			this.conceptLabel.setValue("");
+			this.categoryLabel.setValue("");
+		}
 	}
 
 	/**
@@ -524,6 +535,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.categoryLabel = categoryLabel;
 	}
 
+	public Label getCategoryLabel() {
+		return categoryLabel;
+	}
+
 	/**
 	 * Set the conceptSelect value
 	 * 
@@ -532,6 +547,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	public void setConceptLabel(Label conceptLabel) {
 		this.conceptLabel = conceptLabel;
+	}
+
+	public Label getConceptLabel() {
+		return conceptLabel;
 	}
 
 	/**

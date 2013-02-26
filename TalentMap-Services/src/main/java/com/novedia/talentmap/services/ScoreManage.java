@@ -33,7 +33,7 @@ import com.novedia.talentmap.model.entity.Tool;
 	
 		
 	/**
-	 * 
+	 * TODO : revoir le calcul
 	 * @param mapCategory : map of category 
 	 * @param nbToolKnow : number of tools known
 	 * @param nbAllTool : total number of tools
@@ -50,7 +50,7 @@ import com.novedia.talentmap.model.entity.Tool;
 				 for (Entry<Concept, Map> mapConcept : allConcept.entrySet()) {
 					 Map<Tool, Skill> mapTools = mapConcept.getValue();
 					 Integer sum = sumAverageToolConcept(mapTools);
-					 scoreConcept = (sum * toolKnow) / mapTools.size();
+					 scoreConcept = (sum /** toolKnow*/) / mapTools.size();
 					 scoreConcept =  Math.round(scoreConcept);
 					 mapConcept.getKey().setScore(scoreConcept);
 					 allConcept.put(mapConcept.getKey(), mapConcept.getValue());

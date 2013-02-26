@@ -294,7 +294,6 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout"/>
 		<constructor-arg name="skillLabel" ref="skillLabel"/>
-		<constructor-arg name="save" ref="saveSkill"/>
 		<constructor-arg name="edit" ref="editSkill"/>
 		<constructor-arg name="cancel" ref="cancelSkill"/>
 		<constructor-arg name="addSkill" ref="addSkill"/>
@@ -560,7 +559,6 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout2"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout2"/>
 		<constructor-arg name="skillLabel" ref="skillLabel2"/>
-		<constructor-arg name="save" ref="saveSkill2"/>
 		<constructor-arg name="edit" ref="editSkill2"/>
 		<constructor-arg name="cancel" ref="cancelSkill2"/>
 		<constructor-arg name="addSkill" ref="addSkill2"/>

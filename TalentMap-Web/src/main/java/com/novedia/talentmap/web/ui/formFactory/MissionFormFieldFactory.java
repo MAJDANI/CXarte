@@ -53,10 +53,12 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					
 					if(propertyId.equals(ConstantsEnglish.FIELD_MISSION_NAME)){
 						//Putting a condition
+						field.setMaxLength(ConstantsEnglish.MISSION_TITLE_MAX_LENGTH);
 					}
 
 					if(propertyId.equals(ConstantsEnglish.FIELD_MISSION_PLACE)){
 						//Putting a condition
+						field.setMaxLength(ConstantsEnglish.MISSION_PLACE_MAX_LENGTH);
 					}
 					
 					return field;

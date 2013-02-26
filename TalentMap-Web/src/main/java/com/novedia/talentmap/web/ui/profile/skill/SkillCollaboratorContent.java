@@ -37,10 +37,6 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	private Label skillLabel;
 	
-	/**
-	 * Button Vaadin
-	 */
-	private Button save;
 	private Button edit;
 	private Button cancel;
 	private Button addSkill;
@@ -61,7 +57,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	public SkillCollaboratorContent(ListSkill listSkill,Panel listSkillPanel,Panel skillPanel,
 			AddSkillPanel addSkillPanel,VerticalLayout bodyLayout,HorizontalLayout footerLayout,
-			Label skillLabel, Button save,Button edit, Button cancel, Button addSkill){
+			Label skillLabel, Button edit, Button cancel, Button addSkill){
 		this.listSkill = listSkill;
 		this.listSkillPanel = listSkillPanel;
 		this.skillPanel = skillPanel;
@@ -69,7 +65,6 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		this.bodyLayout = bodyLayout;
 		this.footerLayout = footerLayout;
 		this.skillLabel = skillLabel;
-		this.save = save;
 		this.edit = edit;
 		this.cancel = cancel;
 		this.addSkill = addSkill;
@@ -185,9 +180,6 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	public void buildButtonLayout() {
 		HorizontalLayout hLayout = new HorizontalLayout();
 
-		this.save.setCaption(ConstantsEnglish.SAVE_CAPTION);
-		this.save.addListener(this);
-		
 		this.edit.setCaption(ConstantsEnglish.EDIT_CAPTION);
 		this.edit.setDisableOnClick(true);
 		this.edit.addListener(this);
@@ -199,7 +191,6 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		this.addSkill.addListener(this);
 
 		hLayout.setSpacing(true);
-		hLayout.addComponent(this.save);
 		hLayout.addComponent(this.edit);
 		hLayout.addComponent(this.cancel);
 
@@ -221,15 +212,10 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 
 		Button button = event.getButton();
 		
-		//Save Button
-		if (button == this.save) {
-			
-			
 		//Edit Button
-		}else if( button == this.edit){
+		if( button == this.edit){
 			
 			if(this.setAddSkillPanelWithTool()){
-				
 				this.addSkillPanel.setNewSkill(false);
 				this.addSkillPanel.setVisible(true);
 				this.addSkill.setEnabled(false);
@@ -239,14 +225,12 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			
 		//Cancel Button
 		} else if (button == this.cancel) {
-			
 			this.addSkillPanel.setVisible(false);
 			this.addSkill.setEnabled(true);
 			this.edit.setEnabled(true);
 
 		//Add Skill Panel button
 		} else if (button == this.addSkill) {
-			
 			this.edit.setEnabled(false);
 			this.skillPanel.setVisible(false);
 			
@@ -255,6 +239,8 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			
 			this.addSkillPanel.eraseAllSelects();
+			this.addSkillPanel.getCategoryLabel().setValue("");
+			this.addSkillPanel.getConceptLabel().setValue("");
 			
 		}
 	}
