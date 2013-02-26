@@ -156,6 +156,7 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		toolField.setNullRepresentation(ConstantsEnglish.ADMIN_NULL_REPRESENTATION);
 		toolField.setRequired(true);
 		toolField.setEnabled(false);
+		toolField.setMaxLength(ConstantsEnglish.TOOL_NAME_MAX_LENGTH);
 		
 		// on ajouts les fields au form
 		this.formAddSkill.addField(ConstantsEnglish.ADMIN_CATEGORY_NAME, categorySelect);
@@ -259,8 +260,9 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 	@Override
 	public void valueChange(ValueChangeEvent event) {
 			
-		Field toolField = this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME);
+		TextField toolField = (TextField)this.formAddSkill.getField(ConstantsEnglish.ADMIN_TOOL_NAME);
 		Select conceptSelect = (Select) this.formAddSkill.getField(ConstantsEnglish.ADMIN_CONCEPT_NAME);
+		toolField.setMaxLength(ConstantsEnglish.TOOL_NAME_MAX_LENGTH);
 		
 		if(event.getProperty().getValue() instanceof Category){
 			// on met à jour la liste des concepts disponibles en fonction de la catégorie sélectionnée

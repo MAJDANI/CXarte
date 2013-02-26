@@ -86,6 +86,7 @@ public class NewConceptWindow extends Window implements ClickListener{
 		// Concept field creation
 		TextField conceptField = new TextField(ConstantsEnglish.NEW_CONCEPT_WINDOW_FIELD_CONCEPT);
 		conceptField.setRequired(true);
+		conceptField.setMaxLength(ConstantsEnglish.CONCEPT_NAME_MAX_LENGTH);
 		this.newConceptForm.addField(ConstantsEnglish.NEW_CONCEPT_WINDOW_CONCEPT, conceptField);
 	}
 	

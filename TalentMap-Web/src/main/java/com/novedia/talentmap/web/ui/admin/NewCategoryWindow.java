@@ -70,6 +70,7 @@ public class NewCategoryWindow extends Window implements ClickListener{
 		
 		TextField categoryField = new TextField(ConstantsEnglish.NEW_CATEGORY_WINDOW_FIELD_LABEL);
 		categoryField.setRequired(true);
+		categoryField.setMaxLength(ConstantsEnglish.CATEGORY_NAME_MAX_LENGTH);
 		
 		this.newCategoryForm.addField(ConstantsEnglish.NEW_CATEGORY_WINDOW_CATEGORY, categoryField);
 	}

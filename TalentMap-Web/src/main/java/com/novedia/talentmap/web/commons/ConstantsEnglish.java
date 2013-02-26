@@ -255,6 +255,6 @@ public class ConstantsEnglish {
 	public static final int MISSION_PLACE_MAX_LENGTH = 60;
 	public static final int CATEGORY_NAME_MAX_LENGTH = 20;
 	public static final int CONCEPT_NAME_MAX_LENGTH = 20;
-	public static final int TOOL_NAME_MAX_LENGTH = 20;
+	public static final int TOOL_NAME_MAX_LENGTH = 30;
 	
 }
