@@ -2,11 +2,9 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.novedia.talentmap.model.entity.Category;
@@ -61,8 +59,15 @@ public class ScoreManageTest {
 		//Given
 		Integer nbToolKnown = 5;
 		Integer nbAllTools = 10;
-		Double expectedScoreConcept1 = 1.0;
-		Double expectedScoreConcept2 = 3.0;
+		//Le calcul computeConceptScore() a été modifié (on ne tiens plus compte de nbAllTools)
+		//afin de pouvoir obtenir des notes de concept supérieures à 0
+		// cette modification fait qu'on n'attend plus 1.0 mais 2.0 pour concept 1 et
+		// au lieu de 3.0 on obtient 5.0 pour le concept 2
+		//A revoir quand le calcul de la note aura été revu
+//		Double expectedScoreConcept1 = 1.0;
+//		Double expectedScoreConcept2 = 3.0;
+		Double expectedScoreConcept1 = 2.0;
+		Double expectedScoreConcept2 = 5.0;
 		
 		Category category = Category.builder().id(1).name("JAVA").build();
 		//création concept 1
