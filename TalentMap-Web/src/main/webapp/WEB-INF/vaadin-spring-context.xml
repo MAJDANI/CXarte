@@ -118,6 +118,7 @@
 		<constructor-arg name="accConcept" ref="accConcept" />
 	</bean>
 	
+	
 	<!-- We declare another ListSkill UI because it's used by two beans => ProfileCollabWindow -->
 	
 	<bean id="tableTools2" class="com.vaadin.ui.Table" />
@@ -236,6 +237,9 @@
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 	</bean>
 	
+	<bean id="missionContainerBean2" class="com.novedia.talentmap.web.ui.profile.mission.MissionContainer">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+	</bean>
 	<!-- Vaadin ListMission UI -->
 	
 	<bean id="listMissionBean" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
@@ -602,36 +606,44 @@
 		<constructor-arg name="missionForm" ref="missionFormBean3"/>
 	</bean>
 	<bean id="listMissionBean3" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
-		<constructor-arg name="missionContainer" ref="missionContainerBean"/>
+		<constructor-arg name="missionContainer" ref="missionContainerBean2"/>
 	</bean>
 	<bean id="listPanel3" class="com.vaadin.ui.Panel"/>
+	<bean id="missionFormLayout2" class="com.vaadin.ui.GridLayout"/>
+	<bean id="fieldOrderMissionFormBean2" class="java.util.Vector"/>
+	<bean id="saveMissionButton2" class="com.vaadin.ui.Button"/>
+	<bean id="cancelMissionButton2" class="com.vaadin.ui.Button"/>
+	<bean id="missionForm2" class="com.vaadin.ui.Form"/>
+	
 	<bean id="missionFormBean3" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 		<constructor-arg name="clientService" ref="clientService"/>
-		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
-		<constructor-arg name="missionForm" ref="missionForm"/>
-		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
-		<constructor-arg name="save" ref="saveMissionButton"/>
-		<constructor-arg name="cancel" ref="cancelMissionButton"/>
+		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean2"/>
+		<constructor-arg name="missionForm" ref="missionForm2"/>
+		<constructor-arg name="missionFormLayout" ref="missionFormLayout2"/>
+		<constructor-arg name="save" ref="saveMissionButton2"/>
+		<constructor-arg name="cancel" ref="cancelMissionButton2"/>
 	</bean>
+
 	
 	<bean id="btnAddMission3" class="com.vaadin.ui.Button"/>
 	<bean id="pageTitleMission3" class="com.vaadin.ui.Label"/>
 	<bean id="btnModifyMission3" class="com.vaadin.ui.Button"/>
 	<bean id="btnDeleteMission3" class="com.vaadin.ui.Button"/>
 		
+		
 	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="tableTools" ref="tableTools" />
-		<constructor-arg name="accCategory" ref="accCategory" />
-		<constructor-arg name="accConcept" ref="accConcept" />
+		<constructor-arg name="tableTools" ref="tableTools2" />
+		<constructor-arg name="accCategory" ref="accCategory2" />
+		<constructor-arg name="accConcept" ref="accConcept2" />
 	</bean>
 	<bean id="listSkillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="skillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="addSkillPanelBean2" class="com.novedia.talentmap.web.ui.profile.AddSkillPanel" scope="session">
 		<constructor-arg name="skillTab" ref="skillTab2"/>
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="listSkill" ref="listSkillBean" />
+		<constructor-arg name="listSkill" ref="listSkillBean2" />
 		<constructor-arg name="categoryLabel" ref="categoryLabel2" />
 		<constructor-arg name="conceptLabel" ref="conceptLabel2" />
 		<constructor-arg name="frequencyUseSelect" ref="frequencyUseSelect2" />
