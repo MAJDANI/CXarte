@@ -120,6 +120,9 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		// Select the views to display
 		if(role.equals(Role.AD)){
 			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabReachByName());
+			mainTab.removeComponent(mainTab.getTabSearchByCustomer());
+			mainTab.removeComponent(mainTab.getTabReachBySkills());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
 		}
 		else if(role.equals(Role.IA)){
@@ -128,12 +131,18 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		}
 		else if(role.equals(Role.RH)){		
 			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabReachByName());
+			mainTab.removeComponent(mainTab.getTabSearchByCustomer());
+			mainTab.removeComponent(mainTab.getTabReachBySkills());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
 			mainTab.removeComponent(mainTab.getAdminView());		
 			addComponent(rhContentLayout);
 		}
 		else if(role.equals(Role.CM)){
 			mainTab.removeComponent(mainTab.getSearchView());
+			mainTab.removeComponent(mainTab.getTabReachByName());
+			mainTab.removeComponent(mainTab.getTabSearchByCustomer());
+			mainTab.removeComponent(mainTab.getTabReachBySkills());
 			mainTab.removeComponent(mainTab.getTabProfileSheet());
 			mainTab.removeComponent(mainTab.getAdminView());		
 			addComponent(cmContentLayout);
