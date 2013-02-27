@@ -251,6 +251,10 @@
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 	</bean>
 	
+	<bean id="missionContainerBean2" class="com.novedia.talentmap.web.ui.profile.mission.MissionContainer">
+		<constructor-arg name="collabService" ref="collaboratorService"/>
+	</bean>
+	
 	<!-- Vaadin ListMission UI -->
 	
 	<bean id="listMissionBean" class="com.novedia.talentmap.web.ui.profile.mission.ListMission">
@@ -309,7 +313,6 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout"/>
 		<constructor-arg name="skillLabel" ref="skillLabel"/>
-		<constructor-arg name="save" ref="saveSkill"/>
 		<constructor-arg name="edit" ref="editSkill"/>
 		<constructor-arg name="cancel" ref="cancelSkill"/>
 		<constructor-arg name="addSkill" ref="addSkill"/>
@@ -342,6 +345,7 @@
 		<constructor-arg name="manageSkillContent" ref="manageSkillContentBean" />
 		<constructor-arg name="addSkillContent" ref="adminAddSkillContentBean" />
 		<constructor-arg name="hSplitContent" ref="hSplitContent" />
+		<constructor-arg name="deleteColleagueContent" ref="adminDeleteColleagueContentBean" />
 	</bean>
 		
 	<!-- Vaadin NavigationLink UI -->
@@ -389,6 +393,10 @@
 		<constructor-arg name="adminService" ref="adminService" />
 	</bean>
 	
+	<bean id="adminDeleteColleagueContentBean" class="com.novedia.talentmap.web.ui.admin.AdminDeleteColleagueContent" scope="session">
+		<constructor-arg name="colleagueService" ref="collaboratorService" />
+		<constructor-arg name="adminService" ref="adminService" />
+	</bean>
 	
 	<!-- Vaadin AdminContentLayout UI -->
 	
@@ -567,7 +575,6 @@
 		<constructor-arg name="bodyLayout" ref="bodySkillLayout2"/>
 		<constructor-arg name="footerLayout" ref="footerSkillLayout2"/>
 		<constructor-arg name="skillLabel" ref="skillLabel2"/>
-		<constructor-arg name="save" ref="saveSkill2"/>
 		<constructor-arg name="edit" ref="editSkill2"/>
 		<constructor-arg name="cancel" ref="cancelSkill2"/>
 		<constructor-arg name="addSkill" ref="addSkill2"/>
@@ -617,12 +624,17 @@
 	<bean id="missionFormBean3" class="com.novedia.talentmap.web.ui.profile.mission.MissionForm">
 		<constructor-arg name="collabService" ref="collaboratorService"/>
 		<constructor-arg name="clientService" ref="clientService"/>
-		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean"/>
-		<constructor-arg name="missionForm" ref="missionForm"/>
-		<constructor-arg name="missionFormLayout" ref="missionFormLayout"/>
-		<constructor-arg name="save" ref="saveMissionButton"/>
-		<constructor-arg name="cancel" ref="cancelMissionButton"/>
+		<constructor-arg name="fieldOrderMission" ref="fieldOrderMissionFormBean2"/>
+		<constructor-arg name="missionForm" ref="missionForm2"/>
+		<constructor-arg name="missionFormLayout" ref="missionFormLayout2"/>
+		<constructor-arg name="save" ref="saveMissionButton2"/>
+		<constructor-arg name="cancel" ref="cancelMissionButton2"/>
 	</bean>
+	<bean id="missionFormLayout2" class="com.vaadin.ui.GridLayout"/>
+	<bean id="fieldOrderMissionFormBean2" class="java.util.Vector"/>
+	<bean id="saveMissionButton2" class="com.vaadin.ui.Button"/>
+	<bean id="cancelMissionButton2" class="com.vaadin.ui.Button"/>
+	<bean id="missionForm2" class="com.vaadin.ui.Form"/>
 	
 	<bean id="btnAddMission3" class="com.vaadin.ui.Button"/>
 	<bean id="pageTitleMission3" class="com.vaadin.ui.Label"/>
@@ -631,16 +643,16 @@
 		
 	<bean id="listSkillBean2" class="com.novedia.talentmap.web.ui.profile.ListSkill" scope="session">
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="tableTools" ref="tableTools" />
-		<constructor-arg name="accCategory" ref="accCategory" />
-		<constructor-arg name="accConcept" ref="accConcept" />
+		<constructor-arg name="tableTools" ref="tableTools2" />
+		<constructor-arg name="accCategory" ref="accCategory2" />
+		<constructor-arg name="accConcept" ref="accConcept2" />
 	</bean>
 	<bean id="listSkillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="skillPanel2" class="com.vaadin.ui.Panel"/>
 	<bean id="addSkillPanelBean2" class="com.novedia.talentmap.web.ui.profile.AddSkillPanel" scope="session">
 		<constructor-arg name="skillTab" ref="skillTab2"/>
 		<constructor-arg name="skillService" ref="skillService" />
-		<constructor-arg name="listSkill" ref="listSkillBean" />
+		<constructor-arg name="listSkill" ref="listSkillBean2" />
 		<constructor-arg name="categoryLabel" ref="categoryLabel2" />
 		<constructor-arg name="conceptLabel" ref="conceptLabel2" />
 		<constructor-arg name="frequencyUseSelect" ref="frequencyUseSelect2" />
