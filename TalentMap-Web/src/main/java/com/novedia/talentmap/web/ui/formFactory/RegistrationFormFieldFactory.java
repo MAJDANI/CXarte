@@ -74,18 +74,26 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					field.setValidationVisible(true);
 					field.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
 					
-					
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_FIRST_NAME_FIELD)){
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_FIRST_NAME_MAX_LENGTH);
+					}					
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_LAST_NAME_FIELD)){
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_LAST_NAME_MAX_LENGTH);
+					}					
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_PHONE_FIELD)){
 						field.setRequired(false);
 						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_PHONE_NUMBER));
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_PHONE_MAX_LENGTH);
 					}
 					
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_EXPERIENCE_FIELD)){
 						field.addValidator(new RegexpValidator(ConstantsEnglish.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EXPERIENCE));
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EXPERIENCE_MAX_LENGTH);
 					}
 					
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_EMAIL_FIELD)){
 						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EMAIL));
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EMAIL_MAX_LENGTH);
 					}
 					return field;
 					
@@ -96,7 +104,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					passwordField.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					passwordField.setValidationVisible(true);
 					passwordField.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
-
+					passwordField.setMaxLength(ConstantsEnglish.REGISTRATION_PASSWORD_MAX_LENGTH);
 					return passwordField;
 				}
 				

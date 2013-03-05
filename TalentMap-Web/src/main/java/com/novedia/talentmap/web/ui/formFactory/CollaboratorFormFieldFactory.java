@@ -75,20 +75,20 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					
 					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_LAST_NAME)){
 						field.setStyleName("last-name");
-						
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_LAST_NAME_MAX_LENGTH);
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_FIRST_NAME)){
 						field.setStyleName("first-name");
-						
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_FIRST_NAME_MAX_LENGTH);
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMAIL)){
 						field.setStyleName("email");
-						
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EMAIL_MAX_LENGTH);
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PHONE)){
 						field.setStyleName("phone");
 						field.setRequired(false);
-						
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_PHONE_MAX_LENGTH);
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EXPERIENCE)){
 						field.setStyleName("experience");
-						
+						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EXPERIENCE_MAX_LENGTH);
 					}
 
 					return field;

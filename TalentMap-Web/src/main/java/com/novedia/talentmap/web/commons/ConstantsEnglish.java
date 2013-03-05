@@ -89,6 +89,8 @@ public class ConstantsEnglish {
 	/**
 	 * Données Registration
 	 */
+	public static final String REGISTRATION_LAST_NAME_FIELD = "lastName";
+	public static final String REGISTRATION_FIRST_NAME_FIELD = "firstName";
 	public static final String REGISTRATION_EMPLOYMENT_DATE_FIELD = "employmentDate";
 	public static final String REGISTRATION_BUSINESS_ENGINEER_FIELD = "businessEngineer";
 	public static final String REGISTRATION_PROFILE_FIELD = "profileId";
@@ -108,7 +110,7 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Incorrect phone number";
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Years of Experience incorrect";
 	public static final String REGISTRATION_ERROR_EMAIL = "Email is invalid";
-	
+
 	/**
 	 * For CollaboratorForm
 	 */
@@ -251,10 +253,24 @@ public class ConstantsEnglish {
 	/**
 	 * DATABASE MAX_SIZE
 	 */
+	//TABLE MISSION
 	public static final int MISSION_TITLE_MAX_LENGTH = 60;
 	public static final int MISSION_PLACE_MAX_LENGTH = 60;
+	//TABLE CATEGORY
 	public static final int CATEGORY_NAME_MAX_LENGTH = 20;
+	//TABLE CONCEPT
 	public static final int CONCEPT_NAME_MAX_LENGTH = 20;
+	//TABLE TOOL
 	public static final int TOOL_NAME_MAX_LENGTH = 30;
+	// TABLE AUTHENTICATION
+	public static final int REGISTRATION_LOGIN_MAX_LENGTH = 50;
+	public static final int REGISTRATION_PASSWORD_MAX_LENGTH = 50;
+	//TABLE COLLEAGUE
+	public static final int COLLEAGUE_LAST_NAME_MAX_LENGTH = 30;
+	public static final int COLLEAGUE_FIRST_NAME_MAX_LENGTH = 30;
+	public static final int COLLEAGUE_EMAIL_MAX_LENGTH = 50;
+	public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;
+	public static final int COLLEAGUE_EXPERIENCE_MAX_LENGTH = 2;
+
 	
 }
