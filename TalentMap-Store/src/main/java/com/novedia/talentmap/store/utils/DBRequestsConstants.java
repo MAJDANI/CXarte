@@ -30,11 +30,6 @@ public static final String GET_COLLEAGUE = "colleague.get";
 public static final String GET_ALL_COLLEAGUES = "colleague.getAll";
 
 /**
- * Constant request to add a colleague.
- */
-public static final String ADD_COLLEAGUE = "colleague.add";
-
-/**
  * Constant request to delete a colleague.
  */
 public static final String DELETE_colleague = "colleague.delete";
@@ -44,7 +39,7 @@ public static final String DELETE_colleague = "colleague.delete";
  */
 public static final String SAVE_COLLEAGUE = "colleague.save";
 
-public static final String UPDATE_MANAGER_COLLEAGUE = "colleague.updateManager";
+public static final String ERASE_MANAGER_COLLEAGUE = "colleague.eraseManager";
 
 /**
  * Constant request to get a colleague by lastName.

@@ -97,27 +97,5 @@ public class ColleagueDaoTest {
 		Assert.assertEquals(1, updateCounter);
 	}
 	
-	/**
-	 * Test Add
-	 * @throws Exception
-	 */
-	@Test
-	@DataSet("ColleagueDaoTest.testAdd.xml")
-	public void testAdd() throws Exception {
-
-		// Given
-		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(5).firstName("Renaud").lastName("Migne").build(); 
-		Colleague colleague = Colleague.builder().managerId(1).profileId(1)
-				.phone("6020202020").experience(7).firstName("Johan")
-				.lastName("RONDOUDOUX").businessEngineer(businessEngineer)
-				.email(".rondoudoux@novediagroup.com").employmentDate(new Date())
-				.build();
-		
-		// When
-		int addIndex = colleagueDao.add(colleague);
-		
-		// Then
-		Assert.assertTrue(addIndex > 0);
-	}
 
 }

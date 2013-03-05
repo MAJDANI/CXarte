@@ -54,10 +54,7 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	
 	@Override
 	public int add(Colleague colleague) throws DataAccessException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Add colleague");
-		}
-		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_COLLEAGUE, colleague);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -67,7 +64,7 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		}
 		Integer DeletResult =  this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_colleague, colleague); 
 		if(DeletResult > 0){
-			this.getSqlMapClientTemplate().update(DBRequestsConstants.UPDATE_MANAGER_COLLEAGUE, colleague);
+			this.getSqlMapClientTemplate().update(DBRequestsConstants.ERASE_MANAGER_COLLEAGUE, colleague);
 		}
 		return DeletResult;
 		//throw new UnsupportedOperationException();

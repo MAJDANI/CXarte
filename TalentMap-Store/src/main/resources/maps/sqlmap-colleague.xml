@@ -112,7 +112,7 @@
     	DELETE FROM COLLEAGUE WHERE COLLEAGUE_ID = #id#
     </delete>
     
-     <update id="updateManager"  parameterClass="com.novedia.talentmap.model.entity.Colleague">
+     <update id="eraseManager"  parameterClass="com.novedia.talentmap.model.entity.Colleague">
     	UPDATE COLLEAGUE SET MANAGER_ID = '' WHERE MANAGER_ID = #id#
     </update>
 
@@ -131,26 +131,6 @@
 		AND a.nbTool = #listSize[0]#
     </select>	
 
-	<insert id="add">
-		<selectKey resultClass="Integer" keyProperty="id">
-      		SELECT SEQCOLLEAGUE.NEXTVAL FROM DUAL
-    	</selectKey>
- 	
-    	INSERT INTO COLLEAGUE (
-    		MANAGER_ID,
-    		PROFILE_ID,
-    		LAST_NAME,
-    		FIRST_NAME, 
-    		EMAIL,
-    		PHONE,
-    		EMPLOYMENT_DATE,
-    		EXPERIENCE,
-    		B_ENGINEER_ID
-    		)values (
-			#managerId#, #profileId#, #lastName#, #firstName#, #email#, #phone#, #employmentDate#, #experience#, #businessEngineer.id#
-    		)
-	</insert>
-	
     <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
         SELECT * FROM COLLEAGUE WHERE MANAGER_ID = #id#
     </select>
