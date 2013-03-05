@@ -16,15 +16,15 @@ import com.novedia.talentmap.model.entity.Tool;
 	 */
 	public abstract class ScoreManage {
 	/**
-	 * TOOL_PONDERATION.
+	 * TOOL_PONDERATION = 3.0.
 	 */
 	private static final Double TOOL_PONDERATION = 3.0;
 	/**
-	 * FREQUENCY_USE_PONDERATION.
+	 * FREQUENCY_USE_PONDERATION = 1.0.
 	 */
 	private static final Double FREQUENCY_USE_PONDERATION = 1.0;
 	/**
-	 * NO_USING_TIME_PONDERATION.
+	 * NO_USING_TIME_PONDERATION = 5.0.
 	 */
 	private static final Double NO_USING_TIME_PONDERATION = 5.0;
 	
@@ -92,14 +92,15 @@ import com.novedia.talentmap.model.entity.Tool;
 	 */
 	public static double computeToolAverage(final double toolNote, final double usingFrequencyTool,final double timeNotUsingTool) {
 	
-		int j = 4;
-		int noUsingTimeInverse = 0;
-		for (int i = 1; i < 5; i++) {
-			if (i == timeNotUsingTool) {
-				noUsingTimeInverse = j;
-			}
-			j--;
-		}
+//		int j = 4;
+//		int noUsingTimeInverse = 0;
+//		for (int i = 1; i < 5; i++) {
+//			if (i == timeNotUsingTool) {
+//				noUsingTimeInverse = j;
+//			}
+//			j--;
+//		}
+		double noUsingTimeInverse = 5 - timeNotUsingTool;
 		
 		return Math.round((TOOL_PONDERATION * toolNote
 		+ FREQUENCY_USE_PONDERATION * usingFrequencyTool 
