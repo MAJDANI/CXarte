@@ -312,9 +312,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 				//Get all collaborators who has all skills requested
 				this.listCollab =  getListColleagueForTooIdChecked();
-				if(!this.listCollab.isEmpty()) {
-					updateObservateur();
-				}
+				updateObservateur();
 			}
 		}
 	}
@@ -391,14 +389,12 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			
 			if(treeSkills.isSelected(item)) {
 				atLeastOneIsSelected = true;
-				System.out.println("item selected" + item);
 				if (item  instanceof Category) {
 					//On veut des comptétences sur une catégorie entière
 					//On va collecter tous les outils de la catégorie
 					//et identifier les id collaborateur qui ont une compétence sur
 					//au moins un de ces outils
 					Collection lesConceptsFils = this.treeSkills.getChildren(item);
-					System.out.println("lesFils de la catégorie=" + lesConceptsFils);
 					
 					List<Integer> listToolIdForCategory = new ArrayList<Integer>();
 					
@@ -426,11 +422,9 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
-					System.out.println("listColleagueId=" + listColleagueId);
 					
 				} else if (item  instanceof Concept) {
 					Collection lesToolFils = this.treeSkills.getChildren(item);
-					System.out.println("lesFils du concept=" + lesToolFils);
 
 					//On veut des comptétences sur un concept entier
 					//On va collecter tous les outils du concept
@@ -453,7 +447,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
-					System.out.println("listColleagueId=" + listColleagueId);
 				
 				} else {
 					//C'est un Tool qui est sélectionné
@@ -470,7 +463,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
-					System.out.println("listColleagueId=" + listColleagueId);
 				}
 			}
 		}

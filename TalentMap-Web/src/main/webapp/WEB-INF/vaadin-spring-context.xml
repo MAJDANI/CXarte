@@ -504,18 +504,20 @@
 	
 	<bean id="searchTargetPanel" class="com.vaadin.ui.Panel"/>
 	<bean id="searchResultsPanel" class="com.vaadin.ui.Panel"/>
+	<bean id="searchResultsPanelNoResult" class="com.vaadin.ui.Panel"/>
 	<bean id="searchTargetLabel" class="com.vaadin.ui.Label"/>
 	<bean id="searchResultsLabel" class="com.vaadin.ui.Label"/>
+	<bean id="searchResultsLabelNoResult" class="com.vaadin.ui.Label"/>
 	
-	
-
 	<bean id="searchContentBean" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
 		<constructor-arg name="searchTarget" ref="searchTargetBean" />
 		<constructor-arg name="searchResults" ref="searchResultsBean" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanelNoResult"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabelNoResult"/>
 	</bean>
 	
 	
@@ -689,16 +691,20 @@
 		<constructor-arg name="searchResults" ref="searchResultsBean" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanelNoResult"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabelNoResult"/>
 	</bean>
 	<bean id="searchContentBean3" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
 		<constructor-arg name="searchTarget" ref="searchTargetBean" />
 		<constructor-arg name="searchResults" ref="searchResultsBean" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanelNoResult"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabelNoResult"/>
 	</bean>
 	<!-- *************************Affichage contenu ongle horizontal : By NAME****************************************************************** -->
 	<bean id="searchContentBean5" class="com.novedia.talentmap.web.ui.search.SearchContent" scope ="session">
@@ -706,8 +712,10 @@
 		<constructor-arg name="searchResults" ref="searchResultsBean5" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel5"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel5"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanel5"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel5"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel5"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabel5"/>
 	</bean>
 	<bean id="searchByClientPanel5" class="com.vaadin.ui.Panel"/>
 	<bean id="searchByNamePanel5" class="com.vaadin.ui.Panel"/>
@@ -840,8 +848,10 @@
 		<constructor-arg name="searchResults" ref="searchResultsBean6" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanel4"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanel4"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanel4"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabel4"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabel4"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabel4"/>
 	</bean>
 	<bean id="searchTargetBean4" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
 		<constructor-arg name="listCollab" ref="listSearchCollaborator4"/>
@@ -910,8 +920,10 @@
 		<constructor-arg name="searchResults" ref="searchResultssKillBean" />
 		<constructor-arg name="searchTargetPanel" ref="searchTargetPanelSkill"/>
 		<constructor-arg name="searchResultsPanel" ref="searchResultsPanelSkill"/>
+		<constructor-arg name="searchResultsPanelNoResult" ref="searchResultsPanelSkill"/>
 		<constructor-arg name="searchTargetLabel" ref="searchTargetLabelSkill"/>
 		<constructor-arg name="searchResultsLabel" ref="searchResultsLabelSkill"/>
+		<constructor-arg name="searchResultsLabelNoResult" ref="searchResultsLabelSkill"/>
 	</bean>
 	<bean id="searchTargetSkillBean" class="com.novedia.talentmap.web.ui.search.SearchTarget" scope="session">
 		<constructor-arg name="listCollab" ref="listSearchCollaboratorSkill1"/>

@@ -27,14 +27,18 @@ public class SearchContent extends VerticalLayout {
 	 */
 	private Panel searchTargetPanel;
 	private Panel searchResultsPanel;
+	//Le panel à afficher quand les recherches ne retournent aucun résultat
+	private Panel searchResultsPanelNoResult;
 	private Label searchTargetLabel;
 	private Label searchResultsLabel;
+	private Label searchResultsLabelNoResult;
 
 	/**
 	 * Constants
 	 */
 	public static final String PANEL_TARGET_NAME = "Find an employee";
-	public static final String PANEL_RESULTS_NAME = "List of collaborators of the research";
+	public static final String PANEL_RESULTS_NAME = "List of colleagues of the research";
+	public static final String PANEL_NO_RESULTS_NAME = "No colleague found";
 
 	/**
 	 * Build the class SearchContent.java
@@ -46,15 +50,17 @@ public class SearchContent extends VerticalLayout {
 	 */
 	public SearchContent(SearchTarget searchTarget,
 			SearchResults searchResults, Panel searchTargetPanel,
-			Panel searchResultsPanel, Label searchTargetLabel,
-			Label searchResultsLabel) {
+			Panel searchResultsPanel, Panel searchResultsPanelNoResult, Label searchTargetLabel,
+			Label searchResultsLabel, Label searchResultsLabelNoResult) {
 		super();
 		this.searchTarget = searchTarget;
 		this.searchResults = searchResults;
 		this.searchTargetPanel = searchTargetPanel;
 		this.searchResultsPanel = searchResultsPanel;
+		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
 		this.searchTargetLabel = searchTargetLabel;
 		this.searchResultsLabel = searchResultsLabel;
+		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
 		
 		buildObservators();
 		
@@ -68,10 +74,15 @@ public class SearchContent extends VerticalLayout {
 			public void changeSearchResults(List<Colleague> listCollab, boolean clearState) {
 				
 				if(!clearState){
-					
-					SearchContent.this.searchResults.removeAllItems();
-					SearchContent.this.searchResults.buildResultsTable(listCollab);
-					SearchContent.this.searchResultsPanel.setVisible(true);
+					if(listCollab.isEmpty()) {
+						SearchContent.this.searchResultsPanel.setVisible(false);
+						SearchContent.this.searchResultsPanelNoResult.setVisible(true);
+					} else { 
+						SearchContent.this.searchResults.removeAllItems();
+						SearchContent.this.searchResults.buildResultsTable(listCollab);
+						SearchContent.this.searchResultsPanel.setVisible(true);
+						SearchContent.this.searchResultsPanelNoResult.setVisible(false);
+					}
 				}
 			}
 		}, ISearchContent.class);
@@ -113,7 +124,10 @@ public class SearchContent extends VerticalLayout {
 		
 		this.searchResultsLabel.setCaption(PANEL_RESULTS_NAME);
 		this.searchResultsLabel.addStyleName(TalentMapCSS.H2);
-	}
+
+		this.searchResultsLabelNoResult.setCaption(PANEL_NO_RESULTS_NAME);
+		this.searchResultsLabelNoResult.addStyleName(TalentMapCSS.H2);
+}
 
 	/**
 	 * Builder of the panels
@@ -125,6 +139,7 @@ public class SearchContent extends VerticalLayout {
 		// Add the labels to the panels
 		this.searchTargetPanel.addComponent(this.searchTargetLabel);
 		this.searchResultsPanel.addComponent(this.searchResultsLabel);
+		this.searchResultsPanelNoResult.addComponent(this.searchResultsLabelNoResult);
 
 		// Add the UI to the panels
 		this.searchTargetPanel.addComponent(this.searchTarget);
@@ -133,8 +148,10 @@ public class SearchContent extends VerticalLayout {
 	
 		addComponent(this.searchTargetPanel);
 		addComponent(this.searchResultsPanel);
+		addComponent(this.searchResultsPanelNoResult);
 		
 		this.searchResultsPanel.setVisible(false);
+		this.searchResultsPanelNoResult.setVisible(false);
 	}
 	
 	/**

@@ -116,10 +116,6 @@ public class SearchResults extends Table {
 				int idCollab = (Integer) btnListener.getData();
 				System.out.println("SearchResults.btnProfileEvent() idCollab=" + idCollab);
 
-				//TODO enlever les sysout
-//				System.out.println("SearchResults=" + SearchResults);
-//				System.out.println("SearchResults=" + SearchResults);
-				
 				SearchResults.this.profileCollabWindow
 						.setCOLLAB_ID(idCollab);
 
