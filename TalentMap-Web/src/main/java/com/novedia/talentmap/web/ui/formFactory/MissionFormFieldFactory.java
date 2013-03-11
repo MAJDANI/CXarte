@@ -90,11 +90,11 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					datefield.setDateFormat("dd/MM/yyyy");
 					datefield.setCaption((String) ConstantsEnglish.NAME_FIELD_MISSION[i]+ " : ");
 					
-					datefield.setRequired(true);
 					datefield.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_MISSION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					datefield.setValidationVisible(true);
 
 					if (propertyId.equals(ConstantsEnglish.FIELD_MISSION_START_DATE)){
+						datefield.setRequired(true);
 						datefield.setStyleName("mission-start-date");
 					}else if (propertyId.equals(ConstantsEnglish.FIELD_MISSION_END_DATE)){
 						datefield.setStyleName("mission-end-date");

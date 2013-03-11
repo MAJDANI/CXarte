@@ -1,11 +1,13 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
-import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
-import com.novedia.talentmap.web.util.IObservable;
-import com.novedia.talentmap.web.util.IProfileView;
 import com.vaadin.ui.Panel;
 
 public class AddMissionPanel extends Panel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private MissionForm missionForm;
 

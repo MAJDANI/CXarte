@@ -259,8 +259,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				!isNotEmpty(mission.getTitle()) ||
 				!isNotEmpty(mission.getPlace()) ||
 				!isNotEmpty(mission.getClient()) ||
-				!isNotEmpty(mission.getStartDate()) ||
-				!isNotEmpty(mission.getEndDate()) 				
+				!isNotEmpty(mission.getStartDate())  				
 			) return VALIDATION_FIELD_MISSING;
 		if(!isAValidPeriod(mission.getStartDate(),mission.getEndDate())
 			) return VALIDATION_INVALID_PERIOD;
@@ -269,14 +268,15 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 	
 	/**
-	 * Checks if startDate is before endDate
+	 * If end Date is specified, checks if startDate is before endDate. Without endDate
+	 * the method considers the period valid.
 	 * @param startDate
 	 * @param endDate
 	 * @return
 	 */
 	private boolean isAValidPeriod(Date startDate, Date endDate) {
-		if(startDate.after(endDate)) return false;
-		return true;
+		if((endDate == null) || ((endDate != null) && (endDate.after(startDate)))) return true;
+		return false;
 	}
 	
 	/**

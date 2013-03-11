@@ -92,7 +92,12 @@ public class ListMission extends Table {
 	 * @return
 	 */
 	public static String formatterDate(Date date) {
-		return dateFormat.format(date);
+		if (date != null) {
+			return dateFormat.format(date);
+		}
+		else {
+			return "";
+		}
 	}
 	
 	/**
