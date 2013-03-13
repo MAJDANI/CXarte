@@ -65,6 +65,13 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	private Tree treeSkills;
 
 	/**
+	 * Constructeur par défaut
+	 */
+	public SearchTarget() {
+		super();
+	}
+	
+	/**
 	 * 
 	 * Build the class SearchTarget.java 
 	 * @param searchByClientPanel
@@ -154,10 +161,25 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		this.searchByNamePanel.addComponent(this.fieldName);
 		
 		//Build the Skills Panel
-		List<VSkill> listVSkill = this.skillService.getAllVSkillOrdered();
-		treeSkills = new Tree("Skills");
+		treeSkills = buildTreeSkills();
+		
+		this.searchBySkillsPanel.addComponent(treeSkills);
+		addComponent(this.searchByClientPanel);
+		addComponent(this.searchByNamePanel);
+		addComponent(this.searchBySkillsPanel);
+
+		initField();
+	}
+
+	/**
+	 * Construit l'arbre des compétences
+	 * @return
+	 */
+	public Tree buildTreeSkills() {
+		Tree treeSkills = new Tree("Skills");
 		treeSkills.setMultiSelect(true);
 		
+		List<VSkill> listVSkill = this.skillService.getAllVSkillOrdered();
 		Integer currentCategoryId;
 		Integer currentConceptId;
 		Integer lastCategoryId = -1;
@@ -205,15 +227,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			treeSkills.setChildrenAllowed(tool, false);
 			
 		}
-		
-		this.searchBySkillsPanel.addComponent(treeSkills);
-		addComponent(this.searchByClientPanel);
-		addComponent(this.searchByNamePanel);
-		addComponent(this.searchBySkillsPanel);
-
-		initField();
+		return treeSkills;
 	}
-
+	
+	
 	/**
 	 * Default init for the fields
 	 * 
@@ -353,9 +370,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
-
 		if (cl == ISearchContent.class) {
-
 			this.obs = (ISearchContent) observateur;
 		}
 	}
@@ -376,18 +391,41 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * @return List<Colleague> la liste des colleagues. Elle peut être vide si l'utilisateur n'a rien coché
 	 * (pa de requête effectuée) ou si la sélection d'outils ne renvoie pas de résultat
 	 */
-	private List<Colleague> getListColleagueForTooIdChecked() {
-		
+	public List<Colleague> getListColleagueForTooIdChecked() {
 		List<Colleague> listColleague = new ArrayList<Colleague>();
-		List<Integer> listColleagueId = new ArrayList<Integer>();
-		List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
 		Boolean atLeastOneIsSelected = false;
+		List<Integer> listColleagueId = new ArrayList<Integer>();
+
+		atLeastOneIsSelected= parseList(listColleagueId);
 		
+		if (!atLeastOneIsSelected) {
+			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_PLEASE_SELECT, Notification.TYPE_WARNING_MESSAGE);
+		} else {
+			//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
+			if(listColleagueId.isEmpty()) {
+				getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
+			} else {
+				listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
+			}
+		}
+		return listColleague;
+	}
+
+	/**
+	 * Renvoie une liste d'Id de colleague remplie ou vide. Cette liste est construite en cherchant en base
+	 * les colleague qui ont une compétence correspondant à la sélection faite dans l'arbre de compétences.
+	 * @param atLeastOneIsSelected : permet à l'appelant de savoir si au moins un élément de l'arbre des
+	 * compétences a été sélectionné
+	 * @return la liste des Id colleague trouvés
+	 */
+	public Boolean parseList(List<Integer> listColleagueId) {
+		Boolean atLeastOneIsSelected = false;
+		List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
 		Collection<Object> lesItemId =(Collection<Object>)this.treeSkills.getContainerDataSource().getItemIds();
-		Boolean noColleagueFound = false;
+		
 		Boucle: for( Object item : lesItemId ) {
 			
-			if(treeSkills.isSelected(item)) {
+			if(this.treeSkills.isSelected(item)) {
 				atLeastOneIsSelected = true;
 				if (item  instanceof Category) {
 					//On veut des comptétences sur une catégorie entière
@@ -418,14 +456,13 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 					//Si la séléction utilisateur ne donne déjà pas de résultat, on sort
 					//de la boucle
 					if (listColleagueId.isEmpty()) {
-						noColleagueFound = true;
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
 					
 				} else if (item  instanceof Concept) {
 					Collection lesToolFils = this.treeSkills.getChildren(item);
-
+	
 					//On veut des comptétences sur un concept entier
 					//On va collecter tous les outils du concept
 					//et identifier les id collaborateur qui ont une compétence sur
@@ -443,7 +480,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 						listColleagueId.addAll(listColleagueIdTemp);
 					}
 					if (listColleagueId.isEmpty()) {
-						noColleagueFound = true;
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
@@ -459,25 +495,15 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 						listColleagueId.addAll(listColleagueIdTemp);
 					}
 					if (listColleagueId.isEmpty()) {
-						noColleagueFound = true;
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
 				}
 			}
 		}
-		if (!atLeastOneIsSelected) {
-			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_PLEASE_SELECT, Notification.TYPE_WARNING_MESSAGE);
-		} else {
-			//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
-			if(noColleagueFound == false) {
-				listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
-			} else {
-				getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
-			}
-		}
-		return listColleague;
+		return atLeastOneIsSelected;
 	}
+
 	/**
 	 * Get the searchByClientPanel value
 	 * 
