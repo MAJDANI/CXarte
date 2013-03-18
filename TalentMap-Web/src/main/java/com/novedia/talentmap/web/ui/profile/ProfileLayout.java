@@ -1,9 +1,7 @@
 package com.novedia.talentmap.web.ui.profile;
 
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
-import com.novedia.talentmap.web.ui.profile.mission.MissionColleagueContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IProfileLayout;
 import com.vaadin.ui.HorizontalLayout;

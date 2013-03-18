@@ -2,13 +2,8 @@ package com.novedia.talentmap.web.ui;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
-import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
-import com.novedia.talentmap.web.ui.profile.mission.MissionColleagueContent;
-import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.TabSheet.SelectedTabChangeListener;
 import com.vaadin.ui.VerticalLayout;
 
 /**

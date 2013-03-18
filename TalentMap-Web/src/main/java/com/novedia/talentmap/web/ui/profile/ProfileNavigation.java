@@ -2,7 +2,6 @@ package com.novedia.talentmap.web.ui.profile;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
-import com.novedia.talentmap.web.ui.profile.mission.MissionColleagueContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.IProfileLayout;
