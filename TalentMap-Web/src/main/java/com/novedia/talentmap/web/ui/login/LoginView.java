@@ -33,11 +33,6 @@ public class LoginView extends VerticalLayout {
 	/**
 	 * 
 	 */
-	private LoginViewListener loginViewListener;
-	
-	/**
-	 * 
-	 */
 	MyVaadinApplication application;
 	
 	/**
@@ -89,14 +84,13 @@ public class LoginView extends VerticalLayout {
 		this.loginForm.setUsernameCaption(LabelConstants.USER_LOGIN);
 		this.loginForm.setPasswordCaption(LabelConstants.USER_PASSWORD);
 		this.loginForm.setLoginButtonCaption(LabelConstants.LOGIN_BUTTON);
-		loginViewListener = new LoginViewListener(application);
 		this.loginForm.setHeight("150px");
-		this.loginForm.addListener(loginViewListener);
+		//this.loginForm.addListener(loginViewListener);
 		this.loginPanel.addComponent(this.loginForm);
 		
 		this.signIn = new Button(LABEL_BUTTON_SIGN_IN);
-		this.signIn.addListener(loginViewListener);
-		this.loginPanel.addComponent(this.signIn);
+		//this.signIn.addListener(loginViewListener);
+		//this.loginPanel.addComponent(this.signIn);
 		addComponent(this.loginPanel);
 		setComponentAlignment(this.loginPanel, Alignment.MIDDLE_CENTER);
 		HorizontalLayout footer = new HorizontalLayout();
@@ -108,22 +102,7 @@ public class LoginView extends VerticalLayout {
 	
 	/**    GETTERS/SETTERS   **/
 	
-	/**
-	 * Get the loginViewListener
-	 * @return loginViewListener
-	 */
-	public LoginViewListener getLoginViewListener() {
-		return loginViewListener;
-	}
 
-	/**
-	 * Set the loginViewListener
-	 * @param loginViewListener
-	 */
-	public void setLoginViewListener(LoginViewListener loginViewListener) {
-		this.loginViewListener = loginViewListener;
-	}
-	
 	
 	
 }
