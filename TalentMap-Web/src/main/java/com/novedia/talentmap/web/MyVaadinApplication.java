@@ -114,10 +114,6 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
 		
-//		ColleagueData colleagueData = new ColleagueData(this);
-//		getContext().addTransactionListener(colleagueData);
-		
-		//window.setContent(new LoginScreen(this));
 		window.setContent(buildLoginView());
 		
 	}
