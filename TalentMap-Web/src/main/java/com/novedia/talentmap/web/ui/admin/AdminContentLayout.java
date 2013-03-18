@@ -7,6 +7,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 
+@SuppressWarnings("serial")
 public class AdminContentLayout extends HorizontalLayout {
 
 	/**
@@ -41,10 +42,6 @@ public class AdminContentLayout extends HorizontalLayout {
 	 */
 	public AdminContentLayout buildViewAdminContentLayout(){
 		removeAllComponents();
-		adminNav = adminNav.buildAdminNavigation();
-		manageSkillContent = manageSkillContent.buildViewManageSkillContent();
-		addSkillContent = addSkillContent.buildViewAdminAddSkillContent();
-		deleteColleagueContent = deleteColleagueContent.mainBuild();
 		mainBuild();
 		buildObservators();
 		return this;
@@ -77,6 +74,7 @@ public class AdminContentLayout extends HorizontalLayout {
 			public void updateAdminContentLayout(Class<?> cl) {
 
 				if(cl == ManageSkillContent.class){
+					manageSkillContent = manageSkillContent.buildViewManageSkillContent();
 					AdminContentLayout.this.manageSkillContent.buildTreeSkill();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.manageSkillContent);
 					AdminContentLayout.this.manageSkillContent.getTitle().setCaption(ConstantsEnglish.LIST_TOOL_TITLE);
@@ -84,10 +82,12 @@ public class AdminContentLayout extends HorizontalLayout {
 				} else if(cl == AdminAddSkillContent.class){
 
 					//Rafraichit les catégories disponibles
+					addSkillContent = addSkillContent.buildViewAdminAddSkillContent();
 					AdminContentLayout.this.addSkillContent.refreshCategoriesAvailable();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
 					AdminContentLayout.this.addSkillContent.getTitle().setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
 				} else if(cl == AdminDeleteColleagueContent.class){
+					deleteColleagueContent = deleteColleagueContent.mainBuild();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.deleteColleagueContent);
 				}
 			}
@@ -105,11 +105,11 @@ public class AdminContentLayout extends HorizontalLayout {
 		
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setHeight(600);
-		vLayout.addComponent(this.adminNav);
+		vLayout.addComponent(this.adminNav.buildAdminNavigation());
 		this.hSplitContent.setFirstComponent(vLayout);
-		this.hSplitContent.setSecondComponent(this.manageSkillContent);
+		this.hSplitContent.setSecondComponent(this.manageSkillContent.buildViewManageSkillContent());
 		this.hSplitContent.setSplitPosition(20);
-
+		hSplitContent.setLocked(true);
 		addComponent(this.hSplitContent);
 		setSizeFull();
 		setExpandRatio(this.hSplitContent, 1);
