@@ -4,10 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
 
 import com.vaadin.ui.Table;
 
+@SuppressWarnings("serial")
 public class ListMission extends Table {
 
 	protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -17,21 +19,36 @@ public class ListMission extends Table {
 	 */
 	private MissionContainer missionContainer;
 
-	/**
-	 * Temporary Constant 
-	 */
-	public static final int COLLAB_ID = 2;
+	private Authentication authentication;
+	
 
+	
+	/**
+	 * Default constructor
+	 */
+	public ListMission(){
+		super();
+	}
+	
+	/**
+	 * Build colleague's mission
+	 * @return
+	 */
+	public ListMission buildAllColleagueMission(){
+		removeAllItems();
+		buildMain();
+		return this;
+	}
 	
 	/**
 	 * Build the class ListMission.java 
 	 * @param profileService
 	 */
-	public ListMission(MissionContainer missionContainer) {
-		super();
-		this.missionContainer = missionContainer;
-		buildMain();
-	}
+//	public ListMission(MissionContainer missionContainer) {
+//		super();
+//		this.missionContainer = missionContainer;
+//		buildMain();
+//	}
 	
 	public void buildMain(){
 		//calling setwith(850) allows vaadin display automatically an horizontal 
@@ -44,7 +61,7 @@ public class ListMission extends Table {
 	 * Principal function filling ListMission Table
 	 */
 	public void buildContainer(){
-		System.out.println("ListMission.buildContainer()");
+		//System.out.println("ListMission.buildContainer()");
 		addColumns();
 		setSelectable(true);
 		setNullSelectionAllowed(true);
@@ -53,7 +70,7 @@ public class ListMission extends Table {
 	}
 	
 	public void fillMissionContainer() {
-		this.missionContainer.fillContainer(this.COLLAB_ID);
+		this.missionContainer.fillContainer(authentication.getColleagueId());
 	}
 	/**
 	 * Builds Headers of the Table ListMission
@@ -116,6 +133,18 @@ public class ListMission extends Table {
 		return missionContainer;
 	}
 
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	
+	
 
 
 }

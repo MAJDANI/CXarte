@@ -295,6 +295,7 @@
 			<name>Releases</name>
 			<url>http://nsltsiv-ncipjava.smart-up.net:8083/nexus/content/repositories/releases</url>
 		</repository>
+		
 		<!-- Use the following if you ARE using a snapshot version. -->
 		<snapshotRepository>
 			<id>snapshots</id>

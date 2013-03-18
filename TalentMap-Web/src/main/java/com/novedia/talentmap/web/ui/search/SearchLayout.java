@@ -18,6 +18,24 @@ public class SearchLayout extends HorizontalLayout{
 	private SearchContent searchContent;
 	private HorizontalSplitPanel hSplitPanel;
 	private SearchNavigation searchNavigation;
+	
+	/**
+	 * Default Constructor
+	 */
+	public SearchLayout(){
+		super();
+	}
+	
+	public SearchLayout buildSearchLayout(){
+		removeAllComponents();
+		searchNavigation = searchNavigation.buildSearchNavigationView();
+		searchContent = searchContent.buildSearchContentView();
+		buildObservators();
+		mainBuild();
+		return this;
+	}
+	
+	
 
 	/**
 	 * Build the class SearchLayout.java 
@@ -25,17 +43,17 @@ public class SearchLayout extends HorizontalLayout{
 	 * @param hSplitpanel
 	 * @param searchNavigation
 	 */
-	public SearchLayout(SearchContent searchContent,
-			HorizontalSplitPanel hSplitPanel, SearchNavigation searchNavigation) {
-		super();
-		this.searchContent = searchContent;
-		this.hSplitPanel = hSplitPanel;
-		this.searchNavigation = searchNavigation;
-		
-		buildObservators();
-		
-		mainBuild();
-	}
+//	public SearchLayout(SearchContent searchContent,
+//			HorizontalSplitPanel hSplitPanel, SearchNavigation searchNavigation) {
+//		super();
+//		this.searchContent = searchContent;
+//		this.hSplitPanel = hSplitPanel;
+//		this.searchNavigation = searchNavigation;
+//		
+//		buildObservators();
+//		
+//		mainBuild();
+//	}
 	
 	public void buildObservators(){
 		
@@ -89,7 +107,7 @@ public class SearchLayout extends HorizontalLayout{
 	 * Get the hSplitpanel value
 	 * @return the hSplitpanel
 	 */
-	public HorizontalSplitPanel gethSplitpanel() {
+	public HorizontalSplitPanel getHSplitPanel() {
 		return hSplitPanel;
 	}
 
@@ -97,7 +115,7 @@ public class SearchLayout extends HorizontalLayout{
 	 * Set the hSplitpanel value
 	 * @param hSplitpanel the hSplitpanel to set
 	 */
-	public void sethSplitpanel(HorizontalSplitPanel hSplitPanel) {
+	public void setHSplitPanel(HorizontalSplitPanel hSplitPanel) {
 		this.hSplitPanel = hSplitPanel;
 	}
 
@@ -117,5 +135,6 @@ public class SearchLayout extends HorizontalLayout{
 		this.searchNavigation = searchNavigation;
 	}
 
+	
 	
 }

@@ -52,8 +52,15 @@ public class ProfileCollabWindow extends Window {
 	/**
 	 * Constants
 	 */
-	private int COLLAB_ID = 2;
+//	private int COLLAB_ID = 2;
+	private int COLLAB_ID;
 
+	/**
+	 * Default constructor
+	 */
+	public ProfileCollabWindow(){
+		super();
+	}
 
 	/**
 	 * 
@@ -253,4 +260,17 @@ public class ProfileCollabWindow extends Window {
 	public void setProfileService(IProfileService profileService) {
 		this.profileService = profileService;
 	}
+
+	public IBusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
+	}
+	
+	
+	
+	
 }

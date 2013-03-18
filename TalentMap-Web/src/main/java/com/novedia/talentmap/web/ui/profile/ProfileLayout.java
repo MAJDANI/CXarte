@@ -1,24 +1,28 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.ui.ea.EaContentHistorique;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
+import com.novedia.talentmap.web.ui.profile.mission.MissionColleagueContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.novedia.talentmap.web.util.IProfileLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 
+@SuppressWarnings("serial")
 public class ProfileLayout extends HorizontalLayout {
 
 	/**
 	 * Vaadin UI
 	 */
-	private ProfileCollaboratorContent profileCollabContent;
+	private ProfileCollaboratorContent profileColleagueContent;
+	private ProfileNavigation profileNavigation;
 	private MissionCollaboratorContent missionCollabContent;
 	private SkillCollaboratorContent skillCollabContent;
-	private ProfileNavigation profileNavigation;
-	private EaContentHistorique eaContentHistorique;
 
+	
+	private Authentication authentication;
 
 	/**
 	 * Vaadin Components
@@ -26,76 +30,50 @@ public class ProfileLayout extends HorizontalLayout {
 	private HorizontalSplitPanel hSplitPanel;
 
 	/**
-	 * Build the class ProfileLayout.java
-	 * 
-	 * @param profileCollabContent
-	 * @param profileNavigation
+	 * default constructor
 	 */
-	public ProfileLayout(ProfileCollaboratorContent profileCollabContent,
-			ProfileNavigation profileNavigation,
-			HorizontalSplitPanel hSplitPanel,
-			MissionCollaboratorContent missionCollabContent,
-			SkillCollaboratorContent skillCollabContent,
-			EaContentHistorique eaContentHistorique) {
+	public ProfileLayout(){
 		super();
-		this.profileCollabContent = profileCollabContent;
-		this.profileNavigation = profileNavigation;
-		this.skillCollabContent = skillCollabContent;
-		this.hSplitPanel = hSplitPanel;
-		this.missionCollabContent = missionCollabContent;
-		this.eaContentHistorique = eaContentHistorique;
-
-		buildObservators();
-		
-		mainBuild();
 	}
+	
+	
+	
+	/**
+	 * Build the profil Layout of user
+	 * @return
+	 */
+	public HorizontalLayout buildProfileLayout(){
+		profileColleagueContent.setAuthentication(getAuthentication());
+		skillCollabContent.setAuthentication(getAuthentication());
+		missionCollabContent.setAuthentication(getAuthentication());
+		removeAllComponents();
+		hSplitPanel = new HorizontalSplitPanel();
+		buildObservators();
+		mainBuild();
+		return this;
+	}
+	
+	
 	
 	public void buildObservators(){
 		
 		this.profileNavigation.addObservateur(new IProfileLayout() {
-
+			
 			@Override
 			public void updateProfileLayout(Class<?> cl) {
 				
 				if(cl == ProfileCollaboratorContent.class){
-					
-					ProfileLayout.this.profileCollabContent.setVisible(true);
-					ProfileLayout.this.missionCollabContent.setVisible(false);
-					ProfileLayout.this.skillCollabContent.setVisible(false);
-					ProfileLayout.this.eaContentHistorique.setVisible(false);
-					
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.profileCollabContent);
+					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.profileColleagueContent.buildProfileColleagueContent());
 				}
 				
 				if(cl == MissionCollaboratorContent.class){
-					
-					ProfileLayout.this.profileCollabContent.setVisible(false);
-					ProfileLayout.this.missionCollabContent.setVisible(true);
-					ProfileLayout.this.skillCollabContent.setVisible(false);
-					ProfileLayout.this.eaContentHistorique.setVisible(false);
-				
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.missionCollabContent);
+					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.missionCollabContent.buildViewMissionColleagueContent());
 				}
 				
 				if(cl == SkillCollaboratorContent.class){
 					
-					ProfileLayout.this.profileCollabContent.setVisible(false);
-					ProfileLayout.this.missionCollabContent.setVisible(false);
-					ProfileLayout.this.skillCollabContent.setVisible(true);
-					ProfileLayout.this.eaContentHistorique.setVisible(false);
-				
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.skillCollabContent);
+					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.skillCollabContent.buildSkillCollaboratorContent());
 				}
-				if(cl == EaContentHistorique.class){
-					ProfileLayout.this.eaContentHistorique.setVisible(true);
-					ProfileLayout.this.profileCollabContent.setVisible(false);
-					ProfileLayout.this.skillCollabContent.setVisible(false);
-					ProfileLayout.this.missionCollabContent.setVisible(false);
-					ProfileLayout.this.eaContentHistorique.setVisible(false);
-					
-
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.eaContentHistorique);									
-				}				
 			}
 		}, IProfileLayout.class);
 	}
@@ -107,14 +85,12 @@ public class ProfileLayout extends HorizontalLayout {
 	 */
 	public void mainBuild() {
 		
-		initView();
-		
 		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.addComponent(this.profileNavigation);
+		vLayout.addComponent(this.profileNavigation.mainBuild());
 		vLayout.setHeight(800);
 
 		this.hSplitPanel.setFirstComponent(vLayout);
-		this.hSplitPanel.setSecondComponent(this.profileCollabContent);
+		this.hSplitPanel.setSecondComponent(this.profileColleagueContent.buildProfileColleagueContent());
 		this.hSplitPanel.setSplitPosition(20);
 		this.hSplitPanel.setLocked(true);
 
@@ -123,35 +99,25 @@ public class ProfileLayout extends HorizontalLayout {
 		setExpandRatio(this.hSplitPanel, 1);
 	}
 	
-	public void initView(){
-		
-		this.profileCollabContent.setVisible(true);
-		this.missionCollabContent.setVisible(false);
-		this.skillCollabContent.setVisible(false);
-		this.eaContentHistorique.setVisible(false);
-	}
 	
-	/**
-	 * @return the eaContentHistorique
-	 */
-	public EaContentHistorique getEaContentHistorique() {
-		return eaContentHistorique;
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
-	/**
-	 * @param eaContentHistorique the eaContentHistorique to set
-	 */
-	public void setEaContentHistorique(EaContentHistorique eaContentHistorique) {
-		this.eaContentHistorique = eaContentHistorique;
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
+
 
 	/**
 	 * Get the profileCollabContent value
 	 * 
 	 * @return the profileCollabContent
 	 */
-	public ProfileCollaboratorContent getProfileCollabContent() {
-		return profileCollabContent;
+	public ProfileCollaboratorContent getProfileColleagueContent() {
+		return profileColleagueContent;
 	}
 
 	/**
@@ -160,9 +126,9 @@ public class ProfileLayout extends HorizontalLayout {
 	 * @param profileCollabContent
 	 *            the profileCollabContent to set
 	 */
-	public void setProfileCollabContent(
-			ProfileCollaboratorContent profileCollabContent) {
-		this.profileCollabContent = profileCollabContent;
+	public void setProfileColleagueContent(
+			ProfileCollaboratorContent profileColleagueContent) {
+		this.profileColleagueContent = profileColleagueContent;
 	}
 
 	/**
@@ -189,7 +155,7 @@ public class ProfileLayout extends HorizontalLayout {
 	 * 
 	 * @return the hSplitPanel
 	 */
-	public HorizontalSplitPanel gethSplitPanel() {
+	public HorizontalSplitPanel getHSplitPanel() {
 		return hSplitPanel;
 	}
 
@@ -199,7 +165,7 @@ public class ProfileLayout extends HorizontalLayout {
 	 * @param hSplitPanel
 	 *            the hSplitPanel to set
 	 */
-	public void sethSplitPanel(HorizontalSplitPanel hSplitPanel) {
+	public void setHSplitPanel(HorizontalSplitPanel hSplitPanel) {
 		this.hSplitPanel = hSplitPanel;
 	}
 
@@ -231,18 +197,7 @@ public class ProfileLayout extends HorizontalLayout {
 		this.skillCollabContent = skillCollabContent;
 	}
 
-	/**
-	 * @return the tabProfileSkills
-	 */
-//	public TabProfileSkills getTabProfileSkills() {
-//		return tabProfileSkills;
-//	}
-//
-//	/**
-//	 * @param tabProfileSkills the tabProfileSkills to set
-//	 */
-//	public void setTabProfileSkills(TabProfileSkills tabProfileSkills) {
-//		this.tabProfileSkills = tabProfileSkills;
-//	}
+
+
 		
 }

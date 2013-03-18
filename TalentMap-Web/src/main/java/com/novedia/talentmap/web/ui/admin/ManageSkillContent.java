@@ -104,7 +104,22 @@ public class ManageSkillContent extends VerticalLayout implements
 	public static Object[] CONCEPTS = new String[] { "IOC", "concept1",
 			"concept2", "concept3", "concept4" };
 	public static Object[] CATEGORIES = new String[] { "JAVA", ".NET" };
+	
+	
+	/**
+	 * Default constructor
+	 */
+	public ManageSkillContent(){
+		super();
+	}
 
+	public ManageSkillContent buildViewManageSkillContent(){
+		removeAllComponents();
+		mainBuild();
+		return this;
+	}
+	
+	
 	/**
 	 * Build the class AddSkillContent.java
 	 * 
@@ -112,34 +127,34 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @param treeSkill
 	 * @param save
 	 */
-	public ManageSkillContent(Form formSkill, Tree treeSkill, Button save,
-			List<Tool> listTool, List<Concept> listConcept,
-			List<Category> listCategory, IAdminService adminService,
-			Vector<Object> fieldOrderSkill, Button edit, Button delete,
-			Label title, HorizontalLayout body, Button cancel) {
-		super();
-		this.formSkill = formSkill;
-		this.treeSkill = treeSkill;
-		this.save = save;
-		this.listTool = listTool;
-		this.listConcept = listConcept;
-		this.listCategory = listCategory;
-		this.adminService = adminService;
-		this.fieldOrderSkill = fieldOrderSkill;
-		this.edit = edit;
-		this.delete = delete;
-		this.title = title;
-		this.body = body;
-		this.cancel = cancel;
-
-		// Initiate the current ID and Skill
-		this.currentCategoryId = null;
-		this.currentConceptId = null;
-		this.currentToolId = null;
-		this.currentVSkill = null;
-
-		mainBuild();
-	}
+//	public ManageSkillContent(Form formSkill, Tree treeSkill, Button save,
+//			List<Tool> listTool, List<Concept> listConcept,
+//			List<Category> listCategory, IAdminService adminService,
+//			Vector<Object> fieldOrderSkill, Button edit, Button delete,
+//			Label title, HorizontalLayout body, Button cancel) {
+//		super();
+//		this.formSkill = formSkill;
+//		this.treeSkill = treeSkill;
+//		this.save = save;
+//		this.listTool = listTool;
+//		this.listConcept = listConcept;
+//		this.listCategory = listCategory;
+//		this.adminService = adminService;
+//		this.fieldOrderSkill = fieldOrderSkill;
+//		this.edit = edit;
+//		this.delete = delete;
+//		this.title = title;
+//		this.body = body;
+//		this.cancel = cancel;
+//
+//		// Initiate the current ID and Skill
+//		this.currentCategoryId = null;
+//		this.currentConceptId = null;
+//		this.currentToolId = null;
+//		this.currentVSkill = null;
+//
+//		mainBuild();
+//	}
 
 	/**
 	 * The main build components

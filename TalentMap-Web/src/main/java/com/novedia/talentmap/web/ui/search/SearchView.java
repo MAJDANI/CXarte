@@ -12,20 +12,35 @@ public class SearchView extends VerticalLayout {
 	 * Vaadin UI
 	 */
 	private SearchLayout searchLayout;
+	
+	
+	/**
+	 * Default constructor
+	 */
+	public SearchView(){
+		super();
+	}
+	
+	public SearchView buildSearchView(){
+		removeAllComponents();
+		searchLayout = searchLayout.buildSearchLayout();
+		mainBuild();
+		return this;
+	}
+	
 
 	/**
 	 * Build the class SearchView.java 
 	 * @param searchLayout
 	 */
-	public SearchView(SearchLayout searchLayout) {
-		super();
-		this.searchLayout = searchLayout;
-		
-		mainBuild();
-	}
+//	public SearchView(SearchLayout searchLayout) {
+//		super();
+//		this.searchLayout = searchLayout;
+//		
+//		mainBuild();
+//	}
 	
 	public void mainBuild(){
-		
 		addComponent(this.searchLayout);
 	}
 

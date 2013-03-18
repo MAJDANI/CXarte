@@ -20,11 +20,6 @@ public class SearchResults extends Table {
 	private static final long serialVersionUID = -1983028405136383549L;
 
 	/**
-	 * Constants
-	 */
-	public static final int COLLAB_ID = 2;
-
-	/**
 	 * Factoriser cette constante qui est aussi utilisée dans MonitoringCollabContent
 	 * VGU TODO
 	 */
@@ -35,21 +30,36 @@ public class SearchResults extends Table {
 	 * VGU
 	 */
 	private ProfileCollabWindow profileCollabWindow;
+	
+	/**
+	 * Default constructor
+	 */
+	public SearchResults(){
+		super();
+	}
+	
+	/**
+	 * Build SearchResults view
+	 * @return
+	 */
+	public SearchResults buildSearchResultsView(){
+		removeAllItems();
+		mainBuild();
+		return this;
+	}
 
 	/**
 	 * Build the class SearchResults.java
 	 * 
 	 * @param collabService
 	 */
-	public SearchResults(ProfileCollabWindow profileCollabWindow) {
-		super();
-		System.out.println("SearchResults:constructeur");
-		this.profileCollabWindow = profileCollabWindow;
-		mainBuild();
-	}
+//	public SearchResults(ProfileCollabWindow profileCollabWindow) {
+//		super();
+//		this.profileCollabWindow = profileCollabWindow;
+//		mainBuild();
+//	}
 
 	public void mainBuild() {
-		System.out.println("SearchResults.mainBuild()");
 		addColumns();
 	}
 
@@ -68,7 +78,7 @@ public class SearchResults extends Table {
 	}
 
 	public void fillResultsTable(List<Colleague> listCollab) {
-		System.out.println("SearchResults.fillResultsTable()");
+//		System.out.println("SearchResults.fillResultsTable()");
 
 		int idResultsTable = 1;
 		for (Colleague collab : listCollab) {
@@ -106,7 +116,7 @@ public class SearchResults extends Table {
 	//TODO : voir si on peut factoriser cette méthode
 	//qui est copiée de la classe MonitoringCollabEvent
 	private void btnProfileEvent(Button button) {
-		System.out.println("MonitoringCollabContent.btnProfileEvent()");
+//		System.out.println("MonitoringCollabContent.btnProfileEvent()");
 		button.addListener(new ClickListener() {
 
 			@Override
@@ -114,7 +124,7 @@ public class SearchResults extends Table {
 
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
-				System.out.println("SearchResults.btnProfileEvent() idCollab=" + idCollab);
+//				System.out.println("SearchResults.btnProfileEvent() idCollab=" + idCollab);
 
 				SearchResults.this.profileCollabWindow
 						.setCOLLAB_ID(idCollab);

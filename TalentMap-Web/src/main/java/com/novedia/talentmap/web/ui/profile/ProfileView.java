@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -7,36 +8,37 @@ import com.vaadin.ui.VerticalLayout;
  * @author e.moumbe
  *
  */
+
+@SuppressWarnings("serial")
 public class ProfileView extends VerticalLayout{
 
 	/**
-	 * UID
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-	 * TalentMap Services
+	 * profil Layout
 	 */
 	private ProfileLayout profileLayout;
-
+	
+	private Authentication authentication;
+	
 	/**
-	 * Build the class ProfileView.java 
-	 * @param profileLayout
+	 * Default constructor
 	 */
-	public ProfileView(ProfileLayout profileLayout) {
+	public ProfileView(){
 		super();
-		this.profileLayout = profileLayout;
-		
-		mainBuild();
 	}
-
+	
+	
 	/**
-	 * The main builder
-	 * @class ProfileView.java
+	 * Build the tabsheet that conatains profil data
+	 * @return
 	 */
-	public void mainBuild(){
-		
-		addComponent(this.profileLayout);
+	public VerticalLayout buildTabSheetProfilData(){
+		VerticalLayout profileView = new VerticalLayout();
+		profileLayout.setAuthentication(getAuthentication());
+		profileView.addComponent(profileLayout.buildProfileLayout());
+		return profileView;
 	}
+	
+
 	/**
 	 * Get the profileLayout value
 	 * @return the profileLayout
@@ -52,6 +54,18 @@ public class ProfileView extends VerticalLayout{
 	public void setProfileLayout(ProfileLayout profileLayout) {
 		this.profileLayout = profileLayout;
 	}
+
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+	
+	
 	
 	
 }

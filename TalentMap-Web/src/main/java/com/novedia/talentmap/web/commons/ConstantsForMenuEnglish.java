@@ -18,7 +18,7 @@ public class ConstantsForMenuEnglish {
 	public static final String VISUALIZE_SKILLS_NAME = "skills";
 	public static final String VISUALIZE_MISSIONS_NAME = "Historic missions";
 	public static final String VISUALIZE_EA_NAME = "Historic EA";
-	public static final String VISUALIZE_ADMINISTRATIVE_DATA = "administrative data";
+	public static final String VISUALIZE_ADMINISTRATIVE_DATA = "Administrative Data";
 	public static final Object[][] subItemProfilNav = new Object[][] { new Object[] {
 			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA, VISUALIZE_SKILLS_NAME,
 			VISUALIZE_MISSIONS_NAME /*, VISUALIZE_EA_NAME */} };

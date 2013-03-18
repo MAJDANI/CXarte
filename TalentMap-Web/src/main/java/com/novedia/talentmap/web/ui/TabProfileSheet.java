@@ -1,10 +1,15 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
+import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
+import com.novedia.talentmap.web.ui.profile.mission.MissionColleagueContent;
+import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.TabSheet.SelectedTabChangeListener;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * The Profile tab contains the profile view and also the collaborator view (CM) 
@@ -13,47 +18,44 @@ import com.vaadin.ui.TabSheet;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
-public class TabProfileSheet extends TabSheet{
-	
-	/**
-	 * Serial Version Number
-	 */
-	private static final long serialVersionUID = 2112120532020200846L;
+
+@SuppressWarnings("serial")
+public class TabProfileSheet extends TabSheet {
 	
 	/**
 	 * All views
 	 */
 	private ProfileView profileView;
-	private MonitoringCollabView monitoringCollabView;
-	private TabProfileSkills tabProfileSkills;
-	private TabProfileAdminstrativeData tabProfileAdminstratveData;
-	private TabProfileHistoricMission tabProfileHistoricMission;
+	
+	private Authentication authentication;
+	/**
+	 * Default constructor
+	 */
+	public TabProfileSheet(){
+		super();
+	}
+	
 	
 	/**
-	 * 
-	 * Build the class TabProfileSheet.java 
-	 * @param profileView
-	 * @param collabView
+	 * content of Profile tabulation 
 	 */
-	public TabProfileSheet(ProfileView profileView,
-			MonitoringCollabView monitoringCollabView,
-			TabProfileSkills tabProfileSkills,
-			TabProfileAdminstrativeData tabProfileAdminstratveData,
-			TabProfileHistoricMission tabProfileHistoricMission){
-		super();
-		this.profileView = profileView;
-		this.monitoringCollabView = monitoringCollabView;
-		this.tabProfileSkills = tabProfileSkills;
-		this.tabProfileAdminstratveData = tabProfileAdminstratveData;
-		this.tabProfileHistoricMission = tabProfileHistoricMission;
+	VerticalLayout tabProfileView;
 	
+	
+	/**
+	 * Build the profile sheet
+	 * @return
+	 */
+	public TabSheet buildTabSheetProfile(){
+		this.removeAllComponents();
 		setImmediate(true);
-		addTab(this.profileView, ConstantsEnglish.TAB_PROFILE_NAME);
-		//addTab(this.monitoringCollabView, ConstantsEnglish.TAB_COLLAB_NAME);
-		addTab(this.tabProfileSkills, ConstantsForMenuEnglish.VISUALIZE_SKILLS_NAME);
-		addTab(this.tabProfileAdminstratveData, ConstantsForMenuEnglish.VISUALIZE_ADMINISTRATIVE_DATA);
-		addTab(this.tabProfileHistoricMission, ConstantsForMenuEnglish.VISUALIZE_MISSIONS_NAME);	
+		profileView.setAuthentication(getAuthentication());
+		tabProfileView = profileView.buildTabSheetProfilData();
+		addTab(tabProfileView, ConstantsEnglish.TAB_PROFILE_NAME);
+		return this;
 	}
+	
+	
 	
 	/**
 	 * Set the profileView value
@@ -63,41 +65,23 @@ public class TabProfileSheet extends TabSheet{
 		this.profileView = profileView;
 	}
 
-	/**
-	 * Set the cmView value
-	 * @param cmView the cmView to set
-	 */
-	public void setMonitoringCollabView(MonitoringCollabView monitoringCollabView) {
-		this.monitoringCollabView = monitoringCollabView;
-	}
 
 	/**
-	 * @return the tabProfileSkills
+	 * 
+	 * @return
 	 */
-	public TabProfileSkills getTabProfileSkills() {
-		return tabProfileSkills;
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
-	/**
-	 * @param tabProfileSkills the tabProfileSkills to set
-	 */
-	public void setTabProfileSkills(TabProfileSkills tabProfileSkills) {
-		this.tabProfileSkills = tabProfileSkills;
-	}
 
 	/**
-	 * @param tabProfileAdminstratveData the tabProfileAdminstratveData to set
+	 * 
+	 * @param authentication
 	 */
-	public void setTabProfileAdminstratveData(
-			TabProfileAdminstrativeData tabProfileAdminstratveData) {
-		this.tabProfileAdminstratveData = tabProfileAdminstratveData;
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
 
-	/**
-	 * @param tabProfileHistoricMission the tabProfileHistoricMission to set
-	 */
-	public void setTabProfileHistoricMission(
-			TabProfileHistoricMission tabProfileHistoricMission) {
-		this.tabProfileHistoricMission = tabProfileHistoricMission;
-	}
+	
 }

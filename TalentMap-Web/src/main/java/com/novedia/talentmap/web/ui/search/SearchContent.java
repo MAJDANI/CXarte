@@ -39,6 +39,24 @@ public class SearchContent extends VerticalLayout {
 	public static final String PANEL_TARGET_NAME = "Find an employee";
 	public static final String PANEL_RESULTS_NAME = "List of colleagues of the research";
 	public static final String PANEL_NO_RESULTS_NAME = "No colleague found";
+	
+	/**
+	 * Default constructor
+	 */
+	public SearchContent(){
+		super();
+	}
+	
+	
+	public SearchContent buildSearchContentView(){
+		removeAllComponents();
+		searchTarget = searchTarget.buildSearchTargetView();
+		searchResults = searchResults.buildSearchResultsView();
+		buildObservators();
+		mainBuild();
+		return this;
+	}
+		
 
 	/**
 	 * Build the class SearchContent.java
@@ -48,24 +66,24 @@ public class SearchContent extends VerticalLayout {
 	 * @param searchTargetPanel
 	 * @param searchResultsPanel
 	 */
-	public SearchContent(SearchTarget searchTarget,
-			SearchResults searchResults, Panel searchTargetPanel,
-			Panel searchResultsPanel, Panel searchResultsPanelNoResult, Label searchTargetLabel,
-			Label searchResultsLabel, Label searchResultsLabelNoResult) {
-		super();
-		this.searchTarget = searchTarget;
-		this.searchResults = searchResults;
-		this.searchTargetPanel = searchTargetPanel;
-		this.searchResultsPanel = searchResultsPanel;
-		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
-		this.searchTargetLabel = searchTargetLabel;
-		this.searchResultsLabel = searchResultsLabel;
-		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
-		
-		buildObservators();
-		
-		mainBuild();
-	}
+//	public SearchContent(SearchTarget searchTarget,
+//			SearchResults searchResults, Panel searchTargetPanel,
+//			Panel searchResultsPanel, Panel searchResultsPanelNoResult, Label searchTargetLabel,
+//			Label searchResultsLabel, Label searchResultsLabelNoResult) {
+//		super();
+//		this.searchTarget = searchTarget;
+//		this.searchResults = searchResults;
+//		this.searchTargetPanel = searchTargetPanel;
+//		this.searchResultsPanel = searchResultsPanel;
+//		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
+//		this.searchTargetLabel = searchTargetLabel;
+//		this.searchResultsLabel = searchResultsLabel;
+//		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
+//		
+//		buildObservators();
+//		
+//		mainBuild();
+//	}
 	
 	public void buildObservators(){
 		this.searchTarget.addObservateur(new ISearchContent() {
@@ -291,6 +309,28 @@ public class SearchContent extends VerticalLayout {
 	public void setSearchResultsLabel(Label searchResultsLabel) {
 		this.searchResultsLabel = searchResultsLabel;
 	}
+
+
+	public Panel getSearchResultsPanelNoResult() {
+		return searchResultsPanelNoResult;
+	}
+
+
+	public void setSearchResultsPanelNoResult(Panel searchResultsPanelNoResult) {
+		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
+	}
+
+
+	public Label getSearchResultsLabelNoResult() {
+		return searchResultsLabelNoResult;
+	}
+
+
+	public void setSearchResultsLabelNoResult(Label searchResultsLabelNoResult) {
+		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
+	}
+	
+	
 
 	// /**
 	// *

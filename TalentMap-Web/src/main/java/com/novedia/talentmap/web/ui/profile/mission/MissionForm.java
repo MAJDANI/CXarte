@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.Date;
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
@@ -23,12 +24,9 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window.Notification;
 
+@SuppressWarnings("serial")
 public class MissionForm extends FormLayout implements ClickListener, IObservable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6372102791482264327L;
 
 	/**
 	* We add listMission in AddMissionPanel's attributes in order to
@@ -49,6 +47,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	private IColleagueService collabService;
 	
 	private IClientService clientService;
+	
 
 	/**
 	 * POJO
@@ -59,14 +58,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Vaadin Components
 	 */
 	private Form missionForm;
-	private GridLayout missionFormLayout;
 	private Button save;
 	private Button cancel;
 
-	/**
-	 * Constants
-	 */
-	public static final int COLLEAGUE_ID = 2;
 	public static final String SAVE_BUTTON_NAME = "Save";
 	public static final String CANCEL_BUTTON_NAME = "Cancel";
 
@@ -97,6 +91,26 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	private String currentAction;
 	private String currentSaveMode;
 	
+	
+	private Authentication authentication;
+	
+	/**
+	 * Default constructor
+	 */
+	public MissionForm(){
+		super();
+	}
+	
+	
+	/**
+	 * Build the form mission of colleague
+	 * @return
+	 */
+	public MissionForm buildMissionFormColleague(){
+		buildMain();
+		return this;
+	}
+	
 	/**
 	 * Build the class MissionForm.java
 	 * 
@@ -104,21 +118,21 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param missionForm
 	 * @param missionFormLayout
 	 */
-	public MissionForm(Vector<Object> fieldOrderMission, Form missionForm,
-			GridLayout missionFormLayout, IColleagueService collabService, 
-			IClientService clientService,
-			Button save, Button cancel) {
-		super();
-		this.fieldOrderMission = fieldOrderMission;
-		this.missionForm = missionForm;
-		this.missionFormLayout = missionFormLayout;
-		this.collabService = collabService;
-		this.clientService = clientService;
-		this.save = save;
-		this.cancel = cancel;
-
-		buildMain();
-	}
+//	public MissionForm(Vector<Object> fieldOrderMission, Form missionForm,
+//			GridLayout missionFormLayout, IColleagueService collabService, 
+//			IClientService clientService,
+//			Button save, Button cancel) {
+//		super();
+//		this.fieldOrderMission = fieldOrderMission;
+//		this.missionForm = missionForm;
+//		this.missionFormLayout = missionFormLayout;
+//		this.collabService = collabService;
+//		this.clientService = clientService;
+//		this.save = save;
+//		this.cancel = cancel;
+//
+//		buildMain();
+//	}
 
 	public void buildMain() {
 
@@ -133,35 +147,30 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 	
 	public void initMissionList(){
-		MissionContainer missionContainer = new MissionContainer(collabService);
-		this.listMission = new ListMission(missionContainer);
+		//MissionContainer missionContainer = new MissionContainer(collabService);
+		this.listMission = listMission.buildAllColleagueMission();
+		//this.listMission = new ListMission(missionContainer);
 	}
 
 	public void buildMissionForm() throws Exception {
-
-		this.missionForm.setLayout(this.missionFormLayout);
-
+		//this.missionForm.setLayout(this.missionFormLayout);
 		CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
-		
 		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
 		
 		BeanItem<Item> missionBean = new BeanItem(new Mission());
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
-		// VGU
-		// Set the form to act immediately on user input. This is
-		// necessary for the validation of the fields to occur immediately
-		// when the input focus changes and not just on commit.	
 		this.missionForm.setImmediate(true);
 		
 		addComponent(this.missionForm);
 	}
 	
 	public void buildMissionLayout(){
-		
-		this.missionFormLayout.setMargin(true);
-		this.missionFormLayout.setSpacing(true);
-		this.missionFormLayout.setColumns(3);
-		this.missionFormLayout.setRows(2);
+		GridLayout missionFormLayout = new GridLayout();
+		missionFormLayout.setMargin(true);
+		missionFormLayout.setSpacing(true);
+		missionFormLayout.setColumns(3);
+		missionFormLayout.setRows(2);
+		missionForm.setLayout(missionFormLayout);
 	}
 	
 	public void buildButton(){
@@ -205,7 +214,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			case VALIDATION_VALID_FORM :
 				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setColleagueId(COLLEAGUE_ID);
+					missionToInsert.setColleagueId(authentication.getColleagueId());
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
@@ -344,33 +353,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 
 
-	/**
-	 * Calls the CollaboratorService to delete the mission in Data Base. After the insert
-	 * the list of missions in the table is updated with fresh data.
-	 * @param missionToDelete
-	 */
-	public void deleteMission(int idMissionToDelete) {
-//		try {
-////			int result = this.collabService.deleteMission(idMissionToDelete);
-//			
-//			if(this.collabService.deleteMission(idMissionToDelete)!=0){
-//				setCurrentAction(ACTION_DELETE);
-//
-//				//TODO centraliser les messages
-//				CUtils.showMessage("La mission a bien été supprimée", Message.INFO, getWindow());
-//				
-//				//creates a new list
-//				refreshListMission();
-//				
-//			} else {
-//				//TODO : que faire?
-//				CUtils.showMessage("La mission N'A PAS été supprimée", Message.INFO, getWindow());
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
+
 
 	private void cancelInsertMission() {
 		this.updateObservateur();
@@ -383,13 +366,51 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void refreshListMission() {
 		
 		//creates a new list, filled with the elements in database
-		MissionContainer missionContainer = new MissionContainer(collabService);
-		this.listMission = new ListMission(missionContainer);
-		
+		//MissionContainer missionContainer = new MissionContainer(collabService);
+		listMission = listMission.buildAllColleagueMission();
+		//this.listMission = new ListMission(missionContainer);
 		//"sends" the new list to the observer (so the observer will be able to
 		//new list can be displayed
 		this.updateObservateur();
 	}
+	
+	@Override
+	public void addObservateur(Object observateur, Class<?> cl) {
+		this.obs = (IMissionCollaboratorContent) observateur;
+	}
+
+	public void updateObservateur(String currentAction) {
+		if(ACTION_CANCEL == currentAction) {
+			this.obs.cancelAddMission();
+		}
+		if(ACTION_SAVE == currentAction) {
+			this.obs.updateListMission(this.listMission);
+		}
+		if(ACTION_DELETE == currentAction) {
+			this.obs.updateListMission(this.listMission);
+		}
+	}
+
+	@Override
+	public void updateObservateur() {
+		if(ACTION_CANCEL == this.currentAction) {
+			this.obs.cancelAddMission();
+		}
+		if(ACTION_SAVE == this.currentAction) {
+			this.obs.updateListMission(this.listMission);
+		}
+		if(ACTION_DELETE == this.currentAction) {
+			System.out.println("suppressiion");
+			this.obs.updateListMission(this.listMission);
+		}
+	}
+	
+	@Override
+	public void delObservateur() {
+		this.obs = null;
+	}
+	
+	
 	
 	/**
 	 * Set the fieldOrderMission value
@@ -420,15 +441,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.missionForm = missionForm;
 	}
 
-	/**
-	 * Set the missionFormLayout value
-	 * 
-	 * @param missionFormLayout
-	 *            the missionFormLayout to set
-	 */
-	public void setMissionFormLayout(GridLayout missionFormLayout) {
-		this.missionFormLayout = missionFormLayout;
-	}
 
 	/**
 	 * Set the collabService value
@@ -464,40 +476,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		return missionForm;
 	}
 
-	@Override
-	public void addObservateur(Object observateur, Class<?> cl) {
-		this.obs = (IMissionCollaboratorContent) observateur;
-	}
-
-	public void updateObservateur(String currentAction) {
-		if(ACTION_CANCEL == currentAction) {
-			this.obs.cancelAddMission();
-		}
-		if(ACTION_SAVE == currentAction) {
-			this.obs.updateListMission(this.listMission);
-		}
-		if(ACTION_DELETE == currentAction) {
-			this.obs.updateListMission(this.listMission);
-		}
-	}
-
-	@Override
-	public void updateObservateur() {
-		if(ACTION_CANCEL == this.currentAction) {
-			this.obs.cancelAddMission();
-		}
-		if(ACTION_SAVE == this.currentAction) {
-			this.obs.updateListMission(this.listMission);
-		}
-		if(ACTION_DELETE == this.currentAction) {
-			this.obs.updateListMission(this.listMission);
-		}
-	}
-	
-	@Override
-	public void delObservateur() {
-		this.obs = null;
-	}
 	
 	public String getCurrentAction() {
 		return this.currentAction;
@@ -515,4 +493,32 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.currentSaveMode = currentSaveMode;
 	}
 
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+
+	public ListMission getListMission() {
+		return listMission;
+	}
+
+
+	public void setListMission(ListMission listMission) {
+		this.listMission = listMission;
+	}
+
+
+	
+	
 }

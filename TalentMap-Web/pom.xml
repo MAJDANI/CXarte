@@ -132,6 +132,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             <artifactId>jetty-maven-plugin</artifactId>
             <configuration>
             	<scanIntervalSeconds>5</scanIntervalSeconds>
+            		<additionalClasspathElements> 
+                        <additionalClasspathElement>src/main/webapp/WEB-INF/</additionalClasspathElement> 
+                      </additionalClasspathElements> 
                 <systemProperties>
 					<systemProperty>
                     	<name>catalina.base</name>
@@ -190,6 +193,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<groupId>org.apache.shiro</groupId>
 		<artifactId>shiro-core</artifactId>
 		<version>1.2.1</version>
+	</dependency>
+	
+	<!-- Pagedtable dependency -->
+	<dependency>
+	   <groupId>org.vaadin.addons</groupId>
+	   <artifactId>pagedtable</artifactId>
+	   <version>0.6.3</version>
 	</dependency>
 	
   </dependencies>

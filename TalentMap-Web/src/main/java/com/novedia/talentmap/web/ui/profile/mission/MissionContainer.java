@@ -6,19 +6,22 @@ import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.vaadin.data.util.BeanItemContainer;
 
+@SuppressWarnings("serial")
 public class MissionContainer extends BeanItemContainer<Mission> {
 
 	private IColleagueService collabService;
 	
 	/**
-	 * Temporary parameter
+	 * 
 	 */
-	public static int COLLAB_ID = 2;
-
-	public MissionContainer(IColleagueService collabService){
+	public MissionContainer(){
 		super(Mission.class);
-		this.collabService = collabService;
 	}
+
+//	public MissionContainer(IColleagueService collabService){
+//		super(Mission.class);
+//		this.collabService = collabService;
+//	}
 	
 	/**
 	 * Calls the CollaboratorService to retrieve all missions in tha Data Base
@@ -28,16 +31,13 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 	 */
 	public MissionContainer fillContainer(int collabId){
 		
-		MissionContainer.COLLAB_ID = collabId;
 		try {
-			List<Mission> listMission = this.collabService.getAllMissions(MissionContainer.COLLAB_ID);
-			System.out.println("MissionContainer.fillContainer() listMission = " + listMission);
-			
+			List<Mission> listMission = this.collabService.getAllMissions(collabId);
 			// TODO : Rustine pour éviter la NPE au démarrage de l'application
 			if(listMission!=null){
 				for(Mission m : listMission){
 					addBean(m);
-					System.out.println("MissionContainer.fillContainer() bean m = " + m);
+					//System.out.println("MissionContainer.fillContainer() bean m = " + m);
 				}
 				
 			}
@@ -64,19 +64,4 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		this.collabService = collabService;
 	}
 
-	/**
-	 * Get the cOLLAB_ID value
-	 * @return the cOLLAB_ID
-	 */
-	public static int getCOLLAB_ID() {
-		return COLLAB_ID;
-	}
-
-	/**
-	 * Set the cOLLAB_ID value
-	 * @param cOLLAB_ID the cOLLAB_ID to set
-	 */
-	public static void setCOLLAB_ID(int cOLLAB_ID) {
-		COLLAB_ID = cOLLAB_ID;
-	}
 }

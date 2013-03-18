@@ -71,8 +71,8 @@ public class ConstantsEnglish {
 
 	public static final String ADMIN_DATA_LABEL = "Administrative data";
 	public static final String LAST_MISSION_LABEL = "Last mission";
-	public static final String ADMIN_DATA_SAVE_BUTTON = "Save";
-	public static final String ADMIN_DATA_CANCEL_BUTTON = "Cancel";
+	public static final String LABEL_SAVE_BUTTON = "Save";
+	public static final String LABEL_CANCEL_BUTTON = "Cancel";
 	public static final String ADMIN_DATA_EDIT_BUTTON = "Edit";
 	
 	
@@ -141,9 +141,12 @@ public class ConstantsEnglish {
 	 * Constants for MissionCollaboratorContent
 	 */
 	public static final String PAGE_TITLE = "List of missions";
-	public static final String LABEL_BUTTON_ADD_MISSION = "Add mission";
-	public static final String LABEL_BUTTON_MODIFY_MISSION = "Change mission";
-	public static final String LABEL_BUTTON_DELETE_MISSION = "Remove mission";
+	public static final String LABEL_BUTTON_ADD_MISSION = "Add Mission";
+	public static final String LABEL_BUTTON_MODIFY_MISSION = "Edit Mission";
+	public static final String LABEL_BUTTON_DELETE_MISSION = "Delete Mission";
+	public static final String TITLE_FORM_ADD_MISSION ="Add Mission";
+	public static final String TITLE_FORM_EDIT_MISSION ="Edit Mission";
+	
 	
 	/**
 	 * Labels form confirmation delete window (Classe : MissionCollaboratorContent)  

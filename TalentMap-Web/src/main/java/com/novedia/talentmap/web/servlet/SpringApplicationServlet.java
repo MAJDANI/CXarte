@@ -42,7 +42,7 @@ public class SpringApplicationServlet extends AbstractApplicationServlet {
 	 * Get the Spring web application context
 	 * @return
 	 */
-	private WebApplicationContext getSpringContext() {
+	private  WebApplicationContext getSpringContext() {
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		return context;
 	}

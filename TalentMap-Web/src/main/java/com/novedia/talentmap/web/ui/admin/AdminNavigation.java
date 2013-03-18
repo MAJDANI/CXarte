@@ -33,8 +33,18 @@ public class AdminNavigation extends VerticalLayout implements IObservable , Ite
 	 */
 	public AdminNavigation() {
 		super();
-		mainBuild();
+//		mainBuild();
 
+	}
+	
+	/**
+	 * Build the AdminNavigation view
+	 * @return
+	 */
+	public AdminNavigation  buildAdminNavigation(){
+		removeAllComponents();
+		mainBuild();
+		return this;
 	}
 
 	public void mainBuild() {

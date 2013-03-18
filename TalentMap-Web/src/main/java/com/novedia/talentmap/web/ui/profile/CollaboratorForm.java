@@ -2,12 +2,14 @@ package com.novedia.talentmap.web.ui.profile;
 
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.ColleagueData;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
@@ -36,6 +38,9 @@ public class CollaboratorForm extends VerticalLayout{
 	 */
 	private static final long serialVersionUID = 1195179317563179902L;
 	
+	
+	private Authentication authentication;
+	 
 	/**
 	 * Java Object
 	 */
@@ -43,11 +48,6 @@ public class CollaboratorForm extends VerticalLayout{
 	private Vector<Object> fieldOrderMission;
 	
 
-	/**
-	 * ConstantsEnglish
-	 */
-	//TODO remis la valeur 2 pour que l'application puisse tourner en attendant qu'on enlève le bouchon
-	public static int COLLAB_ID = 2;
 
 	/**
 	 * Vaddin Components
@@ -64,34 +64,27 @@ public class CollaboratorForm extends VerticalLayout{
 	private IClientService clientService;
 	private IBusinessEngineerService businessEngineerService;
 	
+	
+	
 	/**
-	 * 
-	 * Build the class CollaboratorForm.java
-	 * 
-	 * @param collaboratorService
-	 * @param profileService
-	 * @param fieldOrder
-	 * @param gLayoutCollaborator
+	 * Default constructor
 	 */
-	public CollaboratorForm(IColleagueService colleagueService,
-			IProfileService profileService, 
-			IClientService clientService, 
-			IBusinessEngineerService businessEngineerService,
-			Vector<Object> fieldOrderCollaborator, 
-			Vector<Object> fieldOrderMission,
-			Form formCollaborator, Form formMission) {
-
-		this.fieldOrderCollaborator = fieldOrderCollaborator;
-		this.fieldOrderMission = fieldOrderMission;
-		this.colleagueService = colleagueService;
-		this.profileService = profileService;
-		this.clientService = clientService;
-		this.businessEngineerService = businessEngineerService;
-		this.formCollaborator = formCollaborator;
-		this.formMission = formMission;
-
-		mainBuild();
+	public CollaboratorForm(){
+		super();
 	}
+	
+	/**
+	 * Build the colleague data
+	 * @return
+	 */
+	public VerticalLayout buildColleagueData(){
+		removeAllComponents();
+		mainBuild();
+		
+		return this;
+	}
+		
+	
 	
 	/**
 	 * The main builder
@@ -106,23 +99,24 @@ public class CollaboratorForm extends VerticalLayout{
 			CUtils.setOrderForm(this.fieldOrderCollaborator, ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
 			//Set the order for Mission Form
 			CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
-			buildFormCollaborator();
-			buildFormMission();
+			buildFormColleagueData();
+			buildFormColleagueMission();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	Label dataAdminLabel;
 	/**
 	 * Build the Collaborator Form
 	 * 
 	 * @class CollaboratorForm.java
 	 * @throws Exception
 	 */
-	private void buildFormCollaborator() throws Exception {
+	private void buildFormColleagueData() throws Exception {
 		
 		// Label "Données administratives"
-		Label dataAdminLabel = new Label();
+		dataAdminLabel = new Label();
 		dataAdminLabel.setCaption(ConstantsEnglish.ADMIN_DATA_LABEL);
 		dataAdminLabel.setStyle(TalentMapCSS.H2);
 		addComponent(dataAdminLabel);
@@ -131,17 +125,13 @@ public class CollaboratorForm extends VerticalLayout{
 		GridLayout adminDatasLayout = new GridLayout();
 
 		// Création des différents champs du formulaire "Données administratives"
-		this.formCollaborator
-				.setFormFieldFactory(new CollaboratorFormFieldFactory(
+		this.formCollaborator.setFormFieldFactory(new CollaboratorFormFieldFactory(
 						this.profileService, this.businessEngineerService, this.colleagueService));
 		
-		Colleague currentColleague = colleagueService.getColleague(COLLAB_ID);
-		initFormCollaborator(currentColleague);
+		//Colleague currentColleague = colleagueService.getColleague(COLLAB_ID);
+		Colleague currentColleague = colleagueService.getColleague(authentication.getColleagueId());
+		initFormColleagueData(currentColleague);
 
-		// VGU
-		// Set the form to act immediately on user input. This is
-		// necessary for the validation of the fields to occur immediately
-		// when the input focus changes and not just on commit.	
 		this.formCollaborator.setImmediate(true);
 		
 		adminDatasLayout.setMargin(true);
@@ -157,7 +147,7 @@ public class CollaboratorForm extends VerticalLayout{
 	 * Init the value of the collaborator form with current colleague datas
 	 * @param currentColleague
 	 */
-	private void initFormCollaborator(Colleague currentColleague){
+	private void initFormColleagueData(Colleague currentColleague){
 		if(currentColleague != null){
 			BeanItem<Item> collaboratorBean = new BeanItem(currentColleague);
 			this.formCollaborator.setItemDataSource(collaboratorBean, this.fieldOrderCollaborator);
@@ -173,44 +163,41 @@ public class CollaboratorForm extends VerticalLayout{
 	 * @class CollaboratorForm.java
 	 * @throws Exception
 	 */
-	private void buildFormMission() throws Exception {
-
-		// Label "Données administratives"
-		Label lastMissionLabel = new Label();
-		lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
-		lastMissionLabel.setStyle(TalentMapCSS.H2);
-
-		addComponent(lastMissionLabel);
+	private void buildFormColleagueMission() throws Exception {
 		
-		// Layout de la dernière mission
-		GridLayout lastMissionDatasLayout = new GridLayout();
-		
-		lastMissionDatasLayout.setMargin(true);
-		lastMissionDatasLayout.setSpacing(true);
-		lastMissionDatasLayout.setColumns(3);
-		lastMissionDatasLayout.setRows(1);
-		
-		// Création des différents champs du formulaire "Dernière mission"
-		this.formMission.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
-		
-		Mission currentColleaguesLastMission = colleagueService.getLastMission(COLLAB_ID);
-		initFormMission(currentColleaguesLastMission);
-		// VGU
-		// Set the form to act immediately on user input. This is
-		// necessary for the validation of the fields to occur immediately
-		// when the input focus changes and not just on commit.	
-		this.formMission.setImmediate(true);
-		this.formMission.setLayout(lastMissionDatasLayout);
-		this.formMission.setReadOnly(true);
-
-		addComponent(this.formMission);
+		Mission currentColleaguesLastMission = colleagueService.getLastMission(authentication.getColleagueId());
+		if(currentColleaguesLastMission != null){
+			// Label "Last Mission"
+			Label lastMissionLabel = new Label();
+			lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
+			lastMissionLabel.setStyle(TalentMapCSS.H2);
+			addComponent(lastMissionLabel);
+			
+			// Layout de la dernière mission
+			GridLayout lastMissionDatasLayout = new GridLayout();
+			lastMissionDatasLayout.setMargin(true);
+			lastMissionDatasLayout.setSpacing(true);
+			lastMissionDatasLayout.setColumns(3);
+			lastMissionDatasLayout.setRows(1);
+			
+			//Mission currentColleaguesLastMission = colleagueService.getLastMission(COLLAB_ID);
+			
+				// Création des différents champs du formulaire "Dernière mission"
+			this.formMission.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
+			initFormColleagueMission(currentColleaguesLastMission);
+			this.formMission.setImmediate(true);
+			this.formMission.setLayout(lastMissionDatasLayout);
+			this.formMission.setReadOnly(true);
+			addComponent(this.formMission);
+			
+		}
 	}
 	
 	/**
 	 * Init the value of the mission form with last mission datas
 	 * @param lastMission
 	 */
-	private void initFormMission(Mission lastMission){
+	private void initFormColleagueMission(Mission lastMission){
 		if(lastMission != null){
 			BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
 			this.formMission.setItemDataSource(lastMissionBean, this.fieldOrderMission);
@@ -223,15 +210,18 @@ public class CollaboratorForm extends VerticalLayout{
 	/**
 	 * Refresh all the forms with default values (Mission and AdminData)
 	 */
-	public void refreshAllFormsToDefault(){
-		Colleague currentColleague = colleagueService.getColleague(COLLAB_ID);
-		Mission currentColleaguesLastMission = colleagueService.getLastMission(COLLAB_ID);
+	public void refreshAllFormsToDefault() {
+		Colleague currentColleague = colleagueService.getColleague(authentication.getColleagueId());
+		Mission currentColleaguesLastMission = colleagueService.getLastMission(authentication.getColleagueId());
 		//Workaround to solve a gridLayout bug vaadin with method SetItemDataSource
 		this.formMission.getLayout().removeAllComponents();
 		this.formCollaborator.getLayout().removeAllComponents();
 		
-		initFormCollaborator(currentColleague);
-		initFormMission(currentColleaguesLastMission);
+		initFormColleagueData(currentColleague);
+		if(currentColleaguesLastMission != null){
+			initFormColleagueMission(currentColleaguesLastMission);
+		}
+		
 	}
 	
 	
@@ -290,22 +280,6 @@ public class CollaboratorForm extends VerticalLayout{
 		this.formCollaborator = formCollaborator;
 	}
 	
-	/**
-	 * Get the cOLLAB_ID value
-	 * @return the cOLLAB_ID
-	 */
-	public int getCOLLAB_ID() {
-		return COLLAB_ID;
-	}
-
-	/**
-	 * Set the cOLLAB_ID value
-	 * @param cOLLAB_ID the cOLLAB_ID to set
-	 */
-	public void setCOLLAB_ID(int cOLLAB_ID) {
-		COLLAB_ID = cOLLAB_ID;
-	}
-	
 
 	public Form getFormMission() {
 		return formMission;
@@ -315,7 +289,49 @@ public class CollaboratorForm extends VerticalLayout{
 		this.formMission = formMission;
 	}
 	
-	public void discard(){
-		
+	/**
+	 * Get authentication value.
+	 * @return authentication
+	 */
+	public Authentication getAuthentication() {
+		return authentication;
 	}
+
+	/**
+	 * Set authentication value.
+	 * @param authentication
+	 */
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+	
+	
+	
+	public IClientService getClientService() {
+		return clientService;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	
+	
+	public IBusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
+	}
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+	public IProfileService getProfileService() {
+		return profileService;
+	}
+
 }

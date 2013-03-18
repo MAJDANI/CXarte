@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.profile;
 
 import java.util.Map;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
@@ -34,6 +35,8 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * TalentMap Services
 	 */
 	private ISkillService skillService;
+	
+	private Authentication authentication;
 
 	/**
 	 * JAVA Objects
@@ -47,11 +50,28 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	private Accordion accCategory;
 	private Accordion accConcept;
 
-	/**
-	 * Constants
-	 */
-	private int COLLAB_ID = 2;
 
+	/**
+	 * Default Constructor
+	 */
+	public ListSkill(){
+		super();
+	}
+	
+	
+	/**
+	 * Build the view of list skill
+	 * @return
+	 */
+	public ListSkill buildListSkill(){
+		setImmediate(true);
+		setMargin(true);
+		mainBuild();
+		return this;
+	}
+	
+	
+	
 	/**
 	 * 
 	 * Build the class ListSkill.java
@@ -62,18 +82,18 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * @param accConcept
 	 * @throws Exception
 	 */
-	public ListSkill(ISkillService skillService, Table tableTools,
-			Accordion accCategory, Accordion accConcept) throws Exception {
-		this.skillService = skillService;
-		this.tableTools = tableTools;
-		this.accCategory = accCategory;
-		this.accConcept = accConcept;
-
-		setImmediate(true);
-		setMargin(true);
-
-		mainBuild();
-	}
+//	public ListSkill(ISkillService skillService, Table tableTools,
+//			Accordion accCategory, Accordion accConcept) throws Exception {
+//		this.skillService = skillService;
+//		this.tableTools = tableTools;
+//		this.accCategory = accCategory;
+//		this.accConcept = accConcept;
+//
+//		setImmediate(true);
+//		setMargin(true);
+//
+//		mainBuild();
+//	}
 
 	/**
 	 * The main builder
@@ -81,12 +101,10 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * @class ListSkill.java
 	 */
 	public void mainBuild() {
-
 		removeAllComponents();
-
 		try {
 
-			this.mapSkill = this.skillService.getAllCollaboratorSkill(COLLAB_ID);
+			this.mapSkill = this.skillService.getAllCollaboratorSkill(authentication.getColleagueId());
 
 		} catch (Exception e) {
 
@@ -162,13 +180,13 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public Table getTableTools() {
 		return tableTools;
 	}
-
+	
 	/**
 	 * 
 	 * @class ListSkill.java
 	 * @param tableTools
 	 */
-	private void setTableTools(Table tableTools) {
+	public void setTableTools(Table tableTools) {
 		this.tableTools = tableTools;
 	}
 
@@ -181,6 +199,12 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
+
+	
+
+
+	
+
 
 	/**
 	 * Get the accCategory value
@@ -220,23 +244,19 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		this.accConcept = accConcept;
 	}
 
-	/**
-	 * Get the cOLLAB_ID value
-	 * 
-	 * @return the cOLLAB_ID
-	 */
-	public int getCOLLAB_ID() {
-		return COLLAB_ID;
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
-	/**
-	 * Set the cOLLAB_ID value
-	 * 
-	 * @param cOLLAB_ID
-	 *            the cOLLAB_ID to set
-	 */
-	public void setCOLLAB_ID(int cOLLAB_ID) {
-		COLLAB_ID = cOLLAB_ID;
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
+
+	public ISkillService getSkillService() {
+		return skillService;
+	}
+
+	
+	
 
 }

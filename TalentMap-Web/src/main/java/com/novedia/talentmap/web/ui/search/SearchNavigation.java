@@ -13,7 +13,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
-public class SearchNavigation extends VerticalLayout implements ClickListener, IObservable,ItemClickListener {
+public class SearchNavigation extends VerticalLayout implements  IObservable,ItemClickListener {
 
 	/**
 	 * Util Observator
@@ -35,21 +35,40 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	 * root
 	 */
 	public Tree root = new Tree();
-	private ConstantsForMenuEnglish constantsForMenuEnglish;
+	
+	/**
+	 * Default constructor
+	 */
+	public SearchNavigation(){
+		super();
+	}
+	
+	/**
+	 * Build SearchNavigation view
+	 * @return
+	 */
+	public SearchNavigation buildSearchNavigationView(){
+		removeAllComponents();
+		mainBuild();
+		return this;
+		
+	}
+	
+	
 	/**
 	 * Build the class SearchNavigation.java 
 	 * @param byClient
 	 * @param byName
 	 * @param bySkills
 	 */
-	public SearchNavigation(Button byClient, Button byName, Button bySkills) {
-		super();
-		this.byClient = byClient;
-		this.byName = byName;
-		this.bySkills = bySkills;
-	
-		mainBuild();
-	}
+//	public SearchNavigation(Button byClient, Button byName, Button bySkills) {
+//		super();
+//		this.byClient = byClient;
+//		this.byName = byName;
+//		this.bySkills = bySkills;
+//	
+//		mainBuild();
+//	}
 	
 	public void mainBuild(){
 		
@@ -66,7 +85,7 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 	public void constructTree(){
 		 String firstElement ;
 		 String firstEl;
-		 Object[][] subItems = constantsForMenuEnglish.subItemsOfSearch;
+		 Object[][] subItems = ConstantsForMenuEnglish.subItemsOfSearch;
 		 
 		for (int i = 0; i < subItems.length; i++) {			
 			firstEl = (String) subItems[i][0];
@@ -98,15 +117,15 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 			Object itemId = event.getItemId();
 			
 			if(itemId != null){
-				if(itemId.equals(constantsForMenuEnglish.BY_CLIENT_BUTTON_NAME)){
+				if(itemId.equals(ConstantsForMenuEnglish.BY_CLIENT_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_CLIENT;
 					updateObservateur();
 				}
-				else if(itemId.equals(constantsForMenuEnglish.BY_NAME_BUTTON_NAME)){
+				else if(itemId.equals(ConstantsForMenuEnglish.BY_NAME_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_NAME;
 					updateObservateur();
 				}
-				else if(itemId.equals(constantsForMenuEnglish.BY_SKILLS_BUTTON_NAME)){
+				else if(itemId.equals(ConstantsForMenuEnglish.BY_SKILLS_BUTTON_NAME)){
 					this.searchTargetPanel = SearchTargetPanel.BY_SKILLS;
 					updateObservateur();
 				}
@@ -183,9 +202,4 @@ public class SearchNavigation extends VerticalLayout implements ClickListener, I
 		this.bySkills = bySkills;
 	}
 
-	@Override
-	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
 }

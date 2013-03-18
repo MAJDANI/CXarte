@@ -1,7 +1,11 @@
 package com.novedia.talentmap.web.ui;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.role.CmContentLayout;
+import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.TabSheet;
@@ -13,52 +17,59 @@ import com.vaadin.ui.TabSheet;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
+
+@SuppressWarnings("serial")
 public class TabMain extends TabSheet {
 	
-	/**
-	 * UID
-	 */
-	private static final long serialVersionUID = 1L;
 	/**
 	 * All view
 	 */
 	private TabProfileSheet tabProfileSheet;
 	private SearchView searchView;
 	private AdminView adminView;
-	private TabSearchByCustomer tabSearchByCustomer;
-	private TabReachByName tabReachByName;
-	private TabReachBySkills tabReachBySkills;
+	private RhContentLayout rhContentLayout;
+	private CmContentLayout cmContentLayout; 
 	
+	private Authentication authentication;
 	
 	/**
-	 * Build the class TabMain.java 
-	 * @param tabProfileSheet
-	 * @param tabSearch
+	 * Default constructor
 	 */
-	public TabMain(TabProfileSheet tabProfileSheet, SearchView searchView, AdminView adminView,
-			TabSearchByCustomer tabSearchByCustomer,TabReachByName tabReachByName,
-			TabReachBySkills tabReachBySkills) {
-		
+	public TabMain(){
 		super();
-		this.tabProfileSheet = tabProfileSheet;
-		this.searchView = searchView;
-		this.adminView = adminView;
-		this.tabSearchByCustomer =  tabSearchByCustomer;
-		this.tabReachByName = tabReachByName;
-		this.tabReachBySkills = tabReachBySkills;
+	}
+	
+	/**
+	 * Build the View according to user's role
+	 * @param role user's role
+	 * @return
+	 */
+	public TabSheet buildViewAccordingToUser(Role role){
 		
-		//TODO: give explicit name of tabprofile
+		removeAllComponents();
 		setStyleName(TalentMapCSS.TABSHEET);
 		setImmediate(true);
-				
-		//TODO : filter tab panel en fonction du role ??
-		addTab(this.tabProfileSheet, ConstantsForMenuEnglish.TAB_PROFIL_NAME);
-		addTab(this.searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
-		addTab(this.adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
-		addTab(this.tabSearchByCustomer, ConstantsForMenuEnglish.TAB_SEARCH_BY_CUSTOMER);
-		addTab(this.tabReachByName, ConstantsForMenuEnglish.TAB_SEARCH_BY_NAME);
-		addTab(this.tabReachBySkills, ConstantsForMenuEnglish.TAB_SEARCH_BY_SKILLS);		
+		setAuthentication(authentication);
+		if(role.equals(Role.AD)){    //Admin
+			adminView = adminView.buildAdminView();
+			addTab(adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
+		} else if (role.equals(Role.CL)) {   //Colleague
+			tabProfileSheet.setAuthentication(getAuthentication());
+			addTab(tabProfileSheet.buildTabSheetProfile(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+		} else if(role.equals(Role.IA)){    //IA
+			searchView = searchView.buildSearchView();
+			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
+		} else if (role.equals(Role.CM)) {  //CM
+			cmContentLayout = cmContentLayout.init();
+			addTab(cmContentLayout,"cm");
+		} else if (role.equals(Role.RH)) {  //RH
+			rhContentLayout = rhContentLayout.init();
+			addTab(rhContentLayout,"rh");
+		}
+		
+		return this;
 	}
+	
 	
 	/**
 	 * Set the tabProfileSheet value
@@ -68,6 +79,22 @@ public class TabMain extends TabSheet {
 		this.tabProfileSheet = tabProfileSheet;
 	}
 	
+	/**
+	 * Get the authentication
+	 * @return
+	 */
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	/**
+	 * Set the authentication
+	 * @param authentication
+	 */
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
 	/**
 	 * Set the tabSearch value
 	 * @param tabSearch the tabSearch to set
@@ -106,45 +133,22 @@ public class TabMain extends TabSheet {
 		return searchView;
 	}
 
-	/**
-	 * @return the tabSearchByCustomer
-	 */
-	public TabSearchByCustomer getTabSearchByCustomer() {
-		return tabSearchByCustomer;
+	public RhContentLayout getRhContentLayout() {
+		return rhContentLayout;
 	}
 
-	/**
-	 * @param tabSearchByCustomer the tabSearchByCustomer to set
-	 */
-	public void setTabSearchByCustomer(TabSearchByCustomer tabSearchByCustomer) {
-		this.tabSearchByCustomer = tabSearchByCustomer;
+	public void setRhContentLayout(RhContentLayout rhContentLayout) {
+		this.rhContentLayout = rhContentLayout;
 	}
 
-	/**
-	 * @return the tabReachByName
-	 */
-	public TabReachByName getTabReachByName() {
-		return tabReachByName;
+	public CmContentLayout getCmContentLayout() {
+		return cmContentLayout;
 	}
 
-	/**
-	 * @param tabReachByName the tabReachByName to set
-	 */
-	public void setTabReachByName(TabReachByName tabReachByName) {
-		this.tabReachByName = tabReachByName;
+	public void setCmContentLayout(CmContentLayout cmContentLayout) {
+		this.cmContentLayout = cmContentLayout;
 	}
+	
+	
 
-	/**
-	 * @return the tabReachBySkills
-	 */
-	public TabReachBySkills getTabReachBySkills() {
-		return tabReachBySkills;
-	}
-
-	/**
-	 * @param tabReachBySkills the tabReachBySkills to set
-	 */
-	public void setTabReachBySkills(TabReachBySkills tabReachBySkills) {
-		this.tabReachBySkills = tabReachBySkills;
-	}		
 }

@@ -1,21 +1,16 @@
 package com.novedia.talentmap.web.ui.login;
 
-import java.nio.channels.GatheringByteChannel;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.web.MyVaadinApplication;
-import com.novedia.talentmap.web.ui.profile.CollaboratorForm;
+import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.LabelConstants;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
-import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
-import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -23,16 +18,17 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
+
 
 /**
  * Login Screen
  * @author e.moumbe
  */
 
-public class LoginScreen extends VerticalLayout implements HttpServletRequestListener {
+public class LoginScreen extends VerticalLayout /*implements HttpServletRequestListener*/ {
 	
 	/**
 	 * UID
@@ -49,6 +45,8 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 	 */
 	private MyVaadinApplication application;
 	
+	
+	
 	/**
 	 * Vaadin component
 	 */
@@ -56,13 +54,11 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 	private LoginForm loginForm;
 	private Panel loginPanel;
 	
-	private static  int ID ;
-	
-	
 	/**
 	 * Default constructor
 	 */
 	public LoginScreen() {
+		
 	}
 	
 	/**
@@ -115,7 +111,7 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 	 * @author e.moumbe
 	 *
 	 */
-	private static class MyLoginListener implements LoginForm.LoginListener, ClickListener {
+	 class MyLoginListener implements LoginForm.LoginListener, ClickListener {
 		
 		/**
 		 * UID
@@ -126,6 +122,7 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 		 * The application
 		 */
 		private MyVaadinApplication application;
+		
 		
 		/**
 		 * 
@@ -145,26 +142,53 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 			//Credentials infos
 			String username = event.getLoginParameter("username");
 			String password = event.getLoginParameter("password");
-			HttpSession session = null;
+			Authentication authentication = null;
+			try {
+				//authentication = application.login(username, password);
+				authentication = login(username, password);
+				if (authentication != null) {
+					//this.application.setUser(authentication);
+					getWindow().setContent(new AuthenticatedScreen(application, authentication));
+					//application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));					
+				}
+			} catch (TalentMapSecurityException tmpex) {
+				getWindow().showNotification("Bad user name/password");
+				//application.getMainWindow().showNotification("Bad user name/password");
+			}
+		}
+		
+		
+		/**
+		 * Login method
+		 * 
+		 * @param login
+		 * @param password
+		 */
+		public Authentication login(final String login,final String password)
+				throws TalentMapSecurityException {
 			
 			Authentication authentication = null;
 			try {
-				authentication = application.login(username, password);
-				
-				WebApplicationContext ctx = (WebApplicationContext) application.getContext();
-				session = ctx.getHttpSession();
-				session.setAttribute("id", authentication.getToken());
-				
-				//See javado: Application has attribute User (See how we can integrate this capability
-				//in yours conception
-				if (authentication != null) {
-					this.application.setUser(authentication);
-					application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));					
+				CredentialToken credential = new CredentialToken();
+				credential.setLogin(login);
+				credential.setPassword(CUtils.encodePassword(password));
+				authentication = application.getAuthenticationService().checkUser(credential);
+
+				if (authentication == null
+						|| (authentication != null && authentication.getAuthorization() == null)) {
+					throw new TalentMapSecurityException("User unknown");
 				}
-			} catch (TalentMapSecurityException tmpex) {
-				application.getMainWindow().showNotification("Bad user name/password");
+			} catch (DataAccessException ex) {
+				if (LOGGER.isErrorEnabled()) {
+					LOGGER.error("Technical Exception : ", ex.getMessage());
+				}
 			}
+
+			return authentication;
 		}
+
+		
+		
 
 		@Override
 		public void buttonClick(ClickEvent event) {
@@ -177,17 +201,5 @@ public class LoginScreen extends VerticalLayout implements HttpServletRequestLis
 
 	}
 
-	@Override
-	public void onRequestStart(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-				
-	}
 
-	@Override
-	public void onRequestEnd(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
 }

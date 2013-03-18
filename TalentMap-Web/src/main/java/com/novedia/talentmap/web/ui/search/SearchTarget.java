@@ -72,6 +72,17 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	}
 	
 	/**
+	 * Build SearchTarget view 
+	 * @return
+	 */
+	public SearchTarget buildSearchTargetView(){
+		removeAllComponents();
+		buildMain();
+		return this;
+	}
+	
+	
+	/**
 	 * 
 	 * Build the class SearchTarget.java 
 	 * @param searchByClientPanel
@@ -84,24 +95,24 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 * @param collabService
 	 * @param skillService
 	 */
-	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
-			Panel searchBySkillsPanel, Select clientNameSelect,
-			TextField fieldName, Button search, List<Colleague> listCollab,
-			IColleagueService collabService, ISkillService skillService,IClientService clientService, Tree treeSkills) {
-		super();
-		this.searchByClientPanel = searchByClientPanel;
-		this.searchByNamePanel = searchByNamePanel;
-		this.searchBySkillsPanel = searchBySkillsPanel;
-		this.clientNameSelect = clientNameSelect;
-		this.fieldName = fieldName;
-		this.search = search;
-		this.listCollab = listCollab;
-		this.collabService = collabService;
-		this.skillService = skillService;
-		this.clientService = clientService;
-		this.treeSkills = treeSkills;
-		buildMain();
-	}
+//	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
+//			Panel searchBySkillsPanel, Select clientNameSelect,
+//			TextField fieldName, Button search, List<Colleague> listCollab,
+//			IColleagueService collabService, ISkillService skillService,IClientService clientService, Tree treeSkills) {
+//		super();
+//		this.searchByClientPanel = searchByClientPanel;
+//		this.searchByNamePanel = searchByNamePanel;
+//		this.searchBySkillsPanel = searchBySkillsPanel;
+//		this.clientNameSelect = clientNameSelect;
+//		this.fieldName = fieldName;
+//		this.search = search;
+//		this.listCollab = listCollab;
+//		this.collabService = collabService;
+//		this.skillService = skillService;
+//		this.clientService = clientService;
+//		this.treeSkills = treeSkills;
+//		buildMain();
+//	}
 
 	/**
 	 * The main builder
@@ -673,5 +684,15 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void setTreeSkills(Tree treeSkills) {
 		this.treeSkills = treeSkills;
 	}
+
+	public IClientService getClientService() {
+		return clientService;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+	
+	
 	
 }

@@ -69,18 +69,35 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 
 	
 	/**
+	 * Default constructor
+	 */
+	public AdminAddSkillContent(){
+		super();
+	}
+	
+	/**
+	 * Build AdminAddSkillContent view 
+	 * @return
+	 */
+	public AdminAddSkillContent buildViewAdminAddSkillContent(){
+		removeAllComponents();
+		mainBuild();
+		return this;
+	}
+	
+	/**
 	 * Build the class AddSkillContent.java
 	 * 
 	 * @param formSkill
 	 * @param treeSkill
 	 * @param save
 	 */
-	public AdminAddSkillContent(IAdminService adminService) {
-		super();
-		this.adminService = adminService;
-
-		mainBuild();
-	}
+//	public AdminAddSkillContent(IAdminService adminService) {
+//		super();
+//		this.adminService = adminService;
+//
+//		mainBuild();
+//	}
 
 	/**
 	 * The main build components

@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
@@ -23,6 +24,8 @@ import com.vaadin.ui.VerticalLayout;
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
  */
+
+@SuppressWarnings("serial")
 public class ProfileCollaboratorContent extends VerticalLayout implements ClickListener {
 
 	/**
@@ -35,6 +38,8 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	 */
 	private CollaboratorForm collabForm;
 
+	
+	private Authentication authentication;
 	/**
 	 * Buttons
 	 */
@@ -44,26 +49,25 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	
 	
 	/**
-	 * 
-	 * Build the class ProfileCollaboratorContent.java 
-	 * @param collabService
-	 * @param profileService
-	 * @param collabForm
-	 * @param save
-	 * @param cancel
-	 * @param bodyLayout
-	 * @param footerLayout
-	 * @param edit
+	 * default constructor
 	 */
-	public ProfileCollaboratorContent(IColleagueService colleagueService,
-			CollaboratorForm collabForm) {
+	public ProfileCollaboratorContent(){
 		super();
-		this.colleagueService = colleagueService;
-		this.collabForm = collabForm;
-
-		this.mainBuild();
 	}
+	
+	/**
+	 * Build the ProfileCollaboratorContent 
+	 * @return
+	 */
+	public VerticalLayout buildProfileColleagueContent(){
+		removeAllComponents();
+		collabForm.setAuthentication(getAuthentication());
+		mainBuild();
+		return this;
+	}
+	
 
+	
 	/**
 	 * The main builder
 	 * @class ProfileView.java
@@ -71,10 +75,10 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	public void mainBuild() {
 
 		//On ajoute le formulaire  
+		this.addComponent(this.collabForm.buildColleagueData());
 		this.collabForm.setImmediate(true);	
 		this.collabForm.getFormCollaborator().setReadOnly(true);
 		this.collabForm.getFormMission().setReadOnly(true);
-		this.addComponent(this.collabForm);
 		
 		this.setMargin(true);
 		this.setSizeFull();
@@ -108,14 +112,14 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		//Bouton "Enregistrer"
 		save = new Button();
-		save.setCaption(ConstantsEnglish.ADMIN_DATA_SAVE_BUTTON);
+		save.setCaption(ConstantsEnglish.LABEL_SAVE_BUTTON);
 		save.addListener(this);
 		save.setEnabled(false);
 		buttonLayout.addComponent(save);
 
 		//Bouton "Annuler"
 		cancel = new Button();
-		cancel.setCaption(ConstantsEnglish.ADMIN_DATA_CANCEL_BUTTON);
+		cancel.setCaption(ConstantsEnglish.LABEL_CANCEL_BUTTON);
 		cancel.addListener(this);
 		buttonLayout.addComponent(cancel);
 		
@@ -176,7 +180,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			Button button = event.getButton();
 		
 		//Save Button
-		if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_SAVE_BUTTON)) {
+		if (button.getCaption().equals(ConstantsEnglish.LABEL_SAVE_BUTTON)) {
 			saveDataCollaborator();
 			//saveDataMission();
 			this.collabForm.getFormCollaborator().setReadOnly(true);
@@ -192,7 +196,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			this.edit.setEnabled(false);
 			this.cancel.setEnabled(true);
 			
-		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_CANCEL_BUTTON)){
+		} else if (button.getCaption().equals(ConstantsEnglish.LABEL_CANCEL_BUTTON)){
 			this.collabForm.refreshAllFormsToDefault();
 			this.collabForm.getFormCollaborator().setReadOnly(true);
 			this.collabForm.getFormMission().setReadOnly(true);
@@ -202,6 +206,18 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		} 
 	}
 
+
+	
+	
+	
+	
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
 
 	/**
 	 * Set the collabService value
@@ -230,5 +246,8 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	public CollaboratorForm getCollabForm() {
 		return collabForm;
 	}
+
+	
+	
 
 }

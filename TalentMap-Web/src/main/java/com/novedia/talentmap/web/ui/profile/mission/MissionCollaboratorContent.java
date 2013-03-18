@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
@@ -18,13 +19,10 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
+@SuppressWarnings("serial")
 public class MissionCollaboratorContent extends VerticalLayout implements
 		ClickListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8997879738001974821L;
 
 	/**
 	 * Talent Map Service
@@ -48,7 +46,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * Vaadin Components
 	 */
 	private Panel listPanel;
-	private Label pageTitle;
 
 	private HorizontalLayout hLayListMissionButtons;
 	private Button btnAddMission;
@@ -64,6 +61,33 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * The mission selected by the user, in order to modify or delete it.
 	 */
 	private Mission selectedMission;
+	
+	private Authentication authentication;
+	
+	
+	/**
+	 * Default constructor
+	 */
+	public MissionCollaboratorContent(){
+		super();
+	}
+	
+	/**
+	 * Build the view of mission's colleague
+	 * @return
+	 */
+	public MissionCollaboratorContent buildViewMissionColleagueContent(){
+		removeAllComponents();
+		listMission.setAuthentication(getAuthentication());
+		listMission = listMission.buildAllColleagueMission();
+		missionForm.setAuthentication(getAuthentication());
+		
+		addMissionPanel = addMissionPanel.buildAddMissionPanel();
+		buildMain();
+		buildObersvators();
+		return this;
+	}
+	
 
 	/**
 	 * Build the class MissionCollaboratorContent.java
@@ -71,25 +95,25 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @param missionForm
 	 */
 
-	public MissionCollaboratorContent(IColleagueService collaboratorService,
-			ListMission listMission, MissionForm missionForm,
-			Button btnAddMission, AddMissionPanel addMissionPanel,
-			Panel listPanel, Label pageTitle, Button btnModifyMission,
-			Button btnDeleteMission) {
-		super();
-		this.collaboratorService = collaboratorService;
-		this.listMission = listMission;
-		this.missionForm = missionForm;
-		this.btnAddMission = btnAddMission;
-		this.addMissionPanel = addMissionPanel;
-		this.listPanel = listPanel;
-		this.pageTitle = pageTitle;
-		this.btnModifyMission = btnModifyMission;
-		this.btnDeleteMission = btnDeleteMission;
-
-		buildMain();
-		buildObersvators();
-	}
+//	public MissionCollaboratorContent(IColleagueService collaboratorService,
+//			ListMission listMission, MissionForm missionForm,
+//			Button btnAddMission, AddMissionPanel addMissionPanel,
+//			Panel listPanel, Label pageTitle, Button btnModifyMission,
+//			Button btnDeleteMission) {
+//		super();
+//		this.collaboratorService = collaboratorService;
+//		this.listMission = listMission;
+//		this.missionForm = missionForm;
+//		this.btnAddMission = btnAddMission;
+//		this.addMissionPanel = addMissionPanel;
+//		this.listPanel = listPanel;
+//		this.pageTitle = pageTitle;
+//		this.btnModifyMission = btnModifyMission;
+//		this.btnDeleteMission = btnDeleteMission;
+//
+//		buildMain();
+//		buildObersvators();
+//	}
 
 	/**
 	 * The main builder
@@ -100,16 +124,9 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 		setMargin(true);
 		setSpacing(true);
-
 		buildTitle();
-
 		buildButton();
-
 		buildContent();
-		// VGU
-		// Set the form to act immediately on user input. This is
-		// necessary for the validation of the fields to occur immediately
-		// when the input focus changes and not just on commit.
 		this.missionForm.setImmediate(true);
 
 	}
@@ -120,10 +137,11 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @class MissionCollaboratorContent.java
 	 */
 	public void buildTitle() {
-
-		this.pageTitle.setCaption(ConstantsEnglish.PAGE_TITLE);
-		this.pageTitle.setStyle(TalentMapCSS.H2);
-		addComponent(this.pageTitle);
+		
+		Label pageTitle = new Label();
+		pageTitle.setCaption(ConstantsEnglish.PAGE_TITLE);
+		pageTitle.addStyleName(TalentMapCSS.H2);
+		addComponent(pageTitle);
 	}
 
 	/**
@@ -229,11 +247,12 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		System.out.println("MissionCollaboratorContent.buttonClick()");
+		//System.out.println("MissionCollaboratorContent.buttonClick()");
 		Button button = event.getButton();
 		// ADD NEW MISSION
 		if (button == this.btnAddMission) {
 			//On vide le contenu de MissionForm
+			missionForm = missionForm.buildMissionFormColleague();
 			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
 			//On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
@@ -252,6 +271,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			} else {
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
+					missionForm = missionForm.buildMissionFormColleague();
 					fillAddMissionPanelWithMission(selectedMission);
 					// On indique que l'action courante est une modification de
 					// mission (pas une création)
@@ -282,7 +302,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 				// TODO centralize messages
 				CUtils.showMessage("The mission has been deleted", Message.INFO, getWindow());
-
+				
 				// creates a new list
 				missionForm.refreshListMission();
 
@@ -304,13 +324,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		windowConfirmDelete = new Window(ConstantsEnglish.LABEL_WINDOW_CONFIRM_DELETE);
 		windowConfirmDelete.center();
 
-		// Debut : Au lien de ces 2 lignes, les lignes suivantes
-		// Button confirmDeleteButton = new
-		// Button(LABEL_BUTTON_CONFIRM_DELETE_MISSION, this,
-		// "confirmDeleteButtonClick");
-		// Button cancelDeleteButton = new
-		// Button(LABEL_BUTTON_CANCEL_DELETE_MISSION, this,
-		// "cancelDeleteButtonClick");
 		Button confirmDeleteButton = new Button(
 				ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
 		Button cancelDeleteButton = new Button(
@@ -331,8 +344,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		});
 		// Fin : Au lien de ces 2 lignes, les lignes suivantes
 
-		confirmDeleteButton.addListener(missionForm);
-		cancelDeleteButton.addListener(missionForm);
+		//confirmDeleteButton.addListener(missionForm);
+		//cancelDeleteButton.addListener(missionForm);
 
 		windowConfirmDelete.addComponent(confirmDeleteButton);
 		windowConfirmDelete.addComponent(cancelDeleteButton);
@@ -415,25 +428,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 
 	/**
-	 * Get the pageTitle value
-	 * 
-	 * @return the pageTitle
-	 */
-	public Label getPageTitle() {
-		return pageTitle;
-	}
-
-	/**
-	 * Set the pageTitle value
-	 * 
-	 * @param pageTitle
-	 *            the pageTitle to set
-	 */
-	public void setPageTitle(Label pageTitle) {
-		this.pageTitle = pageTitle;
-	}
-
-	/**
 	 * Get the addMissionPanel value
 	 * 
 	 * @return the addMissionPanel
@@ -470,4 +464,79 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		return btnAddMission;
 	}
 
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	public IColleagueService getCollaboratorService() {
+		return collaboratorService;
+	}
+
+	public void setCollaboratorService(IColleagueService collaboratorService) {
+		this.collaboratorService = collaboratorService;
+	}
+
+	public MissionForm getMissionForm() {
+		return missionForm;
+	}
+
+	public void setMissionForm(MissionForm missionForm) {
+		this.missionForm = missionForm;
+	}
+
+	public HorizontalLayout gethLayListMissionButtons() {
+		return hLayListMissionButtons;
+	}
+
+	public void sethLayListMissionButtons(HorizontalLayout hLayListMissionButtons) {
+		this.hLayListMissionButtons = hLayListMissionButtons;
+	}
+
+	public Button getBtnAddMission() {
+		return btnAddMission;
+	}
+
+	public void setBtnAddMission(Button btnAddMission) {
+		this.btnAddMission = btnAddMission;
+	}
+
+	public Button getBtnModifyMission() {
+		return btnModifyMission;
+	}
+
+	public void setBtnModifyMission(Button btnModifyMission) {
+		this.btnModifyMission = btnModifyMission;
+	}
+
+	public Button getBtnDeleteMission() {
+		return btnDeleteMission;
+	}
+
+	public void setBtnDeleteMission(Button btnDeleteMission) {
+		this.btnDeleteMission = btnDeleteMission;
+	}
+
+	public Window getWindowConfirmDelete() {
+		return windowConfirmDelete;
+	}
+
+	public void setWindowConfirmDelete(Window windowConfirmDelete) {
+		this.windowConfirmDelete = windowConfirmDelete;
+	}
+
+	public Mission getSelectedMission() {
+		return selectedMission;
+	}
+
+	public void setSelectedMission(Mission selectedMission) {
+		this.selectedMission = selectedMission;
+	}
+
+	
+	
+	
 }

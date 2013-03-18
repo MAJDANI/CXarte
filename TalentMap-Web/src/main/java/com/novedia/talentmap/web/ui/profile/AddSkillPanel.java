@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.vaadin.teemu.ratingstars.RatingStars;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
@@ -50,6 +51,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	private ISkillService skillService;
 
+	private Authentication authentication;
 	/**
 	 * Vaadin Components
 	 */
@@ -89,13 +91,37 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	private Button validSkill;
 	
-	private int COLLAB_ID = 2;
+	//private int COLLAB_ID = 2;
 
 	
 	/**
 	 * Flag
 	 */
 	private boolean isNewSkill;
+	
+	/**
+	 * Default constructor
+	 */
+	public AddSkillPanel(){
+		super();
+	}
+	
+	/**
+	 * Build view of buildAddSkillPanel
+	 * @return
+	 */
+	public AddSkillPanel buildAddSkillPanel(){
+		removeAllComponents();
+		setImmediate(true);
+		try {
+			buildWindow();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return this;
+	}
+	
 	
 	/**
 	 * 
@@ -113,31 +139,31 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * @param listSkill
 	 * @throws Exception
 	 */
-	public AddSkillPanel(Label categoryLabel, Label conceptLabel,
-			Select toolSelect, Select frequencyUseSelect,
-			Select noUsingTimeSelect, RatingStars stars,
-			Map<Integer, String> valueOptions, Button validSkill,
-			ISkillService skillService, ListSkill listSkill, Accordion skillTab)
-			throws Exception {
-		this.categoryLabel = categoryLabel;
-		this.conceptLabel = conceptLabel;
-		this.frequencyUseSelect = frequencyUseSelect;
-		this.noUsingTimeSelect = noUsingTimeSelect;
-		this.toolSelect = toolSelect;
-		this.stars = stars;
-		this.valueOptions = valueOptions;
-		this.validSkill = validSkill;
-		this.skillService = skillService;
-		this.listSkill = listSkill;
-		this.skillTab = skillTab;
-		
-		//Set the skill added like a new skill
-		this.isNewSkill = true;
-
-		setImmediate(true);
-
-		buildWindow();
-	}
+//	public AddSkillPanel(Label categoryLabel, Label conceptLabel,
+//			Select toolSelect, Select frequencyUseSelect,
+//			Select noUsingTimeSelect, RatingStars stars,
+//			Map<Integer, String> valueOptions, Button validSkill,
+//			ISkillService skillService, ListSkill listSkill, Accordion skillTab)
+//			throws Exception {
+//		this.categoryLabel = categoryLabel;
+//		this.conceptLabel = conceptLabel;
+//		this.frequencyUseSelect = frequencyUseSelect;
+//		this.noUsingTimeSelect = noUsingTimeSelect;
+//		this.toolSelect = toolSelect;
+//		this.stars = stars;
+//		this.valueOptions = valueOptions;
+//		this.validSkill = validSkill;
+//		this.skillService = skillService;
+//		this.listSkill = listSkill;
+//		this.skillTab = skillTab;
+//		
+//		//Set the skill added like a new skill
+//		this.isNewSkill = true;
+//
+//		setImmediate(true);
+//
+//		buildWindow();
+//	}
 
 	/**
 	 * Build all components in the main window
@@ -270,7 +296,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 		// We fill only the Tool Select
 		List<Tool> listTool = skillService.getAllTools();
-		System.out.println("***listTool*** : "+ listTool);
+//		System.out.println("***listTool*** : "+ listTool);
 
 		for (Tool t : listTool) {
 			this.toolSelect.addItem(t.getName());
@@ -333,7 +359,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 			Tool tool = skillService.getToolByName(this.toolSelect.getValue()
 					.toString());
-			System.out.println(" **tool** = " + tool);
+//			System.out.println(" **tool** = " + tool);
 
 			Double starsValue = (Double) this.stars.getValue();
 			int frequencyUseValue = 0;
@@ -355,13 +381,13 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			
 			Skill skill = new Skill();
 
-			skill.setColleagueId(COLLAB_ID);
+			skill.setColleagueId(authentication.getColleagueId());
 			skill.setTool_id(tool.getId());
 			skill.setScore(starsValue.intValue());
 			skill.setUse_frequency(frequencyUseValue);
 			skill.setNo_using_time(noUsingTimeValue);
 			
-			System.out.println(" **skill** = " + skill);
+//			System.out.println(" **skill** = " + skill);
 			
 			// Test if it's a new skill or not
 			if(this.isNewSkill){
@@ -414,7 +440,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	private void updateMapSkill() throws Exception{
 		
 		Map<Category, Map> mapSkill = this.skillService
-				.getAllCollaboratorSkill(COLLAB_ID);
+				.getAllCollaboratorSkill(authentication.getColleagueId());
 
 		this.listSkill = new ListSkill(mapSkill);
 
@@ -434,7 +460,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		
 		try {
 
-			skill = this.skillService.getSkillByToolId(COLLAB_ID, tId);
+			skill = this.skillService.getSkillByToolId(authentication.getColleagueId(), tId);
 
 		} catch (Exception e) {
 
@@ -700,5 +726,31 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.isNewSkill = isNewSkill;
 	}
 
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	public Accordion getSkillTab() {
+		return skillTab;
+	}
+
+	public ListSkill getListSkill() {
+		return listSkill;
+	}
+
+	public static Map<Integer, String> getValueOptions() {
+		return valueOptions;
+	}
+
+	public Button getValidSkill() {
+		return validSkill;
+	}
+
+	
+	
 
 }

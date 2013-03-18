@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile.skill;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.data.FrequencyUse;
 import com.novedia.talentmap.web.data.TimeUse;
@@ -32,6 +33,8 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	private VerticalLayout bodyLayout;
 	private HorizontalLayout footerLayout;
 	
+	private Authentication authentication;
+	
 	/**
 	 * Vaadin Components
 	 */
@@ -42,10 +45,28 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	private Button addSkill;
 
 	/**
-	 * Constants
+	 * Default constructor
 	 */
-	private final int COLLAB_ID = 2;
-		
+	public SkillCollaboratorContent(){
+		super();
+	}
+	
+	/**
+	 * Build the view of SkillCollaboratorContent
+	 * @return SkillCollaboratorContent
+	 */
+	public VerticalLayout buildSkillCollaboratorContent(){
+		removeAllComponents();
+		listSkill.setAuthentication(getAuthentication());
+		addSkillPanel.setAuthentication(getAuthentication());
+		listSkill = listSkill.buildListSkill();
+		addSkillPanel = addSkillPanel.buildAddSkillPanel();
+		setImmediate(true);
+		buildObersvators();
+		mainBuild();
+		return this;
+	}
+	
 	/**
 	 * Constructor
 	 * @param listSkill
@@ -55,24 +76,24 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @param bodyLayout
 	 * @param footerLayout
 	 */
-	public SkillCollaboratorContent(ListSkill listSkill,Panel listSkillPanel,Panel skillPanel,
-			AddSkillPanel addSkillPanel,VerticalLayout bodyLayout,HorizontalLayout footerLayout,
-			Label skillLabel, Button edit, Button cancel, Button addSkill){
-		this.listSkill = listSkill;
-		this.listSkillPanel = listSkillPanel;
-		this.skillPanel = skillPanel;
-		this.addSkillPanel = addSkillPanel;
-		this.bodyLayout = bodyLayout;
-		this.footerLayout = footerLayout;
-		this.skillLabel = skillLabel;
-		this.edit = edit;
-		this.cancel = cancel;
-		this.addSkill = addSkill;
-		setImmediate(true);
-
-		buildObersvators();
-		mainBuild();
-	}
+//	public SkillCollaboratorContent(ListSkill listSkill,Panel listSkillPanel,Panel skillPanel,
+//			AddSkillPanel addSkillPanel,VerticalLayout bodyLayout,HorizontalLayout footerLayout,
+//			Label skillLabel, Button edit, Button cancel, Button addSkill){
+//		this.listSkill = listSkill;
+//		this.listSkillPanel = listSkillPanel;
+//		this.skillPanel = skillPanel;
+//		this.addSkillPanel = addSkillPanel;
+//		this.bodyLayout = bodyLayout;
+//		this.footerLayout = footerLayout;
+//		this.skillLabel = skillLabel;
+//		this.edit = edit;
+//		this.cancel = cancel;
+//		this.addSkill = addSkill;
+//		setImmediate(true);
+//
+//		buildObersvators();
+//		mainBuild();
+//	}
 	
 	
 	/**
@@ -337,5 +358,120 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		}, IProfileView.class);
 
 	}
+
+
+	public ListSkill getListSkill() {
+		return listSkill;
+	}
+
+
+	public void setListSkill(ListSkill listSkill) {
+		this.listSkill = listSkill;
+	}
+
+
+	public Panel getListSkillPanel() {
+		return listSkillPanel;
+	}
+
+
+	public void setListSkillPanel(Panel listSkillPanel) {
+		this.listSkillPanel = listSkillPanel;
+	}
+
+
+	public Panel getSkillPanel() {
+		return skillPanel;
+	}
+
+
+	public void setSkillPanel(Panel skillPanel) {
+		this.skillPanel = skillPanel;
+	}
+
+
+	public AddSkillPanel getAddSkillPanel() {
+		return addSkillPanel;
+	}
+
+
+	public void setAddSkillPanel(AddSkillPanel addSkillPanel) {
+		this.addSkillPanel = addSkillPanel;
+	}
+
+
+	public VerticalLayout getBodyLayout() {
+		return bodyLayout;
+	}
+
+
+	public void setBodyLayout(VerticalLayout bodyLayout) {
+		this.bodyLayout = bodyLayout;
+	}
+
+
+	public HorizontalLayout getFooterLayout() {
+		return footerLayout;
+	}
+
+
+	public void setFooterLayout(HorizontalLayout footerLayout) {
+		this.footerLayout = footerLayout;
+	}
+
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+
+	public Label getSkillLabel() {
+		return skillLabel;
+	}
+
+
+	public void setSkillLabel(Label skillLabel) {
+		this.skillLabel = skillLabel;
+	}
+
+
+	public Button getEdit() {
+		return edit;
+	}
+
+
+	public void setEdit(Button edit) {
+		this.edit = edit;
+	}
+
+
+	public Button getCancel() {
+		return cancel;
+	}
+
+
+	public void setCancel(Button cancel) {
+		this.cancel = cancel;
+	}
+
+
+	public Button getAddSkill() {
+		return addSkill;
+	}
+
+
+	public void setAddSkill(Button addSkill) {
+		this.addSkill = addSkill;
+	}
+	
+	
+	
+	
+	
 	
 }
