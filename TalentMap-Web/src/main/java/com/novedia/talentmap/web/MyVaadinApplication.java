@@ -172,7 +172,6 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 		try {
 			authentication = checkUserAuthentication(username, password);
 			if (authentication != null) {
-				//ColleagueData.setColleagueID(authentication.getColleagueId());
 				authenticatedScreen.setAuthentication(authentication);
 				authenticatedScreen.setApplication(this);
 				getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());

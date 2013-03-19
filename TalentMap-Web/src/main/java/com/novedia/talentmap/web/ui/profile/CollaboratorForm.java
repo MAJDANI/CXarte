@@ -9,7 +9,6 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IProfileService;
-import com.novedia.talentmap.web.ColleagueData;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
