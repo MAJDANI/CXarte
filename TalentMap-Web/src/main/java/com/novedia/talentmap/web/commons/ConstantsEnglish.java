@@ -251,6 +251,7 @@ public class ConstantsEnglish {
 	 * Constants for Search by Skills
 	 */
 	public static final String SEARCH_SKILLS_MSG_PLEASE_SELECT = "Please select at least one element";
+	public static final String NO_CUSTUMER_SELECT_MSG = "Please select a custumer";
 	public static final String SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND = "No colleague found";
 	
 	/**
