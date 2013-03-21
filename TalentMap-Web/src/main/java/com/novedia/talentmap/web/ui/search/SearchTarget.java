@@ -312,12 +312,18 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 			//---------------------------------------------------------
 			if (this.searchByClientPanel.isVisible()) {
 				Client client = (Client) this.clientNameSelect.getValue();
-				try {
-					this.listCollab = this.collabService.getAllColleaguesByClient(client);
-					updateObservateur();
-				} catch (Exception e) {
-					e.printStackTrace();
+				if(client != null){
+					try {
+						this.listCollab = this.collabService.getAllColleaguesByClient(client);
+						updateObservateur();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					getWindow().showNotification(ConstantsEnglish.NO_CUSTUMER_SELECT_MSG, Notification.TYPE_WARNING_MESSAGE);
 				}
+					
+				
 			}
 
 			//---------------------------------------------------------
