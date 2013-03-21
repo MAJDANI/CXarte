@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.ISearchContent;
 import com.novedia.talentmap.web.util.TalentMapCSS;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -39,6 +40,8 @@ public class SearchContent extends VerticalLayout {
 	public static final String PANEL_TARGET_NAME = "Find an employee";
 	public static final String PANEL_RESULTS_NAME = "List of colleagues of the research";
 	public static final String PANEL_NO_RESULTS_NAME = "No colleague found";
+	
+	private static final int PAGE_SIZE = 5;
 	
 	/**
 	 * Default constructor
@@ -98,6 +101,13 @@ public class SearchContent extends VerticalLayout {
 					} else { 
 						SearchContent.this.searchResults.removeAllItems();
 						SearchContent.this.searchResults.buildResultsTable(listCollab);
+						SearchContent.this.searchResults.setCurrentPage(1);
+						refeshSearchResultsPanel();
+						if(listCollab.size() > PAGE_SIZE){
+							HorizontalLayout control = SearchContent.this.searchResults.createControls();
+							 SearchContent.this.searchResultsPanel.addComponent(control);
+							 SearchContent.this.searchResults.setPageLength(PAGE_SIZE);
+						}
 						SearchContent.this.searchResultsPanel.setVisible(true);
 						SearchContent.this.searchResultsPanelNoResult.setVisible(false);
 					}
@@ -106,6 +116,13 @@ public class SearchContent extends VerticalLayout {
 		}, ISearchContent.class);
 	}
 
+	
+	private void refeshSearchResultsPanel(){
+		this.searchResultsPanel.removeAllComponents();
+		this.searchResultsPanel.addComponent(this.searchResultsLabel);
+		this.searchResultsPanel.addComponent(this.searchResults);
+	}
+	
 	/**
 	 * The main builder
 	 * 

@@ -2,17 +2,16 @@ package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
 
+import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.web.ui.collab.MonitoringCollabContent;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
 
-public class SearchResults extends Table {
+public class SearchResults extends PagedTable {
 
 	/**
 	 * 
@@ -24,6 +23,8 @@ public class SearchResults extends Table {
 	 * VGU TODO
 	 */
 	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
+	
+	
 
 	/**
 	 * Vaadin UI
@@ -100,6 +101,8 @@ public class SearchResults extends Table {
 					collab.getFirstName(), collab.getEmail(), hLayout}, idResultsTable);
 			idResultsTable++;
 		}
+		
+		
 	}
 
 	private Button buildButton(Button button) {
