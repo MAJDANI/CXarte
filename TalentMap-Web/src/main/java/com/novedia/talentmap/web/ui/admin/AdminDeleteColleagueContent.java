@@ -46,8 +46,9 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	
 	private static final String LABEL_BUTTON_DELETE = "Delete";
 	private static final String LABEL_BUTTON_CANCEL = "Cancel";
-	private static final String LABEL_BUTON_YES = "Yes";
-	private static final String LABEL_BUTON_NO = "No";
+	private static final String LABEL_BUTTON_SEARCH = "Search";
+	private static final String LABEL_BUTTON_YES = "Yes";
+	private static final String LABEL_BUTTON_NO = "No";
 	private static final String CONFIRM_DELETE = "Are you sure you want to delete these colleagues ?";
 	private static final String NO_RESULT_TEXT = "No colleague found";
 	
@@ -59,6 +60,7 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	private HorizontalLayout containerButon;
 	private Button delete ;
 	private Button cancel ;
+	private Button searchButton;
 	private PagedTable colleagueList ;
 	private HorizontalLayout containerSearch;
 	private Panel searchPanel;
@@ -99,9 +101,12 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		searchPanel = new Panel();
 		searchField = new TextField("Colleague Name :");
 		searchField.addListener((TextChangeListener) this);
+		searchButton = new Button(LABEL_BUTTON_SEARCH);
+		searchButton.addListener((ClickListener) this);
 		containerSearch = new HorizontalLayout();
 		containerSearch.setSpacing(true);
 		containerSearch.addComponent(searchField);
+		containerSearch.addComponent(searchButton);
 		searchPanel.addComponent(containerSearch); 
 		
 	}
@@ -236,8 +241,8 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		popup.setReadOnly(true);
 		popup.setWidth("30%");
 		HorizontalLayout confirmationButtonContainer = new HorizontalLayout();
-		Button yesButton = new Button(LABEL_BUTON_YES);
-		Button noButton = new Button(LABEL_BUTON_NO);
+		Button yesButton = new Button(LABEL_BUTTON_YES);
+		Button noButton = new Button(LABEL_BUTTON_NO);
 		yesButton.addListener((ClickListener) this);
 		noButton.addListener((ClickListener) this);
 		confirmationButtonContainer.setSpacing(true);
@@ -260,9 +265,9 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		} else if(event.getButton().getCaption().equals(LABEL_BUTTON_CANCEL)){  //cancel button
 			colleagueList.setValue(null);
 			
-		} else if (event.getButton().getCaption().equals(LABEL_BUTON_NO)) {  //no button
+		} else if (event.getButton().getCaption().equals(LABEL_BUTTON_NO)) {  //no button
 			getWindow().removeWindow(popup);
-		} else if (event.getButton().getCaption().equals(LABEL_BUTON_YES)) {  // yes button
+		} else if (event.getButton().getCaption().equals(LABEL_BUTTON_YES)) {  // yes button
 			getWindow().removeWindow(popup);
 			Set<Colleague> colleagueSelected = (Set<Colleague>) colleagueList.getValue();
 			Map<String, Object> mapNotification = null;
@@ -275,6 +280,8 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 			}
 			buildResultPanel((String) searchField.getValue());
 			
+		} else if (event.getButton().getCaption().equals(LABEL_BUTTON_SEARCH)) {
+			buildResultPanel((String) searchField.getValue());
 		}
 		
 	}
