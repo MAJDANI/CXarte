@@ -4,6 +4,7 @@ import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.role.CmContentLayout;
 import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.ui.search.SearchView;
@@ -24,7 +25,7 @@ public class TabMain extends TabSheet {
 	/**
 	 * All view
 	 */
-	private TabProfileSheet tabProfileSheet;
+	private ProfileView profileView;
 	private SearchView searchView;
 	private AdminView adminView;
 	private RhContentLayout rhContentLayout;
@@ -54,8 +55,8 @@ public class TabMain extends TabSheet {
 			adminView = adminView.buildAdminView();
 			addTab(adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
 		} else if (role.equals(Role.CL)) {   //Colleague
-			tabProfileSheet.setAuthentication(getAuthentication());
-			addTab(tabProfileSheet.buildTabSheetProfile(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+			profileView.setAuthentication(getAuthentication());
+			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 		} else if(role.equals(Role.IA)){    //IA
 			searchView = searchView.buildSearchView();
 			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
@@ -71,13 +72,6 @@ public class TabMain extends TabSheet {
 	}
 	
 	
-	/**
-	 * Set the tabProfileSheet value
-	 * @param tabProfileSheet the tabProfileSheet to set
-	 */
-	public void setTabProfileSheet(TabProfileSheet tabProfileSheet) {
-		this.tabProfileSheet = tabProfileSheet;
-	}
 	
 	/**
 	 * Get the authentication
@@ -119,12 +113,7 @@ public class TabMain extends TabSheet {
 		this.adminView = adminView;
 	}
 
-	/**
-	 * @return the tabProfileSheet
-	 */
-	public TabProfileSheet getTabProfileSheet() {
-		return tabProfileSheet;
-	}
+	
 
 	/**
 	 * @return the searchView
@@ -148,6 +137,16 @@ public class TabMain extends TabSheet {
 	public void setCmContentLayout(CmContentLayout cmContentLayout) {
 		this.cmContentLayout = cmContentLayout;
 	}
+
+	public ProfileView getProfileView() {
+		return profileView;
+	}
+
+	public void setProfileView(ProfileView profileView) {
+		this.profileView = profileView;
+	}
+	
+	
 	
 	
 

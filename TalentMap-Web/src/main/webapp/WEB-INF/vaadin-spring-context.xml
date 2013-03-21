@@ -38,18 +38,12 @@
 	
 	<!-- mainTab bean -->
     <bean id="mainTab" class="com.novedia.talentmap.web.ui.TabMain" scope="session">
-		<property name="tabProfileSheet" ref="tabProfileSheetBean"/> 
+		<property name="profileView" ref="profileViewBean"/>
 		<property name="adminView" ref="adminViewBean"/>
 		<property name="searchView" ref="searchViewBean"/>
 		<property name="rhContentLayout" ref="rhContentLayout"/>
 		<property name="cmContentLayout" ref="cmContentLayout"/>
 	</bean>
-	
-	<!-- tabProfileSheet Bean  -->
-	<bean id="tabProfileSheetBean" class="com.novedia.talentmap.web.ui.TabProfileSheet" scope="session" >
-		<property name="profileView" ref="profileViewBean" />
-	</bean>
-	
 	
 	
 	<!-- profileView Bean -->
@@ -103,6 +97,7 @@
 		<property name="missionForm" ref="missionForm"/>
 		<property name="save" ref="saveMissionButton"/>
 		<property name="cancel" ref="cancelMissionButton"/>
+		<property name="missionContainer" ref="missionContainerBean"/>
 		<property name="listMission" ref="listMissionBean"/>
 		
 	</bean>

@@ -10,9 +10,8 @@ import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
-import com.novedia.talentmap.web.ui.role.CmContentLayout;
-import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComponentContainer;
@@ -50,7 +49,7 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	private TabMain mainTab;
 	
 	
-	private static final String LOG_OUT_BUTTON = "LogOut";
+	private static final String LABEL_LOG_OUT_BTTON = "Logout";
 	//
 	
 	/**
@@ -59,6 +58,7 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	 */
 	
 	public AuthenticatedScreen(){
+		super();
 	}
 	
 	
@@ -66,6 +66,7 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		super();
 		//Set style
 		setSizeFull();
+		setSpacing(true);
 		setMargin(true);
 		setStyleName(Reindeer.LAYOUT_WHITE);
 		this.application = application;
@@ -79,6 +80,7 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	 * @return
 	 */
 	public ComponentContainer selectedViewAccordingToUserRoles() {
+		removeAllComponents();
 		
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Call selectedViewAccordingToUserRoles ()");
@@ -108,9 +110,10 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	 * @return
 	 */
 	private ComponentContainer buildMainLayout(Role role) {
-		Panel globalPannel = new Panel();
-		VerticalLayout logOutLayout = new VerticalLayout();
-		Button logOutButton = new Button(LOG_OUT_BUTTON);
+		Panel globalView = new Panel();
+		VerticalLayout headerLayout = new VerticalLayout();
+		headerLayout.setMargin(true);
+		Button logOutButton = new Button(LABEL_LOG_OUT_BTTON);
 		logOutButton.addStyleName(Reindeer.BUTTON_LINK); //transformation du bouton en lien
 		logOutButton.addListener(new Button.ClickListener(){
 			@Override
@@ -119,11 +122,12 @@ public class AuthenticatedScreen extends VerticalLayout  {
 			}
 		});
 		
-		logOutLayout.addComponent(logOutButton);		
-		globalPannel.addComponent(logOutLayout);
+		headerLayout.addComponent(logOutButton);	
+		headerLayout.setComponentAlignment(logOutButton, Alignment.MIDDLE_RIGHT);
+		globalView.addComponent(headerLayout);
 		mainTab.setAuthentication(getAuthentication());
-		globalPannel.addComponent(mainTab.buildViewAccordingToUser(role));
-		this.addComponent(globalPannel);
+		globalView.addComponent(mainTab.buildViewAccordingToUser(role));
+		this.addComponent(globalView);
 		return this;
 	}
 	
