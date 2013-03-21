@@ -112,12 +112,29 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	}
 	
 	/**
+	 * init table's colleague
+	 */
+	private void initColleagueTable(){
+		colleagueList = new PagedTable();
+		for (String property : VisibleColumn) {
+			colleagueList.addContainerProperty(property, String.class,"");
+		}
+		colleagueList.setSelectable(true);
+		colleagueList.setImmediate(true);
+		colleagueList.setMultiSelect(true);
+		colleagueList.setMultiSelectMode(MultiSelectMode.SIMPLE);
+		colleagueList.setWidth("100%");
+		colleagueList.setNullSelectionAllowed(true);
+		colleagueList.addListener((Property.ValueChangeListener) this);
+	}
+	
+	/**
 	 * init result pannel
 	 */
 	private void initResultPanel(){
 		resultPanel = new Panel();
 		colleagueContainer = new BeanItemContainer<Colleague>(Colleague.class);
-		refreshColleagueTable();
+		initColleagueTable();
 		buildContainerButton();
 	}
 	
@@ -134,8 +151,8 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	}
 	
 	/**
-	 * Build the reult pannel 
-	 * @param value
+	 * Build the reult pannel that will contain colleague list
+	 * @param value the name of colleague
 	 */
 	private void buildResultPanel(String value){
 		fillColleagueContainer(value);
@@ -158,29 +175,13 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		
 	}
 	
-	/**
-	 * Refresh table's colleague
-	 */
-	private void refreshColleagueTable(){
-		colleagueList = null;
-		colleagueList = new PagedTable();
-		for (String property : VisibleColumn) {
-			colleagueList.addContainerProperty(property, String.class,"");
-		}
-		colleagueList.setSelectable(true);
-		colleagueList.setImmediate(true);
-		colleagueList.setMultiSelect(true);
-		colleagueList.setMultiSelectMode(MultiSelectMode.SIMPLE);
-		colleagueList.setWidth("100%");
-		colleagueList.setNullSelectionAllowed(true);
-		colleagueList.addListener((Property.ValueChangeListener) this);
-	}
+	
 	
 	/**
 	 * fill the table to display
 	 */
 	private void fillColleagueList(){
-		refreshColleagueTable();
+		colleagueList.removeAllItems();
 		Collection<Colleague> colleagueResult = colleagueContainer.getItemIds();
 		for (Colleague colleague : colleagueResult) {
 			colleagueList.addItem(new Object[]{colleague.getFirstName(),colleague.getLastName(),
@@ -198,6 +199,7 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 			Label resultTitle = new Label("Colleague List");
 			resultTitle.addStyleName(TalentMapCSS.H2);
 			resultPanel.addComponent(resultTitle);
+			colleagueList.setCurrentPage(1);
 			resultPanel.addComponent(colleagueList);
 			if(colleagueContainer.size() > PAGE_SIZE){
 				resultPanel.addComponent(colleagueList.createControls());
