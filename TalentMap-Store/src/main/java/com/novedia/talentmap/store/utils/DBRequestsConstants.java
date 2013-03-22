@@ -59,7 +59,7 @@ public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAl
 /**
  * Constant request to check if the user who wants to register is already existing in db
  */
-public static final String CHECK_REGISTRATION = "colleague.check";
+public static final String GET_COLLEAGUE_BY_MAIL = "colleague.getByMail";
 
 /**
  * Constant request to add a colleague from a registration
@@ -413,11 +413,11 @@ public static final String CHECK_AUTHENTIFICATION = "authentication.check";
 
 public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogin";
 
-public static final String GET_AUTHENTICATE = "authentication.get";
-
 public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.get";
 
 public static final String ADD_USER_FROM_REGISTRATION = "authentication.addUserFromRegistration";
+
+public static final String AUTHENTIFICATION_COUNT_LOGIN= "authentication.countLogin";
 
 
 

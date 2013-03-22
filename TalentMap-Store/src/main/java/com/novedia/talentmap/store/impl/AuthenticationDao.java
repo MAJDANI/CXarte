@@ -76,9 +76,19 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_AUTHENTIFICATION, token);
 	}
 	
-	public int addUserFromRegistration(Registration registration) throws DataAccessException {
+	public Integer addUserFromRegistration(Registration registration) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().insert(
 				DBRequestsConstants.ADD_USER_FROM_REGISTRATION, registration);
+	}
+
+	/**
+	 * Counts the number of login "login" existing in table Authentication.
+	 * It's used to assure a user won't choose a login already existing.
+	 * @param login : tho login to check in table
+	 * @return the number of login found in table
+	 */
+	public Integer countLogin(String login) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.AUTHENTIFICATION_COUNT_LOGIN, login);
 	}
 	
 	@Override

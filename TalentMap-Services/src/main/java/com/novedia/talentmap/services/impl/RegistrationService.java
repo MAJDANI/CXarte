@@ -12,7 +12,6 @@ import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.AuthenticationDao;
-import com.novedia.talentmap.store.impl.BusinessEngineerDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.ProfileDao;
 
@@ -42,10 +41,14 @@ public class RegistrationService implements IRegistrationService {
 	 * The businessEngineer DAO.
 	 */
 	private IDao<BusinessEngineer> businessEngineerDao;
-	
+
 	@Override
 	public Colleague check(Registration registration) {
-		return ((ColleagueDao) colleagueDao).check(registration);
+		throw new UnsupportedOperationException();
+	}
+
+	public Colleague getByMail(String mail) {
+		return ((ColleagueDao) colleagueDao).getByMail(mail);
 	}
 	
 	@Override
@@ -66,6 +69,16 @@ public class RegistrationService implements IRegistrationService {
 	@Override
 	public List<Colleague> getAllConsultantManager() {
 		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
+	}
+	/**
+	 * Counts the number of login "login" existing in table Authentication.
+	 * It's used to assure a user won't choose a login already existing.
+	 * @param login : tho login to check in table
+	 * @return the number of login found in table
+	 */
+	public Integer countLogin(String login) {
+		AuthenticationDao authentificationDao = (AuthenticationDao) this.authenticationDao;
+		return authentificationDao.countLogin(login);
 	}
 
 	public IDao<Colleague> getColleagueDao() {

@@ -7,10 +7,9 @@
  <typeAlias alias="authentication" type="com.novedia.talentmap.model.entity.Authentication"/> 
 
 	<resultMap id="authenticationResult" class="authentication">
-        <result property="id" column="AUTHENTICATION_ID"/>     
-        <result property="colleagueId" column="COLLEAGUE_ID"/> 
         <result property="token.login"  column="LOGIN"/>         
         <result property="token.password"  column="PASSWORD"/>
+        <result property="colleagueId" column="COLLEAGUE_ID"/> 
         <result property="authorization.roleId" column="ROLE_ID"/>
         <result property="authorization.label" column="LABEL"/>    
     </resultMap>
@@ -19,24 +18,22 @@
 		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE auth.LOGIN = #login# AND auth.PASSWORD = #password#
 				AND auth.ROLE_ID = role.ROLE_ID
 	</select>	
+
+	<select id="countLogin" resultClass="java.lang.Integer" parameterClass="String">
+		SELECT count(*) FROM AUTHENTICATION WHERE LOGIN = #login#
+	</select>
     
     <insert id="addUserFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration"> 
-   		<selectKey resultClass="Integer" keyProperty="authenticationId">
-      		SELECT SEQAUTH.NEXTVAL FROM DUAL
-    	</selectKey>
-    	
     	INSERT INTO AUTHENTICATION (
-    		AUTHENTICATION_ID,
-    		COLLEAGUE_ID,
-    		ROLE_ID,
     		LOGIN,
-    		PASSWORD
+    		PASSWORD,
+    		COLLEAGUE_ID,
+    		ROLE_ID
     		)values (
-    		#authenticationId#,
-    		#colleagueId#,
-    		4,
     		#login#,
-    		#password#
+    		#password#,
+    		#colleagueId#,
+    		#role.id#
     		)
     </insert>	
     

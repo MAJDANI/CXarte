@@ -21,19 +21,14 @@ public class Authentication implements Serializable {
 	private static final long serialVersionUID = 6615977875597428826L;
 
 	/**
-	 * id of table
+	 * Credential
 	 */
-	private Integer id;
-	
+	private CredentialToken token;
+
 	/**
 	 * id of collaborator
 	 */
 	private Integer colleagueId;
-	
-	/**
-	 * Credential
-	 */
-	private CredentialToken token;
 	
 	/**
 	 * Authorization
@@ -52,6 +47,7 @@ public class Authentication implements Serializable {
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[colleagueId=").append(getColleagueId()).append(", ");
+		strBld.append("token.login=").append(getToken().getLogin()).append("]");
 		return strBld.toString();
 	}
 	
@@ -61,7 +57,7 @@ public class Authentication implements Serializable {
 	 */
 	public int hashCode() {
 		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getId());
+		hashBuilder.append(this.getToken().getLogin());
 		return hashBuilder.hashCode();
 	}
 
@@ -80,22 +76,8 @@ public class Authentication implements Serializable {
 
 		Authentication comparedObj = (Authentication) obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getId(), comparedObj.getId());
+		ebuilder.append(this.getToken().getLogin(), comparedObj.getToken().getLogin());
 		return ebuilder.isEquals();
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**

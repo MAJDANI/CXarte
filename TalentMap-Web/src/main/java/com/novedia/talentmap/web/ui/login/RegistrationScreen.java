@@ -8,9 +8,12 @@ import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
+import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -59,6 +62,7 @@ public class RegistrationScreen extends VerticalLayout {
 	 */
 	public RegistrationScreen() {
 	}
+	
 	
 	/**
 	 * The constructor
@@ -160,23 +164,28 @@ public class RegistrationScreen extends VerticalLayout {
 		@Override
 		public void buttonClick(ClickEvent event) {
 			//appel du service d'inscription
-			
 			BeanItem<Registration> registrationItem = (BeanItem<Registration>) this.registrationForm.getRegistrationForm().getItemDataSource();
 			Registration registration = registrationItem.getBean();
 			
 			String button = event.getButton().getCaption();
 			Authentication authenticate = null;
 			if (button.equalsIgnoreCase(ConstantsEnglish.SAVE_BUTTON_NAME)){
+				//On ne vérifie pas la validité du Login et de l'email ici parce que leur gestion se passe dans le
+				//formulaire this.registrationForm.getRegistrationForm() : si l'un de ces champ n'est pas correct
+				//on vide le champ, jusqu'à ce que la saisie soit correcte.
 				if(!validateRegistrationForm()){
 					application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS);
 				} else if ((!validatePassword())){
 					application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR);
 				} else {
-
 					try {
 						authenticate = application.register(registration);
-						application.getMainWindow().setContent(new AuthenticatedScreen(application, authenticate));
-					} catch (TalentMapSecurityException e) {
+						AuthenticatedScreen authenticatedScreen =  application.getAuthenticatedScreen();
+						authenticatedScreen.setAuthentication(authenticate);
+						authenticatedScreen.selectedViewAccordingToUserRoles();
+//						application.getMainWindow().setContent(new AuthenticatedScreen(application, authenticate));
+						//getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
+			} catch (TalentMapSecurityException e) {
 						application.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
 					}
 				}
@@ -188,7 +197,7 @@ public class RegistrationScreen extends VerticalLayout {
 		
 		}
 
-		
+
 		/**
 		 * Test the registrationForm validity
 		 * @return

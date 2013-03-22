@@ -63,7 +63,6 @@ public class AuthenticationServiceTest {
 		authorization.setRoleId(4);
 
 		Authentication userAuthentication = new Authentication();
-		userAuthentication.setId(1);
 		userAuthentication.setColleagueId(35);
 		userAuthentication.setAuthorization(authorization);
 		userAuthentication.setToken(credentialToken);
@@ -90,7 +89,6 @@ public class AuthenticationServiceTest {
 		authorization.setRoleId(4);
 
 		Authentication userAuthentication = new Authentication();
-		userAuthentication.setId(1);
 		userAuthentication.setColleagueId(35);
 		userAuthentication.setAuthorization(authorization);
 		userAuthentication.setToken(credentialToken);

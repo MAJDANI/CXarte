@@ -80,8 +80,8 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		throw new UnsupportedOperationException();
 	}
 	
-	public Colleague check(Registration registration) throws DataAccessException{
-		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_REGISTRATION, registration);
+	public Colleague getByMail(String mail) throws DataAccessException{
+		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLEAGUE_BY_MAIL, mail);
 	}
 	
 	public Integer addColleagueFromRegistration(Registration registration) throws DataAccessException{

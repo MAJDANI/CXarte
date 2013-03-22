@@ -9,6 +9,8 @@ import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
@@ -42,23 +44,25 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 	 */
 	private IBusinessEngineerService businessEngineerService;
 	
+	private Object listener;
 	
 	/**
 	 * 
 	 * @param registration Service
 	 */
-	public RegistrationFormFieldFactory(IRegistrationService registrationService, IBusinessEngineerService businessEngineerService){
+	public RegistrationFormFieldFactory(IRegistrationService registrationService, IBusinessEngineerService businessEngineerService, Object listener){
 		this.registrationService = registrationService;
 		this.businessEngineerService = businessEngineerService;
+		this.listener = listener;
 	}
 	
 	
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		
-		for (int i = 0; i < RegistrationForm.FIELD_ORDER_REGISTRATION.length; i++) {
+		for (int i = 0; i < ConstantsEnglish.FIELD_ORDER_REGISTRATION.length; i++) {
 			
-			if(propertyId.equals(RegistrationForm.FIELD_ORDER_REGISTRATION[i])){
+			if(propertyId.equals(ConstantsEnglish.FIELD_ORDER_REGISTRATION[i])){
 				
 				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
@@ -67,10 +71,10 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						&&!propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD)
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD) ){
 					
-					TextField field = new TextField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
+					TextField field = new TextField((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
 					
 					field.setRequired(true);
-					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setValidationVisible(true);
 					field.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
 					
@@ -79,7 +83,11 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					}					
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_LAST_NAME_FIELD)){
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_LAST_NAME_MAX_LENGTH);
-					}					
+					}
+					if(propertyId.equals(ConstantsEnglish.REGISTRATION_LOGIN_FIELD)){
+						field.setMaxLength(ConstantsEnglish.REGISTRATION_LOGIN_MAX_LENGTH);
+						field.addListener(ValueChangeEvent.class, listener, "validateLogin");
+					}
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_PHONE_FIELD)){
 						field.setRequired(false);
 						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_PHONE_NUMBER));
@@ -94,14 +102,15 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_EMAIL_FIELD)){
 						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EMAIL));
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EMAIL_MAX_LENGTH);
+						field.addListener(ValueChangeEvent.class, listener, "validateEmail");
 					}
 					return field;
 					
 				}
 				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD) || propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD)){
-					PasswordField passwordField = new PasswordField((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
+					PasswordField passwordField = new PasswordField((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
 					passwordField.setRequired(true);
-					passwordField.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					passwordField.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					passwordField.setValidationVisible(true);
 					passwordField.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
 					passwordField.setMaxLength(ConstantsEnglish.REGISTRATION_PASSWORD_MAX_LENGTH);
@@ -113,9 +122,9 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					PopupDateField datefield = new PopupDateField();
 					
 					datefield.setDateFormat(ConstantsEnglish.REGISTRATION_DATE_FORMAT);
-					datefield.setCaption((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+ " : ");					
+					datefield.setCaption((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+ " : ");					
 					datefield.setRequired(true);
-					datefield.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + RegistrationForm.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
+					datefield.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					datefield.setValidationVisible(true);
 					
 					return datefield;
@@ -125,7 +134,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty(ConstantsEnglish.REGISTRATION_SELECT_VALUE, String.class, null);
 					
-					Select profilSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : "); 
+					Select profilSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : "); 
 					
 					try {
 						for(Profile p : registrationService.getAllProfile()){
@@ -151,7 +160,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
-					Select colleagueSelect = new Select((String) RegistrationForm.NAME_FIELD_REGISTRATION[i]+" : ");
+					Select colleagueSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
 					
 					
 					try {

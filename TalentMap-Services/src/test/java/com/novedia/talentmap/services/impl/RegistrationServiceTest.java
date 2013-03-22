@@ -64,7 +64,7 @@ public class RegistrationServiceTest {
 		Registration registration  = new Registration();
 		
 		// When
-		Mockito.when(colleagueDaoMock.check(registration)).thenReturn(collaborator);
+		Mockito.when(colleagueDaoMock.check(registration.getEmail())).thenReturn(collaborator);
 		Colleague result = service.check(registration);
 
 		// Then

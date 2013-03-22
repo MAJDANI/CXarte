@@ -79,7 +79,12 @@ public class Registration {
 	 * Manager Id
 	 */
 	private Integer managerId;
-	
+
+	/**
+	 * Role 
+	 */
+	private Authorization.Role role;
+
 	/**
 	 * Default constructor
 	 */
@@ -504,7 +509,6 @@ public class Registration {
 		this.passwordConfirm = passwordConfirm;
 	}
 
-
 	/**
 	 * @return the colleagueId
 	 */
@@ -535,5 +539,23 @@ public class Registration {
 	public void setAuthenticationId(Integer authenticationId) {
 		this.authenticationId = authenticationId;
 	}
+
+
+	/**
+	 * @return the role
+	 */
+	public Authorization.Role getRole() {
+		return role;
+	}
+
+
+	/**
+	 * @param role the Authorization.Role to set
+	 */
+	public void setRole(Authorization.Role role) {
+		this.role = role;
+	}
+
+
 		
 }

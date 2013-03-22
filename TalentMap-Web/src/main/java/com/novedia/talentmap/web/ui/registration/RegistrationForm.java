@@ -2,20 +2,25 @@ package com.novedia.talentmap.web.ui.registration;
 
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
+import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.RegistrationFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 
 
-public class RegistrationForm extends FormLayout{
+public class RegistrationForm extends FormLayout {
 
 	/**
 	 * 
@@ -39,13 +44,6 @@ public class RegistrationForm extends FormLayout{
 	 */
 	private IRegistrationService registrationService;
 	private IBusinessEngineerService businessEngineerService;
-	
-
-	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Name", "First name","Password","Confirm password",
-		"Email", "Téléphone", "Date of hire", "Profile", "Years of Experience", "Business engineer",
-		 "Manager" };
-	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm","email",
-		"phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
 	
 
 	/**
@@ -92,7 +90,7 @@ public class RegistrationForm extends FormLayout{
 		this.fieldOrderRegistration = new Vector<Object>(ConstantsEnglish.FIELD_ORDER_REGISTRATION.length);
 		CUtils.setOrderForm(this.fieldOrderRegistration, ConstantsEnglish.FIELD_ORDER_REGISTRATION);
 		
-		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService, this.businessEngineerService));
+		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService, this.businessEngineerService, this));
 		
 		BeanItem<Item> registrationBean = new BeanItem(new Registration());
 		this.registrationForm.setItemDataSource(registrationBean, this.fieldOrderRegistration);
@@ -102,6 +100,50 @@ public class RegistrationForm extends FormLayout{
 		addComponent(this.registrationForm);
 	}
 	
+	/**
+	 * Controle la validité du champ Login : Vérifie que ce champ n'est pas déjà en base
+	 */
+	public void validateLogin() {
+		Field fieldLogin = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_LOGIN_FIELD);
+		String login;
+		if (fieldLogin != null && fieldLogin.getValue() != "") {
+			login = (String) fieldLogin.getValue();
+			try {
+				RegistrationService service = (RegistrationService)this.registrationService;
+				int nbFound = service.countLogin(login);
+				if(nbFound>0) {
+					getWindow().showNotification("Ce login (" + login + ") existe déjà");
+					fieldLogin.focus();
+					fieldLogin.setValue("");
+				} 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà en base
+	 */
+	public void validateEmail() {
+		Field fieldEMail = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_EMAIL_FIELD);
+		String eMail;
+		if (fieldEMail != null && fieldEMail.getValue() != "") {
+			eMail = (String) fieldEMail.getValue();
+			try {
+				RegistrationService service = (RegistrationService)this.registrationService;
+				Colleague colleagueFound = service.getByMail(eMail);
+				if(colleagueFound != null) {
+					getWindow().showNotification("Cet email (" + eMail + ") existe déjà");
+					fieldEMail.focus();
+					fieldEMail.setValue("");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	
 	public Form getRegistrationForm() {
 		return registrationForm;

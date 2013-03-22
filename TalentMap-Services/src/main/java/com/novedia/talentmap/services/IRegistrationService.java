@@ -3,7 +3,6 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;

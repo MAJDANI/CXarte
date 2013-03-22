@@ -15,12 +15,14 @@
  */
 package com.novedia.talentmap.web;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.impl.AuthenticationService;
@@ -91,6 +93,7 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	 * the authenticatedScreen
 	 */
 	private AuthenticatedScreen authenticatedScreen;
+	
 	
 	/**
 	 * the loginView
@@ -219,29 +222,28 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 
 		Authentication authenticate = null;
 
-		registration.setLogin(getLogin(registration));
+		//registration.setLogin(getLogin(registration));
 		try {
 
-			// We check if the user is already existing in Database
-			// (Collaborator table)
-			if (registrationService.check(registration) == null) {
-				registrationService.addColleagueFromRegistration(registration);
-			} else {
-				throw new TalentMapSecurityException("Email already used");
-			}
+			registrationService.addColleagueFromRegistration(registration);
 
 			// Password encoding
-			String encodedPassword = CUtils.encodePassword(registration.getPassword());
+			String encodedPassword = CUtils.encodePassword(registration
+					.getPassword());
 			registration.setPassword(encodedPassword);
+			
+			//On positionne le Role par défaut CL Consultant :
+			registration.setRole(Authorization.Role.CL);
+			
 			registrationService.addUserFromRegistration(registration);
-
+			
 			CredentialToken credential = new CredentialToken();
 			credential.setLogin(registration.getLogin());
 			credential.setPassword(registration.getPassword());
 			authenticate = authenticationService.checkUser(credential);
 		} catch (DataAccessException ex) {
 			if (LOGGER.isErrorEnabled()) {
-				LOGGER.error("Technical Exception : ", ex.getMessage());
+				LOGGER.error("DataAccessException : ", ex);
 			}
 		}
 
@@ -368,6 +370,7 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	}
 
 
+	
 	
 	
 

@@ -56,13 +56,13 @@ public class AuthenticationDaoTest {
 		credential.setLogin("v.dibi");
 		credential.setPassword("v.dibi");
 		
-		authentication.setId(1);
 		authentication.setColleagueId(1);
 		authentication.setAuthorization(authorization);
 		authentication.setToken(credential);
-		
-		int addAuth = authenticationDao.add(authentication);
-		Assert.assertEquals(authentication.getId().intValue(), addAuth);
+
+		//TODO REvoir si test bien fait
+		Object addAuth = authenticationDao.add(authentication);
+		Assert.assertNotNull(addAuth);
 	}
 	
 	/**
@@ -83,20 +83,5 @@ public class AuthenticationDaoTest {
 		
 		int updateAuth = authenticationDao.save(authentication);
 		Assert.assertEquals(1, updateAuth);	
-	}
-	/**
-	 * check the authentication exist
-	 */
-	@Test
-	@DataSet("AuthenticateDaoTest.testCheck-result.xml")
-	public void testCheckCredentialToken() {
-		
-		Authentication authExpected = authenticationDao.get(17);
-		ReflectionAssert.assertPropertyLenientEquals("id", 17, authExpected);
-		ReflectionAssert.assertPropertyLenientEquals("token.login", "v.dibi", authExpected);
-		ReflectionAssert.assertPropertyLenientEquals("token.password", "testUpdate1", authExpected);
-		
-		Authentication authActual = authenticationDao.get(17);
-		ReflectionAssert.assertReflectionEquals(authExpected, authActual, ReflectionComparatorMode.IGNORE_DEFAULTS);		
 	}
 }

@@ -27,7 +27,7 @@
     	<property name="businessEngineerService" ref="businessEngineerService" />
     	<property name="authenticatedScreen" ref="authenticatedScreen"/>
     </bean>
-    
+   
 	<bean id="windowBean" class="com.vaadin.ui.Window" scope="session"/>
 	
 	
@@ -97,7 +97,7 @@
 		<property name="missionForm" ref="missionForm"/>
 		<property name="save" ref="saveMissionButton"/>
 		<property name="cancel" ref="cancelMissionButton"/>
-		<property name="missionContainer" ref="missionContainerBean"/>
+<!-- 		<property name="missionContainer" ref="missionContainerBean"/> -->
 		<property name="listMission" ref="listMissionBean"/>
 		
 	</bean>
@@ -367,7 +367,7 @@
 		<constructor-arg name="businessEngineerService" ref="businessEngineerService"/>
 	</bean>
 	
-	<bean id="registrationScreen" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >
+	<bean id="registrationScreenBean" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >
 		<constructor-arg name="application" ref="vaadinBean"/>
 	</bean>
 			

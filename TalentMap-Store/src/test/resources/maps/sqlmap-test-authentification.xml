@@ -7,10 +7,9 @@
  <typeAlias alias="authentication" type="com.novedia.talentmap.model.entity.Authentication"/> 
 
 	<resultMap id="authenticationResult" class="authentication">
-        <result property="id" column="AUTHENTICATION_ID"/>     
-        <result property="colleagueId" column="COLLEAGUE_ID"/> 
         <result property="token.login"  column="LOGIN"/>         
         <result property="token.password"  column="PASSWORD"/>
+        <result property="colleagueId" column="COLLEAGUE_ID"/> 
         <result property="authorization.roleId" column="ROLE_ID"/>
        <!--  <result property="authorization.label" column="LABEL"/>  -->   
     </resultMap>
@@ -20,27 +19,17 @@
 				AND auth.ROLE_ID = role.ROLE_ID
 	</select>	
 	
-	<select id="get" resultMap="authenticationResult" parameterClass="Integer">
-		SELECT * FROM AUTHENTICATION WHERE AUTHENTICATION_ID = #id#
-	</select>
-    
      <insert id="add" parameterClass="Authentication">    	
-     	<selectKey resultClass="Integer" keyProperty="id"> 
-      		SELECT SEQAUTH.NEXTVAL FROM DUAL 
-     	</selectKey> 
-     	
     	INSERT INTO AUTHENTICATION (
-    		AUTHENTICATION_ID,
-    		COLLEAGUE_ID,
-    		ROLE_ID,
     		LOGIN,
     		PASSWORD
+    		COLLEAGUE_ID,
+    		ROLE_ID,
     		)values (
-    		#id#,
-    		#colleagueId#,
-    		#authorization.roleId#,
     		#token.login#,
     		#token.password#
+    		#colleagueId#,
+    		#authorization.roleId#,
     		)
     </insert>	
     

@@ -97,6 +97,7 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_MANAGER_FIELD = "managerId";
 	public static final String REGISTRATION_PASSWORD_FIELD = "password";
 	public static final String REGISTRATION_PASSWORD_CONFIRM_FIELD = "passwordConfirm";
+	public static final String REGISTRATION_LOGIN_FIELD = "login";
 	public static final String REGISTRATION_PHONE_FIELD = "phone";
 	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
 	public static final String REGISTRATION_EMAIL_FIELD = "email";
@@ -123,10 +124,10 @@ public class ConstantsEnglish {
 	 *For Registration
 	 */
 	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Name", "First name","Password","Confirm password",
-		"Email", "Téléphone", "Date of hire", "Profile", "Years of Experience", "Business engineer",
+		"Choose a login", "Email", "Téléphone", "Date of hire", "Profile", "Years of Experience", "Business engineer",
 		 "Manager" };
-	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm","email",
-		"phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
+	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm",
+		"login", "email", "phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
 	/**
 	 * For SkillCollaboratorContent
 	 */

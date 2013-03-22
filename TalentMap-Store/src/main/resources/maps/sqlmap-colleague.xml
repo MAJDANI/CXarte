@@ -142,7 +142,7 @@
 		ORDER BY C1.LAST_NAME
     </select>
     
-    <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">
+    <select id="getByMail" parameterClass="String" resultMap="colleagueResult">
         SELECT * FROM COLLEAGUE WHERE EMAIL = #email#
     </select>
     
