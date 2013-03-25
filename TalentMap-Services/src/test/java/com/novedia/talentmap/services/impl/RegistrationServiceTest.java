@@ -55,17 +55,18 @@ public class RegistrationServiceTest {
 	 * 
 	 */
 	@Test
-	public void checkRegistrationReturnAColleague(){
+	public void getByMailReturnAColleague(){
 		
 		// Given
 		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
 		
 		// TODO : rendre les instances de registration immutables
 		Registration registration  = new Registration();
-		
+		registration.setEmail("mail@gmail.com");
+				
 		// When
-		Mockito.when(colleagueDaoMock.check(registration.getEmail())).thenReturn(collaborator);
-		Colleague result = service.check(registration);
+		Mockito.when(colleagueDaoMock.getByMail(registration.getEmail())).thenReturn(collaborator);
+		Colleague result = service.getByMail(registration.getEmail());
 
 		// Then
 		Assert.assertNotNull(result);
