@@ -29,6 +29,7 @@
     	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = #conceptId#
     	AND tool.CONCEPT_ID = concept.CONCEPT_ID 
     </select>	
+    
         
     <insert id="add" parameterClass="com.novedia.talentmap.model.entity.Tool">
     	

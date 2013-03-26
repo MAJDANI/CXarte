@@ -7,8 +7,17 @@
 
 	<typeAlias alias="mission" type="com.novedia.talentmap.model.entity.Mission"/>
  	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
+ 	<typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool"/> 
  
-	<resultMap id="missionResult"         class="mission">
+ 	<resultMap id="toolResult"                    class="tool">
+    	<result property="id"                     column="TOOL_ID"/> 
+        <result property="name"                   column="TOOL_NAME"/>      
+        <result property="concept.id"             column="CONCEPT_ID"/>
+    </resultMap>
+    
+    
+ 
+	<resultMap id="missionResult"                           class="mission">
 		<result property="id"             					column="MISSION_ID" />
 		<result property="colleagueId"             			column="COLLEAGUE_ID" />
 		<result property="title"           					column="TITLE" />
@@ -18,7 +27,15 @@
 		<result property="endDate"       					column="END_DATE" />
 		<result property="client.id" 						column="CLIENT_ID"/>
 		<result property="client.name" 						column="CLIENT_NAME"/>
+		<result property="tools" 							column="MISSION_ID" 	select="mission.getMissionTools"/>
 	</resultMap>
+	
+	
+	 <select id="getMissionTools" resultMap="toolResult" parameterClass="Integer">
+		SELECT * FROM TOOL tools, MISSION_TOOL mission_tool 
+		WHERE mission_tool.MISSION_ID = #value# 
+		AND mission_tool.TOOL_ID = tools.TOOL_ID
+	</select>	
 
 	<select id="get" resultMap="missionResult" parameterClass="Integer">
 		SELECT * FROM MISSION mission, CLIENT client
@@ -36,6 +53,8 @@
 		AND mission.CLIENT_ID = client.CLIENT_ID
 		AND mission.END_DATE = (SELECT MAX(END_DATE) FROM MISSION mission WHERE COLLEAGUE_ID = #value#)
 	</select>
+	
+	
 	
 	
 	<update id="save" parameterClass="Mission">
@@ -57,10 +76,11 @@
 		values 
 		(#id#, #colleagueId#, #title#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
 
-		<selectKey keyProperty="id" resultClass="Integer">
-			SELECT LAST_INSERT_ID() AS id
-		</selectKey>
 	</insert>
+	
+
+	
+	
 
 	<delete id="delete" parameterClass="Integer">
 		DELETE MISSION WHERE MISSION_ID = #id#
