@@ -37,14 +37,6 @@ List<Concept> getAllConcepts();
 List<Category> getAllCategories();
 
 /**
-* Add one skill.
-* @class IAdminService.java
-* @param skill a skill
-* @return Return an error message callback
-*/
-Map<String, Object> addSkill(VSkill skill);
-
-/**
  * Get all concepts available for a category
  * @param category
  * @return List of concept

@@ -160,39 +160,6 @@ public List<Concept> getAllConceptByCategory(Category category) throws DataAcces
 
 
 /**
- * Add one category.
- * @class AdminService.java
- * @param skill a skill
- * @throws DataAccessException
- */
-void saveCategory(final VSkill skill) throws DataAccessException {
-
-	int categoryId;
-	this.category = this.categoryDao.check(skill.getCategoryName());
-
-	if (this.category == null && this.tool == null) {
-		this.category = Category.builder().name(skill.getCategoryName()).build();
-		categoryId = this.categoryDao.save(this.category);
-	} 
-}
-
-// TODO : Retourner la valeur d'insertion type integer
-/**
- * Save a concept.
- * @param skill
- */
-void saveConcept(final VSkill skill) {
-
-	if (this.category != null) {
-		this.concept = this.conceptDao.check(skill.getConceptName());
-
-		if (this.concept == null && this.tool == null) {
-			this.concept = Concept.builder().name(skill.getConceptName()).category(this.category).build();
-			this.conceptDao.save(this.concept);
-		}
-	}
-}
-/**
  * Save a Tool.
  * @param skill
  * @return Tool
@@ -214,34 +181,6 @@ Tool saveTool(final VSkill skill) throws DataAccessException {
 	return tool;
 }
 
-/**
- * Add one Skill
- * @return <String, Object> map
- * @throws DataAccessException
- */
-@Override
-public Map<String, Object> addSkill(VSkill skill) throws DataAccessException {
-
-	this.tool = this.toolDao.check(skill.getToolName());
-	saveCategory(skill);
-	saveConcept(skill);
-
-	if (saveTool(skill) != null) {
-		this.mapNotification.put("typeError", 1);
-		this.mapNotification.put("messageError", "La compétence a bien été ajoutée");
-	}
-	else {
-
-		this.mapNotification.put("typeError", 2);
-		this.mapNotification.put(
-				"messageError",
-				"Cet outil existe déjà pour la catégorie \""
-						+ this.category.getName()
-						+ "\" et le concept \""
-						+ this.concept.getName() + "\" .");
-	}
-	return this.mapNotification;
-}
 
 /**
  * This method allow to update one Skill.
