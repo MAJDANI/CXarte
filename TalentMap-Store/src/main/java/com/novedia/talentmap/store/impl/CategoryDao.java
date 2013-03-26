@@ -84,7 +84,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	 */
 	@Override
 	public Category check(String name) throws DataAccessException {
-		return (Category)this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_CATEGORY, name);
+		throw new UnsupportedOperationException();
 	}
 	
 	/**

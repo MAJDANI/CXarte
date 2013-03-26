@@ -54,10 +54,6 @@
     		)
     </insert>
     
-    <select id="check" resultMap="conceptResult" parameterClass="java.util.HashMap">
-		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category.id#
-	</select>	
-	
 	<select id="checkObject" resultMap="conceptResult" parameterClass="concept">
 		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category.id#
 	</select>	

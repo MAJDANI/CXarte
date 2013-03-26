@@ -209,32 +209,6 @@ private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
 		Mockito.verify(categoryDaoMock, Mockito.times(1)).getAll();
 	}
 	
-	@Test(expected = DataAccessException.class)
-	public void saveCategoryThrowsDataAccessException() throws DataAccessException {
-		
-		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
-		
-		//When
-		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(categoryDaoMock).save(Mockito.any(Category.class));
-		service.saveCategory(vSkill);
-	}
-
-	@Test
-	public void saveCategoryWhenCategoryIsNull(){
-
-		// Given
-		Category category = Category.builder().id(1).name("JAVA").build();		
-		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("ORM").toolName("HIBERNATE").build();
-		
-		// When
-		Mockito.when(categoryDaoMock.check(Mockito.anyString())).thenReturn(null);
-		//Mockito.when(categoryDaoMock.save(category)).thenReturn(1);
-		service.saveCategory(vSkill);
-
-		// Then
-		assertNotNull(vSkill);
-		Mockito.verify(categoryDaoMock, Mockito.times(1)).save(Mockito.any(Category.class));				
-	}
 
 	@Test
 	public void saveCategoryWhenCategoryNotNull(){
@@ -284,53 +258,6 @@ private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
 		
 		//Then
 		assertNotNull(toolActual);		
-	}
-	
-	@Test
-	public void saveConceptCallsConceptDaoWhenCategoryNotNullAndConceptNull() {
-		
-		//Given
-		Integer conceptId = 1;
-		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("").toolName("HIBERNATE").build();
-				
-		Category category = Category.builder().id(1).name("JAVA").build();
-		service.setCategory(category);
-		
-		//When
-		Mockito.when(conceptDaoMock.check(Mockito.anyString())).thenReturn(null);
-		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(conceptId);
-		service.saveConcept(vSkill);
-		
-		//Then
-		Mockito.verify(conceptDaoMock, Mockito.times(1)).save(Mockito.any(Concept.class));
-	}
-	
-	@Test
-	public void saveConceptCallsConceptDaoWhenCategoryNullAndConceptNull() {
-		//Given
-		VSkill vSkill =  VSkill.builder().categoryName("JAVA").conceptName("").toolName("HIBERNATE").build();			
-		Category category = Category.builder().id(1).name("JAVA").build();
-		service.setCategory(category);
-		
-		//When
-		Mockito.when(conceptDaoMock.save(Mockito.any(Concept.class))).thenReturn(0);
-		service.saveConcept(vSkill);
-		
-		//Then
-		Mockito.verify(conceptDaoMock, Mockito.times(1)).save(Mockito.any(Concept.class));
-	}
-	
-
-	@Test(expected = DataAccessException.class)
-	public void saveConceptThrowsDataAccessException() throws DataAccessException{
-		//Given
-		VSkill vSkill = new VSkill();
-		service.setCategory(new Category());
-		
-		//When
-		Mockito.when(conceptDaoMock.check(Mockito.anyString())).thenReturn(null);
-		Mockito.doThrow(new DataAccessResourceFailureException(DATA_ACCESS_ERROR_MESSAGE)).when(conceptDaoMock).save(Mockito.any(Concept.class));
-		service.saveConcept(vSkill);
 	}
 	
 	@Test

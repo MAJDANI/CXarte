@@ -100,10 +100,6 @@ public static final String GET_ALL_CATEGORY = "category.getAll";
  * Constant request to insert the category.
  */
 public static final String  ADD_CATEGORY = "category.add";
-/**
- * Constant request to check a category.
- */
-public static final String CHECK_CATEGORY = "category.check";
 
 /**
  * Constant request to check a category.
@@ -156,11 +152,6 @@ public static final String SAVE_CONCEPT = "concept.save";
  * Constant request to delete concept.
  */
 public static final String DELETE_CONCEPT = "concept.delete";
-
-/**
- * Constant request to check a concept.
- */
-public static final String CHECK_CONCEPT = "concept.check";
 
 /**
  * Constant request to check a concept.
@@ -351,11 +342,6 @@ public static final String ADD_TOOL = "tool.add";
  * Constant request to update a collaborator.
  */
 public static final String SAVE_TOOL = "tool.save";
-
-/**
- * Constant request id to check a tool.
- */
-public static final String CHECK_TOOL = "tool.check";
 
 /**
  * Constant request id to check a tool.

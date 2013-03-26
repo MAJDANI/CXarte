@@ -37,10 +37,6 @@
     	values (#id#, #concept.id#, upper(#name#))
     </insert>    
     
-    <select id="check" resultClass="tool" parameterClass="String">
-		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
-	</select>		
-	
 	<update id="save" parameterClass="Tool">
 		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
 	</update> 

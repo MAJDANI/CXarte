@@ -144,10 +144,6 @@
 		ORDER BY C1.LAST_NAME
     </select>
     
-    <select id="check" parameterClass="com.novedia.talentmap.model.entity.Registration" resultMap="colleagueResult">
-        SELECT * FROM COLLEAGUE WHERE EMAIL = #email#
-    </select>
-    
     <insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
 	    <selectKey resultClass="Integer" keyProperty="colleagueId">
       		SELECT SEQCOLLEAGUE.NEXTVAL FROM DUAL

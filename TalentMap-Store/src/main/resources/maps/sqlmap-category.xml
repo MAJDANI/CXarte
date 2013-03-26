@@ -39,10 +39,6 @@
     		)
     </insert>	
     
-    <select id="check" resultMap="categoryResult" parameterClass="String">
-		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
-	</select>	
-	
 	<select id="checkObject" resultMap="categoryResult" parameterClass="category">
 		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
 	</select>

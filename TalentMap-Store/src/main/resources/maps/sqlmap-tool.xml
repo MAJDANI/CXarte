@@ -46,10 +46,6 @@
     		)
     </insert>
     
-    <select id="check" resultClass="tool" parameterClass="String">
-		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#)
-	</select>		
-	
 	<select id="checkObject" resultClass="tool" parameterClass="tool">
 		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#) AND CONCEPT_ID = #concept.id#
 	</select>

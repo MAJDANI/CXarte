@@ -333,50 +333,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	}
 
 	/**
-	 * Add one skill(category, concept, tool)
-	 * 
-	 * @class ManageSkillContent.java
-	 */
-	private void addOneSkill() {
-
-		// Get all input value (category, concept, tool)
-		String categoryName = (String) this.formSkill.getField(
-				FIELD_ORDER_SKILL[0]).getValue();
-		String conceptName = (String) this.formSkill.getField(
-				FIELD_ORDER_SKILL[1]).getValue();
-		String toolName = (String) this.formSkill
-				.getField(FIELD_ORDER_SKILL[2]).getValue();
-
-		// Test if the field is null
-		if (categoryName != null && conceptName != null && toolName != null) {
-
-			VSkill vSkill = new VSkill();
-			vSkill.setCategoryName(categoryName.trim());
-			vSkill.setConceptName(conceptName.trim());
-			vSkill.setToolName(toolName.trim());
-
-			try {
-
-				// Add the skill in database
-				Map<String, Object> mapNotification = this.adminService.addSkill(vSkill);
-				CUtils.showMessage(mapNotification, getWindow());
-
-				// Re build the tree skill
-				buildTreeSkill();
-
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			}
-
-		} else {
-
-			CUtils.showMessage(MESSAGE_FIELD_EMPTY, Message.WARNING,
-					getWindow());
-		}
-	}
-
-	/**
 	 * Show the add view
 	 * 
 	 * @class ManageSkillContent.java
