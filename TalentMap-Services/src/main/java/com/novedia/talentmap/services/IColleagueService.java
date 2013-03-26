@@ -3,6 +3,7 @@ package com.novedia.talentmap.services;
 import java.util.List;
 import java.util.Map;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -40,14 +41,14 @@ Integer saveColleague(Colleague colleague);
  * @param mission a mission
  * @return id of the mission inserted
  */
-Integer addMission(Mission mission);
+Integer addMission(MissionDto mission);
 
 /**
  * Update a mission.
  * @param mission a mission
  * @return int
  */
-Integer saveMission(Mission mission);
+Integer saveMission(MissionDto mission);
 
 /**
  * Delete a mission.
@@ -77,7 +78,7 @@ List<Mission> getAllMissions(Integer collabId);
  * @param collabId a id
  * @return List<Mission>
  */
-Mission getLastMission(Integer collabId);
+MissionDto getLastMission(Integer collabId);
 
 /**
  * Get manager.

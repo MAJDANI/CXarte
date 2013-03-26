@@ -1,7 +1,13 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.CUtils;
@@ -252,8 +258,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		// ADD NEW MISSION
 		if (button == this.btnAddMission) {
 			//On vide le contenu de MissionForm
-			missionForm = missionForm.buildMissionFormColleague();
 			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
+			missionForm = missionForm.buildMissionFormColleague();
 			//On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
 			// On indique que l'action courante est une création (pas une
@@ -263,6 +269,33 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		// MODIFY OR DELETE EXISTING MISSION
 		else {
 			selectedMission = (Mission) this.listMission.getValue();
+			
+			MissionDto selectedMissionDTO = new MissionDto();
+	
+			// Recopie des attributs "simples"
+			Set<Tool> toolsSet = new HashSet<Tool>();
+			List<Tool> tools = selectedMission.getTools();
+			
+			if(tools.size()>0)
+			{
+				for(Tool t : tools)
+				{
+					toolsSet.add(t);
+				}
+				
+				selectedMissionDTO.setTools(toolsSet);
+			}
+
+			selectedMissionDTO.setId(selectedMission.getId());
+			selectedMissionDTO.setClient(selectedMission.getClient());
+			selectedMissionDTO.setStartDate(selectedMission.getStartDate());
+			selectedMissionDTO.setEndDate(selectedMission.getEndDate());
+			selectedMissionDTO.setTitle(selectedMission.getTitle());
+			selectedMissionDTO.setPlace(selectedMission.getPlace());
+			selectedMissionDTO.setNotes(selectedMission.getNotes());
+			selectedMissionDTO.setColleagueId(selectedMission.getColleagueId());
+			selectedMissionDTO.setTools(toolsSet);
+			
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if (null == selectedMission) {
 				getWindow().showNotification(
@@ -272,7 +305,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
 					missionForm = missionForm.buildMissionFormColleague();
-					fillAddMissionPanelWithMission(selectedMission);
+					fillAddMissionPanelWithMission(selectedMissionDTO);
 					// On indique que l'action courante est une modification de
 					// mission (pas une création)
 					this.missionForm
@@ -381,10 +414,10 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @param missionId
 	 *            : the id of the mission selected in the table
 	 */
-	private void fillAddMissionPanelWithMission(Mission mission) {
+	private void fillAddMissionPanelWithMission(MissionDto missionDto) {
 
 		enableAddMissionPanel();
-		this.missionForm.fillMissionFormWithMission(mission);
+		this.missionForm.fillMissionFormWithMission(missionDto);
 
 	}
 

@@ -2,13 +2,16 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.ManagerDao;
@@ -31,6 +34,11 @@ public class ColleagueService implements IColleagueService {
 	 * The mission DAO.
 	 */
 	private IDao<Mission> missionDao;
+	
+	/**
+	 * The mission DAO.
+	 */
+	private IDao<MissionDto> missionDaoForDto;
 	
 	/**
 	 * The manager DAO.
@@ -74,16 +82,18 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer addMission(final Mission mission) throws DataAccessException {
-		return missionDao.add(mission);
+	public Integer addMission(final MissionDto missionDto) throws DataAccessException {
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		return missionDao.add(missionDao.createEntity(missionDto));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer saveMission(final Mission mission) throws DataAccessException {
-		return missionDao.save(mission);
+	public Integer saveMission(final MissionDto missionDto) throws DataAccessException {
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		return missionDao.save(missionDao.createEntity(missionDto));
 	}
 
 	/**
@@ -107,9 +117,10 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Mission getLastMission(final Integer colleagueId)throws DataAccessException {
+	public MissionDto getLastMission(final Integer colleagueId)throws DataAccessException {
 		MissionDao missionDao = (MissionDao) this.missionDao;
-		return missionDao.getLastMissionByColleagueId(colleagueId);
+		Mission m =  missionDao.getLastMissionByColleagueId(colleagueId);
+		return missionDao.createDTO(m);
 	}
 	
 	
@@ -195,5 +206,13 @@ public class ColleagueService implements IColleagueService {
 	 */
 	public void setManagerDao(IDao<Manager> managerDao) {
 		this.managerDao = managerDao;
+	}
+
+	public IDao<MissionDto> getMissionDaoForDto() {
+		return missionDaoForDto;
+	}
+
+	public void setMissionDaoForDto(IDao<MissionDto> missionDaoForDto) {
+		this.missionDaoForDto = missionDaoForDto;
 	}
 }

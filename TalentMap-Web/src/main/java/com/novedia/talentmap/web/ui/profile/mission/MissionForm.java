@@ -1,12 +1,16 @@
 package com.novedia.talentmap.web.ui.profile.mission;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.Vector;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
@@ -47,7 +51,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	private IColleagueService collabService;
 	
 	private IClientService clientService;
-	
+	private ISkillService skillService;
 
 	/**
 	 * POJO
@@ -73,6 +77,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final String DATE_DEBUT = "start Date";
 	public static final String DATE_FIN = "End date";
 	public static final String COMMENTAIRE = "Comment";
+	public static final String OUTILS1 = "Outils n°1";
+	public static final String OUTILS2 = "Outils n°2";
+	public static final String OUTILS3 = "Outils n°3";
 
 	//3	constants to identify which action is source of calling updateObservators()
 	public static final String ACTION_CANCEL = "CANCEL";
@@ -86,7 +93,8 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	//3 constants to validate fields in MissionForm
 	public static final int VALIDATION_FIELD_MISSING = 0;
 	public static final int VALIDATION_INVALID_PERIOD = 1;
-	public static final int VALIDATION_VALID_FORM = 2;
+	public static final int VALIDATION_INVALID_SELECTION = 2;
+	public static final int VALIDATION_VALID_FORM = 3;
 	
 	private String currentAction;
 	private String currentSaveMode;
@@ -134,6 +142,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 //		buildMain();
 //	}
 
+	
 	public void buildMain() {
 
 		try {
@@ -155,9 +164,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void buildMissionForm() throws Exception {
 		//this.missionForm.setLayout(this.missionFormLayout);
 		CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
-		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService));
+		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService,this.skillService,false));
 		
-		BeanItem<Item> missionBean = new BeanItem(new Mission());
+		BeanItem<Item> missionBean = new BeanItem(new MissionDto());
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
 		this.missionForm.setImmediate(true);
 		
@@ -169,7 +178,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		missionFormLayout.setMargin(true);
 		missionFormLayout.setSpacing(true);
 		missionFormLayout.setColumns(3);
-		missionFormLayout.setRows(2);
+		missionFormLayout.setRows(3);
 		missionForm.setLayout(missionFormLayout);
 	}
 	
@@ -198,9 +207,10 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		if(this.save == button){
 			setCurrentAction(ACTION_SAVE);
 			
-			BeanItem<Mission> missionItem = (BeanItem<Mission>) this.missionForm.getItemDataSource();
-			Mission missionToInsert = missionItem.getBean();
+			BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.missionForm.getItemDataSource();
+			MissionDto missionToInsert = missionItem.getBean();
 			
+
 			int formValidation = validatedMissionForm(missionToInsert);
 			switch (formValidation) {
 			case VALIDATION_FIELD_MISSING :
@@ -209,6 +219,10 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				break;
 			case VALIDATION_INVALID_PERIOD :
 				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_PERIOD,
+						Notification.TYPE_ERROR_MESSAGE);
+				break;
+			case VALIDATION_INVALID_SELECTION :
+				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_SELECTION,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
 			case VALIDATION_VALID_FORM :
@@ -239,9 +253,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @param itemMission 
 	 * @param missionId
 	 */
-	public void fillMissionFormWithMission(Mission mission) {
+	public void fillMissionFormWithMission(MissionDto missionDto) {
 
-		BeanItem<Mission> beanMissionToModify = new BeanItem<Mission>(mission);
+		BeanItem<MissionDto> beanMissionToModify = new BeanItem<MissionDto>(missionDto);
 		this.missionForm.setItemDataSource(beanMissionToModify, this.fieldOrderMission);
 
 	}
@@ -250,7 +264,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Empties all properties in missionForm
 	 */
 	public void emptyMissionForm() {
-		BeanItem<Item> missionBean = new BeanItem(new Mission());//TODO
+		BeanItem<Item> missionBean = new BeanItem(new MissionDto());//TODO
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
 	}
 	
@@ -262,7 +276,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD
 	 * or VALIDATION_VALID_FORM
 	 */
-	private int validatedMissionForm (Mission mission) {
+	private int validatedMissionForm (MissionDto mission) {
 		
 		if( 	!isNotEmpty(mission.getClient()) ||
 				!isNotEmpty(mission.getTitle()) ||
@@ -272,6 +286,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			) return VALIDATION_FIELD_MISSING;
 		if(!isAValidPeriod(mission.getStartDate(),mission.getEndDate())
 			) return VALIDATION_INVALID_PERIOD;
+		if(!isAValidSelection(mission.getTools()))
+			return VALIDATION_INVALID_SELECTION;
+			
 				
 		return VALIDATION_VALID_FORM;
 	}
@@ -285,6 +302,20 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 */
 	private boolean isAValidPeriod(Date startDate, Date endDate) {
 		if((endDate == null) || ((endDate != null) && (endDate.after(startDate)))) return true;
+		return false;
+	}
+	
+	/**
+	 * Check if selected tools are between 1 and 3
+	 * @param tools
+	 * @return false if the parameter value is not between 1 and 3
+	 */
+	private boolean isAValidSelection(Set<Tool> tools) {
+		if(tools!=null){
+			if(tools.size()<=3)
+				return true;
+		}
+		
 		return false;
 	}
 	
@@ -307,7 +338,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * the list of missions in the table is updated with fresh data.
 	 * @param missionToInsert
 	 */
-	private void insertMission(Mission missionToInsert) {
+	private void insertMission(MissionDto missionToInsert) {
 		try {
 			int result = this.collabService.addMission(missionToInsert); 
 			if(result !=0){
@@ -331,7 +362,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * the list of missions in the table is updated with fresh data.
 	 * @param missionToUpdate
 	 */
-	private void updateMission(Mission missionToUpdate) {
+	private void updateMission(MissionDto missionToUpdate) {
 		try {
 			this.missionForm.commit();
 			int result = this.collabService.saveMission(missionToUpdate);
@@ -493,6 +524,14 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.currentSaveMode = currentSaveMode;
 	}
 
+	public ISkillService getSkillService() {
+		return skillService;
+	}
+
+	public void setSkillService(ISkillService skillService) {
+		this.skillService = skillService;
+	}
+
 
 	public Authentication getAuthentication() {
 		return authentication;
@@ -519,6 +558,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 
 
+	
 	
 	
 }

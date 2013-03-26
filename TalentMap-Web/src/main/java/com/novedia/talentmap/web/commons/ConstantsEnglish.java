@@ -52,7 +52,7 @@ public class ConstantsEnglish {
 	 * Données Profil - Mission
 	 */
 	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Title", "Customer",
-		"Place", "Start mission", "End mission", "Comment" };
+		"Place", "Start mission", "End mission", "Comment","tools" };
 
 	public static final String FIELD_MISSION_NAME = "title";
 	public static final String FIELD_MISSION_CLIENT = "client";
@@ -60,6 +60,7 @@ public class ConstantsEnglish {
 	public static final String FIELD_MISSION_START_DATE = "startDate";
 	public static final String FIELD_MISSION_END_DATE = "endDate";
 	public static final String FIELD_MISSION_NOTES = "notes";
+	public static final String FIELD_MISSION_TOOLS = "tools";
 
 	public static final Object[] FIELD_ORDER_MISSION = new Object[] { 
 		FIELD_MISSION_NAME, 
@@ -67,7 +68,8 @@ public class ConstantsEnglish {
 		FIELD_MISSION_PLACE, 
 		FIELD_MISSION_START_DATE, 
 		FIELD_MISSION_END_DATE, 
-		FIELD_MISSION_NOTES };
+		FIELD_MISSION_NOTES,
+		FIELD_MISSION_TOOLS};
 
 	public static final String ADMIN_DATA_LABEL = "Administrative data";
 	public static final String LAST_MISSION_LABEL = "Last mission";
@@ -85,6 +87,7 @@ public class ConstantsEnglish {
 	public static final String MISSION_MSG_DATA_INSERTED_KO = "Be careful , the mission has not been added";
 
 	public static final String MISSION_MSG_INVALID_PERIOD = "The period is invalid";
+	public static final String MISSION_MSG_INVALID_SELECTION = "The tools selection is invalid";
 	
 	/**
 	 * Données Registration
@@ -111,7 +114,7 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Incorrect phone number";
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Years of Experience incorrect";
 	public static final String REGISTRATION_ERROR_EMAIL = "Email is invalid";
-
+	
 	/**
 	 * For CollaboratorForm
 	 */

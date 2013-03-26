@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.vaadin.data.util.BeanItemContainer;
 
@@ -35,6 +36,7 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 			List<Mission> listMission = this.collabService.getAllMissions(collabId);
 			// TODO : Rustine pour éviter la NPE au démarrage de l'application
 			if(listMission!=null){
+				
 				for(Mission m : listMission){
 					addBean(m);
 					//System.out.println("MissionContainer.fillContainer() bean m = " + m);

@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Mission;
@@ -162,9 +163,9 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	private int saveDataMission(){
 		try {
 			this.collabForm.getFormMission().commit();
-				BeanItem<Mission> missionItem = (BeanItem<Mission>) this.collabForm.getFormMission()
+				BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.collabForm.getFormMission()
 						.getItemDataSource();
-				Mission mission = missionItem.getBean();
+				MissionDto mission = missionItem.getBean();
 				return this.colleagueService.saveMission(mission);
 		} catch (InvalidValueException invalidVE) {
 			return 0;

@@ -2,6 +2,8 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -59,6 +61,11 @@ public class Mission implements Serializable {
 	 * End date of the mission
 	 */
 	private Date endDate;
+	
+	/**
+	 * Tools of the mission
+	 */
+	private List<Tool> tools;
 
 	/**
 	 * Build the class Mission.java
@@ -67,6 +74,24 @@ public class Mission implements Serializable {
 	}
 	
 	
+	/**
+	 * get tools of the mission
+	 * @return the tools
+	 */
+	public List<Tool> getTools() {
+		return tools;
+	}
+
+
+	/**
+	 * set tools of the mission
+	 * @param tools the tools to set
+	 */
+	public void setTools(List<Tool> tools) {
+		this.tools = tools;
+	}
+
+
 	/**
 	 * Get the mission id
 	 * 
@@ -77,7 +102,7 @@ public class Mission implements Serializable {
 	}
 	
 	/**
-	 * Set the mission id
+	 * List the mission id
 	 * 
 	 * @param id
 	 */
@@ -96,7 +121,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the client value
+	 * List the client value
 	 * 
 	 * @param client
 	 *            the client to set
@@ -115,7 +140,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the startDate value
+	 * List the startDate value
 	 * 
 	 * @param startDate
 	 *            the startDate to set
@@ -134,7 +159,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the endDate value
+	 * List the endDate value
 	 * 
 	 * @param endDate
 	 *            the endDate to set
@@ -153,7 +178,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the name value
+	 * List the name value
 	 * 
 	 * @param name
 	 *            the name to set
@@ -172,7 +197,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the place value
+	 * List the place value
 	 * 
 	 * @param place
 	 *            the place to set
@@ -191,7 +216,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the notes
+	 * List the notes
 	 * 
 	 * @param notes
 	 *            the notes to set
@@ -209,7 +234,7 @@ public class Mission implements Serializable {
 	}
 
 	/**
-	 * Set the colleague id
+	 * List the colleague id
 	 * @param colleagueId
 	 */
 	public void setColleagueId(Integer colleagueId) {
@@ -292,6 +317,7 @@ public class Mission implements Serializable {
 		this.notes = builder.notes;
 		this.startDate = builder.startDate;
 		this.endDate = builder.endDate;
+		this.tools = builder.tools;
 	}
 	
 
@@ -341,9 +367,14 @@ public class Mission implements Serializable {
 		 * End date of the mission
 		 */
 		private Date endDate;
+		
+		/**
+		 * tools of the mission
+		 */
+		private List<Tool> tools;
 
 		/**
-		 * Set the mission id
+		 * List the mission id
 		 * 
 		 * @param id
 		 *            mission identifier
@@ -356,7 +387,7 @@ public class Mission implements Serializable {
 		}
 		
 		/**
-		 * Set the colleague
+		 * List the colleague
 		 * 
 		 * @param colleague
 		 *            the linked colleague
@@ -369,7 +400,7 @@ public class Mission implements Serializable {
 		}
 
 		/**
-		 * Set the mission title
+		 * List the mission title
 		 * 
 		 * @param title
 		 *            the mission title
@@ -382,7 +413,7 @@ public class Mission implements Serializable {
 		}
 
 		/**
-		 * Set place of the mission
+		 * List place of the mission
 		 * 
 		 * @param place
 		 *            the mission's place
@@ -395,7 +426,7 @@ public class Mission implements Serializable {
 		}
 
 		/**
-		 * Set the client name
+		 * List the client name
 		 * 
 		 * @param client the client name
 		 * 
@@ -407,7 +438,7 @@ public class Mission implements Serializable {
 		}
 		
 		/**
-		 * Set the notes about the mission
+		 * List the notes about the mission
 		 * 
 		 * @param notes
 		 *            the comments about the mission
@@ -419,7 +450,7 @@ public class Mission implements Serializable {
 		}
 		
 		/**
-		 * Set the start date
+		 * List the start date
 		 * 
 		 * @param startDate
 		 *            the mission's start date
@@ -431,7 +462,7 @@ public class Mission implements Serializable {
 		}
 		
 		/**
-		 * Set the end date
+		 * List the end date
 		 * 
 		 * @param endDate
 		 *            the mission's end date
@@ -439,6 +470,18 @@ public class Mission implements Serializable {
 		 */
 		public Builder endDate(final Date endDate) {
 			this.endDate = endDate;
+			return this;
+		}
+		
+		/**
+		 * List the tools
+		 * 
+		 * @param tools
+		 *            the mission's tools
+		 * @return the builder
+		 */
+		public Builder tools(final List<Tool> tools) {
+			this.tools = tools;
 			return this;
 		}
 		

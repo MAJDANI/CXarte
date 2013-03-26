@@ -201,6 +201,16 @@ public static final String GET_ALL_CLIENTS = "client.getAll";
 // MISSION REQUESTS
 
 /**
+ * This constant is used to retrieve all mission for a colleague id.
+ */
+public static final String GET_ALL = "mission.getAll";
+
+/**
+ * This constant is used to retrieve tools of a mission.
+ */
+public static final String GET_MISSION_TOOLS = "mission.getMissionTools";
+
+/**
  * This constant is used to retrieve a mission.
  */
 public static final String GET_MISSION = "mission.get";
@@ -231,6 +241,18 @@ public static final String SAVE_MISSION = "mission.save";
  */
 public static final String GET_ALL_CLIENTS_NAME = "mission.getAllClientsName";
 
+//MISSION_TOOL REQUESTS
+
+/**
+ *  Constant request to add a tool to a mission
+ */
+public static final String ADD_MISSION_TOOL = "mission_tool.add";
+
+
+/**
+ *  Constant request to delete tools for a mission
+ */
+public static final String DELETE_MISSION_TOOL = "mission_tool.delete";
 
 // PROFILE REQUESTS
 
