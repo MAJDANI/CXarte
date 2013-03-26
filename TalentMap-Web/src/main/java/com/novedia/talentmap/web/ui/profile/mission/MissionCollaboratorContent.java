@@ -275,38 +275,38 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		else {
 			selectedMission = (Mission) this.listMission.getValue();
 			
-			MissionDto selectedMissionDTO = new MissionDto();
-	
-			// Recopie des attributs "simples"
-			Set<Tool> toolsSet = new HashSet<Tool>();
-			List<Tool> tools = selectedMission.getTools();
-			
-			if(tools.size()>0)
-			{
-				for(Tool t : tools)
-				{
-					toolsSet.add(t);
-				}
-				
-				selectedMissionDTO.setTools(toolsSet);
-			}
-
-			selectedMissionDTO.setId(selectedMission.getId());
-			selectedMissionDTO.setClient(selectedMission.getClient());
-			selectedMissionDTO.setStartDate(selectedMission.getStartDate());
-			selectedMissionDTO.setEndDate(selectedMission.getEndDate());
-			selectedMissionDTO.setTitle(selectedMission.getTitle());
-			selectedMissionDTO.setPlace(selectedMission.getPlace());
-			selectedMissionDTO.setNotes(selectedMission.getNotes());
-			selectedMissionDTO.setColleagueId(selectedMission.getColleagueId());
-			selectedMissionDTO.setTools(toolsSet);
-			
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if (null == selectedMission) {
 				getWindow().showNotification(
 						"Please select a mission",
 						Notification.TYPE_WARNING_MESSAGE);
 			} else {
+				MissionDto selectedMissionDTO = new MissionDto();
+				
+				// Recopie des attributs "simples"
+				Set<Tool> toolsSet = new HashSet<Tool>();
+				List<Tool> tools = selectedMission.getTools();
+				
+				if(tools.size()>0)
+				{
+					for(Tool t : tools)
+					{
+						toolsSet.add(t);
+					}
+					
+					selectedMissionDTO.setTools(toolsSet);
+				}
+
+				selectedMissionDTO.setId(selectedMission.getId());
+				selectedMissionDTO.setClient(selectedMission.getClient());
+				selectedMissionDTO.setStartDate(selectedMission.getStartDate());
+				selectedMissionDTO.setEndDate(selectedMission.getEndDate());
+				selectedMissionDTO.setTitle(selectedMission.getTitle());
+				selectedMissionDTO.setPlace(selectedMission.getPlace());
+				selectedMissionDTO.setNotes(selectedMission.getNotes());
+				selectedMissionDTO.setColleagueId(selectedMission.getColleagueId());
+				selectedMissionDTO.setTools(toolsSet);
+
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
 					//missionForm = missionForm.buildMissionFormColleague();

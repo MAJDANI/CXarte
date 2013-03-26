@@ -18,13 +18,13 @@ public class ConstantsEnglish {
 	/**
 	 * Champ Vide
 	 */
-	public static final String FIELD_NULL_REPRESENTATION = "not save";
+	public static final String FIELD_NULL_REPRESENTATION = "";
 
 	/**
 	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-		"Name", "first name", "Profile", "Email", "Tél", "Date of entry Novedia",
+		"Name", "First name", "Profile", "Email", "Tel", "Date of entry Novedia",
 		"Years of Experience", "Business engineer", "Manager" };
 
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";

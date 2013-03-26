@@ -74,12 +74,12 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final String INTITULE = "Title";
 	public static final String CLIENT = "Customer";
 	public static final String LIEU = "Place";
-	public static final String DATE_DEBUT = "start Date";
+	public static final String DATE_DEBUT = "Start Date";
 	public static final String DATE_FIN = "End date";
 	public static final String COMMENTAIRE = "Comment";
-	public static final String OUTILS1 = "Outils n°1";
-	public static final String OUTILS2 = "Outils n°2";
-	public static final String OUTILS3 = "Outils n°3";
+	public static final String OUTILS1 = "Tool 1";
+	public static final String OUTILS2 = "Tool 2";
+	public static final String OUTILS3 = "Tool 3";
 
 	//3	constants to identify which action is source of calling updateObservators()
 	public static final String ACTION_CANCEL = "CANCEL";
