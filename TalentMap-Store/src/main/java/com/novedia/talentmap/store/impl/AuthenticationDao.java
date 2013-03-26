@@ -45,8 +45,7 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 	 */
 	@Override
 	public int add(Authentication element) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(
-				DBRequestsConstants.ADD_AUTHENTIFICATION, element);
+		throw new UnsupportedOperationException();
 	}
 	
 	/**

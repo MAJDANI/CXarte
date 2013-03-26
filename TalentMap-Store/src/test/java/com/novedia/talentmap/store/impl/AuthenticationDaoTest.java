@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
 import org.unitils.spring.annotation.SpringBeanByName;
@@ -29,7 +27,6 @@ public class AuthenticationDaoTest {
 	
 	@SpringBean("authenticationDao")
 	private AuthenticationDao authenticationDao;
-		
 
 	@SpringBeanByName
 	private Authorization authorization;
@@ -42,27 +39,10 @@ public class AuthenticationDaoTest {
 	private CredentialToken credential = new CredentialToken();
 	private Authentication authentication = new Authentication();
 	
-	
-	/**
-	 * Add the authentication
-	 */
-	@Test
-	@DataSet("AuthenticateDaoTest.xml")
-	public void testAdd() {
-	
-		authorization.setLabel("Consultant");
-		authorization.setRoleId(4);
-		
-		credential.setLogin("v.dibi");
-		credential.setPassword("v.dibi");
-		
-		authentication.setColleagueId(1);
-		authentication.setAuthorization(authorization);
-		authentication.setToken(credential);
-
-		//TODO REvoir si test bien fait
-		Object addAuth = authenticationDao.add(authentication);
-		Assert.assertNotNull(addAuth);
+	public void testAddUserFromRegistration() {
+		//Given
+		//When
+		//Then
 	}
 	
 	/**
@@ -83,5 +63,12 @@ public class AuthenticationDaoTest {
 		
 		int updateAuth = authenticationDao.save(authentication);
 		Assert.assertEquals(1, updateAuth);	
+	}
+	
+	@Test
+	public void testCountLogin() {
+		//Given
+		//When
+		//Then
 	}
 }

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertSame;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.LinkRef;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,6 +79,59 @@ public class RegistrationServiceTest {
 	 * 
 	 */
 	@Test
+	public void addColleagueFromRegistrationCallsOneTime() {
+		
+		// Given
+		Registration registration  = new Registration();		
+		// When
+		Mockito.when(colleagueDaoMock.addColleagueFromRegistration(Mockito.any(Registration.class))).thenReturn(1);
+		service.addColleagueFromRegistration(registration);
+	
+		// Then
+		Mockito.verify(colleagueDaoMock, Mockito.times(1)).addColleagueFromRegistration(registration);		
+	}
+
+	/**
+	 * Test the add user registration
+	 */
+	@Test
+	public void addUserFromRegistrationCallsOneTime() {
+		
+		// Given
+		Registration registration  = new Registration();		
+		// When
+		Mockito.when(authenticationDaoMock.addUserFromRegistration(Mockito.any(Registration.class))).thenReturn(1);
+		service.addUserFromRegistration(registration);
+	
+		// Then
+		Mockito.verify(authenticationDaoMock, Mockito.times(1)).addUserFromRegistration(registration);		
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void getAllProfileReturnAListOfProfile(){
+		
+		// Given
+		Profile profile = Profile.builder().id(1).type("Développeur").build();
+		
+		List<Profile> expectedProfilesList = new ArrayList<Profile>();
+		expectedProfilesList.add(profile);
+	
+		// When
+		Mockito.when(profileDaoMock.getAll()).thenReturn(expectedProfilesList);
+		List<Profile> profiles = service.getAllProfile();
+	
+		// Then
+		Assert.assertNotNull(profiles);
+		assertSame(expectedProfilesList, profiles);
+	}
+
+	/**
+	 * 
+	 */
+	@Test
 	public void getAllConsultantManagerReturnAListOfColleagues(){
 		
 		// Given
@@ -95,56 +150,19 @@ public class RegistrationServiceTest {
 	}
 	
 	/**
-	 * 
+	 * Test de countLogin(String login)
+	 * {@link com.novedia.talentmap.services.impl.RegistrationService#countLogin(String)}
 	 */
-	@Test
-	public void getAllProfileReturnAListOfProfile(){
+	public void countLoginReturnsInteger() {
+		//Given
+		String login ="login";
+		Integer expected = 1;
 		
-		// Given
-		Profile profile = Profile.builder().id(1).type("Développeur").build();
+		//When
+		Mockito.when(authenticationDaoMock.countLogin(login)).thenReturn(1);
+		Integer result = service.countLogin(login);
 		
-		List<Profile> expectedProfilesList = new ArrayList<Profile>();
-		expectedProfilesList.add(profile);
-
-		// When
-		Mockito.when(profileDaoMock.getAll()).thenReturn(expectedProfilesList);
-		List<Profile> profiles = service.getAllProfile();
-
-		// Then
-		Assert.assertNotNull(profiles);
-		assertSame(expectedProfilesList, profiles);
+		//Then
+		assertSame(expected, result);
 	}
-	
-	/**
-	 * 
-	 */
-	@Test
-	public void addColleagueFromRegistrationCallsOneTime() {
-		
-		// Given
-		Registration registration  = new Registration();		
-		// When
-		Mockito.when(colleagueDaoMock.addColleagueFromRegistration(Mockito.any(Registration.class))).thenReturn(1);
-		service.addColleagueFromRegistration(registration);
-
-		// Then
-		Mockito.verify(colleagueDaoMock, Mockito.times(1)).addColleagueFromRegistration(registration);		
-	}
-	
-	/**
-	 * Test the add user registration
-	 */
-	@Test
-	public void addUserFromRegistrationCallsOneTime() {
-		
-		// Given
-		Registration registration  = new Registration();		
-		// When
-		Mockito.when(authenticationDaoMock.addUserFromRegistration(Mockito.any(Registration.class))).thenReturn(1);
-		service.addUserFromRegistration(registration);
-
-		// Then
-		Mockito.verify(authenticationDaoMock, Mockito.times(1)).addUserFromRegistration(registration);		
-	}
-	
 }

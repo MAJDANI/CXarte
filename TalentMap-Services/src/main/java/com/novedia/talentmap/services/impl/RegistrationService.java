@@ -73,7 +73,7 @@ public class RegistrationService implements IRegistrationService {
 	/**
 	 * Counts the number of login "login" existing in table Authentication.
 	 * It's used to assure a user won't choose a login already existing.
-	 * @param login : tho login to check in table
+	 * @param login : the login to check in table
 	 * @return the number of login found in table
 	 */
 	public Integer countLogin(String login) {

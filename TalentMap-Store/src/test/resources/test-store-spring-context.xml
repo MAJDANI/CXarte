@@ -66,4 +66,7 @@
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
 
+	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization"/>
+
+
 </beans>

@@ -405,8 +405,6 @@ public static final String GET_ALL_AUTHENTIFICATION = "authentication.getAll";
 
 public static String SAVE_AUTHENTIFICATION = "authentication.save";
 
-public static final String ADD_AUTHENTIFICATION = "authentication.add";
-
 public static final String ADD_USER_AUTHENTIFICATION = "authentication.addUser";
 
 public static final String CHECK_AUTHENTIFICATION = "authentication.check";

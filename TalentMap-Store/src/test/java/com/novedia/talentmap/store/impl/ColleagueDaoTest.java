@@ -43,6 +43,30 @@ public class ColleagueDaoTest {
 	public void setUp() throws Exception {
 		colleagueDao.setSqlMapClient(sqlMapClient);
 	}
+
+	@Test
+	public void testGetByMail() {
+		//Given
+		//When
+		//Then
+	}
+	
+	
+	@Test
+	public void testAddColleagueFromRegistration() {
+		//Given
+		//When
+		//Then
+	}	
+	
+	
+	@Test
+	public void testGetAllConsultantManager() {
+		//Given
+		//When
+		//Then
+	}	
+	
 	
 	/**
 	 * Test get colleague by id
