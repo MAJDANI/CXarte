@@ -45,13 +45,14 @@
 	<select id="getAllByColleague" resultMap="missionResult" parameterClass="Integer">
 		SELECT * FROM MISSION mission, CLIENT client WHERE COLLEAGUE_ID = #value# 
 		AND mission.CLIENT_ID = client.CLIENT_ID
-		ORDER BY START_DATE
+		ORDER BY START_DATE desc
 	</select>
 	
 	<select id="getLastMissionByColleague" resultMap="missionResult" parameterClass="Integer">
-		SELECT * FROM MISSION mission, CLIENT client WHERE COLLEAGUE_ID = #value# 
-		AND mission.CLIENT_ID = client.CLIENT_ID
-		AND mission.END_DATE = (SELECT MAX(END_DATE) FROM MISSION mission WHERE COLLEAGUE_ID = #value#)
+		select * FROM MISSION mission
+        join CLIENT client on (mission.CLIENT_ID = client.CLIENT_ID) 
+        WHERE COLLEAGUE_ID = #value#
+        and mission.start_date = (select max(start_date) from MISSION  WHERE COLLEAGUE_ID = #value#)
 	</select>
 	
 	
