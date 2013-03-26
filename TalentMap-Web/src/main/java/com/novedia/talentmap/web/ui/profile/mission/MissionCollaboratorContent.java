@@ -173,7 +173,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 		addComponent(this.btnAddMission);
 		addComponent(this.addMissionPanel);
-
+		this.btnAddMission.setEnabled(true);
+		
 		buildListPanelMission();
 
 		if (this.listMission.getItemIds().isEmpty()) {
@@ -191,7 +192,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 	public void buildListPanelMission() {
 		if(listMission.size() > 0){
-			
+			listPanel.removeAllComponents();
 			this.listPanel.addComponent(this.listMission.buildAllColleagueMission());
 			
 			this.hLayListMissionButtons = new HorizontalLayout();
@@ -229,12 +230,14 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 				// We fill the listPanel with the new list
 				buildListPanelMission();
 				disableAddMissionPanel();
+				enableButton(true);
 			}
 
 			@Override
 			public void cancelAddMission() {
 				MissionCollaboratorContent.this.missionForm.emptyMissionForm();
 				disableAddMissionPanel();
+				enableButton(true);
 			}
 
 		}, IMissionCollaboratorContent.class);
@@ -249,12 +252,20 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		addMissionPanel.setVisible(true);
 	}
 
+	
+	private void enableButton(boolean enable){
+		btnAddMission.setEnabled(enable);
+		btnModifyMission.setEnabled(enable);
+		btnDeleteMission.setEnabled(enable);
+	}
+	
 	/**
 	 * Hides the form to add missions and enables the button "add"
 	 */
 	private void disableAddMissionPanel() {
 		btnAddMission.setEnabled(true);
 		addMissionPanel.setVisible(false);
+		
 	}
 
 	@Override
@@ -267,6 +278,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
 			//On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
+			enableButton(false);
 			// On indique que l'action courante est une création (pas une
 			// modification de mission)
 			this.missionForm.setCurrentSaveMode(MissionForm.SAVE_MODE_INSERT);
@@ -311,6 +323,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 				if (button == this.btnModifyMission) {
 					//missionForm = missionForm.buildMissionFormColleague();
 					fillAddMissionPanelWithMission(selectedMissionDTO);
+					enableButton(false);
 					// On indique que l'action courante est une modification de
 					// mission (pas une création)
 					this.missionForm
