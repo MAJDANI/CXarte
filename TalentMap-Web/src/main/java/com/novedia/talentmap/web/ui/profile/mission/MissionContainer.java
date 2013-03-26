@@ -34,9 +34,9 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		
 		try {
 			List<Mission> listMission = this.collabService.getAllMissions(collabId);
+			removeAllItems();
 			// TODO : Rustine pour éviter la NPE au démarrage de l'application
-			if(listMission!=null){
-				
+			if(listMission!=null && !listMission.isEmpty()){
 				for(Mission m : listMission){
 					addBean(m);
 					//System.out.println("MissionContainer.fillContainer() bean m = " + m);

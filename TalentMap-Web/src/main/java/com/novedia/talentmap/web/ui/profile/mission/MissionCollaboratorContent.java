@@ -14,7 +14,6 @@ import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.IMissionCollaboratorContent;
 import com.novedia.talentmap.web.util.Message;
 import com.novedia.talentmap.web.util.TalentMapCSS;
-import com.vaadin.data.Item;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -85,7 +84,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	public MissionCollaboratorContent buildViewMissionColleagueContent(){
 		removeAllComponents();
 		listMission.setAuthentication(getAuthentication());
-		listMission = listMission.buildAllColleagueMission();
 		missionForm.setAuthentication(getAuthentication());
 		
 		addMissionPanel = addMissionPanel.buildAddMissionPanel();
@@ -192,15 +190,23 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 
 	public void buildListPanelMission() {
-		this.listPanel.addComponent(this.listMission);
-
-		this.hLayListMissionButtons = new HorizontalLayout();
-		this.hLayListMissionButtons.addComponent(btnModifyMission);
-		this.hLayListMissionButtons.addComponent(btnDeleteMission);
-		this.hLayListMissionButtons.setSpacing(true);
-
-		this.listPanel.addComponent(this.hLayListMissionButtons);
-		addComponent(this.listPanel);
+		if(listMission.size() > 0){
+			
+			this.listPanel.addComponent(this.listMission.buildAllColleagueMission());
+			
+			this.hLayListMissionButtons = new HorizontalLayout();
+			this.hLayListMissionButtons.addComponent(btnModifyMission);
+			this.hLayListMissionButtons.addComponent(btnDeleteMission);
+			this.hLayListMissionButtons.setSpacing(true);
+			hLayListMissionButtons.setMargin(true);
+			hLayListMissionButtons.addStyleName("footerButton");
+			
+			this.listPanel.addComponent(this.hLayListMissionButtons);
+			addComponent(this.listPanel);
+			listPanel.setVisible(true);
+		} else{
+			listPanel.setVisible(false);
+		}
 	}
 
 
@@ -259,7 +265,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		if (button == this.btnAddMission) {
 			//On vide le contenu de MissionForm
 			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
-			missionForm = missionForm.buildMissionFormColleague();
 			//On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
 			// On indique que l'action courante est une création (pas une
@@ -304,7 +309,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 			} else {
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
-					missionForm = missionForm.buildMissionFormColleague();
+					//missionForm = missionForm.buildMissionFormColleague();
 					fillAddMissionPanelWithMission(selectedMissionDTO);
 					// On indique que l'action courante est une modification de
 					// mission (pas une création)
@@ -332,7 +337,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 			if (result != 0) {
 				this.missionForm.setCurrentAction(MissionForm.ACTION_DELETE);
-
 				// TODO centralize messages
 				CUtils.showMessage("The mission has been deleted", Message.INFO, getWindow());
 				
@@ -357,31 +361,33 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		windowConfirmDelete = new Window(ConstantsEnglish.LABEL_WINDOW_CONFIRM_DELETE);
 		windowConfirmDelete.center();
 
-		Button confirmDeleteButton = new Button(
-				ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
-		Button cancelDeleteButton = new Button(
-				ConstantsEnglish.LABEL_BUTTON_CANCEL_DELETE_MISSION);
-		confirmDeleteButton.addListener(new Button.ClickListener() {
+		Button yesButton = new Button(ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
+		Button noButton = new Button(ConstantsEnglish.LABEL_BUTTON_CANCEL_DELETE_MISSION);
+		yesButton.addListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 8938851452280879463L;
-
 			public void buttonClick(ClickEvent event) {
 				confirmDeleteButtonClick(event);
 			}
 		});
-		cancelDeleteButton.addListener(new Button.ClickListener() {
+		
+		noButton.addListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 8312230721392985816L;
-
 			public void buttonClick(ClickEvent event) {
 				cancelDeleteButtonClick(event);
 			}
 		});
-		// Fin : Au lien de ces 2 lignes, les lignes suivantes
+		
+		windowConfirmDelete.addComponent(new Label(ConstantsEnglish.CONFIRM_DELETE_MESSAGE_MISSION));
 
-		//confirmDeleteButton.addListener(missionForm);
-		//cancelDeleteButton.addListener(missionForm);
-
-		windowConfirmDelete.addComponent(confirmDeleteButton);
-		windowConfirmDelete.addComponent(cancelDeleteButton);
+		HorizontalLayout containerButton = new HorizontalLayout();
+		containerButton.setSpacing(true);
+		containerButton.setMargin(true);
+		containerButton.addStyleName("footerButton");
+		containerButton.addComponent(yesButton);
+		containerButton.addComponent(noButton);
+		windowConfirmDelete.addComponent(containerButton);
+		
+		windowConfirmDelete.setWidth("30%");
 		windowConfirmDelete.setReadOnly(true);
 		windowConfirmDelete.setModal(true);
 

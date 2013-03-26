@@ -6,7 +6,6 @@ import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
-import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.LabelConstants;
@@ -148,7 +147,7 @@ public class LoginScreen extends VerticalLayout /*implements HttpServletRequestL
 				authentication = login(username, password);
 				if (authentication != null) {
 					//this.application.setUser(authentication);
-					getWindow().setContent(new AuthenticatedScreen(application, authentication));
+					//getWindow().setContent(new AuthenticatedScreen(application, authentication));
 					//application.getMainWindow().setContent(new AuthenticatedScreen(application, authentication));					
 				}
 			} catch (TalentMapSecurityException tmpex) {
@@ -195,7 +194,8 @@ public class LoginScreen extends VerticalLayout /*implements HttpServletRequestL
 			
 			String button = event.getButton().getCaption();		
 			if (button.equalsIgnoreCase("Sign In")){
-				application.getMainWindow().setContent(new RegistrationScreen(application));
+				RegistrationScreen registrationScreen = new RegistrationScreen();
+				application.getMainWindow().setContent(registrationScreen.buildRegistrationScreenView());
 			}
 		}
 

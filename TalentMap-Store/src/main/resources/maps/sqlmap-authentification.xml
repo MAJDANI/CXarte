@@ -5,6 +5,7 @@
 <sqlMap namespace="authentication">
 
  <typeAlias alias="authentication" type="com.novedia.talentmap.model.entity.Authentication"/> 
+ <typeAlias alias="token" type="com.novedia.talentmap.model.entity.CredentialToken"/> 
 
 	<resultMap id="authenticationResult" class="authentication">
         <result property="token.login"  column="LOGIN"/>         
@@ -36,5 +37,9 @@
     		#role.id#
     		)
     </insert>	
+    
+    <update id="save" parameterClass="com.novedia.talentmap.model.entity.Authentication">
+    	update AUTHENTICATION set PASSWORD=#token.password# where LOGIN = #token.login#
+    </update>
     
 </sqlMap>

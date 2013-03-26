@@ -115,6 +115,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * @return
 	 */
 	public MissionForm buildMissionFormColleague(){
+		removeAllComponents();
 		buildMain();
 		return this;
 	}
@@ -142,7 +143,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 //		buildMain();
 //	}
 
-	
 	public void buildMain() {
 
 		try {
@@ -156,9 +156,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 	
 	public void initMissionList(){
-		//MissionContainer missionContainer = new MissionContainer(collabService);
-		this.listMission = listMission.buildAllColleagueMission();
-		//this.listMission = new ListMission(missionContainer);
+		listMission = listMission.buildAllColleagueMission();
 	}
 
 	public void buildMissionForm() throws Exception {
@@ -343,6 +341,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			int result = this.collabService.addMission(missionToInsert); 
 			if(result !=0){
 				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_INSERTED_OK, Notification.TYPE_TRAY_NOTIFICATION);
+				
 				//creates a new list
 				refreshListMission();
 				
@@ -397,9 +396,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void refreshListMission() {
 		
 		//creates a new list, filled with the elements in database
-		//MissionContainer missionContainer = new MissionContainer(collabService);
-		listMission = listMission.buildAllColleagueMission();
-		//this.listMission = new ListMission(missionContainer);
+		listMission = this.listMission.buildAllColleagueMission();
 		//"sends" the new list to the observer (so the observer will be able to
 		//new list can be displayed
 		this.updateObservateur();
@@ -431,7 +428,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			this.obs.updateListMission(this.listMission);
 		}
 		if(ACTION_DELETE == this.currentAction) {
-			System.out.println("suppressiion");
 			this.obs.updateListMission(this.listMission);
 		}
 	}
@@ -557,8 +553,5 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.listMission = listMission;
 	}
 
-
-	
-	
 	
 }

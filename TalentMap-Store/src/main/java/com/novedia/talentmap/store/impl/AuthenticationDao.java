@@ -35,9 +35,9 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 	 * Update password
 	 */
 	@Override
-	public int save(Authentication element) throws DataAccessException {
+	public int save(Authentication authentication) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().update(
-				DBRequestsConstants.SAVE_AUTHENTIFICATION, element);
+				DBRequestsConstants.SAVE_AUTHENTIFICATION, authentication);
 	}
 
 	/**

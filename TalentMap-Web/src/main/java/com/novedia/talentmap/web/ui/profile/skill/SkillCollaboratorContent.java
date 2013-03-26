@@ -144,7 +144,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		VerticalLayout vLayout = new VerticalLayout();
 		HorizontalLayout hLayout = new HorizontalLayout();
 		HorizontalLayout hLayout2 = new HorizontalLayout();
-
+		skillPanel.removeAllComponents();
 		this.skillPanel.addComponent(skillLabel);
 		skillLabel.setCaption(ConstantsEnglish.ADD_SKILL_LABEL);
 

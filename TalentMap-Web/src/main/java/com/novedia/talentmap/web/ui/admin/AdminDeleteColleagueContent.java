@@ -221,6 +221,8 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	private void buildContainerButton(){
 		containerButon = new HorizontalLayout();
 		containerButon.setSpacing(true);
+		containerButon.setMargin(true);
+		containerButon.addStyleName("footerButton");
 		delete = new Button(LABEL_BUTTON_DELETE);
 		cancel = new Button(LABEL_BUTTON_CANCEL);
 		
@@ -242,17 +244,18 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	    popup = new Window("Confirm Delete");
 		popup.setReadOnly(true);
 		popup.setWidth("30%");
-		HorizontalLayout confirmationButtonContainer = new HorizontalLayout();
+		HorizontalLayout confirmButtonContainer = new HorizontalLayout();
 		Button yesButton = new Button(LABEL_BUTTON_YES);
 		Button noButton = new Button(LABEL_BUTTON_NO);
 		yesButton.addListener((ClickListener) this);
 		noButton.addListener((ClickListener) this);
-		confirmationButtonContainer.setSpacing(true);
-		confirmationButtonContainer.setMargin(true);
-		confirmationButtonContainer.addComponent(yesButton);
-		confirmationButtonContainer.addComponent(noButton);
+		confirmButtonContainer.setSpacing(true);
+		confirmButtonContainer.setMargin(true);
+		confirmButtonContainer.addStyleName("footerButton");
+		confirmButtonContainer.addComponent(yesButton);
+		confirmButtonContainer.addComponent(noButton);
 		popup.addComponent(new Label(CONFIRM_DELETE));
-		popup.addComponent(confirmationButtonContainer);
+		popup.addComponent(confirmButtonContainer);
 		popup.setModal(true);
 		getWindow().addWindow(popup);
 	}

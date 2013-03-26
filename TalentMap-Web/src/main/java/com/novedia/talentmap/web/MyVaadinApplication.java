@@ -83,7 +83,6 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	private BusinessEngineerService businessEngineerService;
 
 	
-	// me
 	/**
 	 * the authentication
 	 */
@@ -93,6 +92,8 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	 * the authenticatedScreen
 	 */
 	private AuthenticatedScreen authenticatedScreen;
+	
+	private RegistrationScreen registrationScreen;
 	
 	
 	/**
@@ -163,7 +164,9 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	public void buttonClick(ClickEvent event) {
 		String button = event.getButton().getCaption();		
 		if (button.equalsIgnoreCase("Sign In")){
-			getMainWindow().setContent(new RegistrationScreen(this));
+			//getMainWindow().setContent(new RegistrationScreen(this));
+			registrationScreen.setMyVaadinApplication(this);
+			getMainWindow().setContent(registrationScreen.buildRegistrationScreenView());
 		}		
 	}
 
@@ -367,6 +370,14 @@ public class MyVaadinApplication extends Application implements LoginListener, C
 	 */
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
+	}
+
+	public RegistrationScreen getRegistrationScreen() {
+		return registrationScreen;
+	}
+
+	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
+		this.registrationScreen = registrationScreen;
 	}
 
 

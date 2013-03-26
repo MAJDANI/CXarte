@@ -11,8 +11,6 @@ import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.RegistrationFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
 import com.vaadin.data.Item;
-import com.vaadin.data.Property;
-import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
@@ -45,6 +43,21 @@ public class RegistrationForm extends FormLayout {
 	private IRegistrationService registrationService;
 	private IBusinessEngineerService businessEngineerService;
 	
+	
+	/**
+	 * Default constructor
+	 */
+	public RegistrationForm(){
+		super();
+	}
+	
+	public RegistrationForm buildRegistrationFormView(){
+		removeAllComponents();
+		buildMain();
+		return this;
+	}
+	
+	
 
 	/**
 	 * Build the class RegistrationForm.java
@@ -53,18 +66,18 @@ public class RegistrationForm extends FormLayout {
 	 * @param missionForm
 	 * @param missionFormLayout
 	 */
-	public RegistrationForm(Form registrationForm,
-			GridLayout registrationFormLayout,
-			IRegistrationService registrationService,
-			IBusinessEngineerService businessEngineerService) {
-		super();
-		this.registrationForm = registrationForm;
-		this.registrationFormLayout = registrationFormLayout;
-		this.registrationService = registrationService;
-		this.businessEngineerService = businessEngineerService;
-
-		buildMain();
-	}
+//	public RegistrationForm(Form registrationForm,
+//			GridLayout registrationFormLayout,
+//			IRegistrationService registrationService,
+//			IBusinessEngineerService businessEngineerService) {
+//		super();
+//		this.registrationForm = registrationForm;
+//		this.registrationFormLayout = registrationFormLayout;
+//		this.registrationService = registrationService;
+//		this.businessEngineerService = businessEngineerService;
+//
+//		buildMain();
+//	}
 	
 	public void buildMain() {
 
@@ -160,5 +173,24 @@ public class RegistrationForm extends FormLayout {
 	public void setRegistrationService(IRegistrationService registrationService) {
 		this.registrationService = registrationService;
 	}
+
+	public IBusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
+	}
+
+	public GridLayout getRegistrationFormLayout() {
+		return registrationFormLayout;
+	}
+
+	public void setRegistrationFormLayout(GridLayout registrationFormLayout) {
+		this.registrationFormLayout = registrationFormLayout;
+	}
+	
+	
 
 }

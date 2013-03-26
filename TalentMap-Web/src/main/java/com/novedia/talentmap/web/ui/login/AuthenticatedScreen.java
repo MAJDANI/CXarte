@@ -14,6 +14,7 @@ import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -27,7 +28,7 @@ import com.vaadin.ui.themes.Reindeer;
 
 
 @SuppressWarnings("serial")
-public class AuthenticatedScreen extends VerticalLayout  {
+public class AuthenticatedScreen extends VerticalLayout implements ClickListener {
 	
 	/**
 	 * The logger 
@@ -40,6 +41,8 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	 */
 	private Authentication authentication;
 	
+	private ChangePasswordForm changePasswordForm;
+	
 	/**
 	 * My Vaadin app
 	 */
@@ -49,7 +52,9 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	private TabMain mainTab;
 	
 	
-	private static final String LABEL_LOG_OUT_BTTON = "Logout";
+	private static final String LABEL_LOG_OUT_BUTTON = "Logout";
+	private static final String LABEL_CHANGE_PASSWORD_BUTTON = "Change Password";
+	
 	//
 	
 	/**
@@ -62,17 +67,17 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	}
 	
 	
-	public AuthenticatedScreen (MyVaadinApplication application, Authentication authentication) {
-		super();
-		//Set style
-		setSizeFull();
-		setSpacing(true);
-		setMargin(true);
-		setStyleName(Reindeer.LAYOUT_WHITE);
-		this.application = application;
-		this.authentication = authentication;
-//		selectedViewAccordingToUserRoles();
-	}
+//	public AuthenticatedScreen (MyVaadinApplication application, Authentication authentication) {
+//		super();
+//		//Set style
+//		setSizeFull();
+//		setSpacing(true);
+//		setMargin(true);
+//		setStyleName(Reindeer.LAYOUT_WHITE);
+//		this.application = application;
+//		this.authentication = authentication;
+////		selectedViewAccordingToUserRoles();
+//	}
 	
 	
 	/**
@@ -113,23 +118,39 @@ public class AuthenticatedScreen extends VerticalLayout  {
 		Panel globalView = new Panel();
 		VerticalLayout headerLayout = new VerticalLayout();
 		headerLayout.setMargin(true);
-		Button logOutButton = new Button(LABEL_LOG_OUT_BTTON);
+		Button logOutButton = new Button(LABEL_LOG_OUT_BUTTON);
 		logOutButton.addStyleName(Reindeer.BUTTON_LINK); //transformation du bouton en lien
-		logOutButton.addListener(new Button.ClickListener(){
-			@Override
-			public void buttonClick(ClickEvent event) {
-				logout();
-			}
-		});
-		
+		logOutButton.addListener(this);
 		headerLayout.addComponent(logOutButton);	
 		headerLayout.setComponentAlignment(logOutButton, Alignment.MIDDLE_RIGHT);
+		
+		Button changePasswordButton = new Button(LABEL_CHANGE_PASSWORD_BUTTON);
+		changePasswordButton.addListener(this);
+		headerLayout.addComponent(changePasswordButton);
 		globalView.addComponent(headerLayout);
 		mainTab.setAuthentication(getAuthentication());
 		globalView.addComponent(mainTab.buildViewAccordingToUser(role));
 		this.addComponent(globalView);
 		return this;
 	}
+	
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if(event.getButton().getCaption().equals(LABEL_LOG_OUT_BUTTON)){
+			logout();
+			return ;
+		}
+		if(event.getButton().getCaption().equals(LABEL_CHANGE_PASSWORD_BUTTON)){
+			changePasswordForm.setAuthentication(getAuthentication());
+			changePasswordForm.setMyVaadinApplication(application);
+			getWindow().addWindow(changePasswordForm.buildChangePasswordFormView());
+			return ;
+		}
+		
+	}
+	
+	
 	
 	/**
 	 * manage the logout buton
@@ -166,6 +187,19 @@ public class AuthenticatedScreen extends VerticalLayout  {
 	public void setMainTab(TabMain mainTab) {
 		this.mainTab = mainTab;
 	}
+
+
+	public ChangePasswordForm getChangePasswordForm() {
+		return changePasswordForm;
+	}
+
+
+	public void setChangePasswordForm(ChangePasswordForm changePasswordForm) {
+		this.changePasswordForm = changePasswordForm;
+	}
+
+
+	
 
 	
 	

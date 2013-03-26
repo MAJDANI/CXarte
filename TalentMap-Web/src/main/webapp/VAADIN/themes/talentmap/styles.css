@@ -92,6 +92,24 @@
 	text-transform:none;
 }
 
+
+.changePasswordForm{
+	width: 500px;
+}
+.errorLabel{
+	color: red;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 auto;
+	
+}
+
+.footerButton{
+	margin: 0 auto;
+}
+
+
 /* BUTTON NAVIGATION IN ADMIN & MONITORING COLLAB */
 .admin-button{background: none!important;}
 .admin-button>span{background:none!important; border-style:none!important;}

@@ -20,6 +20,7 @@ public class AddMissionPanel extends Panel {
 	 * @return
 	 */
 	public AddMissionPanel buildAddMissionPanel(){
+		removeAllComponents();
 		mainBuild();
 		return this;
 	}
@@ -41,7 +42,7 @@ public class AddMissionPanel extends Panel {
 	 */
 	public void mainBuild(){
 		
-		addComponent(this.missionForm);
+		addComponent(missionForm.buildMissionFormColleague());
 	}
 
 	/**

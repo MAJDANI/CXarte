@@ -155,9 +155,10 @@ public class ConstantsEnglish {
 	/**
 	 * Labels form confirmation delete window (Classe : MissionCollaboratorContent)  
 	 */
-	public static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation of deletion mission";
-	public static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Remove mission";
-	public static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "DO NOT delete the mission";
+	public static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirm Delete";
+	public static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Yes";
+	public static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "No";
+	public static final String CONFIRM_DELETE_MESSAGE_MISSION = "Are you sure you want to delete these mission ?";
 
 	/**
 	 * Constants for AddSkillPanel

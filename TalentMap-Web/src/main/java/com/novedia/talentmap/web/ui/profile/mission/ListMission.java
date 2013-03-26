@@ -24,60 +24,57 @@ public class ListMission extends Table {
 	private MissionContainer missionContainer;
 
 	private Authentication authentication;
+	
 
+	
 	/**
 	 * Default constructor
 	 */
-	public ListMission() {
+	public ListMission(){
 		super();
+		addColumns();
+		setSelectable(true);
+		setNullSelectionAllowed(true);
 	}
-
+	
 	/**
 	 * Build colleague's mission
-	 * 
 	 * @return
 	 */
-	public ListMission buildAllColleagueMission() {
+	public ListMission buildAllColleagueMission(){
 		removeAllItems();
 		buildMain();
 		return this;
 	}
-
+	
 	/**
-	 * Build the class ListMission.java
-	 * 
+	 * Build the class ListMission.java 
 	 * @param profileService
 	 */
-	// public ListMission(MissionContainer missionContainer) {
-	// super();
-	// this.missionContainer = missionContainer;
-	// buildMain();
-	// }
-
-	public void buildMain() {
-		// calling setwith(850) allows vaadin display automatically an
-		// horizontal
-		// scrollBar if line width is too large
-		setWidth(900);
+//	public ListMission(MissionContainer missionContainer) {
+//		super();
+//		this.missionContainer = missionContainer;
+//		buildMain();
+//	}
+	
+	public void buildMain(){
+		//calling setwith(850) allows vaadin display automatically an horizontal 
+		//scrollBar if line width is too large
+		setWidth(850);
 		buildContainer();
 	}
 
 	/**
 	 * Principal function filling ListMission Table
 	 */
-	public void buildContainer() {
-		// System.out.println("ListMission.buildContainer()");
-		addColumns();
-		setSelectable(true);
-		setNullSelectionAllowed(true);
+	public void buildContainer(){
 		fillMissionContainer();
 		fillResultsTable();
 	}
-
+	
 	public void fillMissionContainer() {
 		this.missionContainer.fillContainer(authentication.getColleagueId());
 	}
-
 	/**
 	 * Builds Headers of the Table ListMission
 	 */
@@ -94,10 +91,8 @@ public class ListMission extends Table {
 	}
 
 	/**
-	 * Gets each item mission in the MissionContainer given in parameter. With
-	 * each item mission we fill the actual Table ListMission using addItem()
-	 * method.
-	 * 
+	 * Gets each item mission in the MissionContainer given in parameter.
+	 * With each item mission we fill the actual Table ListMission using addItem() method.  
 	 * @param missionContainer
 	 */
 	public void fillResultsTable() {
@@ -128,23 +123,21 @@ public class ListMission extends Table {
 
 	/**
 	 * Format the date with the template dateFormat "dd/MM/yyyy"
-	 * 
 	 * @param date
 	 * @return
 	 */
 	public static String formatterDate(Date date) {
 		if (date != null) {
 			return dateFormat.format(date);
-		} else {
+		}
+		else {
 			return "";
 		}
 	}
-
+	
 	/**
 	 * Set the missionContainer value
-	 * 
-	 * @param missionContainer
-	 *            the missionContainer to set
+	 * @param missionContainer the missionContainer to set
 	 */
 	public void setMissionContainer(MissionContainer missionContainer) {
 		this.missionContainer = missionContainer;
@@ -152,19 +145,24 @@ public class ListMission extends Table {
 
 	/**
 	 * Get the missionContainer value
-	 * 
 	 * @return the missionContainer
 	 */
 	public MissionContainer getMissionContainer() {
 		return missionContainer;
 	}
 
+
 	public Authentication getAuthentication() {
 		return authentication;
 	}
 
+
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
+
+	
+	
+
 
 }
