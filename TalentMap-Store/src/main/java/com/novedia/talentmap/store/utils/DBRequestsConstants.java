@@ -89,8 +89,6 @@ public static final String GET_ALL_BUSINESS_ENGINEER = "businessEngineer.getAll"
  */
 public static final String GET_BUSINESS_ENGINEER_BY_ID = "businessEngineer.get";
 
-
-
 /**
  * Constant request to get a category.
  */

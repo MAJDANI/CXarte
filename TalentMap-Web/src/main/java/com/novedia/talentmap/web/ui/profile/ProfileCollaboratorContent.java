@@ -174,6 +174,17 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 	}
 
+	
+	public String validateForm() {
+		String message = null;
+		try {
+			this.collabForm.getFormCollaborator().validate();
+		} catch (InvalidValueException e) {
+			message = e.getMessage();
+		}
+		return message;
+	}
+	
 	/**
 	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà en base pour un autre collaborateur
 	 * @return : true si le mail est valide (il peut être attribué), false sinon
@@ -213,16 +224,21 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		//Save Button
 		if (button.getCaption().equals(ConstantsEnglish.LABEL_SAVE_BUTTON)) {
-			if (validateEmail()) {
-				saveDataCollaborator();
-				//saveDataMission();
-				this.collabForm.getFormCollaborator().setReadOnly(true);
-				this.collabForm.getFormMission().setReadOnly(true);
-				this.save.setEnabled(false);
-				this.edit.setEnabled(true);
-				this.cancel.setEnabled(false);
+			
+			String message = validateForm();
+			if (message == null) {
+				if (validateEmail()) {
+					saveDataCollaborator();
+					//saveDataMission();
+					this.collabForm.getFormCollaborator().setReadOnly(true);
+					this.collabForm.getFormMission().setReadOnly(true);
+					this.save.setEnabled(false);
+					this.edit.setEnabled(true);
+					this.cancel.setEnabled(false);
+				}
+			} else {
+				getWindow().showNotification(message);
 			}
-
 		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_EDIT_BUTTON)){
 			this.collabForm.getFormCollaborator().setReadOnly(false);
 			this.collabForm.getFormMission().setReadOnly(true);
@@ -239,11 +255,6 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 			this.cancel.setEnabled(false);
 		} 
 	}
-
-
-	
-	
-	
 	
 	public Authentication getAuthentication() {
 		return authentication;

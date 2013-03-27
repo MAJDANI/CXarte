@@ -114,6 +114,8 @@ public class RegistrationForm extends FormLayout {
 	
 	/**
 	 * Controle la validité du champ Login : Vérifie que ce champ n'est pas déjà en base
+	 * Cette méthode n'est pas "appelée" directement, on indique son appel dans RegistrationFormFieldFactory,
+	 * au moment du .addListener()
 	 */
 	public void validateLogin() {
 		Field fieldLogin = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_LOGIN_FIELD);
@@ -137,6 +139,8 @@ public class RegistrationForm extends FormLayout {
 	
 	/**
 	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà en base
+	 * Cette méthode n'est pas "appelée" directement, on indique son appel dans RegistrationFormFieldFactory,
+	 * au moment du .addListener()
 	 */
 	public void validateEmail() {
 		Field fieldEMail = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_EMAIL_FIELD);

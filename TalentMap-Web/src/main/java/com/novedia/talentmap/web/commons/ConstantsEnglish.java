@@ -114,9 +114,9 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Incorrect phone number";
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Years of Experience incorrect";
 	public static final String REGISTRATION_ERROR_EMAIL = "Email is invalid";
-	public static final String REGISTRATION_ERROR_EMAIL_EXISTS1 = "This email already exists (";
+	public static final String REGISTRATION_ERROR_EMAIL_EXISTS1 = "This email is already in use (";
 	public static final String REGISTRATION_ERROR_EMAIL_EXISTS2 = ").Please choose another one.";
-	public static final String REGISTRATION_ERROR_LOGIN_EXISTS1 = "This login already exists (";
+	public static final String REGISTRATION_ERROR_LOGIN_EXISTS1 = "This login is already in use (";
 	public static final String REGISTRATION_ERROR_LOGIN_EXISTS2 = ").Please choose another one.";
 	
 	/**

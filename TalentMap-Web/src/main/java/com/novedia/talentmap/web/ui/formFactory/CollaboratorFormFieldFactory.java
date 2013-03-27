@@ -8,10 +8,12 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
+import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
@@ -75,10 +77,12 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMAIL)){
 						field.setStyleName("email");
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EMAIL_MAX_LENGTH);
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_EMAIL_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_EMAIL));
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PHONE)){
 						field.setStyleName("phone");
 						field.setRequired(false);
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_PHONE_MAX_LENGTH);
+						field.addValidator(new RegexpValidator(Constants.REGISTRATION_NUMBER_REGEXP,ConstantsEnglish.REGISTRATION_ERROR_PHONE_NUMBER));
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EXPERIENCE)){
 						field.setStyleName("experience");
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_EXPERIENCE_MAX_LENGTH);
@@ -114,7 +118,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 				}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMPLOYMENT_DATE)){
 					
 					PopupDateField datefield = new PopupDateField();
-					datefield.setDateFormat("dd/MM/yyyy");
+					datefield.setDateFormat(ConstantsEnglish.REGISTRATION_DATE_FORMAT);
 					datefield.setCaption((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					datefield.setStyleName("employment-date");
 					datefield.setRequired(true);
@@ -122,7 +126,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 
 					return datefield;
 					
-				}else if(propertyId.equals("profileId")){
+				}else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD)){
 					IndexedContainer ic = new IndexedContainer();
 			        ic.addContainerProperty("value", String.class, null);
 					
