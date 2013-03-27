@@ -466,11 +466,13 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 			e.printStackTrace();
 		}
-
-		if (skill == null)
+		
+		if (skill == null){
 			return false;
-		else
+		} else {
 			return true;
+			
+		}
 	}
 
 	/**
