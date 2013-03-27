@@ -66,6 +66,13 @@ Map<Category, Map> getAllCollaboratorSkill(int collabId);
 List<Tool> getAllTools();
 
 /**
+ * Select All Tools by Concept.
+ * @class ISkillService.java
+ * @return a list of Tool
+ */
+List<Tool> getAllToolsByConcept(int conceptId);
+
+/**
  * Select all VSkills ordered by category and concept
  * @class ISkillService.java
  * @return a list of VSkill

@@ -17,8 +17,7 @@ public enum TimeUse {
 	LESS_1_YEAR(1,"Less than 1 year"),
 	LESS_2_YEAR(2, "Between 1 and 2 years"),
 	LESS_3_YEAR(3, "Between 2 and 3 years "),
-	LESS_4_YEAR(4, "Between 3 and 4 years"),
-	LESS_5_YEAR(5, "Between 4 and 5 years");
+	LESS_4_YEAR(4, "More than 3 years");
 	
 	private int id;
 	private String value;

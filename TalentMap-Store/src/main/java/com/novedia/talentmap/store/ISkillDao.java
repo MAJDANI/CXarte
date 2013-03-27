@@ -47,4 +47,6 @@ List<Integer> getAllCollaboratorIdByToolIdAndCollabList(int toolId, List<Integer
  * @return a tool
  */
 Tool getToolByName(String name);
+
+List<Tool> getAllByConcept(int conceptId);
 }

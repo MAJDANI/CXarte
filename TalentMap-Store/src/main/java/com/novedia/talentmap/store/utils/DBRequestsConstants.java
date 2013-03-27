@@ -356,6 +356,13 @@ public static final String CHECK_TOOL_OBJECT = "tool.checkObject";
  */
 public static final String GET_ALL_TOOL_BY_CONCEPT = "tool.getAllToolByConcept";
 
+
+/**
+ * This constant is used to retrieve all tool by concept.
+ */
+public static final String GET_TOOLS_BY_CONCEPT = "tool.getAllByConcept";
+
+
 /**
  * This constant is used to retrieve all tool.
  */

@@ -52,6 +52,13 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 		throw new UnsupportedOperationException();
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tool> getAllByConcept(int conceptId)  {
+		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_TOOLS_BY_CONCEPT,conceptId);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

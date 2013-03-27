@@ -43,6 +43,8 @@ public class ToolDao extends SqlMapClientDaoSupport implements IDao<Tool> {
 	public List<Tool> getAll() throws DataAccessException {
 		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_TOOL);
 	}
+	
+	
 
 	/**
 	 * {@inheritDoc}
