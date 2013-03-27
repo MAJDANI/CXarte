@@ -177,10 +177,6 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 						}
 						colleagueSelect.setContainerDataSource(ic);
 						colleagueSelect.setItemCaptionPropertyId(ConstantsEnglish.REGISTRATION_SELECT_VALUE);
-						if(propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
-							colleagueSelect.setNullSelectionAllowed(false);
-							colleagueSelect.setRequired(true);
-						}
 						colleagueSelect.setImmediate(true);
 						
 					} catch (Exception e) {
