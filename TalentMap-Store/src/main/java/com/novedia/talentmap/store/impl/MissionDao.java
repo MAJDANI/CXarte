@@ -141,33 +141,34 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	
 	public MissionDto createDTO(Mission m) {
 	
-		MissionDto mDTO = new MissionDto();
-	
-		 
-
-		// Recopie des attributs "simples"
-		Set<Tool> toolsSet = new HashSet<Tool>();
-		List<Tool> tools = m.getTools();
-		
-		if(tools.size()>0)
-		{
-			for(Tool t : tools)
+		MissionDto mDTO = null;
+		if(m != null){
+			 mDTO = new MissionDto();
+			// Recopie des attributs "simples"
+			Set<Tool> toolsSet = new HashSet<Tool>();
+			List<Tool> tools = m.getTools();
+			
+			if(tools.size()>0)
 			{
-				toolsSet.add(t);
+				for(Tool t : tools)
+				{
+					toolsSet.add(t);
+				}
+				
+				mDTO.setTools(toolsSet);
 			}
 			
+			mDTO.setId(m.getId());
+			mDTO.setClient(m.getClient());
+			mDTO.setStartDate(m.getStartDate());
+			mDTO.setEndDate(m.getEndDate());
+			mDTO.setTitle(m.getTitle());
+			mDTO.setPlace(m.getPlace());
+			mDTO.setNotes(m.getNotes());
+			mDTO.setColleagueId(m.getColleagueId());
 			mDTO.setTools(toolsSet);
+			
 		}
-
-		mDTO.setId(m.getId());
-		mDTO.setClient(m.getClient());
-		mDTO.setStartDate(m.getStartDate());
-		mDTO.setEndDate(m.getEndDate());
-		mDTO.setTitle(m.getTitle());
-		mDTO.setPlace(m.getPlace());
-		mDTO.setNotes(m.getNotes());
-		mDTO.setColleagueId(m.getColleagueId());
-		mDTO.setTools(toolsSet);
 		
 
 		return mDTO;
