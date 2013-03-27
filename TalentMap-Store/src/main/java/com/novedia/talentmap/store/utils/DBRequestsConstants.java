@@ -57,9 +57,14 @@ public static final String GET_ALL_COLLEAGUES_BY_CLIENT="colleague.getAllColleag
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
 
 /**
- * Constant request to check if the user who wants to register is already existing in db
+ * Constant request to count the mail already existing in db
  */
-public static final String GET_COLLEAGUE_BY_MAIL = "colleague.getByMail";
+public static final String COUNT_COLLEAGUE_BY_MAIL = "colleague.countMail";
+
+/**
+ * Constant request to count mail already existing in db for other colleagues
+ */
+public static final String COUNT_COLLEAGUE_BY_MAIL_AND_ID = "colleague.countMailForColleagueId";
 
 /**
  * Constant request to add a colleague from a registration

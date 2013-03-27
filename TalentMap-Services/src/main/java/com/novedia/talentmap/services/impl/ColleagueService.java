@@ -2,7 +2,6 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
 
@@ -11,12 +10,10 @@ import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.store.IDao;
-import com.novedia.talentmap.store.impl.ManagerDao;
-import com.novedia.talentmap.store.impl.MissionDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
+import com.novedia.talentmap.store.impl.MissionDao;
 
 /**
  * The colleague Service implementation.
@@ -188,6 +185,17 @@ public class ColleagueService implements IColleagueService {
 	 */
 	public void setColleagueDao(IDao<Colleague> colleagueDao) {
 		this.colleagueDao = colleagueDao;
+	}
+
+	/**
+	 * Counts colleagues in DB that have already the mail, with a different colleagueId.
+	 * Used to check when a colleague wants to modify his email, if this email is
+	 * not already use by someone else.
+	 * @param the colleague who wants to change his email
+	 * @return The count found.
+	 */
+	public Integer countMailForColleagueId(Colleague colleague) {
+		return ((ColleagueDao) colleagueDao).countMailForColleagueId(colleague);
 	}
 
 	/**

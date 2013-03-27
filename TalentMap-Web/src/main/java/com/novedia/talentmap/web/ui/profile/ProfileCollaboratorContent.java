@@ -3,8 +3,8 @@ package com.novedia.talentmap.web.ui.profile;
 import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.impl.ColleagueService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.data.Validator.InvalidValueException;
@@ -13,6 +13,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Field;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
@@ -174,6 +175,36 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 	}
 
 	/**
+	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà en base pour un autre collaborateur
+	 * @return : true si le mail est valide (il peut être attribué), false sinon
+	 */
+	public boolean validateEmail() {
+		Field fieldEMail = this.collabForm.getFormCollaborator().getField(ConstantsEnglish.REGISTRATION_EMAIL_FIELD);
+		if (fieldEMail != null && fieldEMail.getValue() != "") {
+			BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm.getFormCollaborator()
+					.getItemDataSource();
+			Colleague colleague = collabItem.getBean();
+			ColleagueService service = (ColleagueService)this.colleagueService;
+			
+			Integer nbColleagueFound = 0;
+			try {
+				nbColleagueFound = service.countMailForColleagueId(colleague);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(nbColleagueFound > 0) {
+				String eMail = colleague.getEmail();
+				String message = ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS1 + eMail + ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS2;
+				getWindow().showNotification(message);
+				fieldEMail.focus();
+				fieldEMail.setValue("");
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * Button Click Listener
 	 */
 	@Override
@@ -182,14 +213,16 @@ public class ProfileCollaboratorContent extends VerticalLayout implements ClickL
 		
 		//Save Button
 		if (button.getCaption().equals(ConstantsEnglish.LABEL_SAVE_BUTTON)) {
-			saveDataCollaborator();
-			//saveDataMission();
-			this.collabForm.getFormCollaborator().setReadOnly(true);
-			this.collabForm.getFormMission().setReadOnly(true);
-			this.save.setEnabled(false);
-			this.edit.setEnabled(true);
-			this.cancel.setEnabled(false);
-			
+			if (validateEmail()) {
+				saveDataCollaborator();
+				//saveDataMission();
+				this.collabForm.getFormCollaborator().setReadOnly(true);
+				this.collabForm.getFormMission().setReadOnly(true);
+				this.save.setEnabled(false);
+				this.edit.setEnabled(true);
+				this.cancel.setEnabled(false);
+			}
+
 		} else if (button.getCaption().equals(ConstantsEnglish.ADMIN_DATA_EDIT_BUTTON)){
 			this.collabForm.getFormCollaborator().setReadOnly(false);
 			this.collabForm.getFormMission().setReadOnly(true);

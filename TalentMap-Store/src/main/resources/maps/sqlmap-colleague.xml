@@ -142,8 +142,13 @@
 		ORDER BY C1.LAST_NAME
     </select>
     
-    <select id="getByMail" parameterClass="String" resultMap="colleagueResult">
-        SELECT * FROM COLLEAGUE WHERE EMAIL = #email#
+    <select id="countMail" parameterClass="String" resultClass="Integer">
+        SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#
+    </select>
+
+    <select id="countMailForColleagueId" parameterClass="com.novedia.talentmap.model.entity.Colleague" resultClass="Integer">
+        SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email# 
+        AND COLLEAGUE_ID != #id#
     </select>
     
     <insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">

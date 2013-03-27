@@ -50,14 +50,11 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
 		
-		
-		
 		for(int i=0; i<ConstantsEnglish.FIELD_ORDER_COLLABORATOR.length;i++){
 			
 			if(propertyId.equals(ConstantsEnglish.FIELD_ORDER_COLLABORATOR[i])){
 				
-				//We give a default format for all input except the employmentDate and the profileId input
-				
+				//We give a default format for all input except the employmentDate, profileId input, Business Engineer and CM
 				if(!propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMPLOYMENT_DATE) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PROFILE_ID)
 						&& !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_BUISINESS_ENGINEER) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_MANAGER)){
 					
@@ -66,10 +63,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					field.setRequired(true);
 					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_COLLABORATOR[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setNullRepresentation(ConstantsEnglish.FIELD_NULL_REPRESENTATION);
-					
-					if(!propertyId.equals(ConstantsEnglish.FIELD_COLLAB_PHONE) && !propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EXPERIENCE)){
-						field.setRequired(false);
-					}
 					
 					//We test every input name
 					
@@ -99,7 +92,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						
 						Select bEngineerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 						
-						
 						try {
 							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
 								item = ic.addItem(businessEngineer);
@@ -119,13 +111,15 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 						return bEngineerSelect;		
 					
 					
-				}else if(propertyId.equals("employmentDate")){
+				}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_EMPLOYMENT_DATE)){
 					
 					PopupDateField datefield = new PopupDateField();
 					datefield.setDateFormat("dd/MM/yyyy");
 					datefield.setCaption((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					datefield.setStyleName("employment-date");
-					
+					datefield.setRequired(true);
+					datefield.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_COLLABORATOR[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
+
 					return datefield;
 					
 				}else if(propertyId.equals("profileId")){
@@ -133,7 +127,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 			        ic.addContainerProperty("value", String.class, null);
 					
 					Select profilSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
-					
 					
 					try {
 						for(Profile p : profileService.getAllProfile()){
@@ -159,7 +152,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 			        ic.addContainerProperty("value", String.class, null);
 					
 					Select managerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
-					
 					
 					try {
 						for(Manager manager : colleagueService.getAllManagers()){

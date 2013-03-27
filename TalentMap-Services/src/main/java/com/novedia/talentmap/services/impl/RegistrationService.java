@@ -47,8 +47,13 @@ public class RegistrationService implements IRegistrationService {
 		throw new UnsupportedOperationException();
 	}
 
-	public Colleague getByMail(String mail) {
-		return ((ColleagueDao) colleagueDao).getByMail(mail);
+	/**
+	 * Gets the colleague corresponding to the mail in parameter. Returns Null if not found.
+	 * @param mail : the mail to find
+	 * @return The colleague found or null.
+	 */
+	public Integer countMail(String mail) {
+		return ((ColleagueDao) colleagueDao).countMail(mail);
 	}
 	
 	@Override

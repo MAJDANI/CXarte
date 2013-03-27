@@ -2,7 +2,6 @@ package com.novedia.talentmap.web.ui.registration;
 
 import java.util.Vector;
 
-import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
@@ -125,7 +124,8 @@ public class RegistrationForm extends FormLayout {
 				RegistrationService service = (RegistrationService)this.registrationService;
 				int nbFound = service.countLogin(login);
 				if(nbFound>0) {
-					getWindow().showNotification("Ce login (" + login + ") existe déjà");
+					String message = ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS1 + login + ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS2;
+					getWindow().showNotification(message);
 					fieldLogin.focus();
 					fieldLogin.setValue("");
 				} 
@@ -143,16 +143,18 @@ public class RegistrationForm extends FormLayout {
 		String eMail;
 		if (fieldEMail != null && fieldEMail.getValue() != "") {
 			eMail = (String) fieldEMail.getValue();
+			RegistrationService service = (RegistrationService)this.registrationService;
+			Integer nbColleagueFound = 0;
 			try {
-				RegistrationService service = (RegistrationService)this.registrationService;
-				Colleague colleagueFound = service.getByMail(eMail);
-				if(colleagueFound != null) {
-					getWindow().showNotification("Cet email (" + eMail + ") existe déjà");
-					fieldEMail.focus();
-					fieldEMail.setValue("");
-				}
+				nbColleagueFound = service.countMail(eMail);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+			if(nbColleagueFound > 0) {
+				String message = ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS1 + eMail + ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS2;
+				getWindow().showNotification(message);
+				fieldEMail.focus();
+				fieldEMail.setValue("");
 			}
 		}
 	}

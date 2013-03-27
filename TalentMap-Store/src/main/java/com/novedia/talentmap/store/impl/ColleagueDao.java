@@ -80,8 +80,19 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		throw new UnsupportedOperationException();
 	}
 	
-	public Colleague getByMail(String mail) throws DataAccessException{
-		return (Colleague) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_COLLEAGUE_BY_MAIL, mail);
+	public Integer countMail(String mail) throws DataAccessException{
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.COUNT_COLLEAGUE_BY_MAIL, mail);
+	}
+
+	/**
+	 * Counts colleagues in DB that have already the mail, with a different colleagueId.
+	 * Used to check when a colleague wants to modifiy his email, if this email is
+	 * not already use by someone else.
+	 * @param the colleague who wants to change his email
+	 * @return The count found.
+	 */
+	public Integer countMailForColleagueId(Colleague colleague) throws DataAccessException{
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.COUNT_COLLEAGUE_BY_MAIL_AND_ID, colleague);
 	}
 	
 	public Integer addColleagueFromRegistration(Registration registration) throws DataAccessException{

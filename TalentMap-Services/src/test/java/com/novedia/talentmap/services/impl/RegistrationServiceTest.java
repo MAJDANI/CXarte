@@ -5,8 +5,6 @@ import static org.junit.Assert.assertSame;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.LinkRef;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,22 +55,20 @@ public class RegistrationServiceTest {
 	 * 
 	 */
 	@Test
-	public void getByMailReturnAColleague(){
+	public void countMailReturnANumber(){
 		
 		// Given
-		Colleague collaborator = Colleague.builder().id(1).firstName("toto").build();
-		
 		// TODO : rendre les instances de registration immutables
 		Registration registration  = new Registration();
 		registration.setEmail("mail@gmail.com");
 				
 		// When
-		Mockito.when(colleagueDaoMock.getByMail(registration.getEmail())).thenReturn(collaborator);
-		Colleague result = service.getByMail(registration.getEmail());
+		Mockito.when(colleagueDaoMock.countMail(registration.getEmail())).thenReturn(1);
+		Integer result = service.countMail(registration.getEmail());
 
 		// Then
 		Assert.assertNotNull(result);
-		assertSame(result, collaborator);
+		assertSame(result, 1);
 	}
 	
 	/**
