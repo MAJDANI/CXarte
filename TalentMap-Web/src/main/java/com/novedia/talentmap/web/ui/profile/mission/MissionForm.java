@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
@@ -146,6 +145,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void buildMain() {
 
 		try {
+			missionForm.removeAllProperties();
 			buildMissionLayout();
 			buildMissionForm();
 			buildButton();
@@ -160,7 +160,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	}
 
 	public void buildMissionForm() throws Exception {
-		//this.missionForm.setLayout(this.missionFormLayout);
 		CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
 		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService,this.skillService,false));
 		

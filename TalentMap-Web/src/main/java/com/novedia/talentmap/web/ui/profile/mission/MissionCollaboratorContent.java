@@ -173,7 +173,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 		addComponent(this.btnAddMission);
 		addComponent(this.addMissionPanel);
-		this.btnAddMission.setEnabled(true);
+		enableButton(true);
 		
 		buildListPanelMission();
 
