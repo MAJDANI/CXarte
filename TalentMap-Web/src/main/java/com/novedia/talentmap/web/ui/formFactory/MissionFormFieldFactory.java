@@ -1,13 +1,10 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Client;
-import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.ISkillService;
@@ -78,7 +75,6 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
-		boolean allowNull = false;
 
 		for (int i = 0; i < ConstantsEnglish.FIELD_ORDER_MISSION.length; i++) {
 
@@ -168,8 +164,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 							(String) ConstantsEnglish.NAME_FIELD_MISSION[i]
 									+ " : ");
 					textarea.setNullRepresentation("");
-
-					textarea.setColumns(25);
+					textarea.setColumns(20);
 					textarea.setRows(5);
 
 					return textarea;
