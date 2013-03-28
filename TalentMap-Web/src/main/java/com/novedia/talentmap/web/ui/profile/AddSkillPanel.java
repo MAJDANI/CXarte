@@ -248,6 +248,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.toolSelect.addValidator(this);
 		this.toolSelect.setImmediate(true);
 		this.toolSelect.setStyleName("tool-select");
+		this.toolSelect.setWidth("150px");
 
 		// We build the Frequency Use Select
 		this.frequencyUseSelect.setCaption(ConstantsEnglish.FREQUENCY_USE);
@@ -279,6 +280,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		stars.setAnimated(true);
 		stars.setMaxValue(5);
 		stars.setWidth(150);
+		
 
 		for (int i = 0; i < ConstantsEnglish.OPTIONS.length; i++) {
 			stars.setValueCaption(i + 1, ConstantsEnglish.OPTIONS[i]);
@@ -297,7 +299,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		// We fill only the Tool Select
 		List<Tool> listTool = skillService.getAllTools();
 //		System.out.println("***listTool*** : "+ listTool);
-
 		for (Tool t : listTool) {
 			this.toolSelect.addItem(t.getName());
 			//Item i = this.toolSelect.addItem(t.getName());
