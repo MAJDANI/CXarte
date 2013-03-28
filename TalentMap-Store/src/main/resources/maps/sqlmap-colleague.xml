@@ -93,9 +93,7 @@
     </select>
 	
 	<select id="getAllManagers" resultMap="managerResult">
-         SELECT * FROM COLLEAGUE colleague
-        WHERE colleague.COLLEAGUE_ID IN
-        (SELECT colleague2.MANAGER_ID FROM COLLEAGUE colleague2)  
+		SELECT * FROM COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
     </select>
 	
     <select id="getAllColleaguesByLastName" parameterClass="string" resultMap="colleagueResult">
@@ -136,10 +134,7 @@
     </select>
     
     <select id="getAllConsultantManager" resultMap="colleagueResult">
-		SELECT DISTINCT C1.* 
-		FROM COLLEAGUE C1, COLLEAGUE c2 
-		WHERE C1.COLLEAGUE_ID = C2.MANAGER_ID
-		ORDER BY C1.LAST_NAME
+    	SELECT * FROM COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
     </select>
     
     <select id="countMail" parameterClass="String" resultClass="Integer">
