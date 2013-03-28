@@ -200,6 +200,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 
 	public void buildButtonLayout() {
 		HorizontalLayout hLayout = new HorizontalLayout();
+		footerLayout.removeAllComponents();
 
 		this.edit.setCaption(ConstantsEnglish.EDIT_CAPTION);
 		this.edit.setDisableOnClick(true);
