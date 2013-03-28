@@ -204,7 +204,7 @@ public class ManageSkillContent extends VerticalLayout implements
 						TextField textField = new TextField(NAME_FIELD_SKILL[i]
 								+ " : ");
 						textField.setNullRepresentation("");
-
+						textField.setMaxLength(ConstantsEnglish.CATEGORY_NAME_MAX_LENGTH);
 						return textField;
 					}
 				}

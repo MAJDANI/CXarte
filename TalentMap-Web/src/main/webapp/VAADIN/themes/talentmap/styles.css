@@ -110,6 +110,17 @@
 }
 
 
+.informationHeaderLayout{
+	float: right;
+}
+
+.helloLabel{
+	font-size: 12px;
+	color: #808080;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+
 
 /* BUTTON NAVIGATION IN ADMIN & MONITORING COLLAB */
 .admin-button{background: none!important;}

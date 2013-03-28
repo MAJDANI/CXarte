@@ -35,7 +35,8 @@
 	<!--  authenticatedScreen bean   -->
     <bean id="authenticatedScreen" class="com.novedia.talentmap.web.ui.login.AuthenticatedScreen" scope="session">
     	<property name="mainTab" ref="mainTab" />  
-    	<property name="changePasswordForm" ref="changePasswordFormBean" />  
+    	<property name="changePasswordForm" ref="changePasswordFormBean" /> 
+    	<property name="colleagueService" ref="collaboratorService" /> 
 	</bean>
 	
 	<!-- mainTab bean -->
@@ -100,7 +101,6 @@
 		<property name="save" ref="saveMissionButton"/>
 		<property name="cancel" ref="cancelMissionButton"/>
 		 <property name="skillService" ref="skillService"/>
-<!-- 		<property name="missionContainer" ref="missionContainerBean"/> -->
 		<property name="listMission" ref="listMissionBean"/>
 		
 	</bean>
@@ -360,13 +360,10 @@
 	
 	<!-- Vaadin RegistrationForm UI -->
 	
-<!-- 	<bean id="fieldOrderRegistrationFormBean" class="java.util.Vector" scope="session"/> -->
 	<bean id="registrationForm" class="com.vaadin.ui.Form" scope="session"/>
-<!-- 	<bean id="registrationFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/> -->
 	
 	<bean id="registrationFormBean" class="com.novedia.talentmap.web.ui.registration.RegistrationForm" scope="session">
 		<property name="registrationForm" ref="registrationForm"/>
-<!-- 		<property name="registrationFormLayout" ref="registrationFormLayoutBean"/> -->
 		<property name="registrationService" ref="registrationService"/>
 		<property name="businessEngineerService" ref="businessEngineerService"/>
 	</bean>

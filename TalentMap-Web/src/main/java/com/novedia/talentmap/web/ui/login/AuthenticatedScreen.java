@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Authorization.Role;
+import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.ui.TabMain;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
@@ -16,6 +18,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComponentContainer;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
@@ -43,6 +47,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	private ChangePasswordForm changePasswordForm;
 	
+	private IColleagueService colleagueService;
+	
 	/**
 	 * My Vaadin app
 	 */
@@ -54,6 +60,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	private static final String LABEL_LOG_OUT_BUTTON = "Logout";
 	private static final String LABEL_CHANGE_PASSWORD_BUTTON = "Change Password";
+	
+	private static final String HELLO_LABEL = "Hello, ";
 	
 	//
 	
@@ -117,13 +125,21 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	private ComponentContainer buildMainLayout(Role role) {
 		Panel globalView = new Panel();
 		VerticalLayout headerLayout = new VerticalLayout();
-		headerLayout.setMargin(true);
+		HorizontalLayout informationLayout = new HorizontalLayout();
+		informationLayout.setSpacing(true);
+		informationLayout.addStyleName("informationHeaderLayout");
 		Button logOutButton = new Button(LABEL_LOG_OUT_BUTTON);
 		logOutButton.addStyleName(Reindeer.BUTTON_LINK); //transformation du bouton en lien
 		logOutButton.addListener(this);
-		headerLayout.addComponent(logOutButton);	
-		headerLayout.setComponentAlignment(logOutButton, Alignment.MIDDLE_RIGHT);
+		Colleague currentColleague= colleagueService.getColleague(authentication.getColleagueId());
+		Label helloLabel = new Label(HELLO_LABEL + currentColleague.getFirstName());
+		helloLabel.addStyleName("helloLabel");
+		informationLayout.addComponent(helloLabel);
+		informationLayout.addComponent(logOutButton);	
+		headerLayout.addComponent(informationLayout);
 		
+		headerLayout.setMargin(true);
+		headerLayout.setComponentAlignment(informationLayout, Alignment.MIDDLE_RIGHT);
 		Button changePasswordButton = new Button(LABEL_CHANGE_PASSWORD_BUTTON);
 		changePasswordButton.addListener(this);
 		headerLayout.addComponent(changePasswordButton);
@@ -198,6 +214,17 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		this.changePasswordForm = changePasswordForm;
 	}
 
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
+	}
+
+	
 
 	
 
