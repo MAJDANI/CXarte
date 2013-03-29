@@ -443,8 +443,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		Map<Category, Map> mapSkill = this.skillService
 				.getAllCollaboratorSkill(authentication.getColleagueId());
 
-		this.listSkill = new ListSkill(mapSkill);
-
+		//this.listSkill = new ListSkill(mapSkill);
+		this.listSkill = listSkill.buildListSkill();
+		
 		this.updateObservateur();
 	}
 

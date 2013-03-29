@@ -4,25 +4,19 @@ import java.util.Map;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.model.entity.Concept;
-import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.util.CUtils;
-import com.novedia.talentmap.web.util.TalentMapCSS;
-import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
-import com.vaadin.event.MouseEvents.ClickEvent;
-import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window.Notification;
 
 /**
  * List of Collaborator Skills
  * 
  * @author j.collet
+ * @author b.tiomofofou
  * @project TalentMap-Web
  * @package com.novedia.talentmap.web.ui
  * @created 21 mai 2012
@@ -56,6 +50,8 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 */
 	public ListSkill(){
 		super();
+		setImmediate(true);
+		setMargin(true);
 	}
 	
 	
@@ -64,8 +60,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * @return
 	 */
 	public ListSkill buildListSkill(){
-		setImmediate(true);
-		setMargin(true);
 		mainBuild();
 		return this;
 	}
@@ -112,10 +106,9 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		}
 
 		// Test if the Collaborator have one skill
-		if (!mapSkill.isEmpty() && mapSkill != null) {
-
+		if ( mapSkill != null && !mapSkill.isEmpty()) {
+			initComponents();
 			addComponent(buildListSkill(this.mapSkill));
-
 		} else {
 			setVisible(false);
 		}
@@ -127,21 +120,19 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * 
 	 * @param mapSkill
 	 */
-	public ListSkill(Map<Category, Map> mapSkill) {
-		this.mapSkill = mapSkill;
-
-		// Init the components
-
-		// Test if the Collaborator have one skill
-		if (mapSkill != null && !mapSkill.isEmpty()) {
-
-			initComponents();
-			addComponent(buildListSkill(this.mapSkill));
-
-		} else {
-			setVisible(false);
-		}
-	}
+//	public ListSkill(Map<Category, Map> mapSkill) {
+//		this.mapSkill = mapSkill;
+//		// Init the components
+//
+//		// Test if the Collaborator have one skill
+//		if (mapSkill != null && !mapSkill.isEmpty()) {
+//			initComponents();
+//			addComponent(buildListSkill(this.mapSkill));
+//
+//		} else {
+//			setVisible(false);
+//		}
+//	}
 
 	/**
 	 * Initialize all component
@@ -160,9 +151,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * @class ListSkill.java
 	 */
 	public Accordion buildListSkill(Map<Category, Map> mapSkill) {
-
 		return CUtils.MapSkillToAccordionSkill(mapSkill, this);
-		
 	}
 
 	@Override
@@ -199,11 +188,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
-
-	
-
-
-	
 
 
 	/**
@@ -256,6 +240,17 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		return skillService;
 	}
 
+
+	public Map<Category, Map> getMapSkill() {
+		return mapSkill;
+	}
+
+
+	public void setMapSkill(Map<Category, Map> mapSkill) {
+		this.mapSkill = mapSkill;
+	}
+
+	
 	
 	
 

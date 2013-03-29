@@ -56,12 +56,9 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @return SkillCollaboratorContent
 	 */
 	public VerticalLayout buildSkillCollaboratorContent(){
-		removeAllComponents();
+		setImmediate(true);
 		listSkill.setAuthentication(getAuthentication());
 		addSkillPanel.setAuthentication(getAuthentication());
-		listSkill = listSkill.buildListSkill();
-		addSkillPanel = addSkillPanel.buildAddSkillPanel();
-		setImmediate(true);
 		buildObersvators();
 		mainBuild();
 		return this;
@@ -101,10 +98,11 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @class ProfileView.java
 	 */
 	public void mainBuild() {
-
+		removeAllComponents();
+		listSkill = listSkill.buildListSkill();
+		addSkillPanel = addSkillPanel.buildAddSkillPanel();
 		buildSkillLayout();
 		buildButtonLayout();
-
 		addComponent(this.bodyLayout);
 		addComponent(this.footerLayout);
 	}
@@ -116,19 +114,17 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @return
 	 */
 	public void buildSkillLayout() {
-		this.skillLabel.setStyle(TalentMapCSS.H2);
-
-		if (this.listSkill.isVisible()) {
-
+		this.skillLabel.addStyleName(TalentMapCSS.H2);
+		if (this.listSkill.getMapSkill() != null && !listSkill.getMapSkill().isEmpty()) {
 			buildAddSkillPanel();
 			this.skillPanel.setVisible(false);
 			this.addSkillPanel.setVisible(false);
-
 			buildListSkillPanel();
-
 		} else {
 			this.edit.setVisible(false);
 			buildAddSkillPanel();
+			skillPanel.setVisible(true);
+			System.out.println("pas de skill");
 		}
 
 	}
@@ -140,13 +136,13 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @param skillPanel
 	 */
 	public void buildAddSkillPanel() {
-
+		bodyLayout.removeAllComponents();
 		VerticalLayout vLayout = new VerticalLayout();
 		HorizontalLayout hLayout = new HorizontalLayout();
 		HorizontalLayout hLayout2 = new HorizontalLayout();
 		skillPanel.removeAllComponents();
-		this.skillPanel.addComponent(skillLabel);
 		skillLabel.setCaption(ConstantsEnglish.ADD_SKILL_LABEL);
+		this.skillPanel.addComponent(skillLabel);
 
 		Label question = new Label("Would you choose your skills?");
 
@@ -178,11 +174,12 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 * @param skillPanel
 	 */
 	public void buildListSkillPanel() {
-
+		this.listSkillPanel.removeAllComponents();
+			
 		this.addSkill.setCaption("Add skill");
 		this.addSkill.setEnabled(true);
 
-		this.skillLabel = new Label(ConstantsEnglish.SKILL_LABEL);
+		this.skillLabel.setCaption(ConstantsEnglish.SKILL_LABEL);
 		this.listSkillPanel.addComponent(this.skillLabel);
 		this.listSkillPanel.addComponent(this.addSkill);
 		this.listSkillPanel.addComponent(this.listSkill);
@@ -247,9 +244,9 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			
 		//Cancel Button
 		} else if (button == this.cancel) {
-			this.addSkillPanel.setVisible(false);
-			this.addSkill.setEnabled(true);
-			this.edit.setEnabled(true);
+			edit.setEnabled(true);
+			addSkill.setEnabled(true);
+			mainBuild();
 
 		//Add Skill Panel button
 		} else if (button == this.addSkill) {

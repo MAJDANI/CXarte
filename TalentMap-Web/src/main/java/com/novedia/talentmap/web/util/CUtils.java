@@ -47,7 +47,6 @@ public abstract class CUtils {
 						
 						vLayoutConcept.setMargin(true);
 						rateConcept = new RatingStars();
-						rateConcept.addStyleName("ratingStarConcept");
 						
 						
 						//We build a new table Tool
@@ -87,7 +86,7 @@ public abstract class CUtils {
 						int noteconcept = (int) Math.round(eConcept.getKey().getScore());
 						if (noteconcept != 0) {
 							rateConcept.setMaxValue(noteconcept);
-							rateConcept.setValue(eConcept.getKey().getScore().intValue());
+							rateConcept.setValue(noteconcept);
 							rateConcept.setReadOnly(true);
 							hLayoutConcept.addComponent(new Label(LABEL_NOTE_CONCEPT));
 							hLayoutConcept.addComponent(rateConcept);

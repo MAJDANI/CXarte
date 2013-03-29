@@ -15,7 +15,6 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.model.entity.VSkillCollab;
 import com.novedia.talentmap.services.ISkillService;
-import com.novedia.talentmap.services.ScoreManage;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillCollabDao;
 import com.novedia.talentmap.store.IVSkillDao;
@@ -124,48 +123,32 @@ return this.vSkillCollabDao.getAllSkillCollab(collabId);
 public Map<Category, Map> getAllCollaboratorSkill(int collabId)	throws DataAccessException {
 
 	List<Skill> listSkill = new ArrayList<Skill>();
-
-	// A Tool Map (Tool Object, Integer:Score)
 	Map<Tool, Skill> mapTool = new HashMap<Tool, Skill>();
 
-	// A Concept Map (Concept, Tool Map which matches with the Concept)
 	Map<Concept, Map> mapConcept = new HashMap<Concept, Map>();
 
-	// A Category Map (Category, Concept Map which matches with the
-	// Category)
-	Map<Category, Map> mapCategory = new HashMap<Category, Map>();
+	Map<Category, Map> mapCategory = null;
 
 	// We take all Collaborators Skills
 	listSkill = skillDao.getAllCollaboratorSkill(collabId);
+	if (listSkill != null && !listSkill.isEmpty()) {
+		mapCategory = new HashMap<Category, Map>();
+		buildTool(listSkill, mapTool);
+		List<Integer> listToolScore = new ArrayList<Integer>();
+		Concept conceptTMP = null;
 
-	// We build the Tool Map
-	buildTool(listSkill, mapTool);
-	List<Integer> listToolScore = new ArrayList<Integer>();
-	Concept conceptTMP = null;
-	//double conceptScore = 0;
+		// We build the Concept Map
+		conceptTMP = buildConcept(mapTool, mapConcept, listToolScore,conceptTMP);
+		// We calculate the score of the last concept if it's not null
+		if (conceptTMP != null) {
+			Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
+			mapConcept.remove(conceptTMP);
+			mapConcept.put(conceptTMP, mapTMP);
+		}
+		mapCategory = buildCategory(mapConcept, mapCategory);
+		mapCategory = computeConceptScore(mapCategory);
+	} 
 
-	// We build the Concept Map
-	conceptTMP = buildConcept(mapTool, mapConcept, listToolScore,conceptTMP);
-	// We calculate the score of the last concept if it's not null
-	if (conceptTMP != null) {
-		//conceptScore = ScoreManage.conceptScore(listToolScore, toolDao.getAll().size());
-
-		Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
-		mapConcept.remove(conceptTMP);
-
-		//conceptTMP.setScore(conceptScore);
-		mapConcept.put(conceptTMP, mapTMP);
-	}
-
-	// We build the Category Map
-	mapCategory = buildCategory(mapConcept, mapCategory);
-//	for(Entry<Category, Map> cat : mapCategory.entrySet()) {
-//		System.out.println("concept : "+cat.getValue());
-//		
-//	}
-	mapCategory = computeConceptScore(mapCategory);
-	//mapCategory = ScoreManage.computeConceptScore(mapCategory, listSkill.size(), toolDao.getAll().size());
-	//return buildCategory(mapConcept, mapCategory);
 	return mapCategory;
 }
 
