@@ -79,8 +79,8 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Vector<Object> fieldOrderSkill;
 
 	//Constant
-	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Catégorie",
-			"Concept", "Outil" };
+	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Category",
+			"Concept", "Tool" };
 	
 	public static final Object[] FIELD_ORDER_SKILL = new Object[] {
 		"categoryName", "conceptName", "toolName" };
@@ -89,7 +89,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	public static final int TYPE_CATEGORY = 1;
 	public static final int TYPE_CONCEPT = 2;
 	public static final int TYPE_TOOL = 3;
-	public static final String MESSAGE_FIELD_EMPTY = "Vous devez remplir tous les champs.";
+	public static final String MESSAGE_FIELD_EMPTY = "You must fill all fields.";
 
 	/**
 	 * Current ID Skill
@@ -227,16 +227,16 @@ public class ManageSkillContent extends VerticalLayout implements
 		hLayoutButton.setMargin(true);
 		hLayoutButton.setSpacing(true);
 
-		this.save.setCaption("Enrergistrer");
+		this.save.setCaption("Save");
 		this.save.addListener(this);
 
-		this.cancel.setCaption("Annuler");
+		this.cancel.setCaption("Cancel");
 		this.cancel.addListener(this);
 
-		this.edit.setCaption("Modifier");
+		this.edit.setCaption("Modify");
 		this.edit.addListener(this);
 
-		this.delete.setCaption("Supprimer");
+		this.delete.setCaption("Delete");
 		this.delete.addListener(this);
 
 		hLayoutButton.addComponent(this.save);
@@ -273,7 +273,7 @@ public class ManageSkillContent extends VerticalLayout implements
 			this.treeSkill.addItem(ca.getId() + ":" + TYPE_CATEGORY + ":"
 					+ ca.getName());
 			this.treeSkill.setItemCaption(ca.getId() + ":" + TYPE_CATEGORY
-					+ ":" + ca.getName(), ca.getName());
+					+ ":" + ca.getName(), ca.getName().toUpperCase());
 
 			for (Concept co : this.listConcept) {
 
@@ -283,7 +283,7 @@ public class ManageSkillContent extends VerticalLayout implements
 							+ TYPE_CONCEPT + ":" + co.getName());
 					this.treeSkill.setItemCaption(co.getId() + ":"
 							+ TYPE_CONCEPT + ":" + co.getName(),
-							co.getName());
+							co.getName().toUpperCase());
 
 					this.treeSkill.setParent(
 							co.getId() + ":" + TYPE_CONCEPT + ":"
@@ -299,7 +299,7 @@ public class ManageSkillContent extends VerticalLayout implements
 									+ ":" + t.getName());
 							this.treeSkill.setItemCaption(t.getId() + ":"
 									+ TYPE_TOOL + ":" + t.getName(),
-									t.getName());
+									t.getName().toUpperCase());
 
 							this.treeSkill.setParent(t.getId() + ":"
 									+ TYPE_TOOL + ":" + t.getName(), co.getId()
@@ -402,7 +402,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillCategory(String categoryName) {
 
-		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName.toUpperCase()).build();
 		
 		try {
 
@@ -423,9 +423,9 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillConcept(String categoryName, String conceptName) {
 
-		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName.toUpperCase()).build();
 
-		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName.toUpperCase()).build();
 
 		try {
 
@@ -447,8 +447,8 @@ public class ManageSkillContent extends VerticalLayout implements
 	 */
 	private void updateSkillTool(String categoryName, String conceptName, String toolName) {
 
-		Category category = Category.builder().id(this.currentCategoryId).name(categoryName).build();
-		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName).build();
+		Category category = Category.builder().id(this.currentCategoryId).name(categoryName.toUpperCase()).build();
+		Concept concept = Concept.builder().id(this.currentConceptId).category(category).name(conceptName.toUpperCase()).build();
 		Tool tool = Tool.builder().id(this.currentToolId).concept(concept).name(toolName).build();
 
 		try {
@@ -650,7 +650,7 @@ public class ManageSkillContent extends VerticalLayout implements
 		// Test if the item clicked is a CATEGORY TYPE
 		if ((Integer) item.get("type") == TYPE_CATEGORY) {
 
-			updateItemCateogry(item);
+			updateItemCategory(item);
 		}
 
 		// Test if the item clicked is a CONCEPT TYPE
@@ -673,7 +673,7 @@ public class ManageSkillContent extends VerticalLayout implements
 	 * @class ManageSkillContent.java
 	 * @param item
 	 */
-	private void updateItemCateogry(Map<String, Object> item) {
+	private void updateItemCategory(Map<String, Object> item) {
 
 		this.formSkill.getField(FIELD_ORDER_SKILL[0])
 				.setValue(item.get("name"));
@@ -685,6 +685,8 @@ public class ManageSkillContent extends VerticalLayout implements
 		this.formSkill.getField(FIELD_ORDER_SKILL[2]).setEnabled(false);
 
 		this.currentCategoryId = (Integer) item.get("id");
+		this.currentConceptId = null;
+		this.currentToolId = null;
 	}
 
 	/**
@@ -710,6 +712,7 @@ public class ManageSkillContent extends VerticalLayout implements
 
 		this.currentCategoryId = (Integer) categoryItem.get("id");
 		this.currentConceptId = (Integer) item.get("id");
+		this.currentToolId = null;
 	}
 
 	/**
