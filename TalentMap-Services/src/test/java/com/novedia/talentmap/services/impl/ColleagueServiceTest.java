@@ -3,8 +3,11 @@ package com.novedia.talentmap.services.impl;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,10 +19,12 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.MissionDao;
@@ -173,20 +178,25 @@ public class ColleagueServiceTest {
 	 */
 	@Test
 	public void addMissionReturnsACorrectId(){
-//		
-//		//Given
-//		Integer missionForTestsId = 1;
-//		Mission missionForTests = Mission.builder().build();
-//		
-//		
-//		
-//		//When
-//		Mockito.when(missionDaoMock.add(missionForTests)).thenReturn(missionForTestsId);
-//		Integer missionIdactual = service.addMission(missionForTests);
-//		
-//		//Then
-//		Mockito.verify(missionDaoMock, Mockito.times(1)).add(missionForTests);		
-//		Assert.assertEquals(missionIdactual, missionForTestsId);
+		
+		//Given
+		Integer expectedResult = 1;
+		Mission missionForTests = Mission.builder().id(1).build();
+		Set<Tool> tools = new HashSet<Tool>();
+		Tool t1 = Tool.builder().id(1).build();
+		tools.add(t1);
+		Client client = Client.builder().id(1).build();
+		MissionDto missionDto = MissionDto.builder().id(1).client(client).colleagueId(1).place("place test")
+				.startDate(new Date()).title("title test").tools(tools).build();
+		
+		
+		//When
+		Mockito.when(missionDaoMock.add(missionForTests)).thenReturn(expectedResult);
+		Integer currentResult = service.addMission(missionDto);
+		
+		//Then
+		//Mockito.verify(missionDaoMock, Mockito.times(1)).add(missionForTests);		
+		Assert.assertEquals(expectedResult,currentResult);
 	}
 	
 	/**
