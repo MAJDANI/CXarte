@@ -3,21 +3,18 @@ package com.novedia.talentmap.store.impl;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.dao.DataAccessException;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
-import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.CredentialToken;
 
-@Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class AuthenticationDaoTest {
@@ -28,47 +25,53 @@ public class AuthenticationDaoTest {
 	@SpringBean("authenticationDao")
 	private AuthenticationDao authenticationDao;
 
-	@SpringBeanByName
-	private Authorization authorization;
+//	@SpringBeanByName
+//	private Authorization authorization;
 
 	@Before
 	public void setUp() throws Exception {
 		authenticationDao.setSqlMapClient(sqlMapClient);
 	}
-
-	private CredentialToken credential = new CredentialToken();
-	private Authentication authentication = new Authentication();
-	
-	public void testAddUserFromRegistration() {
-		//Given
-		//When
-		//Then
-	}
 	
 	/**
-	 * Update Authenticate
+	 * update user's password
 	 */
 	@Test
 	@DataSet("AuthenticateDaoTest.testSave-result.xml")
-	public void testSave() {	
-		authorization.setLabel("Consultant");
-		authorization.setRoleId(4);
+	public void testSaveReturnInteger() {	
+		//Given
+		CredentialToken credential1 = new CredentialToken();
+		Authentication authentication1 = new Authentication();
 		
-		credential.setLogin("o.chauvie");
-		credential.setPassword("testUpdate");
+		CredentialToken credential2 = new CredentialToken();
+		Authentication authentication2 = new Authentication();
 		
-		authentication.setColleagueId(1);
-		authentication.setAuthorization(authorization);
-		authentication.setToken(credential);
+		credential1.setLogin("o.chauvie");
+		credential1.setPassword("newPassword");
+		authentication1.setToken(credential1);
 		
-		int updateAuth = authenticationDao.save(authentication);
-		Assert.assertEquals(1, updateAuth);	
+		credential2.setLogin("user2");
+		credential2.setPassword("passworduser2");
+		authentication2.setToken(credential2);
+		int expectedResultSave1 = 1;
+		int expectedResultSave2 = 0;
+		
+		//When
+		int currentResultSave1 = authenticationDao.save(authentication1);
+		int currentResultSave2 = authenticationDao.save(authentication2);
+		
+		//Then
+		Assert.assertEquals(expectedResultSave1, currentResultSave1);
+		Assert.assertEquals(expectedResultSave2, currentResultSave2);
 	}
 	
-	@Test
-	public void testCountLogin() {
+	@Test(expected=DataAccessException.class)
+	public void testSaveThrowDataAccessException(){
 		//Given
+		Authentication authentication = null;
+		
 		//When
-		//Then
+		authenticationDao.save(authentication);
 	}
+	
 }

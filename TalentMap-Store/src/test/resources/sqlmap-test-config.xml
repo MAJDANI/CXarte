@@ -9,6 +9,7 @@
     <sqlMap resource="maps/sqlmap-test-category.xml"/>
     <sqlMap resource="maps/sqlmap-test-concept.xml"/>
     <sqlMap resource="maps/sqlmap-test-tool.xml"/>
+<!--     <sqlMap resource="maps/sqlmap-test-mission.xml"/> -->
     <sqlMap resource="maps/sqlmap-test-mission.xml"/>
     <sqlMap resource="maps/sqlmap-test-authentification.xml"/>
     <sqlMap resource="maps/sqlmap-test-mission_tool.xml"/>
