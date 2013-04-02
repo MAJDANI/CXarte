@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.dao.DataAccessException;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -103,5 +104,11 @@ public class MissionDaoTest {
 		// Then
 		Assert.assertEquals(expectedResult, currentResult);
 		Assert.assertEquals(expectedResult2, currentResult2);
+	}
+	
+	@Test(expected=DataAccessException.class)
+	public void testSaveNullPointerException(){
+		Mission mission = null;
+		missionDao.save(mission);
 	}
 }
