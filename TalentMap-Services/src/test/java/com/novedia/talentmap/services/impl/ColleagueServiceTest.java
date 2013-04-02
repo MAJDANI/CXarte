@@ -187,7 +187,7 @@ public class ColleagueServiceTest {
 		tools.add(t1);
 		Client client = Client.builder().id(1).build();
 		MissionDto missionDto = MissionDto.builder().id(1).client(client).colleagueId(1).place("place test")
-				.startDate(new Date()).title("title test").tools(tools).build();
+				.startDate(new Date()).endDate(new Date()).title("title test").notes("").tools(tools).build();
 		
 		
 		//When
@@ -206,19 +206,25 @@ public class ColleagueServiceTest {
 	 */
 	@Test
 	public void saveMissionReturnsACorrectId() {
-//
-//		//Given
-//		Integer missionForTestsId = 1;
-//		Mission missionForTests = Mission.builder().build();
-//
-//		//When
-//		Mockito.when(missionDaoMock.save(missionForTests)).thenReturn(missionForTestsId);
-//		Integer missionIdactual = service.saveMission(missionForTests);
-//		
-//		//Then
-//		Mockito.verify(missionDaoMock, Mockito.times(1)).save(missionForTests);		
-//		Assert.assertEquals(missionIdactual, missionForTestsId);
-//		
+
+		//Given
+		Integer missionForTestsId = 1;
+		Mission missionForTests = Mission.builder().id(1).build();
+		Set<Tool> tools = new HashSet<Tool>();
+		Tool t1 = Tool.builder().id(1).build();
+		tools.add(t1);
+		Client client = Client.builder().id(1).build();
+		MissionDto missionDto = MissionDto.builder().id(1).client(client).colleagueId(1).place("place test")
+				.startDate(new Date()).title("title test").tools(tools).build();
+
+		//When
+		Mockito.when(missionDaoMock.save(missionForTests)).thenReturn(missionForTestsId);
+		Integer missionIdactual = service.saveMission(missionDto);
+		
+		//Then
+		//Mockito.verify(missionDaoMock, Mockito.times(1)).save(missionForTests);		
+		Assert.assertEquals(missionForTestsId, missionIdactual);
+		
 	}
 
 	/**
