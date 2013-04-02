@@ -3,6 +3,7 @@ package com.novedia.talentmap.services.impl;
 
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -17,8 +18,17 @@ import com.novedia.talentmap.store.IDao;
 @RunWith(MockitoJUnitRunner.class)
 public class ChangePasswordServiceTest {
 	
+	private ChangePasswordService changePasswordService; 
+	
 	@Mock
 	private IDao<Authentication> authenticationDaoMock;
+	
+	
+	@Before
+	public void setUp(){
+		changePasswordService = new ChangePasswordService();
+		changePasswordService.setAuthenticationDao(authenticationDaoMock);
+	}
 	
 	@Test
 	public void savePasswordReturnInteger(){
@@ -33,10 +43,10 @@ public class ChangePasswordServiceTest {
 		token.setPassword(encodedPassword);
 		authentication.setToken(token);
 		Integer expectedResultSave = 1;
-		Integer currentResult = 1;
 		
 		//When 
-		Mockito.when(authenticationDaoMock.save(authentication)).thenReturn(currentResult);
+		Mockito.when(authenticationDaoMock.save(authentication)).thenReturn(expectedResultSave);
+		Integer currentResult = changePasswordService.savePassword(authentication);
 		
 		//Then
 		Assert.assertEquals(expectedResultSave, currentResult);
