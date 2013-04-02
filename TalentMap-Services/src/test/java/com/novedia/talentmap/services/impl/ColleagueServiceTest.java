@@ -30,7 +30,7 @@ import com.novedia.talentmap.store.impl.MissionDao;
  * @author v.guillemain
  *
  */
-@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class ColleagueServiceTest {
 	

@@ -9,8 +9,9 @@
     <sqlMap resource="maps/sqlmap-test-category.xml"/>
     <sqlMap resource="maps/sqlmap-test-concept.xml"/>
     <sqlMap resource="maps/sqlmap-test-tool.xml"/>
-<!--     <sqlMap resource="maps/sqlmap-test-mission.xml"/> -->
-<!--     <sqlMap resource="maps/sqlmap-authentification.xml"/> -->
+    <sqlMap resource="maps/sqlmap-test-mission.xml"/>
+    <sqlMap resource="maps/sqlmap-test-authentification.xml"/>
+    <sqlMap resource="maps/sqlmap-test-mission_tool.xml"/>
 <!--     <sqlMap resource="maps/sqlmap-skill.xml"/> -->
 <!--     <sqlMap resource="maps/sqlmap-vskill.xml"/> -->
 <!--     <sqlMap resource="maps/sqlmap-vskillcollab.xml"/> -->
