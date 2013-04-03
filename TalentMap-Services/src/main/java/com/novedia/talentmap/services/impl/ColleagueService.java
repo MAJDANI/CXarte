@@ -86,43 +86,33 @@ public class ColleagueService implements IColleagueService {
 	@Override
 	public Integer addMission(final MissionDto missionDto) throws DataAccessException {
 		Mission mission = createEntity(missionDto);
-		return missionDao.add(mission);
+		return  missionDao.add(mission);
 	}
 	
 	private Mission createEntity(MissionDto mDTO) {
-		
 		Mission m = null;
-	
-		 if(mDTO != null){
-			 m = new Mission();
-			 List<Tool> toolsList = new ArrayList<Tool>();
-				
-				Set<Tool> tools = mDTO.getTools();
-
-				
-				if(tools.size()>0)
+		if(mDTO != null){
+			m = new Mission();
+			List<Tool> toolsList = new ArrayList<Tool>();
+			Set<Tool> tools = mDTO.getTools();
+			if(tools.size()>0)
+			{
+				for(Tool t : tools)
 				{
-					for(Tool t : tools)
-					{
-						toolsList.add(t);
-					}
-					
-					m.setTools(toolsList);
+					toolsList.add(t);
 				}
-
-				m.setId(mDTO.getId());
-				m.setClient(mDTO.getClient());
-				m.setStartDate(mDTO.getStartDate());
-				m.setEndDate(mDTO.getEndDate());
-				m.setTitle(mDTO.getTitle());
-				m.setPlace(mDTO.getPlace());
-				m.setNotes(mDTO.getNotes());
-				m.setColleagueId(mDTO.getColleagueId());
-		 }
-
-		// Recopie des attributs "simples"
-		
-
+				m.setTools(toolsList);
+			}
+			// Recopie des attributs "simples"
+			m.setId(mDTO.getId());
+			m.setClient(mDTO.getClient());
+			m.setStartDate(mDTO.getStartDate());
+			m.setEndDate(mDTO.getEndDate());
+			m.setTitle(mDTO.getTitle());
+			m.setPlace(mDTO.getPlace());
+			m.setNotes(mDTO.getNotes());
+			m.setColleagueId(mDTO.getColleagueId());
+		}
 		return m;
 	}
 
