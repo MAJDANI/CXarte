@@ -98,20 +98,20 @@ public class AuthenticationDaoTest {
 		
 	}
 	
-//	@Test
-//	@DataSet("AuthenticateDaoTest.testSave-result.xml")
-//	public void testAddUserFromRegistration(){
-//		//Given
-//		Registration registration = Registration.Builder.builder().login("t.test").colleagueId(4).password("test").build();
-//		registration.setRole(Authorization.Role.CL);
-//		Integer expectedResult = 1; 
-//		
-//		//When
-//		Integer currentResult = authenticationDao.addUserFromRegistration(registration);
-//		
-//		//Then
-//		Assert.assertEquals(expectedResult, currentResult);
-//		
-//	}
+	@Test
+	@DataSet("AuthenticateDaoTest.testSave-result.xml")
+	public void testAddUserFromRegistration(){
+		//Given
+		Registration registration = Registration.Builder.builder().login("t.test").colleagueId(4).password("test").build();
+		registration.setRole(Authorization.Role.CL);
+		Integer expectedResult = null; 
+		
+		//When
+		Integer currentResult = authenticationDao.addUserFromRegistration(registration);
+		
+		//Then
+		Assert.assertEquals(expectedResult, currentResult);
+		
+	}
 	
 }
