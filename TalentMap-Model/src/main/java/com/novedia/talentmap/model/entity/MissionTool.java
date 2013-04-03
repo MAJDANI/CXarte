@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * This entity represents an union between a mission and a tool.
- * @author maquin
+ * @author j.maquin
  *
  */
 
@@ -48,16 +48,15 @@ public class MissionTool implements Serializable{
 	 * 
 	 * @return toolId
 	 */
-	
+	public Integer getToolId() {
+		return toolId;
+	}
+
 	/**
 	 * Set the tool id
 	 * 
 	 * @param toolId
 	 */
-	public Integer getToolId() {
-		return toolId;
-	}
-
 	public void setToolId(Integer toolId) {
 		this.toolId = toolId;
 	}

@@ -89,32 +89,7 @@ public class ColleagueService implements IColleagueService {
 		return  missionDao.add(mission);
 	}
 	
-	private Mission createEntity(MissionDto mDTO) {
-		Mission m = null;
-		if(mDTO != null){
-			m = new Mission();
-			List<Tool> toolsList = new ArrayList<Tool>();
-			Set<Tool> tools = mDTO.getTools();
-			if(tools.size()>0)
-			{
-				for(Tool t : tools)
-				{
-					toolsList.add(t);
-				}
-				m.setTools(toolsList);
-			}
-			// Recopie des attributs "simples"
-			m.setId(mDTO.getId());
-			m.setClient(mDTO.getClient());
-			m.setStartDate(mDTO.getStartDate());
-			m.setEndDate(mDTO.getEndDate());
-			m.setTitle(mDTO.getTitle());
-			m.setPlace(mDTO.getPlace());
-			m.setNotes(mDTO.getNotes());
-			m.setColleagueId(mDTO.getColleagueId());
-		}
-		return m;
-	}
+	
 
 	/**
 	 * {@inheritDoc}
@@ -151,41 +126,6 @@ public class ColleagueService implements IColleagueService {
 		Mission m =  missionDao.getLastMissionByColleagueId(colleagueId);
 		return createDTO(m);
 	}
-	
-	private MissionDto createDTO(Mission m) {
-		
-			MissionDto mDTO = null;
-			if(m != null){
-				 mDTO = new MissionDto();
-				// Recopie des attributs "simples"
-				Set<Tool> toolsSet = new HashSet<Tool>();
-				List<Tool> tools = m.getTools();
-				
-				if(tools.size()>0)
-				{
-					for(Tool t : tools)
-					{
-						toolsSet.add(t);
-					}
-					
-					mDTO.setTools(toolsSet);
-				}
-				
-				mDTO.setId(m.getId());
-				mDTO.setClient(m.getClient());
-				mDTO.setStartDate(m.getStartDate());
-				mDTO.setEndDate(m.getEndDate());
-				mDTO.setTitle(m.getTitle());
-				mDTO.setPlace(m.getPlace());
-				mDTO.setNotes(m.getNotes());
-				mDTO.setColleagueId(m.getColleagueId());
-				mDTO.setTools(toolsSet);
-				
-			}
-			
-	
-			return mDTO;
-		}
 	
 	/**
 	 * {@inheritDoc}
@@ -243,6 +183,86 @@ public class ColleagueService implements IColleagueService {
 	public List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId) throws DataAccessException {
 		return ((ColleagueDao) colleagueDao).getAllColleagueByColleagueIdList(listColleagueId);
 	}
+	
+	/**
+	 * This method allow to create a Mission with a MissionDto
+	 * 
+	 * @param MissionDto
+	 * @return a mission
+	 */
+	private Mission createEntity(MissionDto mDTO) {
+		
+		Mission m = null;
+	
+		 if(mDTO != null){
+			 m = new Mission();
+			 List<Tool> toolsList = new ArrayList<Tool>();
+				
+				Set<Tool> tools = mDTO.getTools();
+
+				
+				if(tools.size()>0)
+				{
+					for(Tool t : tools)
+					{
+						toolsList.add(t);
+					}
+					
+					m.setTools(toolsList);
+				}
+
+				m.setId(mDTO.getId());
+				m.setClient(mDTO.getClient());
+				m.setStartDate(mDTO.getStartDate());
+				m.setEndDate(mDTO.getEndDate());
+				m.setTitle(mDTO.getTitle());
+				m.setPlace(mDTO.getPlace());
+				m.setNotes(mDTO.getNotes());
+				m.setColleagueId(mDTO.getColleagueId());
+		 }
+		return m;
+	}
+	
+	/**
+	 * This method allow to create a MissionDto with a Mission
+	 * 
+	 * @param Mission
+	 * @return a missionDto
+	 */
+	private MissionDto createDTO(Mission m) {
+		
+		MissionDto mDTO = null;
+		if(m != null){
+			 mDTO = new MissionDto();
+			// Recopie des attributs "simples"
+			Set<Tool> toolsSet = new HashSet<Tool>();
+			List<Tool> tools = m.getTools();
+			
+			if(tools.size()>0)
+			{
+				for(Tool t : tools)
+				{
+					toolsSet.add(t);
+				}
+				
+				mDTO.setTools(toolsSet);
+			}
+			
+			mDTO.setId(m.getId());
+			mDTO.setClient(m.getClient());
+			mDTO.setStartDate(m.getStartDate());
+			mDTO.setEndDate(m.getEndDate());
+			mDTO.setTitle(m.getTitle());
+			mDTO.setPlace(m.getPlace());
+			mDTO.setNotes(m.getNotes());
+			mDTO.setColleagueId(m.getColleagueId());
+			mDTO.setTools(toolsSet);
+			
+		}
+		
+
+		return mDTO;
+	}
 
 	/**
 	 * This method allows to make the spring injection.
@@ -282,10 +302,11 @@ public class ColleagueService implements IColleagueService {
 		this.managerDao = managerDao;
 	}
 
-	public IDao<MissionDto> getMissionDaoForDto() {
-		return missionDaoForDto;
-	}
-
+	/**
+	 * This method allows to make the spring injection.
+	 * 
+	 * @param missionDaoForDto
+	 */
 	public void setMissionDaoForDto(IDao<MissionDto> missionDaoForDto) {
 		this.missionDaoForDto = missionDaoForDto;
 	}

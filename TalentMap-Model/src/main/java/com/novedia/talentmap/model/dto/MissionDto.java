@@ -9,10 +9,16 @@ import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.Mission.Builder;
 
+/**
+ * This entity represents a missionDto. A missionDto is a mission with a Set of tools instead of List of tools. 
+ * 
+ * @author j.maquin
+ * 
+ */
 public class MissionDto {
 	
 	/**
-	 * The mission id
+	 * The missionDto id
 	 */
 	private Integer id;
 
@@ -22,12 +28,12 @@ public class MissionDto {
 	private Integer colleagueId;
 
 	/**
-	 * Mission title
+	 * MissionDto title
 	 */
 	private String title;
 
 	/**
-	 * Mission take place
+	 * MissionDto take place
 	 */
 	private String place;
 
@@ -37,97 +43,169 @@ public class MissionDto {
 	private Client client;
 
 	/**
-	 * Information on this mission
+	 * Information on this missionDto
 	 */
 	private String notes;
 
 	/**
-	 * Start date of the mission
+	 * Start date of the missionDto
 	 */
 	private Date startDate;
 
 	/**
-	 * End date of the mission
+	 * End date of the missionDto
 	 */
 	private Date endDate;
 	
 	/**
-	 * Tools of the mission
+	 * Tools of the missionDto
 	 */
 	private Set<Tool> tools;
 	
 	public MissionDto() {
 	}
 
-
+	/**
+	 * Get missionDto id
+	 * 
+	 * @return id
+	 */
 	public Integer getId() {
 		return id;
 	}
-
+	/**
+	 * Set the missionDto id
+	 * 
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * Get the colleague id
+	 * 
+	 * @return colleagueId
+	 */
 	public Integer getColleagueId() {
 		return colleagueId;
 	}
-
+	/**
+	 * Set the colleague id
+	 * 
+	 * @param colleagueId
+	 */
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;
 	}
-
+	/**
+	 * Get the title
+	 * 
+	 * @return title
+	 */
 	public String getTitle() {
 		return title;
 	}
-
+	/**
+	 * Set the title
+	 * 
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	/**
+	 * Get the place 
+	 * 
+	 * @return place
+	 */
 	public String getPlace() {
 		return place;
 	}
-
+	/**
+	 * Set the place 
+	 * 
+	 * @param place 
+	 */
 	public void setPlace(String place) {
 		this.place = place;
 	}
-
+	/**
+	 * Get the client
+	 * 
+	 * @return client
+	 */
 	public Client getClient() {
 		return client;
 	}
-
+	/**
+	 * Set the client
+	 * 
+	 * @param client
+	 */
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
+	/**
+	 * Get the comment
+	 * 
+	 * @return notes
+	 */
 	public String getNotes() {
 		return notes;
 	}
-
+	/**
+	 * Set the comment
+	 * 
+	 * @param notes
+	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-
+	/**
+	 * Get the start date
+	 * 
+	 * @return startDate
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
-
+	/**
+	 * Set the start date
+	 * 
+	 * @param startDate
+	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-
+	/**
+	 * Get the end date
+	 * 
+	 * @return endDate
+	 */
 	public Date getEndDate() {
 		return endDate;
 	}
-
+	/**
+	 * Set the end date
+	 * 
+	 * @param endDate
+	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
+	/**
+	 * Get the Set of tool
+	 * 
+	 * @return tools
+	 */
 	public Set<Tool> getTools() {
 		return tools;
 	}
-
+	/**
+	 * Set the Set of tool
+	 * 
+	 * @param tools
+	 */
 	public void setTools(Set<Tool> tools) {
 		this.tools = tools;
 	}
@@ -146,7 +224,7 @@ public class MissionDto {
 		}
 		
 		/**
-		 * Build an immutable mission entity.
+		 * Build an immutable missionDto entity.
 		 * 
 		 * @param builder
 		 *            the builder inner class for this entity
@@ -173,55 +251,55 @@ public class MissionDto {
 		public static final class Builder {
 
 			/**
-			 * The mission id
+			 * The missionDto id
 			 */
 			private Integer id;
 
 			/**
-			 * Colleague associated the mission
+			 * Colleague associated the missionDto
 			 */
 			private Integer colleagueId;
 
 			/**
-			 * Mission name
+			 * MissionDto name
 			 */
 			private String title;
 
 			/**
-			 * Mission take place
+			 * MissionDto take place
 			 */
 			private String place;
 
 			/**
-			 * The mission customer
+			 * The missionDto customer
 			 */
 			private Client client;
 
 			/**
-			 * Information on this mission
+			 * Information on this missionDto
 			 */
 			private String notes;
 
 			/**
-			 * Start date of the mission
+			 * Start date of the missionDto
 			 */
 			private Date startDate;
 
 			/**
-			 * End date of the mission
+			 * End date of the missionDto
 			 */
 			private Date endDate;
 			
 			/**
-			 * tools of the mission
+			 * tools of the missionDto
 			 */
 			private Set<Tool> tools;
 
 			/**
-			 * List the mission id
+			 * List the missionDto id
 			 * 
 			 * @param id
-			 *            mission identifier
+			 *            missionDto identifier
 			 *            
 			 * @return the builder
 			 */
@@ -244,10 +322,10 @@ public class MissionDto {
 			}
 
 			/**
-			 * List the mission title
+			 * List the missionDto title
 			 * 
 			 * @param title
-			 *            the mission title
+			 *            the missionDto title
 			 *            
 			 * @return the builder
 			 */
@@ -257,10 +335,10 @@ public class MissionDto {
 			}
 
 			/**
-			 * List place of the mission
+			 * List place of the missionDto
 			 * 
 			 * @param place
-			 *            the mission's place
+			 *            the missionDto's place
 			 * 
 			 * @return the builder
 			 */
@@ -282,10 +360,10 @@ public class MissionDto {
 			}
 			
 			/**
-			 * List the notes about the mission
+			 * List the notes about the missionDto
 			 * 
 			 * @param notes
-			 *            the comments about the mission
+			 *            the comments about the missionDto
 			 * @return the builder
 			 */
 			public Builder notes(final String notes) {
@@ -297,7 +375,7 @@ public class MissionDto {
 			 * List the start date
 			 * 
 			 * @param startDate
-			 *            the mission's start date
+			 *            the missionDto's start date
 			 * @return the builder
 			 */
 			public Builder startDate(final Date startDate) {
@@ -309,7 +387,7 @@ public class MissionDto {
 			 * List the end date
 			 * 
 			 * @param endDate
-			 *            the mission's end date
+			 *            the missionDto's end date
 			 * @return the builder
 			 */
 			public Builder endDate(final Date endDate) {
@@ -321,7 +399,7 @@ public class MissionDto {
 			 * List the tools
 			 * 
 			 * @param tools
-			 *            the mission's tools
+			 *            the missionDto's tools
 			 * @return the builder
 			 */
 			public Builder tools(final Set<Tool> tools) {
@@ -332,7 +410,7 @@ public class MissionDto {
 			/**
 			 * Build an immutable instance of mission.
 			 * 
-			 * @return mission
+			 * @return missionDto
 			 */
 			public MissionDto build() {
 				return new MissionDto(this);
