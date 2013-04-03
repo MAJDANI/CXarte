@@ -92,6 +92,7 @@ public class ColleagueDaoTest {
 	/**
 	 * Test get all colleagues
 	 */
+	@Ignore
 	@Test
 	public void testGetAll() {
 

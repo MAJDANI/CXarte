@@ -13,7 +13,9 @@ import org.unitils.spring.annotation.SpringBean;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.model.entity.Registration;
 
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
@@ -73,5 +75,43 @@ public class AuthenticationDaoTest {
 		//When
 		authenticationDao.save(authentication);
 	}
+	
+	/**
+	 * Test countLogin method
+	 */
+	@Test
+	@DataSet("AuthenticateDaoTest.testCheck-result.xml")
+	public void testCountLoginReturnInteger(){
+		//Given
+		String existLogin = "o.chauvie";
+		String notExistLogin = "o.chauvie  ";
+		Integer expectedResultExistLogin = 1;
+		Integer expectedResultNotExistLogin = 0;
+		
+		//When
+		Integer currentResultExistLogin = authenticationDao.countLogin(existLogin);
+		Integer currentResultNotExistLogin = authenticationDao.countLogin(notExistLogin);
+		
+		//Then
+		Assert.assertEquals(expectedResultExistLogin, currentResultExistLogin);
+		Assert.assertEquals(expectedResultNotExistLogin, currentResultNotExistLogin);
+		
+	}
+	
+//	@Test
+//	@DataSet("AuthenticateDaoTest.testSave-result.xml")
+//	public void testAddUserFromRegistration(){
+//		//Given
+//		Registration registration = Registration.Builder.builder().login("t.test").colleagueId(4).password("test").build();
+//		registration.setRole(Authorization.Role.CL);
+//		Integer expectedResult = 1; 
+//		
+//		//When
+//		Integer currentResult = authenticationDao.addUserFromRegistration(registration);
+//		
+//		//Then
+//		Assert.assertEquals(expectedResult, currentResult);
+//		
+//	}
 	
 }
