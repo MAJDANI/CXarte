@@ -220,7 +220,7 @@ public class SkillService implements ISkillService {
 		for (Map.Entry<Concept, ToolSkillMap> entry : conceptMapDto.getMapConcept().entrySet()) {
 			Category category = getCategoryById(entry.getKey().getCategory().getId());
 			
-			if(categoryMapDto.getMapCategory().isEmpty() || !categoryMapDto.getMapCategory().containsKey(category)){
+			if(!categoryMapDto.getMapCategory().containsKey(category)){
 				ConceptMapDTO conceptMapDtoTmp = new ConceptMapDTO();
 				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
 				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
@@ -229,7 +229,6 @@ public class SkillService implements ISkillService {
 				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
 				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
 			}
-			
 		}
 		
 	}
@@ -246,7 +245,7 @@ public class SkillService implements ISkillService {
 			Integer conceptId = entry.getKey().getConcept().getId();
 			Concept concept = getConceptById(conceptId);
 			
-			if(conceptMapDto.getMapConcept().isEmpty() || !conceptMapDto.getMapConcept().containsKey(concept)){
+			if(!conceptMapDto.getMapConcept().containsKey(concept)){
 				ToolSkillMap toolSkillMapTmp = new ToolSkillMap();
 				toolSkillMapTmp.getMapTool().put(entry.getKey(), entry.getValue());
 				conceptMapDto.getMapConcept().put(concept, toolSkillMapTmp);
