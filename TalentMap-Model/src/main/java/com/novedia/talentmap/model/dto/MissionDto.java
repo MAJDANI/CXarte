@@ -1,13 +1,10 @@
 package com.novedia.talentmap.model.dto;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import com.novedia.talentmap.model.entity.Client;
-import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
-import com.novedia.talentmap.model.entity.Mission.Builder;
 
 /**
  * This entity represents a missionDto. A missionDto is a mission with a Set of tools instead of List of tools. 

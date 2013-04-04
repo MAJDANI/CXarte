@@ -6,6 +6,9 @@ import java.util.Vector;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.vaadin.teemu.ratingstars.RatingStars;
 
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
+import com.novedia.talentmap.model.dto.ConceptMapDTO;
+import com.novedia.talentmap.model.dto.ToolSkillMap;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
@@ -21,33 +24,29 @@ import com.vaadin.ui.Window;
 public abstract class CUtils {
 	
 	
-	public static Accordion MapSkillToAccordionSkill(Map<Category, Map> mapSkill, Object _this){
+	public static Accordion MapSkillToAccordionSkill(CategoryMapDTO categoryMapDto, Object _this){
 		
-		// We organize the skills in tabs and tables: Categories tabs, Concepts
-				// tabs and Tools tables
-				
 				//We build a new accordion Category
 				Accordion accCategory = new Accordion();
 				final String LABEL_NOTE_CONCEPT = "Level : ";
 				final String FAIL_LABEL_NOTE_CONCEPT = "improve your skill";
 				RatingStars rateConcept ;
-				for (Map.Entry<Category, Map> eCategory : mapSkill.entrySet()) {
+				for (Map.Entry<Category, ConceptMapDTO> category : categoryMapDto.getMapCategory().entrySet()) {
 					VerticalLayout vLayoutCategory = new VerticalLayout();
 					vLayoutCategory.setMargin(true);
 					
 					//We build a new accordion Concept
 					Accordion accConcept = new Accordion();
 					
-					Map<Concept, Map> mapConcept = eCategory.getValue();
+					ConceptMapDTO conceptMapDto = category.getValue();
 
-					for (Map.Entry<Concept, Map> eConcept : mapConcept.entrySet()) {
+					for (Map.Entry<Concept, ToolSkillMap> concept : conceptMapDto.getMapConcept().entrySet()) {
 						VerticalLayout vLayoutConcept = new VerticalLayout();
 						HorizontalLayout hLayoutConcept = new HorizontalLayout();  //layout de  la note du concept
 						hLayoutConcept.setSpacing(true);
 						
 						vLayoutConcept.setMargin(true);
 						rateConcept = new RatingStars();
-						
 						
 						//We build a new table Tool
 						Table tableTools = new Table();
@@ -57,7 +56,7 @@ public abstract class CUtils {
 						
 						if(_this != null){ tableTools.addListener((ItemClickListener) _this); }
 					
-						Map<Tool, Skill> mapTool = eConcept.getValue();
+						Map<Tool, Skill> mapTool = concept.getValue().getMapTool();
 
 						int idTable = 1;
 						VerticalLayout vLayoutTool = new VerticalLayout();
@@ -83,7 +82,7 @@ public abstract class CUtils {
 						
 						vLayoutTool.addComponent(tableTools);
 						
-						int noteconcept = (int) Math.round(eConcept.getKey().getScore());
+						int noteconcept = (int) Math.round(concept.getKey().getScore());
 						if (noteconcept != 0) {
 							rateConcept.setMaxValue(noteconcept);
 							rateConcept.setValue(noteconcept);
@@ -100,20 +99,16 @@ public abstract class CUtils {
 					
 						// Set Concept tabs Style
 						accConcept.setStyleName(TalentMapCSS.TABLE_CONCEPT);
-						accConcept.addTab(vLayoutConcept,eConcept.getKey().getName());
+						accConcept.addTab(vLayoutConcept,concept.getKey().getName());
 						
-						
-//						accConcept.addTab(vLayoutConcept, eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore())
-//						.setCaption(eConcept.getKey().getName()+" : "+ eConcept.getKey().getScore());
-			
 						vLayoutCategory.addComponent(accConcept);
 					}
 					
 					// Set Categories tabs Style
 					accCategory.setStyleName(TalentMapCSS.TABLE_CATEGORY);
 
-					accCategory.addTab(vLayoutCategory, eCategory.getKey().getName())
-					.setCaption(eCategory.getKey().getName());
+					accCategory.addTab(vLayoutCategory, category.getKey().getName())
+					.setCaption(category.getKey().getName());
 				}
 				
 				return accCategory;

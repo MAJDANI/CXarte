@@ -1,9 +1,7 @@
 package com.novedia.talentmap.web.ui.profile;
 
-import java.util.Map;
-
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.util.CUtils;
 import com.vaadin.event.ItemClickEvent;
@@ -35,7 +33,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	/**
 	 * JAVA Objects
 	 */
-	private Map<Category, Map> mapSkill;
+	private CategoryMapDTO categoryMapDto;
 
 	/**
 	 * Vaadin Components
@@ -98,7 +96,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		removeAllComponents();
 		try {
 
-			this.mapSkill = this.skillService.getAllCollaboratorSkill(authentication.getColleagueId());
+			this.categoryMapDto = this.skillService.getAllCollaboratorSkill(authentication.getColleagueId());
 
 		} catch (Exception e) {
 
@@ -106,9 +104,9 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		}
 
 		// Test if the Collaborator have one skill
-		if ( mapSkill != null && !mapSkill.isEmpty()) {
+		if ( categoryMapDto != null && !categoryMapDto.getMapCategory().isEmpty()) {
 			initComponents();
-			addComponent(buildListSkill(this.mapSkill));
+			addComponent(buildListSkill(this.categoryMapDto));
 		} else {
 			setVisible(false);
 		}
@@ -150,10 +148,11 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * 
 	 * @class ListSkill.java
 	 */
-	public Accordion buildListSkill(Map<Category, Map> mapSkill) {
-		return CUtils.MapSkillToAccordionSkill(mapSkill, this);
+	public Accordion buildListSkill(CategoryMapDTO categoryMapDto) {
+		return CUtils.MapSkillToAccordionSkill(categoryMapDto, this);
 	}
-
+	
+	
 	@Override
 	public void itemClick(ItemClickEvent event) {
 
@@ -241,17 +240,14 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	}
 
 
-	public Map<Category, Map> getMapSkill() {
-		return mapSkill;
+	public CategoryMapDTO getCategoryMapDto() {
+		return categoryMapDto;
 	}
 
 
-	public void setMapSkill(Map<Category, Map> mapSkill) {
-		this.mapSkill = mapSkill;
+	public void setCategoryMapDto(CategoryMapDTO categoryMapDto) {
+		this.categoryMapDto = categoryMapDto;
 	}
 
-	
-	
-	
 
 }

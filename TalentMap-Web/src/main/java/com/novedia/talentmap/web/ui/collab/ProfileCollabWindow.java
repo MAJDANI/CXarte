@@ -5,10 +5,8 @@ import java.util.Vector;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
-import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
-import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.CollaboratorFormFieldFactory;
 import com.novedia.talentmap.web.util.CUtils;
@@ -28,6 +26,7 @@ import com.vaadin.ui.Window;
  * @author moumbe
  *
  */
+@SuppressWarnings("serial")
 public class ProfileCollabWindow extends Window {
 
 	/**

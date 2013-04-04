@@ -6,7 +6,6 @@ import java.util.Map;
 import org.vaadin.teemu.ratingstars.RatingStars;
 
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
@@ -194,7 +193,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		HorizontalLayout hLayoutLabel = new HorizontalLayout();
 
 		Label addSkillLabel = new Label(ConstantsEnglish.ADD_SKILL_LABEL);
-		addSkillLabel.setStyle(TalentMapCSS.H2);
+		addSkillLabel.addStyleName(TalentMapCSS.H2);
 
 		hLayoutLabel.addComponent(categoryLabel);
 		hLayoutLabel.addComponent(this.conceptLabel);
@@ -261,7 +260,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		this.noUsingTimeSelect.setNullSelectionAllowed(false);
 		this.noUsingTimeSelect.setImmediate(true);
 		this.noUsingTimeSelect.setStyleName("no-using-time-select");
-		this.noUsingTimeSelect.setWidth(210);
+		this.noUsingTimeSelect.setWidth("210px");
 
 		// Just fill the Tool Select, the Frequency Use Select and the No Using
 		// Time Select
@@ -279,7 +278,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		stars.setCaption("Votre note pour l'outil : ");
 		stars.setAnimated(true);
 		stars.setMaxValue(5);
-		stars.setWidth(150);
+		stars.setWidth("150px");
 		
 
 		for (int i = 0; i < ConstantsEnglish.OPTIONS.length; i++) {
@@ -440,10 +439,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	
 	private void updateMapSkill() throws Exception{
 		
-		Map<Category, Map> mapSkill = this.skillService
-				.getAllCollaboratorSkill(authentication.getColleagueId());
-
-		//this.listSkill = new ListSkill(mapSkill);
 		this.listSkill = listSkill.buildListSkill();
 		
 		this.updateObservateur();

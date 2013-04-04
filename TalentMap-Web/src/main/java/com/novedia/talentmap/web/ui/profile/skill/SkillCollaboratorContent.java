@@ -115,7 +115,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	public void buildSkillLayout() {
 		this.skillLabel.addStyleName(TalentMapCSS.H2);
-		if (this.listSkill.getMapSkill() != null && !listSkill.getMapSkill().isEmpty()) {
+		if (this.listSkill.getCategoryMapDto().getMapCategory() != null && !listSkill.getCategoryMapDto().getMapCategory().isEmpty()) {
 			buildAddSkillPanel();
 			this.skillPanel.setVisible(false);
 			this.addSkillPanel.setVisible(false);
@@ -124,7 +124,6 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 			this.edit.setVisible(false);
 			buildAddSkillPanel();
 			skillPanel.setVisible(true);
-			System.out.println("pas de skill");
 		}
 
 	}

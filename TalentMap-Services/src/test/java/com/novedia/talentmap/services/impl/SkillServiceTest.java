@@ -3,7 +3,8 @@
  */
 package com.novedia.talentmap.services.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.Map;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -23,8 +23,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
+import com.novedia.talentmap.model.dto.ConceptMapDTO;
+import com.novedia.talentmap.model.dto.ToolSkillMap;
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
@@ -158,25 +160,30 @@ public class SkillServiceTest {
 	
 	
 	@Test
-	public void buildCategoryReturnMapCategoryConcept(){
-		
+	public void buildCategoryMapDto(){
 		//Given
-		Category category = Category.builder().id(1).name("categoryName").build();
-		Concept concept = Concept.builder().id(1).name("conceptName").category(category).build();
-				
-		Map<Category, Map> categoryMap = new HashMap<Category, Map>();
-		Map<Concept, Map> conceptMap = new HashMap<Concept, Map>();
-		conceptMap.put(concept, new HashMap<Tool, String>());	
+		Category expectedCategory = Category.builder().id(1).name("categoryName").build();
+		Concept concept = Concept.builder().id(1).name("conceptName").category(expectedCategory).build();
+		ConceptMapDTO givenConceptMapDto = new ConceptMapDTO();
+		CategoryMapDTO GivencategoryMapDto = new CategoryMapDTO();
+		
+		ToolSkillMap toolSkillMap = new ToolSkillMap(); 
+		Tool tool1 = Tool.builder().id(1).concept(concept).name("toolName").build();
+		Skill skill1 = Skill.builder().colleagueId(1).tool_id(1).build();
+		toolSkillMap.getMapTool().put(tool1, skill1);
+		
 		List<Category> categories = new ArrayList<Category>();
-		categories.add(category);
+		categories.add(expectedCategory);
+		
+		givenConceptMapDto.getMapConcept().put(concept, toolSkillMap);
 		
 		//When
 		Mockito.when(categoryDaoMock.getAll()).thenReturn(categories);
-		Map<Category, Map> categoryMapActuel = service.buildCategory(conceptMap,categoryMap);
-			
+		service.buildCategoryMapDto(givenConceptMapDto, GivencategoryMapDto);
+		
 		//Then
-		Assert.assertNotNull(categoryMapActuel);
-		Assert.assertTrue(categoryMapActuel.containsKey(category));			
+		Assert.assertTrue(GivencategoryMapDto.getMapCategory().containsKey(expectedCategory));
+		Assert.assertTrue(GivencategoryMapDto.getMapCategory().get(expectedCategory).getMapConcept().containsKey(concept));
 	}
 	
 	
@@ -414,9 +421,6 @@ public class SkillServiceTest {
 		assertNotNull(toolactuel);
 		assertSame(expectedTool, toolactuel);
 	
-		
-		
-		
 		
 	}
 	

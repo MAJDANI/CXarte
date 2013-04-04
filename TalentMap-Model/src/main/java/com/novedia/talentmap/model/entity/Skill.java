@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import com.novedia.talentmap.model.entity.VSkill.Builder;
-
 /**
  * This entity represents a skill.
  * 

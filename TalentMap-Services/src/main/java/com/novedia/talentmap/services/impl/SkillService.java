@@ -1,13 +1,15 @@
 package com.novedia.talentmap.services.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.dao.DataAccessException;
 
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
+import com.novedia.talentmap.model.dto.ConceptMapDTO;
+import com.novedia.talentmap.model.dto.ToolSkillMap;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Skill;
@@ -124,79 +126,30 @@ public class SkillService implements ISkillService {
 	 * @throws DataAccessException
 	 */
 	@Override
-	public Map<Category, Map> getAllCollaboratorSkill(int collabId)
-			throws DataAccessException {
+	public CategoryMapDTO getAllCollaboratorSkill(int collabId) {
 
 		List<Skill> listSkill = new ArrayList<Skill>();
-		Map<Tool, Skill> mapTool = new HashMap<Tool, Skill>();
-
-		Map<Concept, Map> mapConcept = new HashMap<Concept, Map>();
-
-		Map<Category, Map> mapCategory = null;
-
-		// We take all Collaborators Skills
+		ToolSkillMap toolSkillMap ;
+		ConceptMapDTO conceptMapDto ;
+		CategoryMapDTO categoryMapDto = new CategoryMapDTO();
 		listSkill = skillDao.getAllCollaboratorSkill(collabId);
 		if (listSkill != null && !listSkill.isEmpty()) {
-			mapCategory = new HashMap<Category, Map>();
-			buildTool(listSkill, mapTool);
-			List<Integer> listToolScore = new ArrayList<Integer>();
-			Concept conceptTMP = null;
-
-			// We build the Concept Map
-			conceptTMP = buildConcept(mapTool, mapConcept, listToolScore,
-					conceptTMP);
-			// We calculate the score of the last concept if it's not null
-			if (conceptTMP != null) {
-				Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
-				mapConcept.remove(conceptTMP);
-				mapConcept.put(conceptTMP, mapTMP);
-			}
-			mapCategory = buildCategory(mapConcept, mapCategory);
-			mapCategory = computeConceptScore(mapCategory);
+			toolSkillMap = new ToolSkillMap();
+			conceptMapDto = new ConceptMapDTO();
+			buildTool(listSkill, toolSkillMap.getMapTool());
+			buildConceptMapDto(toolSkillMap,conceptMapDto);
+			buildCategoryMapDto(conceptMapDto,categoryMapDto);
+			
 		}
-
-		return mapCategory;
+		return categoryMapDto;
 	}
-
-	/**
-	 * TODO : revoir le calcul
-	 * 
-	 * @param mapCategory
-	 *            : map of category
-	 * @return mapCategory : map of category with score of each concept
-	 */
-	public Map<Category, Map> computeConceptScore(Map<Category, Map> mapCategory) {
-
-		double scoreConcept = 0;
-		if (mapCategory != null) {
-			for (Entry<Category, Map> category : mapCategory.entrySet()) {
-				Map<Concept, Map> allConcept = category.getValue(); // tous les
-																	// concepts
-																	// de la
-																	// categorie
-				for (Entry<Concept, Map> mapConcept : allConcept.entrySet()) {
-					Map<Tool, Skill> mapTools = mapConcept.getValue();
-					int id = mapConcept.getKey().getId();
-					List<Tool> toolByConcept = getAllToolsByConcept(id);
-					Integer sum = sumAverageToolConcept(mapTools);
-					scoreConcept = sum / (toolByConcept.size() * 1.0);
-					scoreConcept = Math.round(scoreConcept);
-					mapConcept.getKey().setScore(scoreConcept);
-					allConcept.put(mapConcept.getKey(), mapConcept.getValue());
-				}
-				mapCategory.put(category.getKey(), allConcept);
-			}
-		}
-
-		return mapCategory;
-	}
+	
 
 	/**
 	 * 
 	 * compute sum of average tool's concept
 	 * 
-	 * @param mapTools
-	 *            map of tools and skill
+	 * @param mapTools map of tools and skill
 	 * @return sum of average tool's concept
 	 */
 	public static Integer sumAverageToolConcept(Map<Tool, Skill> mapTools) {
@@ -212,13 +165,9 @@ public class SkillService implements ISkillService {
 	/**
 	 * 
 	 * compute average's tool
-	 * 
-	 * @param toolNote
-	 *            score of tool
-	 * @param usingFrequencyTool
-	 *            using frequency tool
-	 * @param timeNotUsingTool
-	 *            time not using tool
+	 * @param toolNote  score of tool
+	 * @param usingFrequencyTool using frequency tool
+	 * @param timeNotUsingTool time not using tool
 	 * @return average's tool
 	 */
 	public static double computeToolAverage(final double toolNote,
@@ -255,113 +204,73 @@ public class SkillService implements ISkillService {
 			break;
 		}
 
-		return Math
-				.round((TOOL_PONDERATION * toolNote + FREQUENCY_USE_PONDERATION
+		return Math.round((TOOL_PONDERATION * toolNote + FREQUENCY_USE_PONDERATION
 						* usingFrequencyToolValue + NO_USING_TIME_PONDERATION
 						* noUsingTimeValue)
 						/ (TOOL_PONDERATION + FREQUENCY_USE_PONDERATION + NO_USING_TIME_PONDERATION));
 	}
 
 	/**
-	 * build category. This method returns a map. This map contains an object
-	 * "Category" and a map of the "Concept" It takes two parameters maps
-	 * "Concept" and "Category" The mapConcept : contains an object "Concept"
-	 * and a map of the "Tool" The mapCategory : contains an object "Concept"
-	 * and a map of the "Concept"
-	 * 
-	 * @param mapConcept
-	 * @param mapCategory
-	 * @return
+	 * Build CategoryMapDTO which contain each concept group by category
+	 * @param conceptMapDto  conceptMapDto which contain all concept skill of colleague
+	 * @param categoryMapDto categoryMapDto to return
 	 */
-
-	@SuppressWarnings("rawtypes")
-	Map<Category, Map> buildCategory(Map<Concept, Map> mapConcept,
-			Map<Category, Map> mapCategory) {
-
-		if (mapConcept != null) {
-			for (Map.Entry<Concept, Map> entry : mapConcept.entrySet()) {
-				Category category = getCategoryById(entry.getKey()
-						.getCategory().getId());
-				// tester si on peut écrire ce qui suit :
-				// Category category = entry.getKey().getCategory();
-				if (!mapCategory.containsKey(category)) {
-					// mapCategory.put(category, new HashMap<Concept, Map>());
-					// mapCategory.get(category).put(entry.getKey(),
-					// entry.getValue());
-					Map<Concept, Map> newConceptMap = new HashMap<Concept, Map>();
-					newConceptMap.put(entry.getKey(), entry.getValue());
-					mapCategory.put(category, newConceptMap);
-				} else {
-					// mapCategory.containsKey(category);
-					mapCategory.get(category).put(entry.getKey(),
-							entry.getValue());
-				}
+	public void buildCategoryMapDto(ConceptMapDTO conceptMapDto, CategoryMapDTO categoryMapDto){
+		
+		for (Map.Entry<Concept, ToolSkillMap> entry : conceptMapDto.getMapConcept().entrySet()) {
+			Category category = getCategoryById(entry.getKey().getCategory().getId());
+			
+			if(categoryMapDto.getMapCategory().isEmpty() || !categoryMapDto.getMapCategory().containsKey(category)){
+				ConceptMapDTO conceptMapDtoTmp = new ConceptMapDTO();
+				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
+				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
+			} else{
+				ConceptMapDTO conceptMapDtoTmp = categoryMapDto.getMapCategory().get(category);
+				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
+				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
 			}
+			
 		}
-		return mapCategory;
+		
 	}
 
+	
 	/**
-	 * build concept. This method returns an object "Concept" The mapTool :
-	 * contains an object "Concept" and a map of the "Tool" The mapConcept :
-	 * contains an object "Concept" and a map of the "Tool" The listToolScore :
-	 * is a list of Integer An object Concept
-	 * 
-	 * @param mapTool
-	 * @param mapConcept
-	 * @param listToolScore
-	 * @param conceptTMP
-	 * @return
+	 * Build conceptMapDto which contain each skill group by concept
+	 * @param toolSkillMap map which contain all skill's colleague
+	 * @param conceptMapDto conceprMapDto to return
 	 */
-	@SuppressWarnings("unchecked")
-	Concept buildConcept(Map<Tool, Skill> mapTool,
-			Map<Concept, Map> mapConcept, List<Integer> listToolScore,
-			Concept conceptTMP) {
-		// double conceptScore;
-		for (Map.Entry<Tool, Skill> entry : mapTool.entrySet()) {
-			// TODO : NullPointerException
+	public void buildConceptMapDto(ToolSkillMap toolSkillMap, ConceptMapDTO conceptMapDto){
+		
+		for (Map.Entry<Tool, Skill> entry : toolSkillMap.getMapTool().entrySet()) {
 			Integer conceptId = entry.getKey().getConcept().getId();
 			Concept concept = getConceptById(conceptId);
-
-			if (!mapConcept.isEmpty()) {
-
-				// We calculate the Concept Score
-				// TODO : CODE à MODIFIER nécessitant de récupérer
-				// programatiquement les outil
-				// correspondant à ce concept
-
-				// conceptScore = ScoreManage.ConceptScore(listToolScore,
-				// toolDao.selectAllByConceptId(conceptTMP.getId()).size());
-				// conceptScore = ScoreManage.conceptScore(listToolScore,
-				// toolDao.getAll().size());
-
-				Map<Tool, Skill> mapTMP = mapConcept.get(conceptTMP);
-				mapConcept.remove(conceptTMP);
-
-				// conceptTMP.setScore(conceptScore);
-				mapConcept.put(conceptTMP, mapTMP);
-
-				conceptTMP = concept;
-			} else {
-				conceptTMP = concept;
+			
+			if(conceptMapDto.getMapConcept().isEmpty() || !conceptMapDto.getMapConcept().containsKey(concept)){
+				ToolSkillMap toolSkillMapTmp = new ToolSkillMap();
+				toolSkillMapTmp.getMapTool().put(entry.getKey(), entry.getValue());
+				conceptMapDto.getMapConcept().put(concept, toolSkillMapTmp);
+				
+			} else{
+				ToolSkillMap toolSkillMapTmp = conceptMapDto.getMapConcept().get(concept);
+				toolSkillMapTmp.getMapTool().put(entry.getKey(), entry.getValue());
+				conceptMapDto.getMapConcept().put(concept, toolSkillMapTmp);
 			}
-
-			if (!mapConcept.containsKey(concept)) {
-
-				listToolScore.clear();
-
-				mapConcept.put(concept, new HashMap<Tool, Skill>());
-				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
-			} else {
-
-				mapConcept.get(concept).put(entry.getKey(), entry.getValue());
-			}
-			// We put in the list the Tool Score
-			listToolScore.add(entry.getValue().getAverageScore());
 		}
-		return conceptTMP;
+		
+		//Compute score of each concept
+		for (Map.Entry<Concept, ToolSkillMap> conceptEntry : conceptMapDto.getMapConcept().entrySet()) {
+			double scoreConcept = 0;
+			List<Tool> toolByConcept = getAllToolsByConcept(conceptEntry.getKey().getId());
+			Integer sum = sumAverageToolConcept(conceptEntry.getValue().getMapTool());
+			scoreConcept = sum / (toolByConcept.size() * 1.0);
+			scoreConcept = Math.round(scoreConcept);
+			conceptEntry.getKey().setScore(scoreConcept);
+		}
+		
 	}
-
+	
+	
 	/**
 	 * build mapTool given in second parameter : a map of skills the colleague
 	 * has.. Uses listSkill, the list of skills of the colleague, and gets for
@@ -374,15 +283,9 @@ public class SkillService implements ISkillService {
 	void buildTool(List<Skill> listSkill, Map<Tool, Skill> mapTool) {
 		for (Skill skill : listSkill) {
 			Tool tool1 = toolDao.get(skill.getTool_id());
-
-			// We put only not null tool element in mapTool
 			if (tool1 != null) {
-				// We give a score to the tool
 				int score = (int) computeToolAverage(skill.getScore(),
 						skill.getUse_frequency(), skill.getNo_using_time());
-				// int score = (int)
-				// ScoreManage.computeToolAverage(skill.getScore(),skill.getUse_frequency(),
-				// skill.getNo_using_time());
 				skill.setAverageScore(score);
 				mapTool.put(tool1, skill);
 			}
@@ -431,8 +334,7 @@ public class SkillService implements ISkillService {
 	/**
 	 * This method allow to add skill.
 	 * 
-	 * @param skill
-	 *            a skill
+	 * @param skilla skill
 	 * @throws DataAccessException
 	 */
 	@Override

@@ -1,11 +1,8 @@
 package com.novedia.talentmap.services;
 
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.dao.DataAccessException;
-
-import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
@@ -56,7 +53,7 @@ List<VSkillCollab> getAllSkillCollab(int collabId);
  * @param collabId a id
  * @return a map
  */
-Map<Category, Map> getAllCollaboratorSkill(int collabId);
+CategoryMapDTO getAllCollaboratorSkill(int collabId);
 
 /**
  * Select All Tools.
