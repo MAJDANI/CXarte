@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jensjansson.pagedtable.PagedTable;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IColleagueService;
@@ -39,6 +40,8 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	 * 
 	 */
 	private IAdminService adminService;
+	
+	private Authentication authentication; 
 	
 	private IColleagueService colleagueService;
 	
@@ -169,7 +172,9 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		colleagueContainer.removeAllItems();
 		if(colleagueResult != null && !colleagueResult.isEmpty()){
 			for (Colleague colleague : colleagueResult) {
-				colleagueContainer.addBean(colleague);
+				if(!authentication.getColleagueId().equals(colleague.getId())){
+					colleagueContainer.addBean(colleague);
+				}
 			}
 		}
 		
@@ -335,6 +340,18 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	public void setColleagueService(IColleagueService colleagueService) {
 		this.colleagueService = colleagueService;
 	}
+
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+	
+	
 	
 	
 }

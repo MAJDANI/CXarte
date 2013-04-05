@@ -52,6 +52,7 @@ public class TabMain extends TabSheet {
 		setImmediate(true);
 		setAuthentication(authentication);
 		if(role.equals(Role.AD)){    //Admin
+			adminView.setAuthentication(getAuthentication());
 			adminView = adminView.buildAdminView();
 			addTab(adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
 		} else if (role.equals(Role.CL)) {   //Colleague

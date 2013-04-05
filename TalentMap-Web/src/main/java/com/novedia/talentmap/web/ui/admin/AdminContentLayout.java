@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.admin;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
@@ -22,6 +23,8 @@ public class AdminContentLayout extends HorizontalLayout {
 	private ManageSkillContent manageSkillContent;
 	private AdminAddSkillContent addSkillContent;
 	private AdminDeleteColleagueContent deleteColleagueContent;
+	
+	private Authentication authentication; 
 
 
 	/**
@@ -87,6 +90,7 @@ public class AdminContentLayout extends HorizontalLayout {
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.addSkillContent);
 					AdminContentLayout.this.addSkillContent.getTitle().setCaption(ConstantsEnglish.ADD_TOOL_TITLE);
 				} else if(cl == AdminDeleteColleagueContent.class){
+					deleteColleagueContent.setAuthentication(getAuthentication());
 					deleteColleagueContent = deleteColleagueContent.mainBuild();
 					AdminContentLayout.this.hSplitContent.setSecondComponent(AdminContentLayout.this.deleteColleagueContent);
 				}
@@ -188,6 +192,15 @@ public class AdminContentLayout extends HorizontalLayout {
 		this.deleteColleagueContent = deleteColleagueContent;
 	}
 
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	
 	
 
 }
