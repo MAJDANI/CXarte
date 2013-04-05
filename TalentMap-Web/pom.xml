@@ -8,8 +8,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   <parent>
       <artifactId>TalentMap</artifactId>
       <groupId>com.novedia.talentmap</groupId>
-      <version>2.1</version>
-<!--       <version>2.1-SNAPSHOT</version> -->
+      <version>2.1-SNAPSHOT</version>
   </parent>
   <artifactId>TalentMap-Web</artifactId>
   <packaging>war</packaging>
@@ -182,8 +181,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <dependency>
 		<groupId>com.novedia.talentmap</groupId>
 		<artifactId>TalentMap-Services</artifactId>
-		<version>2.1</version>
-<!-- 		<version>2.1-SNAPSHOT</version> -->
+		<version>2.1-SNAPSHOT</version>
 	</dependency>
 	
 	<!-- Vaadin Add Ons dependency -->
