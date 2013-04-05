@@ -10,6 +10,7 @@
 	<artifactId>TalentMap</artifactId>
 	<packaging>pom</packaging>
 	<version>2.1-SNAPSHOT</version>
+	
 	<description>
     TalentMap is a useful application giving some view on Novedia people skills
   </description>
