@@ -24,7 +24,7 @@ public class ConstantsEnglish {
 	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-		"Name", "First name", "Profile", "Email", "Tel", "Date of entry Novedia",
+		"Name", "First name", "Job title", "Email", "Tel", "Date of entry Novedia",
 		"Years of Experience", "Business engineer", "Manager" };
 
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";
@@ -92,6 +92,7 @@ public class ConstantsEnglish {
 	/**
 	 * Données Registration
 	 */
+	public static final String REGISTRATION_SEX_FIELD = "sex";
 	public static final String REGISTRATION_LAST_NAME_FIELD = "lastName";
 	public static final String REGISTRATION_FIRST_NAME_FIELD = "firstName";
 	public static final String REGISTRATION_EMPLOYMENT_DATE_FIELD = "employmentDate";
@@ -104,6 +105,10 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_PHONE_FIELD = "phone";
 	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
 	public static final String REGISTRATION_EMAIL_FIELD = "email";
+	public static final String REGISTRATION_COMPONENT_SIZE = "208px";
+	public static final String REGISTRATION_SEX_CHOICE1 = "M";
+	public static final String REGISTRATION_SEX_CHOICE2 = "F";
+	
 	
 	public static final String REGISTRATION_NULL_REPRESENTATION = "";
 	public static final String REGISTRATION_DATE_FORMAT = "dd/MM/yyyy";
@@ -130,10 +135,10 @@ public class ConstantsEnglish {
 	/**
 	 *For Registration
 	 */
-	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Name", "First name","Password","Confirm password",
-		"Choose a login", "Email", "Téléphone", "Date of hire", "Profile", "Years of Experience", "Business engineer",
+	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Sex","Name","First name","Password","Confirm password",
+		"Choose a login", "Email", "Téléphone", "Date of hire", "Job title", "Years of Experience", "Business engineer",
 		 "Manager" };
-	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm",
+	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] {"sex","lastName", "firstName","password","passwordConfirm",
 		"login", "email", "phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
 	/**
 	 * For SkillCollaboratorContent

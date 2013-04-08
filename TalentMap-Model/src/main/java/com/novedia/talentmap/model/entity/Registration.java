@@ -21,6 +21,11 @@ public class Registration {
 	private Integer authenticationId;
 	
 	/**
+	 * Sex
+	 */
+	private String sex;
+	
+	/**
 	 * First Name
 	 */
 	private String firstName;
@@ -554,6 +559,16 @@ public class Registration {
 	 */
 	public void setRole(Authorization.Role role) {
 		this.role = role;
+	}
+
+
+	public String getSex() {
+		return sex;
+	}
+
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 

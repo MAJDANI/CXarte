@@ -16,6 +16,7 @@ import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormFieldFactory;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.Select;
@@ -64,11 +65,12 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(ConstantsEnglish.FIELD_ORDER_REGISTRATION[i])){
 				
-				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
+				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_SEX_FIELD)
+						&&!propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD) 
-						&&!propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD)
+						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD)
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD) ){
 					
 					TextField field = new TextField((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
@@ -77,6 +79,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					field.setRequiredError(ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART1 + ConstantsEnglish.NAME_FIELD_REGISTRATION[i] + ConstantsEnglish.PROFILE_MSG_FIELD_REQUIRED_PART2);
 					field.setValidationVisible(true);
 					field.setNullRepresentation(ConstantsEnglish.REGISTRATION_NULL_REPRESENTATION);
+					
 					
 					if(propertyId.equals(ConstantsEnglish.REGISTRATION_FIRST_NAME_FIELD)){
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_FIRST_NAME_MAX_LENGTH);
@@ -107,6 +110,13 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					return field;
 					
 				}
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_SEX_FIELD)){
+					OptionGroup optiongroup = new OptionGroup((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
+					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_SEX_CHOICE1);
+					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_SEX_CHOICE2);
+					optiongroup.setRequired(true);
+					return optiongroup;
+				}
 				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_FIELD) || propertyId.equals(ConstantsEnglish.REGISTRATION_PASSWORD_CONFIRM_FIELD)){
 					PasswordField passwordField = new PasswordField((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
 					passwordField.setRequired(true);
@@ -135,7 +145,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			        ic.addContainerProperty(ConstantsEnglish.REGISTRATION_SELECT_VALUE, String.class, null);
 					
 					Select profilSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : "); 
-					
+					profilSelect.setWidth((String) ConstantsEnglish.REGISTRATION_COMPONENT_SIZE);
 					try {
 						for(Profile p : registrationService.getAllProfile()){
 							item = ic.addItem(p.getId());
@@ -161,7 +171,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
 					
 					Select colleagueSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
-					
+					colleagueSelect.setWidth((String) ConstantsEnglish.REGISTRATION_COMPONENT_SIZE);
 					
 					try {
 						if(propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){

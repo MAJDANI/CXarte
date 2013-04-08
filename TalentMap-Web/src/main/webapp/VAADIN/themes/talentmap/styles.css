@@ -27,6 +27,11 @@
 .type-profile, .last-name, .first-name, .email, .phone, .employment-date, .experience, .business-engineer, .mission-start-date, .mission-end-date, .mission-client,
 .consultant-manager
 {position: relative;}
+
+/* SEX */
+.v-select-optiongroup .v-select-option {
+    display: inline-block;
+}
 	
 	/* LAST NAME */
 .form-data-administrative .v-caption-last-name{left:0px!important; bottom:0px!important;}
@@ -145,3 +150,4 @@
 
 /* HORIZONTAL LAYOUT FOR SKILL LABEL */
 .skill-labels{background: rgba(0,0,0,0.1); padding:10px!important; }
+}
