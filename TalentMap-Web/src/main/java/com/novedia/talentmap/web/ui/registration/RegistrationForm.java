@@ -50,33 +50,15 @@ public class RegistrationForm extends FormLayout {
 		super();
 	}
 	
+	/**
+	 * Build the registration Form View 
+	 * @return RegistrationForm object
+	 */
 	public RegistrationForm buildRegistrationFormView(){
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
-	
-
-	/**
-	 * Build the class RegistrationForm.java
-	 * 
-	 * @param fieldOrderMission
-	 * @param missionForm
-	 * @param missionFormLayout
-	 */
-//	public RegistrationForm(Form registrationForm,
-//			GridLayout registrationFormLayout,
-//			IRegistrationService registrationService,
-//			IBusinessEngineerService businessEngineerService) {
-//		super();
-//		this.registrationForm = registrationForm;
-//		this.registrationFormLayout = registrationFormLayout;
-//		this.registrationService = registrationService;
-//		this.businessEngineerService = businessEngineerService;
-//
-//		buildMain();
-//	}
 	
 	public void buildMain() {
 
@@ -88,6 +70,9 @@ public class RegistrationForm extends FormLayout {
 		}
 	}
 	
+	/**
+	 * Build the registrationForm Layout
+	 */
 	public void buildSignInLayout(){
 		this.registrationFormLayout.setMargin(true);
 		this.registrationFormLayout.setSpacing(true);
@@ -163,36 +148,67 @@ public class RegistrationForm extends FormLayout {
 		}
 	}
 
-	
+	/**
+	 * Get the registrationForm
+	 * @return registrationForm
+	 */
 	public Form getRegistrationForm() {
 		return registrationForm;
 	}
 
+	/**
+	 * Set the registrationForm
+	 * @param registrationForm registrationForm to set 
+	 */
 	public void setRegistrationForm(Form registrationForm) {
 		this.registrationForm = registrationForm;
 	}
 
+	/**
+	 * Get the registrationService
+	 * @return registrationService
+	 */
 	public IRegistrationService getRegistrationService() {
 		return registrationService;
 	}
 
+	/**
+	 * Set the registrationService
+	 * @param registrationService registrationService to set 
+	 */
 	public void setRegistrationService(IRegistrationService registrationService) {
 		this.registrationService = registrationService;
 	}
 
+	/**
+	 * Get the businessEngineerService
+	 * @return businessEngineerService
+	 */
 	public IBusinessEngineerService getBusinessEngineerService() {
 		return businessEngineerService;
 	}
 
+	/**
+	 * Set the businessEngineerService
+	 * @param businessEngineerService businessEngineerService to set 
+	 */
 	public void setBusinessEngineerService(
 			IBusinessEngineerService businessEngineerService) {
 		this.businessEngineerService = businessEngineerService;
 	}
 
+	/**
+	 * Get the registrationFormLayout
+	 * @return registrationFormLayout
+	 */
 	public GridLayout getRegistrationFormLayout() {
 		return registrationFormLayout;
 	}
 
+	/**
+	 * Set the registrationFormLayout
+	 * @param registrationFormLayout registrationFormLayout to set
+	 */
 	public void setRegistrationFormLayout(GridLayout registrationFormLayout) {
 		this.registrationFormLayout = registrationFormLayout;
 	}

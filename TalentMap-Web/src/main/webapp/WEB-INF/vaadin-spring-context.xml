@@ -16,17 +16,19 @@
     <!-- Vaddin components declaration -->
 	<bean id="mainLayout" class="com.vaadin.ui.HorizontalLayout"/>
     <bean id="closeButton" class="com.vaadin.ui.Button"/>
-<!--     <bean id="mainVerticalLayout" class="com.vaadin.ui.VerticalLayout"/> -->
     
     
     <!-- Vaddin root application declaration -->    
     <bean id="vaadinBean" class="com.novedia.talentmap.web.MyVaadinApplication" scope="session">
     	<property name="window" ref="windowBean"/>
-    	<property name="authenticationService" ref="authenticationService" />
-    	<property name="registrationService" ref="registrationService" />
-    	<property name="businessEngineerService" ref="businessEngineerService" />
+    	<property name="loginScreen" ref="loginScreenBean"/>
+    </bean>
+        
+    <bean id="loginScreenBean" class="com.novedia.talentmap.web.ui.login.LoginScreen" scope="session">
+   		<property name="authenticationService" ref="authenticationService" />
     	<property name="authenticatedScreen" ref="authenticatedScreen"/>
     	<property name="registrationScreen" ref="registrationScreenBean"/>
+    
     </bean>
     
 	<bean id="windowBean" class="com.vaadin.ui.Window" scope="session"/>
@@ -371,6 +373,8 @@
 	<bean id="registrationScreenBean" class="com.novedia.talentmap.web.ui.login.RegistrationScreen" scope="session" >
 		<property name="registrationForm" ref="registrationFormBean"/>
 		<property name="authenticatedScreen" ref="authenticatedScreen"/>
+		<property name="authenticationService" ref="authenticationService" />
+    	<property name="registrationService" ref="registrationService" />
 	</bean>
 	
 	<!-- change password form bean -->

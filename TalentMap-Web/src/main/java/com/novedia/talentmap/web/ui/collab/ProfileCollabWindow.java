@@ -140,7 +140,6 @@ public class ProfileCollabWindow extends Window {
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildSkillCollaborator() {
-		System.out.println("ProfileCollabWindow.buildSkillCollaborator()");
 
 		try {
 

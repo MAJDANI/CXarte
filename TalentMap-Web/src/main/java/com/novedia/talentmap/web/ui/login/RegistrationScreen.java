@@ -2,12 +2,18 @@ package com.novedia.talentmap.web.ui.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
+import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.model.entity.Registration;
+import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.impl.RegistrationService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
+import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
@@ -44,6 +50,21 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	 */
 	private MyVaadinApplication myVaadinApplication;
 	
+	
+	/**
+	 * The authentication service
+	 */
+	private AuthenticationService authenticationService;
+
+	/**
+	 * The registration service
+	 */
+	private RegistrationService registrationService;
+	
+	private LoginScreen loginScreen;
+
+	
+	
 	/**
 	 * Vaadin component
 	 */
@@ -72,13 +93,9 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	 */
 	public RegistrationScreen buildRegistrationScreenView(){
 		removeAllComponents();
-		
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Call Sign In Screen constructor");
-		}
+		getMyVaadinApplication().getMainWindow().setCaption("Sign Up Talent Map");
 		//Panel for Registration
 		registrationPanel = new Panel(ConstantsEnglish.REGISTRATION_PANEL_NAME);
-		
 		registrationPanel.setWidth(ConstantsEnglish.REGISTRATION_PANEL_WIDTH);
 		
 		//components initialisation
@@ -143,9 +160,10 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 				myVaadinApplication.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR);
 			} else {
 				try {
-					authentication = myVaadinApplication.register(registration);
+					//authentication = myVaadinApplication.register(registration);
+					authentication = register(registration);
 					authenticatedScreen.setAuthentication(authentication);
-					authenticatedScreen.setApplication(myVaadinApplication);
+					authenticatedScreen.setMyVaadinApplicationApplication(getMyVaadinApplication());
 					myVaadinApplication.getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 		} catch (TalentMapSecurityException e) {
 					myVaadinApplication.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
@@ -154,10 +172,46 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		}
 		
 		else if (button.equalsIgnoreCase(ConstantsEnglish.CANCEL_BUTTON_NAME)){
-			myVaadinApplication.getMainWindow().setContent(myVaadinApplication.buildLoginView());
+			myVaadinApplication.getMainWindow().setContent(loginScreen.buildLoginScreenView());
 		}
 	
 	}
+	
+	
+	/**
+	 * Register method
+	 * 
+	 * @param registration
+	 */
+	public Authentication register(Registration registration) throws TalentMapSecurityException {
+		Authentication authenticate = null;
+		try {
+
+			registrationService.addColleagueFromRegistration(registration);
+			// Password encoding
+			String encodedPassword = CUtils.encodePassword(registration.getPassword());
+			registration.setPassword(encodedPassword);
+
+			//On positionne le Role par défaut CL Consultant :
+			registration.setRole(Authorization.Role.CL);
+
+			registrationService.addUserFromRegistration(registration);
+
+			CredentialToken credential = new CredentialToken();
+			credential.setLogin(registration.getLogin());
+			credential.setPassword(registration.getPassword());
+			authenticate = authenticationService.checkUser(credential);
+		} catch (DataAccessException ex) {
+			if (LOGGER.isErrorEnabled()) {
+				LOGGER.error("DataAccessException : ", ex);
+			}
+		}
+
+		return authenticate;
+	}
+	
+	
+	
 	
 	/**
 	 * Test the registrationForm validity
@@ -250,6 +304,46 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		this.authenticatedScreen = authenticatedScreen;
 	}
 
+
+	public LoginScreen getLoginScreen() {
+		return loginScreen;
+	}
+
+
+	public void setLoginScreen(LoginScreen loginScreen) {
+		this.loginScreen = loginScreen;
+	}
+
+	
+	/**
+	 * Get the authenticationService
+	 * @return
+	 */
+	public AuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+	
+	/**
+	 * set the authenticationService
+	 * @param authenticationService the authenticationService to set
+	 */
+	public void setAuthenticationService(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
+	
+	
+	public RegistrationService getRegistrationService() {
+		return registrationService;
+	}
+
+	
+	/**
+	 * Set the registrationService
+	 * @param registrationService
+	 */
+	public void setRegistrationService(RegistrationService registrationService) {
+		this.registrationService = registrationService;
+	}
 
 
 }

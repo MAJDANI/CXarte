@@ -26,7 +26,7 @@ import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Show view according to user's role
- * 
+ * @author b.tiomofofou
  * @author e.moumbe
  */
 
@@ -52,7 +52,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	/**
 	 * My Vaadin app
 	 */
-	private MyVaadinApplication application;
+	private MyVaadinApplication myVaadinApplication;
 	
 	//
 	private TabMain mainTab;
@@ -63,11 +63,10 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	private static final String HELLO_LABEL = "Hello, ";
 	
-	//
 	
 	/**
 	 * Constructor
-	 * @param application
+	 * @param myVaadinApplication
 	 */
 	
 	public AuthenticatedScreen(){
@@ -75,26 +74,13 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	}
 	
 	
-//	public AuthenticatedScreen (MyVaadinApplication application, Authentication authentication) {
-//		super();
-//		//Set style
-//		setSizeFull();
-//		setSpacing(true);
-//		setMargin(true);
-//		setStyleName(Reindeer.LAYOUT_WHITE);
-//		this.application = application;
-//		this.authentication = authentication;
-////		selectedViewAccordingToUserRoles();
-//	}
-	
-	
 	/**
-	 * Build according to user 
-	 * @return
+	 * Build the view according to user 
+	 * @return ComponentContainer object
 	 */
 	public ComponentContainer selectedViewAccordingToUserRoles() {
 		removeAllComponents();
-		
+		getMyVaadinApplication().getMainWindow().setCaption("Talent Map NovediaGroup");
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Call selectedViewAccordingToUserRoles ()");
 		}
@@ -119,8 +105,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	/**
 	 * 
-	 * @param role
-	 * @return
+	 * @param role user's role
+	 * @return ComponentContainer object
 	 */
 	private ComponentContainer buildMainLayout(Role role) {
 		Panel globalView = new Panel();
@@ -159,7 +145,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		}
 		if(event.getButton().getCaption().equals(LABEL_CHANGE_PASSWORD_BUTTON)){
 			changePasswordForm.setAuthentication(getAuthentication());
-			changePasswordForm.setMyVaadinApplication(application);
+			changePasswordForm.setMyVaadinApplication(myVaadinApplication);
 			getWindow().addWindow(changePasswordForm.buildChangePasswordFormView());
 			return ;
 		}
@@ -172,64 +158,96 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 * manage the logout buton
 	 */
 	public void logout() {
-		application.getWindow().removeAllComponents();
-		application.close();
-		WebApplicationContext webCtx = (WebApplicationContext)  application.getContext();
+		myVaadinApplication.getWindow().removeAllComponents();
+		myVaadinApplication.close();
+		WebApplicationContext webCtx = (WebApplicationContext)  myVaadinApplication.getContext();
         HttpSession session = webCtx.getHttpSession();
         session.invalidate();
-        application.setLogoutURL(null);
+        myVaadinApplication.setLogoutURL(null);
 	}
 
+	/**
+	 * Get the authentication
+	 * @return authentication
+	 */
 	public Authentication getAuthentication() {
 		return authentication;
 	}
 
+	/**
+	 * Set authentication
+	 * @param authentication authentication to set 
+	 */
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
 
-	public MyVaadinApplication getApplication() {
-		return application;
+	/**
+	 * Get the vaadinApplication
+	 * @return myvaadinApplication
+	 */
+	public MyVaadinApplication getMyVaadinApplication() {
+		return myVaadinApplication;
 	}
 
-	public void setApplication(MyVaadinApplication application) {
-		this.application = application;
+	/**
+	 * Set the myvaadinApplication
+	 * @param application myvaadinApplication to set
+	 */
+	public void setMyVaadinApplicationApplication(MyVaadinApplication application) {
+		this.myVaadinApplication = application;
 	}
 
+	/**
+	 * Get the maintab
+	 * @return mainTab
+	 */
 	public TabMain getMainTab() {
 		return mainTab;
 	}
 
+	/**
+	 * Set the mainTab
+	 * @param mainTab mainTab to set
+	 */
 	public void setMainTab(TabMain mainTab) {
 		this.mainTab = mainTab;
 	}
 
 
+	/**
+	 * Get the changePasswordForm
+	 * @return changePasswordForm
+	 */
 	public ChangePasswordForm getChangePasswordForm() {
 		return changePasswordForm;
 	}
 
 
+	/**
+	 * Set changePasswordForm
+	 * @param changePasswordForm changePasswordForm to set
+	 */
 	public void setChangePasswordForm(ChangePasswordForm changePasswordForm) {
 		this.changePasswordForm = changePasswordForm;
 	}
 
 
+	/**
+	 * Get the colleagueService
+	 * @return colleagueService
+	 */
 	public IColleagueService getColleagueService() {
 		return colleagueService;
 	}
 
 
+	/**
+	 * Set colleagueService
+	 * @param colleagueService colleagueService to set
+	 */
 	public void setColleagueService(IColleagueService colleagueService) {
 		this.colleagueService = colleagueService;
 	}
-
-	
-
-	
-
-	
-	
-	
 
 }
