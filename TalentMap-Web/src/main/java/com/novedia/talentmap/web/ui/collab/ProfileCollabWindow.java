@@ -108,13 +108,13 @@ public class ProfileCollabWindow extends Window {
 	public void buildDataCollaborator() {
 		try {
 
-			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService, this.colleagueService));
+			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService, this.colleagueService,false));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
 					ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
 			
 			Colleague collab = this.colleagueService.getColleague(COLLAB_ID);
-			
+		
 			//We create a bean with the POJO Collaborator
 			BeanItem<Item> collaboratorBean = new BeanItem(collab);
 			
@@ -140,6 +140,7 @@ public class ProfileCollabWindow extends Window {
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildSkillCollaborator() {
+		
 
 		try {
 

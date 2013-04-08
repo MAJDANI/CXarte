@@ -24,9 +24,10 @@ public class ConstantsEnglish {
 	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-		"Name", "First name", "Job title", "Email", "Tel", "Date of entry Novedia",
+		"Sex", "Name", "First name", "Job title", "Email", "Tel", "Date of entry Novedia",
 		"Years of Experience", "Business engineer", "Manager" };
-
+	
+	public static final String FIELD_COLLAB_SEX = "sex";
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";
 	public static final String FIELD_COLLAB_FIRST_NAME = "firstName";
 	public static final String FIELD_COLLAB_PROFILE_ID = "profileId";
@@ -38,6 +39,7 @@ public class ConstantsEnglish {
 	public static final String FIELD_COLLAB_MANAGER = "managerId";
 
 	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
+		FIELD_COLLAB_SEX, 
 		FIELD_COLLAB_LAST_NAME, 
 		FIELD_COLLAB_FIRST_NAME, 
 		FIELD_COLLAB_PROFILE_ID, 

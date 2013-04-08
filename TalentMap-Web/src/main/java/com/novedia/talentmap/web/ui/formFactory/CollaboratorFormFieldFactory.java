@@ -36,6 +36,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	private IBusinessEngineerService businessEngineerService;
 	private IColleagueService colleagueService;
 
+	private boolean isCollaboratorContent;
 	/**
 	 * 
 	 * Build the class CollaboratorFormFieldFactory.java 
@@ -43,10 +44,11 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 	 */
 	public CollaboratorFormFieldFactory(IProfileService profileService, 
 			IBusinessEngineerService businessEngineerService,
-			IColleagueService colleagueService){
+			IColleagueService colleagueService,boolean isCollaboratorContent){
 		this.profileService = profileService;
 		this.businessEngineerService = businessEngineerService;
 		this.colleagueService = colleagueService;
+		this.isCollaboratorContent = isCollaboratorContent;
 	}
 	
 	@Override
@@ -67,8 +69,11 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					field.setNullRepresentation(ConstantsEnglish.FIELD_NULL_REPRESENTATION);
 					
 					//We test every input name
-					
-					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_LAST_NAME)){
+					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_SEX) && isCollaboratorContent){
+						field.setStyleName("sex");
+						return null;
+					}
+					else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_LAST_NAME)){
 						field.setStyleName("last-name");
 						field.setMaxLength(ConstantsEnglish.COLLEAGUE_LAST_NAME_MAX_LENGTH);
 					}else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_FIRST_NAME)){

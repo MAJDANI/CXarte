@@ -128,7 +128,7 @@ public class CollaboratorForm extends VerticalLayout {
 		this.formCollaborator
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
 						this.profileService, this.businessEngineerService,
-						this.colleagueService));
+						this.colleagueService,true));
 
 		// Colleague currentColleague =
 		// colleagueService.getColleague(COLLAB_ID);
