@@ -172,9 +172,7 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 		colleagueContainer.removeAllItems();
 		if(colleagueResult != null && !colleagueResult.isEmpty()){
 			for (Colleague colleague : colleagueResult) {
-				if(!authentication.getColleagueId().equals(colleague.getId())){
 					colleagueContainer.addBean(colleague);
-				}
 			}
 		}
 		

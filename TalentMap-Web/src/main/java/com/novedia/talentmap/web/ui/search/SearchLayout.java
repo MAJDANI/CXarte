@@ -36,24 +36,6 @@ public class SearchLayout extends HorizontalLayout{
 	}
 	
 	
-
-	/**
-	 * Build the class SearchLayout.java 
-	 * @param searchContent
-	 * @param hSplitpanel
-	 * @param searchNavigation
-	 */
-//	public SearchLayout(SearchContent searchContent,
-//			HorizontalSplitPanel hSplitPanel, SearchNavigation searchNavigation) {
-//		super();
-//		this.searchContent = searchContent;
-//		this.hSplitPanel = hSplitPanel;
-//		this.searchNavigation = searchNavigation;
-//		
-//		buildObservators();
-//		
-//		mainBuild();
-//	}
 	
 	public void buildObservators(){
 		

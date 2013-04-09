@@ -61,32 +61,6 @@ public class SearchContent extends VerticalLayout {
 	}
 		
 
-	/**
-	 * Build the class SearchContent.java
-	 * 
-	 * @param searchTarget
-	 * @param searchResults
-	 * @param searchTargetPanel
-	 * @param searchResultsPanel
-	 */
-//	public SearchContent(SearchTarget searchTarget,
-//			SearchResults searchResults, Panel searchTargetPanel,
-//			Panel searchResultsPanel, Panel searchResultsPanelNoResult, Label searchTargetLabel,
-//			Label searchResultsLabel, Label searchResultsLabelNoResult) {
-//		super();
-//		this.searchTarget = searchTarget;
-//		this.searchResults = searchResults;
-//		this.searchTargetPanel = searchTargetPanel;
-//		this.searchResultsPanel = searchResultsPanel;
-//		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
-//		this.searchTargetLabel = searchTargetLabel;
-//		this.searchResultsLabel = searchResultsLabel;
-//		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
-//		
-//		buildObservators();
-//		
-//		mainBuild();
-//	}
 	
 	public void buildObservators(){
 		this.searchTarget.addObservateur(new ISearchContent() {

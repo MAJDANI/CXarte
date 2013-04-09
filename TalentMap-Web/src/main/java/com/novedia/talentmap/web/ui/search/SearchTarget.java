@@ -82,37 +82,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	}
 	
 	
-	/**
-	 * 
-	 * Build the class SearchTarget.java 
-	 * @param searchByClientPanel
-	 * @param searchByNamePanel
-	 * @param searchBySkillsPanel
-	 * @param fieldClient
-	 * @param fieldName
-	 * @param search
-	 * @param listCollab
-	 * @param collabService
-	 * @param skillService
-	 */
-//	public SearchTarget(Panel searchByClientPanel, Panel searchByNamePanel,
-//			Panel searchBySkillsPanel, Select clientNameSelect,
-//			TextField fieldName, Button search, List<Colleague> listCollab,
-//			IColleagueService collabService, ISkillService skillService,IClientService clientService, Tree treeSkills) {
-//		super();
-//		this.searchByClientPanel = searchByClientPanel;
-//		this.searchByNamePanel = searchByNamePanel;
-//		this.searchBySkillsPanel = searchBySkillsPanel;
-//		this.clientNameSelect = clientNameSelect;
-//		this.fieldName = fieldName;
-//		this.search = search;
-//		this.listCollab = listCollab;
-//		this.collabService = collabService;
-//		this.skillService = skillService;
-//		this.clientService = clientService;
-//		this.treeSkills = treeSkills;
-//		buildMain();
-//	}
 
 	/**
 	 * The main builder
@@ -291,7 +260,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	public void buildButton() {
 
-		this.search.setCaption("Search");
+		this.search.setCaption("Rechercher");
 		this.search.addListener(this);
 
 		addComponent(this.search);

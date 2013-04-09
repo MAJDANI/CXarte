@@ -49,16 +49,6 @@ public class SearchResults extends PagedTable {
 		return this;
 	}
 
-	/**
-	 * Build the class SearchResults.java
-	 * 
-	 * @param collabService
-	 */
-//	public SearchResults(ProfileCollabWindow profileCollabWindow) {
-//		super();
-//		this.profileCollabWindow = profileCollabWindow;
-//		mainBuild();
-//	}
 
 	public void mainBuild() {
 		addColumns();
@@ -79,8 +69,6 @@ public class SearchResults extends PagedTable {
 	}
 
 	public void fillResultsTable(List<Colleague> listCollab) {
-//		System.out.println("SearchResults.fillResultsTable()");
-
 		int idResultsTable = 1;
 		for (Colleague collab : listCollab) {
 
