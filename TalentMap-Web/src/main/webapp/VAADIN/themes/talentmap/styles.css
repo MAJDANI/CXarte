@@ -11,6 +11,91 @@
 .v-table-body{height:auto!important;}
 .v-table-cell-content{vertical-align:middle!important;}
 
+/*
+.loginView{
+	width: 1280px;
+	height: 625px;
+}
+*/
+
+.loginPanel{
+	margin-left: 10px;
+	margin-top: 0px;
+}
+
+
+.v-panel-caption-loginPanel{
+	color: #393939;
+	font-weight: bold;
+	font-size: 18px;
+	letter-spacing: 0px;
+}
+
+
+.loginForm{
+	height: 150px;
+}
+
+
+.loginFormField{
+	border-radius: 3px;
+	margin-bottom: 10px;
+	height: 20px;
+}
+
+
+.v-caption-loginFormField .v-captiontext{
+	text-transform: none;
+	margin-bottom: 4px;
+	font-size:  15px;
+	
+}
+
+
+.logInButton{
+	background-color: #24A828;
+	height: 30px;
+	width: 80px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+
+.logInButton .v-button-wrap {
+	color: #FFFFFF;
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none;
+    font-size: 15px;
+    border-radius: 0px;
+    border-style: none;
+    border-width: 0px;
+    box-shadow: none;
+}
+
+.errorLoginLabel{
+	color: #EB3800;
+	font-family: "Helvetica Neue",arial;
+    font-size: 14px;
+}
+
+.signIn .v-button-caption {
+	color: #939393;
+	font-size: 14px;
+}
+
+
+.white .logo{
+	background-image: url(./images/logoNovedia.jpg);
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 80px;
+	margin: 0 auto;
+}
+
+
 /*by:v.dibi : Page vide */
 .mystyle {font-style: italic;color:black;background-color:green;font-size: 25px;width:350px}
 

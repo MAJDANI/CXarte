@@ -9,17 +9,18 @@ import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.util.CUtils;
-import com.novedia.talentmap.web.util.LabelConstants;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Form;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.LoginForm;
-import com.vaadin.ui.LoginForm.LoginEvent;
-import com.vaadin.ui.LoginForm.LoginListener;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
@@ -30,7 +31,7 @@ import com.vaadin.ui.themes.Reindeer;
  * 
  */
 
-public class LoginScreen extends VerticalLayout implements LoginListener, ClickListener {
+public class LoginScreen extends VerticalLayout implements ClickListener {
 	
 	/**
 	 * UID
@@ -61,53 +62,89 @@ public class LoginScreen extends VerticalLayout implements LoginListener, ClickL
 	 */
 	private AuthenticatedScreen authenticatedScreen;
 	
+	/**
+	 * Constant for login
+	 */
+	public static final String USER_LOGIN = "Login";
 	
+	/**
+	 * Constant for password
+	 */
+	public static final String USER_PASSWORD = "Password";
+	
+	/**
+	 * Constant label for button
+	 */
+	public static final String LABEL_LOGIN = "Log In";
 	
 	/**
 	 * Vaadin component
 	 */
 	private Button signIn;
-	private LoginForm loginForm;
 	private Panel loginPanel;
+	
+	
+	private Form loginForm;
+	
+	private TextField loginField ;
+	private PasswordField passwordField ;
+	
+	private Button logInButton;
 	
 	/**
 	 * the loginView
 	 */
 	private VerticalLayout loginView;
 	
-	private String LABEL_BUTTON_SIGN_IN = "Sign in";
+	private static final String LABEL_BUTTON_SIGN_IN = "Create an Account";
+	
+	private static final String ERROR_LOGIN = "The Login or password was incorrect.";
+	
+	private Label errorLoginLabel;
 	
 	/**
 	 * Default constructor
 	 */
 	public LoginScreen() {
 		setSizeFull();
-		setMargin(true);
-		setStyleName(Reindeer.LAYOUT_WHITE);
+		//setMargin(true);
+		//setStyleName(Reindeer.LAYOUT_WHITE);
 	}
 	
 	
 	
 	public VerticalLayout buildLoginScreenView(){
 		getMyVaadinApplication().getMainWindow().setCaption("Log In Talent Map");
+		VerticalLayout logo = new VerticalLayout();
+		logo.setHeight("80px");
+		logo.setWidth("200px");
+		logo.addStyleName("logo");
+		
 		loginView = new VerticalLayout();
 		loginView.setSizeFull();
-		loginView.setMargin(true);
-		loginView.setStyleName(Reindeer.LAYOUT_WHITE);
+		loginView.addStyleName(Reindeer.LAYOUT_WHITE);
+		
+		loginView.addComponent(logo);
+		loginView.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
+		
 		//Panel for login
-		loginPanel = new Panel("Log In");
+		loginPanel = new Panel(LABEL_LOGIN);
+		loginPanel.addStyleName("loginPanel");
 		loginPanel.setWidth("400px");
 		
-		//The form
-		loginForm = new LoginForm();
-		loginForm.setUsernameCaption(LabelConstants.USER_LOGIN);
-		loginForm.setPasswordCaption(LabelConstants.USER_PASSWORD);
-		loginForm.setLoginButtonCaption(LabelConstants.LOGIN_BUTTON);
-		loginForm.setHeight("150px");
-		loginForm.addListener(this);
+		
+		errorLoginLabel = new Label(ERROR_LOGIN);
+		errorLoginLabel.addStyleName("errorLoginLabel");
+		errorLoginLabel.setVisible(false);
+		loginPanel.addComponent(errorLoginLabel);
+		
+		buildLoginForm();
 		loginPanel.addComponent(loginForm);
 		
+		
 		signIn = new Button(LABEL_BUTTON_SIGN_IN);
+		signIn.addStyleName(Reindeer.BUTTON_LINK);
+		signIn.addStyleName("signIn");
 		signIn.addListener(this);
 		loginPanel.addComponent(signIn);
 		loginView.addComponent(loginPanel);
@@ -120,39 +157,57 @@ public class LoginScreen extends VerticalLayout implements LoginListener, ClickL
 		
 	}
 	
+	/**
+	 * Build the Login Form
+	 */
+	private void buildLoginForm(){
+		loginForm = new Form();
+		GridLayout loginFormLayout = new GridLayout();
+		loginFormLayout.addStyleName("loginForm");
+		loginFormLayout.setSpacing(true);
+		loginField = new TextField(USER_LOGIN);
+		loginField.addStyleName("loginFormField");
+		passwordField = new PasswordField(USER_PASSWORD);
+		passwordField.addStyleName("loginFormField");
+		loginFormLayout.addComponent(loginField);
+		loginFormLayout.addComponent(passwordField);
+		logInButton = new Button(LABEL_LOGIN);
+		logInButton.addListener(this);
+		logInButton.addStyleName("logInButton");
+		loginFormLayout.addComponent(logInButton);
+		loginForm.setLayout(loginFormLayout);
+		
+	}
+	
 	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		String button = event.getButton().getCaption();		
-		if (button.equalsIgnoreCase(LABEL_BUTTON_SIGN_IN)){
+		if (event.getButton().equals(signIn)){
 			registrationScreen.setMyVaadinApplication(getMyVaadinApplication());
 			registrationScreen.setLoginScreen(this);
 			getMyVaadinApplication().getMainWindow().setContent(registrationScreen.buildRegistrationScreenView());
+			return ;
 		}
-		
-	}
-
-
-
-	@Override
-	public void onLogin(LoginEvent event) {
-		//Credentials infos
-		String username = event.getLoginParameter("username");
-		String password = event.getLoginParameter("password");
-		try {
-			authentication = checkUserAuthentication(username, password);
-			if (authentication != null) {
-				authenticatedScreen.setAuthentication(authentication);
-				authenticatedScreen.setMyVaadinApplicationApplication(myVaadinApplication);
-				myVaadinApplication.getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
+		if (event.getButton().equals(logInButton)) {
+			String username = (String) loginField.getValue();
+			String password = (String) passwordField.getValue();
+			try {
+				authentication = checkUserAuthentication(username, password);
+				if (authentication != null) {
+					authenticatedScreen.setAuthentication(authentication);
+					authenticatedScreen.setMyVaadinApplicationApplication(myVaadinApplication);
+					myVaadinApplication.getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
+				}
+			} catch (TalentMapSecurityException tmpex) {
+				//myVaadinApplication.getMainWindow().showNotification("Bad user name/password");
+				errorLoginLabel.setVisible(true);
 			}
-		} catch (TalentMapSecurityException tmpex) {
-			myVaadinApplication.getMainWindow().showNotification("Bad user name/password");
+			return;
 		}
 		
 	}
-	
-	
+
+
 	/**
 	 *  this method check the authentication user
 	 * @param login login's user
