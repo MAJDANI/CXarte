@@ -107,12 +107,14 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 	 */
 	public LoginScreen() {
 		setSizeFull();
-		//setMargin(true);
-		//setStyleName(Reindeer.LAYOUT_WHITE);
 	}
 	
 	
 	
+	/**
+	 * Build the login view
+	 * @return VerticalLayout
+	 */
 	public VerticalLayout buildLoginScreenView(){
 		getMyVaadinApplication().getMainWindow().setCaption("Log In Talent Map");
 		VerticalLayout logo = new VerticalLayout();
@@ -121,19 +123,22 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 		logo.addStyleName("logo");
 		
 		loginView = new VerticalLayout();
+		loginView.setSpacing(false);
 		loginView.setSizeFull();
-		loginView.addStyleName(Reindeer.LAYOUT_WHITE);
+		//loginView.addStyleName(Reindeer.LAYOUT_WHITE);
 		
 		loginView.addComponent(logo);
 		loginView.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
 		
 		//Panel for login
 		loginPanel = new Panel(LABEL_LOGIN);
+		loginPanel.setCaption(LABEL_LOGIN);
 		loginPanel.addStyleName("loginPanel");
 		loginPanel.setWidth("400px");
 		
 		
 		errorLoginLabel = new Label(ERROR_LOGIN);
+		errorLoginLabel.setCaption(ERROR_LOGIN);
 		errorLoginLabel.addStyleName("errorLoginLabel");
 		errorLoginLabel.setVisible(false);
 		loginPanel.addComponent(errorLoginLabel);
@@ -141,8 +146,8 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 		buildLoginForm();
 		loginPanel.addComponent(loginForm);
 		
-		
 		signIn = new Button(LABEL_BUTTON_SIGN_IN);
+		signIn.setCaption(LABEL_BUTTON_SIGN_IN);
 		signIn.addStyleName(Reindeer.BUTTON_LINK);
 		signIn.addStyleName("signIn");
 		signIn.addListener(this);
@@ -315,7 +320,6 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
 		this.registrationScreen = registrationScreen;
 	}
-	
 
 
 }
