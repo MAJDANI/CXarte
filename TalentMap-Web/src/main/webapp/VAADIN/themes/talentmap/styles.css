@@ -19,8 +19,9 @@
 */
 
 .loginPanel{
-	margin-left: 10px;
+	margin-left: 100px;
 	margin-top: 0px;
+	/*margin: 0 auto;*/
 }
 
 
@@ -87,7 +88,7 @@
 }
 
 
-.white .logo{
+.logo{
 	background-image: url(./images/logoNovedia.jpg);
 	background-repeat: no-repeat;
 	width: 200px;
