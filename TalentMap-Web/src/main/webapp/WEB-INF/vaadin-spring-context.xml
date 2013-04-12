@@ -31,6 +31,7 @@
     
     </bean>
     
+    
 	<bean id="windowBean" class="com.vaadin.ui.Window" scope="session"/>
 	
 	
