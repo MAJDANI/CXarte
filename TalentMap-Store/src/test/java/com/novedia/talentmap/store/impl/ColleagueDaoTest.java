@@ -132,7 +132,7 @@ public class ColleagueDaoTest {
 	@Test
 	@DataSet("ColleagueDaoTest.testSave-result.xml")
 	public void testSave() {
-		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(3)
+		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(1)
 				.firstName("Julie").lastName("Vigneron").build();
 		Colleague colleague = Colleague.builder().id(1).profileId(1)
 				.phone("6020202020").experience(7)

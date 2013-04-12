@@ -90,7 +90,8 @@
 	</select>
 
 	<select id="getAll" resultMap="colleagueResult">
-		SELECT * FROM COLLEAGUE colleague
+		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<update id="save" parameterClass="Colleague">
