@@ -24,10 +24,10 @@ public class ConstantsEnglish {
 	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-		"Sex", "Name", "First name", "Job title", "Email", "Tel", "Date of entry Novedia",
+		"Title", "Name", "First name", "Job title", "Email", "Tel", "Date of entry Novedia",
 		"Years of Experience", "Business engineer", "Manager" };
 	
-	public static final String FIELD_COLLAB_SEX = "sex";
+	public static final String FIELD_COLLAB_TITLE = "title";
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";
 	public static final String FIELD_COLLAB_FIRST_NAME = "firstName";
 	public static final String FIELD_COLLAB_PROFILE_ID = "profileId";
@@ -39,7 +39,7 @@ public class ConstantsEnglish {
 	public static final String FIELD_COLLAB_MANAGER = "managerId";
 
 	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
-		FIELD_COLLAB_SEX, 
+		FIELD_COLLAB_TITLE, 
 		FIELD_COLLAB_LAST_NAME, 
 		FIELD_COLLAB_FIRST_NAME, 
 		FIELD_COLLAB_PROFILE_ID, 
@@ -94,7 +94,7 @@ public class ConstantsEnglish {
 	/**
 	 * Données Registration
 	 */
-	public static final String REGISTRATION_SEX_FIELD = "sex";
+	public static final String REGISTRATION_TITLE_FIELD = "title";
 	public static final String REGISTRATION_LAST_NAME_FIELD = "lastName";
 	public static final String REGISTRATION_FIRST_NAME_FIELD = "firstName";
 	public static final String REGISTRATION_EMPLOYMENT_DATE_FIELD = "employmentDate";
@@ -108,8 +108,8 @@ public class ConstantsEnglish {
 	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
 	public static final String REGISTRATION_EMAIL_FIELD = "email";
 	public static final String REGISTRATION_COMPONENT_SIZE = "208px";
-	public static final String REGISTRATION_SEX_CHOICE1 = "M";
-	public static final String REGISTRATION_SEX_CHOICE2 = "F";
+	public static final String REGISTRATION_TITLE_CHOICE1 = "Mr";
+	public static final String REGISTRATION_TITLE_CHOICE2 = "M";
 	
 	
 	public static final String REGISTRATION_NULL_REPRESENTATION = "";
@@ -137,10 +137,10 @@ public class ConstantsEnglish {
 	/**
 	 *For Registration
 	 */
-	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Sex","Name","First name","Password","Confirm password",
+	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Title","Name","First name","Password","Confirm password",
 		"Choose a login", "Email", "Téléphone", "Date of hire", "Job title", "Years of Experience", "Business engineer",
 		 "Manager" };
-	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] {"sex","lastName", "firstName","password","passwordConfirm",
+	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] {"title","lastName", "firstName","password","passwordConfirm",
 		"login", "email", "phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
 	/**
 	 * For SkillCollaboratorContent

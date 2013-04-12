@@ -183,6 +183,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 					}
 					TwinColSelect l = new TwinColSelect(
 							"Tools (choose 1 to 3 tools) : ", container2);
+					l.setDescription("Choose 1 to 3 tools");
 					l.setRows(3);
 					l.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 					l.setItemCaptionPropertyId("name");

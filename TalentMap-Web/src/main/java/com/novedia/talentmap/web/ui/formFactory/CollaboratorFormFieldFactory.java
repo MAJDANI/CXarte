@@ -69,8 +69,7 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					field.setNullRepresentation(ConstantsEnglish.FIELD_NULL_REPRESENTATION);
 					
 					//We test every input name
-					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_SEX) && isCollaboratorContent){
-						field.setStyleName("sex");
+					if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_TITLE) && isCollaboratorContent){
 						return null;
 					}
 					else if(propertyId.equals(ConstantsEnglish.FIELD_COLLAB_LAST_NAME)){

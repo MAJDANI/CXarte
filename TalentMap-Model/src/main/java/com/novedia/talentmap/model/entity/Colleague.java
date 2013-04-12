@@ -76,7 +76,7 @@ public class Colleague implements Serializable {
 	/**
 	 * Colleague Sex
 	 */
-	protected String sex;
+	protected String title;
 
 	/**
 	 *  List of missions
@@ -280,10 +280,10 @@ public class Colleague implements Serializable {
 	/**
 	 * Get the colleague's sex
 	 * 
-	 * @return the sex
+	 * @return the title
 	 */
-	public String getSex() {
-		return sex;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
@@ -291,8 +291,8 @@ public class Colleague implements Serializable {
 	 * 
 	 * @param sex           
 	 */
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	/**
@@ -422,7 +422,7 @@ public class Colleague implements Serializable {
 		this.employmentDate = builder.employmentDate;
 		this.businessEngineer = builder.businessEngineer;
 		this.email = builder.email;
-		this.sex = builder.sex;
+		this.title = builder.title;
 		this.missions = builder.missions;
 		this.tools = builder.tools;
 	}
@@ -487,7 +487,7 @@ public class Colleague implements Serializable {
 		/**
 		 * Colleague sex
 		 */
-		protected String sex;
+		protected String title;
 		
 		/**
 		 * List of tools mastered by Colleague
@@ -616,8 +616,8 @@ public class Colleague implements Serializable {
 		 * @param sex the colleague's sex
 		 * @return
 		 */
-		public Builder sex (final String sex) {
-			this.sex = sex;
+		public Builder title (final String title) {
+			this.title = title;
 			return this;
 		}
 		

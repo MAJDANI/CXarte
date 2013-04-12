@@ -23,7 +23,7 @@ public class Registration {
 	/**
 	 * Sex
 	 */
-	private String sex;
+	private String title;
 	
 	/**
 	 * First Name
@@ -562,13 +562,13 @@ public class Registration {
 	}
 
 
-	public String getSex() {
-		return sex;
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 

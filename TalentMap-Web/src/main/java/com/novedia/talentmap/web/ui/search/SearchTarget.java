@@ -260,7 +260,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	 */
 	public void buildButton() {
 
-		this.search.setCaption("Rechercher");
+		this.search.setCaption("Search");
 		this.search.addListener(this);
 
 		addComponent(this.search);

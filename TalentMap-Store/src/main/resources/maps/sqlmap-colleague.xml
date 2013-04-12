@@ -23,7 +23,7 @@
 		<result property="experience" column="EXPERIENCE" />
 		<result property="businessEngineer" column="B_ENGINEER_ID"
 			select="colleague.getBusinessEngineer" />
-		<result property="sex" column="SEX" />
+		<result property="title" column="TITLE" />
 		<result property="missions" column="COLLEAGUE_ID"
 			select="colleague.selectMissionsByColleagueId" />
 	</resultMap>
@@ -183,10 +183,10 @@
 		EMPLOYMENT_DATE,
 		EXPERIENCE,
 		B_ENGINEER_ID,
-		SEX
+		TITLE
 		)values (#colleagueId#,
 		#managerId#, #profileId#, UPPER(#lastName#), #firstName#, #email#, #phone#,
-		#employmentDate#, #experience#, #businessEngineer.id#,#sex#
+		#employmentDate#, #experience#, #businessEngineer.id#,#title#
 		)
 	</insert>
 

@@ -65,7 +65,7 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 			
 			if(propertyId.equals(ConstantsEnglish.FIELD_ORDER_REGISTRATION[i])){
 				
-				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_SEX_FIELD)
+				if(!propertyId.equals(ConstantsEnglish.REGISTRATION_TITLE_FIELD)
 						&&!propertyId.equals(ConstantsEnglish.REGISTRATION_EMPLOYMENT_DATE_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) 
 						&& !propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD) 
@@ -110,10 +110,10 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 					return field;
 					
 				}
-				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_SEX_FIELD)){
+				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_TITLE_FIELD)){
 					OptionGroup optiongroup = new OptionGroup((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
-					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_SEX_CHOICE1);
-					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_SEX_CHOICE2);
+					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_TITLE_CHOICE1);
+					optiongroup.addItem((String) ConstantsEnglish.REGISTRATION_TITLE_CHOICE2);
 					optiongroup.setRequired(true);
 					return optiongroup;
 				}
