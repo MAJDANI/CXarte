@@ -80,7 +80,6 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 */
 	public ComponentContainer selectedViewAccordingToUserRoles() {
 		removeAllComponents();
-		getMyVaadinApplication().getMainWindow().setCaption("Talent Map NovediaGroup");
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Call selectedViewAccordingToUserRoles ()");
 		}
@@ -118,6 +117,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		logOutButton.addStyleName(Reindeer.BUTTON_LINK); //transformation du bouton en lien
 		logOutButton.addListener(this);
 		Colleague currentColleague= colleagueService.getColleague(authentication.getColleagueId());
+		String pageTilte = currentColleague.getFirstName() +" - Talent Map NovediaGroup" ;
+		getMyVaadinApplication().getMainWindow().setCaption(pageTilte); 
 		Label helloLabel = new Label(HELLO_LABEL + currentColleague.getFirstName());
 		helloLabel.addStyleName("helloLabel");
 		informationLayout.addComponent(helloLabel);

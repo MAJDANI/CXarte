@@ -117,28 +117,27 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 	 */
 	public VerticalLayout buildLoginScreenView(){
 		getMyVaadinApplication().getMainWindow().setCaption("Log In Talent Map");
-		VerticalLayout logo = new VerticalLayout();
-		logo.setHeight("80px");
-		logo.setWidth("200px");
-		logo.addStyleName("logo");
+		
 		
 		loginView = new VerticalLayout();
 		loginView.setSpacing(false);
 		loginView.setSizeFull();
 		//loginView.addStyleName(Reindeer.LAYOUT_WHITE);
 		
-		loginView.addComponent(logo);
-		loginView.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
+//		VerticalLayout logo = new VerticalLayout();
+//		logo.setHeight("80px");
+//		logo.setWidth("200px");
+//		logo.addStyleName("logo");
+//		loginView.addComponent(logo);
+//		loginView.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
 		
 		//Panel for login
 		loginPanel = new Panel(LABEL_LOGIN);
 		loginPanel.setCaption(LABEL_LOGIN);
-		loginPanel.addStyleName("loginPanel");
 		loginPanel.setWidth("400px");
 		
 		
 		errorLoginLabel = new Label(ERROR_LOGIN);
-		errorLoginLabel.setCaption(ERROR_LOGIN);
 		errorLoginLabel.addStyleName("errorLoginLabel");
 		errorLoginLabel.setVisible(false);
 		loginPanel.addComponent(errorLoginLabel);

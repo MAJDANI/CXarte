@@ -24,8 +24,10 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Registration Screen
@@ -77,6 +79,9 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	private AuthenticatedScreen authenticatedScreen;
 	
 	
+	public static final String ALREADY_HAVE_AN_ACCOUNT_LABEL = "Already have an account ?";
+	
+	
 	/**
 	 * Default constructor
 	 * @author b.tiomofofou
@@ -105,7 +110,6 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		registrationForm.setRegistrationFormLayout(registrationFormLayout);
 		registrationForm = registrationForm.buildRegistrationFormView();
 		
-		
 		registrationPanel.addComponent(registrationForm);
 		buildButton();
 		
@@ -126,27 +130,36 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	public void buildButton(){
 		
 		this.save.setCaption(ConstantsEnglish.SAVE_BUTTON_NAME);
+		save.addStyleName("logInButton");
 		this.save.addListener(this);
 		
-		this.cancel.setCaption(ConstantsEnglish.CANCEL_BUTTON_NAME);
+		//this.cancel.setCaption(ConstantsEnglish.CANCEL_BUTTON_NAME);
+		this.cancel.setCaption("Log In");
 		this.cancel.addListener(this);
+		cancel.addStyleName(Reindeer.BUTTON_LINK);
+		cancel.addStyleName("signIn");
+		
+		VerticalLayout vLayout = new VerticalLayout();
+		vLayout.setSpacing(true);
+		vLayout.addComponent(save);
 		
 		HorizontalLayout hLayout = new HorizontalLayout();
-		hLayout.setMargin(true);
 		hLayout.setSpacing(true);
-		hLayout.addComponent(save);
+		Label label = new Label(ALREADY_HAVE_AN_ACCOUNT_LABEL);
+		label.addStyleName("haveAccountLabel");
+		hLayout.addComponent(label);
 		hLayout.addComponent(cancel);
-		registrationPanel.addComponent(hLayout);
-		//this.registrationForm.setFooter(hLayout);
+		vLayout.addComponent(hLayout);
+		registrationPanel.addComponent(vLayout);
 	}
 	
 	
 	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		String button = event.getButton().getCaption();
+		Button button = event.getButton();
 		
-		if (button.equalsIgnoreCase(ConstantsEnglish.SAVE_BUTTON_NAME)){
+		if (button.equals(this.save)){
 			//appel du service d'inscription
 			BeanItem<Registration> registrationItem = (BeanItem<Registration>) this.registrationForm.getRegistrationForm().getItemDataSource();
 			Registration registration = registrationItem.getBean();
@@ -171,7 +184,7 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 			}
 		}
 		
-		else if (button.equalsIgnoreCase(ConstantsEnglish.CANCEL_BUTTON_NAME)){
+		else if (button.equals(this.cancel)){
 			myVaadinApplication.getMainWindow().setContent(loginScreen.buildLoginScreenView());
 		}
 	

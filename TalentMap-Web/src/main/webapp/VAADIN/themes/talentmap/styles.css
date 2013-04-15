@@ -11,21 +11,8 @@
 .v-table-body{height:auto!important;}
 .v-table-cell-content{vertical-align:middle!important;}
 
-/*
-.loginView{
-	width: 1280px;
-	height: 625px;
-}
-*/
 
-.loginPanel{
-	margin-left: 100px;
-	margin-top: 0px;
-	/*margin: 0 auto;*/
-}
-
-
-.v-panel-caption-loginPanel{
+.v-panel-caption{
 	color: #393939;
 	font-weight: bold;
 	font-size: 18px;
@@ -85,6 +72,11 @@
 .signIn .v-button-caption {
 	color: #939393;
 	font-size: 14px;
+}
+
+.haveAccountLabel{
+	font-size: 13px;
+	color: #808080;
 }
 
 
