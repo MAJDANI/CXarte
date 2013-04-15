@@ -55,6 +55,7 @@ public class RegistrationForm extends FormLayout {
 	 * @return RegistrationForm object
 	 */
 	public RegistrationForm buildRegistrationFormView(){
+		registrationForm.removeAllProperties();
 		removeAllComponents();
 		buildMain();
 		return this;
