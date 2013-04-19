@@ -75,7 +75,20 @@
 		SELECT * FROM COLLEAGUE colleague
 		WHERE colleague.MANAGER_ID = #id#
 	</statement>
-
+	
+	<statement id="getCmColleaguesByClient" parameterClass="hashmap"
+		resultMap="colleagueResult">
+		SELECT DISTINCT colleague.* FROM COLLEAGUE colleague,MISSION mission
+		WHERE colleague.MANAGER_ID = #managerId# AND mission.COLLEAGUE_ID = colleague.COLLEAGUE_ID
+		AND mission.CLIENT_ID = #clientId#
+	</statement>
+	
+	<statement id="getCmColleaguesByLastName" parameterClass="hashmap"
+		resultMap="colleagueResult">		
+		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#
+	</statement>
+	
 	<statement id="selectMissionsByColleagueId" parameterClass="int"
 		resultMap="select-mission-result">
 		SELECT * FROM MISSION mission, CLIENT client
@@ -110,8 +123,8 @@
 	</select>
 
 	<select id="getAllManagers" resultMap="managerResult">
-		SELECT * FROM COLLEAGUE
-		WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
+		SELECT colleague.* FROM COLLEAGUE colleague,AUTHENTICATION authentication
+		WHERE authentication.COLLEAGUE_ID=colleague.COLLEAGUE_ID AND authentication.ROLE_ID = 2 ORDER BY LAST_NAME
 	</select>
 
 	<select id="getAllColleaguesByLastName" parameterClass="string"

@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -157,6 +158,20 @@ public class ColleagueService implements IColleagueService {
 	 */
 	public List<Colleague> getAllColleaguesByClient(Client client) throws DataAccessException {
 		return ((ColleagueDao) colleagueDao).getAllColleaguesByClient(client);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Colleague> getCmColleaguesByClient(int clientId,int managerId) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByClient(clientId,managerId);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Colleague> getCmColleaguesByLastName(String lastName,int managerId) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByLastName(lastName,managerId);
 	}
 	
 	/**

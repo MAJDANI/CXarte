@@ -24,7 +24,7 @@ public class ConstantsForMenuEnglish {
 			VISUALIZE_MISSIONS_NAME /*, VISUALIZE_EA_NAME */} };
 
 	/**
-	 * for tree in the SerachNavigation
+	 * for tree in the SearchNavigation
 	 */
 	public static final String BY_CLIENT_BUTTON_NAME = "by customer";
 	public static final String BY_NAME_BUTTON_NAME = "by name";
@@ -43,6 +43,7 @@ public class ConstantsForMenuEnglish {
 	public static final String TAB_PROFIL_NAME = "Profile";
 	public static final String TAB_SEARCH_NAME = "search";
 	public static final String TAB_ADMIN_NAME = "Administration";
+	public static final String TAB_CM_NAME = "Menu";
 	
 	/**
 	 * Tree for admin navigation
@@ -54,6 +55,16 @@ public class ConstantsForMenuEnglish {
 			"Menu", ADMIN_VIEW_SKILL_NAME, ADMIN_ADD_SKILL_NAME,
 			ADMIN_DELETE_COLLAB_NAME} };
 	
+	
+	/**
+	 * Tree for cm navigation
+	 */
+	public static final String CM_SEARCH_BY_CLIENT = "By Customer";
+	public static final String CM_SEARCH_BY_SKILL = "By Skill";
+	public static final String CM_SEARCH_BY_NAME = "By Name";
+	public static final Object[][] CM_MENU_NAVIGATION = new Object[][] { new Object[] {
+			"Search", CM_SEARCH_BY_CLIENT, CM_SEARCH_BY_SKILL,
+			CM_SEARCH_BY_NAME} };
 	
 
 //	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";

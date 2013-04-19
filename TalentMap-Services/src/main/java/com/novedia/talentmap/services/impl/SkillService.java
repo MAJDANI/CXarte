@@ -95,6 +95,17 @@ public class SkillService implements ISkillService {
 			throws DataAccessException {
 		return this.skillDao.getAllColleagueIdByToolId(toolId);
 	}
+	
+	/**
+	 * @return List<Integer>.
+	 * @param toolId , managerId
+	 * @throws DataAccessException
+	 */
+	@Override
+	public List<Integer> getCmColleagueIdByToolId(Integer toolId,Integer managerId)
+			throws DataAccessException {
+		return this.skillDao.getCmColleagueIdByToolId(toolId,managerId);
+	}
 
 	/**
 	 * @return List<Integer>.
@@ -105,6 +116,17 @@ public class SkillService implements ISkillService {
 	public List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId)
 			throws DataAccessException {
 		return this.skillDao.getAllColleagueIdByListToolId(listToolId);
+	}
+	
+	/**
+	 * @return List<Integer>.
+	 * @param listToolId
+	 * @throws DataAccessException
+	 */
+	@Override
+	public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,int managerId)
+			throws DataAccessException {
+		return this.skillDao.getCmColleagueIdByListToolId(listToolId,managerId);
 	}
 
 	/**

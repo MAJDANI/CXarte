@@ -21,6 +21,11 @@ private List<Integer> listTools;
  * get tool by integer.
  * @return int
  */
+/**
+ * colleagueId.
+ */
+private Integer managerId;
+
 public Integer getToolId() {
 return toolId;
 }
@@ -56,5 +61,19 @@ public List<Integer> getListTools() {
 public void setListTools(List<Integer> listTools) {
 	this.listTools = listTools;
 }
+/**
+ * @return the manager id.
+ */
+public Integer getManagerId() {
+	return managerId;
+}
+/**
+ * set a manager id.
+ * @param managerId
+ */
+public void setManagerId(Integer managerId) {
+	this.managerId = managerId;
+}
+
 
 }

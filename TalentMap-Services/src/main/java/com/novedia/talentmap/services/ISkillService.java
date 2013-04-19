@@ -1,5 +1,6 @@
 package com.novedia.talentmap.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.novedia.talentmap.model.dto.CategoryMapDTO;
@@ -33,12 +34,29 @@ Skill getSkillByToolId(int collaboratorID, int toolId);
 List<Integer> getAllColleagueIdByToolId(Integer toolId);
 
 /**
+ * Select CM colleague's id who have skill with the tool id.
+ * @class ISkillService.java
+ * @param listToolId a tool Id , managerId
+ * @return List<Integer> a list of colleague's id
+ */
+List<Integer> getCmColleagueIdByToolId(Integer toolId,Integer managerId);
+
+/**
  * Select all colleague's id who have skill with one ore more tool id of the list.
  * @class ISkillService.java
  * @param listToolId a list of toolId
  * @return List<Integer> a list of colleague's id
  */
 List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId);
+
+/**
+ * Select all CM colleague's id who have skill with one ore more tool id of the list.
+ * @class ISkillService.java
+ * @param listToolId a list of toolId
+ * @return List<Integer> a list of colleague's id
+ */
+List<Integer> getCmColleagueIdByListToolId(
+		List<Integer> listToolIdForCategory,int managerId);
 
 /**
  * Select all Collaborator Skills By id (new version).
@@ -103,5 +121,7 @@ void saveSkill(Skill skill);
  * @param name a tool name
  * @return a Tool by name
  */
- Tool getToolByName(String name);	
+ Tool getToolByName(String name);
+
+	
 }

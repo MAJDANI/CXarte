@@ -148,6 +148,24 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	public List<Integer> getAllColleagueIdByToolId(Integer toolId) throws DataAccessException {
 		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_TOOL_ID, toolId);
 	}
+	
+	/**
+	 * Select CM Collaborators Id By a toolId.
+	 * 
+	 * @param toolId
+	 *            : a tool Id
+	 *        managerId
+	 *        	  : a manager Id
+	 * @return all collaborator's id who has a competence on the tool specified
+	 * @author j.maquin
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Integer> getCmColleagueIdByToolId(Integer toolId,Integer managerId) throws DataAccessException {
+		HashMap parameters = new HashMap();
+		parameters.put("toolId", toolId);
+		parameters.put("managerId", managerId);
+		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_CM_COLLEAGUE_ID_BY_TOOL_ID, parameters);
+	}
 
 	/**
 	 * Select all Collaborators Id By a list of toolId.
@@ -163,6 +181,23 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 		skillParameter.setListTools(listToolId);
 		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID, skillParameter);
 	}
+	
+	/**
+	 * Select CM Collaborators Id By a list of toolId.
+	 * 
+	 * @param listToolId
+	 *            : a list of toolId
+	 * @return CM collaborator's id who has a competence on one or more of the tools specified
+	 * @author j.maquin
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,int managerId) throws DataAccessException {
+		SkillParameter skillParameter = new SkillParameter();
+		skillParameter.setListTools(listToolId);
+		skillParameter.setManagerId(managerId);
+		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_CM_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID, skillParameter);
+	}
+
 
 	/**
 	 * Set the tool DAO

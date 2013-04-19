@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -108,6 +109,21 @@ List<Colleague> getAllColleaguesByLastName(String lastName);
  * @return List<Colleague>
  */
 List<Colleague> getAllColleaguesByClient(Client client);
+
+/**
+ * Get Cm Colleagues by client name
+ * @param clientName
+ * @return List<Colleague>
+ */
+List<Colleague> getCmColleaguesByClient(int clientId,int managerId);
+
+/**
+ * Get Cm Colleagues by last name
+ * @param lastName
+ * @return List<Colleague>
+ */
+List<Colleague> getCmColleaguesByLastName(String lastName,int managerId);
+
 
 /**
  * Get all Colleagues by toolId.

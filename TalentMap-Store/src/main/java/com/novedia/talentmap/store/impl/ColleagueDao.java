@@ -1,5 +1,6 @@
 package com.novedia.talentmap.store.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -106,6 +108,21 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 	public List<Colleague> getAllColleaguesByClient(Client client) throws DataAccessException {
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_CLIENT, client);
 	}
+	
+	public List<Colleague> getCmColleaguesByClient(int clientId,int managerId) throws DataAccessException {
+		HashMap parameters = new HashMap();
+		parameters.put("clientId", clientId);
+		parameters.put("managerId", managerId);
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CM_COLLEAGUES_BY_CLIENT, parameters);
+	}
+	
+	public List<Colleague> getCmColleaguesByLastName(String lastName,int managerId) throws DataAccessException {
+		HashMap parameters = new HashMap();
+		parameters.put("lastName", lastName);
+		parameters.put("managerId", managerId);
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CM_COLLEAGUES_BY_LASTNAME, parameters);
+	}
+	
 	
 	public List<Colleague> getAllColleaguesByListToolId(Map ToolIdMap) throws DataAccessException {
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LIST_TOOL_ID, ToolIdMap);

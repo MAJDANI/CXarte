@@ -11,7 +11,7 @@ public class AdminView extends VerticalLayout {
 	private Authentication authentication; 
 
 	/**
-	 * Deafault constructor
+	 * Default constructor
 	 */
 	public AdminView(){
 		super();

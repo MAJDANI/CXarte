@@ -52,6 +52,16 @@ public static final String GET_ALL_COLLEAGUES_BY_LASTNAME="colleague.getAllColle
 public static final String GET_ALL_COLLEAGUES_BY_CLIENT="colleague.getAllColleaguesByClient";
 
 /**
+ * Constant request to get CM colleagues by client name.
+ */
+public static final String GET_CM_COLLEAGUES_BY_CLIENT="colleague.getCmColleaguesByClient";
+
+/**
+ * Constant request to get CM colleagues by last name.
+ */
+public static final String GET_CM_COLLEAGUES_BY_LASTNAME="colleague.getCmColleaguesByLastName";
+
+/**
  * Constant request to get colleague by manager id
  */
 public static final String GET_ALL_COLLABORATOR_BY_MANAGER_ID = "colleague.getAllCollaboratorsByManagerId";
@@ -114,7 +124,6 @@ public static final String  SAVE_CATEGORY = "category.save";
  * Constant request to delete category.
  */
 public static final String DELETE_CATEGORY = "category.delete";
-
 
 // CONCEPT REQUEST
 /**
@@ -297,7 +306,23 @@ public static final String GET_ALL_COLLEAGUE_ID_BY_TOOL_ID = "skill.getAllCollea
 /**
  * Constant request to get all collaborators by a list of tool.
  */
+public static final String GET_CM_COLLEAGUE_ID_BY_TOOL_ID = "skill.getCmColleagueIdByToolId";
+
+/**
+ * Constant request to get all collaborators by a list of tool.
+ */
 public static final String GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID = "skill.getAllColleagueIdByListToolId";
+
+/**
+ * Constant request to get CM collaborators by a list of tool.
+ */
+public static final String GET_CM_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID = "skill.getCmColleagueIdByListToolId";
+
+/**
+ * This constant is used to retrieve all collaborator by tool.
+ */
+public static final String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
+
 
 // TOOL REQUESTS
 

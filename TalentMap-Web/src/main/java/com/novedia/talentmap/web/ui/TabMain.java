@@ -4,6 +4,7 @@ import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.cm.CmView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.role.CmContentLayout;
 import com.novedia.talentmap.web.ui.role.RhContentLayout;
@@ -28,8 +29,9 @@ public class TabMain extends TabSheet {
 	private ProfileView profileView;
 	private SearchView searchView;
 	private AdminView adminView;
+	private CmView cmView;
+
 	private RhContentLayout rhContentLayout;
-	private CmContentLayout cmContentLayout; 
 	
 	private Authentication authentication;
 	
@@ -62,8 +64,9 @@ public class TabMain extends TabSheet {
 			searchView = searchView.buildSearchView();
 			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 		} else if (role.equals(Role.CM)) {  //CM
-			cmContentLayout = cmContentLayout.init();
-			addTab(cmContentLayout,"cm");
+			cmView.setAuthentication(getAuthentication());
+			cmView = cmView.buildCmView();
+			addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
 		} else if (role.equals(Role.RH)) {  //RH
 			rhContentLayout = rhContentLayout.init();
 			addTab(rhContentLayout,"rh");
@@ -115,7 +118,6 @@ public class TabMain extends TabSheet {
 	}
 
 	
-
 	/**
 	 * @return the searchView
 	 */
@@ -131,13 +133,6 @@ public class TabMain extends TabSheet {
 		this.rhContentLayout = rhContentLayout;
 	}
 
-	public CmContentLayout getCmContentLayout() {
-		return cmContentLayout;
-	}
-
-	public void setCmContentLayout(CmContentLayout cmContentLayout) {
-		this.cmContentLayout = cmContentLayout;
-	}
 
 	public ProfileView getProfileView() {
 		return profileView;
@@ -147,6 +142,13 @@ public class TabMain extends TabSheet {
 		this.profileView = profileView;
 	}
 	
+	public CmView getCmView() {
+		return cmView;
+	}
+
+	public void setCmView(CmView cmView) {
+		this.cmView = cmView;
+	}
 	
 	
 	
