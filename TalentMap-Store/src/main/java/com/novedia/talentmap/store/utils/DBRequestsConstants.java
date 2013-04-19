@@ -87,12 +87,8 @@ public static final String GET_ALL_BUSINESS_ENGINEER = "businessEngineer.getAll"
 /**
  * Constant request to get all Business Engineer
  */
-public static final String GET_BUSINESS_ENGINEER_BY_ID = "businessEngineer.get";
+//public static final String GET_BUSINESS_ENGINEER_BY_ID = "businessEngineer.get";
 
-/**
- * Constant request to get a category.
- */
-public static final String GET_CATEGORY = "category.get";
 
 /**
  * This constant is used to retrieve all category.
@@ -118,11 +114,6 @@ public static final String  SAVE_CATEGORY = "category.save";
  * Constant request to delete category.
  */
 public static final String DELETE_CATEGORY = "category.delete";
-
-/**
- * This constant is used to retrieve a category.
- */
-public static final String GET_CATEGORY_BY_NAME = "category.getByName";
 
 
 // CONCEPT REQUEST
@@ -261,29 +252,9 @@ public static final String GET_ALL_PROFILE = "profile.getAll";
 public static final String GET_PROFILE = "profile.get";
 
 /**
- * Constant request to delete a profile.
- */
-public static final String DELETE_PROFILE = "profile.delete";
-
-/**
- * Constant request to update a profile.
- */
-public static final  String SAVE_PROFILE = "profile.save";
-
-/**
- * Constant request to add a profile.
- */
-public static final String ADD_PROFILE = "profile.add";
-
-/**
  * This constant is used to retrieve a profile by name.
  */
 public static final String GET_PROFILE_BY_NAME = "profile.getByName";
-
-/**
- * This constant is used to retrieve a profile by type.
- */
-public static final String GET_PROFILE_BY_TYPE = "profile.getByType";
 
 
 // SKILL REQUEST
@@ -327,12 +298,6 @@ public static final String GET_ALL_COLLEAGUE_ID_BY_TOOL_ID = "skill.getAllCollea
  * Constant request to get all collaborators by a list of tool.
  */
 public static final String GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID = "skill.getAllColleagueIdByListToolId";
-
-/**
- * This constant is used to retrieve all collaborator by tool.
- */
-public static final String GET_ALL_COLLABORATORID_BY_TOOL ="skill.getAllCollaboratorIdByToolIdAndCollabList";
-
 
 // TOOL REQUESTS
 
@@ -423,13 +388,9 @@ public static final String GET_ALL_AUTHENTIFICATION = "authentication.getAll";
 
 public static String SAVE_AUTHENTIFICATION = "authentication.save";
 
-public static final String ADD_USER_AUTHENTIFICATION = "authentication.addUser";
-
 public static final String CHECK_AUTHENTIFICATION = "authentication.check";
 
 public static final String GET_COLLAB_BY_LOGIN = "authentication.getCollabByLogin";
-
-public static final String GET_BY_ID_AUTHENTIFICATION = "authentication.get";
 
 public static final String ADD_USER_FROM_REGISTRATION = "authentication.addUserFromRegistration";
 

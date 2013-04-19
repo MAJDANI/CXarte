@@ -124,7 +124,8 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 	 */
 	@Override
 	public Tool getToolByName(final String name) throws DataAccessException {
-		return toolDao.getByName(name);
+//		return toolDao.getByName(name);
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -161,42 +162,6 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,	IDao<
 		SkillParameter skillParameter = new SkillParameter();
 		skillParameter.setListTools(listToolId);
 		return this.getSqlMapClientTemplate().queryForList(	DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_LIST_OF_TOOL_ID, skillParameter);
-	}
-
-	/**
-	 * Select all collaborator's Id by a toolId and a list of collaboratorId.
-	 * 
-	 * @author v.guillemain
-	 * @class ISkillDao.java
-	 * @param toolId
-	 *            : a toolId
-	 * @param listCollaboratorId
-	 *            of collaborator's Id
-	 * @return all collaborator's id who has the competence (toolId) and who is
-	 *         in the list of collaborator's id
-	 * @throws Exception
-	 */
-	// TODO : virer les sysout
-	@SuppressWarnings("unchecked")
-	public List<Integer> getAllCollaboratorIdByToolIdAndCollabList(int toolId, List<Integer> listCollaboratorId) throws DataAccessException {
-		System.out.println("SDao +++++ 1 +++++  : entrée");
-		System.out.println("SDao +++++ 1.1 +++++  : toolId=" + toolId);
-		System.out.println("SDao +++++ 1.2 +++++  : listCollaboratorId= "
-				+ listCollaboratorId);
-
-		SkillParameter skillParameter = new SkillParameter();
-		skillParameter.setToolId(toolId);
-		skillParameter.setListCollaborators(listCollaboratorId);
-
-		List<Integer> listResult = this.getSqlMapClientTemplate().queryForList(
-				DBRequestsConstants.GET_ALL_COLLABORATORID_BY_TOOL,
-				skillParameter);
-
-		for (Integer id : listResult) {
-			System.out.println("SDao +++++ 2 +++++ id = " + id);
-		}
-
-		return listResult;
 	}
 
 	/**

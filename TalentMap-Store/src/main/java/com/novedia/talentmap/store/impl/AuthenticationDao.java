@@ -49,15 +49,6 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 	}
 	
 	/**
-	 * Add login/password
-	 */
-	public int addUser(CredentialToken element) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(
-				DBRequestsConstants.ADD_USER_AUTHENTIFICATION, element);
-	}
-	
-
-	/**
 	 * Delete login/password
 	 */
 	@Override
@@ -97,7 +88,7 @@ public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Au
 
 	@Override
 	public Authentication get(Integer id) throws DataAccessException {
-		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BY_ID_AUTHENTIFICATION, id);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

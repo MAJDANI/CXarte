@@ -32,7 +32,8 @@ public class BusinessEngineerDao extends SqlMapClientDaoSupport implements
 	
 	@Override
 	public BusinessEngineer get(Integer id) throws DataAccessException {
-		return (BusinessEngineer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BUSINESS_ENGINEER_BY_ID);
+//		return (BusinessEngineer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BUSINESS_ENGINEER_BY_ID);
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override

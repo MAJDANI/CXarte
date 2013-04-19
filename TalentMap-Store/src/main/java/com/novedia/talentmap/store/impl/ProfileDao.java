@@ -50,7 +50,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int save(final Profile profile) throws DataAccessException {
-		return this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_PROFILE, profile);
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int add(final Profile profile) throws DataAccessException {
-		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_PROFILE, profile);
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	 */
 	@Override
 	public int delete(final Profile profile) throws DataAccessException {
-		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_PROFILE, profile);
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -75,18 +75,6 @@ public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> 
 	@Override
 	public Profile check(final String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * Get One Profile By Type.
-	 * 
-	 * @class IProfileDao.java
-	 * @param type
-	 * @return profile
-	 * @throws DataAccessException
-	 */
-	Profile getByType(final String type) throws DataAccessException {
-		return (Profile) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_PROFILE_BY_TYPE, type);
 	}
 
 	/**

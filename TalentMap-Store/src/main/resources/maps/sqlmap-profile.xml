@@ -20,8 +20,4 @@
     	SELECT * FROM PROFILE
     </select>
     
-    <select id="getByType" resultMap="profileResult" parameterClass="String">
-    	SELECT * FROM PROFILE WHERE PROFILE_TYPE = #type#
-    </select>					 
-
 </sqlMap>

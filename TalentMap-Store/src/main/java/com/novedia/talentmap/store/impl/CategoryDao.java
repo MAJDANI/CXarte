@@ -43,7 +43,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	 */
 	@Override
 	public Category get(Integer id) throws DataAccessException {
-		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY, id);
+		throw new UnsupportedOperationException();
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category
 	 */
 	@Override
 	public Category getByName(String name) throws DataAccessException {
-		return (Category) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_CATEGORY_BY_NAME, name);
+		throw new UnsupportedOperationException();
 	}
 
 }

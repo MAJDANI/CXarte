@@ -18,8 +18,5 @@
 		SELECT * FROM VSKILL_COLLAB WHERE COLLEAGUE_ID = #collab_id#
 	</select>
 	
-	<select id="get" resultMap="vskillCollabResult" parameterClass="Integer">
-		SELECT * FROM VSKILL_COLLAB WHERE COLLEAGUE_ID = #id#
-	</select>		 
 
 </sqlMap>

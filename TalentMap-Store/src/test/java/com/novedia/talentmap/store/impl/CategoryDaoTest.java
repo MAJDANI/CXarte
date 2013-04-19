@@ -40,16 +40,6 @@ public class CategoryDaoTest {
 	}
 	
 	/**
-	 * Test get
-	 */
-	@Test
-	public void testGetById () {
-		Category category = categoryDao.get(1);
-		ReflectionAssert.assertPropertyLenientEquals("id", 1 ,category);
-		ReflectionAssert.assertPropertyLenientEquals("name", "CATEGORY1" ,category);
-	}
-	
-	/**
 	 * Test get all
 	 */
 	@Test

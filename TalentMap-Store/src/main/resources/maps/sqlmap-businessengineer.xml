@@ -14,9 +14,10 @@
         <result property="businessUnit"    column="BUSINESS_UNIT"/>	   
     </resultMap>
 
-    <select id="get" parameterClass="Integer" resultMap="businessEngineerResult">
-        SELECT * FROM  BUSINESS_ENGINEER WHERE B_ENGINEER_ID = #id#
-    </select>
+<!-- 	Pas Utilisé -->
+<!--     <select id="get" parameterClass="Integer" resultMap="businessEngineerResult"> -->
+<!--         SELECT * FROM  BUSINESS_ENGINEER WHERE B_ENGINEER_ID = #id# -->
+<!--     </select> -->
     
     <select id="getAll" resultMap="businessEngineerResult">
     	SELECT * FROM BUSINESS_ENGINEER

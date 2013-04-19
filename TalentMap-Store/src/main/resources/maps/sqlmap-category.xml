@@ -16,9 +16,10 @@
 		SELECT * FROM CATEGORY WHERE CATEGORY_ID = #id#
 	</select>
 	
-	<select id="getByName" resultMap="categoryResult" parameterClass="String">
-		SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name#
-	</select>
+<!-- 	Pas Utilisé -->
+<!-- 	<select id="getByName" resultMap="categoryResult" parameterClass="String"> -->
+<!-- 		SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name# -->
+<!-- 	</select> -->
 	
     <select id="getAll" resultMap="categoryResult">
     	SELECT DISTINCT * FROM CATEGORY
