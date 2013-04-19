@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.ISearchContent;
@@ -17,6 +18,9 @@ public class SearchContent extends VerticalLayout {
 	 * 
 	 */
 	private static final long serialVersionUID = -3434654428791584784L;
+	
+	private Authentication authentication;
+	
 	/**
 	 * Vaadin UI
 	 */
@@ -53,6 +57,7 @@ public class SearchContent extends VerticalLayout {
 	
 	public SearchContent buildSearchContentView(){
 		removeAllComponents();
+		searchTarget.setAuthentication(getAuthentication());
 		searchTarget = searchTarget.buildSearchTargetView();
 		searchResults = searchResults.buildSearchResultsView();
 		buildObservators();
@@ -319,6 +324,16 @@ public class SearchContent extends VerticalLayout {
 
 	public void setSearchResultsLabelNoResult(Label searchResultsLabelNoResult) {
 		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
+	}
+
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
 	
 	

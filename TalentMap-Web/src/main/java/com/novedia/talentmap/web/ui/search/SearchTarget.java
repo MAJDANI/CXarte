@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -30,13 +32,15 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
-public class SearchTarget extends VerticalLayout implements ClickListener,TextChangeListener,
-		IObservable {
+public class SearchTarget extends VerticalLayout implements ClickListener,
+		TextChangeListener, IObservable {
 
 	/**
 	 * Utils Observator
 	 */
 	private ISearchContent obs;
+
+	private Authentication authentication;
 
 	/**
 	 * TalentMap Services
@@ -70,18 +74,17 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public SearchTarget() {
 		super();
 	}
-	
+
 	/**
-	 * Build SearchTarget view 
+	 * Build SearchTarget view
+	 * 
 	 * @return
 	 */
-	public SearchTarget buildSearchTargetView(){
+	public SearchTarget buildSearchTargetView() {
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
-	
 
 	/**
 	 * The main builder
@@ -94,11 +97,11 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		setSpacing(true);
 
 		try {
-		
+
 			buildField();
-		
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -107,42 +110,41 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * The field builder
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 * 
 	 * @class SearchTarget.java
 	 */
 	public void buildField() throws Exception {
 
-		//Build the Client Panel
+		// Build the Client Panel
 		List<Client> listClient = this.clientService.getAllClients();
 		Collections.sort(listClient);
-			
-		
-		BeanItemContainer<Client> container =
-		        new BeanItemContainer<Client>(Client.class);
-	
-		for(Client client : listClient){
+
+		BeanItemContainer<Client> container = new BeanItemContainer<Client>(
+				Client.class);
+
+		for (Client client : listClient) {
 			container.addItem(client);
 		}
-		
-		this.clientNameSelect = new Select("Customer : ",container); 
-		this.clientNameSelect.setItemCaptionMode(
-	            Select.ITEM_CAPTION_MODE_PROPERTY);
+
+		this.clientNameSelect = new Select("Customer : ", container);
+		this.clientNameSelect
+				.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		this.clientNameSelect.setItemCaptionPropertyId("name");
 		this.clientNameSelect.setNullSelectionAllowed(false);
 		this.clientNameSelect.setImmediate(true);
 
-		
 		this.searchByClientPanel.addComponent(clientNameSelect);
-		
-		//Build the Name Panel
+
+		// Build the Name Panel
 		this.fieldName.setCaption("Name of collaborator: ");
 		this.fieldName.addListener(this);
 		this.searchByNamePanel.addComponent(this.fieldName);
-		
-		//Build the Skills Panel
+
+		// Build the Skills Panel
 		treeSkills = buildTreeSkills();
-		
+
 		this.searchBySkillsPanel.addComponent(treeSkills);
 		addComponent(this.searchByClientPanel);
 		addComponent(this.searchByNamePanel);
@@ -153,64 +155,66 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Construit l'arbre des compétences
+	 * 
 	 * @return
 	 */
 	public Tree buildTreeSkills() {
 		Tree treeSkills = new Tree("Skills");
 		treeSkills.setMultiSelect(true);
-		
+
 		List<VSkill> listVSkill = this.skillService.getAllVSkillOrdered();
 		Integer currentCategoryId;
 		Integer currentConceptId;
 		Integer lastCategoryId = -1;
 		Integer lastConceptId = -1;
 
-		for(VSkill vSkill : listVSkill){
-			
+		for (VSkill vSkill : listVSkill) {
+
 			currentCategoryId = vSkill.getCategoryId();
 			currentConceptId = vSkill.getConceptId();
 			Category categorie = Category.builder().build();
 			Concept concept = Concept.builder().build();
 			Tool tool = Tool.builder().build();
-			
-			//Si on a une nouvelle catégorie à traiter
-			if(currentCategoryId != lastCategoryId) {
-				//On ajoute la categorie
+
+			// Si on a une nouvelle catégorie à traiter
+			if (currentCategoryId != lastCategoryId) {
+				// On ajoute la categorie
 				String catName = vSkill.getCategoryName();
-				categorie = Category.builder().id(currentCategoryId).name(catName).build();
+				categorie = Category.builder().id(currentCategoryId)
+						.name(catName).build();
 				treeSkills.addItem(categorie);
 				treeSkills.setItemCaption(categorie, catName);
 				lastCategoryId = currentCategoryId;
-			}	
-			
-			//Si on a un nouveau concept à traiter
-			if(currentConceptId != lastConceptId) {
+			}
+
+			// Si on a un nouveau concept à traiter
+			if (currentConceptId != lastConceptId) {
 				String conceptName = vSkill.getConceptName();
-				concept = Concept.builder().id(currentConceptId).name(conceptName).build();
+				concept = Concept.builder().id(currentConceptId)
+						.name(conceptName).build();
 				// On ajoute le concept en tant que nouvel Item.
 				treeSkills.addItem(concept);
 				treeSkills.setItemCaption(concept, conceptName);
 
-	            // On le positionne comme enfant de la categorie
+				// On le positionne comme enfant de la categorie
 				treeSkills.setParent(concept, categorie);
-	            lastConceptId = currentConceptId;
-			} 
+				lastConceptId = currentConceptId;
+			}
 			String toolName = vSkill.getToolName();
 			tool = Tool.builder().id(vSkill.getToolId()).name(toolName).build();
 			// On ajoute le tool en tant que nouvel Item.
 			treeSkills.addItem(tool);
 			treeSkills.setItemCaption(tool, toolName);
-            // On le positionne comme enfant de la categorie
+			// On le positionne comme enfant de la categorie
 			treeSkills.setParent(tool, concept);
-				
-            // Make the moons look like leaves.
+
+			// Make the moons look like leaves.
 			treeSkills.setChildrenAllowed(tool, false);
-			
+
 		}
 		return treeSkills;
 	}
-	
-	
+
 	/**
 	 * Default init for the fields
 	 * 
@@ -276,84 +280,114 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 		Button button = event.getButton();
 		if (button == this.search) {
 
-			//---------------------------------------------------------
-			//The Panel "Search by customer" is visible
-			//---------------------------------------------------------
+			// ---------------------------------------------------------
+			// The Panel "Search by customer" is visible
+			// ---------------------------------------------------------
 			if (this.searchByClientPanel.isVisible()) {
 				Client client = (Client) this.clientNameSelect.getValue();
-				if(client != null){
+				if (client != null) {
 					try {
-						this.listCollab = this.collabService.getAllColleaguesByClient(client);
+						if (authentication != null) {
+							if (Authorization.Role.CM.getId().equals(
+									this.authentication.getAuthorization()
+											.getRoleId())) {
+								this.listCollab = this.collabService
+										.getCmColleaguesByClient(
+												client.getId(),
+												authentication.getColleagueId());
+							}
+						} else {
+							this.listCollab = this.collabService
+									.getAllColleaguesByClient(client);
+						}
 						updateObservateur();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				} else {
-					getWindow().showNotification(ConstantsEnglish.NO_CUSTUMER_SELECT_MSG, Notification.TYPE_WARNING_MESSAGE);
+					getWindow().showNotification(
+							ConstantsEnglish.NO_CUSTUMER_SELECT_MSG,
+							Notification.TYPE_WARNING_MESSAGE);
 				}
-					
-				
+
 			}
 
-			//---------------------------------------------------------
-			//The Panel "Search by name" is visible
-			//---------------------------------------------------------
+			// ---------------------------------------------------------
+			// The Panel "Search by name" is visible
+			// ---------------------------------------------------------
 			if (this.searchByNamePanel.isVisible()) {
 				String collabName = (String) this.fieldName.getValue();
 				try {
-					this.listCollab = this.collabService.getAllColleaguesByLastName(collabName);
+					if (authentication != null) {
+						if (Authorization.Role.CM.getId().equals(
+								this.authentication.getAuthorization()
+										.getRoleId())) {
+							this.listCollab = this.collabService
+									.getCmColleaguesByLastName(collabName,
+											authentication.getColleagueId());
+						}
+					} else {
+						this.listCollab = this.collabService
+								.getAllColleaguesByLastName(collabName);
+					}
 					updateObservateur();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			
-			//---------------------------------------------------------
-			//The Panel "Search by skills" is visible
-			//---------------------------------------------------------
-			if (this.searchBySkillsPanel.isVisible()) {
 
-				//Get all collaborators who has all skills requested
-				this.listCollab =  getListColleagueForTooIdChecked();
+			// ---------------------------------------------------------
+			// The Panel "Search by skills" is visible
+			// ---------------------------------------------------------
+			if (this.searchBySkillsPanel.isVisible()) {
+				// Get all collaborators who has all skills requested
+				this.listCollab = getListColleagueForTooIdChecked();
 				updateObservateur();
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
 	@Override
 	public void textChange(TextChangeEvent event) {
-		
+
 		String valueField = event.getText();
-		
-		if(valueField.length() >= 3){
-			
-			if(this.searchByClientPanel.isVisible()){
-				
-				
+
+		if (valueField.length() >= 3) {
+
+			if (this.searchByClientPanel.isVisible()) {
+
 			}
-			
-			if(this.searchByNamePanel.isVisible()){
-				
+
+			if (this.searchByNamePanel.isVisible()) {
+
 				try {
-					
-					this.listCollab = this.collabService.getAllColleaguesByLastName(valueField);
-					
+					if (authentication != null) {
+						if (Authorization.Role.CM.getId().equals(
+								this.authentication.getAuthorization()
+										.getRoleId())) {
+							this.listCollab = this.collabService
+									.getCmColleaguesByLastName(valueField,
+											authentication.getColleagueId());
+						}
+					} else {
+						this.listCollab = this.collabService
+								.getAllColleaguesByLastName(valueField);
+					}
 					updateObservateur();
-					
+
 				} catch (Exception e) {
-					
+
 					e.printStackTrace();
 				}
-				
-				
+
 			}
-			
+
 		}
 	}
-	
+
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
 		if (cl == ISearchContent.class) {
@@ -370,112 +404,170 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void delObservateur() {
 		this.obs = null;
 	}
-	
-	
+
 	/**
-	 * Renvoie la liste des Colleagues correspondant aux outils cochés dans le Panel de checherche par Compétence
-	 * @return List<Colleague> la liste des colleagues. Elle peut être vide si l'utilisateur n'a rien coché
-	 * (pa de requête effectuée) ou si la sélection d'outils ne renvoie pas de résultat
+	 * Renvoie la liste des Colleagues correspondant aux outils cochés dans le
+	 * Panel de checherche par Compétence
+	 * 
+	 * @return List<Colleague> la liste des colleagues. Elle peut être vide si
+	 *         l'utilisateur n'a rien coché (pa de requête effectuée) ou si la
+	 *         sélection d'outils ne renvoie pas de résultat
 	 */
 	public List<Colleague> getListColleagueForTooIdChecked() {
 		List<Colleague> listColleague = new ArrayList<Colleague>();
 		Boolean atLeastOneIsSelected = false;
 		List<Integer> listColleagueId = new ArrayList<Integer>();
 
-		atLeastOneIsSelected= parseList(listColleagueId);
-		
+		atLeastOneIsSelected = parseList(listColleagueId);
+
 		if (!atLeastOneIsSelected) {
-			getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_PLEASE_SELECT, Notification.TYPE_WARNING_MESSAGE);
+			getWindow().showNotification(
+					ConstantsEnglish.SEARCH_SKILLS_MSG_PLEASE_SELECT,
+					Notification.TYPE_WARNING_MESSAGE);
 		} else {
-			//On charge les collaborateurs correspondant à notre liste définitive de colleagueId
-			if(listColleagueId.isEmpty()) {
-				getWindow().showNotification(ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND, Notification.TYPE_WARNING_MESSAGE);
+			// On charge les collaborateurs correspondant à notre liste
+			// définitive de colleagueId
+			if (listColleagueId.isEmpty()) {
+				getWindow().showNotification(
+						ConstantsEnglish.SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND,
+						Notification.TYPE_WARNING_MESSAGE);
 			} else {
-				listColleague = this.collabService.getAllColleagueByColleagueIdList(listColleagueId);
+				listColleague = this.collabService
+						.getAllColleagueByColleagueIdList(listColleagueId);
 			}
 		}
 		return listColleague;
 	}
 
 	/**
-	 * Renvoie une liste d'Id de colleague remplie ou vide. Cette liste est construite en cherchant en base
-	 * les colleague qui ont une compétence correspondant à la sélection faite dans l'arbre de compétences.
-	 * @param atLeastOneIsSelected : permet à l'appelant de savoir si au moins un élément de l'arbre des
-	 * compétences a été sélectionné
+	 * Renvoie une liste d'Id de colleague remplie ou vide. Cette liste est
+	 * construite en cherchant en base les colleague qui ont une compétence
+	 * correspondant à la sélection faite dans l'arbre de compétences.
+	 * 
+	 * @param atLeastOneIsSelected
+	 *            : permet à l'appelant de savoir si au moins un élément de
+	 *            l'arbre des compétences a été sélectionné
 	 * @return la liste des Id colleague trouvés
 	 */
 	public Boolean parseList(List<Integer> listColleagueId) {
 		Boolean atLeastOneIsSelected = false;
 		List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
-		Collection<Object> lesItemId =(Collection<Object>)this.treeSkills.getContainerDataSource().getItemIds();
-		
-		Boucle: for( Object item : lesItemId ) {
-			
-			if(this.treeSkills.isSelected(item)) {
+		Collection<Object> lesItemId = (Collection<Object>) this.treeSkills
+				.getContainerDataSource().getItemIds();
+
+		Boucle: for (Object item : lesItemId) {
+
+			if (this.treeSkills.isSelected(item)) {
 				atLeastOneIsSelected = true;
-				if (item  instanceof Category) {
-					//On veut des comptétences sur une catégorie entière
-					//On va collecter tous les outils de la catégorie
-					//et identifier les id collaborateur qui ont une compétence sur
-					//au moins un de ces outils
-					Collection lesConceptsFils = this.treeSkills.getChildren(item);
-					
+				if (item instanceof Category) {
+					// On veut des comptétences sur une catégorie entière
+					// On va collecter tous les outils de la catégorie
+					// et identifier les id collaborateur qui ont une compétence
+					// sur
+					// au moins un de ces outils
+					Collection lesConceptsFils = this.treeSkills
+							.getChildren(item);
+
 					List<Integer> listToolIdForCategory = new ArrayList<Integer>();
-					
-					for( Object concepFils : lesConceptsFils ) {
-						Collection lesToolsPetitsFils = this.treeSkills.getChildren(concepFils);
-						for(Object toolPetitFils : lesToolsPetitsFils ) {
-							Tool tool = (Tool)toolPetitFils;
+
+					for (Object concepFils : lesConceptsFils) {
+						Collection lesToolsPetitsFils = this.treeSkills
+								.getChildren(concepFils);
+						for (Object toolPetitFils : lesToolsPetitsFils) {
+							Tool tool = (Tool) toolPetitFils;
 							listToolIdForCategory.add(tool.getId());
 						}
 					}
-					//Récupérer les id collab ayant au moins un tool de la catégorie
-					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByListToolId(listToolIdForCategory));
-					//Si notre liste résultat listColleagueId contenait déjà des id collab, on ne garde que les
-					//id collab en commun dans les 2 listes
-					//sinon, on ajoute simplement les éléments de listColleagueIdTemp à la liste résultat
-					if(!listColleagueId.isEmpty()) {
+					// Récupérer les id collab ayant au moins un tool de
+					// la
+					// catégorie
+					if (authentication != null) {
+						if (Authorization.Role.CM.getId().equals(
+								this.authentication.getAuthorization()
+										.getRoleId())) {
+							listColleagueIdTemp
+									.addAll(this.skillService
+											.getCmColleagueIdByListToolId(listToolIdForCategory,authentication.getColleagueId()));
+						}
+					} else {
+						// Récupérer les id collab ayant au moins un tool de la
+						// catégorie
+						listColleagueIdTemp
+								.addAll(this.skillService
+										.getAllColleagueIdByListToolId(listToolIdForCategory));
+					}
+					// Si notre liste résultat listColleagueId contenait déjà
+					// des id collab, on ne garde que les
+					// id collab en commun dans les 2 listes
+					// sinon, on ajoute simplement les éléments de
+					// listColleagueIdTemp à la liste résultat
+					if (!listColleagueId.isEmpty()) {
 						listColleagueId.retainAll(listColleagueIdTemp);
 					} else {
 						listColleagueId.addAll(listColleagueIdTemp);
 					}
-					//Si la séléction utilisateur ne donne déjà pas de résultat, on sort
-					//de la boucle
+					// Si la séléction utilisateur ne donne déjà pas de
+					// résultat, on sort
+					// de la boucle
 					if (listColleagueId.isEmpty()) {
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
-					
-				} else if (item  instanceof Concept) {
+
+				} else if (item instanceof Concept) {
 					Collection lesToolFils = this.treeSkills.getChildren(item);
-	
-					//On veut des comptétences sur un concept entier
-					//On va collecter tous les outils du concept
-					//et identifier les id collaborateur qui ont une compétence sur
-					//au moins un de ces outils
+
+					// On veut des comptétences sur un concept entier
+					// On va collecter tous les outils du concept
+					// et identifier les id collaborateur qui ont une compétence
+					// sur
+					// au moins un de ces outils
 					List<Integer> listToolIdForConcept = new ArrayList<Integer>();
-					for(Object toolFils : lesToolFils ) {
-						Tool tool = (Tool)toolFils;
+					for (Object toolFils : lesToolFils) {
+						Tool tool = (Tool) toolFils;
 						listToolIdForConcept.add(tool.getId());
 					}
-					//Récupérer les id collab ayant au moins un tool du concept
-					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByListToolId(listToolIdForConcept));
-					if(!listColleagueId.isEmpty()) {
+					// Récupérer les id collab ayant au moins un tool du concept
+					if (authentication != null) {
+						if (Authorization.Role.CM.getId().equals(
+								this.authentication.getAuthorization()
+										.getRoleId())) {
+							listColleagueIdTemp
+									.addAll(this.skillService
+											.getCmColleagueIdByListToolId(listToolIdForConcept,authentication.getColleagueId()));
+						}
+					} else {
+					listColleagueIdTemp
+							.addAll(this.skillService
+									.getAllColleagueIdByListToolId(listToolIdForConcept));
+					}
+					if (!listColleagueId.isEmpty()) {
 						listColleagueId.retainAll(listColleagueIdTemp);
-					}else {
+					} else {
 						listColleagueId.addAll(listColleagueIdTemp);
 					}
 					if (listColleagueId.isEmpty()) {
 						break Boucle;
 					}
 					listColleagueIdTemp.clear();
-				
+
 				} else {
-					//C'est un Tool qui est sélectionné
-					Tool toolSelected = (Tool)item;
-					//Récupérer les id collab ayant une compétence sur ce tool
-					listColleagueIdTemp.addAll(this.skillService.getAllColleagueIdByToolId(toolSelected.getId()));
-					if(!listColleagueId.isEmpty()) {
+					// C'est un Tool qui est sélectionné
+					Tool toolSelected = (Tool) item;
+					// Récupérer les id collab ayant une compétence sur ce tool
+					if (authentication != null) {
+						if (Authorization.Role.CM.getId().equals(
+								this.authentication.getAuthorization()
+										.getRoleId())) {
+							listColleagueIdTemp.addAll(this.skillService
+									.getCmColleagueIdByToolId(toolSelected.getId(),authentication.getColleagueId()));
+						}
+						else{
+							listColleagueIdTemp.addAll(this.skillService
+							.getAllColleagueIdByToolId(toolSelected.getId()));
+						}
+					}
+					if (!listColleagueId.isEmpty()) {
 						listColleagueId.retainAll(listColleagueIdTemp);
 					} else {
 						listColleagueId.addAll(listColleagueIdTemp);
@@ -603,9 +695,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void setSearch(Button search) {
 		this.search = search;
 	}
-	
+
 	/**
 	 * Get the collabService value
+	 * 
 	 * @return the collabService
 	 */
 	public IColleagueService getCollabService() {
@@ -614,7 +707,9 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Set the collabService value
-	 * @param collabService the collabService to set
+	 * 
+	 * @param collabService
+	 *            the collabService to set
 	 */
 	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
@@ -622,6 +717,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Get the skillService value
+	 * 
 	 * @return the skillService
 	 */
 	public ISkillService getSkillService() {
@@ -630,7 +726,9 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Set the skillService value
-	 * @param skillService the skillService to set
+	 * 
+	 * @param skillService
+	 *            the skillService to set
 	 */
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
@@ -638,6 +736,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Get the listCollab value
+	 * 
 	 * @return the listCollab
 	 */
 	public List<Colleague> getListCollab() {
@@ -646,7 +745,9 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 
 	/**
 	 * Set the listCollab value
-	 * @param listCollab the listCollab to set
+	 * 
+	 * @param listCollab
+	 *            the listCollab to set
 	 */
 	public void setListCollab(List<Colleague> listCollab) {
 		this.listCollab = listCollab;
@@ -667,7 +768,13 @@ public class SearchTarget extends VerticalLayout implements ClickListener,TextCh
 	public void setClientService(IClientService clientService) {
 		this.clientService = clientService;
 	}
-	
-	
-	
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
 }
