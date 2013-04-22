@@ -168,7 +168,7 @@
 	</select>
 
 	<select id="getAllConsultantManager" resultMap="colleagueResult">
-		SELECT * FROM COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
+		SELECT * FROM COLLEAGUE c,AUTHENTICATION a WHERE c.COLLEAGUE_ID = a.COLLEAGUE_ID AND a.ROLE_ID = 2 ORDER BY LAST_NAME
 	</select>
 
 	<select id="countMail" parameterClass="String" resultClass="Integer">

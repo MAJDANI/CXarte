@@ -25,6 +25,7 @@ import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Select;
@@ -61,6 +62,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 	// Il manque les Skills !!! ??
 
 	private Button search;
+	private OptionGroup group;
 
 	/**
 	 * POJO
@@ -138,6 +140,16 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 		this.searchByClientPanel.addComponent(clientNameSelect);
 
 		// Build the Name Panel
+		// Have an option group
+//		if (authentication != null) {
+//			if (Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())) {
+//				group = new OptionGroup();
+//				group.addItem("My collaborators");
+//				group.addItem("All collaborators");
+//				group.select("My collaborators");
+//				this.searchByNamePanel.addComponent(group);
+//			}
+//		}
 		this.fieldName.setCaption("Name of collaborator: ");
 		this.fieldName.addListener(this);
 		this.searchByNamePanel.addComponent(this.fieldName);
@@ -288,13 +300,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 				if (client != null) {
 					try {
 						if (authentication != null) {
-							if (Authorization.Role.CM.getId().equals(
-									this.authentication.getAuthorization()
-											.getRoleId())) {
-								this.listCollab = this.collabService
-										.getCmColleaguesByClient(
-												client.getId(),
-												authentication.getColleagueId());
+							if (Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())) {
+								System.out.println(group.getValue());
+							
+									this.listCollab = this.collabService.getCmColleaguesByClient(client.getId(),authentication.getColleagueId());
 							}
 						} else {
 							this.listCollab = this.collabService
@@ -485,9 +494,10 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 						if (Authorization.Role.CM.getId().equals(
 								this.authentication.getAuthorization()
 										.getRoleId())) {
-							listColleagueIdTemp
-									.addAll(this.skillService
-											.getCmColleagueIdByListToolId(listToolIdForCategory,authentication.getColleagueId()));
+							listColleagueIdTemp.addAll(this.skillService
+									.getCmColleagueIdByListToolId(
+											listToolIdForCategory,
+											authentication.getColleagueId()));
 						}
 					} else {
 						// Récupérer les id collab ayant au moins un tool de la
@@ -532,14 +542,15 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 						if (Authorization.Role.CM.getId().equals(
 								this.authentication.getAuthorization()
 										.getRoleId())) {
-							listColleagueIdTemp
-									.addAll(this.skillService
-											.getCmColleagueIdByListToolId(listToolIdForConcept,authentication.getColleagueId()));
+							listColleagueIdTemp.addAll(this.skillService
+									.getCmColleagueIdByListToolId(
+											listToolIdForConcept,
+											authentication.getColleagueId()));
 						}
 					} else {
-					listColleagueIdTemp
-							.addAll(this.skillService
-									.getAllColleagueIdByListToolId(listToolIdForConcept));
+						listColleagueIdTemp
+								.addAll(this.skillService
+										.getAllColleagueIdByListToolId(listToolIdForConcept));
 					}
 					if (!listColleagueId.isEmpty()) {
 						listColleagueId.retainAll(listColleagueIdTemp);
@@ -560,11 +571,13 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 								this.authentication.getAuthorization()
 										.getRoleId())) {
 							listColleagueIdTemp.addAll(this.skillService
-									.getCmColleagueIdByToolId(toolSelected.getId(),authentication.getColleagueId()));
-						}
-						else{
+									.getCmColleagueIdByToolId(
+											toolSelected.getId(),
+											authentication.getColleagueId()));
+						} else {
 							listColleagueIdTemp.addAll(this.skillService
-							.getAllColleagueIdByToolId(toolSelected.getId()));
+									.getAllColleagueIdByToolId(toolSelected
+											.getId()));
 						}
 					}
 					if (!listColleagueId.isEmpty()) {
