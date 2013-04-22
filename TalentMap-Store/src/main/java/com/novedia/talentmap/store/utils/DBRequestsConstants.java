@@ -44,7 +44,7 @@ public static final String ERASE_MANAGER_COLLEAGUE = "colleague.eraseManager";
 /**
  * Constant request to get a colleague by lastName.
  */
-public static final String GET_ALL_COLLEAGUES_BY_LASTNAME="colleague.getAllColleaguesByLastName";
+public static final String GET_ALL_COLLEAGUES_BY_NAME="colleague.getAllColleaguesByName";
 
 /**
  * Constant request to get a colleague by client name.
@@ -59,7 +59,7 @@ public static final String GET_CM_COLLEAGUES_BY_CLIENT="colleague.getCmColleague
 /**
  * Constant request to get CM colleagues by last name.
  */
-public static final String GET_CM_COLLEAGUES_BY_LASTNAME="colleague.getCmColleaguesByLastName";
+public static final String GET_CM_COLLEAGUES_BY_NAME="colleague.getCmColleaguesByName";
 
 /**
  * Constant request to get colleague by manager id

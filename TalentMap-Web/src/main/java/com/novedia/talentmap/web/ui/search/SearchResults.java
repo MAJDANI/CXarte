@@ -3,8 +3,10 @@ package com.novedia.talentmap.web.ui.search;
 import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
+import com.novedia.talentmap.web.ui.profile.mission.ListMission;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -19,36 +21,35 @@ public class SearchResults extends PagedTable {
 	private static final long serialVersionUID = -1983028405136383549L;
 
 	/**
-	 * Factoriser cette constante qui est aussi utilisée dans MonitoringCollabContent
-	 * VGU TODO
+	 * Factoriser cette constante qui est aussi utilisée dans
+	 * MonitoringCollabContent VGU TODO
 	 */
 	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
-	
-	
+	public static final String VISUALIZE_COLLABORATOR_MISSIONS = "Display missions";
 
 	/**
-	 * Vaadin UI
-	 * VGU
+	 * Vaadin UI VGU
 	 */
 	private ProfileCollabWindow profileCollabWindow;
-	
+	private ListMission listMission;
+
 	/**
 	 * Default constructor
 	 */
-	public SearchResults(){
+	public SearchResults() {
 		super();
 	}
-	
+
 	/**
 	 * Build SearchResults view
+	 * 
 	 * @return
 	 */
-	public SearchResults buildSearchResultsView(){
+	public SearchResults buildSearchResultsView() {
 		removeAllItems();
 		mainBuild();
 		return this;
 	}
-
 
 	public void mainBuild() {
 		addColumns();
@@ -63,7 +64,7 @@ public class SearchResults extends PagedTable {
 	}
 
 	public void buildResultsTable(List<Colleague> listCollab) {
-	
+
 		addColumns();
 		fillResultsTable(listCollab);
 	}
@@ -74,23 +75,27 @@ public class SearchResults extends PagedTable {
 
 			HorizontalLayout hLayout = new HorizontalLayout();
 			hLayout.setMargin(true);
-	
-			
+
 			Button visualizeProfile = buildButton(new Button(
 					VISUALIZE_PROFILE_NAME));
 
-			
 			visualizeProfile.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 			visualizeProfile.setData(collab.getId());
-			
+
 			hLayout.addComponent(visualizeProfile);
-			
-			addItem(new Object[] { collab.getLastName(),
-					collab.getFirstName(), collab.getEmail(), hLayout}, idResultsTable);
+
+//			Button visualizeMissions = buildButton(new Button(
+//					VISUALIZE_COLLABORATOR_MISSIONS));
+//			visualizeMissions.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+//			visualizeMissions.setData(collab.getId());
+//
+//			hLayout.addComponent(visualizeMissions);
+
+			addItem(new Object[] { collab.getLastName(), collab.getFirstName(),
+					collab.getEmail(), hLayout }, idResultsTable);
 			idResultsTable++;
 		}
-		
-		
+
 	}
 
 	private Button buildButton(Button button) {
@@ -102,32 +107,43 @@ public class SearchResults extends PagedTable {
 
 		return button;
 	}
-	
-	
-	//TODO : voir si on peut factoriser cette méthode
-	//qui est copiée de la classe MonitoringCollabEvent
+
+	// TODO : voir si on peut factoriser cette méthode
+	// qui est copiée de la classe MonitoringCollabEvent
 	private void btnProfileEvent(Button button) {
-//		System.out.println("MonitoringCollabContent.btnProfileEvent()");
 		button.addListener(new ClickListener() {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
 
 				Button btnListener = event.getButton();
-				int idCollab = (Integer) btnListener.getData();
-//				System.out.println("SearchResults.btnProfileEvent() idCollab=" + idCollab);
+				if (btnListener.getCaption().equals(VISUALIZE_PROFILE_NAME)) {
+					int idCollab = (Integer) btnListener.getData();
 
-				SearchResults.this.profileCollabWindow
-						.setCOLLAB_ID(idCollab);
+					SearchResults.this.profileCollabWindow
+							.setCOLLAB_ID(idCollab);
 
-				SearchResults.this.profileCollabWindow.mainBuild();
+					SearchResults.this.profileCollabWindow.mainBuild();
 
-				getWindow().addWindow(
-						SearchResults.this.profileCollabWindow);
+					getWindow().addWindow(
+							SearchResults.this.profileCollabWindow);
+				} else {
+//					int idCollab = (Integer) btnListener.getData();
+//
+//					Authentication auth = new Authentication();
+//					auth.setColleagueId(idCollab);
+//					listMission.setAuthentication(auth);
+//					//SearchResults.this.listMission.setColleagueId(idCollab);
+//
+//					SearchResults.this.listMission.buildAllColleagueMission();
+//
+//					getWindow().addComponent(
+//							SearchResults.this.listMission);
+				}
 			}
 		});
 	}
-	
+
 	public ProfileCollabWindow getProfileCollabWindow() {
 		return profileCollabWindow;
 	}

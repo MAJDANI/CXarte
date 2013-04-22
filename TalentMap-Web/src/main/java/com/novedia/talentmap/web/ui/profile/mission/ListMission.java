@@ -58,9 +58,9 @@ public class ListMission extends Table {
 //	}
 	
 	public void buildMain(){
-		//calling setwith(850) allows vaadin display automatically an horizontal 
+		//calling setwith(900) allows vaadin display automatically an horizontal 
 		//scrollBar if line width is too large
-		setWidth(850);
+		setWidth(900);
 		buildContainer();
 	}
 

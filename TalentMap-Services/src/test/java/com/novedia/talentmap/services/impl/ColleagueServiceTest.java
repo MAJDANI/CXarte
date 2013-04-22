@@ -321,11 +321,11 @@ public class ColleagueServiceTest {
 
 		//When
 		ColleagueDao colleagueDao = (ColleagueDao) this.colleagueExtendedDaoMock;
-		Mockito.when(colleagueDao.getAllColleaguesByLastName(COLLEAGUE_LAST_NAME)).thenReturn(expectedColleagueList);
-		List<Colleague> actualColleagueList = service.getAllColleaguesByLastName(COLLEAGUE_LAST_NAME);
+		Mockito.when(colleagueDao.getAllColleaguesByName(COLLEAGUE_LAST_NAME)).thenReturn(expectedColleagueList);
+		List<Colleague> actualColleagueList = service.getAllColleaguesByName(COLLEAGUE_LAST_NAME);
 		
 		//Then
-		Mockito.verify(colleagueDao, Mockito.times(1)).getAllColleaguesByLastName(COLLEAGUE_LAST_NAME);		
+		Mockito.verify(colleagueDao, Mockito.times(1)).getAllColleaguesByName(COLLEAGUE_LAST_NAME);		
 		Assert.assertEquals(actualColleagueList, expectedColleagueList);
 
 		//Changement de mock Dao

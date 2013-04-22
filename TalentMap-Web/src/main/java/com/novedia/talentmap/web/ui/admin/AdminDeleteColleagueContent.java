@@ -168,7 +168,7 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements Click
 	 * @param name
 	 */
 	private void fillColleagueContainer(String name){
-		List<Colleague> colleagueResult = colleagueService.getAllColleaguesByLastName(name);
+		List<Colleague> colleagueResult = colleagueService.getAllColleaguesByName(name);
 		colleagueContainer.removeAllItems();
 		if(colleagueResult != null && !colleagueResult.isEmpty()){
 			for (Colleague colleague : colleagueResult) {

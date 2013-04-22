@@ -166,7 +166,7 @@ public class ProfileCollabWindow extends Window {
 	}
 
 	/**
-	 * Get the cOLLAB_ID value
+	 * Get the COLLAB_ID value
 	 * 
 	 * @return the cOLLAB_ID
 	 */

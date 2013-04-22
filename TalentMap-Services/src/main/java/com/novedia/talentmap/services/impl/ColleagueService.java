@@ -149,8 +149,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllColleaguesByLastName(String lastName) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getAllColleaguesByLastName(lastName);
+	public List<Colleague> getAllColleaguesByName(String name) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByName(name);
 	}
 
 	/**
@@ -170,8 +170,8 @@ public class ColleagueService implements IColleagueService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Colleague> getCmColleaguesByLastName(String lastName,int managerId) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getCmColleaguesByLastName(lastName,managerId);
+	public List<Colleague> getCmColleaguesByName(String name,int managerId) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByName(name,managerId);
 	}
 	
 	/**

@@ -332,12 +332,12 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 								this.authentication.getAuthorization()
 										.getRoleId())) {
 							this.listCollab = this.collabService
-									.getCmColleaguesByLastName(collabName,
+									.getCmColleaguesByName(collabName,
 											authentication.getColleagueId());
 						}
 					} else {
 						this.listCollab = this.collabService
-								.getAllColleaguesByLastName(collabName);
+								.getAllColleaguesByName(collabName);
 					}
 					updateObservateur();
 				} catch (Exception e) {
@@ -378,12 +378,12 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 								this.authentication.getAuthorization()
 										.getRoleId())) {
 							this.listCollab = this.collabService
-									.getCmColleaguesByLastName(valueField,
+									.getCmColleaguesByName(valueField,
 											authentication.getColleagueId());
 						}
 					} else {
 						this.listCollab = this.collabService
-								.getAllColleaguesByLastName(valueField);
+								.getAllColleaguesByName(valueField);
 					}
 					updateObservateur();
 

@@ -101,7 +101,7 @@ List<Manager> getAllManagers();
  * @param lastName a lastName
  * @return List<Colleague>
  */
-List<Colleague> getAllColleaguesByLastName(String lastName);
+List<Colleague> getAllColleaguesByName(String name);
 
 /**
  * Get all Colleagues by client name
@@ -122,7 +122,7 @@ List<Colleague> getCmColleaguesByClient(int clientId,int managerId);
  * @param lastName
  * @return List<Colleague>
  */
-List<Colleague> getCmColleaguesByLastName(String lastName,int managerId);
+List<Colleague> getCmColleaguesByName(String name,int managerId);
 
 
 /**

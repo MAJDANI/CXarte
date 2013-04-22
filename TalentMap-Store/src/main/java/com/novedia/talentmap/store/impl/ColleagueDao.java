@@ -101,8 +101,8 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (Integer) this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_COLLEAGUE_FROM_REGISTRATION, registration);
 	}
 	
-	public List<Colleague> getAllColleaguesByLastName(String lastName) throws DataAccessException {
-		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_LASTNAME, lastName);
+	public List<Colleague> getAllColleaguesByName(String name) throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUES_BY_NAME, name);
 	}
 	
 	public List<Colleague> getAllColleaguesByClient(Client client) throws DataAccessException {
@@ -116,11 +116,11 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CM_COLLEAGUES_BY_CLIENT, parameters);
 	}
 	
-	public List<Colleague> getCmColleaguesByLastName(String lastName,int managerId) throws DataAccessException {
+	public List<Colleague> getCmColleaguesByName(String name,int managerId) throws DataAccessException {
 		HashMap parameters = new HashMap();
-		parameters.put("lastName", lastName);
+		parameters.put("name", name);
 		parameters.put("managerId", managerId);
-		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CM_COLLEAGUES_BY_LASTNAME, parameters);
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_CM_COLLEAGUES_BY_NAME, parameters);
 	}
 	
 	

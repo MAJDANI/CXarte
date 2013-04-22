@@ -83,10 +83,10 @@
 		AND mission.CLIENT_ID = #clientId#
 	</statement>
 	
-	<statement id="getCmColleaguesByLastName" parameterClass="hashmap"
+	<statement id="getCmColleaguesByName" parameterClass="hashmap"
 		resultMap="colleagueResult">		
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#)
 	</statement>
 	
 	<statement id="selectMissionsByColleagueId" parameterClass="int"
@@ -104,7 +104,7 @@
 
 	<select id="getAll" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5)
 	</select>
 
 	<update id="save" parameterClass="Colleague">
@@ -127,10 +127,10 @@
 		WHERE authentication.COLLEAGUE_ID=colleague.COLLEAGUE_ID AND authentication.ROLE_ID = 2 ORDER BY LAST_NAME
 	</select>
 
-	<select id="getAllColleaguesByLastName" parameterClass="string"
+	<select id="getAllColleaguesByName" parameterClass="string"
 		resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5)
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"
