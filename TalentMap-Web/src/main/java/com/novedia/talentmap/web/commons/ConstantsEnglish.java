@@ -271,6 +271,12 @@ public class ConstantsEnglish {
 	public static final String SEARCH_SKILLS_MSG_NO_COLLEAGUE_FOUND = "No colleague found";
 	
 	/**
+	 * Constants for Missions list Window
+	 */
+	public static final String LIST_MISSION_WINDOW_TITLE = "Missions' History for ";
+	public static final String LIST_MISSION_WINDOW_NO_MISSIONS = "No records yet.";
+	
+	/**
 	 * DATABASE MAX_SIZE
 	 */
 	//TABLE MISSION

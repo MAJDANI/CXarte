@@ -3,10 +3,9 @@ package com.novedia.talentmap.web.ui.search;
 import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
-import com.novedia.talentmap.web.ui.profile.mission.ListMission;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -25,13 +24,14 @@ public class SearchResults extends PagedTable {
 	 * MonitoringCollabContent VGU TODO
 	 */
 	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
-	public static final String VISUALIZE_COLLABORATOR_MISSIONS = "Display missions";
+	public static final String VISUALIZE_MISSION_HISTORY_NAME = "Display missions";
+
 
 	/**
 	 * Vaadin UI VGU
 	 */
 	private ProfileCollabWindow profileCollabWindow;
-	private ListMission listMission;
+	private ListMissionCollabWindow listMissionWindow;
 
 	/**
 	 * Default constructor
@@ -78,18 +78,16 @@ public class SearchResults extends PagedTable {
 
 			Button visualizeProfile = buildButton(new Button(
 					VISUALIZE_PROFILE_NAME));
-
+			Button visualizeMissionHistory = buildButton(new Button(
+					VISUALIZE_MISSION_HISTORY_NAME));
 			visualizeProfile.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 			visualizeProfile.setData(collab.getId());
 
-			hLayout.addComponent(visualizeProfile);
+			visualizeMissionHistory.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+			visualizeMissionHistory.setData(collab);
 
-//			Button visualizeMissions = buildButton(new Button(
-//					VISUALIZE_COLLABORATOR_MISSIONS));
-//			visualizeMissions.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-//			visualizeMissions.setData(collab.getId());
-//
-//			hLayout.addComponent(visualizeMissions);
+			hLayout.addComponent(visualizeProfile);
+			hLayout.addComponent(visualizeMissionHistory);
 
 			addItem(new Object[] { collab.getLastName(), collab.getFirstName(),
 					collab.getEmail(), hLayout }, idResultsTable);
@@ -99,12 +97,12 @@ public class SearchResults extends PagedTable {
 	}
 
 	private Button buildButton(Button button) {
-
 		if (button.getCaption().equals(VISUALIZE_PROFILE_NAME)) {
-
 			btnProfileEvent(button);
 		}
-
+		if (button.getCaption().equals(VISUALIZE_MISSION_HISTORY_NAME)) {
+			btnMissionHistoryEvent(button);
+		}
 		return button;
 	}
 
@@ -117,29 +115,35 @@ public class SearchResults extends PagedTable {
 			public void buttonClick(ClickEvent event) {
 
 				Button btnListener = event.getButton();
-				if (btnListener.getCaption().equals(VISUALIZE_PROFILE_NAME)) {
-					int idCollab = (Integer) btnListener.getData();
+				int idCollab = (Integer) btnListener.getData();
 
-					SearchResults.this.profileCollabWindow
-							.setCOLLAB_ID(idCollab);
+				SearchResults.this.profileCollabWindow
+						.setCOLLAB_ID(idCollab);
 
-					SearchResults.this.profileCollabWindow.mainBuild();
+				SearchResults.this.profileCollabWindow.mainBuild();
 
-					getWindow().addWindow(
-							SearchResults.this.profileCollabWindow);
-				} else {
-//					int idCollab = (Integer) btnListener.getData();
-//
-//					Authentication auth = new Authentication();
-//					auth.setColleagueId(idCollab);
-//					listMission.setAuthentication(auth);
-//					//SearchResults.this.listMission.setColleagueId(idCollab);
-//
-//					SearchResults.this.listMission.buildAllColleagueMission();
-//
-//					getWindow().addComponent(
-//							SearchResults.this.listMission);
-				}
+				getWindow().addWindow(
+						SearchResults.this.profileCollabWindow);
+			}
+		});
+	}
+
+
+	private void btnMissionHistoryEvent(Button button) {
+		button.addListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+
+				Button btnListener = event.getButton();
+				Colleague currentColleague = (Colleague) btnListener.getData();
+
+				SearchResults.this.listMissionWindow
+						.setCurrentColleague(currentColleague);
+				SearchResults.this.listMissionWindow.mainBuild();
+				
+				getWindow().addWindow(
+						SearchResults.this.listMissionWindow);
 			}
 		});
 	}
@@ -150,6 +154,14 @@ public class SearchResults extends PagedTable {
 
 	public void setProfileCollabWindow(ProfileCollabWindow profileCollabWindow) {
 		this.profileCollabWindow = profileCollabWindow;
+	}
+
+	public ListMissionCollabWindow getListMissionWindow() {
+		return listMissionWindow;
+	}
+
+	public void setListMissionWindow(ListMissionCollabWindow listMissionWindow) {
+		this.listMissionWindow = listMissionWindow;
 	}
 
 }

@@ -4,6 +4,7 @@ import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.cm.CmView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.role.CmContentLayout;
@@ -32,6 +33,7 @@ public class TabMain extends TabSheet {
 	private CmView cmView;
 
 	private RhContentLayout rhContentLayout;
+	private MonitoringCollabView monitoringCollabView;
 	
 	private Authentication authentication;
 	
@@ -67,9 +69,14 @@ public class TabMain extends TabSheet {
 			cmView.setAuthentication(getAuthentication());
 			cmView = cmView.buildCmView();
 			addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
+			//Les deux lignes ci-dessous pour tester le code créé par Véronique
+			monitoringCollabView = monitoringCollabView.mainBuild();
+			addTab(monitoringCollabView,"Monitoring");
 		} else if (role.equals(Role.RH)) {  //RH
-			rhContentLayout = rhContentLayout.init();
-			addTab(rhContentLayout,"rh");
+			searchView = searchView.buildSearchView();
+			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
+//			rhContentLayout = rhContentLayout.init();
+//			addTab(rhContentLayout,"rh");
 		}
 		
 		return this;
@@ -140,6 +147,14 @@ public class TabMain extends TabSheet {
 
 	public void setProfileView(ProfileView profileView) {
 		this.profileView = profileView;
+	}
+
+	public MonitoringCollabView getMonitoringCollabView() {
+		return monitoringCollabView;
+	}
+
+	public void setMonitoringCollabView(MonitoringCollabView monitoringCollabView) {
+		this.monitoringCollabView = monitoringCollabView;
 	}
 	
 	public CmView getCmView() {

@@ -46,6 +46,13 @@ public class MonitoringCollabContent extends VerticalLayout {
 	private Integer MANAGER_ID = 1;
 
 	/**
+	 * Default constructor
+	 */
+	public MonitoringCollabContent(){
+		super();
+	}
+
+	/**
 	 * Build the class MonitoringCollabContent.java
 	 * 
 	 * @param collabTable
@@ -256,7 +263,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	 * @param skillService
 	 *            the skillService to set
 	 */
-	public void setCollabService(IManagerService managerService) {
+	public void setManagerService(IManagerService managerService) {
 		this.managerService = managerService;
 	}
 

@@ -1,7 +1,6 @@
 package com.novedia.talentmap.web.ui.collab;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.ui.profile.CollaboratorSkillContent;
 import com.novedia.talentmap.web.ui.profile.HistoryMissionColab;
 import com.novedia.talentmap.web.ui.profile.ObjectiveEa;
@@ -37,6 +36,13 @@ IObservable{
 	private ConstantsForMenuEnglish constantsForMenuInglish;
 	
 		
+	/**
+	 * Default constructor
+	 */
+	public MonitoringCollabNavigation(){
+		super();
+	}
+	
 	/**
 	 * Constructeur
 	 */

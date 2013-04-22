@@ -83,7 +83,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public MissionCollaboratorContent buildViewMissionColleagueContent(){
 		removeAllComponents();
-		listMission.setAuthentication(getAuthentication());
+		listMission.setColleagueId(getAuthentication().getColleagueId());
 		missionForm.setAuthentication(getAuthentication());
 		
 		addMissionPanel = addMissionPanel.buildAddMissionPanel();

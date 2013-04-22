@@ -23,9 +23,7 @@ public class ListMission extends Table {
 	 */
 	private MissionContainer missionContainer;
 
-	private Authentication authentication;
-	
-
+	private Integer colleagueId;
 	
 	/**
 	 * Default constructor
@@ -47,15 +45,6 @@ public class ListMission extends Table {
 		return this;
 	}
 	
-	/**
-	 * Build the class ListMission.java 
-	 * @param profileService
-	 */
-//	public ListMission(MissionContainer missionContainer) {
-//		super();
-//		this.missionContainer = missionContainer;
-//		buildMain();
-//	}
 	
 	public void buildMain(){
 		//calling setwith(900) allows vaadin display automatically an horizontal 
@@ -73,7 +62,7 @@ public class ListMission extends Table {
 	}
 	
 	public void fillMissionContainer() {
-		this.missionContainer.fillContainer(authentication.getColleagueId());
+		this.missionContainer.fillContainer(getColleagueId());
 	}
 	/**
 	 * Builds Headers of the Table ListMission
@@ -151,18 +140,13 @@ public class ListMission extends Table {
 		return missionContainer;
 	}
 
-
-	public Authentication getAuthentication() {
-		return authentication;
+	public Integer getColleagueId() {
+		return colleagueId;
 	}
 
-
-	public void setAuthentication(Authentication authentication) {
-		this.authentication = authentication;
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
 	}
-
-	
-	
 
 
 }

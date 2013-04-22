@@ -19,6 +19,15 @@ public class MonitoringCollabView extends VerticalLayout {
 	 */
 	private MonitoringCollabContentLayout monitoringCollabContentLayout;
 	
+	
+	/**
+	 * Default constructor
+	 */
+	public MonitoringCollabView(){
+		super();
+	}
+	
+
 	/**
 	 * Build the class MonitoringCollabView.java 
 	 * @param monitoringCollabContentLayout
@@ -35,9 +44,10 @@ public class MonitoringCollabView extends VerticalLayout {
 	 * The main builder
 	 * @class MonitoringCollabView.java
 	 */
-	public void mainBuild(){
-		
+	public MonitoringCollabView mainBuild(){
+		this.monitoringCollabContentLayout.mainBuild();
 		addComponent(this.monitoringCollabContentLayout);
+		return this;
 	}
 
 	/**
@@ -47,5 +57,12 @@ public class MonitoringCollabView extends VerticalLayout {
 	public void setMonitoringCollabContentLayout(
 			MonitoringCollabContentLayout monitoringCollabContentLayout) {
 		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
+	}
+
+
+	public MonitoringCollabContentLayout getMonitoringCollabContentLayout() {
+		return monitoringCollabContentLayout;
 	}		
+	
+	
 }
