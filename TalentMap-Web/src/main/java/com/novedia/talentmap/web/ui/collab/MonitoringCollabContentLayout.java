@@ -15,6 +15,7 @@ public class MonitoringCollabContentLayout extends HorizontalLayout {
 	 */
 	private MonitoringCollabContent monitoringCollabContent;
 	private MonitoringCollabNavigation monitoringCollabNavigation;	
+	private CollaboratorSkillContent collaboratorSkillContent;
 	private HistoryMissionColab historyMissionColab ;
 	private ObjectiveEa objectiveEa;
 	
