@@ -10,10 +10,13 @@ import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.web.MyVaadinApplication;
 import com.novedia.talentmap.web.util.CUtils;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
+import com.vaadin.terminal.Resource;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -117,6 +120,8 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 	 */
 	public VerticalLayout buildLoginScreenView(){
 		getMyVaadinApplication().getMainWindow().setCaption("Log In Talent Map");
+//		Resource res = new ThemeResource("./images/logoNovedia.jpg");
+//		final Embedded logo = new Embedded("",res);
 		
 		
 		loginView = new VerticalLayout();
