@@ -5,7 +5,6 @@ import java.util.Vector;
 import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
@@ -117,7 +116,7 @@ public class CollaboratorForm extends VerticalLayout {
 		// Label "Données administratives"
 		dataAdminLabel = new Label();
 		dataAdminLabel.setCaption(ConstantsEnglish.ADMIN_DATA_LABEL);
-		dataAdminLabel.setStyle(TalentMapCSS.H2);
+		dataAdminLabel.addStyleName(TalentMapCSS.H2);
 		addComponent(dataAdminLabel);
 
 		// Layout des données administratives (2 colonnes)
@@ -177,7 +176,7 @@ public class CollaboratorForm extends VerticalLayout {
 			// Label "Last Mission"
 			Label lastMissionLabel = new Label();
 			lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
-			lastMissionLabel.setStyle(TalentMapCSS.H2);
+			lastMissionLabel.addStyleName(TalentMapCSS.H2);
 			addComponent(lastMissionLabel);
 
 			// Layout de la dernière mission

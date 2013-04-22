@@ -9,7 +9,6 @@ import java.util.Set;
 import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.dto.MissionDto;
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -37,11 +36,6 @@ public class ColleagueService implements IColleagueService {
 	 */
 	private IDao<Mission> missionDao;
 	
-	
-	/**
-	 * The mission DAO.
-	 */
-	private IDao<MissionDto> missionDaoForDto;
 	
 	/**
 	 * The manager DAO.
@@ -141,8 +135,8 @@ public class ColleagueService implements IColleagueService {
 	 * Get all managers
 	 */
 	@Override
-	public List<Manager> getAllManagers() {
-		return ((ColleagueDao) colleagueDao).getAllManagers();
+	public List<Colleague> getAllConsultantManager() {
+		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
 	}
 	
 	/**
@@ -317,12 +311,4 @@ public class ColleagueService implements IColleagueService {
 		this.managerDao = managerDao;
 	}
 
-	/**
-	 * This method allows to make the spring injection.
-	 * 
-	 * @param missionDaoForDto
-	 */
-	public void setMissionDaoForDto(IDao<MissionDto> missionDaoForDto) {
-		this.missionDaoForDto = missionDaoForDto;
-	}
 }

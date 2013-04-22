@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.chainsaw.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

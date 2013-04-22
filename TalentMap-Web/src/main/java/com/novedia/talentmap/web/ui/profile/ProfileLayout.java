@@ -85,7 +85,7 @@ public class ProfileLayout extends HorizontalLayout {
 		
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.addComponent(this.profileNavigation.mainBuild());
-		vLayout.setHeight(800);
+		vLayout.setHeight("800px");
 
 		this.hSplitPanel.setFirstComponent(vLayout);
 		this.hSplitPanel.setSecondComponent(this.profileColleagueContent.buildProfileColleagueContent());

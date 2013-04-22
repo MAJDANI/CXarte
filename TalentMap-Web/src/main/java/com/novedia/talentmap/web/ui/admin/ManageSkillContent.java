@@ -121,42 +121,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	
 	
 	/**
-	 * Build the class AddSkillContent.java
-	 * 
-	 * @param formSkill
-	 * @param treeSkill
-	 * @param save
-	 */
-//	public ManageSkillContent(Form formSkill, Tree treeSkill, Button save,
-//			List<Tool> listTool, List<Concept> listConcept,
-//			List<Category> listCategory, IAdminService adminService,
-//			Vector<Object> fieldOrderSkill, Button edit, Button delete,
-//			Label title, HorizontalLayout body, Button cancel) {
-//		super();
-//		this.formSkill = formSkill;
-//		this.treeSkill = treeSkill;
-//		this.save = save;
-//		this.listTool = listTool;
-//		this.listConcept = listConcept;
-//		this.listCategory = listCategory;
-//		this.adminService = adminService;
-//		this.fieldOrderSkill = fieldOrderSkill;
-//		this.edit = edit;
-//		this.delete = delete;
-//		this.title = title;
-//		this.body = body;
-//		this.cancel = cancel;
-//
-//		// Initiate the current ID and Skill
-//		this.currentCategoryId = null;
-//		this.currentConceptId = null;
-//		this.currentToolId = null;
-//		this.currentVSkill = null;
-//
-//		mainBuild();
-//	}
-
-	/**
 	 * The main build components
 	 * 
 	 * @class AddSkillContent.java

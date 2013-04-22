@@ -119,28 +119,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		return this;
 	}
 	
-	/**
-	 * Build the class MissionForm.java
-	 * 
-	 * @param fieldOrderMission
-	 * @param missionForm
-	 * @param missionFormLayout
-	 */
-//	public MissionForm(Vector<Object> fieldOrderMission, Form missionForm,
-//			GridLayout missionFormLayout, IColleagueService collabService, 
-//			IClientService clientService,
-//			Button save, Button cancel) {
-//		super();
-//		this.fieldOrderMission = fieldOrderMission;
-//		this.missionForm = missionForm;
-//		this.missionFormLayout = missionFormLayout;
-//		this.collabService = collabService;
-//		this.clientService = clientService;
-//		this.save = save;
-//		this.cancel = cancel;
-//
-//		buildMain();
-//	}
 
 	public void buildMain() {
 

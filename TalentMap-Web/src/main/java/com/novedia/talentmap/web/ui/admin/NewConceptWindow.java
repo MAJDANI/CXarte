@@ -16,6 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickListener;
 
+@SuppressWarnings("serial")
 public class NewConceptWindow extends Window implements ClickListener{
 
 	/**

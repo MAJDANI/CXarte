@@ -1,17 +1,14 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
 import com.novedia.talentmap.model.entity.BusinessEngineer;
-import com.novedia.talentmap.model.entity.Client;
-import com.novedia.talentmap.model.entity.Manager;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
-import com.novedia.talentmap.services.IManagerService;
 import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.web.commons.Constants;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
@@ -162,15 +159,14 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 					Select managerSelect = new Select((String) ConstantsEnglish.NAME_FIELD_COLLABORATOR[i]+" : ");
 					
 					try {
-						for(Manager manager : colleagueService.getAllManagers()){
-							item = ic.addItem(manager.getId());
-							item.getItemProperty("value").setValue(manager.getFirstName() + " " +manager.getLastName());
+						for(Colleague colleague : colleagueService.getAllConsultantManager()){
+							item = ic.addItem(colleague.getId());
+							item.getItemProperty("value").setValue(colleague.getFirstName() + " " +colleague.getLastName());
 						}
 						
 						managerSelect.setContainerDataSource(ic);
 						managerSelect.setItemCaptionPropertyId("value");
 						
-//						managerSelect.setNullSelectionAllowed(false);
 						managerSelect.setImmediate(true);
 						
 					} catch (Exception e) {

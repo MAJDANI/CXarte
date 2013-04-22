@@ -30,29 +30,6 @@ public class AdminView extends VerticalLayout {
 		return this;
 	}
 	
-	
-	/**
-	 * 
-	 * Build the class AdminView.java 
-	 * @param adminContentLayout
-	 * @param loginLayout
-	 */
-//	public AdminView(AdminContentLayout adminContentLayout) {
-//		super();
-//		this.adminContentLayout = adminContentLayout;
-//		mainBuild();
-//	}
-	
-	/**
-	 * The main builder
-	 * @class AdminView.java
-	 */
-//	public void mainBuild(){
-//		removeAllComponents();
-//		addComponent(this.adminContentLayout);
-//
-//	}
-	
 
 	
 	/**

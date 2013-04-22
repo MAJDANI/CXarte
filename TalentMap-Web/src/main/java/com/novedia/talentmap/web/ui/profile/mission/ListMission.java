@@ -3,13 +3,9 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
-
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
@@ -47,9 +43,7 @@ public class ListMission extends Table {
 	
 	
 	public void buildMain(){
-		//calling setwith(900) allows vaadin display automatically an horizontal 
-		//scrollBar if line width is too large
-		setWidth(900);
+		setWidth("900px");
 		buildContainer();
 	}
 

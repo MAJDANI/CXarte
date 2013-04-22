@@ -9,7 +9,7 @@
 	<groupId>com.novedia.talentmap</groupId>
 	<artifactId>TalentMap</artifactId>
 	<packaging>pom</packaging>
-	<version>2.2-SNAPSHOT</version>
+	<version>3.0-SNAPSHOT</version>
 	<description>
     TalentMap is a useful application giving some view on Novedia people skills
   </description>
@@ -64,6 +64,8 @@
 		<module>TalentMap-Web</module>
 		<module>TalentMap-Store</module>
 		<module>TalentMap-Resources</module>
+		<module>TalentMap-Rest</module>
+		<module>TalentMap-Rest-Jersey</module>
 	</modules>
 
 	<!-- Dependencies version -->
@@ -77,6 +79,7 @@
 		<slf4j.version>1.6.1</slf4j.version>
 		<commons-lang.version>2.6</commons-lang.version>
 		<spring.security.version>3.1.2.RELEASE</spring.security.version>
+		<jackson.json.version>1.9.12</jackson.json.version>
 	</properties>
 
 	<!-- Inherited dependencies by modules -->
@@ -181,6 +184,13 @@
 			<version>2.1</version>
 		</dependency>
 		
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.json.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- Build information -->
@@ -253,37 +263,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
-		<!-- <plugins> -->
-		<!-- <plugin> -->
-		<!-- <groupId>org.mortbay.jetty</groupId> -->
-		<!-- <artifactId>jetty-maven-plugin</artifactId> -->
-		<!-- </plugin> -->
-		<!-- <plugin> -->
-		<!-- <artifactId>maven-clean-plugin</artifactId> -->
-		<!-- <configuration> -->
-		<!-- <failOnError>false</failOnError> -->
-		<!-- </configuration> -->
-		<!-- </plugin> -->
-		<!-- <plugin> -->
-		<!-- <artifactId>maven-resources-plugin</artifactId> -->
-		<!-- <configuration> -->
-		<!-- <encoding>${project.build.sourceEncoding}</encoding> -->
-		<!-- </configuration> -->
-		<!-- </plugin> -->
-		<!-- <plugin> -->
-		<!-- <artifactId>maven-compiler-plugin</artifactId> -->
-		<!-- <configuration> -->
-		<!-- <debug>true</debug> -->
-		<!-- <encoding>${project.build.sourceEncoding}</encoding> -->
-		<!-- <optimize>true</optimize> -->
-		<!-- <showDeprecation>true</showDeprecation> -->
-		<!-- <showWarnings>true</showWarnings> -->
-		<!-- <source>1.6</source> -->
-		<!-- <target>1.6</target> -->
-		<!-- </configuration> -->
-		<!-- </plugin> -->
-		<!-- </plugins> -->
 
 	</build>
 

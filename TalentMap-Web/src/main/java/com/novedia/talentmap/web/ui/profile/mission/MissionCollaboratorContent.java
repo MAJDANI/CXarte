@@ -93,31 +93,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 	
 
-	/**
-	 * Build the class MissionCollaboratorContent.java
-	 * 
-	 * @param missionForm
-	 */
-
-//	public MissionCollaboratorContent(IColleagueService collaboratorService,
-//			ListMission listMission, MissionForm missionForm,
-//			Button btnAddMission, AddMissionPanel addMissionPanel,
-//			Panel listPanel, Label pageTitle, Button btnModifyMission,
-//			Button btnDeleteMission) {
-//		super();
-//		this.collaboratorService = collaboratorService;
-//		this.listMission = listMission;
-//		this.missionForm = missionForm;
-//		this.btnAddMission = btnAddMission;
-//		this.addMissionPanel = addMissionPanel;
-//		this.listPanel = listPanel;
-//		this.pageTitle = pageTitle;
-//		this.btnModifyMission = btnModifyMission;
-//		this.btnDeleteMission = btnDeleteMission;
-//
-//		buildMain();
-//		buildObersvators();
-//	}
 
 	/**
 	 * The main builder

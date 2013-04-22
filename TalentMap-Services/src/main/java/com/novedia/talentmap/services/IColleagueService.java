@@ -93,7 +93,7 @@ Manager getManager(Integer managerId);
  * Get all Manager.
  * @return list of manager
  */
-List<Manager> getAllManagers();
+List<Colleague> getAllConsultantManager();
 
 
 /**

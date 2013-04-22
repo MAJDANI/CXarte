@@ -28,23 +28,6 @@
 			select="colleague.selectMissionsByColleagueId" />
 	</resultMap>
 
-	<resultMap id="managerResult" class="com.novedia.talentmap.model.entity.Manager">
-		<result property="id" column="COLLEAGUE_ID" />
-		<result property="managerId" column="MANAGER_ID" />
-		<result property="profileId" column="PROFILE_ID" />
-		<result property="lastName" column="LAST_NAME" />
-		<result property="firstName" column="FIRST_NAME" />
-		<result property="email" column="EMAIL" />
-		<result property="phone" column="PHONE" />
-		<result property="employmentDate" column="EMPLOYMENT_DATE" />
-		<result property="experience" column="EXPERIENCE" />
-		<result property="businessEngineer" column="B_ENGINEER_ID"
-			select="colleague.getBusinessEngineer" />
-		<result property="missions" column="COLLEAGUE_ID"
-			select="colleague.selectMissionsByColleagueId" />
-		<result property="colleagues" column="MANAGER_ID"
-			select="colleague.selectColleagueByManagerId" />
-	</resultMap>
 
 	<resultMap id="select-mission-result" class="com.novedia.talentmap.model.entity.Mission">
 		<result property="id" column="MISSION_ID" />
@@ -86,14 +69,14 @@
 	<statement id="getCmColleaguesByName" parameterClass="hashmap"
 		resultMap="colleagueResult">		
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5 AND c.MANAGER_ID = #managerId#)
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE UPPER('$name$%'))  
+		 AND (AUTH.ROLE_ID != ${admin.role}) AND (c.MANAGER_ID = #managerId#) 
 	</statement>
 	
 	<statement id="selectMissionsByColleagueId" parameterClass="int"
 		resultMap="select-mission-result">
 		SELECT * FROM MISSION mission, CLIENT client
-		WHERE
-		mission.CLIENT_ID = client.CLIENT_ID AND mission.MISSION_ID = #id#
+		WHERE mission.CLIENT_ID = client.CLIENT_ID AND mission.MISSION_ID = #id#
 	</statement>
 
 
@@ -104,7 +87,8 @@
 
 	<select id="getAll" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5)
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE UPPER('$name$%')) 
+		 AND AUTH.ROLE_ID != ${admin.role} 
 	</select>
 
 	<update id="save" parameterClass="Colleague">
@@ -117,20 +101,10 @@
 		B_ENGINEER_ID = #businessEngineer.id# WHERE COLLEAGUE_ID = #id#
 	</update>
 
-	<select id="getManager" parameterClass="Integer" resultMap="managerResult">
-		SELECT * FROM COLLEAGUE colleague
-		WHERE colleague.COLLEAGUE_ID = #id#
-	</select>
-
-	<select id="getAllManagers" resultMap="managerResult">
-		SELECT colleague.* FROM COLLEAGUE colleague,AUTHENTICATION authentication
-		WHERE authentication.COLLEAGUE_ID=colleague.COLLEAGUE_ID AND authentication.ROLE_ID = 2 ORDER BY LAST_NAME
-	</select>
-
-	<select id="getAllColleaguesByName" parameterClass="string"
-		resultMap="colleagueResult">
+	<select id="getAllColleaguesByName" parameterClass="string" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5) OR (UPPER(c.FIRST_NAME) LIKE UPPER('$name$%') AND AUTH.ROLE_ID != 5)
+		 WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE UPPER('$name$%'))  
+		 AND AUTH.ROLE_ID != ${admin.role}
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"
@@ -168,7 +142,8 @@
 	</select>
 
 	<select id="getAllConsultantManager" resultMap="colleagueResult">
-		SELECT * FROM COLLEAGUE c,AUTHENTICATION a WHERE c.COLLEAGUE_ID = a.COLLEAGUE_ID AND a.ROLE_ID = 2 ORDER BY LAST_NAME
+		select * from COLLEAGUE c join AUTHENTICATION a on (c.COLLEAGUE_ID = a.COLLEAGUE_ID) 
+		where a.ROLE_ID = ${cm.role} ORDER BY LAST_NAME
 	</select>
 
 	<select id="countMail" parameterClass="String" resultClass="Integer">

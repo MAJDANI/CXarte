@@ -18,11 +18,12 @@
 	</select>
 	
 	<statement id="getByName" resultMap="toolResult" parameterClass="String">
+	
 		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</statement>
 	
     <statement id="getAll" resultMap="toolResult">
-    	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = concept.CONCEPT_ID
+    	SELECT * FROM TOOL tool join CONCEPT concept on (tool.CONCEPT_ID = concept.CONCEPT_ID) order by tool.TOOL_NAME
     </statement>
     
     <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">

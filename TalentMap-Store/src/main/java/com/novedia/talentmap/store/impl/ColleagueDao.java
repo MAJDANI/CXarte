@@ -10,10 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
-import com.novedia.talentmap.model.entity.Manager;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
@@ -138,13 +136,5 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements IDao<Colleag
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_COLLEAGUE_BY_COLL_ID_LIST, skillParameter);
 	}
 
-	/**
-	 * This method allow to get all manager.
-	 * @return a list of manager
-	 * @throws DataAccessException
-	 */
-	public List<Manager> getAllManagers() throws DataAccessException {
-		return (List<Manager>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MANAGER);
-	}
 
 }

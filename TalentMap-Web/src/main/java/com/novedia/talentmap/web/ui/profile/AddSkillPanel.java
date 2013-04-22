@@ -90,9 +90,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	private Button validSkill;
 	
-	//private int COLLAB_ID = 2;
-
-	
 	/**
 	 * Flag
 	 */
@@ -122,48 +119,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 	
 	
-	/**
-	 * 
-	 * Build the class AddSkillPanel.java
-	 * 
-	 * @param categoryLabel
-	 * @param conceptLabel
-	 * @param toolSelect
-	 * @param frequencyUseSelect
-	 * @param noUsingTimeSelect
-	 * @param stars
-	 * @param valueOptions
-	 * @param validSkill
-	 * @param skillService
-	 * @param listSkill
-	 * @throws Exception
-	 */
-//	public AddSkillPanel(Label categoryLabel, Label conceptLabel,
-//			Select toolSelect, Select frequencyUseSelect,
-//			Select noUsingTimeSelect, RatingStars stars,
-//			Map<Integer, String> valueOptions, Button validSkill,
-//			ISkillService skillService, ListSkill listSkill, Accordion skillTab)
-//			throws Exception {
-//		this.categoryLabel = categoryLabel;
-//		this.conceptLabel = conceptLabel;
-//		this.frequencyUseSelect = frequencyUseSelect;
-//		this.noUsingTimeSelect = noUsingTimeSelect;
-//		this.toolSelect = toolSelect;
-//		this.stars = stars;
-//		this.valueOptions = valueOptions;
-//		this.validSkill = validSkill;
-//		this.skillService = skillService;
-//		this.listSkill = listSkill;
-//		this.skillTab = skillTab;
-//		
-//		//Set the skill added like a new skill
-//		this.isNewSkill = true;
-//
-//		setImmediate(true);
-//
-//		buildWindow();
-//	}
-
 	/**
 	 * Build all components in the main window
 	 * 

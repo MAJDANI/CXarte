@@ -8,6 +8,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
+@SuppressWarnings("serial")
 public class AdminNavigation extends VerticalLayout implements IObservable , ItemClickListener {
 
 	/**

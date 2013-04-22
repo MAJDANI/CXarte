@@ -9,6 +9,7 @@ import com.vaadin.ui.Window.CloseEvent;
 
 
 	/** Component contains a button that allows opening a window. */
+	@SuppressWarnings("serial")
 	public class WindowOpener extends CustomComponent implements Window.CloseListener {
 		Window mainwindow; // Reference to main window
 		Window mywindow; // The window to be opened

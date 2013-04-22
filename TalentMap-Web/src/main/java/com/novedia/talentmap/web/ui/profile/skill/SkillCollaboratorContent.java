@@ -64,34 +64,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		return this;
 	}
 	
-	/**
-	 * Constructor
-	 * @param listSkill
-	 * @param listSkillPanel
-	 * @param skillPanel
-	 * @param addSkillPanel
-	 * @param bodyLayout
-	 * @param footerLayout
-	 */
-//	public SkillCollaboratorContent(ListSkill listSkill,Panel listSkillPanel,Panel skillPanel,
-//			AddSkillPanel addSkillPanel,VerticalLayout bodyLayout,HorizontalLayout footerLayout,
-//			Label skillLabel, Button edit, Button cancel, Button addSkill){
-//		this.listSkill = listSkill;
-//		this.listSkillPanel = listSkillPanel;
-//		this.skillPanel = skillPanel;
-//		this.addSkillPanel = addSkillPanel;
-//		this.bodyLayout = bodyLayout;
-//		this.footerLayout = footerLayout;
-//		this.skillLabel = skillLabel;
-//		this.edit = edit;
-//		this.cancel = cancel;
-//		this.addSkill = addSkill;
-//		setImmediate(true);
-//
-//		buildObersvators();
-//		mainBuild();
-//	}
-	
+
 	
 	/**
 	 * The main builder

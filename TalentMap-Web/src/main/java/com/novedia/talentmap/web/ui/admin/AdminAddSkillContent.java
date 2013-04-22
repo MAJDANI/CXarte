@@ -8,15 +8,13 @@ import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
-import com.novedia.talentmap.web.util.CUtils;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -85,19 +83,6 @@ public class AdminAddSkillContent extends VerticalLayout implements ClickListene
 		return this;
 	}
 	
-	/**
-	 * Build the class AddSkillContent.java
-	 * 
-	 * @param formSkill
-	 * @param treeSkill
-	 * @param save
-	 */
-//	public AdminAddSkillContent(IAdminService adminService) {
-//		super();
-//		this.adminService = adminService;
-//
-//		mainBuild();
-//	}
 
 	/**
 	 * The main build components

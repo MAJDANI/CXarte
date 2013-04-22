@@ -3,7 +3,6 @@ package com.novedia.talentmap.web.ui.profile.mission;
 import java.util.List;
 
 import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.vaadin.data.util.BeanItemContainer;
 
@@ -19,10 +18,6 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 		super(Mission.class);
 	}
 
-//	public MissionContainer(IColleagueService collabService){
-//		super(Mission.class);
-//		this.collabService = collabService;
-//	}
 	
 	/**
 	 * Calls the CollaboratorService to retrieve all missions in tha Data Base

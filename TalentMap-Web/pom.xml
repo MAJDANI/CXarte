@@ -16,8 +16,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- <vaadin.version>6.8.3</vaadin.version>
-    <gwt.version>2.3.0</gwt.version> -->
     <vaadin.version>6.8.7</vaadin.version> 
     <jetty-plugin.version>6.1.24</jetty-plugin.version>
     <gwt.plugin.version>2.2.0</gwt.plugin.version> 
@@ -25,6 +23,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <aspectj-maven-plugin.version>1.3</aspectj-maven-plugin.version>
     <javax.version>2.5</javax.version>
     <tomcat-maven-plugin.version>1.1</tomcat-maven-plugin.version>
+    <talentmap.services.version>3.0-SNAPSHOT</talentmap.services.version>
   </properties>
 
   <build>
@@ -68,57 +67,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          </configuration>
       </plugin>
 
-      <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
-      <!--
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>${gwt.plugin.version}</version>
-        <configuration>
-          <webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
-          <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-          <runTarget>TalentMap-Web</runTarget>
-          <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-          <noServer>true</noServer>
-          <port>8080</port>
-          <compileReport>false</compileReport>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>resources</goal>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <version>${gwt.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-maven-plugin</artifactId>
-        <version>1.0.2</version>
-        <executions>
-          <execution>
-            <configuration>
-            </configuration>
-            <goals>
-              <goal>update-widgetset</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      -->
       
 	  <!-- To launch embded tomcat server -->
       <plugin>
@@ -179,7 +127,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <dependency>
 		<groupId>com.novedia.talentmap</groupId>
 		<artifactId>TalentMap-Services</artifactId>
-		<version>2.2-SNAPSHOT</version>
+		<version>${talentmap.services.version}</version>
 	</dependency>
 	
 	<!-- Vaadin Add Ons dependency -->

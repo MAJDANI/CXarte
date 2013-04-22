@@ -3,6 +3,7 @@
 		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 		
 <sqlMapConfig>
+    <properties resource="constants.properties"/>
     <settings useStatementNamespaces="true"/>
     <sqlMap resource="maps/sqlmap-businessengineer.xml"/>
     <sqlMap resource="maps/sqlmap-colleague.xml"/>

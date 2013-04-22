@@ -25,16 +25,6 @@ public class AddMissionPanel extends Panel {
 		return this;
 	}
 
-	/**
-	 * Build the class AddMissionPanel.java 
-	 * @param missionForm
-	 */
-//	public AddMissionPanel(MissionForm missionForm) {
-//		super();
-//		this.missionForm = missionForm;
-//		
-//		mainBuild();
-//	}
 	
 	/**
 	 * The main builder

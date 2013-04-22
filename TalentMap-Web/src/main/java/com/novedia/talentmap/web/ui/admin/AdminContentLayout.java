@@ -3,7 +3,6 @@ package com.novedia.talentmap.web.ui.admin;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.util.IAdminContentLayout;
-import com.novedia.talentmap.web.util.IAdminView;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
@@ -11,10 +10,6 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class AdminContentLayout extends HorizontalLayout {
 
-	/**
-	 * Util Observateur
-	 */
-	private IAdminView obs;
 
 	/**
 	 * All views
@@ -50,24 +45,6 @@ public class AdminContentLayout extends HorizontalLayout {
 		return this;
 	}
 
-
-	/**
-	 * Build the class AdminView.java
-	 */
-//	public AdminContentLayout(AdminNavigation adminNav, ManageSkillContent manageSkillContent, 
-//			AdminAddSkillContent addSkillContent, HorizontalSplitPanel hSplitContent,AdminDeleteColleagueContent deleteColleagueContent) {
-//		super();
-//		this.adminNav = adminNav;
-//		this.manageSkillContent = manageSkillContent;
-//		this.addSkillContent = addSkillContent;
-//		this.hSplitContent = hSplitContent;
-//		
-//		this.deleteColleagueContent = deleteColleagueContent;
-//
-//		mainBuild();
-//
-//		buildObservators();
-//	}
 
 	private void buildObservators() {
 
@@ -105,10 +82,8 @@ public class AdminContentLayout extends HorizontalLayout {
 	 */
 	public void mainBuild() {
 
-		//initView();
-		
 		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.setHeight(600);
+		vLayout.setHeight("600px");
 		vLayout.addComponent(this.adminNav.buildAdminNavigation());
 		this.hSplitContent.setFirstComponent(vLayout);
 		this.hSplitContent.setSecondComponent(this.manageSkillContent.buildViewManageSkillContent());
@@ -119,13 +94,6 @@ public class AdminContentLayout extends HorizontalLayout {
 		setExpandRatio(this.hSplitContent, 1);
 	}
 	
-//	public void initView(){
-//		
-//		this.manageSkillContent.setVisible(true);
-//		this.addSkillContent.setVisible(false);
-//		this.deleteColleagueContent.setVisible(false);
-//	}
-
 	/**
 	 * Set the navLink value
 	 * 
