@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.search;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.vaadin.ui.VerticalLayout;
 
 public class SearchView extends VerticalLayout {
@@ -12,6 +13,7 @@ public class SearchView extends VerticalLayout {
 	 * Vaadin UI
 	 */
 	private SearchLayout searchLayout;
+	private Authentication authentication;
 	
 	
 	/**
@@ -23,6 +25,7 @@ public class SearchView extends VerticalLayout {
 	
 	public SearchView buildSearchView(){
 		removeAllComponents();
+		searchLayout.setAuthentication(authentication);
 		searchLayout = searchLayout.buildSearchLayout();
 		mainBuild();
 		return this;
@@ -58,6 +61,14 @@ public class SearchView extends VerticalLayout {
 	 */
 	public void setSearchLayout(SearchLayout searchLayout) {
 		this.searchLayout = searchLayout;
+	}
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
 	
 	

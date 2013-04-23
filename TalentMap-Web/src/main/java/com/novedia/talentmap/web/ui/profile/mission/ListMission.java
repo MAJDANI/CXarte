@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
+import com.vaadin.data.Property;
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
@@ -43,7 +44,7 @@ public class ListMission extends Table {
 	
 	
 	public void buildMain(){
-		setWidth("900px");
+		setWidth("1000px");
 		buildContainer();
 	}
 
@@ -97,10 +98,15 @@ public class ListMission extends Table {
 				}
 
 			}
-				addItem(new Object[] { mission.getTitle(),
-						mission.getClient().getName(), mission.getPlace(),
-						dateDebut, dateFin, mission.getNotes(), toolNames[0],
-						toolNames[1], toolNames[2] }, mission);
+			//Extrait du champ commentaire aux 25 premiers caractères pour affichage dans le tableau
+			String notes = mission.getNotes();
+			if (notes != null && notes.length() >=25) {
+				notes = notes.substring(0, 25) + "[...]";
+			}
+			addItem(new Object[] { mission.getTitle(),
+					mission.getClient().getName(), mission.getPlace(),
+					dateDebut, dateFin, notes, toolNames[0],
+					toolNames[1], toolNames[2] }, mission);
 		}
 	}
 

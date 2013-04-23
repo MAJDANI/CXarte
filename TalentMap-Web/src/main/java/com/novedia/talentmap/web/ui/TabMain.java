@@ -62,18 +62,23 @@ public class TabMain extends TabSheet {
 			profileView.setAuthentication(getAuthentication());
 			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 		} else if(role.equals(Role.IA)){    //IA
+			searchView.setAuthentication(getAuthentication());
 			searchView = searchView.buildSearchView();
 			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 		} else if (role.equals(Role.CM)) {  //CM
+			profileView.setAuthentication(getAuthentication());
+			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 			cmView.setAuthentication(getAuthentication());
 			cmView = cmView.buildCmView();
 			addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
 			//Les deux lignes ci-dessous pour tester le code créé par Véronique
-			monitoringCollabView = monitoringCollabView.mainBuild();
-			addTab(monitoringCollabView,"Monitoring");
+//			monitoringCollabView = monitoringCollabView.mainBuild();
+//			addTab(monitoringCollabView,"Monitoring");
 		} else if (role.equals(Role.RH)) {  //RH
-			searchView = searchView.buildSearchView();
-			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
+			profileView.setAuthentication(getAuthentication());
+			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+			searchView.setAuthentication(getAuthentication());
+			addTab(searchView.buildSearchView(), ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 //			rhContentLayout = rhContentLayout.init();
 //			addTab(rhContentLayout,"rh");
 		}

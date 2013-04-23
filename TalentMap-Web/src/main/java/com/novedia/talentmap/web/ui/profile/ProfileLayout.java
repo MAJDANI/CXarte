@@ -84,6 +84,7 @@ public class ProfileLayout extends HorizontalLayout {
 	public void mainBuild() {
 		
 		VerticalLayout vLayout = new VerticalLayout();
+		this.profileNavigation.setRoleId(authentication.getAuthorization().getRoleId());
 		vLayout.addComponent(this.profileNavigation.mainBuild());
 		vLayout.setHeight("800px");
 

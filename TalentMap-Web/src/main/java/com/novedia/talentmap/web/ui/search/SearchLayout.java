@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.search;
 
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.util.ISearchLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
@@ -18,6 +19,7 @@ public class SearchLayout extends HorizontalLayout{
 	private SearchContent searchContent;
 	private HorizontalSplitPanel hSplitPanel;
 	private SearchNavigation searchNavigation;
+	private Authentication authentication;
 	
 	/**
 	 * Default Constructor
@@ -29,6 +31,8 @@ public class SearchLayout extends HorizontalLayout{
 	public SearchLayout buildSearchLayout(){
 		removeAllComponents();
 		searchNavigation = searchNavigation.buildSearchNavigationView();
+		//ICI VGU
+		searchContent.setAuthentication(authentication);
 		searchContent = searchContent.buildSearchContentView();
 		buildObservators();
 		mainBuild();
@@ -115,6 +119,14 @@ public class SearchLayout extends HorizontalLayout{
 	 */
 	public void setSearchNavigation(SearchNavigation searchNavigation) {
 		this.searchNavigation = searchNavigation;
+	}
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
 	}
 
 	

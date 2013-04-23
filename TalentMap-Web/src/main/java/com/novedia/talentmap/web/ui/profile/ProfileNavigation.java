@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.profile.mission.MissionCollaboratorContent;
 import com.novedia.talentmap.web.ui.profile.skill.SkillCollaboratorContent;
@@ -23,6 +24,7 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,Ite
 	 */
 	private Class<?> cl = ProfileCollaboratorContent.class;
 
+	private Integer roleId;
 	
 	/**
 	 * Navigation tree
@@ -58,8 +60,18 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,Ite
 		String firstElement ;
 		String firstEl;
 		tree = new Tree();
-		Object[][] subItems = ConstantsForMenuEnglish.subItemProfilNav;
-		int nbItem = subItems.length;
+		Object[][] subItems = null;
+		//On construit le menu en fonction du Role de la personne connectée
+		if((Authorization.Role.RH.getId().equals(roleId))) {
+			subItems = ConstantsForMenuEnglish.subItemProfilNavForRH;
+		} else if((Authorization.Role.CL.getId().equals(roleId))) {
+			subItems = ConstantsForMenuEnglish.subItemProfilNavForCL;
+		} else if((Authorization.Role.CM.getId().equals(roleId))) {
+			subItems = ConstantsForMenuEnglish.subItemProfilNavForCM;
+		}
+		int nbItem = 0;
+		if(subItems != null)
+			nbItem = subItems.length;
 		for (int i = 0; i < nbItem; i++) {			
 			firstEl = (String) subItems[i][0];
 			tree.addItem(firstEl);
@@ -128,6 +140,16 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,Ite
 	@Override
 	public void delObservateur() {
 		this.obs = null;
+	}
+
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 	
 

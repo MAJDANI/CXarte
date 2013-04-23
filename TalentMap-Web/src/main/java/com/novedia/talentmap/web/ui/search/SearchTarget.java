@@ -334,12 +334,14 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 							this.listCollab = this.collabService
 									.getCmColleaguesByName(collabName,
 											authentication.getColleagueId());
-						}
-					} else {
-						this.listCollab = this.collabService
+						} else {
+							this.listCollab = this.collabService
 								.getAllColleaguesByName(collabName);
+						}
+						updateObservateur();
+					} else {
+						//DO STH
 					}
-					updateObservateur();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -380,10 +382,11 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 							this.listCollab = this.collabService
 									.getCmColleaguesByName(valueField,
 											authentication.getColleagueId());
+						
+						} else {
+							this.listCollab = this.collabService
+									.getAllColleaguesByName(valueField);
 						}
-					} else {
-						this.listCollab = this.collabService
-								.getAllColleaguesByName(valueField);
 					}
 					updateObservateur();
 

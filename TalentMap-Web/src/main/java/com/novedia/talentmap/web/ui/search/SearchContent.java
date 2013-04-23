@@ -59,6 +59,7 @@ public class SearchContent extends VerticalLayout {
 		removeAllComponents();
 		searchTarget.setAuthentication(getAuthentication());
 		searchTarget = searchTarget.buildSearchTargetView();
+		searchResults.setRoleId(getAuthentication().getAuthorization().getRoleId());
 		searchResults = searchResults.buildSearchResultsView();
 		buildObservators();
 		mainBuild();

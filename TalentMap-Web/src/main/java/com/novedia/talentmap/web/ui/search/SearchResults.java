@@ -3,6 +3,8 @@ package com.novedia.talentmap.web.ui.search;
 import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
@@ -19,6 +21,8 @@ public class SearchResults extends PagedTable {
 	 */
 	private static final long serialVersionUID = -1983028405136383549L;
 
+	private Integer roleId;
+	
 	/**
 	 * Factoriser cette constante qui est aussi utilisée dans
 	 * MonitoringCollabContent VGU TODO
@@ -28,7 +32,7 @@ public class SearchResults extends PagedTable {
 
 
 	/**
-	 * Vaadin UI VGU
+	 * Vaadin UI
 	 */
 	private ProfileCollabWindow profileCollabWindow;
 	private ListMissionCollabWindow listMissionWindow;
@@ -138,8 +142,8 @@ public class SearchResults extends PagedTable {
 				Button btnListener = event.getButton();
 				Colleague currentColleague = (Colleague) btnListener.getData();
 
-				SearchResults.this.listMissionWindow
-						.setCurrentColleague(currentColleague);
+				SearchResults.this.listMissionWindow.setCurrentColleague(currentColleague);
+				SearchResults.this.listMissionWindow.setRole(getRoleId());
 				SearchResults.this.listMissionWindow.mainBuild();
 				
 				getWindow().addWindow(
@@ -163,5 +167,14 @@ public class SearchResults extends PagedTable {
 	public void setListMissionWindow(ListMissionCollabWindow listMissionWindow) {
 		this.listMissionWindow = listMissionWindow;
 	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
 
 }
