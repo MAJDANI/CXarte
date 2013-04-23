@@ -16,6 +16,12 @@ import com.novedia.talentmap.model.entity.VSkill;
 public interface IAdminService {
 
 /**
+* Get a tool by its id.
+* @return a tool.
+*/
+Tool getTool(Integer toolId);
+	
+/**
 * Gets all tools.
 * @return a list of tools.
 */

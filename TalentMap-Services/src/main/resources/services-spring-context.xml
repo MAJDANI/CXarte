@@ -40,6 +40,10 @@
 		<property name="vSkillCollabDao" ref="vSkillCollabDao" />
 	</bean>
 	
+	<bean id="notificationService" class="com.novedia.talentmap.services.impl.NotificationService">
+		<property name="notificationDao"        ref="notificationDao"/>
+	</bean>
+	
 	<bean id="mapNotification" class="java.util.HashMap" />
 	
 	<bean id="adminService" class="com.novedia.talentmap.services.impl.AdminService">

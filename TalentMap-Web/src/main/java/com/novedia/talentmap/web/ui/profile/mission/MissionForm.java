@@ -6,9 +6,15 @@ import java.util.Vector;
 
 import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Mission;
+import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.model.entity.UserNotification;
+import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.INotificationService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.formFactory.MissionFormFieldFactory;
@@ -51,6 +57,8 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	
 	private IClientService clientService;
 	private ISkillService skillService;
+	private IColleagueService colleagueService;
+	private INotificationService notificationService;
 
 	/**
 	 * POJO
@@ -94,6 +102,10 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final int VALIDATION_INVALID_PERIOD = 1;
 	public static final int VALIDATION_INVALID_SELECTION = 2;
 	public static final int VALIDATION_VALID_FORM = 3;
+	
+	//2 constants to create a notification
+	public static final String ADD_MISSION = "ADD";
+	public static final String UPDATE_MISSION = "UPDATE";
 	
 	private String currentAction;
 	private String currentSaveMode;
@@ -204,9 +216,11 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
 					missionToInsert.setColleagueId(authentication.getColleagueId());
+					CmNotification(ADD_MISSION, missionToInsert);
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
+					CmNotification(UPDATE_MISSION, missionToInsert);
 					updateMission(missionToInsert);
 				}
 				break;
@@ -414,8 +428,30 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.obs = null;
 	}
 	
-	
-	
+	public void CmNotification(String type, MissionDto mission) {
+		if (type.equals(ADD_MISSION)) {
+			Colleague c = colleagueService.getColleague(mission.getColleagueId());
+
+			String comment = c.getFirstName() + " " + c.getLastName()
+					+ " added mission " + mission.getTitle();
+			Date date = new Date();
+			UserNotification notification = UserNotification.builder()
+					.colleagueId(mission.getColleagueId()).notes(comment)
+					.date(date).build();
+			this.notificationService.saveNotification(notification);
+		}
+		else if (type.equals(UPDATE_MISSION)) {
+			Colleague c = colleagueService.getColleague(mission.getColleagueId());
+
+			String comment = c.getFirstName() + " " + c.getLastName()
+					+ " updated mission " + mission.getTitle();
+			Date date = new Date();
+			UserNotification notification = UserNotification.builder()
+					.colleagueId(mission.getColleagueId()).notes(comment)
+					.date(date).build();
+			this.notificationService.saveNotification(notification);
+		}
+	}
 	/**
 	 * Set the fieldOrderMission value
 	 * 
@@ -504,6 +540,22 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
+	
+	public INotificationService getNotificationService() {
+		return notificationService;
+	}
+
+	public void setNotificationService(INotificationService notificationService) {
+		this.notificationService = notificationService;
+	}
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
+	}
 
 
 	public Authentication getAuthentication() {
@@ -529,6 +581,5 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void setListMission(ListMission listMission) {
 		this.listMission = listMission;
 	}
-
 	
 }

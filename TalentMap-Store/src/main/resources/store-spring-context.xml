@@ -76,4 +76,9 @@
 	<bean id="businessEngineerDao" class="com.novedia.talentmap.store.impl.BusinessEngineerDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
+	
+		<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+	
 </beans>

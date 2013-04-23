@@ -20,4 +20,5 @@
 <!--     <sqlMap resource="maps/sqlmap-task.xml"/> -->
     <sqlMap resource="maps/sqlmap-authentification.xml"/>
     <sqlMap resource="maps/sqlmap-mission_tool.xml"/>
+    <sqlMap resource="maps/sqlmap-user_notification.xml"/>
 </sqlMapConfig>

@@ -421,8 +421,8 @@ public static final String ADD_USER_FROM_REGISTRATION = "authentication.addUserF
 
 public static final String AUTHENTIFICATION_COUNT_LOGIN= "authentication.countLogin";
 
+//NOTIFICATION REQUESTS
 
-
-
+public static final String SAVE_NOTIFICATION= "user_notification.saveNotification";
 
 }

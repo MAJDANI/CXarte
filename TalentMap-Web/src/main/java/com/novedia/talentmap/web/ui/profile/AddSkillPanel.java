@@ -1,14 +1,21 @@
 package com.novedia.talentmap.web.ui.profile;
 
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.vaadin.teemu.ratingstars.RatingStars;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.model.entity.UserNotification;
 import com.novedia.talentmap.model.entity.VSkill;
+import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.INotificationService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.data.FrequencyUse;
@@ -49,6 +56,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * TalentMap Services
 	 */
 	private ISkillService skillService;
+	private INotificationService notificationService;
+	private IColleagueService colleagueService;
+	private IAdminService adminService;
 
 	private Authentication authentication;
 	/**
@@ -89,36 +99,40 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 * Vaadin Buttons
 	 */
 	private Button validSkill;
-	
+
+	private String ADD_SKILL = "ADD";
+	private String UPDATE_SKILL = "UPDATE";
+
+
 	/**
 	 * Flag
 	 */
 	private boolean isNewSkill;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public AddSkillPanel(){
+	public AddSkillPanel() {
 		super();
 	}
-	
+
 	/**
 	 * Build view of buildAddSkillPanel
+	 * 
 	 * @return
 	 */
-	public AddSkillPanel buildAddSkillPanel(){
+	public AddSkillPanel buildAddSkillPanel() {
 		removeAllComponents();
 		setImmediate(true);
 		try {
 			buildWindow();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return this;
 	}
-	
-	
+
 	/**
 	 * Build all components in the main window
 	 * 
@@ -161,7 +175,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		hLayout.addComponent(this.stars);
 		hLayout.addComponent(this.noUsingTimeSelect);
 		hLayout.addComponent(this.frequencyUseSelect);
-		
+
 		hLayout.setSpacing(true);
 
 		// We add the Horizontal Layout and the Button in the Vertical Layout
@@ -234,7 +248,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		stars.setAnimated(true);
 		stars.setMaxValue(5);
 		stars.setWidth("150px");
-		
 
 		for (int i = 0; i < ConstantsEnglish.OPTIONS.length; i++) {
 			stars.setValueCaption(i + 1, ConstantsEnglish.OPTIONS[i]);
@@ -252,19 +265,19 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 		// We fill only the Tool Select
 		List<Tool> listTool = skillService.getAllTools();
-//		System.out.println("***listTool*** : "+ listTool);
+		// System.out.println("***listTool*** : "+ listTool);
 		for (Tool t : listTool) {
 			this.toolSelect.addItem(t.getName());
-			//Item i = this.toolSelect.addItem(t.getName());
-			//Item i2 = this.toolSelect.addItem(t);
-//			i.addItemProperty(t.getId(), t.getName());
+			// Item i = this.toolSelect.addItem(t.getName());
+			// Item i2 = this.toolSelect.addItem(t);
+			// i.addItemProperty(t.getId(), t.getName());
 		}
 
 		// We fill the Frequency Use
 		for (FrequencyUse fu : FrequencyUse.values()) {
 			this.frequencyUseSelect.addItem(fu.getValue());
 		}
-		
+
 		// We fill the No Using Time
 		for (TimeUse tu : TimeUse.values()) {
 			this.noUsingTimeSelect.addItem(tu.getValue());
@@ -301,7 +314,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 						ConstantsEnglish.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 			} else {
-				
+
 				this.addOneSkill();
 			}
 
@@ -314,7 +327,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 			Tool tool = skillService.getToolByName(this.toolSelect.getValue()
 					.toString());
-//			System.out.println(" **tool** = " + tool);
+			// System.out.println(" **tool** = " + tool);
 
 			Double starsValue = (Double) this.stars.getValue();
 			int frequencyUseValue = 0;
@@ -333,7 +346,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					noUsingTimeValue = tu.getId();
 				}
 			}
-			
+
 			Skill skill = new Skill();
 
 			skill.setColleagueId(authentication.getColleagueId());
@@ -341,28 +354,27 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			skill.setScore(starsValue.intValue());
 			skill.setUse_frequency(frequencyUseValue);
 			skill.setNo_using_time(noUsingTimeValue);
-			
-//			System.out.println(" **skill** = " + skill);
-			
+
+			// System.out.println(" **skill** = " + skill);
+
 			// Test if it's a new skill or not
-			if(this.isNewSkill){
-				
+			if (this.isNewSkill) {
+
 				// Check if the Collaborator already have the Skill
 				if (!hasSkill(tool.getId())) {
-					
+
 					addOneNewSkill(skill);
 
 				} else {
 
-					getWindow().showNotification(
-							"You already have this skill",
+					getWindow().showNotification("You already have this skill",
 							Notification.TYPE_WARNING_MESSAGE);
 				}
-				
-			}else{
-				
+
+			} else {
+
 				updateOneSkill(skill);
-				
+
 			}
 
 		} catch (Exception e) {
@@ -370,9 +382,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			e.printStackTrace();
 		}
 	}
-	
-	private void updateOneSkill(Skill skill) throws Exception{
-		
+
+	private void updateOneSkill(Skill skill) throws Exception {
+		CmNotification(UPDATE_SKILL, skill);
 		this.skillService.saveSkill(skill);
 
 		getWindow().showNotification("Skill changed",
@@ -380,22 +392,22 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 		this.updateMapSkill();
 	}
-	
-	private void addOneNewSkill(Skill skill) throws Exception{
-		
+
+	private void addOneNewSkill(Skill skill) throws Exception {
+		CmNotification(ADD_SKILL, skill);
 		this.skillService.addSkill(skill);
 
 		getWindow().showNotification("Skill added",
 				Notification.TYPE_TRAY_NOTIFICATION);
 
 		this.updateMapSkill();
-		
+
 	}
-	
-	private void updateMapSkill() throws Exception{
-		
+
+	private void updateMapSkill() throws Exception {
+
 		this.listSkill = listSkill.buildListSkill();
-		
+
 		this.updateObservateur();
 	}
 
@@ -409,21 +421,22 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	 */
 	private boolean hasSkill(Integer tId) {
 		Skill skill = null;
-		
+
 		try {
 
-			skill = this.skillService.getSkillByToolId(authentication.getColleagueId(), tId);
+			skill = this.skillService.getSkillByToolId(
+					authentication.getColleagueId(), tId);
 
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		
-		if (skill == null){
+
+		if (skill == null) {
 			return false;
 		} else {
 			return true;
-			
+
 		}
 	}
 
@@ -438,8 +451,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		if (property == this.toolSelect) {
 
 			try {
-				//TODO : this.toolSelect.getValue().toString() lance une NPE quand on est dans le cas où on fait 
-				//un "Add Skill" : il n'y a pas de value dans toolSelect
+				// TODO : this.toolSelect.getValue().toString() lance une NPE
+				// quand on est dans le cas où on fait
+				// un "Add Skill" : il n'y a pas de value dans toolSelect
 				String toolValue = "";
 				if (this.toolSelect.getValue() != null) {
 					toolValue = this.toolSelect.getValue().toString();
@@ -456,8 +470,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 
 	/**
-	 * The Concept Select is updated by the choice of the Category
-	 * TODO : a revoir !!
+	 * The Concept Select is updated by the choice of the Category TODO : a
+	 * revoir !!
+	 * 
 	 * @class AddSkillPanel.java
 	 * @param categorytName
 	 * @throws Exception
@@ -465,7 +480,8 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	private void updateSelect(String toolName) throws Exception {
 		VSkill skill = null;
 		if (toolName != "" && toolName != null) {
-			//TODO Question : un appel à la base à chaque sélection d'outil dans la combo?
+			// TODO Question : un appel à la base à chaque sélection d'outil
+			// dans la combo?
 			skill = skillService.getSkillByTool(toolName);
 		}
 		if (skill != null) {
@@ -492,6 +508,34 @@ public class AddSkillPanel extends Panel implements ClickListener,
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	public void CmNotification(String type, Skill skill) {
+		
+		if (type.equals(ADD_SKILL)) {
+			Colleague c = colleagueService.getColleague(skill.getColleagueId());
+			Tool t = adminService.getTool(skill.getTool_id());
+
+			String comment = c.getFirstName() + " " + c.getLastName()
+					+ " added tool " + t.getName();
+			Date date = new Date();
+			UserNotification notification = UserNotification.builder()
+					.colleagueId(skill.getColleagueId()).notes(comment)
+					.date(date).build();
+			this.notificationService.saveNotification(notification);
+		}
+		else if (type.equals(UPDATE_SKILL)) {
+			Colleague c = colleagueService.getColleague(skill.getColleagueId());
+			Tool t = adminService.getTool(skill.getTool_id());
+
+			String comment = c.getFirstName() + " " + c.getLastName()
+					+ " updated tool " + t.getName();
+			Date date = new Date();
+			UserNotification notification = UserNotification.builder()
+					.colleagueId(skill.getColleagueId()).notes(comment)
+					.date(date).build();
+			this.notificationService.saveNotification(notification);
 		}
 	}
 
@@ -624,9 +668,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	public void setSkillTab(Accordion skillTab) {
 		this.skillTab = skillTab;
 	}
-	
+
 	/**
 	 * Get the toolSelect value
+	 * 
 	 * @return the toolSelect
 	 */
 	public Select getToolSelect() {
@@ -634,21 +679,20 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 
 	/**
-	 * This Methods empties all selections in the Add Skill Panel : The tool selected,
-	 * Stars given, no using time and frequency use. 
-	 * The first idea was to select an "empty" choice in each Select, but as it didn't
-	 * work, here we empty each select and refill completely in order to have
-	 * the expected behavior. 
-	 * TODO : change the solution
+	 * This Methods empties all selections in the Add Skill Panel : The tool
+	 * selected, Stars given, no using time and frequency use. The first idea
+	 * was to select an "empty" choice in each Select, but as it didn't work,
+	 * here we empty each select and refill completely in order to have the
+	 * expected behavior. TODO : change the solution
 	 */
-	public void eraseAllSelects()  {
+	public void eraseAllSelects() {
 		toolSelect.removeAllItems();
-		frequencyUseSelect.removeAllItems(); 
+		frequencyUseSelect.removeAllItems();
 		noUsingTimeSelect.removeAllItems();
 		fillSelect();
 		stars.setValue(0);
 	}
-	
+
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
 		this.obs = (IProfileView) observateur;
@@ -663,9 +707,10 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	public void delObservateur() {
 		this.obs = null;
 	}
-	
+
 	/**
 	 * Get the isNewSkill value
+	 * 
 	 * @return the isNewSkill
 	 */
 	public boolean isNewSkill() {
@@ -674,7 +719,9 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 	/**
 	 * Set the isNewSkill value
-	 * @param isNewSkill the isNewSkill to set
+	 * 
+	 * @param isNewSkill
+	 *            the isNewSkill to set
 	 */
 	public void setNewSkill(boolean isNewSkill) {
 		this.isNewSkill = isNewSkill;
@@ -704,7 +751,28 @@ public class AddSkillPanel extends Panel implements ClickListener,
 		return validSkill;
 	}
 
-	
-	
+	public INotificationService getNotificationService() {
+		return notificationService;
+	}
+
+	public void setNotificationService(INotificationService notificationService) {
+		this.notificationService = notificationService;
+	}
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
+	}
+
+	public IAdminService getAdminService() {
+		return adminService;
+	}
+
+	public void setAdminService(IAdminService adminService) {
+		this.adminService = adminService;
+	}
 
 }

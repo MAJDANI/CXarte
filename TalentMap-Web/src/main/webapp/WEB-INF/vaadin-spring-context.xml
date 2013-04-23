@@ -116,6 +116,8 @@
 		scope="session">
 		<property name="collabService" ref="collaboratorService" />
 		<property name="clientService" ref="clientService" />
+		<property name="notificationService" ref="notificationService" />
+		<property name="colleagueService" ref="collaboratorService" />
 		<property name="fieldOrderMission" ref="fieldOrderMissionFormBean" />
 		<property name="missionForm" ref="missionForm" />
 		<property name="save" ref="saveMissionButton" />
@@ -200,6 +202,9 @@
 		scope="session">
 		<property name="skillTab" ref="skillTab" />
 		<property name="skillService" ref="skillService" />
+		<property name="notificationService" ref="notificationService" />
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="adminService" ref="adminService" />
 		<property name="listSkill" ref="listSkillBean" />
 		<property name="categoryLabel" ref="categoryLabel" />
 		<property name="conceptLabel" ref="conceptLabel" />

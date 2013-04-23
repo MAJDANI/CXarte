@@ -73,6 +73,15 @@ private Map<String, Object> mapNotification;
  * {@inheritDoc}
  */
 @Override
+public Tool getTool(Integer toolId) throws DataAccessException { 
+	return toolDao.get(toolId);
+}
+
+
+/**
+ * {@inheritDoc}
+ */
+@Override
 public List<Tool> getAllTools() throws DataAccessException { 
 	return toolDao.getAll();
 }
