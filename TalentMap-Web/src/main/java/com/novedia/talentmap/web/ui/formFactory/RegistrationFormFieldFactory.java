@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.ui.formFactory;
 
+import java.util.List;
+
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
@@ -10,7 +12,6 @@ import com.novedia.talentmap.web.commons.ConstantsEnglish;
 import com.novedia.talentmap.web.ui.registration.RegistrationForm;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Field;
@@ -140,20 +141,19 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 				}			
 				
 				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_PROFILE_FIELD)){
-					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(ConstantsEnglish.REGISTRATION_SELECT_VALUE, String.class, null);
-					
 					Select profilSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : "); 
 					profilSelect.setWidth((String) ConstantsEnglish.REGISTRATION_COMPONENT_SIZE);
 					try {
-						for(Profile p : registrationService.getAllProfile()){
-							item = ic.addItem(p.getId());
-							item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(p.getType());
-						}
+						List<Profile> allProfile = registrationService.getAllProfile();
+						profilSelect.addItem(ConstantsEnglish.DEFAULT_SELECTED_CHOICE);
+						profilSelect.setItemCaption(ConstantsEnglish.DEFAULT_SELECTED_CHOICE, 
+								ConstantsEnglish.DEFAULT_CAPTION_SELECTED_JOB);
 						
-						profilSelect.setContainerDataSource(ic);
+						for(Profile p : allProfile){
+							profilSelect.addItem(p.getId());
+							profilSelect.setItemCaption(p.getId(), p.getType());
+						}
 						profilSelect.setRequired(true);
-						profilSelect.setItemCaptionPropertyId(ConstantsEnglish.REGISTRATION_SELECT_VALUE);
 						profilSelect.setNullSelectionAllowed(false);
 						profilSelect.setImmediate(true);
 						
@@ -166,27 +166,34 @@ public class RegistrationFormFieldFactory implements FormFieldFactory {
 				}
 				
 				else if(propertyId.equals(ConstantsEnglish.REGISTRATION_BUSINESS_ENGINEER_FIELD) || propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
-					IndexedContainer ic = new IndexedContainer();
-			        ic.addContainerProperty(Constants.REGISTRATION_SELECT_VALUE, String.class, null);
-					
 					Select colleagueSelect = new Select((String) ConstantsEnglish.NAME_FIELD_REGISTRATION[i]+" : ");
 					colleagueSelect.setWidth((String) ConstantsEnglish.REGISTRATION_COMPONENT_SIZE);
 					
 					try {
 						if(propertyId.equals(ConstantsEnglish.REGISTRATION_MANAGER_FIELD)){
-							for(Colleague colleague : registrationService.getAllConsultantManager()){
-								item = ic.addItem(colleague.getId());
-								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(colleague.getFirstName() + " " + colleague.getLastName());
+							List<Colleague> allConsultantManager  = registrationService.getAllConsultantManager();
+							colleagueSelect.addItem(ConstantsEnglish.DEFAULT_SELECTED_CHOICE);
+							colleagueSelect.setItemCaption(ConstantsEnglish.DEFAULT_SELECTED_CHOICE, 
+									ConstantsEnglish.DEFAULT_CAPTION_SELECTED_MAMANGER);
+							
+							for(Colleague colleague : allConsultantManager){
+								colleagueSelect.addItem(colleague.getId());
+								colleagueSelect.setItemCaption(colleague.getId(), colleague.getFirstName() + " " + colleague.getLastName());
 							}
 						} else {
-							for(BusinessEngineer businessEngineer : businessEngineerService.getAllBusinessEngineer()){
-								item = ic.addItem(businessEngineer);
-								item.getItemProperty(Constants.REGISTRATION_SELECT_VALUE).setValue(businessEngineer.getFirstName() + " " + (businessEngineer.getLastName()));
+							List<BusinessEngineer> allBusinessEngineers = businessEngineerService.getAllBusinessEngineer();
+							
+							BusinessEngineer defaultBusinessEngineer = BusinessEngineer.builder().id(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).build(); 
+							colleagueSelect.addItem(defaultBusinessEngineer);
+							colleagueSelect.setItemCaption(defaultBusinessEngineer, 
+									ConstantsEnglish.DEFAULT_CAPTION_SELECTED_BUSINESSENGINEER);
+							for(BusinessEngineer businessEngineer : allBusinessEngineers){
+								colleagueSelect.addItem(businessEngineer);
+								colleagueSelect.setItemCaption(businessEngineer, businessEngineer.getFirstName() + " " + (businessEngineer.getLastName()));
 							}
 						}
-						colleagueSelect.setContainerDataSource(ic);
-						colleagueSelect.setItemCaptionPropertyId(ConstantsEnglish.REGISTRATION_SELECT_VALUE);
 						colleagueSelect.setImmediate(true);
+						colleagueSelect.setNullSelectionAllowed(false);
 						
 					} catch (Exception e) {
 						e.printStackTrace();

@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.registration;
 
 import java.util.Vector;
 
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
@@ -90,7 +91,13 @@ public class RegistrationForm extends FormLayout {
 		
 		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService, this.businessEngineerService, this));
 		
-		BeanItem<Item> registrationBean = new BeanItem(new Registration());
+		BusinessEngineer defaultBusinessEngineer = BusinessEngineer.builder().id(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).build(); 
+		Registration defaultRegistration = Registration.Builder.builder().
+				profileId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).
+				managerId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).
+				businessEngineer(defaultBusinessEngineer).build();
+		
+		BeanItem<Item> registrationBean = new BeanItem(defaultRegistration);
 		this.registrationForm.setItemDataSource(registrationBean, this.fieldOrderRegistration);
 
 		this.registrationForm.setImmediate(true);

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -135,6 +134,7 @@ public class Mission implements Serializable {
 	 * 
 	 * @return the startDate
 	 */
+	//@JsonSerialize(using = DateSerializer.class)
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -145,6 +145,7 @@ public class Mission implements Serializable {
 	 * @param startDate
 	 *            the startDate to set
 	 */
+	//@JsonSerialize(using = DateSerializer.class)
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}

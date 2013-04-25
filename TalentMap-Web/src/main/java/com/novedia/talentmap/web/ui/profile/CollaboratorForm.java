@@ -129,10 +129,7 @@ public class CollaboratorForm extends VerticalLayout {
 						this.profileService, this.businessEngineerService,
 						this.colleagueService,true));
 
-		// Colleague currentColleague =
-		// colleagueService.getColleague(COLLAB_ID);
-		Colleague currentColleague = colleagueService
-				.getColleague(authentication.getColleagueId());
+		Colleague currentColleague = colleagueService.getColleague(authentication.getColleagueId());
 		initFormColleagueData(currentColleague);
 
 		this.formCollaborator.setImmediate(true);

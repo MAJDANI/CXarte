@@ -10,7 +10,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.novedia.talentmap.model.entity.BusinessEngineer;
 /**
  * This entity represents a colleague.
  * 
@@ -210,6 +209,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @return the employmentDate
 	 */
+	//@JsonSerialize(using = DateSerializer.class)
 	public Date getEmploymentDate() {
 		return employmentDate;
 	}

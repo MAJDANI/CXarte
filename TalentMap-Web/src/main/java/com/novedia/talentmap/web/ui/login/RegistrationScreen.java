@@ -27,6 +27,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.Reindeer;
 
 /**
@@ -51,7 +52,6 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	 * Application
 	 */
 	private MyVaadinApplication myVaadinApplication;
-	
 	
 	/**
 	 * The authentication service
@@ -133,7 +133,6 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		save.addStyleName("logInButton");
 		this.save.addListener(this);
 		
-		//this.cancel.setCaption(ConstantsEnglish.CANCEL_BUTTON_NAME);
 		this.cancel.setCaption("Log In");
 		this.cancel.addListener(this);
 		cancel.addStyleName(Reindeer.BUTTON_LINK);
@@ -164,22 +163,33 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 			BeanItem<Registration> registrationItem = (BeanItem<Registration>) this.registrationForm.getRegistrationForm().getItemDataSource();
 			Registration registration = registrationItem.getBean();
 			Authentication authentication = null;
+			
 			//On ne vérifie pas la validité du Login et de l'email ici parce que leur gestion se passe dans le
 			//formulaire this.registrationForm.getRegistrationForm() : si l'un de ces champ n'est pas correct
 			//on vide le champ, jusqu'à ce que la saisie soit correcte.
 			if(!validateRegistrationForm()){
-				myVaadinApplication.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS);
+				getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS,
+						Notification.TYPE_ERROR_MESSAGE);
 			} else if ((!validatePassword())){
-				myVaadinApplication.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR);
+				getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR,
+						Notification.TYPE_ERROR_MESSAGE);
+			} else if(!checkSelectedItem(registration)) {
+				getWindow().showNotification(ConstantsEnglish.DEFAULT_CAPTION_SELECTED_JOB_MSG,
+						Notification.TYPE_ERROR_MESSAGE);
 			} else {
 				try {
-					//authentication = myVaadinApplication.register(registration);
+					if(registration.getManagerId().equals(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)){
+						registration.setManagerId(null);
+					}
+					if(registration.getBusinessEngineer().getId().equals(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)){
+						registration.getBusinessEngineer().setId(null);
+					}
 					authentication = register(registration);
 					authenticatedScreen.setAuthentication(authentication);
 					authenticatedScreen.setMyVaadinApplicationApplication(getMyVaadinApplication());
 					myVaadinApplication.getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 		} catch (TalentMapSecurityException e) {
-					myVaadinApplication.getMainWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
+					getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
 				}
 			}
 		}
@@ -228,7 +238,7 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	
 	/**
 	 * Test the registrationForm validity
-	 * @return
+	 * @return boolean
 	 */
 	private boolean validateRegistrationForm(){
 		
@@ -244,9 +254,25 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		return isValidRegistration;
 	}
 	
+	
+	/**
+	 * Check if required selected item has not default value
+	 * @param registration registration object that contains all item form
+	 * @return boolean false if default value of item is selected otherwise  true 
+	 */
+	private boolean checkSelectedItem(Registration registration){
+		Integer defaultChoice = ConstantsEnglish.DEFAULT_SELECTED_CHOICE;
+		boolean result = true;
+		if(registration.getProfileId().equals(defaultChoice)){
+			result = false;
+		}
+		return result;
+	}
+	
+	
 	/**
 	 * Test the password
-	 * @return
+	 * @return boolean
 	 */
 	private boolean validatePassword(){
 		

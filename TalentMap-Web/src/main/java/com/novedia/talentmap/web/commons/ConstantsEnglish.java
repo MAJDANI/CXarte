@@ -297,6 +297,13 @@ public class ConstantsEnglish {
 	public static final int COLLEAGUE_EMAIL_MAX_LENGTH = 50;
 	public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;
 	public static final int COLLEAGUE_EXPERIENCE_MAX_LENGTH = 2;
+	
+	
+	public static final Integer DEFAULT_SELECTED_CHOICE = 0; 
+	public static final String DEFAULT_CAPTION_SELECTED_JOB = "Select your Profile";
+	public static final String DEFAULT_CAPTION_SELECTED_BUSINESSENGINEER = "Select your businessEnginer";
+	public static final String DEFAULT_CAPTION_SELECTED_MAMANGER = "Select your Manager";
+	public static final String DEFAULT_CAPTION_SELECTED_JOB_MSG = "Please select your job title";
 
 	
 }

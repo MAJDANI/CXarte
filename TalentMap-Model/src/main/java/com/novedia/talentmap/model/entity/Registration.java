@@ -115,221 +115,221 @@ public class Registration {
 		this.setManagerId(builder.managerId);
 	}
 	
+	
 	// -------------------------------------
 		// ------------ BUILDER PART -----------
 		// -------------------------------------
 		
 
+	/**
+	 * Inner builder class.
+	 * 
+	 * @author y.rohr
+	 */
+	public static class Builder {
+
+		private Integer colleagueId;
+
+		private Integer authenticationId;
+
+		private String firstName;
+
+		private String lastName;
+
+		private String email;
+
+		private String phone;
+
+		private String login;
+
+		private String password;
+
+		private String passwordConfirm;
+
+		private Date employmentDate;
+
+		private Integer experience;
+
+		private BusinessEngineer businessEngineer;
+
+		private Integer profileId;
+
+		private Integer managerId;
 
 		/**
-		 * Inner builder class.
+		 * Set colleague id
 		 * 
-		 * @author y.rohr
+		 * @param colleague id
+		 * @return the builder
 		 */
-		public static class Builder {
-			
-			private Integer colleagueId;
-			
-			private Integer authenticationId;
-			
-			private String firstName;
-			
-			private String lastName;
-			
-			private String email;
-			
-			private String phone;
-			
-			private String login;
-			
-			private String password;
-			
-			private String passwordConfirm;
-			
-			private Date employmentDate;
-			
-			private Integer experience;
-			
-			private BusinessEngineer businessEngineer;
-			
-			private Integer profileId;
-			
-			private Integer managerId;
-
-			/**
-			 * Set colleague id
-			 * 
-			 * @param colleague id
-			 * @return the builder
-			 */
-			public Builder colleagueId(final Integer colleagueId) {
-				this.colleagueId = colleagueId;
-				return this;
-			}
-			
-			/**
-			 * Set authentication id
-			 * 
-			 * @param authentication id
-			 * @return the builder
-			 */
-			public Builder authenticationId(final Integer authenticationId) {
-				this.authenticationId = authenticationId;
-				return this;
-			}
-			
-			/**
-			 * Set first name
-			 * 
-			 * @param firstName the coworker's first name
-			 * @return the builder
-			 */
-			public Builder firstName(final String firstName) {
-				this.firstName = firstName;
-				return this;
-			}
-
-			/**
-			 * Set last name
-			 * 
-			 * @param lastName the coworker's first name
-			 * @return the builder
-			 */
-			public Builder lastName(final String lastName) {
-				this.lastName = lastName;
-				return this;
-			}
-			
-			/**
-			 * Set password
-			 * 
-			 * @param password
-			 * @return the builder
-			 */
-			public Builder password(final String password) {
-				this.password = password;
-				return this;
-			}
-			
-			/**
-			 * Set confirm password
-			 * 
-			 * @param password
-			 * @return the builder
-			 */
-			public Builder passwordConfirm(final String passwordConfirm) {
-				this.passwordConfirm = passwordConfirm;
-				return this;
-			}
-			
-			/**
-			 * Set login
-			 * 
-			 * @param login
-			 * @return the builder
-			 */
-			public Builder login(final String login) {
-				this.login = login;
-				return this;
-			}
-			
-			
-			
-			/**
-			 * Set profileId
-			 * 
-			 * @param profileId the coworker's profile
-			 * @return the builder
-			 */
-			public Builder profileId(final Integer profileId) {
-				this.profileId = profileId;
-				return this;
-			}
-			
-			/**
-			 * Set phone
-			 * 
-			 * @param phone the coworker's phone
-			 * @return the builder
-			 */
-			public Builder phone (final String phone) {
-				this.phone = phone;
-				return this;
-			}
-			
-			/**
-			 * Set experience
-			 * 
-			 * @param experience the coworker's experience
-			 * @return the builder
-			 */
-			public Builder experience (final Integer experience) {
-				this.experience = experience;
-				return this;
-			}
-			
-			/**
-			 * Set manager
-			 * 
-			 * @param managerId the coworker's manager 
-			 * @return the builder
-			 */
-			public Builder managerId (final Integer managerId) {
-				this.managerId = managerId;
-				return this;
-			}
-			
-			/**
-			 * Set employment date
-			 * 
-			 * @param employmentDate the coworker's employment date
-			 * @return the builder
-			 */
-			public Builder employmentDate (final Date employmentDate) {
-				this.employmentDate = employmentDate;
-				return this;
-			}
-			
-			/**
-			 * Set business engineer
-			 * @param businessEngineer the coworker's business engineer
-			 * 
-			 * @return the builder
-			 */
-			public Builder businessEngineer (final BusinessEngineer businessEngineer) {
-				this.businessEngineer= businessEngineer;
-				return this;
-			}
-			
-			/**
-			 * Set email
-			 * 
-			 * @param email the coworker's email
-			 * @return
-			 */
-			public Builder email (final String email) {
-				this.email = email;
-				return this;
-			}
-			
-			/**
-			 * Build an immutable instance of concept.
-			 * 
-			 * @return concept
-			 */
-			public Registration build() {
-				return new Registration(this);
-			}
-		
-			/**
-			 * Static constructor for this class.
-			 * 
-			 * @return a builder instance
-			 */
-			public static Builder builder() {
-				return new Builder();
-			}
+		public Builder colleagueId(final Integer colleagueId) {
+			this.colleagueId = colleagueId;
+			return this;
 		}
+
+		/**
+		 * Set authentication id
+		 * 
+		 * @param authentication id
+		 * @return the builder
+		 */
+		public Builder authenticationId(final Integer authenticationId) {
+			this.authenticationId = authenticationId;
+			return this;
+		}
+
+		/**
+		 * Set first name
+		 * 
+		 * @param firstName the coworker's first name
+		 * @return the builder
+		 */
+		public Builder firstName(final String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		/**
+		 * Set last name
+		 * 
+		 * @param lastName the coworker's first name
+		 * @return the builder
+		 */
+		public Builder lastName(final String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+
+		/**
+		 * Set password
+		 * 
+		 * @param password
+		 * @return the builder
+		 */
+		public Builder password(final String password) {
+			this.password = password;
+			return this;
+		}
+
+		/**
+		 * Set confirm password
+		 * 
+		 * @param password
+		 * @return the builder
+		 */
+		public Builder passwordConfirm(final String passwordConfirm) {
+			this.passwordConfirm = passwordConfirm;
+			return this;
+		}
+
+		/**
+		 * Set login
+		 * 
+		 * @param login
+		 * @return the builder
+		 */
+		public Builder login(final String login) {
+			this.login = login;
+			return this;
+		}
+
+
+
+		/**
+		 * Set profileId
+		 * 
+		 * @param profileId the coworker's profile
+		 * @return the builder
+		 */
+		public Builder profileId(final Integer profileId) {
+			this.profileId = profileId;
+			return this;
+		}
+
+		/**
+		 * Set phone
+		 * 
+		 * @param phone the coworker's phone
+		 * @return the builder
+		 */
+		public Builder phone (final String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		/**
+		 * Set experience
+		 * 
+		 * @param experience the coworker's experience
+		 * @return the builder
+		 */
+		public Builder experience (final Integer experience) {
+			this.experience = experience;
+			return this;
+		}
+
+		/**
+		 * Set manager
+		 * 
+		 * @param managerId the coworker's manager 
+		 * @return the builder
+		 */
+		public Builder managerId (final Integer managerId) {
+			this.managerId = managerId;
+			return this;
+		}
+
+		/**
+		 * Set employment date
+		 * 
+		 * @param employmentDate the coworker's employment date
+		 * @return the builder
+		 */
+		public Builder employmentDate (final Date employmentDate) {
+			this.employmentDate = employmentDate;
+			return this;
+		}
+
+		/**
+		 * Set business engineer
+		 * @param businessEngineer the coworker's business engineer
+		 * 
+		 * @return the builder
+		 */
+		public Builder businessEngineer (final BusinessEngineer businessEngineer) {
+			this.businessEngineer= businessEngineer;
+			return this;
+		}
+
+		/**
+		 * Set email
+		 * 
+		 * @param email the coworker's email
+		 * @return
+		 */
+		public Builder email (final String email) {
+			this.email = email;
+			return this;
+		}
+
+		/**
+		 * Build an immutable instance of concept.
+		 * 
+		 * @return concept
+		 */
+		public Registration build() {
+			return new Registration(this);
+		}
+
+		/**
+		 * Static constructor for this class.
+		 * 
+		 * @return a builder instance
+		 */
+		public static Builder builder() {
+			return new Builder();
+		}
+	}
 	
 		
 	/**
