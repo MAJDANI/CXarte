@@ -6,7 +6,6 @@ import java.util.Date;
 
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
-import com.vaadin.data.Property;
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")

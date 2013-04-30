@@ -301,7 +301,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 					try {
 						if (authentication != null) {
 							if (Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())) {
-								System.out.println(group.getValue());
+
 							
 									this.listCollab = this.collabService.getCmColleaguesByClient(client.getId(),authentication.getColleagueId());
 							}

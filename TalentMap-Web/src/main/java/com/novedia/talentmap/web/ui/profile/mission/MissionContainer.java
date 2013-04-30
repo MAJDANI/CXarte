@@ -20,7 +20,7 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 
 	
 	/**
-	 * Calls the CollaboratorService to retrieve all missions in tha Data Base
+	 * Calls the CollaboratorService to retrieve all missions in the Data Base
 	 * for the collaborator's id given
 	 * @param collabId
 	 * @return

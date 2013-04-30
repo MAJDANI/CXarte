@@ -3,8 +3,6 @@ package com.novedia.talentmap.web.ui.search;
 import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
-import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;

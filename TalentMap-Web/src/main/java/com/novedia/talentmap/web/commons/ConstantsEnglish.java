@@ -142,6 +142,18 @@ public class ConstantsEnglish {
 		 "Manager" };
 	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] {"title","lastName", "firstName","password","passwordConfirm",
 		"login", "email", "phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
+	
+	/**
+	 *For Cm Options
+	 */
+	public static final Object[] NAME_FIELD_CM_OPTIONS = new Object[] { "Email Frequency"};
+	public static final Object[] FIELD_ORDER_CM_OPTIONS = new Object[] {"frequency"};
+	
+	/**
+	 * For Cm options
+	 */
+	public static final String CM_OPTION_SAVE = "Save";
+	
 	/**
 	 * For SkillCollaboratorContent
 	 */

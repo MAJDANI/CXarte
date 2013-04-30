@@ -49,6 +49,7 @@ public class ConstantsForMenuEnglish {
 	public static final String TAB_SEARCH_NAME = "search";
 	public static final String TAB_ADMIN_NAME = "Administration";
 	public static final String TAB_CM_NAME = "Menu";
+	public static final String TAB_CM_NOTIFICATION = "Notification";
 	
 	/**
 	 * Tree for admin navigation
@@ -70,6 +71,14 @@ public class ConstantsForMenuEnglish {
 	public static final Object[][] CM_MENU_NAVIGATION = new Object[][] { new Object[] {
 			"Search", CM_SEARCH_BY_CLIENT, CM_SEARCH_BY_SKILL,
 			CM_SEARCH_BY_NAME} };
+	
+	/**
+	 * Tree for cm notification navigation
+	 */
+	public static final String CM_NOTIFICATION_HISTORY = "All notifications";
+	public static final String CM_NOTIFICATION_SETTINGS = "Settings";
+	public static final Object[][] CM_NOTIFICATION_NAVIGATION = new Object[][] { new Object[] {
+			"Notification",CM_NOTIFICATION_HISTORY, CM_NOTIFICATION_SETTINGS} };
 	
 
 //	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";

@@ -9,8 +9,8 @@
                            http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<!-- TalentMap Services import -->
-	<import resource="classpath:services-spring-context.xml"/>
-	<import resource="classpath:model-spring-context.xml"/>
+	<import resource="classpath:services-spring-context.xml" />
+	<import resource="classpath:model-spring-context.xml" />
 
 	<!-- Vaddin components declaration -->
 	<bean id="mainLayout" class="com.vaadin.ui.HorizontalLayout" />
@@ -52,8 +52,9 @@
 		<property name="adminView" ref="adminViewBean" />
 		<property name="searchView" ref="searchViewBean" />
 		<property name="cmView" ref="cmViewBean" />
+		<property name="cmNotificationView" ref="cmNotificationViewBean" />
 		<property name="rhContentLayout" ref="rhContentLayout" />
-		<property name="monitoringCollabView" ref="monitoringCollabView"/>
+		<property name="monitoringCollabView" ref="monitoringCollabView" />
 	</bean>
 
 
@@ -147,6 +148,8 @@
 		class="com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent"
 		scope="session">
 		<property name="colleagueService" ref="collaboratorService" />
+		<property name="notificationService" ref="notificationService" />
+		<property name="profileService" ref="profileService" />
 		<property name="collabForm" ref="collaboratorFormBean" />
 	</bean>
 
@@ -378,7 +381,9 @@
 		<property name="search" ref="searchButton" />
 	</bean>
 
-	<bean id="listMissionCollabWindowBean" class="com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow" scope="session" >
+	<bean id="listMissionCollabWindowBean"
+		class="com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow"
+		scope="session">
 		<property name="listMission" ref="listMissionBean" />
 	</bean>
 
@@ -425,48 +430,115 @@
 		<property name="cmContentLayout" ref="cmContentLayout" />
 	</bean>
 
-	<bean id="rhContentLayout" class="com.novedia.talentmap.web.ui.role.RhContentLayout"
-		scope="session" />
-	<bean id="label" class="com.vaadin.ui.Label" scope ="session" />
-	<bean id="table" class="com.vaadin.ui.Table" scope ="session" />
-	<bean id="monitoringCollabContent" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent" scope="session">
-		<property name="pageTitle" ref="label"/>
-		<property name="collabTable" ref="table"/>
-		<property name="managerService" ref="managerService"/>
-		
+	<bean id="cmNotificationViewBean" class="com.novedia.talentmap.web.ui.cm.CmNotificationView"
+		scope="session">
+		<property name="cmNotificationContentLayout" ref="cmNotificationContentLayout" />
 	</bean>
 	
-	<bean id="monitoringCollabNavigation" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation" scope="session"/>
-	<bean id="historyMissionColab" class="com.novedia.talentmap.web.ui.profile.HistoryMissionColab" scope="session"/>
-	<bean id="objectiveEa" class="com.novedia.talentmap.web.ui.profile.ObjectiveEa" scope="session"/>
-	<bean id="hSplitPanel" class="com.vaadin.ui.HorizontalSplitPanel" scope="session" />
-		
-	<bean id="monitoringCollabContentLayout" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout" scope="session">
-		<property name="monitoringCollabContent" ref="monitoringCollabContent"/>
-		<property name="monitoringCollabNavigation" ref="monitoringCollabNavigation"/>
-		<property name="historyMissionColab" ref="historyMissionColab"/>
-		<property name="objectiveEa" ref="objectiveEa"/>
-		<property name="hSplitPanel" ref="hSplitPanel"/>
-	</bean>
-		
-		
-	<bean id="cmContentLayout" class="com.novedia.talentmap.web.ui.role.CmContentLayout"
+		<bean id="cmContentLayout" class="com.novedia.talentmap.web.ui.role.CmContentLayout"
 		scope="session">
 		<property name="cmNav" ref="cmNavigationBean" />
 		<property name="searchContent" ref="searchContentBean" />
 		<property name="hSplitContent" ref="hSplitContent" />
 	</bean>
 
-	<bean id="cmNavigationBean" class="com.novedia.talentmap.web.ui.cm.CmNavigation"
-		scope="session" />
-	<bean id="monitoringCollabView" class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView" scope="session">
-		<property name="monitoringCollabContentLayout" ref="monitoringCollabContentLayout"/>
+	<bean id="cmNotificationContentLayout"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationContentLayout"
+		scope="session">
+		<property name="cmNotificationNavigation" ref="cmNotificationNavigationBean" />
+		<property name="cmNotificationContent" ref="CmNotificationContentBean" />
+		<property name="cmNotificationOption" ref="CmNotificationOptionBean" />
 	</bean>
 
+	<bean id="cmNavigationBean" class="com.novedia.talentmap.web.ui.cm.CmNavigation"
+		scope="session" />
+		
+	<bean id="CmlistNotificationBean"
+		class="com.novedia.talentmap.web.ui.cm.CmListNotification"
+		scope="session">
+		<property name="cmNotificationContainer" ref="CmNotificationContainerBean" />
+	</bean>
 	
+	<bean id="cmNotificationNavigationBean"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationNavigation"
+		scope="session" />
+		
+	<bean id="CmNotificationContainerBean"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationContainer"
+		scope="session">
+		<property name="notificationService" ref="notificationService" />
+	</bean>
 	
-	    
+	<bean id="CmNotificationContentBean"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationContent"
+		scope="session">
+		<property name="cmListNotification" ref="CmlistNotificationBean" />
+		<property name="listPanel" ref="listPanelNotificationHistory" />
+	</bean>
 	
+	<bean id="CmNotificationOptionBean"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationOption"
+		scope="session">
+		<property name="listPanel" ref="listPanelNotificationOption" />
+		<property name="notificationService" ref="notificationService" />
+		<property name="cmNotificationOptionForm" ref="cmOptionFormBean" />
+		<property name="btnSaveOptions" ref="btnSaveOptions" />
+	</bean>
+	
+	<bean id="cmOptionForm" class="com.vaadin.ui.Form" scope="session" />
+	
+	<bean id="cmOptionFormBean"
+		class="com.novedia.talentmap.web.ui.cm.CmNotificationOptionForm"
+		scope="session">
+		<property name="cmOptionForm" ref="cmOptionForm" />
+		<property name="notificationService" ref="notificationService" />
+	</bean>
+	
+	<bean id="listPanelNotificationHistory" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="listPanelNotificationOption" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="btnSaveOptions" class="com.vaadin.ui.Button" scope="session" />
+
+	<bean id="rhContentLayout" class="com.novedia.talentmap.web.ui.role.RhContentLayout"
+		scope="session" />
+	<bean id="label" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="table" class="com.vaadin.ui.Table" scope="session" />
+	<bean id="monitoringCollabContent"
+		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent"
+		scope="session">
+		<property name="pageTitle" ref="label" />
+		<property name="collabTable" ref="table" />
+		<property name="managerService" ref="managerService" />
+
+	</bean>
+	
+	<bean id="monitoringCollabNavigation"
+		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation"
+		scope="session" />
+	<bean id="historyMissionColab"
+		class="com.novedia.talentmap.web.ui.profile.HistoryMissionColab"
+		scope="session" />
+	<bean id="objectiveEa" class="com.novedia.talentmap.web.ui.profile.ObjectiveEa"
+		scope="session" />
+	<bean id="hSplitPanel" class="com.vaadin.ui.HorizontalSplitPanel"
+		scope="session" />
+
+	<bean id="monitoringCollabContentLayout"
+		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout"
+		scope="session">
+		<property name="monitoringCollabContent" ref="monitoringCollabContent" />
+		<property name="monitoringCollabNavigation" ref="monitoringCollabNavigation" />
+		<property name="historyMissionColab" ref="historyMissionColab" />
+		<property name="objectiveEa" ref="objectiveEa" />
+		<property name="hSplitPanel" ref="hSplitPanel" />
+	</bean>
+
+
+	<bean id="monitoringCollabView"
+		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView"
+		scope="session">
+		<property name="monitoringCollabContentLayout" ref="monitoringCollabContentLayout" />
+	</bean>
+
 	<!-- Vaadin RegistrationForm UI -->
 
 	<bean id="registrationForm" class="com.vaadin.ui.Form" scope="session" />

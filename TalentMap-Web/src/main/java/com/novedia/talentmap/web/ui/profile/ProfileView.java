@@ -28,7 +28,7 @@ public class ProfileView extends VerticalLayout{
 	
 	
 	/**
-	 * Build the tabsheet that conatains profil data
+	 * Build the tabsheet that contains profil data
 	 * @return
 	 */
 	public VerticalLayout buildTabSheetProfilData(){

@@ -4,6 +4,7 @@ import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.cm.CmNotificationView;
 import com.novedia.talentmap.web.ui.cm.CmView;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
@@ -11,6 +12,7 @@ import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  * The main tab contains the profile tab and the search tab
@@ -30,6 +32,7 @@ public class TabMain extends TabSheet {
 	private SearchView searchView;
 	private AdminView adminView;
 	private CmView cmView;
+	private CmNotificationView cmNotificationView;
 
 	private RhContentLayout rhContentLayout;
 	private MonitoringCollabView monitoringCollabView;
@@ -71,6 +74,11 @@ public class TabMain extends TabSheet {
 			cmView.setAuthentication(getAuthentication());
 			cmView = cmView.buildCmView();
 			addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
+			cmNotificationView.setAuthentication(getAuthentication());
+			cmNotificationView =  cmNotificationView.buildCmNotificationView();
+			addTab(cmNotificationView,ConstantsForMenuEnglish.TAB_CM_NOTIFICATION);
+			
+			
 			//Les deux lignes ci-dessous pour tester le code créé par Véronique
 //			monitoringCollabView = monitoringCollabView.mainBuild();
 //			addTab(monitoringCollabView,"Monitoring");
@@ -169,7 +177,14 @@ public class TabMain extends TabSheet {
 		this.cmView = cmView;
 	}
 	
-	
+	public CmNotificationView getCmNotificationView() {
+		return cmNotificationView;
+	}
+
+	public void setCmNotificationView(CmNotificationView cmNotificationView) {
+		this.cmNotificationView = cmNotificationView;
+	}
+
 	
 
 }

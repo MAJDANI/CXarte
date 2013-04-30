@@ -423,6 +423,11 @@ public static final String AUTHENTIFICATION_COUNT_LOGIN= "authentication.countLo
 
 //NOTIFICATION REQUESTS
 
-public static final String SAVE_NOTIFICATION= "user_notification.saveNotification";
+public static final String SAVE_NOTIFICATION = "user_notification.saveNotification";
+public static final String GET_ALL_NOTIFICATION_BY_MANAGER_ID = "user_notification.getAllNotificationByManagerId";
+public static final String GET_ALL_FREQUENCY_CHOICES  = "user_notification.getAllFrequencyChoices";
+public static final String GET_CM_FREQUENCY_OPTION  = "user_notification.getCmFrequencyOption";
+public static final String SAVE_CM_FREQUENCY_OPTION = "user_notification.saveFrequencyOption";
+public static final String ADD_CM_FREQUENCY_OPTION = "user_notification.addFrequencyOption";
 
 }

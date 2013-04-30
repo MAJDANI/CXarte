@@ -48,7 +48,7 @@ public class CmContentLayout extends HorizontalLayout {
 	}
 	
 	/**
-	 * Build the AdminContentLayout view
+	 * Build the CmContentLayout view
 	 * @return
 	 */
 	public CmContentLayout buildViewCmContentLayout(){

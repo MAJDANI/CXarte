@@ -20,7 +20,7 @@ public class CmView extends VerticalLayout {
 	}
 	
 	/**
-	 * Build the view's admin
+	 * Build the view's cm
 	 * @return
 	 */
 	public CmView buildCmView(){
