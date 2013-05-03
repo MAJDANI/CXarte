@@ -1,14 +1,11 @@
 package com.novedia.talentmap.store.impl;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.dao.DataAccessException;
@@ -33,7 +30,7 @@ import com.novedia.talentmap.model.entity.Tool;
 
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
-@DataSet("MissionDaoTest.xml")
+@DataSet({"ProfileDaoTest.xml", "ColleagueDaoTest.xml", "ClientDataSet.xml", "MissionDaoTest.xml"})
 public class MissionDaoTest {
 
 	@SpringBeanByName
@@ -62,7 +59,6 @@ public class MissionDaoTest {
 	 * Test get all missions by colleague id.
 	 */
 	@Test
-	@DataSet("MissionDaoTest.xml")
 	public void testGetAllByColleague() throws Exception {
 		Integer colleagueId = 1;
 		List<Mission> missionList = missionDao.getAllByColleagueId(colleagueId);
@@ -74,7 +70,7 @@ public class MissionDaoTest {
 	 * Test save modification on a mission tuple.
 	 */
 	@Test
-	@DataSet("MissionDaoTest-Save-result.xml")
+	@DataSet({"ProfileDaoTest.xml", "ColleagueDaoTest.xml", "ClientDataSet.xml","MissionDaoTest-Save-result.xml"})
 	public void testSaveReturnInt() throws Exception {
 
 		// Given

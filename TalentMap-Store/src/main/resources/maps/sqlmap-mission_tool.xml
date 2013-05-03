@@ -21,7 +21,7 @@
 	</insert>
 	
 	<delete id="delete" parameterClass="Integer">
-		DELETE MISSION_TOOL WHERE MISSION_ID = #id#
+		DELETE FROM MISSION_TOOL WHERE MISSION_ID = #id#
 	</delete>
 
 </sqlMap>

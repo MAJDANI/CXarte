@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -25,6 +24,7 @@ import com.novedia.talentmap.model.entity.Tool;
  * 
  * @author e.moumbe
  * @author j.marie-sainte
+ * @author b.tiomofofou
  *
  */
 @SpringApplicationContext("test-store-spring-context.xml")
@@ -80,7 +80,6 @@ public class ToolDaoTest {
 	 * @throws Exception
 	 */
 	@Test
-	@Ignore
 	@ExpectedDataSet("ToolDaoTest.testSave-result.xml")
 	public void testSave () throws Exception{
 		
@@ -116,14 +115,11 @@ public class ToolDaoTest {
 		Assert.assertTrue(deleteIndex > 0);
 	}
 	
-	// TODO : problème sur la requête
 	/**
 	 * Test add
 	 * @throws Exception
 	 */
 	@Test
-	@Ignore
-	@DataSet("ToolDaoTest.testAdd.xml")
 	public void testAdd() throws Exception {
 		
 		// Given

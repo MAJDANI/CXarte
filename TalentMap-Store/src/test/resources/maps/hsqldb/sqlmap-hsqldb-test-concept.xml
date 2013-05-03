@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="concept">
+
+    <typeAlias alias="concept" type="com.novedia.talentmap.model.entity.Concept"/> 
+	  
+	<resultMap id="conceptResult" class="concept">
+	  <result property="id" column="CONCEPT_ID"/>
+	  <result property="name" column="CONCEPT_NAME"/>
+	  <result property="category.id" column="CATEGORY_ID"  />
+	</resultMap>
+
+
+	<select id="get" resultMap="conceptResult" parameterClass="Integer">
+		SELECT * FROM CONCEPT concept, CATEGORY category WHERE concept.CONCEPT_ID = #id#
+				 AND concept.CATEGORY_ID = category.CATEGORY_ID
+	</select>
+	
+	<select id="getByName" resultMap="conceptResult" parameterClass="String">
+		SELECT * FROM CONCEPT concept, CATEGORY category WHERE concept.CONCEPT_NAME = #name#
+		         AND concept.CATEGORY_ID = category.CATEGORY_ID
+	</select>
+	
+    <select id="getAll" resultMap="conceptResult">
+    	SELECT DISTINCT * FROM CONCEPT concept, CATEGORY category WHERE concept.CATEGORY_ID = category.CATEGORY_ID
+    </select>
+	
+	<statement id="getAllConceptByCategoryId" parameterClass="Integer" resultMap="conceptResult">
+  		select * from CONCEPT concept, CATEGORY category
+  				where concept.CATEGORY_ID = category.CATEGORY.ID
+  				and category.CATEGORY_ID = #categoryId#
+	</statement>
+    
+    
+    <insert id="add" parameterClass="Concept">
+    	
+    	<selectKey resultClass="Integer" keyProperty="id">
+    		SELECT NEXT VALUE FOR SEQCONCEPT FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+      		where SEQUENCE_NAME = 'SEQCONCEPT'
+    	</selectKey>
+ 	
+    	INSERT INTO CONCEPT (
+    		CONCEPT_ID,
+    		CATEGORY_ID, 
+    		CONCEPT_NAME
+    		)values (
+    		#id#, #category.id# , upper(#name#)
+    		)
+    </insert>
+    
+	<select id="checkObject" resultMap="conceptResult" parameterClass="concept">
+		SELECT * FROM CONCEPT WHERE upper(CONCEPT_NAME) = upper(#name#) AND CATEGORY_ID = #category.id#
+	</select>	
+	
+	<update id="save" parameterClass="Concept">
+		UPDATE CONCEPT SET CONCEPT_ID = #id#, CATEGORY_ID = #category.id#, CONCEPT_NAME = #name# WHERE CONCEPT_ID = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="concept">
+		DELETE FROM CONCEPT WHERE CONCEPT_ID = #id#
+	</delete>			 
+	
+	<select id="getByCategory" resultMap="conceptResult" parameterClass="com.novedia.talentmap.model.entity.Category">
+		SELECT * FROM CONCEPT WHERE CATEGORY_ID = #id#
+	</select>	
+
+</sqlMap>

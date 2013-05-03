@@ -69,7 +69,8 @@
 	<insert id="add" parameterClass="Mission">
 
 		<selectKey resultClass="int" keyProperty="id">
-			SELECT SEQMISSION.NEXTVAL FROM DUAL
+			SELECT NEXT VALUE FOR SEQMISSION FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+      		where SEQUENCE_NAME = 'SEQMISSION'
 		</selectKey>
 
 		INSERT INTO MISSION 

@@ -26,10 +26,8 @@ public class AuthenticationDaoTest {
 	
 	@SpringBean("authenticationDao")
 	private AuthenticationDao authenticationDao;
-
-//	@SpringBeanByName
-//	private Authorization authorization;
-
+	
+	
 	@Before
 	public void setUp() throws Exception {
 		authenticationDao.setSqlMapClient(sqlMapClient);
@@ -39,7 +37,7 @@ public class AuthenticationDaoTest {
 	 * update user's password
 	 */
 	@Test
-	@DataSet("AuthenticateDaoTest.testSave-result.xml")
+	@DataSet({"UserRoleDataSet.xml", "ProfileDaoTest.xml", "AuthenticateDaoTest.testSave-result.xml"})
 	public void testSaveReturnInteger() {	
 		//Given
 		CredentialToken credential1 = new CredentialToken();
@@ -80,7 +78,7 @@ public class AuthenticationDaoTest {
 	 * Test countLogin method
 	 */
 	@Test
-	@DataSet("AuthenticateDaoTest.testCheck-result.xml")
+	@DataSet({"UserRoleDataSet.xml", "ProfileDaoTest.xml", "AuthenticateDaoTest.testCheck-result.xml"})
 	public void testCountLoginReturnInteger(){
 		//Given
 		String existLogin = "o.chauvie";
@@ -99,7 +97,7 @@ public class AuthenticationDaoTest {
 	}
 	
 	@Test
-	@DataSet("AuthenticateDaoTest.testSave-result.xml")
+	@DataSet({"UserRoleDataSet.xml", "ProfileDaoTest.xml","AuthenticateDaoTest.testSave-result.xml"})
 	public void testAddUserFromRegistration(){
 		//Given
 		Registration registration = Registration.Builder.builder().login("t.test").colleagueId(4).password("test").build();

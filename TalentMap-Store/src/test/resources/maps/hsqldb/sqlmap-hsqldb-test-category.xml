@@ -27,7 +27,8 @@
     <insert id="add" parameterClass="Category">
     	
     	<selectKey resultClass="Integer" keyProperty="id">
-      		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
+      		SELECT NEXT VALUE FOR SEQCATEGORY FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+      		where SEQUENCE_NAME = 'SEQCATEGORY'
     	</selectKey>
     	
     	INSERT INTO CATEGORY (
@@ -44,7 +45,7 @@
 	</update>
 	
 	<delete id="delete" parameterClass="Category">
-		DELETE FROM CATEGORY WHERE CATEGORY_ID = #id#
+		DELETE FROM CATEGORY  WHERE CATEGORY_ID = #id#
 	</delete> 
 
 </sqlMap>

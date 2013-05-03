@@ -31,7 +31,7 @@ import com.novedia.talentmap.model.entity.Registration;
  */
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
-@DataSet("ColleagueDaoTest.xml")
+@DataSet({"ProfileDaoTest.xml", "ColleagueDaoTest.xml"})
 public class ColleagueDaoTest {
 
 	@SpringBeanByName
@@ -130,7 +130,7 @@ public class ColleagueDaoTest {
 	 * Test save
 	 */
 	@Test
-	@DataSet("ColleagueDaoTest.testSave-result.xml")
+	@DataSet({"ProfileDaoTest.xml", "ColleagueDaoTest.testSave-result.xml"})
 	public void testSave() {
 		BusinessEngineer businessEngineer = BusinessEngineer.builder().id(1)
 				.firstName("Julie").lastName("Vigneron").build();

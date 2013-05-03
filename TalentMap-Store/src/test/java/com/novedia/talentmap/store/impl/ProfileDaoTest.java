@@ -26,7 +26,6 @@ import com.novedia.talentmap.model.entity.Profile;
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @DataSet("ProfileDaoTest.xml")
-@Ignore
 public class ProfileDaoTest {
 
 	@SpringBeanByName
@@ -66,6 +65,7 @@ public class ProfileDaoTest {
 	/**
 	 * Test update profile
 	 */
+	@Ignore
 	@Test
 	@ExpectedDataSet("ProfileDaoTest.testSave-result.xml")
 	public void testSave () throws Exception{
@@ -82,7 +82,9 @@ public class ProfileDaoTest {
 	
 	/**
 	 * Test delete profile
+	 * 
 	 */
+	@Ignore
 	@Test
 	public void testDelete() throws Exception {
 		
@@ -99,6 +101,7 @@ public class ProfileDaoTest {
 	/**
 	 * Test add profile
 	 */
+	@Ignore
 	@Test
 	@DataSet("ProfileDaoTest.testAdd.xml")
 	public void testAdd() throws Exception {

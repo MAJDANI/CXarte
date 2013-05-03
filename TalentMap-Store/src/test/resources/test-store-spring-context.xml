@@ -13,7 +13,7 @@
 	<import resource="datasource-test.xml"/>
 	
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="classpath:sqlmap-test-config.xml" />
+        <property name="configLocation" value="classpath:sqlmap-hsqldb-test-config.xml" />
         <property name="dataSource" ref="dataSource" />
     </bean>    
 	
@@ -65,7 +65,7 @@
 	<bean id="authenticationDao" class="com.novedia.talentmap.store.impl.AuthenticationDao">
 		<constructor-arg ref="sqlMapClient"/>
 	</bean>
-
+	
 	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization"/>
 
 
