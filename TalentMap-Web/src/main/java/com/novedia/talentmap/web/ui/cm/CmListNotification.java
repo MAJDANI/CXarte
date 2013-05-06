@@ -46,7 +46,7 @@ public class CmListNotification extends PagedTable {
 	
 	
 	public void buildMain(){
-		setWidth("1000px");
+		setWidth("900px");
 		buildContainer();
 	}
 	
