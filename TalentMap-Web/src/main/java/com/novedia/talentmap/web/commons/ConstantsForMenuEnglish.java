@@ -46,9 +46,9 @@ public class ConstantsForMenuEnglish {
 	 * Constants for TabMain
 	 */
 	public static final String TAB_PROFIL_NAME = "Profile";
-	public static final String TAB_SEARCH_NAME = "search";
+	public static final String TAB_SEARCH_NAME = "Search";
 	public static final String TAB_ADMIN_NAME = "Administration";
-	public static final String TAB_CM_NAME = "Menu";
+	public static final String TAB_CM_NAME = "Search";
 	public static final String TAB_CM_NOTIFICATION = "Notification";
 	
 	/**
