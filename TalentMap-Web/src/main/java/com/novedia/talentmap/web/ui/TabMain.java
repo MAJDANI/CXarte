@@ -8,11 +8,9 @@ import com.novedia.talentmap.web.ui.cm.CmNotificationView;
 import com.novedia.talentmap.web.ui.cm.CmView;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
-import com.novedia.talentmap.web.ui.role.RhContentLayout;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.VerticalLayout;
 
 /**
  * The main tab contains the profile tab and the search tab
@@ -34,7 +32,6 @@ public class TabMain extends TabSheet {
 	private CmView cmView;
 	private CmNotificationView cmNotificationView;
 
-	private RhContentLayout rhContentLayout;
 	private MonitoringCollabView monitoringCollabView;
 	
 	private Authentication authentication;
@@ -77,18 +74,12 @@ public class TabMain extends TabSheet {
 			cmNotificationView.setAuthentication(getAuthentication());
 			cmNotificationView =  cmNotificationView.buildCmNotificationView();
 			addTab(cmNotificationView,ConstantsForMenuEnglish.TAB_CM_NOTIFICATION);
-			
-			
 			//Les deux lignes ci-dessous pour tester le code créé par Véronique
 //			monitoringCollabView = monitoringCollabView.mainBuild();
 //			addTab(monitoringCollabView,"Monitoring");
 		} else if (role.equals(Role.RH)) {  //RH
-			profileView.setAuthentication(getAuthentication());
-			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 			searchView.setAuthentication(getAuthentication());
 			addTab(searchView.buildSearchView(), ConstantsForMenuEnglish.TAB_SEARCH_NAME);
-//			rhContentLayout = rhContentLayout.init();
-//			addTab(rhContentLayout,"rh");
 		}
 		
 		return this;
@@ -143,15 +134,6 @@ public class TabMain extends TabSheet {
 	public SearchView getSearchView() {
 		return searchView;
 	}
-
-	public RhContentLayout getRhContentLayout() {
-		return rhContentLayout;
-	}
-
-	public void setRhContentLayout(RhContentLayout rhContentLayout) {
-		this.rhContentLayout = rhContentLayout;
-	}
-
 
 	public ProfileView getProfileView() {
 		return profileView;

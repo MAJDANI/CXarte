@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.ui.collab.ListMissionCollabWindow;
 import com.novedia.talentmap.web.ui.collab.ProfileCollabWindow;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -78,18 +79,22 @@ public class SearchResults extends PagedTable {
 			HorizontalLayout hLayout = new HorizontalLayout();
 			hLayout.setMargin(true);
 
+			// Afficher le profil
 			Button visualizeProfile = buildButton(new Button(
 					VISUALIZE_PROFILE_NAME));
-			Button visualizeMissionHistory = buildButton(new Button(
-					VISUALIZE_MISSION_HISTORY_NAME));
 			visualizeProfile.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 			visualizeProfile.setData(collab.getId());
-
-			visualizeMissionHistory.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
-			visualizeMissionHistory.setData(collab);
-
 			hLayout.addComponent(visualizeProfile);
-			hLayout.addComponent(visualizeMissionHistory);
+
+			// Afficher l'historique des missions pour les roles autorisés RH et CM
+			if ( Role.RH.getId().equals(roleId)
+					|| Role.CM.getId().equals(roleId) ) {
+				Button visualizeMissionHistory = buildButton(new Button(
+						VISUALIZE_MISSION_HISTORY_NAME));
+				visualizeMissionHistory.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+				visualizeMissionHistory.setData(collab);
+				hLayout.addComponent(visualizeMissionHistory);
+			}
 
 			addItem(new Object[] { collab.getLastName(), collab.getFirstName(),
 					collab.getEmail(), hLayout }, idResultsTable);

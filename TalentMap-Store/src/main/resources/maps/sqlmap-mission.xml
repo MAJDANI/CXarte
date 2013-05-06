@@ -35,6 +35,7 @@
 		SELECT * FROM TOOL tools, MISSION_TOOL mission_tool 
 		WHERE mission_tool.MISSION_ID = #value# 
 		AND mission_tool.TOOL_ID = tools.TOOL_ID
+		ORDER BY tools.TOOL_NAME
 	</select>	
 
 	<select id="get" resultMap="missionResult" parameterClass="Integer">

@@ -1,9 +1,12 @@
 package com.novedia.talentmap.model.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 
 /**
@@ -291,6 +294,26 @@ public class MissionDto {
 			 * tools of the missionDto
 			 */
 			private Set<Tool> tools;
+
+			public Builder mission(final Mission mission) {
+				this.id = mission.getId();
+				this.colleagueId = mission.getColleagueId();
+				this.title = mission.getTitle();
+				this.place = mission.getPlace();
+				this.client = mission.getClient();
+				this.notes = mission.getNotes();
+				this.startDate = mission.getStartDate();
+				this.endDate = mission.getEndDate();
+				Set<Tool> toolsSet = new HashSet<Tool>();
+				List<Tool> tools = mission.getTools();
+				if(tools.size()>0){
+					for(Tool t : tools){
+						toolsSet.add(t);
+					}
+					this.tools = toolsSet;
+				}
+				return this;
+			}
 
 			/**
 			 * List the missionDto id

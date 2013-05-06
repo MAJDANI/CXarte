@@ -25,8 +25,6 @@ public class ConstantsForMenuEnglish {
 	public static final Object[][] subItemProfilNavForCM = new Object[][] { new Object[] {
 			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA, VISUALIZE_SKILLS_NAME,
 			VISUALIZE_MISSIONS_NAME /*, VISUALIZE_EA_NAME */} };
-	public static final Object[][] subItemProfilNavForRH = new Object[][] { new Object[] {
-			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA}};
 
 	/**
 	 * for tree in the SearchNavigation

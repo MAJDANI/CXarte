@@ -73,6 +73,13 @@ public class ConstantsEnglish {
 		FIELD_MISSION_NOTES,
 		FIELD_MISSION_TOOLS};
 
+	
+	/**
+	 * Données Edit - Mission (ListMissionCollabWindow)
+	 */
+	public static final String MSG_EDIT_MISSION_ON_CLICK = "Select a mission to show details.";
+	
+
 	public static final String ADMIN_DATA_LABEL = "Administrative data";
 	public static final String LAST_MISSION_LABEL = "Last mission";
 	public static final String LABEL_SAVE_BUTTON = "Save";

@@ -62,9 +62,7 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,Ite
 		tree = new Tree();
 		Object[][] subItems = null;
 		//On construit le menu en fonction du Role de la personne connectée
-		if((Authorization.Role.RH.getId().equals(roleId))) {
-			subItems = ConstantsForMenuEnglish.subItemProfilNavForRH;
-		} else if((Authorization.Role.CL.getId().equals(roleId))) {
+		if((Authorization.Role.CL.getId().equals(roleId))) {
 			subItems = ConstantsForMenuEnglish.subItemProfilNavForCL;
 		} else if((Authorization.Role.CM.getId().equals(roleId))) {
 			subItems = ConstantsForMenuEnglish.subItemProfilNavForCM;
