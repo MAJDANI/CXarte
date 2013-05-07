@@ -61,7 +61,7 @@ public class SearchLayout extends HorizontalLayout{
 		
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.addComponent(this.searchNavigation);
-		vLayout.setHeight(800);
+		vLayout.setHeight("800px");
 		
 		this.hSplitPanel.setFirstComponent(vLayout);
 		this.hSplitPanel.setSecondComponent(this.searchContent);

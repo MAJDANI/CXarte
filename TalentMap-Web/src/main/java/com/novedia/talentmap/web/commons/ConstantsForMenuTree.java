@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.commons;
 
-import com.vaadin.ui.Tree;
 
 public class ConstantsForMenuTree {
 	

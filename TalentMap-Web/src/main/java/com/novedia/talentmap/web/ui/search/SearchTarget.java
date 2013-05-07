@@ -25,13 +25,12 @@ import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.OptionGroup;
-import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window.Notification;
 
 public class SearchTarget extends VerticalLayout implements ClickListener,
 		TextChangeListener, IObservable {
@@ -62,7 +61,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 	// Il manque les Skills !!! ??
 
 	private Button search;
-	private OptionGroup group;
+
 
 	/**
 	 * POJO

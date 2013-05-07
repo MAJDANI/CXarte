@@ -1,21 +1,12 @@
 package com.novedia.talentmap.web.ui.role;
 
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.web.commons.ConstantsEnglish;
-import com.novedia.talentmap.web.ui.admin.AdminAddSkillContent;
-import com.novedia.talentmap.web.ui.admin.AdminContentLayout;
-import com.novedia.talentmap.web.ui.admin.AdminDeleteColleagueContent;
-import com.novedia.talentmap.web.ui.admin.AdminNavigation;
-import com.novedia.talentmap.web.ui.admin.ManageSkillContent;
 import com.novedia.talentmap.web.ui.cm.CmNavigation;
 import com.novedia.talentmap.web.ui.search.SearchContent;
-import com.novedia.talentmap.web.ui.search.SearchLayout;
-import com.novedia.talentmap.web.util.IAdminContentLayout;
 import com.novedia.talentmap.web.util.IAdminView;
 import com.novedia.talentmap.web.util.ISearchLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -104,7 +95,7 @@ public void buildObservators(){
 		//initView();
 		
 		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.setHeight(600);
+		vLayout.setHeight("600px");
 		vLayout.addComponent(this.cmNav);
 		this.hSplitContent.setFirstComponent(vLayout);
 		this.hSplitContent.setSecondComponent(this.searchContent);
@@ -166,6 +157,14 @@ public void buildObservators(){
 
 	public void setSearchContent(SearchContent searchContent) {
 		this.searchContent = searchContent;
+	}
+
+	public IAdminView getObs() {
+		return obs;
+	}
+
+	public void setObs(IAdminView obs) {
+		this.obs = obs;
 	}
 
 }

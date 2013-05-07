@@ -213,11 +213,11 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 				//Form's data are valid 
 				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
 					missionToInsert.setColleagueId(authentication.getColleagueId());
-					CmNotification(ADD_MISSION, missionToInsert);
+					NotifyCm(ADD_MISSION, missionToInsert);
 					insertMission(missionToInsert);
 				}
 				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
-					CmNotification(UPDATE_MISSION, missionToInsert);
+					NotifyCm(UPDATE_MISSION, missionToInsert);
 					updateMission(missionToInsert);
 				}
 				break;
@@ -425,7 +425,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.obs = null;
 	}
 	
-	public void CmNotification(String type, MissionDto mission) {
+	public void NotifyCm(String type, MissionDto mission) {
 		if (type.equals(ADD_MISSION)) {
 			Colleague c = colleagueService.getColleague(mission.getColleagueId());
 

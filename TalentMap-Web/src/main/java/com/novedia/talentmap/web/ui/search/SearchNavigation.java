@@ -1,15 +1,12 @@
 package com.novedia.talentmap.web.ui.search;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.commons.ConstantsForMenuTree;
 import com.novedia.talentmap.web.data.SearchTargetPanel;
 import com.novedia.talentmap.web.util.IObservable;
 import com.novedia.talentmap.web.util.ISearchLayout;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 

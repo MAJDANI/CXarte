@@ -2,7 +2,6 @@ package com.novedia.talentmap.web.ui.profile;
 
 import java.util.Date;
 
-import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
@@ -157,33 +156,11 @@ public class ProfileCollaboratorContent extends VerticalLayout implements
 			BeanItem<Colleague> collabItem = (BeanItem<Colleague>) this.collabForm
 					.getFormCollaborator().getItemDataSource();
 			Colleague collab = collabItem.getBean();
-			CmNotification(collab);
+			NotifyCm(collab);
 			return this.colleagueService.saveColleague(collab);
 		} catch (InvalidValueException invalidVE) {
 			return 0;
 		}
-	}
-
-	/**
-	 * Save the Mission Data : Les données administratives concernant la
-	 * dernière mission du collaborateur (pas les données "personnelles" du
-	 * collaborateur)
-	 * 
-	 * @class ProfileColaboratorContent.java
-	 * @return : int : code permettant de savoir si l'opération s'est bien
-	 *         passée (int=1) ou pas (int=0)
-	 */
-	private int saveDataMission() {
-		try {
-			this.collabForm.getFormMission().commit();
-			BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.collabForm
-					.getFormMission().getItemDataSource();
-			MissionDto mission = missionItem.getBean();
-			return this.colleagueService.saveMission(mission);
-		} catch (InvalidValueException invalidVE) {
-			return 0;
-		}
-
 	}
 
 	public String validateForm() {
@@ -274,7 +251,7 @@ public class ProfileCollaboratorContent extends VerticalLayout implements
 		}
 	}
 
-	public void CmNotification(Colleague colleague) {
+	public void NotifyCm(Colleague colleague) {
 
 	
 			Profile profile = profileService.getProfile(colleague.getProfileId());

@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.profile;
 
-import java.security.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
