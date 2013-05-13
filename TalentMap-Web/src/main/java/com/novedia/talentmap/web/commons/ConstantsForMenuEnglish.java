@@ -79,7 +79,4 @@ public class ConstantsForMenuEnglish {
 			"Notification",CM_NOTIFICATION_HISTORY, CM_NOTIFICATION_SETTINGS} };
 	
 
-//	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
-//	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
-
 }

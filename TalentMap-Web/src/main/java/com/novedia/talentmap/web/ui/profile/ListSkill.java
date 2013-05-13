@@ -61,31 +61,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		mainBuild();
 		return this;
 	}
-	
-	
-	
-	/**
-	 * 
-	 * Build the class ListSkill.java
-	 * 
-	 * @param skillService
-	 * @param tableTools
-	 * @param accCategory
-	 * @param accConcept
-	 * @throws Exception
-	 */
-//	public ListSkill(ISkillService skillService, Table tableTools,
-//			Accordion accCategory, Accordion accConcept) throws Exception {
-//		this.skillService = skillService;
-//		this.tableTools = tableTools;
-//		this.accCategory = accCategory;
-//		this.accConcept = accConcept;
-//
-//		setImmediate(true);
-//		setMargin(true);
-//
-//		mainBuild();
-//	}
 
 	/**
 	 * The main builder
@@ -111,26 +86,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 			setVisible(false);
 		}
 	}
-
-	/**
-	 * 
-	 * Build the class ListSkill.java
-	 * 
-	 * @param mapSkill
-	 */
-//	public ListSkill(Map<Category, Map> mapSkill) {
-//		this.mapSkill = mapSkill;
-//		// Init the components
-//
-//		// Test if the Collaborator have one skill
-//		if (mapSkill != null && !mapSkill.isEmpty()) {
-//			initComponents();
-//			addComponent(buildListSkill(this.mapSkill));
-//
-//		} else {
-//			setVisible(false);
-//		}
-//	}
 
 	/**
 	 * Initialize all component

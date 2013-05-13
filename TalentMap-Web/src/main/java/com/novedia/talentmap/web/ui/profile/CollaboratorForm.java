@@ -183,9 +183,6 @@ public class CollaboratorForm extends VerticalLayout {
 			lastMissionDatasLayout.setColumns(3);
 			lastMissionDatasLayout.setRows(1);
 
-			// Mission currentColleaguesLastMission =
-			// colleagueService.getLastMission(COLLAB_ID);
-
 			// Création des différents champs du formulaire "Dernière mission"
 			this.formMission.setFormFieldFactory(new MissionFormFieldFactory(
 					this.clientService, this.skillService,currentColleaguesLastMission,true));

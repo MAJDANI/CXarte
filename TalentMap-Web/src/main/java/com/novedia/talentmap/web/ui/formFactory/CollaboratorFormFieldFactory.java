@@ -106,7 +106,6 @@ public class CollaboratorFormFieldFactory implements FormFieldFactory {
 							bEngineerSelect.setContainerDataSource(ic);
 							bEngineerSelect.setItemCaptionPropertyId("value");
 							
-//							bEngineerSelect.setNullSelectionAllowed(false);
 							bEngineerSelect.setImmediate(true);
 							
 						} catch (Exception e) {

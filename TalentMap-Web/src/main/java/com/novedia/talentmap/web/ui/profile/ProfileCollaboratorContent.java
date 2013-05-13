@@ -222,7 +222,6 @@ public class ProfileCollaboratorContent extends VerticalLayout implements
 			if (message == null) {
 				if (validateEmail()) {
 					saveDataCollaborator();
-					// saveDataMission();
 					this.collabForm.getFormCollaborator().setReadOnly(true);
 					this.collabForm.getFormMission().setReadOnly(true);
 					this.save.setEnabled(false);

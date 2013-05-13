@@ -138,17 +138,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 
 		this.searchByClientPanel.addComponent(clientNameSelect);
 
-		// Build the Name Panel
-		// Have an option group
-//		if (authentication != null) {
-//			if (Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())) {
-//				group = new OptionGroup();
-//				group.addItem("My collaborators");
-//				group.addItem("All collaborators");
-//				group.select("My collaborators");
-//				this.searchByNamePanel.addComponent(group);
-//			}
-//		}
 		this.fieldName.setCaption("Name of collaborator: ");
 		this.fieldName.addListener(this);
 		this.searchByNamePanel.addComponent(this.fieldName);

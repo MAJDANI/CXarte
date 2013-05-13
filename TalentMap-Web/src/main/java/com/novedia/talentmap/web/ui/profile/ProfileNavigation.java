@@ -109,7 +109,6 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,Ite
 					updateObservateur();				
 				}
 				else if(itemId.equals(ConstantsForMenuEnglish.VISUALIZE_MISSIONS_NAME)){					
-					//this.cl = MissionCollaboratorContent.class;
 					this.cl = MissionCollaboratorContent.class;
 					updateObservateur();				
 				}				

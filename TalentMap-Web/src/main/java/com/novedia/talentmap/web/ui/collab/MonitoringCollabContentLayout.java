@@ -15,7 +15,6 @@ public class MonitoringCollabContentLayout extends HorizontalLayout {
 	 */
 	private MonitoringCollabContent monitoringCollabContent;
 	private MonitoringCollabNavigation monitoringCollabNavigation;	
-	private CollaboratorSkillContent collaboratorSkillContent;
 	private HistoryMissionColab historyMissionColab ;
 	private ObjectiveEa objectiveEa;
 	
@@ -42,14 +41,12 @@ public class MonitoringCollabContentLayout extends HorizontalLayout {
 	public MonitoringCollabContentLayout(
 		MonitoringCollabContent monitoringCollabContent,
 		MonitoringCollabNavigation monitoringCollabNavigation,
-		CollaboratorSkillContent collaboratorSkillContent,
 		HistoryMissionColab historyMissionColab,
 		ObjectiveEa objectiveEa,
 		HorizontalSplitPanel hSplitPanel) {
 		super();
 		this.monitoringCollabContent = monitoringCollabContent;
 		this.monitoringCollabNavigation = monitoringCollabNavigation;
-		this.collaboratorSkillContent = collaboratorSkillContent;
 		this.historyMissionColab =  historyMissionColab;
 		this.objectiveEa = objectiveEa;
 		this.hSplitPanel = hSplitPanel;
@@ -100,7 +97,7 @@ public class MonitoringCollabContentLayout extends HorizontalLayout {
 	public void mainBuild(){
 		
 		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.setHeight(600);
+		vLayout.setHeight("600px");
 		this.monitoringCollabNavigation.mainBuild();
 		vLayout.addComponent(this.monitoringCollabNavigation);
 		this.hSplitPanel.setFirstComponent(vLayout);

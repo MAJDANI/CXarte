@@ -296,7 +296,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
 				// MODIFY MISSION
 				if (button == this.btnModifyMission) {
-					//missionForm = missionForm.buildMissionFormColleague();
 					fillAddMissionPanelWithMission(selectedMissionDTO);
 					enableButton(false);
 					// On indique que l'action courante est une modification de

@@ -8,12 +8,6 @@ package com.novedia.talentmap.web.data;
  * @created 21 mai 2012
  */
 public enum TimeUse {
-//	LESS_1_YEAR(1, "Moins d'1 an"),
-//	LESS_2_YEAR(2, "Entre 1 an et 2 ans"),
-//	LESS_3_YEAR(3, "Entre 2 ans et 3 ans "),
-//	LESS_4_YEAR(4, "Entre 3 ans et 4 ans"),
-//	LESS_5_YEAR(5, "Entre 4 ans et 5 ans");
-	
 	LESS_1_YEAR(1,"Less than 1 year"),
 	LESS_2_YEAR(2, "Between 1 and 2 years"),
 	LESS_3_YEAR(3, "Between 2 and 3 years "),

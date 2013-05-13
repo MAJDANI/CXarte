@@ -97,14 +97,6 @@ public class ManageSkillContent extends VerticalLayout implements
 	private Integer currentCategoryId;
 	private Integer currentConceptId;
 	private Integer currentToolId;
-
-	// Dummy data
-	public static Object[] TOOLS = new String[] { "Spring", "tool1", "tool2",
-			"tool3", "tool4" };
-	public static Object[] CONCEPTS = new String[] { "IOC", "concept1",
-			"concept2", "concept3", "concept4" };
-	public static Object[] CATEGORIES = new String[] { "JAVA", ".NET" };
-	
 	
 	/**
 	 * Default constructor

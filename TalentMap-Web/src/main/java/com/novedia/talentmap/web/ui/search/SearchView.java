@@ -31,18 +31,6 @@ public class SearchView extends VerticalLayout {
 		return this;
 	}
 	
-
-	/**
-	 * Build the class SearchView.java 
-	 * @param searchLayout
-	 */
-//	public SearchView(SearchLayout searchLayout) {
-//		super();
-//		this.searchLayout = searchLayout;
-//		
-//		mainBuild();
-//	}
-	
 	public void mainBuild(){
 		addComponent(this.searchLayout);
 	}

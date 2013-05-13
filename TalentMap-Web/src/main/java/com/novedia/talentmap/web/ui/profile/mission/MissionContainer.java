@@ -34,7 +34,6 @@ public class MissionContainer extends BeanItemContainer<Mission> {
 			if(listMission!=null && !listMission.isEmpty()){
 				for(Mission m : listMission){
 					addBean(m);
-					//System.out.println("MissionContainer.fillContainer() bean m = " + m);
 				}
 				
 			}

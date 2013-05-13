@@ -52,25 +52,6 @@ public class CmContentLayout extends HorizontalLayout {
 		return this;
 	}
 
-
-	/**
-	 * Build the class AdminView.java
-	 */
-//	public AdminContentLayout(AdminNavigation adminNav, ManageSkillContent manageSkillContent, 
-//			AdminAddSkillContent addSkillContent, HorizontalSplitPanel hSplitContent,AdminDeleteColleagueContent deleteColleagueContent) {
-//		super();
-//		this.adminNav = adminNav;
-//		this.manageSkillContent = manageSkillContent;
-//		this.addSkillContent = addSkillContent;
-//		this.hSplitContent = hSplitContent;
-//		
-//		this.deleteColleagueContent = deleteColleagueContent;
-//
-//		mainBuild();
-//
-//		buildObservators();
-//	}
-
 public void buildObservators(){
 		
 		this.cmNav.addObservateur(new ISearchLayout() {
@@ -91,8 +72,6 @@ public void buildObservators(){
 	 * @class CmView.java
 	 */
 	public void mainBuild() {
-
-		//initView();
 		
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setHeight("600px");

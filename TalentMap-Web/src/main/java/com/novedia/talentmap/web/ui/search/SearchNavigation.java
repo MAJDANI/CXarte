@@ -51,22 +51,6 @@ public class SearchNavigation extends VerticalLayout implements  IObservable,Ite
 		
 	}
 	
-	
-	/**
-	 * Build the class SearchNavigation.java 
-	 * @param byClient
-	 * @param byName
-	 * @param bySkills
-	 */
-//	public SearchNavigation(Button byClient, Button byName, Button bySkills) {
-//		super();
-//		this.byClient = byClient;
-//		this.byName = byName;
-//		this.bySkills = bySkills;
-//	
-//		mainBuild();
-//	}
-	
 	public void mainBuild(){
 		
 		setMargin(true);
