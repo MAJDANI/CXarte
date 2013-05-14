@@ -14,6 +14,7 @@ import com.vaadin.ui.TabSheet;
 
 /**
  * The main tab contains the profile tab and the search tab
+ * 
  * @author j.collet
  * @project TalentMap-Web
  * @package com.novedia.talentmap.web.ui
@@ -22,7 +23,7 @@ import com.vaadin.ui.TabSheet;
 
 @SuppressWarnings("serial")
 public class TabMain extends TabSheet {
-	
+
 	/**
 	 * All view
 	 */
@@ -33,62 +34,67 @@ public class TabMain extends TabSheet {
 	private CmNotificationView cmNotificationView;
 
 	private MonitoringCollabView monitoringCollabView;
-	
+
 	private Authentication authentication;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public TabMain(){
+	public TabMain() {
 		super();
 	}
-	
+
 	/**
 	 * Build the View according to user's role
-	 * @param role user's role
+	 * 
+	 * @param role
+	 *            user's role
 	 * @return
 	 */
-	public TabSheet buildViewAccordingToUser(Role role){
-		
+	public TabSheet buildViewAccordingToUser(Role role) {
+
 		removeAllComponents();
 		setStyleName(TalentMapCSS.TABSHEET);
 		setImmediate(true);
 		setAuthentication(authentication);
-		if(role.equals(Role.AD)){    //Admin
+		if (role.equals(Role.AD)) { // Admin
 			adminView.setAuthentication(getAuthentication());
 			adminView = adminView.buildAdminView();
 			addTab(adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
-		} else if (role.equals(Role.CL)) {   //Colleague
+		} else if (role.equals(Role.CL)) { // Colleague
 			profileView.setAuthentication(getAuthentication());
-			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
-		} else if(role.equals(Role.IA)){    //IA
+			addTab(profileView.buildTabSheetProfilData(),
+					ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+		} else if (role.equals(Role.IA)) { // IA
 			searchView.setAuthentication(getAuthentication());
 			searchView = searchView.buildSearchView();
 			addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
-		} else if (role.equals(Role.CM)) {  //CM
+		} else if (role.equals(Role.CM)) { // CM
 			profileView.setAuthentication(getAuthentication());
-			addTab(profileView.buildTabSheetProfilData(), ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+			addTab(profileView.buildTabSheetProfilData(),
+					ConstantsForMenuEnglish.TAB_PROFIL_NAME);
 			cmView.setAuthentication(getAuthentication());
 			cmView = cmView.buildCmView();
 			addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
 			cmNotificationView.setAuthentication(getAuthentication());
-			cmNotificationView =  cmNotificationView.buildCmNotificationView();
-			addTab(cmNotificationView,ConstantsForMenuEnglish.TAB_CM_NOTIFICATION);
-			//Les deux lignes ci-dessous pour tester le code créé par Véronique
-//			monitoringCollabView = monitoringCollabView.mainBuild();
-//			addTab(monitoringCollabView,"Monitoring");
-		} else if (role.equals(Role.RH)) {  //RH
+			cmNotificationView = cmNotificationView.buildCmNotificationView();
+			addTab(cmNotificationView,
+					ConstantsForMenuEnglish.TAB_CM_NOTIFICATION);
+			// Les deux lignes ci-dessous pour tester le code créé par Véronique
+			// monitoringCollabView = monitoringCollabView.mainBuild();
+			// addTab(monitoringCollabView,"Monitoring");
+		} else if (role.equals(Role.RH)) { // RH
 			searchView.setAuthentication(getAuthentication());
-			addTab(searchView.buildSearchView(), ConstantsForMenuEnglish.TAB_SEARCH_NAME);
+			addTab(searchView.buildSearchView(),
+					ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 		}
-		
+
 		return this;
 	}
-	
-	
-	
+
 	/**
 	 * Get the authentication
+	 * 
 	 * @return
 	 */
 	public Authentication getAuthentication() {
@@ -97,6 +103,7 @@ public class TabMain extends TabSheet {
 
 	/**
 	 * Set the authentication
+	 * 
 	 * @param authentication
 	 */
 	public void setAuthentication(Authentication authentication) {
@@ -105,14 +112,17 @@ public class TabMain extends TabSheet {
 
 	/**
 	 * Set the tabSearch value
-	 * @param tabSearch the tabSearch to set
+	 * 
+	 * @param tabSearch
+	 *            the tabSearch to set
 	 */
 	public void setSearchView(SearchView searchView) {
 		this.searchView = searchView;
 	}
-	
+
 	/**
 	 * Get the adminView value
+	 * 
 	 * @return the adminView
 	 */
 	public AdminView getAdminView() {
@@ -121,13 +131,14 @@ public class TabMain extends TabSheet {
 
 	/**
 	 * Set the adminView value
-	 * @param adminView the adminView to set
+	 * 
+	 * @param adminView
+	 *            the adminView to set
 	 */
 	public void setAdminView(AdminView adminView) {
 		this.adminView = adminView;
 	}
 
-	
 	/**
 	 * @return the searchView
 	 */
@@ -147,10 +158,11 @@ public class TabMain extends TabSheet {
 		return monitoringCollabView;
 	}
 
-	public void setMonitoringCollabView(MonitoringCollabView monitoringCollabView) {
+	public void setMonitoringCollabView(
+			MonitoringCollabView monitoringCollabView) {
 		this.monitoringCollabView = monitoringCollabView;
 	}
-	
+
 	public CmView getCmView() {
 		return cmView;
 	}
@@ -158,7 +170,7 @@ public class TabMain extends TabSheet {
 	public void setCmView(CmView cmView) {
 		this.cmView = cmView;
 	}
-	
+
 	public CmNotificationView getCmNotificationView() {
 		return cmNotificationView;
 	}
@@ -166,7 +178,5 @@ public class TabMain extends TabSheet {
 	public void setCmNotificationView(CmNotificationView cmNotificationView) {
 		this.cmNotificationView = cmNotificationView;
 	}
-
-	
 
 }

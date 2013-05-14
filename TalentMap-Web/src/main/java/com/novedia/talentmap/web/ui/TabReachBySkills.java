@@ -8,9 +8,9 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
- *
+ * 
  */
-public class TabReachBySkills extends VerticalLayout{
+public class TabReachBySkills extends VerticalLayout {
 	private SearchContent searchContentSkil;
 
 	public TabReachBySkills(SearchContent searchContentSkil) {
@@ -28,10 +28,11 @@ public class TabReachBySkills extends VerticalLayout{
 	}
 
 	/**
-	 * @param searchContentSkil the searchContentSkil to set
+	 * @param searchContentSkil
+	 *            the searchContentSkil to set
 	 */
 	public void setSearchContentSkil(SearchContent searchContentSkil) {
 		this.searchContentSkil = searchContentSkil;
 	}
-		
+
 }

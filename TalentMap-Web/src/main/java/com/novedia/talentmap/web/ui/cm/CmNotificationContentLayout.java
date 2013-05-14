@@ -15,8 +15,7 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 	private CmNotificationContent cmNotificationContent;
 	private CmNotificationNavigation cmNotificationNavigation;
 	private CmNotificationOption cmNotificationOption;
-	
-	
+
 	private Authentication authentication;
 
 	/**
@@ -27,17 +26,16 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 	/**
 	 * default constructor
 	 */
-	public CmNotificationContentLayout(){
+	public CmNotificationContentLayout() {
 		super();
 	}
-	
-	
-	
+
 	/**
 	 * Build the profil Layout of user
+	 * 
 	 * @return
 	 */
-	public CmNotificationContentLayout buildViewCmNotificationContentLayout(){
+	public CmNotificationContentLayout buildViewCmNotificationContentLayout() {
 		removeAllComponents();
 		hSplitContent = new HorizontalSplitPanel();
 		cmNotificationContent.setAuthentication(getAuthentication());
@@ -46,33 +44,28 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 		mainBuild();
 		return this;
 	}
-	
-	
-	
-	public void buildObservators(){
-		
+
+	public void buildObservators() {
+
 		this.cmNotificationNavigation.addObservateur(new INotificationLayout() {
-			
+
 			@Override
 			public void updateNotificationLayout(Class<?> cl) {
-				if(cl == CmNotificationContent.class){
-					cmNotificationContent = cmNotificationContent.buildViewNotificationContent();
-					CmNotificationContentLayout.this.hSplitContent.setSecondComponent(cmNotificationContent);
-				}
-				else if(cl == CmNotificationOption.class){
-					cmNotificationOption = cmNotificationOption.buildViewNotificationOptionContent();
-					CmNotificationContentLayout.this.hSplitContent.setSecondComponent(cmNotificationOption);
+				if (cl == CmNotificationContent.class) {
+					cmNotificationContent = cmNotificationContent
+							.buildViewNotificationContent();
+					CmNotificationContentLayout.this.hSplitContent
+							.setSecondComponent(cmNotificationContent);
+				} else if (cl == CmNotificationOption.class) {
+					cmNotificationOption = cmNotificationOption
+							.buildViewNotificationOptionContent();
+					CmNotificationContentLayout.this.hSplitContent
+							.setSecondComponent(cmNotificationOption);
 				}
 			}
 		}, INotificationLayout.class);
-		
-		
-	
+
 	}
-
-
-
-
 
 	/**
 	 * The main builder
@@ -80,15 +73,17 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 	 * @class ProfileLayout.java
 	 */
 	public void mainBuild() {
-		
+
 		VerticalLayout vLayout = new VerticalLayout();
-		vLayout.addComponent(cmNotificationNavigation.buildCmNotificationNavigation());
+		vLayout.addComponent(cmNotificationNavigation
+				.buildCmNotificationNavigation());
 		vLayout.setHeight("800px");
 
 		this.hSplitContent.setFirstComponent(vLayout);
-		cmNotificationContent = cmNotificationContent.buildViewNotificationContent();
+		cmNotificationContent = cmNotificationContent
+				.buildViewNotificationContent();
 		hSplitContent.setSecondComponent(cmNotificationContent);
-	
+
 		this.hSplitContent.setSplitPosition(20);
 		this.hSplitContent.setLocked(true);
 
@@ -96,8 +91,7 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 		setSizeFull();
 		setExpandRatio(this.hSplitContent, 1);
 	}
-	
-	
+
 	public Authentication getAuthentication() {
 		return authentication;
 	}
@@ -114,34 +108,28 @@ public class CmNotificationContentLayout extends HorizontalLayout {
 			CmNotificationNavigation cmNotificationNavigation) {
 		this.cmNotificationNavigation = cmNotificationNavigation;
 	}
-	
+
 	public CmNotificationContent getCmNotificationContent() {
 		return cmNotificationContent;
 	}
 
-	public void setCmNotificationContent(CmNotificationContent cmNotificationContent) {
+	public void setCmNotificationContent(
+			CmNotificationContent cmNotificationContent) {
 		this.cmNotificationContent = cmNotificationContent;
 	}
-
-
 
 	public CmNotificationOption getCmNotificationOption() {
 		return cmNotificationOption;
 	}
 
-
-
-	public void setCmNotificationOption(CmNotificationOption cmNotificationOption) {
+	public void setCmNotificationOption(
+			CmNotificationOption cmNotificationOption) {
 		this.cmNotificationOption = cmNotificationOption;
 	}
-
-
 
 	public HorizontalSplitPanel gethSplitContent() {
 		return hSplitContent;
 	}
-
-
 
 	public void sethSplitContent(HorizontalSplitPanel hSplitContent) {
 		this.hSplitContent = hSplitContent;

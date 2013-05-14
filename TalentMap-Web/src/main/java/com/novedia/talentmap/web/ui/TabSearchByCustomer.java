@@ -8,17 +8,17 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
- *
+ * 
  */
-public class TabSearchByCustomer extends VerticalLayout{
+public class TabSearchByCustomer extends VerticalLayout {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private SearchContent searchContent;
-	
+
 	public TabSearchByCustomer(SearchContent searchContent) {
-		super();		
+		super();
 		this.searchContent = searchContent;
 		this.searchContent.getSearchTarget().switchByClientPanel();
 		addComponent(this.searchContent);
@@ -32,12 +32,11 @@ public class TabSearchByCustomer extends VerticalLayout{
 	}
 
 	/**
-	 * @param searchContent the searchContent to set
+	 * @param searchContent
+	 *            the searchContent to set
 	 */
 	public void setSearchContent(SearchContent searchContent) {
 		this.searchContent = searchContent;
 	}
-	
-	
-	
+
 }

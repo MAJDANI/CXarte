@@ -7,41 +7,45 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class CmView extends VerticalLayout {
-	
+
 	private CmContentLayout cmContentLayout;
-	
+
 	private Authentication authentication;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public CmView(){
+	public CmView() {
 		super();
 	}
-	
+
 	/**
 	 * Build the view's cm
+	 * 
 	 * @return
 	 */
-	public CmView buildCmView(){
+	public CmView buildCmView() {
 		removeAllComponents();
 		cmContentLayout.setAuthentication(getAuthentication());
 		cmContentLayout = cmContentLayout.buildViewCmContentLayout();
 		addComponent(cmContentLayout);
 		return this;
 	}
-	
+
 	/**
 	 * Get the cmContentLayout value
+	 * 
 	 * @return the cmContentLayout
 	 */
 	public CmContentLayout getCmContentLayout() {
 		return cmContentLayout;
 	}
-	
+
 	/**
 	 * Set the cmContentLayout value
-	 * @param cmContentLayout the cmContentLayout to set
+	 * 
+	 * @param cmContentLayout
+	 *            the cmContentLayout to set
 	 */
 	public void setCmContentLayout(CmContentLayout cmContentLayout) {
 		this.cmContentLayout = cmContentLayout;
@@ -49,6 +53,7 @@ public class CmView extends VerticalLayout {
 
 	/**
 	 * Get the authentication
+	 * 
 	 * @return the authentication
 	 */
 	public Authentication getAuthentication() {
@@ -57,7 +62,9 @@ public class CmView extends VerticalLayout {
 
 	/**
 	 * Set the authentication
-	 * @param authentication the authentication to set
+	 * 
+	 * @param authentication
+	 *            the authentication to set
 	 */
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;

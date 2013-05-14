@@ -15,8 +15,9 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class CmNotificationOption extends VerticalLayout implements ClickListener{
-	
+public class CmNotificationOption extends VerticalLayout implements
+		ClickListener {
+
 	private NotificationService notificationService;
 	private Authentication authentication;
 
@@ -25,30 +26,31 @@ public class CmNotificationOption extends VerticalLayout implements ClickListene
 	 */
 	private Panel listPanel;
 	private Button btnSaveOptions;
-	
+
 	private CmNotificationOptionForm cmNotificationOptionForm;
-	
+
 	private GridLayout cmOptionFormLayout;
-	
+
 	public static final String OPTION_EMAIL_FREQUENCY = "Email frequency";
-	
+
 	/**
 	 * Default constructor
 	 */
-	public CmNotificationOption(){
+	public CmNotificationOption() {
 		super();
 	}
-	
+
 	/**
 	 * Build the view of cm's notification options
+	 * 
 	 * @return
 	 */
-	public CmNotificationOption buildViewNotificationOptionContent(){
+	public CmNotificationOption buildViewNotificationOptionContent() {
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
+
 	/**
 	 * The main builder
 	 * 
@@ -60,43 +62,46 @@ public class CmNotificationOption extends VerticalLayout implements ClickListene
 		buildButton();
 		buildListPanelNotificationOption();
 	}
-	
+
 	public void buildButton() {
 		this.btnSaveOptions.setCaption(ConstantsEnglish.CM_OPTION_SAVE);
 		this.btnSaveOptions.addListener(this);
 	}
-	
+
 	public void buildListPanelNotificationOption() {
 		listPanel.removeAllComponents();
-		
-		//components initialisation
+
+		// components initialisation
 		cmOptionFormLayout = new GridLayout();
 		cmNotificationOptionForm.setAuthentication(getAuthentication());
 		cmNotificationOptionForm.setCmOptionFormLayout(cmOptionFormLayout);
-		cmNotificationOptionForm = cmNotificationOptionForm.buildCmOptionFormView();
+		cmNotificationOptionForm = cmNotificationOptionForm
+				.buildCmOptionFormView();
 		listPanel.addComponent(cmNotificationOptionForm);
 		listPanel.addComponent(btnSaveOptions);
 		addComponent(listPanel);
 	}
-	
+
 	@Override
 	public void buttonClick(ClickEvent event) {
 		Button button = event.getButton();
 		// SAVE OPTIONS
 		if (button == this.btnSaveOptions) {
-			BeanItem<CmOption> cmOptionItem =  (BeanItem<CmOption>) this.cmNotificationOptionForm.getCmOptionForm().getItemDataSource();
+			BeanItem<CmOption> cmOptionItem = (BeanItem<CmOption>) this.cmNotificationOptionForm
+					.getCmOptionForm().getItemDataSource();
 			CmOption cmOption = cmOptionItem.getBean();
-			if(notificationService.getCmFrequencyOption(getAuthentication().getColleagueId()) != null)
-			{
-				notificationService.saveFrequencyOption(cmOption.getFrequency().getId(),getAuthentication().getColleagueId());
+			if (notificationService.getCmFrequencyOption(getAuthentication()
+					.getColleagueId()) != null) {
+				notificationService.saveFrequencyOption(cmOption.getFrequency()
+						.getId(), getAuthentication().getColleagueId());
+			} else {
+				notificationService.addFrequencyOption(cmOption.getFrequency()
+						.getId(), getAuthentication().getColleagueId());
 			}
-			else
-			{
-				notificationService.addFrequencyOption(cmOption.getFrequency().getId(),getAuthentication().getColleagueId());
-			}
-			getWindow().showNotification("Options saved",Notification.TYPE_WARNING_MESSAGE);
+			getWindow().showNotification("Options saved",
+					Notification.TYPE_WARNING_MESSAGE);
 		}
-		
+
 	}
 
 	public NotificationService getNotificationService() {
@@ -119,7 +124,8 @@ public class CmNotificationOption extends VerticalLayout implements ClickListene
 		return cmNotificationOptionForm;
 	}
 
-	public void setCmNotificationOptionForm(CmNotificationOptionForm cmNotificationOptionForm) {
+	public void setCmNotificationOptionForm(
+			CmNotificationOptionForm cmNotificationOptionForm) {
 		this.cmNotificationOptionForm = cmNotificationOptionForm;
 	}
 
@@ -138,7 +144,7 @@ public class CmNotificationOption extends VerticalLayout implements ClickListene
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
-	
+
 	public Button getBtnSaveOptions() {
 		return btnSaveOptions;
 	}

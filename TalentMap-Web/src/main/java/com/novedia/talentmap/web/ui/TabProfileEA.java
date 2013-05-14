@@ -7,15 +7,13 @@ import com.vaadin.ui.TabSheet;
 
 /**
  * @author v.dibi
- *
+ * 
  */
-public class TabProfileEA extends TabSheet{
+public class TabProfileEA extends TabSheet {
 
 	public TabProfileEA() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
 }

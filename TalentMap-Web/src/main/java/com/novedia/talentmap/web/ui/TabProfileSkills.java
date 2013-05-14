@@ -8,20 +8,20 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
- *
+ * 
  */
-public class TabProfileSkills extends VerticalLayout{
+public class TabProfileSkills extends VerticalLayout {
 	private SkillCollaboratorContent skillCollaboratorContent;
 
 	public TabProfileSkills(SkillCollaboratorContent skillCollaboratorContent) {
 		super();
-		this.skillCollaboratorContent =  skillCollaboratorContent;
-		 mainBuild();
-	}
-	public void mainBuild(){
-		addComponent(this.skillCollaboratorContent);
+		this.skillCollaboratorContent = skillCollaboratorContent;
+		mainBuild();
 	}
 
+	public void mainBuild() {
+		addComponent(this.skillCollaboratorContent);
+	}
 
 	/**
 	 * @return the skillCollaboratorContent
@@ -31,7 +31,8 @@ public class TabProfileSkills extends VerticalLayout{
 	}
 
 	/**
-	 * @param skillCollaboratorContent the skillCollaboratorContent to set
+	 * @param skillCollaboratorContent
+	 *            the skillCollaboratorContent to set
 	 */
 	public void setSkillCollaboratorContent(
 			SkillCollaboratorContent skillCollaboratorContent) {

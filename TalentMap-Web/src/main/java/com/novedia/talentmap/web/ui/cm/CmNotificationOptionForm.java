@@ -14,49 +14,50 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 
-public class CmNotificationOptionForm extends FormLayout{
+public class CmNotificationOptionForm extends FormLayout {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8506054835155389774L;
-	
+
 	/**
 	 * Vaadin components
 	 */
 	private Form cmOptionForm;
 	private GridLayout cmOptionFormLayout;
-	
+
 	/**
 	 * POJO
 	 */
 	private Vector<Object> fieldOrderOption;
-	
+
 	/**
 	 * TalentMap service
 	 */
 	private INotificationService notificationService;
-	
+
 	private Authentication authentication;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public CmNotificationOptionForm(){
+	public CmNotificationOptionForm() {
 		super();
 	}
-	
+
 	/**
-	 * Build the cm option Form View 
+	 * Build the cm option Form View
+	 * 
 	 * @return RegistrationForm object
 	 */
-	public CmNotificationOptionForm buildCmOptionFormView(){
+	public CmNotificationOptionForm buildCmOptionFormView() {
 		cmOptionForm.removeAllProperties();
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
+
 	public void buildMain() {
 
 		try {
@@ -66,36 +67,42 @@ public class CmNotificationOptionForm extends FormLayout{
 			e.printStackTrace();
 		}
 	}
-	
-	public void buildCmOptionLayout(){
+
+	public void buildCmOptionLayout() {
 		this.cmOptionFormLayout.setMargin(true);
 		this.cmOptionFormLayout.setSpacing(true);
 		this.cmOptionFormLayout.setColumns(2);
 		this.cmOptionFormLayout.setRows(8);
 	}
-	
-	public void buildCmOptionForm(){
-		
+
+	public void buildCmOptionForm() {
+
 		this.cmOptionForm.setLayout(this.cmOptionFormLayout);
-		
-		this.fieldOrderOption = new Vector<Object>(ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length);
-		CUtils.setOrderForm(this.fieldOrderOption, ConstantsEnglish.FIELD_ORDER_CM_OPTIONS);
-		
-		this.cmOptionForm.setFormFieldFactory(new CmOptionFormFieldFactory(this.notificationService));
+
+		this.fieldOrderOption = new Vector<Object>(
+				ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length);
+		CUtils.setOrderForm(this.fieldOrderOption,
+				ConstantsEnglish.FIELD_ORDER_CM_OPTIONS);
+
+		this.cmOptionForm.setFormFieldFactory(new CmOptionFormFieldFactory(
+				this.notificationService));
 		Frequency defaultFrequency = null;
-		Frequency f = notificationService.getCmFrequencyOption(authentication.getColleagueId());
-		if(f == null){
-			defaultFrequency = Frequency.builder().id(1).build() ;
-		}
-		else{
+		Frequency f = notificationService.getCmFrequencyOption(authentication
+				.getColleagueId());
+		if (f == null) {
+			defaultFrequency = Frequency.builder().id(1).build();
+		} else {
 			defaultFrequency = f;
 		}
-		CmOption defaultCmOption = CmOption.builder().frequency(defaultFrequency).build();
-		BeanItem<CmOption> cmOptionBean = new BeanItem<CmOption>(defaultCmOption);
-		this.cmOptionForm.setItemDataSource(cmOptionBean, this.fieldOrderOption);
-		
+		CmOption defaultCmOption = CmOption.builder()
+				.frequency(defaultFrequency).build();
+		BeanItem<CmOption> cmOptionBean = new BeanItem<CmOption>(
+				defaultCmOption);
+		this.cmOptionForm
+				.setItemDataSource(cmOptionBean, this.fieldOrderOption);
+
 		this.cmOptionForm.setImmediate(true);
-		
+
 		addComponent(this.cmOptionForm);
 	}
 
@@ -130,7 +137,7 @@ public class CmNotificationOptionForm extends FormLayout{
 	public void setFieldOrderOption(Vector<Object> fieldOrderOption) {
 		this.fieldOrderOption = fieldOrderOption;
 	}
-	
+
 	public Authentication getAuthentication() {
 		return authentication;
 	}
@@ -138,6 +145,5 @@ public class CmNotificationOptionForm extends FormLayout{
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
-
 
 }

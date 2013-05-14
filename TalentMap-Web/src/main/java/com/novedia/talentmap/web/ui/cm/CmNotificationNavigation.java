@@ -10,24 +10,24 @@ import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class CmNotificationNavigation  extends VerticalLayout implements IObservable,ItemClickListener {
+public class CmNotificationNavigation extends VerticalLayout implements
+		IObservable, ItemClickListener {
 
 	/**
 	 * Util Observateur
 	 */
 	private INotificationLayout obsCmNotificationContentLayout;
 
-	
 	/**
 	 * POJO
 	 */
 	private Class<?> cl = CmNotificationContent.class;
-	
+
 	/**
 	 * 
 	 */
 	public Tree tree = new Tree();
-	
+
 	/**
 	 * 
 	 * Build the class NavigationLink.java
@@ -36,12 +36,13 @@ public class CmNotificationNavigation  extends VerticalLayout implements IObserv
 	public CmNotificationNavigation() {
 		super();
 	}
-	
+
 	/**
 	 * Build the CmNotificationNavigation view
+	 * 
 	 * @return
 	 */
-	public CmNotificationNavigation  buildCmNotificationNavigation(){
+	public CmNotificationNavigation buildCmNotificationNavigation() {
 		removeAllComponents();
 		mainBuild();
 		return this;
@@ -54,62 +55,62 @@ public class CmNotificationNavigation  extends VerticalLayout implements IObserv
 		displayTree();
 		return this;
 	}
-	
+
 	/**
-	 * build menu tree 
+	 * build menu tree
 	 */
-	public void displayTree(){
-		String firstElement ;
+	public void displayTree() {
+		String firstElement;
 		String firstEl;
 		Object[][] menuNotif = ConstantsForMenuEnglish.CM_NOTIFICATION_NAVIGATION;
 		int nbItems = menuNotif.length;
-		for (int i = 0; i < nbItems; i++) {		
+		for (int i = 0; i < nbItems; i++) {
 			firstEl = (String) menuNotif[i][0];
 			tree.addItem(firstEl);
-			//au moins 1 élément dans le tableau
-			if(menuNotif[i].length == 1){
+			// au moins 1 élément dans le tableau
+			if (menuNotif[i].length == 1) {
 				tree.setChildrenAllowed(menuNotif, false);
-			}
-			else{
-				//On remplit le Menu
-				for (int j = 1; j <  menuNotif[i].length; j++) {	
-					firstElement = (String) menuNotif[i][j]; 
+			} else {
+				// On remplit le Menu
+				for (int j = 1; j < menuNotif[i].length; j++) {
+					firstElement = (String) menuNotif[i][j];
 					tree.addItem(firstElement);
 					tree.setParent(firstElement, firstEl);
 					tree.setChildrenAllowed(firstElement, false);
 				}
-				tree.expandItemsRecursively(firstEl);	
+				tree.expandItemsRecursively(firstEl);
 			}
 		}
 		tree.addListener((ItemClickListener) this);
-		addComponent(this.tree);	
+		addComponent(this.tree);
 	}
-	
+
 	@Override
 	public void itemClick(ItemClickEvent event) {
-		
-		if(event.getSource() == tree){
-			//get the item in the tree
+
+		if (event.getSource() == tree) {
+			// get the item in the tree
 			Object itemId = event.getItemId();
-			if(itemId != null){
-				if(itemId.equals(ConstantsForMenuEnglish.CM_NOTIFICATION_HISTORY)){
-					//allowed to forward the view page
+			if (itemId != null) {
+				if (itemId
+						.equals(ConstantsForMenuEnglish.CM_NOTIFICATION_HISTORY)) {
+					// allowed to forward the view page
 					this.cl = CmNotificationContent.class;
-					updateObservateur();			
-				}
-				else if(itemId.equals(ConstantsForMenuEnglish.CM_NOTIFICATION_SETTINGS)){	
+					updateObservateur();
+				} else if (itemId
+						.equals(ConstantsForMenuEnglish.CM_NOTIFICATION_SETTINGS)) {
 					this.cl = CmNotificationOption.class;
-					updateObservateur();				
+					updateObservateur();
 				}
 
-			}				
+			}
 		}
-			
+
 	}
 
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
-		if(cl == INotificationLayout.class){
+		if (cl == INotificationLayout.class) {
 			this.obsCmNotificationContentLayout = (INotificationLayout) observateur;
 		}
 	}
@@ -117,7 +118,7 @@ public class CmNotificationNavigation  extends VerticalLayout implements IObserv
 	@Override
 	public void updateObservateur() {
 		this.obsCmNotificationContentLayout.updateNotificationLayout(this.cl);
-	
+
 	}
 
 	@Override

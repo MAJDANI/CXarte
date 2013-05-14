@@ -9,9 +9,9 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
- *
+ * 
  */
-public class TabReachByName extends VerticalLayout{
+public class TabReachByName extends VerticalLayout {
 	/**
 	 * 
 	 */
@@ -32,9 +32,10 @@ public class TabReachByName extends VerticalLayout{
 	}
 
 	/**
-	 * @param searchContentName the searchContentName to set
+	 * @param searchContentName
+	 *            the searchContentName to set
 	 */
 	public void setSearchContentName(SearchContent searchContentName) {
 		this.searchContentName = searchContentName;
 	}
-	}
+}

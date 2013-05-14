@@ -7,36 +7,38 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class CmNotificationContent extends VerticalLayout implements ClickListener{
+public class CmNotificationContent extends VerticalLayout implements
+		ClickListener {
 
 	private CmListNotification cmListNotification;
-	
+
 	private Authentication authentication;
-	
+
 	/***
 	 * Vaadin Components
 	 */
 	private Panel listPanel;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public CmNotificationContent(){
+	public CmNotificationContent() {
 		super();
 	}
-	
+
 	/**
 	 * Build the view of cm's notification
+	 * 
 	 * @return
 	 */
-	public CmNotificationContent buildViewNotificationContent(){
+	public CmNotificationContent buildViewNotificationContent() {
 		removeAllComponents();
 		cmListNotification.setColleagueId(getAuthentication().getColleagueId());
 		cmListNotification = cmListNotification.buildAllCmNotification();
 		buildMain();
 		return this;
 	}
-	
+
 	/**
 	 * The main builder
 	 * 
@@ -47,27 +49,23 @@ public class CmNotificationContent extends VerticalLayout implements ClickListen
 		setSpacing(true);
 		buildListPanelNotification();
 	}
-	
+
 	public void buildListPanelNotification() {
-		if(cmListNotification.size() > 0){
+		if (cmListNotification.size() > 0) {
 			listPanel.removeAllComponents();
 			this.listPanel.addComponent(this.cmListNotification);
-			
-			
+
 			addComponent(this.listPanel);
 			listPanel.setVisible(true);
-		} else{
+		} else {
 			listPanel.setVisible(false);
 		}
 	}
-	
-	
-	
-	
+
 	@Override
 	public void buttonClick(ClickEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public CmListNotification getCmListNotification() {

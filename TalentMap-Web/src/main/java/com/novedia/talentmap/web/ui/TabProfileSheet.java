@@ -7,7 +7,8 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
 /**
- * The Profile tab contains the profile view and also the collaborator view (CM) 
+ * The Profile tab contains the profile view and also the collaborator view (CM)
+ * 
  * @author j.collet
  * @project TalentMap-Web
  * @package com.novedia.talentmap.web.ui
@@ -16,32 +17,32 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class TabProfileSheet extends TabSheet {
-	
+
 	/**
 	 * All views
 	 */
 	private ProfileView profileView;
-	
+
 	private Authentication authentication;
+
 	/**
 	 * Default constructor
 	 */
-	public TabProfileSheet(){
+	public TabProfileSheet() {
 		super();
 	}
-	
-	
+
 	/**
-	 * content of Profile tabulation 
+	 * content of Profile tabulation
 	 */
 	VerticalLayout tabProfileView;
-	
-	
+
 	/**
 	 * Build the profile sheet
+	 * 
 	 * @return
 	 */
-	public TabSheet buildTabSheetProfile(){
+	public TabSheet buildTabSheetProfile() {
 		this.removeAllComponents();
 		setImmediate(true);
 		profileView.setAuthentication(getAuthentication());
@@ -49,17 +50,16 @@ public class TabProfileSheet extends TabSheet {
 		addTab(tabProfileView, ConstantsEnglish.TAB_PROFILE_NAME);
 		return this;
 	}
-	
-	
-	
+
 	/**
 	 * Set the profileView value
-	 * @param profileView the profileView to set
+	 * 
+	 * @param profileView
+	 *            the profileView to set
 	 */
 	public void setProfileView(ProfileView profileView) {
 		this.profileView = profileView;
 	}
-
 
 	/**
 	 * 
@@ -69,7 +69,6 @@ public class TabProfileSheet extends TabSheet {
 		return authentication;
 	}
 
-
 	/**
 	 * 
 	 * @param authentication
@@ -78,5 +77,4 @@ public class TabProfileSheet extends TabSheet {
 		this.authentication = authentication;
 	}
 
-	
 }

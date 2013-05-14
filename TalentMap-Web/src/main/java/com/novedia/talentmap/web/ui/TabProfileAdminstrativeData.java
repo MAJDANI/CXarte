@@ -8,27 +8,27 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * @author v.dibi
- *
+ * 
  */
 @SuppressWarnings("serial")
-public class TabProfileAdminstrativeData extends VerticalLayout{
-	
+public class TabProfileAdminstrativeData extends VerticalLayout {
+
 	private ProfileCollaboratorContent profileColleagueContent;
 
 	/**
 	 * Default constructor
 	 */
-	public TabProfileAdminstrativeData(){
+	public TabProfileAdminstrativeData() {
 		super();
 	}
-	
-	public VerticalLayout buildProfileColleagueConten(){
+
+	public VerticalLayout buildProfileColleagueConten() {
 		removeAllComponents();
-		this.addComponent(profileColleagueContent.buildProfileColleagueContent());
+		this.addComponent(profileColleagueContent
+				.buildProfileColleagueContent());
 		return this;
 	}
-	
-	
+
 	/**
 	 * @return the profileCollabContent
 	 */
@@ -37,11 +37,12 @@ public class TabProfileAdminstrativeData extends VerticalLayout{
 	}
 
 	/**
-	 * @param profileCollabContent the profileCollabContent to set
+	 * @param profileCollabContent
+	 *            the profileCollabContent to set
 	 */
-	public void setProfileColleagueContent(ProfileCollaboratorContent profileColleagueContent) {
+	public void setProfileColleagueContent(
+			ProfileCollaboratorContent profileColleagueContent) {
 		this.profileColleagueContent = profileColleagueContent;
 	}
 
-	
 }
