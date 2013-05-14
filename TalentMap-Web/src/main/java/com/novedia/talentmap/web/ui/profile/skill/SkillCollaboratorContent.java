@@ -19,7 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
 
 public class SkillCollaboratorContent extends VerticalLayout implements
-		ClickListener{
+		ClickListener {
 
 	/**
 	 * 
@@ -32,14 +32,14 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	private AddSkillPanel addSkillPanel;
 	private VerticalLayout bodyLayout;
 	private HorizontalLayout footerLayout;
-	
+
 	private Authentication authentication;
-	
+
 	/**
 	 * Vaadin Components
 	 */
 	private Label skillLabel;
-	
+
 	private Button edit;
 	private Button cancel;
 	private Button addSkill;
@@ -47,15 +47,16 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	/**
 	 * Default constructor
 	 */
-	public SkillCollaboratorContent(){
+	public SkillCollaboratorContent() {
 		super();
 	}
-	
+
 	/**
 	 * Build the view of SkillCollaboratorContent
+	 * 
 	 * @return SkillCollaboratorContent
 	 */
-	public VerticalLayout buildSkillCollaboratorContent(){
+	public VerticalLayout buildSkillCollaboratorContent() {
 		setImmediate(true);
 		listSkill.setAuthentication(getAuthentication());
 		addSkillPanel.setAuthentication(getAuthentication());
@@ -63,11 +64,10 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		mainBuild();
 		return this;
 	}
-	
 
-	
 	/**
 	 * The main builder
+	 * 
 	 * @class ProfileView.java
 	 */
 	public void mainBuild() {
@@ -79,7 +79,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		addComponent(this.bodyLayout);
 		addComponent(this.footerLayout);
 	}
-	
+
 	/**
 	 * Build method for the Skill Layout
 	 * 
@@ -88,7 +88,8 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	public void buildSkillLayout() {
 		this.skillLabel.addStyleName(TalentMapCSS.H2);
-		if (this.listSkill.getCategoryMapDto().getMapCategory() != null && !listSkill.getCategoryMapDto().getMapCategory().isEmpty()) {
+		if (this.listSkill.getCategoryMapDto().getMapCategory() != null
+				&& !listSkill.getCategoryMapDto().getMapCategory().isEmpty()) {
 			buildAddSkillPanel();
 			this.skillPanel.setVisible(false);
 			this.addSkillPanel.setVisible(false);
@@ -100,7 +101,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		}
 
 	}
-	
+
 	/**
 	 * Build method for the SkillPanel Layout
 	 * 
@@ -138,7 +139,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 		this.addSkillPanel.setVisible(false);
 		this.bodyLayout.addComponent(this.addSkillPanel);
 	}
-	
+
 	/**
 	 * Build the List of Skill
 	 * 
@@ -147,7 +148,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	 */
 	public void buildListSkillPanel() {
 		this.listSkillPanel.removeAllComponents();
-			
+
 		this.addSkill.setCaption("Add skill");
 		this.addSkill.setEnabled(true);
 
@@ -159,7 +160,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 
 		this.bodyLayout.addComponent(this.listSkillPanel);
 	}
-	
+
 	/**
 	 * Build method for the Button Layout
 	 * 
@@ -194,7 +195,7 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 				Alignment.MIDDLE_CENTER);
 
 	}
-	
+
 	/**
 	 * Button Click Listener
 	 */
@@ -202,102 +203,113 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 	public void buttonClick(ClickEvent event) {
 
 		Button button = event.getButton();
-		
-		//Edit Button
-		if( button == this.edit){
-			
-			if(this.setAddSkillPanelWithTool()){
+
+		// Edit Button
+		if (button == this.edit) {
+
+			if (this.setAddSkillPanelWithTool()) {
 				this.addSkillPanel.setNewSkill(false);
 				this.addSkillPanel.setVisible(true);
 				this.addSkill.setEnabled(false);
-			}else{
+			} else {
 				this.edit.setEnabled(true);
 			}
-			
-		//Cancel Button
+
+			// Cancel Button
 		} else if (button == this.cancel) {
 			edit.setEnabled(true);
 			addSkill.setEnabled(true);
 			mainBuild();
 
-		//Add Skill Panel button
+			// Add Skill Panel button
 		} else if (button == this.addSkill) {
 			this.edit.setEnabled(false);
 			this.skillPanel.setVisible(false);
-			
+
 			this.addSkillPanel.setNewSkill(true);
 			this.addSkillPanel.setVisible(true);
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
-			
+
 			this.addSkillPanel.eraseAllSelects();
 			this.addSkillPanel.getCategoryLabel().setValue("");
 			this.addSkillPanel.getConceptLabel().setValue("");
-			
+
 		}
 	}
-	
+
 	/**
 	 * We set the AddSkillPanel with the row selected in the tool table
+	 * 
 	 * @class ProfileView.java
 	 * @return
 	 */
-	public boolean setAddSkillPanelWithTool(){
-		
-	Object rowId = this.listSkill.getTableTools().getValue(); // get the selected rows id
-		
-		if(rowId!=null){
-			//-------------------
+	public boolean setAddSkillPanelWithTool() {
+
+		Object rowId = this.listSkill.getTableTools().getValue(); // get the
+																	// selected
+																	// rows id
+
+		if (rowId != null) {
+			// -------------------
 			// ToolName
-			//-------------------
-			String toolName = (String)this.listSkill.getTableTools().getContainerProperty(rowId,"Tool Name").getValue();
+			// -------------------
+			String toolName = (String) this.listSkill.getTableTools()
+					.getContainerProperty(rowId, "Tool Name").getValue();
 			this.addSkillPanel.getToolSelect().setReadOnly(false);
 			this.addSkillPanel.getToolSelect().setValue(toolName);
 			this.addSkillPanel.getToolSelect().setNullSelectionAllowed(false);
 			this.addSkillPanel.getToolSelect().setReadOnly(true);
 
-			//-------------------
+			// -------------------
 			// toolScore
-			//-------------------
-			Integer toolScore = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"score").getValue();
+			// -------------------
+			Integer toolScore = (Integer) this.listSkill.getTableTools()
+					.getContainerProperty(rowId, "score").getValue();
 			this.addSkillPanel.getStars().setValue(toolScore);
-			
-			//-------------------
+
+			// -------------------
 			// toolUseFrequency
-			//-------------------
-			//TODO : trouver comment faire plus simplement, par exemple :
-			//this.addSkillPanel.getFrequencyUseSelect().setValue(toolUseFrequency);
-			Integer toolUseFrequency = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"use_frequency").getValue();
+			// -------------------
+			// TODO : trouver comment faire plus simplement, par exemple :
+			// this.addSkillPanel.getFrequencyUseSelect().setValue(toolUseFrequency);
+			Integer toolUseFrequency = (Integer) this.listSkill.getTableTools()
+					.getContainerProperty(rowId, "use_frequency").getValue();
 			for (FrequencyUse fu : FrequencyUse.values()) {
 				if (fu.getId() == toolUseFrequency) {
-					this.addSkillPanel.getFrequencyUseSelect().setValue(fu.getValue());
+					this.addSkillPanel.getFrequencyUseSelect().setValue(
+							fu.getValue());
 					break;
 				}
 			}
 
-			//-------------------
+			// -------------------
 			// toolNoUsingTime
-			//-------------------
-			//TODO : trouver comment faire plus simplement, par exemple :
-			//this.addSkillPanel.getNoUsingTimeSelect().setValue(toolNoUsingTime);
-			Integer toolNoUsingTime = (Integer)this.listSkill.getTableTools().getContainerProperty(rowId,"no_using_time").getValue();
+			// -------------------
+			// TODO : trouver comment faire plus simplement, par exemple :
+			// this.addSkillPanel.getNoUsingTimeSelect().setValue(toolNoUsingTime);
+			Integer toolNoUsingTime = (Integer) this.listSkill.getTableTools()
+					.getContainerProperty(rowId, "no_using_time").getValue();
 			for (TimeUse tu : TimeUse.values()) {
 				if (tu.getId() == toolNoUsingTime) {
-					this.addSkillPanel.getNoUsingTimeSelect().setValue(tu.getValue());
+					this.addSkillPanel.getNoUsingTimeSelect().setValue(
+							tu.getValue());
 					break;
 				}
 			}
 			return true;
 
-		}else{
-			getWindow().showNotification("Please select a tool in the array of skills", Notification.TYPE_WARNING_MESSAGE);
+		} else {
+			getWindow().showNotification(
+					"Please select a tool in the array of skills",
+					Notification.TYPE_WARNING_MESSAGE);
 			return false;
 		}
-		
 
 	}
-	
+
 	/**
 	 * Builder for all observator
+	 * 
 	 * @class ProfileView.java
 	 */
 	private void buildObersvators() {
@@ -318,7 +330,8 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 				SkillCollaboratorContent.this.addSkillPanel.setVisible(false);
 				SkillCollaboratorContent.this.edit.setEnabled(true);
 
-				SkillCollaboratorContent.this.listSkillPanel.removeAllComponents();
+				SkillCollaboratorContent.this.listSkillPanel
+						.removeAllComponents();
 
 				buildAddSkillPanel();
 				buildListSkillPanel();
@@ -329,119 +342,92 @@ public class SkillCollaboratorContent extends VerticalLayout implements
 
 	}
 
-
 	public ListSkill getListSkill() {
 		return listSkill;
 	}
-
 
 	public void setListSkill(ListSkill listSkill) {
 		this.listSkill = listSkill;
 	}
 
-
 	public Panel getListSkillPanel() {
 		return listSkillPanel;
 	}
-
 
 	public void setListSkillPanel(Panel listSkillPanel) {
 		this.listSkillPanel = listSkillPanel;
 	}
 
-
 	public Panel getSkillPanel() {
 		return skillPanel;
 	}
-
 
 	public void setSkillPanel(Panel skillPanel) {
 		this.skillPanel = skillPanel;
 	}
 
-
 	public AddSkillPanel getAddSkillPanel() {
 		return addSkillPanel;
 	}
-
 
 	public void setAddSkillPanel(AddSkillPanel addSkillPanel) {
 		this.addSkillPanel = addSkillPanel;
 	}
 
-
 	public VerticalLayout getBodyLayout() {
 		return bodyLayout;
 	}
-
 
 	public void setBodyLayout(VerticalLayout bodyLayout) {
 		this.bodyLayout = bodyLayout;
 	}
 
-
 	public HorizontalLayout getFooterLayout() {
 		return footerLayout;
 	}
-
 
 	public void setFooterLayout(HorizontalLayout footerLayout) {
 		this.footerLayout = footerLayout;
 	}
 
-
 	public Authentication getAuthentication() {
 		return authentication;
 	}
-
 
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
 
-
 	public Label getSkillLabel() {
 		return skillLabel;
 	}
-
 
 	public void setSkillLabel(Label skillLabel) {
 		this.skillLabel = skillLabel;
 	}
 
-
 	public Button getEdit() {
 		return edit;
 	}
-
 
 	public void setEdit(Button edit) {
 		this.edit = edit;
 	}
 
-
 	public Button getCancel() {
 		return cancel;
 	}
-
 
 	public void setCancel(Button cancel) {
 		this.cancel = cancel;
 	}
 
-
 	public Button getAddSkill() {
 		return addSkill;
 	}
 
-
 	public void setAddSkill(Button addSkill) {
 		this.addSkill = addSkill;
 	}
-	
-	
-	
-	
-	
-	
+
 }

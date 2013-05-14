@@ -28,7 +28,6 @@ import com.vaadin.ui.Window.Notification;
 public class MissionCollaboratorContent extends VerticalLayout implements
 		ClickListener {
 
-
 	/**
 	 * Talent Map Service
 	 */
@@ -56,7 +55,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	private Button btnAddMission;
 	private Button btnModifyMission;
 	private Button btnDeleteMission;
-	
+
 	/**
 	 * SubWindow to confirm or cancel a delete mission action
 	 */
@@ -66,33 +65,31 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * The mission selected by the user, in order to modify or delete it.
 	 */
 	private Mission selectedMission;
-	
+
 	private Authentication authentication;
-	
-	
+
 	/**
 	 * Default constructor
 	 */
-	public MissionCollaboratorContent(){
+	public MissionCollaboratorContent() {
 		super();
 	}
-	
+
 	/**
 	 * Build the view of mission's colleague
+	 * 
 	 * @return
 	 */
-	public MissionCollaboratorContent buildViewMissionColleagueContent(){
+	public MissionCollaboratorContent buildViewMissionColleagueContent() {
 		removeAllComponents();
 		listMission.setColleagueId(getAuthentication().getColleagueId());
 		missionForm.setAuthentication(getAuthentication());
-		
+
 		addMissionPanel = addMissionPanel.buildAddMissionPanel();
 		buildMain();
 		buildObersvators();
 		return this;
 	}
-	
-
 
 	/**
 	 * The main builder
@@ -116,7 +113,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @class MissionCollaboratorContent.java
 	 */
 	public void buildTitle() {
-		
+
 		Label pageTitle = new Label();
 		pageTitle.setCaption(ConstantsEnglish.PAGE_TITLE);
 		pageTitle.addStyleName(TalentMapCSS.H2);
@@ -129,13 +126,16 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * @class MissionCollaboratorContent.java
 	 */
 	public void buildButton() {
-		this.btnAddMission.setCaption(ConstantsEnglish.LABEL_BUTTON_ADD_MISSION);
+		this.btnAddMission
+				.setCaption(ConstantsEnglish.LABEL_BUTTON_ADD_MISSION);
 		this.btnAddMission.addListener(this);
 
-		this.btnModifyMission.setCaption(ConstantsEnglish.LABEL_BUTTON_MODIFY_MISSION);
+		this.btnModifyMission
+				.setCaption(ConstantsEnglish.LABEL_BUTTON_MODIFY_MISSION);
 		this.btnModifyMission.addListener(this);
 
-		this.btnDeleteMission.setCaption(ConstantsEnglish.LABEL_BUTTON_DELETE_MISSION);
+		this.btnDeleteMission
+				.setCaption(ConstantsEnglish.LABEL_BUTTON_DELETE_MISSION);
 		this.btnDeleteMission.addListener(this);
 	}
 
@@ -149,7 +149,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		addComponent(this.btnAddMission);
 		addComponent(this.addMissionPanel);
 		enableButton(true);
-		
+
 		buildListPanelMission();
 
 		if (this.listMission.getItemIds().isEmpty()) {
@@ -166,25 +166,25 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 
 	public void buildListPanelMission() {
-		if(listMission.size() > 0){
+		if (listMission.size() > 0) {
 			listPanel.removeAllComponents();
-			this.listPanel.addComponent(this.listMission.buildAllColleagueMission());
-			
+			this.listPanel.addComponent(this.listMission
+					.buildAllColleagueMission());
+
 			this.hLayListMissionButtons = new HorizontalLayout();
 			this.hLayListMissionButtons.addComponent(btnModifyMission);
 			this.hLayListMissionButtons.addComponent(btnDeleteMission);
 			this.hLayListMissionButtons.setSpacing(true);
 			hLayListMissionButtons.setMargin(true);
 			hLayListMissionButtons.addStyleName("footerButton");
-			
+
 			this.listPanel.addComponent(this.hLayListMissionButtons);
 			addComponent(this.listPanel);
 			listPanel.setVisible(true);
-		} else{
+		} else {
 			listPanel.setVisible(false);
 		}
 	}
-
 
 	/**
 	 * Builder for all observers
@@ -219,68 +219,63 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	}
 
 	/**
-	 * Shows the form to add missions and disables the button "add".
-	 * The form must be emptied.
+	 * Shows the form to add missions and disables the button "add". The form
+	 * must be emptied.
 	 */
 	private void enableAddMissionPanel() {
 		btnAddMission.setEnabled(false);
 		addMissionPanel.setVisible(true);
 	}
 
-	
-	private void enableButton(boolean enable){
+	private void enableButton(boolean enable) {
 		btnAddMission.setEnabled(enable);
 		btnModifyMission.setEnabled(enable);
 		btnDeleteMission.setEnabled(enable);
 	}
-	
+
 	/**
 	 * Hides the form to add missions and enables the button "add"
 	 */
 	private void disableAddMissionPanel() {
 		btnAddMission.setEnabled(true);
 		addMissionPanel.setVisible(false);
-		
+
 	}
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		//System.out.println("MissionCollaboratorContent.buttonClick()");
+		// System.out.println("MissionCollaboratorContent.buttonClick()");
 		Button button = event.getButton();
 		// ADD NEW MISSION
 		if (button == this.btnAddMission) {
-			//On vide le contenu de MissionForm
+			// On vide le contenu de MissionForm
 			MissionCollaboratorContent.this.missionForm.emptyMissionForm();
-			//On affiche le panel de saisie d'une nouvelle mission
+			// On affiche le panel de saisie d'une nouvelle mission
 			enableAddMissionPanel();
 			enableButton(false);
 			// On indique que l'action courante est une création (pas une
 			// modification de mission)
 			this.missionForm.setCurrentSaveMode(MissionForm.SAVE_MODE_INSERT);
-		}
-		// MODIFY OR DELETE EXISTING MISSION
-		else {
+		} else {
+			// MODIFY OR DELETE EXISTING MISSION
 			selectedMission = (Mission) this.listMission.getValue();
-			
+
 			// CHECK USER SELECTED A MISSION IN THE TABLE
 			if (null == selectedMission) {
-				getWindow().showNotification(
-						"Please select a mission",
+				getWindow().showNotification("Please select a mission",
 						Notification.TYPE_WARNING_MESSAGE);
 			} else {
 				MissionDto selectedMissionDTO = new MissionDto();
-				
+
 				// Recopie des attributs "simples"
 				Set<Tool> toolsSet = new HashSet<Tool>();
 				List<Tool> tools = selectedMission.getTools();
-				
-				if(tools.size()>0)
-				{
-					for(Tool t : tools)
-					{
+
+				if (tools.size() > 0) {
+					for (Tool t : tools) {
 						toolsSet.add(t);
 					}
-					
+
 					selectedMissionDTO.setTools(toolsSet);
 				}
 
@@ -291,7 +286,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 				selectedMissionDTO.setTitle(selectedMission.getTitle());
 				selectedMissionDTO.setPlace(selectedMission.getPlace());
 				selectedMissionDTO.setNotes(selectedMission.getNotes());
-				selectedMissionDTO.setColleagueId(selectedMission.getColleagueId());
+				selectedMissionDTO.setColleagueId(selectedMission
+						.getColleagueId());
 				selectedMissionDTO.setTools(toolsSet);
 
 				// MODIFY MISSION
@@ -319,20 +315,24 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 */
 	public void deleteMission(int idMissionToDelete) {
 		try {
-			Mission missionToDelete = Mission.builder().id(idMissionToDelete).build();
-			int result = this.collaboratorService.deleteMission(missionToDelete);
+			Mission missionToDelete = Mission.builder().id(idMissionToDelete)
+					.build();
+			int result = this.collaboratorService
+					.deleteMission(missionToDelete);
 
 			if (result != 0) {
 				this.missionForm.setCurrentAction(MissionForm.ACTION_DELETE);
 				// TODO centralize messages
-				CUtils.showMessage("The mission has been deleted", Message.INFO, getWindow());
-				
+				CUtils.showMessage("The mission has been deleted",
+						Message.INFO, getWindow());
+
 				// creates a new list
 				missionForm.refreshListMission();
 
 			} else {
 				// TODO : what to do?
-				CUtils.showMessage("The mission was not deleted", Message.INFO, getWindow());
+				CUtils.showMessage("The mission was not deleted", Message.INFO,
+						getWindow());
 			}
 
 		} catch (Exception e) {
@@ -345,26 +345,32 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 	 * selected mission
 	 */
 	private void openConfirmWindow() {
-		windowConfirmDelete = new Window(ConstantsEnglish.LABEL_WINDOW_CONFIRM_DELETE);
+		windowConfirmDelete = new Window(
+				ConstantsEnglish.LABEL_WINDOW_CONFIRM_DELETE);
 		windowConfirmDelete.center();
 
-		Button yesButton = new Button(ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
-		Button noButton = new Button(ConstantsEnglish.LABEL_BUTTON_CANCEL_DELETE_MISSION);
+		Button yesButton = new Button(
+				ConstantsEnglish.LABEL_BUTTON_CONFIRM_DELETE_MISSION);
+		Button noButton = new Button(
+				ConstantsEnglish.LABEL_BUTTON_CANCEL_DELETE_MISSION);
 		yesButton.addListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 8938851452280879463L;
+
 			public void buttonClick(ClickEvent event) {
 				confirmDeleteButtonClick(event);
 			}
 		});
-		
+
 		noButton.addListener(new Button.ClickListener() {
 			private static final long serialVersionUID = 8312230721392985816L;
+
 			public void buttonClick(ClickEvent event) {
 				cancelDeleteButtonClick(event);
 			}
 		});
-		
-		windowConfirmDelete.addComponent(new Label(ConstantsEnglish.CONFIRM_DELETE_MESSAGE_MISSION));
+
+		windowConfirmDelete.addComponent(new Label(
+				ConstantsEnglish.CONFIRM_DELETE_MESSAGE_MISSION));
 
 		HorizontalLayout containerButton = new HorizontalLayout();
 		containerButton.setSpacing(true);
@@ -373,7 +379,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		containerButton.addComponent(yesButton);
 		containerButton.addComponent(noButton);
 		windowConfirmDelete.addComponent(containerButton);
-		
+
 		windowConfirmDelete.setWidth("30%");
 		windowConfirmDelete.setReadOnly(true);
 		windowConfirmDelete.setModal(true);
@@ -518,7 +524,8 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		return hLayListMissionButtons;
 	}
 
-	public void sethLayListMissionButtons(HorizontalLayout hLayListMissionButtons) {
+	public void sethLayListMissionButtons(
+			HorizontalLayout hLayListMissionButtons) {
 		this.hLayListMissionButtons = hLayListMissionButtons;
 	}
 
@@ -562,7 +569,4 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		this.selectedMission = selectedMission;
 	}
 
-	
-	
-	
 }

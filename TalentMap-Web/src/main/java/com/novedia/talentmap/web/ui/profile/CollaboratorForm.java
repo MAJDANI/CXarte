@@ -127,9 +127,10 @@ public class CollaboratorForm extends VerticalLayout {
 		this.formCollaborator
 				.setFormFieldFactory(new CollaboratorFormFieldFactory(
 						this.profileService, this.businessEngineerService,
-						this.colleagueService,true));
+						this.colleagueService, true));
 
-		Colleague currentColleague = colleagueService.getColleague(authentication.getColleagueId());
+		Colleague currentColleague = colleagueService
+				.getColleague(authentication.getColleagueId());
 		initFormColleagueData(currentColleague);
 
 		this.formCollaborator.setImmediate(true);
@@ -185,7 +186,8 @@ public class CollaboratorForm extends VerticalLayout {
 
 			// Création des différents champs du formulaire "Dernière mission"
 			this.formMission.setFormFieldFactory(new MissionFormFieldFactory(
-					this.clientService, this.skillService,currentColleaguesLastMission,true));
+					this.clientService, this.skillService,
+					currentColleaguesLastMission, true));
 			initFormColleagueMission(currentColleaguesLastMission);
 			this.formMission.setImmediate(true);
 			this.formMission.setLayout(lastMissionDatasLayout);
@@ -324,7 +326,7 @@ public class CollaboratorForm extends VerticalLayout {
 	public void setClientService(IClientService clientService) {
 		this.clientService = clientService;
 	}
-	
+
 	public ISkillService getSkillService() {
 		return skillService;
 	}

@@ -51,18 +51,15 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 	private static final long serialVersionUID = 3111770449952231327L;
 
-	/**
-	 * TalentMap Services
-	 */
+	// TalentMap Services
 	private ISkillService skillService;
 	private INotificationService notificationService;
 	private IColleagueService colleagueService;
 	private IAdminService adminService;
 
 	private Authentication authentication;
-	/**
-	 * Vaadin Components
-	 */
+
+	// Vaadin Components
 	private Accordion skillTab;
 
 	/**
@@ -80,7 +77,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	private Select noUsingTimeSelect;
 
 	/**
-	 * Vaadin Widget : RatingStars
+	 * .Vaadin Widget : RatingStars.
 	 */
 	private RatingStars stars;
 
@@ -90,7 +87,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	private static Map<Integer, String> valueOptions;
 
 	/**
-	 * Util Observateur
+	 * . Util! Observator.!
 	 */
 	private IProfileView obs;
 
@@ -101,7 +98,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 
 	private String ADD_SKILL = "ADD";
 	private String UPDATE_SKILL = "UPDATE";
-
 
 	/**
 	 * Flag
@@ -504,7 +500,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
 
 	public void NotifyCm(String type, Skill skill) {
-		
+
 		if (type.equals(ADD_SKILL)) {
 			Colleague c = colleagueService.getColleague(skill.getColleagueId());
 			Tool t = adminService.getTool(skill.getTool_id());
@@ -516,8 +512,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 					.colleagueId(skill.getColleagueId()).notes(comment)
 					.date(date).build();
 			this.notificationService.saveNotification(notification);
-		}
-		else if (type.equals(UPDATE_SKILL)) {
+		} else if (type.equals(UPDATE_SKILL)) {
 			Colleague c = colleagueService.getColleague(skill.getColleagueId());
 			Tool t = adminService.getTool(skill.getTool_id());
 

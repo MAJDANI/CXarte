@@ -19,7 +19,6 @@ public class ProfileLayout extends HorizontalLayout {
 	private MissionCollaboratorContent missionCollabContent;
 	private SkillCollaboratorContent skillCollabContent;
 
-	
 	private Authentication authentication;
 
 	/**
@@ -30,17 +29,16 @@ public class ProfileLayout extends HorizontalLayout {
 	/**
 	 * default constructor
 	 */
-	public ProfileLayout(){
+	public ProfileLayout() {
 		super();
 	}
-	
-	
-	
+
 	/**
 	 * Build the profil Layout of user
+	 * 
 	 * @return
 	 */
-	public HorizontalLayout buildProfileLayout(){
+	public HorizontalLayout buildProfileLayout() {
 		profileColleagueContent.setAuthentication(getAuthentication());
 		skillCollabContent.setAuthentication(getAuthentication());
 		missionCollabContent.setAuthentication(getAuthentication());
@@ -50,27 +48,31 @@ public class ProfileLayout extends HorizontalLayout {
 		mainBuild();
 		return this;
 	}
-	
-	
-	
-	public void buildObservators(){
-		
+
+	public void buildObservators() {
+
 		this.profileNavigation.addObservateur(new IProfileLayout() {
-			
+
 			@Override
 			public void updateProfileLayout(Class<?> cl) {
-				
-				if(cl == ProfileCollaboratorContent.class){
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.profileColleagueContent.buildProfileColleagueContent());
+
+				if (cl == ProfileCollaboratorContent.class) {
+					ProfileLayout.this.hSplitPanel
+							.setSecondComponent(ProfileLayout.this.profileColleagueContent
+									.buildProfileColleagueContent());
 				}
-				
-				if(cl == MissionCollaboratorContent.class){
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.missionCollabContent.buildViewMissionColleagueContent());
+
+				if (cl == MissionCollaboratorContent.class) {
+					ProfileLayout.this.hSplitPanel
+							.setSecondComponent(ProfileLayout.this.missionCollabContent
+									.buildViewMissionColleagueContent());
 				}
-				
-				if(cl == SkillCollaboratorContent.class){
-					
-					ProfileLayout.this.hSplitPanel.setSecondComponent(ProfileLayout.this.skillCollabContent.buildSkillCollaboratorContent());
+
+				if (cl == SkillCollaboratorContent.class) {
+
+					ProfileLayout.this.hSplitPanel
+							.setSecondComponent(ProfileLayout.this.skillCollabContent
+									.buildSkillCollaboratorContent());
 				}
 			}
 		}, IProfileLayout.class);
@@ -82,14 +84,16 @@ public class ProfileLayout extends HorizontalLayout {
 	 * @class ProfileLayout.java
 	 */
 	public void mainBuild() {
-		
+
 		VerticalLayout vLayout = new VerticalLayout();
-		this.profileNavigation.setRoleId(authentication.getAuthorization().getRoleId());
+		this.profileNavigation.setRoleId(authentication.getAuthorization()
+				.getRoleId());
 		vLayout.addComponent(this.profileNavigation.mainBuild());
 		vLayout.setHeight("800px");
 
 		this.hSplitPanel.setFirstComponent(vLayout);
-		this.hSplitPanel.setSecondComponent(this.profileColleagueContent.buildProfileColleagueContent());
+		this.hSplitPanel.setSecondComponent(this.profileColleagueContent
+				.buildProfileColleagueContent());
 		this.hSplitPanel.setSplitPosition(20);
 		this.hSplitPanel.setLocked(true);
 
@@ -97,18 +101,14 @@ public class ProfileLayout extends HorizontalLayout {
 		setSizeFull();
 		setExpandRatio(this.hSplitPanel, 1);
 	}
-	
-	
+
 	public Authentication getAuthentication() {
 		return authentication;
 	}
 
-
-
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
-
 
 	/**
 	 * Get the profileCollabContent value
@@ -192,11 +192,9 @@ public class ProfileLayout extends HorizontalLayout {
 		return skillCollabContent;
 	}
 
-	public void setSkillCollabContent(SkillCollaboratorContent skillCollabContent) {
+	public void setSkillCollabContent(
+			SkillCollaboratorContent skillCollabContent) {
 		this.skillCollabContent = skillCollabContent;
 	}
 
-
-
-		
 }

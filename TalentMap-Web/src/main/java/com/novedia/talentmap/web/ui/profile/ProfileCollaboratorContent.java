@@ -252,17 +252,17 @@ public class ProfileCollaboratorContent extends VerticalLayout implements
 
 	public void NotifyCm(Colleague colleague) {
 
-	
-			Profile profile = profileService.getProfile(colleague.getProfileId());
+		Profile profile = profileService.getProfile(colleague.getProfileId());
 
-			String comment = colleague.getFirstName() + " " + colleague.getLastName()
-					+ " modified his job title to " + profile.getType() ;
-			Date date = new Date();
-			UserNotification notification = UserNotification.builder()
-					.colleagueId(colleague.getId()).notes(comment)
-					.date(date).build();
-			this.notificationService.saveNotification(notification);
-		
+		String comment = colleague.getFirstName() + " "
+				+ colleague.getLastName() + " modified his job title to "
+				+ profile.getType();
+		Date date = new Date();
+		UserNotification notification = UserNotification.builder()
+				.colleagueId(colleague.getId()).notes(comment).date(date)
+				.build();
+		this.notificationService.saveNotification(notification);
+
 	}
 
 	public Authentication getAuthentication() {
@@ -303,7 +303,6 @@ public class ProfileCollaboratorContent extends VerticalLayout implements
 		this.notificationService = notificationService;
 	}
 
-	
 	/**
 	 * Set the collabForm value
 	 * 

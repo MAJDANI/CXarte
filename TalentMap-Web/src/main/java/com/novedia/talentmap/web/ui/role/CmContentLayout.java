@@ -21,28 +21,28 @@ public class CmContentLayout extends HorizontalLayout {
 	 * All views
 	 */
 	private CmNavigation cmNav;
-	
-	private Authentication authentication; 
 
+	private Authentication authentication;
 
 	/**
 	 * Vaadin Components
 	 */
 	private HorizontalSplitPanel hSplitContent;
 	private SearchContent searchContent;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public CmContentLayout(){
+	public CmContentLayout() {
 		super();
 	}
-	
+
 	/**
 	 * Build the CmContentLayout view
+	 * 
 	 * @return
 	 */
-	public CmContentLayout buildViewCmContentLayout(){
+	public CmContentLayout buildViewCmContentLayout() {
 		removeAllComponents();
 		cmNav = cmNav.buildCmNavigation();
 		searchContent.setAuthentication(getAuthentication());
@@ -52,27 +52,26 @@ public class CmContentLayout extends HorizontalLayout {
 		return this;
 	}
 
-public void buildObservators(){
-		
+	public void buildObservators() {
+
 		this.cmNav.addObservateur(new ISearchLayout() {
-			
+
 			@Override
 			public void switchPanelTarget(int searchTargetPanel) {
-				CmContentLayout.this.searchContent.switchPanel(searchTargetPanel);
+				CmContentLayout.this.searchContent
+						.switchPanel(searchTargetPanel);
 			}
 
 		}, ISearchLayout.class);
-		
+
 	}
-		
-	
 
 	/**
 	 * 
 	 * @class CmView.java
 	 */
 	public void mainBuild() {
-		
+
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setHeight("600px");
 		vLayout.addComponent(this.cmNav);
@@ -116,7 +115,8 @@ public void buildObservators(){
 	/**
 	 * Set the hSplitContent
 	 * 
-	 * @param hSplitContent the hSplitPanel to set
+	 * @param hSplitContent
+	 *            the hSplitPanel to set
 	 */
 	public void sethSplitContent(HorizontalSplitPanel hSplitContent) {
 		this.hSplitContent = hSplitContent;
@@ -129,7 +129,7 @@ public void buildObservators(){
 	public void setCmNav(CmNavigation cmNav) {
 		this.cmNav = cmNav;
 	}
-	
+
 	public SearchContent getSearchContent() {
 		return searchContent;
 	}

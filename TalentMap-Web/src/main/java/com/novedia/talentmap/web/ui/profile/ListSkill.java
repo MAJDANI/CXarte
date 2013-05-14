@@ -27,7 +27,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	 * TalentMap Services
 	 */
 	private ISkillService skillService;
-	
+
 	private Authentication authentication;
 
 	/**
@@ -42,22 +42,21 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	private Accordion accCategory;
 	private Accordion accConcept;
 
-
 	/**
 	 * Default Constructor
 	 */
-	public ListSkill(){
+	public ListSkill() {
 		super();
 		setImmediate(true);
 		setMargin(true);
 	}
-	
-	
+
 	/**
 	 * Build the view of list skill
+	 * 
 	 * @return
 	 */
-	public ListSkill buildListSkill(){
+	public ListSkill buildListSkill() {
 		mainBuild();
 		return this;
 	}
@@ -71,7 +70,8 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		removeAllComponents();
 		try {
 
-			this.categoryMapDto = this.skillService.getAllCollaboratorSkill(authentication.getColleagueId());
+			this.categoryMapDto = this.skillService
+					.getAllCollaboratorSkill(authentication.getColleagueId());
 
 		} catch (Exception e) {
 
@@ -79,7 +79,8 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		}
 
 		// Test if the Collaborator have one skill
-		if ( categoryMapDto != null && !categoryMapDto.getMapCategory().isEmpty()) {
+		if (categoryMapDto != null
+				&& !categoryMapDto.getMapCategory().isEmpty()) {
 			initComponents();
 			addComponent(buildListSkill(this.categoryMapDto));
 		} else {
@@ -106,8 +107,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public Accordion buildListSkill(CategoryMapDTO categoryMapDto) {
 		return CUtils.MapSkillToAccordionSkill(categoryMapDto, this);
 	}
-	
-	
+
 	@Override
 	public void itemClick(ItemClickEvent event) {
 
@@ -123,7 +123,7 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public Table getTableTools() {
 		return tableTools;
 	}
-	
+
 	/**
 	 * 
 	 * @class ListSkill.java
@@ -142,7 +142,6 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
-
 
 	/**
 	 * Get the accCategory value
@@ -194,15 +193,12 @@ public class ListSkill extends VerticalLayout implements ItemClickListener {
 		return skillService;
 	}
 
-
 	public CategoryMapDTO getCategoryMapDto() {
 		return categoryMapDto;
 	}
 
-
 	public void setCategoryMapDto(CategoryMapDTO categoryMapDto) {
 		this.categoryMapDto = categoryMapDto;
 	}
-
 
 }

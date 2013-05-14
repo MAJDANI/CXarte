@@ -10,23 +10,25 @@ public class MissionValidator implements Validator {
 	private static final long serialVersionUID = -8850542344779077130L;
 
 	/**
-	 * Upon failure, the validate() method throws an exception
-	 * with an error message.
+	 * Upon failure, the validate() method throws an exception with an error
+	 * message.
 	 */
 	@Override
 	public void validate(Object value) throws InvalidValueException {
 		if (!isValid(value)) {
 			if (value != null && value.toString().startsWith("0")) {
-				throw new InvalidValueException("Postal code must not start with a zero.");
+				throw new InvalidValueException(
+						"Postal code must not start with a zero.");
 			} else {
-				throw new InvalidValueException("Postal code must be a number 10000-99999.");
+				throw new InvalidValueException(
+						"Postal code must be a number 10000-99999.");
 			}
 		}
 	}
 
 	/**
-	 * The isValid() method returns simply a boolean value, so
-	 * it can not return an error message.
+	 * The isValid() method returns simply a boolean value, so it can not return
+	 * an error message.
 	 */
 	@Override
 	public boolean isValid(Object value) {
@@ -37,4 +39,3 @@ public class MissionValidator implements Validator {
 	}
 
 }
-

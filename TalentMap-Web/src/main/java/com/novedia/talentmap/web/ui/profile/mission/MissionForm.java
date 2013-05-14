@@ -31,19 +31,19 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
-public class MissionForm extends FormLayout implements ClickListener, IObservable {
-
+public class MissionForm extends FormLayout implements ClickListener,
+		IObservable {
 
 	/**
-	* We add listMission in AddMissionPanel's attributes in order to
-	* be able to refresh the list listMission when a new mission is
-	* created or when a mission is modified
+	 * We add listMission in AddMissionPanel's attributes in order to be able to
+	 * refresh the list listMission when a new mission is created or when a
+	 * mission is modified
 	 */
 	private ListMission listMission;
-	
+
 	/**
-	 * Declare the observer. The observer will be used when an action
-	 * in AddMissionPanel will require update data in ListPanel
+	 * Declare the observer. The observer will be used when an action in
+	 * AddMissionPanel will require update data in ListPanel
 	 */
 	private IMissionCollaboratorContent obs;
 
@@ -51,7 +51,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	 * Talent Map Service
 	 */
 	private IColleagueService collabService;
-	
+
 	private IClientService clientService;
 	private ISkillService skillService;
 	private IColleagueService colleagueService;
@@ -73,7 +73,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final String CANCEL_BUTTON_NAME = "Cancel";
 
 	/**
-	 *  Properties in Table ListMission
+	 * Properties in Table ListMission
 	 */
 	public static final String INTITULE = "Title";
 	public static final String CLIENT = "Customer";
@@ -85,49 +85,48 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public static final String OUTILS2 = "Tool 2";
 	public static final String OUTILS3 = "Tool 3";
 
-	//3	constants to identify which action is source of calling updateObservators()
+	// 3 constants to identify which action is source of calling
+	// updateObservators()
 	public static final String ACTION_CANCEL = "CANCEL";
 	public static final String ACTION_SAVE = "SAVE";
 	public static final String ACTION_DELETE = "DELETE";
-	
-	//2	constants to identify if "save" is an insert or update
+
+	// 2 constants to identify if "save" is an insert or update
 	public static final String SAVE_MODE_UPDATE = "UPDATE";
 	public static final String SAVE_MODE_INSERT = "INSERT";
-	
-	//3 constants to validate fields in MissionForm
+
+	// 3 constants to validate fields in MissionForm
 	public static final int VALIDATION_FIELD_MISSING = 0;
 	public static final int VALIDATION_INVALID_PERIOD = 1;
 	public static final int VALIDATION_INVALID_SELECTION = 2;
 	public static final int VALIDATION_VALID_FORM = 3;
-	
-	//2 constants to create a notification
+
+	// 2 constants to create a notification
 	public static final String ADD_MISSION = "ADD";
 	public static final String UPDATE_MISSION = "UPDATE";
-	
+
 	private String currentAction;
 	private String currentSaveMode;
-	
-	
+
 	private Authentication authentication;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public MissionForm(){
+	public MissionForm() {
 		super();
 	}
-	
-	
+
 	/**
 	 * Build the form mission of colleague
+	 * 
 	 * @return
 	 */
-	public MissionForm buildMissionFormColleague(){
+	public MissionForm buildMissionFormColleague() {
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
 
 	public void buildMain() {
 
@@ -141,23 +140,25 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			e.printStackTrace();
 		}
 	}
-	
-	public void initMissionList(){
+
+	public void initMissionList() {
 		listMission = listMission.buildAllColleagueMission();
 	}
 
 	public void buildMissionForm() throws Exception {
-		CUtils.setOrderForm(this.fieldOrderMission, ConstantsEnglish.FIELD_ORDER_MISSION);
-		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(this.clientService,this.skillService,false));
-		
+		CUtils.setOrderForm(this.fieldOrderMission,
+				ConstantsEnglish.FIELD_ORDER_MISSION);
+		this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(
+				this.clientService, this.skillService, false));
+
 		BeanItem<Item> missionBean = new BeanItem(new MissionDto());
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
 		this.missionForm.setImmediate(true);
-		
+
 		addComponent(this.missionForm);
 	}
-	
-	public void buildMissionLayout(){
+
+	public void buildMissionLayout() {
 		GridLayout missionFormLayout = new GridLayout();
 		missionFormLayout.setMargin(true);
 		missionFormLayout.setSpacing(true);
@@ -165,15 +166,15 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		missionFormLayout.setRows(3);
 		missionForm.setLayout(missionFormLayout);
 	}
-	
-	public void buildButton(){
-		
+
+	public void buildButton() {
+
 		this.save.setCaption(SAVE_BUTTON_NAME);
 		this.save.addListener(this);
-		
+
 		this.cancel.setCaption(CANCEL_BUTTON_NAME);
 		this.cancel.addListener(this);
-		
+
 		HorizontalLayout hLayout = new HorizontalLayout();
 		hLayout.setMargin(true);
 		hLayout.setSpacing(true);
@@ -181,132 +182,141 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		hLayout.addComponent(this.cancel);
 		this.missionForm.setFooter(hLayout);
 	}
-	
-	
+
 	@Override
 	public void buttonClick(ClickEvent event) {
-		
+
 		Button button = event.getButton();
-		
-		if(this.save == button){
+
+		if (this.save == button) {
 			setCurrentAction(ACTION_SAVE);
-			
-			BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.missionForm.getItemDataSource();
+
+			BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.missionForm
+					.getItemDataSource();
 			MissionDto missionToInsert = missionItem.getBean();
-			
 
 			int formValidation = validatedMissionForm(missionToInsert);
 			switch (formValidation) {
-			case VALIDATION_FIELD_MISSING :
-				getWindow().showNotification(ConstantsEnglish.MSG_MISSING_FIELDS,
+			case VALIDATION_FIELD_MISSING:
+				getWindow().showNotification(
+						ConstantsEnglish.MSG_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
-			case VALIDATION_INVALID_PERIOD :
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_PERIOD,
+			case VALIDATION_INVALID_PERIOD:
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_INVALID_PERIOD,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
-			case VALIDATION_INVALID_SELECTION :
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_SELECTION,
+			case VALIDATION_INVALID_SELECTION:
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_INVALID_SELECTION,
 						Notification.TYPE_ERROR_MESSAGE);
 				break;
-			case VALIDATION_VALID_FORM :
-				//Form's data are valid 
-				if(SAVE_MODE_INSERT == getCurrentSaveMode()) {
-					missionToInsert.setColleagueId(authentication.getColleagueId());
+			case VALIDATION_VALID_FORM:
+				// Form's data are valid
+				if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
+					missionToInsert.setColleagueId(authentication
+							.getColleagueId());
 					NotifyCm(ADD_MISSION, missionToInsert);
 					insertMission(missionToInsert);
 				}
-				if(SAVE_MODE_UPDATE == getCurrentSaveMode()) {
+				if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
 					NotifyCm(UPDATE_MISSION, missionToInsert);
 					updateMission(missionToInsert);
 				}
 				break;
 			}
-			
+
 		}
-		
-		if(this.cancel == button){
+
+		if (this.cancel == button) {
 			setCurrentAction(ACTION_CANCEL);
 			cancelInsertMission();
 		}
-		
+
 	}
 
-	
 	/**
-	 * Builds an object Mission whith data given in parameters: itemMission and MissionId.
-	 * The Mission object is then loaded in the mission form, to be displayed.
-	 * @param itemMission 
+	 * Builds an object Mission whith data given in parameters: itemMission and
+	 * MissionId. The Mission object is then loaded in the mission form, to be
+	 * displayed.
+	 * 
+	 * @param itemMission
 	 * @param missionId
 	 */
 	public void fillMissionFormWithMission(MissionDto missionDto) {
 
-		BeanItem<MissionDto> beanMissionToModify = new BeanItem<MissionDto>(missionDto);
-		this.missionForm.setItemDataSource(beanMissionToModify, this.fieldOrderMission);
+		BeanItem<MissionDto> beanMissionToModify = new BeanItem<MissionDto>(
+				missionDto);
+		this.missionForm.setItemDataSource(beanMissionToModify,
+				this.fieldOrderMission);
 
 	}
-	
+
 	/**
 	 * Empties all properties in missionForm
 	 */
 	public void emptyMissionForm() {
-		BeanItem<Item> missionBean = new BeanItem(new MissionDto());//TODO
+		BeanItem<Item> missionBean = new BeanItem(new MissionDto());// TODO
 		this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
 	}
-	
-	
+
 	/**
-	 * Checks all mandatory mission's fields are not null and
-	 * period is valid (begin date before end date)
+	 * Checks all mandatory mission's fields are not null and period is valid
+	 * (begin date before end date)
+	 * 
 	 * @param mission
-	 * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD
-	 * or VALIDATION_VALID_FORM
+	 * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD or
+	 *         VALIDATION_VALID_FORM
 	 */
-	private int validatedMissionForm (MissionDto mission) {
-		
-		if( 	!isNotEmpty(mission.getClient()) ||
-				!isNotEmpty(mission.getTitle()) ||
-				!isNotEmpty(mission.getPlace()) ||
-				!isNotEmpty(mission.getClient()) ||
-				!isNotEmpty(mission.getStartDate())  				
-			) return VALIDATION_FIELD_MISSING;
-		if(!isAValidPeriod(mission.getStartDate(),mission.getEndDate())
-			) return VALIDATION_INVALID_PERIOD;
-		if(!isAValidSelection(mission.getTools()))
+	private int validatedMissionForm(MissionDto mission) {
+
+		if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
+				|| !isNotEmpty(mission.getPlace())
+				|| !isNotEmpty(mission.getClient())
+				|| !isNotEmpty(mission.getStartDate()))
+			return VALIDATION_FIELD_MISSING;
+		if (!isAValidPeriod(mission.getStartDate(), mission.getEndDate()))
+			return VALIDATION_INVALID_PERIOD;
+		if (!isAValidSelection(mission.getTools()))
 			return VALIDATION_INVALID_SELECTION;
-			
-				
+
 		return VALIDATION_VALID_FORM;
 	}
-	
+
 	/**
-	 * If end Date is specified, checks if startDate is before endDate. Without endDate
-	 * the method considers the period valid.
+	 * If end Date is specified, checks if startDate is before endDate. Without
+	 * endDate the method considers the period valid.
+	 * 
 	 * @param startDate
 	 * @param endDate
 	 * @return
 	 */
 	private boolean isAValidPeriod(Date startDate, Date endDate) {
-		if((endDate == null) || ((endDate != null) && (endDate.after(startDate)))) return true;
+		if ((endDate == null)
+				|| ((endDate != null) && (endDate.after(startDate))))
+			return true;
 		return false;
 	}
-	
+
 	/**
 	 * Check if selected tools are between 1 and 3
+	 * 
 	 * @param tools
 	 * @return false if the parameter value is not between 1 and 3
 	 */
 	private boolean isAValidSelection(Set<Tool> tools) {
-		if(tools!=null){
-			if(tools.size()<=3)
+		if (tools != null) {
+			if (tools.size() <= 3)
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Check null values
+	 * 
 	 * @param value
 	 * @return false if the parameter value is null
 	 */
@@ -318,116 +328,123 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		}
 	}
 
-
 	/**
-	 * Calls the CollaboratorService to insert the mission in Data Base. After the insert
-	 * the list of missions in the table is updated with fresh data.
+	 * Calls the CollaboratorService to insert the mission in Data Base. After
+	 * the insert the list of missions in the table is updated with fresh data.
+	 * 
 	 * @param missionToInsert
 	 */
 	private void insertMission(MissionDto missionToInsert) {
 		try {
-			int result = this.collabService.addMission(missionToInsert); 
-			if(result !=0){
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_INSERTED_OK, Notification.TYPE_TRAY_NOTIFICATION);
-				
-				//creates a new list
+			int result = this.collabService.addMission(missionToInsert);
+			if (result != 0) {
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_DATA_INSERTED_OK,
+						Notification.TYPE_TRAY_NOTIFICATION);
+
+				// creates a new list
 				refreshListMission();
-				
+
 			} else {
-				//TODO :  What to do in this case?
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_INSERTED_KO, Notification.TYPE_TRAY_NOTIFICATION);
+				// TODO : What to do in this case?
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_DATA_INSERTED_KO,
+						Notification.TYPE_TRAY_NOTIFICATION);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	/**
-	 * Calls the CollaboratorService to update the mission in Data Base. After the insert
-	 * the list of missions in the table is updated with fresh data.
+	 * Calls the CollaboratorService to update the mission in Data Base. After
+	 * the insert the list of missions in the table is updated with fresh data.
+	 * 
 	 * @param missionToUpdate
 	 */
 	private void updateMission(MissionDto missionToUpdate) {
 		try {
 			this.missionForm.commit();
 			int result = this.collabService.saveMission(missionToUpdate);
-			if(result !=0){
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_SAVED_OK, Notification.TYPE_TRAY_NOTIFICATION);
-				
-				//creates a new list
+			if (result != 0) {
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_DATA_SAVED_OK,
+						Notification.TYPE_TRAY_NOTIFICATION);
+
+				// creates a new list
 				refreshListMission();
-				
+
 			} else {
-				//TODO : What to do in this case?
-				getWindow().showNotification(ConstantsEnglish.MISSION_MSG_DATA_SAVED_KO, Notification.TYPE_ERROR_MESSAGE);
+				// TODO : What to do in this case?
+				getWindow().showNotification(
+						ConstantsEnglish.MISSION_MSG_DATA_SAVED_KO,
+						Notification.TYPE_ERROR_MESSAGE);
 			}
-				
+
 		} catch (InvalidValueException invalidVE) {
 
 		}
-		
+
 	}
-
-
-
 
 	private void cancelInsertMission() {
 		this.updateObservateur();
 	}
 
 	/**
-	 * This method creates a new object ListMission, filled with all elements founded
-	 * in database, so a new mission created will be visible in the list 
+	 * This method creates a new object ListMission, filled with all elements
+	 * founded in database, so a new mission created will be visible in the list
 	 */
 	public void refreshListMission() {
-		
-		//creates a new list, filled with the elements in database
+
+		// creates a new list, filled with the elements in database
 		listMission = this.listMission.buildAllColleagueMission();
-		//"sends" the new list to the observer (so the observer will be able to
-		//new list can be displayed
+		// "sends" the new list to the observer (so the observer will be able to
+		// new list can be displayed
 		this.updateObservateur();
 	}
-	
+
 	@Override
 	public void addObservateur(Object observateur, Class<?> cl) {
 		this.obs = (IMissionCollaboratorContent) observateur;
 	}
 
 	public void updateObservateur(String currentAction) {
-		if(ACTION_CANCEL == currentAction) {
+		if (ACTION_CANCEL == currentAction) {
 			this.obs.cancelAddMission();
 		}
-		if(ACTION_SAVE == currentAction) {
+		if (ACTION_SAVE == currentAction) {
 			this.obs.updateListMission(this.listMission);
 		}
-		if(ACTION_DELETE == currentAction) {
+		if (ACTION_DELETE == currentAction) {
 			this.obs.updateListMission(this.listMission);
 		}
 	}
 
 	@Override
 	public void updateObservateur() {
-		if(ACTION_CANCEL == this.currentAction) {
+		if (ACTION_CANCEL == this.currentAction) {
 			this.obs.cancelAddMission();
 		}
-		if(ACTION_SAVE == this.currentAction) {
+		if (ACTION_SAVE == this.currentAction) {
 			this.obs.updateListMission(this.listMission);
 		}
-		if(ACTION_DELETE == this.currentAction) {
+		if (ACTION_DELETE == this.currentAction) {
 			this.obs.updateListMission(this.listMission);
 		}
 	}
-	
+
 	@Override
 	public void delObservateur() {
 		this.obs = null;
 	}
-	
+
 	public void NotifyCm(String type, MissionDto mission) {
 		if (type.equals(ADD_MISSION)) {
-			Colleague c = colleagueService.getColleague(mission.getColleagueId());
+			Colleague c = colleagueService.getColleague(mission
+					.getColleagueId());
 
 			String comment = c.getFirstName() + " " + c.getLastName()
 					+ " added mission " + mission.getTitle();
@@ -436,9 +453,9 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 					.colleagueId(mission.getColleagueId()).notes(comment)
 					.date(date).build();
 			this.notificationService.saveNotification(notification);
-		}
-		else if (type.equals(UPDATE_MISSION)) {
-			Colleague c = colleagueService.getColleague(mission.getColleagueId());
+		} else if (type.equals(UPDATE_MISSION)) {
+			Colleague c = colleagueService.getColleague(mission
+					.getColleagueId());
 
 			String comment = c.getFirstName() + " " + c.getLastName()
 					+ " updated mission " + mission.getTitle();
@@ -449,6 +466,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 			this.notificationService.saveNotification(notification);
 		}
 	}
+
 	/**
 	 * Set the fieldOrderMission value
 	 * 
@@ -478,7 +496,6 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.missionForm = missionForm;
 	}
 
-
 	/**
 	 * Set the collabService value
 	 * 
@@ -488,10 +505,12 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void setCollabService(IColleagueService collabService) {
 		this.collabService = collabService;
 	}
-	
+
 	/**
 	 * Set the save value
-	 * @param save the save to set
+	 * 
+	 * @param save
+	 *            the save to set
 	 */
 	public void setSave(Button save) {
 		this.save = save;
@@ -499,21 +518,23 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 
 	/**
 	 * Set the cancel value
-	 * @param cancel the cancel to set
+	 * 
+	 * @param cancel
+	 *            the cancel to set
 	 */
 	public void setCancel(Button cancel) {
 		this.cancel = cancel;
 	}
-	
+
 	/**
 	 * Get the missionForm value
+	 * 
 	 * @return the missionForm
 	 */
 	public Form getMissionForm() {
 		return missionForm;
 	}
 
-	
 	public String getCurrentAction() {
 		return this.currentAction;
 	}
@@ -537,7 +558,7 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
-	
+
 	public INotificationService getNotificationService() {
 		return notificationService;
 	}
@@ -554,29 +575,24 @@ public class MissionForm extends FormLayout implements ClickListener, IObservabl
 		this.colleagueService = colleagueService;
 	}
 
-
 	public Authentication getAuthentication() {
 		return authentication;
 	}
-
 
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
 
-
 	public void setClientService(IClientService clientService) {
 		this.clientService = clientService;
 	}
-
 
 	public ListMission getListMission() {
 		return listMission;
 	}
 
-
 	public void setListMission(ListMission listMission) {
 		this.listMission = listMission;
 	}
-	
+
 }

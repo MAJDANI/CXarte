@@ -20,29 +20,29 @@ public class ListMission extends Table {
 	private MissionContainer missionContainer;
 
 	private Integer colleagueId;
-	
+
 	/**
 	 * Default constructor
 	 */
-	public ListMission(){
+	public ListMission() {
 		super();
 		addColumns();
 		setSelectable(true);
 		setNullSelectionAllowed(true);
 	}
-	
+
 	/**
 	 * Build colleague's mission
+	 * 
 	 * @return
 	 */
-	public ListMission buildAllColleagueMission(){
+	public ListMission buildAllColleagueMission() {
 		removeAllItems();
 		buildMain();
 		return this;
 	}
-	
-	
-	public void buildMain(){
+
+	public void buildMain() {
 		setWidth("1000px");
 		buildContainer();
 	}
@@ -50,14 +50,15 @@ public class ListMission extends Table {
 	/**
 	 * Principal function filling ListMission Table
 	 */
-	public void buildContainer(){
+	public void buildContainer() {
 		fillMissionContainer();
 		fillResultsTable();
 	}
-	
+
 	public void fillMissionContainer() {
 		this.missionContainer.fillContainer(getColleagueId());
 	}
+
 	/**
 	 * Builds Headers of the Table ListMission
 	 */
@@ -74,58 +75,62 @@ public class ListMission extends Table {
 	}
 
 	/**
-	 * Gets each item mission in the MissionContainer given in parameter.
-	 * With each item mission we fill the actual Table ListMission using addItem() method.  
+	 * Gets each item mission in the MissionContainer given in parameter. With
+	 * each item mission we fill the actual Table ListMission using addItem()
+	 * method.
+	 * 
 	 * @param missionContainer
 	 */
 	public void fillResultsTable() {
 		Collection<Mission> collectionMission = this.missionContainer
 				.getItemIds();
 
-
 		for (Mission mission : collectionMission) {
 			String dateDebut = formatterDate(mission.getStartDate());
 			String dateFin = formatterDate(mission.getEndDate());
-			String[] toolNames =  {"","",""};
+			String[] toolNames = { "", "", "" };
 			int i = 0;
 			if (mission.getTools() != null) {
-				
+
 				for (Tool t : mission.getTools()) {
 					toolNames[i] = t.getName();
 					i++;
-					
+
 				}
 
 			}
-			//Extrait du champ commentaire aux 25 premiers caractères pour affichage dans le tableau
+			// Extrait du champ commentaire aux 25 premiers caractères pour
+			// affichage dans le tableau
 			String notes = mission.getNotes();
-			if (notes != null && notes.length() >=25) {
+			if (notes != null && notes.length() >= 25) {
 				notes = notes.substring(0, 25) + "[...]";
 			}
 			addItem(new Object[] { mission.getTitle(),
 					mission.getClient().getName(), mission.getPlace(),
-					dateDebut, dateFin, notes, toolNames[0],
-					toolNames[1], toolNames[2] }, mission);
+					dateDebut, dateFin, notes, toolNames[0], toolNames[1],
+					toolNames[2] }, mission);
 		}
 	}
 
 	/**
 	 * Format the date with the template dateFormat "dd/MM/yyyy"
+	 * 
 	 * @param date
 	 * @return
 	 */
 	public static String formatterDate(Date date) {
 		if (date != null) {
 			return dateFormat.format(date);
-		}
-		else {
+		} else {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * Set the missionContainer value
-	 * @param missionContainer the missionContainer to set
+	 * 
+	 * @param missionContainer
+	 *            the missionContainer to set
 	 */
 	public void setMissionContainer(MissionContainer missionContainer) {
 		this.missionContainer = missionContainer;
@@ -133,6 +138,7 @@ public class ListMission extends Table {
 
 	/**
 	 * Get the missionContainer value
+	 * 
 	 * @return the missionContainer
 	 */
 	public MissionContainer getMissionContainer() {
@@ -146,6 +152,5 @@ public class ListMission extends Table {
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;
 	}
-
 
 }

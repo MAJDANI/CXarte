@@ -17,7 +17,6 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 
-
 public class RegistrationForm extends FormLayout {
 
 	/**
@@ -29,39 +28,38 @@ public class RegistrationForm extends FormLayout {
 	 * POJO
 	 */
 	private Vector<Object> fieldOrderRegistration;
-	
+
 	/**
 	 * Vaadin components
 	 */
 	private Form registrationForm;
 	private GridLayout registrationFormLayout;
-	
-	
+
 	/**
 	 * TalentMap service
 	 */
 	private IRegistrationService registrationService;
 	private IBusinessEngineerService businessEngineerService;
-	
-	
+
 	/**
 	 * Default constructor
 	 */
-	public RegistrationForm(){
+	public RegistrationForm() {
 		super();
 	}
-	
+
 	/**
-	 * Build the registration Form View 
+	 * Build the registration Form View
+	 * 
 	 * @return RegistrationForm object
 	 */
-	public RegistrationForm buildRegistrationFormView(){
+	public RegistrationForm buildRegistrationFormView() {
 		registrationForm.removeAllProperties();
 		removeAllComponents();
 		buildMain();
 		return this;
 	}
-	
+
 	public void buildMain() {
 
 		try {
@@ -71,84 +69,97 @@ public class RegistrationForm extends FormLayout {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Build the registrationForm Layout
 	 */
-	public void buildSignInLayout(){
+	public void buildSignInLayout() {
 		this.registrationFormLayout.setMargin(true);
 		this.registrationFormLayout.setSpacing(true);
 		this.registrationFormLayout.setColumns(2);
 		this.registrationFormLayout.setRows(8);
 	}
-	
-	public void buildRegistrationForm(){
+
+	public void buildRegistrationForm() {
 
 		this.registrationForm.setLayout(this.registrationFormLayout);
-		
-		this.fieldOrderRegistration = new Vector<Object>(ConstantsEnglish.FIELD_ORDER_REGISTRATION.length);
-		CUtils.setOrderForm(this.fieldOrderRegistration, ConstantsEnglish.FIELD_ORDER_REGISTRATION);
-		
-		this.registrationForm.setFormFieldFactory(new RegistrationFormFieldFactory(this.registrationService, this.businessEngineerService, this));
-		
-		BusinessEngineer defaultBusinessEngineer = BusinessEngineer.builder().id(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).build(); 
-		Registration defaultRegistration = Registration.Builder.builder().
-				profileId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).
-				managerId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).
-				businessEngineer(defaultBusinessEngineer).build();
-		
+
+		this.fieldOrderRegistration = new Vector<Object>(
+				ConstantsEnglish.FIELD_ORDER_REGISTRATION.length);
+		CUtils.setOrderForm(this.fieldOrderRegistration,
+				ConstantsEnglish.FIELD_ORDER_REGISTRATION);
+
+		this.registrationForm
+				.setFormFieldFactory(new RegistrationFormFieldFactory(
+						this.registrationService, this.businessEngineerService,
+						this));
+
+		BusinessEngineer defaultBusinessEngineer = BusinessEngineer.builder()
+				.id(ConstantsEnglish.DEFAULT_SELECTED_CHOICE).build();
+		Registration defaultRegistration = Registration.Builder.builder()
+				.profileId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)
+				.managerId(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)
+				.businessEngineer(defaultBusinessEngineer).build();
+
 		BeanItem<Item> registrationBean = new BeanItem(defaultRegistration);
-		this.registrationForm.setItemDataSource(registrationBean, this.fieldOrderRegistration);
+		this.registrationForm.setItemDataSource(registrationBean,
+				this.fieldOrderRegistration);
 
 		this.registrationForm.setImmediate(true);
-		
+
 		addComponent(this.registrationForm);
 	}
-	
+
 	/**
-	 * Controle la validité du champ Login : Vérifie que ce champ n'est pas déjà en base
-	 * Cette méthode n'est pas "appelée" directement, on indique son appel dans RegistrationFormFieldFactory,
-	 * au moment du .addListener()
+	 * Controle la validité du champ Login : Vérifie que ce champ n'est pas déjà
+	 * en base Cette méthode n'est pas "appelée" directement, on indique son
+	 * appel dans RegistrationFormFieldFactory, au moment du .addListener()
 	 */
 	public void validateLogin() {
-		Field fieldLogin = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_LOGIN_FIELD);
+		Field fieldLogin = this.getRegistrationForm().getField(
+				ConstantsEnglish.REGISTRATION_LOGIN_FIELD);
 		String login;
 		if (fieldLogin != null && fieldLogin.getValue() != "") {
 			login = (String) fieldLogin.getValue();
 			try {
-				RegistrationService service = (RegistrationService)this.registrationService;
+				RegistrationService service = (RegistrationService) this.registrationService;
 				int nbFound = service.countLogin(login);
-				if(nbFound>0) {
-					String message = ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS1 + login + ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS2;
+				if (nbFound > 0) {
+					String message = ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS1
+							+ login
+							+ ConstantsEnglish.REGISTRATION_ERROR_LOGIN_EXISTS2;
 					getWindow().showNotification(message);
 					fieldLogin.focus();
 					fieldLogin.setValue("");
-				} 
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	/**
-	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà en base
-	 * Cette méthode n'est pas "appelée" directement, on indique son appel dans RegistrationFormFieldFactory,
-	 * au moment du .addListener()
+	 * Controle la validité du champ email : Vérifie que ce champ n'est pas déjà
+	 * en base Cette méthode n'est pas "appelée" directement, on indique son
+	 * appel dans RegistrationFormFieldFactory, au moment du .addListener()
 	 */
 	public void validateEmail() {
-		Field fieldEMail = this.getRegistrationForm().getField(ConstantsEnglish.REGISTRATION_EMAIL_FIELD);
+		Field fieldEMail = this.getRegistrationForm().getField(
+				ConstantsEnglish.REGISTRATION_EMAIL_FIELD);
 		String eMail;
 		if (fieldEMail != null && fieldEMail.getValue() != "") {
 			eMail = (String) fieldEMail.getValue();
-			RegistrationService service = (RegistrationService)this.registrationService;
+			RegistrationService service = (RegistrationService) this.registrationService;
 			Integer nbColleagueFound = 0;
 			try {
 				nbColleagueFound = service.countMail(eMail);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(nbColleagueFound > 0) {
-				String message = ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS1 + eMail + ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS2;
+			if (nbColleagueFound > 0) {
+				String message = ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS1
+						+ eMail
+						+ ConstantsEnglish.REGISTRATION_ERROR_EMAIL_EXISTS2;
 				getWindow().showNotification(message);
 				fieldEMail.focus();
 				fieldEMail.setValue("");
@@ -158,6 +169,7 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Get the registrationForm
+	 * 
 	 * @return registrationForm
 	 */
 	public Form getRegistrationForm() {
@@ -166,7 +178,9 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Set the registrationForm
-	 * @param registrationForm registrationForm to set 
+	 * 
+	 * @param registrationForm
+	 *            registrationForm to set
 	 */
 	public void setRegistrationForm(Form registrationForm) {
 		this.registrationForm = registrationForm;
@@ -174,6 +188,7 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Get the registrationService
+	 * 
 	 * @return registrationService
 	 */
 	public IRegistrationService getRegistrationService() {
@@ -182,7 +197,9 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Set the registrationService
-	 * @param registrationService registrationService to set 
+	 * 
+	 * @param registrationService
+	 *            registrationService to set
 	 */
 	public void setRegistrationService(IRegistrationService registrationService) {
 		this.registrationService = registrationService;
@@ -190,6 +207,7 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Get the businessEngineerService
+	 * 
 	 * @return businessEngineerService
 	 */
 	public IBusinessEngineerService getBusinessEngineerService() {
@@ -198,7 +216,9 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Set the businessEngineerService
-	 * @param businessEngineerService businessEngineerService to set 
+	 * 
+	 * @param businessEngineerService
+	 *            businessEngineerService to set
 	 */
 	public void setBusinessEngineerService(
 			IBusinessEngineerService businessEngineerService) {
@@ -207,6 +227,7 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Get the registrationFormLayout
+	 * 
 	 * @return registrationFormLayout
 	 */
 	public GridLayout getRegistrationFormLayout() {
@@ -215,12 +236,12 @@ public class RegistrationForm extends FormLayout {
 
 	/**
 	 * Set the registrationFormLayout
-	 * @param registrationFormLayout registrationFormLayout to set
+	 * 
+	 * @param registrationFormLayout
+	 *            registrationFormLayout to set
 	 */
 	public void setRegistrationFormLayout(GridLayout registrationFormLayout) {
 		this.registrationFormLayout = registrationFormLayout;
 	}
-	
-	
 
 }
