@@ -16,19 +16,16 @@ import com.vaadin.ui.TextField;
 
 public class EditMissionFormFieldFactory implements FormFieldFactory {
 
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8213744445391942619L;
 
 	private Mission mission;
-	
 
 	public EditMissionFormFieldFactory(Mission mission) {
 		this.mission = mission;
 	}
-
 
 	@Override
 	public Field createField(Item item, Object propertyId, Component uiContext) {
@@ -41,8 +38,7 @@ public class EditMissionFormFieldFactory implements FormFieldFactory {
 						|| propertyId
 								.equals(ConstantsEnglish.FIELD_MISSION_PLACE)
 						|| propertyId
-								.equals(ConstantsEnglish.FIELD_MISSION_CLIENT)
-								){
+								.equals(ConstantsEnglish.FIELD_MISSION_CLIENT)) {
 
 					TextField field = new TextField(
 							(String) ConstantsEnglish.NAME_FIELD_MISSION[i]
@@ -50,7 +46,6 @@ public class EditMissionFormFieldFactory implements FormFieldFactory {
 
 					return field;
 				}
-
 
 				if (propertyId
 						.equals(ConstantsEnglish.FIELD_MISSION_START_DATE)
@@ -89,7 +84,7 @@ public class EditMissionFormFieldFactory implements FormFieldFactory {
 				if (propertyId.equals(ConstantsEnglish.FIELD_MISSION_TOOLS)) {
 
 					List<Tool> allTools = this.mission.getTools();
-					
+
 					int j = 0;
 
 					Table table = new Table("Tools :");
@@ -108,20 +103,16 @@ public class EditMissionFormFieldFactory implements FormFieldFactory {
 							j++;
 						}
 					}
-					
 
 					return table;
 
 				}
 
-
-				
 			}
 
 		}
 
 		return null;
 	}
-
 
 }

@@ -32,12 +32,11 @@ import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Registration Screen
+ * 
  * @author y.rohr
  */
-public class RegistrationScreen extends VerticalLayout implements ClickListener{
-	
+public class RegistrationScreen extends VerticalLayout implements ClickListener {
 
-	
 	/**
 	 * 
 	 */
@@ -46,13 +45,14 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	/**
 	 * The logger
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationScreen.class);
-	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(RegistrationScreen.class);
+
 	/**
 	 * Application
 	 */
 	private MyVaadinApplication myVaadinApplication;
-	
+
 	/**
 	 * The authentication service
 	 */
@@ -62,11 +62,9 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	 * The registration service
 	 */
 	private RegistrationService registrationService;
-	
+
 	private LoginScreen loginScreen;
 
-	
-	
 	/**
 	 * Vaadin component
 	 */
@@ -75,73 +73,72 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 	private Button save;
 	private Button cancel;
 	private GridLayout registrationFormLayout;
-	
+
 	private AuthenticatedScreen authenticatedScreen;
-	
-	
+
 	public static final String ALREADY_HAVE_AN_ACCOUNT_LABEL = "Already have an account ?";
-	
-	
+
 	/**
 	 * Default constructor
+	 * 
 	 * @author b.tiomofofou
 	 */
 	public RegistrationScreen() {
 		super();
 	}
-	
-	
+
 	/**
 	 * Build the registration screen view
+	 * 
 	 * @return view of registration
 	 * @author b.tiomofofou
 	 */
-	public RegistrationScreen buildRegistrationScreenView(){
+	public RegistrationScreen buildRegistrationScreenView() {
 		removeAllComponents();
-		getMyVaadinApplication().getMainWindow().setCaption("Sign Up Talent Map");
-		//Panel for Registration
+		getMyVaadinApplication().getMainWindow().setCaption(
+				"Sign Up Talent Map");
+		// Panel for Registration
 		registrationPanel = new Panel(ConstantsEnglish.REGISTRATION_PANEL_NAME);
 		registrationPanel.setWidth(ConstantsEnglish.REGISTRATION_PANEL_WIDTH);
-		
-		//components initialisation
+
+		// components initialisation
 		registrationFormLayout = new GridLayout();
 		save = new Button();
 		cancel = new Button();
 		registrationForm.setRegistrationFormLayout(registrationFormLayout);
 		registrationForm = registrationForm.buildRegistrationFormView();
-		
+
 		registrationPanel.addComponent(registrationForm);
 		buildButton();
-		
+
 		addComponent(registrationPanel);
 		setComponentAlignment(registrationPanel, Alignment.MIDDLE_CENTER);
 
 		HorizontalLayout footer = new HorizontalLayout();
 		footer.setHeight(ConstantsEnglish.REGISTRATION_PANEL_FOOTER_HEIGHT);
 		addComponent(footer);
-		
+
 		return this;
 	}
-	
-	
+
 	/**
 	 * Build the buttons of the screen
 	 */
-	public void buildButton(){
-		
+	public void buildButton() {
+
 		this.save.setCaption(ConstantsEnglish.SAVE_BUTTON_NAME);
 		save.addStyleName("logInButton");
 		this.save.addListener(this);
-		
+
 		this.cancel.setCaption("Log In");
 		this.cancel.addListener(this);
 		cancel.addStyleName(Reindeer.BUTTON_LINK);
 		cancel.addStyleName("signIn");
-		
+
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.setSpacing(true);
 		vLayout.addComponent(save);
-		
+
 		HorizontalLayout hLayout = new HorizontalLayout();
 		hLayout.setSpacing(true);
 		Label label = new Label(ALREADY_HAVE_AN_ACCOUNT_LABEL);
@@ -151,71 +148,82 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 		vLayout.addComponent(hLayout);
 		registrationPanel.addComponent(vLayout);
 	}
-	
-	
-	
+
 	@Override
 	public void buttonClick(ClickEvent event) {
 		Button button = event.getButton();
-		
-		if (button.equals(this.save)){
-			//appel du service d'inscription
-			BeanItem<Registration> registrationItem = (BeanItem<Registration>) this.registrationForm.getRegistrationForm().getItemDataSource();
+
+		if (button.equals(this.save)) {
+			// appel du service d'inscription
+			BeanItem<Registration> registrationItem = (BeanItem<Registration>) this.registrationForm
+					.getRegistrationForm().getItemDataSource();
 			Registration registration = registrationItem.getBean();
 			Authentication authentication = null;
-			
-			//On ne vérifie pas la validité du Login et de l'email ici parce que leur gestion se passe dans le
-			//formulaire this.registrationForm.getRegistrationForm() : si l'un de ces champ n'est pas correct
-			//on vide le champ, jusqu'à ce que la saisie soit correcte.
-			if(!validateRegistrationForm()){
-				getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS,
+
+			// On ne vérifie pas la validité du Login et de l'email ici parce
+			// que leur gestion se passe dans le
+			// formulaire this.registrationForm.getRegistrationForm() : si l'un
+			// de ces champ n'est pas correct
+			// on vide le champ, jusqu'à ce que la saisie soit correcte.
+			if (!validateRegistrationForm()) {
+				getWindow().showNotification(
+						ConstantsEnglish.REGISTRATION_PANEL_MISSING_FIELDS,
 						Notification.TYPE_ERROR_MESSAGE);
-			} else if ((!validatePassword())){
-				getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR,
+			} else if ((!validatePassword())) {
+				getWindow().showNotification(
+						ConstantsEnglish.REGISTRATION_PANEL_PASSWORD_ERROR,
 						Notification.TYPE_ERROR_MESSAGE);
-			} else if(!checkSelectedItem(registration)) {
-				getWindow().showNotification(ConstantsEnglish.DEFAULT_CAPTION_SELECTED_JOB_MSG,
+			} else if (!checkSelectedItem(registration)) {
+				getWindow().showNotification(
+						ConstantsEnglish.DEFAULT_CAPTION_SELECTED_JOB_MSG,
 						Notification.TYPE_ERROR_MESSAGE);
 			} else {
 				try {
-					if(registration.getManagerId().equals(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)){
+					if (registration.getManagerId().equals(
+							ConstantsEnglish.DEFAULT_SELECTED_CHOICE)) {
 						registration.setManagerId(null);
 					}
-					if(registration.getBusinessEngineer().getId().equals(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)){
+					if (registration.getBusinessEngineer().getId()
+							.equals(ConstantsEnglish.DEFAULT_SELECTED_CHOICE)) {
 						registration.getBusinessEngineer().setId(null);
 					}
 					authentication = register(registration);
 					authenticatedScreen.setAuthentication(authentication);
-					authenticatedScreen.setMyVaadinApplicationApplication(getMyVaadinApplication());
-					myVaadinApplication.getMainWindow().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
-		} catch (TalentMapSecurityException e) {
-					getWindow().showNotification(ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
+					authenticatedScreen
+							.setMyVaadinApplicationApplication(getMyVaadinApplication());
+					myVaadinApplication.getMainWindow().setContent(
+							authenticatedScreen
+									.selectedViewAccordingToUserRoles());
+				} catch (TalentMapSecurityException e) {
+					getWindow()
+							.showNotification(
+									ConstantsEnglish.REGISTRATION_PANEL_USER_CREATION_ERROR);
 				}
 			}
+		} else if (button.equals(this.cancel)) {
+			myVaadinApplication.getMainWindow().setContent(
+					loginScreen.buildLoginScreenView());
 		}
-		
-		else if (button.equals(this.cancel)){
-			myVaadinApplication.getMainWindow().setContent(loginScreen.buildLoginScreenView());
-		}
-	
+
 	}
-	
-	
+
 	/**
 	 * Register method
 	 * 
 	 * @param registration
 	 */
-	public Authentication register(Registration registration) throws TalentMapSecurityException {
+	public Authentication register(Registration registration)
+			throws TalentMapSecurityException {
 		Authentication authenticate = null;
 		try {
 
 			registrationService.addColleagueFromRegistration(registration);
 			// Password encoding
-			String encodedPassword = CUtils.encodePassword(registration.getPassword());
+			String encodedPassword = CUtils.encodePassword(registration
+					.getPassword());
 			registration.setPassword(encodedPassword);
 
-			//On positionne le Role par défaut CL Consultant :
+			// On positionne le Role par défaut CL Consultant :
 			registration.setRole(Authorization.Role.CL);
 
 			registrationService.addUserFromRegistration(registration);
@@ -232,66 +240,65 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 
 		return authenticate;
 	}
-	
-	
-	
-	
+
 	/**
 	 * Test the registrationForm validity
+	 * 
 	 * @return boolean
 	 */
-	private boolean validateRegistrationForm(){
-		
+	private boolean validateRegistrationForm() {
+
 		boolean isValidRegistration = true;
 		Form regisForm = this.registrationForm.getRegistrationForm();
-		
+
 		try {
 			regisForm.validate();
-		} catch (InvalidValueException e){
+		} catch (InvalidValueException e) {
 			isValidRegistration = false;
 		}
-		
+
 		return isValidRegistration;
 	}
-	
-	
+
 	/**
 	 * Check if required selected item has not default value
-	 * @param registration registration object that contains all item form
-	 * @return boolean false if default value of item is selected otherwise  true 
+	 * 
+	 * @param registration
+	 *            registration object that contains all item form
+	 * @return boolean false if default value of item is selected otherwise true
 	 */
-	private boolean checkSelectedItem(Registration registration){
+	private boolean checkSelectedItem(Registration registration) {
 		Integer defaultChoice = ConstantsEnglish.DEFAULT_SELECTED_CHOICE;
 		boolean result = true;
-		if(registration.getProfileId().equals(defaultChoice)){
+		if (registration.getProfileId().equals(defaultChoice)) {
 			result = false;
 		}
 		return result;
 	}
-	
-	
+
 	/**
 	 * Test the password
+	 * 
 	 * @return boolean
 	 */
-	private boolean validatePassword(){
-		
+	private boolean validatePassword() {
+
 		boolean isValidPassword = true;
 		Form regisForm = this.registrationForm.getRegistrationForm();
-		String password = (String)regisForm.getField("password").getValue();
-		String confirmPassword = (String)regisForm.getField("passwordConfirm").getValue();
-		
-		if (!password.equals(confirmPassword)){
+		String password = (String) regisForm.getField("password").getValue();
+		String confirmPassword = (String) regisForm.getField("passwordConfirm")
+				.getValue();
+
+		if (!password.equals(confirmPassword)) {
 			isValidPassword = false;
 		}
-		
+
 		return isValidPassword;
-	}	
-	
-	
+	}
 
 	/**
 	 * Get the registrationForm
+	 * 
 	 * @return registrationForm
 	 */
 	public RegistrationForm getRegistrationForm() {
@@ -300,89 +307,88 @@ public class RegistrationScreen extends VerticalLayout implements ClickListener{
 
 	/**
 	 * Set the registrationForm
+	 * 
 	 * @param registrationForm
 	 */
 	public void setRegistrationForm(RegistrationForm registrationForm) {
 		this.registrationForm = registrationForm;
 	}
 
-
-	
 	/**
 	 * Get the main application
+	 * 
 	 * @return
 	 */
 	public MyVaadinApplication getMyVaadinApplication() {
 		return myVaadinApplication;
 	}
 
-
 	/**
 	 * Set the main application
+	 * 
 	 * @param myVaadinApplication
 	 */
 	public void setMyVaadinApplication(MyVaadinApplication myVaadinApplication) {
 		this.myVaadinApplication = myVaadinApplication;
 	}
 
-
 	/**
 	 * Get the authenticatedScreen
+	 * 
 	 * @return
 	 */
 	public AuthenticatedScreen getAuthenticatedScreen() {
 		return authenticatedScreen;
 	}
 
-
 	/**
 	 * Set the authenticatedScreen
+	 * 
 	 * @param authenticatedScreen
 	 */
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
 	}
 
-
 	public LoginScreen getLoginScreen() {
 		return loginScreen;
 	}
-
 
 	public void setLoginScreen(LoginScreen loginScreen) {
 		this.loginScreen = loginScreen;
 	}
 
-	
 	/**
 	 * Get the authenticationService
+	 * 
 	 * @return
 	 */
 	public AuthenticationService getAuthenticationService() {
 		return authenticationService;
 	}
-	
+
 	/**
 	 * set the authenticationService
-	 * @param authenticationService the authenticationService to set
+	 * 
+	 * @param authenticationService
+	 *            the authenticationService to set
 	 */
-	public void setAuthenticationService(AuthenticationService authenticationService) {
+	public void setAuthenticationService(
+			AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
-	
-	
+
 	public RegistrationService getRegistrationService() {
 		return registrationService;
 	}
 
-	
 	/**
 	 * Set the registrationService
+	 * 
 	 * @param registrationService
 	 */
 	public void setRegistrationService(RegistrationService registrationService) {
 		this.registrationService = registrationService;
 	}
-
 
 }

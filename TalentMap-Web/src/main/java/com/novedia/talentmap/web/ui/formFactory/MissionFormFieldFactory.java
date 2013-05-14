@@ -43,7 +43,8 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	 *            skillService mission isLastMission
 	 */
 	public MissionFormFieldFactory(IClientService clientService,
-			ISkillService skillService, MissionDto missionDto, boolean isLastMission) {
+			ISkillService skillService, MissionDto missionDto,
+			boolean isLastMission) {
 		this.clientService = clientService;
 		this.skillService = skillService;
 		this.missionDto = missionDto;
@@ -204,7 +205,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 						&& isLastMission) {
 
 					Set<Tool> allTools = missionDto.getTools();
-					
+
 					int j = 0;
 
 					Table table = new Table("Tools :");
@@ -223,7 +224,6 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 							j++;
 						}
 					}
-					
 
 					return table;
 

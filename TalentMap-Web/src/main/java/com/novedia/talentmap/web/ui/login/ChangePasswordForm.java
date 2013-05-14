@@ -19,27 +19,28 @@ import com.vaadin.ui.Window;
 
 /**
  * Change password form class
+ * 
  * @author b.tiomofofou
  * @version TMP 2.1
  */
 @SuppressWarnings("serial")
-public class ChangePasswordForm extends Window implements ClickListener{
-	
+public class ChangePasswordForm extends Window implements ClickListener {
+
 	/**
 	 * authentication
 	 */
 	private Authentication authentication;
-	
+
 	/**
 	 * changePasswordService
 	 */
 	private IChangePasswordService changePasswordService;
-	
+
 	/**
 	 * the main application
 	 */
 	private MyVaadinApplication myVaadinApplication;
-	
+
 	/**
 	 * vaadin componnent
 	 */
@@ -51,38 +52,37 @@ public class ChangePasswordForm extends Window implements ClickListener{
 	private PasswordField confirmPasswordField;
 	private static Label errorLabelPassword;
 	private static Label errorLabelNewPassword;
-	
-	
+
 	/**
 	 * Constant message
 	 */
-	private static final String LABEL_OLD_PASSWORD_FIELD= "Old Password";
-	private static final String LABEL_NEW_PASSWORD_FIELD= "New Password";
-	private static final String LABEL_CONFIRM_PASSWORD_FIELD= "Retype new Password";
-	private static final String FORM_TITLE= "Change password Form";
-	private static final String MISSING_FIELD_MSG = "All fields are required"; 
+	private static final String LABEL_OLD_PASSWORD_FIELD = "Old Password";
+	private static final String LABEL_NEW_PASSWORD_FIELD = "New Password";
+	private static final String LABEL_CONFIRM_PASSWORD_FIELD = "Retype new Password";
+	private static final String FORM_TITLE = "Change password Form";
+	private static final String MISSING_FIELD_MSG = "All fields are required";
 	private static final String UPADTE_SUCCESS_MSG = "Update successful";
-	private static final String UPDATE_ERROR_MSG ="Update error";
+	private static final String UPDATE_ERROR_MSG = "Update error";
 	private static final String ERROR_OLD_PASSWORD = "Error : You misspelled your old password !!";
 	private static final String ERROR_NEW_PASSWORD = "Error : New password fields do not match !!";
-	
-	
+
 	/**
 	 * Default constructor
 	 */
-	public ChangePasswordForm(){
+	public ChangePasswordForm() {
 		super();
 		setCaption(FORM_TITLE);
 		setReadOnly(true);
 		setModal(true);
 		addStyleName("changePasswordForm");
 	}
-	
+
 	/**
 	 * Build the ChangePasswordForm view
+	 * 
 	 * @return
 	 */
-	public ChangePasswordForm buildChangePasswordFormView(){
+	public final ChangePasswordForm buildChangePasswordFormView() {
 		removeAllComponents();
 		initForm();
 		errorLabelPassword = new Label(ERROR_OLD_PASSWORD);
@@ -96,144 +96,155 @@ public class ChangePasswordForm extends Window implements ClickListener{
 		addComponent(changePasswordForm);
 		return this;
 	}
-	
-	
+
 	/**
 	 * init change password form
 	 */
-	private void initForm(){
+	private void initForm() {
 		changePasswordForm = new Form();
 		oldPasswordField = new PasswordField(LABEL_OLD_PASSWORD_FIELD);
 		oldPasswordField.setRequired(true);
-		
+
 		newPasswordField = new PasswordField(LABEL_NEW_PASSWORD_FIELD);
 		newPasswordField.setRequired(true);
-		
+
 		confirmPasswordField = new PasswordField(LABEL_CONFIRM_PASSWORD_FIELD);
 		confirmPasswordField.setRequired(true);
-		
+
 		changePasswordForm.addField(LABEL_OLD_PASSWORD_FIELD, oldPasswordField);
 		changePasswordForm.addField(LABEL_NEW_PASSWORD_FIELD, newPasswordField);
-		changePasswordForm.addField(LABEL_CONFIRM_PASSWORD_FIELD, confirmPasswordField);
-		
+		changePasswordForm.addField(LABEL_CONFIRM_PASSWORD_FIELD,
+				confirmPasswordField);
+
 		saveButton = new Button(ConstantsEnglish.LABEL_SAVE_BUTTON);
 		cancelButton = new Button(ConstantsEnglish.LABEL_CANCEL_BUTTON);
 		saveButton.addListener(this);
 		cancelButton.addListener(this);
-		
+
 		HorizontalLayout footerForm = new HorizontalLayout();
 		footerForm.addStyleName("footerButton");
 		footerForm.addComponent(saveButton);
 		footerForm.addComponent(cancelButton);
 		changePasswordForm.setFooter(footerForm);
-		
-		
+
 	}
-	
-	
-	
+
 	@Override
-	public void buttonClick(ClickEvent event) {
-		if(event.getButton().equals(cancelButton)){
+	public final void buttonClick(final ClickEvent event) {
+		if (event.getButton().equals(cancelButton)) {
 			close();
 			return;
 		}
-		if(event.getButton().equals(saveButton)){
-			try 
-			{
+		if (event.getButton().equals(saveButton)) {
+			try {
 				changePasswordForm.validate();
 				String oldPassword = (String) oldPasswordField.getValue();
 				String newPassword = (String) newPasswordField.getValue();
-				String confirmPassword = (String) confirmPasswordField.getValue();
-				if(CUtils.encodePassword(oldPassword).equals(authentication.getToken().getPassword())){
+				String confirmPassword = (String) confirmPasswordField
+						.getValue();
+				if (CUtils.encodePassword(oldPassword).equals(
+						authentication.getToken().getPassword())) {
 					if (newPassword.equals(confirmPassword)) {
-						String encodeNewPassword = CUtils.encodePassword(newPassword);
+						String encodeNewPassword = CUtils
+								.encodePassword(newPassword);
 						Authentication authenticationTmp = new Authentication();
 						CredentialToken credentialTmp = new CredentialToken();
-						credentialTmp.setLogin(this.authentication.getToken().getLogin());
+						credentialTmp.setLogin(this.authentication.getToken()
+								.getLogin());
 						credentialTmp.setPassword(encodeNewPassword);
-						authenticationTmp.setColleagueId(this.authentication.getColleagueId());
+						authenticationTmp.setColleagueId(this.authentication
+								.getColleagueId());
 						authenticationTmp.setToken(credentialTmp);
-						 int result = changePasswordService.savePassword(authenticationTmp);
-						if (result != 0 ) {
-							this.authentication.getToken().setPassword(encodeNewPassword);
+						int result = changePasswordService
+								.savePassword(authenticationTmp);
+						if (result != 0) {
+							this.authentication.getToken().setPassword(
+									encodeNewPassword);
 							close();
-							CUtils.showMessage(UPADTE_SUCCESS_MSG, Message.INFO, getMyVaadinApplication().getMainWindow());
+							CUtils.showMessage(UPADTE_SUCCESS_MSG,
+									Message.INFO, getMyVaadinApplication()
+											.getMainWindow());
 						} else {
 							close();
-							CUtils.showMessage(UPDATE_ERROR_MSG, Message.ERROR, getMyVaadinApplication().getMainWindow());
+							CUtils.showMessage(UPDATE_ERROR_MSG, Message.ERROR,
+									getMyVaadinApplication().getMainWindow());
 						}
-						
+
 					} else {
 						errorLabelPassword.setVisible(false);
 						errorLabelNewPassword.setVisible(true);
 					}
-					
-				} else{
+
+				} else {
 					errorLabelPassword.setVisible(true);
 					errorLabelNewPassword.setVisible(false);
 				}
-				
+
 			} catch (InvalidValueException e) {
-				getWindow().showNotification(MISSING_FIELD_MSG, Notification.TYPE_ERROR_MESSAGE);
+				getWindow().showNotification(MISSING_FIELD_MSG,
+						Notification.TYPE_ERROR_MESSAGE);
 			}
 			return;
 		}
-		
+
 	}
-	
-	
-	
+
 	/**
 	 * get the authentication's user
+	 * 
 	 * @return authentication
 	 */
-	public Authentication getAuthentication() {
+	public final Authentication getAuthentication() {
 		return authentication;
 	}
 
 	/**
 	 * Set the authentication
-	 * @param authentication authentication to set
+	 * 
+	 * @param authentication
+	 *            authentication to set
 	 */
-	public void setAuthentication(Authentication authentication) {
+	public final void setAuthentication(final Authentication authentication) {
 		this.authentication = authentication;
 	}
 
-
-
 	/**
 	 * Get the password service
+	 * 
 	 * @return changePasswordService
 	 */
-	public IChangePasswordService getChangePasswordService() {
+	public final IChangePasswordService getChangePasswordService() {
 		return changePasswordService;
 	}
 
 	/**
 	 * Set the password service
-	 * @param changePasswordService password service to set
+	 * 
+	 * @param changePasswordService
+	 *            password service to set
 	 */
-	public void setChangePasswordService(IChangePasswordService changePasswordService) {
+	public final void setChangePasswordService(
+			final IChangePasswordService changePasswordService) {
 		this.changePasswordService = changePasswordService;
 	}
 
 	/**
 	 * Get the main application
+	 * 
 	 * @return
 	 */
-	public MyVaadinApplication getMyVaadinApplication() {
+	public final MyVaadinApplication getMyVaadinApplication() {
 		return myVaadinApplication;
 	}
 
 	/**
 	 * Set the main application
+	 * 
 	 * @param myVaadinApplication
 	 */
-	public void setMyVaadinApplication(MyVaadinApplication myVaadinApplication) {
+	public final void setMyVaadinApplication(
+			final MyVaadinApplication myVaadinApplication) {
 		this.myVaadinApplication = myVaadinApplication;
 	}
-
-	
 
 }

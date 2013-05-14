@@ -20,11 +20,11 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 /**
- * The {@link ProfileCollabWindow} is the main window for render 
- *  profile of collabs.
- *  
+ * The {@link ProfileCollabWindow} is the main window for render profile of
+ * collabs.
+ * 
  * @author moumbe
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class ProfileCollabWindow extends Window {
@@ -34,7 +34,7 @@ public class ProfileCollabWindow extends Window {
 	 */
 	private Form dataCollab;
 	private Accordion skillCollab;
-	
+
 	/**
 	 * Talent Map Services
 	 */
@@ -51,19 +51,20 @@ public class ProfileCollabWindow extends Window {
 	/**
 	 * Constants
 	 */
-//	private int COLLAB_ID = 2;
+	// private int COLLAB_ID = 2;
 	private int COLLAB_ID;
 
 	/**
 	 * Default constructor
 	 */
-	public ProfileCollabWindow(){
+	public ProfileCollabWindow() {
 		super();
 	}
 
 	/**
 	 * 
-	 * Build the class ProfileCollabWindow.java 
+	 * Build the class ProfileCollabWindow.java
+	 * 
 	 * @param dataCollab
 	 * @param skillCollab
 	 * @param skillService
@@ -72,9 +73,8 @@ public class ProfileCollabWindow extends Window {
 	 * @param profileService
 	 */
 	public ProfileCollabWindow(Form dataCollab, Accordion skillCollab,
-			ISkillService skillService,
-			Vector<Object> fieldOrderCollaborator,
-			IProfileService profileService, 
+			ISkillService skillService, Vector<Object> fieldOrderCollaborator,
+			IProfileService profileService,
 			IBusinessEngineerService businessEngineerService,
 			IColleagueService colleagueService) {
 		super();
@@ -86,9 +86,10 @@ public class ProfileCollabWindow extends Window {
 		this.businessEngineerService = businessEngineerService;
 		this.colleagueService = colleagueService;
 	}
-	
+
 	/**
 	 * The main builder
+	 * 
 	 * @class ProfileCollabWindow.java
 	 */
 	public void mainBuild() {
@@ -100,28 +101,33 @@ public class ProfileCollabWindow extends Window {
 		buildDataCollaborator();
 		buildSkillCollaborator();
 	}
-	
+
 	/**
 	 * The Data Collaborator Form Builder
+	 * 
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildDataCollaborator() {
 		try {
 
-			this.dataCollab.setFormFieldFactory(new CollaboratorFormFieldFactory(this.profileService, this.businessEngineerService, this.colleagueService,false));
+			this.dataCollab
+					.setFormFieldFactory(new CollaboratorFormFieldFactory(
+							this.profileService, this.businessEngineerService,
+							this.colleagueService, false));
 
 			CUtils.setOrderForm(this.fieldOrderCollaborator,
 					ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
-			
+
 			Colleague collab = this.colleagueService.getColleague(COLLAB_ID);
-		
-			//We create a bean with the POJO Collaborator
+
+			// We create a bean with the POJO Collaborator
 			BeanItem<Item> collaboratorBean = new BeanItem(collab);
-			
-			//We give a name for the window
-			setCaption("Fiche profil de : "+ collab.getLastName() +" "+ collab.getFirstName());
-			
-			//Data Binding
+
+			// We give a name for the window
+			setCaption("Fiche profil de : " + collab.getLastName() + " "
+					+ collab.getFirstName());
+
+			// Data Binding
 			this.dataCollab.setItemDataSource(collaboratorBean,
 					this.fieldOrderCollaborator);
 
@@ -137,10 +143,10 @@ public class ProfileCollabWindow extends Window {
 
 	/**
 	 * The Skill Collaborator Accordion Builder
+	 * 
 	 * @class ProfileCollabWindow.java
 	 */
 	public void buildSkillCollaborator() {
-		
 
 		try {
 
@@ -150,12 +156,13 @@ public class ProfileCollabWindow extends Window {
 			addComponent(this.skillCollab);
 
 		} catch (Exception e) {
-			
+
 			VerticalLayout vLayout = new VerticalLayout();
-			//Label noSkillLabel = new Label("Pas de compétences enregistrées !");
+			// Label noSkillLabel = new
+			// Label("Pas de compétences enregistrées !");
 			Label noSkillLabel = new Label("there is no skill saved !");
 			noSkillLabel.setStyleName(TalentMapCSS.H2);
-			
+
 			vLayout.addComponent(noSkillLabel);
 			vLayout.setMargin(true);
 
@@ -251,10 +258,12 @@ public class ProfileCollabWindow extends Window {
 	public void setFieldOrderCollaborator(Vector<Object> fieldOrderCollaborator) {
 		this.fieldOrderCollaborator = fieldOrderCollaborator;
 	}
-	
+
 	/**
 	 * Set the profileService value
-	 * @param profileService the profileService to set
+	 * 
+	 * @param profileService
+	 *            the profileService to set
 	 */
 	public void setProfileService(IProfileService profileService) {
 		this.profileService = profileService;
@@ -268,8 +277,5 @@ public class ProfileCollabWindow extends Window {
 			IBusinessEngineerService businessEngineerService) {
 		this.businessEngineerService = businessEngineerService;
 	}
-	
-	
-	
-	
+
 }

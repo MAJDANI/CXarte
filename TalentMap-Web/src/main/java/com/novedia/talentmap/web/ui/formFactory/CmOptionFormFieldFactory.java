@@ -42,18 +42,19 @@ public class CmOptionFormFieldFactory implements FormFieldFactory {
 
 			if (propertyId.equals(ConstantsEnglish.FIELD_ORDER_CM_OPTIONS[i])) {
 
-				Select emailFrequency = new Select(ConstantsEnglish.NAME_FIELD_CM_OPTIONS[i] + " : ");
+				Select emailFrequency = new Select(
+						ConstantsEnglish.NAME_FIELD_CM_OPTIONS[i] + " : ");
 				try {
-					List<Frequency> allFrequencies = notificationService.getAllFrequencyChoices();
+					List<Frequency> allFrequencies = notificationService
+							.getAllFrequencyChoices();
 
 					for (Frequency f : allFrequencies) {
 						emailFrequency.addItem(f);
-						emailFrequency.setItemCaption(f,f.getName());
+						emailFrequency.setItemCaption(f, f.getName());
 					}
 
 					emailFrequency.setNullSelectionAllowed(false);
 					emailFrequency.setImmediate(true);
-					
 
 				} catch (Exception e) {
 					e.printStackTrace();

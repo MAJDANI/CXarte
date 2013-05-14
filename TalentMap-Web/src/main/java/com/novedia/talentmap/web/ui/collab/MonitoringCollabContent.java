@@ -20,7 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * 
  * @author e.moumbe
- *
+ * 
  */
 public class MonitoringCollabContent extends VerticalLayout {
 
@@ -48,7 +48,7 @@ public class MonitoringCollabContent extends VerticalLayout {
 	/**
 	 * Default constructor
 	 */
-	public MonitoringCollabContent(){
+	public MonitoringCollabContent() {
 		super();
 	}
 
@@ -99,20 +99,24 @@ public class MonitoringCollabContent extends VerticalLayout {
 		this.collabTable.addContainerProperty("Actions",
 				HorizontalLayout.class, null);
 	}
-	
-	public void fillCollabTable(List<Colleague> listCollaborator) throws Exception{
-	
+
+	public void fillCollabTable(List<Colleague> listCollaborator)
+			throws Exception {
+
 		int idTable = 1;
-		for (Colleague collab : listCollaborator) {	
-			Profile collabProfile = this.profileService.getProfile(collab.getProfileId());
-			
+		for (Colleague collab : listCollaborator) {
+			Profile collabProfile = this.profileService.getProfile(collab
+					.getProfileId());
+
 			HorizontalLayout hLayoutButton = new HorizontalLayout();
 			hLayoutButton.setSpacing(true);
 			hLayoutButton.setMargin(true);
-			Button visualizeCV = buildButton(new Button(ConstantsEnglish.VISUALIZE_CV_NAME));
+			Button visualizeCV = buildButton(new Button(
+					ConstantsEnglish.VISUALIZE_CV_NAME));
 			Button visualizeMission = buildButton(new Button(
 					ConstantsEnglish.VISUALIZE_MISSION_NAME));
-			Button visualizeEA = buildButton(new Button(ConstantsEnglish.VISUALIZE_EA_NAME));
+			Button visualizeEA = buildButton(new Button(
+					ConstantsEnglish.VISUALIZE_EA_NAME));
 			Button visualizeProfile = buildButton(new Button(
 					ConstantsEnglish.VISUALIZE_PROFILE_NAME));
 
@@ -128,9 +132,8 @@ public class MonitoringCollabContent extends VerticalLayout {
 			hLayoutButton.addComponent(visualizeProfile);
 
 			this.collabTable.addItem(new Object[] { collab.getFirstName(),
-					collab.getLastName(),
-					collabProfile.getType(), "In mission",
-					hLayoutButton }, idTable);
+					collab.getLastName(), collabProfile.getType(),
+					"In mission", hLayoutButton }, idTable);
 
 			idTable++;
 		}
@@ -146,7 +149,8 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 		try {
 
-			List<Colleague> listCollaborator = this.managerService.getAllColleagues(MANAGER_ID);
+			List<Colleague> listCollaborator = this.managerService
+					.getAllColleagues(MANAGER_ID);
 			fillCollabTable(listCollaborator);
 		} catch (Exception e) {
 
@@ -234,7 +238,9 @@ public class MonitoringCollabContent extends VerticalLayout {
 
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
-				System.out.println("MonitoringCollabContent.btnProfileEvent() idCollab=" + idCollab);
+				System.out
+						.println("MonitoringCollabContent.btnProfileEvent() idCollab="
+								+ idCollab);
 
 				MonitoringCollabContent.this.profileCollabWindow
 						.setCOLLAB_ID(idCollab);

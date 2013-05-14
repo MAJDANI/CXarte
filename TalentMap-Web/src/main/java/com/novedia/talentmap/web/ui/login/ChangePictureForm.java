@@ -40,7 +40,7 @@ public class ChangePictureForm extends Window {
 	 * the main application
 	 */
 	private MyVaadinApplication myVaadinApplication;
-	
+
 	/**
 	 * authentication
 	 */
@@ -95,7 +95,7 @@ public class ChangePictureForm extends Window {
 				// Create upload stream
 				FileOutputStream fos = null; // Stream to write to
 				try {
-					filename = authentication.getToken().getLogin() + ".jpg"; 
+					filename = authentication.getToken().getLogin() + ".jpg";
 					// Open the file for writing.
 					file = new File("C:/Users/j.maquin/Desktop/tmp/" + filename);
 					fos = new FileOutputStream(file);
@@ -138,6 +138,7 @@ public class ChangePictureForm extends Window {
 
 	/**
 	 * get the authentication's user
+	 * 
 	 * @return authentication
 	 */
 	public Authentication getAuthentication() {
@@ -146,11 +147,12 @@ public class ChangePictureForm extends Window {
 
 	/**
 	 * Set the authentication
-	 * @param authentication authentication to set
+	 * 
+	 * @param authentication
+	 *            authentication to set
 	 */
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
-
 
 }
