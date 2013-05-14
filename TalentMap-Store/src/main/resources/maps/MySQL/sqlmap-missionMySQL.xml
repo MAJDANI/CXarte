@@ -13,12 +13,11 @@
     	<result property="id"                     column="TOOL_ID"/> 
         <result property="name"                   column="TOOL_NAME"/>      
         <result property="concept.id"             column="CONCEPT_ID"/>
-<!--         <result property="concept.name"           column="CONCEPT_NAME"/>     -->
-
-      
     </resultMap>
+    
+    
  
-	<resultMap id="missionResult"         class="mission">
+	<resultMap id="missionResult"                           class="mission">
 		<result property="id"             					column="MISSION_ID" />
 		<result property="colleagueId"             			column="COLLEAGUE_ID" />
 		<result property="title"           					column="TITLE" />
@@ -28,38 +27,16 @@
 		<result property="endDate"       					column="END_DATE" />
 		<result property="client.id" 						column="CLIENT_ID"/>
 		<result property="client.name" 						column="CLIENT_NAME"/>
-<!-- 		<result property="tools" 							resultMap="mission.toolResult"/> -->
-<!-- 		<result property="tools.id" 							column="TOOL_ID"/> -->
-<!-- 		<result property="tools.name" 						column="TOOL_NAME"/> -->
+		<result property="tools" 							column="MISSION_ID" 	select="mission.getMissionTools"/>
 	</resultMap>
 	
-	 <select id="getMissionTools" resultMap="toolResult" parameterClass="Integer">
-		SELECT * FROM TOOL tools, MISSION_TOOL mission_tool WHERE mission_tool.MISSION_ID = #value# 
-		AND mission_tool.TOOL_ID = tools.TOOL_ID
-	</select>	
 	
-	<!-- <select id="getAll" resultMap="missionResult" parameterClass="Integer"> -->
-<!-- 		SELECT  -->
-<!-- 		mission.MISSION_ID, -->
-<!-- 		COLLEAGUE_ID, -->
-<!-- 		TITLE, -->
-<!-- 		PLACE, -->
-<!-- 		NOTES, -->
-<!-- 		START_DATE, -->
-<!-- 		END_DATE, -->
-<!-- 		mission.CLIENT_ID, -->
-<!-- 		CLIENT_NAME, -->
-<!-- 		missionTool.TOOL_ID, -->
-<!-- 		TOOL_NAME, -->
-<!-- 		CONCEPT_ID -->
-		
-<!-- 		FROM MISSION mission, CLIENT client,TOOL tool,MISSION_TOOL missionTool -->
-<!-- 		WHERE COLLEAGUE_ID = #value#  -->
-<!-- 		AND mission.CLIENT_ID = client.CLIENT_ID -->
-<!-- 		AND mission.MISSION_ID=missionTool.MISSION_ID -->
-<!-- 		AND missionTool.TOOL_ID=tool.TOOL_ID -->
-<!-- 		ORDER BY START_DATE -->
-<!-- 	</select> -->
+	 <select id="getMissionTools" resultMap="toolResult" parameterClass="Integer">
+		SELECT * FROM TOOL tools, MISSION_TOOL mission_tool 
+		WHERE mission_tool.MISSION_ID = #value# 
+		AND mission_tool.TOOL_ID = tools.TOOL_ID
+		ORDER BY tools.TOOL_NAME
+	</select>	
 
 	<select id="get" resultMap="missionResult" parameterClass="Integer">
 		SELECT * FROM MISSION mission, CLIENT client
@@ -69,14 +46,17 @@
 	<select id="getAllByColleague" resultMap="missionResult" parameterClass="Integer">
 		SELECT * FROM MISSION mission, CLIENT client WHERE COLLEAGUE_ID = #value# 
 		AND mission.CLIENT_ID = client.CLIENT_ID
-		ORDER BY START_DATE
+		ORDER BY START_DATE desc
 	</select>
 	
 	<select id="getLastMissionByColleague" resultMap="missionResult" parameterClass="Integer">
-		SELECT * FROM MISSION mission, CLIENT client WHERE COLLEAGUE_ID = #value# 
-		AND mission.CLIENT_ID = client.CLIENT_ID
-		AND mission.END_DATE = (SELECT MAX(END_DATE) FROM MISSION mission WHERE COLLEAGUE_ID = #value#)
+		select * FROM MISSION mission
+        join CLIENT client on (mission.CLIENT_ID = client.CLIENT_ID) 
+        WHERE COLLEAGUE_ID = #value#
+        and mission.start_date = (select max(start_date) from MISSION  WHERE COLLEAGUE_ID = #value#)
 	</select>
+	
+	
 	
 	
 	<update id="save" parameterClass="Mission">
@@ -90,14 +70,18 @@
 	<insert id="add" parameterClass="Mission">
 
 		INSERT INTO MISSION 
-		(COLLEAGUE_ID, TITLE, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE) 
+		(MISSION_ID, COLLEAGUE_ID, TITLE, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE) 
 		values 
-		(#colleagueId#, #title#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
+		(#id#, #colleagueId#, #title#, #place#, #client.id#, #notes#, #startDate#, #endDate#)
 
 		<selectKey keyProperty="id" resultClass="Integer">
 			SELECT LAST_INSERT_ID() AS MISSION_ID
 		</selectKey>
 	</insert>
+	
+
+	
+	
 
 	<delete id="delete" parameterClass="Integer">
 		DELETE MISSION WHERE MISSION_ID = #id#

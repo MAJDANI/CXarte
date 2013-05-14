@@ -77,7 +77,7 @@
 	</update>
 
 	<delete id="delete" parameterClass="concept">
-		DELETE CONCEPT CASCADE WHERE
+		DELETE FROM CONCEPT WHERE
 		CONCEPT_ID = #id#
 	</delete>
 

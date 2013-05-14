@@ -68,7 +68,7 @@
 	</update>
 
 	<delete id="delete" parameterClass="Tool">
-		DELETE TOOL CASCADE WHERE
+		DELETE FROM TOOL WHERE
 		TOOL_ID = #id#
 	</delete>
 

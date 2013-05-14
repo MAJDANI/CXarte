@@ -3,6 +3,7 @@
 		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 		
 <sqlMapConfig>
+	<properties resource="constants.properties"/>
     <settings useStatementNamespaces="true"/>
     <sqlMap resource="maps/sqlmap-businessengineer.xml"/>
     <sqlMap resource="maps/MySQL/sqlmap-colleagueMySQL.xml"/>
@@ -19,4 +20,5 @@
 <!--     <sqlMap resource="maps/sqlmap-task.xml"/> -->
     <sqlMap resource="maps/MySQL/sqlmap-authentificationMySQL.xml"/>
      <sqlMap resource="maps/sqlmap-mission_tool.xml"/>
+     <sqlMap resource="maps/sqlmap-user_notification.xml"/>
 </sqlMapConfig>

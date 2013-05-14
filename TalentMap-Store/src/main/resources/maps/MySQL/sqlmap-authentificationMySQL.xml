@@ -4,43 +4,42 @@
 
 <sqlMap namespace="authentication">
 
-	<typeAlias alias="authentication"
-		type="com.novedia.talentmap.model.entity.Authentication" />
+ <typeAlias alias="authentication" type="com.novedia.talentmap.model.entity.Authentication"/> 
+ <typeAlias alias="token" type="com.novedia.talentmap.model.entity.CredentialToken"/> 
 
 	<resultMap id="authenticationResult" class="authentication">
-		<result property="id" column="AUTHENTICATION_ID" />
-		<result property="colleagueId" column="COLLEAGUE_ID" />
-		<result property="token.login" column="LOGIN" />
-		<result property="token.password" column="PASSWORD" />
-		<result property="authorization.roleId" column="ROLE_ID" />
-		<result property="authorization.label" column="LABEL" />
-	</resultMap>
+        <result property="token.login"  column="LOGIN"/>         
+        <result property="token.password"  column="PASSWORD"/>
+        <result property="colleagueId" column="COLLEAGUE_ID"/> 
+        <result property="authorization.roleId" column="ROLE_ID"/>
+        <result property="authorization.label" column="LABEL"/>    
+    </resultMap>
+    
+    <select id="check" resultMap="authenticationResult" parameterClass="com.novedia.talentmap.model.entity.CredentialToken">
+		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE auth.LOGIN = #login# AND auth.PASSWORD = #password#
+				AND auth.ROLE_ID = role.ROLE_ID
+	</select>	
 
-	<select id="check" resultMap="authenticationResult"
-		parameterClass="com.novedia.talentmap.model.entity.CredentialToken">
-		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE
-		auth.LOGIN = #login# AND auth.PASSWORD = #password#
-		AND auth.ROLE_ID = role.ROLE_ID
+	<select id="countLogin" resultClass="java.lang.Integer" parameterClass="String">
+		SELECT count(*) FROM AUTHENTICATION WHERE LOGIN = #login#
 	</select>
-
-	<insert id="addUserFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
-
-		INSERT INTO AUTHENTICATION (
-		COLLEAGUE_ID,
-		ROLE_ID,
-		LOGIN,
-		PASSWORD
-		)values (
-		#colleagueId#,
-		4,
-		#login#,
-		#password#
-		)
-
-		<selectKey resultClass="Integer" keyProperty="authenticationId">
-			SELECT
-			LAST_INSERT_ID() AS AUTHENTICATION_ID
-		</selectKey>
-	</insert>
-
+    
+    <insert id="addUserFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration"> 
+    	INSERT INTO AUTHENTICATION (
+    		LOGIN,
+    		PASSWORD,
+    		COLLEAGUE_ID,
+    		ROLE_ID
+    		)values (
+    		#login#,
+    		#password#,
+    		#colleagueId#,
+    		#role.id#
+    		)
+    </insert>	
+    
+    <update id="save" parameterClass="com.novedia.talentmap.model.entity.Authentication">
+    	update AUTHENTICATION set PASSWORD=#token.password# where LOGIN = #token.login#
+    </update>
+    
 </sqlMap>
