@@ -10,8 +10,8 @@ import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
 
 /**
- * This class is the servlet mapped in the web.xml file.
- * This is the entry point for the web context of the application.
+ * This class is the servlet mapped in the web.xml file. This is the entry point
+ * for the web context of the application.
  * 
  * @author j.marie-sainte
  */
@@ -26,36 +26,43 @@ public class SpringApplicationServlet extends AbstractApplicationServlet {
 	 * Spring bean name in init of servlet
 	 */
 	public static final String PARAMETER_APPLICATION_BEAN_NAME = "applicationBean";
-	
+
 	private String applicationBeanName;
 
 	@Override
-	public void init(javax.servlet.ServletConfig servletConfig)	throws javax.servlet.ServletException {
+	public void init(javax.servlet.ServletConfig servletConfig)
+			throws javax.servlet.ServletException {
 		super.init(servletConfig);
 		applicationBeanName = getApplicationProperty(PARAMETER_APPLICATION_BEAN_NAME);
 		if (applicationBeanName == null) {
-			throw new ServletException("Failed to load application class because bean name is null");
+			throw new ServletException(
+					"Failed to load application class because bean name is null");
 		}
 	}
-	
+
 	/**
 	 * Get the Spring web application context
+	 * 
 	 * @return
 	 */
-	private  WebApplicationContext getSpringContext() {
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+	private WebApplicationContext getSpringContext() {
+		WebApplicationContext context = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
 		return context;
 	}
 
 	@Override
-	protected Application getNewApplication(HttpServletRequest request)	throws ServletException {
+	protected Application getNewApplication(HttpServletRequest request)
+			throws ServletException {
 		return (Application) getSpringContext().getBean(applicationBeanName);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Class<? extends Application> getApplicationClass() throws ClassNotFoundException {
-		return (Class<? extends Application>) getSpringContext().getBean(this.applicationBeanName).getClass();
+	protected Class<? extends Application> getApplicationClass()
+			throws ClassNotFoundException {
+		return (Class<? extends Application>) getSpringContext().getBean(
+				this.applicationBeanName).getClass();
 	}
 
 }

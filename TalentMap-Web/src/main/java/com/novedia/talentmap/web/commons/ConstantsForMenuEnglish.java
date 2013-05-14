@@ -20,11 +20,17 @@ public class ConstantsForMenuEnglish {
 	public static final String VISUALIZE_EA_NAME = "Historic EA";
 	public static final String VISUALIZE_ADMINISTRATIVE_DATA = "Administrative Data";
 	public static final Object[][] subItemProfilNavForCL = new Object[][] { new Object[] {
-			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA, VISUALIZE_SKILLS_NAME,
-			VISUALIZE_MISSIONS_NAME /*, VISUALIZE_EA_NAME */} };
+			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA,
+			VISUALIZE_SKILLS_NAME, VISUALIZE_MISSIONS_NAME /*
+															 * ,
+															 * VISUALIZE_EA_NAME
+															 */} };
 	public static final Object[][] subItemProfilNavForCM = new Object[][] { new Object[] {
-			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA, VISUALIZE_SKILLS_NAME,
-			VISUALIZE_MISSIONS_NAME /*, VISUALIZE_EA_NAME */} };
+			"Personal data", VISUALIZE_ADMINISTRATIVE_DATA,
+			VISUALIZE_SKILLS_NAME, VISUALIZE_MISSIONS_NAME /*
+															 * ,
+															 * VISUALIZE_EA_NAME
+															 */} };
 
 	/**
 	 * for tree in the SearchNavigation
@@ -48,7 +54,7 @@ public class ConstantsForMenuEnglish {
 	public static final String TAB_ADMIN_NAME = "Administration";
 	public static final String TAB_CM_NAME = "Search";
 	public static final String TAB_CM_NOTIFICATION = "Notification";
-	
+
 	/**
 	 * Tree for admin navigation
 	 */
@@ -57,9 +63,8 @@ public class ConstantsForMenuEnglish {
 	public static final String ADMIN_DELETE_COLLAB_NAME = "delete collaborator";
 	public static final Object[][] ADMIN_MENU_NAVIGATION = new Object[][] { new Object[] {
 			"Menu", ADMIN_VIEW_SKILL_NAME, ADMIN_ADD_SKILL_NAME,
-			ADMIN_DELETE_COLLAB_NAME} };
-	
-	
+			ADMIN_DELETE_COLLAB_NAME } };
+
 	/**
 	 * Tree for cm navigation
 	 */
@@ -68,15 +73,14 @@ public class ConstantsForMenuEnglish {
 	public static final String CM_SEARCH_BY_NAME = "By Name";
 	public static final Object[][] CM_MENU_NAVIGATION = new Object[][] { new Object[] {
 			"Search", CM_SEARCH_BY_CLIENT, CM_SEARCH_BY_SKILL,
-			CM_SEARCH_BY_NAME} };
-	
+			CM_SEARCH_BY_NAME } };
+
 	/**
 	 * Tree for cm notification navigation
 	 */
 	public static final String CM_NOTIFICATION_HISTORY = "All notifications";
 	public static final String CM_NOTIFICATION_SETTINGS = "Settings";
 	public static final Object[][] CM_NOTIFICATION_NAVIGATION = new Object[][] { new Object[] {
-			"Notification",CM_NOTIFICATION_HISTORY, CM_NOTIFICATION_SETTINGS} };
-	
+			"Notification", CM_NOTIFICATION_HISTORY, CM_NOTIFICATION_SETTINGS } };
 
 }

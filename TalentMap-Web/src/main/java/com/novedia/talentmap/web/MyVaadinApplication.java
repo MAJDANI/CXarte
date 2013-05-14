@@ -15,7 +15,6 @@
  */
 package com.novedia.talentmap.web;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -29,25 +28,24 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 @Configurable
-public class MyVaadinApplication extends Application  {
-
+public class MyVaadinApplication extends Application {
 
 	/**
 	 * The logger
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(MyVaadinApplication.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MyVaadinApplication.class);
 
 	/**
 	 * Vaadin components
 	 */
 	private Window window;
-	
+
 	/**
 	 * The loginScreen
 	 */
 	private LoginScreen loginScreen;
-	
-	
+
 	/**
 	 * The init
 	 */
@@ -58,33 +56,34 @@ public class MyVaadinApplication extends Application  {
 		}
 		this.setTheme("talentmap");
 		this.setMainWindow(window);
-		
+
 		loginScreen.setMyVaadinApplication(this);
 		window.setContent(loginScreen.buildLoginScreenView());
-		
+
 	}
 
-	
-	
 	/**
 	 * Set the main window
-	 * @param window window to set
+	 * 
+	 * @param window
+	 *            window to set
 	 */
 	public void setWindow(Window window) {
 		this.window = window;
 	}
-	
-	
+
 	/**
 	 * Get the main window
+	 * 
 	 * @return window
 	 */
 	public Window getWindow() {
 		return window;
 	}
-	
+
 	/**
-	 * Get the LoginScreen 
+	 * Get the LoginScreen
+	 * 
 	 * @return loginScreen
 	 */
 	public LoginScreen getLoginScreen() {
@@ -93,11 +92,12 @@ public class MyVaadinApplication extends Application  {
 
 	/**
 	 * Set the loginScreen
-	 * @param loginScreen loginScreen to set
+	 * 
+	 * @param loginScreen
+	 *            loginScreen to set
 	 */
 	public void setLoginScreen(LoginScreen loginScreen) {
 		this.loginScreen = loginScreen;
 	}
-
 
 }

@@ -21,11 +21,13 @@ public class Constants {
 	public static final String FIELD_NULL_REPRESENTATION = "Non renseigné";
 
 	/**
-	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia", "Années d'expérience", "Ingénieur d'affaire"
+	 * Données Profil - Collaborateur :"Nom", "Prénom", "Profil", "Email",
+	 * "Tél", "Date d'entrée Novedia", "Années d'expérience",
+	 * "Ingénieur d'affaire"
 	 */
 	public static final Object[] NAME_FIELD_COLLABORATOR = new Object[] {
-		"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",
-		"Années d'expérience", "Ingénieur d'affaire", "Manager" };
+			"Nom", "Prénom", "Profil", "Email", "Tél", "Date d'entrée Novedia",
+			"Années d'expérience", "Ingénieur d'affaire", "Manager" };
 
 	public static final String FIELD_COLLAB_LAST_NAME = "lastName";
 	public static final String FIELD_COLLAB_FIRST_NAME = "firstName";
@@ -38,21 +40,17 @@ public class Constants {
 	public static final String FIELD_COLLAB_MANAGER = "managerId";
 
 	public static final Object[] FIELD_ORDER_COLLABORATOR = new Object[] {
-		FIELD_COLLAB_LAST_NAME, 
-		FIELD_COLLAB_FIRST_NAME, 
-		FIELD_COLLAB_PROFILE_ID, 
-		FIELD_COLLAB_EMAIL, 
-		FIELD_COLLAB_PHONE,
-		FIELD_COLLAB_EMPLOYMENT_DATE, 
-		FIELD_COLLAB_EXPERIENCE, 
-		FIELD_COLLAB_BUISINESS_ENGINEER,
-		FIELD_COLLAB_MANAGER};
+			FIELD_COLLAB_LAST_NAME, FIELD_COLLAB_FIRST_NAME,
+			FIELD_COLLAB_PROFILE_ID, FIELD_COLLAB_EMAIL, FIELD_COLLAB_PHONE,
+			FIELD_COLLAB_EMPLOYMENT_DATE, FIELD_COLLAB_EXPERIENCE,
+			FIELD_COLLAB_BUISINESS_ENGINEER, FIELD_COLLAB_MANAGER };
 
 	/**
 	 * Données Profil - Mission
 	 */
-	public static final Object[] NAME_FIELD_MISSION = new Object[] { "Intitulé", "Client",
-		"Lieu", "Début mission", "Fin mission", "Commentaire" };
+	public static final Object[] NAME_FIELD_MISSION = new Object[] {
+			"Intitulé", "Client", "Lieu", "Début mission", "Fin mission",
+			"Commentaire" };
 
 	public static final String FIELD_MISSION_NAME = "title";
 	public static final String FIELD_MISSION_CLIENT = "client";
@@ -61,21 +59,17 @@ public class Constants {
 	public static final String FIELD_MISSION_END_DATE = "endDate";
 	public static final String FIELD_MISSION_NOTES = "notes";
 
-	public static final Object[] FIELD_ORDER_MISSION = new Object[] { 
-		FIELD_MISSION_NAME, 
-		FIELD_MISSION_CLIENT,
-		FIELD_MISSION_PLACE, 
-		FIELD_MISSION_START_DATE, 
-		FIELD_MISSION_END_DATE, 
-		FIELD_MISSION_NOTES };
+	public static final Object[] FIELD_ORDER_MISSION = new Object[] {
+			FIELD_MISSION_NAME, FIELD_MISSION_CLIENT, FIELD_MISSION_PLACE,
+			FIELD_MISSION_START_DATE, FIELD_MISSION_END_DATE,
+			FIELD_MISSION_NOTES };
 
 	public static final String ADMIN_DATA_LABEL = "Données administratives";
 	public static final String LAST_MISSION_LABEL = "Dernière mission";
 	public static final String ADMIN_DATA_SAVE_BUTTON = "Enregistrer";
 	public static final String ADMIN_DATA_CANCEL_BUTTON = "Annuler";
 	public static final String ADMIN_DATA_EDIT_BUTTON = "Editer";
-	
-	
+
 	/**
 	 * Données Mission - Messages
 	 */
@@ -85,19 +79,19 @@ public class Constants {
 	public static final String MISSION_MSG_DATA_INSERTED_KO = "Attention, la mission n'a pas été ajoutée";
 
 	public static final String MISSION_MSG_INVALID_PERIOD = "La période est invalide";
-	
+
 	/**
 	 * Données Skill management
 	 */
 	public static final Object[] FIELD_ORDER_SKILL = new Object[] {
-		"categoryName", "conceptName", "toolName" };
-	
+			"categoryName", "conceptName", "toolName" };
+
 	public static final String SKILL_MANAGEMENT_CATEGORY = "categoryName";
 	public static final String SKILL_MANAGEMENT_CONCEPT = "conceptName";
 	public static final String SKILL_MANAGEMENT_TOOL = "toolName";
-	
+
 	public static final Object[] NAME_FIELD_SKILL = new Object[] { "Catégorie",
-		"Concept", "Outil" };
+			"Concept", "Outil" };
 	/**
 	 * Données Registration
 	 */
@@ -110,7 +104,7 @@ public class Constants {
 	public static final String REGISTRATION_PHONE_FIELD = "phone";
 	public static final String REGISTRATION_EXPERIENCE_FIELD = "experience";
 	public static final String REGISTRATION_EMAIL_FIELD = "email";
-	
+
 	public static final String REGISTRATION_NULL_REPRESENTATION = "";
 	public static final String REGISTRATION_DATE_FORMAT = "dd/MM/yyyy";
 	public static final String REGISTRATION_SELECT_VALUE = "value";
@@ -120,16 +114,19 @@ public class Constants {
 	public static final String REGISTRATION_ERROR_PHONE_NUMBER = "Numéro de téléphone incorrecte";
 	public static final String REGISTRATION_ERROR_EXPERIENCE = "Années d'expérience incorrectes";
 	public static final String REGISTRATION_ERROR_EMAIL = "Email non valide";
-	
+
 	/**
-	 *For Registration
+	 * For Registration
 	 */
-	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] { "Nom", "Prénom","Mot de passe","Confirmer le mot de passe",
-		"Email", "Téléphone", "Date d'embauche", "Profile", "Années d'expérience", "Ingénieur d'affaire",
-		 "Manager" };
-	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] { "lastName", "firstName","password","passwordConfirm","email",
-		"phone", "employmentDate", "profileId", "experience", "businessEngineer", "managerId" };
-	
+	public static final Object[] NAME_FIELD_REGISTRATION = new Object[] {
+			"Nom", "Prénom", "Mot de passe", "Confirmer le mot de passe",
+			"Email", "Téléphone", "Date d'embauche", "Profile",
+			"Années d'expérience", "Ingénieur d'affaire", "Manager" };
+	public static final Object[] FIELD_ORDER_REGISTRATION = new Object[] {
+			"lastName", "firstName", "password", "passwordConfirm", "email",
+			"phone", "employmentDate", "profileId", "experience",
+			"businessEngineer", "managerId" };
+
 	/**
 	 * Constants for MissionCollaboratorContent
 	 */
@@ -139,12 +136,13 @@ public class Constants {
 	public static final String LABEL_BUTTON_DELETE_MISSION = "Supprimer la mission";
 
 	/**
-	 * Labels form confirmation delete window (Classe : MissionCollaboratorContent)  
+	 * Labels form confirmation delete window (Classe :
+	 * MissionCollaboratorContent)
 	 */
 	public static final String LABEL_WINDOW_CONFIRM_DELETE = "Confirmation de Suppression de mission";
 	public static final String LABEL_BUTTON_CONFIRM_DELETE_MISSION = "Supprimer la mission";
 	public static final String LABEL_BUTTON_CANCEL_DELETE_MISSION = "NE PAS Supprimer la mission";
-	
+
 	/**
 	 * Constants for AddSkillPanel
 	 */
@@ -156,7 +154,7 @@ public class Constants {
 	public static final String NO_TIME_USING = "Durée de non utilisation de l'outil :";
 	public static final String[] OPTIONS = new String[] { "Débutant",
 			"Intermédiare", "Professionnel", "Maitrise", "Expert" };
-	
+
 	/**
 	 * Constant for RegistrationScreen
 	 */
@@ -168,8 +166,7 @@ public class Constants {
 	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
 	public static final String REGISTRATION_PANEL_PASSWORD_ERROR = "Error on your password confirmation";
 	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error when creating user";
-	
-	
+
 	/**
 	 * Constants for MonitoringCollabContent
 	 */
@@ -178,19 +175,17 @@ public class Constants {
 	public static final String VISUALIZE_EA_NAME = "Historique EA";
 	public static final String VISUALIZE_PROFILE_NAME = "Visualiser Profil";
 	public static final String PAGE_TITLE_COLAB = "Liste de vos Collaborateurs";
-	
+
 	/**
 	 * Constants for AdminContentLayout
 	 */
 	public static final String ADD_SKILL_TITLE = "Ajouter une compétence à la liste";
 	public static final String UPDATE_SKILL_TITLE = "Visualisation des compétences";
-	
+
 	/**
 	 * Constants for TabProfileSheet
 	 */
 	public static final String TAB_PROFILE_NAME = "Fiche Profil";
 	public static final String TAB_COLLAB_NAME = "Suivi des Collaborateur";
-
-
 
 }
