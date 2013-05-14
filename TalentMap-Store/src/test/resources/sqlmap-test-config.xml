@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" 
 		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
-		
+
 <sqlMapConfig>
-    <settings useStatementNamespaces="true"/>
-    <sqlMap resource="maps/sqlmap-test-colleague.xml"/>
-    <sqlMap resource="maps/sqlmap-test-profile.xml"/>
-    <sqlMap resource="maps/sqlmap-test-category.xml"/>
-    <sqlMap resource="maps/sqlmap-test-concept.xml"/>
-    <sqlMap resource="maps/sqlmap-test-tool.xml"/>
-    <sqlMap resource="maps/sqlmap-test-mission.xml"/>
-    <sqlMap resource="maps/sqlmap-test-authentification.xml"/>
-    <sqlMap resource="maps/sqlmap-test-mission_tool.xml"/>
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="maps/sqlmap-test-colleague.xml" />
+	<sqlMap resource="maps/sqlmap-test-profile.xml" />
+	<sqlMap resource="maps/sqlmap-test-category.xml" />
+	<sqlMap resource="maps/sqlmap-test-concept.xml" />
+	<sqlMap resource="maps/sqlmap-test-tool.xml" />
+	<sqlMap resource="maps/sqlmap-test-mission.xml" />
+	<sqlMap resource="maps/sqlmap-test-authentification.xml" />
+	<sqlMap resource="maps/sqlmap-test-mission_tool.xml" />
 </sqlMapConfig>

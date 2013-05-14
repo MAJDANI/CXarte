@@ -8,22 +8,23 @@ import com.novedia.talentmap.model.entity.Concept;
 /**
  * 
  * @author b.tiomofofou
- *
+ * 
  */
 
 public class ConceptMapDTO {
-	
+
 	private Map<Concept, ToolSkillMap> mapConcept;
-	
+
 	/**
 	 * Build ConceptMapDto class
 	 */
-	public ConceptMapDTO(){
+	public ConceptMapDTO() {
 		mapConcept = new HashMap<Concept, ToolSkillMap>();
 	}
-	
+
 	/**
 	 * Get the mapConcept
+	 * 
 	 * @return mapConcept
 	 */
 	public Map<Concept, ToolSkillMap> getMapConcept() {
@@ -32,11 +33,12 @@ public class ConceptMapDTO {
 
 	/**
 	 * Set the mapConcept
-	 * @param mapConcept mapConcept to set
+	 * 
+	 * @param mapConcept
+	 *            mapConcept to set
 	 */
 	public void setMapConcept(Map<Concept, ToolSkillMap> mapConcept) {
 		this.mapConcept = mapConcept;
 	}
-	
 
 }

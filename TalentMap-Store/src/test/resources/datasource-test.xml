@@ -19,6 +19,6 @@
 		<property name="username" value="${talentmap.jdbc.username}" />
 		<property name="password" value="${talentmap.jdbc.password}" />
 	</bean>
-	
+
 
 </beans>

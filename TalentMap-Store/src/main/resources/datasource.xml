@@ -4,7 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<value>classpath:database.properties</value>
 		</property>
@@ -16,13 +17,16 @@
 		<property name="username" value="${talentmap.jdbc.username}" />
 		<property name="password" value="${talentmap.jdbc.password}" />
 	</bean>
-	
-<!-- 	<bean id="dataSource" destroy-method="close" -->
-<!-- 		class="org.apache.commons.dbcp.BasicDataSource"> -->
-<!-- 		<property name="driverClassName" value="${mysql.talentmap.jdbc.driverClassName}" /> -->
-<!-- 		<property name="url" value="${mysql.talentmap.jdbc.url}" /> -->
-<!-- 		<property name="username" value="${mysql.talentmap.jdbc.username}" /> -->
-<!-- 		<property name="password" value="${mysql.talentmap.jdbc.password}" /> -->
-<!-- 	</bean> -->
+
+	<!-- <bean id="dataSource" destroy-method="close" -->
+	<!-- class="org.apache.commons.dbcp.BasicDataSource"> -->
+	<!-- <property name="driverClassName" value="${mysql.talentmap.jdbc.driverClassName}" 
+		/> -->
+	<!-- <property name="url" value="${mysql.talentmap.jdbc.url}" /> -->
+	<!-- <property name="username" value="${mysql.talentmap.jdbc.username}" 
+		/> -->
+	<!-- <property name="password" value="${mysql.talentmap.jdbc.password}" 
+		/> -->
+	<!-- </bean> -->
 
 </beans>

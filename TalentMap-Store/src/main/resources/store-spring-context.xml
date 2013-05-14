@@ -16,7 +16,8 @@
 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap-config.xml" />
-<!-- 		<property name="configLocation" value="classpath:sqlmap-configMySQL.xml" /> -->
+		<!-- <property name="configLocation" value="classpath:sqlmap-configMySQL.xml" 
+			/> -->
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
@@ -76,9 +77,9 @@
 	<bean id="businessEngineerDao" class="com.novedia.talentmap.store.impl.BusinessEngineerDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
-	
-		<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
+
+	<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
-	
+
 </beans>

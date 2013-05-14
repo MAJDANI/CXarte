@@ -12,69 +12,67 @@ import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-
 /**
  * The Colleague DAO.
  * 
  * @author j.collet
  */
-public class ClientDao extends SqlMapClientDaoSupport implements IDao<Client>{
+public class ClientDao extends SqlMapClientDaoSupport implements IDao<Client> {
 
-	/**
-	 * The logger
-	 */
-	private static Log logger = LogFactory.getLog(ClientDao.class);
-	
-	
-	/**
-	 * Class builder based on sqlMapClient
-	 * @param sqlMapClient
-	 */
-	public ClientDao(final SqlMapClient sqlMapClient){
-		setSqlMapClient(sqlMapClient);
-	}
-	
-	@Override
-	public Client get(Integer id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * The logger
+     */
+    private static Log logger = LogFactory.getLog(ClientDao.class);
 
-	@Override
-	public List<Client> getAll() throws DataAccessException {
-		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CLIENTS);
-	}
+    /**
+     * Class builder based on sqlMapClient
+     * 
+     * @param sqlMapClient
+     */
+    public ClientDao(final SqlMapClient sqlMapClient) {
+	setSqlMapClient(sqlMapClient);
+    }
 
-	@Override
-	public int save(Client element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public Client get(Integer id) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
-	@Override
-	public int add(Client element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public List<Client> getAll() throws DataAccessException {
+	return this.getSqlMapClientTemplate().queryForList(
+		DBRequestsConstants.GET_ALL_CLIENTS);
+    }
 
-	@Override
-	public int delete(Client element) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int save(Client element) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return 0;
+    }
 
-	@Override
-	public Client getByName(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public int add(Client element) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return 0;
+    }
 
-	@Override
-	public Client check(String name) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
+    @Override
+    public int delete(Client element) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public Client getByName(String name) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+    @Override
+    public Client check(String name) throws DataAccessException {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
 }

@@ -26,7 +26,8 @@
 	</statement>
 
 	<statement id="getAll" resultMap="toolResult">
-		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID =
+		SELECT * FROM TOOL tool,
+		CONCEPT concept WHERE tool.CONCEPT_ID =
 		concept.CONCEPT_ID
 	</statement>
 
@@ -49,7 +50,7 @@
 			SELECT
 			LAST_INSERT_ID() AS TOOL_ID
 		</selectKey>
-		
+
 	</insert>
 
 	<select id="check" resultClass="tool" parameterClass="String">

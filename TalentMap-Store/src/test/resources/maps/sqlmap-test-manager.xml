@@ -5,49 +5,51 @@
 
 <sqlMap namespace="manager">
 
-    <typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager"/> 
-	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague"/> 
-	
-    <resultMap id="managerResult" class="manager">
-    	<result property="id" column="MANAGER_ID"/>        
-        <result property="profileId"  column="PROFILE_ID"/>    	    
-        <result property="lastName"   column="LAST_NAME"/>	   
-        <result property="firstName"   column="FIRST_NAME"/>	   
-        <result property="email"  column="EMAIL"/>	    
-        <result property="phone"   column="PHONE"/>
-        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
-        <result property="experience"   column="EXPERIENCE"/>
-<!--         <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	    -->
-        <result property="businessEngineer.id" column="B_ENGINEER_ID"/>
-        <result property="businessEngineer.lastName" column="LAST_NAME"/>     
-    </resultMap>
-	
+	<typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager" />
+	<typeAlias alias="colleague"
+		type="com.novedia.talentmap.model.entity.Colleague" />
+
+	<resultMap id="managerResult" class="manager">
+		<result property="id" column="MANAGER_ID" />
+		<result property="profileId" column="PROFILE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="experience" column="EXPERIENCE" />
+		<!-- <result property="businessEngineer" column="BUSINESS_ENGINEER"/> -->
+		<result property="businessEngineer.id" column="B_ENGINEER_ID" />
+		<result property="businessEngineer.lastName" column="LAST_NAME" />
+	</resultMap>
+
 	<resultMap id="colleagueResult" class="colleague">
-        <result property="id" column="COLLEAGUE_ID"/>     
-        <result property="managerId"  column="MANAGER_ID"/>         
-        <result property="profileId"  column="PROFILE_ID"/>    	    
-        <result property="lastName"   column="LAST_NAME"/>	   
-        <result property="firstName"   column="FIRST_NAME"/>	   
-        <result property="email"  column="EMAIL"/>	    
-        <result property="phone"   column="PHONE"/>
-        <result property="employmentDate"  column="EMPLOYMENT_DATE"/>	    
-        <result property="experience"   column="EXPERIENCE"/>
-<!--         <result property="businessEngineer"   column="BUSINESS_ENGINEER"/>	    -->
-        <result property="businessEngineer.id" column="B_ENGINEER_ID"/>
-        <result property="businessEngineer.lastName" column="LAST_NAME"/>     
-    </resultMap>
-	
+		<result property="id" column="COLLEAGUE_ID" />
+		<result property="managerId" column="MANAGER_ID" />
+		<result property="profileId" column="PROFILE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="experience" column="EXPERIENCE" />
+		<!-- <result property="businessEngineer" column="BUSINESS_ENGINEER"/> -->
+		<result property="businessEngineer.id" column="B_ENGINEER_ID" />
+		<result property="businessEngineer.lastName" column="LAST_NAME" />
+	</resultMap>
+
 	<select id="get" resultMap="managerResult" parameterClass="Integer">
-		SELECT * FROM MANAGER m, BUSINESS_ERNGINEER b 
+		SELECT * FROM MANAGER m, BUSINESS_ERNGINEER b
 		WHERE MANAGER_ID = #id#
-		AND m.B_ENGINEER_ID = B.B_ENGINEER_ID 
+		AND m.B_ENGINEER_ID = B.B_ENGINEER_ID
 	</select>
-	
-    <!-- v.guillemain -->
-    <select id="getAllCollaboratorsByManagerId" parameterClass="Integer" resultMap="colleagueResult">
-        SELECT * FROM COLLEAGUE c, BUSINESS_ERNGINEER b 
-        WHERE MANAGER_ID = #id#
-        AND c.B_ENGINEER_ID = B.B_ENGINEER_ID 
-    </select>
-	
+
+	<!-- v.guillemain -->
+	<select id="getAllCollaboratorsByManagerId" parameterClass="Integer"
+		resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE c, BUSINESS_ERNGINEER b
+		WHERE MANAGER_ID = #id#
+		AND c.B_ENGINEER_ID = B.B_ENGINEER_ID
+	</select>
+
 </sqlMap>

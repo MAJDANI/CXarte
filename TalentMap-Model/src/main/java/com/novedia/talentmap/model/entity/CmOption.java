@@ -3,8 +3,6 @@ package com.novedia.talentmap.model.entity;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
-
 /**
  * This entity represents options of a CM.
  * 
@@ -12,7 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * 
  */
 public class CmOption {
-	
+
 	/**
 	 * The email frequency
 	 */
@@ -25,7 +23,7 @@ public class CmOption {
 	public void setFrequency(Frequency frequency) {
 		this.frequency = frequency;
 	}
-	
+
 	/**
 	 * Build an immutable CmOption entity.
 	 * 
@@ -37,9 +35,9 @@ public class CmOption {
 	}
 
 	public CmOption() {
-		
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -47,7 +45,7 @@ public class CmOption {
 	public int hashCode() {
 		HashCodeBuilder hashBuilder = new HashCodeBuilder();
 		hashBuilder.append(this.getFrequency());
-		
+
 		return hashBuilder.hashCode();
 	}
 
@@ -56,7 +54,7 @@ public class CmOption {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (obj != null && !(obj instanceof CmOption)) {
 			return false;
 		}
@@ -70,9 +68,11 @@ public class CmOption {
 		if (obj.getClass() != getClass()) {
 			return false;
 		}
-		
+
 		CmOption cmOption = (CmOption) obj;
-		return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.getFrequency(), cmOption.getFrequency()).isEquals();
+		return new EqualsBuilder().appendSuper(super.equals(obj))
+				.append(this.getFrequency(), cmOption.getFrequency())
+				.isEquals();
 	}
 
 	// -------------------------------------

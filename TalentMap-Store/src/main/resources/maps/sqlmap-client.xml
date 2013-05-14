@@ -5,16 +5,16 @@
 
 <sqlMap namespace="client">
 
-    <typeAlias alias="client" type="com.novedia.talentmap.model.entity.Client"/> 
+	<typeAlias alias="client" type="com.novedia.talentmap.model.entity.Client" />
 
-    <resultMap id="clientResult" class="client">
-        <result property="id" column="CLIENT_ID"/>     
-        <result property="name"  column="CLIENT_NAME"/>         
-    </resultMap>
-    
-    <select id="getAll" resultMap="clientResult">
-    	SELECT * FROM CLIENT
-    </select>
-    
-    
+	<resultMap id="clientResult" class="client">
+		<result property="id" column="CLIENT_ID" />
+		<result property="name" column="CLIENT_NAME" />
+	</resultMap>
+
+	<select id="getAll" resultMap="clientResult">
+		SELECT * FROM CLIENT
+	</select>
+
+
 </sqlMap>        

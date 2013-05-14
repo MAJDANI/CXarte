@@ -19,31 +19,32 @@ public class BusinessEngineer implements Serializable {
 	 * Entity identifier
 	 */
 	private Integer id;
-	
+
 	/**
 	 * Business Engineer first name
 	 */
 	private String firstName;
-	
+
 	/**
 	 * Business Engineer last name
 	 */
 	private String lastName;
-	
+
 	/**
 	 * Business Unit
 	 */
 	private String businessUnit;
-	
+
 	/**
 	 * Default constructor
 	 */
 	public BusinessEngineer() {
-	
+
 	}
-	
+
 	/**
 	 * Gets the Business Engineer's Id
+	 * 
 	 * @return the id of the Business Engineer
 	 */
 	public Integer getId() {
@@ -52,7 +53,9 @@ public class BusinessEngineer implements Serializable {
 
 	/**
 	 * Sets the Business Engineer's Id
-	 * @param id : the Business Engineer's Id to set
+	 * 
+	 * @param id
+	 *            : the Business Engineer's Id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -60,6 +63,7 @@ public class BusinessEngineer implements Serializable {
 
 	/**
 	 * Gets the Business Engineer's name
+	 * 
 	 * @return the name of the Business Engineer
 	 */
 	public String getFirstName() {
@@ -69,12 +73,13 @@ public class BusinessEngineer implements Serializable {
 	/**
 	 * Sets the Business Engineer's firs name
 	 * 
-	 * @param firstName the Business Engineer's first name to set
+	 * @param firstName
+	 *            the Business Engineer's first name to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	/**
 	 * Get the business engineer's last name
 	 * 
@@ -83,17 +88,18 @@ public class BusinessEngineer implements Serializable {
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	/**
 	 * Set the last name
 	 * 
-	 * @param lastName the business engineer's last name
+	 * @param lastName
+	 *            the business engineer's last name
 	 */
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	/**
 	 * Get the business unit
 	 * 
@@ -103,11 +109,12 @@ public class BusinessEngineer implements Serializable {
 	public String getBusinessUnit() {
 		return businessUnit;
 	}
-	
+
 	/**
 	 * Set the business unit
 	 * 
-	 * @param businessUnit the business unit
+	 * @param businessUnit
+	 *            the business unit
 	 */
 
 	public void setBusinessUnit(String businessUnit) {
@@ -115,19 +122,18 @@ public class BusinessEngineer implements Serializable {
 	}
 
 	/**
-	 * {@inheritDoc} 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null || !(obj instanceof BusinessEngineer)){
+		if (obj == null || !(obj instanceof BusinessEngineer)) {
 			return false;
-		}
-		else {
+		} else {
 			BusinessEngineer b = (BusinessEngineer) obj;
 			return (this.id.equals(b.getId()));
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -138,7 +144,7 @@ public class BusinessEngineer implements Serializable {
 		strBld.append("firstName=").append(getFirstName()).append("] ");
 		return strBld.toString();
 	}
-	
+
 	/**
 	 * Build an immutable Business Engineer entity.
 	 * 
@@ -152,8 +158,6 @@ public class BusinessEngineer implements Serializable {
 		this.businessUnit = builder.firstName;
 	}
 
-	
-	
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
@@ -165,14 +169,14 @@ public class BusinessEngineer implements Serializable {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author v.guillemain
 	 */
 	public static class Builder {
-		
+
 		/**
 		 * Business Engineer identifier
 		 */
@@ -182,12 +186,12 @@ public class BusinessEngineer implements Serializable {
 		 * Business Engineer first name
 		 */
 		private String firstName;
-		
+
 		/**
 		 * Business Engineer last name
 		 */
 		private String lastName;
-		
+
 		/**
 		 * The activity market of business engineer
 		 */
@@ -196,7 +200,8 @@ public class BusinessEngineer implements Serializable {
 		/**
 		 * Set id
 		 * 
-		 * @param id the Business Engineer's identifier
+		 * @param id
+		 *            the Business Engineer's identifier
 		 * @return the builder
 		 */
 		public Builder id(final Integer id) {
@@ -207,46 +212,51 @@ public class BusinessEngineer implements Serializable {
 		/**
 		 * Set firstName
 		 * 
-		 * @param name the Business Engineer's name
+		 * @param name
+		 *            the Business Engineer's name
 		 * @return the builder
 		 */
 		public Builder firstName(final String name) {
 			this.firstName = name;
 			return this;
 		}
-		
+
 		/**
 		 * Set lastName
 		 * 
-		 * @param name the Business Engineer's name
+		 * @param name
+		 *            the Business Engineer's name
 		 * @return the builder
 		 */
 		public Builder lastName(final String lastName) {
 			this.lastName = lastName;
 			return this;
 		}
-		
+
 		/**
 		 * Set lastName
 		 * 
-		 * @param name the Business Engineer's name
+		 * @param name
+		 *            the Business Engineer's name
 		 * @return the builder
 		 */
 		public Builder businessUnit(final String businessUnit) {
 			this.businessUnit = businessUnit;
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of BusinessEngineer.
+		 * 
 		 * @return BusinessEngineer
 		 */
 		public BusinessEngineer build() {
 			return new BusinessEngineer(this);
 		}
-	
+
 		/**
 		 * Static constructor for this class.
+		 * 
 		 * @return a builder instance
 		 */
 		public static Builder builder() {

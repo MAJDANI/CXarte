@@ -2,7 +2,6 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
-
 /**
  * Entity Client
  * 
@@ -14,25 +13,24 @@ public class Client implements Serializable, Comparable<Client> {
 	 * 
 	 */
 	private static final long serialVersionUID = 257698099636559191L;
-	
+
 	/**
 	 * entity identify
 	 */
 	protected Integer id;
-	
+
 	/**
 	 * Colleague name
 	 */
 	protected String name;
-	
-	
+
 	/**
 	 * Default Constructor
 	 */
 	public Client() {
-		
+
 	}
-	
+
 	/**
 	 * Build an immutable category entity.
 	 * 
@@ -43,7 +41,7 @@ public class Client implements Serializable, Comparable<Client> {
 		this.id = builder.id;
 		this.name = builder.name;
 	}
-	
+
 	/**
 	 * Static constructor for this class.
 	 * 
@@ -52,14 +50,14 @@ public class Client implements Serializable, Comparable<Client> {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author y.rohr
 	 */
 	public static class Builder {
-		
+
 		/**
 		 * Client identifier
 		 */
@@ -70,11 +68,11 @@ public class Client implements Serializable, Comparable<Client> {
 		 */
 		private String name;
 
-		
 		/**
 		 * Set id
 		 * 
-		 * @param id the coworker's identifier
+		 * @param id
+		 *            the coworker's identifier
 		 * 
 		 * @return the builder
 		 */
@@ -86,14 +84,15 @@ public class Client implements Serializable, Comparable<Client> {
 		/**
 		 * Set name
 		 * 
-		 * @param name the coworker's first name
+		 * @param name
+		 *            the coworker's first name
 		 * @return the builder
 		 */
 		public Builder name(final String name) {
 			this.name = name;
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of tool.
 		 * 
@@ -102,8 +101,7 @@ public class Client implements Serializable, Comparable<Client> {
 		public Client build() {
 			return new Client(this);
 		}
-		
-		
+
 	}
 
 	public Integer getId() {
@@ -126,14 +124,15 @@ public class Client implements Serializable, Comparable<Client> {
 	public int compareTo(Client otherClient) {
 		return this.getName().compareTo((otherClient).getName());
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null || !(obj instanceof Client)){
+		if (obj == null || !(obj instanceof Client)) {
 			return false;
 		} else {
 			Client client = (Client) obj;
-			return (this.id.equals(client.getId()) && this.name.equals(client.getName()));
+			return (this.id.equals(client.getId()) && this.name.equals(client
+					.getName()));
 		}
-	}   
+	}
 }

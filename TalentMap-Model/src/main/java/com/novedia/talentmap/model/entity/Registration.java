@@ -2,103 +2,102 @@ package com.novedia.talentmap.model.entity;
 
 import java.util.Date;
 
-
 /**
  * This entity represents a registration on TalentMap
+ * 
  * @author y.rohr
- *
+ * 
  */
 public class Registration {
-	
+
 	/**
 	 * Colleague Id
 	 */
 	private Integer colleagueId;
-	
+
 	/**
 	 * AuthenticationId
 	 */
 	private Integer authenticationId;
-	
+
 	/**
 	 * Sex
 	 */
 	private String title;
-	
+
 	/**
 	 * First Name
 	 */
 	private String firstName;
-	
+
 	/**
 	 * Last Name
 	 */
 	private String lastName;
-	
+
 	/**
 	 * mail
 	 */
 	private String email;
-	
+
 	/**
 	 * Phone number
 	 */
 	private String phone;
-	
+
 	/**
 	 * User password
 	 */
 	private String password;
-	
+
 	/**
 	 * User confirm password
 	 */
 	private String passwordConfirm;
-	
+
 	/**
 	 * User login
 	 */
 	private String login;
-	
+
 	/**
 	 * Employment Date
 	 */
 	private Date employmentDate;
-	
+
 	/**
-	 * Experience (unit : years) 
+	 * Experience (unit : years)
 	 */
 	private Integer experience;
-	
+
 	/**
 	 * The business Engineer
 	 */
 	private BusinessEngineer businessEngineer;
-	
+
 	/**
 	 * Profile id
 	 */
 	private Integer profileId;
-	
+
 	/**
 	 * Manager Id
 	 */
 	private Integer managerId;
 
 	/**
-	 * Role 
+	 * Role
 	 */
 	private Authorization.Role role;
 
 	/**
 	 * Default constructor
 	 */
-	public Registration(){
-		
+	public Registration() {
+
 	}
-	
-	
-	public Registration(final Builder builder){
+
+	public Registration(final Builder builder) {
 		this.setColleagueId(builder.colleagueId);
 		this.setAuthenticationId(builder.authenticationId);
 		this.setFirstName(builder.firstName);
@@ -114,12 +113,10 @@ public class Registration {
 		this.setProfileId(builder.profileId);
 		this.setManagerId(builder.managerId);
 	}
-	
-	
+
 	// -------------------------------------
-		// ------------ BUILDER PART -----------
-		// -------------------------------------
-		
+	// ------------ BUILDER PART -----------
+	// -------------------------------------
 
 	/**
 	 * Inner builder class.
@@ -159,7 +156,8 @@ public class Registration {
 		/**
 		 * Set colleague id
 		 * 
-		 * @param colleague id
+		 * @param colleague
+		 *            id
 		 * @return the builder
 		 */
 		public Builder colleagueId(final Integer colleagueId) {
@@ -170,7 +168,8 @@ public class Registration {
 		/**
 		 * Set authentication id
 		 * 
-		 * @param authentication id
+		 * @param authentication
+		 *            id
 		 * @return the builder
 		 */
 		public Builder authenticationId(final Integer authenticationId) {
@@ -181,7 +180,8 @@ public class Registration {
 		/**
 		 * Set first name
 		 * 
-		 * @param firstName the coworker's first name
+		 * @param firstName
+		 *            the coworker's first name
 		 * @return the builder
 		 */
 		public Builder firstName(final String firstName) {
@@ -192,7 +192,8 @@ public class Registration {
 		/**
 		 * Set last name
 		 * 
-		 * @param lastName the coworker's first name
+		 * @param lastName
+		 *            the coworker's first name
 		 * @return the builder
 		 */
 		public Builder lastName(final String lastName) {
@@ -233,12 +234,11 @@ public class Registration {
 			return this;
 		}
 
-
-
 		/**
 		 * Set profileId
 		 * 
-		 * @param profileId the coworker's profile
+		 * @param profileId
+		 *            the coworker's profile
 		 * @return the builder
 		 */
 		public Builder profileId(final Integer profileId) {
@@ -249,10 +249,11 @@ public class Registration {
 		/**
 		 * Set phone
 		 * 
-		 * @param phone the coworker's phone
+		 * @param phone
+		 *            the coworker's phone
 		 * @return the builder
 		 */
-		public Builder phone (final String phone) {
+		public Builder phone(final String phone) {
 			this.phone = phone;
 			return this;
 		}
@@ -260,10 +261,11 @@ public class Registration {
 		/**
 		 * Set experience
 		 * 
-		 * @param experience the coworker's experience
+		 * @param experience
+		 *            the coworker's experience
 		 * @return the builder
 		 */
-		public Builder experience (final Integer experience) {
+		public Builder experience(final Integer experience) {
 			this.experience = experience;
 			return this;
 		}
@@ -271,10 +273,11 @@ public class Registration {
 		/**
 		 * Set manager
 		 * 
-		 * @param managerId the coworker's manager 
+		 * @param managerId
+		 *            the coworker's manager
 		 * @return the builder
 		 */
-		public Builder managerId (final Integer managerId) {
+		public Builder managerId(final Integer managerId) {
 			this.managerId = managerId;
 			return this;
 		}
@@ -282,32 +285,36 @@ public class Registration {
 		/**
 		 * Set employment date
 		 * 
-		 * @param employmentDate the coworker's employment date
+		 * @param employmentDate
+		 *            the coworker's employment date
 		 * @return the builder
 		 */
-		public Builder employmentDate (final Date employmentDate) {
+		public Builder employmentDate(final Date employmentDate) {
 			this.employmentDate = employmentDate;
 			return this;
 		}
 
 		/**
 		 * Set business engineer
-		 * @param businessEngineer the coworker's business engineer
+		 * 
+		 * @param businessEngineer
+		 *            the coworker's business engineer
 		 * 
 		 * @return the builder
 		 */
-		public Builder businessEngineer (final BusinessEngineer businessEngineer) {
-			this.businessEngineer= businessEngineer;
+		public Builder businessEngineer(final BusinessEngineer businessEngineer) {
+			this.businessEngineer = businessEngineer;
 			return this;
 		}
 
 		/**
 		 * Set email
 		 * 
-		 * @param email the coworker's email
+		 * @param email
+		 *            the coworker's email
 		 * @return
 		 */
-		public Builder email (final String email) {
+		public Builder email(final String email) {
 			this.email = email;
 			return this;
 		}
@@ -330,18 +337,17 @@ public class Registration {
 			return new Builder();
 		}
 	}
-	
-		
+
 	/**
-	* @return the firstName
-	*/
+	 * @return the firstName
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -354,9 +360,9 @@ public class Registration {
 		return lastName;
 	}
 
-
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -369,9 +375,9 @@ public class Registration {
 		return email;
 	}
 
-
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -384,9 +390,9 @@ public class Registration {
 		return phone;
 	}
 
-
 	/**
-	 * @param phone the phone to set
+	 * @param phone
+	 *            the phone to set
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
@@ -399,9 +405,9 @@ public class Registration {
 		return password;
 	}
 
-
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -414,9 +420,9 @@ public class Registration {
 		return employmentDate;
 	}
 
-
 	/**
-	 * @param employmentDate the employmentDate to set
+	 * @param employmentDate
+	 *            the employmentDate to set
 	 */
 	public void setEmploymentDate(Date employmentDate) {
 		this.employmentDate = employmentDate;
@@ -429,9 +435,9 @@ public class Registration {
 		return experience;
 	}
 
-
 	/**
-	 * @param experience the experience to set
+	 * @param experience
+	 *            the experience to set
 	 */
 	public void setExperience(Integer experience) {
 		this.experience = experience;
@@ -444,9 +450,9 @@ public class Registration {
 		return businessEngineer;
 	}
 
-
 	/**
-	 * @param businessEngineer the businessEngineer to set
+	 * @param businessEngineer
+	 *            the businessEngineer to set
 	 */
 	public void setBusinessEngineer(BusinessEngineer businessEngineer) {
 		this.businessEngineer = businessEngineer;
@@ -459,9 +465,9 @@ public class Registration {
 		return profileId;
 	}
 
-
 	/**
-	 * @param profileId the profileId to set
+	 * @param profileId
+	 *            the profileId to set
 	 */
 	public void setProfileId(Integer profileId) {
 		this.profileId = profileId;
@@ -474,14 +480,13 @@ public class Registration {
 		return managerId;
 	}
 
-
 	/**
-	 * @param managerId the managerId to set
+	 * @param managerId
+	 *            the managerId to set
 	 */
 	public void setManagerId(Integer managerId) {
 		this.managerId = managerId;
 	}
-
 
 	/**
 	 * @return the login
@@ -490,14 +495,13 @@ public class Registration {
 		return login;
 	}
 
-
 	/**
-	 * @param login the login to set
+	 * @param login
+	 *            the login to set
 	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
 
 	/**
 	 * @return the passwordConfirm
@@ -506,9 +510,9 @@ public class Registration {
 		return passwordConfirm;
 	}
 
-
 	/**
-	 * @param passwordConfirm the passwordConfirm to set
+	 * @param passwordConfirm
+	 *            the passwordConfirm to set
 	 */
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
@@ -521,14 +525,13 @@ public class Registration {
 		return colleagueId;
 	}
 
-
 	/**
-	 * @param colleagueId the colleagueId to set
+	 * @param colleagueId
+	 *            the colleagueId to set
 	 */
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;
 	}
-
 
 	/**
 	 * @return the authenticationId
@@ -537,14 +540,13 @@ public class Registration {
 		return authenticationId;
 	}
 
-
 	/**
-	 * @param authenticationId the authenticationId to set
+	 * @param authenticationId
+	 *            the authenticationId to set
 	 */
 	public void setAuthenticationId(Integer authenticationId) {
 		this.authenticationId = authenticationId;
 	}
-
 
 	/**
 	 * @return the role
@@ -553,24 +555,20 @@ public class Registration {
 		return role;
 	}
 
-
 	/**
-	 * @param role the Authorization.Role to set
+	 * @param role
+	 *            the Authorization.Role to set
 	 */
 	public void setRole(Authorization.Role role) {
 		this.role = role;
 	}
 
-
 	public String getTitle() {
 		return title;
 	}
-
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
-		
 }

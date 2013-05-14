@@ -52,17 +52,20 @@
 		UPDATE SKILL SET COLLEAGUE_ID =
 		#colleagueId#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY =
 		#use_frequency#, NO_USING_TIME = #no_using_time#
-		WHERE COLLEAGUE_ID = #colleagueId# AND TOOL_ID = #tool_id#
+		WHERE COLLEAGUE_ID =
+		#colleagueId# AND TOOL_ID = #tool_id#
 	</update>
 
 	<select id="getAllColleagueIdByToolId" resultMap="collabIdResult"
 		parameterClass="java.lang.Integer">
 		SELECT COLLEAGUE_ID FROM SKILL WHERE TOOL_ID = #toolId#
 	</select>
-	
+
 	<select id="getCmColleagueIdByToolId" resultMap="collabIdResult"
 		parameterClass="hashmap">
-		SELECT s.COLLEAGUE_ID FROM SKILL s,COLLEAGUE c WHERE s.TOOL_ID = #toolId# AND s.COLLEAGUE_ID = c.COLLEAGUE_ID AND c.MANAGER_ID = #managerId#
+		SELECT s.COLLEAGUE_ID FROM SKILL s,COLLEAGUE c WHERE
+		s.TOOL_ID = #toolId# AND s.COLLEAGUE_ID = c.COLLEAGUE_ID AND
+		c.MANAGER_ID = #managerId#
 	</select>
 
 	<select id="getAllColleagueIdByListToolId" resultMap="collabIdResult"
@@ -78,7 +81,9 @@
 	<select id="getCmColleagueIdByListToolId" resultMap="collabIdResult"
 		parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
 		SELECT DISTINCT s.COLLEAGUE_ID FROM SKILL s,COLLEAGUE c
-		WHERE c.COLLEAGUE_ID = s.COLLEAGUE_ID AND c.MANAGER_ID = #managerId#  AND s.TOOL_ID IN
+		WHERE
+		c.COLLEAGUE_ID = s.COLLEAGUE_ID AND c.MANAGER_ID = #managerId# AND
+		s.TOOL_ID IN
 		<iterate property="listTools" open="(" close=")" conjunction=",">
 			#listTools[]#
 		</iterate>

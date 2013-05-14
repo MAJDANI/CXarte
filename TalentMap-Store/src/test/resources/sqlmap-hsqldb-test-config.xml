@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" 
 		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
-		
+
 <sqlMapConfig>
-    <settings useStatementNamespaces="true"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-colleague.xml"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-category.xml"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-concept.xml"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-mission.xml"/>
-    <sqlMap resource="maps/sqlmap-test-mission_tool.xml"/>
-    <sqlMap resource="maps/sqlmap-test-authentification.xml"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-profile.xml"/>
-    <sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-tool.xml"/>
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-colleague.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-category.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-concept.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-mission.xml" />
+	<sqlMap resource="maps/sqlmap-test-mission_tool.xml" />
+	<sqlMap resource="maps/sqlmap-test-authentification.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-profile.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-tool.xml" />
 </sqlMapConfig>

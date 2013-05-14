@@ -5,18 +5,18 @@
 
 <sqlMap namespace="task">
 
-    <typeAlias alias="task" type="com.novedia.talentmap.model.entity.Task"/>
-    <resultMap id="taskResult" class="task">
-    	<result property="id" column="TASK_ID"/> 
-        <result property="name" column="NAME"/>     
-        <result property="taskType"  column="TASK_TYPE"/>
-        <result property="targetDate"  column="TARGET_DATE"/>  
-        <result property="priority"  column="PRIORITY"/>
-        <result property="effort" column="EFFORT"/>
-    </resultMap>
-    
-    <select id="get" resultMap="taskResult" parameterClass="Integer">
-    	SELECT * FROM TASK WHERE TASK_ID = #id#
-    </select>
+	<typeAlias alias="task" type="com.novedia.talentmap.model.entity.Task" />
+	<resultMap id="taskResult" class="task">
+		<result property="id" column="TASK_ID" />
+		<result property="name" column="NAME" />
+		<result property="taskType" column="TASK_TYPE" />
+		<result property="targetDate" column="TARGET_DATE" />
+		<result property="priority" column="PRIORITY" />
+		<result property="effort" column="EFFORT" />
+	</resultMap>
+
+	<select id="get" resultMap="taskResult" parameterClass="Integer">
+		SELECT * FROM TASK WHERE TASK_ID = #id#
+	</select>
 </sqlMap>
     

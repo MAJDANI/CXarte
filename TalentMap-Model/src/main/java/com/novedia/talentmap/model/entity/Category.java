@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * 
  * @author j.marie-sainte
  */
-@SuppressWarnings( { "unused" })
+@SuppressWarnings({ "unused" })
 public class Category implements Serializable {
 
 	/**
@@ -28,7 +28,6 @@ public class Category implements Serializable {
 	 */
 	private String name;
 
-	
 	/**
 	 * Default constructor
 	 */
@@ -107,11 +106,11 @@ public class Category implements Serializable {
 		hashBuilder.append(this.getId());
 		return hashBuilder.hashCode();
 	}
-	
+
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-	
+
 	/**
 	 * Static constructor for this class.
 	 * 
@@ -120,7 +119,7 @@ public class Category implements Serializable {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Build a category entity.
 	 * 
@@ -131,7 +130,7 @@ public class Category implements Serializable {
 		this.id = builder.id;
 		this.name = builder.name;
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
@@ -152,7 +151,8 @@ public class Category implements Serializable {
 		/**
 		 * Constructor with parameter id.
 		 * 
-		 * @param id the category identifier
+		 * @param id
+		 *            the category identifier
 		 * @return the builder
 		 */
 		public Builder id(final Integer id) {
@@ -163,7 +163,8 @@ public class Category implements Serializable {
 		/**
 		 * Constructor with parameter name
 		 * 
-		 * @param name the category name
+		 * @param name
+		 *            the category name
 		 * @return the builder
 		 */
 		public Builder name(final String name) {

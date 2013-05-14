@@ -4,22 +4,23 @@ import java.io.Serializable;
 
 /**
  * This entity represents an union between a mission and a tool.
+ * 
  * @author j.maquin
- *
+ * 
  */
 
-public class MissionTool implements Serializable{
+public class MissionTool implements Serializable {
 
 	/**
-	 *  Serialization identifier
+	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = 495162391337345554L;
-	
+
 	/**
 	 * The mission id
 	 */
 	private Integer missionId;
-	
+
 	/**
 	 * The tool id
 	 */

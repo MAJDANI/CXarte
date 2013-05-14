@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
  * This entity represents a manager.
  * 
  * @author j.marie-sainte
- *
+ * 
  */
 public class Manager extends Colleague implements Serializable {
 
@@ -22,7 +22,7 @@ public class Manager extends Colleague implements Serializable {
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -5987763744641087415L;
-	
+
 	/**
 	 * Colleagues list
 	 */
@@ -47,16 +47,17 @@ public class Manager extends Colleague implements Serializable {
 	/**
 	 * Set the manager's colleagues list
 	 * 
-	 * @param colleagues the colleagues to set
+	 * @param colleagues
+	 *            the colleagues to set
 	 */
 	public void setColleagues(List<Colleague> colleagues) {
 		this.colleagues = colleagues;
 	}
-	
+
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-		
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -64,7 +65,8 @@ public class Manager extends Colleague implements Serializable {
 	public String toString() {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append(super.toString());
-		strBld.append("->[Colleagues List").append(getColleagues()).append("] ");
+		strBld.append("->[Colleagues List").append(getColleagues())
+				.append("] ");
 
 		return strBld.toString();
 	}
@@ -81,53 +83,52 @@ public class Manager extends Colleague implements Serializable {
 
 		return hashBuilder.hashCode();
 	}
-		
+
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-		
+
 	/**
 	 * Static constructor for this class.
 	 * 
 	 * @return a builder instance
 	 */
-	public static Builder builder(){
-		return new Builder() ;
-	} 
-	
+	public static Builder builder() {
+		return new Builder();
+	}
+
 	/**
 	 * 
 	 * @param builder
 	 */
-	private Manager(final Builder builder){
+	private Manager(final Builder builder) {
 		super(builder);
 		this.colleagues = builder.colleagues;
 	}
-	
-	
+
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author j.marie-sainte
 	 */
-	public static final class Builder extends Colleague.Builder{
-		
+	public static final class Builder extends Colleague.Builder {
+
 		/**
 		 * Colleagues list bind to this manager
 		 */
 		private List<Colleague> colleagues = Lists.newArrayList();
-		
+
 		/**
 		 * Set the colleagues list
 		 * 
 		 * @param colleagues
 		 * @return the builder
 		 */
-		public Builder colleagues(Colleague... colleagues){
+		public Builder colleagues(Colleague... colleagues) {
 			this.colleagues.addAll(Arrays.asList(colleagues));
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of tool.
 		 * 
@@ -137,7 +138,7 @@ public class Manager extends Colleague implements Serializable {
 			this.colleagues = ImmutableList.copyOf(this.colleagues);
 			return new Manager(this);
 		}
-				
+
 	}
-	
-}		
+
+}

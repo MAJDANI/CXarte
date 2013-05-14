@@ -8,13 +8,16 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 /**
  * This entity represents a Talent Map tool.
  * <ul>
- * <li>A tool is the finest level of skill.</li> 
- * <li>A tool could be, from a technical point of view, a Framework like Spring, Vaadin an so on.</li> 
- * <li>It could be also any kind of software using in the realization of a project (ERP, BDD, etc.)</li>
+ * <li>A tool is the finest level of skill.</li>
+ * <li>A tool could be, from a technical point of view, a Framework like Spring,
+ * Vaadin an so on.</li>
+ * <li>It could be also any kind of software using in the realization of a
+ * project (ERP, BDD, etc.)</li>
  * </ul>
- * @author j.marie-sainte 
+ * 
+ * @author j.marie-sainte
  */
-@SuppressWarnings({"rawtypes", "unused"})
+@SuppressWarnings({ "rawtypes", "unused" })
 public class Tool implements Serializable, Comparable {
 
 	/**
@@ -40,9 +43,9 @@ public class Tool implements Serializable, Comparable {
 	/**
 	 * Default constructor
 	 */
-	public Tool(){	
+	public Tool() {
 	}
-	
+
 	/**
 	 * Get the identifier.
 	 * 
@@ -51,7 +54,7 @@ public class Tool implements Serializable, Comparable {
 	public Integer getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Set the identifier.
 	 * 
@@ -60,7 +63,7 @@ public class Tool implements Serializable, Comparable {
 	private void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * Get the matching concept.
 	 * 
@@ -69,7 +72,7 @@ public class Tool implements Serializable, Comparable {
 	public Concept getConcept() {
 		return concept;
 	}
-	
+
 	/**
 	 * Set the matching concept.
 	 * 
@@ -101,7 +104,7 @@ public class Tool implements Serializable, Comparable {
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -114,7 +117,7 @@ public class Tool implements Serializable, Comparable {
 				.append(getConcept()).append("]");
 		return strBld.toString();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -134,7 +137,7 @@ public class Tool implements Serializable, Comparable {
 		ebuilder.append(this.getId(), comparedObj.getId());
 		return ebuilder.isEquals();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -151,16 +154,16 @@ public class Tool implements Serializable, Comparable {
 	 */
 	@Override
 	public int compareTo(Object o) {
-		Tool toolToCompare = (Tool)o; 
-		int result = this.getName().compareToIgnoreCase(toolToCompare.getName());
+		Tool toolToCompare = (Tool) o;
+		int result = this.getName()
+				.compareToIgnoreCase(toolToCompare.getName());
 		return result;
 	}
-	
-	
+
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-	
+
 	/**
 	 * Static constructor for this class.
 	 * 
@@ -169,7 +172,7 @@ public class Tool implements Serializable, Comparable {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Build an immutable tool entity.
 	 * 
@@ -181,7 +184,7 @@ public class Tool implements Serializable, Comparable {
 		this.name = builder.name;
 		this.concept = builder.concept;
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
@@ -198,12 +201,12 @@ public class Tool implements Serializable, Comparable {
 		 * The tool name.
 		 */
 		private String name;
-		
+
 		/**
 		 * The concept this tool is a part of.
 		 */
 		private Concept concept;
-		
+
 		/**
 		 * Set the tool identifier
 		 * 
@@ -214,7 +217,7 @@ public class Tool implements Serializable, Comparable {
 			this.id = id;
 			return this;
 		}
-		
+
 		/**
 		 * Set the tool name
 		 * 
@@ -225,18 +228,18 @@ public class Tool implements Serializable, Comparable {
 			this.name = name;
 			return this;
 		}
-		
+
 		/**
-		 * Set the concept 
+		 * Set the concept
 		 * 
 		 * @param concept
 		 * @return the builder
 		 */
-		public Builder concept(final Concept concept){
+		public Builder concept(final Concept concept) {
 			this.concept = concept;
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of tool.
 		 * 

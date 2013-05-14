@@ -20,84 +20,93 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * @author v.guillemain
  * 
  */
-public class AuthenticationDao extends SqlMapClientDaoSupport implements IDao<Authentication> {
+public class AuthenticationDao extends SqlMapClientDaoSupport implements
+	IDao<Authentication> {
 
-	/**
-	 * Class builder based on sqlMapClient
-	 * 
-	 * @param sqlMapClient
-	 */
-	public AuthenticationDao(final SqlMapClient sqlMapClient) {
-		setSqlMapClient(sqlMapClient);
-	}
+    /**
+     * Class builder based on sqlMapClient
+     * 
+     * @param sqlMapClient
+     */
+    public AuthenticationDao(final SqlMapClient sqlMapClient) {
+	setSqlMapClient(sqlMapClient);
+    }
 
-	/**
-	 * Update password
-	 */
-	@Override
-	public int save(Authentication authentication) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().update(
-				DBRequestsConstants.SAVE_AUTHENTIFICATION, authentication);
-	}
+    /**
+     * Update password
+     */
+    @Override
+    public int save(Authentication authentication) throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().update(
+		DBRequestsConstants.SAVE_AUTHENTIFICATION, authentication);
+    }
 
-	/**
-	 * Add login/password
-	 */
-	@Override
-	public int add(Authentication element) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * Delete login/password
-	 */
-	@Override
-	public int delete(Authentication authentification) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * This method check if credentials info exists in table
-	 * @param token
-	 * @return authentication
-	 * @throws DataAccessException
-	 */
-	public Authentication check(CredentialToken token) throws DataAccessException {
-		return (Authentication) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.CHECK_AUTHENTIFICATION, token);
-	}
-	
-	public Integer addUserFromRegistration(Registration registration) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().insert(
-				DBRequestsConstants.ADD_USER_FROM_REGISTRATION, registration);
-	}
+    /**
+     * Add login/password
+     */
+    @Override
+    public int add(Authentication element) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * Counts the number of login "login" existing in table Authentication.
-	 * It's used to assure a user won't choose a login already existing.
-	 * @param login : tho login to check in table
-	 * @return the number of login found in table
-	 */
-	public Integer countLogin(String login) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.AUTHENTIFICATION_COUNT_LOGIN, login);
-	}
-	
-	@Override
-	public Authentication getByName(String name) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Delete login/password
+     */
+    @Override
+    public int delete(Authentication authentification)
+	    throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Authentication get(Integer id) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * This method check if credentials info exists in table
+     * 
+     * @param token
+     * @return authentication
+     * @throws DataAccessException
+     */
+    public Authentication check(CredentialToken token)
+	    throws DataAccessException {
+	return (Authentication) this.getSqlMapClientTemplate().queryForObject(
+		DBRequestsConstants.CHECK_AUTHENTIFICATION, token);
+    }
 
-	@Override
-	public List<Authentication> getAll() throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+    public Integer addUserFromRegistration(Registration registration)
+	    throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().insert(
+		DBRequestsConstants.ADD_USER_FROM_REGISTRATION, registration);
+    }
 
-	@Override
-	public Authentication check(String name) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Counts the number of login "login" existing in table Authentication. It's
+     * used to assure a user won't choose a login already existing.
+     * 
+     * @param login
+     *            : tho login to check in table
+     * @return the number of login found in table
+     */
+    public Integer countLogin(String login) throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().queryForObject(
+		DBRequestsConstants.AUTHENTIFICATION_COUNT_LOGIN, login);
+    }
+
+    @Override
+    public Authentication getByName(String name) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Authentication get(Integer id) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Authentication> getAll() throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Authentication check(String name) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
 }

@@ -10,92 +10,91 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 /**
  * This entity represents a colleague.
  * 
  * @author j.marie-sainte
  */
 public class Colleague implements Serializable {
-	
+
 	/**
 	 * Serialization identifier
 	 */
 	private static final long serialVersionUID = -1323210979848908088L;
-	
+
 	/**
 	 * entity indentifier
 	 */
 	protected Integer id;
-	
+
 	/**
 	 * manager id
 	 */
 	private Integer managerId;
-	
+
 	/**
 	 * Profile id
 	 */
 	protected Integer profileId;
-	
+
 	/**
 	 * Colleague last name
 	 */
 	protected String lastName;
-	
+
 	/**
 	 * Colleague first name
 	 */
 	protected String firstName;
-	
+
 	/**
 	 * Colleague email
 	 */
 	protected String email;
-	
+
 	/**
 	 * Colleague phone number
 	 */
 	protected String phone;
-	
+
 	/**
 	 * Colleague employment date
 	 */
 	protected Date employmentDate;
-	
+
 	/**
 	 * Colleague experience
 	 */
 	protected Integer experience;
-	
+
 	/**
 	 * Colleague business Engineer
 	 */
 	protected BusinessEngineer businessEngineer;
-	
+
 	/**
 	 * Colleague Sex
 	 */
 	protected String title;
 
 	/**
-	 *  List of missions
+	 * List of missions
 	 */
 	private List<Mission> missions;
-	
-	/** 
-	 * List of tools 
+
+	/**
+	 * List of tools
 	 */
 	private List<Tool> tools;
 
-	
 	/**
 	 * Default Constructor
 	 */
 	public Colleague() {
-		
+
 	}
-	
-	
+
 	/**
 	 * Get the colleague's identifier
 	 * 
@@ -108,7 +107,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's identifier
 	 * 
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -126,7 +126,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's manager
 	 * 
-	 * @param managerId the managerId to set
+	 * @param managerId
+	 *            the managerId to set
 	 */
 	public void setManagerId(Integer managerId) {
 		this.managerId = managerId;
@@ -144,7 +145,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's profile
 	 * 
-	 * @param profileId the profileId to set
+	 * @param profileId
+	 *            the profileId to set
 	 */
 	public void setProfileId(Integer profileId) {
 		this.profileId = profileId;
@@ -160,9 +162,10 @@ public class Colleague implements Serializable {
 	}
 
 	/**
-	 * Set the colleague's last name 
+	 * Set the colleague's last name
 	 * 
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -180,7 +183,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's first name
 	 * 
-	 * @param firstName the firstName to set
+	 * @param firstName
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -198,7 +202,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's email
 	 * 
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -209,7 +214,7 @@ public class Colleague implements Serializable {
 	 * 
 	 * @return the employmentDate
 	 */
-	//@JsonSerialize(using = DateSerializer.class)
+	// @JsonSerialize(using = DateSerializer.class)
 	public Date getEmploymentDate() {
 		return employmentDate;
 	}
@@ -217,7 +222,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's employment date
 	 * 
-	 * @param employmentDate the employmentDate to set
+	 * @param employmentDate
+	 *            the employmentDate to set
 	 */
 	public void setEmploymentDate(Date employmentDate) {
 		this.employmentDate = employmentDate;
@@ -235,7 +241,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's experience
 	 * 
-	 * @param experience the experience to set
+	 * @param experience
+	 *            the experience to set
 	 */
 	public void setExperience(Integer experience) {
 		this.experience = experience;
@@ -253,7 +260,8 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the business engineer
 	 * 
-	 * @param businessEngineer the businessEngineer to set
+	 * @param businessEngineer
+	 *            the businessEngineer to set
 	 */
 	public void setBusinessEngineer(BusinessEngineer businessEngineer) {
 		this.businessEngineer = businessEngineer;
@@ -271,12 +279,13 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's phone number
 	 * 
-	 * @param phone the phone to set
+	 * @param phone
+	 *            the phone to set
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	/**
 	 * Get the colleague's sex
 	 * 
@@ -289,12 +298,12 @@ public class Colleague implements Serializable {
 	/**
 	 * Set the colleague's sex
 	 * 
-	 * @param sex           
+	 * @param sex
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	/**
 	 * Get the list of the colleague's missions
 	 * 
@@ -332,12 +341,11 @@ public class Colleague implements Serializable {
 	public void setTool(List<Tool> tool) {
 		this.tools = tool;
 	}
-	
-	
+
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -353,7 +361,7 @@ public class Colleague implements Serializable {
 		strBld.append("experience").append(getExperience()).append("] ");
 		return strBld.toString();
 	}
-		
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -363,7 +371,7 @@ public class Colleague implements Serializable {
 		hashBuilder.append(this.getId());
 		hashBuilder.append(this.getFirstName());
 		hashBuilder.append(this.getLastName());
-		
+
 		return hashBuilder.hashCode();
 	}
 
@@ -372,7 +380,7 @@ public class Colleague implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (obj != null && !(obj instanceof Colleague)) {
 			return false;
 		}
@@ -386,16 +394,16 @@ public class Colleague implements Serializable {
 		if (obj.getClass() != getClass()) {
 			return false;
 		}
-		
+
 		Colleague colleague = (Colleague) obj;
-		return new EqualsBuilder().appendSuper(super.equals(obj)).append(this.getId(), colleague.getId()).isEquals();
+		return new EqualsBuilder().appendSuper(super.equals(obj))
+				.append(this.getId(), colleague.getId()).isEquals();
 	}
-	
-	
+
 	// -------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-	
+
 	/**
 	 * Static constructor for this class.
 	 * 
@@ -404,7 +412,7 @@ public class Colleague implements Serializable {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Build an immutable category entity.
 	 * 
@@ -426,14 +434,14 @@ public class Colleague implements Serializable {
 		this.missions = builder.missions;
 		this.tools = builder.tools;
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
 	 * @author j.marie-sainte
 	 */
 	public static class Builder {
-		
+
 		/**
 		 * Colleague identifier
 		 */
@@ -453,7 +461,7 @@ public class Colleague implements Serializable {
 		 * Colleague phone
 		 */
 		private String phone;
-		
+
 		/**
 		 * Colleague experience
 		 */
@@ -483,26 +491,27 @@ public class Colleague implements Serializable {
 		 * Colleague email
 		 */
 		protected String email;
-		
+
 		/**
 		 * Colleague sex
 		 */
 		protected String title;
-		
+
 		/**
 		 * List of tools mastered by Colleague
 		 */
 		public List<Tool> tools = Lists.newArrayList();
-		
+
 		/**
 		 * List of mission performed by Colleague
 		 */
 		public List<Mission> missions = Lists.newArrayList();
-		
+
 		/**
 		 * Set id
 		 * 
-		 * @param id the colleague's identifier
+		 * @param id
+		 *            the colleague's identifier
 		 * 
 		 * @return the builder
 		 */
@@ -514,7 +523,8 @@ public class Colleague implements Serializable {
 		/**
 		 * Set first name
 		 * 
-		 * @param firstName the colleague's first name
+		 * @param firstName
+		 *            the colleague's first name
 		 * @return the builder
 		 */
 		public Builder firstName(final String firstName) {
@@ -525,127 +535,137 @@ public class Colleague implements Serializable {
 		/**
 		 * Set profileId
 		 * 
-		 * @param profileId the colleague's profile
+		 * @param profileId
+		 *            the colleague's profile
 		 * @return the builder
 		 */
 		public Builder profileId(final Integer profileId) {
 			this.profileId = profileId;
 			return this;
 		}
-		
+
 		/**
 		 * Set phone
 		 * 
-		 * @param phone the colleague's phone
+		 * @param phone
+		 *            the colleague's phone
 		 * @return the builder
 		 */
-		public Builder phone (final String phone) {
+		public Builder phone(final String phone) {
 			this.phone = phone;
 			return this;
 		}
-		
+
 		/**
 		 * Set experience
 		 * 
-		 * @param experience the colleague's experience
+		 * @param experience
+		 *            the colleague's experience
 		 * @return the builder
 		 */
-		public Builder experience (final Integer experience) {
+		public Builder experience(final Integer experience) {
 			this.experience = experience;
 			return this;
 		}
-		
+
 		/**
 		 * Set manager
 		 * 
-		 * @param managerId the colleague's manager 
+		 * @param managerId
+		 *            the colleague's manager
 		 * @return the builder
 		 */
-		public Builder managerId (final Integer managerId) {
+		public Builder managerId(final Integer managerId) {
 			this.managerId = managerId;
 			return this;
 		}
-		
+
 		/**
 		 * Set last name
 		 * 
-		 * @param lastName the colleague's last name
+		 * @param lastName
+		 *            the colleague's last name
 		 * @return the builder
 		 */
-		public Builder lastName (final String lastName) {
+		public Builder lastName(final String lastName) {
 			this.lastName = lastName;
 			return this;
 		}
-		
+
 		/**
 		 * Set employment date
 		 * 
-		 * @param employmentDate the colleague's employment date
+		 * @param employmentDate
+		 *            the colleague's employment date
 		 * @return the builder
 		 */
-		public Builder employmentDate (final Date employmentDate) {
+		public Builder employmentDate(final Date employmentDate) {
 			this.employmentDate = employmentDate;
 			return this;
 		}
-		
+
 		/**
 		 * Set business engineer
-		 * @param businessEngineer the colleague's business engineer
+		 * 
+		 * @param businessEngineer
+		 *            the colleague's business engineer
 		 * 
 		 * @return the builder
 		 */
-		public Builder businessEngineer (final BusinessEngineer businessEngineer) {
+		public Builder businessEngineer(final BusinessEngineer businessEngineer) {
 			this.businessEngineer = businessEngineer;
 			return this;
 		}
-		
+
 		/**
 		 * Set email
 		 * 
-		 * @param email the colleague's email
+		 * @param email
+		 *            the colleague's email
 		 * @return
 		 */
-		public Builder email (final String email) {
+		public Builder email(final String email) {
 			this.email = email;
 			return this;
 		}
-		
+
 		/**
 		 * Set sex
 		 * 
-		 * @param sex the colleague's sex
+		 * @param sex
+		 *            the colleague's sex
 		 * @return
 		 */
-		public Builder title (final String title) {
+		public Builder title(final String title) {
 			this.title = title;
 			return this;
 		}
-		
+
 		/**
 		 * Set the mission list
 		 * 
 		 * @param missions
 		 * @return
 		 */
-		public Builder missions(final Mission...missions){
+		public Builder missions(final Mission... missions) {
 			this.missions.addAll(Arrays.asList(missions));
 			return this;
 		}
-		
+
 		/**
 		 * Set the tools list
 		 * 
 		 * @param tools
 		 * @return
 		 */
-		public Builder tools(final Tool...tools){
+		public Builder tools(final Tool... tools) {
 			this.tools.addAll(Arrays.asList(tools));
 			return this;
 		}
-		
-		
+
 		/**
-		 * Build instance of colleague with immutable lists of missions and tools.
+		 * Build instance of colleague with immutable lists of missions and
+		 * tools.
 		 * 
 		 * @return Colleague
 		 */

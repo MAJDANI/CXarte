@@ -13,94 +13,99 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
-
 /**
  * The category DAO
  * 
  * @author j.Collet
- *
+ * 
  */
-public class CategoryDao extends SqlMapClientDaoSupport implements IDao<Category> {
-	
-	/**
-	 * The logger
-	 */
-	private static Log logger = LogFactory.getLog(CategoryDao.class);
-	
-	/**
-	 * Class builder based on sqlMapClient
-	 * @param sqlMapClient
-	 */
-	public CategoryDao(final SqlMapClient sqlMapClient){
-		if(logger.isDebugEnabled()) {
-			logger.debug("Create CategoryDao");
-		}
-		setSqlMapClient(sqlMapClient);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Category get(Integer id) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Category> getAll() throws DataAccessException {
-		return (List<Category>) getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_CATEGORY);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int add(Category category) throws DataAccessException {
-		return (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_CATEGORY, category);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int save(Category category) throws DataAccessException {
-		return (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_CATEGORY, category);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int delete(Category category) throws DataAccessException {
-		return (Integer) this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_CATEGORY, category);			
-	}
+public class CategoryDao extends SqlMapClientDaoSupport implements
+	IDao<Category> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Category check(String name) throws DataAccessException {
-		throw new UnsupportedOperationException();
+    /**
+     * The logger
+     */
+    private static Log logger = LogFactory.getLog(CategoryDao.class);
+
+    /**
+     * Class builder based on sqlMapClient
+     * 
+     * @param sqlMapClient
+     */
+    public CategoryDao(final SqlMapClient sqlMapClient) {
+	if (logger.isDebugEnabled()) {
+	    logger.debug("Create CategoryDao");
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public Category check(Category category) throws DataAccessException {
-		return (Category) this.getSqlMapClientTemplate().queryForObject(
-				DBRequestsConstants.CHECK_CATEGORY_OBJECT, category);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Category getByName(String name) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+	setSqlMapClient(sqlMapClient);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Category get(Integer id) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Category> getAll() throws DataAccessException {
+	return (List<Category>) getSqlMapClientTemplate().queryForList(
+		DBRequestsConstants.GET_ALL_CATEGORY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int add(Category category) throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().insert(
+		DBRequestsConstants.ADD_CATEGORY, category);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int save(Category category) throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().update(
+		DBRequestsConstants.SAVE_CATEGORY, category);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int delete(Category category) throws DataAccessException {
+	return (Integer) this.getSqlMapClientTemplate().delete(
+		DBRequestsConstants.DELETE_CATEGORY, category);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Category check(String name) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Category check(Category category) throws DataAccessException {
+	return (Category) this.getSqlMapClientTemplate().queryForObject(
+		DBRequestsConstants.CHECK_CATEGORY_OBJECT, category);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Category getByName(String name) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
 
 }

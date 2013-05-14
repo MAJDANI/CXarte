@@ -3,13 +3,13 @@ package com.novedia.talentmap.model.entity;
 import java.io.Serializable;
 
 /**
- * The token that contains login/password
- * Uses by Ibatis
+ * The token that contains login/password Uses by Ibatis
+ * 
  * @author e.moumbe
- *
+ * 
  */
 public class CredentialToken implements Serializable {
-	
+
 	/**
 	 * serialization identifier
 	 */
@@ -19,12 +19,12 @@ public class CredentialToken implements Serializable {
 	 * login credential
 	 */
 	private String login;
-	
+
 	/**
 	 * password credential
 	 */
 	private String password;
-	
+
 	/**
 	 * @return the login
 	 */
@@ -33,7 +33,8 @@ public class CredentialToken implements Serializable {
 	}
 
 	/**
-	 * @param login the login to set
+	 * @param login
+	 *            the login to set
 	 */
 	public void setLogin(String login) {
 		this.login = login;
@@ -47,7 +48,8 @@ public class CredentialToken implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;

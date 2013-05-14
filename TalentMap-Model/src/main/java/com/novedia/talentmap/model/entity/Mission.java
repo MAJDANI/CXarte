@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
 /**
  * This entity represents a mission.
  * 
@@ -60,7 +59,7 @@ public class Mission implements Serializable {
 	 * End date of the mission
 	 */
 	private Date endDate;
-	
+
 	/**
 	 * Tools of the mission
 	 */
@@ -71,25 +70,25 @@ public class Mission implements Serializable {
 	 */
 	public Mission() {
 	}
-	
-	
+
 	/**
 	 * get tools of the mission
+	 * 
 	 * @return the tools
 	 */
 	public List<Tool> getTools() {
 		return tools;
 	}
 
-
 	/**
 	 * set tools of the mission
-	 * @param tools the tools to set
+	 * 
+	 * @param tools
+	 *            the tools to set
 	 */
 	public void setTools(List<Tool> tools) {
 		this.tools = tools;
 	}
-
 
 	/**
 	 * Get the mission id
@@ -99,7 +98,7 @@ public class Mission implements Serializable {
 	public Integer getId() {
 		return id;
 	}
-	
+
 	/**
 	 * List the mission id
 	 * 
@@ -108,7 +107,6 @@ public class Mission implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	/**
 	 * Get the client value
@@ -134,7 +132,7 @@ public class Mission implements Serializable {
 	 * 
 	 * @return the startDate
 	 */
-	//@JsonSerialize(using = DateSerializer.class)
+	// @JsonSerialize(using = DateSerializer.class)
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -145,7 +143,7 @@ public class Mission implements Serializable {
 	 * @param startDate
 	 *            the startDate to set
 	 */
-	//@JsonSerialize(using = DateSerializer.class)
+	// @JsonSerialize(using = DateSerializer.class)
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -187,7 +185,7 @@ public class Mission implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	/**
 	 * Get the place value
 	 * 
@@ -225,9 +223,10 @@ public class Mission implements Serializable {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
+
 	/**
 	 * Get the colleague id
+	 * 
 	 * @return
 	 */
 	public Integer getColleagueId() {
@@ -236,16 +235,17 @@ public class Mission implements Serializable {
 
 	/**
 	 * List the colleague id
+	 * 
 	 * @param colleagueId
 	 */
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;
 	}
-	
+
 	// ------------------------------------------
 	// ------------ OVERRIDEN METHODS -----------
 	// ------------------------------------------
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -264,8 +264,8 @@ public class Mission implements Serializable {
 	public int hashCode() {
 		HashCodeBuilder hBuilder = new HashCodeBuilder();
 		hBuilder.append(this.getId());
-		//hBuilder.append(this.getTitle());
-		//hBuilder.append(this.getClient());
+		// hBuilder.append(this.getTitle());
+		// hBuilder.append(this.getClient());
 		return hBuilder.hashCode();
 	}
 
@@ -284,15 +284,15 @@ public class Mission implements Serializable {
 		Mission comparedObj = (Mission) obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
 		ebuilder.append(this.getId(), comparedObj.getId());
-		//ebuilder.append(this.getClient(), comparedObj.getClient());
-		//ebuilder.append(this.getTitle(), comparedObj.getTitle());
+		// ebuilder.append(this.getClient(), comparedObj.getClient());
+		// ebuilder.append(this.getTitle(), comparedObj.getTitle());
 		return ebuilder.isEquals();
 	}
-	
-	//--------------------------------------
+
+	// --------------------------------------
 	// ------------ BUILDER PART -----------
 	// -------------------------------------
-	
+
 	/**
 	 * Static constructor for this class.
 	 * 
@@ -301,7 +301,7 @@ public class Mission implements Serializable {
 	public static Builder builder() {
 		return new Builder();
 	}
-	
+
 	/**
 	 * Build an immutable mission entity.
 	 * 
@@ -309,7 +309,7 @@ public class Mission implements Serializable {
 	 *            the builder inner class for this entity
 	 */
 	private Mission(final Builder builder) {
-		
+
 		this.id = builder.id;
 		this.colleagueId = builder.colleagueId;
 		this.title = builder.title;
@@ -320,7 +320,6 @@ public class Mission implements Serializable {
 		this.endDate = builder.endDate;
 		this.tools = builder.tools;
 	}
-	
 
 	/**
 	 * Inner builder class.
@@ -368,7 +367,7 @@ public class Mission implements Serializable {
 		 * End date of the mission
 		 */
 		private Date endDate;
-		
+
 		/**
 		 * tools of the mission
 		 */
@@ -379,20 +378,20 @@ public class Mission implements Serializable {
 		 * 
 		 * @param id
 		 *            mission identifier
-		 *            
+		 * 
 		 * @return the builder
 		 */
 		public Builder id(final Integer id) {
 			this.id = id;
 			return this;
 		}
-		
+
 		/**
 		 * List the colleague
 		 * 
 		 * @param colleague
 		 *            the linked colleague
-		 *            
+		 * 
 		 * @return the builder
 		 */
 		public Builder colleagueId(final Integer colleagueId) {
@@ -405,7 +404,7 @@ public class Mission implements Serializable {
 		 * 
 		 * @param title
 		 *            the mission title
-		 *            
+		 * 
 		 * @return the builder
 		 */
 		public Builder title(final String title) {
@@ -429,7 +428,8 @@ public class Mission implements Serializable {
 		/**
 		 * List the client name
 		 * 
-		 * @param client the client name
+		 * @param client
+		 *            the client name
 		 * 
 		 * @return the builder
 		 */
@@ -437,7 +437,7 @@ public class Mission implements Serializable {
 			this.client = client;
 			return this;
 		}
-		
+
 		/**
 		 * List the notes about the mission
 		 * 
@@ -449,7 +449,7 @@ public class Mission implements Serializable {
 			this.notes = notes;
 			return this;
 		}
-		
+
 		/**
 		 * List the start date
 		 * 
@@ -461,7 +461,7 @@ public class Mission implements Serializable {
 			this.startDate = startDate;
 			return this;
 		}
-		
+
 		/**
 		 * List the end date
 		 * 
@@ -473,7 +473,7 @@ public class Mission implements Serializable {
 			this.endDate = endDate;
 			return this;
 		}
-		
+
 		/**
 		 * List the tools
 		 * 
@@ -485,7 +485,7 @@ public class Mission implements Serializable {
 			this.tools = tools;
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of mission.
 		 * 

@@ -14,34 +14,38 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * The skill and collaborator link table DAO.
  * 
  * @author j.marie-sainte
- *
+ * 
  */
-public class VSkillCollabDao extends SqlMapClientDaoSupport implements IVSkillCollabDao {
-	
-	/**
-	 * Set the sqlMapClient value
-	 * 
-	 * @param sqlMapClient the sqlMapClient to set
-	 */
-	public VSkillCollabDao(final SqlMapClient sqlMapClient) {
-		setSqlMapClient(sqlMapClient);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<VSkillCollab> getAllSkillCollab(int collab_id) throws DataAccessException {
-		return this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
-	}
+public class VSkillCollabDao extends SqlMapClientDaoSupport implements
+	IVSkillCollabDao {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public VSkillCollab get(int id) throws DataAccessException {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Set the sqlMapClient value
+     * 
+     * @param sqlMapClient
+     *            the sqlMapClient to set
+     */
+    public VSkillCollabDao(final SqlMapClient sqlMapClient) {
+	setSqlMapClient(sqlMapClient);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<VSkillCollab> getAllSkillCollab(int collab_id)
+	    throws DataAccessException {
+	return this.getSqlMapClientTemplate().queryForList(
+		DBRequestsConstants.GET_ALL_SKILL_COLLAB, collab_id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public VSkillCollab get(int id) throws DataAccessException {
+	throw new UnsupportedOperationException();
+    }
 
 }

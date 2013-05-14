@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
@@ -11,7 +8,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 /**
  * @author v.dibi
  * @author v.guillemain
- * 
  */
 public class Authentication implements Serializable {
 
@@ -29,15 +25,15 @@ public class Authentication implements Serializable {
 	 * id of collaborator
 	 */
 	private Integer colleagueId;
-	
+
 	/**
 	 * Authorization
 	 */
-	private Authorization authorization; 
+	private Authorization authorization;
 
 	/**
-	 * Build an immutable Authentification entity. the builder inner class for this
-	 * entity
+	 * Build an immutable Authentification entity. the builder inner class for
+	 * this entity
 	 */
 
 	// ------------------------------------------
@@ -50,9 +46,10 @@ public class Authentication implements Serializable {
 		strBld.append("token.login=").append(getToken().getLogin()).append("]");
 		return strBld.toString();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
@@ -63,6 +60,7 @@ public class Authentication implements Serializable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object obj) {
@@ -76,7 +74,8 @@ public class Authentication implements Serializable {
 
 		Authentication comparedObj = (Authentication) obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getToken().getLogin(), comparedObj.getToken().getLogin());
+		ebuilder.append(this.getToken().getLogin(), comparedObj.getToken()
+				.getLogin());
 		return ebuilder.isEquals();
 	}
 
@@ -88,7 +87,8 @@ public class Authentication implements Serializable {
 	}
 
 	/**
-	 * @param token the token to set
+	 * @param token
+	 *            the token to set
 	 */
 	public void setToken(CredentialToken token) {
 		this.token = token;
@@ -102,7 +102,8 @@ public class Authentication implements Serializable {
 	}
 
 	/**
-	 * @param authorization the authorization to set
+	 * @param authorization
+	 *            the authorization to set
 	 */
 	public void setAuthorization(Authorization authorization) {
 		this.authorization = authorization;
@@ -116,7 +117,8 @@ public class Authentication implements Serializable {
 	}
 
 	/**
-	 * @param colleagueId the colleagueId to set
+	 * @param colleagueId
+	 *            the colleagueId to set
 	 */
 	public void setColleagueId(Integer colleagueId) {
 		this.colleagueId = colleagueId;

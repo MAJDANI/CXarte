@@ -5,51 +5,57 @@
 
 <sqlMap namespace="category">
 
-    <typeAlias alias="category" type="com.novedia.talentmap.model.entity.Category"/> 
+	<typeAlias alias="category"
+		type="com.novedia.talentmap.model.entity.Category" />
 
-    <resultMap id="categoryResult" class="category">
-        <result property="id" column="CATEGORY_ID"/>     
-        <result property="name"  column="CATEGORY_NAME"/>         
-    </resultMap>
-	
-	<select id="getCategory" resultMap="categoryResult" parameterClass="Integer">
+	<resultMap id="categoryResult" class="category">
+		<result property="id" column="CATEGORY_ID" />
+		<result property="name" column="CATEGORY_NAME" />
+	</resultMap>
+
+	<select id="getCategory" resultMap="categoryResult"
+		parameterClass="Integer">
 		SELECT * FROM CATEGORY WHERE CATEGORY_ID = #id#
 	</select>
-	
-<!-- 	Pas Utilisé -->
-<!-- 	<select id="getByName" resultMap="categoryResult" parameterClass="String"> -->
-<!-- 		SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name# -->
-<!-- 	</select> -->
-	
-    <select id="getAll" resultMap="categoryResult">
-    	SELECT DISTINCT * FROM CATEGORY
-    </select>			
-    
-    <insert id="add" parameterClass="Category">
-    	
-    	<selectKey resultClass="Integer" keyProperty="id">
-      		SELECT SEQCATEGORY.NEXTVAL FROM DUAL
-    	</selectKey>
-    	
-    	INSERT INTO CATEGORY (
-    		CATEGORY_ID,
-    		CATEGORY_NAME
-    		)values (
-    		#id#,
-    		upper(#name#)
-    		)
-    </insert>	
-    
-	<select id="checkObject" resultMap="categoryResult" parameterClass="category">
-		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) = upper(#name#)
+
+	<!-- Pas Utilisé -->
+	<!-- <select id="getByName" resultMap="categoryResult" parameterClass="String"> -->
+	<!-- SELECT * FROM CATEGORY WHERE CATEGORY_NAME = #name# -->
+	<!-- </select> -->
+
+	<select id="getAll" resultMap="categoryResult">
+		SELECT DISTINCT * FROM CATEGORY
 	</select>
-	
+
+	<insert id="add" parameterClass="Category">
+
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT SEQCATEGORY.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO CATEGORY (
+		CATEGORY_ID,
+		CATEGORY_NAME
+		)values (
+		#id#,
+		upper(#name#)
+		)
+	</insert>
+
+	<select id="checkObject" resultMap="categoryResult"
+		parameterClass="category">
+		SELECT * FROM CATEGORY WHERE upper(CATEGORY_NAME) =
+		upper(#name#)
+	</select>
+
 	<update id="save" parameterClass="Category">
-		UPDATE CATEGORY SET CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
+		UPDATE CATEGORY SET
+		CATEGORY_NAME = #name# WHERE CATEGORY_ID = #id#
 	</update>
-	
+
 	<delete id="delete" parameterClass="Category">
-		DELETE CATEGORY CASCADE WHERE CATEGORY_ID = #id#
-	</delete> 
+		DELETE CATEGORY CASCADE WHERE
+		CATEGORY_ID = #id#
+	</delete>
 
 </sqlMap>

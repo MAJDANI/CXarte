@@ -73,7 +73,8 @@
 	<statement id="selectColleagueByManagerId" parameterClass="int"
 		resultMap="colleagueResult">
 		SELECT * FROM COLLEAGUE colleague
-		WHERE colleague.MANAGER_ID = #id#
+		WHERE colleague.MANAGER_ID
+		= #id#
 	</statement>
 
 	<statement id="selectMissionsByColleagueId" parameterClass="int"
@@ -85,23 +86,28 @@
 
 
 	<select id="get" parameterClass="Integer" resultMap="colleagueResult">
-		SELECT * FROM COLLEAGUE colleague
+		SELECT *
+		FROM COLLEAGUE colleague
 		WHERE colleague.COLLEAGUE_ID = #id#
 	</select>
 
 	<select id="getAll" resultMap="colleagueResult">
-		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		SELECT c.* FROM COLLEAGUE c JOIN
+		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<update id="save" parameterClass="Colleague">
 		UPDATE COLLEAGUE SET MANAGER_ID
 		= #managerId#, LAST_NAME = #lastName#,
-		FIRST_NAME = #firstName#, EMAIL = #email#, PROFILE_ID = #profileId#,
+		FIRST_NAME = #firstName#, EMAIL
+		= #email#, PROFILE_ID = #profileId#,
 		PHONE =
-		#phone#, EXPERIENCE = #experience#, EMPLOYMENT_DATE =
+		#phone#, EXPERIENCE =
+		#experience#, EMPLOYMENT_DATE =
 		#employmentDate#,
-		B_ENGINEER_ID = #businessEngineer.id# WHERE COLLEAGUE_ID = #id#
+		B_ENGINEER_ID =
+		#businessEngineer.id# WHERE COLLEAGUE_ID = #id#
 	</update>
 
 	<select id="getManager" parameterClass="Integer" resultMap="managerResult">
@@ -116,23 +122,27 @@
 
 	<select id="getAllColleaguesByLastName" parameterClass="string"
 		resultMap="colleagueResult">
-		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		 WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
+		(c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"
 		resultMap="colleagueResult">
 		SELECT DISTINCT c.* FROM MISSION m, COLLEAGUE c
-		WHERE m.COLLEAGUE_ID = c.COLLEAGUE_ID
+		WHERE
+		m.COLLEAGUE_ID = c.COLLEAGUE_ID
 		AND m.CLIENT_ID = #id#
 	</select>
 
 	<delete id="delete" parameterClass="com.novedia.talentmap.model.entity.Colleague">
-		DELETE FROM COLLEAGUE WHERE COLLEAGUE_ID = #id#
+		DELETE FROM COLLEAGUE WHERE
+		COLLEAGUE_ID = #id#
 	</delete>
 
 	<update id="eraseManager" parameterClass="com.novedia.talentmap.model.entity.Colleague">
-		UPDATE COLLEAGUE SET MANAGER_ID = '' WHERE MANAGER_ID = #id#
+		UPDATE COLLEAGUE SET
+		MANAGER_ID = '' WHERE MANAGER_ID = #id#
 	</update>
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult"
@@ -155,7 +165,8 @@
 	</select>
 
 	<select id="getAllConsultantManager" resultMap="colleagueResult">
-		SELECT * FROM COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
+		SELECT * FROM
+		COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
 	</select>
 
 	<select id="countMail" parameterClass="String" resultClass="Integer">
@@ -165,12 +176,14 @@
 	<select id="countMailForColleagueId" parameterClass="com.novedia.talentmap.model.entity.Colleague"
 		resultClass="Integer">
 		SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#
-		AND COLLEAGUE_ID != #id#
+		AND
+		COLLEAGUE_ID != #id#
 	</select>
 
 	<insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
 		<selectKey resultClass="Integer" keyProperty="colleagueId">
-			SELECT SEQCOLLEAGUE.NEXTVAL FROM DUAL
+			SELECT
+			SEQCOLLEAGUE.NEXTVAL FROM DUAL
 		</selectKey>
 
 		INSERT INTO COLLEAGUE (
@@ -186,8 +199,10 @@
 		B_ENGINEER_ID,
 		TITLE
 		)values (#colleagueId#,
-		#managerId#, #profileId#, UPPER(#lastName#), #firstName#, #email#, #phone#,
-		#employmentDate#, #experience#, #businessEngineer.id#,#title#
+		#managerId#, #profileId#, UPPER(#lastName#),
+		#firstName#, #email#, #phone#,
+		#employmentDate#, #experience#,
+		#businessEngineer.id#,#title#
 		)
 	</insert>
 

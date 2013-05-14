@@ -4,59 +4,68 @@
 
 <sqlMap namespace="tool">
 
-    <typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool"/> 
-    
-    <resultMap id="toolResult"                    class="tool">
-    	<result property="id"                     column="TOOL_ID"/> 
-        <result property="name"                   column="TOOL_NAME"/>          
-        <result property="concept.id"             column="CONCEPT_ID"/>
-        <result property="concept.name"           column="CONCEPT_NAME"/> 
-    </resultMap>
-	
+	<typeAlias alias="tool" type="com.novedia.talentmap.model.entity.Tool" />
+
+	<resultMap id="toolResult" class="tool">
+		<result property="id" column="TOOL_ID" />
+		<result property="name" column="TOOL_NAME" />
+		<result property="concept.id" column="CONCEPT_ID" />
+		<result property="concept.name" column="CONCEPT_NAME" />
+	</resultMap>
+
 	<select id="get" resultMap="toolResult" parameterClass="Integer">
-		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND tool.CONCEPT_ID = concept.CONCEPT_ID
+		SELECT *
+		FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_ID = #id# AND
+		tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
-	
-	<statement id="getByName" resultMap="toolResult" parameterClass="String">
-	
-		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND tool.CONCEPT_ID = concept.CONCEPT_ID
+
+	<statement id="getByName" resultMap="toolResult"
+		parameterClass="String">
+
+		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.TOOL_NAME = #name# AND
+		tool.CONCEPT_ID = concept.CONCEPT_ID
 	</statement>
-	
-    <statement id="getAll" resultMap="toolResult">
-    	SELECT * FROM TOOL tool join CONCEPT concept on (tool.CONCEPT_ID = concept.CONCEPT_ID) order by tool.TOOL_NAME
-    </statement>
-    
-    <select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
-    	SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID = #conceptId#
-    	AND tool.CONCEPT_ID = concept.CONCEPT_ID 
-    </select>	
-    
-        
-    <insert id="add" parameterClass="com.novedia.talentmap.model.entity.Tool">
-    	
-    	<selectKey resultClass="Integer" keyProperty="id">
-      		SELECT SEQTOOL.NEXTVAL FROM DUAL
-    	</selectKey>
-    	
-    	INSERT INTO TOOL (
-    		TOOL_ID,
-    		CONCEPT_ID, 
-    		TOOL_NAME
-    		)values (
-  			#id#, #concept.id# , #name#
-    		)
-    </insert>
-    
-	<select id="checkObject" resultClass="tool" parameterClass="tool">
-		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#) AND CONCEPT_ID = #concept.id#
+
+	<statement id="getAll" resultMap="toolResult">
+		SELECT * FROM TOOL tool join CONCEPT concept on (tool.CONCEPT_ID =
+		concept.CONCEPT_ID) order by tool.TOOL_NAME
+	</statement>
+
+	<select id="getAllByConcept" resultClass="tool" parameterClass="Integer">
+		SELECT * FROM TOOL tool, CONCEPT concept WHERE tool.CONCEPT_ID =
+		#conceptId#
+		AND tool.CONCEPT_ID = concept.CONCEPT_ID
 	</select>
-	
+
+
+	<insert id="add" parameterClass="com.novedia.talentmap.model.entity.Tool">
+
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT SEQTOOL.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO TOOL (
+		TOOL_ID,
+		CONCEPT_ID,
+		TOOL_NAME
+		)values (
+		#id#, #concept.id# , #name#
+		)
+	</insert>
+
+	<select id="checkObject" resultClass="tool" parameterClass="tool">
+		SELECT * FROM TOOL WHERE upper(TOOL_NAME) = upper(#name#) AND
+		CONCEPT_ID = #concept.id#
+	</select>
+
 	<update id="save" parameterClass="Tool">
-		UPDATE TOOL SET TOOL_ID = #id#, CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
-	</update> 
-	
+		UPDATE TOOL SET TOOL_ID = #id#,
+		CONCEPT_ID = #concept.id#, TOOL_NAME = #name# WHERE TOOL_ID = #id#
+	</update>
+
 	<delete id="delete" parameterClass="Tool">
-		DELETE TOOL CASCADE	WHERE TOOL_ID = #id#
-	</delete>	 
+		DELETE TOOL CASCADE WHERE
+		TOOL_ID = #id#
+	</delete>
 
 </sqlMap>

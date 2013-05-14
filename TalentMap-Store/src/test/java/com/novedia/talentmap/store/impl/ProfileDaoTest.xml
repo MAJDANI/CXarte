@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<PROFILE PROFILE_ID="1" PROFILE_TYPE="Business Analyst"/>
-	<PROFILE PROFILE_ID="2" PROFILE_TYPE="Developer"/>
-	<PROFILE PROFILE_ID="3" PROFILE_TYPE="Software Architect"/>
-	<PROFILE PROFILE_ID="4" PROFILE_TYPE="Tester"/>
-	<PROFILE PROFILE_ID="5" PROFILE_TYPE="Project Manager"/>
+	<PROFILE PROFILE_ID="1" PROFILE_TYPE="Business Analyst" />
+	<PROFILE PROFILE_ID="2" PROFILE_TYPE="Developer" />
+	<PROFILE PROFILE_ID="3" PROFILE_TYPE="Software Architect" />
+	<PROFILE PROFILE_ID="4" PROFILE_TYPE="Tester" />
+	<PROFILE PROFILE_ID="5" PROFILE_TYPE="Project Manager" />
 </dataset>

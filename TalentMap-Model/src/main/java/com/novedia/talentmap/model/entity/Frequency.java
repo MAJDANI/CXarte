@@ -3,7 +3,6 @@ package com.novedia.talentmap.model.entity;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
 /**
  * This entity represents a frequency option.
  * 
@@ -69,9 +68,9 @@ public class Frequency {
 	}
 
 	public Frequency() {
-		
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -79,8 +78,8 @@ public class Frequency {
 	public int hashCode() {
 		HashCodeBuilder hBuilder = new HashCodeBuilder();
 		hBuilder.append(this.getId());
-		//hBuilder.append(this.getTitle());
-		//hBuilder.append(this.getClient());
+		// hBuilder.append(this.getTitle());
+		// hBuilder.append(this.getClient());
 		return hBuilder.hashCode();
 	}
 
@@ -99,11 +98,10 @@ public class Frequency {
 		Frequency comparedObj = (Frequency) obj;
 		EqualsBuilder ebuilder = new EqualsBuilder();
 		ebuilder.append(this.getId(), comparedObj.getId());
-		//ebuilder.append(this.getClient(), comparedObj.getClient());
-		//ebuilder.append(this.getTitle(), comparedObj.getTitle());
+		// ebuilder.append(this.getClient(), comparedObj.getClient());
+		// ebuilder.append(this.getTitle(), comparedObj.getTitle());
 		return ebuilder.isEquals();
 	}
-
 
 	// -------------------------------------
 	// ------------ BUILDER PART -----------

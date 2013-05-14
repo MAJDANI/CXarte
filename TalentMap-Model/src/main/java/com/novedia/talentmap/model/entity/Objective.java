@@ -6,7 +6,7 @@ import java.io.Serializable;
  * This entity represent an objective
  * 
  * @author e.moumbe
- *
+ * 
  */
 public class Objective implements Serializable {
 

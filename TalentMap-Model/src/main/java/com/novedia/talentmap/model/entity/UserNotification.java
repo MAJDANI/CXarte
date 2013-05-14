@@ -85,7 +85,7 @@ public class UserNotification implements Serializable {
 		this.date = builder.date;
 
 	}
-	
+
 	/**
 	 * Inner builder class.
 	 * 
@@ -97,30 +97,30 @@ public class UserNotification implements Serializable {
 		 * Colleague associated the notification
 		 */
 		private Integer colleagueId;
-		
+
 		/**
 		 * Information on this notification
 		 */
 		private String notes;
-		
+
 		/**
 		 * date of the notification
 		 */
 		private Date date;
-		
+
 		/**
 		 * List the colleague
 		 * 
 		 * @param colleague
 		 *            the linked colleague
-		 *            
+		 * 
 		 * @return the builder
 		 */
 		public Builder colleagueId(final Integer colleagueId) {
 			this.colleagueId = colleagueId;
 			return this;
 		}
-		
+
 		/**
 		 * List the notes about the notification
 		 * 
@@ -132,7 +132,7 @@ public class UserNotification implements Serializable {
 			this.notes = notes;
 			return this;
 		}
-		
+
 		/**
 		 * List the date
 		 * 
@@ -144,7 +144,7 @@ public class UserNotification implements Serializable {
 			this.date = date;
 			return this;
 		}
-		
+
 		/**
 		 * Build an immutable instance of notification.
 		 * 
