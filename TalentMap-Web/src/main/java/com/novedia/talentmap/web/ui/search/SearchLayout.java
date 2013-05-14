@@ -6,13 +6,13 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 
-public class SearchLayout extends HorizontalLayout{
-	
+public class SearchLayout extends HorizontalLayout {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9108933129376360461L;
-	
+
 	/**
 	 * Vaadin UI
 	 */
@@ -20,61 +20,60 @@ public class SearchLayout extends HorizontalLayout{
 	private HorizontalSplitPanel hSplitPanel;
 	private SearchNavigation searchNavigation;
 	private Authentication authentication;
-	
+
 	/**
 	 * Default Constructor
 	 */
-	public SearchLayout(){
+	public SearchLayout() {
 		super();
 	}
-	
-	public SearchLayout buildSearchLayout(){
+
+	public SearchLayout buildSearchLayout() {
 		removeAllComponents();
 		searchNavigation = searchNavigation.buildSearchNavigationView();
-		//ICI VGU
+		// ICI VGU
 		searchContent.setAuthentication(authentication);
 		searchContent = searchContent.buildSearchContentView();
 		buildObservators();
 		mainBuild();
 		return this;
 	}
-	
-	
-	
-	public void buildObservators(){
-		
+
+	public void buildObservators() {
+
 		this.searchNavigation.addObservateur(new ISearchLayout() {
-			
+
 			@Override
 			public void switchPanelTarget(int searchTargetPanel) {
 				SearchLayout.this.searchContent.switchPanel(searchTargetPanel);
 			}
 
 		}, ISearchLayout.class);
-		
+
 	}
-	
-	public void mainBuild(){
-		
+
+	public void mainBuild() {
+
 		setMargin(true);
 		setSpacing(true);
-		
+
 		VerticalLayout vLayout = new VerticalLayout();
 		vLayout.addComponent(this.searchNavigation);
 		vLayout.setHeight("800px");
-		
+
 		this.hSplitPanel.setFirstComponent(vLayout);
 		this.hSplitPanel.setSecondComponent(this.searchContent);
 		this.hSplitPanel.setSplitPosition(20);
 		this.hSplitPanel.setLocked(true);
-		
+
 		addComponent(this.hSplitPanel);
 		setSizeFull();
 		setExpandRatio(this.hSplitPanel, 1);
 	}
-	
+
 	/**
 	 * Get the searchContent value
+	 * 
 	 * @return the searchContent
 	 */
 	public SearchContent getSearchContent() {
@@ -83,7 +82,9 @@ public class SearchLayout extends HorizontalLayout{
 
 	/**
 	 * Set the searchContent value
-	 * @param searchContent the searchContent to set
+	 * 
+	 * @param searchContent
+	 *            the searchContent to set
 	 */
 	public void setSearchContent(SearchContent searchContent) {
 		this.searchContent = searchContent;
@@ -91,6 +92,7 @@ public class SearchLayout extends HorizontalLayout{
 
 	/**
 	 * Get the hSplitpanel value
+	 * 
 	 * @return the hSplitpanel
 	 */
 	public HorizontalSplitPanel getHSplitPanel() {
@@ -99,7 +101,9 @@ public class SearchLayout extends HorizontalLayout{
 
 	/**
 	 * Set the hSplitpanel value
-	 * @param hSplitpanel the hSplitpanel to set
+	 * 
+	 * @param hSplitpanel
+	 *            the hSplitpanel to set
 	 */
 	public void setHSplitPanel(HorizontalSplitPanel hSplitPanel) {
 		this.hSplitPanel = hSplitPanel;
@@ -107,6 +111,7 @@ public class SearchLayout extends HorizontalLayout{
 
 	/**
 	 * Get the searchNavigation value
+	 * 
 	 * @return the searchNavigation
 	 */
 	public SearchNavigation getSearchNavigation() {
@@ -115,7 +120,9 @@ public class SearchLayout extends HorizontalLayout{
 
 	/**
 	 * Set the searchNavigation value
-	 * @param searchNavigation the searchNavigation to set
+	 * 
+	 * @param searchNavigation
+	 *            the searchNavigation to set
 	 */
 	public void setSearchNavigation(SearchNavigation searchNavigation) {
 		this.searchNavigation = searchNavigation;
@@ -129,6 +136,4 @@ public class SearchLayout extends HorizontalLayout{
 		this.authentication = authentication;
 	}
 
-	
-	
 }

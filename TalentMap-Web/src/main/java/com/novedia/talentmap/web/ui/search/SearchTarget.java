@@ -62,7 +62,6 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 
 	private Button search;
 
-
 	/**
 	 * POJO
 	 */
@@ -288,10 +287,14 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 				if (client != null) {
 					try {
 						if (authentication != null) {
-							if (Authorization.Role.CM.getId().equals(this.authentication.getAuthorization().getRoleId())) {
+							if (Authorization.Role.CM.getId().equals(
+									this.authentication.getAuthorization()
+											.getRoleId())) {
 
-							
-									this.listCollab = this.collabService.getCmColleaguesByClient(client.getId(),authentication.getColleagueId());
+								this.listCollab = this.collabService
+										.getCmColleaguesByClient(
+												client.getId(),
+												authentication.getColleagueId());
 							}
 						} else {
 							this.listCollab = this.collabService
@@ -324,11 +327,11 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 											authentication.getColleagueId());
 						} else {
 							this.listCollab = this.collabService
-								.getAllColleaguesByName(collabName);
+									.getAllColleaguesByName(collabName);
 						}
 						updateObservateur();
 					} else {
-						//DO STH
+						// DO STH
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -370,7 +373,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
 							this.listCollab = this.collabService
 									.getCmColleaguesByName(valueField,
 											authentication.getColleagueId());
-						
+
 						} else {
 							this.listCollab = this.collabService
 									.getAllColleaguesByName(valueField);

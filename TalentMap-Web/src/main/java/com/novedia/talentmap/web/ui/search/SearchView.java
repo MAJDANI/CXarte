@@ -14,29 +14,29 @@ public class SearchView extends VerticalLayout {
 	 */
 	private SearchLayout searchLayout;
 	private Authentication authentication;
-	
-	
+
 	/**
 	 * Default constructor
 	 */
-	public SearchView(){
+	public SearchView() {
 		super();
 	}
-	
-	public SearchView buildSearchView(){
+
+	public SearchView buildSearchView() {
 		removeAllComponents();
 		searchLayout.setAuthentication(authentication);
 		searchLayout = searchLayout.buildSearchLayout();
 		mainBuild();
 		return this;
 	}
-	
-	public void mainBuild(){
+
+	public void mainBuild() {
 		addComponent(this.searchLayout);
 	}
 
 	/**
 	 * Get the searchLayout value
+	 * 
 	 * @return the searchLayout
 	 */
 	public SearchLayout getSearchLayout() {
@@ -45,7 +45,9 @@ public class SearchView extends VerticalLayout {
 
 	/**
 	 * Set the searchLayout value
-	 * @param searchLayout the searchLayout to set
+	 * 
+	 * @param searchLayout
+	 *            the searchLayout to set
 	 */
 	public void setSearchLayout(SearchLayout searchLayout) {
 		this.searchLayout = searchLayout;
@@ -58,6 +60,5 @@ public class SearchView extends VerticalLayout {
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
-	
-	
+
 }

@@ -21,14 +21,13 @@ public class SearchResults extends PagedTable {
 	private static final long serialVersionUID = -1983028405136383549L;
 
 	private Integer roleId;
-	
+
 	/**
 	 * Factoriser cette constante qui est aussi utilisée dans
 	 * MonitoringCollabContent VGU TODO
 	 */
 	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
 	public static final String VISUALIZE_MISSION_HISTORY_NAME = "Display missions";
-
 
 	/**
 	 * Vaadin UI
@@ -86,12 +85,14 @@ public class SearchResults extends PagedTable {
 			visualizeProfile.setData(collab.getId());
 			hLayout.addComponent(visualizeProfile);
 
-			// Afficher l'historique des missions pour les roles autorisés RH et CM
-			if ( Role.RH.getId().equals(roleId)
-					|| Role.CM.getId().equals(roleId) ) {
+			// Afficher l'historique des missions pour les roles autorisés RH et
+			// CM
+			if (Role.RH.getId().equals(roleId)
+					|| Role.CM.getId().equals(roleId)) {
 				Button visualizeMissionHistory = buildButton(new Button(
 						VISUALIZE_MISSION_HISTORY_NAME));
-				visualizeMissionHistory.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
+				visualizeMissionHistory
+						.addStyleName(TalentMapCSS.BUTTON_NAVIGATION);
 				visualizeMissionHistory.setData(collab);
 				hLayout.addComponent(visualizeMissionHistory);
 			}
@@ -124,17 +125,14 @@ public class SearchResults extends PagedTable {
 				Button btnListener = event.getButton();
 				int idCollab = (Integer) btnListener.getData();
 
-				SearchResults.this.profileCollabWindow
-						.setCOLLAB_ID(idCollab);
+				SearchResults.this.profileCollabWindow.setCOLLAB_ID(idCollab);
 
 				SearchResults.this.profileCollabWindow.mainBuild();
 
-				getWindow().addWindow(
-						SearchResults.this.profileCollabWindow);
+				getWindow().addWindow(SearchResults.this.profileCollabWindow);
 			}
 		});
 	}
-
 
 	private void btnMissionHistoryEvent(Button button) {
 		button.addListener(new ClickListener() {
@@ -145,12 +143,12 @@ public class SearchResults extends PagedTable {
 				Button btnListener = event.getButton();
 				Colleague currentColleague = (Colleague) btnListener.getData();
 
-				SearchResults.this.listMissionWindow.setCurrentColleague(currentColleague);
+				SearchResults.this.listMissionWindow
+						.setCurrentColleague(currentColleague);
 				SearchResults.this.listMissionWindow.setRole(getRoleId());
 				SearchResults.this.listMissionWindow.mainBuild();
-				
-				getWindow().addWindow(
-						SearchResults.this.listMissionWindow);
+
+				getWindow().addWindow(SearchResults.this.listMissionWindow);
 			}
 		});
 	}
@@ -178,6 +176,5 @@ public class SearchResults extends PagedTable {
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-
 
 }
