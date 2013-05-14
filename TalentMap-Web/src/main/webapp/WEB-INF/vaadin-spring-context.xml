@@ -433,8 +433,8 @@
 		scope="session">
 		<property name="cmNotificationContentLayout" ref="cmNotificationContentLayout" />
 	</bean>
-	
-		<bean id="cmContentLayout" class="com.novedia.talentmap.web.ui.role.CmContentLayout"
+
+	<bean id="cmContentLayout" class="com.novedia.talentmap.web.ui.role.CmContentLayout"
 		scope="session">
 		<property name="cmNav" ref="cmNavigationBean" />
 		<property name="searchContent" ref="searchContentBean" />
@@ -451,50 +451,48 @@
 
 	<bean id="cmNavigationBean" class="com.novedia.talentmap.web.ui.cm.CmNavigation"
 		scope="session" />
-		
-	<bean id="CmlistNotificationBean"
-		class="com.novedia.talentmap.web.ui.cm.CmListNotification"
+
+	<bean id="CmlistNotificationBean" class="com.novedia.talentmap.web.ui.cm.CmListNotification"
 		scope="session">
 		<property name="cmNotificationContainer" ref="CmNotificationContainerBean" />
 	</bean>
-	
+
 	<bean id="cmNotificationNavigationBean"
 		class="com.novedia.talentmap.web.ui.cm.CmNotificationNavigation"
 		scope="session" />
-		
-	<bean id="CmNotificationContainerBean"
-		class="com.novedia.talentmap.web.ui.cm.CmNotificationContainer"
+
+	<bean id="CmNotificationContainerBean" class="com.novedia.talentmap.web.ui.cm.CmNotificationContainer"
 		scope="session">
 		<property name="notificationService" ref="notificationService" />
 	</bean>
-	
-	<bean id="CmNotificationContentBean"
-		class="com.novedia.talentmap.web.ui.cm.CmNotificationContent"
+
+	<bean id="CmNotificationContentBean" class="com.novedia.talentmap.web.ui.cm.CmNotificationContent"
 		scope="session">
 		<property name="cmListNotification" ref="CmlistNotificationBean" />
 		<property name="listPanel" ref="listPanelNotificationHistory" />
 	</bean>
-	
-	<bean id="CmNotificationOptionBean"
-		class="com.novedia.talentmap.web.ui.cm.CmNotificationOption"
+
+	<bean id="CmNotificationOptionBean" class="com.novedia.talentmap.web.ui.cm.CmNotificationOption"
 		scope="session">
 		<property name="listPanel" ref="listPanelNotificationOption" />
 		<property name="notificationService" ref="notificationService" />
 		<property name="cmNotificationOptionForm" ref="cmOptionFormBean" />
 		<property name="btnSaveOptions" ref="btnSaveOptions" />
 	</bean>
-	
+
 	<bean id="cmOptionForm" class="com.vaadin.ui.Form" scope="session" />
-	
+
 	<bean id="cmOptionFormBean"
 		class="com.novedia.talentmap.web.ui.cm.CmNotificationOptionForm"
 		scope="session">
 		<property name="cmOptionForm" ref="cmOptionForm" />
 		<property name="notificationService" ref="notificationService" />
 	</bean>
-	
-	<bean id="listPanelNotificationHistory" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="listPanelNotificationOption" class="com.vaadin.ui.Panel" scope="session" />
+
+	<bean id="listPanelNotificationHistory" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="listPanelNotificationOption" class="com.vaadin.ui.Panel"
+		scope="session" />
 	<bean id="btnSaveOptions" class="com.vaadin.ui.Button" scope="session" />
 
 	<bean id="label" class="com.vaadin.ui.Label" scope="session" />
@@ -507,7 +505,7 @@
 		<property name="managerService" ref="managerService" />
 
 	</bean>
-	
+
 	<bean id="monitoringCollabNavigation"
 		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation"
 		scope="session" />
