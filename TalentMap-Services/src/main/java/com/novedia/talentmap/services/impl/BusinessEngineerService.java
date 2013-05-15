@@ -18,7 +18,7 @@ public class BusinessEngineerService implements IBusinessEngineerService {
 	 * The businessEngineer DAO.
 	 */
 	private IDao<BusinessEngineer> businessEngineerDao;
-	
+
 	@Override
 	public List<BusinessEngineer> getAllBusinessEngineer() {
 		return businessEngineerDao.getAll();
@@ -28,9 +28,9 @@ public class BusinessEngineerService implements IBusinessEngineerService {
 		return businessEngineerDao;
 	}
 
-	public void setBusinessEngineerDao(IDao<BusinessEngineer> businessEngineerDao) {
+	public void setBusinessEngineerDao(
+			IDao<BusinessEngineer> businessEngineerDao) {
 		this.businessEngineerDao = businessEngineerDao;
 	}
 
-	
 }

@@ -47,7 +47,7 @@ public class ProfileService implements IProfileService {
 	}
 
 	/**
-	 * Get the profile 
+	 * Get the profile
 	 * 
 	 * @return a profile.
 	 * @throws DataAccessException

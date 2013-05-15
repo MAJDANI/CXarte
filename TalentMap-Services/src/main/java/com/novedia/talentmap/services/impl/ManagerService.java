@@ -35,11 +35,11 @@ public class ManagerService implements IManagerService {
 	 * @throws DataAccessException
 	 */
 	@Override
-	public List<Colleague> getAllColleagues(Integer managerId) throws DataAccessException {
+	public List<Colleague> getAllColleagues(Integer managerId)
+			throws DataAccessException {
 		return ((ManagerDao) managerDao).getAllCollaborators(managerId);
 	}
 
-	
 	/**
 	 * Get One Collaborator By ID.
 	 * 

@@ -95,16 +95,17 @@ public class SkillService implements ISkillService {
 			throws DataAccessException {
 		return this.skillDao.getAllColleagueIdByToolId(toolId);
 	}
-	
+
 	/**
 	 * @return List<Integer>.
-	 * @param toolId , managerId
+	 * @param toolId
+	 *            , managerId
 	 * @throws DataAccessException
 	 */
 	@Override
-	public List<Integer> getCmColleagueIdByToolId(Integer toolId,Integer managerId)
-			throws DataAccessException {
-		return this.skillDao.getCmColleagueIdByToolId(toolId,managerId);
+	public List<Integer> getCmColleagueIdByToolId(Integer toolId,
+			Integer managerId) throws DataAccessException {
+		return this.skillDao.getCmColleagueIdByToolId(toolId, managerId);
 	}
 
 	/**
@@ -117,16 +118,17 @@ public class SkillService implements ISkillService {
 			throws DataAccessException {
 		return this.skillDao.getAllColleagueIdByListToolId(listToolId);
 	}
-	
+
 	/**
 	 * @return List<Integer>.
 	 * @param listToolId
 	 * @throws DataAccessException
 	 */
 	@Override
-	public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,int managerId)
-			throws DataAccessException {
-		return this.skillDao.getCmColleagueIdByListToolId(listToolId,managerId);
+	public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,
+			int managerId) throws DataAccessException {
+		return this.skillDao
+				.getCmColleagueIdByListToolId(listToolId, managerId);
 	}
 
 	/**
@@ -151,27 +153,27 @@ public class SkillService implements ISkillService {
 	public CategoryMapDTO getAllCollaboratorSkill(int collabId) {
 
 		List<Skill> listSkill = new ArrayList<Skill>();
-		ToolSkillMap toolSkillMap ;
-		ConceptMapDTO conceptMapDto ;
+		ToolSkillMap toolSkillMap;
+		ConceptMapDTO conceptMapDto;
 		CategoryMapDTO categoryMapDto = new CategoryMapDTO();
 		listSkill = skillDao.getAllCollaboratorSkill(collabId);
 		if (listSkill != null && !listSkill.isEmpty()) {
 			toolSkillMap = new ToolSkillMap();
 			conceptMapDto = new ConceptMapDTO();
 			buildTool(listSkill, toolSkillMap.getMapTool());
-			buildConceptMapDto(toolSkillMap,conceptMapDto);
-			buildCategoryMapDto(conceptMapDto,categoryMapDto);
-			
+			buildConceptMapDto(toolSkillMap, conceptMapDto);
+			buildCategoryMapDto(conceptMapDto, categoryMapDto);
+
 		}
 		return categoryMapDto;
 	}
-	
 
 	/**
 	 * 
 	 * compute sum of average tool's concept
 	 * 
-	 * @param mapTools map of tools and skill
+	 * @param mapTools
+	 *            map of tools and skill
 	 * @return sum of average tool's concept
 	 */
 	public static Integer sumAverageToolConcept(Map<Tool, Skill> mapTools) {
@@ -187,9 +189,13 @@ public class SkillService implements ISkillService {
 	/**
 	 * 
 	 * compute average's tool
-	 * @param toolNote  score of tool
-	 * @param usingFrequencyTool using frequency tool
-	 * @param timeNotUsingTool time not using tool
+	 * 
+	 * @param toolNote
+	 *            score of tool
+	 * @param usingFrequencyTool
+	 *            using frequency tool
+	 * @param timeNotUsingTool
+	 *            time not using tool
 	 * @return average's tool
 	 */
 	public static double computeToolAverage(final double toolNote,
@@ -226,7 +232,8 @@ public class SkillService implements ISkillService {
 			break;
 		}
 
-		return Math.round((TOOL_PONDERATION * toolNote + FREQUENCY_USE_PONDERATION
+		return Math
+				.round((TOOL_PONDERATION * toolNote + FREQUENCY_USE_PONDERATION
 						* usingFrequencyToolValue + NO_USING_TIME_PONDERATION
 						* noUsingTimeValue)
 						/ (TOOL_PONDERATION + FREQUENCY_USE_PONDERATION + NO_USING_TIME_PONDERATION));
@@ -234,64 +241,82 @@ public class SkillService implements ISkillService {
 
 	/**
 	 * Build CategoryMapDTO which contain each concept group by category
-	 * @param conceptMapDto  conceptMapDto which contain all concept skill of colleague
-	 * @param categoryMapDto categoryMapDto to return
+	 * 
+	 * @param conceptMapDto
+	 *            conceptMapDto which contain all concept skill of colleague
+	 * @param categoryMapDto
+	 *            categoryMapDto to return
 	 */
-	public void buildCategoryMapDto(ConceptMapDTO conceptMapDto, CategoryMapDTO categoryMapDto){
-		
-		for (Map.Entry<Concept, ToolSkillMap> entry : conceptMapDto.getMapConcept().entrySet()) {
-			Category category = getCategoryById(entry.getKey().getCategory().getId());
-			
-			if(!categoryMapDto.getMapCategory().containsKey(category)){
+	public void buildCategoryMapDto(ConceptMapDTO conceptMapDto,
+			CategoryMapDTO categoryMapDto) {
+
+		for (Map.Entry<Concept, ToolSkillMap> entry : conceptMapDto
+				.getMapConcept().entrySet()) {
+			Category category = getCategoryById(entry.getKey().getCategory()
+					.getId());
+
+			if (!categoryMapDto.getMapCategory().containsKey(category)) {
 				ConceptMapDTO conceptMapDtoTmp = new ConceptMapDTO();
-				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
+				conceptMapDtoTmp.getMapConcept().put(entry.getKey(),
+						entry.getValue());
 				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
-			} else{
-				ConceptMapDTO conceptMapDtoTmp = categoryMapDto.getMapCategory().get(category);
-				conceptMapDtoTmp.getMapConcept().put(entry.getKey(), entry.getValue());
+			} else {
+				ConceptMapDTO conceptMapDtoTmp = categoryMapDto
+						.getMapCategory().get(category);
+				conceptMapDtoTmp.getMapConcept().put(entry.getKey(),
+						entry.getValue());
 				categoryMapDto.getMapCategory().put(category, conceptMapDtoTmp);
 			}
 		}
-		
+
 	}
 
-	
 	/**
 	 * Build conceptMapDto which contain each skill group by concept
-	 * @param toolSkillMap map which contain all skill's colleague
-	 * @param conceptMapDto conceprMapDto to return
+	 * 
+	 * @param toolSkillMap
+	 *            map which contain all skill's colleague
+	 * @param conceptMapDto
+	 *            conceprMapDto to return
 	 */
-	public void buildConceptMapDto(ToolSkillMap toolSkillMap, ConceptMapDTO conceptMapDto){
-		
-		for (Map.Entry<Tool, Skill> entry : toolSkillMap.getMapTool().entrySet()) {
+	public void buildConceptMapDto(ToolSkillMap toolSkillMap,
+			ConceptMapDTO conceptMapDto) {
+
+		for (Map.Entry<Tool, Skill> entry : toolSkillMap.getMapTool()
+				.entrySet()) {
 			Integer conceptId = entry.getKey().getConcept().getId();
 			Concept concept = getConceptById(conceptId);
-			
-			if(!conceptMapDto.getMapConcept().containsKey(concept)){
+
+			if (!conceptMapDto.getMapConcept().containsKey(concept)) {
 				ToolSkillMap toolSkillMapTmp = new ToolSkillMap();
-				toolSkillMapTmp.getMapTool().put(entry.getKey(), entry.getValue());
+				toolSkillMapTmp.getMapTool().put(entry.getKey(),
+						entry.getValue());
 				conceptMapDto.getMapConcept().put(concept, toolSkillMapTmp);
-				
-			} else{
-				ToolSkillMap toolSkillMapTmp = conceptMapDto.getMapConcept().get(concept);
-				toolSkillMapTmp.getMapTool().put(entry.getKey(), entry.getValue());
+
+			} else {
+				ToolSkillMap toolSkillMapTmp = conceptMapDto.getMapConcept()
+						.get(concept);
+				toolSkillMapTmp.getMapTool().put(entry.getKey(),
+						entry.getValue());
 				conceptMapDto.getMapConcept().put(concept, toolSkillMapTmp);
 			}
 		}
-		
-		//Compute score of each concept
-		for (Map.Entry<Concept, ToolSkillMap> conceptEntry : conceptMapDto.getMapConcept().entrySet()) {
+
+		// Compute score of each concept
+		for (Map.Entry<Concept, ToolSkillMap> conceptEntry : conceptMapDto
+				.getMapConcept().entrySet()) {
 			double scoreConcept = 0;
-			List<Tool> toolByConcept = getAllToolsByConcept(conceptEntry.getKey().getId());
-			Integer sum = sumAverageToolConcept(conceptEntry.getValue().getMapTool());
+			List<Tool> toolByConcept = getAllToolsByConcept(conceptEntry
+					.getKey().getId());
+			Integer sum = sumAverageToolConcept(conceptEntry.getValue()
+					.getMapTool());
 			scoreConcept = sum / (toolByConcept.size() * 1.0);
 			scoreConcept = Math.round(scoreConcept);
 			conceptEntry.getKey().setScore(scoreConcept);
 		}
-		
+
 	}
-	
-	
+
 	/**
 	 * build mapTool given in second parameter : a map of skills the colleague
 	 * has.. Uses listSkill, the list of skills of the colleague, and gets for
@@ -355,7 +380,8 @@ public class SkillService implements ISkillService {
 	/**
 	 * This method allow to add skill.
 	 * 
-	 * @param skilla skill
+	 * @param skilla
+	 *            skill
 	 * @throws DataAccessException
 	 */
 	@Override

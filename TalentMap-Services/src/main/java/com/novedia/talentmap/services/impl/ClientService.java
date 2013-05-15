@@ -17,7 +17,7 @@ public class ClientService implements IClientService {
 	 * The client DAO.
 	 */
 	private IDao<Client> clientDao;
-	
+
 	@Override
 	public List<Client> getAllClients() {
 		return clientDao.getAll();
@@ -30,5 +30,5 @@ public class ClientService implements IClientService {
 	public void setClientDao(IDao<Client> clientDao) {
 		this.clientDao = clientDao;
 	}
-	
+
 }

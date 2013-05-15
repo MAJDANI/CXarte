@@ -25,7 +25,7 @@ import com.novedia.talentmap.store.impl.MissionDao;
  * @author j.collet
  */
 public class ColleagueService implements IColleagueService {
-	
+
 	/**
 	 * The colleague DAO.
 	 */
@@ -35,13 +35,11 @@ public class ColleagueService implements IColleagueService {
 	 * The mission DAO.
 	 */
 	private IDao<Mission> missionDao;
-	
-	
+
 	/**
 	 * The manager DAO.
 	 */
 	private IDao<Manager> managerDao;
-
 
 	/**
 	 * {@inheritDoc}
@@ -63,7 +61,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer saveColleague(Colleague colleague) throws DataAccessException {
+	public Integer saveColleague(Colleague colleague)
+			throws DataAccessException {
 		return colleagueDao.save(colleague);
 	}
 
@@ -79,18 +78,18 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer addMission(final MissionDto missionDto) throws DataAccessException {
+	public Integer addMission(final MissionDto missionDto)
+			throws DataAccessException {
 		Mission mission = createEntity(missionDto);
-		return  missionDao.add(mission);
+		return missionDao.add(mission);
 	}
-	
-	
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Integer saveMission(final MissionDto missionDto) throws DataAccessException {
+	public Integer saveMission(final MissionDto missionDto)
+			throws DataAccessException {
 		Mission mission = createEntity(missionDto);
 		return missionDao.save(mission);
 	}
@@ -107,7 +106,8 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Mission> getAllMissions(final Integer colleagueId)throws DataAccessException {
+	public List<Mission> getAllMissions(final Integer colleagueId)
+			throws DataAccessException {
 		MissionDao missionDao = (MissionDao) this.missionDao;
 		return missionDao.getAllByColleagueId(colleagueId);
 	}
@@ -116,20 +116,21 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MissionDto getLastMission(final Integer colleagueId)throws DataAccessException {
+	public MissionDto getLastMission(final Integer colleagueId)
+			throws DataAccessException {
 		MissionDao missionDao = (MissionDao) this.missionDao;
-		Mission m =  missionDao.getLastMissionByColleagueId(colleagueId);
+		Mission m = missionDao.getLastMissionByColleagueId(colleagueId);
 		return createDTO(m);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Manager getManager(final Integer managerId) throws DataAccessException {
+	public Manager getManager(final Integer managerId)
+			throws DataAccessException {
 		return managerDao.get(managerId);
 	}
-
 
 	/**
 	 * Get all managers
@@ -138,41 +139,48 @@ public class ColleagueService implements IColleagueService {
 	public List<Colleague> getAllConsultantManager() {
 		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllColleaguesByName(String name) throws DataAccessException {
+	public List<Colleague> getAllColleaguesByName(String name)
+			throws DataAccessException {
 		return ((ColleagueDao) colleagueDao).getAllColleaguesByName(name);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Colleague> getAllColleaguesByClient(Client client) throws DataAccessException {
+	public List<Colleague> getAllColleaguesByClient(Client client)
+			throws DataAccessException {
 		return ((ColleagueDao) colleagueDao).getAllColleaguesByClient(client);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Colleague> getCmColleaguesByClient(int clientId,int managerId) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getCmColleaguesByClient(clientId,managerId);
+	public List<Colleague> getCmColleaguesByClient(int clientId, int managerId)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByClient(clientId,
+				managerId);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Colleague> getCmColleaguesByName(String name,int managerId) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getCmColleaguesByName(name,managerId);
+	public List<Colleague> getCmColleaguesByName(String name, int managerId)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByName(name,
+				managerId);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllCollaboratorsByToolId(Integer toolId) throws DataAccessException {
+	public List<Colleague> getAllCollaboratorsByToolId(Integer toolId)
+			throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -181,18 +189,22 @@ public class ColleagueService implements IColleagueService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllColleaguesByListToolId(Map toolIdMap) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getAllColleaguesByListToolId(toolIdMap);
+	public List<Colleague> getAllColleaguesByListToolId(Map toolIdMap)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao)
+				.getAllColleaguesByListToolId(toolIdMap);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId) throws DataAccessException {
-		return ((ColleagueDao) colleagueDao).getAllColleagueByColleagueIdList(listColleagueId);
+	public List<Colleague> getAllColleagueByColleagueIdList(
+			List<Integer> listColleagueId) throws DataAccessException {
+		return ((ColleagueDao) colleagueDao)
+				.getAllColleagueByColleagueIdList(listColleagueId);
 	}
-	
+
 	/**
 	 * This method allow to create a Mission with a MissionDto
 	 * 
@@ -200,38 +212,35 @@ public class ColleagueService implements IColleagueService {
 	 * @return a mission
 	 */
 	private Mission createEntity(MissionDto mDTO) {
-		
-		Mission m = null;
-	
-		 if(mDTO != null){
-			 m = new Mission();
-			 List<Tool> toolsList = new ArrayList<Tool>();
-				
-				Set<Tool> tools = mDTO.getTools();
 
-				
-				if(tools.size()>0)
-				{
-					for(Tool t : tools)
-					{
-						toolsList.add(t);
-					}
-					
-					m.setTools(toolsList);
+		Mission m = null;
+
+		if (mDTO != null) {
+			m = new Mission();
+			List<Tool> toolsList = new ArrayList<Tool>();
+
+			Set<Tool> tools = mDTO.getTools();
+
+			if (tools.size() > 0) {
+				for (Tool t : tools) {
+					toolsList.add(t);
 				}
 
-				m.setId(mDTO.getId());
-				m.setClient(mDTO.getClient());
-				m.setStartDate(mDTO.getStartDate());
-				m.setEndDate(mDTO.getEndDate());
-				m.setTitle(mDTO.getTitle());
-				m.setPlace(mDTO.getPlace());
-				m.setNotes(mDTO.getNotes());
-				m.setColleagueId(mDTO.getColleagueId());
-		 }
+				m.setTools(toolsList);
+			}
+
+			m.setId(mDTO.getId());
+			m.setClient(mDTO.getClient());
+			m.setStartDate(mDTO.getStartDate());
+			m.setEndDate(mDTO.getEndDate());
+			m.setTitle(mDTO.getTitle());
+			m.setPlace(mDTO.getPlace());
+			m.setNotes(mDTO.getNotes());
+			m.setColleagueId(mDTO.getColleagueId());
+		}
 		return m;
 	}
-	
+
 	/**
 	 * This method allow to create a MissionDto with a Mission
 	 * 
@@ -239,24 +248,22 @@ public class ColleagueService implements IColleagueService {
 	 * @return a missionDto
 	 */
 	private MissionDto createDTO(Mission m) {
-		
+
 		MissionDto mDTO = null;
-		if(m != null){
-			 mDTO = new MissionDto();
+		if (m != null) {
+			mDTO = new MissionDto();
 			// Recopie des attributs "simples"
 			Set<Tool> toolsSet = new HashSet<Tool>();
 			List<Tool> tools = m.getTools();
-			
-			if(tools.size()>0)
-			{
-				for(Tool t : tools)
-				{
+
+			if (tools.size() > 0) {
+				for (Tool t : tools) {
 					toolsSet.add(t);
 				}
-				
+
 				mDTO.setTools(toolsSet);
 			}
-			
+
 			mDTO.setId(m.getId());
 			mDTO.setClient(m.getClient());
 			mDTO.setStartDate(m.getStartDate());
@@ -266,9 +273,8 @@ public class ColleagueService implements IColleagueService {
 			mDTO.setNotes(m.getNotes());
 			mDTO.setColleagueId(m.getColleagueId());
 			mDTO.setTools(toolsSet);
-			
+
 		}
-		
 
 		return mDTO;
 	}
@@ -283,10 +289,12 @@ public class ColleagueService implements IColleagueService {
 	}
 
 	/**
-	 * Counts colleagues in DB that have already the mail, with a different colleagueId.
-	 * Used to check when a colleague wants to modify his email, if this email is
-	 * not already use by someone else.
-	 * @param the colleague who wants to change his email
+	 * Counts colleagues in DB that have already the mail, with a different
+	 * colleagueId. Used to check when a colleague wants to modify his email, if
+	 * this email is not already use by someone else.
+	 * 
+	 * @param the
+	 *            colleague who wants to change his email
 	 * @return The count found.
 	 */
 	public Integer countMailForColleagueId(Colleague colleague) {

@@ -21,22 +21,22 @@ import com.novedia.talentmap.store.impl.ProfileDao;
  * @author y.rohr
  */
 public class RegistrationService implements IRegistrationService {
-	
+
 	/**
 	 * The colleague DAO.
 	 */
 	private IDao<Colleague> colleagueDao;
-	
+
 	/**
 	 * The authentication DAO.
 	 */
 	private IDao<Authentication> authenticationDao;
-	
+
 	/**
 	 * The profile DAO.
 	 */
 	private IDao<Profile> profileDao;
-	
+
 	/**
 	 * The businessEngineer DAO.
 	 */
@@ -48,37 +48,46 @@ public class RegistrationService implements IRegistrationService {
 	}
 
 	/**
-	 * Gets the colleague corresponding to the mail in parameter. Returns Null if not found.
-	 * @param mail : the mail to find
+	 * Gets the colleague corresponding to the mail in parameter. Returns Null
+	 * if not found.
+	 * 
+	 * @param mail
+	 *            : the mail to find
 	 * @return The colleague found or null.
 	 */
 	public Integer countMail(String mail) {
 		return ((ColleagueDao) colleagueDao).countMail(mail);
 	}
-	
+
 	@Override
-	public Integer addColleagueFromRegistration(Registration registration) throws DataAccessException{
-		return ((ColleagueDao) colleagueDao).addColleagueFromRegistration(registration);
+	public Integer addColleagueFromRegistration(Registration registration)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao)
+				.addColleagueFromRegistration(registration);
 	}
 
 	@Override
-	public Integer addUserFromRegistration(Registration registration){
-		return ((AuthenticationDao) authenticationDao).addUserFromRegistration(registration);
+	public Integer addUserFromRegistration(Registration registration) {
+		return ((AuthenticationDao) authenticationDao)
+				.addUserFromRegistration(registration);
 	}
-	
+
 	@Override
 	public List<Profile> getAllProfile() throws DataAccessException {
 		return ((ProfileDao) profileDao).getAll();
 	}
-	
+
 	@Override
 	public List<Colleague> getAllConsultantManager() {
 		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
 	}
+
 	/**
-	 * Counts the number of login "login" existing in table Authentication.
-	 * It's used to assure a user won't choose a login already existing.
-	 * @param login : the login to check in table
+	 * Counts the number of login "login" existing in table Authentication. It's
+	 * used to assure a user won't choose a login already existing.
+	 * 
+	 * @param login
+	 *            : the login to check in table
 	 * @return the number of login found in table
 	 */
 	public Integer countLogin(String login) {

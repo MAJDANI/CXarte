@@ -21,7 +21,7 @@ public class MissionService implements IMissionService {
 	 * mission DAO.
 	 */
 	private IDao<Mission> missionDao;
-	
+
 	/**
 	 * This method allows to make the spring injection. Set the manager DAO.
 	 * 

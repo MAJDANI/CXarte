@@ -11,8 +11,9 @@ import com.novedia.talentmap.store.impl.AuthenticationDao;
 
 /**
  * This {@link AuthenticationService} authenticates user
+ * 
  * @author v.dibi
- *
+ * 
  */
 public class AuthenticationService implements IAuthenticationService {
 
@@ -32,7 +33,9 @@ public class AuthenticationService implements IAuthenticationService {
 
 	/**
 	 * Set the authentication DAO
-	 * @param authenticationDao the authenticationDao to set
+	 * 
+	 * @param authenticationDao
+	 *            the authenticationDao to set
 	 */
 	public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
 		this.authenticationDao = authenticationDao;
