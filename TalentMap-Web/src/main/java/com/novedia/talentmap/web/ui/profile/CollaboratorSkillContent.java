@@ -5,17 +5,17 @@ import com.vaadin.ui.VerticalLayout;
 
 public class CollaboratorSkillContent extends VerticalLayout {
 
-	public CollaboratorSkillContent() {
+    public CollaboratorSkillContent() {
 
-		init();
-	}
+	init();
+    }
 
-	public void init() {
-		Label label = new Label(" Page en cours de construction");
-		label.setVisible(true);
-		label.addStyleName("mystyle");
-		addComponent(label);
+    public void init() {
+	Label label = new Label(" Page en cours de construction");
+	label.setVisible(true);
+	label.addStyleName("mystyle");
+	addComponent(label);
 
-	}
+    }
 
 }

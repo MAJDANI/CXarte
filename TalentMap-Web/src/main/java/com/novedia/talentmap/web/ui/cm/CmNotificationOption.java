@@ -16,141 +16,141 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class CmNotificationOption extends VerticalLayout implements
-		ClickListener {
+	ClickListener {
 
-	private NotificationService notificationService;
-	private Authentication authentication;
+    private NotificationService notificationService;
+    private Authentication authentication;
 
-	/***
-	 * Vaadin Components
-	 */
-	private Panel listPanel;
-	private Button btnSaveOptions;
+    /***
+     * Vaadin Components
+     */
+    private Panel listPanel;
+    private Button btnSaveOptions;
 
-	private CmNotificationOptionForm cmNotificationOptionForm;
+    private CmNotificationOptionForm cmNotificationOptionForm;
 
-	private GridLayout cmOptionFormLayout;
+    private GridLayout cmOptionFormLayout;
 
-	public static final String OPTION_EMAIL_FREQUENCY = "Email frequency";
+    public static final String OPTION_EMAIL_FREQUENCY = "Email frequency";
 
-	/**
-	 * Default constructor
-	 */
-	public CmNotificationOption() {
-		super();
+    /**
+     * Default constructor
+     */
+    public CmNotificationOption() {
+	super();
+    }
+
+    /**
+     * Build the view of cm's notification options
+     * 
+     * @return
+     */
+    public CmNotificationOption buildViewNotificationOptionContent() {
+	removeAllComponents();
+	buildMain();
+	return this;
+    }
+
+    /**
+     * The main builder
+     * 
+     * @class CmNotificationOption.java
+     */
+    public void buildMain() {
+	setMargin(true);
+	setSpacing(true);
+	buildButton();
+	buildListPanelNotificationOption();
+    }
+
+    public void buildButton() {
+	this.btnSaveOptions.setCaption(ConstantsEnglish.CM_OPTION_SAVE);
+	this.btnSaveOptions.addListener(this);
+    }
+
+    public void buildListPanelNotificationOption() {
+	listPanel.removeAllComponents();
+
+	// components initialisation
+	cmOptionFormLayout = new GridLayout();
+	cmNotificationOptionForm.setAuthentication(getAuthentication());
+	cmNotificationOptionForm.setCmOptionFormLayout(cmOptionFormLayout);
+	cmNotificationOptionForm = cmNotificationOptionForm
+		.buildCmOptionFormView();
+	listPanel.addComponent(cmNotificationOptionForm);
+	listPanel.addComponent(btnSaveOptions);
+	addComponent(listPanel);
+    }
+
+    @Override
+    public void buttonClick(ClickEvent event) {
+	Button button = event.getButton();
+	// SAVE OPTIONS
+	if (button == this.btnSaveOptions) {
+	    BeanItem<CmOption> cmOptionItem = (BeanItem<CmOption>) this.cmNotificationOptionForm
+		    .getCmOptionForm().getItemDataSource();
+	    CmOption cmOption = cmOptionItem.getBean();
+	    if (notificationService.getCmFrequencyOption(getAuthentication()
+		    .getColleagueId()) != null) {
+		notificationService.saveFrequencyOption(cmOption.getFrequency()
+			.getId(), getAuthentication().getColleagueId());
+	    } else {
+		notificationService.addFrequencyOption(cmOption.getFrequency()
+			.getId(), getAuthentication().getColleagueId());
+	    }
+	    getWindow().showNotification("Options saved",
+		    Notification.TYPE_WARNING_MESSAGE);
 	}
 
-	/**
-	 * Build the view of cm's notification options
-	 * 
-	 * @return
-	 */
-	public CmNotificationOption buildViewNotificationOptionContent() {
-		removeAllComponents();
-		buildMain();
-		return this;
-	}
+    }
 
-	/**
-	 * The main builder
-	 * 
-	 * @class CmNotificationOption.java
-	 */
-	public void buildMain() {
-		setMargin(true);
-		setSpacing(true);
-		buildButton();
-		buildListPanelNotificationOption();
-	}
+    public NotificationService getNotificationService() {
+	return notificationService;
+    }
 
-	public void buildButton() {
-		this.btnSaveOptions.setCaption(ConstantsEnglish.CM_OPTION_SAVE);
-		this.btnSaveOptions.addListener(this);
-	}
+    public void setNotificationService(NotificationService notificationService) {
+	this.notificationService = notificationService;
+    }
 
-	public void buildListPanelNotificationOption() {
-		listPanel.removeAllComponents();
+    public Panel getListPanel() {
+	return listPanel;
+    }
 
-		// components initialisation
-		cmOptionFormLayout = new GridLayout();
-		cmNotificationOptionForm.setAuthentication(getAuthentication());
-		cmNotificationOptionForm.setCmOptionFormLayout(cmOptionFormLayout);
-		cmNotificationOptionForm = cmNotificationOptionForm
-				.buildCmOptionFormView();
-		listPanel.addComponent(cmNotificationOptionForm);
-		listPanel.addComponent(btnSaveOptions);
-		addComponent(listPanel);
-	}
+    public void setListPanel(Panel listPanel) {
+	this.listPanel = listPanel;
+    }
 
-	@Override
-	public void buttonClick(ClickEvent event) {
-		Button button = event.getButton();
-		// SAVE OPTIONS
-		if (button == this.btnSaveOptions) {
-			BeanItem<CmOption> cmOptionItem = (BeanItem<CmOption>) this.cmNotificationOptionForm
-					.getCmOptionForm().getItemDataSource();
-			CmOption cmOption = cmOptionItem.getBean();
-			if (notificationService.getCmFrequencyOption(getAuthentication()
-					.getColleagueId()) != null) {
-				notificationService.saveFrequencyOption(cmOption.getFrequency()
-						.getId(), getAuthentication().getColleagueId());
-			} else {
-				notificationService.addFrequencyOption(cmOption.getFrequency()
-						.getId(), getAuthentication().getColleagueId());
-			}
-			getWindow().showNotification("Options saved",
-					Notification.TYPE_WARNING_MESSAGE);
-		}
+    public CmNotificationOptionForm getCmNotificationOptionForm() {
+	return cmNotificationOptionForm;
+    }
 
-	}
+    public void setCmNotificationOptionForm(
+	    CmNotificationOptionForm cmNotificationOptionForm) {
+	this.cmNotificationOptionForm = cmNotificationOptionForm;
+    }
 
-	public NotificationService getNotificationService() {
-		return notificationService;
-	}
+    public GridLayout getCmOptionFormLayout() {
+	return cmOptionFormLayout;
+    }
 
-	public void setNotificationService(NotificationService notificationService) {
-		this.notificationService = notificationService;
-	}
+    public void setCmOptionFormLayout(GridLayout cmOptionFormLayout) {
+	this.cmOptionFormLayout = cmOptionFormLayout;
+    }
 
-	public Panel getListPanel() {
-		return listPanel;
-	}
+    public Authentication getAuthentication() {
+	return authentication;
+    }
 
-	public void setListPanel(Panel listPanel) {
-		this.listPanel = listPanel;
-	}
+    public void setAuthentication(Authentication authentication) {
+	this.authentication = authentication;
+    }
 
-	public CmNotificationOptionForm getCmNotificationOptionForm() {
-		return cmNotificationOptionForm;
-	}
+    public Button getBtnSaveOptions() {
+	return btnSaveOptions;
+    }
 
-	public void setCmNotificationOptionForm(
-			CmNotificationOptionForm cmNotificationOptionForm) {
-		this.cmNotificationOptionForm = cmNotificationOptionForm;
-	}
-
-	public GridLayout getCmOptionFormLayout() {
-		return cmOptionFormLayout;
-	}
-
-	public void setCmOptionFormLayout(GridLayout cmOptionFormLayout) {
-		this.cmOptionFormLayout = cmOptionFormLayout;
-	}
-
-	public Authentication getAuthentication() {
-		return authentication;
-	}
-
-	public void setAuthentication(Authentication authentication) {
-		this.authentication = authentication;
-	}
-
-	public Button getBtnSaveOptions() {
-		return btnSaveOptions;
-	}
-
-	public void setBtnSaveOptions(Button btnSaveOptions) {
-		this.btnSaveOptions = btnSaveOptions;
-	}
+    public void setBtnSaveOptions(Button btnSaveOptions) {
+	this.btnSaveOptions = btnSaveOptions;
+    }
 
 }

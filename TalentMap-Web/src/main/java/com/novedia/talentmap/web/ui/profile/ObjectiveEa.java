@@ -5,20 +5,20 @@ import com.vaadin.ui.VerticalLayout;
 
 public class ObjectiveEa extends VerticalLayout {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -1758249567036725375L;
+    private static final long serialVersionUID = -1758249567036725375L;
 
-	public ObjectiveEa() {
+    public ObjectiveEa() {
 
-		init();
-	}
+	init();
+    }
 
-	public void init() {
-		Label label = new Label(" Page en cours de construction");
-		label.setVisible(true);
-		label.addStyleName("mystyle");
-		addComponent(label);
-	}
+    public void init() {
+	Label label = new Label(" Page en cours de construction");
+	label.setVisible(true);
+	label.addStyleName("mystyle");
+	addComponent(label);
+    }
 }

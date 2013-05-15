@@ -12,22 +12,22 @@ import com.novedia.talentmap.model.entity.Manager;
  */
 public interface IManagerService {
 
-	/**
-	 * Get all colleagues
-	 * 
-	 * @param managerId
-	 *            the manager id
-	 * @return List<Collaborator>
-	 */
-	List<Colleague> getAllColleagues(Integer managerId);
+    /**
+     * Get all colleagues
+     * 
+     * @param managerId
+     *            the manager id
+     * @return List<Collaborator>
+     */
+    List<Colleague> getAllColleagues(Integer managerId);
 
-	/**
-	 * Get a colleague.
-	 * 
-	 * @param id
-	 *            a id
-	 * @return collaborator
-	 */
-	Colleague getCollaborator(int id);
+    /**
+     * Get a colleague.
+     * 
+     * @param id
+     *            a id
+     * @return collaborator
+     */
+    Colleague getCollaborator(int id);
 
 }

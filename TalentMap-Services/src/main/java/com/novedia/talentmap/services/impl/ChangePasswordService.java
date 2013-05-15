@@ -12,33 +12,33 @@ import com.novedia.talentmap.store.IDao;
  */
 public class ChangePasswordService implements IChangePasswordService {
 
-	/**
-	 * authenticationDao
-	 */
-	private IDao<Authentication> authenticationDao;
+    /**
+     * authenticationDao
+     */
+    private IDao<Authentication> authenticationDao;
 
-	@Override
-	public Integer savePassword(Authentication authentication) {
-		return authenticationDao.save(authentication);
-	}
+    @Override
+    public Integer savePassword(Authentication authentication) {
+	return authenticationDao.save(authentication);
+    }
 
-	/**
-	 * Get the authenticationDao
-	 * 
-	 * @return authenticationDao
-	 */
-	public IDao<Authentication> getAuthenticationDao() {
-		return authenticationDao;
-	}
+    /**
+     * Get the authenticationDao
+     * 
+     * @return authenticationDao
+     */
+    public IDao<Authentication> getAuthenticationDao() {
+	return authenticationDao;
+    }
 
-	/**
-	 * Set the authenticationDao
-	 * 
-	 * @param authenticationDao
-	 *            authenticationDao to set
-	 */
-	public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
-		this.authenticationDao = authenticationDao;
-	}
+    /**
+     * Set the authenticationDao
+     * 
+     * @param authenticationDao
+     *            authenticationDao to set
+     */
+    public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
+	this.authenticationDao = authenticationDao;
+    }
 
 }

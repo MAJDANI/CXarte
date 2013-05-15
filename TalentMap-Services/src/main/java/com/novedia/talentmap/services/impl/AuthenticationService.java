@@ -17,28 +17,28 @@ import com.novedia.talentmap.store.impl.AuthenticationDao;
  */
 public class AuthenticationService implements IAuthenticationService {
 
-	/**
-	 * The authentification DAO.
-	 */
-	private IDao<Authentication> authenticationDao;
+    /**
+     * The authentification DAO.
+     */
+    private IDao<Authentication> authenticationDao;
 
-	/**
-	 * Inherited
-	 */
-	@Override
-	public Authentication checkUser(CredentialToken token) {
-		AuthenticationDao authentificationDao = (AuthenticationDao) this.authenticationDao;
-		return authentificationDao.check(token);
-	}
+    /**
+     * Inherited
+     */
+    @Override
+    public Authentication checkUser(CredentialToken token) {
+	AuthenticationDao authentificationDao = (AuthenticationDao) this.authenticationDao;
+	return authentificationDao.check(token);
+    }
 
-	/**
-	 * Set the authentication DAO
-	 * 
-	 * @param authenticationDao
-	 *            the authenticationDao to set
-	 */
-	public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
-		this.authenticationDao = authenticationDao;
-	}
+    /**
+     * Set the authentication DAO
+     * 
+     * @param authenticationDao
+     *            the authenticationDao to set
+     */
+    public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
+	this.authenticationDao = authenticationDao;
+    }
 
 }

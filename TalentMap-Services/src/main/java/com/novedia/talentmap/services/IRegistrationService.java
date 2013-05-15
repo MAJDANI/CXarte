@@ -2,6 +2,8 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
@@ -13,40 +15,37 @@ import com.novedia.talentmap.model.entity.Registration;
  */
 public interface IRegistrationService {
 
-	/**
-	 * Test if the user to register is already existing
-	 * 
-	 * @param registration
-	 * @return
-	 */
-	Colleague check(Registration registration);
+    /**
+     * Test if the user to register is already existing
+     * 
+     * @param registration
+     * @return
+     */
+    Colleague check(Registration registration);
 
-	/**
-	 * Add a colleague from a registration
-	 * 
-	 * @param registration
-	 * @return
-	 */
-	Integer addColleagueFromRegistration(Registration registration);
+    /**
+     * Add a colleague from a registration
+     * 
+     * @param registration
+     * @return
+     */
+    @Transactional
+    Integer addColleagueFromRegistration(Registration registration);
 
-	/**
-	 * Add an user from a registration
-	 * 
-	 * @param registration
-	 * @return
-	 */
-	Integer addUserFromRegistration(Registration registration);
+    /**
+     * Get All profiles
+     * 
+     * @return
+     */
+    List<Profile> getAllProfile();
 
-	/**
-	 * Get All profiles
-	 * 
-	 * @return
-	 */
-	List<Profile> getAllProfile();
+    /**
+     * Get all Consultant Manager
+     */
+    List<Colleague> getAllConsultantManager();
 
-	/**
-	 * Get all Consultant Manager
-	 */
-	List<Colleague> getAllConsultantManager();
+    Integer countLogin(String login);
+
+    Integer countMail(String mail);
 
 }

@@ -11,32 +11,32 @@ import com.vaadin.ui.VerticalLayout;
  * 
  */
 public class TabSearchByCustomer extends VerticalLayout {
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private SearchContent searchContent;
+    private static final long serialVersionUID = 1L;
+    private SearchContent searchContent;
 
-	public TabSearchByCustomer(SearchContent searchContent) {
-		super();
-		this.searchContent = searchContent;
-		this.searchContent.getSearchTarget().switchByClientPanel();
-		addComponent(this.searchContent);
-	}
+    public TabSearchByCustomer(SearchContent searchContent) {
+	super();
+	this.searchContent = searchContent;
+	this.searchContent.getSearchTarget().switchByClientPanel();
+	addComponent(this.searchContent);
+    }
 
-	/**
-	 * @return the searchContent
-	 */
-	public SearchContent getSearchContent() {
-		return searchContent;
-	}
+    /**
+     * @return the searchContent
+     */
+    public SearchContent getSearchContent() {
+	return searchContent;
+    }
 
-	/**
-	 * @param searchContent
-	 *            the searchContent to set
-	 */
-	public void setSearchContent(SearchContent searchContent) {
-		this.searchContent = searchContent;
-	}
+    /**
+     * @param searchContent
+     *            the searchContent to set
+     */
+    public void setSearchContent(SearchContent searchContent) {
+	this.searchContent = searchContent;
+    }
 
 }

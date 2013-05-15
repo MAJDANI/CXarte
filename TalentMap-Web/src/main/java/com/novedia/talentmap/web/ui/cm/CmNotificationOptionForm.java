@@ -16,134 +16,134 @@ import com.vaadin.ui.GridLayout;
 
 public class CmNotificationOptionForm extends FormLayout {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -8506054835155389774L;
+    private static final long serialVersionUID = -8506054835155389774L;
 
-	/**
-	 * Vaadin components
-	 */
-	private Form cmOptionForm;
-	private GridLayout cmOptionFormLayout;
+    /**
+     * Vaadin components
+     */
+    private Form cmOptionForm;
+    private GridLayout cmOptionFormLayout;
 
-	/**
-	 * POJO
-	 */
-	private Vector<Object> fieldOrderOption;
+    /**
+     * POJO
+     */
+    private Vector<Object> fieldOrderOption;
 
-	/**
-	 * TalentMap service
-	 */
-	private INotificationService notificationService;
+    /**
+     * TalentMap service
+     */
+    private INotificationService notificationService;
 
-	private Authentication authentication;
+    private Authentication authentication;
 
-	/**
-	 * Default constructor
-	 */
-	public CmNotificationOptionForm() {
-		super();
+    /**
+     * Default constructor
+     */
+    public CmNotificationOptionForm() {
+	super();
+    }
+
+    /**
+     * Build the cm option Form View
+     * 
+     * @return RegistrationForm object
+     */
+    public CmNotificationOptionForm buildCmOptionFormView() {
+	cmOptionForm.removeAllProperties();
+	removeAllComponents();
+	buildMain();
+	return this;
+    }
+
+    public void buildMain() {
+
+	try {
+	    buildCmOptionLayout();
+	    buildCmOptionForm();
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
+    }
 
-	/**
-	 * Build the cm option Form View
-	 * 
-	 * @return RegistrationForm object
-	 */
-	public CmNotificationOptionForm buildCmOptionFormView() {
-		cmOptionForm.removeAllProperties();
-		removeAllComponents();
-		buildMain();
-		return this;
+    public void buildCmOptionLayout() {
+	this.cmOptionFormLayout.setMargin(true);
+	this.cmOptionFormLayout.setSpacing(true);
+	this.cmOptionFormLayout.setColumns(2);
+	this.cmOptionFormLayout.setRows(8);
+    }
+
+    public void buildCmOptionForm() {
+
+	this.cmOptionForm.setLayout(this.cmOptionFormLayout);
+
+	this.fieldOrderOption = new Vector<Object>(
+		ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length);
+	CUtils.setOrderForm(this.fieldOrderOption,
+		ConstantsEnglish.FIELD_ORDER_CM_OPTIONS);
+
+	this.cmOptionForm.setFormFieldFactory(new CmOptionFormFieldFactory(
+		this.notificationService));
+	Frequency defaultFrequency = null;
+	Frequency f = notificationService.getCmFrequencyOption(authentication
+		.getColleagueId());
+	if (f == null) {
+	    defaultFrequency = Frequency.builder().id(1).build();
+	} else {
+	    defaultFrequency = f;
 	}
+	CmOption defaultCmOption = CmOption.builder()
+		.frequency(defaultFrequency).build();
+	BeanItem<CmOption> cmOptionBean = new BeanItem<CmOption>(
+		defaultCmOption);
+	this.cmOptionForm
+		.setItemDataSource(cmOptionBean, this.fieldOrderOption);
 
-	public void buildMain() {
+	this.cmOptionForm.setImmediate(true);
 
-		try {
-			buildCmOptionLayout();
-			buildCmOptionForm();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	addComponent(this.cmOptionForm);
+    }
 
-	public void buildCmOptionLayout() {
-		this.cmOptionFormLayout.setMargin(true);
-		this.cmOptionFormLayout.setSpacing(true);
-		this.cmOptionFormLayout.setColumns(2);
-		this.cmOptionFormLayout.setRows(8);
-	}
+    public Form getCmOptionForm() {
+	return cmOptionForm;
+    }
 
-	public void buildCmOptionForm() {
+    public void setCmOptionForm(Form cmOptionForm) {
+	this.cmOptionForm = cmOptionForm;
+    }
 
-		this.cmOptionForm.setLayout(this.cmOptionFormLayout);
+    public GridLayout getCmOptionFormLayout() {
+	return cmOptionFormLayout;
+    }
 
-		this.fieldOrderOption = new Vector<Object>(
-				ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length);
-		CUtils.setOrderForm(this.fieldOrderOption,
-				ConstantsEnglish.FIELD_ORDER_CM_OPTIONS);
+    public void setCmOptionFormLayout(GridLayout cmOptionFormLayout) {
+	this.cmOptionFormLayout = cmOptionFormLayout;
+    }
 
-		this.cmOptionForm.setFormFieldFactory(new CmOptionFormFieldFactory(
-				this.notificationService));
-		Frequency defaultFrequency = null;
-		Frequency f = notificationService.getCmFrequencyOption(authentication
-				.getColleagueId());
-		if (f == null) {
-			defaultFrequency = Frequency.builder().id(1).build();
-		} else {
-			defaultFrequency = f;
-		}
-		CmOption defaultCmOption = CmOption.builder()
-				.frequency(defaultFrequency).build();
-		BeanItem<CmOption> cmOptionBean = new BeanItem<CmOption>(
-				defaultCmOption);
-		this.cmOptionForm
-				.setItemDataSource(cmOptionBean, this.fieldOrderOption);
+    public INotificationService getNotificationService() {
+	return notificationService;
+    }
 
-		this.cmOptionForm.setImmediate(true);
+    public void setNotificationService(INotificationService notificationService) {
+	this.notificationService = notificationService;
+    }
 
-		addComponent(this.cmOptionForm);
-	}
+    public Vector<Object> getFieldOrderOption() {
+	return fieldOrderOption;
+    }
 
-	public Form getCmOptionForm() {
-		return cmOptionForm;
-	}
+    public void setFieldOrderOption(Vector<Object> fieldOrderOption) {
+	this.fieldOrderOption = fieldOrderOption;
+    }
 
-	public void setCmOptionForm(Form cmOptionForm) {
-		this.cmOptionForm = cmOptionForm;
-	}
+    public Authentication getAuthentication() {
+	return authentication;
+    }
 
-	public GridLayout getCmOptionFormLayout() {
-		return cmOptionFormLayout;
-	}
-
-	public void setCmOptionFormLayout(GridLayout cmOptionFormLayout) {
-		this.cmOptionFormLayout = cmOptionFormLayout;
-	}
-
-	public INotificationService getNotificationService() {
-		return notificationService;
-	}
-
-	public void setNotificationService(INotificationService notificationService) {
-		this.notificationService = notificationService;
-	}
-
-	public Vector<Object> getFieldOrderOption() {
-		return fieldOrderOption;
-	}
-
-	public void setFieldOrderOption(Vector<Object> fieldOrderOption) {
-		this.fieldOrderOption = fieldOrderOption;
-	}
-
-	public Authentication getAuthentication() {
-		return authentication;
-	}
-
-	public void setAuthentication(Authentication authentication) {
-		this.authentication = authentication;
-	}
+    public void setAuthentication(Authentication authentication) {
+	this.authentication = authentication;
+    }
 
 }

@@ -14,23 +14,23 @@ import com.novedia.talentmap.store.IDao;
  */
 public class BusinessEngineerService implements IBusinessEngineerService {
 
-	/**
-	 * The businessEngineer DAO.
-	 */
-	private IDao<BusinessEngineer> businessEngineerDao;
+    /**
+     * The businessEngineer DAO.
+     */
+    private IDao<BusinessEngineer> businessEngineerDao;
 
-	@Override
-	public List<BusinessEngineer> getAllBusinessEngineer() {
-		return businessEngineerDao.getAll();
-	}
+    @Override
+    public List<BusinessEngineer> getAllBusinessEngineer() {
+	return businessEngineerDao.getAll();
+    }
 
-	public IDao<BusinessEngineer> getBusinessEngineerDao() {
-		return businessEngineerDao;
-	}
+    public IDao<BusinessEngineer> getBusinessEngineerDao() {
+	return businessEngineerDao;
+    }
 
-	public void setBusinessEngineerDao(
-			IDao<BusinessEngineer> businessEngineerDao) {
-		this.businessEngineerDao = businessEngineerDao;
-	}
+    public void setBusinessEngineerDao(
+	    IDao<BusinessEngineer> businessEngineerDao) {
+	this.businessEngineerDao = businessEngineerDao;
+    }
 
 }
