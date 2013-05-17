@@ -238,6 +238,7 @@ public class LoginScreen extends VerticalLayout implements ClickListener {
 	    }
 	} catch (DataAccessException ex) {
 	    if (LOGGER.isErrorEnabled()) {
+	    ex.printStackTrace();
 		LOGGER.error("Technical Exception : ", ex.getMessage());
 	    }
 	}
