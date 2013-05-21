@@ -17,17 +17,17 @@ import com.novedia.talentmap.store.impl.MissionDao;
  */
 public class MissionService implements IMissionService {
 
-    /**
-     * mission DAO.
-     */
-    private IDao<Mission> missionDao;
+	/**
+	 * mission DAO.
+	 */
+	private IDao<Mission> missionDao;
 
-    /**
-     * This method allows to make the spring injection. Set the manager DAO.
-     * 
-     * @param managerDao
-     */
-    public void setMissionDao(IDao<Mission> missionDao) {
-	this.missionDao = missionDao;
-    }
+	/**
+	 * This method allows to make the spring injection. Set the manager DAO.
+	 * 
+	 * @param managerDao
+	 */
+	public void setMissionDao(IDao<Mission> missionDao) {
+		this.missionDao = missionDao;
+	}
 }

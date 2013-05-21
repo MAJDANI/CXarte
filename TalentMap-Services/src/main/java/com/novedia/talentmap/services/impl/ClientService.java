@@ -13,22 +13,22 @@ import com.novedia.talentmap.store.IDao;
  */
 public class ClientService implements IClientService {
 
-    /**
-     * The client DAO.
-     */
-    private IDao<Client> clientDao;
+	/**
+	 * The client DAO.
+	 */
+	private IDao<Client> clientDao;
 
-    @Override
-    public List<Client> getAllClients() {
-	return clientDao.getAll();
-    }
+	@Override
+	public List<Client> getAllClients() {
+		return clientDao.getAll();
+	}
 
-    public IDao<Client> getClientDao() {
-	return clientDao;
-    }
+	public IDao<Client> getClientDao() {
+		return clientDao;
+	}
 
-    public void setClientDao(IDao<Client> clientDao) {
-	this.clientDao = clientDao;
-    }
+	public void setClientDao(IDao<Client> clientDao) {
+		this.clientDao = clientDao;
+	}
 
 }
