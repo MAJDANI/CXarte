@@ -9,13 +9,92 @@ import java.util.Date;
  */
 public class UserNotification implements Serializable {
 
-	/**
-	 * serial number
-	 */
-	private static final long serialVersionUID = 3527985794687884954L;
+    /**
+     * serial number
+     */
+    private static final long serialVersionUID = 3527985794687884954L;
+
+    /**
+     * The colleague id.
+     */
+    private Integer colleagueId;
+
+    /**
+     * Information on this notification
+     */
+    private String notes;
+
+    /**
+     * Date of the notification
+     */
+    private Date date;
+
+    /**
+     * Build the class Notification.java
+     */
+    public UserNotification() {
+    }
+
+    public Integer getColleagueId() {
+	return colleagueId;
+    }
+
+    public void setColleagueId(Integer colleagueId) {
+	this.colleagueId = colleagueId;
+    }
+
+    public String getNotes() {
+	return notes;
+    }
+
+    public void setNotes(String notes) {
+	this.notes = notes;
+    }
+
+    public Date getDate() {
+	return date;
+    }
+
+    public void setDate(Date date) {
+	this.date = date;
+    }
+
+    // --------------------------------------
+    // ------------ BUILDER PART -----------
+    // -------------------------------------
+
+    /**
+     * Static constructor for this class.
+     * 
+     * @return a builder instance
+     */
+    public static Builder builder() {
+	return new Builder();
+    }
+
+    /**
+     * Build an immutable mission entity.
+     * 
+     * @param builder
+     *            the builder inner class for this entity
+     */
+    private UserNotification(final Builder builder) {
+
+	this.colleagueId = builder.colleagueId;
+	this.notes = builder.notes;
+	this.date = builder.date;
+
+    }
+
+    /**
+     * Inner builder class.
+     * 
+     * @author j.maquin
+     */
+    public static final class Builder {
 
 	/**
-	 * The colleague id.
+	 * Colleague associated the notification
 	 */
 	private Integer colleagueId;
 
@@ -25,133 +104,54 @@ public class UserNotification implements Serializable {
 	private String notes;
 
 	/**
-	 * Date of the notification
+	 * date of the notification
 	 */
 	private Date date;
 
 	/**
-	 * Build the class Notification.java
-	 */
-	public UserNotification() {
-	}
-
-	public Integer getColleagueId() {
-		return colleagueId;
-	}
-
-	public void setColleagueId(Integer colleagueId) {
-		this.colleagueId = colleagueId;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	// --------------------------------------
-	// ------------ BUILDER PART -----------
-	// -------------------------------------
-
-	/**
-	 * Static constructor for this class.
+	 * List the colleague
 	 * 
-	 * @return a builder instance
+	 * @param colleague
+	 *            the linked colleague
+	 * 
+	 * @return the builder
 	 */
-	public static Builder builder() {
-		return new Builder();
+	public Builder colleagueId(final Integer colleagueId) {
+	    this.colleagueId = colleagueId;
+	    return this;
 	}
 
 	/**
-	 * Build an immutable mission entity.
+	 * List the notes about the notification
 	 * 
-	 * @param builder
-	 *            the builder inner class for this entity
+	 * @param notes
+	 *            the comments about the notification
+	 * @return the builder
 	 */
-	private UserNotification(final Builder builder) {
-
-		this.colleagueId = builder.colleagueId;
-		this.notes = builder.notes;
-		this.date = builder.date;
-
+	public Builder notes(final String notes) {
+	    this.notes = notes;
+	    return this;
 	}
 
 	/**
-	 * Inner builder class.
+	 * List the date
 	 * 
-	 * @author j.maquin
+	 * @param date
+	 *            the notification's date
+	 * @return the builder
 	 */
-	public static final class Builder {
-
-		/**
-		 * Colleague associated the notification
-		 */
-		private Integer colleagueId;
-
-		/**
-		 * Information on this notification
-		 */
-		private String notes;
-
-		/**
-		 * date of the notification
-		 */
-		private Date date;
-
-		/**
-		 * List the colleague
-		 * 
-		 * @param colleague
-		 *            the linked colleague
-		 * 
-		 * @return the builder
-		 */
-		public Builder colleagueId(final Integer colleagueId) {
-			this.colleagueId = colleagueId;
-			return this;
-		}
-
-		/**
-		 * List the notes about the notification
-		 * 
-		 * @param notes
-		 *            the comments about the notification
-		 * @return the builder
-		 */
-		public Builder notes(final String notes) {
-			this.notes = notes;
-			return this;
-		}
-
-		/**
-		 * List the date
-		 * 
-		 * @param date
-		 *            the notification's date
-		 * @return the builder
-		 */
-		public Builder date(final Date date) {
-			this.date = date;
-			return this;
-		}
-
-		/**
-		 * Build an immutable instance of notification.
-		 * 
-		 * @return notification
-		 */
-		public UserNotification build() {
-			return new UserNotification(this);
-		}
+	public Builder date(final Date date) {
+	    this.date = date;
+	    return this;
 	}
+
+	/**
+	 * Build an immutable instance of notification.
+	 * 
+	 * @return notification
+	 */
+	public UserNotification build() {
+	    return new UserNotification(this);
+	}
+    }
 }

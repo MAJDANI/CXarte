@@ -9,130 +9,130 @@ import java.io.Serializable;
  */
 public class Client implements Serializable, Comparable<Client> {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 257698099636559191L;
+    private static final long serialVersionUID = 257698099636559191L;
+
+    /**
+     * entity identify
+     */
+    protected Integer id;
+
+    /**
+     * Colleague name
+     */
+    protected String name;
+
+    /**
+     * Default Constructor
+     */
+    public Client() {
+
+    }
+
+    /**
+     * Build an immutable category entity.
+     * 
+     * @param builder
+     *            the builder inner class for this entity
+     */
+    public Client(final Builder builder) {
+	this.id = builder.id;
+	this.name = builder.name;
+    }
+
+    /**
+     * Static constructor for this class.
+     * 
+     * @return a builder instance
+     */
+    public static Builder builder() {
+	return new Builder();
+    }
+
+    /**
+     * Inner builder class.
+     * 
+     * @author y.rohr
+     */
+    public static class Builder {
 
 	/**
-	 * entity identify
+	 * Client identifier
 	 */
-	protected Integer id;
+	private Integer id;
 
 	/**
-	 * Colleague name
+	 * Client Name
 	 */
-	protected String name;
+	private String name;
 
 	/**
-	 * Default Constructor
-	 */
-	public Client() {
-
-	}
-
-	/**
-	 * Build an immutable category entity.
+	 * Set id
 	 * 
-	 * @param builder
-	 *            the builder inner class for this entity
+	 * @param id
+	 *            the coworker's identifier
+	 * 
+	 * @return the builder
 	 */
-	public Client(final Builder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
+	public Builder id(final Integer id) {
+	    this.id = id;
+	    return this;
 	}
 
 	/**
-	 * Static constructor for this class.
+	 * Set name
 	 * 
-	 * @return a builder instance
+	 * @param name
+	 *            the coworker's first name
+	 * @return the builder
 	 */
-	public static Builder builder() {
-		return new Builder();
+	public Builder name(final String name) {
+	    this.name = name;
+	    return this;
 	}
 
 	/**
-	 * Inner builder class.
+	 * Build an immutable instance of tool.
 	 * 
-	 * @author y.rohr
+	 * @return a tool
 	 */
-	public static class Builder {
-
-		/**
-		 * Client identifier
-		 */
-		private Integer id;
-
-		/**
-		 * Client Name
-		 */
-		private String name;
-
-		/**
-		 * Set id
-		 * 
-		 * @param id
-		 *            the coworker's identifier
-		 * 
-		 * @return the builder
-		 */
-		public Builder id(final Integer id) {
-			this.id = id;
-			return this;
-		}
-
-		/**
-		 * Set name
-		 * 
-		 * @param name
-		 *            the coworker's first name
-		 * @return the builder
-		 */
-		public Builder name(final String name) {
-			this.name = name;
-			return this;
-		}
-
-		/**
-		 * Build an immutable instance of tool.
-		 * 
-		 * @return a tool
-		 */
-		public Client build() {
-			return new Client(this);
-		}
-
+	public Client build() {
+	    return new Client(this);
 	}
 
-	public Integer getId() {
-		return id;
-	}
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+	return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	@Override
-	public int compareTo(Client otherClient) {
-		return this.getName().compareTo((otherClient).getName());
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof Client)) {
-			return false;
-		} else {
-			Client client = (Client) obj;
-			return (this.id.equals(client.getId()) && this.name.equals(client
-					.getName()));
-		}
+    @Override
+    public int compareTo(Client otherClient) {
+	return this.getName().compareTo((otherClient).getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj == null || !(obj instanceof Client)) {
+	    return false;
+	} else {
+	    Client client = (Client) obj;
+	    return (this.id.equals(client.getId()) && this.name.equals(client
+		    .getName()));
 	}
+    }
 }

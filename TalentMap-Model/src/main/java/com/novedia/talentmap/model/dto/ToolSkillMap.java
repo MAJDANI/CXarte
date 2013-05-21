@@ -13,32 +13,32 @@ import com.novedia.talentmap.model.entity.Tool;
  */
 public class ToolSkillMap {
 
-	private Map<Tool, Skill> mapTool;
+    private Map<Tool, Skill> mapTool;
 
-	/**
-	 * build ToolSkillMap class
-	 */
-	public ToolSkillMap() {
-		mapTool = new HashMap<Tool, Skill>();
-	}
+    /**
+     * build ToolSkillMap class
+     */
+    public ToolSkillMap() {
+	mapTool = new HashMap<Tool, Skill>();
+    }
 
-	/**
-	 * Get the mapTool
-	 * 
-	 * @return
-	 */
-	public Map<Tool, Skill> getMapTool() {
-		return mapTool;
-	}
+    /**
+     * Get the mapTool
+     * 
+     * @return
+     */
+    public Map<Tool, Skill> getMapTool() {
+	return mapTool;
+    }
 
-	/**
-	 * Set the mapTool
-	 * 
-	 * @param mapTool
-	 *            mapTool to set
-	 */
-	public void setMapTool(Map<Tool, Skill> mapTool) {
-		this.mapTool = mapTool;
-	}
+    /**
+     * Set the mapTool
+     * 
+     * @param mapTool
+     *            mapTool to set
+     */
+    public void setMapTool(Map<Tool, Skill> mapTool) {
+	this.mapTool = mapTool;
+    }
 
 }

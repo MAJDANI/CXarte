@@ -12,32 +12,32 @@ import com.novedia.talentmap.model.entity.Category;
  */
 public class CategoryMapDTO {
 
-	private Map<Category, ConceptMapDTO> mapCategory;
+    private Map<Category, ConceptMapDTO> mapCategory;
 
-	/**
-	 * Build the CategoryMapDTO class
-	 */
-	public CategoryMapDTO() {
-		mapCategory = new HashMap<Category, ConceptMapDTO>();
-	}
+    /**
+     * Build the CategoryMapDTO class
+     */
+    public CategoryMapDTO() {
+	mapCategory = new HashMap<Category, ConceptMapDTO>();
+    }
 
-	/**
-	 * Get the mapCategory
-	 * 
-	 * @return
-	 */
-	public Map<Category, ConceptMapDTO> getMapCategory() {
-		return mapCategory;
-	}
+    /**
+     * Get the mapCategory
+     * 
+     * @return
+     */
+    public Map<Category, ConceptMapDTO> getMapCategory() {
+	return mapCategory;
+    }
 
-	/**
-	 * Set the mapCategory
-	 * 
-	 * @param mapCategory
-	 *            mapcategory to set
-	 */
-	public void setMapCategory(Map<Category, ConceptMapDTO> mapCategory) {
-		this.mapCategory = mapCategory;
-	}
+    /**
+     * Set the mapCategory
+     * 
+     * @param mapCategory
+     *            mapcategory to set
+     */
+    public void setMapCategory(Map<Category, ConceptMapDTO> mapCategory) {
+	this.mapCategory = mapCategory;
+    }
 
 }

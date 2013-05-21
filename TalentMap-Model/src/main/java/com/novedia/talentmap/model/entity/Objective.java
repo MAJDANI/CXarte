@@ -10,9 +10,9 @@ import java.io.Serializable;
  */
 public class Objective implements Serializable {
 
-	/**
-	 * Serialization identifier
-	 */
-	private static final long serialVersionUID = 4940722058013124579L;
+    /**
+     * Serialization identifier
+     */
+    private static final long serialVersionUID = 4940722058013124579L;
 
 }

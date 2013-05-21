@@ -11,116 +11,116 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class Authentication implements Serializable {
 
-	/**
-	 * serial number
-	 */
-	private static final long serialVersionUID = 6615977875597428826L;
+    /**
+     * serial number
+     */
+    private static final long serialVersionUID = 6615977875597428826L;
 
-	/**
-	 * Credential
-	 */
-	private CredentialToken token;
+    /**
+     * Credential
+     */
+    private CredentialToken token;
 
-	/**
-	 * id of collaborator
-	 */
-	private Integer colleagueId;
+    /**
+     * id of collaborator
+     */
+    private Integer colleagueId;
 
-	/**
-	 * Authorization
-	 */
-	private Authorization authorization;
+    /**
+     * Authorization
+     */
+    private Authorization authorization;
 
-	/**
-	 * Build an immutable Authentification entity. the builder inner class for
-	 * this entity
-	 */
+    /**
+     * Build an immutable Authentification entity. the builder inner class for
+     * this entity
+     */
 
-	// ------------------------------------------
-	// ------------ OVERRIDEN METHODS -----------
-	// ------------------------------------------
-	@Override
-	public String toString() {
-		StringBuilder strBld = new StringBuilder();
-		strBld.append("[colleagueId=").append(getColleagueId()).append(", ");
-		strBld.append("token.login=").append(getToken().getLogin()).append("]");
-		return strBld.toString();
+    // ------------------------------------------
+    // ------------ OVERRIDEN METHODS -----------
+    // ------------------------------------------
+    @Override
+    public String toString() {
+	StringBuilder strBld = new StringBuilder();
+	strBld.append("[colleagueId=").append(getColleagueId()).append(", ");
+	strBld.append("token.login=").append(getToken().getLogin()).append("]");
+	return strBld.toString();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode() {
+	HashCodeBuilder hashBuilder = new HashCodeBuilder();
+	hashBuilder.append(this.getToken().getLogin());
+	return hashBuilder.hashCode();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj) {
+	if (obj == null) {
+	    return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getToken().getLogin());
-		return hashBuilder.hashCode();
+	if (!(obj instanceof Authentication)) {
+	    return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
+	Authentication comparedObj = (Authentication) obj;
+	EqualsBuilder ebuilder = new EqualsBuilder();
+	ebuilder.append(this.getToken().getLogin(), comparedObj.getToken()
+		.getLogin());
+	return ebuilder.isEquals();
+    }
 
-		if (!(obj instanceof Authentication)) {
-			return false;
-		}
+    /**
+     * @return the token
+     */
+    public CredentialToken getToken() {
+	return token;
+    }
 
-		Authentication comparedObj = (Authentication) obj;
-		EqualsBuilder ebuilder = new EqualsBuilder();
-		ebuilder.append(this.getToken().getLogin(), comparedObj.getToken()
-				.getLogin());
-		return ebuilder.isEquals();
-	}
+    /**
+     * @param token
+     *            the token to set
+     */
+    public void setToken(CredentialToken token) {
+	this.token = token;
+    }
 
-	/**
-	 * @return the token
-	 */
-	public CredentialToken getToken() {
-		return token;
-	}
+    /**
+     * @return the authorization
+     */
+    public Authorization getAuthorization() {
+	return authorization;
+    }
 
-	/**
-	 * @param token
-	 *            the token to set
-	 */
-	public void setToken(CredentialToken token) {
-		this.token = token;
-	}
+    /**
+     * @param authorization
+     *            the authorization to set
+     */
+    public void setAuthorization(Authorization authorization) {
+	this.authorization = authorization;
+    }
 
-	/**
-	 * @return the authorization
-	 */
-	public Authorization getAuthorization() {
-		return authorization;
-	}
+    /**
+     * @return the colleagueId
+     */
+    public Integer getColleagueId() {
+	return colleagueId;
+    }
 
-	/**
-	 * @param authorization
-	 *            the authorization to set
-	 */
-	public void setAuthorization(Authorization authorization) {
-		this.authorization = authorization;
-	}
-
-	/**
-	 * @return the colleagueId
-	 */
-	public Integer getColleagueId() {
-		return colleagueId;
-	}
-
-	/**
-	 * @param colleagueId
-	 *            the colleagueId to set
-	 */
-	public void setColleagueId(Integer colleagueId) {
-		this.colleagueId = colleagueId;
-	}
+    /**
+     * @param colleagueId
+     *            the colleagueId to set
+     */
+    public void setColleagueId(Integer colleagueId) {
+	this.colleagueId = colleagueId;
+    }
 }

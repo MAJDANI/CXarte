@@ -18,127 +18,127 @@ import com.google.common.collect.Lists;
  */
 public class Manager extends Colleague implements Serializable {
 
-	/**
-	 * Serialization identifier
-	 */
-	private static final long serialVersionUID = -5987763744641087415L;
+    /**
+     * Serialization identifier
+     */
+    private static final long serialVersionUID = -5987763744641087415L;
+
+    /**
+     * Colleagues list
+     */
+    private List<Colleague> colleagues = new ArrayList<Colleague>();
+
+    /**
+     * Build an instance of manager
+     */
+    public Manager() {
+	super();
+    }
+
+    /**
+     * Get the manager's colleagues list
+     * 
+     * @return the colleagues
+     */
+    public List<Colleague> getColleagues() {
+	return colleagues;
+    }
+
+    /**
+     * Set the manager's colleagues list
+     * 
+     * @param colleagues
+     *            the colleagues to set
+     */
+    public void setColleagues(List<Colleague> colleagues) {
+	this.colleagues = colleagues;
+    }
+
+    // ------------------------------------------
+    // ------------ OVERRIDEN METHODS -----------
+    // ------------------------------------------
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+	StringBuilder strBld = new StringBuilder();
+	strBld.append(super.toString());
+	strBld.append("->[Colleagues List").append(getColleagues())
+		.append("] ");
+
+	return strBld.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+	HashCodeBuilder hashBuilder = new HashCodeBuilder();
+	hashBuilder.append(this.getId());
+	hashBuilder.append(this.getFirstName());
+	hashBuilder.append(this.getLastName());
+
+	return hashBuilder.hashCode();
+    }
+
+    // -------------------------------------
+    // ------------ BUILDER PART -----------
+    // -------------------------------------
+
+    /**
+     * Static constructor for this class.
+     * 
+     * @return a builder instance
+     */
+    public static Builder builder() {
+	return new Builder();
+    }
+
+    /**
+     * 
+     * @param builder
+     */
+    private Manager(final Builder builder) {
+	super(builder);
+	this.colleagues = builder.colleagues;
+    }
+
+    /**
+     * Inner builder class.
+     * 
+     * @author j.marie-sainte
+     */
+    public static final class Builder extends Colleague.Builder {
 
 	/**
-	 * Colleagues list
+	 * Colleagues list bind to this manager
 	 */
-	private List<Colleague> colleagues = new ArrayList<Colleague>();
+	private List<Colleague> colleagues = Lists.newArrayList();
 
 	/**
-	 * Build an instance of manager
-	 */
-	public Manager() {
-		super();
-	}
-
-	/**
-	 * Get the manager's colleagues list
-	 * 
-	 * @return the colleagues
-	 */
-	public List<Colleague> getColleagues() {
-		return colleagues;
-	}
-
-	/**
-	 * Set the manager's colleagues list
+	 * Set the colleagues list
 	 * 
 	 * @param colleagues
-	 *            the colleagues to set
+	 * @return the builder
 	 */
-	public void setColleagues(List<Colleague> colleagues) {
-		this.colleagues = colleagues;
-	}
-
-	// ------------------------------------------
-	// ------------ OVERRIDEN METHODS -----------
-	// ------------------------------------------
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		StringBuilder strBld = new StringBuilder();
-		strBld.append(super.toString());
-		strBld.append("->[Colleagues List").append(getColleagues())
-				.append("] ");
-
-		return strBld.toString();
+	public Builder colleagues(Colleague... colleagues) {
+	    this.colleagues.addAll(Arrays.asList(colleagues));
+	    return this;
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		HashCodeBuilder hashBuilder = new HashCodeBuilder();
-		hashBuilder.append(this.getId());
-		hashBuilder.append(this.getFirstName());
-		hashBuilder.append(this.getLastName());
-
-		return hashBuilder.hashCode();
-	}
-
-	// -------------------------------------
-	// ------------ BUILDER PART -----------
-	// -------------------------------------
-
-	/**
-	 * Static constructor for this class.
+	 * Build an immutable instance of tool.
 	 * 
-	 * @return a builder instance
+	 * @return a manager
 	 */
-	public static Builder builder() {
-		return new Builder();
+	public Manager build() {
+	    this.colleagues = ImmutableList.copyOf(this.colleagues);
+	    return new Manager(this);
 	}
 
-	/**
-	 * 
-	 * @param builder
-	 */
-	private Manager(final Builder builder) {
-		super(builder);
-		this.colleagues = builder.colleagues;
-	}
-
-	/**
-	 * Inner builder class.
-	 * 
-	 * @author j.marie-sainte
-	 */
-	public static final class Builder extends Colleague.Builder {
-
-		/**
-		 * Colleagues list bind to this manager
-		 */
-		private List<Colleague> colleagues = Lists.newArrayList();
-
-		/**
-		 * Set the colleagues list
-		 * 
-		 * @param colleagues
-		 * @return the builder
-		 */
-		public Builder colleagues(Colleague... colleagues) {
-			this.colleagues.addAll(Arrays.asList(colleagues));
-			return this;
-		}
-
-		/**
-		 * Build an immutable instance of tool.
-		 * 
-		 * @return a manager
-		 */
-		public Manager build() {
-			this.colleagues = ImmutableList.copyOf(this.colleagues);
-			return new Manager(this);
-		}
-
-	}
+    }
 
 }

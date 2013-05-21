@@ -10,9 +10,9 @@ import java.io.Serializable;
  */
 public class ObjectiveTask implements Serializable {
 
-	/**
-	 * Serialization identifier
-	 */
-	private static final long serialVersionUID = -5352822953223252812L;
+    /**
+     * Serialization identifier
+     */
+    private static final long serialVersionUID = -5352822953223252812L;
 
 }
