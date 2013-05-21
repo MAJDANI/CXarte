@@ -14,334 +14,334 @@ import com.vaadin.ui.VerticalLayout;
 
 public class SearchContent extends VerticalLayout {
 
-    /**
+	/**
 	 * 
 	 */
-    private static final long serialVersionUID = -3434654428791584784L;
+	private static final long serialVersionUID = -3434654428791584784L;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /**
-     * Vaadin UI
-     */
-    private SearchTarget searchTarget;
-    private SearchResults searchResults;
+	/**
+	 * Vaadin UI
+	 */
+	private SearchTarget searchTarget;
+	private SearchResults searchResults;
 
-    /**
-     * Vaadin Components
-     */
-    private Panel searchTargetPanel;
-    private Panel searchResultsPanel;
-    // Le panel à afficher quand les recherches ne retournent aucun résultat
-    private Panel searchResultsPanelNoResult;
-    private Label searchTargetLabel;
-    private Label searchResultsLabel;
-    private Label searchResultsLabelNoResult;
+	/**
+	 * Vaadin Components
+	 */
+	private Panel searchTargetPanel;
+	private Panel searchResultsPanel;
+	// Le panel à afficher quand les recherches ne retournent aucun résultat
+	private Panel searchResultsPanelNoResult;
+	private Label searchTargetLabel;
+	private Label searchResultsLabel;
+	private Label searchResultsLabelNoResult;
 
-    /**
-     * Constants
-     */
-    public static final String PANEL_TARGET_NAME = "Find an employee";
-    public static final String PANEL_RESULTS_NAME = "List of colleagues of the research";
-    public static final String PANEL_NO_RESULTS_NAME = "No colleague found";
+	/**
+	 * Constants
+	 */
+	public static final String PANEL_TARGET_NAME = "Find an employee";
+	public static final String PANEL_RESULTS_NAME = "List of colleagues of the research";
+	public static final String PANEL_NO_RESULTS_NAME = "No colleague found";
 
-    private static final int PAGE_SIZE = 5;
+	private static final int PAGE_SIZE = 5;
 
-    /**
-     * Default constructor
-     */
-    public SearchContent() {
-	super();
-    }
+	/**
+	 * Default constructor
+	 */
+	public SearchContent() {
+		super();
+	}
 
-    public SearchContent buildSearchContentView() {
-	removeAllComponents();
-	searchTarget.setAuthentication(getAuthentication());
-	searchTarget = searchTarget.buildSearchTargetView();
-	searchResults.setRoleId(getAuthentication().getAuthorization()
-		.getRoleId());
-	searchResults = searchResults.buildSearchResultsView();
-	buildObservators();
-	mainBuild();
-	return this;
-    }
+	public SearchContent buildSearchContentView() {
+		removeAllComponents();
+		searchTarget.setAuthentication(getAuthentication());
+		searchTarget = searchTarget.buildSearchTargetView();
+		searchResults.setRoleId(getAuthentication().getAuthorization()
+				.getRoleId());
+		searchResults = searchResults.buildSearchResultsView();
+		buildObservators();
+		mainBuild();
+		return this;
+	}
 
-    public void buildObservators() {
-	this.searchTarget.addObservateur(new ISearchContent() {
+	public void buildObservators() {
+		this.searchTarget.addObservateur(new ISearchContent() {
 
-	    @Override
-	    public void changeSearchResults(List<Colleague> listCollab,
-		    boolean clearState) {
+			@Override
+			public void changeSearchResults(List<Colleague> listCollab,
+					boolean clearState) {
 
-		if (!clearState) {
-		    if (listCollab.isEmpty()) {
-			SearchContent.this.searchResultsPanel.setVisible(false);
-			SearchContent.this.searchResultsPanelNoResult
-				.setVisible(true);
-		    } else {
-			SearchContent.this.searchResults.removeAllItems();
-			SearchContent.this.searchResults
-				.buildResultsTable(listCollab);
-			SearchContent.this.searchResults.setCurrentPage(1);
-			refeshSearchResultsPanel();
-			if (listCollab.size() > PAGE_SIZE) {
-			    HorizontalLayout control = SearchContent.this.searchResults
-				    .createControls();
-			    SearchContent.this.searchResultsPanel
-				    .addComponent(control);
-			    SearchContent.this.searchResults
-				    .setPageLength(PAGE_SIZE);
+				if (!clearState) {
+					if (listCollab.isEmpty()) {
+						SearchContent.this.searchResultsPanel.setVisible(false);
+						SearchContent.this.searchResultsPanelNoResult
+								.setVisible(true);
+					} else {
+						SearchContent.this.searchResults.removeAllItems();
+						SearchContent.this.searchResults
+								.buildResultsTable(listCollab);
+						SearchContent.this.searchResults.setCurrentPage(1);
+						refeshSearchResultsPanel();
+						if (listCollab.size() > PAGE_SIZE) {
+							HorizontalLayout control = SearchContent.this.searchResults
+									.createControls();
+							SearchContent.this.searchResultsPanel
+									.addComponent(control);
+							SearchContent.this.searchResults
+									.setPageLength(PAGE_SIZE);
+						}
+						SearchContent.this.searchResultsPanel.setVisible(true);
+						SearchContent.this.searchResultsPanelNoResult
+								.setVisible(false);
+					}
+				}
 			}
-			SearchContent.this.searchResultsPanel.setVisible(true);
-			SearchContent.this.searchResultsPanelNoResult
-				.setVisible(false);
-		    }
+		}, ISearchContent.class);
+	}
+
+	private void refeshSearchResultsPanel() {
+		this.searchResultsPanel.removeAllComponents();
+		this.searchResultsPanel.addComponent(this.searchResultsLabel);
+		this.searchResultsPanel.addComponent(this.searchResults);
+	}
+
+	/**
+	 * The main builder
+	 * 
+	 * @class SearchContent.java
+	 */
+	public void mainBuild() {
+
+		buildSearchResults();
+
+		buildLabel();
+
+		buildPanel();
+	}
+
+	/**
+	 * The Search Results builder
+	 * 
+	 * @class SearchContent.java
+	 */
+	public void buildSearchResults() {
+
+		this.searchResults.setColumnWidth("Email", 400);
+		this.searchResults.setSizeFull();
+	}
+
+	/**
+	 * Builder of the labels of panels
+	 * 
+	 * @class SearchContent.java
+	 */
+	public void buildLabel() {
+
+		this.searchTargetLabel.setCaption(PANEL_TARGET_NAME);
+		this.searchTargetLabel.addStyleName(TalentMapCSS.H2);
+
+		this.searchResultsLabel.setCaption(PANEL_RESULTS_NAME);
+		this.searchResultsLabel.addStyleName(TalentMapCSS.H2);
+
+		this.searchResultsLabelNoResult.setCaption(PANEL_NO_RESULTS_NAME);
+		this.searchResultsLabelNoResult.addStyleName(TalentMapCSS.H2);
+	}
+
+	/**
+	 * Builder of the panels
+	 * 
+	 * @class SearchContent.java
+	 */
+	public void buildPanel() {
+
+		// Add the labels to the panels
+		this.searchTargetPanel.addComponent(this.searchTargetLabel);
+		this.searchResultsPanel.addComponent(this.searchResultsLabel);
+		this.searchResultsPanelNoResult
+				.addComponent(this.searchResultsLabelNoResult);
+
+		// Add the UI to the panels
+		this.searchTargetPanel.addComponent(this.searchTarget);
+
+		this.searchResultsPanel.addComponent(this.searchResults);
+
+		addComponent(this.searchTargetPanel);
+		addComponent(this.searchResultsPanel);
+		addComponent(this.searchResultsPanelNoResult);
+
+		this.searchResultsPanel.setVisible(false);
+		this.searchResultsPanelNoResult.setVisible(false);
+	}
+
+	/**
+	 * 
+	 * @class SearchContent.java
+	 * @param searchTargetPanel
+	 */
+	public void switchPanel(int searchTargetPanel) {
+
+		if (searchTargetPanel == SearchTargetPanel.BY_NAME) {
+
+			this.searchTarget.switchByNamePanel();
 		}
-	    }
-	}, ISearchContent.class);
-    }
 
-    private void refeshSearchResultsPanel() {
-	this.searchResultsPanel.removeAllComponents();
-	this.searchResultsPanel.addComponent(this.searchResultsLabel);
-	this.searchResultsPanel.addComponent(this.searchResults);
-    }
+		if (searchTargetPanel == SearchTargetPanel.BY_CLIENT) {
 
-    /**
-     * The main builder
-     * 
-     * @class SearchContent.java
-     */
-    public void mainBuild() {
+			this.searchTarget.switchByClientPanel();
+		}
 
-	buildSearchResults();
+		if (searchTargetPanel == SearchTargetPanel.BY_SKILLS) {
 
-	buildLabel();
+			this.searchTarget.switchBySkillsPanel();
+		}
 
-	buildPanel();
-    }
-
-    /**
-     * The Search Results builder
-     * 
-     * @class SearchContent.java
-     */
-    public void buildSearchResults() {
-
-	this.searchResults.setColumnWidth("Email", 400);
-	this.searchResults.setSizeFull();
-    }
-
-    /**
-     * Builder of the labels of panels
-     * 
-     * @class SearchContent.java
-     */
-    public void buildLabel() {
-
-	this.searchTargetLabel.setCaption(PANEL_TARGET_NAME);
-	this.searchTargetLabel.addStyleName(TalentMapCSS.H2);
-
-	this.searchResultsLabel.setCaption(PANEL_RESULTS_NAME);
-	this.searchResultsLabel.addStyleName(TalentMapCSS.H2);
-
-	this.searchResultsLabelNoResult.setCaption(PANEL_NO_RESULTS_NAME);
-	this.searchResultsLabelNoResult.addStyleName(TalentMapCSS.H2);
-    }
-
-    /**
-     * Builder of the panels
-     * 
-     * @class SearchContent.java
-     */
-    public void buildPanel() {
-
-	// Add the labels to the panels
-	this.searchTargetPanel.addComponent(this.searchTargetLabel);
-	this.searchResultsPanel.addComponent(this.searchResultsLabel);
-	this.searchResultsPanelNoResult
-		.addComponent(this.searchResultsLabelNoResult);
-
-	// Add the UI to the panels
-	this.searchTargetPanel.addComponent(this.searchTarget);
-
-	this.searchResultsPanel.addComponent(this.searchResults);
-
-	addComponent(this.searchTargetPanel);
-	addComponent(this.searchResultsPanel);
-	addComponent(this.searchResultsPanelNoResult);
-
-	this.searchResultsPanel.setVisible(false);
-	this.searchResultsPanelNoResult.setVisible(false);
-    }
-
-    /**
-     * 
-     * @class SearchContent.java
-     * @param searchTargetPanel
-     */
-    public void switchPanel(int searchTargetPanel) {
-
-	if (searchTargetPanel == SearchTargetPanel.BY_NAME) {
-
-	    this.searchTarget.switchByNamePanel();
+		clearSearchResults();
 	}
 
-	if (searchTargetPanel == SearchTargetPanel.BY_CLIENT) {
+	public void clearSearchResults() {
 
-	    this.searchTarget.switchByClientPanel();
+		this.searchResults.removeAllItems();
+		this.searchResultsPanel.setVisible(false);
 	}
 
-	if (searchTargetPanel == SearchTargetPanel.BY_SKILLS) {
-
-	    this.searchTarget.switchBySkillsPanel();
+	/**
+	 * Get the searchTarget value
+	 * 
+	 * @return the searchTarget
+	 */
+	public SearchTarget getSearchTarget() {
+		return searchTarget;
 	}
 
-	clearSearchResults();
-    }
+	/**
+	 * Set the searchTarget value
+	 * 
+	 * @param searchTarget
+	 *            the searchTarget to set
+	 */
+	public void setSearchTarget(SearchTarget searchTarget) {
+		this.searchTarget = searchTarget;
+	}
 
-    public void clearSearchResults() {
+	/**
+	 * Get the searchResults value
+	 * 
+	 * @return the searchResults
+	 */
+	public SearchResults getSearchResults() {
+		return searchResults;
+	}
 
-	this.searchResults.removeAllItems();
-	this.searchResultsPanel.setVisible(false);
-    }
+	/**
+	 * Set the searchResults value
+	 * 
+	 * @param searchResults
+	 *            the searchResults to set
+	 */
+	public void setSearchResults(SearchResults searchResults) {
+		this.searchResults = searchResults;
+	}
 
-    /**
-     * Get the searchTarget value
-     * 
-     * @return the searchTarget
-     */
-    public SearchTarget getSearchTarget() {
-	return searchTarget;
-    }
+	/**
+	 * Get the searchTargetPanel value
+	 * 
+	 * @return the searchTargetPanel
+	 */
+	public Panel getSearchTargetPanel() {
+		return searchTargetPanel;
+	}
 
-    /**
-     * Set the searchTarget value
-     * 
-     * @param searchTarget
-     *            the searchTarget to set
-     */
-    public void setSearchTarget(SearchTarget searchTarget) {
-	this.searchTarget = searchTarget;
-    }
+	/**
+	 * Set the searchTargetPanel value
+	 * 
+	 * @param searchTargetPanel
+	 *            the searchTargetPanel to set
+	 */
+	public void setSearchTargetPanel(Panel searchTargetPanel) {
+		this.searchTargetPanel = searchTargetPanel;
+	}
 
-    /**
-     * Get the searchResults value
-     * 
-     * @return the searchResults
-     */
-    public SearchResults getSearchResults() {
-	return searchResults;
-    }
+	/**
+	 * Get the searchResultsPanel value
+	 * 
+	 * @return the searchResultsPanel
+	 */
+	public Panel getSearchResultsPanel() {
+		return searchResultsPanel;
+	}
 
-    /**
-     * Set the searchResults value
-     * 
-     * @param searchResults
-     *            the searchResults to set
-     */
-    public void setSearchResults(SearchResults searchResults) {
-	this.searchResults = searchResults;
-    }
+	/**
+	 * Set the searchResultsPanel value
+	 * 
+	 * @param searchResultsPanel
+	 *            the searchResultsPanel to set
+	 */
+	public void setSearchResultsPanel(Panel searchResultsPanel) {
+		this.searchResultsPanel = searchResultsPanel;
+	}
 
-    /**
-     * Get the searchTargetPanel value
-     * 
-     * @return the searchTargetPanel
-     */
-    public Panel getSearchTargetPanel() {
-	return searchTargetPanel;
-    }
+	/**
+	 * Get the searchTargetLabel value
+	 * 
+	 * @return the searchTargetLabel
+	 */
+	public Label getSearchTargetLabel() {
+		return searchTargetLabel;
+	}
 
-    /**
-     * Set the searchTargetPanel value
-     * 
-     * @param searchTargetPanel
-     *            the searchTargetPanel to set
-     */
-    public void setSearchTargetPanel(Panel searchTargetPanel) {
-	this.searchTargetPanel = searchTargetPanel;
-    }
+	/**
+	 * Set the searchTargetLabel value
+	 * 
+	 * @param searchTargetLabel
+	 *            the searchTargetLabel to set
+	 */
+	public void setSearchTargetLabel(Label searchTargetLabel) {
+		this.searchTargetLabel = searchTargetLabel;
+	}
 
-    /**
-     * Get the searchResultsPanel value
-     * 
-     * @return the searchResultsPanel
-     */
-    public Panel getSearchResultsPanel() {
-	return searchResultsPanel;
-    }
+	/**
+	 * Get the searchResultsLabel value
+	 * 
+	 * @return the searchResultsLabel
+	 */
+	public Label getSearchResultsLabel() {
+		return searchResultsLabel;
+	}
 
-    /**
-     * Set the searchResultsPanel value
-     * 
-     * @param searchResultsPanel
-     *            the searchResultsPanel to set
-     */
-    public void setSearchResultsPanel(Panel searchResultsPanel) {
-	this.searchResultsPanel = searchResultsPanel;
-    }
+	/**
+	 * Set the searchResultsLabel value
+	 * 
+	 * @param searchResultsLabel
+	 *            the searchResultsLabel to set
+	 */
+	public void setSearchResultsLabel(Label searchResultsLabel) {
+		this.searchResultsLabel = searchResultsLabel;
+	}
 
-    /**
-     * Get the searchTargetLabel value
-     * 
-     * @return the searchTargetLabel
-     */
-    public Label getSearchTargetLabel() {
-	return searchTargetLabel;
-    }
+	public Panel getSearchResultsPanelNoResult() {
+		return searchResultsPanelNoResult;
+	}
 
-    /**
-     * Set the searchTargetLabel value
-     * 
-     * @param searchTargetLabel
-     *            the searchTargetLabel to set
-     */
-    public void setSearchTargetLabel(Label searchTargetLabel) {
-	this.searchTargetLabel = searchTargetLabel;
-    }
+	public void setSearchResultsPanelNoResult(Panel searchResultsPanelNoResult) {
+		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
+	}
 
-    /**
-     * Get the searchResultsLabel value
-     * 
-     * @return the searchResultsLabel
-     */
-    public Label getSearchResultsLabel() {
-	return searchResultsLabel;
-    }
+	public Label getSearchResultsLabelNoResult() {
+		return searchResultsLabelNoResult;
+	}
 
-    /**
-     * Set the searchResultsLabel value
-     * 
-     * @param searchResultsLabel
-     *            the searchResultsLabel to set
-     */
-    public void setSearchResultsLabel(Label searchResultsLabel) {
-	this.searchResultsLabel = searchResultsLabel;
-    }
+	public void setSearchResultsLabelNoResult(Label searchResultsLabelNoResult) {
+		this.searchResultsLabelNoResult = searchResultsLabelNoResult;
+	}
 
-    public Panel getSearchResultsPanelNoResult() {
-	return searchResultsPanelNoResult;
-    }
+	public Authentication getAuthentication() {
+		return authentication;
+	}
 
-    public void setSearchResultsPanelNoResult(Panel searchResultsPanelNoResult) {
-	this.searchResultsPanelNoResult = searchResultsPanelNoResult;
-    }
-
-    public Label getSearchResultsLabelNoResult() {
-	return searchResultsLabelNoResult;
-    }
-
-    public void setSearchResultsLabelNoResult(Label searchResultsLabelNoResult) {
-	this.searchResultsLabelNoResult = searchResultsLabelNoResult;
-    }
-
-    public Authentication getAuthentication() {
-	return authentication;
-    }
-
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
 
 }

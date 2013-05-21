@@ -4,5 +4,5 @@ import com.novedia.talentmap.web.ui.profile.ListSkill;
 
 public interface IProfileView {
 
-    public void updateListSkill(ListSkill listSkill);
+	public void updateListSkill(ListSkill listSkill);
 }
