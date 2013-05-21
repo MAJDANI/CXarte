@@ -30,74 +30,74 @@ import com.vaadin.ui.Window;
 @Configurable
 public class MyVaadinApplication extends Application {
 
-    /**
-     * The logger
-     */
-    private static final Logger LOGGER = LoggerFactory
-	    .getLogger(MyVaadinApplication.class);
+	/**
+	 * The logger
+	 */
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(MyVaadinApplication.class);
 
-    /**
-     * Vaadin components
-     */
-    private Window window;
+	/**
+	 * Vaadin components
+	 */
+	private Window window;
 
-    /**
-     * The loginScreen
-     */
-    private LoginScreen loginScreen;
+	/**
+	 * The loginScreen
+	 */
+	private LoginScreen loginScreen;
 
-    /**
-     * The init
-     */
-    @Override
-    public void init() {
-	if (LOGGER.isDebugEnabled()) {
-	    LOGGER.debug("Talent Map Front initialization");
+	/**
+	 * The init
+	 */
+	@Override
+	public void init() {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Talent Map Front initialization");
+		}
+		this.setTheme("talentmap");
+		this.setMainWindow(window);
+
+		loginScreen.setMyVaadinApplication(this);
+		window.setContent(loginScreen.buildLoginScreenView());
+
 	}
-	this.setTheme("talentmap");
-	this.setMainWindow(window);
 
-	loginScreen.setMyVaadinApplication(this);
-	window.setContent(loginScreen.buildLoginScreenView());
+	/**
+	 * Set the main window
+	 * 
+	 * @param window
+	 *            window to set
+	 */
+	public void setWindow(Window window) {
+		this.window = window;
+	}
 
-    }
+	/**
+	 * Get the main window
+	 * 
+	 * @return window
+	 */
+	public Window getWindow() {
+		return window;
+	}
 
-    /**
-     * Set the main window
-     * 
-     * @param window
-     *            window to set
-     */
-    public void setWindow(Window window) {
-	this.window = window;
-    }
+	/**
+	 * Get the LoginScreen
+	 * 
+	 * @return loginScreen
+	 */
+	public LoginScreen getLoginScreen() {
+		return loginScreen;
+	}
 
-    /**
-     * Get the main window
-     * 
-     * @return window
-     */
-    public Window getWindow() {
-	return window;
-    }
-
-    /**
-     * Get the LoginScreen
-     * 
-     * @return loginScreen
-     */
-    public LoginScreen getLoginScreen() {
-	return loginScreen;
-    }
-
-    /**
-     * Set the loginScreen
-     * 
-     * @param loginScreen
-     *            loginScreen to set
-     */
-    public void setLoginScreen(LoginScreen loginScreen) {
-	this.loginScreen = loginScreen;
-    }
+	/**
+	 * Set the loginScreen
+	 * 
+	 * @param loginScreen
+	 *            loginScreen to set
+	 */
+	public void setLoginScreen(LoginScreen loginScreen) {
+		this.loginScreen = loginScreen;
+	}
 
 }
