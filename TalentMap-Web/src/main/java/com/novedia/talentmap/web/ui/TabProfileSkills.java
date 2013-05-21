@@ -11,32 +11,32 @@ import com.vaadin.ui.VerticalLayout;
  * 
  */
 public class TabProfileSkills extends VerticalLayout {
-    private SkillCollaboratorContent skillCollaboratorContent;
+	private SkillCollaboratorContent skillCollaboratorContent;
 
-    public TabProfileSkills(SkillCollaboratorContent skillCollaboratorContent) {
-	super();
-	this.skillCollaboratorContent = skillCollaboratorContent;
-	mainBuild();
-    }
+	public TabProfileSkills(SkillCollaboratorContent skillCollaboratorContent) {
+		super();
+		this.skillCollaboratorContent = skillCollaboratorContent;
+		mainBuild();
+	}
 
-    public void mainBuild() {
-	addComponent(this.skillCollaboratorContent);
-    }
+	public void mainBuild() {
+		addComponent(this.skillCollaboratorContent);
+	}
 
-    /**
-     * @return the skillCollaboratorContent
-     */
-    public SkillCollaboratorContent getSkillCollaboratorContent() {
-	return skillCollaboratorContent;
-    }
+	/**
+	 * @return the skillCollaboratorContent
+	 */
+	public SkillCollaboratorContent getSkillCollaboratorContent() {
+		return skillCollaboratorContent;
+	}
 
-    /**
-     * @param skillCollaboratorContent
-     *            the skillCollaboratorContent to set
-     */
-    public void setSkillCollaboratorContent(
-	    SkillCollaboratorContent skillCollaboratorContent) {
-	this.skillCollaboratorContent = skillCollaboratorContent;
-    }
+	/**
+	 * @param skillCollaboratorContent
+	 *            the skillCollaboratorContent to set
+	 */
+	public void setSkillCollaboratorContent(
+			SkillCollaboratorContent skillCollaboratorContent) {
+		this.skillCollaboratorContent = skillCollaboratorContent;
+	}
 
 }

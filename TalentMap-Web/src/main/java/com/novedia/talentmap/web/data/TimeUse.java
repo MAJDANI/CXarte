@@ -10,52 +10,52 @@ package com.novedia.talentmap.web.data;
  * @created 21 mai 2012
  */
 public enum TimeUse {
-    LESS_1_YEAR(1, "Less than 1 year"), LESS_2_YEAR(2, "Between 1 and 2 years"), LESS_3_YEAR(
-	    3, "Between 2 and 3 years "), LESS_4_YEAR(4, "More than 3 years");
+	LESS_1_YEAR(1, "Less than 1 year"), LESS_2_YEAR(2, "Between 1 and 2 years"), LESS_3_YEAR(
+			3, "Between 2 and 3 years "), LESS_4_YEAR(4, "More than 3 years");
 
-    private int id;
-    private String value;
+	private int id;
+	private String value;
 
-    private TimeUse(int id, String value) {
-	this.id = id;
-	this.value = value;
-    }
+	private TimeUse(int id, String value) {
+		this.id = id;
+		this.value = value;
+	}
 
-    /**
-     * Get the id value
-     * 
-     * @return the id
-     */
-    public int getId() {
-	return id;
-    }
+	/**
+	 * Get the id value
+	 * 
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
-    /**
-     * Set the id value
-     * 
-     * @param id
-     *            the id to set
-     */
-    public void setId(int id) {
-	this.id = id;
-    }
+	/**
+	 * Set the id value
+	 * 
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    /**
-     * Get the value value
-     * 
-     * @return the value
-     */
-    public String getValue() {
-	return value;
-    }
+	/**
+	 * Get the value value
+	 * 
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
 
-    /**
-     * Set the value value
-     * 
-     * @param value
-     *            the value to set
-     */
-    public void setValue(String value) {
-	this.value = value;
-    }
+	/**
+	 * Set the value value
+	 * 
+	 * @param value
+	 *            the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

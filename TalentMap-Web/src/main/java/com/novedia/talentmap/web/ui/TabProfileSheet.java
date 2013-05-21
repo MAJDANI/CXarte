@@ -18,63 +18,63 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class TabProfileSheet extends TabSheet {
 
-    /**
-     * All views
-     */
-    private ProfileView profileView;
+	/**
+	 * All views
+	 */
+	private ProfileView profileView;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /**
-     * Default constructor
-     */
-    public TabProfileSheet() {
-	super();
-    }
+	/**
+	 * Default constructor
+	 */
+	public TabProfileSheet() {
+		super();
+	}
 
-    /**
-     * content of Profile tabulation
-     */
-    VerticalLayout tabProfileView;
+	/**
+	 * content of Profile tabulation
+	 */
+	VerticalLayout tabProfileView;
 
-    /**
-     * Build the profile sheet
-     * 
-     * @return
-     */
-    public TabSheet buildTabSheetProfile() {
-	this.removeAllComponents();
-	setImmediate(true);
-	profileView.setAuthentication(getAuthentication());
-	tabProfileView = profileView.buildTabSheetProfilData();
-	addTab(tabProfileView, ConstantsEnglish.TAB_PROFILE_NAME);
-	return this;
-    }
+	/**
+	 * Build the profile sheet
+	 * 
+	 * @return
+	 */
+	public TabSheet buildTabSheetProfile() {
+		this.removeAllComponents();
+		setImmediate(true);
+		profileView.setAuthentication(getAuthentication());
+		tabProfileView = profileView.buildTabSheetProfilData();
+		addTab(tabProfileView, ConstantsEnglish.TAB_PROFILE_NAME);
+		return this;
+	}
 
-    /**
-     * Set the profileView value
-     * 
-     * @param profileView
-     *            the profileView to set
-     */
-    public void setProfileView(ProfileView profileView) {
-	this.profileView = profileView;
-    }
+	/**
+	 * Set the profileView value
+	 * 
+	 * @param profileView
+	 *            the profileView to set
+	 */
+	public void setProfileView(ProfileView profileView) {
+		this.profileView = profileView;
+	}
 
-    /**
-     * 
-     * @return
-     */
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	public Authentication getAuthentication() {
+		return authentication;
+	}
 
-    /**
-     * 
-     * @param authentication
-     */
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+	/**
+	 * 
+	 * @param authentication
+	 */
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
 
 }

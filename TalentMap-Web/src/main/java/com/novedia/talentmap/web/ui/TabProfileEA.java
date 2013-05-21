@@ -11,9 +11,9 @@ import com.vaadin.ui.TabSheet;
  */
 public class TabProfileEA extends TabSheet {
 
-    public TabProfileEA() {
-	super();
-	// TODO Auto-generated constructor stub
-    }
+	public TabProfileEA() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 }
