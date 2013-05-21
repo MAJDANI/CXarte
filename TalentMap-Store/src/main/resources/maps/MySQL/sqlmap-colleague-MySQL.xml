@@ -73,7 +73,7 @@
 	<statement id="getCmColleaguesByName" parameterClass="hashmap"
 		resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID =
-		auth.COLLEAGUE_ID)
+		AUTH.COLLEAGUE_ID)
 		WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
 		UPPER('$name$%'))
 		AND (AUTH.ROLE_ID != ${admin.role}) AND (c.MANAGER_ID = #managerId#)

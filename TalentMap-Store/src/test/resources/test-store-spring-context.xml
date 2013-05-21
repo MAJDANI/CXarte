@@ -12,7 +12,8 @@
 	<import resource="datasource-test.xml" />
 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="configLocation" value="classpath:sqlmap-hsqldb-test-config.xml" />
+<property name="configLocation" value="classpath:sqlmap-hsqldb-test-config.xml" />
+<!-- 		<property name="configLocation" value="classpath:sqlmap-test-config.xml" /> -->
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

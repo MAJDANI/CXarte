@@ -13,63 +13,63 @@ import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 public class BusinessEngineerDao extends SqlMapClientDaoSupport implements
-	IDao<BusinessEngineer> {
+		IDao<BusinessEngineer> {
 
-    /**
-     * The logger
-     */
-    private static Log logger = LogFactory.getLog(BusinessEngineerDao.class);
+	/**
+	 * The logger
+	 */
+	private static Log logger = LogFactory.getLog(BusinessEngineerDao.class);
 
-    /**
-     * Class builder based on sqlMapClient
-     * 
-     * @param sqlMapClient
-     */
-    public BusinessEngineerDao(final SqlMapClient sqlMapClient) {
-	setSqlMapClient(sqlMapClient);
-    }
+	/**
+	 * Class builder based on sqlMapClient
+	 * 
+	 * @param sqlMapClient
+	 */
+	public BusinessEngineerDao(final SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
+	}
 
-    @Override
-    public BusinessEngineer get(Integer id) throws DataAccessException {
-	// return (BusinessEngineer)
-	// this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BUSINESS_ENGINEER_BY_ID);
-	throw new UnsupportedOperationException();
-    }
+	@Override
+	public BusinessEngineer get(Integer id) throws DataAccessException {
+		// return (BusinessEngineer)
+		// this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_BUSINESS_ENGINEER_BY_ID);
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public List<BusinessEngineer> getAll() throws DataAccessException {
-	return this.getSqlMapClientTemplate().queryForList(
-		DBRequestsConstants.GET_ALL_BUSINESS_ENGINEER);
-    }
+	@Override
+	public List<BusinessEngineer> getAll() throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_BUSINESS_ENGINEER);
+	}
 
-    @Override
-    public int save(BusinessEngineer element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	@Override
+	public int save(BusinessEngineer element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    @Override
-    public int add(BusinessEngineer element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	@Override
+	public int add(BusinessEngineer element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    @Override
-    public int delete(BusinessEngineer element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	@Override
+	public int delete(BusinessEngineer element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    @Override
-    public BusinessEngineer getByName(String name) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	@Override
+	public BusinessEngineer getByName(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    @Override
-    public BusinessEngineer check(String name) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	@Override
+	public BusinessEngineer check(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

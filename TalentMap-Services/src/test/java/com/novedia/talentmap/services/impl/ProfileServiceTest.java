@@ -29,79 +29,79 @@ import com.novedia.talentmap.store.IDao;
 @RunWith(MockitoJUnitRunner.class)
 public class ProfileServiceTest {
 
-    private ProfileService service;
+	private ProfileService service;
 
-    @Mock
-    private IDao<Profile> profileDaoMock;
+	@Mock
+	private IDao<Profile> profileDaoMock;
 
-    private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
+	private final String DATA_ACCESS_ERROR_MESSAGE = "Data Access Failure";
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-	service = new ProfileService();
-	service.setProfileDao(profileDaoMock);
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		service = new ProfileService();
+		service.setProfileDao(profileDaoMock);
+	}
 
-    @Test
-    public void getAllProfileReturnsAListOfProfiles() {
-	// Given
-	Profile profileExpected = new Profile();
-	List<Profile> listProfileExpected = new ArrayList<Profile>();
-	listProfileExpected.add(profileExpected);
+	@Test
+	public void getAllProfileReturnsAListOfProfiles() {
+		// Given
+		Profile profileExpected = new Profile();
+		List<Profile> listProfileExpected = new ArrayList<Profile>();
+		listProfileExpected.add(profileExpected);
 
-	// When
-	Mockito.when(profileDaoMock.getAll()).thenReturn(listProfileExpected);
-	List<Profile> listProfileActual = service.getAllProfile();
+		// When
+		Mockito.when(profileDaoMock.getAll()).thenReturn(listProfileExpected);
+		List<Profile> listProfileActual = service.getAllProfile();
 
-	// Then
-	Mockito.verify(profileDaoMock, Mockito.times(1)).getAll();
-	Assert.assertNotNull(listProfileActual);
-	Assert.assertSame(listProfileExpected, listProfileActual);
+		// Then
+		Mockito.verify(profileDaoMock, Mockito.times(1)).getAll();
+		Assert.assertNotNull(listProfileActual);
+		Assert.assertSame(listProfileExpected, listProfileActual);
 
-    }
+	}
 
-    @Test(expected = DataAccessException.class)
-    public void getAllProfileThrowsDataAccessException()
-	    throws DataAccessException {
-	// When
-	Mockito.when(profileDaoMock.getAll()).thenThrow(
-		new DataAccessResourceFailureException(
-			DATA_ACCESS_ERROR_MESSAGE));
-	service.getAllProfile();
+	@Test(expected = DataAccessException.class)
+	public void getAllProfileThrowsDataAccessException()
+			throws DataAccessException {
+		// When
+		Mockito.when(profileDaoMock.getAll()).thenThrow(
+				new DataAccessResourceFailureException(
+						DATA_ACCESS_ERROR_MESSAGE));
+		service.getAllProfile();
 
-    }
+	}
 
-    @Test
-    public void getProfileReturnsAProfile() {
-	// Given
-	Integer profileId = 1;
-	Profile profileExpected = Profile.builder().id(profileId).build();
+	@Test
+	public void getProfileReturnsAProfile() {
+		// Given
+		Integer profileId = 1;
+		Profile profileExpected = Profile.builder().id(profileId).build();
 
-	// When
-	Mockito.when(profileDaoMock.get(profileId)).thenReturn(profileExpected);
-	Profile profileActual = service.getProfile(profileId);
+		// When
+		Mockito.when(profileDaoMock.get(profileId)).thenReturn(profileExpected);
+		Profile profileActual = service.getProfile(profileId);
 
-	// Then
-	Mockito.verify(profileDaoMock, Mockito.times(1)).get(profileId);
-	Assert.assertNotNull(profileActual);
-	Assert.assertSame(profileExpected, profileActual);
+		// Then
+		Mockito.verify(profileDaoMock, Mockito.times(1)).get(profileId);
+		Assert.assertNotNull(profileActual);
+		Assert.assertSame(profileExpected, profileActual);
 
-    }
+	}
 
-    @Test(expected = DataAccessException.class)
-    public void getProfileThrowsDataAccessException()
-	    throws DataAccessException {
-	// Given
-	Integer profileId = 1;
+	@Test(expected = DataAccessException.class)
+	public void getProfileThrowsDataAccessException()
+			throws DataAccessException {
+		// Given
+		Integer profileId = 1;
 
-	// When
-	Mockito.when(profileDaoMock.get(profileId)).thenThrow(
-		new DataAccessResourceFailureException(
-			DATA_ACCESS_ERROR_MESSAGE));
-	service.getProfile(profileId);
+		// When
+		Mockito.when(profileDaoMock.get(profileId)).thenThrow(
+				new DataAccessResourceFailureException(
+						DATA_ACCESS_ERROR_MESSAGE));
+		service.getProfile(profileId);
 
-    }
+	}
 }

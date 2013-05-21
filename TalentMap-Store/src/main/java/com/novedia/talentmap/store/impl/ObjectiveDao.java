@@ -15,68 +15,68 @@ import com.novedia.talentmap.store.IDao;
  * 
  */
 public class ObjectiveDao extends SqlMapClientDaoSupport implements
-	IDao<Objective> {
+		IDao<Objective> {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Objective get(final Integer id) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Objective get(final Integer id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Objective> getAll() throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Objective> getAll() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int save(final Objective element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int save(final Objective element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int add(final Objective element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int add(final Objective element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int delete(final Objective element) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return 0;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int delete(final Objective element) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Objective getByName(final String name) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Objective getByName(final String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Objective check(final String name) throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Objective check(final String name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

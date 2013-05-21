@@ -16,37 +16,37 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  * @author j.collet
  */
 public class VSkillDao extends SqlMapClientDaoSupport implements IVSkillDao {
-    /**
-     * Class builder based on sqlMapClient.
-     * 
-     * @param sqlMapClient
-     *            a sqlMapClient
-     */
-    public VSkillDao(final SqlMapClient sqlMapClient) {
-	setSqlMapClient(sqlMapClient);
-    }
+	/**
+	 * Class builder based on sqlMapClient.
+	 * 
+	 * @param sqlMapClient
+	 *            a sqlMapClient
+	 */
+	public VSkillDao(final SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
+	}
 
-    /**
-     * @return all VSkill ordered by category and concept
-     * @throws DataAccessException
-     */
-    @SuppressWarnings("unchecked")
-    public List<VSkill> getAllVSkillOrdered() throws DataAccessException {
-	return this.getSqlMapClientTemplate().queryForList(
-		DBRequestsConstants.GET_ALL_VSKILL_ORDERED);
-    }
+	/**
+	 * @return all VSkill ordered by category and concept
+	 * @throws DataAccessException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<VSkill> getAllVSkillOrdered() throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_VSKILL_ORDERED);
+	}
 
-    /**
-     * @param toolName
-     *            a tool name
-     * @return VSkill
-     * @throws DataAccessException
-     */
-    @Override
-    public VSkill getSkillByTool(final String toolName)
-	    throws DataAccessException {
-	return (VSkill) this.getSqlMapClientTemplate().queryForObject(
-		DBRequestsConstants.GET_SKILL_BY_TOOL, toolName);
-    }
+	/**
+	 * @param toolName
+	 *            a tool name
+	 * @return VSkill
+	 * @throws DataAccessException
+	 */
+	@Override
+	public VSkill getSkillByTool(final String toolName)
+			throws DataAccessException {
+		return (VSkill) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_SKILL_BY_TOOL, toolName);
+	}
 
 }

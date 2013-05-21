@@ -18,73 +18,73 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  */
 public class ProfileDao extends SqlMapClientDaoSupport implements IDao<Profile> {
 
-    /**
-     * Set the sqlMapClient value.
-     * 
-     * @param sqlMapClient
-     *            the sqlMapClient to set
-     */
-    public ProfileDao(final SqlMapClient sqlMapClient) {
-	this.setSqlMapClient(sqlMapClient);
-    }
+	/**
+	 * Set the sqlMapClient value.
+	 * 
+	 * @param sqlMapClient
+	 *            the sqlMapClient to set
+	 */
+	public ProfileDao(final SqlMapClient sqlMapClient) {
+		this.setSqlMapClient(sqlMapClient);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Profile get(final Integer id) throws DataAccessException {
-	return (Profile) this.getSqlMapClientTemplate().queryForObject(
-		DBRequestsConstants.GET_PROFILE, id);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile get(final Integer id) throws DataAccessException {
+		return (Profile) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_PROFILE, id);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Profile> getAll() throws DataAccessException {
-	return this.getSqlMapClientTemplate().queryForList(
-		DBRequestsConstants.GET_ALL_PROFILE);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Profile> getAll() throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_PROFILE);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int save(final Profile profile) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int save(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int add(final Profile profile) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int add(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int delete(final Profile profile) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int delete(final Profile profile) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Profile check(final String name) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile check(final String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Profile getByName(final String name) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Profile getByName(final String name) throws DataAccessException {
+		throw new UnsupportedOperationException();
+	}
 
 }

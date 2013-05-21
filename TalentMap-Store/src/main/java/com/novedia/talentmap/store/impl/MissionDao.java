@@ -34,30 +34,40 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	 */
 	@Override
 	public Mission get(final Integer id) throws DataAccessException {
-		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_MISSION, id);
+		return (Mission) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_MISSION, id);
 	}
 
 	/**
-	 * Gets all mission for a colleague identifies by colleagueId, ordered by START_DATE.
+	 * Gets all mission for a colleague identifies by colleagueId, ordered by
+	 * START_DATE.
 	 * 
-	 * @param colleagueId colleague identifier
+	 * @param colleagueId
+	 *            colleague identifier
 	 * @return List<Mission> mission list
 	 * @throws DataAccessException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Mission> getAllByColleagueId(final Integer colleagueId) throws DataAccessException {
-		return (List<Mission>) this.getSqlMapClientTemplate().queryForList(DBRequestsConstants.GET_ALL_MISSION_BY_COLLEAGUE_ID, colleagueId);
+	public List<Mission> getAllByColleagueId(final Integer colleagueId)
+			throws DataAccessException {
+		return (List<Mission>) this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_MISSION_BY_COLLEAGUE_ID,
+				colleagueId);
 	}
-	
+
 	/**
 	 * Gets the last Mission for a colleague identifies by colleagueId
 	 * 
-	 * @param colleagueId colleague identifier
+	 * @param colleagueId
+	 *            colleague identifier
 	 * @return List<Mission> mission list
 	 * @throws DataAccessException
 	 */
-	public Mission getLastMissionByColleagueId(final Integer colleagueId) throws DataAccessException {	
-		return (Mission) this.getSqlMapClientTemplate().queryForObject(DBRequestsConstants.GET_LAST_MISSION_BY_COLLEAGUE_ID, colleagueId);
+	public Mission getLastMissionByColleagueId(final Integer colleagueId)
+			throws DataAccessException {
+		return (Mission) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_LAST_MISSION_BY_COLLEAGUE_ID,
+				colleagueId);
 	}
 
 	/**
@@ -73,18 +83,21 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	 */
 	@Override
 	public int save(final Mission mission) throws DataAccessException {
-		Integer res = (Integer)this.getSqlMapClientTemplate().update(DBRequestsConstants.SAVE_MISSION, mission);
-		if(res != 0){
-			this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION_TOOL,mission.getId());
+		Integer res = (Integer) this.getSqlMapClientTemplate().update(
+				DBRequestsConstants.SAVE_MISSION, mission);
+		if (res != 0) {
+			this.getSqlMapClientTemplate().delete(
+					DBRequestsConstants.DELETE_MISSION_TOOL, mission.getId());
 			for (Tool t : mission.getTools()) {
-				MissionTool missionTool=new MissionTool();
+				MissionTool missionTool = new MissionTool();
 				missionTool.setMissionId(mission.getId());
 				missionTool.setToolId(t.getId());
-				this.getSqlMapClientTemplate().update(DBRequestsConstants.ADD_MISSION_TOOL, missionTool);
+				this.getSqlMapClientTemplate().update(
+						DBRequestsConstants.ADD_MISSION_TOOL, missionTool);
 			}
-			
+
 		}
-		
+
 		return res;
 	}
 
@@ -94,18 +107,20 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 
 	@Override
 	public int add(final Mission mission) throws DataAccessException {
-		Integer res = (Integer)this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_MISSION, mission);
-		if(res != 0){
-			
+		Integer res = (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.ADD_MISSION, mission);
+		if (res != 0) {
+
 			for (Tool t : mission.getTools()) {
-				MissionTool missionTool=new MissionTool();
+				MissionTool missionTool = new MissionTool();
 				missionTool.setMissionId(mission.getId());
 				missionTool.setToolId(t.getId());
-				this.getSqlMapClientTemplate().insert(DBRequestsConstants.ADD_MISSION_TOOL, missionTool);
+				this.getSqlMapClientTemplate().insert(
+						DBRequestsConstants.ADD_MISSION_TOOL, missionTool);
 			}
-			
+
 		}
-		
+
 		return res;
 	}
 
@@ -114,7 +129,8 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	 */
 	@Override
 	public int delete(final Mission mission) throws DataAccessException {
-		return this.getSqlMapClientTemplate().delete(DBRequestsConstants.DELETE_MISSION, mission.getId());
+		return this.getSqlMapClientTemplate().delete(
+				DBRequestsConstants.DELETE_MISSION, mission.getId());
 	}
 
 	/**
@@ -132,8 +148,5 @@ public class MissionDao extends SqlMapClientDaoSupport implements IDao<Mission> 
 	public Mission getByName(final String name) throws DataAccessException {
 		throw new UnsupportedOperationException();
 	}
-	
-	
-	
-	
+
 }

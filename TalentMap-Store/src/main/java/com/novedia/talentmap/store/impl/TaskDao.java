@@ -18,84 +18,84 @@ import com.novedia.talentmap.store.utils.DBRequestsConstants;
  */
 public class TaskDao extends SqlMapClientDaoSupport implements IDao<Task> {
 
-    /**
-     * TaskDao constructor.
-     * 
-     * @param sqlMapClient
-     *            a SqlMapClient
-     */
-    public TaskDao(final SqlMapClient sqlMapClient) {
-	setSqlMapClient(sqlMapClient);
-    }
+	/**
+	 * TaskDao constructor.
+	 * 
+	 * @param sqlMapClient
+	 *            a SqlMapClient
+	 */
+	public TaskDao(final SqlMapClient sqlMapClient) {
+		setSqlMapClient(sqlMapClient);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#get(java.lang.Integer)
-     */
-    @Override
-    public Task get(final Integer id) throws DataAccessException {
-	return (Task) this.getSqlMapClientTemplate().queryForObject(
-		DBRequestsConstants.GET_TASK_BY_ID, id);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#get(java.lang.Integer)
+	 */
+	@Override
+	public Task get(final Integer id) throws DataAccessException {
+		return (Task) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_TASK_BY_ID, id);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#getAll()
-     */
-    @Override
-    public List<Task> getAll() throws DataAccessException {
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#getAll()
+	 */
+	@Override
+	public List<Task> getAll() throws DataAccessException {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#save(java.lang.Object)
-     */
-    @Override
-    public int save(Task task) throws DataAccessException {
-	return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#save(java.lang.Object)
+	 */
+	@Override
+	public int save(Task task) throws DataAccessException {
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#add(java.lang.Object)
-     */
-    @Override
-    public int add(final Task task) throws DataAccessException {
-	return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#add(java.lang.Object)
+	 */
+	@Override
+	public int add(final Task task) throws DataAccessException {
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#delete(java.lang.Object)
-     */
-    @Override
-    public int delete(final Task task) throws DataAccessException {
-	return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#delete(java.lang.Object)
+	 */
+	@Override
+	public int delete(final Task task) throws DataAccessException {
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#getByName(java.lang.String)
-     */
-    @Override
-    public Task getByName(String name) throws DataAccessException {
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#getByName(java.lang.String)
+	 */
+	@Override
+	public Task getByName(String name) throws DataAccessException {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.novedia.talentmap.store.IDao#check(java.lang.String)
-     */
-    @Override
-    public Task check(String name) throws DataAccessException {
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.store.IDao#check(java.lang.String)
+	 */
+	@Override
+	public Task check(String name) throws DataAccessException {
+		return null;
+	}
 }
