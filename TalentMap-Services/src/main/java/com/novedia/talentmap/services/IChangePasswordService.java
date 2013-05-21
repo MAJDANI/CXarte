@@ -10,13 +10,13 @@ import com.novedia.talentmap.model.entity.Authentication;
  */
 public interface IChangePasswordService {
 
-    /**
-     * Save user's password
-     * 
-     * @param authentication
-     *            authentication information user
-     * @return Integer
-     */
-    Integer savePassword(Authentication authentication);
+	/**
+	 * Save user's password
+	 * 
+	 * @param authentication
+	 *            authentication information user
+	 * @return Integer
+	 */
+	Integer savePassword(Authentication authentication);
 
 }

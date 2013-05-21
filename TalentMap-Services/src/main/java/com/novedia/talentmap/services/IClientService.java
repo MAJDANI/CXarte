@@ -11,11 +11,11 @@ import com.novedia.talentmap.model.entity.Client;
  */
 public interface IClientService {
 
-    /**
-     * Get all Clients.
-     * 
-     * @return List<Client>
-     */
-    List<Client> getAllClients();
+	/**
+	 * Get all Clients.
+	 * 
+	 * @return List<Client>
+	 */
+	List<Client> getAllClients();
 
 }
