@@ -8,88 +8,88 @@ import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class CmNotificationContent extends VerticalLayout implements
-	ClickListener {
+		ClickListener {
 
-    private CmListNotification cmListNotification;
+	private CmListNotification cmListNotification;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /***
-     * Vaadin Components
-     */
-    private Panel listPanel;
+	/***
+	 * Vaadin Components
+	 */
+	private Panel listPanel;
 
-    /**
-     * Default constructor
-     */
-    public CmNotificationContent() {
-	super();
-    }
-
-    /**
-     * Build the view of cm's notification
-     * 
-     * @return
-     */
-    public CmNotificationContent buildViewNotificationContent() {
-	removeAllComponents();
-	cmListNotification.setColleagueId(getAuthentication().getColleagueId());
-	cmListNotification = cmListNotification.buildAllCmNotification();
-	buildMain();
-	return this;
-    }
-
-    /**
-     * The main builder
-     * 
-     * @class CmNotificationContent.java
-     */
-    public void buildMain() {
-	setMargin(true);
-	setSpacing(true);
-	buildListPanelNotification();
-    }
-
-    public void buildListPanelNotification() {
-	if (cmListNotification.size() > 0) {
-	    listPanel.removeAllComponents();
-	    this.listPanel.addComponent(this.cmListNotification);
-
-	    addComponent(this.listPanel);
-	    listPanel.setVisible(true);
-	} else {
-	    listPanel.setVisible(false);
+	/**
+	 * Default constructor
+	 */
+	public CmNotificationContent() {
+		super();
 	}
-    }
 
-    @Override
-    public void buttonClick(ClickEvent event) {
-	// TODO Auto-generated method stub
+	/**
+	 * Build the view of cm's notification
+	 * 
+	 * @return
+	 */
+	public CmNotificationContent buildViewNotificationContent() {
+		removeAllComponents();
+		cmListNotification.setColleagueId(getAuthentication().getColleagueId());
+		cmListNotification = cmListNotification.buildAllCmNotification();
+		buildMain();
+		return this;
+	}
 
-    }
+	/**
+	 * The main builder
+	 * 
+	 * @class CmNotificationContent.java
+	 */
+	public void buildMain() {
+		setMargin(true);
+		setSpacing(true);
+		buildListPanelNotification();
+	}
 
-    public CmListNotification getCmListNotification() {
-	return cmListNotification;
-    }
+	public void buildListPanelNotification() {
+		if (cmListNotification.size() > 0) {
+			listPanel.removeAllComponents();
+			this.listPanel.addComponent(this.cmListNotification);
 
-    public void setCmListNotification(CmListNotification cmListNotification) {
-	this.cmListNotification = cmListNotification;
-    }
+			addComponent(this.listPanel);
+			listPanel.setVisible(true);
+		} else {
+			listPanel.setVisible(false);
+		}
+	}
 
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+	@Override
+	public void buttonClick(ClickEvent event) {
+		// TODO Auto-generated method stub
 
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+	}
 
-    public Panel getListPanel() {
-	return listPanel;
-    }
+	public CmListNotification getCmListNotification() {
+		return cmListNotification;
+	}
 
-    public void setListPanel(Panel listPanel) {
-	this.listPanel = listPanel;
-    }
+	public void setCmListNotification(CmListNotification cmListNotification) {
+		this.cmListNotification = cmListNotification;
+	}
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	public Panel getListPanel() {
+		return listPanel;
+	}
+
+	public void setListPanel(Panel listPanel) {
+		this.listPanel = listPanel;
+	}
 
 }

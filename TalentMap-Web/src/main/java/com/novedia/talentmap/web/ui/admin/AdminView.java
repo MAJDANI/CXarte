@@ -6,46 +6,46 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class AdminView extends VerticalLayout {
 
-    private AdminContentLayout adminContentLayout;
+	private AdminContentLayout adminContentLayout;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /**
-     * Default constructor
-     */
-    public AdminView() {
-	super();
-    }
+	/**
+	 * Default constructor
+	 */
+	public AdminView() {
+		super();
+	}
 
-    /**
-     * Build the view's admin
-     * 
-     * @return
-     */
-    public AdminView buildAdminView() {
-	removeAllComponents();
-	adminContentLayout = adminContentLayout.buildViewAdminContentLayout();
-	adminContentLayout.setAuthentication(getAuthentication());
-	addComponent(adminContentLayout);
-	return this;
-    }
+	/**
+	 * Build the view's admin
+	 * 
+	 * @return
+	 */
+	public AdminView buildAdminView() {
+		removeAllComponents();
+		adminContentLayout = adminContentLayout.buildViewAdminContentLayout();
+		adminContentLayout.setAuthentication(getAuthentication());
+		addComponent(adminContentLayout);
+		return this;
+	}
 
-    /**
-     * Set the adminContentLayout value
-     * 
-     * @param adminContentLayout
-     *            the adminContentLayout to set
-     */
-    public void setAdminContentLayout(AdminContentLayout adminContentLayout) {
-	this.adminContentLayout = adminContentLayout;
-    }
+	/**
+	 * Set the adminContentLayout value
+	 * 
+	 * @param adminContentLayout
+	 *            the adminContentLayout to set
+	 */
+	public void setAdminContentLayout(AdminContentLayout adminContentLayout) {
+		this.adminContentLayout = adminContentLayout;
+	}
 
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+	public Authentication getAuthentication() {
+		return authentication;
+	}
 
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
 
 }

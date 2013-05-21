@@ -10,60 +10,60 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class MonitoringCollabView extends VerticalLayout {
 
-    /**
-     * UID
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * UID
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Vaadin UI
-     */
-    private MonitoringCollabContentLayout monitoringCollabContentLayout;
+	/**
+	 * Vaadin UI
+	 */
+	private MonitoringCollabContentLayout monitoringCollabContentLayout;
 
-    /**
-     * Default constructor
-     */
-    public MonitoringCollabView() {
-	super();
-    }
+	/**
+	 * Default constructor
+	 */
+	public MonitoringCollabView() {
+		super();
+	}
 
-    /**
-     * Build the class MonitoringCollabView.java
-     * 
-     * @param monitoringCollabContentLayout
-     */
-    public MonitoringCollabView(
-	    MonitoringCollabContentLayout monitoringCollabContentLayout) {
-	super();
-	this.monitoringCollabContentLayout = monitoringCollabContentLayout;
+	/**
+	 * Build the class MonitoringCollabView.java
+	 * 
+	 * @param monitoringCollabContentLayout
+	 */
+	public MonitoringCollabView(
+			MonitoringCollabContentLayout monitoringCollabContentLayout) {
+		super();
+		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
 
-	mainBuild();
-    }
+		mainBuild();
+	}
 
-    /**
-     * The main builder
-     * 
-     * @class MonitoringCollabView.java
-     */
-    public MonitoringCollabView mainBuild() {
-	this.monitoringCollabContentLayout.mainBuild();
-	addComponent(this.monitoringCollabContentLayout);
-	return this;
-    }
+	/**
+	 * The main builder
+	 * 
+	 * @class MonitoringCollabView.java
+	 */
+	public MonitoringCollabView mainBuild() {
+		this.monitoringCollabContentLayout.mainBuild();
+		addComponent(this.monitoringCollabContentLayout);
+		return this;
+	}
 
-    /**
-     * Set the monitoringCollabContentLayout value
-     * 
-     * @param monitoringCollabContentLayout
-     *            the monitoringCollabContentLayout to set
-     */
-    public void setMonitoringCollabContentLayout(
-	    MonitoringCollabContentLayout monitoringCollabContentLayout) {
-	this.monitoringCollabContentLayout = monitoringCollabContentLayout;
-    }
+	/**
+	 * Set the monitoringCollabContentLayout value
+	 * 
+	 * @param monitoringCollabContentLayout
+	 *            the monitoringCollabContentLayout to set
+	 */
+	public void setMonitoringCollabContentLayout(
+			MonitoringCollabContentLayout monitoringCollabContentLayout) {
+		this.monitoringCollabContentLayout = monitoringCollabContentLayout;
+	}
 
-    public MonitoringCollabContentLayout getMonitoringCollabContentLayout() {
-	return monitoringCollabContentLayout;
-    }
+	public MonitoringCollabContentLayout getMonitoringCollabContentLayout() {
+		return monitoringCollabContentLayout;
+	}
 
 }
