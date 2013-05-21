@@ -11,190 +11,190 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class ProfileLayout extends HorizontalLayout {
 
-	/**
-	 * Vaadin UI
-	 */
-	private ProfileCollaboratorContent profileColleagueContent;
-	private ProfileNavigation profileNavigation;
-	private MissionCollaboratorContent missionCollabContent;
-	private SkillCollaboratorContent skillCollabContent;
+    /**
+     * Vaadin UI
+     */
+    private ProfileCollaboratorContent profileColleagueContent;
+    private ProfileNavigation profileNavigation;
+    private MissionCollaboratorContent missionCollabContent;
+    private SkillCollaboratorContent skillCollabContent;
 
-	private Authentication authentication;
+    private Authentication authentication;
 
-	/**
-	 * Vaadin Components
-	 */
-	private HorizontalSplitPanel hSplitPanel;
+    /**
+     * Vaadin Components
+     */
+    private HorizontalSplitPanel hSplitPanel;
 
-	/**
-	 * default constructor
-	 */
-	public ProfileLayout() {
-		super();
-	}
+    /**
+     * default constructor
+     */
+    public ProfileLayout() {
+	super();
+    }
 
-	/**
-	 * Build the profil Layout of user
-	 * 
-	 * @return
-	 */
-	public HorizontalLayout buildProfileLayout() {
-		profileColleagueContent.setAuthentication(getAuthentication());
-		skillCollabContent.setAuthentication(getAuthentication());
-		missionCollabContent.setAuthentication(getAuthentication());
-		removeAllComponents();
-		hSplitPanel = new HorizontalSplitPanel();
-		buildObservators();
-		mainBuild();
-		return this;
-	}
+    /**
+     * Build the profil Layout of user
+     * 
+     * @return
+     */
+    public HorizontalLayout buildProfileLayout() {
+	profileColleagueContent.setAuthentication(getAuthentication());
+	skillCollabContent.setAuthentication(getAuthentication());
+	missionCollabContent.setAuthentication(getAuthentication());
+	removeAllComponents();
+	hSplitPanel = new HorizontalSplitPanel();
+	buildObservators();
+	mainBuild();
+	return this;
+    }
 
-	public void buildObservators() {
+    public void buildObservators() {
 
-		this.profileNavigation.addObservateur(new IProfileLayout() {
+	this.profileNavigation.addObservateur(new IProfileLayout() {
 
-			@Override
-			public void updateProfileLayout(Class<?> cl) {
+	    @Override
+	    public void updateProfileLayout(Class<?> cl) {
 
-				if (cl == ProfileCollaboratorContent.class) {
-					ProfileLayout.this.hSplitPanel
-							.setSecondComponent(ProfileLayout.this.profileColleagueContent
-									.buildProfileColleagueContent());
-				}
+		if (cl == ProfileCollaboratorContent.class) {
+		    ProfileLayout.this.hSplitPanel
+			    .setSecondComponent(ProfileLayout.this.profileColleagueContent
+				    .buildProfileColleagueContent());
+		}
 
-				if (cl == MissionCollaboratorContent.class) {
-					ProfileLayout.this.hSplitPanel
-							.setSecondComponent(ProfileLayout.this.missionCollabContent
-									.buildViewMissionColleagueContent());
-				}
+		if (cl == MissionCollaboratorContent.class) {
+		    ProfileLayout.this.hSplitPanel
+			    .setSecondComponent(ProfileLayout.this.missionCollabContent
+				    .buildViewMissionColleagueContent());
+		}
 
-				if (cl == SkillCollaboratorContent.class) {
+		if (cl == SkillCollaboratorContent.class) {
 
-					ProfileLayout.this.hSplitPanel
-							.setSecondComponent(ProfileLayout.this.skillCollabContent
-									.buildSkillCollaboratorContent());
-				}
-			}
-		}, IProfileLayout.class);
-	}
+		    ProfileLayout.this.hSplitPanel
+			    .setSecondComponent(ProfileLayout.this.skillCollabContent
+				    .buildSkillCollaboratorContent());
+		}
+	    }
+	}, IProfileLayout.class);
+    }
 
-	/**
-	 * The main builder
-	 * 
-	 * @class ProfileLayout.java
-	 */
-	public void mainBuild() {
+    /**
+     * The main builder
+     * 
+     * @class ProfileLayout.java
+     */
+    public void mainBuild() {
 
-		VerticalLayout vLayout = new VerticalLayout();
-		this.profileNavigation.setRoleId(authentication.getAuthorization()
-				.getRoleId());
-		vLayout.addComponent(this.profileNavigation.mainBuild());
-		vLayout.setHeight("800px");
+	VerticalLayout vLayout = new VerticalLayout();
+	this.profileNavigation.setRoleId(authentication.getAuthorization()
+		.getRoleId());
+	vLayout.addComponent(this.profileNavigation.mainBuild());
+	vLayout.setHeight("800px");
 
-		this.hSplitPanel.setFirstComponent(vLayout);
-		this.hSplitPanel.setSecondComponent(this.profileColleagueContent
-				.buildProfileColleagueContent());
-		this.hSplitPanel.setSplitPosition(20);
-		this.hSplitPanel.setLocked(true);
+	this.hSplitPanel.setFirstComponent(vLayout);
+	this.hSplitPanel.setSecondComponent(this.profileColleagueContent
+		.buildProfileColleagueContent());
+	this.hSplitPanel.setSplitPosition(20);
+	this.hSplitPanel.setLocked(true);
 
-		addComponent(this.hSplitPanel);
-		setSizeFull();
-		setExpandRatio(this.hSplitPanel, 1);
-	}
+	addComponent(this.hSplitPanel);
+	setSizeFull();
+	setExpandRatio(this.hSplitPanel, 1);
+    }
 
-	public Authentication getAuthentication() {
-		return authentication;
-	}
+    public Authentication getAuthentication() {
+	return authentication;
+    }
 
-	public void setAuthentication(Authentication authentication) {
-		this.authentication = authentication;
-	}
+    public void setAuthentication(Authentication authentication) {
+	this.authentication = authentication;
+    }
 
-	/**
-	 * Get the profileCollabContent value
-	 * 
-	 * @return the profileCollabContent
-	 */
-	public ProfileCollaboratorContent getProfileColleagueContent() {
-		return profileColleagueContent;
-	}
+    /**
+     * Get the profileCollabContent value
+     * 
+     * @return the profileCollabContent
+     */
+    public ProfileCollaboratorContent getProfileColleagueContent() {
+	return profileColleagueContent;
+    }
 
-	/**
-	 * Set the profileCollabContent value
-	 * 
-	 * @param profileCollabContent
-	 *            the profileCollabContent to set
-	 */
-	public void setProfileColleagueContent(
-			ProfileCollaboratorContent profileColleagueContent) {
-		this.profileColleagueContent = profileColleagueContent;
-	}
+    /**
+     * Set the profileCollabContent value
+     * 
+     * @param profileCollabContent
+     *            the profileCollabContent to set
+     */
+    public void setProfileColleagueContent(
+	    ProfileCollaboratorContent profileColleagueContent) {
+	this.profileColleagueContent = profileColleagueContent;
+    }
 
-	/**
-	 * Get the profileNavigation value
-	 * 
-	 * @return the profileNavigation
-	 */
-	public ProfileNavigation getProfileNavigation() {
-		return profileNavigation;
-	}
+    /**
+     * Get the profileNavigation value
+     * 
+     * @return the profileNavigation
+     */
+    public ProfileNavigation getProfileNavigation() {
+	return profileNavigation;
+    }
 
-	/**
-	 * Set the profileNavigation value
-	 * 
-	 * @param profileNavigation
-	 *            the profileNavigation to set
-	 */
-	public void setProfileNavigation(ProfileNavigation profileNavigation) {
-		this.profileNavigation = profileNavigation;
-	}
+    /**
+     * Set the profileNavigation value
+     * 
+     * @param profileNavigation
+     *            the profileNavigation to set
+     */
+    public void setProfileNavigation(ProfileNavigation profileNavigation) {
+	this.profileNavigation = profileNavigation;
+    }
 
-	/**
-	 * Get the hSplitPanel value
-	 * 
-	 * @return the hSplitPanel
-	 */
-	public HorizontalSplitPanel getHSplitPanel() {
-		return hSplitPanel;
-	}
+    /**
+     * Get the hSplitPanel value
+     * 
+     * @return the hSplitPanel
+     */
+    public HorizontalSplitPanel getHSplitPanel() {
+	return hSplitPanel;
+    }
 
-	/**
-	 * Set the hSplitPanel value
-	 * 
-	 * @param hSplitPanel
-	 *            the hSplitPanel to set
-	 */
-	public void setHSplitPanel(HorizontalSplitPanel hSplitPanel) {
-		this.hSplitPanel = hSplitPanel;
-	}
+    /**
+     * Set the hSplitPanel value
+     * 
+     * @param hSplitPanel
+     *            the hSplitPanel to set
+     */
+    public void setHSplitPanel(HorizontalSplitPanel hSplitPanel) {
+	this.hSplitPanel = hSplitPanel;
+    }
 
-	/**
-	 * Get the missionCollabContent value
-	 * 
-	 * @return the missionCollabContent
-	 */
-	public MissionCollaboratorContent getMissionCollabContent() {
-		return missionCollabContent;
-	}
+    /**
+     * Get the missionCollabContent value
+     * 
+     * @return the missionCollabContent
+     */
+    public MissionCollaboratorContent getMissionCollabContent() {
+	return missionCollabContent;
+    }
 
-	/**
-	 * Set the missionCollabContent value
-	 * 
-	 * @param missionCollabContent
-	 *            the missionCollabContent to set
-	 */
-	public void setMissionCollabContent(
-			MissionCollaboratorContent missionCollabContent) {
-		this.missionCollabContent = missionCollabContent;
-	}
+    /**
+     * Set the missionCollabContent value
+     * 
+     * @param missionCollabContent
+     *            the missionCollabContent to set
+     */
+    public void setMissionCollabContent(
+	    MissionCollaboratorContent missionCollabContent) {
+	this.missionCollabContent = missionCollabContent;
+    }
 
-	public SkillCollaboratorContent getSkillCollabContent() {
-		return skillCollabContent;
-	}
+    public SkillCollaboratorContent getSkillCollabContent() {
+	return skillCollabContent;
+    }
 
-	public void setSkillCollabContent(
-			SkillCollaboratorContent skillCollabContent) {
-		this.skillCollabContent = skillCollabContent;
-	}
+    public void setSkillCollabContent(
+	    SkillCollaboratorContent skillCollabContent) {
+	this.skillCollabContent = skillCollabContent;
+    }
 
 }

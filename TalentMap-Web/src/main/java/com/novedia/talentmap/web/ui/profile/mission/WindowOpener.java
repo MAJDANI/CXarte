@@ -10,70 +10,70 @@ import com.vaadin.ui.Window.CloseEvent;
 /** Component contains a button that allows opening a window. */
 @SuppressWarnings("serial")
 public class WindowOpener extends CustomComponent implements
-		Window.CloseListener {
-	// Reference to main window
-	Window mainwindow;
-	Window mywindow; // The window to be opened
-	Button openbutton; // Button for opening the window
-	Button closebutton; // A button in the window
-	Label explanation; // A descriptive text
+	Window.CloseListener {
+    // Reference to main window
+    Window mainwindow;
+    Window mywindow; // The window to be opened
+    Button openbutton; // Button for opening the window
+    Button closebutton; // A button in the window
+    Label explanation; // A descriptive text
 
-	// Y Position of the window
-	private final int positionY = 100;
+    // Y Position of the window
+    private final int positionY = 100;
 
-	// X Position of the window
-	private final int positionX = 200;
+    // X Position of the window
+    private final int positionX = 200;
 
-	public WindowOpener(String label, Window mainWindow) {
-		this.mainwindow = mainWindow;
+    public WindowOpener(String label, Window mainWindow) {
+	this.mainwindow = mainWindow;
 
-		// The component contains a button that opens the window.
-		final VerticalLayout layout = new VerticalLayout();
-		openbutton = new Button("Open Window", this, "openButtonClick");
-		explanation = new Label("Explanation");
-		layout.addComponent(openbutton);
-		layout.addComponent(explanation);
-		setCompositionRoot(layout);
-	}
+	// The component contains a button that opens the window.
+	final VerticalLayout layout = new VerticalLayout();
+	openbutton = new Button("Open Window", this, "openButtonClick");
+	explanation = new Label("Explanation");
+	layout.addComponent(openbutton);
+	layout.addComponent(explanation);
+	setCompositionRoot(layout);
+    }
 
-	/** Handle the clicks for the two buttons. */
-	public void openButtonClick(Button.ClickEvent event) {
-		/* Create a new window. */
-		mywindow = new Window("My Dialog");
-		mywindow.setPositionX(positionX);
-		mywindow.setPositionY(positionY);
+    /** Handle the clicks for the two buttons. */
+    public void openButtonClick(Button.ClickEvent event) {
+	/* Create a new window. */
+	mywindow = new Window("My Dialog");
+	mywindow.setPositionX(positionX);
+	mywindow.setPositionY(positionY);
 
-		/* Add the window inside the main window. */
-		mainwindow.addWindow(mywindow);
+	/* Add the window inside the main window. */
+	mainwindow.addWindow(mywindow);
 
-		/* Listen for close events for the window. */
-		mywindow.addListener(this);
+	/* Listen for close events for the window. */
+	mywindow.addListener(this);
 
-		/* Add components in the window. */
-		mywindow.addComponent(new Label("A text label in the window."));
-		closebutton = new Button("Close", this, "closeButtonClick");
-		mywindow.addComponent(closebutton);
+	/* Add components in the window. */
+	mywindow.addComponent(new Label("A text label in the window."));
+	closebutton = new Button("Close", this, "closeButtonClick");
+	mywindow.addComponent(closebutton);
 
-		/* Allow opening only one window at a time. */
-		openbutton.setEnabled(false);
-		explanation.setValue("Window opened");
-	}
+	/* Allow opening only one window at a time. */
+	openbutton.setEnabled(false);
+	explanation.setValue("Window opened");
+    }
 
-	/** Handle Close button click and close the window. */
-	public void closeButtonClick(Button.ClickEvent event) {
-		/* Windows are managed by the application object. */
-		mainwindow.removeWindow(mywindow);
+    /** Handle Close button click and close the window. */
+    public void closeButtonClick(Button.ClickEvent event) {
+	/* Windows are managed by the application object. */
+	mainwindow.removeWindow(mywindow);
 
-		/* Return to initial state. */
-		openbutton.setEnabled(true);
-		explanation.setValue("Closed with button");
-	}
+	/* Return to initial state. */
+	openbutton.setEnabled(true);
+	explanation.setValue("Closed with button");
+    }
 
-	/** In case the window is closed otherwise. */
-	public void windowClose(CloseEvent e) {
-		/* Return to initial state. */
-		openbutton.setEnabled(true);
-		explanation.setValue("Closed with window controls");
-	}
+    /** In case the window is closed otherwise. */
+    public void windowClose(CloseEvent e) {
+	/* Return to initial state. */
+	openbutton.setEnabled(true);
+	explanation.setValue("Closed with window controls");
+    }
 
 }

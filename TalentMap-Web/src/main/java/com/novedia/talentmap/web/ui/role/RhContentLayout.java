@@ -6,20 +6,20 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class RhContentLayout extends VerticalLayout {
 
-	/**
-	 * Default constructor
-	 */
-	public RhContentLayout() {
-		super();
-	}
+    /**
+     * Default constructor
+     */
+    public RhContentLayout() {
+	super();
+    }
 
-	public RhContentLayout init() {
-		Label label = new Label(
-				" Page resource humaine en cours de construction ");
-		label.setVisible(true);
-		label.addStyleName("mystyle");
-		addComponent(label);
-		return this;
-	}
+    public RhContentLayout init() {
+	Label label = new Label(
+		" Page resource humaine en cours de construction ");
+	label.setVisible(true);
+	label.addStyleName("mystyle");
+	addComponent(label);
+	return this;
+    }
 
 }

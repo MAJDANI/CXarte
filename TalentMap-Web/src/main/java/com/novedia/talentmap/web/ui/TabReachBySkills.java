@@ -11,28 +11,28 @@ import com.vaadin.ui.VerticalLayout;
  * 
  */
 public class TabReachBySkills extends VerticalLayout {
-	private SearchContent searchContentSkil;
+    private SearchContent searchContentSkil;
 
-	public TabReachBySkills(SearchContent searchContentSkil) {
-		super();
-		this.searchContentSkil = searchContentSkil;
-		this.searchContentSkil.getSearchTarget().switchBySkillsPanel();
-		addComponent(this.searchContentSkil);
-	}
+    public TabReachBySkills(SearchContent searchContentSkil) {
+	super();
+	this.searchContentSkil = searchContentSkil;
+	this.searchContentSkil.getSearchTarget().switchBySkillsPanel();
+	addComponent(this.searchContentSkil);
+    }
 
-	/**
-	 * @return the searchContentSkil
-	 */
-	public SearchContent getSearchContentSkil() {
-		return searchContentSkil;
-	}
+    /**
+     * @return the searchContentSkil
+     */
+    public SearchContent getSearchContentSkil() {
+	return searchContentSkil;
+    }
 
-	/**
-	 * @param searchContentSkil
-	 *            the searchContentSkil to set
-	 */
-	public void setSearchContentSkil(SearchContent searchContentSkil) {
-		this.searchContentSkil = searchContentSkil;
-	}
+    /**
+     * @param searchContentSkil
+     *            the searchContentSkil to set
+     */
+    public void setSearchContentSkil(SearchContent searchContentSkil) {
+	this.searchContentSkil = searchContentSkil;
+    }
 
 }
