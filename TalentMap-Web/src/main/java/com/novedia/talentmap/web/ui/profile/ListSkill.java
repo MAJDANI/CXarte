@@ -21,184 +21,184 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class ListSkill extends VerticalLayout implements ItemClickListener {
 
-    private static final long serialVersionUID = 1557665108285765557L;
+	private static final long serialVersionUID = 1557665108285765557L;
 
-    /**
-     * TalentMap Services
-     */
-    private ISkillService skillService;
+	/**
+	 * TalentMap Services
+	 */
+	private ISkillService skillService;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /**
-     * JAVA Objects
-     */
-    private CategoryMapDTO categoryMapDto;
+	/**
+	 * JAVA Objects
+	 */
+	private CategoryMapDTO categoryMapDto;
 
-    /**
-     * Vaadin Components
-     */
-    private Table tableTools;
-    private Accordion accCategory;
-    private Accordion accConcept;
+	/**
+	 * Vaadin Components
+	 */
+	private Table tableTools;
+	private Accordion accCategory;
+	private Accordion accConcept;
 
-    /**
-     * Default Constructor
-     */
-    public ListSkill() {
-	super();
-	setImmediate(true);
-	setMargin(true);
-    }
-
-    /**
-     * Build the view of list skill
-     * 
-     * @return
-     */
-    public ListSkill buildListSkill() {
-	mainBuild();
-	return this;
-    }
-
-    /**
-     * The main builder
-     * 
-     * @class ListSkill.java
-     */
-    public void mainBuild() {
-	removeAllComponents();
-	try {
-
-	    this.categoryMapDto = this.skillService
-		    .getAllCollaboratorSkill(authentication.getColleagueId());
-
-	} catch (Exception e) {
-
-	    e.printStackTrace();
+	/**
+	 * Default Constructor
+	 */
+	public ListSkill() {
+		super();
+		setImmediate(true);
+		setMargin(true);
 	}
 
-	// Test if the Collaborator have one skill
-	if (categoryMapDto != null
-		&& !categoryMapDto.getMapCategory().isEmpty()) {
-	    initComponents();
-	    addComponent(buildListSkill(this.categoryMapDto));
-	} else {
-	    setVisible(false);
+	/**
+	 * Build the view of list skill
+	 * 
+	 * @return
+	 */
+	public ListSkill buildListSkill() {
+		mainBuild();
+		return this;
 	}
-    }
 
-    /**
-     * Initialize all component
-     * 
-     * @class ListSkill.java
-     */
-    private void initComponents() {
-	this.tableTools = new Table();
-	this.accCategory = new Accordion();
-	this.accConcept = new Accordion();
-    }
+	/**
+	 * The main builder
+	 * 
+	 * @class ListSkill.java
+	 */
+	public void mainBuild() {
+		removeAllComponents();
+		try {
 
-    /**
-     * Build the list of the Skills
-     * 
-     * @class ListSkill.java
-     */
-    public Accordion buildListSkill(CategoryMapDTO categoryMapDto) {
-	return CUtils.MapSkillToAccordionSkill(categoryMapDto, this);
-    }
+			this.categoryMapDto = this.skillService
+					.getAllCollaboratorSkill(authentication.getColleagueId());
 
-    @Override
-    public void itemClick(ItemClickEvent event) {
+		} catch (Exception e) {
 
-	this.tableTools.setValue(null);
-	setTableTools((Table) event.getSource());
-    }
+			e.printStackTrace();
+		}
 
-    /**
-     * Get the tableTools value
-     * 
-     * @return the tableTools
-     */
-    public Table getTableTools() {
-	return tableTools;
-    }
+		// Test if the Collaborator have one skill
+		if (categoryMapDto != null
+				&& !categoryMapDto.getMapCategory().isEmpty()) {
+			initComponents();
+			addComponent(buildListSkill(this.categoryMapDto));
+		} else {
+			setVisible(false);
+		}
+	}
 
-    /**
-     * 
-     * @class ListSkill.java
-     * @param tableTools
-     */
-    public void setTableTools(Table tableTools) {
-	this.tableTools = tableTools;
-    }
+	/**
+	 * Initialize all component
+	 * 
+	 * @class ListSkill.java
+	 */
+	private void initComponents() {
+		this.tableTools = new Table();
+		this.accCategory = new Accordion();
+		this.accConcept = new Accordion();
+	}
 
-    /**
-     * Set the skillService value
-     * 
-     * @param skillService
-     *            the skillService to set
-     */
-    public void setSkillService(ISkillService skillService) {
-	this.skillService = skillService;
-    }
+	/**
+	 * Build the list of the Skills
+	 * 
+	 * @class ListSkill.java
+	 */
+	public Accordion buildListSkill(CategoryMapDTO categoryMapDto) {
+		return CUtils.MapSkillToAccordionSkill(categoryMapDto, this);
+	}
 
-    /**
-     * Get the accCategory value
-     * 
-     * @return the accCategory
-     */
-    public Accordion getAccCategory() {
-	return accCategory;
-    }
+	@Override
+	public void itemClick(ItemClickEvent event) {
 
-    /**
-     * Set the accCategory value
-     * 
-     * @param accCategory
-     *            the accCategory to set
-     */
-    public void setAccCategory(Accordion accCategory) {
-	this.accCategory = accCategory;
-    }
+		this.tableTools.setValue(null);
+		setTableTools((Table) event.getSource());
+	}
 
-    /**
-     * Get the accConcept value
-     * 
-     * @return the accConcept
-     */
-    public Accordion getAccConcept() {
-	return accConcept;
-    }
+	/**
+	 * Get the tableTools value
+	 * 
+	 * @return the tableTools
+	 */
+	public Table getTableTools() {
+		return tableTools;
+	}
 
-    /**
-     * Set the accConcept value
-     * 
-     * @param accConcept
-     *            the accConcept to set
-     */
-    public void setAccConcept(Accordion accConcept) {
-	this.accConcept = accConcept;
-    }
+	/**
+	 * 
+	 * @class ListSkill.java
+	 * @param tableTools
+	 */
+	public void setTableTools(Table tableTools) {
+		this.tableTools = tableTools;
+	}
 
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+	/**
+	 * Set the skillService value
+	 * 
+	 * @param skillService
+	 *            the skillService to set
+	 */
+	public void setSkillService(ISkillService skillService) {
+		this.skillService = skillService;
+	}
 
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+	/**
+	 * Get the accCategory value
+	 * 
+	 * @return the accCategory
+	 */
+	public Accordion getAccCategory() {
+		return accCategory;
+	}
 
-    public ISkillService getSkillService() {
-	return skillService;
-    }
+	/**
+	 * Set the accCategory value
+	 * 
+	 * @param accCategory
+	 *            the accCategory to set
+	 */
+	public void setAccCategory(Accordion accCategory) {
+		this.accCategory = accCategory;
+	}
 
-    public CategoryMapDTO getCategoryMapDto() {
-	return categoryMapDto;
-    }
+	/**
+	 * Get the accConcept value
+	 * 
+	 * @return the accConcept
+	 */
+	public Accordion getAccConcept() {
+		return accConcept;
+	}
 
-    public void setCategoryMapDto(CategoryMapDTO categoryMapDto) {
-	this.categoryMapDto = categoryMapDto;
-    }
+	/**
+	 * Set the accConcept value
+	 * 
+	 * @param accConcept
+	 *            the accConcept to set
+	 */
+	public void setAccConcept(Accordion accConcept) {
+		this.accConcept = accConcept;
+	}
+
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	public ISkillService getSkillService() {
+		return skillService;
+	}
+
+	public CategoryMapDTO getCategoryMapDto() {
+		return categoryMapDto;
+	}
+
+	public void setCategoryMapDto(CategoryMapDTO categoryMapDto) {
+		this.categoryMapDto = categoryMapDto;
+	}
 
 }

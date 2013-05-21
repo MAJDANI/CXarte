@@ -19,58 +19,58 @@ import com.vaadin.ui.Select;
  */
 public class CmOptionFormFieldFactory implements FormFieldFactory {
 
-    /**
+	/**
 	 * 
 	 */
-    private static final long serialVersionUID = -3853034798754733877L;
+	private static final long serialVersionUID = -3853034798754733877L;
 
-    private INotificationService notificationService;
+	private INotificationService notificationService;
 
-    /**
-     * 
-     * @param Notification
-     *            Service
-     */
-    public CmOptionFormFieldFactory(INotificationService notificationService) {
-	this.notificationService = notificationService;
-    }
-
-    @Override
-    public Field createField(Item item, Object propertyId, Component uiContext) {
-
-	for (int i = 0; i < ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length; i++) {
-
-	    if (propertyId.equals(ConstantsEnglish.FIELD_ORDER_CM_OPTIONS[i])) {
-
-		Select emailFrequency = new Select(
-			ConstantsEnglish.NAME_FIELD_CM_OPTIONS[i] + " : ");
-		try {
-		    List<Frequency> allFrequencies = notificationService
-			    .getAllFrequencyChoices();
-
-		    for (Frequency f : allFrequencies) {
-			emailFrequency.addItem(f);
-			emailFrequency.setItemCaption(f, f.getName());
-		    }
-
-		    emailFrequency.setNullSelectionAllowed(false);
-		    emailFrequency.setImmediate(true);
-
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		return emailFrequency;
-
-	    }
+	/**
+	 * 
+	 * @param Notification
+	 *            Service
+	 */
+	public CmOptionFormFieldFactory(INotificationService notificationService) {
+		this.notificationService = notificationService;
 	}
-	return null;
-    }
 
-    public INotificationService getNotificationService() {
-	return notificationService;
-    }
+	@Override
+	public Field createField(Item item, Object propertyId, Component uiContext) {
 
-    public void setNotificationService(INotificationService notificationService) {
-	this.notificationService = notificationService;
-    }
+		for (int i = 0; i < ConstantsEnglish.FIELD_ORDER_CM_OPTIONS.length; i++) {
+
+			if (propertyId.equals(ConstantsEnglish.FIELD_ORDER_CM_OPTIONS[i])) {
+
+				Select emailFrequency = new Select(
+						ConstantsEnglish.NAME_FIELD_CM_OPTIONS[i] + " : ");
+				try {
+					List<Frequency> allFrequencies = notificationService
+							.getAllFrequencyChoices();
+
+					for (Frequency f : allFrequencies) {
+						emailFrequency.addItem(f);
+						emailFrequency.setItemCaption(f, f.getName());
+					}
+
+					emailFrequency.setNullSelectionAllowed(false);
+					emailFrequency.setImmediate(true);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return emailFrequency;
+
+			}
+		}
+		return null;
+	}
+
+	public INotificationService getNotificationService() {
+		return notificationService;
+	}
+
+	public void setNotificationService(INotificationService notificationService) {
+		this.notificationService = notificationService;
+	}
 }

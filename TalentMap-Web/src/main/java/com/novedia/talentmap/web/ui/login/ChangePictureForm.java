@@ -36,123 +36,123 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public class ChangePictureForm extends Window {
 
-    /**
-     * the main application
-     */
-    private MyVaadinApplication myVaadinApplication;
+	/**
+	 * the main application
+	 */
+	private MyVaadinApplication myVaadinApplication;
 
-    /**
-     * authentication
-     */
-    private Authentication authentication;
+	/**
+	 * authentication
+	 */
+	private Authentication authentication;
 
-    /**
-     * vaadin componnent
-     */
-    private Upload upload;
+	/**
+	 * vaadin componnent
+	 */
+	private Upload upload;
 
-    /**
-     * Constant message
-     */
-    private static final String FORM_TITLE = "Change picture";
+	/**
+	 * Constant message
+	 */
+	private static final String FORM_TITLE = "Change picture";
 
-    /**
-     * Default constructor
-     */
-    public ChangePictureForm() {
-	super();
-	setCaption(FORM_TITLE);
-	setModal(true);
-	addStyleName("changePasswordForm");
-    }
-
-    /**
-     * Build the ChangePictureForm view
-     * 
-     * @return
-     */
-    public ChangePictureForm buildChangePictureFormView() {
-	removeAllComponents();
-	initForm();
-
-	return this;
-    }
-
-    /**
-     * init change password form
-     */
-    private void initForm() {
-	upload = new Upload();
-	upload.setButtonCaption("Start Upload");
-	addComponent(upload);
-
-	// Implement both receiver that saves upload in a file and
-	// listener for successful upload
-	class ImageUploader implements Receiver, SucceededListener {
-	    public File file;
-
-	    public OutputStream receiveUpload(String filename, String mimeType) {
-		// Create upload stream
-		FileOutputStream fos = null; // Stream to write to
-		try {
-		    filename = authentication.getToken().getLogin() + ".jpg";
-		    // Open the file for writing.
-		    file = new File("C:/Users/j.maquin/Desktop/tmp/" + filename);
-		    fos = new FileOutputStream(file);
-		} catch (final java.io.FileNotFoundException e) {
-		    // Notification.show(
-		    // "Could not open file<br/>", e.getMessage(),
-		    // Notification.TYPE_ERROR_MESSAGE);
-		    return null;
-		}
-		return fos; // Return the output stream to write to
-	    }
-
-	    public void uploadSucceeded(SucceededEvent event) {
-		close();
-	    }
+	/**
+	 * Default constructor
+	 */
+	public ChangePictureForm() {
+		super();
+		setCaption(FORM_TITLE);
+		setModal(true);
+		addStyleName("changePasswordForm");
 	}
-	;
-	final ImageUploader uploader = new ImageUploader();
-	upload.setReceiver(uploader);
-	upload.addListener(uploader);
-    }
 
-    /**
-     * Get the main application
-     * 
-     * @return
-     */
-    public MyVaadinApplication getMyVaadinApplication() {
-	return myVaadinApplication;
-    }
+	/**
+	 * Build the ChangePictureForm view
+	 * 
+	 * @return
+	 */
+	public ChangePictureForm buildChangePictureFormView() {
+		removeAllComponents();
+		initForm();
 
-    /**
-     * Set the main application
-     * 
-     * @param myVaadinApplication
-     */
-    public void setMyVaadinApplication(MyVaadinApplication myVaadinApplication) {
-	this.myVaadinApplication = myVaadinApplication;
-    }
+		return this;
+	}
 
-    /**
-     * get the authentication's user
-     * 
-     * @return authentication
-     */
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+	/**
+	 * init change password form
+	 */
+	private void initForm() {
+		upload = new Upload();
+		upload.setButtonCaption("Start Upload");
+		addComponent(upload);
 
-    /**
-     * Set the authentication
-     * 
-     * @param authentication
-     *            authentication to set
-     */
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+		// Implement both receiver that saves upload in a file and
+		// listener for successful upload
+		class ImageUploader implements Receiver, SucceededListener {
+			public File file;
+
+			public OutputStream receiveUpload(String filename, String mimeType) {
+				// Create upload stream
+				FileOutputStream fos = null; // Stream to write to
+				try {
+					filename = authentication.getToken().getLogin() + ".jpg";
+					// Open the file for writing.
+					file = new File("C:/Users/j.maquin/Desktop/tmp/" + filename);
+					fos = new FileOutputStream(file);
+				} catch (final java.io.FileNotFoundException e) {
+					// Notification.show(
+					// "Could not open file<br/>", e.getMessage(),
+					// Notification.TYPE_ERROR_MESSAGE);
+					return null;
+				}
+				return fos; // Return the output stream to write to
+			}
+
+			public void uploadSucceeded(SucceededEvent event) {
+				close();
+			}
+		}
+		;
+		final ImageUploader uploader = new ImageUploader();
+		upload.setReceiver(uploader);
+		upload.addListener(uploader);
+	}
+
+	/**
+	 * Get the main application
+	 * 
+	 * @return
+	 */
+	public MyVaadinApplication getMyVaadinApplication() {
+		return myVaadinApplication;
+	}
+
+	/**
+	 * Set the main application
+	 * 
+	 * @param myVaadinApplication
+	 */
+	public void setMyVaadinApplication(MyVaadinApplication myVaadinApplication) {
+		this.myVaadinApplication = myVaadinApplication;
+	}
+
+	/**
+	 * get the authentication's user
+	 * 
+	 * @return authentication
+	 */
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	/**
+	 * Set the authentication
+	 * 
+	 * @param authentication
+	 *            authentication to set
+	 */
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
 
 }

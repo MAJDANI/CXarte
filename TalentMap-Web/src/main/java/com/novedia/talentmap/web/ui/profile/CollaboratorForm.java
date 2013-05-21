@@ -33,323 +33,323 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class CollaboratorForm extends VerticalLayout {
 
-    /**
+	/**
                 * 
                  */
-    private static final long serialVersionUID = 1195179317563179902L;
+	private static final long serialVersionUID = 1195179317563179902L;
 
-    private Authentication authentication;
+	private Authentication authentication;
 
-    /**
-     * Java Object
-     */
-    private Vector<Object> fieldOrderCollaborator;
-    private Vector<Object> fieldOrderMission;
+	/**
+	 * Java Object
+	 */
+	private Vector<Object> fieldOrderCollaborator;
+	private Vector<Object> fieldOrderMission;
 
-    /**
-     * Vaddin Components
-     */
-    private Form formCollaborator;
-    private Form formMission;
+	/**
+	 * Vaddin Components
+	 */
+	private Form formCollaborator;
+	private Form formMission;
 
-    /**
-     * TalentMap service
-     */
-    private IColleagueService colleagueService;
-    private IProfileService profileService;
-    private ISkillService skillService;
-    private IClientService clientService;
-    private IBusinessEngineerService businessEngineerService;
+	/**
+	 * TalentMap service
+	 */
+	private IColleagueService colleagueService;
+	private IProfileService profileService;
+	private ISkillService skillService;
+	private IClientService clientService;
+	private IBusinessEngineerService businessEngineerService;
 
-    /**
-     * Default constructor
-     */
-    public CollaboratorForm() {
-	super();
-    }
-
-    /**
-     * Build the colleague data
-     * 
-     * @return
-     */
-    public VerticalLayout buildColleagueData() {
-	removeAllComponents();
-	mainBuild();
-
-	return this;
-    }
-
-    /**
-     * The main builder
-     * 
-     * @class CollaboratorForm.java
-     */
-    public void mainBuild() {
-
-	setSizeFull();
-
-	try {
-	    // Set the order for Collaborator Form
-	    CUtils.setOrderForm(this.fieldOrderCollaborator,
-		    ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
-	    // Set the order for Mission Form
-	    CUtils.setOrderForm(this.fieldOrderMission,
-		    ConstantsEnglish.FIELD_ORDER_MISSION);
-	    buildFormColleagueData();
-	    buildFormColleagueMission();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-    }
-
-    Label dataAdminLabel;
-
-    /**
-     * Build the Collaborator Form
-     * 
-     * @class CollaboratorForm.java
-     * @throws Exception
-     */
-    private void buildFormColleagueData() throws Exception {
-
-	// Label "Données administratives"
-	dataAdminLabel = new Label();
-	dataAdminLabel.setCaption(ConstantsEnglish.ADMIN_DATA_LABEL);
-	dataAdminLabel.addStyleName(TalentMapCSS.H2);
-	addComponent(dataAdminLabel);
-
-	// Layout des données administratives (2 colonnes)
-	GridLayout adminDatasLayout = new GridLayout();
-
-	// Création des différents champs du formulaire
-	// "Données administratives"
-	this.formCollaborator
-		.setFormFieldFactory(new CollaboratorFormFieldFactory(
-			this.profileService, this.businessEngineerService,
-			this.colleagueService, true));
-
-	Colleague currentColleague = colleagueService
-		.getColleague(authentication.getColleagueId());
-	initFormColleagueData(currentColleague);
-
-	this.formCollaborator.setImmediate(true);
-
-	adminDatasLayout.setMargin(true);
-	adminDatasLayout.setSpacing(true);
-	adminDatasLayout.setColumns(3);
-	this.formCollaborator.setLayout(adminDatasLayout);
-
-	addComponent(this.formCollaborator);
-    }
-
-    /**
-     * Init the value of the collaborator form with current colleague datas
-     * 
-     * @param currentColleague
-     */
-    private void initFormColleagueData(Colleague currentColleague) {
-	if (currentColleague != null) {
-	    BeanItem<Item> collaboratorBean = new BeanItem(currentColleague);
-	    this.formCollaborator.setItemDataSource(collaboratorBean,
-		    this.fieldOrderCollaborator);
-	} else {
-	    InvalidValueException invalidVE = new InvalidValueException(
-		    ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
-	    this.formCollaborator.setComponentError(invalidVE);
-	}
-    }
-
-    /**
-     * Build the Mission Form
-     * 
-     * @class CollaboratorForm.java
-     * @throws Exception
-     */
-    private void buildFormColleagueMission() throws Exception {
-
-	MissionDto currentColleaguesLastMission = colleagueService
-		.getLastMission(authentication.getColleagueId());
-	if (currentColleaguesLastMission != null) {
-	    // Label "Last Mission"
-	    Label lastMissionLabel = new Label();
-	    lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
-	    lastMissionLabel.addStyleName(TalentMapCSS.H2);
-	    addComponent(lastMissionLabel);
-
-	    // Layout de la dernière mission
-	    GridLayout lastMissionDatasLayout = new GridLayout();
-	    lastMissionDatasLayout.setMargin(true);
-	    lastMissionDatasLayout.setSpacing(true);
-	    lastMissionDatasLayout.setColumns(3);
-	    lastMissionDatasLayout.setRows(1);
-
-	    // Création des différents champs du formulaire "Dernière mission"
-	    this.formMission.setFormFieldFactory(new MissionFormFieldFactory(
-		    this.clientService, this.skillService,
-		    currentColleaguesLastMission, true));
-	    initFormColleagueMission(currentColleaguesLastMission);
-	    this.formMission.setImmediate(true);
-	    this.formMission.setLayout(lastMissionDatasLayout);
-	    this.formMission.setReadOnly(true);
-	    addComponent(this.formMission);
-
-	}
-    }
-
-    /**
-     * Init the value of the mission form with last mission datas
-     * 
-     * @param lastMission
-     */
-    private void initFormColleagueMission(MissionDto lastMission) {
-	if (lastMission != null) {
-	    BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
-	    this.formMission.setItemDataSource(lastMissionBean,
-		    this.fieldOrderMission);
-	} else {
-	    InvalidValueException invalidVE = new InvalidValueException(
-		    ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
-	    this.formCollaborator.setComponentError(invalidVE);
-	}
-    }
-
-    /**
-     * Refresh all the forms with default values (Mission and AdminData)
-     */
-    public void refreshAllFormsToDefault() {
-	Colleague currentColleague = colleagueService
-		.getColleague(authentication.getColleagueId());
-	MissionDto currentColleaguesLastMission = colleagueService
-		.getLastMission(authentication.getColleagueId());
-	// Workaround to solve a gridLayout bug vaadin with method
-	// SetItemDataSource
-	this.formMission.getLayout().removeAllComponents();
-	this.formCollaborator.getLayout().removeAllComponents();
-
-	initFormColleagueData(currentColleague);
-	if (currentColleaguesLastMission != null) {
-	    initFormColleagueMission(currentColleaguesLastMission);
+	/**
+	 * Default constructor
+	 */
+	public CollaboratorForm() {
+		super();
 	}
 
-    }
+	/**
+	 * Build the colleague data
+	 * 
+	 * @return
+	 */
+	public VerticalLayout buildColleagueData() {
+		removeAllComponents();
+		mainBuild();
 
-    /**
-     * Set the profileService value
-     * 
-     * @param profileService
-     *            the profileService to set
-     */
-    public void setProfileService(IProfileService profileService) {
-	this.profileService = profileService;
-    }
+		return this;
+	}
 
-    /**
-     * Set the fieldOrderCollaborator value
-     * 
-     * @param fieldOrderCollaborator
-     *            the fieldOrderCollaborator to set
-     */
-    public void setFieldOrderCollaborator(Vector<Object> fieldOrderCollaborator) {
-	this.fieldOrderCollaborator = fieldOrderCollaborator;
-    }
+	/**
+	 * The main builder
+	 * 
+	 * @class CollaboratorForm.java
+	 */
+	public void mainBuild() {
 
-    /**
-     * Set the fieldOrderMission value
-     * 
-     * @param fieldOrderMission
-     *            the fieldOrderMission to set
-     */
-    public void setFieldOrderMission(Vector<Object> fieldOrderMission) {
-	this.fieldOrderMission = fieldOrderMission;
-    }
+		setSizeFull();
 
-    /**
-     * Set the profileService value
-     * 
-     * @param profileService
-     *            the profileService to set
-     */
-    public void setColleagueService(IColleagueService colleagueService) {
-	this.colleagueService = colleagueService;
-    }
+		try {
+			// Set the order for Collaborator Form
+			CUtils.setOrderForm(this.fieldOrderCollaborator,
+					ConstantsEnglish.FIELD_ORDER_COLLABORATOR);
+			// Set the order for Mission Form
+			CUtils.setOrderForm(this.fieldOrderMission,
+					ConstantsEnglish.FIELD_ORDER_MISSION);
+			buildFormColleagueData();
+			buildFormColleagueMission();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Get the formCollaborator value
-     * 
-     * @return the formCollaborator
-     */
-    public Form getFormCollaborator() {
-	return formCollaborator;
-    }
+	Label dataAdminLabel;
 
-    /**
-     * Set the formCollaborator value
-     * 
-     * @param formCollaborator
-     *            the formCollaborator to set
-     */
-    public void setFormCollaborator(Form formCollaborator) {
-	this.formCollaborator = formCollaborator;
-    }
+	/**
+	 * Build the Collaborator Form
+	 * 
+	 * @class CollaboratorForm.java
+	 * @throws Exception
+	 */
+	private void buildFormColleagueData() throws Exception {
 
-    public Form getFormMission() {
-	return formMission;
-    }
+		// Label "Données administratives"
+		dataAdminLabel = new Label();
+		dataAdminLabel.setCaption(ConstantsEnglish.ADMIN_DATA_LABEL);
+		dataAdminLabel.addStyleName(TalentMapCSS.H2);
+		addComponent(dataAdminLabel);
 
-    public void setFormMission(Form formMission) {
-	this.formMission = formMission;
-    }
+		// Layout des données administratives (2 colonnes)
+		GridLayout adminDatasLayout = new GridLayout();
 
-    /**
-     * Get authentication value.
-     * 
-     * @return authentication
-     */
-    public Authentication getAuthentication() {
-	return authentication;
-    }
+		// Création des différents champs du formulaire
+		// "Données administratives"
+		this.formCollaborator
+				.setFormFieldFactory(new CollaboratorFormFieldFactory(
+						this.profileService, this.businessEngineerService,
+						this.colleagueService, true));
 
-    /**
-     * Set authentication value.
-     * 
-     * @param authentication
-     */
-    public void setAuthentication(Authentication authentication) {
-	this.authentication = authentication;
-    }
+		Colleague currentColleague = colleagueService
+				.getColleague(authentication.getColleagueId());
+		initFormColleagueData(currentColleague);
 
-    public IClientService getClientService() {
-	return clientService;
-    }
+		this.formCollaborator.setImmediate(true);
 
-    public void setClientService(IClientService clientService) {
-	this.clientService = clientService;
-    }
+		adminDatasLayout.setMargin(true);
+		adminDatasLayout.setSpacing(true);
+		adminDatasLayout.setColumns(3);
+		this.formCollaborator.setLayout(adminDatasLayout);
 
-    public ISkillService getSkillService() {
-	return skillService;
-    }
+		addComponent(this.formCollaborator);
+	}
 
-    public void setSkillService(ISkillService skillService) {
-	this.skillService = skillService;
-    }
+	/**
+	 * Init the value of the collaborator form with current colleague datas
+	 * 
+	 * @param currentColleague
+	 */
+	private void initFormColleagueData(Colleague currentColleague) {
+		if (currentColleague != null) {
+			BeanItem<Item> collaboratorBean = new BeanItem(currentColleague);
+			this.formCollaborator.setItemDataSource(collaboratorBean,
+					this.fieldOrderCollaborator);
+		} else {
+			InvalidValueException invalidVE = new InvalidValueException(
+					ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			this.formCollaborator.setComponentError(invalidVE);
+		}
+	}
 
-    public IBusinessEngineerService getBusinessEngineerService() {
-	return businessEngineerService;
-    }
+	/**
+	 * Build the Mission Form
+	 * 
+	 * @class CollaboratorForm.java
+	 * @throws Exception
+	 */
+	private void buildFormColleagueMission() throws Exception {
 
-    public void setBusinessEngineerService(
-	    IBusinessEngineerService businessEngineerService) {
-	this.businessEngineerService = businessEngineerService;
-    }
+		MissionDto currentColleaguesLastMission = colleagueService
+				.getLastMission(authentication.getColleagueId());
+		if (currentColleaguesLastMission != null) {
+			// Label "Last Mission"
+			Label lastMissionLabel = new Label();
+			lastMissionLabel.setCaption(ConstantsEnglish.LAST_MISSION_LABEL);
+			lastMissionLabel.addStyleName(TalentMapCSS.H2);
+			addComponent(lastMissionLabel);
 
-    public IColleagueService getColleagueService() {
-	return colleagueService;
-    }
+			// Layout de la dernière mission
+			GridLayout lastMissionDatasLayout = new GridLayout();
+			lastMissionDatasLayout.setMargin(true);
+			lastMissionDatasLayout.setSpacing(true);
+			lastMissionDatasLayout.setColumns(3);
+			lastMissionDatasLayout.setRows(1);
 
-    public IProfileService getProfileService() {
-	return profileService;
-    }
+			// Création des différents champs du formulaire "Dernière mission"
+			this.formMission.setFormFieldFactory(new MissionFormFieldFactory(
+					this.clientService, this.skillService,
+					currentColleaguesLastMission, true));
+			initFormColleagueMission(currentColleaguesLastMission);
+			this.formMission.setImmediate(true);
+			this.formMission.setLayout(lastMissionDatasLayout);
+			this.formMission.setReadOnly(true);
+			addComponent(this.formMission);
+
+		}
+	}
+
+	/**
+	 * Init the value of the mission form with last mission datas
+	 * 
+	 * @param lastMission
+	 */
+	private void initFormColleagueMission(MissionDto lastMission) {
+		if (lastMission != null) {
+			BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
+			this.formMission.setItemDataSource(lastMissionBean,
+					this.fieldOrderMission);
+		} else {
+			InvalidValueException invalidVE = new InvalidValueException(
+					ConstantsEnglish.MESSAGE_COLLABORATOR_ID_NOT_FOUND);
+			this.formCollaborator.setComponentError(invalidVE);
+		}
+	}
+
+	/**
+	 * Refresh all the forms with default values (Mission and AdminData)
+	 */
+	public void refreshAllFormsToDefault() {
+		Colleague currentColleague = colleagueService
+				.getColleague(authentication.getColleagueId());
+		MissionDto currentColleaguesLastMission = colleagueService
+				.getLastMission(authentication.getColleagueId());
+		// Workaround to solve a gridLayout bug vaadin with method
+		// SetItemDataSource
+		this.formMission.getLayout().removeAllComponents();
+		this.formCollaborator.getLayout().removeAllComponents();
+
+		initFormColleagueData(currentColleague);
+		if (currentColleaguesLastMission != null) {
+			initFormColleagueMission(currentColleaguesLastMission);
+		}
+
+	}
+
+	/**
+	 * Set the profileService value
+	 * 
+	 * @param profileService
+	 *            the profileService to set
+	 */
+	public void setProfileService(IProfileService profileService) {
+		this.profileService = profileService;
+	}
+
+	/**
+	 * Set the fieldOrderCollaborator value
+	 * 
+	 * @param fieldOrderCollaborator
+	 *            the fieldOrderCollaborator to set
+	 */
+	public void setFieldOrderCollaborator(Vector<Object> fieldOrderCollaborator) {
+		this.fieldOrderCollaborator = fieldOrderCollaborator;
+	}
+
+	/**
+	 * Set the fieldOrderMission value
+	 * 
+	 * @param fieldOrderMission
+	 *            the fieldOrderMission to set
+	 */
+	public void setFieldOrderMission(Vector<Object> fieldOrderMission) {
+		this.fieldOrderMission = fieldOrderMission;
+	}
+
+	/**
+	 * Set the profileService value
+	 * 
+	 * @param profileService
+	 *            the profileService to set
+	 */
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
+	}
+
+	/**
+	 * Get the formCollaborator value
+	 * 
+	 * @return the formCollaborator
+	 */
+	public Form getFormCollaborator() {
+		return formCollaborator;
+	}
+
+	/**
+	 * Set the formCollaborator value
+	 * 
+	 * @param formCollaborator
+	 *            the formCollaborator to set
+	 */
+	public void setFormCollaborator(Form formCollaborator) {
+		this.formCollaborator = formCollaborator;
+	}
+
+	public Form getFormMission() {
+		return formMission;
+	}
+
+	public void setFormMission(Form formMission) {
+		this.formMission = formMission;
+	}
+
+	/**
+	 * Get authentication value.
+	 * 
+	 * @return authentication
+	 */
+	public Authentication getAuthentication() {
+		return authentication;
+	}
+
+	/**
+	 * Set authentication value.
+	 * 
+	 * @param authentication
+	 */
+	public void setAuthentication(Authentication authentication) {
+		this.authentication = authentication;
+	}
+
+	public IClientService getClientService() {
+		return clientService;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public ISkillService getSkillService() {
+		return skillService;
+	}
+
+	public void setSkillService(ISkillService skillService) {
+		this.skillService = skillService;
+	}
+
+	public IBusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
+	}
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+	public IProfileService getProfileService() {
+		return profileService;
+	}
 
 }
