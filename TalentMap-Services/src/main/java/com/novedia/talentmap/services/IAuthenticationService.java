@@ -12,12 +12,12 @@ import com.novedia.talentmap.model.entity.CredentialToken;
 
 public interface IAuthenticationService {
 
-	/**
-	 * Checks if user with credentials info exist in Database
-	 * 
-	 * @param authentication
-	 * @return
-	 */
-	Authentication checkUser(CredentialToken token);
+    /**
+     * Checks if user with credentials info exist in Database
+     * 
+     * @param authentication
+     * @return
+     */
+    Authentication checkUser(CredentialToken token);
 
 }

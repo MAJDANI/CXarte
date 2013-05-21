@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	
+
 	<!-- DAO bean declaration import -->
-	<import resource="classpath:store-spring-context.xml"/>
-	
+	<import resource="classpath:store-spring-context.xml" />
+
 	<!-- Service beans declaration -->
 	<bean id="collaboratorService" class="com.novedia.talentmap.services.impl.ColleagueService">
-		 <property name="colleagueDao" ref="colleagueDao"/>
-		 <property name="missionDao" ref="missionDao"/>
-		 <property name="managerDao" ref="managerDao"/>
-	</bean>
-	
-	<bean id="clientService" class="com.novedia.talentmap.services.impl.ClientService">
-		<property name="clientDao" ref="clientDao"/>
+		<property name="colleagueDao" ref="colleagueDao" />
+		<property name="missionDao" ref="missionDao" />
+		<property name="managerDao" ref="managerDao" />
 	</bean>
 
-	<bean id="businessEngineerService" class="com.novedia.talentmap.services.impl.BusinessEngineerService">
-		<property name="businessEngineerDao" ref="businessEngineerDao"/>
+	<bean id="clientService" class="com.novedia.talentmap.services.impl.ClientService">
+		<property name="clientDao" ref="clientDao" />
 	</bean>
-    
-    <bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
-		<property name="profileDao" ref="profileDao"/>
+
+	<bean id="businessEngineerService"
+		class="com.novedia.talentmap.services.impl.BusinessEngineerService">
+		<property name="businessEngineerDao" ref="businessEngineerDao" />
 	</bean>
-	
+
+	<bean id="profileService" class="com.novedia.talentmap.services.impl.ProfileService">
+		<property name="profileDao" ref="profileDao" />
+	</bean>
+
 	<bean id="skillService" class="com.novedia.talentmap.services.impl.SkillService">
-		<property name="skillDao"        ref="skillDao"/>
-		<property name="toolDao"         ref="toolDao"/>
-		<property name="conceptDao"      ref="conceptDao"/>
-		<property name="categoryDao"     ref="categoryDao"/>
-		<property name="vSkillDao"       ref="vSkillDao"/>
+		<property name="skillDao" ref="skillDao" />
+		<property name="toolDao" ref="toolDao" />
+		<property name="conceptDao" ref="conceptDao" />
+		<property name="categoryDao" ref="categoryDao" />
+		<property name="vSkillDao" ref="vSkillDao" />
 		<property name="vSkillCollabDao" ref="vSkillCollabDao" />
 	</bean>
-	
+
 	<bean id="notificationService" class="com.novedia.talentmap.services.impl.NotificationService">
-		<property name="notificationDao"        ref="notificationDao"/>
+		<property name="notificationDao" ref="notificationDao" />
 	</bean>
-	
+
 	<bean id="mapNotification" class="java.util.HashMap" />
-	
+
 	<bean id="adminService" class="com.novedia.talentmap.services.impl.AdminService">
-		<property name="toolDao" ref="toolDao"/>
-		<property name="conceptDao" ref="conceptDao"/>
-		<property name="categoryDao" ref="categoryDao"/>
-		<property name="vSkillDao" ref="vSkillDao"/>
+		<property name="toolDao" ref="toolDao" />
+		<property name="conceptDao" ref="conceptDao" />
+		<property name="categoryDao" ref="categoryDao" />
+		<property name="vSkillDao" ref="vSkillDao" />
 		<property name="mapNotification" ref="mapNotification" />
 		<property name="colleagueDao" ref="colleagueDao" />
 	</bean>
 
 	<bean id="managerService" class="com.novedia.talentmap.services.impl.ManagerService">
-		<property name="managerDao" ref="managerDao"/>
-		<property name="colleagueDao" ref="colleagueDao"/>
+		<property name="managerDao" ref="managerDao" />
+		<property name="colleagueDao" ref="colleagueDao" />
 	</bean>
-	
+
 	<bean id="missionService" class="com.novedia.talentmap.services.impl.MissionService">
-		<property name="missionDao" ref="missionDao"/>
+		<property name="missionDao" ref="missionDao" />
 	</bean>
-	
-	<bean id="authenticationService" class="com.novedia.talentmap.services.impl.AuthenticationService">
-		<property name="authenticationDao" ref="authenticationDao"/>
+
+	<bean id="authenticationService"
+		class="com.novedia.talentmap.services.impl.AuthenticationService">
+		<property name="authenticationDao" ref="authenticationDao" />
 	</bean>
-	
+
 	<bean id="registrationService" class="com.novedia.talentmap.services.impl.RegistrationService">
-		<property name="authenticationDao" ref="authenticationDao"/>
-		<property name="colleagueDao" ref="colleagueDao"/>	
-		<property name="profileDao" ref="profileDao"/>
+		<property name="authenticationDao" ref="authenticationDao" />
+		<property name="colleagueDao" ref="colleagueDao" />
+		<property name="profileDao" ref="profileDao" />
 	</bean>
-	
-	<bean id="changePasswordService"  class="com.novedia.talentmap.services.impl.ChangePasswordService">
-		<property name="authenticationDao" ref="authenticationDao"/>
-	
+
+	<bean id="changePasswordService"
+		class="com.novedia.talentmap.services.impl.ChangePasswordService">
+		<property name="authenticationDao" ref="authenticationDao" />
+
 	</bean>
-	
+
 </beans>

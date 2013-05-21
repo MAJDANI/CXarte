@@ -15,37 +15,37 @@ import com.novedia.talentmap.model.entity.Registration;
  */
 public interface IRegistrationService {
 
-	/**
-	 * Test if the user to register is already existing
-	 * 
-	 * @param registration
-	 * @return
-	 */
-	Colleague check(Registration registration);
+    /**
+     * Test if the user to register is already existing
+     * 
+     * @param registration
+     * @return
+     */
+    Colleague check(Registration registration);
 
-	/**
-	 * Add a colleague from a registration
-	 * 
-	 * @param registration
-	 * @return
-	 */
-	@Transactional
-	Integer addColleagueFromRegistration(Registration registration);
+    /**
+     * Add a colleague from a registration
+     * 
+     * @param registration
+     * @return
+     */
+    @Transactional
+    Integer addColleagueFromRegistration(Registration registration);
 
-	/**
-	 * Get All profiles
-	 * 
-	 * @return
-	 */
-	List<Profile> getAllProfile();
+    /**
+     * Get All profiles
+     * 
+     * @return
+     */
+    List<Profile> getAllProfile();
 
-	/**
-	 * Get all Consultant Manager
-	 */
-	List<Colleague> getAllConsultantManager();
+    /**
+     * Get all Consultant Manager
+     */
+    List<Colleague> getAllConsultantManager();
 
-	Integer countLogin(String login);
+    Integer countLogin(String login);
 
-	Integer countMail(String mail);
+    Integer countMail(String mail);
 
 }

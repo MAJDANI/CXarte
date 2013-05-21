@@ -18,175 +18,175 @@ import com.novedia.talentmap.model.entity.Mission;
  */
 public interface IColleagueService {
 
-	/**
-	 * Get all colleagues.
-	 * 
-	 * @return List<Collaborator>
-	 */
-	List<Colleague> getAllColleagues();
+    /**
+     * Get all colleagues.
+     * 
+     * @return List<Collaborator>
+     */
+    List<Colleague> getAllColleagues();
 
-	/**
-	 * Get a colleague.
-	 * 
-	 * @param id
-	 *            the identifier
-	 * @return Colleague a collaborator
-	 */
-	Colleague getColleague(Integer id);
+    /**
+     * Get a colleague.
+     * 
+     * @param id
+     *            the identifier
+     * @return Colleague a collaborator
+     */
+    Colleague getColleague(Integer id);
 
-	/**
-	 * Save a colleague.
-	 * 
-	 * @param colleague
-	 *            a collaborator
-	 * @return a int
-	 */
-	Integer saveColleague(Colleague colleague);
+    /**
+     * Save a colleague.
+     * 
+     * @param colleague
+     *            a collaborator
+     * @return a int
+     */
+    Integer saveColleague(Colleague colleague);
 
-	/**
-	 * Add a mission.
-	 * 
-	 * @param mission
-	 *            a mission
-	 * @return id of the mission inserted
-	 */
-	@Transactional
-	Integer addMission(MissionDto mission);
+    /**
+     * Add a mission.
+     * 
+     * @param mission
+     *            a mission
+     * @return id of the mission inserted
+     */
+    @Transactional
+    Integer addMission(MissionDto mission);
 
-	/**
-	 * Update a mission.
-	 * 
-	 * @param mission
-	 *            a mission
-	 * @return int
-	 */
-	@Transactional
-	Integer saveMission(MissionDto mission);
+    /**
+     * Update a mission.
+     * 
+     * @param mission
+     *            a mission
+     * @return int
+     */
+    @Transactional
+    Integer saveMission(MissionDto mission);
 
-	/**
-	 * Delete a mission.
-	 * 
-	 * @param mission
-	 *            mission
-	 * @return int
-	 */
-	Integer deleteMission(Mission mission);
+    /**
+     * Delete a mission.
+     * 
+     * @param mission
+     *            mission
+     * @return int
+     */
+    Integer deleteMission(Mission mission);
 
-	/**
-	 * Get a mission.
-	 * 
-	 * @param missionId
-	 *            the mission id
-	 * @return mission a mission
-	 */
-	Mission getMission(Integer missionId);
+    /**
+     * Get a mission.
+     * 
+     * @param missionId
+     *            the mission id
+     * @return mission a mission
+     */
+    Mission getMission(Integer missionId);
 
-	/**
-	 * Get all Collaborators' Mission By Collab_ID.
-	 * 
-	 * @class ICollaboratorService.java
-	 * @param collabId
-	 *            a id
-	 * @return List<Mission>
-	 */
-	List<Mission> getAllMissions(Integer collabId);
+    /**
+     * Get all Collaborators' Mission By Collab_ID.
+     * 
+     * @class ICollaboratorService.java
+     * @param collabId
+     *            a id
+     * @return List<Mission>
+     */
+    List<Mission> getAllMissions(Integer collabId);
 
-	/**
-	 * Get last mission for a Collab_ID.
-	 * 
-	 * @class ICollaboratorService.java
-	 * @param collabId
-	 *            a id
-	 * @return List<Mission>
-	 */
-	MissionDto getLastMission(Integer collabId);
+    /**
+     * Get last mission for a Collab_ID.
+     * 
+     * @class ICollaboratorService.java
+     * @param collabId
+     *            a id
+     * @return List<Mission>
+     */
+    MissionDto getLastMission(Integer collabId);
 
-	/**
-	 * Get manager.
-	 * 
-	 * @class ICollaboratorService.java
-	 * @param managerId
-	 *            a id
-	 * @return Manager
-	 */
-	Manager getManager(Integer managerId);
+    /**
+     * Get manager.
+     * 
+     * @class ICollaboratorService.java
+     * @param managerId
+     *            a id
+     * @return Manager
+     */
+    Manager getManager(Integer managerId);
 
-	/**
-	 * Get all Manager.
-	 * 
-	 * @return list of manager
-	 */
-	List<Colleague> getAllConsultantManager();
+    /**
+     * Get all Manager.
+     * 
+     * @return list of manager
+     */
+    List<Colleague> getAllConsultantManager();
 
-	/**
-	 * Get all Colleagues by lastName.
-	 * 
-	 * @param lastName
-	 *            a lastName
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getAllColleaguesByName(String name);
+    /**
+     * Get all Colleagues by lastName.
+     * 
+     * @param lastName
+     *            a lastName
+     * @return List<Colleague>
+     */
+    List<Colleague> getAllColleaguesByName(String name);
 
-	/**
-	 * Get all Colleagues by client name
-	 * 
-	 * @param clientName
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getAllColleaguesByClient(Client client);
+    /**
+     * Get all Colleagues by client name
+     * 
+     * @param clientName
+     * @return List<Colleague>
+     */
+    List<Colleague> getAllColleaguesByClient(Client client);
 
-	/**
-	 * Get Cm Colleagues by client name
-	 * 
-	 * @param clientName
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getCmColleaguesByClient(int clientId, int managerId);
+    /**
+     * Get Cm Colleagues by client name
+     * 
+     * @param clientName
+     * @return List<Colleague>
+     */
+    List<Colleague> getCmColleaguesByClient(int clientId, int managerId);
 
-	/**
-	 * Get Cm Colleagues by last name
-	 * 
-	 * @param lastName
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getCmColleaguesByName(String name, int managerId);
+    /**
+     * Get Cm Colleagues by last name
+     * 
+     * @param lastName
+     * @return List<Colleague>
+     */
+    List<Colleague> getCmColleaguesByName(String name, int managerId);
 
-	/**
-	 * Get all Colleagues by toolId.
-	 * 
-	 * @param toolId
-	 *            a toolId
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getAllCollaboratorsByToolId(Integer toolId);
+    /**
+     * Get all Colleagues by toolId.
+     * 
+     * @param toolId
+     *            a toolId
+     * @return List<Colleague>
+     */
+    List<Colleague> getAllCollaboratorsByToolId(Integer toolId);
 
-	/**
-	 * Select all Colleagues by a list of toolId.
-	 * 
-	 * @param listToolId
-	 *            a listTool
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getAllColleaguesByListToolId(Map toolIdMap);
+    /**
+     * Select all Colleagues by a list of toolId.
+     * 
+     * @param listToolId
+     *            a listTool
+     * @return List<Colleague>
+     */
+    List<Colleague> getAllColleaguesByListToolId(Map toolIdMap);
 
-	/**
-	 * Select all Colleagues by a list of colleagueId.
-	 * 
-	 * @param listColleagueId
-	 *            a list of colleague's Id
-	 * @return List<Colleague>
-	 */
-	List<Colleague> getAllColleagueByColleagueIdList(
-			List<Integer> listColleagueId);
+    /**
+     * Select all Colleagues by a list of colleagueId.
+     * 
+     * @param listColleagueId
+     *            a list of colleague's Id
+     * @return List<Colleague>
+     */
+    List<Colleague> getAllColleagueByColleagueIdList(
+	    List<Integer> listColleagueId);
 
-	/**
-	 * Counts colleagues in DB that have already the mail, with a different
-	 * colleagueId. Used to check when a colleague wants to modify his email, if
-	 * this email is not already use by someone else.
-	 * 
-	 * @param colleague
-	 *            who wants to change his email
-	 * @return The count found.
-	 */
-	Integer countMailForColleagueId(Colleague colleague);
+    /**
+     * Counts colleagues in DB that have already the mail, with a different
+     * colleagueId. Used to check when a colleague wants to modify his email, if
+     * this email is not already use by someone else.
+     * 
+     * @param colleague
+     *            who wants to change his email
+     * @return The count found.
+     */
+    Integer countMailForColleagueId(Colleague colleague);
 }

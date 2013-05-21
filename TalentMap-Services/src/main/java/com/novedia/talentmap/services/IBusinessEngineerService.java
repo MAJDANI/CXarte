@@ -11,11 +11,11 @@ import com.novedia.talentmap.model.entity.BusinessEngineer;
  */
 public interface IBusinessEngineerService {
 
-	/**
-	 * Get all BusinessEngineer.
-	 * 
-	 * @return List<BusinessEngineer>
-	 */
-	List<BusinessEngineer> getAllBusinessEngineer();
+    /**
+     * Get all BusinessEngineer.
+     * 
+     * @return List<BusinessEngineer>
+     */
+    List<BusinessEngineer> getAllBusinessEngineer();
 
 }

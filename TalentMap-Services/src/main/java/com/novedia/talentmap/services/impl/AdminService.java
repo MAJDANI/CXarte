@@ -28,382 +28,382 @@ import com.novedia.talentmap.store.impl.CategoryDao;
  */
 public class AdminService implements IAdminService {
 
-	/**
-	 * The tool DAO.
-	 */
-	private IDao<Tool> toolDao;
-	/**
-	 * The category DAO.
-	 */
-	private IDao<Category> categoryDao;
+    /**
+     * The tool DAO.
+     */
+    private IDao<Tool> toolDao;
+    /**
+     * The category DAO.
+     */
+    private IDao<Category> categoryDao;
 
-	/**
-	 * The concept DAO.
-	 */
-	private IDao<Concept> conceptDao;
+    /**
+     * The concept DAO.
+     */
+    private IDao<Concept> conceptDao;
 
-	private IDao<Colleague> colleagueDao;
+    private IDao<Colleague> colleagueDao;
 
-	/**
-	 * The vskill DAO.
-	 */
-	private IVSkillDao vSkillDao;
+    /**
+     * The vskill DAO.
+     */
+    private IVSkillDao vSkillDao;
 
-	/**
-	 * Entity:Category.
-	 */
-	private Category category;
+    /**
+     * Entity:Category.
+     */
+    private Category category;
 
-	/**
-	 * Entity:Concept.
-	 */
-	private Concept concept;
+    /**
+     * Entity:Concept.
+     */
+    private Concept concept;
 
-	/**
-	 * Entity:Tool.
-	 */
-	private Tool tool;
+    /**
+     * Entity:Tool.
+     */
+    private Tool tool;
 
-	/**
-	 * Map of notification.
-	 */
-	private Map<String, Object> mapNotification;
+    /**
+     * Map of notification.
+     */
+    private Map<String, Object> mapNotification;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Tool getTool(Integer toolId) throws DataAccessException {
-		return toolDao.get(toolId);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Tool getTool(Integer toolId) throws DataAccessException {
+	return toolDao.get(toolId);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Tool> getAllTools() throws DataAccessException {
+	return toolDao.getAll();
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public Integer addTool(Tool tool) throws DataAccessException {
+	return toolDao.add(tool);
+    }
+
+    /**
+     * Add one Category
+     * 
+     * @param category
+     * @return
+     */
+    public Integer addCategory(Category category) throws DataAccessException {
+	return categoryDao.add(category);
+    }
+
+    /**
+     * Add one Concept
+     * 
+     * @param concept
+     * @return
+     */
+    public Integer addConcept(Concept concept) throws DataAccessException {
+	return conceptDao.add(concept);
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public Tool checkTool(Tool tool) throws DataAccessException {
+	return ((ToolDao) toolDao).check(tool);
+    }
+
+    /**
+     * Add one Category
+     * 
+     * @param category
+     * @return
+     */
+    public Category checkCategory(Category category) throws DataAccessException {
+	return ((CategoryDao) categoryDao).check(category);
+    }
+
+    /**
+     * Add one Concept
+     * 
+     * @param concept
+     * @return
+     */
+    public Concept checkConcept(Concept concept) throws DataAccessException {
+	return ((ConceptDao) conceptDao).check(concept);
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public List<Concept> getAllConcepts() throws DataAccessException {
+	return conceptDao.getAll();
+    }
+
+    /**
+     * Get all categories.
+     * 
+     * @return list a of Category
+     * @throws DataAccessException
+     */
+    @Override
+    public List<Category> getAllCategories() throws DataAccessException {
+	return categoryDao.getAll();
+    }
+
+    /**
+     * Get all concepts for a category
+     * 
+     * @return list of concept
+     * @param category
+     * @throws DataAccessException
+     */
+    public List<Concept> getAllConceptByCategory(Category category)
+	    throws DataAccessException {
+	return ((ConceptDao) conceptDao).getAllConceptByCategory(category);
+    }
+
+    /**
+     * Save a Tool.
+     * 
+     * @param skill
+     * @return Tool
+     * @throws DataAccessException
+     */
+    Tool saveTool(final VSkill skill) throws DataAccessException {
+
+	if (this.tool == null) {
+	    this.tool = Tool.builder().name(skill.getToolName())
+		    .concept(this.concept).build();
+	    Tool.builder().id(this.toolDao.save(this.tool)).build();
+	} else {
+	    VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());
+	    this.category = Category.builder().name(sk.getCategoryName())
+		    .build();
+
+	    // TODO : vérifier la nécessité de ce code
+	    // this.concept.setName(sk.getConcept_name());
 	}
+	return tool;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Tool> getAllTools() throws DataAccessException {
-		return toolDao.getAll();
-	}
+    /**
+     * This method allow to update one Skill.
+     * 
+     * @return a map<String, Object>
+     * @param category
+     *            a category
+     * @param concept
+     *            a concept
+     * @param tool
+     *            a tool
+     * @throws DataAccessException
+     */
+    @Override
+    public Map<String, Object> updateASkill(Category category, Concept concept,
+	    Tool tool) throws DataAccessException {
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 */
-	public Integer addTool(Tool tool) throws DataAccessException {
-		return toolDao.add(tool);
-	}
-
-	/**
-	 * Add one Category
-	 * 
-	 * @param category
-	 * @return
-	 */
-	public Integer addCategory(Category category) throws DataAccessException {
-		return categoryDao.add(category);
-	}
-
-	/**
-	 * Add one Concept
-	 * 
-	 * @param concept
-	 * @return
-	 */
-	public Integer addConcept(Concept concept) throws DataAccessException {
-		return conceptDao.add(concept);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 */
-	public Tool checkTool(Tool tool) throws DataAccessException {
-		return ((ToolDao) toolDao).check(tool);
-	}
-
-	/**
-	 * Add one Category
-	 * 
-	 * @param category
-	 * @return
-	 */
-	public Category checkCategory(Category category) throws DataAccessException {
-		return ((CategoryDao) categoryDao).check(category);
-	}
-
-	/**
-	 * Add one Concept
-	 * 
-	 * @param concept
-	 * @return
-	 */
-	public Concept checkConcept(Concept concept) throws DataAccessException {
-		return ((ConceptDao) conceptDao).check(concept);
-	}
-
-	/**
-	 * {@inheritDoc}.
-	 */
-	@Override
-	public List<Concept> getAllConcepts() throws DataAccessException {
-		return conceptDao.getAll();
-	}
-
-	/**
-	 * Get all categories.
-	 * 
-	 * @return list a of Category
-	 * @throws DataAccessException
-	 */
-	@Override
-	public List<Category> getAllCategories() throws DataAccessException {
-		return categoryDao.getAll();
-	}
-
-	/**
-	 * Get all concepts for a category
-	 * 
-	 * @return list of concept
-	 * @param category
-	 * @throws DataAccessException
-	 */
-	public List<Concept> getAllConceptByCategory(Category category)
-			throws DataAccessException {
-		return ((ConceptDao) conceptDao).getAllConceptByCategory(category);
-	}
-
-	/**
-	 * Save a Tool.
-	 * 
-	 * @param skill
-	 * @return Tool
-	 * @throws DataAccessException
-	 */
-	Tool saveTool(final VSkill skill) throws DataAccessException {
-
-		if (this.tool == null) {
-			this.tool = Tool.builder().name(skill.getToolName())
-					.concept(this.concept).build();
-			Tool.builder().id(this.toolDao.save(this.tool)).build();
-		} else {
-			VSkill sk = this.vSkillDao.getSkillByTool(this.tool.getName());
-			this.category = Category.builder().name(sk.getCategoryName())
-					.build();
-
-			// TODO : vérifier la nécessité de ce code
-			// this.concept.setName(sk.getConcept_name());
+	if (category != null) {
+	    this.categoryDao.save(category);
+	    if (concept != null) {
+		this.conceptDao.save(concept);
+		if (tool != null) {
+		    this.toolDao.save(tool);
 		}
-		return tool;
+	    }
+	    this.mapNotification.put("typeError", 1);
+	    this.mapNotification.put("messageError", "successful update");
+	} else {
+	    this.mapNotification.put("typeError", 2);
+	    this.mapNotification.put("messageError", "No skill update");
 	}
+	return this.mapNotification;
+    }
 
-	/**
-	 * This method allow to update one Skill.
-	 * 
-	 * @return a map<String, Object>
-	 * @param category
-	 *            a category
-	 * @param concept
-	 *            a concept
-	 * @param tool
-	 *            a tool
-	 * @throws DataAccessException
-	 */
-	@Override
-	public Map<String, Object> updateASkill(Category category, Concept concept,
-			Tool tool) throws DataAccessException {
+    /**
+     * This method allow to delete one category.
+     * 
+     * @param categoryId
+     *            a category id
+     * @return a map<String, Object>
+     * @throws DataAccessException
+     */
+    @Override
+    public Map<String, Object> deleteCategory(int categoryId)
+	    throws DataAccessException {
 
-		if (category != null) {
-			this.categoryDao.save(category);
-			if (concept != null) {
-				this.conceptDao.save(concept);
-				if (tool != null) {
-					this.toolDao.save(tool);
-				}
-			}
-			this.mapNotification.put("typeError", 1);
-			this.mapNotification.put("messageError", "successful update");
-		} else {
-			this.mapNotification.put("typeError", 2);
-			this.mapNotification.put("messageError", "No skill update");
-		}
-		return this.mapNotification;
+	Category category = Category.builder().id(categoryId).build();
+	if (this.categoryDao.delete(category) > 0) {
+	    this.mapNotification.put("typeError", 1);
+	    this.mapNotification.put("messageError", "successful delete");
+	} else {
+	    this.mapNotification.put("typeError", 3);
+	    this.mapNotification.put("messageError", "unsuccessful delete");
 	}
+	return this.mapNotification;
+    }
 
-	/**
-	 * This method allow to delete one category.
-	 * 
-	 * @param categoryId
-	 *            a category id
-	 * @return a map<String, Object>
-	 * @throws DataAccessException
-	 */
-	@Override
-	public Map<String, Object> deleteCategory(int categoryId)
-			throws DataAccessException {
+    /**
+     * This method allow to delete one concept.
+     * 
+     * @param conceptId
+     *            a concept id
+     * @return a map<String, Object>
+     * @throws DataAccessException
+     */
+    @Override
+    public Map<String, Object> deleteConcept(int conceptId)
+	    throws DataAccessException {
 
-		Category category = Category.builder().id(categoryId).build();
-		if (this.categoryDao.delete(category) > 0) {
-			this.mapNotification.put("typeError", 1);
-			this.mapNotification.put("messageError", "successful delete");
-		} else {
-			this.mapNotification.put("typeError", 3);
-			this.mapNotification.put("messageError", "unsuccessful delete");
-		}
-		return this.mapNotification;
+	Concept concept = Concept.builder().id(conceptId).build();
+	if (this.conceptDao.delete(concept) > 0) {
+	    this.mapNotification.put("typeError", 1);
+	    this.mapNotification.put("messageError", "successful delete");
+	} else {
+	    this.mapNotification.put("typeError", 3);
+	    this.mapNotification.put("messageError", "unsuccessful delete");
 	}
+	return this.mapNotification;
+    }
 
-	/**
-	 * This method allow to delete one concept.
-	 * 
-	 * @param conceptId
-	 *            a concept id
-	 * @return a map<String, Object>
-	 * @throws DataAccessException
-	 */
-	@Override
-	public Map<String, Object> deleteConcept(int conceptId)
-			throws DataAccessException {
+    /**
+     * This method allow to delete a tool.
+     * 
+     * @return a map<String, Object>
+     * @param toolId
+     *            a tool
+     * @throws DataAccessException
+     */
+    @Override
+    public Map<String, Object> deleteTool(int toolId)
+	    throws DataAccessException {
 
-		Concept concept = Concept.builder().id(conceptId).build();
-		if (this.conceptDao.delete(concept) > 0) {
-			this.mapNotification.put("typeError", 1);
-			this.mapNotification.put("messageError", "successful delete");
-		} else {
-			this.mapNotification.put("typeError", 3);
-			this.mapNotification.put("messageError", "unsuccessful delete");
-		}
-		return this.mapNotification;
+	Tool tool = Tool.builder().id(toolId).build();
+	if (this.toolDao.delete(tool) > 0) {
+	    this.mapNotification.put("typeError", 1);
+	    this.mapNotification.put("messageError", "successful delete");
+	} else {
+	    this.mapNotification.put("typeError", 3);
+	    this.mapNotification.put("messageError", "unsuccessful delete");
 	}
+	return this.mapNotification;
+    }
 
-	/**
-	 * This method allow to delete a tool.
-	 * 
-	 * @return a map<String, Object>
-	 * @param toolId
-	 *            a tool
-	 * @throws DataAccessException
-	 */
-	@Override
-	public Map<String, Object> deleteTool(int toolId)
-			throws DataAccessException {
+    @Override
+    @Transactional
+    public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
+	try {
+	    for (Colleague colleague : Colleagues) {
+		colleagueDao.delete(colleague);
+	    }
+	    this.mapNotification.put("typeError", 1);
+	    this.mapNotification.put("messageError", "successful delete");
 
-		Tool tool = Tool.builder().id(toolId).build();
-		if (this.toolDao.delete(tool) > 0) {
-			this.mapNotification.put("typeError", 1);
-			this.mapNotification.put("messageError", "successful delete");
-		} else {
-			this.mapNotification.put("typeError", 3);
-			this.mapNotification.put("messageError", "unsuccessful delete");
-		}
-		return this.mapNotification;
+	} catch (DataAccessException e) {
+	    this.mapNotification.put("typeError", 3);
+	    this.mapNotification.put("messageError", "unsuccessful delete");
 	}
+	return mapNotification;
+    }
 
-	@Override
-	@Transactional
-	public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
-		try {
-			for (Colleague colleague : Colleagues) {
-				colleagueDao.delete(colleague);
-			}
-			this.mapNotification.put("typeError", 1);
-			this.mapNotification.put("messageError", "successful delete");
+    @Override
+    public void updateManagerColleague(int colleagueID) {
 
-		} catch (DataAccessException e) {
-			this.mapNotification.put("typeError", 3);
-			this.mapNotification.put("messageError", "unsuccessful delete");
-		}
-		return mapNotification;
-	}
+    }
 
-	@Override
-	public void updateManagerColleague(int colleagueID) {
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param categoryDao
+     *            .
+     */
+    public void setCategoryDao(IDao<Category> categoryDao) {
+	this.categoryDao = categoryDao;
+    }
 
-	}
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param conceptDao
+     *            .
+     */
+    public void setConceptDao(IDao<Concept> conceptDao) {
+	this.conceptDao = conceptDao;
+    }
 
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param categoryDao
-	 *            .
-	 */
-	public void setCategoryDao(IDao<Category> categoryDao) {
-		this.categoryDao = categoryDao;
-	}
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param toolDao
+     *            a tooldao
+     */
+    public void setToolDao(IDao<Tool> toolDao) {
+	this.toolDao = toolDao;
+    }
 
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param conceptDao
-	 *            .
-	 */
-	public void setConceptDao(IDao<Concept> conceptDao) {
-		this.conceptDao = conceptDao;
-	}
+    /**
+     * This method allow to make the spring injection. Set the vSkillDao value
+     * 
+     * @param vSkillDao
+     *            the vSkillDao to set
+     */
+    public void setvSkillDao(IVSkillDao vSkillDao) {
+	this.vSkillDao = vSkillDao;
+    }
 
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param toolDao
-	 *            a tooldao
-	 */
-	public void setToolDao(IDao<Tool> toolDao) {
-		this.toolDao = toolDao;
-	}
+    /**
+     * This method allow to make the spring injection. Set the mapNotification
+     * value
+     * 
+     * @param mapNotification
+     *            the mapNotification to set
+     */
+    public void setMapNotification(Map<String, Object> mapNotification) {
+	this.mapNotification = mapNotification;
+    }
 
-	/**
-	 * This method allow to make the spring injection. Set the vSkillDao value
-	 * 
-	 * @param vSkillDao
-	 *            the vSkillDao to set
-	 */
-	public void setvSkillDao(IVSkillDao vSkillDao) {
-		this.vSkillDao = vSkillDao;
-	}
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param category
+     */
+    public void setCategory(Category category) {
+	this.category = category;
+    }
 
-	/**
-	 * This method allow to make the spring injection. Set the mapNotification
-	 * value
-	 * 
-	 * @param mapNotification
-	 *            the mapNotification to set
-	 */
-	public void setMapNotification(Map<String, Object> mapNotification) {
-		this.mapNotification = mapNotification;
-	}
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param concept
+     */
+    public void setConcept(Concept concept) {
+	this.concept = concept;
+    }
 
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param category
-	 */
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    /**
+     * This method allow to make the spring injection.
+     * 
+     * @param tool
+     */
+    public void setTool(Tool tool) {
+	this.tool = tool;
+    }
 
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param concept
-	 */
-	public void setConcept(Concept concept) {
-		this.concept = concept;
-	}
-
-	/**
-	 * This method allow to make the spring injection.
-	 * 
-	 * @param tool
-	 */
-	public void setTool(Tool tool) {
-		this.tool = tool;
-	}
-
-	/**
-	 * 
-	 * @param colleagueDao
-	 */
-	public void setColleagueDao(IDao<Colleague> colleagueDao) {
-		this.colleagueDao = colleagueDao;
-	}
+    /**
+     * 
+     * @param colleagueDao
+     */
+    public void setColleagueDao(IDao<Colleague> colleagueDao) {
+	this.colleagueDao = colleagueDao;
+    }
 
 }
