@@ -21,7 +21,8 @@
 		parameterClass="com.novedia.talentmap.model.entity.CredentialToken">
 		SELECT * FROM AUTHENTICATION auth, USER_ROLE role WHERE
 		auth.LOGIN = #login# AND auth.PASSWORD = #password#
-		AND auth.ROLE_ID = role.ROLE_ID
+		AND auth.ROLE_ID =
+		role.ROLE_ID
 	</select>
 
 	<select id="countLogin" resultClass="java.lang.Integer"
@@ -31,7 +32,8 @@
 	</select>
 
 	<insert id="addUserFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
-		INSERT INTO AUTHENTICATION (
+		INSERT INTO
+		AUTHENTICATION (
 		LOGIN,
 		PASSWORD,
 		COLLEAGUE_ID,
@@ -45,7 +47,8 @@
 	</insert>
 
 	<update id="save" parameterClass="com.novedia.talentmap.model.entity.Authentication">
-		update AUTHENTICATION set PASSWORD=#token.password# where LOGIN =
+		update AUTHENTICATION set
+		PASSWORD=#token.password# where LOGIN =
 		#token.login#
 	</update>
 

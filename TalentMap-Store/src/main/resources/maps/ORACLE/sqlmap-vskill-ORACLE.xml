@@ -19,7 +19,8 @@
 	<select id="getAllVSkillOrdered" resultMap="vskillResult"
 		parameterClass="String">
 		SELECT * FROM VSKILL
-		ORDER BY CATEGORY_NAME, CONCEPT_NAME, TOOL_NAME
+		ORDER BY CATEGORY_NAME,
+		CONCEPT_NAME, TOOL_NAME
 	</select>
 
 	<select id="getSkillByTool" resultMap="vskillResult"

@@ -48,7 +48,8 @@
 	<select id="getAllCollaboratorsByManagerId" parameterClass="Integer"
 		resultMap="colleagueResult">
 		SELECT * FROM COLLEAGUE c, BUSINESS_ERNGINEER b
-		WHERE MANAGER_ID = #id#
+		WHERE
+		MANAGER_ID = #id#
 		AND c.B_ENGINEER_ID = B.B_ENGINEER_ID
 	</select>
 

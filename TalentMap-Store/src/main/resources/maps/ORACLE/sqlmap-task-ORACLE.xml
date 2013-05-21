@@ -16,7 +16,8 @@
 	</resultMap>
 
 	<select id="get" resultMap="taskResult" parameterClass="Integer">
-		SELECT * FROM TASK WHERE TASK_ID = #id#
+		SELECT *
+		FROM TASK WHERE TASK_ID = #id#
 	</select>
 </sqlMap>
     

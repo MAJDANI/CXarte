@@ -18,25 +18,31 @@
 	<select id="get" resultMap="conceptResult" parameterClass="Integer">
 		SELECT * FROM CONCEPT concept, CATEGORY category WHERE
 		concept.CONCEPT_ID = #id#
-		AND concept.CATEGORY_ID = category.CATEGORY_ID
+		AND concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<select id="getByName" resultMap="conceptResult" parameterClass="String">
 		SELECT * FROM CONCEPT concept, CATEGORY category WHERE
 		concept.CONCEPT_NAME = #name#
-		AND concept.CATEGORY_ID = category.CATEGORY_ID
+		AND concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<select id="getAll" resultMap="conceptResult">
-		SELECT DISTINCT * FROM CONCEPT concept, CATEGORY category WHERE
-		concept.CATEGORY_ID = category.CATEGORY_ID
+		SELECT DISTINCT * FROM CONCEPT
+		concept, CATEGORY category WHERE
+		concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<statement id="getAllConceptByCategoryId" parameterClass="Integer"
 		resultMap="conceptResult">
 		select * from CONCEPT concept, CATEGORY category
-		where concept.CATEGORY_ID = category.CATEGORY.ID
-		and category.CATEGORY_ID = #categoryId#
+		where
+		concept.CATEGORY_ID = category.CATEGORY.ID
+		and category.CATEGORY_ID =
+		#categoryId#
 	</statement>
 
 	<!-- <select id="getAllConceptByCategoryId" resultMap="conceptResult" parameterClass="Integer"> -->
@@ -46,7 +52,8 @@
 	<insert id="add" parameterClass="Concept">
 
 		<selectKey resultClass="Integer" keyProperty="id">
-			SELECT SEQCONCEPT.NEXTVAL FROM DUAL
+			SELECT
+			SEQCONCEPT.NEXTVAL FROM DUAL
 		</selectKey>
 
 		INSERT INTO CONCEPT (

@@ -16,33 +16,34 @@ import com.novedia.talentmap.model.entity.Task;
 
 /**
  * Test TaskDao
+ * 
  * @author moumbe
- *
+ * 
  */
 @Ignore
 @SpringApplicationContext("test-store-spring-context.xml")
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class TaskDaoTest {
 
-	@SpringBeanByName
-	private SqlMapClient sqlMapClient;
-	
-	@SpringBeanByName
-	private TaskDao taskDao;
-	
-	@Before
-	public void setUp() {
-		taskDao.setSqlMapClient(sqlMapClient);
-	}
-	
-	/**
-	 * Test de récupération de toutes les notes attribuées par un collaborateur aux différents
-	 * outils
-	 */
-	@Test
-	@DataSet("TaskDaoTest.xml")
-	public void testGet() {
-		Task task = taskDao.get(1);
-		assertNotNull(task);
-	}
+    @SpringBeanByName
+    private SqlMapClient sqlMapClient;
+
+    @SpringBeanByName
+    private TaskDao taskDao;
+
+    @Before
+    public void setUp() {
+	taskDao.setSqlMapClient(sqlMapClient);
+    }
+
+    /**
+     * Test de récupération de toutes les notes attribuées par un collaborateur
+     * aux différents outils
+     */
+    @Test
+    @DataSet("TaskDaoTest.xml")
+    public void testGet() {
+	Task task = taskDao.get(1);
+	assertNotNull(task);
+    }
 }

@@ -72,11 +72,14 @@
 
 	<statement id="getCmColleaguesByName" parameterClass="hashmap"
 		resultMap="colleagueResult">
-		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON (c.COLLEAGUE_ID =
+		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
+		(c.COLLEAGUE_ID =
 		AUTH.COLLEAGUE_ID)
-		WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		WHERE (UPPER(c.LAST_NAME) LIKE
+		UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
 		UPPER('$name$%'))
-		AND (AUTH.ROLE_ID != ${admin.role}) AND (c.MANAGER_ID = #managerId#)
+		AND
+		(AUTH.ROLE_ID != ${admin.role}) AND (c.MANAGER_ID = #managerId#)
 	</statement>
 
 	<statement id="selectMissionsByColleagueId" parameterClass="int"
@@ -95,8 +98,9 @@
 
 	<select id="getAll" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN
-		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
+		WHERE
+		(UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
 		UPPER('$name$%'))
 		AND AUTH.ROLE_ID != ${admin.role}
 	</select>
@@ -117,10 +121,12 @@
 	<select id="getAllColleaguesByName" parameterClass="string"
 		resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
-		(c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE (UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		(c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
+		WHERE (UPPER(c.LAST_NAME) LIKE
+		UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
 		UPPER('$name$%'))
-		AND AUTH.ROLE_ID != ${admin.role}
+		AND
+		AUTH.ROLE_ID != ${admin.role}
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"

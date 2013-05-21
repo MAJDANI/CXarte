@@ -33,7 +33,8 @@
 	</select>
 
 	<select id="getAllCollaboratorSkill" resultMap="skillResult">
-		SELECT * FROM SKILL WHERE COLLEAGUE_ID = #colleagueId#
+		SELECT * FROM
+		SKILL WHERE COLLEAGUE_ID = #colleagueId#
 	</select>
 
 	<insert id="add" parameterClass="Skill">
@@ -52,7 +53,8 @@
 		UPDATE SKILL SET COLLEAGUE_ID =
 		#colleagueId#, TOOL_ID = #tool_id#, SCORE = #score#, USE_FREQUENCY =
 		#use_frequency#, NO_USING_TIME = #no_using_time#
-		WHERE COLLEAGUE_ID = #colleagueId# AND TOOL_ID = #tool_id#
+		WHERE COLLEAGUE_ID =
+		#colleagueId# AND TOOL_ID = #tool_id#
 	</update>
 
 	<!-- v.guillemain 30/07/12 -->
@@ -66,7 +68,8 @@
 		resultMap="collabIdResult" parameterClass="com.novedia.talentmap.store.impl.SkillParameter">
 		SELECT COLLEAGUE_ID FROM SKILL
 		WHERE TOOL_ID = #toolId#
-		AND COLLEAGUE_ID IN
+		AND COLLEAGUE_ID
+		IN
 		<iterate property="listCollaborators" open="(" close=")"
 			conjunction=",">
 			#listCollaborators[]#

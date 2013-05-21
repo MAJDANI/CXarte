@@ -93,8 +93,9 @@
 
 	<select id="getAll" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN
-		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
+		WHERE
+		UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<update id="save" parameterClass="Colleague">
@@ -123,8 +124,9 @@
 	<select id="getAllColleaguesByLastName" parameterClass="string"
 		resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
-		(c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		(c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
+		WHERE UPPER(c.LAST_NAME) LIKE
+		UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"
@@ -162,11 +164,6 @@
 	<select id="getAllCollaboratorsByManagerId" parameterClass="Integer"
 		resultMap="colleagueResult">
 		SELECT * FROM COLLEAGUE WHERE MANAGER_ID = #id#
-	</select>
-
-	<select id="getAllConsultantManager" resultMap="colleagueResult">
-		SELECT * FROM
-		COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
 	</select>
 
 	<select id="countMail" parameterClass="String" resultClass="Integer">

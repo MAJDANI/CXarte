@@ -30,7 +30,8 @@
 	<insert id="add" parameterClass="Category">
 
 		<selectKey resultClass="Integer" keyProperty="id">
-			SELECT SEQCATEGORY.NEXTVAL FROM DUAL
+			SELECT
+			SEQCATEGORY.NEXTVAL FROM DUAL
 		</selectKey>
 
 		INSERT INTO CATEGORY (

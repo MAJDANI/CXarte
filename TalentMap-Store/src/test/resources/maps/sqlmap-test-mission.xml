@@ -36,7 +36,8 @@
 		parameterClass="Integer">
 		SELECT * FROM TOOL tools, MISSION_TOOL mission_tool
 		WHERE mission_tool.MISSION_ID = #value#
-		AND mission_tool.TOOL_ID = tools.TOOL_ID
+		AND mission_tool.TOOL_ID =
+		tools.TOOL_ID
 	</select>
 
 	<select id="get" resultMap="missionResult" parameterClass="Integer">
@@ -50,15 +51,18 @@
 		SELECT * FROM MISSION mission, CLIENT client WHERE
 		COLLEAGUE_ID = #value#
 		AND mission.CLIENT_ID = client.CLIENT_ID
-		ORDER BY START_DATE desc
+		ORDER BY
+		START_DATE desc
 	</select>
 
 	<select id="getLastMissionByColleague" resultMap="missionResult"
 		parameterClass="Integer">
 		select * FROM MISSION mission
-		join CLIENT client on (mission.CLIENT_ID = client.CLIENT_ID)
+		join CLIENT client on
+		(mission.CLIENT_ID = client.CLIENT_ID)
 		WHERE COLLEAGUE_ID = #value#
-		and mission.start_date = (select max(start_date) from MISSION WHERE
+		and
+		mission.start_date = (select max(start_date) from MISSION WHERE
 		COLLEAGUE_ID = #value#)
 	</select>
 
@@ -68,9 +72,11 @@
 	<update id="save" parameterClass="Mission">
 		UPDATE MISSION
 		SET
-		MISSION_ID = #id#, COLLEAGUE_ID = #colleagueId#, TITLE = #title#,
+		MISSION_ID =
+		#id#, COLLEAGUE_ID = #colleagueId#, TITLE = #title#,
 		PLACE = #place#,
-		CLIENT_ID = #client.id#, NOTES = #notes#, START_DATE = #startDate#, END_DATE =
+		CLIENT_ID = #client.id#, NOTES = #notes#, START_DATE = #startDate#,
+		END_DATE =
 		#endDate#
 		WHERE MISSION_ID = #id#
 	</update>
@@ -83,9 +89,11 @@
 		</selectKey>
 
 		INSERT INTO MISSION
-		(MISSION_ID, COLLEAGUE_ID, TITLE, PLACE, CLIENT_ID, NOTES, START_DATE, END_DATE)
+		(MISSION_ID, COLLEAGUE_ID, TITLE, PLACE, CLIENT_ID,
+		NOTES, START_DATE, END_DATE)
 		values
-		(#id#, #colleagueId#, #title#, #place#, #client.id#, #notes#, #startDate#,
+		(#id#, #colleagueId#, #title#,
+		#place#, #client.id#, #notes#, #startDate#,
 		#endDate#)
 
 	</insert>

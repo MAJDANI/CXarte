@@ -37,9 +37,11 @@
 	<select id="getAllNotificationByManagerId" resultMap="userNotificationResult"
 		parameterClass="Integer">
 		SELECT * FROM NOTIFICATION notification
-		join COLLEAGUE colleague on (notification.COLLEAGUE_ID =
+		join COLLEAGUE
+		colleague on (notification.COLLEAGUE_ID =
 		colleague.COLLEAGUE_ID)
-		WHERE colleague.MANAGER_ID = #value#
+		WHERE
+		colleague.MANAGER_ID = #value#
 		ORDER BY DATE_NOTIFICATION desc
 	</select>
 
@@ -61,7 +63,8 @@
 		UPDATE
 		NOTIFICATION_OPTION
 		SET FREQUENCY_ID = #frequencyId#
-		WHERE COLLEAGUE_ID = #managerId#
+		WHERE COLLEAGUE_ID
+		= #managerId#
 	</update>
 
 	<insert id="addFrequencyOption" parameterClass="hashmap">

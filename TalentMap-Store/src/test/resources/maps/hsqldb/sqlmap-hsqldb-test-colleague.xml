@@ -94,7 +94,8 @@
 	<select id="getAll" resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN
 		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		WHERE
+		UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<update id="save" parameterClass="Colleague">
@@ -124,7 +125,8 @@
 		resultMap="colleagueResult">
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
 		(c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
-		WHERE UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+		WHERE UPPER(c.LAST_NAME) LIKE
+		UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
 	</select>
 
 	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"

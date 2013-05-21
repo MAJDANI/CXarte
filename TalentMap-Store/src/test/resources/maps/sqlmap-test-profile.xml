@@ -27,7 +27,8 @@
 	<insert id="add" parameterClass="Profile">
 
 		<selectKey resultClass="Integer" keyProperty="id">
-			SELECT SEQPROFILE.NEXTVAL FROM DUAL
+			SELECT
+			SEQPROFILE.NEXTVAL FROM DUAL
 		</selectKey>
 
 		INSERT INTO PROFILE (

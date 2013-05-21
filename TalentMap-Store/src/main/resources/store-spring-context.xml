@@ -2,8 +2,7 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/context 
@@ -16,18 +15,20 @@
 
 	<!-- Import all configuration to connect with database -->
 	<import resource="datasource.xml" />
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<!-- sqlMapClient for ORACLE sqlmaps -->
-<!-- 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"> -->
-<!-- 		<property name="configLocation" value="classpath:sqlmap-config-ORACLE.xml" /> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<!-- <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"> -->
+	<!-- <property name="configLocation" value="classpath:sqlmap-config-ORACLE.xml" 
+		/> -->
+	<!-- <property name="dataSource" ref="dataSource" /> -->
+	<!-- </bean> -->
 
 	<!-- sqlMapClient for MySQL sqlmaps -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
@@ -91,9 +92,9 @@
 	<bean id="businessEngineerDao" class="com.novedia.talentmap.store.impl.BusinessEngineerDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
-	
-		<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
+
+	<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
-	
+
 </beans>

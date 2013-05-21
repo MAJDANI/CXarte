@@ -17,33 +17,41 @@
 	<select id="get" resultMap="conceptResult" parameterClass="Integer">
 		SELECT * FROM CONCEPT concept, CATEGORY category WHERE
 		concept.CONCEPT_ID = #id#
-		AND concept.CATEGORY_ID = category.CATEGORY_ID
+		AND concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<select id="getByName" resultMap="conceptResult" parameterClass="String">
 		SELECT * FROM CONCEPT concept, CATEGORY category WHERE
 		concept.CONCEPT_NAME = #name#
-		AND concept.CATEGORY_ID = category.CATEGORY_ID
+		AND concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<select id="getAll" resultMap="conceptResult">
-		SELECT DISTINCT * FROM CONCEPT concept, CATEGORY category WHERE
-		concept.CATEGORY_ID = category.CATEGORY_ID
+		SELECT DISTINCT * FROM CONCEPT
+		concept, CATEGORY category WHERE
+		concept.CATEGORY_ID =
+		category.CATEGORY_ID
 	</select>
 
 	<statement id="getAllConceptByCategoryId" parameterClass="Integer"
 		resultMap="conceptResult">
 		select * from CONCEPT concept, CATEGORY category
-		where concept.CATEGORY_ID = category.CATEGORY.ID
-		and category.CATEGORY_ID = #categoryId#
+		where
+		concept.CATEGORY_ID = category.CATEGORY.ID
+		and category.CATEGORY_ID =
+		#categoryId#
 	</statement>
 
 
 	<insert id="add" parameterClass="Concept">
 
 		<selectKey resultClass="Integer" keyProperty="id">
-			SELECT NEXT VALUE FOR SEQCONCEPT FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
-			where SEQUENCE_NAME = 'SEQCONCEPT'
+			SELECT NEXT
+			VALUE FOR SEQCONCEPT FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+			where
+			SEQUENCE_NAME = 'SEQCONCEPT'
 		</selectKey>
 
 		INSERT INTO CONCEPT (
