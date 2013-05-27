@@ -64,8 +64,7 @@
 		<module>TalentMap-Web</module>
 		<module>TalentMap-Store</module>
 		<module>TalentMap-Resources</module>
-<!-- 		<module>TalentMap-Rest</module> -->
-<!-- 		<module>TalentMap-Rest-Jersey</module> -->
+		<module>TalentMap-API-REST</module>
 	</modules>
 
 	<!-- Dependencies version -->
