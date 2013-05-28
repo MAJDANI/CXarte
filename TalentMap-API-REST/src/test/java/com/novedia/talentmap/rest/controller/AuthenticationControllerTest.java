@@ -5,16 +5,15 @@ import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import com.novedia.talentmap.model.entity.Authentication;
 
-@RunWith(MockitoJUnitRunner.class)
+@Ignore
+@WebAppConfiguration
 public class AuthenticationControllerTest {
 	
 	
