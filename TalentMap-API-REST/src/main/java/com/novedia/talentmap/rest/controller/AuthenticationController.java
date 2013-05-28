@@ -42,7 +42,7 @@ public class AuthenticationController {
 	@ResponseBody
 	public Authentication checkAuthenticationUser(@PathVariable String login, @PathVariable String password){
 		Authentication authentication = null;
-		CredentialToken token = new CredentialToken();
+		CredentialToken token = new CredentialToken(); 
 		Md5PasswordEncoder md5encoder = new Md5PasswordEncoder();
 		String encodePassword = md5encoder.encodePassword(password, null);
 		token.setLogin(login);
