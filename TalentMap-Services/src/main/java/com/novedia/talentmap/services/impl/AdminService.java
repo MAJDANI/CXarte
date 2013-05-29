@@ -195,6 +195,21 @@ public class AdminService implements IAdminService {
 	}
 	return tool;
     }
+    
+    /**
+     * Save a Concept.
+     * 
+     * @param Concept
+     * @return Integer
+     * @throws DataAccessException
+     */
+    public Integer saveConcept(Concept concept) throws DataAccessException {
+    	Integer result = -1;
+    	if(concept.getId() != null){
+    		result = this.conceptDao.save(concept);
+    	}
+    	return result;
+    }
 
     /**
      * This method allow to update one Skill.
@@ -299,7 +314,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
 	try {
 	    for (Colleague colleague : Colleagues) {

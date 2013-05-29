@@ -198,7 +198,7 @@ public class SkillService implements ISkillService {
      *            time not using tool
      * @return average's tool
      */
-    public static double computeToolAverage(final double toolNote,
+    public double computeToolAverage(final double toolNote,
 	    final double usingFrequencyTool, final double timeNotUsingTool) {
 
 	double noUsingTimeValue = 0;
