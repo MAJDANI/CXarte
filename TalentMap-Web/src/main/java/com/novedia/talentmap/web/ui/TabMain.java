@@ -4,8 +4,10 @@ import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization.Role;
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.cm.CmEAEView;
 import com.novedia.talentmap.web.ui.cm.CmNotificationView;
 import com.novedia.talentmap.web.ui.cm.CmView;
+import com.novedia.talentmap.web.ui.collab.CollabEAEView;
 import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.search.SearchView;
@@ -32,6 +34,8 @@ public class TabMain extends TabSheet {
     private AdminView adminView;
     private CmView cmView;
     private CmNotificationView cmNotificationView;
+    private CmEAEView cmEAEView;
+    private CollabEAEView collabEAEView;
 
     private MonitoringCollabView monitoringCollabView;
 
@@ -62,24 +66,39 @@ public class TabMain extends TabSheet {
 	    adminView = adminView.buildAdminView();
 	    addTab(adminView, ConstantsForMenuEnglish.TAB_ADMIN_NAME);
 	} else if (role.equals(Role.CL)) { // Colleague
+	    // ONGLET PROFILE
 	    profileView.setAuthentication(getAuthentication());
 	    addTab(profileView.buildTabSheetProfilData(),
 		    ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+	    // ONGLET EAE
+	    collabEAEView.setAuthentication(getAuthentication());
+	    collabEAEView = collabEAEView.buildViewCollabEAEView();
+	    addTab(collabEAEView,
+		    ConstantsForMenuEnglish.TAB_COLLEAGUE_EAE);
 	} else if (role.equals(Role.IA)) { // IA
 	    searchView.setAuthentication(getAuthentication());
 	    searchView = searchView.buildSearchView();
 	    addTab(searchView, ConstantsForMenuEnglish.TAB_SEARCH_NAME);
 	} else if (role.equals(Role.CM)) { // CM
+	    // ONGLET PROFILE
 	    profileView.setAuthentication(getAuthentication());
 	    addTab(profileView.buildTabSheetProfilData(),
 		    ConstantsForMenuEnglish.TAB_PROFIL_NAME);
+	    // ONGLET 
 	    cmView.setAuthentication(getAuthentication());
 	    cmView = cmView.buildCmView();
 	    addTab(cmView, ConstantsForMenuEnglish.TAB_CM_NAME);
+	    // ONGLET NOTIFICATIONS
 	    cmNotificationView.setAuthentication(getAuthentication());
 	    cmNotificationView = cmNotificationView.buildCmNotificationView();
 	    addTab(cmNotificationView,
 		    ConstantsForMenuEnglish.TAB_CM_NOTIFICATION);
+	    // ONGLET EAE
+	    cmEAEView.setAuthentication(getAuthentication());
+	    cmEAEView = cmEAEView.buildViewCmEAEView();
+	    addTab(cmEAEView,
+		    ConstantsForMenuEnglish.TAB_CM_EAE);
+	    
 	    // Les deux lignes ci-dessous pour tester le code créé par Véronique
 	    // monitoringCollabView = monitoringCollabView.mainBuild();
 	    // addTab(monitoringCollabView,"Monitoring");
@@ -177,6 +196,34 @@ public class TabMain extends TabSheet {
 
     public void setCmNotificationView(CmNotificationView cmNotificationView) {
 	this.cmNotificationView = cmNotificationView;
+    }
+
+    /**
+     * @return the cmEAEView
+     */
+    public CmEAEView getCmEAEView() {
+        return cmEAEView;
+    }
+
+    /**
+     * @param cmEAEView the cmEAEView to set
+     */
+    public void setCmEAEView(CmEAEView cmEAEView) {
+        this.cmEAEView = cmEAEView;
+    }
+
+    /**
+     * @return the collabEAEView
+     */
+    public CollabEAEView getCollabEAEView() {
+        return collabEAEView;
+    }
+
+    /**
+     * @param collabEAEView the collabEAEView to set
+     */
+    public void setCollabEAEView(CollabEAEView collabEAEView) {
+        this.collabEAEView = collabEAEView;
     }
 
 }

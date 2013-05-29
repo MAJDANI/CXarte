@@ -54,8 +54,11 @@
 		<property name="cmView" ref="cmViewBean" />
 		<property name="cmNotificationView" ref="cmNotificationViewBean" />
 		<property name="monitoringCollabView" ref="monitoringCollabView" />
+		<property name="cmEAEView" ref="cmEAEViewBean" />
+		<property name="collabEAEView" ref="collabEAEViewBean" />
 	</bean>
 
+	<!-- COLLAB -->
 
 	<!-- profileView Bean -->
 	<bean id="profileViewBean" class="com.novedia.talentmap.web.ui.profile.ProfileView"
@@ -71,6 +74,17 @@
 		<property name="skillCollabContent" ref="skillCollaboratorContentBean" />
 		<property name="missionCollabContent" ref="missionCollaboratorContentBean" />
 	</bean>
+
+	<bean id="collabEAEViewBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEView"
+		scope="session">
+		<property name="collabEAEContent" ref="collabEAEContentBean" />
+		<property name="collabEAENavigation" ref="collabEAENavigationBean" />
+	</bean>
+
+	<bean id="collabEAEContentBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContent"
+		scope="session"/>
+	<bean id="collabEAENavigationBean" class="com.novedia.talentmap.web.ui.collab.CollabEAENavigation"
+		scope="session"/>
 
 
 	<!-- Beans Gestion des missions -->
@@ -429,6 +443,7 @@
 		<property name="cmContentLayout" ref="cmContentLayout" />
 	</bean>
 
+
 	<bean id="cmNotificationViewBean" class="com.novedia.talentmap.web.ui.cm.CmNotificationView"
 		scope="session">
 		<property name="cmNotificationContentLayout" ref="cmNotificationContentLayout" />
@@ -488,6 +503,20 @@
 		<property name="cmOptionForm" ref="cmOptionForm" />
 		<property name="notificationService" ref="notificationService" />
 	</bean>
+
+	<bean id="cmEAEViewBean" class="com.novedia.talentmap.web.ui.cm.CmEAEView"
+		scope="session">
+		<property name="cmEAENavigation" ref="cmEAENavigationBean" />
+		<property name="cmEAEContent" ref="cmEAEContentBean" />
+	</bean>
+
+	<bean id="cmEAENavigationBean" class="com.novedia.talentmap.web.ui.cm.CmEAENavigation" scope="session" />
+	<bean id="cmEAEContentBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContent" scope="session" />
+
+
+	<!-- FIN CM -->
+
+
 
 	<bean id="listPanelNotificationHistory" class="com.vaadin.ui.Panel"
 		scope="session" />

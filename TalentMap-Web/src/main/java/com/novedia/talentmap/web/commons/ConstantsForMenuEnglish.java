@@ -54,7 +54,8 @@ public class ConstantsForMenuEnglish {
     public static final String TAB_ADMIN_NAME = "Administration";
     public static final String TAB_CM_NAME = "Search";
     public static final String TAB_CM_NOTIFICATION = "Notification";
-
+    public static final String TAB_CM_EAE = "EAE";
+    public static final String TAB_COLLEAGUE_EAE = "EAE";
     /**
      * Tree for admin navigation
      */
@@ -82,5 +83,21 @@ public class ConstantsForMenuEnglish {
     public static final String CM_NOTIFICATION_SETTINGS = "Settings";
     public static final Object[][] CM_NOTIFICATION_NAVIGATION = new Object[][] { new Object[] {
 	    "Notification", CM_NOTIFICATION_HISTORY, CM_NOTIFICATION_SETTINGS } };
+
+    /**
+     * Tree for cm EAE navigation
+     */
+    public static final String CM_EAE_SYNTHESIS = "Synthesis";
+    public static final String CM_EAE_HISTORY = "History";
+    public static final String CM_EAE_CREATION = "Creation";
+    public static final String CM_EAE_PERSONAL = "Personal";
+    public static final Object[][] CM_EAE_NAVIGATION = new Object[][] { new Object[] {
+	    "EAE", CM_EAE_SYNTHESIS, CM_EAE_HISTORY, CM_EAE_CREATION, CM_EAE_PERSONAL } };
+    /**
+     * Tree for Colleague EAE navigation
+     */
+    public static final String COLLAB_EAE_HISTORY = "My EAE History";
+    public static final Object[][] COLLAB_EAE_NAVIGATION = new Object[][] { new Object[] {
+	    "EAE", COLLAB_EAE_HISTORY } };
 
 }
