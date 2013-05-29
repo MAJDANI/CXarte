@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="eae">
+
+	<typeAlias alias="eae" type="com.novedia.talentmap.model.entity.EAE" />
+
+	<resultMap id="eaeResult" class="eae">
+		<result property="id" column="EAE_ID" />
+		<result property="colleague.id" column="COLLEAGUE_ID" />
+		<result property="manager.id" column="MANAGER_ID" />
+		<result property="dateEae" column="EAE_DATE" />
+		<result property="profileLabel" column="PROFILE_LABEL" />
+		<result property="previousEaeId" column="PREVIOUS_EAE_ID" />
+		<result property="colleaguesStrengths" column="COLLEAGUES_STRENGTHS" />
+		<result property="colleaguesWeaknesses" column="COLLEAGUES_WEAKNESSES" />
+		<result property="eaeState" column="EAE_STATE_ID" />
+		<result property="colleaguesSynthesis" column="COLLEAGUES_SYNTHESIS" />
+		<result property="managersSynthesis" column="MANAGERS_SYNTHESIS" />
+		<result property="other" column="OTHER" />
+	</resultMap>
+
+
+	<select id="get" resultMap="eaeResult" parameterClass="Integer">
+		SELECT * FROM EAE 
+		WHERE EAE_ID = #id#
+	</select>
+
+
+	<insert id="add" parameterClass="Concept">
+
+		INSERT INTO EAE (
+			EAE_ID,
+			COLLEAGUE_ID,
+			MANAGER_ID,
+			EAE_DATE,
+			PROFILE_LABEL,
+			PREVIOUS_EAE_ID,
+			COLLEAGUES_STRENGTHS,
+			COLLEAGUES_WEAKNESSES,
+			EAE_STATE_ID,
+			COLLEAGUES_SYNTHESIS,
+			MANAGERS_SYNTHESIS,
+			OTHER
+		)values (
+			#id# ,
+			#colleague.id# ,
+			#manager.id# ,
+			#dateEae# ,
+			#profileLabel# ,
+			#previousEaeId# ,
+			#colleaguesStrengths# ,
+			#colleaguesWeaknesses# ,
+			#eaeState# ,
+			#colleaguesSynthesis# ,
+			#managersSynthesis# ,
+			#other#
+		)
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID() AS EAE_ID
+		</selectKey>
+	</insert>
+
+	<select id="check" resultMap="eaeResult" parameterClass="java.util.HashMap">
+	</select>
+
+	<select id="checkObject" resultMap="eaeResult" parameterClass="EAE">
+	</select>
+
+	<update id="save" parameterClass="EAE">
+		UPDATE EAE SET 
+			COLLEAGUE_ID = #colleague.id#, 
+			MANAGER_ID = #manager.id#, 
+			EAE_DATE = #dateEae#, 
+			PROFILE_LABEL = #profileLabel#, 
+			PREVIOUS_EAE_ID = #previousEaeId#, 
+			COLLEAGUES_STRENGTHS = #colleaguesStrengths#, 
+			COLLEAGUES_WEAKNESSES = #colleaguesWeaknesses#, 
+			EAE_STATE_ID = #eaeState#, 
+			COLLEAGUES_SYNTHESIS = #colleaguesSynthesiscolleaguesSynthesis#, 
+			MANAGERS_SYNTHESIS = #managersSynthesis#, 
+			OTHER = #other#
+		WHERE EAE_ID = #id#
+	</update>
+
+	<delete id="delete" parameterClass="EAE">
+		DELETE FROM EAE WHERE EAE_ID = #id#
+	</delete>
+
+
+</sqlMap>
