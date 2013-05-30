@@ -117,6 +117,13 @@ public interface IColleagueService {
      * @return list of manager
      */
     List<Colleague> getAllConsultantManager();
+    
+    /**
+     * Get all Business Engineers.
+     * 
+     * @return list of business engineers
+     */
+    List<Colleague> getAllBusinessEngineers();
 
     /**
      * Get all Colleagues by lastName.
@@ -189,4 +196,5 @@ public interface IColleagueService {
      * @return The count found.
      */
     Integer countMailForColleagueId(Colleague colleague);
+
 }

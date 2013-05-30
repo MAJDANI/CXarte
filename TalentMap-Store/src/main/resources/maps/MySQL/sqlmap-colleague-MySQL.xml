@@ -171,6 +171,12 @@
 		COLLEAGUE c join AUTHENTICATION a on (c.COLLEAGUE_ID = a.COLLEAGUE_ID)
 		where a.ROLE_ID = ${cm.role} ORDER BY LAST_NAME
 	</select>
+	
+	<select id="getAllBusinessEngineers" resultMap="colleagueResult">
+		select * from
+		COLLEAGUE c join AUTHENTICATION a on (c.COLLEAGUE_ID = a.COLLEAGUE_ID)
+		where a.ROLE_ID = ${ia.role} ORDER BY LAST_NAME
+	</select>
 
 	<select id="countMail" parameterClass="String" resultClass="Integer">
 		SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#

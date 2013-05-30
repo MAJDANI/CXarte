@@ -142,6 +142,14 @@ public class ColleagueService implements IColleagueService {
     public List<Colleague> getAllConsultantManager() {
 	return ((ColleagueDao) colleagueDao).getAllConsultantManager();
     }
+    
+    /**
+     * Get all business engineers
+     */
+    @Override
+    public List<Colleague> getAllBusinessEngineers() {
+	return ((ColleagueDao) colleagueDao).getAllBusinessEngineers();
+    }
 
     /**
      * {@inheritDoc}

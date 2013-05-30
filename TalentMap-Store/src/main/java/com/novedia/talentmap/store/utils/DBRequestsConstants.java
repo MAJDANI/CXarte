@@ -90,6 +90,11 @@ public final class DBRequestsConstants {
 	 * Constant request to get all consultant manager
 	 */
 	public static final String GET_ALL_CONSULTANT_MANAGER = "colleague.getAllConsultantManager";
+	
+	/**
+	 * Constant request to get all business engineers 
+	 */
+	public static final String GET_ALL_BUSINESS_ENGINEERS = "colleague.getAllBusinessEngineers";
 
 	/**
 	 * Constant request to get all Business Engineer

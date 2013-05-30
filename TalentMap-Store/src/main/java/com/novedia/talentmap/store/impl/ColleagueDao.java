@@ -155,6 +155,11 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(
 				DBRequestsConstants.GET_ALL_CONSULTANT_MANAGER);
 	}
+	
+	public List<Colleague> getAllBusinessEngineers() throws DataAccessException {
+		return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_BUSINESS_ENGINEERS);
+	}
 
 	public List<Colleague> getAllColleagueByColleagueIdList(
 			List<Integer> listColleagueId) throws DataAccessException {
