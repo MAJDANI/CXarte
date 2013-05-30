@@ -24,6 +24,7 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
+import com.novedia.talentmap.store.impl.ToolDao;
 
 /**
  * Test class for administration service.
@@ -46,7 +47,7 @@ public class AdminServiceTest {
 	 * toolDaoMock.
 	 */
 	@Mock
-	private IDao<Tool> toolDaoMock;
+	private ToolDao toolDaoMock;
 
 	/**
 	 * conceptDaoMock.

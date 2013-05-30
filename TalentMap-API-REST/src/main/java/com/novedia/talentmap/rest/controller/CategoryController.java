@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Category;
-import com.novedia.talentmap.services.impl.AdminService;
+import com.novedia.talentmap.services.IAdminService;
 
 /**
  * 
@@ -23,7 +23,7 @@ import com.novedia.talentmap.services.impl.AdminService;
 public class CategoryController {
 	
 	@Autowired
-	AdminService adminService;
+	IAdminService adminService;
 	
 	/**
 	 * @return categories
@@ -66,7 +66,12 @@ public class CategoryController {
 	@RequestMapping(value = "/category/{categoryId}/", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteCategory(@PathVariable Integer categoryId) {
-		adminService.deleteCategory(categoryId);
+		try {
+			adminService.deleteCategory(categoryId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

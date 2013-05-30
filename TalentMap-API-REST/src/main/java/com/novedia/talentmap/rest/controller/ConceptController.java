@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
-import com.novedia.talentmap.services.impl.AdminService;
+import com.novedia.talentmap.services.IAdminService;
 
 /**
  * 
@@ -24,7 +24,7 @@ import com.novedia.talentmap.services.impl.AdminService;
 public class ConceptController {
 	
 	@Autowired
-	AdminService adminService;
+	IAdminService adminService;
 	
 	/**
 	 * @param categoryId
@@ -72,7 +72,7 @@ public class ConceptController {
 	 */
 	@RequestMapping(value = "/concept/{conceptId}/", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteCategory(@PathVariable Integer conceptId) {
+	public void deleteConcept(@PathVariable Integer conceptId) {
 		adminService.deleteConcept(conceptId);
 	}
 }

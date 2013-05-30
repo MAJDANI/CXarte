@@ -33,6 +33,13 @@ public interface IAdminService {
      * @return a list of tools.
      */
     List<Tool> getAllTools();
+    
+    /**
+     * Gets all tools of a concept.
+     * 
+     * @return a list of tools.
+     */
+	List<Tool> getToolsByConcept(Integer conceptId);
 
     /**
      * Get all concepts.
@@ -106,6 +113,26 @@ public interface IAdminService {
      * @return
      */
     Concept checkConcept(Concept concept);
+    
+    /**
+     * Update one tool.
+     * 
+     * @class IAdminService.java. 'tool'
+     * @param tool
+     *            a tool
+     * @return Return an integer
+     */
+    Integer updateTool(Tool tool);
+    
+    /**
+     * Save one concept.
+     * 
+     * @class IAdminService.java. 'concept'
+     * @param concept
+     *            a concept
+     * @return Return an integer
+     */
+    Integer saveConcept(Concept concept);
 
     /**
      * Update one skill.

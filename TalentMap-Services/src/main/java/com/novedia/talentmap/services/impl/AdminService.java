@@ -31,7 +31,8 @@ public class AdminService implements IAdminService {
     /**
      * The tool DAO.
      */
-    private IDao<Tool> toolDao;
+//    private IDao<Tool> toolDao;
+	private ToolDao toolDao;
     /**
      * The category DAO.
      */
@@ -83,6 +84,14 @@ public class AdminService implements IAdminService {
     @Override
     public List<Tool> getAllTools() throws DataAccessException {
 	return toolDao.getAll();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Tool> getToolsByConcept(Integer conceptId) throws DataAccessException {
+	return toolDao.getToolsByConcept(conceptId);
     }
 
     /**
@@ -194,6 +203,21 @@ public class AdminService implements IAdminService {
 	    // this.concept.setName(sk.getConcept_name());
 	}
 	return tool;
+    }
+    
+    /**
+     * Update a Tool.
+     * 
+     * @param Tool
+     * @return Integer
+     * @throws DataAccessException
+     */
+    public Integer updateTool(Tool tool) throws DataAccessException {
+    	Integer result = -1;
+    	if(tool.getId() != null){
+    		result = this.toolDao.save(tool);
+    	}
+    	return result;
     }
     
     /**
@@ -314,7 +338,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
 	try {
 	    for (Colleague colleague : Colleagues) {
@@ -361,7 +385,7 @@ public class AdminService implements IAdminService {
      * @param toolDao
      *            a tooldao
      */
-    public void setToolDao(IDao<Tool> toolDao) {
+    public void setToolDao(ToolDao toolDao) {
 	this.toolDao = toolDao;
     }
 
