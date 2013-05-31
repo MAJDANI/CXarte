@@ -44,7 +44,6 @@ public class CategoryController {
 	public Category addCategory(@PathVariable String category_name) {
 		Category category = Category.builder().name(category_name).build();
 		Integer res = adminService.addCategory(category);
-		System.out.println("res : "+res);
 		category.setId(res);
 		return category;
 	}

@@ -20,7 +20,7 @@ import com.novedia.talentmap.services.IAdminService;
  *
  */
 
-//@Controller
+@Controller
 public class ConceptController {
 	
 	@Autowired
@@ -48,7 +48,8 @@ public class ConceptController {
 	public Concept addConcept(@PathVariable Integer categoryId,@PathVariable String concept_name) {
 		Category category = Category.builder().id(categoryId).build();
 		Concept concept = Concept.builder().category(category).name(concept_name).build();
-		adminService.addConcept(concept);
+		Integer res = adminService.addConcept(concept);
+		concept.setId(res);
 		return concept;
 	}
 	

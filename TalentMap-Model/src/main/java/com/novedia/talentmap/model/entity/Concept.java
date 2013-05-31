@@ -58,7 +58,7 @@ public class Concept implements Serializable {
      * 
      * @param id
      */
-    private void setId(Integer id) {
+    public void setId(Integer id) {
 	this.id = id;
     }
 
@@ -77,7 +77,7 @@ public class Concept implements Serializable {
      * @param name
      *            the name to set
      */
-    private void setName(String name) {
+    public void setName(String name) {
 	this.name = name;
     }
 

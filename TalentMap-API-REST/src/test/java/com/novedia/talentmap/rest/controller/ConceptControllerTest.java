@@ -1,9 +1,9 @@
 package com.novedia.talentmap.rest.controller;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -19,15 +19,14 @@ import org.springframework.test.web.server.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.services.IAdminService;
 
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = WebContextLoader.class, 
 locations = {"classpath:test-mockito-services-context.xml","classpath:test-api-rest-context.xml"})
-public class CategoryControllerTest {
-	
+public class ConceptControllerTest {
 	
 	@Autowired
 	private WebApplicationContext wac;
@@ -37,33 +36,45 @@ public class CategoryControllerTest {
 	@Autowired
 	private IAdminService adminService;
 	
-	
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webApplicationContextSetup(this.wac).build();
 	}
 	
+	@Test
+	public void getAllTest() throws Exception {
+		
+		//GIVEN
+		Category category = Category.builder().id(1).build();
+		Concept concept = Concept.builder().id(1).category(category).name("test").build();
+		Concept concept2 = Concept.builder().id(2).category(category).name("test2").build();
+		List<Concept> concepts = new ArrayList<Concept>();
+		concepts.add(concept);
+		concepts.add(concept2);
+		Mockito.when(adminService.getAllConceptByCategory(category)).thenReturn(concepts);
+		
+		//WHEN and THEN
+		mockMvc.perform(MockMvcRequestBuilders.get("/concepts/{categoryId}/",1)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
+	}
 	
 	@Test
-	public void addCategoryTest() throws Exception {
-		Integer resultExpected = 1;
-		Category cat = Category.builder().name("test").build();
-		Mockito.when(adminService.addCategory(cat)).thenReturn(resultExpected);
+	public void addConceptTest() throws Exception {
+		//GIVEN
+		Integer expectedResult = 1;
+		Category category = Category.builder().id(1).build();
+		Concept concept = Concept.builder().category(category).name("test").build();
+		Mockito.when(adminService.addConcept(concept)).thenReturn(expectedResult);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/category/{category_name}/", "test")
+		//WHEN and THEN
+		mockMvc.perform(MockMvcRequestBuilders.post("/concept/{categoryId}/{concept_name}/",1,"test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(resultExpected))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
 	}
-	
-	@Test
-	public void saveCategoryTest() throws Exception {
-		Integer idExpected =1;
-		Category category = Category.builder().id(idExpected).name("test").build();
-		
-		
-	}
-	
 
 }
