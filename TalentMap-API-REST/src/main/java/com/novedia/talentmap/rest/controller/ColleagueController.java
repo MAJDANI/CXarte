@@ -24,7 +24,7 @@ import com.novedia.talentmap.services.IRegistrationService;
  *
  */
 
-@Controller
+//@Controller
 public class ColleagueController {
 	
 	@Autowired

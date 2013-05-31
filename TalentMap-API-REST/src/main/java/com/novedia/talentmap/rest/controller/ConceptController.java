@@ -20,7 +20,7 @@ import com.novedia.talentmap.services.IAdminService;
  *
  */
 
-@Controller
+//@Controller
 public class ConceptController {
 	
 	@Autowired

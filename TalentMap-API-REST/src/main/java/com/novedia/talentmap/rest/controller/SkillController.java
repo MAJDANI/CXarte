@@ -19,7 +19,7 @@ import com.novedia.talentmap.services.impl.SkillService;
  * 
  */
 
-@Controller
+//@Controller
 public class SkillController {
 
 	@Autowired

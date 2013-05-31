@@ -25,18 +25,13 @@
 	            <artifactId>jetty-maven-plugin</artifactId>
 	            <configuration>
 	            	<scanIntervalSeconds>5</scanIntervalSeconds>
+	            	<additionalClasspathElements>
+						<additionalClasspathElement>src/main/webapp/WEB-INF/</additionalClasspathElement>
+					</additionalClasspathElements>
 				</configuration>
 			</plugin>
 	  	</plugins>
 	  	
-	  	
-	  	<testSourceDirectory>src/test/java</testSourceDirectory>
-  		<testResources>
-  			<testResource>
-  				<directory>src/test/resources</directory>
-  			</testResource>
-  		</testResources>
-  		
   </build>
   
    
@@ -82,21 +77,33 @@
 		<version>${jstl.version}</version>
 	</dependency>
             
-  	<dependency>
-        <groupId>commons-httpclient</groupId>
-        <artifactId>commons-httpclient</artifactId>
-        <version>3.1</version>
+<!--     <dependency> -->
+<!--     	<groupId>org.springframework</groupId> -->
+<!--         <artifactId>spring-test-mvc</artifactId> -->
+<!--         <version>1.0.0.M2</version> -->
+<!--         <scope>test</scope> -->
+<!--     </dependency> -->
+		
+    <dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.1</version>
+		</dependency>
+	
+	<dependency>
+		<groupId>com.jayway.jsonpath</groupId>
+		<artifactId>json-path</artifactId>
+		<version>0.8.1</version>
+		<optional>true</optional>
+	</dependency>
+	
+	 <dependency>
+    	<groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>3.1.1.RELEASE</version>
+        <scope>test</scope>
     </dependency>
     
-	
-	<dependency> 
-	<groupId>org.springframework</groupId>
-	<artifactId>spring-test</artifactId>
-	<version>3.2.3.RELEASE</version>
-</dependency>
-            
-	
-	
   </dependencies>
   
 </project>

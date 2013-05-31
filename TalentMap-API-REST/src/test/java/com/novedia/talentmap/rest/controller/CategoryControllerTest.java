@@ -1,5 +1,7 @@
 package com.novedia.talentmap.rest.controller;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -7,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.server.MockMvc;
@@ -17,58 +18,44 @@ import org.springframework.test.web.server.result.MockMvcResultMatchers;
 import org.springframework.test.web.server.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.model.entity.CredentialToken;
-import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.services.IAdminService;
+
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = WebContextLoader.class, 
 locations = {"classpath:test-mockito-services-context.xml","classpath:test-api-rest-context.xml"})
-public class AuthenticationControllerTest {
+public class CategoryControllerTest {
+	
 	
 	@Autowired
 	private WebApplicationContext wac;
-	
+
 	private MockMvc mockMvc;
 	
 	@Autowired
-	private AuthenticationService authenticationService;
+	private IAdminService adminService;
 	
 	
 	@Before
-	public void setUp(){
+	public void setup() {
 		this.mockMvc = MockMvcBuilders.webApplicationContextSetup(this.wac).build();
 	}
 	
 	
-	
 	@Test
-	public void testCheckAuthenticationUserReturnAuthentication() throws Exception{
+	public void addCategoryTest() throws Exception {
+		Integer resultExpected = 1;
+		Category cat = Category.builder().name("test").build();
+		Mockito.when(adminService.addCategory(cat)).thenReturn(resultExpected);
 		
-		Authentication authentication = new Authentication();
-		CredentialToken token = new CredentialToken(); 
-		Md5PasswordEncoder md5encoder = new Md5PasswordEncoder();
-		String encodePassword = md5encoder.encodePassword("test", null);
-		token.setLogin("b.tiomo");
-		token.setPassword(encodePassword);
-		
-		authentication.setToken(token);
-		authentication.setColleagueId(59);
-		//authentication.setAuthorization(null);
-		
-		
-//		authenticationService = mock(AuthenticationService.class);
-		
-		
-		Mockito.when(authenticationService.checkUser(token)).thenReturn(authentication);
-		System.out.println(authentication.getToken());
-		
-		mockMvc.perform(MockMvcRequestBuilders.post("/authentication/{login}/{password}/", "b.tiomo","test")
+		mockMvc.perform(MockMvcRequestBuilders.post("/category/{category_name}/", "test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				/*.andExpect(MockMvcResultMatchers.jsonPath("$.colleagueId").value(59))*/;
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(resultExpected))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
 		
 	}
 

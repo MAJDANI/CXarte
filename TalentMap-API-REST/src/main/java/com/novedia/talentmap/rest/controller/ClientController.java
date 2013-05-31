@@ -25,8 +25,8 @@ public class ClientController {
 	private ClientService clientService;
 
 	/**
-	 * 
-	 * @return clients
+	 * Get all Client
+	 * @return a list of client
 	 */
 	@RequestMapping
 	@ResponseBody
