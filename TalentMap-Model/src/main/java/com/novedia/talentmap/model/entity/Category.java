@@ -49,7 +49,7 @@ public class Category implements Serializable {
      * @param id
      *            the id to set
      */
-    private void setId(Integer id) {
+    public void setId(Integer id) {
 	this.id = id;
     }
 
@@ -68,7 +68,7 @@ public class Category implements Serializable {
      * @param name
      *            the name to set
      */
-    private void setName(String name) {
+    public void setName(String name) {
 	this.name = name;
     }
 

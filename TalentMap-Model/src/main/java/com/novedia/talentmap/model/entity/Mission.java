@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.novedia.talentmap.model.json.serialize.JsonDateSerializer;
 
 /**
  * This entity represents a mission.
@@ -132,7 +135,7 @@ public class Mission implements Serializable {
      * 
      * @return the startDate
      */
-    // @JsonSerialize(using = DateSerializer.class)
+     @JsonSerialize(using = JsonDateSerializer.class)
     public Date getStartDate() {
 	return startDate;
     }
@@ -143,7 +146,7 @@ public class Mission implements Serializable {
      * @param startDate
      *            the startDate to set
      */
-    // @JsonSerialize(using = DateSerializer.class)
+     @JsonSerialize(using = JsonDateSerializer.class)
     public void setStartDate(Date startDate) {
 	this.startDate = startDate;
     }
@@ -153,6 +156,7 @@ public class Mission implements Serializable {
      * 
      * @return the endDate
      */
+     @JsonSerialize(using = JsonDateSerializer.class)
     public Date getEndDate() {
 	return endDate;
     }
@@ -163,6 +167,7 @@ public class Mission implements Serializable {
      * @param endDate
      *            the endDate to set
      */
+     @JsonSerialize(using = JsonDateSerializer.class)
     public void setEndDate(Date endDate) {
 	this.endDate = endDate;
     }

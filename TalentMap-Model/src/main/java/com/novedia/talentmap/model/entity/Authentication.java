@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * @author v.dibi
@@ -29,6 +30,7 @@ public class Authentication implements Serializable {
     /**
      * Authorization
      */
+    @JsonIgnore
     private Authorization authorization;
 
     /**
@@ -105,6 +107,7 @@ public class Authentication implements Serializable {
      * @param authorization
      *            the authorization to set
      */
+//    @JsonIgnore
     public void setAuthorization(Authorization authorization) {
 	this.authorization = authorization;
     }
