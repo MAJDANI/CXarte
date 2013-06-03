@@ -27,8 +27,8 @@ public class AuthenticationController {
 	@Autowired 
 	private AuthenticationService authenticationService;
 	
-//	@Autowired
-//	private ChangePasswordService changePasswordService;
+	@Autowired
+	private ChangePasswordService changePasswordService;
 	
 	
 	
@@ -61,25 +61,25 @@ public class AuthenticationController {
 	 * @param new_password
 	 * @return
 	 */
-//	@RequestMapping(value = "/{login}/{old_password}/{new_password}/" , method = RequestMethod.PUT )
-//	@ResponseBody
-//	public Authentication changePassword(@PathVariable String login, @PathVariable String old_password,
-//			@PathVariable String new_password){
-//		Authentication authentication = null;
-//		CredentialToken token = new CredentialToken();
-//		Md5PasswordEncoder md5encoder = new Md5PasswordEncoder();
-//		String encodePassword = md5encoder.encodePassword(old_password, null);
-//		token.setLogin(login);
-//		token.setPassword(encodePassword);
-//		authentication = authenticationService.checkUser(token);
-//		if(authentication != null){
-//			encodePassword = md5encoder.encodePassword(new_password, null);
-//			token.setPassword(encodePassword);
-//			authentication.setToken(token);
-//			changePasswordService.savePassword(authentication);
-//		}
-//		return authentication;
-//	}
+	@RequestMapping(value = "/{login}/{old_password}/{new_password}/" , method = RequestMethod.PUT )
+	@ResponseBody
+	public Authentication changePassword(@PathVariable String login, @PathVariable String old_password,
+			@PathVariable String new_password){
+		Authentication authentication = null;
+		CredentialToken token = new CredentialToken();
+		Md5PasswordEncoder md5encoder = new Md5PasswordEncoder();
+		String encodePassword = md5encoder.encodePassword(old_password, null);
+		token.setLogin(login);
+		token.setPassword(encodePassword);
+		authentication = authenticationService.checkUser(token);
+		if(authentication != null){
+			encodePassword = md5encoder.encodePassword(new_password, null);
+			token.setPassword(encodePassword);
+			authentication.setToken(token);
+			changePasswordService.savePassword(authentication);
+		}
+		return authentication;
+	}
 	
 	
 	

@@ -14,10 +14,14 @@
 		<constructor-arg value="com.novedia.talentmap.services.impl.AuthenticationService" />
 	</bean>
 	
-	
 	<bean id="adminService" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.novedia.talentmap.services.impl.AdminService" />
 	</bean>
+	
+	<bean id="changePasswordService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.ChangePasswordService" />
+	</bean>
+	
 	
 	
 </beans>	

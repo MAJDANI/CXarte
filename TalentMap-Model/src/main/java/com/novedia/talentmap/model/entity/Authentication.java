@@ -107,7 +107,7 @@ public class Authentication implements Serializable {
      * @param authorization
      *            the authorization to set
      */
-//    @JsonIgnore
+    @JsonIgnore
     public void setAuthorization(Authorization authorization) {
 	this.authorization = authorization;
     }

@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.server.MockMvc;
-import org.springframework.test.web.server.request.MockMvcRequestBuilders;
-import org.springframework.test.web.server.result.MockMvcResultHandlers;
-import org.springframework.test.web.server.result.MockMvcResultMatchers;
-import org.springframework.test.web.server.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.novedia.talentmap.model.entity.Category;
@@ -38,7 +38,7 @@ public class ConceptControllerTest {
 	
 	@Before
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.webApplicationContextSetup(this.wac).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
 	@Test

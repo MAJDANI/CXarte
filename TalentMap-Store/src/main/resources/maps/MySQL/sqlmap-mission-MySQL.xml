@@ -100,10 +100,8 @@
 
 
 
-
-
 	<delete id="delete" parameterClass="Integer">
-		DELETE MISSION WHERE
+		DELETE from MISSION WHERE
 		MISSION_ID = #id#
 	</delete>
 
