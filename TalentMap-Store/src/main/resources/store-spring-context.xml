@@ -96,5 +96,9 @@
 	<bean id="notificationDao" class="com.novedia.talentmap.store.impl.NotificationDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
+	
+	<bean id="eaeDao" class="com.novedia.talentmap.store.impl.EAEDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
 
 </beans>

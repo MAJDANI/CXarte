@@ -511,7 +511,15 @@
 	</bean>
 
 	<bean id="cmEAENavigationBean" class="com.novedia.talentmap.web.ui.cm.CmEAENavigation" scope="session" />
-	<bean id="cmEAEContentBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContent" scope="session" />
+	<bean id="cmEAEContentBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContent" scope="session" >
+			<property name="cmEAEOngoingPageTable" ref="cmEAEOngoingPageTableBean" />
+	</bean>
+	<bean id="cmEAEOngoingPageTableBean" class="com.novedia.talentmap.web.ui.cm.CmEAEOngoingPageTable" scope="session" >
+			<property name="cmEAEOngoingContainer" ref="cmEAEOngoingContainerBean" />
+	</bean>
+	<bean id="cmEAEOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEaeOngoingContainer" scope="session" >
+			<property name="eaeService" ref="eaeService" />
+	</bean>
 
 
 	<!-- FIN CM -->

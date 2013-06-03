@@ -81,4 +81,9 @@
 
 	</bean>
 
+	<bean id="eaeService" class="com.novedia.talentmap.services.impl.EAEService">
+		<property name="eaeDao" ref="eaeDao" />
+	</bean>
+
+
 </beans>

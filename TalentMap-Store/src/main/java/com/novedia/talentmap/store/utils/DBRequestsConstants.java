@@ -432,4 +432,12 @@ public final class DBRequestsConstants {
 	public static final String SAVE_CM_FREQUENCY_OPTION = "user_notification.saveFrequencyOption";
 	public static final String ADD_CM_FREQUENCY_OPTION = "user_notification.addFrequencyOption";
 
+	// EAE REQUEST
+	public static final String GET_EAE = "eae.get";
+	public static final String ADD_EAE = "eae.add";
+	public static final String SAVE_EAE = "eae.save";
+	public static final String DELETE_EAE = "eae.delete";
+	public static final String GET_ONGOING_EAE_FOR_CM = "eae.getOngoingEAEForManager";
+	public static final String GET_WITHOUT_ONGOING_EAE_FOR_CM = "eae.getCollabWithoutOngoingEAEForManager";
+
 }

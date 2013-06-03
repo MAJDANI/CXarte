@@ -6,22 +6,32 @@
 <sqlMap namespace="eae">
 
 	<typeAlias alias="eae" type="com.novedia.talentmap.model.entity.EAE" />
+	<typeAlias alias="eaeForSynthesis" type="com.novedia.talentmap.model.dto.EAEForSynthesis" />
+	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague" />
 
 	<resultMap id="eaeResult" class="eae">
 		<result property="id" column="EAE_ID" />
-		<result property="colleague.id" column="COLLEAGUE_ID" />
-		<result property="manager.id" column="MANAGER_ID" />
+		<result property="colleague.id" column="COLLEAGUE_ID"/>
+		<result property="manager.id" column="MANAGER_ID"/>
 		<result property="dateEae" column="EAE_DATE" />
 		<result property="profileLabel" column="PROFILE_LABEL" />
 		<result property="previousEaeId" column="PREVIOUS_EAE_ID" />
 		<result property="colleaguesStrengths" column="COLLEAGUES_STRENGTHS" />
 		<result property="colleaguesWeaknesses" column="COLLEAGUES_WEAKNESSES" />
-		<result property="eaeState" column="EAE_STATE_ID" />
+		<result property="eaeState.id" column="EAE_STATE_ID"/>
 		<result property="colleaguesSynthesis" column="COLLEAGUES_SYNTHESIS" />
 		<result property="managersSynthesis" column="MANAGERS_SYNTHESIS" />
 		<result property="other" column="OTHER" />
 	</resultMap>
 
+	<resultMap id="eaeSynthesisResult" class="eaeForSynthesis">
+		<result property="id" column="EAE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="dateEae" column="EAE_DATE" />
+		<result property="eaeStateId" column="EAE_STATE_ID" />
+		<result property="eaeStateLabel" column="EAE_STATE_LABEL" />
+	</resultMap>
 
 	<select id="get" resultMap="eaeResult" parameterClass="Integer">
 		SELECT * FROM EAE 
@@ -29,7 +39,7 @@
 	</select>
 
 
-	<insert id="add" parameterClass="Concept">
+	<insert id="add" parameterClass="eae">
 
 		INSERT INTO EAE (
 			EAE_ID,
@@ -64,12 +74,6 @@
 		</selectKey>
 	</insert>
 
-	<select id="check" resultMap="eaeResult" parameterClass="java.util.HashMap">
-	</select>
-
-	<select id="checkObject" resultMap="eaeResult" parameterClass="EAE">
-	</select>
-
 	<update id="save" parameterClass="EAE">
 		UPDATE EAE SET 
 			COLLEAGUE_ID = #colleague.id#, 
@@ -80,15 +84,39 @@
 			COLLEAGUES_STRENGTHS = #colleaguesStrengths#, 
 			COLLEAGUES_WEAKNESSES = #colleaguesWeaknesses#, 
 			EAE_STATE_ID = #eaeState#, 
-			COLLEAGUES_SYNTHESIS = #colleaguesSynthesiscolleaguesSynthesis#, 
+			COLLEAGUES_SYNTHESIS = #colleaguesSynthesis#, 
 			MANAGERS_SYNTHESIS = #managersSynthesis#, 
 			OTHER = #other#
 		WHERE EAE_ID = #id#
 	</update>
 
-	<delete id="delete" parameterClass="EAE">
+	<delete id="delete" parameterClass="eae">
 		DELETE FROM EAE WHERE EAE_ID = #id#
 	</delete>
 
+
+	<select id="getOngoingEAEForManager" resultMap="eaeSynthesisResult" parameterClass="Integer">
+		SELECT eae.EAE_ID  as "EAE_ID",
+		c.LAST_NAME as "LAST_NAME",
+		c.FIRST_NAME as "FIRST_NAME",
+		eae.EAE_DATE as "EAE_DATE",
+		es.EAE_STATE_ID as "EAE_STATE_ID",
+		es.EAE_STATE_LABEL as "EAE_STATE_LABEL"
+		FROM COLLEAGUE c, EAE eae, EAE_STATE es 
+		WHERE c.COLLEAGUE_ID = eae.COLLEAGUE_ID
+		AND eae.EAE_STATE_ID = es.EAE_STATE_ID 
+		AND eae.MANAGER_ID = #id#
+		AND eae.EAE_STATE_ID IN (1,2)
+	</select>
+	
+
+	<select id="getCollabWithoutOngoingEAEForManager" resultClass="colleague" parameterClass="Integer">
+		select * from COLLEAGUE c 
+		LEFT JOIN EAE e ON c.COLLEAGUE_ID = e.COLLEAGUE_ID
+		WHERE c.MANAGER_ID = #id#
+		and c.COLLEAGUE_ID not in (select EAE.colleague_ID
+		from EAE
+		where EAE.MANAGER_ID=#id# and EAE.EAE_STATE_ID in (1,2));	
+	</select>
 
 </sqlMap>

@@ -37,4 +37,12 @@
 
 	<bean id="registration" class="com.novedia.talentmap.model.entity.Registration" />
 
+	<bean id="eaeState" class="com.novedia.talentmap.model.entity.EAEState" />
+
+	<bean id="eae" class="com.novedia.talentmap.model.entity.EAE" >
+		<property name="colleague" ref="colleague" />
+		<property name="manager" ref="colleague" />
+		<property name="eaeState" ref="eaeState" />
+	</bean>
+
 </beans>
