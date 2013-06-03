@@ -385,9 +385,8 @@ public class SkillService implements ISkillService {
      * @throws DataAccessException
      */
     @Override
-    public void addSkill(Skill skill) throws DataAccessException {
-	this.skillDao.add(skill);
-
+    public Integer addSkill(Skill skill) throws DataAccessException {
+    	return this.skillDao.add(skill);
     }
 
     /**
@@ -398,8 +397,8 @@ public class SkillService implements ISkillService {
      * @throws DataAccessException
      */
     @Override
-    public void saveSkill(Skill skill) throws DataAccessException {
-	skillDao.save(skill);
+    public Integer saveSkill(Skill skill) throws DataAccessException {
+	return skillDao.save(skill);
     }
 
     /**

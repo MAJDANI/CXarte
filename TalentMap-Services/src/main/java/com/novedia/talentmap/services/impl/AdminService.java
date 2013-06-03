@@ -15,9 +15,9 @@ import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
+import com.novedia.talentmap.store.impl.CategoryDao;
 import com.novedia.talentmap.store.impl.ConceptDao;
 import com.novedia.talentmap.store.impl.ToolDao;
-import com.novedia.talentmap.store.impl.CategoryDao;
 
 /**
  * The Administration Service implementation.

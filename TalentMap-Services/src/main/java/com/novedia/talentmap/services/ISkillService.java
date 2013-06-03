@@ -131,7 +131,7 @@ public interface ISkillService {
      * @param skill
      *            a skill
      */
-    void addSkill(Skill skill);
+    Integer addSkill(Skill skill);
 
     /**
      * Update One Skill.
@@ -140,7 +140,7 @@ public interface ISkillService {
      * @param skill
      *            a skill
      */
-    void saveSkill(Skill skill);
+    Integer saveSkill(Skill skill);
 
     /**
      * Get One Tool By Name.

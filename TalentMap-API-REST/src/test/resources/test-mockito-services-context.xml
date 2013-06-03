@@ -22,6 +22,17 @@
 		<constructor-arg value="com.novedia.talentmap.services.impl.ChangePasswordService" />
 	</bean>
 	
+	<bean id="skillService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.SkillService" />
+	</bean>
+	
+	<bean id="registrationService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.RegistrationService" />
+	</bean>
+	
+	<bean id="colleagueService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.ColleagueService" />
+	</bean>
 	
 	
 </beans>	

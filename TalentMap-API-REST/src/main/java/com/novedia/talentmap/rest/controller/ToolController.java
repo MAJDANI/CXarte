@@ -19,7 +19,7 @@ import com.novedia.talentmap.services.IAdminService;
  *
  */
 
-//@Controller
+@Controller
 public class ToolController {
 	
 	@Autowired
@@ -45,7 +45,6 @@ public class ToolController {
 	@ResponseBody
 	public List<Tool> getToolsByConcept(@PathVariable Integer conceptId) {
 		List<Tool> tools = adminService.getToolsByConcept(conceptId);
-		System.out.println(tools.size());
 		return tools;
 	}
 	
@@ -59,7 +58,8 @@ public class ToolController {
 	public Tool addTool(@PathVariable Integer conceptId,@PathVariable String tool_name) {
 		Concept concept = Concept.builder().id(conceptId).build();
 		Tool tool = Tool.builder().concept(concept).name(tool_name).build();
-		adminService.addTool(tool);
+		Integer res = adminService.addTool(tool);
+		tool.setId(res);
 		return tool;
 	}
 	

@@ -60,7 +60,7 @@ public class Tool implements Serializable, Comparable {
      * 
      * @param id
      */
-    private void setId(Integer id) {
+    public void setId(Integer id) {
 	this.id = id;
     }
 

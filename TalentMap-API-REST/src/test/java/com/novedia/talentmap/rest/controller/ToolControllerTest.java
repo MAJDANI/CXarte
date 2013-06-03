@@ -20,16 +20,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IAdminService;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = WebContextLoader.class, 
 locations = {"classpath:test-mockito-services-context.xml","classpath:test-api-rest-context.xml"})
-public class ConceptControllerTest {
-	
+public class ToolControllerTest {
+
 	@Autowired
 	private WebApplicationContext wac;
 
@@ -45,18 +44,18 @@ public class ConceptControllerTest {
 	
 	@Test
 	public void getAllTest() throws Exception {
-		
 		//GIVEN
-		Category category = Category.builder().id(1).build();
-		Concept concept = Concept.builder().id(1).category(category).name("test").build();
-		Concept concept2 = Concept.builder().id(2).category(category).name("test2").build();
-		List<Concept> concepts = new ArrayList<Concept>();
-		concepts.add(concept);
-		concepts.add(concept2);
-		Mockito.when(adminService.getAllConceptByCategory(category)).thenReturn(concepts);
+		Concept concept = Concept.builder().id(1).name("ORM").build();
+		Concept concept2 = Concept.builder().id(2).name("TEST").build();
+		Tool tool = Tool.builder().id(1).concept(concept).name("test").build();
+		Tool tool2 = Tool.builder().id(2).concept(concept2).name("test2").build();
+		List<Tool> toolsList = new ArrayList<Tool>();
+		toolsList.add(tool);
+		toolsList.add(tool2);
+		Mockito.when(adminService.getAllTools()).thenReturn(toolsList);
 		
 		//WHEN and THEN
-		mockMvc.perform(MockMvcRequestBuilders.get("/concepts/{categoryId}/",1)
+		mockMvc.perform(MockMvcRequestBuilders.get("/tools/")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -64,49 +63,68 @@ public class ConceptControllerTest {
 	}
 	
 	@Test
-	public void addConceptTest() throws Exception {
+	public void getAllByConceptTest() throws Exception {
 		//GIVEN
-		Integer expectedResult = 1;
-		Category category = Category.builder().id(1).build();
-		Concept concept = Concept.builder().category(category).name("test").build();
-		Mockito.when(adminService.addConcept(concept)).thenReturn(expectedResult);
+		Concept concept = Concept.builder().id(1).build();
+		Tool tool = Tool.builder().id(1).concept(concept).name("test").build();
+		Tool tool2 = Tool.builder().id(2).concept(concept).name("test2").build();
+		List<Tool> tools = new ArrayList<Tool>();
+		tools.add(tool);
+		tools.add(tool2);
+		Mockito.when(adminService.getToolsByConcept(concept.getId())).thenReturn(tools);
 		
 		//WHEN and THEN
-		mockMvc.perform(MockMvcRequestBuilders.post("/concept/{categoryId}/{concept_name}/",1,"test")
+		mockMvc.perform(MockMvcRequestBuilders.get("/tools/{conceptId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
+	}
+	
+	@Test
+	public void addToolTest() throws Exception {
+		//GIVEN
+		Integer expectedResult = 1;
+		Mockito.when(adminService.addTool(Mockito.any(Tool.class))).thenReturn(expectedResult);
+		
+		//WHEN and THEN
+		mockMvc.perform(MockMvcRequestBuilders.post("/tool/{conceptId}/{tool_name}/",1,"test")
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
 	}
 	
 	@Test
-	public void saveConceptTest() throws Exception{
+	public void saveToolTest() throws Exception{
 		//GIVEN
 		Integer expectedResult = 1;
-		Category category = Category.builder().id(1).build();
-		Concept concept = Concept.builder().category(category).id(expectedResult).name("test").build();
-		Mockito.when(adminService.saveConcept(concept)).thenReturn(expectedResult);
+		Concept concept = Concept.builder().id(1).build();
+		Tool tool = Tool.builder().concept(concept).id(expectedResult).name("test").build();
+		Mockito.when(adminService.updateTool(tool)).thenReturn(expectedResult);
 		
 		//WHEN and THEN
-		mockMvc.perform(MockMvcRequestBuilders.put("/concept/{categoryId}/{conceptId}/{concept_name}/",1,1,"test")
+		mockMvc.perform(MockMvcRequestBuilders.put("/tool/{conceptId}/{toolId}/{tool_name}/",1,1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));;
+				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test2"));;
 		
 	}
 	
 	@Test
-	public void deleteConceptTest() throws Exception{
+	public void deleteToolTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
-		Mockito.when(adminService.deleteConcept(1)).thenReturn(map);
+		Mockito.when(adminService.deleteTool(1)).thenReturn(map);
 		
 		//WHEN and THEN
-		mockMvc.perform(MockMvcRequestBuilders.delete("/concept/{conceptId}/",1)
+		mockMvc.perform(MockMvcRequestBuilders.delete("/tool/{toolId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
-
+	
 }
