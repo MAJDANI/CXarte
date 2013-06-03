@@ -1,7 +1,9 @@
 package com.novedia.talentmap.rest.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,6 +77,36 @@ public class ConceptControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
+	}
+	
+	@Test
+	public void saveConceptTest() throws Exception{
+		//GIVEN
+		Integer expectedResult = 1;
+		Category category = Category.builder().id(1).build();
+		Concept concept = Concept.builder().category(category).id(expectedResult).name("test").build();
+		Mockito.when(adminService.saveConcept(concept)).thenReturn(expectedResult);
+		
+		//WHEN and THEN
+		mockMvc.perform(MockMvcRequestBuilders.put("/concept/{categoryId}/{conceptId}/{concept_name}/",1,1,"test")
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult));
+		
+	}
+	
+	@Test
+	public void deleteConceptTest() throws Exception{
+		//GIVEN
+		Map<String, Object> map = new HashMap<String, Object>();
+		Mockito.when(adminService.deleteConcept(1)).thenReturn(map);
+		
+		//WHEN and THEN
+		mockMvc.perform(MockMvcRequestBuilders.delete("/concept/{conceptId}/",1)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
 }
