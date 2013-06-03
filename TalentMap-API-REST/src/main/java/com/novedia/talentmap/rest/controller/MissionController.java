@@ -25,7 +25,7 @@ import com.novedia.talentmap.services.IColleagueService;
  * @author b.tiomofofou
  *
  */
-//@Controller
+@Controller
 @RequestMapping(value = "/missions")
 public class MissionController {
 	
@@ -43,7 +43,7 @@ public class MissionController {
 	 * @param colleagueId collaborator'id
 	 * @return all collaborator's mission
 	 */
-	@RequestMapping(value = "/{colleagueId}", method =RequestMethod.GET)
+	@RequestMapping(value = "/{colleagueId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Mission> getAllMissionByColleague(@PathVariable final Integer colleagueId){
 		List<Mission> missions = null; 
@@ -57,7 +57,7 @@ public class MissionController {
 	 * @param missionId
 	 * @return
 	 */
-	@RequestMapping(value = "/{missionId}", method =RequestMethod.DELETE)
+	@RequestMapping(value = "/{missionId}/", method =RequestMethod.DELETE)
 	@ResponseBody
 	public Response deleteMission(@PathVariable final Integer missionId){
 		Response response = new Response();
