@@ -2,6 +2,8 @@ package com.novedia.talentmap.model.entity;
 
 import java.io.Serializable;
 
+import com.novedia.talentmap.model.entity.Frequency.Builder;
+
 /**
  * This entity represents the state of an EAE. An EAE may have 3 states : when
  * it is created by the manager, in anticipation of an early future EAE, the
@@ -34,6 +36,17 @@ public class EAEState implements Serializable {
      * The label (open, validated or close) of the EAEState
      */
     private String label;
+
+    /**
+     * Build an immutable EAEState entity.
+     * 
+     * @param builder
+     *            the builder inner class for this entity
+     */
+    public EAEState(final Builder builder) {
+	this.id = builder.id;
+	this.label = builder.label;
+    }
 
     /**
      * Builds an Object EAEState
@@ -69,5 +82,75 @@ public class EAEState implements Serializable {
         this.label = label;
     }
     
-    
+    // -------------------------------------
+    // ------------ BUILDER PART -----------
+    // -------------------------------------
+    /**
+     * Static constructor for this class.
+     * 
+     * @return a builder instance
+     */
+    public static Builder builder() {
+	return new Builder();
+    }
+
+    /**
+     * Inner builder class.
+     * 
+     */
+    public static class Builder {
+
+	/**
+	 * EAEState identifier
+	 */
+	private Integer id;
+
+	/**
+	 * EAEState name
+	 */
+	private String label;
+
+	/**
+	 * Set id
+	 * 
+	 * @param id
+	 *            EAEState's identifier
+	 * @return the builder
+	 */
+	public Builder id(final Integer id) {
+	    this.id = id;
+	    return this;
+	}
+
+	/**
+	 * Set label
+	 * 
+	 * @param label
+	 *            the EAEState's label
+	 * @return the builder
+	 */
+	public Builder label(final String label) {
+	    this.label = label;
+	    return this;
+	}
+
+	/**
+	 * Build an immutable instance of EAEState.
+	 * 
+	 * @return EAEState
+	 */
+	public EAEState build() {
+	    return new EAEState(this);
+	}
+
+	/**
+	 * Static constructor for this class.
+	 * 
+	 * @return a builder instance
+	 */
+	public static Builder builder() {
+	    return new Builder();
+	}
+    }
+
 }
