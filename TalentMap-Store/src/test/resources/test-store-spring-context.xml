@@ -69,5 +69,8 @@
 
 	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization" />
 
+	<bean id="eaeDao" class="com.novedia.talentmap.store.impl.EAEDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
 
 </beans>

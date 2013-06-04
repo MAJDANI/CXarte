@@ -116,12 +116,6 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 	throw new UnsupportedOperationException();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public EAE check(Category category) throws DataAccessException {
-	throw new UnsupportedOperationException();
-    }
 
     /**
      * {@inheritDoc}
@@ -138,5 +132,6 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
     public List<EAE> getAll() throws DataAccessException {
 	throw new UnsupportedOperationException();
     }
+
 
 }

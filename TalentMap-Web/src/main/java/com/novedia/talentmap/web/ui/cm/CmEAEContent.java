@@ -3,15 +3,14 @@ package com.novedia.talentmap.web.ui.cm;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class CmEAEContent extends VerticalLayout implements
-	ClickListener {
+public class CmEAEContent extends VerticalLayout implements ClickListener {
 
     private Authentication authentication;
-
+    private CmEAEContentSynthesis cmEAEContentSynthesis;
 
     /**
      * Default constructor
@@ -20,34 +19,20 @@ public class CmEAEContent extends VerticalLayout implements
 	super();
     }
 
-    /**
-     * Build the view of cm's EAE
-     * 
-     * @return
-     */
-    public CmEAEContent buildViewEAEContent() {
+    public CmEAEContent buildViewSynthesisContent() {
 	removeAllComponents();
-	buildMain();
-	return this;
-    }
-
-    /**
-     * The main builder
-     * 
-     * @class CmNotificationContent.java
-     */
-    public void buildMain() {
+	cmEAEContentSynthesis.setAuthentication(getAuthentication());
+	cmEAEContentSynthesis = cmEAEContentSynthesis.buildViewSynthesis();
+	this.addComponent(cmEAEContentSynthesis);
 	setMargin(true);
 	setSpacing(true);
+	return this;
     }
-
 
     @Override
     public void buttonClick(ClickEvent event) {
 	// TODO Auto-generated method stub
-
     }
-
 
     public Authentication getAuthentication() {
 	return authentication;
@@ -55,6 +40,20 @@ public class CmEAEContent extends VerticalLayout implements
 
     public void setAuthentication(Authentication authentication) {
 	this.authentication = authentication;
+    }
+
+    /**
+     * @return the cmEAEContentSynthesis
+     */
+    public CmEAEContentSynthesis getCmEAEContentSynthesis() {
+        return cmEAEContentSynthesis;
+    }
+
+    /**
+     * @param cmEAEContentSynthesis the cmEAEContentSynthesis to set
+     */
+    public void setCmEAEContentSynthesis(CmEAEContentSynthesis cmEAEContentSynthesis) {
+        this.cmEAEContentSynthesis = cmEAEContentSynthesis;
     }
 
 }

@@ -6,6 +6,7 @@ package com.novedia.talentmap.services.impl;
 import java.util.List;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.store.IDao;
@@ -63,6 +64,13 @@ public class EAEService implements IEAEService {
 	return eaeDao.getOngoingEAEForCM(idManager);
     }
 
+    @Override
+    public List<Colleague> getCollabWithoutOngoingEAEForManager(
+	    Integer idManager) {
+	EAEDao eaeDao = (EAEDao) this.eaeDao;
+	return eaeDao.getCollabWithoutOngoingEAEForManager(idManager);
+    }
+
     /**
      * @return the eaeDao
      */
@@ -76,5 +84,6 @@ public class EAEService implements IEAEService {
     public void setEaeDao(IDao<EAE> eaeDao) {
         this.eaeDao = eaeDao;
     }
+
 
 }

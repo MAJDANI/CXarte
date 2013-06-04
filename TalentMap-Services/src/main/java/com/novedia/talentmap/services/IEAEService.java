@@ -2,7 +2,10 @@ package com.novedia.talentmap.services;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
 /**
@@ -63,4 +66,17 @@ public interface IEAEService {
      * 
      */
     List<EAEForSynthesis> getOngoingEAEForCM(Integer idManager);
+    
+    /**
+     * Gets, for a given manager specifier by the parameter id, the list of
+     * Colleague that haven't OPEN or VALIDATED EAE. These colleagues have
+     * closed EAE, or may don't have any EAE yet.
+     * 
+     * @param id
+     *            : the id of the manager searching for his colleagues without
+     *            ongoing EAE
+     * @return List<Colleague> : a list of Colleague
+     * @throws DataAccessException
+     */
+    List<Colleague> getCollabWithoutOngoingEAEForManager(Integer idManager);
 }

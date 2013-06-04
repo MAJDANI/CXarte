@@ -12,4 +12,5 @@
 	<sqlMap resource="maps/sqlmap-test-authentification.xml" />
 	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-profile.xml" />
 	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-tool.xml" />
+	<sqlMap resource="maps/hsqldb/sqlmap-hsqldb-test-eae.xml" />
 </sqlMapConfig>

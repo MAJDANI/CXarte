@@ -62,7 +62,9 @@ public class CmEAEView extends HorizontalSplitPanel {
 	    @Override
 	    public void switchPanelTarget(int targetPanel) {
 		if (targetPanel == EAE_SYNTHESIS) {
-		    CmEAEView.this.setSecondComponent(v1);
+//		    cmEAEContent.buildViewEAEContent();
+		    cmEAEContent.buildViewSynthesisContent();
+		    CmEAEView.this.setSecondComponent(cmEAEContent);
 		    // cmEAESynthesisContent =
 		    // cmEAESynthesisContent.buildViewEAESynthesisContent();
 		    // CmEAEView.this.setSecondComponent(cmEAESynthesisContent);
@@ -98,7 +100,7 @@ public class CmEAEView extends HorizontalSplitPanel {
 	cmEAENavigation.setHeight("800px");
 
 	this.setFirstComponent(cmEAENavigation);
-	cmEAEContent = cmEAEContent.buildViewEAEContent();
+//	cmEAEContent = cmEAEContent.buildViewEAEContent();
 	this.setSecondComponent(cmEAEContent);
 	//La synthèse par défaut
 	cmEAENavigation.setTargetPanel(EAE_SYNTHESIS);

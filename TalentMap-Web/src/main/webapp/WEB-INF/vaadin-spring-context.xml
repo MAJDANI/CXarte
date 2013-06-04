@@ -512,8 +512,13 @@
 
 	<bean id="cmEAENavigationBean" class="com.novedia.talentmap.web.ui.cm.CmEAENavigation" scope="session" />
 	<bean id="cmEAEContentBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContent" scope="session" >
-			<property name="cmEAEOngoingPageTable" ref="cmEAEOngoingPageTableBean" />
+			<property name="cmEAEContentSynthesis" ref="cmEAEContentSynthesisBean" />
 	</bean>
+	<bean id="cmEAEContentSynthesisBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContentSynthesis" scope="session" >
+			<property name="cmEAEOngoingPageTable" ref="cmEAEOngoingPageTableBean" />
+			<property name="cmEAENotOngoingPageTable" ref="cmEAENotOngoingPageTableBean" />
+	</bean>
+	
 	<bean id="cmEAEOngoingPageTableBean" class="com.novedia.talentmap.web.ui.cm.CmEAEOngoingPageTable" scope="session" >
 			<property name="cmEAEOngoingContainer" ref="cmEAEOngoingContainerBean" />
 	</bean>
@@ -521,6 +526,12 @@
 			<property name="eaeService" ref="eaeService" />
 	</bean>
 
+	<bean id="cmEAENotOngoingPageTableBean" class="com.novedia.talentmap.web.ui.cm.CmEAENotOngoingPageTable" scope="session" >
+			<property name="cmEAENotOngoingContainer" ref="cmEAENotOngoingContainerBean" />
+	</bean>
+	<bean id="cmEAENotOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEaeNotOngoingContainer" scope="session" >
+			<property name="eaeService" ref="eaeService" />
+	</bean>
 
 	<!-- FIN CM -->
 
