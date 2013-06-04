@@ -68,7 +68,7 @@ public class MissionControllerTest {
 		Mockito.when(colleagueService.deleteMission(missionToDelete)).thenReturn(expectedResult);
 		
 		//WHEN and THEN
-		mockMvc.perform(MockMvcRequestBuilders.delete("/missions/{missionId}/",1)
+		mockMvc.perform(MockMvcRequestBuilders.delete("/mission/{missionId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
