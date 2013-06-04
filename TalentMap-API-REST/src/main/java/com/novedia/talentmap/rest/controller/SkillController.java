@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Skill;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.impl.SkillService;
 
 /**
@@ -20,7 +21,7 @@ import com.novedia.talentmap.services.impl.SkillService;
  */
 
 @Controller
-public class SkillController {
+public class SkillController extends TalentMapRestHandlerException {
 
 	@Autowired
 	SkillService skillservice;

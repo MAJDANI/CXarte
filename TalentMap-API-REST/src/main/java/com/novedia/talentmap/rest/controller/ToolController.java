@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.IAdminService;
 
 /**
@@ -20,7 +21,7 @@ import com.novedia.talentmap.services.IAdminService;
  */
 
 @Controller
-public class ToolController {
+public class ToolController extends TalentMapRestHandlerException {
 	
 	@Autowired
 	IAdminService adminService;

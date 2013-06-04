@@ -123,7 +123,7 @@ public class ColleagueService implements IColleagueService {
 	    throws DataAccessException {
 	MissionDao missionDao = (MissionDao) this.missionDao;
 	Mission m = missionDao.getLastMissionByColleagueId(colleagueId);
-	return createDTO(m);
+	return createMissionDTO(m);
     }
 
     /**
@@ -258,7 +258,7 @@ public class ColleagueService implements IColleagueService {
      * @param Mission
      * @return a missionDto
      */
-    private MissionDto createDTO(Mission m) {
+    private MissionDto createMissionDTO(Mission m) {
 
 	MissionDto mDTO = null;
 	if (m != null) {

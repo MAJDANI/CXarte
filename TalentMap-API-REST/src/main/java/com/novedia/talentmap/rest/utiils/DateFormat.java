@@ -1,4 +1,4 @@
-package com.novedia.talentmap.rest.controller;
+package com.novedia.talentmap.rest.utiils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,15 +9,17 @@ public class DateFormat {
 	
 	
 	 public static final SimpleDateFormat dateFormat = new SimpleDateFormat(
-			    "yyyy-MM-dd");
-	
-	public static Date parseStringToDate(String dateToParse){
+			    "dd-MM-yyyy");
+	 
+	public static Date parseStringToDate(String dateToParse) throws ParseException {
 		Date date = null;
-		try {
+		dateFormat.setLenient(false);
+//		try {
 			date = dateFormat.parse(dateToParse);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 		return date;
 	}
 	 

@@ -24,4 +24,16 @@
 		<property name="supportedMediaTypes" value="application/json" />
 	</bean>
 	
+	
+	<bean id="annotationMethodHandlerExceptionResolver"
+          class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+          <property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+          
+    </bean>
+    
+    
 </beans>

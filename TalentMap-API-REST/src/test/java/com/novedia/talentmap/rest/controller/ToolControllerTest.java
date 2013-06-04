@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -57,7 +56,6 @@ public class ToolControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/tools/")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
@@ -76,7 +74,6 @@ public class ToolControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/tools/{conceptId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
@@ -90,7 +87,6 @@ public class ToolControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/tool/{conceptId}/{tool_name}/",1,"test")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
@@ -107,7 +103,6 @@ public class ToolControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/tool/{conceptId}/{toolId}/{tool_name}/",1,1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test2"));;
@@ -123,7 +118,6 @@ public class ToolControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/tool/{toolId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	

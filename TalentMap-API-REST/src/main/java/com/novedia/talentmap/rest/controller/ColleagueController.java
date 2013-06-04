@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
@@ -25,7 +26,7 @@ import com.novedia.talentmap.services.IRegistrationService;
  */
 
 @Controller
-public class ColleagueController {
+public class ColleagueController extends TalentMapRestHandlerException {
 	
 	@Autowired
 	IColleagueService colleagueService;

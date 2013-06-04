@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.IAdminService;
 
 /**
@@ -20,7 +21,7 @@ import com.novedia.talentmap.services.IAdminService;
  */
 
 @Controller
-public class CategoryController {
+public class CategoryController extends TalentMapRestHandlerException {
 	
 	@Autowired
 	IAdminService adminService;

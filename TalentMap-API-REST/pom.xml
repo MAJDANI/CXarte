@@ -77,13 +77,6 @@
 		<version>${jstl.version}</version>
 	</dependency>
             
-<!--     <dependency> -->
-<!--     	<groupId>org.springframework</groupId> -->
-<!--         <artifactId>spring-test-mvc</artifactId> -->
-<!--         <version>1.0.0.M2</version> -->
-<!--         <scope>test</scope> -->
-<!--     </dependency> -->
-		
     <dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
@@ -101,7 +94,6 @@
     	<groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>${spring.version}</version>
-<!--         <version>3.1.1.RELEASE</version> -->
         <scope>test</scope>
     </dependency>
     

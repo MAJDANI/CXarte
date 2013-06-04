@@ -17,7 +17,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -63,7 +62,6 @@ public class ColleagueControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/businessengineers/")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 	}
@@ -79,7 +77,6 @@ public class ColleagueControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/managers/")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 	}
@@ -97,7 +94,6 @@ public class ColleagueControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/profiles/")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 	}
@@ -111,7 +107,6 @@ public class ColleagueControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/colleague/{colleagueId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("test"));
@@ -131,7 +126,6 @@ public class ColleagueControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/colleague/{colleagueId}/",1)
 			.accept(MediaType.APPLICATION_JSON))
-			.andDo(MockMvcResultHandlers.print())
 			.andExpect(MockMvcResultMatchers.status().isOk());
 		
 		

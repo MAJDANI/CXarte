@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Client;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.impl.ClientService;
 
 /**
@@ -19,7 +20,7 @@ import com.novedia.talentmap.services.impl.ClientService;
 
 @Controller
 @RequestMapping(value = "/clients/")
-public class ClientController {
+public class ClientController extends TalentMapRestHandlerException {
 	
 	@Autowired
 	private ClientService clientService;

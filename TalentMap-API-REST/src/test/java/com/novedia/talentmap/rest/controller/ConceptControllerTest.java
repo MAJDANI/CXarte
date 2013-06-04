@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -58,7 +57,6 @@ public class ConceptControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/concepts/{categoryId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
@@ -105,7 +103,6 @@ public class ConceptControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/concept/{conceptId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 

@@ -196,5 +196,5 @@ public interface IColleagueService {
      * @return The count found.
      */
     Integer countMailForColleagueId(Colleague colleague);
-
+    
 }

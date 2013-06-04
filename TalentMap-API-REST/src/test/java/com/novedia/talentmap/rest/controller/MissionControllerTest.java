@@ -13,11 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.novedia.talentmap.model.dto.MissionDto;
 import com.novedia.talentmap.model.dto.Response;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
@@ -54,7 +54,6 @@ public class MissionControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/missions/{colleagueId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -63,16 +62,74 @@ public class MissionControllerTest {
 		//GIVEN
 		Integer expectedResult = 1;
 		Response response = new Response();
-		response.setStatus("nok");
+		response.setMessage("nok");
 		Mission missionToDelete = Mission.builder().id(1).build();
 		Mockito.when(colleagueService.deleteMission(missionToDelete)).thenReturn(expectedResult);
 		
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/mission/{missionId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("ok"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"));
+	}
+	
+	
+	@Test
+	public void testaddMission() throws Exception {
+		//GIVEN
+		Integer expectedResult = 1;
+		Integer colleagueId =  1;
+		String title = "mission test";
+		Integer clientId = 1;
+		String place = "place test";
+		String startDate = "12-03-2012";
+		String endDate = "12-04-2012";
+		String comment = "comment test";
+		Integer toolId1 = 1;
+		Integer toolId2 = 2;
+		Integer toolId3 = 3;
+		
+		//WHEN
+		Mockito.when(colleagueService.addMission(Mockito.any(MissionDto.class))).thenReturn(expectedResult);
+		
+		//THEN
+		mockMvc.perform(MockMvcRequestBuilders.post("/mission/{colleagueId}/{title}/{clientId}/{place}/{startDate}/{endDate}"+
+				"/{comment}/{toolId1}/{toolId2}/{toolId3}",colleagueId,title,clientId,place,startDate,endDate,comment,
+				toolId1,toolId2,toolId3)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult));
+		
+	}
+	
+	@Test
+	public void testSaveMission() throws Exception {
+		//GIVEN
+		Integer expectedResult = 1;
+		Integer missionId = 1;
+		Integer colleagueId =  1;
+		String title = "mission test";
+		Integer clientId = 1;
+		String place = "place test";
+		String startDate = "12-03-2012";
+		String endDate = "12-04-2012";
+		String comment = "comment test";
+		Integer toolId1 = 1;
+		Integer toolId2 = 2;
+		Integer toolId3 = 3;
+		
+		//WHEN
+		Mockito.when(colleagueService.saveMission(Mockito.any(MissionDto.class))).thenReturn(expectedResult);
+		
+		//THEN
+		mockMvc.perform(MockMvcRequestBuilders.put("/mission/{missionId}/{colleagueId}/{title}/{clientId}/{place}/{startDate}/{endDate}"+
+				"/{comment}/{toolId1}/{toolId2}/{toolId3}",missionId,colleagueId,title,clientId,place,startDate,endDate,comment,
+				toolId1,toolId2,toolId3)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult));
+	
+		
 	}
 
 }

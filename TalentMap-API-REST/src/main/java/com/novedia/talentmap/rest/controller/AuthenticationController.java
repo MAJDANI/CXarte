@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.impl.AuthenticationService;
 import com.novedia.talentmap.services.impl.ChangePasswordService;
 
@@ -22,7 +23,7 @@ import com.novedia.talentmap.services.impl.ChangePasswordService;
 
 @Controller
 @RequestMapping(value = "/authentication")
-public class AuthenticationController {
+public class AuthenticationController extends TalentMapRestHandlerException {
 	
 	@Autowired 
 	private AuthenticationService authenticationService;

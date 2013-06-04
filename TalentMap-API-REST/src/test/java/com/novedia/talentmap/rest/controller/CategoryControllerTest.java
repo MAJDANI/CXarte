@@ -15,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -57,7 +56,6 @@ public class CategoryControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/categories/")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
@@ -86,7 +84,6 @@ public class CategoryControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/category/{categoryId}/{category_name}/",1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test2"));
 
@@ -101,7 +98,6 @@ public class CategoryControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/category/{categoryId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 

@@ -5,9 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.model.json.serialize.JsonDateSerializer;
 
 /**
  * This entity represents a missionDto. A missionDto is a mission with a Set of
@@ -179,6 +182,7 @@ public class MissionDto {
      * 
      * @return startDate
      */
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getStartDate() {
 	return startDate;
     }
@@ -188,6 +192,7 @@ public class MissionDto {
      * 
      * @param startDate
      */
+    @JsonSerialize(using = JsonDateSerializer.class)
     public void setStartDate(Date startDate) {
 	this.startDate = startDate;
     }
@@ -197,6 +202,7 @@ public class MissionDto {
      * 
      * @return endDate
      */
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getEndDate() {
 	return endDate;
     }
@@ -206,6 +212,7 @@ public class MissionDto {
      * 
      * @param endDate
      */
+    @JsonSerialize(using = JsonDateSerializer.class)
     public void setEndDate(Date endDate) {
 	this.endDate = endDate;
     }
