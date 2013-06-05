@@ -31,6 +31,7 @@ import com.novedia.talentmap.services.IColleagueService;
  *
  */
 @Controller
+//@RequestMapping
 public class MissionController extends TalentMapRestHandlerException {
 	
 	@Autowired

@@ -59,10 +59,10 @@ public class RegistrationService implements IRegistrationService {
     @Transactional(rollbackFor = { DataAccessException.class })
     public Integer addColleagueFromRegistration(Registration registration)
 	    throws DataAccessException {
-	Integer res = -1;
-	((ColleagueDao) colleagueDao)
+	Integer res = 0;
+	res = ((ColleagueDao) colleagueDao)
 		.addColleagueFromRegistration(registration);
-	res = ((AuthenticationDao) authenticationDao)
+	 ((AuthenticationDao) authenticationDao)
 		.addUserFromRegistration(registration);
 	return res;
     }

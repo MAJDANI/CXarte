@@ -45,7 +45,9 @@ public class Authentication implements Serializable {
     public String toString() {
 	StringBuilder strBld = new StringBuilder();
 	strBld.append("[colleagueId=").append(getColleagueId()).append(", ");
-	strBld.append("token.login=").append(getToken().getLogin()).append("]");
+	if(this.token != null){
+	    strBld.append("token.login=").append(getToken().getLogin()).append("]");
+	}
 	return strBld.toString();
     }
 

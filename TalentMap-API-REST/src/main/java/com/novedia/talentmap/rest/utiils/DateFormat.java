@@ -14,12 +14,7 @@ public class DateFormat {
 	public static Date parseStringToDate(String dateToParse) throws ParseException {
 		Date date = null;
 		dateFormat.setLenient(false);
-//		try {
-			date = dateFormat.parse(dateToParse);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
+		date = dateFormat.parse(dateToParse);
 		return date;
 	}
 	 

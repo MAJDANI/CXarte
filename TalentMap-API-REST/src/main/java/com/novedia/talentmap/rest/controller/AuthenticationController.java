@@ -49,6 +49,9 @@ public class AuthenticationController extends TalentMapRestHandlerException {
 		token.setLogin(login);
 		token.setPassword(encodePassword);
 		authentication = authenticationService.checkUser(token);
+		if(authentication == null){
+			authentication = new Authentication();
+		}
 		return authentication;
 		
 	}

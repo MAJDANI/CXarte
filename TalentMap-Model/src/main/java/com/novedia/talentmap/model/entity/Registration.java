@@ -112,6 +112,7 @@ public class Registration {
 	this.setBusinessEngineer(builder.businessEngineer);
 	this.setProfileId(builder.profileId);
 	this.setManagerId(builder.managerId);
+	this.setTitle(builder.title);
     }
 
     // -------------------------------------
@@ -152,6 +153,8 @@ public class Registration {
 	private Integer profileId;
 
 	private Integer managerId;
+	
+	private String title; 
 
 	/**
 	 * Set colleague id
@@ -304,6 +307,18 @@ public class Registration {
 	 */
 	public Builder businessEngineer(final BusinessEngineer businessEngineer) {
 	    this.businessEngineer = businessEngineer;
+	    return this;
+	}
+	
+	/**
+	 * Set title
+	 * 
+	 * @param title
+	 *            the sex of colleague
+	 * @return the builder
+	 */
+	public Builder title(final String title) {
+	    this.title = title;
 	    return this;
 	}
 

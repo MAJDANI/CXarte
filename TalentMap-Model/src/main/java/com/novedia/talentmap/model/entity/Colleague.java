@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.google.common.collect.ImmutableList;
@@ -312,6 +313,7 @@ public class Colleague implements Serializable {
      * 
      * @return the mission
      */
+     @JsonIgnore
     public List<Mission> getMissions() {
 	return missions;
     }
@@ -331,6 +333,7 @@ public class Colleague implements Serializable {
      * 
      * @return the tool
      */
+    @JsonIgnore
     public List<Tool> getTool() {
 	return tools;
     }
