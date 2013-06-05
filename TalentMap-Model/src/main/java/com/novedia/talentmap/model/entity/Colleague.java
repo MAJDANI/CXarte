@@ -7,9 +7,11 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.novedia.talentmap.model.json.serialize.JsonDateSerializer;
 
 /**
  * This entity represents a colleague.
@@ -214,7 +216,7 @@ public class Colleague implements Serializable {
      * 
      * @return the employmentDate
      */
-    // @JsonSerialize(using = DateSerializer.class)
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getEmploymentDate() {
 	return employmentDate;
     }
@@ -225,6 +227,7 @@ public class Colleague implements Serializable {
      * @param employmentDate
      *            the employmentDate to set
      */
+    @JsonSerialize(using = JsonDateSerializer.class)
     public void setEmploymentDate(Date employmentDate) {
 	this.employmentDate = employmentDate;
     }

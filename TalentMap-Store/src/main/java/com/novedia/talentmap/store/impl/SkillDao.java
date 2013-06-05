@@ -178,6 +178,41 @@ public class SkillDao extends SqlMapClientDaoSupport implements ISkillDao,
 		return this.getSqlMapClientTemplate().queryForList(
 				DBRequestsConstants.GET_CM_COLLEAGUE_ID_BY_TOOL_ID, parameters);
 	}
+	
+	/**
+	 * Select all Collaborators Id By a conceptId.
+	 * 
+	 * @param conceptId
+	 *            : a concept Id
+	 * @return all collaborator's id who has a competence on the concept specified
+	 * @author j.maquin
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Integer> getAllColleagueIdByConceptId(Integer conceptId)
+			throws DataAccessException {
+		return this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_ALL_COLLEAGUE_ID_BY_CONCEPT_ID, conceptId);
+	}
+	
+	/**
+	 * Select all CM Collaborators Id By a conceptId.
+	 * 
+	 * @param conceptId
+	 *            : a concept Id
+	 * @param managerId
+	 *            : a manager Id
+	 * @return all CM collaborator's id who has a competence on the concept specified
+	 * @author j.maquin
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Integer> getAllCmColleagueIdByConceptId(Integer conceptId,Integer managerId)
+			throws DataAccessException {
+		HashMap parameters = new HashMap();
+		parameters.put("conceptId", conceptId);
+		parameters.put("managerId", managerId);
+		return this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_CM_COLLEAGUE_ID_BY_CONCEPT_ID, parameters);
+	}
 
 	/**
 	 * Select all Collaborators Id By a list of toolId.

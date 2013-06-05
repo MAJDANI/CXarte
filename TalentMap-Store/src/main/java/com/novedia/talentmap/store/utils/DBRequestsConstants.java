@@ -304,14 +304,24 @@ public final class DBRequestsConstants {
 	public static final String SAVE_SKILL = "skill.save";
 
 	/**
-	 * Constant request to get all collaborators by a list of tool.
+	 * Constant request to get all collaborators by a tool.
 	 */
 	public static final String GET_ALL_COLLEAGUE_ID_BY_TOOL_ID = "skill.getAllColleagueIdByToolId";
 
 	/**
-	 * Constant request to get all collaborators by a list of tool.
+	 * Constant request to get all CM collaborators by a tool.
 	 */
 	public static final String GET_CM_COLLEAGUE_ID_BY_TOOL_ID = "skill.getCmColleagueIdByToolId";
+	
+	/**
+	 * Constant request to get all collaborators by a concept.
+	 */
+	public static final String GET_ALL_COLLEAGUE_ID_BY_CONCEPT_ID = "skill.getAllColleagueIdByConceptId";
+	
+	/**
+	 * Constant request to get all CM collaborators by a concept.
+	 */
+	public static final String GET_CM_COLLEAGUE_ID_BY_CONCEPT_ID = "skill.getCmColleagueIdByConceptId";
 
 	/**
 	 * Constant request to get all collaborators by a list of tool.

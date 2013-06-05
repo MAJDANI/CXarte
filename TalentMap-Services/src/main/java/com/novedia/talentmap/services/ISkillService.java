@@ -3,6 +3,8 @@ package com.novedia.talentmap.services;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.dto.CategoryMapDTO;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
@@ -32,7 +34,7 @@ public interface ISkillService {
      * Select all colleague's id who have skill with the tool id.
      * 
      * @class ISkillService.java
-     * @param listToolId
+     * @param toolId
      *            a tool Id
      * @return List<Integer> a list of colleague's id
      */
@@ -47,6 +49,28 @@ public interface ISkillService {
      * @return List<Integer> a list of colleague's id
      */
     List<Integer> getCmColleagueIdByToolId(Integer toolId, Integer managerId);
+    
+    /**
+     * Select all colleague's id who have skill with the concept id.
+     * 
+     * @class ISkillService.java
+     * @param conceptId
+     *            a concept Id
+     * @return List<Integer> a list of colleague's id
+     */
+    List<Integer> getAllColleagueIdByConceptId(Integer conceptlId);
+    
+    /**
+     * Select all CM colleague's id who have skill with the concept id.
+     * 
+     * @class ISkillService.java
+     * @param conceptId
+     *            a concept Id
+     * @param managerId
+     *            a manager Id
+     * @return List<Integer> a list of colleague's id
+     */
+	List<Integer> getAllCmColleagueIdByConceptId(Integer conceptId,Integer managerId);
 
     /**
      * Select all colleague's id who have skill with one ore more tool id of the
@@ -150,5 +174,7 @@ public interface ISkillService {
      * @return a Tool by name
      */
     Tool getToolByName(String name);
+
+
 
 }
