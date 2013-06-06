@@ -136,5 +136,17 @@
 		from EAE
 		where EAE.MANAGER_ID=#id# and EAE.EAE_STATE_ID in (1,2));	
 	</select>
+	
+	<select id="getHistoryEAEForCollab" resultMap="eaeSynthesisResult" parameterClass="Integer">
+		SELECT EAE.EAE_ID, 
+		null as "LAST_NAME",
+		null as "FIRST_NAME",
+		EAE.EAE_DATE, 
+		EAE.EAE_STATE_ID, 
+		EAE_STATE.EAE_STATE_LABEL
+		FROM EAE , EAE_STATE
+		where EAE.COLLEAGUE_ID = #id#
+		and EAE.EAE_STATE_ID = EAE_STATE.EAE_STATE_ID  ;
+	</select>
 
 </sqlMap>

@@ -71,6 +71,12 @@ public class EAEService implements IEAEService {
 	return eaeDao.getCollabWithoutOngoingEAEForManager(idManager);
     }
 
+    @Override
+    public List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab) {
+	EAEDao eaeDao = (EAEDao) this.eaeDao;
+	return eaeDao.getHistoryEAEForCollab(idCollab);
+    }
+    
     /**
      * @return the eaeDao
      */

@@ -3,7 +3,6 @@ package com.novedia.talentmap.web.ui.collab;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -11,6 +10,7 @@ public class CollabEAEContent extends VerticalLayout implements
 	ClickListener {
 
     private Authentication authentication;
+    private CollabEAEContentHistory collabEAEContentHistory;
 
 
     /**
@@ -27,7 +27,11 @@ public class CollabEAEContent extends VerticalLayout implements
      */
     public CollabEAEContent buildViewEAEContent() {
 	removeAllComponents();
-	buildMain();
+	collabEAEContentHistory.setAuthentication(getAuthentication());
+	collabEAEContentHistory = collabEAEContentHistory.buildViewHistory();
+	this.addComponent(collabEAEContentHistory);
+	setMargin(true);
+	setSpacing(true);
 	return this;
     }
 
@@ -55,6 +59,21 @@ public class CollabEAEContent extends VerticalLayout implements
 
     public void setAuthentication(Authentication authentication) {
 	this.authentication = authentication;
+    }
+
+    /**
+     * @return the collabEAEContentHistory
+     */
+    public CollabEAEContentHistory getCollabEAEContentHistory() {
+        return collabEAEContentHistory;
+    }
+
+    /**
+     * @param collabEAEContentHistory the collabEAEContentHistory to set
+     */
+    public void setCollabEAEContentHistory(
+    	CollabEAEContentHistory collabEAEContentHistory) {
+        this.collabEAEContentHistory = collabEAEContentHistory;
     }
 
 }

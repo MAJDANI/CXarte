@@ -108,6 +108,24 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 		DBRequestsConstants.GET_WITHOUT_ONGOING_EAE_FOR_CM, id);
     }
 
+    
+    /**
+     * Gets, for a given colleague specified by the parameter idCollab, the list
+     * of all his EAE, with the state for each one.
+     * 
+     * @param id
+     *            : the id of the colleague searching for his colleagues EAE
+     *            history
+     * 
+     * @return List<EAEForSynthesis> : a list of EAEForSynthesis
+     * @throws DataAccessException
+     */
+    public List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab)
+	    throws DataAccessException {
+	return (List<EAEForSynthesis>) this.getSqlMapClientTemplate().queryForList(
+		DBRequestsConstants.GET_HISTORY_EAE_FOR_COLLAB, idCollab);
+    }
+    
     /**
      * {@inheritDoc}
      */

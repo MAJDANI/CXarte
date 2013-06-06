@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.collab;
 
 import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.web.ui.cm.CmEAEView;
 import com.novedia.talentmap.web.util.IEAELayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
@@ -43,19 +44,14 @@ public class CollabEAEView extends HorizontalSplitPanel {
     }
 
     public void buildObservators() {
-	// Temporaire
-	final VerticalLayout v1 = new VerticalLayout();
-	v1.addComponent(new Label("EAE History"));
 
 	this.collabEAENavigation.addObservateur(new IEAELayout() {
 
 	    @Override
 	    public void switchPanelTarget(int targetPanel) {
 		if (targetPanel == EAE_HISTORY) {
-		    CollabEAEView.this.setSecondComponent(v1);
-		    // cmEAESynthesisContent =
-		    // cmEAESynthesisContent.buildViewEAESynthesisContent();
-		    // CmEAEView.this.setSecondComponent(cmEAESynthesisContent);
+		    collabEAEContent.buildViewEAEContent();
+		    CollabEAEView.this.setSecondComponent(collabEAEContent);
 		} 
 	    }
 	}, IEAELayout.class);
@@ -75,7 +71,7 @@ public class CollabEAEView extends HorizontalSplitPanel {
 	this.setFirstComponent(collabEAENavigation);
 	collabEAEContent = collabEAEContent.buildViewEAEContent();
 	this.setSecondComponent(collabEAEContent);
-	//La synthèse par défaut
+	//L'historique par défaut
 	collabEAENavigation.setTargetPanel(EAE_HISTORY);
 	collabEAENavigation.updateObservateur();
 

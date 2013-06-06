@@ -449,5 +449,5 @@ public final class DBRequestsConstants {
 	public static final String DELETE_EAE = "eae.delete";
 	public static final String GET_ONGOING_EAE_FOR_CM = "eae.getOngoingEAEForManager";
 	public static final String GET_WITHOUT_ONGOING_EAE_FOR_CM = "eae.getCollabWithoutOngoingEAEForManager";
-
+	public static final String GET_HISTORY_EAE_FOR_COLLAB = "eae.getHistoryEAEForCollab";
 }

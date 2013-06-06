@@ -80,11 +80,26 @@
 		<property name="collabEAEContent" ref="collabEAEContentBean" />
 		<property name="collabEAENavigation" ref="collabEAENavigationBean" />
 	</bean>
-
-	<bean id="collabEAEContentBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContent"
-		scope="session"/>
 	<bean id="collabEAENavigationBean" class="com.novedia.talentmap.web.ui.collab.CollabEAENavigation"
 		scope="session"/>
+
+	<bean id="collabEAEContentBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContent"
+		scope="session">
+		<property name="collabEAEContentHistory" ref="collabEAEContentHistoryBean" />
+	</bean>
+	<bean id="collabEAEContentHistoryBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContentHistory"
+		scope="session">
+		<property name="collabEAEHistoryPageTable" ref="collabEAEHistoryPageTableBean" />
+	</bean>
+		
+	<bean id="collabEAEHistoryPageTableBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEHistoryPageTable"
+		scope="session">
+		<property name="collabEaeHistoryContainer" ref="collabEaeHistoryContainerBean" />
+	</bean>
+	<bean id="collabEaeHistoryContainerBean" class="com.novedia.talentmap.web.ui.collab.CollabEaeHistoryContainer"
+		scope="session">
+			<property name="eaeService" ref="eaeService" />
+	</bean>
 
 
 	<!-- Beans Gestion des missions -->

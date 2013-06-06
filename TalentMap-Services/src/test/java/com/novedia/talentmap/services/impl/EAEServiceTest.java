@@ -151,4 +151,27 @@ public class EAEServiceTest {
 		Mockito.any(Integer.class));
     }
 
+    @Test
+    public void getHistoryEAEForCollab() {
+	// Given
+	List<EAEForSynthesis> historyEaeExpected = new ArrayList<EAEForSynthesis>();
+	EAEForSynthesis ef1 = EntityUtil.createEAEForSynthesis(1, "2012-05-25",
+		"DUPOND", "Michel", 1, "OPEN");
+	EAEForSynthesis ef2 = EntityUtil.createEAEForSynthesis(2, "2010-09-25",
+		"DUROC", "Sophie", 1, "OPEN");
+	historyEaeExpected.add(ef1);
+	historyEaeExpected.add(ef2);
+	Integer idCollab = 63;
+
+	// When
+	Mockito.when(eaeDaoMock.getHistoryEAEForCollab(idCollab)).thenReturn(
+		historyEaeExpected);
+	service.getHistoryEAEForCollab(idCollab);
+
+	// Then
+	Mockito.verify(eaeDaoMock, Mockito.times(1)).getHistoryEAEForCollab(
+		Mockito.any(Integer.class));
+	
+    }
+
 }

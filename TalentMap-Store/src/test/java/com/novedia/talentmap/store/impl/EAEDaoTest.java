@@ -113,6 +113,20 @@ public class EAEDaoTest {
 	// TODO
     }
 
+    @Test
+    public void getHistoryEAEForCollab() {
+	// Given
+	Integer idColleague = 58;
+	// When
+	List<EAEForSynthesis> listEaes = eaeDao
+		.getHistoryEAEForCollab(idColleague);
+	// Then
+	ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(4, 5),
+		listEaes);
+	ReflectionAssert.assertPropertyLenientEquals("eaeStateId",
+		Arrays.asList(1, 2), listEaes);
+    }
+
     /**
      * Test get EAE by id
      */

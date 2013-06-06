@@ -47,9 +47,6 @@ public class CmEAEView extends HorizontalSplitPanel {
 
     public void buildObservators() {
 	// Temporaire
-	final VerticalLayout v1 = new VerticalLayout();
-	v1.setCaption("Synthesis");
-	v1.addComponent(new Label("Synthesis"));
 	final VerticalLayout v2 = new VerticalLayout();
 	v2.addComponent(new Label("History"));
 	final VerticalLayout v3 = new VerticalLayout();
@@ -62,12 +59,8 @@ public class CmEAEView extends HorizontalSplitPanel {
 	    @Override
 	    public void switchPanelTarget(int targetPanel) {
 		if (targetPanel == EAE_SYNTHESIS) {
-//		    cmEAEContent.buildViewEAEContent();
 		    cmEAEContent.buildViewSynthesisContent();
 		    CmEAEView.this.setSecondComponent(cmEAEContent);
-		    // cmEAESynthesisContent =
-		    // cmEAESynthesisContent.buildViewEAESynthesisContent();
-		    // CmEAEView.this.setSecondComponent(cmEAESynthesisContent);
 		} else if (targetPanel == EAE_HISTORY) {
 		    CmEAEView.this.setSecondComponent(v2);
 		    // cmEAEHistoryContent =

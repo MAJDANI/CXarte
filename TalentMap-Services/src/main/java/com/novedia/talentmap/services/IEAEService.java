@@ -66,10 +66,10 @@ public interface IEAEService {
      * 
      */
     List<EAEForSynthesis> getOngoingEAEForCM(Integer idManager);
-    
+
     /**
-     * Gets, for a given manager specifier by the parameter id, the list of
-     * Colleague that haven't OPEN or VALIDATED EAE. These colleagues have
+     * Gets, for a given manager specified by the parameter idManager, the list
+     * of Colleague that haven't OPEN or VALIDATED EAE. These colleagues have
      * closed EAE, or may don't have any EAE yet.
      * 
      * @param id
@@ -79,4 +79,17 @@ public interface IEAEService {
      * @throws DataAccessException
      */
     List<Colleague> getCollabWithoutOngoingEAEForManager(Integer idManager);
+
+    /**
+     * Gets, for a given colleague specified by the parameter idCollab, the list
+     * of all his EAE, with the state for each one.
+     * 
+     * @param id
+     *            : the id of the colleague searching for his colleagues EAE
+     *            history
+     * 
+     * @return List<EAEForSynthesis> : a list of EAEForSynthesis
+     * @throws DataAccessException
+     */
+    List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab);
 }

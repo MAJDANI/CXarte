@@ -12,6 +12,8 @@ public class CmEAEContentSynthesis extends VerticalLayout implements ClickListen
     private Authentication authentication;
     private CmEAEOngoingPageTable cmEAEOngoingPageTable;
     private CmEAENotOngoingPageTable cmEAENotOngoingPageTable;
+    private static final String TAB_ONGOING_TITLE = "Ongoing EAE";
+    private static final String TAB_NO_ONGOING_TITLE = "Colleagues without Ongoing EAE";
 
     /**
      * Default constructor
@@ -26,13 +28,13 @@ public class CmEAEContentSynthesis extends VerticalLayout implements ClickListen
 	// Ongoing EAE
 	///***************************
 	
-	this.addComponent(new Label("Ongoing EAE"));
+	this.addComponent(new Label(TAB_ONGOING_TITLE));
 	cmEAEOngoingPageTable.buildAll(getAuthentication().getColleagueId());
 	this.addComponent(cmEAEOngoingPageTable);
 	///***************************
 	// Colleagues without Ongoing EAE
 	///***************************
-	this.addComponent(new Label("Colleagues without Ongoing EAE"));
+	this.addComponent(new Label(TAB_NO_ONGOING_TITLE));
 	cmEAENotOngoingPageTable.buildAll(getAuthentication().getColleagueId());
 	this.addComponent(cmEAENotOngoingPageTable);
 	setSizeFull();
