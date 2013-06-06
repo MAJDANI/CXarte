@@ -56,6 +56,12 @@
 
 
 	<insert id="add" parameterClass="eae">
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT NEXT
+			VALUE FOR SEQEAE FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+			where
+			SEQUENCE_NAME = 'SEQEAE'
+		</selectKey>
 
 		INSERT INTO EAE (
 			EAE_ID,
@@ -79,15 +85,11 @@
 			#previousEaeId# ,
 			#colleaguesStrengths# ,
 			#colleaguesWeaknesses# ,
-			#eaeState# ,
+			#eaeState.id# ,
 			#colleaguesSynthesis# ,
 			#managersSynthesis# ,
 			#other#
 		)
-		<selectKey resultClass="Integer" keyProperty="id">
-			SELECT
-			LAST_INSERT_ID() AS EAE_ID
-		</selectKey>
 	</insert>
 
 	<update id="save" parameterClass="EAE">

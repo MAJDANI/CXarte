@@ -79,7 +79,7 @@
 			#previousEaeId# ,
 			#colleaguesStrengths# ,
 			#colleaguesWeaknesses# ,
-			#eaeState# ,
+			#eaeState.id# ,
 			#colleaguesSynthesis# ,
 			#managersSynthesis# ,
 			#other#

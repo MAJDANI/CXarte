@@ -24,7 +24,7 @@ public interface IEAEService {
      *            the id of the EAE searched
      * @return an EAE
      */
-    EAE getEAE(Integer id);
+    EAE getEAEById(Integer id);
 
     /**
      * Adds the EAE.

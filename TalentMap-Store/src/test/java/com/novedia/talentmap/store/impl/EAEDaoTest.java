@@ -21,6 +21,7 @@ import org.unitils.spring.annotation.SpringBeanByName;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.dto.EAEForSynthesis;
 import com.novedia.talentmap.model.dto.EntityUtil;
+import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -117,53 +118,54 @@ public class EAEDaoTest {
      */
     @Test
     public void testGetById() {
-
 	// Given
 	Integer idEAE = 1;
-
 	// When
 	EAE eae = eaeDao.get(idEAE);
-
 	// Then
 	ReflectionAssert.assertPropertyLenientEquals("id", 1, eae);
-
     }
 
     /**
      * Test save
      */
-    @Ignore
     @Test
     @ExpectedDataSet("EAEDaoTest.testSave-result.xml")
     public void testSave() {
-	//TODO débugguer
 	// Given
-	EAE eae = EntityUtil.createEAE(4, 59, 62, Calendar.getInstance().getTime(), 1);
-	
+	EAE eae = EntityUtil.createEAE(3, 65, 62, "2013-05-25", 1);
 	// When
 	int updateIndex = eaeDao.save(eae);
-	System.out.println("index=" + updateIndex);
 	// Then
 	Assert.assertTrue(updateIndex > 0);
-
     }
 
     /**
      * Test add
      */
-    @Ignore
     @Test
+    @ExpectedDataSet("EAEDaoTest.testAdd-result.xml")
     public void testAdd() {
-	// TODO
+	// Given
+	EAE eae = EntityUtil.createEAE(4, 63, 62, "2013-06-25", 1);
+	// When
+	int addedIndex = eaeDao.add(eae);
+	// Then
+	Assert.assertTrue(addedIndex > 0);
     }
 
     /**
      * Test delete
      */
-    @Ignore
     @Test
+    @ExpectedDataSet("EAEDaoTest.testDelete-result.xml")
     public void testDelete() {
-	// TODO
+	// Given
+	EAE eae = EntityUtil.createEAE(3, 65, 62, "2013-05-25", 3);
+	// When
+	int deleteIndex = eaeDao.delete(eae);
+	// Then
+	Assert.assertTrue(deleteIndex > 0);
     }
 
 }

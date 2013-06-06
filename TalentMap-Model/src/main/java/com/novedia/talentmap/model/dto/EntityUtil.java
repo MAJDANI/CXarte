@@ -3,6 +3,7 @@
  */
 package com.novedia.talentmap.model.dto;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,26 +17,19 @@ import com.novedia.talentmap.model.entity.EAEState;
  * 
  */
 public class EntityUtil {
-//    protected static final SimpleDateFormat dateFormat = new SimpleDateFormat(
-//	    "dd/MM/yyyy");
-    
-    
-    public static Date parseDate(String date, String format) {
-	Date result = null;
-	try {
-		SimpleDateFormat formatter = new SimpleDateFormat(format);
-		result = formatter.parse(date);
-		return result;
-	} catch (Exception e) {
-		return null;
-	}
-}
+
+    public static SimpleDateFormat formatter = new SimpleDateFormat(
+	    "yyyy-MM-dd");
+
+    public static Date stringToDate(String sDate) throws ParseException {
+	return formatter.parse(sDate);
+    }
 
     /**
      * Builds an object EAE with all MANDATORY fields
      */
     public static EAE createEAE(Integer id, Integer colleagueId,
-	    Integer managerId, Date eaeDate, Integer eaeStateId) {
+	    Integer managerId, /* Date eaeDate */String date, Integer eaeStateId) {
 
 	Colleague colleague = Colleague.builder().id(colleagueId).build();
 	Colleague manager = Colleague.builder().id(managerId).build();
@@ -45,7 +39,13 @@ public class EntityUtil {
 	eae.setColleague(colleague);
 	eae.setManager(manager);
 	eae.setEaeState(eaeState);
-	eae.setDateEae(eaeDate);
+	Date laDate = Calendar.getInstance().getTime();
+	try {
+	    laDate = stringToDate(date);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	eae.setDateEae(laDate);
 
 	return eae;
     }
@@ -58,7 +58,7 @@ public class EntityUtil {
 	Integer id = 999;
 	Integer colleagueId = 999;
 	Integer managerId = 999;
-	Date eaeDate = new Date ();
+	Date eaeDate = new Date();
 	Integer eaeStateId = 1;
 
 	Colleague colleague = Colleague.builder().id(colleagueId).build();
@@ -70,4 +70,24 @@ public class EntityUtil {
 	return eae;
     }
 
+    public static EAEForSynthesis createEAEForSynthesis(Integer id,
+	    String dateEae, String lastName, String firstName, Integer eaeStateId,
+	    String eaeStateLabel) {
+	EAEForSynthesis eae = new EAEForSynthesis();
+	eae.setId(id);
+
+	Date laDate = Calendar.getInstance().getTime();
+	try {
+	    laDate = stringToDate(dateEae);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	
+	eae.setDateEae(laDate);
+	eae.setLastName(lastName);
+	eae.setFirstName(firstName);
+	eae.setEaeStateId(eaeStateId);
+	eae.setEaeStateLabel(eaeStateLabel);
+	return eae;
+    }
 }

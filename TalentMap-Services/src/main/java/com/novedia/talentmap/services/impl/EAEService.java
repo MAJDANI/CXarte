@@ -27,7 +27,7 @@ public class EAEService implements IEAEService {
      * @see com.novedia.talentmap.services.IEAEervice#getEAE(java.lang.Integer)
      */
     @Override
-    public EAE getEAE(Integer id) {
+    public EAE getEAEById(Integer id) {
 	return eaeDao.get(id);
     }
 
