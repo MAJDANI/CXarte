@@ -12,18 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 
 
 /**
- * 
+ * @author b.tiomofofou
  * @author j.maquin
  *
  */
 @Controller
 @RequestMapping(value = "/colleagues/")
-public class SearchController {
+public class SearchController extends TalentMapRestHandlerException {
 	
 	@Autowired
 	IColleagueService colleagueService;
@@ -86,7 +87,9 @@ public class SearchController {
 	public List<Colleague> getAllColleaguesByTool(@PathVariable final Integer toolId){
 		List<Colleague> colleagues = new ArrayList<Colleague>();
 		List<Integer> colleagueIds = skillService.getAllColleagueIdByToolId(toolId);
-		colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
 		return colleagues;
 	}
 	
@@ -95,7 +98,9 @@ public class SearchController {
 	public List<Colleague> getAllCmColleaguesByTool(@PathVariable final Integer toolId,@PathVariable final Integer managerId){
 		List<Colleague> colleagues = new ArrayList<Colleague>();
 		List<Integer> colleagueIds = skillService.getCmColleagueIdByToolId(toolId,managerId);
-		colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
 		return colleagues;
 	}
 	
@@ -104,7 +109,9 @@ public class SearchController {
 	public List<Colleague> getAllColleaguesByConcept(@PathVariable final Integer conceptId){
 		List<Colleague> colleagues = new ArrayList<Colleague>();
 		List<Integer> colleagueIds = skillService.getAllColleagueIdByConceptId(conceptId);
-		colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
 		return colleagues;
 	}
 	
@@ -112,9 +119,10 @@ public class SearchController {
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByConcept(@PathVariable final Integer conceptId,@PathVariable final Integer managerId){
 		List<Colleague> colleagues = new ArrayList<Colleague>();
-		List<Integer> colleagueIds = new ArrayList<Integer>();
-		colleagueIds = skillService.getAllCmColleagueIdByConceptId(conceptId,managerId);
-		colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		List<Integer> colleagueIds = skillService.getAllCmColleagueIdByConceptId(conceptId,managerId);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
 		return colleagues;
 	}
 
