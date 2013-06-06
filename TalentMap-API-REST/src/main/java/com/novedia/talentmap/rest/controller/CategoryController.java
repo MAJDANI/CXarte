@@ -29,7 +29,7 @@ public class CategoryController extends TalentMapRestHandlerException {
 	/**
 	 * @return categories
 	 */
-	@RequestMapping(value = "/categories/")
+	@RequestMapping(value = "/categories/", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Category> getAll() {
 		List<Category> categories = adminService.getAllCategories();

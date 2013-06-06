@@ -42,7 +42,7 @@ public class ToolController extends TalentMapRestHandlerException {
 	 * @param conceptId
 	 * @return tools
 	 */
-	@RequestMapping(value = "/tools/{conceptId}/")
+	@RequestMapping(value = "/tools/{conceptId}/", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Tool> getToolsByConcept(@PathVariable Integer conceptId) {
 		List<Tool> tools = adminService.getToolsByConcept(conceptId);

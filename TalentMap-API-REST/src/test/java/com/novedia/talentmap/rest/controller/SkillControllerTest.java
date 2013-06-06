@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.novedia.talentmap.model.dto.CategoryMapDTO;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.services.impl.SkillService;
 
@@ -44,9 +45,11 @@ public class SkillControllerTest {
 				.score(4).use_frequency(1)
 				.no_using_time(1).averageScore((int) averageScore)
 				.build();
+		
+		//WHEN 
 		Mockito.when(skillservice.addSkill(skill)).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/skill/{colleagueId}/{toolId}/{score}/{use_frequency}/{no_using_time}/",1,1,4,1,1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -63,15 +66,36 @@ public class SkillControllerTest {
 				.score(4).use_frequency(1)
 				.no_using_time(1).averageScore((int) averageScore)
 				.build();
+		
+		//WHEN 
 		Mockito.when(skillservice.saveSkill(skill)).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/skill/{colleagueId}/{toolId}/{score}/{use_frequency}/{no_using_time}/",1,1,5,1,1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.colleagueId").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.tool_id").value(expectedResult))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(5));
+	}
+	
+	@Test
+	public void testGetSkillCollaborator() throws Exception {
+		
+		//GIVEN
+		Integer colleagueId = 1;
+		CategoryMapDTO categoryMapDto = null;
+		
+		
+		//WHEN
+		Mockito.when(skillservice.getAllCollaboratorSkill(Mockito.anyInt())).thenReturn(categoryMapDto);
+		
+		//THEN
+		mockMvc.perform(MockMvcRequestBuilders.get("/skills/{colleagueId}/",colleagueId)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+		
+		
 	}
 
 }

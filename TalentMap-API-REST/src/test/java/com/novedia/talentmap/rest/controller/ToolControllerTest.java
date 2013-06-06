@@ -51,9 +51,11 @@ public class ToolControllerTest {
 		List<Tool> toolsList = new ArrayList<Tool>();
 		toolsList.add(tool);
 		toolsList.add(tool2);
+		
+		//WHEN
 		Mockito.when(adminService.getAllTools()).thenReturn(toolsList);
 		
-		//WHEN and THEN
+        //THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/tools/")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -69,9 +71,11 @@ public class ToolControllerTest {
 		List<Tool> tools = new ArrayList<Tool>();
 		tools.add(tool);
 		tools.add(tool2);
+		
+		//WHEN
 		Mockito.when(adminService.getToolsByConcept(concept.getId())).thenReturn(tools);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/tools/{conceptId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -82,9 +86,11 @@ public class ToolControllerTest {
 	public void addToolTest() throws Exception {
 		//GIVEN
 		Integer expectedResult = 1;
+		
+		//WHEN
 		Mockito.when(adminService.addTool(Mockito.any(Tool.class))).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/tool/{conceptId}/{tool_name}/",1,"test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -98,9 +104,11 @@ public class ToolControllerTest {
 		Integer expectedResult = 1;
 		Concept concept = Concept.builder().id(1).build();
 		Tool tool = Tool.builder().concept(concept).id(expectedResult).name("test").build();
+		
+		//WHEN
 		Mockito.when(adminService.updateTool(tool)).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/tool/{conceptId}/{toolId}/{tool_name}/",1,1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -113,9 +121,11 @@ public class ToolControllerTest {
 	public void deleteToolTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//WHEN
 		Mockito.when(adminService.deleteTool(1)).thenReturn(map);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/tool/{toolId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());

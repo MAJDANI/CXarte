@@ -52,9 +52,11 @@ public class ConceptControllerTest {
 		List<Concept> concepts = new ArrayList<Concept>();
 		concepts.add(concept);
 		concepts.add(concept2);
+		
+		//WHEN
 		Mockito.when(adminService.getAllConceptByCategory(category)).thenReturn(concepts);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/concepts/{categoryId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -67,9 +69,11 @@ public class ConceptControllerTest {
 		Integer expectedResult = 1;
 		Category category = Category.builder().id(1).build();
 		Concept concept = Concept.builder().category(category).name("test").build();
+		
+		//WHEN 
 		Mockito.when(adminService.addConcept(concept)).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/concept/{categoryId}/{concept_name}/",1,"test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -83,9 +87,11 @@ public class ConceptControllerTest {
 		Integer expectedResult = 1;
 		Category category = Category.builder().id(1).build();
 		Concept concept = Concept.builder().category(category).id(expectedResult).name("test").build();
+		
+		//WHEN
 		Mockito.when(adminService.saveConcept(concept)).thenReturn(expectedResult);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/concept/{categoryId}/{conceptId}/{concept_name}/",1,1,"test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -98,9 +104,11 @@ public class ConceptControllerTest {
 	public void deleteConceptTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//WHEN
 		Mockito.when(adminService.deleteConcept(1)).thenReturn(map);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/concept/{conceptId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());

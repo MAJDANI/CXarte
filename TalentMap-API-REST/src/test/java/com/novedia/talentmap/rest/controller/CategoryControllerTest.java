@@ -51,9 +51,11 @@ public class CategoryControllerTest {
 		Category category = Category.builder().id(1).name("Java/JEE").build();
 		List<Category> categoriesList = new ArrayList<Category>();
 		categoriesList.add(category);
+		
+		//WHEN 
 		Mockito.when(adminService.getAllCategories()).thenReturn(categoriesList);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/categories/")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());
@@ -65,9 +67,11 @@ public class CategoryControllerTest {
 		//GIVEN
 		Integer resultExpected = 1;
 		Category cat = Category.builder().name("test").build();
+		
+		//WHEN
 		Mockito.when(adminService.addCategory(cat)).thenReturn(resultExpected);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/category/{category_name}/", "test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -79,9 +83,11 @@ public class CategoryControllerTest {
 	public void saveCategoryTest() throws Exception {
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//WHEN
 		Mockito.when(adminService.updateASkill(Mockito.any(Category.class), Mockito.any(Concept.class), Mockito.any(Tool.class))).thenReturn(map);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/category/{categoryId}/{category_name}/",1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
@@ -93,9 +99,11 @@ public class CategoryControllerTest {
 	public void deleteCategoryTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//WHEN
 		Mockito.when(adminService.deleteCategory(1)).thenReturn(map);
 		
-		//WHEN and THEN
+		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/category/{categoryId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());

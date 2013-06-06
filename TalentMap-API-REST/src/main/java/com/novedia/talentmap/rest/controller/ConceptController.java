@@ -31,7 +31,7 @@ public class ConceptController extends TalentMapRestHandlerException {
 	 * @param categoryId
 	 * @return concept
 	 */
-	@RequestMapping(value = "/concepts/{categoryId}/")
+	@RequestMapping(value = "/concepts/{categoryId}/" , method=RequestMethod.GET)
 	@ResponseBody
 	public List<Concept> getAll(@PathVariable Integer categoryId) {
 		Category category = Category.builder().id(categoryId).build();
