@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
+import com.novedia.talentmap.rest.utiils.DefaultValue;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 
@@ -49,36 +50,33 @@ public class SearchController extends TalentMapRestHandlerException {
 		return colleagues;
 	}
 	
-	@RequestMapping(value = "", method =RequestMethod.GET)
-	@ResponseBody
-	public List<Colleague> getAllColleagues(){
-		List <Colleague> colleagues = new ArrayList<Colleague>();
-		colleagues = colleagueService.getAllColleagues();
-		return colleagues;
-	}
-	
+	/**
+	 * Get colleague by name
+	 * @param name
+	 * @return
+	 */
 	@RequestMapping(value = "byname/{name}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByName(@PathVariable final String name){
 		List <Colleague> colleagues = new ArrayList<Colleague>();
-		colleagues = colleagueService.getAllColleaguesByName(name);
+		if (name.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)) {
+			colleagues = colleagueService.getAllColleagues();
+		} else {
+			colleagues = colleagueService.getAllColleaguesByName(name);
+		}
 		return colleagues;
 	}
 	
-	@RequestMapping(value = "{managerId}/", method =RequestMethod.GET)
-	@ResponseBody
-	public List<Colleague> getAllCmColleagues(@PathVariable final Integer managerId){
-		List <Colleague> colleagues = new ArrayList<Colleague>();
-		String name = "";
-		colleagues = colleagueService.getCmColleaguesByName(name, managerId);
-		return colleagues;
-	}
 	
 	@RequestMapping(value = "byname/{name}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByName(@PathVariable final String name,@PathVariable final Integer managerId){
 		List <Colleague> colleagues = new ArrayList<Colleague>();
-		colleagues = colleagueService.getCmColleaguesByName(name, managerId);
+		String colleagueName = name;
+		if (name.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)) {
+			colleagueName = "";
+		}
+		colleagues = colleagueService.getCmColleaguesByName(colleagueName, managerId);
 		return colleagues;
 	}
 
