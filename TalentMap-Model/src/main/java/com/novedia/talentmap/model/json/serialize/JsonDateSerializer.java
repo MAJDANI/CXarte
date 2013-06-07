@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.SerializerProvider;
 
 public class JsonDateSerializer extends JsonSerializer<Date> {
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
     public void serialize(Date date, JsonGenerator jsonGenerator,
