@@ -12,8 +12,8 @@ public class CmEAENotOngoingPageTable extends PagedTable {
     /**
      * Colonnes
      */
-    public static final String PRENOM = "Prénom";
-    public static final String NOM = "Nom";
+    public static final String PRENOM = "First Name";
+    public static final String NOM = "Last Name";
 
     private static final int PAGE_SIZE = 5;
 
@@ -47,7 +47,7 @@ public class CmEAENotOngoingPageTable extends PagedTable {
     }
 
     public void buildMain() {
-	setWidth("900px");
+	setWidth("1000px");
 	this.cmEAENotOngoingContainer.fillEAEContainer(getColleagueId());
 	fillResultsTable();
     }

@@ -6,7 +6,11 @@ import java.util.Date;
 
 import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.dto.EAEForSynthesis;
-import com.novedia.talentmap.model.entity.Colleague;
+import com.vaadin.terminal.Resource;
+import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.Embedded;
+import com.novedia.talentmap.web.commons.Images;
+import com.novedia.talentmap.web.data.EaeState;
 
 @SuppressWarnings("serial")
 public class CollabEAEHistoryPageTable extends PagedTable {
@@ -18,8 +22,9 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     /**
      * Colonnes
      */
-    public static final String DATE_EAE = "date de l'EAE";
-    public static final String STATE_EAE = "Etat de l'EAE";
+    public static final String DATE_EAE = "EAE's Date";
+    public static final String STATE_EAE = "EAE's State";
+    public static final String STATE_EAE_IMG = "EAE's Icon";
     private static final int PAGE_SIZE = 5;
 
     /**
@@ -51,7 +56,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     }
 
     public void buildMain() {
-	setWidth("900px");
+	setWidth("1000px");
 	this.collabEaeHistoryContainer.fillEAEContainer(getColleagueId());
 	fillResultsTable();
     }
@@ -67,7 +72,14 @@ public class CollabEAEHistoryPageTable extends PagedTable {
 
 	for (EAEForSynthesis eae : collectionEAE) {
 	    String date = formatterDate(eae.getDateEae());
-	    addItem(new Object[] { date, eae.getEaeStateLabel() }, eae);
+
+	    if (eae.getEaeStateId() == EaeState.OPEN) {
+		addItem(new Object[] { date, eae.getEaeStateLabel(), Images.getImgFeuVert()}, eae);
+	    } else if (eae.getEaeStateId() == EaeState.VALIDATED) {
+		addItem(new Object[] { date, eae.getEaeStateLabel(), Images.getImgFeuOrange()}, eae);
+	    } else if (eae.getEaeStateId() == EaeState.CLOSED) {
+		addItem(new Object[] { date, eae.getEaeStateLabel(), Images.getImgFeuRouge() }, eae);
+	    }
 	}
 
     }
@@ -78,6 +90,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     public void addColumns() {
 	addContainerProperty(DATE_EAE, String.class, null);
 	addContainerProperty(STATE_EAE, String.class, null);
+	addContainerProperty(STATE_EAE_IMG, Embedded.class, null);
     }
 
     /**

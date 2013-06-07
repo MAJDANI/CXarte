@@ -6,7 +6,11 @@ import java.util.Date;
 
 import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.dto.EAEForSynthesis;
-import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.web.commons.Images;
+import com.novedia.talentmap.web.data.EaeState;
+import com.vaadin.terminal.Resource;
+import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.Embedded;
 
 @SuppressWarnings("serial")
 public class CmEAEOngoingPageTable extends PagedTable {
@@ -18,10 +22,11 @@ public class CmEAEOngoingPageTable extends PagedTable {
     /**
      * Colonnes
      */
-    public static final String PRENOM = "Prénom";
-    public static final String NOM = "Nom";
-    public static final String DATE_EAE_EN_COURS = "date de l'EAE en cours";
-    public static final String STATE_EAE_EN_COURS = "Etat de l'EAE en cours";
+    public static final String PRENOM = "First Name";
+    public static final String NOM = "Last Name";
+    public static final String DATE_EAE_EN_COURS = "Ongoig EAE's Date";
+    public static final String STATE_EAE_EN_COURS = "Ongoig EAE's State";
+    public static final String STATE_EAE_EN_COURS_IMG = "Ongoig EAE's Icon";
 
     private static final int PAGE_SIZE = 5;
 
@@ -54,7 +59,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
     }
 
     public void buildMain() {
-	setWidth("900px");
+	setWidth("1000px");
 	this.cmEAEOngoingContainer.fillEAEContainer(getColleagueId());
 	fillResultsTable();
     }
@@ -70,8 +75,18 @@ public class CmEAEOngoingPageTable extends PagedTable {
 
 	for (EAEForSynthesis eae : collectionEAE) {
 	    String date = formatterDate(eae.getDateEae());
-	    addItem(new Object[] { eae.getFirstName(), eae.getLastName(), date,
-		    eae.getEaeStateLabel() }, eae);
+
+	    if (eae.getEaeStateId() == EaeState.OPEN) {
+		addItem(new Object[] { eae.getFirstName(), eae.getLastName(),
+			date, eae.getEaeStateLabel(), Images.getImgFeuVert() }, eae);
+	    } else if (eae.getEaeStateId() == EaeState.VALIDATED) {
+		addItem(new Object[] { eae.getFirstName(), eae.getLastName(),
+			date, eae.getEaeStateLabel(), Images.getImgFeuOrange()  }, eae);
+	    } else if (eae.getEaeStateId() == EaeState.CLOSED) {
+		addItem(new Object[] { eae.getFirstName(), eae.getLastName(),
+			date, eae.getEaeStateLabel(), Images.getImgFeuRouge()  }, eae);
+	    }
+
 	}
 
     }
@@ -84,6 +99,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
 	addContainerProperty(NOM, String.class, null);
 	addContainerProperty(DATE_EAE_EN_COURS, String.class, null);
 	addContainerProperty(STATE_EAE_EN_COURS, String.class, null);
+	addContainerProperty(STATE_EAE_EN_COURS_IMG, Embedded.class, null);
     }
 
     /**
