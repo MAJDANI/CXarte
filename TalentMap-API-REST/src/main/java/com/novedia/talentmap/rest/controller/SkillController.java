@@ -69,6 +69,8 @@ public class SkillController extends TalentMapRestHandlerException {
 						SkillTool skillTool = new SkillTool();
 						skillTool.setToolId(eTool.getKey().getId());
 						skillTool.setToolName(eTool.getKey().getName());
+						skillTool.setNoUsingTime(eTool.getValue().getNo_using_time());
+						skillTool.setUseFrequency(eTool.getValue().getUse_frequency());
 						skillTool.setToolScore(eTool.getValue().getAverageScore());
 						skills.add(skillTool);
 					}
