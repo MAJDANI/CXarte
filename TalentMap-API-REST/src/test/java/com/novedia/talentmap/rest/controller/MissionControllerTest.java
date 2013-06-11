@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.novedia.talentmap.model.dto.MissionDto;
-import com.novedia.talentmap.model.dto.Response;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 
@@ -61,8 +60,6 @@ public class MissionControllerTest {
 	public void deleteMissionTest() throws Exception{
 		//GIVEN
 		Integer expectedResult = 1;
-		Response response = new Response();
-		response.setMessage("nok");
 		Mission missionToDelete = Mission.builder().id(1).build();
 		Mockito.when(colleagueService.deleteMission(missionToDelete)).thenReturn(expectedResult);
 		
@@ -96,8 +93,7 @@ public class MissionControllerTest {
 				"/{comment}/{toolId1}/{toolId2}/{toolId3}",colleagueId,title,clientId,place,startDate,endDate,comment,
 				toolId1,toolId2,toolId3)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 	}
 	
@@ -125,8 +121,7 @@ public class MissionControllerTest {
 				"/{comment}/{toolId1}/{toolId2}/{toolId3}",missionId,colleagueId,title,clientId,place,startDate,endDate,comment,
 				toolId1,toolId2,toolId3)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	
 		
 	}
