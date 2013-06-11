@@ -129,9 +129,7 @@ public class ColleagueControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/colleague/{colleagueId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("test"));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 		
 	}

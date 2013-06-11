@@ -52,9 +52,7 @@ public class SkillControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/skill/{colleagueId}/{toolId}/{score}/{use_frequency}/{no_using_time}/",1,1,4,1,1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.colleagueId").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.tool_id").value(expectedResult));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -73,10 +71,7 @@ public class SkillControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/skill/{colleagueId}/{toolId}/{score}/{use_frequency}/{no_using_time}/",1,1,5,1,1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.colleagueId").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.tool_id").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(5));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test

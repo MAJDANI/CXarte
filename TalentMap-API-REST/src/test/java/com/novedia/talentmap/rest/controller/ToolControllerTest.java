@@ -93,9 +93,7 @@ public class ToolControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/tool/{conceptId}/{tool_name}/",1,"test")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -111,9 +109,7 @@ public class ToolControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/tool/{conceptId}/{toolId}/{tool_name}/",1,1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedResult))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test2"));;
+				.andExpect(MockMvcResultMatchers.status().isOk());
 		
 	}
 	

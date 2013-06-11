@@ -74,9 +74,7 @@ public class CategoryControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.post("/category/{category_name}/", "test")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(resultExpected))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -90,8 +88,7 @@ public class CategoryControllerTest {
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.put("/category/{categoryId}/{category_name}/",1,"test2")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test2"));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
 	

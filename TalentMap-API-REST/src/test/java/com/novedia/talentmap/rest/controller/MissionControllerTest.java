@@ -69,8 +69,7 @@ public class MissionControllerTest {
 		//WHEN and THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/mission/{missionId}/",1)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.message").value("ok"));
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	
