@@ -3,8 +3,11 @@ package com.novedia.talentmap.rest.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.JsonException;
+import com.novedia.talentmap.rest.exception.IBadRequestException;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
-import com.novedia.talentmap.rest.utiils.DefaultValue;
+import com.novedia.talentmap.rest.utiils.ConstantsValue;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 
@@ -25,7 +30,7 @@ import com.novedia.talentmap.services.ISkillService;
  */
 @Controller
 @RequestMapping(value = "/colleagues/")
-public class SearchController extends TalentMapRestHandlerException {
+public class SearchController extends TalentMapRestHandlerException implements IBadRequestException {
 	
 	@Autowired
 	IColleagueService colleagueService;
@@ -59,7 +64,7 @@ public class SearchController extends TalentMapRestHandlerException {
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByName(@PathVariable final String name){
 		List <Colleague> colleagues = new ArrayList<Colleague>();
-		if (name.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)) {
+		if (name.equalsIgnoreCase(ConstantsValue.DEFAULT_STRING_VALUE)) {
 			colleagues = colleagueService.getAllColleagues();
 		} else {
 			colleagues = colleagueService.getAllColleaguesByName(name);
@@ -73,7 +78,7 @@ public class SearchController extends TalentMapRestHandlerException {
 	public List<Colleague> getAllCmColleaguesByName(@PathVariable final String name,@PathVariable final Integer managerId){
 		List <Colleague> colleagues = new ArrayList<Colleague>();
 		String colleagueName = name;
-		if (name.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)) {
+		if (name.equalsIgnoreCase(ConstantsValue.DEFAULT_STRING_VALUE)) {
 			colleagueName = "";
 		}
 		colleagues = colleagueService.getCmColleaguesByName(colleagueName, managerId);
@@ -122,6 +127,15 @@ public class SearchController extends TalentMapRestHandlerException {
 			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
 		}
 		return colleagues;
+	}
+
+	@Override
+	@ExceptionHandler({TypeMismatchException.class})
+	public JsonException handlerBadRequestException(Exception ex) {
+		JsonException jsonError = new JsonException();
+		jsonError.setCode(HttpStatus.BAD_REQUEST.value());
+		jsonError.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		return jsonError;
 	}
 
 }

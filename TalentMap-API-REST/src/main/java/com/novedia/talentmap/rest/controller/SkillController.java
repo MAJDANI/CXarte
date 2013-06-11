@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +19,10 @@ import com.novedia.talentmap.model.dto.ConceptMapDTO;
 import com.novedia.talentmap.model.dto.ToolSkillMap;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.JsonException;
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.rest.exception.IBadRequestException;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.rest.utiils.SkillCategory;
 import com.novedia.talentmap.rest.utiils.SkillConcept;
@@ -32,7 +37,7 @@ import com.novedia.talentmap.services.impl.SkillService;
  */
 
 @Controller
-public class SkillController extends TalentMapRestHandlerException {
+public class SkillController extends TalentMapRestHandlerException implements IBadRequestException {
 
 	@Autowired
 	SkillService skillservice;
@@ -137,6 +142,15 @@ public class SkillController extends TalentMapRestHandlerException {
 				.build();
 		skillservice.saveSkill(skill);
 		return skill;
+	}
+
+	@Override
+	@ExceptionHandler({TypeMismatchException.class})
+	public JsonException handlerBadRequestException(Exception ex) {
+		JsonException jsonError = new JsonException();
+		jsonError.setCode(HttpStatus.BAD_REQUEST.value());
+		jsonError.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		return jsonError;
 	}
 
 }

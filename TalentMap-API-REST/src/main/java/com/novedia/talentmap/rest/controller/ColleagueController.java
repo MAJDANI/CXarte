@@ -6,10 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,11 +23,13 @@ import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.model.entity.JsonException;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
+import com.novedia.talentmap.rest.exception.IBadRequestException;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
 import com.novedia.talentmap.rest.utiils.DateFormat;
-import com.novedia.talentmap.rest.utiils.DefaultValue;
+import com.novedia.talentmap.rest.utiils.ConstantsValue;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
@@ -39,7 +44,7 @@ import com.novedia.talentmap.services.impl.AuthenticationService;
  */
 
 @Controller
-public class ColleagueController extends TalentMapRestHandlerException {
+public class ColleagueController extends TalentMapRestHandlerException implements IBadRequestException {
 	
 	@Autowired
 	IColleagueService colleagueService;
@@ -149,16 +154,16 @@ public class ColleagueController extends TalentMapRestHandlerException {
 		BusinessEngineer businessEngineer = null;
 		
 		Integer manager = managerId;
-		if(managerId.equals(DefaultValue.DEFAULT_ID)){
+		if(managerId.equals(ConstantsValue.DEFAULT_NUMERIC_VALUE)){
 			manager = null;
 		}
 		
-		if(!bEngineerID.equals(DefaultValue.DEFAULT_ID)){
+		if(!bEngineerID.equals(ConstantsValue.DEFAULT_NUMERIC_VALUE)){
 			businessEngineer = BusinessEngineer.builder().id(bEngineerID).build();
 		}
 		
 		String phoneNumber = phone;
-		if(phone.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)){
+		if(phone.equalsIgnoreCase(ConstantsValue.DEFAULT_STRING_VALUE)){
 			phoneNumber = null;
 		}
 		
@@ -226,16 +231,16 @@ public class ColleagueController extends TalentMapRestHandlerException {
 		BusinessEngineer businessEngineer = null;
 		
 		Integer manager = managerId;
-		if(managerId.equals(DefaultValue.DEFAULT_ID)){
+		if(managerId.equals(ConstantsValue.DEFAULT_NUMERIC_VALUE)){
 			manager = null;
 		}
 		
-		if(!bEngineerID.equals(DefaultValue.DEFAULT_ID)){
+		if(!bEngineerID.equals(ConstantsValue.DEFAULT_NUMERIC_VALUE)){
 			businessEngineer = BusinessEngineer.builder().id(bEngineerID).build();
 		}
 		
 		String phoneNumber = phone;
-		if(phone.equalsIgnoreCase(DefaultValue.DEFAULT_STRING)){
+		if(phone.equalsIgnoreCase(ConstantsValue.DEFAULT_STRING_VALUE)){
 			phoneNumber = null;
 		}
 		
@@ -246,7 +251,21 @@ public class ColleagueController extends TalentMapRestHandlerException {
 		
 		return colleague;
 	}
+
 	
-	
+	@Override
+	@ExceptionHandler({TypeMismatchException.class, ParseException.class})
+	public JsonException handlerBadRequestException(Exception ex) {
+		JsonException jsonError = new JsonException();
+		jsonError.setCode(HttpStatus.BAD_REQUEST.value());
+		if (ex instanceof ParseException) {
+			jsonError.setMessage(ConstantsValue.INCORRECT_DATE_FORMAT_MSG);
+		} else {
+			jsonError.setMessage(HttpStatus.BAD_REQUEST.getReasonPhrase());
+		}
+		
+		return jsonError;
+	}
+
 
 }

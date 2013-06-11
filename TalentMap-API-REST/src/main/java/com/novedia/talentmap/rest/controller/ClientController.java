@@ -37,8 +37,6 @@ public class ClientController extends TalentMapRestHandlerException {
 		return clients;
 		
 	}
-	
-	
-	
+
 	
 }

@@ -84,8 +84,6 @@ public class AuthenticationController extends TalentMapRestHandlerException {
 		}
 		return authentication;
 	}
-	
-	
-	
-	
+
+
 }
