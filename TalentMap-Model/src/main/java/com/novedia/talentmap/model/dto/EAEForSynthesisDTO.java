@@ -9,7 +9,7 @@ import java.util.Date;
  * @author v.guillemain
  *
  */
-public class EAEForSynthesis {
+public class EAEForSynthesisDTO {
     /**
      * The identifier of the EAE
      */
@@ -122,5 +122,17 @@ public class EAEForSynthesis {
         this.eaeStateLabel = eaeStateLabel;
     }
     
-   
+    @Override
+    public String toString() {
+	StringBuilder strBld = new StringBuilder();
+	strBld.append("[id=").append(getId()).append(", ");
+	strBld.append("dateEae=").append(getDateEae()).append(", ");
+	strBld.append("lastName=").append(getLastName()).append(", ");
+	strBld.append("firstName=").append(getFirstName()).append(", ");
+	strBld.append("eaeStateId=").append(getEaeStateId()).append(", ");
+	strBld.append("eaeStateLabel=").append(getEaeStateLabel()).append("]");
+	
+	return strBld.toString();
+    }
+
 }

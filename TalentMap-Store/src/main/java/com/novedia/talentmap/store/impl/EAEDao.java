@@ -8,8 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
-import com.novedia.talentmap.model.entity.Category;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.store.IDao;
@@ -85,9 +85,9 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
      * @return List<EAE> : a list of EAE wich state is OPEN or VALIDATED
      * @throws DataAccessException
      */
-    public List<EAEForSynthesis> getOngoingEAEForCM(Integer id)
+    public List<EAEForSynthesisDTO> getOngoingEAEForCM(Integer id)
 	    throws DataAccessException {
-	return (List<EAEForSynthesis>) this.getSqlMapClientTemplate()
+	return (List<EAEForSynthesisDTO>) this.getSqlMapClientTemplate()
 		.queryForList(DBRequestsConstants.GET_ONGOING_EAE_FOR_CM, id);
     }
 
@@ -117,15 +117,30 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
      *            : the id of the colleague searching for his colleagues EAE
      *            history
      * 
-     * @return List<EAEForSynthesis> : a list of EAEForSynthesis
+     * @return List<EAEForSynthesisDTO> : a list of EAEForSynthesisDTO
      * @throws DataAccessException
      */
-    public List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab)
+    public List<EAEForSynthesisDTO> getHistoryEAEForCollab(Integer idCollab)
 	    throws DataAccessException {
-	return (List<EAEForSynthesis>) this.getSqlMapClientTemplate().queryForList(
+	return (List<EAEForSynthesisDTO>) this.getSqlMapClientTemplate().queryForList(
 		DBRequestsConstants.GET_HISTORY_EAE_FOR_COLLAB, idCollab);
     }
-    
+ 
+    /**
+     * Gets general informations corresponding to the given EAE's id 
+     * 
+     * @param id
+     *            : the id of the EAE which we want general datas
+     * 
+     * @return EAEGeneralityDTO : an object EAEGeneralityDTO containing general informations of the EAE
+     * @throws DataAccessException
+     */
+    public EAEGeneralityDTO getEAEGenerality(Integer id)
+	    throws DataAccessException {
+	return (EAEGeneralityDTO) this.getSqlMapClientTemplate().queryForObject(
+		DBRequestsConstants.GET_EAE_GENERALITY, id);
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -70,10 +70,10 @@ public class EntityUtil {
 	return eae;
     }
 
-    public static EAEForSynthesis createEAEForSynthesis(Integer id,
-	    String dateEae, String lastName, String firstName, Integer eaeStateId,
-	    String eaeStateLabel) {
-	EAEForSynthesis eae = new EAEForSynthesis();
+    public static EAEForSynthesisDTO createEAEForSynthesis(Integer id,
+	    String dateEae, String lastName, String firstName,
+	    Integer eaeStateId, String eaeStateLabel) {
+	EAEForSynthesisDTO eae = new EAEForSynthesisDTO();
 	eae.setId(id);
 
 	Date laDate = Calendar.getInstance().getTime();
@@ -82,7 +82,7 @@ public class EntityUtil {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	
+
 	eae.setDateEae(laDate);
 	eae.setLastName(lastName);
 	eae.setFirstName(firstName);
@@ -90,4 +90,32 @@ public class EntityUtil {
 	eae.setEaeStateLabel(eaeStateLabel);
 	return eae;
     }
+
+    public static EAEGeneralityDTO createEAEGenerality(Integer id,
+	    String collabLastName, String collabFirstName, String profile,
+	    String managerLastName, String managerFirstName, String eaeDate,
+	    String employmentDate, String previousEaeDate, Integer eaeStateId) {
+
+	EAEGeneralityDTO eae = new EAEGeneralityDTO();
+	eae.setId(id);
+
+	Date laDate = Calendar.getInstance().getTime();
+	try {
+	    laDate = stringToDate(eaeDate);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
+	eae.setCollabLastName(collabLastName);
+	eae.setCollabFirstName(collabFirstName);
+	eae.setProfile(profile);
+	eae.setManagerLastName(managerLastName);
+	eae.setManagerFirstName(managerFirstName);
+	eae.setEaeDate(eaeDate);
+	eae.setEmploymentDate(employmentDate);
+	eae.setPreviousEaeDate(previousEaeDate);
+	eae.setEaeStateId(eaeStateId);
+	return eae;
+    }
+
 }

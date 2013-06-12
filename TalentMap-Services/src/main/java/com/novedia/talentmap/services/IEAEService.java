@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -65,7 +66,7 @@ public interface IEAEService {
      * @return List<EAE> : a list of EAE which state is OPEN or VALIDATED
      * 
      */
-    List<EAEForSynthesis> getOngoingEAEForCM(Integer idManager);
+    List<EAEForSynthesisDTO> getOngoingEAEForCM(Integer idManager);
 
     /**
      * Gets, for a given manager specified by the parameter idManager, the list
@@ -88,8 +89,19 @@ public interface IEAEService {
      *            : the id of the colleague searching for his colleagues EAE
      *            history
      * 
-     * @return List<EAEForSynthesis> : a list of EAEForSynthesis
+     * @return List<EAEForSynthesisDTO> : a list of EAEForSynthesisDTO
      * @throws DataAccessException
      */
-    List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab);
+    List<EAEForSynthesisDTO> getHistoryEAEForCollab(Integer idCollab);
+    
+    /**
+     * Gets general informations corresponding to the given EAE's id 
+     * 
+     * @param id
+     *            : the id of the EAE which we want general datas
+     * 
+     * @return EAEGeneralityDTO : an object EAEGeneralityDTO containing general informations of the EAE
+     * @throws DataAccessException
+     */
+    EAEGeneralityDTO getEAEGenerality(Integer idEAE);
 }

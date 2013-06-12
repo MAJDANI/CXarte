@@ -1,8 +1,6 @@
 package com.novedia.talentmap.store.impl;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -19,9 +17,9 @@ import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBeanByName;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EntityUtil;
-import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -58,7 +56,7 @@ public class EAEDaoTest {
 	Integer idColleague = 62;
 
 	// When
-	List<EAEForSynthesis> listEaes = eaeDao.getOngoingEAEForCM(idColleague);
+	List<EAEForSynthesisDTO> listEaes = eaeDao.getOngoingEAEForCM(idColleague);
 
 	// Then
 	ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(1, 2),
@@ -118,13 +116,28 @@ public class EAEDaoTest {
 	// Given
 	Integer idColleague = 58;
 	// When
-	List<EAEForSynthesis> listEaes = eaeDao
+	List<EAEForSynthesisDTO> listEaes = eaeDao
 		.getHistoryEAEForCollab(idColleague);
 	// Then
 	ReflectionAssert.assertPropertyLenientEquals("id", Arrays.asList(4, 5),
 		listEaes);
 	ReflectionAssert.assertPropertyLenientEquals("eaeStateId",
 		Arrays.asList(1, 2), listEaes);
+    }
+
+    @Test
+    public void getEAEGenerality() {
+	// Given
+	Integer idEAE = 1;
+	EAEGeneralityDTO eaeExpected = EntityUtil.createEAEGenerality(1, "GUILLEMAIN", "Vanessa", "", "", "", "2013-06-25", "2010-01-25", "", 1);
+	// When
+	EAEGeneralityDTO eaeActual = eaeDao
+		.getEAEGenerality(idEAE);
+	// Then
+	Assert.assertEquals(eaeExpected.getId(), eaeActual.getId());
+	Assert.assertEquals(eaeExpected.getCollabFirstName(), eaeActual.getCollabFirstName());
+	Assert.assertEquals(eaeExpected.getCollabLastName(), eaeActual.getCollabLastName());
+	
     }
 
     /**

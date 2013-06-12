@@ -75,28 +75,29 @@
 		<property name="missionCollabContent" ref="missionCollaboratorContentBean" />
 	</bean>
 
-	<bean id="collabEAEViewBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEView"
+	<bean id="collabEAEViewBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEView"
 		scope="session">
 		<property name="collabEAEContent" ref="collabEAEContentBean" />
 		<property name="collabEAENavigation" ref="collabEAENavigationBean" />
 	</bean>
-	<bean id="collabEAENavigationBean" class="com.novedia.talentmap.web.ui.collab.CollabEAENavigation"
+	<bean id="collabEAENavigationBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAENavigation"
 		scope="session"/>
 
-	<bean id="collabEAEContentBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContent"
+	<bean id="collabEAEContentBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEContent"
 		scope="session">
 		<property name="collabEAEContentHistory" ref="collabEAEContentHistoryBean" />
 	</bean>
-	<bean id="collabEAEContentHistoryBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEContentHistory"
+	<bean id="collabEAEContentHistoryBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEContentHistory"
 		scope="session">
 		<property name="collabEAEHistoryPageTable" ref="collabEAEHistoryPageTableBean" />
+		<property name="eaeService" ref="eaeService" />
 	</bean>
 		
-	<bean id="collabEAEHistoryPageTableBean" class="com.novedia.talentmap.web.ui.collab.CollabEAEHistoryPageTable"
+	<bean id="collabEAEHistoryPageTableBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEHistoryPageTable"
 		scope="session">
 		<property name="collabEaeHistoryContainer" ref="collabEaeHistoryContainerBean" />
 	</bean>
-	<bean id="collabEaeHistoryContainerBean" class="com.novedia.talentmap.web.ui.collab.CollabEaeHistoryContainer"
+	<bean id="collabEaeHistoryContainerBean" class="com.novedia.talentmap.web.ui.EAE.CollabEaeHistoryContainer"
 		scope="session">
 			<property name="eaeService" ref="eaeService" />
 	</bean>
@@ -532,19 +533,20 @@
 	<bean id="cmEAEContentSynthesisBean" class="com.novedia.talentmap.web.ui.cm.CmEAEContentSynthesis" scope="session" >
 			<property name="cmEAEOngoingPageTable" ref="cmEAEOngoingPageTableBean" />
 			<property name="cmEAENotOngoingPageTable" ref="cmEAENotOngoingPageTableBean" />
+			<property name="eaeService" ref="eaeService" />
 	</bean>
 	
 	<bean id="cmEAEOngoingPageTableBean" class="com.novedia.talentmap.web.ui.cm.CmEAEOngoingPageTable" scope="session" >
 			<property name="cmEAEOngoingContainer" ref="cmEAEOngoingContainerBean" />
 	</bean>
-	<bean id="cmEAEOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEaeOngoingContainer" scope="session" >
+	<bean id="cmEAEOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEAEOngoingContainer" scope="session" >
 			<property name="eaeService" ref="eaeService" />
 	</bean>
 
 	<bean id="cmEAENotOngoingPageTableBean" class="com.novedia.talentmap.web.ui.cm.CmEAENotOngoingPageTable" scope="session" >
 			<property name="cmEAENotOngoingContainer" ref="cmEAENotOngoingContainerBean" />
 	</bean>
-	<bean id="cmEAENotOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEaeNotOngoingContainer" scope="session" >
+	<bean id="cmEAENotOngoingContainerBean" class="com.novedia.talentmap.web.ui.cm.CmEAENotOngoingContainer" scope="session" >
 			<property name="eaeService" ref="eaeService" />
 	</bean>
 

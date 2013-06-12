@@ -6,8 +6,9 @@
 <sqlMap namespace="eae">
 
 	<typeAlias alias="eae" type="com.novedia.talentmap.model.entity.EAE" />
-	<typeAlias alias="eaeForSynthesis" type="com.novedia.talentmap.model.dto.EAEForSynthesis" />
+	<typeAlias alias="eaeForSynthesis" type="com.novedia.talentmap.model.dto.EAEForSynthesisDTO" />
 	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague" />
+	<typeAlias alias="eaeGenerality" type="com.novedia.talentmap.model.dto.EAEGeneralityDTO" />
 
 	<resultMap id="eaeResult" class="eae">
 		<result property="id" column="EAE_ID" />
@@ -47,6 +48,18 @@
 		<result property="title" column="TITLE" />
 		<result property="missions" column="COLLEAGUE_ID"
 			select="colleague.selectMissionsByColleagueId" />
+	</resultMap>
+	<resultMap id="eaeGeneralityResult" class="eaeGenerality">
+		<result property="id" column="EAE_ID" />
+		<result property="collabLastName" column="C_LAST_NAME" />
+		<result property="collabFirstName" column="C_FIRST_NAME" />
+		<result property="profile" column="PROFILE" />
+		<result property="managerLastName" column="M_LAST_NAME" />
+		<result property="managerFirstName" column="M_FIRST_NAME" />
+		<result property="eaeDate" column="EAE_DATE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="previousEaeDate" column="PREV_EAE_DATE" />
+		<result property="eaeStateId" column="EAE_STATE_ID" />
 	</resultMap>
 
 	<select id="get" resultMap="eaeResult" parameterClass="Integer">
@@ -147,6 +160,19 @@
 		FROM EAE , EAE_STATE
 		where EAE.COLLEAGUE_ID = #id#
 		and EAE.EAE_STATE_ID = EAE_STATE.EAE_STATE_ID  ;
+	</select>
+
+	<select id="getEAEGenerality" resultMap="eaeGeneralityResult" parameterClass="Integer">
+		SELECT eae.EAE_ID as "EAE_ID", col.LAST_NAME as "C_LAST_NAME", col.FIRST_NAME as "C_FIRST_NAME", prof.PROFILE_TYPE as "PROFILE",
+		man.LAST_NAME as "M_LAST_NAME", man.FIRST_NAME as "M_FIRST_NAME", eae.EAE_STATE_ID as "EAE_STATE_ID",
+		eae.EAE_DATE as "EAE_DATE", col.EMPLOYMENT_DATE as "EMPLOYMENT_DATE", prevEae.EAE_DATE as "PREV_EAE_DATE"
+		FROM EAE eae
+			LEFT JOIN EAE prevEae ON eae.PREVIOUS_EAE_ID = prevEae.EAE_ID,
+		COLLEAGUE col, PROFILE prof, COLLEAGUE man
+		WHERE eae.EAE_ID = #id#
+    	AND eae.COLLEAGUE_ID = col.COLLEAGUE_ID
+		AND col.PROFILE_ID = prof.PROFILE_ID
+		AND col.MANAGER_ID = man.COLLEAGUE_ID	;
 	</select>
 
 </sqlMap>
