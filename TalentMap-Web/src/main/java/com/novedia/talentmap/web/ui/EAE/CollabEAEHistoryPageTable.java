@@ -18,7 +18,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat(
 	    "dd/MM/yyyy");
 
-    private CollabEaeHistoryContainer collabEaeHistoryContainer;
+    private CollabEAEHistoryContainer collabEAEHistoryContainer;
     /**
      * Colonnes
      */
@@ -57,7 +57,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
 
     public void buildMain() {
 	setWidth("1000px");
-	this.collabEaeHistoryContainer.fillEAEContainer(getColleagueId());
+	this.collabEAEHistoryContainer.fillEAEContainer(getColleagueId());
 	fillResultsTable();
     }
 
@@ -67,7 +67,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
      * 
      */
     public void fillResultsTable() {
-	Collection<EAEForSynthesisDTO> collectionEAE = this.collabEaeHistoryContainer
+	Collection<EAEForSynthesisDTO> collectionEAE = this.collabEAEHistoryContainer
 		.getItemIds();
 
 	for (EAEForSynthesisDTO eae : collectionEAE) {
@@ -85,7 +85,7 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     }
 
     /**
-     * Builds Headers of the Table CmListNotification
+     * Builds Headers of the Table CollabEAEHistoryPageTable
      */
     public void addColumns() {
 	addContainerProperty(DATE_EAE, String.class, null);
@@ -116,19 +116,19 @@ public class CollabEAEHistoryPageTable extends PagedTable {
     }
 
     /**
-     * @return the collabEaeHistoryContainer
+     * @return the collabEAEHistoryContainer
      */
-    public CollabEaeHistoryContainer getCollabEaeHistoryContainer() {
-	return collabEaeHistoryContainer;
+    public CollabEAEHistoryContainer getCollabEAEHistoryContain() {
+	return collabEAEHistoryContainer;
     }
 
     /**
-     * @param collabEaeHistoryContainer
-     *            the collabEaeHistoryContainer to set
+     * @param collabEAEHistoryContainer
+     *            the collabEAEHistoryContainer to set
      */
-    public void setCollabEaeHistoryContainer(
-	    CollabEaeHistoryContainer collabEaeHistoryContainer) {
-	this.collabEaeHistoryContainer = collabEaeHistoryContainer;
+    public void setCollabEAEHistoryContainer(
+	    CollabEAEHistoryContainer collabEAEHistoryContainer) {
+	this.collabEAEHistoryContainer = collabEAEHistoryContainer;
     }
 
 }

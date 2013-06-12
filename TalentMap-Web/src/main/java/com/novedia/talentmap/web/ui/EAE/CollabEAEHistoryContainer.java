@@ -10,14 +10,14 @@ import com.novedia.talentmap.services.INotificationService;
 import com.vaadin.data.util.BeanItemContainer;
 
 @SuppressWarnings("serial")
-public class CollabEaeHistoryContainer extends BeanItemContainer<EAEForSynthesisDTO> {
+public class CollabEAEHistoryContainer extends BeanItemContainer<EAEForSynthesisDTO> {
 
     private IEAEService eaeService;
 
     /**
      * Default constructor
      */
-    public CollabEaeHistoryContainer() {
+    public CollabEAEHistoryContainer() {
 	super(EAEForSynthesisDTO.class);
     }
 

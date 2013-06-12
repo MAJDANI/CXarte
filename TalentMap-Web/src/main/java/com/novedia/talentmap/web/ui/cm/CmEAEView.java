@@ -85,7 +85,7 @@ public class CmEAEView extends HorizontalSplitPanel {
     /**
      * The main builder
      * 
-     * @class ProfileLayout.java
+     * @class CmEAEView.java
      */
     public void mainBuild() {
 

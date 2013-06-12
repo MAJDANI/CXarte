@@ -8,7 +8,6 @@ import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.cm.CmEAEView;
 import com.novedia.talentmap.web.ui.cm.CmNotificationView;
 import com.novedia.talentmap.web.ui.cm.CmView;
-import com.novedia.talentmap.web.ui.collab.MonitoringCollabView;
 import com.novedia.talentmap.web.ui.profile.ProfileView;
 import com.novedia.talentmap.web.ui.search.SearchView;
 import com.novedia.talentmap.web.util.TalentMapCSS;
@@ -36,8 +35,6 @@ public class TabMain extends TabSheet {
     private CmNotificationView cmNotificationView;
     private CmEAEView cmEAEView;
     private CollabEAEView collabEAEView;
-
-    private MonitoringCollabView monitoringCollabView;
 
     private Authentication authentication;
 
@@ -99,9 +96,6 @@ public class TabMain extends TabSheet {
 	    addTab(cmEAEView,
 		    ConstantsForMenuEnglish.TAB_CM_EAE);
 	    
-	    // Les deux lignes ci-dessous pour tester le code créé par Véronique
-	    // monitoringCollabView = monitoringCollabView.mainBuild();
-	    // addTab(monitoringCollabView,"Monitoring");
 	} else if (role.equals(Role.RH)) { // RH
 	    searchView.setAuthentication(getAuthentication());
 	    addTab(searchView.buildSearchView(),
@@ -171,15 +165,6 @@ public class TabMain extends TabSheet {
 
     public void setProfileView(ProfileView profileView) {
 	this.profileView = profileView;
-    }
-
-    public MonitoringCollabView getMonitoringCollabView() {
-	return monitoringCollabView;
-    }
-
-    public void setMonitoringCollabView(
-	    MonitoringCollabView monitoringCollabView) {
-	this.monitoringCollabView = monitoringCollabView;
     }
 
     public CmView getCmView() {

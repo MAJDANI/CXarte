@@ -2,7 +2,6 @@ package com.novedia.talentmap.web.ui.cm;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
 import com.novedia.talentmap.web.util.IEAELayout;
-import com.novedia.talentmap.web.util.INotificationLayout;
 import com.novedia.talentmap.web.util.IObservable;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
@@ -38,7 +37,7 @@ public class CmEAENavigation extends VerticalLayout implements
     }
 
     /**
-     * Build the CmNotificationNavigation view
+     * Build the CmEAENavigation view
      * 
      * @return
      */

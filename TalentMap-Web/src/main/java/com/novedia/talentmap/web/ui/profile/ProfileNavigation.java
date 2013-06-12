@@ -42,7 +42,7 @@ public class ProfileNavigation extends VerticalLayout implements IObservable,
     /**
      * The main builder
      * 
-     * @class MonitoringCollabNavigation.java
+     * @class ProfileNavigation.java
      */
     public VerticalLayout mainBuild() {
 	removeAllComponents();

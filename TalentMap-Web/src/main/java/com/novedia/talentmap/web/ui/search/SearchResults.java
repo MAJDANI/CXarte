@@ -22,10 +22,6 @@ public class SearchResults extends PagedTable {
 
     private Integer roleId;
 
-    /**
-     * Factoriser cette constante qui est aussi utilisée dans
-     * MonitoringCollabContent VGU TODO
-     */
     public static final String VISUALIZE_PROFILE_NAME = "Display profile";
     public static final String VISUALIZE_MISSION_HISTORY_NAME = "Display missions";
 

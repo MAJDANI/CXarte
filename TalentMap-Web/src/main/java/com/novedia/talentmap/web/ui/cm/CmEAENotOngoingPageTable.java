@@ -68,7 +68,7 @@ public class CmEAENotOngoingPageTable extends PagedTable {
     }
 
     /**
-     * Builds Headers of the Table CmListNotification
+     * Builds Headers of the Table CmEAENotOngoingPageTable
      */
     public void addColumns() {
 	addContainerProperty(PRENOM, String.class, null);

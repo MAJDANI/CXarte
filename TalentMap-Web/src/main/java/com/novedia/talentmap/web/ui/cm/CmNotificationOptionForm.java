@@ -49,7 +49,7 @@ public class CmNotificationOptionForm extends FormLayout {
     /**
      * Build the cm option Form View
      * 
-     * @return RegistrationForm object
+     * @return CmNotificationOptionForm object
      */
     public CmNotificationOptionForm buildCmOptionFormView() {
 	cmOptionForm.removeAllProperties();

@@ -38,7 +38,7 @@ public class CollabEAENavigation extends VerticalLayout implements
     }
 
     /**
-     * Build the CmNotificationNavigation view
+     * Build the CollabEAENavigation view
      * 
      * @return
      */

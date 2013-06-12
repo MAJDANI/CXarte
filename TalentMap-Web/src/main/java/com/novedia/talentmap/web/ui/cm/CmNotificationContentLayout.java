@@ -70,7 +70,7 @@ public class CmNotificationContentLayout extends HorizontalLayout {
     /**
      * The main builder
      * 
-     * @class ProfileLayout.java
+     * @class CmNotificationContentLayout.java
      */
     public void mainBuild() {
 

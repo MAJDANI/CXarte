@@ -72,6 +72,7 @@ public class CmListNotification extends PagedTable {
     }
 
     /**
+     * TODO : commentaire à revoir
      * Gets each item mission in the MissionContainer given in parameter. With
      * each item mission we fill the actual Table ListMission using addItem()
      * method.

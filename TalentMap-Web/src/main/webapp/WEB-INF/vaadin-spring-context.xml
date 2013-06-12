@@ -53,7 +53,6 @@
 		<property name="searchView" ref="searchViewBean" />
 		<property name="cmView" ref="cmViewBean" />
 		<property name="cmNotificationView" ref="cmNotificationViewBean" />
-		<property name="monitoringCollabView" ref="monitoringCollabView" />
 		<property name="cmEAEView" ref="cmEAEViewBean" />
 		<property name="collabEAEView" ref="collabEAEViewBean" />
 	</bean>
@@ -95,9 +94,9 @@
 		
 	<bean id="collabEAEHistoryPageTableBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEHistoryPageTable"
 		scope="session">
-		<property name="collabEaeHistoryContainer" ref="collabEaeHistoryContainerBean" />
+		<property name="collabEAEHistoryContainer" ref="collabEAEHistoryContainerBean" />
 	</bean>
-	<bean id="collabEaeHistoryContainerBean" class="com.novedia.talentmap.web.ui.EAE.CollabEaeHistoryContainer"
+	<bean id="collabEAEHistoryContainerBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEHistoryContainer"
 		scope="session">
 			<property name="eaeService" ref="eaeService" />
 	</bean>
@@ -562,18 +561,7 @@
 
 	<bean id="label" class="com.vaadin.ui.Label" scope="session" />
 	<bean id="table" class="com.vaadin.ui.Table" scope="session" />
-	<bean id="monitoringCollabContent"
-		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContent"
-		scope="session">
-		<property name="pageTitle" ref="label" />
-		<property name="collabTable" ref="table" />
-		<property name="managerService" ref="managerService" />
 
-	</bean>
-
-	<bean id="monitoringCollabNavigation"
-		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabNavigation"
-		scope="session" />
 	<bean id="historyMissionColab"
 		class="com.novedia.talentmap.web.ui.profile.HistoryMissionColab"
 		scope="session" />
@@ -582,22 +570,6 @@
 	<bean id="hSplitPanel" class="com.vaadin.ui.HorizontalSplitPanel"
 		scope="session" />
 
-	<bean id="monitoringCollabContentLayout"
-		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabContentLayout"
-		scope="session">
-		<property name="monitoringCollabContent" ref="monitoringCollabContent" />
-		<property name="monitoringCollabNavigation" ref="monitoringCollabNavigation" />
-		<property name="historyMissionColab" ref="historyMissionColab" />
-		<property name="objectiveEa" ref="objectiveEa" />
-		<property name="hSplitPanel" ref="hSplitPanel" />
-	</bean>
-
-
-	<bean id="monitoringCollabView"
-		class="com.novedia.talentmap.web.ui.collab.MonitoringCollabView"
-		scope="session">
-		<property name="monitoringCollabContentLayout" ref="monitoringCollabContentLayout" />
-	</bean>
 
 	<!-- Vaadin RegistrationForm UI -->
 

@@ -92,7 +92,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
     }
 
     /**
-     * Builds Headers of the Table CmListNotification
+     * Builds Headers of the Table CmEAEOngoingPageTable
      */
     public void addColumns() {
 	addContainerProperty(PRENOM, String.class, null);

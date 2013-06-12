@@ -38,7 +38,7 @@ public class CollabEAEContent extends VerticalLayout implements
     /**
      * The main builder
      * 
-     * @class CmNotificationContent.java
+     * @class CollabEAEContent.java
      */
     public void buildMain() {
 	setMargin(true);

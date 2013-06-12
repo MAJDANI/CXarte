@@ -61,7 +61,7 @@ public class CollabEAEView extends HorizontalSplitPanel {
     /**
      * The main builder
      * 
-     * @class ProfileLayout.java
+     * @class CollabEAEView.java
      */
     public void mainBuild() {
 

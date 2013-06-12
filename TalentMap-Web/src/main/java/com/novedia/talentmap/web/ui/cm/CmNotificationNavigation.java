@@ -1,7 +1,6 @@
 package com.novedia.talentmap.web.ui.cm;
 
 import com.novedia.talentmap.web.commons.ConstantsForMenuEnglish;
-import com.novedia.talentmap.web.ui.profile.ProfileCollaboratorContent;
 import com.novedia.talentmap.web.util.INotificationLayout;
 import com.novedia.talentmap.web.util.IObservable;
 import com.vaadin.event.ItemClickEvent;
