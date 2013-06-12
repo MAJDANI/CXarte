@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.jensjansson.pagedtable.PagedTable;
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.web.commons.Images;
 import com.novedia.talentmap.web.data.EaeState;
 import com.vaadin.terminal.Resource;
@@ -18,7 +18,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat(
 	    "dd/MM/yyyy");
 
-    private CmEaeOngoingContainer cmEAEOngoingContainer;
+    private CmEAEOngoingContainer cmEAEOngoingContainer;
     /**
      * Colonnes
      */
@@ -65,15 +65,15 @@ public class CmEAEOngoingPageTable extends PagedTable {
     }
 
     /**
-     * Gets each item EAEForSynthesis in the container. With each item
-     * EAEForSynthesis we fill the actual Table using addItem() method.
+     * Gets each item EAEForSynthesisDTO in the container. With each item
+     * EAEForSynthesisDTO we fill the actual Table using addItem() method.
      * 
      */
     public void fillResultsTable() {
-	Collection<EAEForSynthesis> collectionEAE = this.cmEAEOngoingContainer
+	Collection<EAEForSynthesisDTO> collectionEAE = this.cmEAEOngoingContainer
 		.getItemIds();
 
-	for (EAEForSynthesis eae : collectionEAE) {
+	for (EAEForSynthesisDTO eae : collectionEAE) {
 	    String date = formatterDate(eae.getDateEae());
 
 	    if (eae.getEaeStateId() == EaeState.OPEN) {
@@ -127,7 +127,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
     /**
      * @return the cmEAEOngoingContainer
      */
-    public CmEaeOngoingContainer getCmEAEOngoingContainer() {
+    public CmEAEOngoingContainer getCmEAEOngoingContainer() {
 	return cmEAEOngoingContainer;
     }
 
@@ -136,7 +136,7 @@ public class CmEAEOngoingPageTable extends PagedTable {
      *            the cmEAEOngoingContainer to set
      */
     public void setCmEAEOngoingContainer(
-	    CmEaeOngoingContainer cmEAEOngoingContainer) {
+	    CmEAEOngoingContainer cmEAEOngoingContainer) {
 	this.cmEAEOngoingContainer = cmEAEOngoingContainer;
     }
 

@@ -5,7 +5,8 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.services.IEAEService;
@@ -59,7 +60,7 @@ public class EAEService implements IEAEService {
      * @see com.novedia.talentmap.services.IEAEervice#getOngoingEAEForCM(java.lang.Integer)
      */
     @Override
-    public List<EAEForSynthesis> getOngoingEAEForCM(Integer idManager) {
+    public List<EAEForSynthesisDTO> getOngoingEAEForCM(Integer idManager) {
 	EAEDao eaeDao = (EAEDao) this.eaeDao;
 	return eaeDao.getOngoingEAEForCM(idManager);
     }
@@ -72,11 +73,18 @@ public class EAEService implements IEAEService {
     }
 
     @Override
-    public List<EAEForSynthesis> getHistoryEAEForCollab(Integer idCollab) {
+    public List<EAEForSynthesisDTO> getHistoryEAEForCollab(Integer idCollab) {
 	EAEDao eaeDao = (EAEDao) this.eaeDao;
 	return eaeDao.getHistoryEAEForCollab(idCollab);
     }
-    
+ 
+    @Override
+    public EAEGeneralityDTO getEAEGenerality(Integer idEAE) {
+	EAEDao eaeDao = (EAEDao) this.eaeDao;
+	return eaeDao.getEAEGenerality(idEAE);
+    }
+
+
     /**
      * @return the eaeDao
      */

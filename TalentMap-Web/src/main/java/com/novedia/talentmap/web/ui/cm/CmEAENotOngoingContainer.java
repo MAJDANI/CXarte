@@ -2,28 +2,28 @@ package com.novedia.talentmap.web.ui.cm;
 
 import java.util.List;
 
-import com.novedia.talentmap.model.dto.EAEForSynthesis;
-import com.novedia.talentmap.model.entity.EAE;
-import com.novedia.talentmap.model.entity.UserNotification;
+import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IEAEService;
-import com.novedia.talentmap.services.INotificationService;
 import com.vaadin.data.util.BeanItemContainer;
 
 @SuppressWarnings("serial")
-public class CmEaeOngoingContainer extends BeanItemContainer<EAEForSynthesis> {
+public class CmEAENotOngoingContainer extends
+	BeanItemContainer<Colleague> {
 
     private IEAEService eaeService;
 
     /**
      * Default constructor
      */
-    public CmEaeOngoingContainer() {
-	super(EAEForSynthesis.class);
+    public CmEAENotOngoingContainer() {
+	super(Colleague.class);
     }
 
     /**
-     * Calls the EAEService to retrieve all EAE not closed in the Data Base for
-     * the manager's id given (collabId)
+     * Calls the EAEService to retrieve all Colleague that don't have an ongoing
+     * EAE. The colleagues depending on the manager which the id is given
+     * (collabId)
      * 
      * @param collabId
      *            : the collab id of the manager consulting his Ongoing EAEs
@@ -32,10 +32,11 @@ public class CmEaeOngoingContainer extends BeanItemContainer<EAEForSynthesis> {
 
     public void fillEAEContainer(int collabId) {
 	try {
-	    List<EAEForSynthesis> cmListEAE = this.eaeService.getOngoingEAEForCM(collabId);
+	    List<Colleague> cmListColleague = this.eaeService
+		    .getCollabWithoutOngoingEAEForManager(collabId);
 	    removeAllItems();
-	    if (cmListEAE != null && !cmListEAE.isEmpty()) {
-		for (EAEForSynthesis eae : cmListEAE) {
+	    if (cmListColleague != null && !cmListColleague.isEmpty()) {
+		for (Colleague eae : cmListColleague) {
 		    addBean(eae);
 		}
 	    }

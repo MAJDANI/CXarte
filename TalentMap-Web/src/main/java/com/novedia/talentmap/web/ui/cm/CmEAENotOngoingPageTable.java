@@ -8,7 +8,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 @SuppressWarnings("serial")
 public class CmEAENotOngoingPageTable extends PagedTable {
 
-    private CmEaeNotOngoingContainer cmEAENotOngoingContainer;
+    private CmEAENotOngoingContainer cmEAENotOngoingContainer;
     /**
      * Colonnes
      */
@@ -87,7 +87,7 @@ public class CmEAENotOngoingPageTable extends PagedTable {
     /**
      * @return the cmEAENotOngoingContainer
      */
-    public CmEaeNotOngoingContainer getCmEAENotOngoingContainer() {
+    public CmEAENotOngoingContainer getCmEAENotOngoingContainer() {
         return cmEAENotOngoingContainer;
     }
 
@@ -95,7 +95,7 @@ public class CmEAENotOngoingPageTable extends PagedTable {
      * @param cmEAENotOngoingContainer the cmEAENotOngoingContainer to set
      */
     public void setCmEAENotOngoingContainer(
-    	CmEaeNotOngoingContainer cmEAENotOngoingContainer) {
+    	CmEAENotOngoingContainer cmEAENotOngoingContainer) {
         this.cmEAENotOngoingContainer = cmEAENotOngoingContainer;
     }
 
