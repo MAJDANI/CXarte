@@ -72,6 +72,32 @@ public interface ISkillService {
      */
 	List<Integer> getAllCmColleagueIdByConceptId(Integer conceptId,Integer managerId);
 
+	
+	  /**
+     * Select all colleague's id who have skill with the category id.
+     * 
+     * @class ISkillService.java
+     * @param categoryId
+     *            a category Id
+     * @return List<Integer> a list of colleague's id
+     */
+	List<Integer> getAllColleagueIdByCategoryId(Integer categoryId)
+			throws DataAccessException;
+	
+	/**
+     * Select all CM colleague's id who have skill with the category id.
+     * 
+     * @class ISkillService.java
+     * @param categoryId
+     *            a category Id
+     * @param managerId
+     *            a manager Id
+     * @return List<Integer> a list of colleague's id
+     */
+	List<Integer> getAllCmColleagueIdByCategoryId(Integer categoryId,
+			Integer managerId) throws DataAccessException;
+
+	
     /**
      * Select all colleague's id who have skill with one ore more tool id of the
      * list.
@@ -174,7 +200,5 @@ public interface ISkillService {
      * @return a Tool by name
      */
     Tool getToolByName(String name);
-
-
 
 }

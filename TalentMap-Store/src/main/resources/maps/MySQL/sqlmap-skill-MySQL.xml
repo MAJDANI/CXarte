@@ -83,6 +83,25 @@
 		WHERE t.CONCEPT_ID = #conceptId#
 		AND c.MANAGER_ID = #managerId# 
 	</select>
+	
+	<select id="getAllColleagueIdByCategoryId" resultMap="collabIdResult"
+		parameterClass="java.lang.Integer">
+		SELECT s.COLLEAGUE_ID
+		FROM SKILL s JOIN COLLEAGUE c ON (s.COLLEAGUE_ID = c.COLLEAGUE_ID)
+		JOIN TOOL t ON (s.TOOL_ID = t.TOOL_ID)
+		JOIN CONCEPT concept ON (concept.CONCEPT_ID = t.CONCEPT_ID)
+		WHERE concept.CATEGORY_ID = #categoryId#
+	</select>
+	
+	<select id="getCmColleagueIdByCategoryId" resultMap="collabIdResult"
+		parameterClass="java.util.HashMap">
+		SELECT s.COLLEAGUE_ID
+		FROM SKILL s JOIN COLLEAGUE c ON (s.COLLEAGUE_ID = c.COLLEAGUE_ID)
+		JOIN TOOL t ON (s.TOOL_ID = t.TOOL_ID)
+		JOIN CONCEPT concept ON (concept.CONCEPT_ID = t.CONCEPT_ID)
+		WHERE concept.CATEGORY_ID = #categoryId#
+		AND c.MANAGER_ID = #managerId# 
+	</select>
 
 	<select id="getAllColleagueIdByListToolId" resultMap="collabIdResult"
 		parameterClass="com.novedia.talentmap.store.impl.SkillParameter">

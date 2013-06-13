@@ -172,7 +172,7 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void testCetAllColleaguesByConcept() throws Exception {
+	public void testGetAllColleaguesByConcept() throws Exception {
 		//GIVEN
 		Integer conceptId = 1;
 		List<Colleague> colleagueList = new ArrayList<Colleague>();
@@ -186,7 +186,7 @@ public class SearchControllerTest {
 		Mockito.when(colleagueService.getAllColleagueByColleagueIdList(Mockito.anyListOf(Integer.class))).thenReturn(colleagueList);
 		
 		//THEN
-		mockMvc.perform(MockMvcRequestBuilders.get("/colleagues/bytool/{toolId}/",conceptId)
+		mockMvc.perform(MockMvcRequestBuilders.get("/colleagues/byconcept/{conceptId}/",conceptId)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -209,6 +209,47 @@ public class SearchControllerTest {
 		
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.get("/colleagues/byconcept/{conceptId}/{managerId}/",conceptId,managerId)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	@Test
+	public void testGetAllColleaguesByCategory() throws Exception {
+		//GIVEN
+		Integer categoryId = 1;
+		List<Colleague> colleagueList = new ArrayList<Colleague>();
+		Colleague colleague = Colleague.builder().id(1).firstName("test").build();
+		colleagueList.add(colleague);
+		List<Integer> colleagueIds = new ArrayList<Integer>();
+		colleagueIds.add(1);
+		
+		//WHEN
+		Mockito.when(skillService.getAllColleagueIdByCategoryId(Mockito.anyInt())).thenReturn(colleagueIds);
+		Mockito.when(colleagueService.getAllColleagueByColleagueIdList(Mockito.anyListOf(Integer.class))).thenReturn(colleagueList);
+		
+		//THEN
+		mockMvc.perform(MockMvcRequestBuilders.get("/colleagues/bycategory/{categoryId}/",categoryId)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	@Test
+	public void testGetAllCmColleaguesByCategory() throws Exception {
+		//GIVEN
+		Integer categoryId = 1;
+		Integer managerId = 1;
+		List<Colleague> colleagueList = new ArrayList<Colleague>();
+		Colleague colleague = Colleague.builder().id(1).firstName("test").managerId(managerId).build();
+		colleagueList.add(colleague);
+		List<Integer> colleagueIds = new ArrayList<Integer>();
+		colleagueIds.add(1);
+		
+		//WHEN
+		Mockito.when(skillService.getAllCmColleagueIdByCategoryId(Mockito.anyInt(),Mockito.anyInt())).thenReturn(colleagueIds);
+		Mockito.when(colleagueService.getAllColleagueByColleagueIdList(Mockito.anyListOf(Integer.class))).thenReturn(colleagueList);
+		
+		//THEN
+		mockMvc.perform(MockMvcRequestBuilders.get("/colleagues/bycategory/{categoryId}/{managerId}/",categoryId,managerId)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}

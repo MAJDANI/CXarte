@@ -38,6 +38,22 @@ public class SearchController extends TalentMapRestHandlerException implements I
 	@Autowired
 	ISkillService skillService;
 	
+	@RequestMapping(method =RequestMethod.GET)
+	@ResponseBody
+	public List<Colleague> getAllColleagues(){
+		List <Colleague> colleagues = new ArrayList<Colleague>();
+		colleagues = colleagueService.getAllColleagues();
+		return colleagues;
+	}
+	
+	@RequestMapping(value = "{managerId}/", method =RequestMethod.GET)
+	@ResponseBody
+	public List<Colleague> getAllColleaguesByCm(@PathVariable final Integer managerId){
+		List <Colleague> colleagues = new ArrayList<Colleague>();
+		colleagues = colleagueService.getCmColleaguesByName(null, managerId);
+		return colleagues;
+	}
+	
 	@RequestMapping(value = "byclient/{clientId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByClient(@PathVariable final Integer clientId){
@@ -64,11 +80,9 @@ public class SearchController extends TalentMapRestHandlerException implements I
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByName(@PathVariable final String name){
 		List <Colleague> colleagues = new ArrayList<Colleague>();
-		if (name.equalsIgnoreCase(ConstantsValue.DEFAULT_STRING_VALUE)) {
-			colleagues = colleagueService.getAllColleagues();
-		} else {
-			colleagues = colleagueService.getAllColleaguesByName(name);
-		}
+	
+		colleagues = colleagueService.getAllColleaguesByName(name);
+		
 		return colleagues;
 	}
 	
@@ -123,6 +137,28 @@ public class SearchController extends TalentMapRestHandlerException implements I
 	public List<Colleague> getAllCmColleaguesByConcept(@PathVariable final Integer conceptId,@PathVariable final Integer managerId){
 		List<Colleague> colleagues = new ArrayList<Colleague>();
 		List<Integer> colleagueIds = skillService.getAllCmColleagueIdByConceptId(conceptId,managerId);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
+		return colleagues;
+	}
+	
+	@RequestMapping(value = "bycategory/{categoryId}/", method =RequestMethod.GET)
+	@ResponseBody
+	public List<Colleague> getAllColleaguesByCategory(@PathVariable final Integer categoryId){
+		List<Colleague> colleagues = new ArrayList<Colleague>();
+		List<Integer> colleagueIds = skillService.getAllColleagueIdByCategoryId(categoryId);
+		if(colleagueIds != null && !colleagueIds.isEmpty()){
+			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
+		}
+		return colleagues;
+	}
+	
+	@RequestMapping(value = "bycategory/{categoryId}/{managerId}/", method =RequestMethod.GET)
+	@ResponseBody
+	public List<Colleague> getAllCmColleaguesByCategory(@PathVariable final Integer categoryId,@PathVariable final Integer managerId){
+		List<Colleague> colleagues = new ArrayList<Colleague>();
+		List<Integer> colleagueIds = skillService.getAllCmColleagueIdByCategoryId(categoryId,managerId);
 		if(colleagueIds != null && !colleagueIds.isEmpty()){
 			colleagues = colleagueService.getAllColleagueByColleagueIdList(colleagueIds);
 		}

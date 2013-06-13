@@ -322,6 +322,16 @@ public final class DBRequestsConstants {
 	 * Constant request to get all CM collaborators by a concept.
 	 */
 	public static final String GET_CM_COLLEAGUE_ID_BY_CONCEPT_ID = "skill.getCmColleagueIdByConceptId";
+	
+	/**
+	 * Constant request to get all collaborators by a category.
+	 */
+	public static final String GET_ALL_COLLEAGUE_ID_BY_CATEGORY_ID = "skill.getAllColleagueIdByCategoryId";
+	
+	/**
+	 * Constant request to get all CM collaborators by a category.
+	 */
+	public static final String GET_CM_COLLEAGUE_ID_BY_CATEGORY_ID = "skill.getCmColleagueIdByCategoryId";
 
 	/**
 	 * Constant request to get all collaborators by a list of tool.
