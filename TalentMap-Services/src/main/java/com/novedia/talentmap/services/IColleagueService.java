@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -51,7 +51,7 @@ public interface IColleagueService {
      * @return id of the mission inserted
      */
     @Transactional
-    Integer addMission(MissionDto mission);
+    Integer addMission(MissionDTO mission);
 
     /**
      * Update a mission.
@@ -61,7 +61,7 @@ public interface IColleagueService {
      * @return int
      */
     @Transactional
-    Integer saveMission(MissionDto mission);
+    Integer saveMission(MissionDTO mission);
 
     /**
      * Delete a mission.
@@ -99,7 +99,7 @@ public interface IColleagueService {
      *            a id
      * @return List<Mission>
      */
-    MissionDto getLastMission(Integer collabId);
+    MissionDTO getLastMission(Integer collabId);
 
     /**
      * Get manager.
