@@ -9,6 +9,11 @@ import com.novedia.talentmap.model.entity.JsonException;
 public interface IBadRequestException {
 	
 	
+	/**
+	 * Allow to handle badRequestException 
+	 * @param ex exception was thrown
+	 * @return Jsonexception objet
+	 */
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public @ResponseBody JsonException handlerBadRequestException(Exception ex);
 

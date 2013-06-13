@@ -5,7 +5,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 import com.novedia.talentmap.model.entity.JsonException;
 
@@ -13,6 +12,11 @@ import com.novedia.talentmap.model.entity.JsonException;
 public class TalentMapRestHandlerException {
 	
 
+	/**
+	 * Allow to handle Not Allowed method exception
+	 * @param ex ex exception was thrown
+	 * @return Jsonexception objet
+	 */
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	public @ResponseBody JsonException handlerNotAllowedMethodException(Exception ex){
@@ -23,23 +27,4 @@ public class TalentMapRestHandlerException {
 		return jsonError;
 	}
 	
-	
-	@ExceptionHandler({NoSuchRequestHandlingMethodException.class})
-	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public @ResponseBody JsonException handlerNotFoundException(NoSuchRequestHandlingMethodException ex){
-		System.out.println("404");
-		JsonException jsonError = new JsonException();
-		jsonError.setCode(HttpStatus.NOT_FOUND.value());
-		jsonError.setMessage(HttpStatus.NOT_FOUND.getReasonPhrase());
-		return jsonError;
-	}
-	
-	
-	
-
-	
-	
-
-	
-
 }
