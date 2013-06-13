@@ -1,6 +1,5 @@
 package com.novedia.talentmap.services;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
