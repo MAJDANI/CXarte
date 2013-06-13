@@ -9,7 +9,7 @@ import java.util.Set;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -80,7 +80,7 @@ public class ColleagueService implements IColleagueService {
      */
     @Override
     @Transactional(rollbackFor = { DataAccessException.class })
-    public Integer addMission(final MissionDto missionDto)
+    public Integer addMission(final MissionDTO missionDto)
 	    throws DataAccessException {
 	Mission mission = createEntity(missionDto);
 	return missionDao.add(mission);
@@ -91,7 +91,7 @@ public class ColleagueService implements IColleagueService {
      */
     @Override
     @Transactional(rollbackFor = { DataAccessException.class })
-    public Integer saveMission(final MissionDto missionDto)
+    public Integer saveMission(final MissionDTO missionDto)
 	    throws DataAccessException {
 	Mission mission = createEntity(missionDto);
 	return missionDao.save(mission);
@@ -119,7 +119,7 @@ public class ColleagueService implements IColleagueService {
      * {@inheritDoc}
      */
     @Override
-    public MissionDto getLastMission(final Integer colleagueId)
+    public MissionDTO getLastMission(final Integer colleagueId)
 	    throws DataAccessException {
 	MissionDao missionDao = (MissionDao) this.missionDao;
 	Mission m = missionDao.getLastMissionByColleagueId(colleagueId);
@@ -222,7 +222,7 @@ public class ColleagueService implements IColleagueService {
      * @param MissionDto
      * @return a mission
      */
-    private Mission createEntity(MissionDto mDTO) {
+    private Mission createEntity(MissionDTO mDTO) {
 
 	Mission m = null;
 
@@ -258,37 +258,37 @@ public class ColleagueService implements IColleagueService {
      * @param Mission
      * @return a missionDto
      */
-    private MissionDto createMissionDTO(Mission m) {
+	private MissionDTO createMissionDTO(Mission m) {
 
-	MissionDto mDTO = null;
-	if (m != null) {
-	    mDTO = new MissionDto();
-	    // Recopie des attributs "simples"
-	    Set<Tool> toolsSet = new HashSet<Tool>();
-	    List<Tool> tools = m.getTools();
+		MissionDTO mDTO = null;
+		if (m != null) {
+			mDTO = new MissionDTO();
+			// Recopie des attributs "simples"
+			Set<Tool> toolsSet = new HashSet<Tool>();
+			List<Tool> tools = m.getTools();
 
-	    if (tools.size() > 0) {
-		for (Tool t : tools) {
-		    toolsSet.add(t);
+			if (tools.size() > 0) {
+				for (Tool t : tools) {
+					toolsSet.add(t);
+				}
+
+				mDTO.setTools(toolsSet);
+			}
+
+			mDTO.setId(m.getId());
+			mDTO.setClient(m.getClient());
+			mDTO.setStartDate(m.getStartDate());
+			mDTO.setEndDate(m.getEndDate());
+			mDTO.setTitle(m.getTitle());
+			mDTO.setPlace(m.getPlace());
+			mDTO.setNotes(m.getNotes());
+			mDTO.setColleagueId(m.getColleagueId());
+			mDTO.setTools(toolsSet);
+
 		}
 
-		mDTO.setTools(toolsSet);
-	    }
-
-	    mDTO.setId(m.getId());
-	    mDTO.setClient(m.getClient());
-	    mDTO.setStartDate(m.getStartDate());
-	    mDTO.setEndDate(m.getEndDate());
-	    mDTO.setTitle(m.getTitle());
-	    mDTO.setPlace(m.getPlace());
-	    mDTO.setNotes(m.getNotes());
-	    mDTO.setColleagueId(m.getColleagueId());
-	    mDTO.setTools(toolsSet);
-
+		return mDTO;
 	}
-
-	return mDTO;
-    }
 
     /**
      * This method allows to make the spring injection.
