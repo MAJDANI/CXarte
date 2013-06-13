@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.TypeMismatchException;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.novedia.talentmap.model.dto.Response;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.BusinessEngineer;
@@ -34,6 +36,7 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.utils.Constants;
 
 
 /**
@@ -111,11 +114,19 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	 */
 	@RequestMapping(value = "/colleague/{colleagueId}/", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteColleague(@PathVariable Integer colleagueId) {
+	public Response deleteColleague(@PathVariable Integer colleagueId) {
+		Response response = new Response();
+		response.setMessage(ConstantsValue.SUCCESSFUL_DELETE_MSG);
+		
 		Colleague colleague = Colleague.builder().id(colleagueId).build();
 		Set<Colleague> colleagues = new HashSet<Colleague>();
 		colleagues.add(colleague);
-		adminService.deleteColleague(colleagues);
+		Map<String, Object> result = adminService.deleteColleague(colleagues);
+		
+		if(result.get(Constants.MSG).equals((String)Constants.UNSUCCESS)){
+			response.setMessage(ConstantsValue.UNSUCCESSFUL_DELETE_MSG);
+		}
+		return response;
 	}
 	
 	

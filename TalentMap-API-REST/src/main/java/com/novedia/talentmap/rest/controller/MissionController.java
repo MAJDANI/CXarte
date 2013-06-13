@@ -65,11 +65,11 @@ public class MissionController extends TalentMapRestHandlerException implements 
 	@ResponseBody
 	public Response deleteMission(@PathVariable final Integer missionId){
 		Response response = new Response();
-		response.setMessage(ConstantsValue.UNSUCCESFUL_DELETE_MSG);
+		response.setMessage(ConstantsValue.UNSUCCESSFUL_DELETE_MSG);
 		Mission missionToDelete = Mission.builder().id(missionId).build();
 		int result = colleagueService.deleteMission(missionToDelete);
 		if(result != 0){
-			response.setMessage(ConstantsValue.SUCCESFUL_DELETE_MSG);
+			response.setMessage(ConstantsValue.SUCCESSFUL_DELETE_MSG);
 		}
 		return response;
 	}

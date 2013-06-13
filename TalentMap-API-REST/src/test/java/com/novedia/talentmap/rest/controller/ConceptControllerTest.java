@@ -22,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.utils.Constants;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -100,9 +101,9 @@ public class ConceptControllerTest {
 	public void deleteConceptTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		map.put(Constants.MSG, Constants.SUCCESS);
 		//WHEN
-		Mockito.when(adminService.deleteConcept(1)).thenReturn(map);
+		Mockito.when(adminService.deleteConcept(Mockito.anyInt())).thenReturn(map);
 		
 		//THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/concept/{conceptId}/",1)

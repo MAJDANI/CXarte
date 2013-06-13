@@ -1,6 +1,7 @@
 package com.novedia.talentmap.rest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.novedia.talentmap.model.dto.Response;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.JsonException;
 import com.novedia.talentmap.rest.exception.IBadRequestException;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
+import com.novedia.talentmap.rest.utiils.ConstantsValue;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.utils.Constants;
 
 /**
  * 
@@ -72,13 +76,21 @@ public class CategoryController extends TalentMapRestHandlerException implements
 	 */
 	@RequestMapping(value = "/category/{categoryId}/", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteCategory(@PathVariable Integer categoryId) {
+	public Response deleteCategory(@PathVariable Integer categoryId) {
+		Response response = new Response();
+		response.setMessage(ConstantsValue.UNSUCCESSFUL_DELETE_MSG);
 		try {
-			adminService.deleteCategory(categoryId);
+			Map<String, Object> result = adminService.deleteCategory(categoryId);
+			
+			if(result.get(Constants.MSG).equals((String)Constants.SUCCESS)){
+				response.setMessage(ConstantsValue.SUCCESSFUL_DELETE_MSG);
+			}
+			return response;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return response;
 	}
 
 	

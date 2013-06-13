@@ -22,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.utils.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = WebContextLoader.class, 
@@ -117,6 +118,7 @@ public class ToolControllerTest {
 	public void deleteToolTest() throws Exception{
 		//GIVEN
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(Constants.MSG, Constants.SUCCESS);
 		
 		//WHEN
 		Mockito.when(adminService.deleteTool(1)).thenReturn(map);

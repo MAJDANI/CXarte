@@ -30,6 +30,7 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.utils.Constants;
 
 
 
@@ -141,9 +142,10 @@ public class ColleagueControllerTest {
 		Colleague colleague = Colleague.builder().id(1).build();
 		Set<Colleague> colleagues = new HashSet<Colleague>();
 		colleagues.add(colleague);
+		map.put(Constants.MSG, Constants.SUCCESS);
 				
 		//WHEN
-		Mockito.when(adminService.deleteColleague(colleagues)).thenReturn(map);
+		Mockito.when(adminService.deleteColleague(Mockito.anySetOf(Colleague.class))).thenReturn(map);
 		
 		// THEN
 		mockMvc.perform(MockMvcRequestBuilders.delete("/colleague/{colleagueId}/",1)

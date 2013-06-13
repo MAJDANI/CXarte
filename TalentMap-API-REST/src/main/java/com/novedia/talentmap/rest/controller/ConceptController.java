@@ -1,6 +1,7 @@
 package com.novedia.talentmap.rest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.novedia.talentmap.model.dto.Response;
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.JsonException;
 import com.novedia.talentmap.rest.exception.IBadRequestException;
 import com.novedia.talentmap.rest.exception.TalentMapRestHandlerException;
+import com.novedia.talentmap.rest.utiils.ConstantsValue;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.utils.Constants;
 
 /**
  * 
@@ -79,8 +83,16 @@ public class ConceptController extends TalentMapRestHandlerException implements 
 	 */
 	@RequestMapping(value = "/concept/{conceptId}/", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteConcept(@PathVariable Integer conceptId) {
-		adminService.deleteConcept(conceptId);
+	public Response deleteConcept(@PathVariable Integer conceptId) {
+		Response response = new Response();
+		response.setMessage(ConstantsValue.SUCCESSFUL_DELETE_MSG);
+		
+		Map<String, Object> result = adminService.deleteConcept(conceptId);
+		
+		if(result.get(Constants.MSG).equals((String)Constants.UNSUCCESS)){
+			response.setMessage(ConstantsValue.UNSUCCESSFUL_DELETE_MSG);
+		}
+		return response;
 	}
 
 	@Override

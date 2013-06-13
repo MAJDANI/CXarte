@@ -13,6 +13,7 @@ import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.services.utils.Constants;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 import com.novedia.talentmap.store.impl.CategoryDao;
@@ -345,11 +346,11 @@ public class AdminService implements IAdminService {
 		colleagueDao.delete(colleague);
 	    }
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put("messageError", "successful delete");
+	    this.mapNotification.put(Constants.MSG, Constants.SUCCESS);
 
 	} catch (DataAccessException e) {
 	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put("messageError", "unsuccessful delete");
+	    this.mapNotification.put(Constants.MSG, Constants.UNSUCCESS);
 	}
 	return mapNotification;
     }
