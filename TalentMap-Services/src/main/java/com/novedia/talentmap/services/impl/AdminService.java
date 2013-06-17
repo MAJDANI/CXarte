@@ -261,10 +261,10 @@ public class AdminService implements IAdminService {
 		}
 	    }
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put("messageError", "successful update");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_UPDATE);
 	} else {
 	    this.mapNotification.put("typeError", 2);
-	    this.mapNotification.put("messageError", "No skill update");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_UPDATE);
 	}
 	return this.mapNotification;
     }
@@ -284,10 +284,10 @@ public class AdminService implements IAdminService {
 	Category category = Category.builder().id(categoryId).build();
 	if (this.categoryDao.delete(category) > 0) {
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put("messageError", "successful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
 	} else {
 	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put("messageError", "unsuccessful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
 	}
 	return this.mapNotification;
     }
@@ -307,10 +307,10 @@ public class AdminService implements IAdminService {
 	Concept concept = Concept.builder().id(conceptId).build();
 	if (this.conceptDao.delete(concept) > 0) {
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put("messageError", "successful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
 	} else {
 	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put("messageError", "unsuccessful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
 	}
 	return this.mapNotification;
     }
@@ -330,10 +330,10 @@ public class AdminService implements IAdminService {
 	Tool tool = Tool.builder().id(toolId).build();
 	if (this.toolDao.delete(tool) > 0) {
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put("messageError", "successful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
 	} else {
 	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put("messageError", "unsuccessful delete");
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
 	}
 	return this.mapNotification;
     }
@@ -346,11 +346,11 @@ public class AdminService implements IAdminService {
 		colleagueDao.delete(colleague);
 	    }
 	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put(Constants.MSG, Constants.SUCCESS);
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
 
 	} catch (DataAccessException e) {
 	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put(Constants.MSG, Constants.UNSUCCESS);
+	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
 	}
 	return mapNotification;
     }
