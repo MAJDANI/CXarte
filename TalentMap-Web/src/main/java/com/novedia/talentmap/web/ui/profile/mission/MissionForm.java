@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import org.springframework.dao.DataAccessException;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Tool;
@@ -153,7 +153,7 @@ public class MissionForm extends FormLayout implements ClickListener,
 	this.missionForm.setFormFieldFactory(new MissionFormFieldFactory(
 		this.clientService, this.skillService, false));
 
-	BeanItem<Item> missionBean = new BeanItem(new MissionDto());
+	BeanItem<Item> missionBean = new BeanItem(new MissionDTO());
 	this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
 	this.missionForm.setImmediate(true);
 
@@ -193,9 +193,9 @@ public class MissionForm extends FormLayout implements ClickListener,
 	if (this.save == button) {
 	    setCurrentAction(ACTION_SAVE);
 
-	    BeanItem<MissionDto> missionItem = (BeanItem<MissionDto>) this.missionForm
+	    BeanItem<MissionDTO> missionItem = (BeanItem<MissionDTO>) this.missionForm
 		    .getItemDataSource();
-	    MissionDto missionToInsert = missionItem.getBean();
+	    MissionDTO missionToInsert = missionItem.getBean();
 
 	    int formValidation = validatedMissionForm(missionToInsert);
 	    switch (formValidation) {
@@ -219,11 +219,11 @@ public class MissionForm extends FormLayout implements ClickListener,
 		if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
 		    missionToInsert.setColleagueId(authentication
 			    .getColleagueId());
-		    CmNotification(ADD_MISSION, missionToInsert);
+		    notifyCm(ADD_MISSION, missionToInsert);
 		    insertMission(missionToInsert);
 		}
 		if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
-		    CmNotification(UPDATE_MISSION, missionToInsert);
+			notifyCm(UPDATE_MISSION, missionToInsert);
 		    updateMission(missionToInsert);
 		}
 		break;
@@ -246,10 +246,10 @@ public class MissionForm extends FormLayout implements ClickListener,
      * @param itemMission
      * @param missionId
      */
-    public void fillMissionFormWithMission(MissionDto missionDto) {
+    public void fillMissionFormWithMission(MissionDTO missionDTO) {
 
-	BeanItem<MissionDto> beanMissionToModify = new BeanItem<MissionDto>(
-		missionDto);
+	BeanItem<MissionDTO> beanMissionToModify = new BeanItem<MissionDTO>(
+			missionDTO);
 	this.missionForm.setItemDataSource(beanMissionToModify,
 		this.fieldOrderMission);
 
@@ -259,7 +259,7 @@ public class MissionForm extends FormLayout implements ClickListener,
      * Empties all properties in missionForm
      */
     public void emptyMissionForm() {
-	BeanItem<Item> missionBean = new BeanItem(new MissionDto());// TODO
+	BeanItem<Item> missionBean = new BeanItem(new MissionDTO());// TODO
 	this.missionForm.setItemDataSource(missionBean, this.fieldOrderMission);
     }
 
@@ -271,7 +271,7 @@ public class MissionForm extends FormLayout implements ClickListener,
      * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD or
      *         VALIDATION_VALID_FORM
      */
-    private int validatedMissionForm(MissionDto mission) {
+    private int validatedMissionForm(MissionDTO mission) {
 
 	if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
 		|| !isNotEmpty(mission.getPlace())
@@ -336,7 +336,7 @@ public class MissionForm extends FormLayout implements ClickListener,
      * 
      * @param missionToInsert
      */
-    private void insertMission(MissionDto missionToInsert) {
+    private void insertMission(MissionDTO missionToInsert) {
 	try {
 	    int result = this.collabService.addMission(missionToInsert);
 	    if (result != 0) {
@@ -364,7 +364,7 @@ public class MissionForm extends FormLayout implements ClickListener,
      * 
      * @param missionToUpdate
      */
-    private void updateMission(MissionDto missionToUpdate) {
+    private void updateMission(MissionDTO missionToUpdate) {
 	try {
 	    this.missionForm.commit();
 	    int result = this.collabService.saveMission(missionToUpdate);
@@ -441,7 +441,7 @@ public class MissionForm extends FormLayout implements ClickListener,
 	this.obs = null;
     }
 
-    public void CmNotification(String type, MissionDto mission) {
+    public void notifyCm(String type, MissionDTO mission) {
 	if (type.equals(ADD_MISSION)) {
 	    Colleague c = colleagueService.getColleague(mission
 		    .getColleagueId());

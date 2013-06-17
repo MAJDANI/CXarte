@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
@@ -265,7 +265,7 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 		getWindow().showNotification("Please select a mission",
 			Notification.TYPE_WARNING_MESSAGE);
 	    } else {
-		MissionDto selectedMissionDTO = new MissionDto();
+		MissionDTO selectedMissionDTO = new MissionDTO();
 
 		// Recopie des attributs "simples"
 		Set<Tool> toolsSet = new HashSet<Tool>();
@@ -413,10 +413,10 @@ public class MissionCollaboratorContent extends VerticalLayout implements
      * @param missionId
      *            : the id of the mission selected in the table
      */
-    private void fillAddMissionPanelWithMission(MissionDto missionDto) {
+    private void fillAddMissionPanelWithMission(MissionDTO missionDTO) {
 
 	enableAddMissionPanel();
-	this.missionForm.fillMissionFormWithMission(missionDto);
+	this.missionForm.fillMissionFormWithMission(missionDTO);
 
     }
 

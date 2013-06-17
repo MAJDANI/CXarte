@@ -353,8 +353,6 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	    skill.setUse_frequency(frequencyUseValue);
 	    skill.setNo_using_time(noUsingTimeValue);
 
-	    // System.out.println(" **skill** = " + skill);
-
 	    // Test if it's a new skill or not
 	    if (this.isNewSkill) {
 
@@ -382,7 +380,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
     }
 
     private void updateOneSkill(Skill skill) throws Exception {
-	CmNotification(UPDATE_SKILL, skill);
+	notifyCm(UPDATE_SKILL, skill);
 	this.skillService.saveSkill(skill);
 
 	getWindow().showNotification("Skill changed",
@@ -392,7 +390,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
     }
 
     private void addOneNewSkill(Skill skill) throws Exception {
-	CmNotification(ADD_SKILL, skill);
+	notifyCm(ADD_SKILL, skill);
 	this.skillService.addSkill(skill);
 
 	getWindow().showNotification("Skill added",
@@ -509,7 +507,7 @@ public class AddSkillPanel extends Panel implements ClickListener,
 	}
     }
 
-    public void CmNotification(String type, Skill skill) {
+    public void notifyCm(String type, Skill skill) {
 
 	if (type.equals(ADD_SKILL)) {
 	    Colleague c = colleagueService.getColleague(skill.getColleagueId());

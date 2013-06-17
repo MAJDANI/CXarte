@@ -3,7 +3,7 @@ package com.novedia.talentmap.web.ui.formFactory;
 import java.util.List;
 import java.util.Set;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
@@ -35,7 +35,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
     private IClientService clientService;
     private ISkillService skillService;
     private boolean isLastMission;
-    private MissionDto missionDto;
+    private MissionDTO missionDTO;
 
     /**
      * 
@@ -43,11 +43,11 @@ public class MissionFormFieldFactory implements FormFieldFactory {
      *            skillService mission isLastMission
      */
     public MissionFormFieldFactory(IClientService clientService,
-	    ISkillService skillService, MissionDto missionDto,
+	    ISkillService skillService, MissionDTO missionDTO,
 	    boolean isLastMission) {
 	this.clientService = clientService;
 	this.skillService = skillService;
-	this.missionDto = missionDto;
+	this.missionDTO = missionDTO;
 	this.isLastMission = isLastMission;
 
     }
@@ -204,7 +204,7 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 		if (propertyId.equals(ConstantsEnglish.FIELD_MISSION_TOOLS)
 			&& isLastMission) {
 
-		    Set<Tool> allTools = missionDto.getTools();
+		    Set<Tool> allTools = missionDTO.getTools();
 
 		    int j = 0;
 
@@ -236,12 +236,12 @@ public class MissionFormFieldFactory implements FormFieldFactory {
 	return null;
     }
 
-    public MissionDto getMission() {
-	return missionDto;
+    public MissionDTO getMission() {
+	return missionDTO;
     }
 
-    public void setMission(MissionDto missionDto) {
-	this.missionDto = missionDto;
+    public void setMission(MissionDTO missionDTO) {
+	this.missionDTO = missionDTO;
     }
 
     public IClientService getClientService() {

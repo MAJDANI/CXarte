@@ -2,7 +2,7 @@ package com.novedia.talentmap.web.ui.profile;
 
 import java.util.Vector;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IBusinessEngineerService;
@@ -168,7 +168,7 @@ public class CollaboratorForm extends VerticalLayout {
      */
     private void buildFormColleagueMission() throws Exception {
 
-	MissionDto currentColleaguesLastMission = colleagueService
+	MissionDTO currentColleaguesLastMission = colleagueService
 		.getLastMission(authentication.getColleagueId());
 	if (currentColleaguesLastMission != null) {
 	    // Label "Last Mission"
@@ -202,7 +202,7 @@ public class CollaboratorForm extends VerticalLayout {
      * 
      * @param lastMission
      */
-    private void initFormColleagueMission(MissionDto lastMission) {
+    private void initFormColleagueMission(MissionDTO lastMission) {
 	if (lastMission != null) {
 	    BeanItem<Item> lastMissionBean = new BeanItem(lastMission);
 	    this.formMission.setItemDataSource(lastMissionBean,
@@ -220,7 +220,7 @@ public class CollaboratorForm extends VerticalLayout {
     public void refreshAllFormsToDefault() {
 	Colleague currentColleague = colleagueService
 		.getColleague(authentication.getColleagueId());
-	MissionDto currentColleaguesLastMission = colleagueService
+	MissionDTO currentColleaguesLastMission = colleagueService
 		.getLastMission(authentication.getColleagueId());
 	// Workaround to solve a gridLayout bug vaadin with method
 	// SetItemDataSource

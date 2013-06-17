@@ -3,7 +3,6 @@ package com.novedia.talentmap.services.impl;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -19,7 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataAccessException;
 
-import com.novedia.talentmap.model.dto.MissionDto;
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Manager;
@@ -204,13 +203,13 @@ public class ColleagueServiceTest {
 		Tool t1 = Tool.builder().build();
 		tools.add(t1);
 		Client client = Client.builder().build();
-		MissionDto missionDto = MissionDto.builder().client(client)
+		MissionDTO missionDTO = MissionDTO.builder().client(client)
 				.tools(tools).build();
 
 		// When
 		Mockito.when(missionDaoMock.add(missionForTests)).thenReturn(
 				expectedResult);
-		Integer currentResult = service.addMission(missionDto);
+		Integer currentResult = service.addMission(missionDTO);
 
 		// Then
 		Mockito.verify(missionDaoMock, Mockito.times(1)).add(missionForTests);
@@ -232,13 +231,13 @@ public class ColleagueServiceTest {
 		Tool t1 = Tool.builder().build();
 		tools.add(t1);
 		Client client = Client.builder().build();
-		MissionDto missionDto = MissionDto.builder().client(client)
+		MissionDTO missionDTO = MissionDTO.builder().client(client)
 				.tools(tools).build();
 
 		// When
 		Mockito.when(missionDaoMock.save(missionForTests)).thenReturn(
 				expectedResult);
-		Integer currentResult = service.saveMission(missionDto);
+		Integer currentResult = service.saveMission(missionDTO);
 
 		// Then
 		Mockito.verify(missionDaoMock, Mockito.times(1)).save(missionForTests);
