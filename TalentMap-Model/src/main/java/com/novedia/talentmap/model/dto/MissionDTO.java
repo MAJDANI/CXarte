@@ -18,6 +18,7 @@ import com.novedia.talentmap.model.entity.Tool;
  */
 public class MissionDTO {
 
+	
     /**
      * The missionDto id
      */
