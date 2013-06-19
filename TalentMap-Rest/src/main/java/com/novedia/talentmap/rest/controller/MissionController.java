@@ -112,6 +112,24 @@ public class MissionController extends TalentMapRestHandlerException implements 
 	}
 	
 	
+	
+	/**
+	 * Update a mission
+	 * @param missionId missionId to update
+	 * @param colleagueId colleagueId of mission
+	 * @param title title of mission
+	 * @param clientId clientId of mission
+	 * @param place place of mission
+	 * @param startDate startDate of mission
+	 * @param endDate endDate of mission
+	 * @param comment comment of mission
+	 * @param toolId1 toolId1 of mission
+	 * @param toolId2 toolId2 of mission
+	 * @param toolId3 toolId3 of mission
+	 * @return MissionDto
+	 * @throws ParseException
+	 * @throws DataAccessException
+	 */
 	@RequestMapping(value = "/mission/{missionId}/{colleagueId}/{title}/{clientId}/{place}/{startDate}/{endDate}" +
 			"/{comment}/{toolId1}/{toolId2}/{toolId3}", 
 			method =RequestMethod.PUT)

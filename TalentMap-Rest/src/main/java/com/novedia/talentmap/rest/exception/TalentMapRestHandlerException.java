@@ -20,7 +20,6 @@ public class TalentMapRestHandlerException {
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	public @ResponseBody JsonException handlerNotAllowedMethodException(Exception ex){
-		System.out.println("yyyyyyyy");
 		JsonException jsonError = new JsonException();
 		jsonError.setCode(HttpStatus.METHOD_NOT_ALLOWED.value());
 		jsonError.setMessage(HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase());
