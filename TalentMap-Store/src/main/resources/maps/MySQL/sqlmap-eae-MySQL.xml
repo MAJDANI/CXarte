@@ -23,6 +23,7 @@
 		<result property="colleaguesSynthesis" column="COLLEAGUES_SYNTHESIS" />
 		<result property="managersSynthesis" column="MANAGERS_SYNTHESIS" />
 		<result property="other" column="OTHER" />
+<!-- 		<result property="salary" column="SALARY" /> -->
 	</resultMap>
 
 	<resultMap id="eaeSynthesisResult" class="eaeForSynthesis">
@@ -55,12 +56,13 @@
 		<result property="collabLastName" column="C_LAST_NAME" />
 		<result property="collabFirstName" column="C_FIRST_NAME" />
 		<result property="profile" column="PROFILE" />
-		<result property="managerLastName" column="M_LAST_NAME" />
-		<result property="managerFirstName" column="M_FIRST_NAME" />
+		<result property="managerLastName" column="M_FIRST_NAME" />
+		<result property="managerFirstName" column="M_LAST_NAME" />
 		<result property="eaeDate" column="EAE_DATE" />
 		<result property="employmentDate" column="EMPLOYMENT_DATE" />
 		<result property="previousEaeDate" column="PREV_EAE_DATE" />
 		<result property="eaeStateId" column="EAE_STATE_ID" />
+<!-- 		<result property="salary" column="SALARY" /> -->
 	</resultMap>
 
 

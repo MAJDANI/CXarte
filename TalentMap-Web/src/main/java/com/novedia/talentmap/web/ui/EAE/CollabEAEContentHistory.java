@@ -1,12 +1,10 @@
 package com.novedia.talentmap.web.ui.EAE;
 
-import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.services.IEAEService;
-import com.novedia.talentmap.web.ui.cm.CmEAENotOngoingPageTable;
-import com.novedia.talentmap.web.ui.cm.CmEAEOngoingPageTable;
+import com.novedia.talentmap.web.ui.search.SearchResults;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button.ClickEvent;
@@ -19,7 +17,7 @@ public class CollabEAEContentHistory extends VerticalLayout implements ClickList
 
     private Authentication authentication;
     private CollabEAEHistoryPageTable collabEAEHistoryPageTable;
-    private IEAEService eaeService;
+    private EAEWindow eaeWindow;
 
     private static final String FORM_TITLE = "EAE History";
 
@@ -52,10 +50,10 @@ public class CollabEAEContentHistory extends VerticalLayout implements ClickList
     @Override
     public void itemClick(ItemClickEvent event) {
         EAEForSynthesisDTO eae = (EAEForSynthesisDTO)event.getItemId();
-        EAEGeneralityDTO eG = this.eaeService.getEAEGenerality(eae.getId());
+//	this.eaeWindow.setEaeForSynthesisDTO(eae);
+	this.eaeWindow.build(eae);
+        getWindow().addWindow(eaeWindow);
         
-        //TODO temporaire
-        System.out.println(eG);
     }
 
     public Authentication getAuthentication() {
@@ -82,17 +80,17 @@ public class CollabEAEContentHistory extends VerticalLayout implements ClickList
     }
 
     /**
-     * @return the eaeService
+     * @return the eaeWindow
      */
-    public IEAEService getEaeService() {
-        return eaeService;
+    public EAEWindow getEaeWindow() {
+        return eaeWindow;
     }
 
     /**
-     * @param eaeService the eaeService to set
+     * @param eaeWindow the eaeWindow to set
      */
-    public void setEaeService(IEAEService eaeService) {
-        this.eaeService = eaeService;
+    public void setEaeWindow(EAEWindow eaeWindow) {
+        this.eaeWindow = eaeWindow;
     }
 
 }

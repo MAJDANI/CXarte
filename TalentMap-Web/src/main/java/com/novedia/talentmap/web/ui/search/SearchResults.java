@@ -110,8 +110,6 @@ public class SearchResults extends PagedTable {
 	return button;
     }
 
-    // TODO : voir si on peut factoriser cette méthode
-    // qui est copiée de la classe MonitoringCollabEvent
     private void btnProfileEvent(Button button) {
 	button.addListener(new ClickListener() {
 

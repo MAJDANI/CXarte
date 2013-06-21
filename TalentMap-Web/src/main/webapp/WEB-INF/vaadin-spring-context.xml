@@ -89,8 +89,27 @@
 	<bean id="collabEAEContentHistoryBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEContentHistory"
 		scope="session">
 		<property name="collabEAEHistoryPageTable" ref="collabEAEHistoryPageTableBean" />
-		<property name="eaeService" ref="eaeService" />
+		<property name="eaeWindow" ref="eaeWindowBean" />
 	</bean>
+	<bean id="eaeWindowBean" class="com.novedia.talentmap.web.ui.EAE.EAEWindow" scope="session">
+		<property name="generalityView" ref="generalityViewBean" />
+		<property name="eaeForSynthesisDTO" ref="eaeForSynthesisDTOBean" />
+	</bean>
+	<bean id="generalityViewBean" class="com.novedia.talentmap.web.ui.EAE.EAEWindowGeneralityView" scope="session">
+		<property name="eaeGeneralityFormLayout" ref="eaeGeneralityFormLayoutBean" />
+	</bean>
+	<bean id="eaeGeneralityFormLayoutBean" class="com.novedia.talentmap.web.ui.EAE.EAEGeneralityFormLayout" scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="eaeGeneralityDTO" ref="eaeGeneralityDTOBean" />
+		<property name="eaeGeneralityForm" ref="eaeGeneralityForm" />
+		<property name="fieldOrderEAEGenerality" ref="fieldOrderEAEGenerality" />
+		<property name="save" ref="saveEAEGeneralityButton" />
+	</bean>
+	<bean id="eaeGeneralityForm" class="com.vaadin.ui.Form" scope="session" />
+	<bean id="eaeForSynthesisDTOBean" class="com.novedia.talentmap.model.dto.EAEForSynthesisDTO" scope="session"/>
+	<bean id="eaeGeneralityDTOBean" class="com.novedia.talentmap.model.dto.EAEGeneralityDTO" scope="session"/>
+	<bean id="fieldOrderEAEGenerality" class="java.util.Vector" scope="session" />
+	<bean id="saveEAEGeneralityButton" class="com.vaadin.ui.Button" scope="session" />
 		
 	<bean id="collabEAEHistoryPageTableBean" class="com.novedia.talentmap.web.ui.EAE.CollabEAEHistoryPageTable"
 		scope="session">

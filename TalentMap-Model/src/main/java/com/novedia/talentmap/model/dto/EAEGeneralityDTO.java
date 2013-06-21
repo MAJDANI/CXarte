@@ -14,28 +14,26 @@ public class EAEGeneralityDTO {
      * The identifier of the EAE
      */
     private Integer id;
-    /**
-     * Colleague last name
-     */
-    private String collabLastName;
 
-    /**
-     * Colleague first name
-     */
+    private String collabLastName;
     private String collabFirstName;
+    
+    /**
+     * Colleague's name (Last + First)
+     */
+//    private String colleagueName;
+
     /**
      * Colleague profile
      */
     private String profile;
     
     /**
-     * Manager's last name 
+     * Manager's name (Last + First)
      */
     private String managerLastName;
-    /**
-     * Manager's first name
-     */
     private String managerFirstName;
+//    private String managerName;
     /**
      * EAE's date
      */
@@ -53,7 +51,11 @@ public class EAEGeneralityDTO {
      * The State of the EAE
      */
     private Integer eaeStateId;
-
+    /**
+     * 
+     */
+//    private Integer salary;
+    
     /**
      * @return the id
      */
@@ -83,33 +85,6 @@ public class EAEGeneralityDTO {
         this.eaeStateId = eaeStateId;
     }
 
-    /**
-     * @return the collabLastName
-     */
-    public String getCollabLastName() {
-        return collabLastName;
-    }
-
-    /**
-     * @param collabLastName the collabLastName to set
-     */
-    public void setCollabLastName(String collabLastName) {
-        this.collabLastName = collabLastName;
-    }
-
-    /**
-     * @return the collabFirstName
-     */
-    public String getCollabFirstName() {
-        return collabFirstName;
-    }
-
-    /**
-     * @param collabFirstName the collabFirstName to set
-     */
-    public void setCollabFirstName(String collabFirstName) {
-        this.collabFirstName = collabFirstName;
-    }
 
     /**
      * @return the profile
@@ -125,33 +100,6 @@ public class EAEGeneralityDTO {
         this.profile = profile;
     }
 
-    /**
-     * @return the managerLastName
-     */
-    public String getManagerLastName() {
-        return managerLastName;
-    }
-
-    /**
-     * @param managerLastName the managerLastName to set
-     */
-    public void setManagerLastName(String managerLastName) {
-        this.managerLastName = managerLastName;
-    }
-
-    /**
-     * @return the managerFirstName
-     */
-    public String getManagerFirstName() {
-        return managerFirstName;
-    }
-
-    /**
-     * @param managerFirstName the managerFirstName to set
-     */
-    public void setManagerFirstName(String managerFirstName) {
-        this.managerFirstName = managerFirstName;
-    }
 
     /**
      * @return the eaeDate
@@ -195,15 +143,86 @@ public class EAEGeneralityDTO {
         this.previousEaeDate = previousEaeDate;
     }
 
+    
+    /**
+     * @return the colleagueName
+     */
+    public String getColleagueName() {
+        return collabLastName + "" +collabFirstName;
+    }
+
+
+    /**
+     * @return the managerName
+     */
+    public String getManagerName() {
+        return managerLastName + "" + managerFirstName;
+    }
+
+
+    /**
+     * @return the collabLastName
+     */
+    public String getCollabLastName() {
+        return collabLastName;
+    }
+
+    /**
+     * @param collabLastName the collabLastName to set
+     */
+    public void setCollabLastName(String collabLastName) {
+        this.collabLastName = collabLastName;
+    }
+
+    /**
+     * @return the collabFirstName
+     */
+    public String getCollabFirstName() {
+        return collabFirstName;
+    }
+
+    /**
+     * @param collabFirstName the collabFirstName to set
+     */
+    public void setCollabFirstName(String collabFirstName) {
+        this.collabFirstName = collabFirstName;
+    }
+
+    /**
+     * @return the managerLastName
+     */
+    public String getManagerLastName() {
+        return managerLastName;
+    }
+
+    /**
+     * @param managerLastName the managerLastName to set
+     */
+    public void setManagerLastName(String managerLastName) {
+        this.managerLastName = managerLastName;
+    }
+
+    /**
+     * @return the managerFirstName
+     */
+    public String getManagerFirstName() {
+        return managerFirstName;
+    }
+
+    /**
+     * @param managerFirstName the managerFirstName to set
+     */
+    public void setManagerFirstName(String managerFirstName) {
+        this.managerFirstName = managerFirstName;
+    }
+
     @Override
     public String toString() {
 	StringBuilder strBld = new StringBuilder();
 	strBld.append("[id=").append(getId()).append(", ");
-	strBld.append("collabLastName=").append(getCollabLastName()).append(", ");
-	strBld.append("collabFirstName=").append(getCollabFirstName()).append(", ");
+	strBld.append("colleagueName=").append(getColleagueName()).append(", ");
 	strBld.append("profile=").append(getProfile()).append(", ");
-	strBld.append("managerLastName=").append(getManagerLastName()).append(", ");
-	strBld.append("managerFirstName=").append(getManagerFirstName()).append(", ");
+	strBld.append("managerName=").append(getManagerName()).append(", ");
 	strBld.append("eaeDate=").append(getEaeDate()).append(", ");
 	strBld.append("employmentDate=").append(getEmploymentDate()).append(", ");
 	strBld.append("previousEaeDate=").append(getPreviousEaeDate()).append(", ");

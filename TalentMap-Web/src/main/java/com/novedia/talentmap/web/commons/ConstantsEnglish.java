@@ -304,11 +304,31 @@ public class ConstantsEnglish {
     public static final int COLLEAGUE_EMAIL_MAX_LENGTH = 50;
     public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;
     public static final int COLLEAGUE_EXPERIENCE_MAX_LENGTH = 2;
-
+    //TABLE EAE
+    public static final int EAE_GENERALITY_SALARY_MAX_LENGTH = 10;
+    
+    
     public static final Integer DEFAULT_SELECTED_CHOICE = 0;
     public static final String DEFAULT_CAPTION_SELECTED_JOB = "Select your Profile";
     public static final String DEFAULT_CAPTION_SELECTED_BUSINESSENGINEER = "Select your businessEnginer";
     public static final String DEFAULT_CAPTION_SELECTED_MAMANGER = "Select your Manager";
     public static final String DEFAULT_CAPTION_SELECTED_JOB_MSG = "Please select your job title";
+
+    public static final String EAE_WINDOW_TITLE_1_COLLEAGUE = "EAE for Colleague : ";
+    public static final String EAE_WINDOW_TITLE_2_DATE = " Date : ";
+
+    public static final String FIELD_COLLEAGUE = "collabLastName";
+    public static final String FIELD_PROFILE = "profile";
+    public static final String FIELD_MANAGER = "managerLastName";
+    public static final String FIELD_EAE_DATE = "eaeDate";
+    public static final String FIELD_INCOME_DATE = "employmentDate";
+    public static final String FIELD_LAST_EAE_DATE = "previousEaeDate";
+    public static final String FIELD_SALARY = "Salary";
+    public static final Object[] FIELD_ORDER_EAE_GENERALITY = new Object[] {
+	    FIELD_COLLEAGUE, FIELD_PROFILE, FIELD_MANAGER,
+	    FIELD_EAE_DATE, FIELD_INCOME_DATE,
+	    FIELD_LAST_EAE_DATE};
+    public static final Object[] NAME_FIELD_EAE_GENERALITY = new Object[] { "Nom du colleague",
+	"Profile", "Nom du manager", "Date eae", "Incoming date in Novedia", "Last EAE date"};
 
 }

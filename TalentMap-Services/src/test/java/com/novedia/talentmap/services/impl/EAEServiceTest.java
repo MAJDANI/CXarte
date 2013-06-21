@@ -13,15 +13,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataAccessResourceFailureException;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EntityUtil;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
-import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.store.impl.EAEDao;
 
 /**

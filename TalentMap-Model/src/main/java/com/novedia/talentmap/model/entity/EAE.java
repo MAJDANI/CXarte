@@ -64,7 +64,11 @@ public class EAE implements Serializable {
      * A free field in order to indicate any other subject.
      */
     private String other;
-
+    /**
+     * The salary of the colleague at the date of the EAE
+     */
+//    private Integer salary;
+    
     /**
      * Build an immutable EAE entity.
      * 
@@ -263,6 +267,20 @@ public class EAE implements Serializable {
 	this.other = other;
     }
 
+//    /**
+//     * @return the salary
+//     */
+//    public Integer getSalary() {
+//        return salary;
+//    }
+//
+//    /**
+//     * @param salary the salary to set
+//     */
+//    public void setSalary(Integer salary) {
+//        this.salary = salary;
+//    }
+
     // ------------------------------------------------------------------------
     // ------------ BUILDER PART ----------------------------------------------
     // ------------------------------------------------------------------------
@@ -332,6 +350,10 @@ public class EAE implements Serializable {
 	 * A free field in order to indicate any other subject.
 	 */
 	private String other;
+	/**
+	* The salary of the colleague at the date of the EAE
+	*/
+//	private Integer salary;
 
 	/**
 	 * Set id
@@ -464,6 +486,17 @@ public class EAE implements Serializable {
 	    this.other = other;
 	    return this;
 	}
+	/**
+	 * Set salary
+	 * 
+	 * @param salary
+	 *            the EAE's salary
+	 * @return the builder
+	 */
+//	public Builder other(final Integer salary) {
+//	    this.salary = salary;
+//	    return this;
+//	}
 	
 	/**
 	 * Build an immutable instance of EAE.
