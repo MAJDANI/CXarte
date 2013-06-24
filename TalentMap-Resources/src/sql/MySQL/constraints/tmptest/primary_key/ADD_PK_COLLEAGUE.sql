@@ -1,6 +1,0 @@
----------------------------
--- PRIMARY KEYS CREATION --
----------------------------
-ALTER TABLE COLLEAGUE ADD CONSTRAINT COLLEAGUEPK PRIMARY KEY (COLLEAGUE_ID);
-
-COMMIT;

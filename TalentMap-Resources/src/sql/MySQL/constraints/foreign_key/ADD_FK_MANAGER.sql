@@ -1,8 +1,0 @@
----------------------------
--- FOREIGN KEYS CREATION --
----------------------------
-
-ALTER TABLE MANAGER ADD CONSTRAINT MANAGERFK1 FOREIGN KEY (PROFILE_ID)
-	  REFERENCES PROFILE (PROFILE_ID);
-	  
-COMMIT;
