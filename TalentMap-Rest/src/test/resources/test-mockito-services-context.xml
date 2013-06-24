@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="clientService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.ClientService" />
+	</bean>
+	
+	<bean id="authenticationService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.AuthenticationService" />
+	</bean>
+	
+	<bean id="adminService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.AdminService" />
+	</bean>
+	
+	<bean id="changePasswordService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.ChangePasswordService" />
+	</bean>
+	
+	<bean id="skillService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.SkillService" />
+	</bean>
+	
+	<bean id="registrationService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.RegistrationService" />
+	</bean>
+	
+	<bean id="colleagueService" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.novedia.talentmap.services.impl.ColleagueService" />
+	</bean>
+	
+	
+</beans>	
