@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="colleague" class="com.novedia.talentmap.model.entity.Colleague" />
+
+	<bean id="client" class="com.novedia.talentmap.model.entity.Client" />
+
+	<bean id="businessEngineer" class="com.novedia.talentmap.model.entity.BusinessEngineer" />
+
+	<bean id="profile" class="com.novedia.talentmap.model.entity.Profile" />
+
+	<bean id="category" class="com.novedia.talentmap.model.entity.Category" />
+
+	<bean id="concept" class="com.novedia.talentmap.model.entity.Concept">
+		<property name="category" ref="category" />
+	</bean>
+
+	<bean id="tool" class="com.novedia.talentmap.model.entity.Tool">
+		<property name="concept" ref="concept" />
+	</bean>
+
+	<bean id="skill" class="com.novedia.talentmap.model.entity.Skill" />
+
+	<bean id="authentication" class="com.novedia.talentmap.model.entity.Authentication">
+		<property name="token" ref="token" />
+	</bean>
+
+	<bean id="token" class="com.novedia.talentmap.model.entity.CredentialToken" />
+
+	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization" />
+
+	<bean id="registration" class="com.novedia.talentmap.model.entity.Registration" />
+
+	<bean id="eaeState" class="com.novedia.talentmap.model.entity.EAEState" />
+
+	<bean id="eae" class="com.novedia.talentmap.model.entity.EAE" >
+		<property name="colleague" ref="colleague" />
+		<property name="manager" ref="colleague" />
+		<property name="eaeState" ref="eaeState" />
+	</bean>
+
+</beans>
