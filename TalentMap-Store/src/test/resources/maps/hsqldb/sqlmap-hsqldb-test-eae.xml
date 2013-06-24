@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="eae">
+
+	<typeAlias alias="eae" type="com.novedia.talentmap.model.entity.EAE" />
+	<typeAlias alias="eaeForSynthesis" type="com.novedia.talentmap.model.dto.EAEForSynthesisDTO" />
+	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague" />
+	<typeAlias alias="eaeGenerality" type="com.novedia.talentmap.model.dto.EAEGeneralityDTO" />
+
+	<resultMap id="eaeResult" class="eae">
+		<result property="id" column="EAE_ID" />
+		<result property="colleague.id" column="COLLEAGUE_ID"/>
+		<result property="manager.id" column="MANAGER_ID"/>
+		<result property="dateEae" column="EAE_DATE" />
+		<result property="profileLabel" column="PROFILE_LABEL" />
+		<result property="previousEaeId" column="PREVIOUS_EAE_ID" />
+		<result property="colleaguesStrengths" column="COLLEAGUES_STRENGTHS" />
+		<result property="colleaguesWeaknesses" column="COLLEAGUES_WEAKNESSES" />
+		<result property="eaeState.id" column="EAE_STATE_ID"/>
+		<result property="colleaguesSynthesis" column="COLLEAGUES_SYNTHESIS" />
+		<result property="managersSynthesis" column="MANAGERS_SYNTHESIS" />
+		<result property="other" column="OTHER" />
+	</resultMap>
+
+	<resultMap id="eaeSynthesisResult" class="eaeForSynthesis">
+		<result property="id" column="EAE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="dateEae" column="EAE_DATE" />
+		<result property="eaeStateId" column="EAE_STATE_ID" />
+		<result property="eaeStateLabel" column="EAE_STATE_LABEL" />
+	</resultMap>
+	<resultMap id="colleagueResult" class="colleague">
+		<result property="id" column="COLLEAGUE_ID" />
+		<result property="managerId" column="MANAGER_ID" />
+		<result property="profileId" column="PROFILE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="experience" column="EXPERIENCE" />
+		<result property="businessEngineer" column="B_ENGINEER_ID"
+			select="colleague.getBusinessEngineer" />
+		<result property="title" column="TITLE" />
+		<result property="missions" column="COLLEAGUE_ID"
+			select="colleague.selectMissionsByColleagueId" />
+	</resultMap>
+	<resultMap id="eaeGeneralityResult" class="eaeGenerality">
+		<result property="id" column="EAE_ID" />
+		<result property="collabLastName" column="C_LAST_NAME" />
+		<result property="collabFirstName" column="C_FIRST_NAME" />
+		<result property="profile" column="PROFILE" />
+		<result property="managerLastName" column="M_LAST_NAME" />
+		<result property="managerFirstName" column="M_FIRST_NAME" />
+		<result property="eaeDate" column="EAE_DATE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="previousEaeDate" column="PREV_EAE_DATE" />
+		<result property="eaeStateId" column="EAE_STATE_ID" />
+	</resultMap>
+
+	<select id="get" resultMap="eaeResult" parameterClass="Integer">
+		SELECT * FROM EAE 
+		WHERE EAE_ID = #id#
+	</select>
+
+
+	<insert id="add" parameterClass="eae">
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT NEXT
+			VALUE FOR SEQEAE FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+			where
+			SEQUENCE_NAME = 'SEQEAE'
+		</selectKey>
+
+		INSERT INTO EAE (
+			EAE_ID,
+			COLLEAGUE_ID,
+			MANAGER_ID,
+			EAE_DATE,
+			PROFILE_LABEL,
+			PREVIOUS_EAE_ID,
+			COLLEAGUES_STRENGTHS,
+			COLLEAGUES_WEAKNESSES,
+			EAE_STATE_ID,
+			COLLEAGUES_SYNTHESIS,
+			MANAGERS_SYNTHESIS,
+			OTHER
+		)values (
+			#id# ,
+			#colleague.id# ,
+			#manager.id# ,
+			#dateEae# ,
+			#profileLabel# ,
+			#previousEaeId# ,
+			#colleaguesStrengths# ,
+			#colleaguesWeaknesses# ,
+			#eaeState.id# ,
+			#colleaguesSynthesis# ,
+			#managersSynthesis# ,
+			#other#
+		)
+	</insert>
+
+	<update id="save" parameterClass="EAE">
+		UPDATE EAE SET 
+			COLLEAGUE_ID = #colleague.id#, 
+			MANAGER_ID = #manager.id#, 
+			EAE_DATE = #dateEae#, 
+			PROFILE_LABEL = #profileLabel#, 
+			PREVIOUS_EAE_ID = #previousEaeId#, 
+			COLLEAGUES_STRENGTHS = #colleaguesStrengths#, 
+			COLLEAGUES_WEAKNESSES = #colleaguesWeaknesses#, 
+			EAE_STATE_ID = #eaeState.id#, 
+			COLLEAGUES_SYNTHESIS = #colleaguesSynthesis#, 
+			MANAGERS_SYNTHESIS = #managersSynthesis#, 
+			OTHER = #other#
+		WHERE EAE_ID = #id#
+	</update>
+
+	<delete id="delete" parameterClass="eae">
+		DELETE FROM EAE WHERE EAE_ID = #id#
+	</delete>
+
+
+	<select id="getOngoingEAEForManager" resultMap="eaeSynthesisResult" parameterClass="Integer">
+		SELECT eae.EAE_ID  as "EAE_ID",
+		c.LAST_NAME as "LAST_NAME",
+		c.FIRST_NAME as "FIRST_NAME",
+		eae.EAE_DATE as "EAE_DATE",
+		es.EAE_STATE_ID as "EAE_STATE_ID",
+		es.EAE_STATE_LABEL as "EAE_STATE_LABEL"
+		FROM COLLEAGUE c, EAE eae, EAE_STATE es 
+		WHERE c.COLLEAGUE_ID = eae.COLLEAGUE_ID
+		AND eae.EAE_STATE_ID = es.EAE_STATE_ID 
+		AND eae.MANAGER_ID = #id#
+		AND eae.EAE_STATE_ID IN (1,2)
+	</select>
+	
+
+	<select id="getCollabWithoutOngoingEAEForManager" resultMap="colleagueResult" parameterClass="Integer">
+		SELECT * FROM COLLEAGUE c 
+		LEFT JOIN EAE e ON c.COLLEAGUE_ID = e.COLLEAGUE_ID
+		WHERE c.MANAGER_ID = #id#
+		and c.COLLEAGUE_ID not in (select EAE.colleague_ID
+		from EAE
+		where EAE.MANAGER_ID=#id# and EAE.EAE_STATE_ID in (1,2));	
+	</select>
+	
+	<select id="getHistoryEAEForCollab" resultMap="eaeSynthesisResult" parameterClass="Integer">
+		SELECT EAE.EAE_ID, 
+		null as "LAST_NAME",
+		null as "FIRST_NAME",
+		EAE.EAE_DATE, 
+		EAE.EAE_STATE_ID, 
+		EAE_STATE.EAE_STATE_LABEL
+		FROM EAE , EAE_STATE
+		where EAE.COLLEAGUE_ID = #id#
+		and EAE.EAE_STATE_ID = EAE_STATE.EAE_STATE_ID  ;
+	</select>
+
+	<select id="getEAEGenerality" resultMap="eaeGeneralityResult" parameterClass="Integer">
+		SELECT eae.EAE_ID as "EAE_ID", col.LAST_NAME as "C_LAST_NAME", col.FIRST_NAME as "C_FIRST_NAME", prof.PROFILE_TYPE as "PROFILE",
+		man.LAST_NAME as "M_LAST_NAME", man.FIRST_NAME as "M_FIRST_NAME", eae.EAE_STATE_ID as "EAE_STATE_ID",
+		eae.EAE_DATE as "EAE_DATE", col.EMPLOYMENT_DATE as "EMPLOYMENT_DATE", prevEae.EAE_DATE as "PREV_EAE_DATE"
+		FROM EAE eae
+			LEFT JOIN EAE prevEae ON eae.PREVIOUS_EAE_ID = prevEae.EAE_ID,
+		COLLEAGUE col, PROFILE prof, COLLEAGUE man
+		WHERE eae.EAE_ID = #id#
+    	AND eae.COLLEAGUE_ID = col.COLLEAGUE_ID
+		AND col.PROFILE_ID = prof.PROFILE_ID
+		AND col.MANAGER_ID = man.COLLEAGUE_ID	;
+	</select>
+
+</sqlMap>

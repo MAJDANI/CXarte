@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="manager">
+
+	<typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager" />
+
+	<!-- DESACTIVé -->
+	<!-- <resultMap id="managerResult" class="manager"> -->
+	<!-- <result property="id" column="MANAGER_ID"/> -->
+	<!-- <result property="profileId" column="PROFILE_ID"/> -->
+	<!-- <result property="lastName" column="LAST_NAME"/> -->
+	<!-- <result property="firstName" column="FIRST_NAME"/> -->
+	<!-- <result property="email" column="EMAIL"/> -->
+	<!-- <result property="phone" column="PHONE"/> -->
+	<!-- <result property="employmentDate" column="EMPLOYMENT_DATE"/> -->
+	<!-- <result property="experience" column="EXPERIENCE"/> -->
+	<!-- <result property="businessEngineer" column="BUSINESS_ENGINEER"/> -->
+	<!-- </resultMap> -->
+
+	<!-- <select id="get" resultMap="managerResult" parameterClass="Integer"> -->
+	<!-- SELECT * FROM MANAGER WHERE MANAGER_ID = #id# -->
+	<!-- </select> -->
+
+</sqlMap>

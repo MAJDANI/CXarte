@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<PROFILE PROFILE_ID="1" PROFILE_TYPE="Développeur"/>
+	<PROFILE PROFILE_ID="2" PROFILE_TYPE="Fonctionnel"/>
+	<PROFILE PROFILE_ID="3" PROFILE_TYPE="Chef de Projet"/>
+	<PROFILE PROFILE_ID="4" PROFILE_TYPE="Architecte Technique"/>
+	<PROFILE PROFILE_ID="5" PROFILE_TYPE="Architecte fonc"/>
+	<PROFILE PROFILE_ID="6" PROFILE_TYPE="Testeur"/>
+</dataset>

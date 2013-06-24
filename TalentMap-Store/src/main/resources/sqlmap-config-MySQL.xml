@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" 
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<properties resource="constants.properties" />
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="maps/MySQL/sqlmap-businessengineer-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-colleague-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-profile-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-category-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-concept-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-skill-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-tool-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-vskill-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-client-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-mission-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-authentification-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-mission_tool-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-user_notification-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-eae-MySQL.xml" />
+</sqlMapConfig>

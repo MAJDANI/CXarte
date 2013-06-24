@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+	<CLIENT CLIENT_ID="1" CLIENT_NAME="Orange" />
+	<CLIENT CLIENT_ID="2" CLIENT_NAME="Air France" />
+	<CLIENT CLIENT_ID="3" CLIENT_NAME="PSA" />
+	<CLIENT CLIENT_ID="4" CLIENT_NAME="Canal +" />
+	<CLIENT CLIENT_ID="5" CLIENT_NAME="Intent" />
+	<CLIENT CLIENT_ID="6" CLIENT_NAME="Total" />
+	<CLIENT CLIENT_ID="7" CLIENT_NAME="Mattel" />
+	<CLIENT CLIENT_ID="8" CLIENT_NAME="NavBoard" />
+	<CLIENT CLIENT_ID="9" CLIENT_NAME="Citroen" />
+	<CLIENT CLIENT_ID="10" CLIENT_NAME="France Télecom" />
+	<CLIENT CLIENT_ID="11" CLIENT_NAME="Hermès" />
+
+</dataset>

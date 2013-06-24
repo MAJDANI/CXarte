@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="colleague">
+
+	<typeAlias alias="colleague"
+		type="com.novedia.talentmap.model.entity.Colleague" />
+	<typeAlias alias="manager" type="com.novedia.talentmap.model.entity.Manager" />
+	<typeAlias alias="businessEngineer"
+		type="com.novedia.talentmap.model.entity.BusinessEngineer" />
+
+	<resultMap id="colleagueResult" class="colleague">
+		<result property="id" column="COLLEAGUE_ID" />
+		<result property="managerId" column="MANAGER_ID" />
+		<result property="profileId" column="PROFILE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="experience" column="EXPERIENCE" />
+		<result property="businessEngineer" column="B_ENGINEER_ID"
+			select="colleague.getBusinessEngineer" />
+		<result property="title" column="TITLE" />
+		<result property="missions" column="COLLEAGUE_ID"
+			select="colleague.selectMissionsByColleagueId" />
+	</resultMap>
+
+	<resultMap id="managerResult" class="com.novedia.talentmap.model.entity.Manager">
+		<result property="id" column="COLLEAGUE_ID" />
+		<result property="managerId" column="MANAGER_ID" />
+		<result property="profileId" column="PROFILE_ID" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="employmentDate" column="EMPLOYMENT_DATE" />
+		<result property="experience" column="EXPERIENCE" />
+		<result property="businessEngineer" column="B_ENGINEER_ID"
+			select="colleague.getBusinessEngineer" />
+		<result property="missions" column="COLLEAGUE_ID"
+			select="colleague.selectMissionsByColleagueId" />
+		<result property="colleagues" column="MANAGER_ID"
+			select="colleague.selectColleagueByManagerId" />
+	</resultMap>
+
+	<resultMap id="select-mission-result" class="com.novedia.talentmap.model.entity.Mission">
+		<result property="id" column="MISSION_ID" />
+		<result property="title" column="TITLE" />
+		<result property="place" column="PLACE" />
+		<result property="notes" column="NOTES" jdbcType="String" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="client.id" column="CLIENT_ID" />
+		<result property="client.name" column="CLIENT_NAME" />
+	</resultMap>
+
+	<resultMap id="businessEngineerResult" class="businessEngineer">
+		<result property="id" column="B_ENGINEER_ID" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="businessUnit" column="BUSINESS_UNIT" />
+	</resultMap>
+
+	<select id="getBusinessEngineer" parameterClass="int"
+		resultMap="businessEngineerResult">
+		select * from BUSINESS_ENGINEER where B_ENGINEER_ID =
+		#value#
+	</select>
+
+	<statement id="selectColleagueByManagerId" parameterClass="int"
+		resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE colleague
+		WHERE colleague.MANAGER_ID
+		= #id#
+	</statement>
+
+	<statement id="selectMissionsByColleagueId" parameterClass="int"
+		resultMap="select-mission-result">
+		SELECT * FROM MISSION mission, CLIENT client
+		WHERE
+		mission.CLIENT_ID = client.CLIENT_ID AND mission.MISSION_ID = #id#
+	</statement>
+
+
+	<select id="get" parameterClass="Integer" resultMap="colleagueResult">
+		SELECT *
+		FROM COLLEAGUE colleague
+		WHERE colleague.COLLEAGUE_ID = #id#
+	</select>
+
+	<select id="getAll" resultMap="colleagueResult">
+		SELECT c.* FROM COLLEAGUE c JOIN
+		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		WHERE
+		UPPER(c.LAST_NAME) LIKE UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+	</select>
+
+	<update id="save" parameterClass="Colleague">
+		UPDATE COLLEAGUE SET MANAGER_ID
+		= #managerId#, LAST_NAME = #lastName#,
+		FIRST_NAME = #firstName#, EMAIL
+		= #email#, PROFILE_ID = #profileId#,
+		PHONE =
+		#phone#, EXPERIENCE =
+		#experience#, EMPLOYMENT_DATE =
+		#employmentDate#,
+		B_ENGINEER_ID =
+		#businessEngineer.id# WHERE COLLEAGUE_ID = #id#
+	</update>
+
+	<select id="getManager" parameterClass="Integer" resultMap="managerResult">
+		SELECT * FROM COLLEAGUE colleague
+		WHERE colleague.COLLEAGUE_ID = #id#
+	</select>
+
+	<select id="getAllManagers" resultMap="managerResult">
+		SELECT * FROM COLLEAGUE
+		WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
+	</select>
+
+	<select id="getAllColleaguesByLastName" parameterClass="string"
+		resultMap="colleagueResult">
+		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
+		(c.COLLEAGUE_ID = auth.COLLEAGUE_ID)
+		WHERE UPPER(c.LAST_NAME) LIKE
+		UPPER('$lastName$%') AND AUTH.ROLE_ID != 5
+	</select>
+
+	<select id="getAllColleaguesByClient" parameterClass="com.novedia.talentmap.model.entity.Client"
+		resultMap="colleagueResult">
+		SELECT DISTINCT c.* FROM MISSION m, COLLEAGUE c
+		WHERE
+		m.COLLEAGUE_ID = c.COLLEAGUE_ID
+		AND m.CLIENT_ID = #id#
+	</select>
+
+	<delete id="delete" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		DELETE FROM COLLEAGUE WHERE
+		COLLEAGUE_ID = #id#
+	</delete>
+
+	<update id="eraseManager" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		UPDATE COLLEAGUE SET
+		MANAGER_ID = '' WHERE MANAGER_ID = #id#
+	</update>
+
+	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult"
+		parameterClass="java.util.Hashtable">
+		SELECT c.* FROM
+		(SELECT s.COLLEAGUE_ID, COUNT(*) as nbTool FROM SKILL s
+		WHERE s.TOOL_ID IN
+		<iterate property="listId" open="(" close=")" conjunction=",">
+			#listId[]#
+		</iterate>
+		GROUP BY s.COLLEAGUE_ID) a, COLLEAGUE c
+		WHERE a.COLLEAGUE_ID =
+		c.COLLEAGUE_ID
+		AND a.nbTool = #listSize[0]#
+	</select>
+
+	<select id="getAllCollaboratorsByManagerId" parameterClass="Integer"
+		resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE WHERE MANAGER_ID = #id#
+	</select>
+
+	<select id="getAllConsultantManager" resultMap="colleagueResult">
+		SELECT * FROM
+		COLLEAGUE WHERE IS_MANAGER = 1 ORDER BY LAST_NAME
+	</select>
+
+	<select id="countMail" parameterClass="String" resultClass="Integer">
+		SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#
+	</select>
+
+	<select id="countMailForColleagueId" parameterClass="com.novedia.talentmap.model.entity.Colleague"
+		resultClass="Integer">
+		SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#
+		AND
+		COLLEAGUE_ID != #id#
+	</select>
+
+	<insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
+		<selectKey resultClass="Integer" keyProperty="colleagueId">
+			SELECT NEXT
+			VALUE FOR SEQCOLLEAGUE FROM INFORMATION_SCHEMA.SYSTEM_SEQUENCES
+			where
+			SEQUENCE_NAME = 'SEQCOLLEAGUE'
+		</selectKey>
+
+		INSERT INTO COLLEAGUE (
+		COLLEAGUE_ID,
+		MANAGER_ID,
+		PROFILE_ID,
+		LAST_NAME,
+		FIRST_NAME,
+		EMAIL,
+		PHONE,
+		EMPLOYMENT_DATE,
+		EXPERIENCE,
+		B_ENGINEER_ID,
+		TITLE
+		)values (#colleagueId#,
+		#managerId#, #profileId#, UPPER(#lastName#),
+		#firstName#, #email#, #phone#,
+		#employmentDate#, #experience#,
+		#businessEngineer.id#,#title#
+		)
+	</insert>
+
+	<statement id="getAllColleagueByColleagueIdList"
+		parameterClass="com.novedia.talentmap.store.impl.SkillParameter"
+		resultMap="colleagueResult">
+		SELECT * FROM COLLEAGUE
+		WHERE COLLEAGUE_ID IN
+		<iterate property="listCollaborators" open="(" close=")"
+			conjunction=",">
+			#listCollaborators[]#
+		</iterate>
+	</statement>
+
+</sqlMap>

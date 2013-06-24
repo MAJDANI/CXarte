@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<AUTHENTICATION LOGIN="o.chauvie" PASSWORD="o.chauvie"
+		COLLEAGUE_ID="1" ROLE_ID="4" />
+	<AUTHENTICATION LOGIN="m.mathieu" PASSWORD="m.mathieu"
+		COLLEAGUE_ID="2" ROLE_ID="4" />
+</dataset>

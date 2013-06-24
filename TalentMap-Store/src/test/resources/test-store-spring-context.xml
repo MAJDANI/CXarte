@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- Import all configuration to connect with database -->
+	<import resource="datasource-test.xml" />
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:sqlmap-hsqldb-test-config.xml" />
+		<!-- <property name="configLocation" value="classpath:sqlmap-test-config.xml" 
+			/> -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Store beans declaration -->
+	<bean id="colleagueDao" class="com.novedia.talentmap.store.impl.ColleagueDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="profileDao" class="com.novedia.talentmap.store.impl.ProfileDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="categoryDao" class="com.novedia.talentmap.store.impl.CategoryDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="conceptDao" class="com.novedia.talentmap.store.impl.ConceptDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="toolDao" class="com.novedia.talentmap.store.impl.ToolDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="skillDao" class="com.novedia.talentmap.store.impl.SkillDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="vSkillDao" class="com.novedia.talentmap.store.impl.VSkillDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="vSkillCollabDao" class="com.novedia.talentmap.store.impl.VSkillCollabDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="missionDao" class="com.novedia.talentmap.store.impl.MissionDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="managerDao" class="com.novedia.talentmap.store.impl.ManagerDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="taskDao" class="com.novedia.talentmap.store.impl.TaskDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="authenticationDao" class="com.novedia.talentmap.store.impl.AuthenticationDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+	<bean id="authorization" class="com.novedia.talentmap.model.entity.Authorization" />
+
+	<bean id="eaeDao" class="com.novedia.talentmap.store.impl.EAEDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
+
+</beans>

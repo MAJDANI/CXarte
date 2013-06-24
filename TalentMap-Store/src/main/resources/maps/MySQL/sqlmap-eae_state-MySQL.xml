@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="eaeState">
+
+	<typeAlias alias="eaeState"
+		type="com.novedia.talentmap.model.entity.EAEState" />
+
+	<resultMap id="eaeStateResult" class="eaeState">
+		<result property="id" column="EAE_STATE_ID" />
+		<result property="label" column="EAE_STATE_LABEL" />
+	</resultMap>
+
+	<select id="getEaeState" resultMap="eaeStateResult"
+		parameterClass="Integer">
+		SELECT * FROM EAE_STATE WHERE EAE_STATE_ID = #id#
+	</select>
+
+	<select id="getAll" resultMap="eaeStateResult">
+		SELECT DISTINCT * FROM EAE_STATE
+	</select>
+
+	<select id="checkObject" resultMap="eaeStateResult"
+		parameterClass="eaeState">
+		SELECT * FROM EAE_STATE WHERE upper(EAE_STATE_LABEL) =
+		upper(#label#)
+	</select>
+
+
+</sqlMap>

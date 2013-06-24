@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL MAP Config 2.0//EN" 
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<properties resource="constants.properties" />
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="maps/ORACLE/sqlmap-businessengineer-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-colleague-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-profile-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-category-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-concept-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-skill-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-tool-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-vskill-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-client-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-mission-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-authentification-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-mission_tool-ORACLE.xml" />
+	<sqlMap resource="maps/ORACLE/sqlmap-user_notification-ORACLE.xml" />
+</sqlMapConfig>

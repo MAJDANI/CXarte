@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="topic">
+
+	<typeAlias alias="topic"
+		type="com.novedia.talentmap.model.entity.Topic" />
+
+	<resultMap id="topicResult" class="topic">
+		<result property="id" column="TOPIC_ID" />
+		<result property="label" column="TOPIC_LABEL" />
+	</resultMap>
+
+	<select id="getTopic" resultMap="topicResult"
+		parameterClass="Integer">
+		SELECT * FROM TOPIC WHERE TOPIC_ID = #id#
+	</select>
+
+	<select id="getAll" resultMap="topicResult">
+		SELECT DISTINCT * FROM TOPIC
+	</select>
+
+	<select id="checkObject" resultMap="topicResult"
+		parameterClass="eaeState">
+		SELECT * FROM TOPIC WHERE upper(TOPIC_LABEL) =
+		upper(#label#)
+	</select>
+
+
+</sqlMap>

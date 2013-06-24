@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user_notification">
+
+	<typeAlias alias="user_notification"
+		type="com.novedia.talentmap.model.entity.UserNotification" />
+
+	<typeAlias alias="frequency"
+		type="com.novedia.talentmap.model.entity.Frequency" />
+
+	<resultMap id="userNotificationResult" class="user_notification">
+		<result property="colleagueId" column="COLLEAGUE_ID" />
+		<result property="notes" column="NOTE" />
+		<result property="date" column="DATE_NOTIFICATION" />
+	</resultMap>
+
+	<resultMap id="frequencyResult" class="frequency">
+		<result property="id" column="FREQUENCY_ID" />
+		<result property="name" column="FREQUENCY_NAME" />
+	</resultMap>
+
+	<insert id="saveNotification" parameterClass="com.novedia.talentmap.model.entity.UserNotification">
+
+		INSERT INTO
+		NOTIFICATION (
+		COLLEAGUE_ID,
+		NOTE,
+		DATE_NOTIFICATION
+		)values
+		(#colleagueId#,#notes#,#date#)
+
+	</insert>
+
+	<select id="getAllNotificationByManagerId" resultMap="userNotificationResult"
+		parameterClass="Integer">
+		SELECT * FROM NOTIFICATION notification
+		join COLLEAGUE
+		colleague on (notification.COLLEAGUE_ID =
+		colleague.COLLEAGUE_ID)
+		WHERE
+		colleague.MANAGER_ID = #value#
+		ORDER BY DATE_NOTIFICATION desc
+	</select>
+
+	<select id="getAllFrequencyChoices" resultMap="frequencyResult">
+		SELECT * FROM
+		FREQUENCY
+
+	</select>
+
+	<select id="getCmFrequencyOption" resultMap="frequencyResult"
+		parameterClass="Integer">
+		SELECT * FROM FREQUENCY f
+		join NOTIFICATION_OPTION n on
+		(f.FREQUENCY_ID = n.FREQUENCY_ID)
+		WHERE n.COLLEAGUE_ID = #value#
+	</select>
+
+	<update id="saveFrequencyOption" parameterClass="hashmap">
+		UPDATE
+		NOTIFICATION_OPTION
+		SET FREQUENCY_ID = #frequencyId#
+		WHERE COLLEAGUE_ID
+		= #managerId#
+	</update>
+
+	<insert id="addFrequencyOption" parameterClass="hashmap">
+		INSERT INTO
+		NOTIFICATION_OPTION (
+		FREQUENCY_ID,COLLEAGUE_ID
+		)values(#frequencyId#,#managerId#)
+	</insert>
+
+</sqlMap>
