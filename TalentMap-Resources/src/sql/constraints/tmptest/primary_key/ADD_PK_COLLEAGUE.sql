@@ -1,0 +1,6 @@
+---------------------------
+-- PRIMARY KEYS CREATION --
+---------------------------
+ALTER TABLE COLLEAGUE ADD CONSTRAINT COLLEAGUEPK PRIMARY KEY (COLLEAGUE_ID) USING INDEX TABLESPACE tmptestidx;
+
+COMMIT;

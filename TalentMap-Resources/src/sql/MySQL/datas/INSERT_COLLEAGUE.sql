@@ -1,0 +1,55 @@
+---------------------------
+--    DATA INSERTION     --
+---------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('44','3','1','ARAMINI','vincent','v.aramini@gmail.com','145354856',str_to_date('01/01/13','%d/%m/%Y'),'2','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('37','4','6','TESTRH','testRH','test@gmail.com',null,str_to_date('06/02/13','%d/%m/%Y'),'5',null);
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('38','5','6','TESTIA','testia','test@gmail.net',null,str_to_date('08/01/13','%d/%m/%Y'),'2',null);
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('54','6','1','TESTIA2','thierry','t.testia2@gmail.com',null,str_to_date('11/03/13','%d/%m/%Y'),'2',null);
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('1','1','5','COLLET','Julien','j.collet@novedia-solution.com','102030405',str_to_date('23/04/10','%d/%m/%Y'),'1','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('2','5','3','MOUMBE','Elisée','e.moumbe@novedia-solution.com','635213689',str_to_date('24/04/10','%d/%m/%Y'),'3','6');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('3','3','4','GUILLEMAIN','Vanessa','v.guillemain@novedia-solution.com','102030425',str_to_date('23/04/10','%d/%m/%Y'),'3','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('4','3','5','CHAUVIE','Olivier','o.chauvie@novedia-solution.com','102030435',str_to_date('23/04/10','%d/%m/%Y'),'8','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('5','4','5','BRULATOUT','Eric','e.brulatout@novedia-solution.com','102030445',str_to_date('23/04/10','%d/%m/%Y'),'7','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('6','2','1','CAUMARTIN','Régine','r.caumartin@novedia-solution.com','102030455',str_to_date('23/04/10','%d/%m/%Y'),'6','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('50','4','1','DUPON','jean','j.dupon@gmail.com',null,str_to_date('04/03/13','%d/%m/%Y'),'2',null);
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('8','2','6','THAI','Shien-Haur','s.thai@novedia-solution.com','102030475',str_to_date('23/04/10','%d/%m/%Y'),'4','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('9','4','5','EYCHENNE','Patrick','p.eychenne@novedia-solution.com','102030485',str_to_date('23/04/10','%d/%m/%Y'),'6','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('10','5','6','ROBIN','Murielle','m.robin@novedia-solution.com','102030495',str_to_date('23/04/10','%d/%m/%Y'),'5','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('11','5','3','RAVINE','Sandrine','s.ravine@novedia-solution.com','102030505',str_to_date('23/04/10','%d/%m/%Y'),'7','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('12','6','6','LOET','Sylvie','s.loet@novedia-solution.com','102030515',str_to_date('23/04/10','%d/%m/%Y'),'9','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('13','1','1','BERTON','Alexandre ','a.berton@novedia-solutions.com','102030525',str_to_date('23/04/10','%d/%m/%Y'),'1','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('14','1','4','BOUDICH','Karim','k.boudich@novedia-solutions.com','102030535',str_to_date('23/04/10','%d/%m/%Y'),'2','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('15','3','2','CHEVALIER','Isabelle','i.chevalier@novedia-solutions.com','102030545',str_to_date('23/04/10','%d/%m/%Y'),'3','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('16','5','4','GALOT','Anne-lise','al.galot@novedia-solutions.com','102030555',str_to_date('23/04/10','%d/%m/%Y'),'8','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('17','4','2','FAUQUEMBERGUE','Eric','e.fauquembergue@novedia-solutions.com','102030565',str_to_date('23/04/10','%d/%m/%Y'),'7','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('18','1','6','GERMOND','Sébastien','s.germond@novedia-solutions.com','102030575',str_to_date('23/04/10','%d/%m/%Y'),'6','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('19',null,'6','GRELIER','Vincent','v.grelier@novedia-solutions.com','102030585',str_to_date('23/04/10','%d/%m/%Y'),'2','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('20','3','1','LE GUENNEC','Julien','j.leguennec@novedia-solutions.com','102030595',str_to_date('23/04/10','%d/%m/%Y'),'4','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('21','4','3','ANDRIET','Louis','l.andriet@novedia-solutions.com','102030605',str_to_date('23/04/10','%d/%m/%Y'),'6','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('22','3','5','AVRIL','Thierry','t.avril@novedia-solutions.com','102030615',str_to_date('23/04/10','%d/%m/%Y'),'5','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('23','1','1','BONNEAU','Johan','j.bonneau@novedia-solutions.com','102030625',str_to_date('23/04/10','%d/%m/%Y'),'7','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('24',null,'3','BALFIN','Guillaume','g.balfin@novedia-agency.com','102030635',str_to_date('23/04/10','%d/%m/%Y'),'9','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('25','3','2','BOUADJIE','Paule','p.bouadjie@novedia-solutions.com','102030645',str_to_date('23/04/10','%d/%m/%Y'),'1','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('26','4','6','BELMQADEM','Houda','h.belmqadem@novedia-decision.com','102030655',str_to_date('23/04/10','%d/%m/%Y'),'2','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('27',null,'5','HENRY','Mickaël','m.henry@novedia-solutions.com','102030665',str_to_date('23/04/10','%d/%m/%Y'),'3','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('28','3','4','DEROUICH','Amina','a.derouich@novedia-decision.com','102030675',str_to_date('23/04/10','%d/%m/%Y'),'8','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('29','5','1','DREUX','Hélène','h.dreux@novedia-solutions.com','102030685',str_to_date('23/04/10','%d/%m/%Y'),'7','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('30','6','2','ALLIX','Erwan','e.allix@novedia-solutions.com','102030695',str_to_date('23/04/10','%d/%m/%Y'),'6','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('31','2','1','HUBERT','Jean-lou','j.hubert@novedia-solutions.com','102030705',str_to_date('23/04/10','%d/%m/%Y'),'2','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('32','2','6','PELLOT','Stéphane','s.pellot@novedia-solutions.com','102030715',str_to_date('23/04/10','%d/%m/%Y'),'4','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('33','5','4','MERLET','Sylvain','s.merlet@novedia-solutions.com','102030725',str_to_date('23/04/10','%d/%m/%Y'),'6','5');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('34','6','1','MAESTRACCI','Mirana','m.maestracci@novedia-solutions.com','102030735',str_to_date('23/04/10','%d/%m/%Y'),'5','3');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('35','3','1','DIBI','Véronique','v.dibi@novediagroup.com','102030745',str_to_date('23/04/10','%d/%m/%Y'),'3','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('36','5','3','MARIE-SAINTE','Jean-Max','j.marie-sainte@novediagroup.com','102030755',str_to_date('23/04/10','%d/%m/%Y'),'3','4');
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('51','5','1','GUILLEMAIN','Vanessa','v.guillemain@gmail.com',null,str_to_date('18/03/13','%d/%m/%Y'),'2',null);
+Insert into COLLEAGUE (COLLEAGUE_ID,MANAGER_ID,PROFILE_ID,LAST_NAME,FIRST_NAME,EMAIL,PHONE,EMPLOYMENT_DATE,EXPERIENCE,B_ENGINEER_ID) values ('53','6','3','TESTIA','toto','t.testia@gmail.com',null,str_to_date('12/03/13','%d/%m/%Y'),'2',null);
+
+
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
