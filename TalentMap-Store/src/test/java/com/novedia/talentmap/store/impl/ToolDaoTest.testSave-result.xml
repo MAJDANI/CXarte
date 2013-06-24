@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-	<TOOL TOOL_ID="1" CONCEPT_ID="1" TOOL_NAME="MYBATIS" />
-	<TOOL TOOL_ID="2" CONCEPT_ID="1" TOOL_NAME="JDO" />
-	<TOOL TOOL_ID="3" CONCEPT_ID="1" TOOL_NAME="SPRING JDBC" />
-</dataset>

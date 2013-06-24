@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-
-	<EAE EAE_ID="1" COLLEAGUE_ID="63" MANAGER_ID="62" EAE_DATE="2013-06-25"
-		EAE_STATE_ID="1"  />
-	<EAE EAE_ID="2" COLLEAGUE_ID="64" MANAGER_ID="62" EAE_DATE="2013-06-24"
-		EAE_STATE_ID="2"  />
-		
-</dataset>

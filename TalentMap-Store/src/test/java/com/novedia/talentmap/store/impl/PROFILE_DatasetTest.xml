@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-	<EAE_STATE EAE_STATE_ID="1" EAE_STATE_LABEL="OPEN"/>
-	<EAE_STATE EAE_STATE_ID="2" EAE_STATE_LABEL="VALIDATED"/>
-	<EAE_STATE EAE_STATE_ID="3" EAE_STATE_LABEL="CLOSED"/>
-</dataset>
