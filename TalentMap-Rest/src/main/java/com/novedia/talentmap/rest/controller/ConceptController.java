@@ -37,8 +37,9 @@ public class ConceptController extends TalentMapRestHandlerException implements 
 	IAdminService adminService;
 	
 	/**
+	 * Get concepts of a category
 	 * @param categoryId
-	 * @return concept
+	 * @return a list of concepts
 	 */
 	@RequestMapping(value = "/concepts/{categoryId}/" , method=RequestMethod.GET)
 	@ResponseBody
@@ -49,9 +50,10 @@ public class ConceptController extends TalentMapRestHandlerException implements 
 	}
 	
 	/**
+	 * Add a concept to a category
 	 * @param categoryId
 	 * @param concept_name
-	 * @return category
+	 * @return concept
 	 */
 	@RequestMapping(value = "/concept/{categoryId}/{concept_name}/", method = RequestMethod.POST)
 	@ResponseBody
@@ -64,6 +66,7 @@ public class ConceptController extends TalentMapRestHandlerException implements 
 	}
 	
 	/**
+	 * Update a concept of a category
 	 * @param categoryId
 	 * @param conceptId
 	 * @param concept_name
@@ -79,7 +82,9 @@ public class ConceptController extends TalentMapRestHandlerException implements 
 	}
 	
 	/**
+	 * Delete a concept
 	 * @param conceptId
+	 * @return response
 	 */
 	@RequestMapping(value = "/concept/{conceptId}/", method = RequestMethod.DELETE)
 	@ResponseBody

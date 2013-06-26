@@ -36,8 +36,8 @@ public class ToolController extends TalentMapRestHandlerException implements IBa
 	IAdminService adminService;
 	
 	/**
-	 * 
-	 * @return tools
+	 * Get all tools
+	 * @return a list of tools
 	 */
 	@RequestMapping(value = "/tools/")
 	@ResponseBody
@@ -47,9 +47,9 @@ public class ToolController extends TalentMapRestHandlerException implements IBa
 	}
 	
 	/**
-	 * 
+	 * Get tools of a concept
 	 * @param conceptId
-	 * @return tools
+	 * @return a list of tools
 	 */
 	@RequestMapping(value = "/tools/{conceptId}/", method=RequestMethod.GET)
 	@ResponseBody
@@ -59,6 +59,7 @@ public class ToolController extends TalentMapRestHandlerException implements IBa
 	}
 	
 	/**
+	 * Add a tool
 	 * @param conceptId
 	 * @param tool_name
 	 * @return tool
@@ -75,6 +76,7 @@ public class ToolController extends TalentMapRestHandlerException implements IBa
 	
 	
 	/**
+	 * Update a tool
 	 * @param conceptId
 	 * @param toolId
 	 * @param tool_name
@@ -90,7 +92,9 @@ public class ToolController extends TalentMapRestHandlerException implements IBa
 	}
 	
 	/**
+	 * Delete a tool
 	 * @param toolId
+	 * @return response
 	 */
 	@RequestMapping(value = "/tool/{toolId}/", method = RequestMethod.DELETE)
 	@ResponseBody

@@ -38,6 +38,10 @@ public class SearchController extends TalentMapRestHandlerException implements I
 	@Autowired
 	ISkillService skillService;
 	
+	/**
+	 * Get  all colleagues
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleagues(){
@@ -46,6 +50,11 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get  all colleagues of a CM
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByCm(@PathVariable final Integer managerId){
@@ -54,6 +63,11 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get  all colleagues who worked for this client
+	 * @param clientId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "byclient/{clientId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByClient(@PathVariable final Integer clientId){
@@ -63,6 +77,12 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get  all colleagues of a CM who worked for this client
+	 * @param clientId
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "byclient/{clientId}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByClient(@PathVariable final Integer clientId,@PathVariable final Integer managerId){
@@ -72,9 +92,9 @@ public class SearchController extends TalentMapRestHandlerException implements I
 	}
 	
 	/**
-	 * Get colleague by name
+	 * Get all colleagues by name
 	 * @param name
-	 * @return
+	 * @return a list of colleagues
 	 */
 	@RequestMapping(value = "byname/{name}/", method =RequestMethod.GET)
 	@ResponseBody
@@ -86,7 +106,12 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
-	
+	/**
+	 * Get all colleagues of a CM by name
+	 * @param name
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "byname/{name}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByName(@PathVariable final String name,@PathVariable final Integer managerId){
@@ -99,6 +124,11 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 
+	/**
+	 * Get all colleagues by tool
+	 * @param toolId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "bytool/{toolId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByTool(@PathVariable final Integer toolId){
@@ -110,6 +140,12 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get all colleagues of a CM by tool
+	 * @param toolId
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "bytool/{toolId}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByTool(@PathVariable final Integer toolId,@PathVariable final Integer managerId){
@@ -121,6 +157,11 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get all colleagues by concept
+	 * @param conceptId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "byconcept/{conceptId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByConcept(@PathVariable final Integer conceptId){
@@ -132,6 +173,12 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get all colleagues of a CM by concept
+	 * @param conceptId
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "byconcept/{conceptId}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByConcept(@PathVariable final Integer conceptId,@PathVariable final Integer managerId){
@@ -143,6 +190,11 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get all colleagues by category
+	 * @param categoryId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "bycategory/{categoryId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllColleaguesByCategory(@PathVariable final Integer categoryId){
@@ -154,6 +206,12 @@ public class SearchController extends TalentMapRestHandlerException implements I
 		return colleagues;
 	}
 	
+	/**
+	 * Get all colleagues of a CM by category
+	 * @param categoryId
+	 * @param managerId
+	 * @return a list of colleagues
+	 */
 	@RequestMapping(value = "bycategory/{categoryId}/{managerId}/", method =RequestMethod.GET)
 	@ResponseBody
 	public List<Colleague> getAllCmColleaguesByCategory(@PathVariable final Integer categoryId,@PathVariable final Integer managerId){

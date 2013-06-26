@@ -36,6 +36,7 @@ public class CategoryController extends TalentMapRestHandlerException implements
 	IAdminService adminService;
 	
 	/**
+	 * Get all categories
 	 * @return categories
 	 */
 	@RequestMapping(value = "/categories/", method=RequestMethod.GET)
@@ -46,6 +47,7 @@ public class CategoryController extends TalentMapRestHandlerException implements
 	}
 	
 	/**
+	 * Add a category
 	 * @param category_name
 	 * @return category
 	 */
@@ -59,6 +61,7 @@ public class CategoryController extends TalentMapRestHandlerException implements
 	}
 	
 	/**
+	 * Update a category
 	 * @param categoryId
 	 * @param category_name
 	 * @return category
@@ -72,7 +75,9 @@ public class CategoryController extends TalentMapRestHandlerException implements
 	}
 	
 	/**
+	 * Delete a category
 	 * @param categoryId
+	 * @return response
 	 */
 	@RequestMapping(value = "/category/{categoryId}/", method = RequestMethod.DELETE)
 	@ResponseBody

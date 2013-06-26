@@ -34,10 +34,10 @@ public class AuthenticationController extends TalentMapRestHandlerException {
 	
 	
 	/**
-	 * 
+	 * Check a user authentication
 	 * @param login
 	 * @param password
-	 * @return
+	 * @return authentication
 	 */
 	@RequestMapping(value = "/{login}/{password}/" , method = RequestMethod.POST )
 	@ResponseBody
@@ -59,11 +59,11 @@ public class AuthenticationController extends TalentMapRestHandlerException {
 	
 	
 	/**
-	 * 
+	 * change the user's password
 	 * @param login
 	 * @param old_password
 	 * @param new_password
-	 * @return
+	 * @return authentication
 	 */
 	@RequestMapping(value = "/{login}/{old_password}/{new_password}/" , method = RequestMethod.PUT )
 	@ResponseBody
