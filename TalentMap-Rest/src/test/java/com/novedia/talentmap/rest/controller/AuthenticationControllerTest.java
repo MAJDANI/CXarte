@@ -52,6 +52,9 @@ public class AuthenticationControllerTest {
 		
 	}
 	
+	/**
+     * Test check a user's authentification
+     */
 	@Test
 	public void testCheckAuthenticationUserReturnAuthentication() throws Exception{
 		
@@ -61,6 +64,9 @@ public class AuthenticationControllerTest {
 		
 	}
 	
+	/**
+     * Test update user's password
+     */
 	@Test
 	public void testChangePassword() throws Exception {
 		

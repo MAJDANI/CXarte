@@ -39,6 +39,9 @@ public class ClientControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get all clients
+     */
 	@Test
 	public void testGetAll() throws Exception {
 		
