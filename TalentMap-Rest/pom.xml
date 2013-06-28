@@ -18,7 +18,7 @@
   </properties>
   
    <build>
-	   <finalName>talentmapRest</finalName>
+	   <finalName>TalentMapRest</finalName>
 	  	<plugins>
 	  		<plugin>
 	      		<groupId>org.mortbay.jetty</groupId>
