@@ -66,6 +66,9 @@ public class ColleagueControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get Business Engineers
+     */
 	@Test
 	public void getBusinessEngineersTest() throws Exception{
 		//GIVEN
@@ -83,6 +86,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test get managers
+     */
 	@Test
 	public void getManagersTest() throws Exception{
 		//GIVEN
@@ -100,6 +106,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test get profiles
+     */
 	@Test
 	public void getProfilesTest() throws Exception{
 		//GIVEN
@@ -119,6 +128,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test get colleague
+     */
 	@Test
 	public void getColleagueTest() throws Exception{
 		//GIVEN
@@ -135,6 +147,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test delete a colleague
+     */
 	@Test
 	public void deleteColleagueTest() throws Exception{
 		//GIVEN
@@ -154,6 +169,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test add a colleague
+     */
 	@Test
 	public void testAddColleague() throws Exception {
 		
@@ -194,6 +212,9 @@ public class ColleagueControllerTest {
 		
 	}
 	
+	/**
+     * Test update a colleague
+     */
 	@Test
 	public void testUpdateColleague() throws Exception {
 		

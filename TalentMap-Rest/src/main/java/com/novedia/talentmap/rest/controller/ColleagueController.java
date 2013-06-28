@@ -62,8 +62,8 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	private AuthenticationService authenticationService;
 	
 	/**
-	 * 
-	 * @return businessEngineers
+	 * Get all business engineers
+	 * @return the list of businessEngineers
 	 */
 	@RequestMapping(value = "/businessengineers/" , method=RequestMethod.GET)
 	@ResponseBody
@@ -73,8 +73,8 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	}
 	
 	/**
-	 * 
-	 * @return managers
+	 * Get all managers
+	 * @return  the list of managers
 	 */
 	@RequestMapping(value = "/managers/" , method=RequestMethod.GET)
 	@ResponseBody
@@ -84,8 +84,8 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	}
 	
 	/**
-	 * 
-	 * @return profiles
+	 * Get all profiles
+	 * @return a list of profiles
 	 */
 	@RequestMapping(value = "/profiles/" , method=RequestMethod.GET )
 	@ResponseBody
@@ -95,6 +95,7 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	}
 	
 	/**
+	 * Get a colleague
 	 * @param colleagueId
 	 * @return colleague
 	 */
@@ -109,6 +110,7 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	}
 	
 	/**
+	 * Delete a colleague
 	 * @param colleagueId
 	 * @return colleague
 	 */
@@ -207,7 +209,7 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	
 	
 	/**
-	 * Update information about a colleague
+	 * Update informations about a colleague
 	 * @param colleagueId the colleague Id
 	 * @param name name of colleague
 	 * @param firstName first name of colleague

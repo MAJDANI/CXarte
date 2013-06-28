@@ -50,7 +50,9 @@ public class SearchControllerTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 
-	
+	/**
+     * Test get all colleagues who worked with this client
+     */
 	@Test
 	public void testGetAllColleaguesByClient() throws Exception {
 		
@@ -70,6 +72,9 @@ public class SearchControllerTest {
 		
 	}
 	
+	/**
+     * Test get all colleagues of a CM who worked with this client
+     */
 	@Test
 	public void testGetAllCmColleaguesByClient() throws Exception {
 		
@@ -90,6 +95,9 @@ public class SearchControllerTest {
 		
 	}
 	
+	/**
+     * Test get all colleagues by name
+     */
 	@Test
 	public void testGetAllColleaguesByName() throws Exception {
 		
@@ -109,6 +117,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get all colleagues of a CM by name
+     */
 	@Test
 	public void testGetAllCmColleaguesByName() throws Exception {
 		
@@ -128,6 +139,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get all colleagues by tool
+     */
 	@Test
 	public void testGetAllColleaguesByTool() throws Exception {
 		
@@ -149,6 +163,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get all colleagues of a CM by tool
+     */
 	@Test
 	public void testGetAllCmColleaguesByTool() throws Exception {
 		//GIVEN
@@ -171,6 +188,9 @@ public class SearchControllerTest {
 		
 	}
 	
+	/**
+     * Test get all colleagues by concept
+     */
 	@Test
 	public void testGetAllColleaguesByConcept() throws Exception {
 		//GIVEN
@@ -191,7 +211,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-
+	/**
+     * Test get all colleagues of a CM by concept
+     */
 	@Test
 	public void testGetAllCmColleaguesByConcept() throws Exception {
 		//GIVEN
@@ -213,6 +235,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get all colleagues by category
+     */
 	@Test
 	public void testGetAllColleaguesByCategory() throws Exception {
 		//GIVEN
@@ -233,6 +258,9 @@ public class SearchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get all colleagues of a CM by category
+     */
 	@Test
 	public void testGetAllCmColleaguesByCategory() throws Exception {
 		//GIVEN

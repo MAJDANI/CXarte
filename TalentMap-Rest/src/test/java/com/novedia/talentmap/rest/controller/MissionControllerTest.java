@@ -40,6 +40,9 @@ public class MissionControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get all missions for a colleague
+     */
 	@Test
 	public void getAllMissionByColleagueTest() throws Exception {
 		//GIVEN
@@ -56,6 +59,9 @@ public class MissionControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test delete a mission
+     */
 	@Test
 	public void deleteMissionTest() throws Exception{
 		//GIVEN
@@ -69,7 +75,9 @@ public class MissionControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-	
+	/**
+     * Test add a mission
+     */
 	@Test
 	public void testaddMission() throws Exception {
 		//GIVEN
@@ -97,6 +105,9 @@ public class MissionControllerTest {
 		
 	}
 	
+	/**
+     * Test update a mission
+     */
 	@Test
 	public void testSaveMission() throws Exception {
 		//GIVEN

@@ -36,6 +36,9 @@ public class SkillControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test add skill
+     */
 	@Test
 	public void addSkillTest() throws Exception {
 		//GIVEN
@@ -55,6 +58,9 @@ public class SkillControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test update skill
+     */
 	@Test
 	public void saveSkillTest() throws Exception{
 		//GIVEN
@@ -74,6 +80,9 @@ public class SkillControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test get skills of a colleague
+     */
 	@Test
 	public void testGetSkillCollaborator() throws Exception {
 		

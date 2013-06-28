@@ -46,6 +46,9 @@ public class CategoryControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get all categories
+     */
 	@Test
 	public void getAllTest() throws Exception {
 		//GIVEN
@@ -62,7 +65,9 @@ public class CategoryControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-	
+	/**
+     * Test add a category
+     */
 	@Test
 	public void addCategoryTest() throws Exception {
 		//GIVEN
@@ -78,6 +83,9 @@ public class CategoryControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test update a category
+     */
 	@Test
 	public void saveCategoryTest() throws Exception {
 		//GIVEN
@@ -94,6 +102,9 @@ public class CategoryControllerTest {
 
 	}
 	
+	/**
+     * Test delete a category
+     */
 	@Test
 	public void deleteCategoryTest() throws Exception{
 		//GIVEN

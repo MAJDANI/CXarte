@@ -42,6 +42,9 @@ public class ToolControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get all tools
+     */
 	@Test
 	public void getAllTest() throws Exception {
 		//GIVEN
@@ -63,6 +66,9 @@ public class ToolControllerTest {
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
 	
+	/**
+     * Test get all tools on a concept
+     */
 	@Test
 	public void getAllByConceptTest() throws Exception {
 		//GIVEN
@@ -83,6 +89,9 @@ public class ToolControllerTest {
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
 	
+	/**
+     * Test add a tool
+     */
 	@Test
 	public void addToolTest() throws Exception {
 		//GIVEN
@@ -97,6 +106,9 @@ public class ToolControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test update a tool
+     */
 	@Test
 	public void saveToolTest() throws Exception{
 		//GIVEN
@@ -114,6 +126,9 @@ public class ToolControllerTest {
 		
 	}
 	
+	/**
+     * Test delete a tool
+     */
 	@Test
 	public void deleteToolTest() throws Exception{
 		//GIVEN

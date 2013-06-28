@@ -6,7 +6,7 @@ public class ConstantsValue {
 	
 	public static final String DEFAULT_STRING_VALUE = "-1";
 	
-	public static final String INCORRECT_DATE_FORMAT_MSG = "Format de Date incorrrect"; 
+	public static final String INCORRECT_DATE_FORMAT_MSG = "Format de Date incorrect"; 
 	
 	public static final String SUCCESSFUL_DELETE_MSG = "Ok";
 	

@@ -43,6 +43,9 @@ public class ConceptControllerTest {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
+	/**
+     * Test get all concepts
+     */
 	@Test
 	public void getAllTest() throws Exception {
 		
@@ -64,6 +67,9 @@ public class ConceptControllerTest {
 				/*.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))*/;
 	}
 	
+	/**
+     * Test add a concept
+     */
 	@Test
 	public void addConceptTest() throws Exception {
 		//GIVEN
@@ -80,6 +86,9 @@ public class ConceptControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
+	/**
+     * Test update a concept
+     */
 	@Test
 	public void saveConceptTest() throws Exception{
 		//GIVEN
@@ -97,6 +106,9 @@ public class ConceptControllerTest {
 		
 	}
 	
+	/**
+     * Test delete a concept
+     */
 	@Test
 	public void deleteConceptTest() throws Exception{
 		//GIVEN

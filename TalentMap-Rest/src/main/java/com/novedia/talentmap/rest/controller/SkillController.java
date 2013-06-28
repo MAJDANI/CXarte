@@ -43,9 +43,9 @@ public class SkillController extends TalentMapRestHandlerException implements IB
 	SkillService skillservice;
 
 	/**
-	 * Get  collaborators' skill
+	 * Get  collaborators' skills
 	 * @param colleagueId
-	 * @return skills
+	 * @return a list of skills
 	 */
 	@RequestMapping(value = "/skills/{colleagueId}/" , method=RequestMethod.GET)
 	@ResponseBody
