@@ -124,13 +124,6 @@
 			<version>2.1.7.597</version>
 		</dependency>
 
-		<!-- Oracle JDBC dependency -->
-		<dependency>
-			<groupId>oracle.jdbc-driver</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
