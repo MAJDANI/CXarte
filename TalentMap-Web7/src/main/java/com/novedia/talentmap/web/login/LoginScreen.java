@@ -13,7 +13,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
-public class LoginScreen extends VerticalLayout{ 
+public class LoginScreen extends HorizontalLayout{ 
 	
 	private Panel loginPanel;
 	
@@ -33,7 +33,7 @@ public class LoginScreen extends VerticalLayout{
 	}
 	
 	
-	public VerticalLayout buildLoginView(){
+	public HorizontalLayout buildLoginView(){
 		
 		
 		HorizontalLayout header = new HorizontalLayout();
@@ -41,6 +41,7 @@ public class LoginScreen extends VerticalLayout{
 		
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
+		
 		
 		HorizontalLayout content = new HorizontalLayout();
 		
@@ -69,6 +70,7 @@ public class LoginScreen extends VerticalLayout{
 		
 		addComponent(loginPanel);
 		setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
+		setSizeFull();
 		
 		return this;
 	}
