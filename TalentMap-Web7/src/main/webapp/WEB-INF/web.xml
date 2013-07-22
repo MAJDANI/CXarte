@@ -31,6 +31,12 @@
 			<param-name>productionMode</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		
+<!-- 		 <init-param> -->
+<!--             <description>Application widgetset</description> -->
+<!--             <param-name>widgetset</param-name> -->
+<!--             <param-value>com.novedia.talentmap.web.gwt.TalentMapWidgetset</param-value> -->
+<!--         </init-param> -->
 
     </servlet>
     <servlet-mapping>

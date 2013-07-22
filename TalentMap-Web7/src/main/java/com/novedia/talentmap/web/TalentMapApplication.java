@@ -1,13 +1,16 @@
 package com.novedia.talentmap.web;
 
 import com.novedia.talentmap.web.login.LoginScreen;
+import com.novedia.talentmap.web.utils.Constants;
+import com.vaadin.annotations.PreserveOnRefresh;
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-//@Theme("talentmaptheme")
+@Theme("talentmap")
 @SuppressWarnings("serial")
+@PreserveOnRefresh
 public class TalentMapApplication extends UI {
 	
 	private VerticalLayout view;
@@ -18,9 +21,10 @@ public class TalentMapApplication extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		view.setSizeFull();
+		getPage().setTitle(Constants.TITLE);
 		view.addComponent(loginScreen.buildLoginView());
-//		view.setComponentAlignment(loginScreen.getLoginPanel(),Alignment.MIDDLE_CENTER);
 	    setContent(view);
+	    
 	}
 
 	
