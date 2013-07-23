@@ -71,6 +71,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
 		
+		loginPanel.addStyleName("loginPanel");
+		
 		VerticalLayout content = new VerticalLayout();
 		
 		content.addComponent(errorLogin);

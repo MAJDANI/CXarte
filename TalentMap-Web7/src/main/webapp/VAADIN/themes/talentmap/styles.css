@@ -5,3 +5,20 @@
 .v-captiontext{
 	font-weight: bold;
 }
+
+.v-app {
+	background: #242424 url(common/img/main-bg.png) repeat-x !important;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", geneva, helvetica, arial, tahoma, verdana, sans-serif;
+	color: #464f52;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.loginPanel, .registrationPanel {
+	box-shadow: 1px 1px 12px #fff;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	
+	border:none;
+}
