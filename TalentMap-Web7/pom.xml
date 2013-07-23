@@ -19,6 +19,7 @@
 		<talentmap.services.version>3.0-SNAPSHOT</talentmap.services.version>
 		<aspectj-maven-plugin.version>1.4</aspectj-maven-plugin.version>
 		<spring.intregration.vaadin.version>1.3.5</spring.intregration.vaadin.version>
+		<jetty.maven.plugin.version>8.1.11.v20130520</jetty.maven.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -99,7 +100,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<complianceLevel>1.6</complianceLevel> <!-- To avoid maven goal execution error of aspectJ plugin -->
+					<complianceLevel>1.6</complianceLevel> <!--  To avoid maven goal execution error of aspectJ plugin -->
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>org.springframework</groupId>
@@ -112,14 +113,15 @@
 				</configuration>
 			</plugin>
 
-
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
+					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+					
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<additionalClasspathElements>
-						<additionalClasspathElement>src/main/webapp/WEB-INF/</additionalClasspathElement>
+						<additionalClasspathElement>src/main/webapp/VAADIN</additionalClasspathElement>
 					</additionalClasspathElements>
 					<systemProperties>
 						<systemProperty>
@@ -136,9 +138,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-
-
 
 </project>
