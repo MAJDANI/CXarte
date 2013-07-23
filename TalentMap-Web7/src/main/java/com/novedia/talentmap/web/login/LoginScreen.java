@@ -64,7 +64,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	
 	
 	public HorizontalLayout buildLoginView(){
-		
+		loginPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 		header.addComponent(new Label(Constants.WELCOMME));
 		
@@ -90,7 +90,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 
 	
 	private void buidlLoginForm(){
-		
+		loginFormLayout.removeAllComponents();
 		loginFormLayout.setColumns(3);
 		loginFormLayout.setRows(1);
 		loginFormLayout.setSpacing(true);
@@ -138,6 +138,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			}
 			
 		} else {  //Sign In Button
+			registrationScreen.setLoginScreen(this);
 			getParent().getUI().setContent(registrationScreen.buildRegistrationView());
 		}
 		

@@ -2,9 +2,13 @@ package com.novedia.talentmap.web.registration;
 
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IRegistrationService;
+import com.novedia.talentmap.web.login.LoginScreen;
+import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
+import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -15,10 +19,12 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 
 @SuppressWarnings("serial")
-public class RegistrationScreen extends HorizontalLayout{
+public class RegistrationScreen extends HorizontalLayout implements ClickListener{
 	
 	private Panel registrationPanel;
 	private OptionGroup title;
@@ -35,12 +41,15 @@ public class RegistrationScreen extends HorizontalLayout{
 	private ComboBox businessEngineerField;
 	private ComboBox managerField;
 	private Button save;
+	private Button logIn;
 	
 	 /**
      * TalentMap service
      */
     private IRegistrationService registrationService;
     private IBusinessEngineerService businessEngineerService;
+    
+    private LoginScreen loginScreen;
 	
 	
 	public RegistrationScreen(){
@@ -48,7 +57,7 @@ public class RegistrationScreen extends HorizontalLayout{
 	}
 	
 	public HorizontalLayout buildRegistrationView(){
-		
+		registrationPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 		header.addComponent(new Label("Registration"));
 		
@@ -109,6 +118,13 @@ public class RegistrationScreen extends HorizontalLayout{
 		save =  new Button("Save");
 		content.addComponent(save);
 		
+		logIn = new Button("Log In");
+		logIn.setStyleName(Reindeer.BUTTON_LINK);
+		logIn.setCaption("Log In");
+		logIn.addClickListener(this);
+		logIn.setId("logIn");
+		content.addComponent(logIn);
+		
 		registrationPanel.addComponent(header);
 		registrationPanel.addComponent(content);
 		registrationPanel.setWidth(null);
@@ -119,6 +135,16 @@ public class RegistrationScreen extends HorizontalLayout{
 		setSizeFull();
 		
 		return this;
+	}
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		
+
+		if (event.getButton().equals(logIn)) {  //Log In Button
+					getParent().getUI().setContent(loginScreen.buildLoginView());
+		}
+		
 	}
 
 	public Panel getRegistrationPanel() {
@@ -239,6 +265,14 @@ public class RegistrationScreen extends HorizontalLayout{
 
 	public void setSave(Button save) {
 		this.save = save;
+	}
+
+	public LoginScreen getLoginScreen() {
+		return loginScreen;
+	}
+
+	public void setLoginScreen(LoginScreen loginScreen) {
+		this.loginScreen = loginScreen;
 	}
 
 }
