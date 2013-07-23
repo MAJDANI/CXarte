@@ -4,6 +4,7 @@ import com.novedia.talentmap.web.login.LoginScreen;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
+//import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -17,12 +18,15 @@ public class TalentMapApplication extends UI {
 	
 	private LoginScreen loginScreen;
 	
+//	private RegistrationScreen registrationScreen;
+	
 
 	@Override
 	protected void init(VaadinRequest request) {
 		view.setSizeFull();
 		getPage().setTitle(Constants.TITLE);
 		view.addComponent(loginScreen.buildLoginView());
+//		view.addComponent(registrationScreen.buildRegistrationView());
 	    setContent(view);
 	    
 	}
@@ -49,7 +53,15 @@ public class TalentMapApplication extends UI {
 	}
 	
 	
+//	public RegistrationScreen getRegistrationScreen() {
+//		return registrationScreen;
+//	}
 
+
+
+//	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
+//		this.registrationScreen = registrationScreen;
+//	}
 	
 	
 	
