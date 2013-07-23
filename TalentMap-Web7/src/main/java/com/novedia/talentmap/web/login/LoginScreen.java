@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
@@ -32,6 +33,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginScreen.class);
 	
 	private Authentication authentication;
+	
+	private RegistrationScreen registrationScreen;
 	
 	/**
      * The authentication service
@@ -135,7 +138,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			}
 			
 		} else {  //Sign In Button
-
+			getParent().getUI().setContent(registrationScreen.buildRegistrationView());
 		}
 		
 	}
@@ -252,6 +255,19 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
 	}
+
+
+	public RegistrationScreen getRegistrationScreen() {
+		return registrationScreen;
+	}
+
+
+	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
+		this.registrationScreen = registrationScreen;
+	}
+	
+	
+	
 
 	
 	

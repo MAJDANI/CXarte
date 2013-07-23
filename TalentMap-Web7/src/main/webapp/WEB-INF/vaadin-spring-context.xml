@@ -18,7 +18,7 @@
 	<bean id="talentMapBean" class="com.novedia.talentmap.web.TalentMapApplication" scope="session">
 		<property name="view" ref="view" />
 		<property name="loginScreen" ref ="loginScreen" />
-<!-- 		<property name="registrationScreen" ref ="registrationScreen" /> -->
+		
 	
 	</bean>	
 	
@@ -57,29 +57,30 @@
 		<property name="errorLogin" ref="errorLogin" />
 		<property name="authenticationService" ref="authenticationService" />
 		<property name="authenticatedScreen" ref="authenticatedScreen" />
+		<property name="registrationScreen" ref ="registrationScreen" />
 		
 	</bean>
 	
 	<bean id="authenticatedScreen" class="com.novedia.talentmap.web.login.AuthenticatedScreen" scope="session"/>
 	
-<!-- 	<bean id="registrationScreen" class="com.novedia.talentmap.web.registration.RegistrationScreen" scope="session"> -->
+	<bean id="registrationScreen" class="com.novedia.talentmap.web.registration.RegistrationScreen" scope="session">
 	
-<!-- 		<property name="registrationPanel" ref="registrationPanel" /> -->
-<!-- 		<property name="title" ref="title" /> -->
-<!-- 		<property name="nameField" ref="nameField" /> -->
-<!-- 		<property name="firstNameField" ref="firstNameField" /> -->
-<!-- 		<property name="passwordField" ref="passwordField2" /> -->
-<!-- 		<property name="confirmPasswordField" ref="confirmPasswordField" /> -->
-<!-- 		<property name="loginField" ref="loginField2" /> -->
-<!-- 		<property name="emailField" ref="emailField" /> -->
-<!-- 		<property name="phoneField" ref="phoneField" /> -->
-<!-- 		<property name="dateField" ref="dateField" /> -->
-<!-- 		<property name="jobField" ref="jobField" /> -->
-<!-- 		<property name="experienceField" ref="experienceField" /> -->
-<!-- 		<property name="businessEngineerField" ref="businessEngineerField" /> -->
-<!-- 		<property name="managerField" ref="managerField" /> -->
+		<property name="registrationPanel" ref="registrationPanel" />
+		<property name="title" ref="title" />
+		<property name="nameField" ref="nameField" />
+		<property name="firstNameField" ref="firstNameField" />
+		<property name="passwordField" ref="passwordField2" />
+		<property name="confirmPasswordField" ref="confirmPasswordField" />
+		<property name="loginField" ref="loginField2" />
+		<property name="emailField" ref="emailField" />
+		<property name="phoneField" ref="phoneField" />
+		<property name="dateField" ref="dateField" />
+		<property name="jobField" ref="jobField" />
+		<property name="experienceField" ref="experienceField" />
+		<property name="businessEngineerField" ref="businessEngineerField" />
+		<property name="managerField" ref="managerField" />
 		
-<!-- 	</bean> -->
+	</bean>
 	
 	
 </beans>
