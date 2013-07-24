@@ -61,7 +61,11 @@
 		
 	</bean>
 	
-	<bean id="authenticatedScreen" class="com.novedia.talentmap.web.login.AuthenticatedScreen" scope="session"/>
+	
+	<bean id="logOutButton" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="authenticatedScreen" class="com.novedia.talentmap.web.login.AuthenticatedScreen" scope="session">
+		<property name="logOutButton" ref="logOutButton" />
+	</bean>
 	
 	<bean id="registrationScreen" class="com.novedia.talentmap.web.registration.RegistrationScreen" scope="session">
 	

@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.novedia.talentmap.web.utils.CUtils;
@@ -58,24 +59,39 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	
 	private AuthenticatedScreen authenticatedScreen;
 	
+	/**
+	 * Default constructor
+	 */
 	public LoginScreen(){
 		super();
 	}
 	
-	
+	/**
+	 * Build home page
+	 * @return an HorizontalLayout
+	 */
 	public HorizontalLayout buildLoginView(){
+		removeAllComponents();
+		
 		loginPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
-		header.addComponent(new Label(Constants.WELCOMME));
+		Label welcomeLabel = new Label();
+		welcomeLabel.setCaption(Constants.WELCOMME);
+		welcomeLabel.addStyleName("titleStyle");
+		header.addComponent(welcomeLabel);
 		
+		loginPanel.removeAllComponents();
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
+		
+		loginPanel.addStyleName("loginPanel");
 		
 		VerticalLayout content = new VerticalLayout();
 		
 		content.addComponent(errorLogin);
 		errorLogin.setCaption(Constants.ERROR_LOGIN_MSG);
 		errorLogin.setVisible(false);
+		errorLogin.addStyleName("errorStyle");
 		
 		buidlLoginForm();
 		content.addComponent(loginFormLayout);
@@ -130,7 +146,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			{
 				authentication = checkUserAuthentication(login, password);
 				if(authentication != null){
-					getParent().getUI().setContent(authenticatedScreen.buildAuthenticatedScreen());
+					TalentMapApplication.getCurrent().setColleagueId(authentication.getColleagueId());
+					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 				}
 				
 			} catch (TalentMapSecurityException e) {
@@ -144,7 +161,13 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		
 	}
 	
-	
+	/**
+	 * check user authentication
+	 * @param login user's login
+	 * @param password user's password
+	 * @return an Authentication object
+	 * @throws TalentMapSecurityException
+	 */
 	private Authentication checkUserAuthentication(final String login,
 		    final String password) throws TalentMapSecurityException {
 		try {

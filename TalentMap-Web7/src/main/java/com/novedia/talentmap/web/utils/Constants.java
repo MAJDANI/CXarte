@@ -15,7 +15,10 @@ public class Constants {
 	public static final String ERROR_LOGIN_MSG = "The Login or password was incorrect.";
 	
 	public static final String TITLE = "Log In Talent Map";
+
+	public static final String LOG_OUT_BUTTON_LABEL = "Logout";
 	
+
 	
 
 }

@@ -55,7 +55,12 @@ public class RegistrationScreen extends HorizontalLayout implements ClickListene
 	public HorizontalLayout buildRegistrationScreenView(){
 		registrationPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
-		header.addComponent(new Label("Registration"));
+		//header.addComponent(new Label("Registration"));
+		
+		Label registrationLabel = new Label();
+		registrationLabel.setCaption("Registration");
+		registrationLabel.addStyleName("titleStyle");
+		header.addComponent(registrationLabel);
 		
 //		GridLayout content = new GridLayout(2,8);
 //		FormLayout content = new FormLayout();
@@ -119,6 +124,11 @@ public class RegistrationScreen extends HorizontalLayout implements ClickListene
 		// components initialisation
 		registrationFormLayout = new GridLayout();
 		save =  new Button("Save");
+
+		save.setId("saveButton");
+//		content.addComponent(save);
+		
+
 		logIn = new Button("Log In");
 		logIn.setStyleName(Reindeer.BUTTON_LINK);
 		logIn.setCaption("Log In");
@@ -130,6 +140,10 @@ public class RegistrationScreen extends HorizontalLayout implements ClickListene
 		registrationPanel.addComponent(header);
 //		registrationPanel.addComponent(content);
 		registrationPanel.setWidth(null);
+
+		registrationPanel.addStyleName("registrationPanel");
+		
+
 		
 		addComponent(registrationPanel);
 		setComponentAlignment(registrationPanel, Alignment.MIDDLE_CENTER);
