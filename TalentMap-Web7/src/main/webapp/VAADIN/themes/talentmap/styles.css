@@ -19,6 +19,103 @@
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 12px;
 	border-radius: 12px;
-	
+}
+
+.v-panel-deco, .white .v-panel-deco {
+	height: 0;
+	border-top: none;
+	background: #e2e2e2;
+	overflow: hidden;
+	display:none;
+}
+
+.v-webkit .v-panel-nocaption{
 	border:none;
+}
+
+.v-caption-titleStyle{
+	text-transform:uppercase;
+	color: #009cda;
+	font-size: 22px;
+	font-weight:normal !important;
+}
+
+.v-textfield, {
+	background: rgba(147, 147, 147,0.2);
+	border: 1px solid #b6b6b6;
+	border-top-color: #9d9d9d;
+	border-bottom-color: #d6d6d6;
+	border-right-color: #d6d6d6;
+	margin: 0;
+	line-height: 14px;
+}
+
+.v-textfield-focus, .v-filterselect-input-focus {
+	border : solid 1px #009cda !important;
+	outline : none !important;
+	background: rgba(255,255,255,1);
+}
+
+#logInButton .v-button-wrap,
+#saveButton .v-button-wrap{
+	padding: 4px 8px 0 0px;
+	background-image:none;
+}
+
+#logInButton.v-button,
+#saveButton.v-button{
+	background-image:none;
+	background-color:#009cda;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+	cursor:pointer;
+}
+
+#saveButton.v-button{
+	margin-top: 15px;
+	margin-left: 110px;
+}
+
+#logInButton span.v-button-caption,
+#saveButton span.v-button-caption {
+	color : #fff !important;
+	font-weight:normal;
+	font-size:15px;
+}
+
+#sigIn{
+	padding :10px 0 0 10px;
+}
+
+#sigIn span.v-button-caption,
+#logIn span.v-button-caption{
+	color:#009cda;
+	text-decoration:none;
+}
+
+#sigIn span.v-button-caption:hover,
+#logIn span.v-button-caption:hover{
+	text-decoration:underline;
+}
+
+#sigIn span.v-button-caption:visited,
+#logIn span.v-button-caption:visited{
+	color:#009cda;
+}
+
+.v-caption-errorStyle{
+	border: solid 1px red;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+	background : rgba(255, 0, 0, 0.5);
+	padding:5px 57px;
+}
+
+.v-caption-errorStyle span{
+	color: #B40404;
 }
