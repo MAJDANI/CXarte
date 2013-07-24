@@ -71,21 +71,27 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	 * @return an HorizontalLayout
 	 */
 	public HorizontalLayout buildLoginView(){
-		
 		removeAllComponents();
 		
+		loginPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
-		header.addComponent(new Label(Constants.WELCOMME));
+		Label welcomeLabel = new Label();
+		welcomeLabel.setCaption(Constants.WELCOMME);
+		welcomeLabel.addStyleName("titleStyle");
+		header.addComponent(welcomeLabel);
 		
 		loginPanel.removeAllComponents();
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
+		
+		loginPanel.addStyleName("loginPanel");
 		
 		VerticalLayout content = new VerticalLayout();
 		
 		content.addComponent(errorLogin);
 		errorLogin.setCaption(Constants.ERROR_LOGIN_MSG);
 		errorLogin.setVisible(false);
+		errorLogin.addStyleName("errorStyle");
 		
 		buidlLoginForm();
 		content.addComponent(loginFormLayout);
@@ -100,7 +106,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 
 	
 	private void buidlLoginForm(){
-		
 		loginFormLayout.removeAllComponents();
 		loginFormLayout.setColumns(3);
 		loginFormLayout.setRows(1);
@@ -150,6 +155,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			}
 			
 		} else {  //Sign In Button
+			registrationScreen.setLoginScreen(this);
 			getParent().getUI().setContent(registrationScreen.buildRegistrationView());
 		}
 		
