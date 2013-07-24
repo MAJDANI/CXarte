@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.novedia.talentmap.web.utils.CUtils;
@@ -58,16 +59,25 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	
 	private AuthenticatedScreen authenticatedScreen;
 	
+	/**
+	 * Default constructor
+	 */
 	public LoginScreen(){
 		super();
 	}
 	
-	
+	/**
+	 * Build home page
+	 * @return an HorizontalLayout
+	 */
 	public HorizontalLayout buildLoginView(){
+		
+		removeAllComponents();
 		
 		HorizontalLayout header = new HorizontalLayout();
 		header.addComponent(new Label(Constants.WELCOMME));
 		
+		loginPanel.removeAllComponents();
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
 		
@@ -91,6 +101,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	
 	private void buidlLoginForm(){
 		
+		loginFormLayout.removeAllComponents();
 		loginFormLayout.setColumns(3);
 		loginFormLayout.setRows(1);
 		loginFormLayout.setSpacing(true);
@@ -130,7 +141,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			{
 				authentication = checkUserAuthentication(login, password);
 				if(authentication != null){
-					getParent().getUI().setContent(authenticatedScreen.buildAuthenticatedScreen());
+					TalentMapApplication.getCurrent().setColleagueId(authentication.getColleagueId());
+					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 				}
 				
 			} catch (TalentMapSecurityException e) {
@@ -143,7 +155,13 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		
 	}
 	
-	
+	/**
+	 * check user authentication
+	 * @param login user's login
+	 * @param password user's password
+	 * @return an Authentication object
+	 * @throws TalentMapSecurityException
+	 */
 	private Authentication checkUserAuthentication(final String login,
 		    final String password) throws TalentMapSecurityException {
 		try {

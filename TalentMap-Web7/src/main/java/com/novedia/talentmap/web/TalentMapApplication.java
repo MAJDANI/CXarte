@@ -17,6 +17,8 @@ public class TalentMapApplication extends UI {
 	
 	private LoginScreen loginScreen;
 	
+	private Integer colleagueId;
+	
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -25,6 +27,9 @@ public class TalentMapApplication extends UI {
 		view.addComponent(loginScreen.buildLoginView());
 	    setContent(view);
 	    
+	}
+	public static TalentMapApplication getCurrent(){
+		return (TalentMapApplication) UI.getCurrent();
 	}
 
 	
@@ -47,6 +52,14 @@ public class TalentMapApplication extends UI {
 	public void setLoginScreen(LoginScreen loginScreen) {
 		this.loginScreen = loginScreen;
 	}
+	public Integer getColleagueId() {
+		return colleagueId;
+	}
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
+	}
+	
+	
 	
 	
 }
