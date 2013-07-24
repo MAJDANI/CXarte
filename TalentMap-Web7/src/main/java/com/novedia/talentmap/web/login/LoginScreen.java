@@ -139,7 +139,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			
 		} else {  //Sign In Button
 			registrationScreen.setLoginScreen(this);
-			getParent().getUI().setContent(registrationScreen.buildRegistrationView());
+			getParent().getUI().setContent(registrationScreen.buildRegistrationScreenView());
 		}
 		
 	}
