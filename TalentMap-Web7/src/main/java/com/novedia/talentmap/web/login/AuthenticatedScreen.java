@@ -177,6 +177,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	public HorizontalLayout getHeaderLayout() {
 		return headerLayout;
 	}
+	
 
 
 	/**

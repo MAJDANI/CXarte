@@ -4,6 +4,7 @@
 
 .v-captiontext{
 	font-weight: bold;
+
 }
 
 .v-app {
@@ -118,4 +119,5 @@
 
 .v-caption-errorStyle span{
 	color: #B40404;
+
 }

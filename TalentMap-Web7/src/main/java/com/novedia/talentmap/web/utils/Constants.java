@@ -15,7 +15,7 @@ public class Constants {
 	public static final String ERROR_LOGIN_MSG = "The Login or password was incorrect.";
 	
 	public static final String TITLE = "Log In Talent Map";
-	
+
 	public static final String LOG_OUT_BUTTON_LABEL = "Logout";
 	
 	public static final String HELLO_LABEL = "Hello ";
@@ -39,7 +39,7 @@ public class Constants {
     public static final String MISSING_FIELD_MSG = "All fields are required";
 	
 	
-	public static final String SAVE_BUTTON_LABEL = "Save"; 
+	public static final String SAVE_BUTTON_LABEL = "Save";  
 	
 	
 
