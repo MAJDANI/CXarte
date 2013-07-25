@@ -18,8 +18,7 @@
 	<bean id="talentMapBean" class="com.novedia.talentmap.web.TalentMapApplication" scope="session">
 		<property name="view" ref="view" />
 		<property name="loginScreen" ref ="loginScreen" />
-		
-	
+		<property name="authentication" ref ="authentication" />
 	</bean>	
 	
 	
@@ -62,9 +61,63 @@
 	</bean>
 	
 	
-	<bean id="logOutButton" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="logOutButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="headeheaderLayoutrAuthenticatedScreenBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="changePasswordButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	
+	<bean id="gridLayoutColleagueViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="profilPannelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="eaePannelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="profilButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="eaeButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
+		<property name="gridLayout" ref ="gridLayoutColleagueViewBean" />
+		<property name="profilPanel" ref ="profilPannelBean" />
+		<property name="eaePanel" ref ="eaePannelBean" />
+		<property name="profilButton" ref ="profilButtonBean" />
+		<property name="eaeButton" ref ="eaeButtonBean" />
+	</bean>
+	
+	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" />
+	
+	<bean id="iaViewBean" class="com.novedia.talentmap.web.ui.ia.IaView" scope="session" />
+	
+	<bean id="rhViewBean" class="com.novedia.talentmap.web.ui.rh.RhView" scope="session" />
+	
+	
+	<bean id="oldPasswordFieldBean" class="com.vaadin.ui.PasswordField" scope="session" />
+	<bean id="newPasswordFieldBean" class="com.vaadin.ui.PasswordField" scope="session" />
+	<bean id="confirmPasswordFieldBean" class="com.vaadin.ui.PasswordField" scope="session" />
+	<bean id="saveButtonChangePasswordFormBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="errorLabelPasswordChangePasswordFormBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="errorLabelNewPasswordChangePasswordFormBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="changePasswordFormLayoutBean" class="com.vaadin.ui.FormLayout" scope="session" />
+	
+	
+	<bean id="changePasswordScreenBean" class="com.novedia.talentmap.web.login.ChangePasswordScreen" scope="session">
+		<property name="changePasswordFormLayout" ref ="changePasswordFormLayoutBean" />
+		<property name="oldPasswordField" ref ="oldPasswordFieldBean" />
+		<property name="newPasswordField" ref ="newPasswordFieldBean" />
+		<property name="saveButton" ref ="saveButtonChangePasswordFormBean" />
+		<property name="errorLabelPassword" ref ="errorLabelPasswordChangePasswordFormBean" />
+		<property name="errorLabelNewPassword" ref ="errorLabelNewPasswordChangePasswordFormBean" />
+		<property name="confirmPasswordField" ref ="confirmPasswordFieldBean" />
+		
+	</bean>
+	
+	
 	<bean id="authenticatedScreen" class="com.novedia.talentmap.web.login.AuthenticatedScreen" scope="session">
-		<property name="logOutButton" ref="logOutButton" />
+		<property name="logOutButton" ref="logOutButtonBean" />
+		<property name="changePasswordButton" ref="changePasswordButtonBean" />
+		<property name="headerLayout" ref="headeheaderLayoutrAuthenticatedScreenBean" />
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="colleagueView" ref="colleagueViewBean" />
+		<property name="adminView" ref="adminViewBean" />
+		<property name="iaView" ref="iaViewBean" />
+		<property name="rhView" ref="rhViewBean" />
+		<property name="changePasswordScreen" ref="changePasswordScreenBean" />
 	</bean>
 	
 	<bean id="registrationScreen" class="com.novedia.talentmap.web.registration.RegistrationScreen" scope="session">

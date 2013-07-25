@@ -11,6 +11,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.novedia.talentmap.web.utils.CUtils;
+import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -33,8 +34,14 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginScreen.class);
 	
+    /**
+     * the authentication
+     */
 	private Authentication authentication;
 	
+	/**
+	 * the registrationScreen
+	 */
 	private RegistrationScreen registrationScreen;
 	
 	/**
@@ -42,22 +49,46 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
      */
     private AuthenticationService authenticationService;
 	
+    /**
+	 * the loginPanel
+	 */
 	private Panel loginPanel;
 	
+	/**
+	 * the loginFormLayout
+	 */
 	private GridLayout loginFormLayout;
 	
+	/**
+	 * the loginField
+	 */
 	private TextField loginField;
 	
+	/**
+	 * the passwordField
+	 */
 	private PasswordField passwordField;
 	
+	/**
+	 * the logInButton
+	 */
 	private Button logInButton;
 	
+	/**
+	 * the sigIn
+	 */
 	private Button sigIn;
 	
+	/**
+	 * the errorLogin
+	 */
 	private Label errorLogin ;
 	
-	
+	/**
+	 * the authenticatedScreen
+	 */
 	private AuthenticatedScreen authenticatedScreen;
+	
 	
 	/**
 	 * Default constructor
@@ -105,6 +136,9 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	}
 
 	
+	/**
+	 * Build the login form view
+	 */
 	private void buidlLoginForm(){
 		loginFormLayout.removeAllComponents();
 		loginFormLayout.setColumns(3);
@@ -112,18 +146,18 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		loginFormLayout.setSpacing(true);
 		
 		loginField.setCaption(Constants.lOGIN_FIELD_LABEL);
-		loginField.setId("login");
+		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
 		passwordField.setCaption(Constants.PASSWORD_FIELD_LABEL);
-		passwordField.setId("password");
+		passwordField.setId(ComponentsId.PASSWORD_ID);
 		
 		sigIn.setStyleName(Reindeer.BUTTON_LINK);
 		logInButton.setCaption(Constants.lOGIN_BUTTON_LABEL);
-		logInButton.setId("logInButton");
+		logInButton.setId(ComponentsId.LOGIN_BUTTON_ID);
 		logInButton.addClickListener(this);
 		
 		sigIn.setCaption(Constants.SIGN_IN_BUTTON_LABEL);
 		sigIn.addClickListener(this);
-		sigIn.setId("sigIn");
+		sigIn.setId(ComponentsId.SIG_IN_BUTTON_ID);
 		
 		VerticalLayout buttonBloc = new VerticalLayout();
 		buttonBloc.addComponent(logInButton);
@@ -146,7 +180,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 			{
 				authentication = checkUserAuthentication(login, password);
 				if(authentication != null){
-					TalentMapApplication.getCurrent().setColleagueId(authentication.getColleagueId());
+					TalentMapApplication.getCurrent().setAuthentication(authentication);
 					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 				}
 				
@@ -175,10 +209,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		    credential.setLogin(login);
 		    credential.setPassword(CUtils.encodePassword(password));
 		    authentication = authenticationService.checkUser(credential);
-		    if (authentication == null
-			    || (authentication != null && authentication
-				    .getAuthorization() == null)) {
-			throw new TalentMapSecurityException("User unknown");
+		    if (authentication == null|| (authentication != null && authentication.getAuthorization() == null)) {
+		    	throw new TalentMapSecurityException("User unknown");
 		    }
 		} catch (DataAccessException ex) {
 		    if (LOGGER.isErrorEnabled()) {
@@ -191,110 +223,185 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	    }
 	
 
+	
+	
+	
+	
+	/**
+	 * Get the loginPanel
+	 * @return loginPanel 
+	 */
 	public Panel getLoginPanel() {
 		return loginPanel;
 	}
 
 
+	/**
+	 * Set the loginPanel
+	 * @param loginPanel  loginPanel to set
+	 */
 	public void setLoginPanel(Panel loginPanel) {
 		this.loginPanel = loginPanel;
 	}
 
 
+	/**
+	 * Get the passwordField
+	 * @return a passwordField
+	 */
 	public PasswordField getPasswordField() {
 		return passwordField;
 	}
 
 
+	/**
+	 * Set the passwordField
+	 * @param passwordField passwordField to set 
+	 */
 	public void setPasswordField(PasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
 
-
+	/**
+	 * Get the loginField
+	 * @return loginField
+	 */
 	public TextField getLoginField() {
 		return loginField;
 	}
 
-
+	/**
+	 * Set the loginField
+	 * @param loginField loginField to set
+	 */
 	public void setLoginField(TextField loginField) {
 		this.loginField = loginField;
 	}
 
 
+	/**
+	 * Get logInButton
+	 * @return logInButton
+	 */
 	public Button getLogInButton() {
 		return logInButton;
 	}
 
 
+	/**
+	 * Set the logInButton
+	 * @param logIn logInButton to set 
+	 */
 	public void setLogInButton(Button logIn) {
 		this.logInButton = logIn;
 	}
 
-
+	/**
+	 * Get the sigIn Button
+	 * @return a button
+	 */
 	public Button getSigIn() {
 		return sigIn;
 	}
 
 
+	/**
+	 * Set the sigIn Button
+	 * @param sigIn sigIn to set
+	 */
 	public void setSigIn(Button sigIn) {
 		this.sigIn = sigIn;
 	}
 
 
+	/**
+	 * Get the authenticationService
+	 * @return an authenticationService
+	 */
 	public AuthenticationService getAuthenticationService() {
 		return authenticationService;
 	}
 
 
+	/**
+	 * Set the authenticationService
+	 * @param authenticationService authenticationService to set 
+	 */
 	public void setAuthenticationService(AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
 
 
+	/**
+	 * Get the errorLogin label
+	 * @return errorLogin label
+	 */
 	public Label getErrorLogin() {
 		return errorLogin;
 	}
 
 
+	/**
+	 * Set the erroLogin 
+	 * @param erroLogin erroLogin to set 
+	 */
 	public void setErrorLogin(Label erroLogin) {
 		this.errorLogin = erroLogin;
 	}
 
 
+	/**
+	 * Get the loginFormLayout
+	 * @return a loginFormLayout
+	 */
 	public GridLayout getLoginFormLayout() {
 		return loginFormLayout;
 	}
 
 
+	/**
+	 * Set the loginFormLayout
+	 * @param loginFormLayout loginFormLayout to set 
+	 */
 	public void setLoginFormLayout(GridLayout loginFormLayout) {
 		this.loginFormLayout = loginFormLayout;
 	}
 
-
+	/**
+	 * Get the authenticatedScreen
+	 * @return authenticatedScreen 
+	 */
 	public AuthenticatedScreen getAuthenticatedScreen() {
 		return authenticatedScreen;
 	}
 
 
+	/**
+	 * Set the authenticatedScreen
+	 * @param authenticatedScreen authenticatedScreen to set 
+	 */
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
 	}
 
 
+	/**
+	 * Get the registrationScreen
+	 * @return a registrationScreen
+	 */
+	
 	public RegistrationScreen getRegistrationScreen() {
 		return registrationScreen;
 	}
 
+	/**
+	 * Set the registrationScreen
+	 * @param registrationScreen registrationScreen to set
+	 */
 
 	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
 		this.registrationScreen = registrationScreen;
 	}
-	
-	
-	
-
-	
-	
 	
 
 
