@@ -19,5 +19,13 @@ public interface IAuthenticationService {
      * @return
      */
     Authentication checkUser(CredentialToken token);
+    
+    
+    /**
+     * Allow to encrypt password 
+     * @param password string to code
+     * @return a coded String
+     */
+    String encodePassword(String password);
 
 }

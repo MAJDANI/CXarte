@@ -1,6 +1,10 @@
 package com.novedia.talentmap.web.login;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.CredentialToken;
+import com.novedia.talentmap.services.IAuthenticationService;
 import com.novedia.talentmap.services.IChangePasswordService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
@@ -16,57 +20,70 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public class ChangePasswordScreen extends Window implements ClickListener {
 
+	/**
+	 * the authenticationService
+	 */
+	private IAuthenticationService authenticationService;
 	
 	/**
-	 * 
+	 * the changePasswordService
 	 */
 	 private IChangePasswordService changePasswordService;
 	 
 	 /**
-	  * 
+	  * the changePasswordFormLayout
 	  */
 	 private FormLayout changePasswordFormLayout;
 	 /**
-	  * 
+	  * the oldPasswordField
 	  */
 	 private PasswordField oldPasswordField;
 	 /**
-	  * 
+	  * the newPasswordField
 	  */
      private PasswordField newPasswordField;
      /**
-      * 
+      * the confirmPasswordField
       */
      private PasswordField confirmPasswordField;
+     
      /**
-      * 
+      * the errorLabelOldPassword
       */
-     private Label errorLabelPassword;
+     private Label errorLabelOldPassword;
      /**
-      * 
+      * the errorLabelNewPassword
       */
      private Label errorLabelNewPassword;
      
      /**
-      * 
+      * the saveButton
       */
      private Button saveButton;
 	
-	
+	/**
+	 * Deafault constructor
+	 */
      public ChangePasswordScreen(){
     	 super();
+    	 setCaption(Constants.CHANGE_PASSWORD_FORM_TITLE);
     	 setModal(true);
      }
 	
+     
+     /**
+      * Build changePassword View
+      * @return Window
+      */
 	public Window buildChangePasswordForm(){
 		removeAllComponents();
 		buildForm();
-		errorLabelPassword.setCaption(Constants.ERROR_OLD_PASSWORD);
+		errorLabelOldPassword.setCaption(Constants.ERROR_OLD_PASSWORD);
 		errorLabelNewPassword.setCaption(Constants.ERROR_NEW_PASSWORD);
-		errorLabelPassword.setVisible(false);
+		errorLabelOldPassword.setVisible(false);
 		errorLabelNewPassword.setVisible(false);
 		
-		addComponent(errorLabelPassword);
+		addComponent(errorLabelOldPassword);
 		addComponent(errorLabelNewPassword);
 		addComponent(changePasswordFormLayout);
 		return this;
@@ -112,78 +129,184 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 				return;
 			}
 			
+			if (authenticationService.encodePassword(oldPassword).equals(
+					TalentMapApplication.getCurrent().getAuthentication().getToken().getPassword())) {
+				if (newPassword.equals(confirmPassword)) {
+					String encodeNewPassword = authenticationService.encodePassword(newPassword);
+					Authentication authenticationTmp = new Authentication();
+					CredentialToken credentialTmp = new CredentialToken();
+					credentialTmp.setLogin(TalentMapApplication.getCurrent().getAuthentication().getToken()
+						.getLogin());
+					credentialTmp.setPassword(encodeNewPassword);
+					authenticationTmp.setColleagueId(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
+					authenticationTmp.setToken(credentialTmp);
+					int result = changePasswordService.savePassword(authenticationTmp);
+					if (result != 0) {
+						TalentMapApplication.getCurrent().getAuthentication().getToken().setPassword(encodeNewPassword);
+						close();
+						Notification.show(Constants.UPADTE_SUCCESS_MSG, Type.TRAY_NOTIFICATION);
+					} else {
+						Notification.show(Constants.UPDATE_ERROR_MSG, Type.ERROR_MESSAGE);
+					}
+					
+				} else {
+					errorLabelOldPassword.setVisible(false);
+					errorLabelNewPassword.setVisible(true);
+				}
+				
+			} else { // bad old password 
+				errorLabelOldPassword.setVisible(true);
+				errorLabelNewPassword.setVisible(false);
+			}
 			
 		}
 	}
 
-	
-	
-	
+	/**
+	 * Get the authenticationService
+	 * @return IAuthenticationService
+	 */
+	public IAuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+
+	/**
+	 * Set the authenticationService
+	 * @param authenticationService authenticationService to set
+	 */
+	public void setAuthenticationService(
+			IAuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
+
+	/**
+	 * Get the changePasswordService
+	 * @return IChangePasswordService
+	 */
 	public IChangePasswordService getChangePasswordService() {
 		return changePasswordService;
 	}
 
+	/**
+	 * Set the changePasswordService
+	 * @param changePasswordService changePasswordService to set
+	 */
 	public void setChangePasswordService(
 			IChangePasswordService changePasswordService) {
 		this.changePasswordService = changePasswordService;
 	}
 
+	/**
+	 * Get the changePasswordFormLayout
+	 * @return FormLayout
+	 */
 	public FormLayout getChangePasswordFormLayout() {
 		return changePasswordFormLayout;
 	}
 
+	/**
+	 * Set the changePasswordFormLayout
+	 * @param changePasswordFormLayout changePasswordFormLayout to set
+	 */
 	public void setChangePasswordFormLayout(FormLayout changePasswordFormLayout) {
 		this.changePasswordFormLayout = changePasswordFormLayout;
 	}
 
+	/**
+	 * Get the oldPasswordField
+	 * @return PasswordField
+	 */
 	public PasswordField getOldPasswordField() {
 		return oldPasswordField;
 	}
 
+	/**
+	 * Set the oldPasswordField
+	 * @param oldPasswordField oldPasswordField to set
+	 */
 	public void setOldPasswordField(PasswordField oldPasswordField) {
 		this.oldPasswordField = oldPasswordField;
 	}
 
+	/**
+	 * Get the newPasswordField
+	 * @return PasswordField
+	 */
 	public PasswordField getNewPasswordField() {
 		return newPasswordField;
 	}
 
+	/**
+	 * Set the newPasswordField 
+	 * @param newPasswordField newPasswordField to set
+	 */
 	public void setNewPasswordField(PasswordField newPasswordField) {
 		this.newPasswordField = newPasswordField;
 	}
 
+	/**
+	 * Get the confirmPasswordField
+	 * @return PasswordField
+	 */
 	public PasswordField getConfirmPasswordField() {
 		return confirmPasswordField;
 	}
 
+	/**
+	 * Set the confirmPasswordField
+	 * @param confirmPasswordField confirmPasswordField to set
+	 */
 	public void setConfirmPasswordField(PasswordField confirmPasswordField) {
 		this.confirmPasswordField = confirmPasswordField;
 	}
 
-	public Label getErrorLabelPassword() {
-		return errorLabelPassword;
+	/**
+	 * Get errorLabelOldPassword
+	 * @return Label
+	 */
+	public Label getErrorLabelOldPassword() {
+		return errorLabelOldPassword;
 	}
 
-	public void setErrorLabelPassword(Label errorLabelPassword) {
-		this.errorLabelPassword = errorLabelPassword;
+	/**
+	 * Set the errorLabelOldPassword
+	 * @param errorLabelPassword errorLabelPassword to set
+	 */
+	public void setErrorLabelOldPassword(Label errorLabelPassword) {
+		this.errorLabelOldPassword = errorLabelPassword;
 	}
 
+	/**
+	 * Get the errorLabelNewPassword
+	 * @return Label
+	 */
 	public  Label getErrorLabelNewPassword() {
 		return errorLabelNewPassword;
 	}
 
+	/**
+	 * Set the errorLabelNewPassword
+	 * @param errorLabelNewPassword errorLabelNewPassword to set
+	 */
 	public void setErrorLabelNewPassword(Label errorLabelNewPassword) {
 		this.errorLabelNewPassword = errorLabelNewPassword;
 	}
 
+	/**
+	 * Get the saveButton
+	 * @return Button
+	 */
 	public Button getSaveButton() {
 		return saveButton;
 	}
 
+	/**
+	 * Set the saveButton
+	 * @param saveButton saveButton to set
+	 */
 	public void setSaveButton(Button saveButton) {
 		this.saveButton = saveButton;
 	}
-	
 	
 
 }

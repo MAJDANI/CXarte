@@ -97,11 +97,13 @@
 	
 	
 	<bean id="changePasswordScreenBean" class="com.novedia.talentmap.web.login.ChangePasswordScreen" scope="session">
+		<property name="authenticationService" ref ="authenticationService" />
+		<property name="changePasswordService" ref="changePasswordService" />
 		<property name="changePasswordFormLayout" ref ="changePasswordFormLayoutBean" />
 		<property name="oldPasswordField" ref ="oldPasswordFieldBean" />
 		<property name="newPasswordField" ref ="newPasswordFieldBean" />
 		<property name="saveButton" ref ="saveButtonChangePasswordFormBean" />
-		<property name="errorLabelPassword" ref ="errorLabelPasswordChangePasswordFormBean" />
+		<property name="errorLabelOldPassword" ref ="errorLabelPasswordChangePasswordFormBean" />
 		<property name="errorLabelNewPassword" ref ="errorLabelNewPasswordChangePasswordFormBean" />
 		<property name="confirmPasswordField" ref ="confirmPasswordFieldBean" />
 		

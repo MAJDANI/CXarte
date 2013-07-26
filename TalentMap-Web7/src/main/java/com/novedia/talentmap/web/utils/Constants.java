@@ -37,6 +37,12 @@ public class Constants {
     public static final String ERROR_NEW_PASSWORD = "Error : New password fields do not match !!";
     
     public static final String MISSING_FIELD_MSG = "All fields are required";
+    
+    public static final String UPADTE_SUCCESS_MSG = "Update successful";
+    
+    public static final String UPDATE_ERROR_MSG = "Update error";
+    
+    public static final String CHANGE_PASSWORD_FORM_TITLE = "Change password Form";
 	
 	
 	public static final String SAVE_BUTTON_LABEL = "Save";  

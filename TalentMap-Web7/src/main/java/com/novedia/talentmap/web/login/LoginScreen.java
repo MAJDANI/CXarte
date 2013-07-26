@@ -6,11 +6,10 @@ import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
-import com.novedia.talentmap.services.impl.AuthenticationService;
+import com.novedia.talentmap.services.IAuthenticationService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
-import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Alignment;
@@ -33,7 +32,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
      * The logger
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginScreen.class);
-	
+    
     /**
      * the authentication
      */
@@ -47,7 +46,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	/**
      * The authentication service
      */
-    private AuthenticationService authenticationService;
+    private IAuthenticationService authenticationService;
 	
     /**
 	 * the loginPanel
@@ -207,7 +206,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		try {
 		    CredentialToken credential = new CredentialToken();
 		    credential.setLogin(login);
-		    credential.setPassword(CUtils.encodePassword(password));
+		    credential.setPassword(authenticationService.encodePassword(password));
 		    authentication = authenticationService.checkUser(credential);
 		    if (authentication == null|| (authentication != null && authentication.getAuthorization() == null)) {
 		    	throw new TalentMapSecurityException("User unknown");
@@ -223,9 +222,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	    }
 	
 
-	
-	
-	
 	
 	/**
 	 * Get the loginPanel
@@ -278,7 +274,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		this.loginField = loginField;
 	}
 
-
 	/**
 	 * Get logInButton
 	 * @return logInButton
@@ -313,24 +308,21 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		this.sigIn = sigIn;
 	}
 
-
 	/**
 	 * Get the authenticationService
 	 * @return an authenticationService
 	 */
-	public AuthenticationService getAuthenticationService() {
+	public IAuthenticationService getAuthenticationService() {
 		return authenticationService;
 	}
-
 
 	/**
 	 * Set the authenticationService
 	 * @param authenticationService authenticationService to set 
 	 */
-	public void setAuthenticationService(AuthenticationService authenticationService) {
+	public void setAuthenticationService(IAuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
-
 
 	/**
 	 * Get the errorLogin label
@@ -340,7 +332,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		return errorLogin;
 	}
 
-
 	/**
 	 * Set the erroLogin 
 	 * @param erroLogin erroLogin to set 
@@ -349,7 +340,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		this.errorLogin = erroLogin;
 	}
 
-
 	/**
 	 * Get the loginFormLayout
 	 * @return a loginFormLayout
@@ -357,7 +347,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public GridLayout getLoginFormLayout() {
 		return loginFormLayout;
 	}
-
 
 	/**
 	 * Set the loginFormLayout
@@ -375,7 +364,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		return authenticatedScreen;
 	}
 
-
 	/**
 	 * Set the authenticatedScreen
 	 * @param authenticatedScreen authenticatedScreen to set 
@@ -383,7 +371,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
 	}
-
 
 	/**
 	 * Get the registrationScreen
@@ -402,7 +389,6 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
 		this.registrationScreen = registrationScreen;
 	}
-	
 
 
 }
