@@ -121,3 +121,8 @@
 	color: #B40404;
 
 }
+
+/* Lay the options horizontally */
+.v-select-optiongroup-horizontal .v-select-option {
+    display: inline-block;
+}

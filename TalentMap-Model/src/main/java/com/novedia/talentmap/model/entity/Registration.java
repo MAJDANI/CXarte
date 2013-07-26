@@ -2,6 +2,11 @@ package com.novedia.talentmap.model.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
 /**
  * This entity represents a registration on TalentMap
  * 
@@ -23,21 +28,28 @@ public class Registration {
     /**
      * Sex
      */
+    @NotNull
     private String title;
 
     /**
      * First Name
      */
+    @NotNull
+    @javax.validation.constraints.Size(min = 2, max=20)
     private String firstName;
 
     /**
      * Last Name
      */
+    @NotNull
+    @javax.validation.constraints.Size(min = 2, max=20)
     private String lastName;
 
     /**
      * mail
      */
+    @NotNull
+    @Email
     private String email;
 
     /**
@@ -48,11 +60,15 @@ public class Registration {
     /**
      * User password
      */
+    @NotNull
+    @javax.validation.constraints.Size(min = 4, max=20)
     private String password;
 
     /**
      * User confirm password
      */
+    @NotNull
+    @javax.validation.constraints.Size(min = 4, max=20)
     private String passwordConfirm;
 
     /**
@@ -63,11 +79,14 @@ public class Registration {
     /**
      * Employment Date
      */
+    @NotNull
     private Date employmentDate;
 
     /**
      * Experience (unit : years)
      */
+    @NotNull
+    @Max(20)
     private Integer experience;
 
     /**
@@ -78,6 +97,7 @@ public class Registration {
     /**
      * Profile id
      */
+    @NotNull
     private Integer profileId;
 
     /**
@@ -351,6 +371,7 @@ public class Registration {
 	public static Builder builder() {
 	    return new Builder();
 	}
+
     }
 
     /**
@@ -449,7 +470,7 @@ public class Registration {
     public Integer getExperience() {
 	return experience;
     }
-
+    
     /**
      * @param experience
      *            the experience to set
