@@ -20,6 +20,8 @@ public class ComponentsId {
 	
 	public static final String CONFIRM_PASSWORD_FIELD_ID = "confirmPassword";
 	
+	public static final String HEADER_LAYOUT_ID = "headerLayout";
+	
 	
 
 }
