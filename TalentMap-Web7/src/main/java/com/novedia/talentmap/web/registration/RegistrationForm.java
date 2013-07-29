@@ -457,12 +457,4 @@ public class RegistrationForm extends FormLayout {
 		this.binder = binder;
 	}
 
-//	public FieldGroup getBinder() {
-//		return binder;
-//	}
-//
-//	public void setBinder(FieldGroup binder) {
-//		this.binder = binder;
-//	}
-
 }

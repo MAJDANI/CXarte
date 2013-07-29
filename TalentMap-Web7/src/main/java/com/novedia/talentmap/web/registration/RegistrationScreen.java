@@ -11,8 +11,9 @@ import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IAuthenticationService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.store.impl.ColleagueDao;
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.login.AuthenticatedScreen;
 import com.novedia.talentmap.web.login.LoginScreen;
-import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -48,6 +49,8 @@ public class RegistrationScreen extends HorizontalLayout implements
 	private RegistrationForm registrationForm;
 	private Button save;
 	private Button logIn;
+	
+	private AuthenticatedScreen authenticatedScreen;
 
 	private LoginScreen loginScreen;
 
@@ -128,14 +131,13 @@ public class RegistrationScreen extends HorizontalLayout implements
 			} else if ((!validatePassword())) {
 				Notification.show(Constants.REGISTRATION_PANEL_PASSWORD_ERROR,Notification.Type.WARNING_MESSAGE);
 			}
-			authentication = register(registrationForm.getRegistration());
+			Registration registration = registrationForm.getRegistration();
+			authentication = register(registration);
 			if (authentication != null) {
-//					authenticatedScreen.setAuthentication(authentication);
-//					authenticatedScreen
-//						.setMyVaadinApplicationApplication(getMyVaadinApplication());
-//					myVaadinApplication.getMainWindow().setContent(
-//						authenticatedScreen
-//							.selectedViewAccordingToUserRoles());
+				if(authentication != null){
+					TalentMapApplication.getCurrent().setAuthentication(authentication);
+					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
+				}
 			} else {
 				Notification.show(Constants.REGISTRATION_PANEL_USER_CREATION_ERROR,Notification.Type.WARNING_MESSAGE);
 			}
@@ -162,7 +164,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 	Authentication authenticate = null;
 	try {
 	    // Password encoding
-	    String encodedPassword = CUtils.encodePassword(registration
+	    String encodedPassword = authenticationService.encodePassword(registration
 		    .getPassword());
 	    registration.setPassword(encodedPassword);
 	    // On positionne le Role par défaut CL Consultant :
@@ -269,6 +271,14 @@ public class RegistrationScreen extends HorizontalLayout implements
 	public void setAuthenticationService(
 			IAuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
+	}
+
+	public AuthenticatedScreen getAuthenticatedScreen() {
+		return authenticatedScreen;
+	}
+
+	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
+		this.authenticatedScreen = authenticatedScreen;
 	}
 
 }
