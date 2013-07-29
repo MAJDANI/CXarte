@@ -42,6 +42,8 @@ public class Constants {
 	
 	public static final String EAE_LABEL = "EAE";
 	
+	public static final String SEARCH_LABEL = "Search";
+	
 	public static final String OLD_PASSWORD_LABEL = "Old Password";
 	
 	public static final String NEW_PASSWORD_LABEL = "New Password";
