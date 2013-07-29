@@ -123,31 +123,16 @@
 	</bean>
 	
 	<bean id="registrationScreen" class="com.novedia.talentmap.web.registration.RegistrationScreen" scope="session">
-	
-		<property name="colleagueService" ref="collaboratorService" />
-		<property name="registrationService" ref="registrationService" />
 		<property name="registrationPanel" ref="registrationPanel" />
 		<property name="registrationForm" ref="registrationForm" />
-<!-- 		<property name="title" ref="title" /> -->
-<!-- 		<property name="nameField" ref="nameField" /> -->
-<!-- 		<property name="firstNameField" ref="firstNameField" /> -->
-<!-- 		<property name="passwordField" ref="passwordField2" /> -->
-<!-- 		<property name="confirmPasswordField" ref="confirmPasswordField" /> -->
-<!-- 		<property name="loginField" ref="loginField2" /> -->
-<!-- 		<property name="emailField" ref="emailField" /> -->
-<!-- 		<property name="phoneField" ref="phoneField" /> -->
-<!-- 		<property name="dateField" ref="dateField" /> -->
-<!-- 		<property name="jobField" ref="jobField" /> -->
-<!-- 		<property name="experienceField" ref="experienceField" /> -->
-<!-- 		<property name="businessEngineerField" ref="businessEngineerField" /> -->
-<!-- 		<property name="managerField" ref="managerField" /> -->
-		
+		<property name="authenticationService" ref="authenticationService" />
+		<property name="registrationService" ref="registrationService" />
 	</bean>
 	
 	
 	<bean id="registrationForm" class="com.novedia.talentmap.web.registration.RegistrationForm" scope="session">
-	
-		
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="registrationService" ref="registrationService" />
 		<property name="title" ref="title" />
 		<property name="nameField" ref="nameField" />
 		<property name="firstNameField" ref="firstNameField" />
@@ -161,7 +146,6 @@
 		<property name="experienceField" ref="experienceField" />
 		<property name="businessEngineerField" ref="businessEngineerField" />
 		<property name="managerField" ref="managerField" />
-		
 	</bean>
 	
 </beans>

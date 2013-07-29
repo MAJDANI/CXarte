@@ -106,7 +106,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		loginPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 		Label welcomeLabel = new Label();
-		welcomeLabel.setCaption(Constants.WELCOMME);
+		welcomeLabel.setCaption(Constants.WELCOME);
 		welcomeLabel.addStyleName("titleStyle");
 		header.addComponent(welcomeLabel);
 		

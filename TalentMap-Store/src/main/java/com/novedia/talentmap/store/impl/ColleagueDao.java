@@ -29,7 +29,8 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 	 * The logger
 	 */
 	private static Log logger = LogFactory.getLog(ColleagueDao.class);
-
+	
+	
 	/**
 	 * Class builder based on sqlMapClient
 	 * 
