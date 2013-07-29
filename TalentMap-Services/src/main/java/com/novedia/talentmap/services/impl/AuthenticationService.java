@@ -3,6 +3,8 @@
  */
 package com.novedia.talentmap.services.impl;
 
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.IAuthenticationService;
@@ -31,6 +33,16 @@ public class AuthenticationService implements IAuthenticationService {
 	return authentificationDao.check(token);
     }
 
+    
+    @Override
+    public String encodePassword(String password) {
+    	Md5PasswordEncoder md5Encoder = new Md5PasswordEncoder();
+    	String encodedPassword = md5Encoder.encodePassword(password, null);
+    	return encodedPassword;
+    }
+    
+    
+    
     /**
      * Set the authentication DAO
      * 
@@ -40,5 +52,6 @@ public class AuthenticationService implements IAuthenticationService {
     public void setAuthenticationDao(IDao<Authentication> authenticationDao) {
 	this.authenticationDao = authenticationDao;
     }
+
 
 }
