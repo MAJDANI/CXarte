@@ -61,8 +61,16 @@
 	</bean>
 	
 	
+	
+	
 	<bean id="logOutButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="headeheaderLayoutrAuthenticatedScreenBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="headeheaderLayoutrAuthenticatedScreenBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	
+	<bean id="settingsLayout" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="logoTalentMap" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="logoNovedia" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="helloLayout" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	
 	<bean id="changePasswordButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	
@@ -119,6 +127,10 @@
 		<property name="adminView" ref="adminViewBean" />
 		<property name="iaView" ref="iaViewBean" />
 		<property name="rhView" ref="rhViewBean" />
+		<property name="settingsLayout" ref="settingsLayout" />
+		<property name="logoTalentMap" ref="logoTalentMap" />
+		<property name="logoNovedia" ref="logoNovedia" />
+		<property name="helloLayout" ref="helloLayout" />
 		<property name="changePasswordScreen" ref="changePasswordScreenBean" />
 	</bean>
 	

@@ -37,7 +37,15 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	/**
 	 * the header layout
 	 */
-	private HorizontalLayout headerLayout;
+	private VerticalLayout headerLayout;
+	
+	private HorizontalLayout settingsLayout;
+	
+	private HorizontalLayout logoTalentMap;
+	
+	private HorizontalLayout logoNovedia;
+	
+	private HorizontalLayout helloLayout;
 	
 	/**
 	 * the colleagueService
@@ -124,7 +132,18 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		Colleague currentColleague = colleagueService.getColleague(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
 		headerLayout.removeAllComponents();
 		headerLayout.setId(ComponentsId.HEADER_LAYOUT_ID);
-		headerLayout.setSpacing(true);
+		
+		helloLayout.removeAllComponents();
+		helloLayout.setSpacing(true);
+		
+		logoNovedia.removeAllComponents();
+		logoNovedia.setId(ComponentsId.LOGO_NOVEDIA_ID);
+		logoNovedia.addComponent(new Label("logo Novedia"));
+		
+		settingsLayout.removeAllComponents();
+		settingsLayout.setSpacing(true);
+		settingsLayout.setId(ComponentsId.SETTINGS_LAYOUT_ID);
+		
 		Label helloLabel = new Label();
 		helloLabel.setCaption(Constants.HELLO_LABEL +currentColleague.getFirstName() +", ");
 		
@@ -136,10 +155,21 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		logOutButton.setCaption(Constants.LOG_OUT_BUTTON_LABEL);
 		logOutButton.addClickListener(this);
 		
-		headerLayout.addComponent(helloLabel);
-		headerLayout.addComponent(changePasswordButton);
-		headerLayout.addComponent(new Label("/"));
-		headerLayout.addComponent(logOutButton);
+		settingsLayout.addComponent(helloLabel);
+		settingsLayout.addComponent(changePasswordButton);
+		settingsLayout.addComponent(new Label("/"));
+		settingsLayout.addComponent(logOutButton);
+		
+		helloLayout.addComponent(logoNovedia);
+		helloLayout.addComponent(settingsLayout);
+
+		logoTalentMap.removeAllComponents();
+		logoTalentMap.setSpacing(true);
+		logoTalentMap.setId(ComponentsId.LOGO_TMP_ID);
+		logoTalentMap.addComponent(new Label("Logo Talentmap"));
+		
+		headerLayout.addComponent(helloLayout);
+		headerLayout.addComponent(logoTalentMap);
 		
 	}
 	
@@ -176,7 +206,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 * Get headerLayout
 	 * @return headerLayout
 	 */
-	public HorizontalLayout getHeaderLayout() {
+	public VerticalLayout getHeaderLayout() {
 		return headerLayout;
 	}
 	
@@ -186,7 +216,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 * Set headerLayout
 	 * @param header headerLayout to set
 	 */
-	public void setHeaderLayout(HorizontalLayout header) {
+	public void setHeaderLayout(VerticalLayout header) {
 		this.headerLayout = header;
 	}
 
@@ -303,6 +333,46 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 
 	public void setChangePasswordScreen(ChangePasswordScreen changePasswordScreen) {
 		this.changePasswordScreen = changePasswordScreen;
+	}
+
+
+	public HorizontalLayout getSettingsLayout() {
+		return settingsLayout;
+	}
+
+
+	public void setSettingsLayout(HorizontalLayout settingsLayout) {
+		this.settingsLayout = settingsLayout;
+	}
+
+
+	public HorizontalLayout getLogoTalentMap() {
+		return logoTalentMap;
+	}
+
+
+	public void setLogoTalentMap(HorizontalLayout logoTalentMap) {
+		this.logoTalentMap = logoTalentMap;
+	}
+
+
+	public HorizontalLayout getLogoNovedia() {
+		return logoNovedia;
+	}
+
+
+	public void setLogoNovedia(HorizontalLayout logoNovedia) {
+		this.logoNovedia = logoNovedia;
+	}
+
+
+	public HorizontalLayout getHelloLayout() {
+		return helloLayout;
+	}
+
+
+	public void setHelloLayout(HorizontalLayout helloLayout) {
+		this.helloLayout = helloLayout;
 	}
 	
 	

@@ -19,6 +19,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -213,9 +215,9 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		    }
 		} catch (DataAccessException ex) {
 		    if (LOGGER.isErrorEnabled()) {
-			ex.printStackTrace();
 			LOGGER.error("Technical Exception : ", ex.getMessage());
 		    }
+		    Notification.show("Technical Exception, try later", Type.ERROR_MESSAGE);
 		}
 
 		return authentication;

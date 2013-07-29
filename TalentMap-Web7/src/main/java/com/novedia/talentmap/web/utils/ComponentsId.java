@@ -22,6 +22,12 @@ public class ComponentsId {
 	
 	public static final String HEADER_LAYOUT_ID = "headerLayout";
 	
+	public static final String LOGO_NOVEDIA_ID = "logoNovedia";
+	
+	public static final String SETTINGS_LAYOUT_ID = "settingsLayout";
+	
+	public static final String LOGO_TMP_ID = "logoTalentMap";
+	
 	
 
 }
