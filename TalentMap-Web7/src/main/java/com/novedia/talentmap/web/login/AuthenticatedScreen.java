@@ -9,6 +9,7 @@ import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.colleague.ColleagueView;
 import com.novedia.talentmap.web.ui.ia.IaView;
 import com.novedia.talentmap.web.ui.rh.RhView;
+import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
@@ -122,6 +123,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	private void buildHeaderLayout(){
 		Colleague currentColleague = colleagueService.getColleague(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
 		headerLayout.removeAllComponents();
+		headerLayout.setId(ComponentsId.HEADER_LAYOUT_ID);
 		headerLayout.setSpacing(true);
 		Label helloLabel = new Label();
 		helloLabel.setCaption(Constants.HELLO_LABEL +currentColleague.getFirstName() +", ");
