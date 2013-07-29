@@ -21,6 +21,7 @@ public interface IAuthenticationService {
     Authentication checkUser(CredentialToken token);
     
     
+    
     /**
      * Allow to encrypt password 
      * @param password string to code

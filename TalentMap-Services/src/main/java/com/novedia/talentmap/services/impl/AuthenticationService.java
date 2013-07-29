@@ -34,6 +34,7 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     
+    
     @Override
     public String encodePassword(String password) {
     	Md5PasswordEncoder md5Encoder = new Md5PasswordEncoder();
