@@ -127,6 +127,7 @@
 		<property name="registrationForm" ref="registrationForm" />
 		<property name="authenticationService" ref="authenticationService" />
 		<property name="registrationService" ref="registrationService" />
+		<property name="authenticatedScreen" ref="authenticatedScreen" />
 	</bean>
 	
 	
