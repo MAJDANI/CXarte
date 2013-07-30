@@ -13,6 +13,8 @@
 	color: #464f52;
 	font-size: 13px;
 	line-height: 18px;
+	
+	padding:20px;
 }
 
 .loginPanel, .registrationPanel {
@@ -41,7 +43,7 @@
 	font-weight:normal !important;
 }
 
-.v-textfield, {
+.v-textfield {
 	background: rgba(147, 147, 147,0.2);
 	border: 1px solid #b6b6b6;
 	border-top-color: #9d9d9d;
@@ -120,6 +122,44 @@
 .v-caption-errorStyle span{
 	color: #B40404;
 
+}
+
+#settingsLayout{
+	position: absolute;
+	right: 0;
+}
+
+#logoNovedia{
+	background:url(img/logoNovedia.jpg) no-repeat;
+	
+	width:225px;
+	height:89px;
+	
+}
+
+#logoNovedia .v-label{	
+	text-indent:-9999px;
+}
+
+#logoTalentMap{
+	text-align:center;
+}
+
+.v-window-outerheader {
+	background:#009cda repeat-x !important;
+	border-bottom: solid 1px #009cda;
+	padding-bottom:12px !important;
+	height:50px !important;
+}
+
+.v-window-header {
+	font-weight: normal !important;
+	font-size: 22px !important;
+	text-shadow: none !important;
+}
+
+.centerPanel{
+	text-align:center;
 }
 
 /* Lay the options horizontally */

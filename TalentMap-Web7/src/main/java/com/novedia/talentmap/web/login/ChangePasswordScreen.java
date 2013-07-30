@@ -110,6 +110,7 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		
 		saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
 		saveButton.addClickListener(this);
+		saveButton.setId(ComponentsId.SAVE_BTN_ID);
 		changePasswordFormLayout.addComponent(oldPasswordField);
 		changePasswordFormLayout.addComponent(newPasswordField);
 		changePasswordFormLayout.addComponent(confirmPasswordField);

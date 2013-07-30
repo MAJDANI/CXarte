@@ -28,6 +28,8 @@ public class ComponentsId {
 	
 	public static final String LOGO_TMP_ID = "logoTalentMap";
 	
+	public static final String SAVE_BTN_ID = "saveButton";
+	
 	
 
 }

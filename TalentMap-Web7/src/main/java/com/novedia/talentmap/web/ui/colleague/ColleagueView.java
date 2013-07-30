@@ -25,6 +25,8 @@ public class ColleagueView extends VerticalLayout {
 	 */
 	public ColleagueView(){
 		super();
+		addStyleName("centerPanel");
+	
 	}
 	
 	
