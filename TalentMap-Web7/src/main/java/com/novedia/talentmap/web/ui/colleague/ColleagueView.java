@@ -48,7 +48,7 @@ public class ColleagueView extends VerticalLayout {
 		gridLayout.removeAllComponents();
 		gridLayout.setSpacing(true);
 		gridLayout.setRows(2);
-		gridLayout.setColumns(2);
+		gridLayout.setColumns(3);
 		
 		profilPanel.removeAllComponents();
 		profilButton.setCaption(Constants.PROFILE_LABEL);
@@ -62,6 +62,24 @@ public class ColleagueView extends VerticalLayout {
 		
 		gridLayout.addComponent(profilPanel);
 		gridLayout.addComponent(eaePanel);
+		
+		//composants ajoutés par défaut pour le style 
+		Panel px = new Panel();
+		px.addComponent(new Button("XX"));
+		
+		Panel py = new Panel();
+		py.addComponent(new Button("YY"));
+		
+		Panel pz = new Panel();
+		pz.addComponent(new Button("ZZ"));
+		
+		Panel pw = new Panel();
+		pw.addComponent(new Button("WW"));
+		
+		gridLayout.addComponent(px);
+		gridLayout.addComponent(py);
+		gridLayout.addComponent(pz);
+		gridLayout.addComponent(pw);
 		
 		
 	}
