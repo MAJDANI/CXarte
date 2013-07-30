@@ -32,6 +32,8 @@ public class ComponentsId {
 	
 	public static final String SAVE_BTN_ID = "saveButton";
 	
+	public static final String DASHBOARD_ID = "dashboardLabel";
+	
 	
 
 }

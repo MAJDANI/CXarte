@@ -38,9 +38,9 @@ public class Constants {
 	
 	public static final String CHANGE_PASSWORD_LABEL = "Change Password";
 	
-	public static final String PROFILE_LABEL = "Profile";
+	public static final String PROFILE_LABEL = "My PROFILE";
 	
-	public static final String EAE_LABEL = "EAE";
+	public static final String EAE_LABEL = "My EAE";
 	
 	public static final String SEARCH_LABEL = "Search";
 	

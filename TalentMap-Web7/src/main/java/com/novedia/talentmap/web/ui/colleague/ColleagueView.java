@@ -6,6 +6,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class ColleagueView extends VerticalLayout {
@@ -49,16 +50,21 @@ public class ColleagueView extends VerticalLayout {
 		gridLayout.setSpacing(true);
 		gridLayout.setRows(2);
 		gridLayout.setColumns(3);
+		gridLayout.setId("gridLayout");
 		
 		profilPanel.removeAllComponents();
 		profilButton.setCaption(Constants.PROFILE_LABEL);
+		profilButton.addStyleName(Reindeer.BUTTON_LINK);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
 		profilPanel.addComponent(profilButton);
+		profilPanel.addStyleName("labelBtnDashboard");
 		
 		eaePanel.removeAllComponents();
 		eaeButton.setCaption(Constants.EAE_LABEL);
+		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
 		eaePanel.addComponent(eaeButton);
+		eaePanel.addStyleName("labelBtnDashboard");
 		
 		gridLayout.addComponent(profilPanel);
 		gridLayout.addComponent(eaePanel);
@@ -69,12 +75,15 @@ public class ColleagueView extends VerticalLayout {
 		
 		Panel py = new Panel();
 		py.addComponent(new Button("YY"));
+		py.addStyleName("top25");
 		
 		Panel pz = new Panel();
 		pz.addComponent(new Button("ZZ"));
+		pz.addStyleName("top25");
 		
 		Panel pw = new Panel();
 		pw.addComponent(new Button("WW"));
+		pw.addStyleName("top25");
 		
 		gridLayout.addComponent(px);
 		gridLayout.addComponent(py);

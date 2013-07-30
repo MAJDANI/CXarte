@@ -127,6 +127,19 @@
 #settingsLayout{
 	position: absolute;
 	right: 0;
+	
+	color:#fff;
+	font-size:15px;
+}
+
+#settingsLayout .v-button-caption{
+	color:#009cda;
+	font-size:15px;
+	text-decoration:none;
+}
+
+#settingsLayout .v-button-caption:hover{
+	text-decoration:underline;
 }
 
 #logoNovedia{
@@ -137,13 +150,21 @@
 	
 }
 
+#logoTalentMap{
+	background:url(img/logoNovedia.jpg) no-repeat;
+	
+	width:225px;
+	height:89px;
+	
+	margin-left:40%;
+	
+	text-align:center
+}
+
 #logoNovedia .v-label{	
 	text-indent:-9999px;
 }
 
-#logoTalentMap{
-	text-align:center;
-}
 
 .v-window-outerheader {
 	background:#009cda repeat-x !important;
@@ -160,6 +181,71 @@
 
 .centerPanel{
 	text-align:center;
+	margin-top:50px;
+	padding:25px;
+	border: ridge 3px #009cda;
+}
+
+#dashboardLabel{
+	background:url(img/home.png) 0 center no-repeat;
+	background-size: 25px;
+	height:35px;
+	margin-left:50px;
+	cursor:pointer;
+}
+
+#dashboardLabel .v-label{
+	font-size:22px;
+	color:#fff;
+	line-height:normal !important;
+	margin-top:4px;
+	margin-left:35px;
+}
+
+.v-gridlayout-slot .v-panel{
+	-webkit-border-radius: 120px;
+	-moz-border-radius: 120px;
+	border-radius: 120px;
+	
+	-moz-box-shadow: 0px 0px 25px 5px #888;
+	-webkit-box-shadow: 0px 0px 25px 5px #888;
+	box-shadow: 0px 0px 25px 5px #888;
+	
+	overflow:hidden;
+	margin-left:20px;
+	
+	width:200px;
+	height:200px;
+}
+
+.v-gridlayout-slot .v-panel-content{
+	height:200px;
+	overflow:hidden;
+}
+
+.v-panel-labelBtnDashboard {
+	cursor:pointer;
+}
+
+.v-panel-content-labelBtnDashboard .v-button-caption{
+	font-size:22px;
+	color: #009cda;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.v-panel-content-labelBtnDashboard .v-button-caption:hover{
+	text-decoration:underline;
+}
+
+.v-panel-labelBtnDashboard .v-verticallayout{
+	text-align:center;
+	top:50%;
+	margin-top:-25px;
+}
+
+.top25{
+	margin-top:25px;
 }
 
 /* Lay the options horizontally */

@@ -172,6 +172,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		
 		dashBoardLayout.removeAllComponents();
 		dashBoardLayout.addComponent(new Label(Constants.DASHBOARD_LABEL));
+		dashBoardLayout.setId(ComponentsId.DASHBOARD_ID);
 		
 		headerLayout.addComponent(helloLayout);
 		headerLayout.addComponent(logoTalentMap);
