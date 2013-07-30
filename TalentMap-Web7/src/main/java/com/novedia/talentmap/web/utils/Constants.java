@@ -60,8 +60,9 @@ public class Constants {
     
     public static final String CHANGE_PASSWORD_FORM_TITLE = "Change password Form";
 	
+	public static final String SAVE_BUTTON_LABEL = "Save"; 
 	
-	public static final String SAVE_BUTTON_LABEL = "Save";  
+	public static final String DASHBOARD_LABEL = "My DASHBOARD"; 
 	
 
 	

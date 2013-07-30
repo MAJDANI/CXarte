@@ -47,6 +47,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	private HorizontalLayout helloLayout;
 	
+	private HorizontalLayout dashBoardLayout;
+	
 	/**
 	 * the colleagueService
 	 */
@@ -168,8 +170,12 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		logoTalentMap.setId(ComponentsId.LOGO_TMP_ID);
 		logoTalentMap.addComponent(new Label("Logo Talentmap"));
 		
+		dashBoardLayout.removeAllComponents();
+		dashBoardLayout.addComponent(new Label(Constants.DASHBOARD_LABEL));
+		
 		headerLayout.addComponent(helloLayout);
 		headerLayout.addComponent(logoTalentMap);
+		headerLayout.addComponent(dashBoardLayout);
 		
 	}
 	
@@ -373,6 +379,16 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 
 	public void setHelloLayout(HorizontalLayout helloLayout) {
 		this.helloLayout = helloLayout;
+	}
+
+
+	public HorizontalLayout getDashBoardLayout() {
+		return dashBoardLayout;
+	}
+
+
+	public void setDashBoardLayout(HorizontalLayout dashBoardLayout) {
+		this.dashBoardLayout = dashBoardLayout;
 	}
 	
 	
