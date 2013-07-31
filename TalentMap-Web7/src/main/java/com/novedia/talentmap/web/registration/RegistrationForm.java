@@ -7,6 +7,7 @@ import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
+import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
@@ -21,31 +22,7 @@ import com.vaadin.ui.TextField;
 @SuppressWarnings("serial")
 public class RegistrationForm extends FormLayout {
 
-	private static final String MANAGER = "Manager";
-
-	private static final String BUSINESS_ENGINEER = "Business engineer";
-
-	private static final String YEARS_OF_EXPERIENCE = "Years of experience";
-
-	private static final String JOB_TITLE = "Job title";
-
-	private static final String DATE_OF_HIRE = "Date of hire";
-
-	private static final String PHONE = "Phone";
-
-	private static final String EMAIL = "Email";
-
-	private static final String CHOOSE_A_LOGIN = "Choose a login";
-
-	private static final String CONFIRM_PASSWORD = "Confirm password";
-
-	private static final String PASSWORD = "Password";
-
-	private static final String FIRST_NAME = "First name";
-
-	private static final String NAME = "Name";
-
-	private static final String TITLE = "Title";
+	
 
 	private Registration registration;
 
@@ -62,44 +39,43 @@ public class RegistrationForm extends FormLayout {
 	private BeanFieldGroup<Registration> binder;
 	
 	@PropertyId("title")
-	private OptionGroup title = new OptionGroup(TITLE);
+	private OptionGroup title;
 	
 	@PropertyId("lastName")
-	private TextField nameField = new TextField(NAME);
+	private TextField nameField;
 	
 	@PropertyId("firstName")
-	private TextField firstNameField = new TextField(FIRST_NAME);
+	private TextField firstNameField;
 	
 	@PropertyId("password")
-	private PasswordField passwordField = new PasswordField(PASSWORD);
+	private PasswordField passwordField;
 	
 	@PropertyId("passwordConfirm")
-	private PasswordField confirmPasswordField = new PasswordField(
-			CONFIRM_PASSWORD);
+	private PasswordField confirmPasswordField;
 	
 	@PropertyId("login")
-	private TextField loginField = new TextField(CHOOSE_A_LOGIN);
+	private TextField loginField;
 	
 	@PropertyId("email")
-	private TextField emailField = new TextField(EMAIL);
+	private TextField emailField;
 	
 	@PropertyId("phone")
-	private TextField phoneField = new TextField(PHONE);
+	private TextField phoneField;
 	
 	@PropertyId("employmentDate")
-	private PopupDateField dateField = new PopupDateField(DATE_OF_HIRE);
+	private PopupDateField dateField;
 	
 	@PropertyId("profileId")
-	private ComboBox jobField = new ComboBox(JOB_TITLE);
+	private ComboBox jobField;
 	
 	@PropertyId("experience")
-	private TextField experienceField = new TextField(YEARS_OF_EXPERIENCE);
+	private TextField experienceField;
 	
 	@PropertyId("businessEngineer")
-	private ComboBox businessEngineerField = new ComboBox(BUSINESS_ENGINEER);
+	private ComboBox businessEngineerField;
 	
 	@PropertyId("managerId")
-	private ComboBox managerField = new ComboBox(MANAGER);
+	private ComboBox managerField;
 	
 	private GridLayout registrationFormLayout;
 
@@ -136,7 +112,7 @@ public class RegistrationForm extends FormLayout {
 	}
 
 	public void buildRegistrationForm() {
-		title.setCaption(TITLE);
+		title.setCaption(Constants.TITLE_REGISTRATION);
 		title.addItem("Mr.");
 		title.addItem("Mrs.");
 		title.setMultiSelect(false);
@@ -156,7 +132,7 @@ public class RegistrationForm extends FormLayout {
 		loginField.setNullRepresentation("");
 		registrationFormLayout.addComponent(loginField);
 		
-		nameField.setCaption(NAME);
+		nameField.setCaption(Constants.NAME);
 		nameField.setRequired(true);
 		nameField.setRequiredError("Give your last name");
 		nameField
@@ -178,7 +154,7 @@ public class RegistrationForm extends FormLayout {
 		firstNameField.setNullRepresentation("");
 		registrationFormLayout.addComponent(firstNameField);
 
-		passwordField.setCaption(PASSWORD);
+		passwordField.setCaption(Constants.PASSWORD);
 		passwordField.setRequired(true);
 		passwordField.setRequiredError("Give your password");
 		passwordField.addValidator(new BeanValidator(Registration.class,
@@ -189,7 +165,7 @@ public class RegistrationForm extends FormLayout {
 		passwordField.setNullRepresentation("");
 		registrationFormLayout.addComponent(passwordField);
 
-		confirmPasswordField.setCaption(CONFIRM_PASSWORD);
+		confirmPasswordField.setCaption(Constants.CONFIRM_PASSWORD);
 		confirmPasswordField.setRequired(true);
 		confirmPasswordField.setRequiredError("Give your confirmed password");
 		confirmPasswordField.addValidator(new BeanValidator(Registration.class,
@@ -200,7 +176,7 @@ public class RegistrationForm extends FormLayout {
 		confirmPasswordField.setNullRepresentation("");
 		registrationFormLayout.addComponent(confirmPasswordField);
 
-		emailField.setCaption(EMAIL);
+		emailField.setCaption(Constants.EMAIL);
 		emailField.setRequired(true);
 		emailField.setRequiredError("Give your email");
 		emailField.addValidator(new BeanValidator(Registration.class, "email"));
@@ -210,12 +186,12 @@ public class RegistrationForm extends FormLayout {
 		emailField.setNullRepresentation("");
 		registrationFormLayout.addComponent(emailField);
 
-		phoneField.setCaption(PHONE);
+		phoneField.setCaption(Constants.PHONE);
 		phoneField.setInputPrompt("Type your phone number");
 		phoneField.setNullRepresentation("");
 		registrationFormLayout.addComponent(phoneField);
 
-		dateField.setCaption(DATE_OF_HIRE);
+		dateField.setCaption(Constants.DATE_OF_HIRE);
 		dateField.setRequired(true);
 		dateField.setRequiredError("Give your date of employement");
 		dateField.addValidator(new BeanValidator(Registration.class,
@@ -225,7 +201,7 @@ public class RegistrationForm extends FormLayout {
 		dateField.setInputPrompt("DD/MM/YY");
 		registrationFormLayout.addComponent(dateField);
 
-		jobField.setCaption(JOB_TITLE);
+		jobField.setCaption(Constants.JOB_TITLE);
 		jobField.setRequired(true);
 		jobField.setRequiredError("Give your job title");
 		jobField.addValidator(new BeanValidator(Registration.class, "profileId"));
@@ -235,7 +211,7 @@ public class RegistrationForm extends FormLayout {
 		buildJobList();
 		registrationFormLayout.addComponent(jobField);
 
-		experienceField.setCaption(YEARS_OF_EXPERIENCE);
+		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
 		experienceField.setRequired(true);
 		experienceField.setRequiredError("Give your years of experience");
 		experienceField.addValidator(new BeanValidator(Registration.class,
@@ -246,12 +222,12 @@ public class RegistrationForm extends FormLayout {
 		experienceField.setNullRepresentation("");
 		registrationFormLayout.addComponent(experienceField);
 
-		businessEngineerField.setCaption(BUSINESS_ENGINEER);
+		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
 		businessEngineerField.setInputPrompt("Select your business engineer");
 		buildEngineerList();
 		registrationFormLayout.addComponent(businessEngineerField);
 
-		managerField.setCaption(MANAGER);
+		managerField.setCaption(Constants.MANAGER);
 		managerField.setInputPrompt("Select your manager");
 		buildManagerList();
 		registrationFormLayout.addComponent(managerField);
