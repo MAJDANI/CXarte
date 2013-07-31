@@ -4,6 +4,7 @@ import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -13,9 +14,9 @@ import com.vaadin.ui.Window;
 public class ProfilePopIn extends Window implements ClickListener{
 	
 	
-
-	
-
+	/**
+	 * Vaadin components
+	 */
 	private Button administrativeDataButton;
 	
 	private Button skillsButton;
@@ -29,6 +30,10 @@ public class ProfilePopIn extends Window implements ClickListener{
 	private VerticalLayout menuContent;
 	
 	private Panel contentPanel;
+	
+	private GridLayout colleagueDataFormLayout;
+	
+	private ColleagueDataForm colleagueDataForm;
 	
 	/**
 	 * Default constructor
@@ -55,11 +60,22 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 
 	private void buildContent() {
+		
+		contentPanel.removeAllComponents();
+		
 		contentPanel.setSizeFull();
 		contentPanel.setHeight("100%");
 		contentPanel.setWidth(null);
         hLayout.addComponent(contentPanel);
         hLayout.setExpandRatio(contentPanel, 1.0f);
+        
+        // components initialisation
+     	colleagueDataFormLayout = new GridLayout();
+
+     	colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
+     	colleagueDataForm = colleagueDataForm.buildColleagueDataFormView();
+     	
+     	contentPanel.addComponent(colleagueDataForm);
 		
 	}
 
@@ -165,6 +181,26 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 	public void setContentPanel(Panel contentPanel) {
 		this.contentPanel = contentPanel;
+	}
+
+
+	public GridLayout getColleagueDataFormLayout() {
+		return colleagueDataFormLayout;
+	}
+
+
+	public void setColleagueDataFormLayout(GridLayout colleagueDataFormLayout) {
+		this.colleagueDataFormLayout = colleagueDataFormLayout;
+	}
+
+
+	public ColleagueDataForm getColleagueDataForm() {
+		return colleagueDataForm;
+	}
+
+
+	public void setColleagueDataForm(ColleagueDataForm colleagueDataForm) {
+		this.colleagueDataForm = colleagueDataForm;
 	}
 
 }

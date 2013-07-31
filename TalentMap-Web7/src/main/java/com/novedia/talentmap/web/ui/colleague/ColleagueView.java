@@ -4,15 +4,18 @@ import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class ColleagueView extends VerticalLayout implements ClickListener {
 
+	/**
+	 * Vaadin components
+	 */
 	private GridLayout gridLayout;
 	
 	private Panel profilPanel;

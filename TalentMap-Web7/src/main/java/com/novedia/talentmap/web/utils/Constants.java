@@ -34,7 +34,7 @@ public class Constants {
 	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error while creating user";
 	
 	/**
-     * Constant for RegistrationForm
+     * Constant for RegistrationForm and ColleagueDataForm
      */
 	
 	public static final String MANAGER = "Manager";

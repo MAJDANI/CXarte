@@ -33,7 +33,6 @@ public class RegistrationForm extends FormLayout {
 	/**
 	 * Vaadin components
 	 */
-//	private FieldGroup binder;
 	private BeanFieldGroup<Registration> binder;
 	
 	@PropertyId(Constants.TITLE_ID)
