@@ -22,8 +22,6 @@ import com.vaadin.ui.TextField;
 @SuppressWarnings("serial")
 public class RegistrationForm extends FormLayout {
 
-	
-
 	private Registration registration;
 
 	/**
@@ -38,43 +36,43 @@ public class RegistrationForm extends FormLayout {
 //	private FieldGroup binder;
 	private BeanFieldGroup<Registration> binder;
 	
-	@PropertyId("title")
+	@PropertyId(Constants.TITLE_ID)
 	private OptionGroup title;
 	
-	@PropertyId("lastName")
+	@PropertyId(Constants.LAST_NAME_ID)
 	private TextField nameField;
 	
-	@PropertyId("firstName")
+	@PropertyId(Constants.FIRST_NAME_ID)
 	private TextField firstNameField;
 	
-	@PropertyId("password")
+	@PropertyId(Constants.PASSWORD_ID)
 	private PasswordField passwordField;
 	
-	@PropertyId("passwordConfirm")
+	@PropertyId(Constants.PASSWORD_CONFIRM_ID)
 	private PasswordField confirmPasswordField;
 	
-	@PropertyId("login")
+	@PropertyId(Constants.LOGIN_ID)
 	private TextField loginField;
 	
-	@PropertyId("email")
+	@PropertyId(Constants.EMAIL_ID)
 	private TextField emailField;
 	
-	@PropertyId("phone")
+	@PropertyId(Constants.PHONE_ID)
 	private TextField phoneField;
 	
-	@PropertyId("employmentDate")
+	@PropertyId(Constants.EMPLOYMENT_DATE_ID)
 	private PopupDateField dateField;
 	
-	@PropertyId("profileId")
+	@PropertyId(Constants.PROFILE_ID)
 	private ComboBox jobField;
 	
-	@PropertyId("experience")
+	@PropertyId(Constants.EXPERIENCE_ID)
 	private TextField experienceField;
 	
-	@PropertyId("businessEngineer")
+	@PropertyId(Constants.BUSINESS_ENGINEER_ID)
 	private ComboBox businessEngineerField;
 	
-	@PropertyId("managerId")
+	@PropertyId(Constants.MANAGER_ID)
 	private ComboBox managerField;
 	
 	private GridLayout registrationFormLayout;
@@ -113,145 +111,128 @@ public class RegistrationForm extends FormLayout {
 
 	public void buildRegistrationForm() {
 		title.setCaption(Constants.TITLE_REGISTRATION);
-		title.addItem("Mr.");
-		title.addItem("Mrs.");
+		title.addItem(Constants.TITLE_MR);
+		title.addItem(Constants.TITLE_MRS);
 		title.setMultiSelect(false);
 		title.setRequired(true);
-		title.setRequiredError("Give title");
+		title.setRequiredError(Constants.GIVE_TITLE);
 		title.addStyleName("horizontal");
 		registrationFormLayout.addComponent(title);
 
-		loginField.setCaption("Choose a login");
+		loginField.setCaption(Constants.CHOOSE_LOGIN);
 		loginField.setRequired(true);
-		loginField.setRequiredError("Give your last name");
-		loginField
-				.addValidator(new BeanValidator(Registration.class, "login"));
+		loginField.setRequiredError(Constants.GIVE_LOGIN);
+		loginField.addValidator(new BeanValidator(Registration.class, Constants.LOGIN_ID));
 		loginField.setImmediate(true);
 		loginField.setValidationVisible(true);
-		loginField.setInputPrompt("Type your login");
+		loginField.setInputPrompt(Constants.TYPE_LOGIN);
 		loginField.setNullRepresentation("");
 		registrationFormLayout.addComponent(loginField);
 		
 		nameField.setCaption(Constants.NAME);
 		nameField.setRequired(true);
-		nameField.setRequiredError("Give your last name");
-		nameField
-				.addValidator(new BeanValidator(Registration.class, "lastName"));
+		nameField.setRequiredError(Constants.GIVE_LAST_NAME);
+		nameField.addValidator(new BeanValidator(Registration.class, Constants.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
-		nameField.setInputPrompt("Type your name");
+		nameField.setInputPrompt(Constants.TYPE_NAME);
 		nameField.setNullRepresentation("");
 		registrationFormLayout.addComponent(nameField);
 
-		firstNameField.setCaption("First Name");
+		firstNameField.setCaption(Constants.FIRST_NAME);
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError("Give your first name");
+		firstNameField.setRequiredError(Constants.GIVE_FIRST_NAME);
 		firstNameField.addValidator(new BeanValidator(Registration.class,
-				"firstName"));
+				Constants.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
-		firstNameField.setInputPrompt("Type your first name");
+		firstNameField.setInputPrompt(Constants.TYPE_FIRST_NAME);
 		firstNameField.setNullRepresentation("");
 		registrationFormLayout.addComponent(firstNameField);
 
 		passwordField.setCaption(Constants.PASSWORD);
 		passwordField.setRequired(true);
-		passwordField.setRequiredError("Give your password");
+		passwordField.setRequiredError(Constants.GIVE_PASSWORD);
 		passwordField.addValidator(new BeanValidator(Registration.class,
-				"password"));
+				Constants.PASSWORD_ID));
 		passwordField.setImmediate(true);
 		passwordField.setValidationVisible(true);
-		passwordField.setInputPrompt("Type your password");
+		passwordField.setInputPrompt(Constants.TYPE_PASSWORD);
 		passwordField.setNullRepresentation("");
 		registrationFormLayout.addComponent(passwordField);
 
 		confirmPasswordField.setCaption(Constants.CONFIRM_PASSWORD);
 		confirmPasswordField.setRequired(true);
-		confirmPasswordField.setRequiredError("Give your confirmed password");
+		confirmPasswordField.setRequiredError(Constants.GIVE_CONFIRMED_PASSWORD);
 		confirmPasswordField.addValidator(new BeanValidator(Registration.class,
-				"passwordConfirm"));
+				Constants.PASSWORD_CONFIRM_ID));
 		confirmPasswordField.setImmediate(true);
 		confirmPasswordField.setValidationVisible(true);
-		confirmPasswordField.setInputPrompt("Confirm your password");
+		confirmPasswordField.setInputPrompt(Constants.CONFIRM_PASSWORD);
 		confirmPasswordField.setNullRepresentation("");
 		registrationFormLayout.addComponent(confirmPasswordField);
 
 		emailField.setCaption(Constants.EMAIL);
 		emailField.setRequired(true);
-		emailField.setRequiredError("Give your email");
-		emailField.addValidator(new BeanValidator(Registration.class, "email"));
+		emailField.setRequiredError(Constants.GIVE_EMAIL);
+		emailField.addValidator(new BeanValidator(Registration.class, Constants.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
-		emailField.setInputPrompt("Type your Email");
+		emailField.setInputPrompt(Constants.TYPE_EMAIL);
 		emailField.setNullRepresentation("");
 		registrationFormLayout.addComponent(emailField);
 
 		phoneField.setCaption(Constants.PHONE);
-		phoneField.setInputPrompt("Type your phone number");
+		phoneField.setInputPrompt(Constants.TYPE_PHONE_NUMBER);
 		phoneField.setNullRepresentation("");
 		registrationFormLayout.addComponent(phoneField);
 
 		dateField.setCaption(Constants.DATE_OF_HIRE);
 		dateField.setRequired(true);
-		dateField.setRequiredError("Give your date of employement");
+		dateField.setRequiredError(Constants.GIVE_EMPLOYEMENT_DATE);
 		dateField.addValidator(new BeanValidator(Registration.class,
-				"employmentDate"));
+				Constants.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
-		dateField.setInputPrompt("DD/MM/YY");
+		dateField.setInputPrompt(Constants.DATE_FORMAT);
 		registrationFormLayout.addComponent(dateField);
 
 		jobField.setCaption(Constants.JOB_TITLE);
 		jobField.setRequired(true);
-		jobField.setRequiredError("Give your job title");
-		jobField.addValidator(new BeanValidator(Registration.class, "profileId"));
+		jobField.setRequiredError(Constants.GIVE_JOB_TITLE);
+		jobField.addValidator(new BeanValidator(Registration.class, Constants.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
-		jobField.setInputPrompt("Select your job title");
+		jobField.setInputPrompt(Constants.SELECT_JOB_TITLE);
 		buildJobList();
 		registrationFormLayout.addComponent(jobField);
 
 		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
 		experienceField.setRequired(true);
-		experienceField.setRequiredError("Give your years of experience");
+		experienceField.setRequiredError(Constants.GIVE_EXPERIENCE);
 		experienceField.addValidator(new BeanValidator(Registration.class,
-				"experience"));
+				Constants.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
-		experienceField.setInputPrompt("ex : 2");
+		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
 		experienceField.setNullRepresentation("");
 		registrationFormLayout.addComponent(experienceField);
 
 		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
-		businessEngineerField.setInputPrompt("Select your business engineer");
+		businessEngineerField.setInputPrompt(Constants.SELECT_BUSINESS_ENGINEER);
 		buildEngineerList();
 		registrationFormLayout.addComponent(businessEngineerField);
 
 		managerField.setCaption(Constants.MANAGER);
-		managerField.setInputPrompt("Select your manager");
+		managerField.setInputPrompt(Constants.SELECT_MANAGER);
 		buildManagerList();
 		registrationFormLayout.addComponent(managerField);
 
-		// Registration registration = new Registration();
-		// BeanItem<Registration> item = new BeanItem<Registration>
-		// (registration);
-		// FieldGroup binder = new FieldGroup(item);
-		// binder.setFieldFactory(new RegistrationFieldGroupFactory());
-		// binder.bind(nameField, "name");
-		registration = Registration.Builder.builder().title("Mr.").build();
-		// BeanItem<Registration> item = new BeanItem<Registration>
-		// (registration);
-		// binder = new FieldGroup(item);
-		// binder.setBuffered(false);
-		// binder.bindMemberFields(this);
-		// registrationFormLayout.addComponent(binder.buildAndBind("Name",
-		// "lastName"));
+		registration = Registration.Builder.builder().title(Constants.TITLE_MR).build();
 
 		binder = new BeanFieldGroup<Registration>(
 				Registration.class);
 		binder.setItemDataSource(registration);
-		// registrationFormLayout.addComponent(binder.buildAndBind("Name",
-		// "lastName"));
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 		

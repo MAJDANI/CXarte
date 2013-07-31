@@ -14,6 +14,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	
 
+	
+
 	private Button administrativeDataButton;
 	
 	private Button skillsButton;
@@ -64,11 +66,11 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 	private void buildButtons() {
 		
-		administrativeDataButton.setCaption("Administrative data");
+		administrativeDataButton.setCaption(Constants.ADMINISTRATIVE_DATA);
 		
-		skillsButton.setCaption("Skills");
+		skillsButton.setCaption(Constants.SKILLS);
 		
-		missionsHistoryButton.setCaption("Missions history");
+		missionsHistoryButton.setCaption(Constants.MISSIONS_HISTORY);
 		
 	}
 
