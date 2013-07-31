@@ -3,13 +3,15 @@ package com.novedia.talentmap.web.ui.colleague;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
-public class ColleagueView extends VerticalLayout {
+public class ColleagueView extends VerticalLayout implements ClickListener {
 
 	private GridLayout gridLayout;
 	
@@ -20,6 +22,8 @@ public class ColleagueView extends VerticalLayout {
 	private Button eaeButton;
 	
 	private Panel eaePanel;
+	
+	private ProfilePopIn profilePopIn;
 	
 	/**
 	 * Default constructor
@@ -55,6 +59,7 @@ public class ColleagueView extends VerticalLayout {
 		profilPanel.removeAllComponents();
 		profilButton.setCaption(Constants.PROFILE_LABEL);
 		profilButton.addStyleName(Reindeer.BUTTON_LINK);
+		profilButton.addClickListener(this);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
 		profilPanel.addComponent(profilButton);
 		profilPanel.addStyleName("labelBtnDashboard");
@@ -86,6 +91,14 @@ public class ColleagueView extends VerticalLayout {
 		gridLayout.addComponent(pz);
 		gridLayout.addComponent(pw);
 		
+		
+	}
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if(event.getButton().equals(profilButton)){
+			getUI().addWindow(profilePopIn.buildProfilePopIn());
+		}
 		
 	}
 
@@ -138,6 +151,15 @@ public class ColleagueView extends VerticalLayout {
 	public void setEaeButton(Button eaeButton) {
 		this.eaeButton = eaeButton;
 	}
-	
-	
+
+
+	public ProfilePopIn getProfilePopIn() {
+		return profilePopIn;
+	}
+
+
+	public void setProfilePopIn(ProfilePopIn profilePopIn) {
+		this.profilePopIn = profilePopIn;
+	}
+
 }

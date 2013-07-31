@@ -75,12 +75,31 @@
 	<bean id="profilButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="eaeButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
+	<bean id="administrativeDataButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="skillsButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="missionsHistoryButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="menuPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="menuContentBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="contentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	
+	<bean id="profilePopIn" class="com.novedia.talentmap.web.ui.colleague.ProfilePopIn" scope="session">
+		<property name="administrativeDataButton" ref ="administrativeDataButtonBean" />
+		<property name="skillsButton" ref ="skillsButtonBean" />
+		<property name="missionsHistoryButton" ref ="missionsHistoryButtonBean" />
+		<property name="hLayout" ref ="hLayoutBean" />
+		<property name="menuPanel" ref ="menuPanelBean" />
+		<property name="menuContent" ref ="menuContentBean" />
+		<property name="contentPanel" ref ="contentPanelBean" />
+	</bean>
+	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
 		<property name="gridLayout" ref ="gridLayoutColleagueViewBean" />
 		<property name="profilPanel" ref ="profilPannelBean" />
 		<property name="eaePanel" ref ="eaePannelBean" />
 		<property name="profilButton" ref ="profilButtonBean" />
 		<property name="eaeButton" ref ="eaeButtonBean" />
+		<property name="profilePopIn" ref ="profilePopIn" />
 	</bean>
 	
 	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" />

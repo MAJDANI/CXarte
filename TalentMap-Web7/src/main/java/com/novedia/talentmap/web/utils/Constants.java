@@ -32,7 +32,37 @@ public class Constants {
 	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
 	
 	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error while creating user";
+	
+	/**
+     * Constant for RegistrationForm
+     */
+	
+	public static final String MANAGER = "Manager";
 
+	public static final String BUSINESS_ENGINEER = "Business engineer";
+
+	public static final String YEARS_OF_EXPERIENCE = "Years of experience";
+
+	public static final String JOB_TITLE = "Job title";
+
+	public static final String DATE_OF_HIRE = "Date of hire";
+
+	public static final String PHONE = "Phone";
+
+	public static final String EMAIL = "Email";
+
+	public static final String CHOOSE_A_LOGIN = "Choose a login";
+
+	public static final String CONFIRM_PASSWORD = "Confirm password";
+
+	public static final String PASSWORD = "Password";
+
+	public static final String FIRST_NAME = "First name";
+
+	public static final String NAME = "Name";
+
+	public static final String TITLE_REGISTRATION = "Title";
+	
 
 	public static final String HELLO_LABEL = "Hello ";
 	
@@ -66,7 +96,13 @@ public class Constants {
 	
 	public static final String DASHBOARD_LABEL = "My DASHBOARD"; 
 	
-
+	/**
+     * Constant for Profile Pop-In
+     */
+	
+	public static final String PROFILE_POP_IN_TITLE = "Profile";
+	
+	public static final String PERSONAL_DATA = "Personal data";
 	
 
 }

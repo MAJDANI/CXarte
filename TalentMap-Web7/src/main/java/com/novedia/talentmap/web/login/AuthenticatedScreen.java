@@ -123,7 +123,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 			logout();
 		} else if (event.getButton().equals(changePasswordButton)) {
 			getUI().addWindow(changePasswordScreen.buildChangePasswordForm());
-		}
+		} 
 	}
 	
 	
