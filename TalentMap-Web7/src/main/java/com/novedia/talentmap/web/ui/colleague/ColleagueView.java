@@ -71,18 +71,14 @@ public class ColleagueView extends VerticalLayout {
 		
 		//composants ajoutés par défaut pour le style 
 		Panel px = new Panel();
-		px.addComponent(new Button("XX"));
 		
 		Panel py = new Panel();
-		py.addComponent(new Button("YY"));
 		py.addStyleName("top25");
 		
 		Panel pz = new Panel();
-		pz.addComponent(new Button("ZZ"));
 		pz.addStyleName("top25");
 		
 		Panel pw = new Panel();
-		pw.addComponent(new Button("WW"));
 		pw.addStyleName("top25");
 		
 		gridLayout.addComponent(px);
