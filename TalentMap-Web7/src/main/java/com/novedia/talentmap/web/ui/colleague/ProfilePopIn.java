@@ -6,6 +6,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -15,7 +16,9 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public class ProfilePopIn extends Window implements ClickListener{
 	
-
+	/**
+	 * Vaadin components
+	 */
 	private Button administrativeDataButton;
 	
 	private Button skillsButton;
@@ -35,6 +38,9 @@ public class ProfilePopIn extends Window implements ClickListener{
 	private MissionColleagueContent missionColleagueContent;
 	
 	
+	private GridLayout colleagueDataFormLayout;
+	
+	private ColleagueDataForm colleagueDataForm;
 	
 	/**
 	 * Default constructor
@@ -190,8 +196,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 		this.panelRight = panelRight;
 	}
 
-
-
 	public VerticalLayout getPanelRightContent() {
 		return panelRightContent;
 	}
@@ -212,10 +216,24 @@ public class ProfilePopIn extends Window implements ClickListener{
 		this.missionColleagueContent = missionColleagueContent;
 	}
 	
-	
-	
-	
-	
 
+	public GridLayout getColleagueDataFormLayout() {
+		return colleagueDataFormLayout;
+	}
+
+
+	public void setColleagueDataFormLayout(GridLayout colleagueDataFormLayout) {
+		this.colleagueDataFormLayout = colleagueDataFormLayout;
+	}
+
+
+	public ColleagueDataForm getColleagueDataForm() {
+		return colleagueDataForm;
+	}
+
+
+	public void setColleagueDataForm(ColleagueDataForm colleagueDataForm) {
+		this.colleagueDataForm = colleagueDataForm;
+	}
 
 }

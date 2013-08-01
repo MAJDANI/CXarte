@@ -205,5 +205,29 @@
 		<property name="managerField" ref="managerField" />
 	</bean>
 	
+	<bean id="nameFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="firstNameFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="emailFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="phoneFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="dateFieldColleagueBean" class="com.vaadin.ui.PopupDateField" scope="session" />
+	<bean id="jobFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	<bean id="experienceFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="businessEngineerFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	<bean id="managerFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	
+	<bean id="colleagueDataForm" class="com.novedia.talentmap.web.ui.colleague.ColleagueDataForm" scope="session">
+		<property name="registrationService" ref="registrationService" />
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="nameField" ref="nameFieldColleagueBean" />
+		<property name="firstNameField" ref="firstNameFieldColleagueBean" />
+		<property name="emailField" ref="emailFieldColleagueBean" />
+		<property name="phoneField" ref="phoneFieldColleagueBean" />
+		<property name="dateField" ref="dateFieldColleagueBean" />
+		<property name="jobField" ref="jobFieldColleagueBean" />
+		<property name="experienceField" ref="experienceFieldColleagueBean" />
+		<property name="businessEngineerField" ref="businessEngineerFieldColleagueBean" />
+		<property name="managerField" ref="managerFieldColleagueBean" />
+	</bean>
+	
 	
 </beans>

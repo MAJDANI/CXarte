@@ -5,10 +5,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.validator.constraints.Email;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -29,6 +32,7 @@ public class Colleague implements Serializable {
     /**
      * entity indentifier
      */
+    @NotNull
     protected Integer id;
 
     /**
@@ -39,21 +43,26 @@ public class Colleague implements Serializable {
     /**
      * Profile id
      */
+    @NotNull
     protected Integer profileId;
 
     /**
      * Colleague last name
      */
+    @NotNull
     protected String lastName;
 
     /**
      * Colleague first name
      */
+    @NotNull
     protected String firstName;
 
     /**
      * Colleague email
      */
+    @NotNull
+    @Email
     protected String email;
 
     /**
@@ -64,11 +73,13 @@ public class Colleague implements Serializable {
     /**
      * Colleague employment date
      */
+    @NotNull
     protected Date employmentDate;
 
     /**
      * Colleague experience
      */
+    @NotNull
     protected Integer experience;
 
     /**
@@ -79,6 +90,7 @@ public class Colleague implements Serializable {
     /**
      * Colleague Sex
      */
+    @NotNull
     protected String title;
 
     /**
