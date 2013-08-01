@@ -102,7 +102,17 @@ public class Constants {
 	
 	public static final String PROFILE_POP_IN_TITLE = "Profile";
 	
-	public static final String PERSONAL_DATA = "Personal data";
+	public static final String PERSONAL_DATA_LABEL = "Administrative data";
+	
+	public static final String SKILL_BUTTON_LABEL = "Skills";
+	
+	public static final String HISTORY_MISSION_LABEL = "Missions history";
+	
+	public static final String PROFILE_VIEW = "profileView";
+	
+	public static final String SKILL_VIEW = "skillView";
+	
+	public static final String MISSION_VIEW = "missionView";
 	
 
 }

@@ -81,6 +81,7 @@
 	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
 	<bean id="menuPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="menuContentBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="panelRightContentBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
 	<bean id="contentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	
 	<bean id="profilePopIn" class="com.novedia.talentmap.web.ui.colleague.ProfilePopIn" scope="session">
@@ -88,9 +89,29 @@
 		<property name="skillsButton" ref ="skillsButtonBean" />
 		<property name="missionsHistoryButton" ref ="missionsHistoryButtonBean" />
 		<property name="hLayout" ref ="hLayoutBean" />
-		<property name="menuPanel" ref ="menuPanelBean" />
+		<property name="panelLeft" ref ="menuPanelBean" />
 		<property name="menuContent" ref ="menuContentBean" />
-		<property name="contentPanel" ref ="contentPanelBean" />
+		<property name="panelRight" ref ="contentPanelBean" />
+		<property name="panelRightContent" ref ="panelRightContentBean" />
+		<property name="missionColleagueContent" ref ="missionColleagueContentBean" />
+	</bean>
+	
+	
+	<bean id="listMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="addMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="missionColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent" scope="session" >
+		<property name="listMission" ref ="listMissionBean" />
+		<property name="addMissionButton" ref ="addMissionButtonBean" />
+		<property name="listMissionPanel" ref ="listMissionPanelBean" />
+	</bean>
+	
+	
+	<bean id="listMissionBean" class="com.novedia.talentmap.web.ui.colleague.missions.ListMission" scope="session" >
+		<property name="missionContainer" ref ="missionContainerBean" />
+	</bean>
+	
+	<bean id="missionContainerBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionContainer" scope="session" >
+		<property name="colleagueService" ref ="collaboratorService" />
 	</bean>
 	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >

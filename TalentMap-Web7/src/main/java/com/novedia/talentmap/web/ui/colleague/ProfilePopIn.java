@@ -1,17 +1,19 @@
 package com.novedia.talentmap.web.ui.colleague;
 
+import com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class ProfilePopIn extends Window implements ClickListener{
-	
 	
 
 	private Button administrativeDataButton;
@@ -22,17 +24,24 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	private HorizontalLayout hLayout;
 	
-	private Panel menuPanel;
+	private Panel panelLeft;
 	
 	private VerticalLayout menuContent;
 	
-	private Panel contentPanel;
+	private Panel panelRight;
+	
+	private VerticalLayout panelRightContent;
+	
+	private MissionColleagueContent missionColleagueContent;
+	
+	
 	
 	/**
 	 * Default constructor
 	 */
      public ProfilePopIn(){
     	 super();
+    	 setWidth("1000px");
     	 setCaption(Constants.PROFILE_POP_IN_TITLE);
     	 setModal(true);
      }
@@ -44,58 +53,74 @@ public class ProfilePopIn extends Window implements ClickListener{
       */
 	public Window buildProfilePopIn(){
 		removeAllComponents();
+		hLayout.setSpacing(true);
+		hLayout.removeAllComponents();
 		buildButtons();
 		buildMenu();
-		buildContent();
+		buildPanelRightContent();
+		hLayout.addComponent(panelRight);
+	    hLayout.setExpandRatio(panelRight, 1.0f);
 		addComponent(hLayout);
 		return this;
 	}
 
 
-	private void buildContent() {
-		contentPanel.setSizeFull();
-		contentPanel.setHeight("100%");
-		contentPanel.setWidth(null);
-        hLayout.addComponent(contentPanel);
-        hLayout.setExpandRatio(contentPanel, 1.0f);
-		
+	private void buildPanelRightContent() {
+		panelRight.removeAllComponents();
+		panelRightContent.removeAllComponents();
+		panelRightContent.setSpacing(true);
+		panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
+		panelRight.setContent(panelRightContent);
+		panelRight.setWidth("800px");
 	}
 
 
 	private void buildButtons() {
 		
-		administrativeDataButton.setCaption("Administrative data");
+		administrativeDataButton.setCaption(Constants.PERSONAL_DATA_LABEL);
+		administrativeDataButton.addStyleName(Reindeer.BUTTON_LINK);
+		administrativeDataButton.addClickListener(this);
 		
-		skillsButton.setCaption("Skills");
+		skillsButton.setCaption(Constants.SKILL_BUTTON_LABEL);
+		skillsButton.addStyleName(Reindeer.BUTTON_LINK);
+		skillsButton.addClickListener(this);
 		
-		missionsHistoryButton.setCaption("Missions history");
+		missionsHistoryButton.setCaption(Constants.HISTORY_MISSION_LABEL);
+		missionsHistoryButton.addStyleName(Reindeer.BUTTON_LINK);
+		missionsHistoryButton.addClickListener(this);
 		
 	}
 
 
 	private void buildMenu() {
 	    hLayout.setSizeFull();
-	    menuPanel.setCaption(Constants.PERSONAL_DATA);
-	    menuPanel.setHeight("100%");
-	    menuPanel.setWidth(null);
+	    panelLeft.setWidth("200px");
+	    menuContent.setSpacing(true);
+	    menuContent.setMargin(true);
 	    menuContent.addComponent(administrativeDataButton);
 	    menuContent.addComponent(skillsButton);
 	    menuContent.addComponent(missionsHistoryButton);
-	    menuContent.setWidth(null);
-	    menuContent.setMargin(true);
-	    menuPanel.setContent(menuContent);
-	    hLayout.addComponent(menuPanel);
+	    panelLeft.setContent(menuContent);
+	    hLayout.addComponent(panelLeft);
 	    
 	}
 
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
+		panelRight.removeAllComponents();
+		panelRightContent.removeAllComponents();
+		if (event.getButton().equals(administrativeDataButton)) { 
+			panelRightContent.addComponent(new Label(event.getButton().getCaption()));
+		} else if (event.getButton().equals(skillsButton)) {
+			panelRightContent.addComponent(new Label(event.getButton().getCaption()));
+		} else if(event.getButton().equals(missionsHistoryButton)) {
+			panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
+		}
+		panelRight.setContent(panelRightContent);
 	}
-
-
+	
+	
 	public Button getAdministrativeDataButton() {
 		return administrativeDataButton;
 	}
@@ -126,13 +151,13 @@ public class ProfilePopIn extends Window implements ClickListener{
 	}
 
 
-	public Panel getMenuPanel() {
-		return menuPanel;
+	public Panel getPanelLeft() {
+		return panelLeft;
 	}
 
 
-	public void setMenuPanel(Panel menuPanel) {
-		this.menuPanel = menuPanel;
+	public void setPanelLeft(Panel panelLeft) {
+		this.panelLeft = panelLeft;
 	}
 
 
@@ -156,13 +181,41 @@ public class ProfilePopIn extends Window implements ClickListener{
 	}
 
 
-	public Panel getContentPanel() {
-		return contentPanel;
+	public Panel getPanelRight() {
+		return panelRight;
 	}
 
 
-	public void setContentPanel(Panel contentPanel) {
-		this.contentPanel = contentPanel;
+	public void setPanelRight(Panel panelRight) {
+		this.panelRight = panelRight;
 	}
+
+
+
+	public VerticalLayout getPanelRightContent() {
+		return panelRightContent;
+	}
+
+
+	public void setPanelRightContent(VerticalLayout panelRightContent) {
+		this.panelRightContent = panelRightContent;
+	}
+
+
+	public MissionColleagueContent getMissionColleagueContent() {
+		return missionColleagueContent;
+	}
+
+
+	public void setMissionColleagueContent(
+			MissionColleagueContent missionColleagueContent) {
+		this.missionColleagueContent = missionColleagueContent;
+	}
+	
+	
+	
+	
+	
+
 
 }
