@@ -77,6 +77,7 @@
 	<bean id="formationPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="formationButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
+	<bean id="colleagueDataFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	<bean id="administrativeDataButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="skillsButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="missionsHistoryButtonBean" class="com.vaadin.ui.Button" scope="session" />
@@ -87,6 +88,8 @@
 	<bean id="contentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	
 	<bean id="profilePopIn" class="com.novedia.talentmap.web.ui.colleague.ProfilePopIn" scope="session">
+		<property name="colleagueDataForm" ref ="colleagueDataForm" />
+		<property name="colleagueDataFormLayout" ref ="colleagueDataFormLayoutBean" />
 		<property name="administrativeDataButton" ref ="administrativeDataButtonBean" />
 		<property name="skillsButton" ref ="skillsButtonBean" />
 		<property name="missionsHistoryButton" ref ="missionsHistoryButtonBean" />
@@ -198,6 +201,7 @@
 	<bean id="registrationForm" class="com.novedia.talentmap.web.registration.RegistrationForm" scope="session">
 		<property name="colleagueService" ref="collaboratorService" />
 		<property name="registrationService" ref="registrationService" />
+		<property name="businessEngineerService" ref="businessEngineerService" />
 		<property name="title" ref="title" />
 		<property name="nameField" ref="nameField" />
 		<property name="firstNameField" ref="firstNameField" />
@@ -223,9 +227,13 @@
 	<bean id="businessEngineerFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
 	<bean id="managerFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
 	
+	<bean id="colleagueFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	
 	<bean id="colleagueDataForm" class="com.novedia.talentmap.web.ui.colleague.ColleagueDataForm" scope="session">
 		<property name="registrationService" ref="registrationService" />
 		<property name="colleagueService" ref="collaboratorService" />
+		<property name="businessEngineerService" ref="businessEngineerService" />
+		<property name="colleagueFormLayout" ref="colleagueFormLayoutBean" />
 		<property name="nameField" ref="nameFieldColleagueBean" />
 		<property name="firstNameField" ref="firstNameFieldColleagueBean" />
 		<property name="emailField" ref="emailFieldColleagueBean" />

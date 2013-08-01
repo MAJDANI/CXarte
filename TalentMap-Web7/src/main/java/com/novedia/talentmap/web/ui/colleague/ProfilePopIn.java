@@ -75,7 +75,9 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.removeAllComponents();
 		panelRightContent.removeAllComponents();
 		panelRightContent.setSpacing(true);
-		panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
+		colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
+		panelRightContent.addComponent(colleagueDataForm.buildColleagueDataFormView());
+//		panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
 		panelRight.setContent(panelRightContent);
 		panelRight.setWidth("800px");
 	}
@@ -117,7 +119,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.removeAllComponents();
 		panelRightContent.removeAllComponents();
 		if (event.getButton().equals(administrativeDataButton)) { 
-			panelRightContent.addComponent(new Label(event.getButton().getCaption()));
+			panelRightContent.addComponent(colleagueDataForm.buildColleagueDataFormView());
 		} else if (event.getButton().equals(skillsButton)) {
 			panelRightContent.addComponent(new Label(event.getButton().getCaption()));
 		} else if(event.getButton().equals(missionsHistoryButton)) {
