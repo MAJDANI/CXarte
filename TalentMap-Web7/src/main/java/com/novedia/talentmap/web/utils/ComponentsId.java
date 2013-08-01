@@ -34,6 +34,11 @@ public class ComponentsId {
 	
 	public static final String DASHBOARD_ID = "dashboardLabel";
 	
+	/**
+     * Constant for ColleagueDataForm
+     */
+	public static final String LAST_NAME_FIELD_ID = "name";
 	
+	public static final String DATE_FIELD_COLLEAGUE_DATA_FORM_ID = "dateField-colleagueDataForm";
 
 }

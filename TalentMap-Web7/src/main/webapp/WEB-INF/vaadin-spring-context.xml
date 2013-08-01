@@ -196,6 +196,7 @@
 	<bean id="managerFieldColleagueBean" class="com.vaadin.ui.ComboBox" scope="session" />
 	
 	<bean id="colleagueDataForm" class="com.novedia.talentmap.web.ui.colleague.ColleagueDataForm" scope="session">
+		<property name="registrationService" ref="registrationService" />
 		<property name="colleagueService" ref="collaboratorService" />
 		<property name="nameField" ref="nameFieldColleagueBean" />
 		<property name="firstNameField" ref="firstNameFieldColleagueBean" />

@@ -190,13 +190,13 @@ public class RegistrationScreen extends HorizontalLayout implements
      */
     private boolean validateRegistrationForm() {
 
-	boolean isValidRegistration = true;
+    	boolean isValidRegistration = true;
 	
-	if(!registrationForm.getBinder().isValid()){
-		isValidRegistration = false;
-	}
+    	if(!registrationForm.getBinder().isValid()){
+    		isValidRegistration = false;
+    	}
 
-	return isValidRegistration;
+    	return isValidRegistration;
     }
 
 	/**
