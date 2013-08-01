@@ -96,6 +96,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	 */
 	public LoginScreen(){
 		super();
+		addStyleName("containerPrincipal");
 	}
 	
 	/**

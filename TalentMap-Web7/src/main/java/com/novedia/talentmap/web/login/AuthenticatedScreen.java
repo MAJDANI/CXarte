@@ -16,6 +16,7 @@ import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -59,6 +60,10 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 */
 	private ColleagueView colleagueView;
 	
+	private GridLayout footerGridLayout;
+	
+	private HorizontalLayout footerLayout;
+	
 	
 	/**
 	 * the adminView
@@ -88,6 +93,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	public AuthenticatedScreen(){
 		super();
 		setSpacing(true);
+		addStyleName("headerContent");
 	}
 	
 	
@@ -112,7 +118,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.RH.getId())) { // RH
 			addComponent(rhView.buildRhContent());
 		}
-		
+		buildFooterLayout();
+		addComponent(footerLayout);
 		return this;
 	}
 
@@ -177,6 +184,32 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		headerLayout.addComponent(helloLayout);
 		headerLayout.addComponent(logoTalentMap);
 		headerLayout.addComponent(dashBoardLayout);
+		
+	}
+	
+	private void buildFooterLayout(){
+		footerLayout.removeAllComponents();
+		footerLayout.setId("footerLayer");
+		footerGridLayout.removeAllComponents();
+		footerGridLayout.setRows(1);
+		footerGridLayout.setColumns(3);
+		VerticalLayout bloc1 = new VerticalLayout();
+		bloc1.addComponent(new Label("eeeeeee"));
+		VerticalLayout bloc2 = new VerticalLayout();
+		bloc2.addComponent(new Label("eeeeeee2"));
+		VerticalLayout bloc3 = new VerticalLayout();
+		bloc3.addComponent(new Label("eeeeeee3"));
+		
+		bloc1.addStyleName("footerStyle");
+		bloc2.addStyleName("footerStyle spacer");
+		bloc3.addStyleName("footerStyle");
+		
+		footerGridLayout.addComponent(bloc1);
+		footerGridLayout.addComponent(bloc2);
+		footerGridLayout.addComponent(bloc3);
+		
+		footerLayout.addComponent(footerGridLayout);
+		
 		
 	}
 	
@@ -391,6 +424,28 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	public void setDashBoardLayout(HorizontalLayout dashBoardLayout) {
 		this.dashBoardLayout = dashBoardLayout;
 	}
+
+
+	public HorizontalLayout getFooterLayout() {
+		return footerLayout;
+	}
+
+
+	public void setFooterLayout(HorizontalLayout footerLayout) {
+		this.footerLayout = footerLayout;
+	}
+
+
+	public GridLayout getFooterGridLayout() {
+		return footerGridLayout;
+	}
+
+
+	public void setFooterGridLayout(GridLayout footerGridLayout) {
+		this.footerGridLayout = footerGridLayout;
+	}
+	
+	
 	
 	
 	

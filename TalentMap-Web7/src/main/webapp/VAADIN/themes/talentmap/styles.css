@@ -2,19 +2,56 @@
 
 @import  "../reindeer/styles.css";
 
+@font-face {
+  	font-family: "Myriad";
+ 	src: url(font/Myriad.ttf) format("truetype");
+}
+
+
 .v-captiontext{
 	font-weight: bold;
+	font-family:"Myriad";
 
 }
 
 .v-app {
-	background: #242424 url(common/img/main-bg.png) repeat-x !important;
-	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", geneva, helvetica, arial, tahoma, verdana, sans-serif;
+	background: #fff;
+	font-family:"Myriad";
 	color: #464f52;
 	font-size: 13px;
 	line-height: 18px;
-	
-	padding:20px;
+}
+
+.containerPrincipal, #headerLayout, #footerLayer{
+	background: #242424 url(img/octicons-bg.png) repeat-x !important;
+}
+
+#headerLayout{
+	border-bottom : solid 3px #009cda;
+}
+
+#footerLayer{
+	border-top : solid 3px #009cda;
+}
+
+.headerContent{
+	position:static;
+	background:#fff;
+}
+
+#footerLayer{
+	padding: 20px;
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
+
+.footerStyle{
+	width:300px;
+}
+
+.footerStyle.spacer{
+	margin : 0 10px;
 }
 
 .loginPanel, .registrationPanel {
@@ -181,21 +218,21 @@
 
 .centerPanel{
 	text-align:center;
-	margin-top:50px;
 	padding:25px;
-	border: ridge 3px #009cda;
+	background:#fff;
+	
 }
 
 #dashboardLabel{
 	background:url(img/home.png) 0 center no-repeat;
 	background-size: 25px;
-	height:35px;
 	margin-left:50px;
+	margin-top:50px;
 	cursor:pointer;
 }
 
 #dashboardLabel .v-label{
-	font-size:22px;
+	font-size:40px;
 	color:#fff;
 	line-height:normal !important;
 	margin-top:4px;
@@ -203,13 +240,14 @@
 }
 
 .v-gridlayout-slot .v-panel{
-	-webkit-border-radius: 120px;
-	-moz-border-radius: 120px;
-	border-radius: 120px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 	
-	-moz-box-shadow: 0px 0px 25px 5px #888;
+	/*-moz-box-shadow: 0px 0px 25px 5px #888;
 	-webkit-box-shadow: 0px 0px 25px 5px #888;
-	box-shadow: 0px 0px 25px 5px #888;
+	box-shadow: 0px 0px 25px 5px #888;*/
+	border: solid 3px #009cda;
 	
 	overflow:hidden;
 	margin-left:20px;
@@ -240,8 +278,9 @@
 
 .v-panel-labelBtnDashboard .v-verticallayout{
 	text-align:center;
-	top:50%;
-	margin-top:-25px;
+	/*top:50%;
+	margin-top:-25px;*/
+	margin-top:145px;
 }
 
 .top25{
@@ -251,4 +290,23 @@
 /* Lay the options horizontally */
 .v-select-optiongroup-horizontal .v-select-option {
     display: inline-block;
+}
+
+.labelBtnDashboard .v-panel-content{
+	background:none;
+}
+
+.labelBtnDashboard.profilPanel{
+	background:url(img/stock-photo-17200729-team-forming-skill-word.jpg) center no-repeat;
+	background-size:200px;
+}
+
+.labelBtnDashboard.eaePanel{
+	background:url(img/stock-photo-14344775-positive-or-negative.jpg) center no-repeat;
+	background-size:200px;
+}
+
+.labelBtnDashboard.formationPanel{
+	background:url(img/stock-photo-18656792-back-to-school.jpg) center no-repeat;
+	background-size:200px;
 }

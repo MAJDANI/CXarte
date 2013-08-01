@@ -14,6 +14,8 @@ public class ComponentsId {
 	
 	public static final String EAE_BUTTON_ID = "eaeButton";
 	
+	public static final String FORMATION_BUTTON_ID = "formationButton";
+	
 	public static final String SEARCH_BUTTON_ID = "searchButton";
 	
 	public static final String OLD_PASSWORD_FIELD_ID = "oldPassword";

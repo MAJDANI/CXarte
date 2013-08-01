@@ -21,6 +21,10 @@ public class ColleagueView extends VerticalLayout {
 	
 	private Panel eaePanel;
 	
+	private Button formationButton;
+	
+	private Panel formationPanel;
+	
 	/**
 	 * Default constructor
 	 */
@@ -57,25 +61,33 @@ public class ColleagueView extends VerticalLayout {
 		profilButton.addStyleName(Reindeer.BUTTON_LINK);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
 		profilPanel.addComponent(profilButton);
-		profilPanel.addStyleName("labelBtnDashboard");
+		profilPanel.addStyleName("labelBtnDashboard profilPanel");
 		
 		eaePanel.removeAllComponents();
 		eaeButton.setCaption(Constants.EAE_LABEL);
 		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
 		eaePanel.addComponent(eaeButton);
-		eaePanel.addStyleName("labelBtnDashboard");
+		eaePanel.addStyleName("labelBtnDashboard eaePanel");
+		
+		formationPanel.removeAllComponents();
+		formationButton.setCaption(Constants.FORMATION_LABEL);
+		formationButton.addStyleName(Reindeer.BUTTON_LINK);
+		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
+		formationPanel.addComponent(formationButton);
+		formationPanel.addStyleName("labelBtnDashboard formationPanel");
 		
 		gridLayout.addComponent(profilPanel);
 		gridLayout.addComponent(eaePanel);
+		gridLayout.addComponent(formationPanel);
 		
 		//composants ajoutés par défaut pour le style 
-		Panel px = new Panel();
+		/*Panel px = new Panel();
 		px.addComponent(new Button("XX"));
+		gridLayout.addComponent(px);
 		
 		Panel py = new Panel();
 		py.addComponent(new Button("YY"));
-		py.addStyleName("top25");
 		
 		Panel pz = new Panel();
 		pz.addComponent(new Button("ZZ"));
@@ -88,7 +100,7 @@ public class ColleagueView extends VerticalLayout {
 		gridLayout.addComponent(px);
 		gridLayout.addComponent(py);
 		gridLayout.addComponent(pz);
-		gridLayout.addComponent(pw);
+		gridLayout.addComponent(pw);*/
 		
 		
 	}
@@ -142,6 +154,28 @@ public class ColleagueView extends VerticalLayout {
 	public void setEaeButton(Button eaeButton) {
 		this.eaeButton = eaeButton;
 	}
+
+
+	public Button getFormationButton() {
+		return formationButton;
+	}
+
+
+	public void setFormationButton(Button formationButton) {
+		this.formationButton = formationButton;
+	}
+
+
+	public Panel getFormationPanel() {
+		return formationPanel;
+	}
+
+
+	public void setFormationPanel(Panel formationPanel) {
+		this.formationPanel = formationPanel;
+	}
+	
+	
 	
 	
 }
