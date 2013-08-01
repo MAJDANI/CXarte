@@ -32,7 +32,85 @@ public class Constants {
 	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
 	
 	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error while creating user";
+	
+	/**
+     * Constant for RegistrationForm and ColleagueDataForm
+     */
+	
+	public static final String MANAGER = "Manager";
 
+	public static final String BUSINESS_ENGINEER = "Business engineer";
+
+	public static final String YEARS_OF_EXPERIENCE = "Years of experience";
+
+	public static final String JOB_TITLE = "Job title";
+
+	public static final String DATE_OF_HIRE = "Date of hire";
+
+	public static final String PHONE = "Phone";
+
+	public static final String EMAIL = "Email";
+
+	public static final String CONFIRM_PASSWORD = "Confirm password";
+
+	public static final String PASSWORD = "Password";
+
+	public static final String FIRST_NAME = "First name";
+
+	public static final String NAME = "Name";
+
+	public static final String TITLE_REGISTRATION = "Title";
+	
+	public static final String SELECT_MANAGER = "Select your manager";
+
+	public static final String SELECT_BUSINESS_ENGINEER = "Select your business engineer";
+
+	public static final String EXPERIENCE_FORMAT = "ex : 2";
+
+	public static final String GIVE_EXPERIENCE = "Give your years of experience";
+
+	public static final String SELECT_JOB_TITLE = "Select your job title";
+
+	public static final String GIVE_JOB_TITLE = "Give your job title";
+
+	public static final String DATE_FORMAT = "DD/MM/YY";
+
+	public static final String GIVE_EMPLOYEMENT_DATE = "Give your date of employement";
+
+	public static final String TYPE_PHONE_NUMBER = "Type your phone number";
+
+	public static final String TYPE_EMAIL = "Type your Email";
+
+	public static final String GIVE_EMAIL = "Give your email";
+
+	public static final String CONFIRM_PASSWORD_TEXT = "Confirm your password";
+
+	public static final String TYPE_PASSWORD = "Type your password";
+
+	public static final String GIVE_PASSWORD = "Give your password";
+
+	public static final String GIVE_CONFIRMED_PASSWORD = "Give your confirmed password";
+
+	public static final String TYPE_FIRST_NAME = "Type your first name";
+
+	public static final String GIVE_FIRST_NAME = "Give your first name";
+
+	public static final String TYPE_NAME = "Type your name";
+
+	public static final String GIVE_LAST_NAME = "Give your last name";
+
+	public static final String TYPE_LOGIN = "Type your login";
+
+	public static final String GIVE_LOGIN = "Give your login";
+
+	public static final String CHOOSE_LOGIN = "Choose a login";
+
+	public static final String GIVE_TITLE = "Give title";
+
+	public static final String TITLE_MRS = "Mrs.";
+
+	public static final String TITLE_MR = "Mr.";
+	
 
 	public static final String HELLO_LABEL = "Hello ";
 	
@@ -68,7 +146,29 @@ public class Constants {
 	
 	public static final String DASHBOARD_LABEL = "My DASHBOARD"; 
 	
+	/**
+     * Constant for Profile Pop-In
+     */
+	
+	public static final String PROFILE_POP_IN_TITLE = "Profile";
+	
+	public static final String PERSONAL_DATA_LABEL = "Administrative data";
+	
+	public static final String SKILL_BUTTON_LABEL = "Skills";
+	
+	public static final String HISTORY_MISSION_LABEL = "Missions history";
+	
+	public static final String PROFILE_VIEW = "profileView";
+	
+	public static final String SKILL_VIEW = "skillView";
+	
+	public static final String MISSION_VIEW = "missionView";
+	
+	public static final String MISSIONS_HISTORY = "Missions history";
 
+	public static final String SKILLS = "Skills";
+
+	public static final String ADMINISTRATIVE_DATA = "Administrative data";
 	
 
 }

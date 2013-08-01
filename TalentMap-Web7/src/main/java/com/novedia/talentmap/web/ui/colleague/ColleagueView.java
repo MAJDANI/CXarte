@@ -3,14 +3,19 @@ package com.novedia.talentmap.web.ui.colleague;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
-public class ColleagueView extends VerticalLayout {
+public class ColleagueView extends VerticalLayout implements ClickListener {
 
+	/**
+	 * Vaadin components
+	 */
 	private GridLayout gridLayout;
 	
 	private Panel profilPanel;
@@ -20,6 +25,8 @@ public class ColleagueView extends VerticalLayout {
 	private Button eaeButton;
 	
 	private Panel eaePanel;
+	
+	private ProfilePopIn profilePopIn;
 	
 	private Button formationButton;
 	
@@ -59,6 +66,7 @@ public class ColleagueView extends VerticalLayout {
 		profilPanel.removeAllComponents();
 		profilButton.setCaption(Constants.PROFILE_LABEL);
 		profilButton.addStyleName(Reindeer.BUTTON_LINK);
+		profilButton.addClickListener(this);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
 		profilPanel.addComponent(profilButton);
 		profilPanel.addStyleName("labelBtnDashboard profilPanel");
@@ -81,27 +89,13 @@ public class ColleagueView extends VerticalLayout {
 		gridLayout.addComponent(eaePanel);
 		gridLayout.addComponent(formationPanel);
 		
-		//composants ajoutés par défaut pour le style 
-		/*Panel px = new Panel();
-		px.addComponent(new Button("XX"));
-		gridLayout.addComponent(px);
-		
-		Panel py = new Panel();
-		py.addComponent(new Button("YY"));
-		
-		Panel pz = new Panel();
-		pz.addComponent(new Button("ZZ"));
-		pz.addStyleName("top25");
-		
-		Panel pw = new Panel();
-		pw.addComponent(new Button("WW"));
-		pw.addStyleName("top25");
-		
-		gridLayout.addComponent(px);
-		gridLayout.addComponent(py);
-		gridLayout.addComponent(pz);
-		gridLayout.addComponent(pw);*/
-		
+	}
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if(event.getButton().equals(profilButton)){
+			getUI().addWindow(profilePopIn.buildProfilePopIn());
+		}
 		
 	}
 
@@ -175,7 +169,13 @@ public class ColleagueView extends VerticalLayout {
 		this.formationPanel = formationPanel;
 	}
 	
-	
-	
-	
+	public ProfilePopIn getProfilePopIn() {
+		return profilePopIn;
+	}
+
+
+	public void setProfilePopIn(ProfilePopIn profilePopIn) {
+		this.profilePopIn = profilePopIn;
+	}
+
 }
