@@ -22,13 +22,6 @@
 		<jetty.maven.plugin.version>8.1.11.v20130520</jetty.maven.plugin.version>
 	</properties>
 	
-<!-- 	<repositories> -->
-<!-- 		<repository> -->
-<!--    			<id>qiiip-repo</id> -->
-<!--    			<url>http://qiiip.org/mavenRepo</url> -->
-<!-- 		</repository>  -->
-		
-<!-- 	</repositories> -->
 
 	<dependencies>
 	

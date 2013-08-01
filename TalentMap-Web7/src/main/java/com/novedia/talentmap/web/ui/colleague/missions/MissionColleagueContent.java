@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.colleague.missions;
 
+import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.utils.MissionFieldLabel;
 import com.vaadin.ui.Button;
@@ -40,16 +41,17 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	addMissionButton.addClickListener(this);
     	
     	addComponent(addMissionButton);
-    	addComponent(listMissionPanel);
     	buildListMissionPanel();
+    	addComponent(listMissionPanel);
     	return this;
     }
     
     
     private void buildListMissionPanel(){
-    	if(listMission.fillAllColleagueMission().size() > 0){
+    	PagedTable t = listMission.fillAllColleagueMission();
+    	if(t.size() > 0){
     		listMissionPanel.removeAllComponents();
-    		listMissionPanel.addComponent(listMission.fillAllColleagueMission());
+    		listMissionPanel.addComponent(t);
     		listMissionPanel.setVisible(true);
     	} else {
     		listMissionPanel.setVisible(false);

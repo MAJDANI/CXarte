@@ -29,7 +29,6 @@ public class MissionContainer extends BeanItemContainer<Mission> {
      * @return
      */
     public MissionContainer fillContainer(int collabId) {
-
 		try {
 			    List<Mission> listMission = this.colleagueService.getAllMissions(collabId);
 			    removeAllItems();

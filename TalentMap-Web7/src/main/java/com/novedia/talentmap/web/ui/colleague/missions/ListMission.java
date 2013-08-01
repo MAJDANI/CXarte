@@ -1,7 +1,7 @@
 package com.novedia.talentmap.web.ui.colleague.missions;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Mission;
@@ -47,6 +47,7 @@ public class ListMission extends PagedTable {
      * @return PagedTable
      */
     public PagedTable fillAllColleagueMission(){
+    	removeAllItems();
     	int colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
     	missionContainer.fillContainer(colleagueId);
     	buildTable();
@@ -57,8 +58,9 @@ public class ListMission extends PagedTable {
      * Build mission table
      */
     private void buildTable(){
-    	Collection<Mission> collectionMission = this.missionContainer.getItemIds();
-    	for (Mission mission : collectionMission) {
+    	List<Mission> listMission = missionContainer.getItemIds();
+    	
+    	for (Mission mission : listMission) {
     		String dateDebut = formatterDate(mission.getStartDate());
     	    String dateFin = formatterDate(mission.getEndDate());
     	    String[] toolNames = { "", "", "" };
@@ -73,7 +75,6 @@ public class ListMission extends PagedTable {
     	    if (notes != null && notes.length() >= 25) {
     	    	notes = notes.substring(0, 25) + "[...]";
     	    }
-    	    
     	    addItem(new Object[] { mission.getTitle(),
     		    mission.getClient().getName(), mission.getPlace(),
     		    dateDebut, dateFin, notes, toolNames[0], toolNames[1],
