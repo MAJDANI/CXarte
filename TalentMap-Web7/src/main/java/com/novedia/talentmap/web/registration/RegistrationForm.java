@@ -7,6 +7,7 @@ import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
+import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -35,43 +36,43 @@ public class RegistrationForm extends FormLayout {
 	 */
 	private BeanFieldGroup<Registration> binder;
 	
-	@PropertyId(Constants.TITLE_ID)
+	@PropertyId(ComponentsId.TITLE_ID)
 	private OptionGroup title;
 	
-	@PropertyId(Constants.LAST_NAME_ID)
+	@PropertyId(ComponentsId.LAST_NAME_ID)
 	private TextField nameField;
 	
-	@PropertyId(Constants.FIRST_NAME_ID)
+	@PropertyId(ComponentsId.FIRST_NAME_ID)
 	private TextField firstNameField;
 	
-	@PropertyId(Constants.PASSWORD_ID)
+	@PropertyId(ComponentsId.PASSWORD_ID)
 	private PasswordField passwordField;
 	
-	@PropertyId(Constants.PASSWORD_CONFIRM_ID)
+	@PropertyId(ComponentsId.PASSWORD_CONFIRM_ID)
 	private PasswordField confirmPasswordField;
 	
-	@PropertyId(Constants.LOGIN_ID)
+	@PropertyId(ComponentsId.LOGIN_ID)
 	private TextField loginField;
 	
-	@PropertyId(Constants.EMAIL_ID)
+	@PropertyId(ComponentsId.EMAIL_ID)
 	private TextField emailField;
 	
-	@PropertyId(Constants.PHONE_ID)
+	@PropertyId(ComponentsId.PHONE_ID)
 	private TextField phoneField;
 	
-	@PropertyId(Constants.EMPLOYMENT_DATE_ID)
+	@PropertyId(ComponentsId.EMPLOYMENT_DATE_ID)
 	private PopupDateField dateField;
 	
-	@PropertyId(Constants.PROFILE_ID)
+	@PropertyId(ComponentsId.PROFILE_ID)
 	private ComboBox jobField;
 	
-	@PropertyId(Constants.EXPERIENCE_ID)
+	@PropertyId(ComponentsId.EXPERIENCE_ID)
 	private TextField experienceField;
 	
-	@PropertyId(Constants.BUSINESS_ENGINEER_ID)
+	@PropertyId(ComponentsId.BUSINESS_ENGINEER_ID)
 	private ComboBox businessEngineerField;
 	
-	@PropertyId(Constants.MANAGER_ID)
+	@PropertyId(ComponentsId.MANAGER_ID)
 	private ComboBox managerField;
 	
 	private GridLayout registrationFormLayout;
@@ -121,7 +122,7 @@ public class RegistrationForm extends FormLayout {
 		loginField.setCaption(Constants.CHOOSE_LOGIN);
 		loginField.setRequired(true);
 		loginField.setRequiredError(Constants.GIVE_LOGIN);
-		loginField.addValidator(new BeanValidator(Registration.class, Constants.LOGIN_ID));
+		loginField.addValidator(new BeanValidator(Registration.class, ComponentsId.LOGIN_ID));
 		loginField.setImmediate(true);
 		loginField.setValidationVisible(true);
 		loginField.setInputPrompt(Constants.TYPE_LOGIN);
@@ -131,7 +132,7 @@ public class RegistrationForm extends FormLayout {
 		nameField.setCaption(Constants.NAME);
 		nameField.setRequired(true);
 		nameField.setRequiredError(Constants.GIVE_LAST_NAME);
-		nameField.addValidator(new BeanValidator(Registration.class, Constants.LAST_NAME_ID));
+		nameField.addValidator(new BeanValidator(Registration.class, ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
 		nameField.setInputPrompt(Constants.TYPE_NAME);
@@ -142,7 +143,7 @@ public class RegistrationForm extends FormLayout {
 		firstNameField.setRequired(true);
 		firstNameField.setRequiredError(Constants.GIVE_FIRST_NAME);
 		firstNameField.addValidator(new BeanValidator(Registration.class,
-				Constants.FIRST_NAME_ID));
+				ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
 		firstNameField.setInputPrompt(Constants.TYPE_FIRST_NAME);
@@ -153,7 +154,7 @@ public class RegistrationForm extends FormLayout {
 		passwordField.setRequired(true);
 		passwordField.setRequiredError(Constants.GIVE_PASSWORD);
 		passwordField.addValidator(new BeanValidator(Registration.class,
-				Constants.PASSWORD_ID));
+				ComponentsId.PASSWORD_ID));
 		passwordField.setImmediate(true);
 		passwordField.setValidationVisible(true);
 		passwordField.setInputPrompt(Constants.TYPE_PASSWORD);
@@ -164,7 +165,7 @@ public class RegistrationForm extends FormLayout {
 		confirmPasswordField.setRequired(true);
 		confirmPasswordField.setRequiredError(Constants.GIVE_CONFIRMED_PASSWORD);
 		confirmPasswordField.addValidator(new BeanValidator(Registration.class,
-				Constants.PASSWORD_CONFIRM_ID));
+				ComponentsId.PASSWORD_CONFIRM_ID));
 		confirmPasswordField.setImmediate(true);
 		confirmPasswordField.setValidationVisible(true);
 		confirmPasswordField.setInputPrompt(Constants.CONFIRM_PASSWORD);
@@ -174,7 +175,7 @@ public class RegistrationForm extends FormLayout {
 		emailField.setCaption(Constants.EMAIL);
 		emailField.setRequired(true);
 		emailField.setRequiredError(Constants.GIVE_EMAIL);
-		emailField.addValidator(new BeanValidator(Registration.class, Constants.EMAIL_ID));
+		emailField.addValidator(new BeanValidator(Registration.class, ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
 		emailField.setInputPrompt(Constants.TYPE_EMAIL);
@@ -190,7 +191,7 @@ public class RegistrationForm extends FormLayout {
 		dateField.setRequired(true);
 		dateField.setRequiredError(Constants.GIVE_EMPLOYEMENT_DATE);
 		dateField.addValidator(new BeanValidator(Registration.class,
-				Constants.EMPLOYMENT_DATE_ID));
+				ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.setInputPrompt(Constants.DATE_FORMAT);
@@ -199,7 +200,7 @@ public class RegistrationForm extends FormLayout {
 		jobField.setCaption(Constants.JOB_TITLE);
 		jobField.setRequired(true);
 		jobField.setRequiredError(Constants.GIVE_JOB_TITLE);
-		jobField.addValidator(new BeanValidator(Registration.class, Constants.PROFILE_ID));
+		jobField.addValidator(new BeanValidator(Registration.class, ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
 		jobField.setInputPrompt(Constants.SELECT_JOB_TITLE);
@@ -210,7 +211,7 @@ public class RegistrationForm extends FormLayout {
 		experienceField.setRequired(true);
 		experienceField.setRequiredError(Constants.GIVE_EXPERIENCE);
 		experienceField.addValidator(new BeanValidator(Registration.class,
-				Constants.EXPERIENCE_ID));
+				ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);

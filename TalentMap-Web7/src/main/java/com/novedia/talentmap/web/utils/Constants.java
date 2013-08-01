@@ -111,32 +111,6 @@ public class Constants {
 
 	public static final String TITLE_MR = "Mr.";
 	
-	public static final String MANAGER_ID = "managerId";
-
-	public static final String BUSINESS_ENGINEER_ID = "businessEngineer";
-
-	public static final String EXPERIENCE_ID = "experience";
-
-	public static final String PROFILE_ID = "profileId";
-
-	public static final String EMPLOYMENT_DATE_ID = "employmentDate";
-
-	public static final String PHONE_ID = "phone";
-
-	public static final String EMAIL_ID = "email";
-
-	public static final String LOGIN_ID = "login";
-	
-	public static final String PASSWORD_CONFIRM_ID = "passwordConfirm";
-
-	public static final String PASSWORD_ID = "password";
-
-	public static final String FIRST_NAME_ID = "firstName";
-
-	public static final String LAST_NAME_ID = "lastName";
-
-	public static final String TITLE_ID = "title";
-	
 
 	public static final String HELLO_LABEL = "Hello ";
 	

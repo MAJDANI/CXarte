@@ -39,31 +39,31 @@ public class ColleagueDataForm extends FormLayout implements FocusListener{
 	
 	private GridLayout colleagueFormLayout;
 	
-	@PropertyId(Constants.LAST_NAME_ID)
+	@PropertyId(ComponentsId.LAST_NAME_ID)
 	private TextField nameField;
 	
-	@PropertyId(Constants.FIRST_NAME_ID)
+	@PropertyId(ComponentsId.FIRST_NAME_ID)
 	private TextField firstNameField;
 	
-	@PropertyId(Constants.EMAIL_ID)
+	@PropertyId(ComponentsId.EMAIL_ID)
 	private TextField emailField;
 	
-	@PropertyId(Constants.PHONE_ID)
+	@PropertyId(ComponentsId.PHONE_ID)
 	private TextField phoneField;
 	
-	@PropertyId(Constants.EMPLOYMENT_DATE_ID)
+	@PropertyId(ComponentsId.EMPLOYMENT_DATE_ID)
 	private PopupDateField dateField;
 	
-	@PropertyId(Constants.PROFILE_ID)
+	@PropertyId(ComponentsId.PROFILE_ID)
 	private ComboBox jobField;
 	
-	@PropertyId(Constants.EXPERIENCE_ID)
+	@PropertyId(ComponentsId.EXPERIENCE_ID)
 	private TextField experienceField;
 	
-	@PropertyId(Constants.BUSINESS_ENGINEER_ID)
+	@PropertyId(ComponentsId.BUSINESS_ENGINEER_ID)
 	private ComboBox businessEngineerField;
 	
-	@PropertyId(Constants.MANAGER_ID)
+	@PropertyId(ComponentsId.MANAGER_ID)
 	private ComboBox managerField;
 	
 	/**
@@ -100,43 +100,46 @@ public class ColleagueDataForm extends FormLayout implements FocusListener{
 		nameField.setCaption(Constants.NAME);
 		nameField.setRequired(true);
 		nameField.setRequiredError(Constants.GIVE_LAST_NAME);
-		nameField.addValidator(new BeanValidator(Colleague.class, Constants.LAST_NAME_ID));
+		nameField.addValidator(new BeanValidator(Colleague.class, ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
 		nameField.addFocusListener(this);
 		nameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
-		nameField.setId(ComponentsId.LAST_NAME_FIELD_ID);
+		nameField.setId(ComponentsId.LAST_NAME_ID);
 		colleagueFormLayout.addComponent(nameField);
 		
 		firstNameField.setCaption(Constants.FIRST_NAME);
 		firstNameField.setRequired(true);
 		firstNameField.setRequiredError(Constants.GIVE_FIRST_NAME);
-		firstNameField.addValidator(new BeanValidator(Colleague.class,Constants.FIRST_NAME_ID));
+		firstNameField.addValidator(new BeanValidator(Colleague.class,ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
 		firstNameField.addFocusListener(this);
 		firstNameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
 		colleagueFormLayout.addComponent(firstNameField);
 		
 		jobField.setCaption(Constants.JOB_TITLE);
 		buildJobList();
 		jobField.setRequired(true);
 		jobField.setRequiredError(Constants.GIVE_JOB_TITLE);
-		jobField.addValidator(new BeanValidator(Colleague.class, Constants.PROFILE_ID));
+		jobField.addValidator(new BeanValidator(Colleague.class, ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
 		jobField.addFocusListener(this);
 		jobField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
+		jobField.setId(ComponentsId.PROFILE_ID);
 		colleagueFormLayout.addComponent(jobField);
 		
 		emailField.setCaption(Constants.EMAIL);
 		emailField.setRequired(true);
 		emailField.setRequiredError(Constants.GIVE_EMAIL);
-		emailField.addValidator(new BeanValidator(Colleague.class, Constants.EMAIL_ID));
+		emailField.addValidator(new BeanValidator(Colleague.class, ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
 		emailField.addFocusListener(this);
 		emailField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		emailField.setId(ComponentsId.EMAIL_ID);
 		colleagueFormLayout.addComponent(emailField);
 		
 		phoneField.setCaption(Constants.PHONE);
@@ -144,39 +147,43 @@ public class ColleagueDataForm extends FormLayout implements FocusListener{
 		phoneField.setNullRepresentation("");
 		phoneField.addFocusListener(this);
 		phoneField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		phoneField.setId(ComponentsId.PHONE_ID);
 		colleagueFormLayout.addComponent(phoneField);
 		
 		dateField.setCaption(Constants.DATE_OF_HIRE);
 		dateField.setRequired(true);
 		dateField.setRequiredError(Constants.GIVE_EMPLOYEMENT_DATE);
-		dateField.addValidator(new BeanValidator(Colleague.class,Constants.EMPLOYMENT_DATE_ID));
+		dateField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.addFocusListener(this);
-		dateField.setId(ComponentsId.DATE_FIELD_ID);
+		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		colleagueFormLayout.addComponent(dateField);
 		
 		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
 		experienceField.setRequired(true);
 		experienceField.setRequiredError(Constants.GIVE_EXPERIENCE);
-		experienceField.addValidator(new BeanValidator(Colleague.class,Constants.EXPERIENCE_ID));
+		experienceField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
 		experienceField.addFocusListener(this);
 		experienceField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		experienceField.setId(ComponentsId.EXPERIENCE_ID);
 		colleagueFormLayout.addComponent(experienceField);
 		
 		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
 		buildEngineerList();
 		businessEngineerField.addFocusListener(this);
 		businessEngineerField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
+		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
 		colleagueFormLayout.addComponent(businessEngineerField);
 		
 		managerField.setCaption(Constants.MANAGER);
 		buildManagerList();
 		managerField.addFocusListener(this);
 		managerField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
+		managerField.setId(ComponentsId.MANAGER_ID);
 		colleagueFormLayout.addComponent(managerField);
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		Colleague colleague = colleagueService.getColleague(authentication.getColleagueId());
