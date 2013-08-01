@@ -2,9 +2,11 @@ package com.novedia.talentmap.web.registration;
 
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.Profile;
 import com.novedia.talentmap.model.entity.Registration;
+import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.utils.ComponentsId;
@@ -30,6 +32,7 @@ public class RegistrationForm extends FormLayout {
 	 */
 	private IRegistrationService registrationService;
 	private IColleagueService colleagueService;
+	private IBusinessEngineerService businessEngineerService;
 	
 	/**
 	 * Vaadin components
@@ -259,12 +262,15 @@ public class RegistrationForm extends FormLayout {
 	}
 
 	private void buildEngineerList() {
-		List<Colleague> allBusinessEngineers = colleagueService
-				.getAllBusinessEngineers();
-		for (Colleague colleague : allBusinessEngineers) {
-			businessEngineerField.addItem(colleague.getId());
-			businessEngineerField.setItemCaption(colleague.getId(),
-					colleague.getFirstName() + " " + colleague.getLastName());
+		List<BusinessEngineer> allBusinessEngineers = businessEngineerService
+				.getAllBusinessEngineer();
+
+		for (BusinessEngineer businessEngineer : allBusinessEngineers) {
+			businessEngineerField.addItem(businessEngineer);
+			businessEngineerField.setItemCaption(
+					businessEngineer,
+					businessEngineer.getFirstName() + " "
+							+ (businessEngineer.getLastName()));
 		}
 	}
 	
@@ -412,6 +418,15 @@ public class RegistrationForm extends FormLayout {
 
 	public void setBinder(BeanFieldGroup<Registration> binder) {
 		this.binder = binder;
+	}
+
+	public IBusinessEngineerService getBusinessEngineerService() {
+		return businessEngineerService;
+	}
+
+	public void setBusinessEngineerService(
+			IBusinessEngineerService businessEngineerService) {
+		this.businessEngineerService = businessEngineerService;
 	}
 
 }
