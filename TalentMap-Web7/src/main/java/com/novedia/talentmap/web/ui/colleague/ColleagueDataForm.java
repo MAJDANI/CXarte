@@ -153,7 +153,7 @@ public class ColleagueDataForm extends FormLayout implements FocusListener{
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.addFocusListener(this);
-		dateField.setId(ComponentsId.DATE_FIELD_COLLEAGUE_DATA_FORM_ID);
+		dateField.setId(ComponentsId.DATE_FIELD_ID);
 		colleagueFormLayout.addComponent(dateField);
 		
 		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
