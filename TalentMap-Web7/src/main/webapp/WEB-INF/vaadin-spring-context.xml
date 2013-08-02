@@ -112,6 +112,7 @@
 	<bean id="confirmDeleteLabelBean" class="com.vaadin.ui.Label" scope="session" />
 	<bean id="confirmButtonContainerBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	<bean id="windowConfirmBean" class="com.vaadin.ui.Window" scope="session" />
+	<bean id="missionFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	
 	<bean id="missionColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent" scope="session" >
 		<property name="colleagueService" ref ="collaboratorService" />
@@ -127,7 +128,10 @@
 		<property name="confirmButtonContainer" ref ="confirmButtonContainerBean" />
 		<property name="yesButton" ref ="yesButtonBean" />
 		<property name="noButton" ref ="noButtonBean" />
-		
+		<property name="missionForm" ref ="missionForm" />
+		<property name="formLayout" ref ="missionFormLayoutBean" />
+		<property name="saveButton" ref ="saveButtonMissionFormBean" />
+		<property name="cancelButton" ref ="cancelButtonMissionFormBean" />
 	</bean>
 	
 	
@@ -278,7 +282,6 @@
 	<bean id="missionForm" class="com.novedia.talentmap.web.ui.colleague.missions.MissionForm" scope="session">
 		<property name="clientService" ref="clientService" />
 		<property name="skillService" ref="skillService" />
-		<property name="collabService" ref="collaboratorService" />
 		<property name="titleField" ref="titleFieldMissionBean" />
 		<property name="clientField" ref="clientFieldMissionBean" />
 		<property name="placeField" ref="placeFieldMissionBean" />
@@ -286,9 +289,6 @@
 		<property name="endDateField" ref="endDateFieldMissionBean" />
 		<property name="commentField" ref="commentFieldMissionBean" />
 		<property name="toolsField" ref="toolsFieldMissionBean" />
-		<property name="saveButton" ref ="saveButtonMissionFormBean" />
-		<property name="cancelButton" ref ="cancelButtonMissionFormBean" />
-		
 	</bean>
 	
 	

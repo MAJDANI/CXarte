@@ -75,7 +75,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		colleagueDataForm.setColleagueFormLayout(formLayout);
-		missionForm.setMissionFormLayout(formLayout);
+//		missionForm.setMissionFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		panelRight.setWidth("800px");
 	}
@@ -118,7 +118,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		if (event.getButton().equals(administrativeDataButton)) { 
 			panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		} else if (event.getButton().equals(skillsButton)) {
-			panelRight.setContent(missionForm.buildMissionFormView());
+//			panelRight.setContent(missionForm.buildMissionFormView());
 		} else if(event.getButton().equals(missionsHistoryButton)) {
 			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		}
