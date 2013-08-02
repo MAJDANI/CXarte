@@ -121,10 +121,11 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	if(listMission.size() > 0){
     		addMissionPanel.setVisible(false);
     		addMissionButton.setEnabled(true);
-    	}else {
-    		addMissionPanel.setVisible(true);
-    		addMissionButton.setEnabled(false);
-		}
+    	}
+//    	else {
+//    		addMissionPanel.setVisible(true);
+//    		addMissionButton.setEnabled(false);
+//		}
     }
     
 	private void buildListMissionPanel(){
@@ -189,7 +190,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 				addMissionPanel.setVisible(false);
 				addMissionButton.setEnabled(true);
 		}else if(event.getButton().equals(saveButton)){
-
+			addMissionButton.setEnabled(true);
+			
 			int formValidation = validatedMissionForm(missionForm.getMissionDTO());
     
 			switch (formValidation) {
@@ -208,8 +210,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 						Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 						missionForm.getMissionDTO().setColleagueId(authentication.getColleagueId());
 						insertMission(missionForm.getMissionDTO());
-						addMissionPanel.setVisible(false);	
-						addMissionButton.setEnabled(true);
+						buildViewMissionColleagueContent();
+//						addMissionPanel.setVisible(false);	
 					}
 					if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
 						updateMission(missionForm.getMissionDTO());
@@ -332,10 +334,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	try {
     		int result = this.colleagueService.addMission(missionToInsert);
     		if (result != 0) {
-    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_OK,Notification.Type.WARNING_MESSAGE);
-    			refreshListMission();
+//    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_OK,Notification.Type.WARNING_MESSAGE);
     		} else {
-    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.WARNING_MESSAGE);
+    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.ERROR_MESSAGE);
     		}
 
     	} catch (DataAccessException e) {
@@ -355,14 +356,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 
     }
     
-    /**
-     * This method creates a new object ListMission, filled with all elements
-     * founded in database, so a new mission created will be visible in the list
-     */
-    public void refreshListMission() {
-
-    }
-
 	public IColleagueService getColleagueService() {
 		return colleagueService;
 	}
