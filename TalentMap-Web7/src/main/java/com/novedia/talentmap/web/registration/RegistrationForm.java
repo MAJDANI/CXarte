@@ -113,7 +113,7 @@ public class RegistrationForm extends FormLayout {
 	}
 
 	public void buildRegistrationForm() {
-		title.setCaption(Constants.TITLE_REGISTRATION);
+		title.setCaption(Constants.TITLE_CAPTION);
 		title.addItem(Constants.TITLE_MR);
 		title.addItem(Constants.TITLE_MRS);
 		title.setMultiSelect(false);

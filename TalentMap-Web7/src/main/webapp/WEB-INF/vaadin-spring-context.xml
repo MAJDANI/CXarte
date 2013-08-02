@@ -88,7 +88,8 @@
 	
 	<bean id="profilePopIn" class="com.novedia.talentmap.web.ui.colleague.ProfilePopIn" scope="session">
 		<property name="colleagueDataForm" ref ="colleagueDataForm" />
-		<property name="colleagueDataFormLayout" ref ="colleagueDataFormLayoutBean" />
+		<property name="missionForm" ref ="missionForm" />
+		<property name="formLayout" ref ="colleagueDataFormLayoutBean" />
 		<property name="administrativeDataButton" ref ="administrativeDataButtonBean" />
 		<property name="skillsButton" ref ="skillsButtonBean" />
 		<property name="missionsHistoryButton" ref ="missionsHistoryButtonBean" />
@@ -249,6 +250,31 @@
 		<property name="experienceField" ref="experienceFieldColleagueBean" />
 		<property name="businessEngineerField" ref="businessEngineerFieldColleagueBean" />
 		<property name="managerField" ref="managerFieldColleagueBean" />
+	</bean>
+	
+	<bean id="titleFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="clientFieldMissionBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	<bean id="placeFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="startDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
+	<bean id="endDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
+	<bean id="commentFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="toolsFieldMissionBean" class="com.vaadin.ui.TwinColSelect" scope="session" />
+	<bean id="saveButtonMissionFormBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="cancelButtonMissionFormBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="missionForm" class="com.novedia.talentmap.web.ui.colleague.missions.MissionForm" scope="session">
+		<property name="clientService" ref="clientService" />
+		<property name="skillService" ref="skillService" />
+		<property name="titleField" ref="titleFieldMissionBean" />
+		<property name="clientField" ref="clientFieldMissionBean" />
+		<property name="placeField" ref="placeFieldMissionBean" />
+		<property name="startDateField" ref="startDateFieldMissionBean" />
+		<property name="endDateField" ref="endDateFieldMissionBean" />
+		<property name="commentField" ref="commentFieldMissionBean" />
+		<property name="toolsField" ref="toolsFieldMissionBean" />
+		<property name="saveButton" ref ="saveButtonMissionFormBean" />
+		<property name="cancelButton" ref ="cancelButtonMissionFormBean" />
+		
 	</bean>
 	
 	

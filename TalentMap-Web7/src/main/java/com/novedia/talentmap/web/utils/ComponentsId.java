@@ -59,5 +59,17 @@ public class ComponentsId {
 	public static final String LAST_NAME_ID = "lastName";
 
 	public static final String TITLE_ID = "title";
+	
+	public static final String CLIENT_ID = "client";
+	
+	public static final String TOOLS_ID = "tools";
+
+	public static final String COMMENT_ID = "notes";
+
+	public static final String END_DATE_ID = "endDate";
+
+	public static final String START_DATE_ID = "startDate";
+
+	public static final String PLACE_ID = "place";
 
 }
