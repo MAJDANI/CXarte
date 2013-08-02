@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.colleague.missions;
 
-import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.utils.MissionFieldLabel;
@@ -10,13 +9,17 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class MissionColleagueContent extends VerticalLayout implements ClickListener, ValueChangeListener {
 	
-	private IColleagueService collaboratorService;
+	private IColleagueService colleagueService;
 	
 	private Button addMissionButton;
 	
@@ -32,6 +35,16 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private HorizontalLayout footerLayoutMissionButton;
     
+    private Window windowConfirm;
+    
+    private Label confirmDeleteLabel;
+    
+    private HorizontalLayout confirmButtonContainer;
+    
+    private Button yesButton;
+    
+    private Button noButton;
+    
     public MissionColleagueContent(){
     	super();
     	setSpacing(true);
@@ -46,25 +59,35 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	removeAllComponents();
     	addMissionButton.setCaption(MissionFieldLabel.ADD_MISSION_LABEL);
     	addMissionButton.addClickListener(this);
-    	
+    	addMissionPanel.removeAllComponents();
+    	addMissionPanel.addComponent(new Label("add mission form"));
     	addComponent(addMissionButton);
+    	addComponent(addMissionPanel);
     	buildListMissionPanel();
     	addComponent(listMissionPanel);
+    	buildAddMissionPanel();
     	return this;
     }
     
-    PagedTable missionTable;
+    
+    private void buildAddMissionPanel(){
+    	if(listMission.size() > 0){
+    		addMissionPanel.setVisible(false);
+    		addMissionButton.setEnabled(true);
+    	}else {
+    		addMissionPanel.setVisible(true);
+    		addMissionButton.setEnabled(false);
+		}
+    }
+    
 	private void buildListMissionPanel(){
-    	missionTable = listMission.fillAllColleagueMission();
-    	missionTable.addValueChangeListener(this);
-    	
-    	missionTable.addStyleName("table");
-    	missionTable.setImmediate(true);
-    	missionTable.setSelectable(true);
+		listMission.fillAllColleagueMission();
+    	listMission.addValueChangeListener(this);
+    	listMission.addStyleName("table");
     	listMissionPanel.addStyleName("listMissionPanel");
-    	if(missionTable.size() > 0){
+    	if(listMission.size() > 0){
     		listMissionPanel.removeAllComponents();
-    		listMissionPanel.addComponent(missionTable);
+    		listMissionPanel.addComponent(listMission);
     		buildFooterMissionButton();
     		listMissionPanel.addComponent(footerLayoutMissionButton);
     		listMissionPanel.setVisible(true);
@@ -79,7 +102,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	footerLayoutMissionButton.removeAllComponents();
     	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton");
     	editMissionButton.setCaption(MissionFieldLabel.EDIT_MISSION_LABEL);
+    	editMissionButton.addClickListener(this);
     	deleteMissionButton.setCaption(MissionFieldLabel.DELETE_MISSION_LABEL);
+    	deleteMissionButton.addClickListener(this);
     	enableButton(false);
     	footerLayoutMissionButton.setSpacing(true);
     	footerLayoutMissionButton.addComponent(editMissionButton);
@@ -88,14 +113,56 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     @Override
 	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
+
+    	if(event.getButton().equals(deleteMissionButton)){
+    		buildConfirmWindow();
+    		getUI().addWindow(windowConfirm);
+    	}else if (event.getButton().equals(editMissionButton)) {
+    		addMissionButton.setEnabled(false);
+    		enableButton(false);
+    		Mission selectedMission = (Mission) listMission.getValue();
+    		
+		} else if (event.getButton().equals(addMissionButton)) {
+			addMissionPanel.setVisible(true);
+    		addMissionButton.setEnabled(false);
+    		enableButton(false);
+		} else if (event.getButton().equals(yesButton)) {
+			windowConfirm.close();
+			Mission selectedMission = (Mission) listMission.getValue();
+			int result = colleagueService.deleteMission(selectedMission);
+			if(result != 0){
+				buildViewMissionColleagueContent();
+			} else {
+				Notification.show(MissionFieldLabel.ERROR_DELETE_MISSION_LABEL, Type.ERROR_MESSAGE);
+			}
+		}else if (event.getButton().equals(noButton)) {
+			windowConfirm.close();
+		}
 	}
+    
+    
+    private void buildConfirmWindow(){
+    	windowConfirm.removeAllComponents();
+    	windowConfirm.setCaption(MissionFieldLabel.WINDOW_CONFIRM_DELETE_TITLE);
+    	windowConfirm.center();
+    	windowConfirm.setModal(true);
+    	windowConfirm.setReadOnly(true);
+    	confirmDeleteLabel.setCaption(MissionFieldLabel.CONFIRM_DELETE_MESSAGE_MISSION);
+    	confirmButtonContainer.setSpacing(true);
+    	yesButton.setCaption(MissionFieldLabel.CONFIRM_DELETE_MISSION_LABEL);
+    	yesButton.addClickListener(this);
+    	noButton.setCaption(MissionFieldLabel.CANCEL_DELETE_MISSION_LABEL);
+    	noButton.addClickListener(this);
+    	confirmButtonContainer.addComponent(yesButton);
+    	confirmButtonContainer.addComponent(noButton);
+    	windowConfirm.addComponent(confirmDeleteLabel);
+    	windowConfirm.addComponent(confirmButtonContainer);
+    }
     
     
 	@Override
 	public void valueChange(ValueChangeEvent event) {
-    	Mission selectedMission = (Mission) missionTable.getValue();
+    	Mission selectedMission = (Mission) listMission.getValue();
     	if(selectedMission != null){
     		enableButton(true);
     	}else{
@@ -109,12 +176,12 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		deleteMissionButton.setEnabled(state);
     }
 
-	public IColleagueService getCollaboratorService() {
-		return collaboratorService;
+	public IColleagueService getColleagueService() {
+		return colleagueService;
 	}
 
-	public void setCollaboratorService(IColleagueService collaboratorService) {
-		this.collaboratorService = collaboratorService;
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
 	}
 
 	public Button getAddMissionButton() {
@@ -174,5 +241,44 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		this.footerLayoutMissionButton = footerLayoutMissionButton;
 	}
 
+	public Window getWindowConfirm() {
+		return windowConfirm;
+	}
+
+	public void setWindowConfirm(Window windowConfirm) {
+		this.windowConfirm = windowConfirm;
+	}
+
+	public Label getConfirmDeleteLabel() {
+		return confirmDeleteLabel;
+	}
+
+	public void setConfirmDeleteLabel(Label confirmDeleteLabel) {
+		this.confirmDeleteLabel = confirmDeleteLabel;
+	}
+
+	public HorizontalLayout getConfirmButtonContainer() {
+		return confirmButtonContainer;
+	}
+
+	public void setConfirmButtonContainer(HorizontalLayout confirmButtonContainer) {
+		this.confirmButtonContainer = confirmButtonContainer;
+	}
+
+	public Button getYesButton() {
+		return yesButton;
+	}
+
+	public void setYesButton(Button yesButton) {
+		this.yesButton = yesButton;
+	}
+
+	public Button getNoButton() {
+		return noButton;
+	}
+
+	public void setNoButton(Button noButton) {
+		this.noButton = noButton;
+	}
 
 }

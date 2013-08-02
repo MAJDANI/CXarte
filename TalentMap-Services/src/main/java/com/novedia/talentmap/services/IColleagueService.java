@@ -197,4 +197,8 @@ public interface IColleagueService {
      */
     Integer countMailForColleagueId(Colleague colleague);
     
+    MissionDTO createMissionDTO(Mission m);
+    
+    Mission createEntity(MissionDTO mDTO);
+    
 }

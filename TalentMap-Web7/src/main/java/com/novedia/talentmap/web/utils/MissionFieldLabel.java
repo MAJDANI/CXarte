@@ -22,9 +22,20 @@ public class MissionFieldLabel {
 	
 	public static final String ADD_MISSION_LABEL = "Add Mission";
 	
-	public static final String EDIT_MISSION_LABEL = "Edit Mission";
+	public static final String EDIT_MISSION_LABEL = "Edit";
 	
-	public static final String DELETE_MISSION_LABEL = "Delete Mission";
+	public static final String DELETE_MISSION_LABEL = "Delete";
+	
+	public static final String CONFIRM_DELETE_MESSAGE_MISSION = "Are you sure you want to delete these mission ?";
+	
+	public static final String CONFIRM_DELETE_MISSION_LABEL = "Yes";
+	
+	public static final String CANCEL_DELETE_MISSION_LABEL = "No";
+	
+	public static final String WINDOW_CONFIRM_DELETE_TITLE = "Confirm Delete";
+	 
+	public static final String ERROR_DELETE_MISSION_LABEL = "Unable to delete mission";
+	
 	
 	
 	
