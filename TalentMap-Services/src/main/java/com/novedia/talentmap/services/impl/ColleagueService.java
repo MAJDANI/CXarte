@@ -222,7 +222,8 @@ public class ColleagueService implements IColleagueService {
      * @param MissionDto
      * @return a mission
      */
-    private Mission createEntity(MissionDTO mDTO) {
+    @Override
+    public Mission createEntity(MissionDTO mDTO) {
 
 	Mission m = null;
 
@@ -258,7 +259,8 @@ public class ColleagueService implements IColleagueService {
      * @param Mission
      * @return a missionDto
      */
-	private MissionDTO createMissionDTO(Mission m) {
+    @Override
+	public MissionDTO createMissionDTO(Mission m) {
 
 		MissionDTO mDTO = null;
 		if (m != null) {

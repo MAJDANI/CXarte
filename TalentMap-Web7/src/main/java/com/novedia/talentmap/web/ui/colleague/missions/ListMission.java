@@ -23,6 +23,7 @@ public class ListMission extends PagedTable {
 		super();
 		addColumns();
 		setSelectable(true);
+		setImmediate(true);
 		setNullSelectionAllowed(true);
     }
     
