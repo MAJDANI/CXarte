@@ -156,7 +156,7 @@ public class Constants {
 	
 	public static final String SKILL_BUTTON_LABEL = "Skills";
 	
-	public static final String HISTORY_MISSION_LABEL = "Missions history";
+	public static final String MISSION_LABEL = "Missions";
 	
 	public static final String PROFILE_VIEW = "profileView";
 	

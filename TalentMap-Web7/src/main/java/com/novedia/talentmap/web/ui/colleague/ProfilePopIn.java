@@ -33,10 +33,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	private Panel panelRight;
 	
-	private VerticalLayout panelRightContent;
-	
 	private MissionColleagueContent missionColleagueContent;
-	
 	
 	private GridLayout colleagueDataFormLayout;
 	
@@ -47,7 +44,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 	 */
      public ProfilePopIn(){
     	 super();
-    	 setWidth("1000px");
+    	 setWidth("1100px");
     	 setCaption(Constants.PROFILE_POP_IN_TITLE);
     	 setModal(true);
      }
@@ -70,17 +67,14 @@ public class ProfilePopIn extends Window implements ClickListener{
 		return this;
 	}
 
-
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
-		panelRightContent.removeAllComponents();
-		panelRightContent.setSpacing(true);
+		panelRight.addStyleName("panelRight");
+		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
-		panelRightContent.addComponent(colleagueDataForm.buildColleagueDataFormView());
-		panelRight.setContent(panelRightContent);
+		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		panelRight.setWidth("800px");
 	}
-
 
 	private void buildButtons() {
 		
@@ -92,7 +86,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		skillsButton.addStyleName(Reindeer.BUTTON_LINK);
 		skillsButton.addClickListener(this);
 		
-		missionsHistoryButton.setCaption(Constants.HISTORY_MISSION_LABEL);
+		missionsHistoryButton.setCaption(Constants.MISSION_LABEL);
 		missionsHistoryButton.addStyleName(Reindeer.BUTTON_LINK);
 		missionsHistoryButton.addClickListener(this);
 		
@@ -100,8 +94,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 
 	private void buildMenu() {
-	    hLayout.setSizeFull();
 	    panelLeft.setWidth("200px");
+	    panelLeft.addStyleName("panelLeft");
 	    menuContent.setSpacing(true);
 	    menuContent.setMargin(true);
 	    menuContent.addComponent(administrativeDataButton);
@@ -109,29 +103,27 @@ public class ProfilePopIn extends Window implements ClickListener{
 	    menuContent.addComponent(missionsHistoryButton);
 	    panelLeft.setContent(menuContent);
 	    hLayout.addComponent(panelLeft);
-	    
 	}
 
 
 	@Override
 	public void buttonClick(ClickEvent event) {
 		panelRight.removeAllComponents();
-		panelRightContent.removeAllComponents();
+		VerticalLayout v = new VerticalLayout();
+		v.addComponent(new Label(event.getButton().getCaption()));
 		if (event.getButton().equals(administrativeDataButton)) { 
-			panelRightContent.addComponent(colleagueDataForm.buildColleagueDataFormView());
+			panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		} else if (event.getButton().equals(skillsButton)) {
-			panelRightContent.addComponent(new Label(event.getButton().getCaption()));
+			panelRight.setContent(v);
 		} else if(event.getButton().equals(missionsHistoryButton)) {
-			panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
+			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		}
-		panelRight.setContent(panelRightContent);
 	}
 	
 	
 	public Button getAdministrativeDataButton() {
 		return administrativeDataButton;
 	}
-
 
 	public void setAdministrativeDataButton(Button administrativeDataButton) {
 		this.administrativeDataButton = administrativeDataButton;
@@ -196,16 +188,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 	public void setPanelRight(Panel panelRight) {
 		this.panelRight = panelRight;
 	}
-
-	public VerticalLayout getPanelRightContent() {
-		return panelRightContent;
-	}
-
-
-	public void setPanelRightContent(VerticalLayout panelRightContent) {
-		this.panelRightContent = panelRightContent;
-	}
-
 
 	public MissionColleagueContent getMissionColleagueContent() {
 		return missionColleagueContent;

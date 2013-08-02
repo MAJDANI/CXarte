@@ -84,7 +84,6 @@
 	<bean id="hLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
 	<bean id="menuPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="menuContentBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="panelRightContentBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
 	<bean id="contentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	
 	<bean id="profilePopIn" class="com.novedia.talentmap.web.ui.colleague.ProfilePopIn" scope="session">
@@ -97,17 +96,24 @@
 		<property name="panelLeft" ref ="menuPanelBean" />
 		<property name="menuContent" ref ="menuContentBean" />
 		<property name="panelRight" ref ="contentPanelBean" />
-		<property name="panelRightContent" ref ="panelRightContentBean" />
 		<property name="missionColleagueContent" ref ="missionColleagueContentBean" />
 	</bean>
 	
 	
 	<bean id="listMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="addMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="footerLayoutMissionButtonBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
+	<bean id="editMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="deleteMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="addMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="missionColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent" scope="session" >
 		<property name="listMission" ref ="listMissionBean" />
 		<property name="addMissionButton" ref ="addMissionButtonBean" />
 		<property name="listMissionPanel" ref ="listMissionPanelBean" />
+		<property name="footerLayoutMissionButton" ref ="footerLayoutMissionButtonBean" />
+		<property name="deleteMissionButton" ref ="deleteMissionButtonBean" />
+		<property name="editMissionButton" ref ="editMissionButtonBean" />
+		<property name="addMissionPanel" ref ="addMissionPanelBean" />
 	</bean>
 	
 	
