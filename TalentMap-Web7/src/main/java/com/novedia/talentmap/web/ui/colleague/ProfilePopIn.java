@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.colleague;
 
 import com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent;
+import com.novedia.talentmap.web.ui.colleague.missions.MissionForm;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -35,9 +36,11 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	private MissionColleagueContent missionColleagueContent;
 	
-	private GridLayout colleagueDataFormLayout;
+	private GridLayout formLayout;
 	
 	private ColleagueDataForm colleagueDataForm;
+	
+	private MissionForm missionForm; 
 	
 	/**
 	 * Default constructor
@@ -71,7 +74,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.removeAllComponents();
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
-		colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
+		colleagueDataForm.setColleagueFormLayout(formLayout);
+		missionForm.setMissionFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		panelRight.setWidth("800px");
 	}
@@ -114,7 +118,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		if (event.getButton().equals(administrativeDataButton)) { 
 			panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		} else if (event.getButton().equals(skillsButton)) {
-			panelRight.setContent(v);
+			panelRight.setContent(missionForm.buildMissionFormView());
 		} else if(event.getButton().equals(missionsHistoryButton)) {
 			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		}
@@ -200,13 +204,13 @@ public class ProfilePopIn extends Window implements ClickListener{
 	}
 	
 
-	public GridLayout getColleagueDataFormLayout() {
-		return colleagueDataFormLayout;
+	public GridLayout getFormLayout() {
+		return formLayout;
 	}
 
 
-	public void setColleagueDataFormLayout(GridLayout colleagueDataFormLayout) {
-		this.colleagueDataFormLayout = colleagueDataFormLayout;
+	public void setFormLayout(GridLayout formLayout) {
+		this.formLayout = formLayout;
 	}
 
 
@@ -217,6 +221,16 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 	public void setColleagueDataForm(ColleagueDataForm colleagueDataForm) {
 		this.colleagueDataForm = colleagueDataForm;
+	}
+
+
+	public MissionForm getMissionForm() {
+		return missionForm;
+	}
+
+
+	public void setMissionForm(MissionForm missionForm) {
+		this.missionForm = missionForm;
 	}
 
 }

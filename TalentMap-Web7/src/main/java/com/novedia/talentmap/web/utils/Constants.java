@@ -59,7 +59,7 @@ public class Constants {
 
 	public static final String NAME = "Name";
 
-	public static final String TITLE_REGISTRATION = "Title";
+	public static final String TITLE_CAPTION = "Title";
 	
 	public static final String SELECT_MANAGER = "Select your manager";
 
@@ -170,5 +170,36 @@ public class Constants {
 
 	public static final String ADMINISTRATIVE_DATA = "Administrative data";
 	
+	/**
+     * Constant for MissionForm
+     */
+	
+	public static final String CLIENT = "Client";
+	
+	public static final String PLACE = "Place";
+	
+	public static final String START_DATE = "Start date";
+	
+	public static final String END_DATE = "End date";
+	
+	public static final String COMMENT = "Comment";
+	
+	public static final String TOOLS = "Tools";
+	
+	public static final String CHOOSE_CLIENT = "Choose a client";
+	
+	public static final String GIVE_PLACE = "Give a place";
+	
+	public static final String GIVE_START_DATE = "Give a start date";
 
+	public static final String CHOOSE_TOOLS = "Choose between one and three tools";
+	
+	public static final String TYPE_TITLE = "Type a title";
+	
+	public static final String SELECT_CLIENT = "Choose a client";
+	
+	public static final String TYPE_PLACE = "Type a place";
+	
+	public static final String TYPE_COMMENT = "Type a comment";
+	
 }
