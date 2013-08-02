@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.dto.MissionDTO;
+import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Client;
-import com.novedia.talentmap.model.entity.Mission;
-import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
+import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -24,6 +27,7 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.TwinColSelect;
@@ -37,11 +41,19 @@ public class MissionForm extends FormLayout implements ClickListener{
     public static final int VALIDATION_INVALID_SELECTION = 2;
     public static final int VALIDATION_VALID_FORM = 3;
     
+ // 2 constants to identify if "save" is an insert or update
+    public static final String SAVE_MODE_UPDATE = "UPDATE";
+    public static final String SAVE_MODE_INSERT = "INSERT";
+    
     private MissionDTO missionDTO;
 	
 	private IClientService clientService;
 
 	private ISkillService skillService;
+	
+	private IColleagueService collabService;
+	
+	private String currentSaveMode = "INSERT";
 	
 	/**
 	 * Vaadin components
@@ -212,33 +224,31 @@ public class MissionForm extends FormLayout implements ClickListener{
 			this.setVisible(false);
 		}else if(event.getButton().equals(saveButton)){
 
-//		    int formValidation = validatedMissionForm(missionToInsert);
-//		    switch (formValidation) {
-//		    	case VALIDATION_FIELD_MISSING:
-//		    		getWindow().showNotification(ConstantsEnglish.MSG_MISSING_FIELDS,Notification.TYPE_ERROR_MESSAGE);
-//		    		break;
-//		    	case VALIDATION_INVALID_PERIOD:
-//		    		getWindow().showNotification(ConstantsEnglish.MISSION_MSG_INVALID_PERIOD,Notification.TYPE_ERROR_MESSAGE);
-//		    		break;
-//		    	case VALIDATION_INVALID_SELECTION:
-//			getWindow().showNotification(
-//				ConstantsEnglish.MISSION_MSG_INVALID_SELECTION,
-//				Notification.TYPE_ERROR_MESSAGE);
-//				break;
-//		    	case VALIDATION_VALID_FORM:
-//		    		// Form's data are valid
-//		    		if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
-//		    			missionToInsert.setColleagueId(authentication
-//		    					.getColleagueId());
-//		    			notifyCm(ADD_MISSION, missionToInsert);
-//		    			insertMission(missionToInsert);
-//		    		}
-//		    		if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
-//		    			notifyCm(UPDATE_MISSION, missionToInsert);
-//		    			updateMission(missionToInsert);
-//		    		}
-//		    	break;
-//		    }
+		    int formValidation = validatedMissionForm(missionDTO);
+		    
+		    switch (formValidation) {
+		    	case VALIDATION_FIELD_MISSING:
+		    		Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+		    		break;
+		    	case VALIDATION_INVALID_PERIOD:
+		    		Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
+		    		break;
+		    	case VALIDATION_INVALID_SELECTION:
+		    		Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
+				break;
+		    	case VALIDATION_VALID_FORM:
+		    		// Form's data are valid
+		    		if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
+		    			Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+		    			missionDTO.setColleagueId(authentication.getColleagueId());
+		    			insertMission(missionDTO);
+		    			this.setVisible(false);		    			
+		    		}
+		    		if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
+		    			updateMission(missionDTO);
+		    		}
+		    	break;
+		    }
 		}
 		
 	}
@@ -308,6 +318,39 @@ public class MissionForm extends FormLayout implements ClickListener{
     	}
 
     	return false;
+    }
+    
+    /**
+     * Calls the CollaboratorService to insert the mission in Data Base. After
+     * the insert the list of missions in the table is updated with fresh data.
+     * 
+     * @param missionToInsert
+     */
+    private void insertMission(MissionDTO missionToInsert) {
+    	try {
+    		int result = this.collabService.addMission(missionToInsert);
+    		if (result != 0) {
+    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_OK,Notification.Type.WARNING_MESSAGE);
+//    			refreshListMission();
+    		} else {
+    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.WARNING_MESSAGE);
+    		}
+
+    	} catch (DataAccessException e) {
+    		Notification.show(Constants.MISSION_MSG_DATA_INSERTED_ERROR,Notification.Type.WARNING_MESSAGE);
+    	}
+
+    }
+    
+    /**
+     * Calls the CollaboratorService to update the mission in Data Base. After
+     * the insert the list of missions in the table is updated with fresh data.
+     * 
+     * @param missionToUpdate
+     */
+    private void updateMission(MissionDTO missionToUpdate) {
+	
+
     }
 
 	private void buildToolsList() {
@@ -440,6 +483,22 @@ public class MissionForm extends FormLayout implements ClickListener{
 
 	public void setCancelButton(Button cancelButton) {
 		this.cancelButton = cancelButton;
+	}
+
+	public String getCurrentSaveMode() {
+		return currentSaveMode;
+	}
+
+	public void setCurrentSaveMode(String currentSaveMode) {
+		this.currentSaveMode = currentSaveMode;
+	}
+
+	public IColleagueService getCollabService() {
+		return collabService;
+	}
+
+	public void setCollabService(IColleagueService collabService) {
+		this.collabService = collabService;
 	}
 
 }

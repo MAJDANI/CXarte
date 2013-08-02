@@ -224,7 +224,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	public void blur(BlurEvent event) {
 		if (!validateColleagueDataForm()) {
 			Notification.show(
-					Constants.REGISTRATION_PANEL_MISSING_FIELDS,
+					Constants.PANEL_MISSING_FIELDS,
 					Notification.Type.WARNING_MESSAGE);
 		} else {
 			colleagueTmp.setTitle(colleague.getTitle());

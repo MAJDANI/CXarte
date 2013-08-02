@@ -265,6 +265,7 @@
 	<bean id="missionForm" class="com.novedia.talentmap.web.ui.colleague.missions.MissionForm" scope="session">
 		<property name="clientService" ref="clientService" />
 		<property name="skillService" ref="skillService" />
+		<property name="collabService" ref="collaboratorService" />
 		<property name="titleField" ref="titleFieldMissionBean" />
 		<property name="clientField" ref="clientFieldMissionBean" />
 		<property name="placeField" ref="placeFieldMissionBean" />

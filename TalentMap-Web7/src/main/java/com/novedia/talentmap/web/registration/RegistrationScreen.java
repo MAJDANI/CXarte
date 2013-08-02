@@ -127,7 +127,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 		
 		if (event.getButton().equals(save)) {
 			if (!validateRegistrationForm()) {
-				Notification.show(Constants.REGISTRATION_PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+				Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
 			} else if ((!validatePassword())) {
 				Notification.show(Constants.REGISTRATION_PANEL_PASSWORD_ERROR,Notification.Type.WARNING_MESSAGE);
 			}

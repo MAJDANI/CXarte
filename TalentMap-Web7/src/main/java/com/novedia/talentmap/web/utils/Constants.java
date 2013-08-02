@@ -20,7 +20,7 @@ public class Constants {
 	
 
 	/**
-     * Constant for RegistrationScreen
+     * Constant for error messages
      */
 	
 	public static final String SAVE_BUTTON_NAME = "Save";
@@ -29,9 +29,19 @@ public class Constants {
 	
 	public static final String REGISTRATION_PANEL_PASSWORD_ERROR = "Error on your password confirmation";
 	
-	public static final String REGISTRATION_PANEL_MISSING_FIELDS = "Error one or many fields are missing";
+	public static final String PANEL_MISSING_FIELDS = "Error one or many fields are missing";
 	
 	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error while creating user";
+	
+	public static final String MISSION_MSG_INVALID_PERIOD = "The period is invalid";
+	
+	public static final String MISSION_MSG_INVALID_SELECTION = "The tools selection is invalid";
+	
+	public static final String MISSION_MSG_DATA_INSERTED_OK = "The mission has been added";
+	
+    public static final String MISSION_MSG_DATA_INSERTED_KO = "Be careful , the mission has not been added";
+    
+    public static final String MISSION_MSG_DATA_INSERTED_ERROR = "Thecnical error, please try again later";
 	
 	/**
      * Constant for RegistrationForm and ColleagueDataForm
