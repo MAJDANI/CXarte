@@ -77,7 +77,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRightContent.setSpacing(true);
 		colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
 		panelRightContent.addComponent(colleagueDataForm.buildColleagueDataFormView());
-//		panelRightContent.addComponent(missionColleagueContent.buildViewMissionColleagueContent());
 		panelRight.setContent(panelRightContent);
 		panelRight.setWidth("800px");
 	}
