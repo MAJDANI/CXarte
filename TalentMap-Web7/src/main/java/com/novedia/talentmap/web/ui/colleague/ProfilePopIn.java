@@ -69,6 +69,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
+		panelRight.addStyleName("panelRight");
 		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		colleagueDataForm.setColleagueFormLayout(colleagueDataFormLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
@@ -93,8 +94,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 
 	private void buildMenu() {
-	    hLayout.setSizeFull();
 	    panelLeft.setWidth("200px");
+	    panelLeft.addStyleName("panelLeft");
 	    menuContent.setSpacing(true);
 	    menuContent.setMargin(true);
 	    menuContent.addComponent(administrativeDataButton);
@@ -123,7 +124,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 	public Button getAdministrativeDataButton() {
 		return administrativeDataButton;
 	}
-
 
 	public void setAdministrativeDataButton(Button administrativeDataButton) {
 		this.administrativeDataButton = administrativeDataButton;

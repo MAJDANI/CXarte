@@ -39,7 +39,6 @@ public class ListMission extends PagedTable {
 		addContainerProperty(MissionFieldLabel.OUTIL1, String.class, null);
 		addContainerProperty(MissionFieldLabel.OUTIL2, String.class, null);
 		addContainerProperty(MissionFieldLabel.OUTIL3, String.class, null);
-	
     }
     
     /**
