@@ -120,6 +120,7 @@ public class RegistrationForm extends FormLayout {
 		title.setRequired(true);
 		title.setRequiredError(Constants.GIVE_TITLE);
 		title.addStyleName("horizontal");
+		title.setId(ComponentsId.TITLE_ID);
 		registrationFormLayout.addComponent(title);
 
 		loginField.setCaption(Constants.CHOOSE_LOGIN);
@@ -130,6 +131,7 @@ public class RegistrationForm extends FormLayout {
 		loginField.setValidationVisible(true);
 		loginField.setInputPrompt(Constants.TYPE_LOGIN);
 		loginField.setNullRepresentation("");
+		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
 		registrationFormLayout.addComponent(loginField);
 		
 		nameField.setCaption(Constants.NAME);
@@ -140,6 +142,7 @@ public class RegistrationForm extends FormLayout {
 		nameField.setValidationVisible(true);
 		nameField.setInputPrompt(Constants.TYPE_NAME);
 		nameField.setNullRepresentation("");
+		nameField.setId(ComponentsId.LAST_NAME_ID);
 		registrationFormLayout.addComponent(nameField);
 
 		firstNameField.setCaption(Constants.FIRST_NAME);
@@ -151,6 +154,7 @@ public class RegistrationForm extends FormLayout {
 		firstNameField.setValidationVisible(true);
 		firstNameField.setInputPrompt(Constants.TYPE_FIRST_NAME);
 		firstNameField.setNullRepresentation("");
+		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
 		registrationFormLayout.addComponent(firstNameField);
 
 		passwordField.setCaption(Constants.PASSWORD);
@@ -162,6 +166,7 @@ public class RegistrationForm extends FormLayout {
 		passwordField.setValidationVisible(true);
 		passwordField.setInputPrompt(Constants.TYPE_PASSWORD);
 		passwordField.setNullRepresentation("");
+		passwordField.setId(ComponentsId.PASSWORD_ID);
 		registrationFormLayout.addComponent(passwordField);
 
 		confirmPasswordField.setCaption(Constants.CONFIRM_PASSWORD);
@@ -173,6 +178,7 @@ public class RegistrationForm extends FormLayout {
 		confirmPasswordField.setValidationVisible(true);
 		confirmPasswordField.setInputPrompt(Constants.CONFIRM_PASSWORD);
 		confirmPasswordField.setNullRepresentation("");
+		confirmPasswordField.setId(ComponentsId.PASSWORD_CONFIRM_ID);
 		registrationFormLayout.addComponent(confirmPasswordField);
 
 		emailField.setCaption(Constants.EMAIL);
@@ -183,11 +189,13 @@ public class RegistrationForm extends FormLayout {
 		emailField.setValidationVisible(true);
 		emailField.setInputPrompt(Constants.TYPE_EMAIL);
 		emailField.setNullRepresentation("");
+		emailField.setId(ComponentsId.EMAIL_ID);
 		registrationFormLayout.addComponent(emailField);
 
 		phoneField.setCaption(Constants.PHONE);
 		phoneField.setInputPrompt(Constants.TYPE_PHONE_NUMBER);
 		phoneField.setNullRepresentation("");
+		phoneField.setId(ComponentsId.PHONE_ID);
 		registrationFormLayout.addComponent(phoneField);
 
 		dateField.setCaption(Constants.DATE_OF_HIRE);
@@ -198,6 +206,7 @@ public class RegistrationForm extends FormLayout {
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.setInputPrompt(Constants.DATE_FORMAT);
+		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		registrationFormLayout.addComponent(dateField);
 
 		jobField.setCaption(Constants.JOB_TITLE);
@@ -208,6 +217,7 @@ public class RegistrationForm extends FormLayout {
 		jobField.setValidationVisible(true);
 		jobField.setInputPrompt(Constants.SELECT_JOB_TITLE);
 		buildJobList();
+		jobField.setId(ComponentsId.PROFILE_ID);
 		registrationFormLayout.addComponent(jobField);
 
 		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
@@ -219,16 +229,19 @@ public class RegistrationForm extends FormLayout {
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
 		experienceField.setNullRepresentation("");
+		experienceField.setId(ComponentsId.EXPERIENCE_ID);
 		registrationFormLayout.addComponent(experienceField);
 
 		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
 		businessEngineerField.setInputPrompt(Constants.SELECT_BUSINESS_ENGINEER);
 		buildEngineerList();
+		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
 		registrationFormLayout.addComponent(businessEngineerField);
 
 		managerField.setCaption(Constants.MANAGER);
 		managerField.setInputPrompt(Constants.SELECT_MANAGER);
 		buildManagerList();
+		managerField.setId(ComponentsId.MANAGER_ID);
 		registrationFormLayout.addComponent(managerField);
 
 		registration = Registration.Builder.builder().title(Constants.TITLE_MR).build();
