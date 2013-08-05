@@ -2,6 +2,21 @@ package com.novedia.talentmap.web.utils;
 
 public class Constants {
 	
+	
+	// 3 constants to validate fields in MissionForm
+    public static final int VALIDATION_FIELD_MISSING = 0;
+    
+    public static final int VALIDATION_INVALID_PERIOD = 1;
+    
+    public static final int VALIDATION_INVALID_SELECTION = 2;
+    
+    public static final int VALIDATION_VALID_FORM = 3;
+    
+    // 2 constants to identify if "save" is an insert or update
+    public static final int SAVE_MODE_UPDATE = 0;
+    
+    public static final int SAVE_MODE_INSERT = 1;
+    
 	public static final String  lOGIN_FIELD_LABEL ="Login";
 	
 	public static final String  PASSWORD_FIELD_LABEL ="Password";
@@ -153,6 +168,8 @@ public class Constants {
     public static final String CHANGE_PASSWORD_FORM_TITLE = "Change password Form";
 	
 	public static final String SAVE_BUTTON_LABEL = "Save"; 
+	
+	public static final String CANCEL_BUTTON_LABEL = "Cancel"; 
 	
 	public static final String DASHBOARD_LABEL = "My DASHBOARD"; 
 	

@@ -113,6 +113,7 @@
 	<bean id="confirmButtonContainerBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	<bean id="windowConfirmBean" class="com.vaadin.ui.Window" scope="session" />
 	<bean id="missionFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="missionFormButtonLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	
 	<bean id="missionColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent" scope="session" >
 		<property name="colleagueService" ref ="collaboratorService" />
@@ -132,6 +133,7 @@
 		<property name="formLayout" ref ="missionFormLayoutBean" />
 		<property name="saveButton" ref ="saveButtonMissionFormBean" />
 		<property name="cancelButton" ref ="cancelButtonMissionFormBean" />
+		<property name="missionFormButtonLayout" ref ="missionFormButtonLayoutBean" />
 	</bean>
 	
 	
@@ -274,7 +276,7 @@
 	<bean id="placeFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
 	<bean id="startDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
 	<bean id="endDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
-	<bean id="commentFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="commentFieldMissionBean" class="com.vaadin.ui.TextArea" scope="session" />
 	<bean id="toolsFieldMissionBean" class="com.vaadin.ui.TwinColSelect" scope="session" />
 	<bean id="saveButtonMissionFormBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="cancelButtonMissionFormBean" class="com.vaadin.ui.Button" scope="session" />

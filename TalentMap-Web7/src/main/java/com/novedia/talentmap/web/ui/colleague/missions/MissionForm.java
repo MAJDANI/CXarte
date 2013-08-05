@@ -13,20 +13,16 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.BeanValidator;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.TwinColSelect;
 
 @SuppressWarnings("serial")
-public class MissionForm extends FormLayout implements ClickListener{
-	
-    private MissionDTO missionDTO;
+public class MissionForm extends FormLayout{
 	
 	private IClientService clientService;
 
@@ -55,7 +51,7 @@ public class MissionForm extends FormLayout implements ClickListener{
 	private PopupDateField endDateField;
 	
 	@PropertyId(ComponentsId.COMMENT_ID)
-	private TextField commentField;
+	private TextArea commentField;
 	
 	@PropertyId(ComponentsId.TOOLS_ID)
 	private TwinColSelect toolsField;
@@ -67,32 +63,11 @@ public class MissionForm extends FormLayout implements ClickListener{
 		super();
 	}
 	
-	public MissionForm buildMissionFormView() {
-
+	public MissionForm buildMissionForm(MissionDTO missionDto) {
 		removeAllComponents();
-		buildMain();
-		return this;
-	}
-
-	private void buildMain() {
-		try {
-			buildLayout();
-			buildMissionForm();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void buildLayout() {
 		MissionFormLayout.removeAllComponents();
-		this.MissionFormLayout.setColumns(3);
-		this.MissionFormLayout.setRows(3);
-		
-	}
-	
-	private void buildMissionForm() {
-		removeAllComponents();
-		
+		MissionFormLayout.setColumns(3);
+		MissionFormLayout.setRows(3);
 		titleField.setCaption(Constants.TITLE_CAPTION);
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
@@ -166,94 +141,36 @@ public class MissionForm extends FormLayout implements ClickListener{
 		buildToolsList();
 		MissionFormLayout.addComponent(toolsField);
 		
-		missionDTO = MissionDTO.builder().build();		
 		binder = new BeanFieldGroup<MissionDTO>(
 				MissionDTO.class);
-		binder.setItemDataSource(missionDTO);
+		binder.setItemDataSource(missionDto);
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 		
 		addComponent(MissionFormLayout);
 		
-		HorizontalLayout buttonLayout = new HorizontalLayout();
-		
-//		saveButton.setCaption("Save");
-//		saveButton.addClickListener(this);
-//		
-//		cancelButton.setCaption("Cancel");
-//		cancelButton.addClickListener(this);
-//		
-//		buttonLayout.addComponent(saveButton);
-//		
-//		buttonLayout.addComponent(cancelButton);
-//		
-//		addComponent(buttonLayout);
+		return this;
 		
 	}
-	
-	@Override
-	public void buttonClick(ClickEvent event) {
-//		if(event.getButton().equals(cancelButton)){
-////			this.setVisible(false);
-//		}else if(event.getButton().equals(saveButton)){
-//
-//		    int formValidation = validatedMissionForm(missionDTO);
-//		    
-//		    switch (formValidation) {
-//		    	case VALIDATION_FIELD_MISSING:
-//		    		Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
-//		    		break;
-//		    	case VALIDATION_INVALID_PERIOD:
-//		    		Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
-//		    		break;
-//		    	case VALIDATION_INVALID_SELECTION:
-//		    		Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
-//				break;
-//		    	case VALIDATION_VALID_FORM:
-//		    		// Form's data are valid
-//		    		if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
-//		    			Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
-//		    			missionDTO.setColleagueId(authentication.getColleagueId());
-//		    			insertMission(missionDTO);
-//		    			this.setVisible(false);		    			
-//		    		}
-//		    		if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
-//		    			updateMission(missionDTO);
-//		    		}
-//		    	break;
-//		    }
-//		}
-		
-	}
-	
 	
 
 	private void buildToolsList() {
-		BeanItemContainer<Tool> container2 = new BeanItemContainer<Tool>(
-			    Tool.class);
-
+		BeanItemContainer<Tool> container2 = new BeanItemContainer<Tool>(Tool.class);
 		List<Tool> allTools = skillService.getAllTools();
-
 		for (Tool tool : allTools) {
 			container2.addItem(tool);
 		}
-		
 		toolsField.setContainerDataSource(container2);
 		toolsField.setItemCaptionPropertyId("name");
-		
 	}
 
 	private void buildClientList() {
-		
-		BeanItemContainer<Client> container = new BeanItemContainer<Client>(
-			    Client.class);
-
+		BeanItemContainer<Client> container = new BeanItemContainer<Client>(Client.class);
 		for (Client client : clientService.getAllClients()) {
 			container.addItem(client);
 		}
 		clientField.setContainerDataSource(container);
 		clientField.setItemCaptionPropertyId("name");
-		
 	}
 
 	public BeanFieldGroup<MissionDTO> getBinder() {
@@ -312,11 +229,11 @@ public class MissionForm extends FormLayout implements ClickListener{
 		this.endDateField = endDateField;
 	}
 
-	public TextField getCommentField() {
+	public TextArea getCommentField() {
 		return commentField;
 	}
 
-	public void setCommentField(TextField commentField) {
+	public void setCommentField(TextArea commentField) {
 		this.commentField = commentField;
 	}
 
@@ -342,14 +259,6 @@ public class MissionForm extends FormLayout implements ClickListener{
 
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
-	}
-
-	public MissionDTO getMissionDTO() {
-		return missionDTO;
-	}
-
-	public void setMissionDTO(MissionDTO missionDTO) {
-		this.missionDTO = missionDTO;
 	}
 
 }

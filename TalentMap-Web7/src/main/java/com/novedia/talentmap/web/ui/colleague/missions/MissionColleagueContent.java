@@ -30,17 +30,7 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public class MissionColleagueContent extends VerticalLayout implements ClickListener, ValueChangeListener {
 	
-	// 3 constants to validate fields in MissionForm
-    public static final int VALIDATION_FIELD_MISSING = 0;
-    public static final int VALIDATION_INVALID_PERIOD = 1;
-    public static final int VALIDATION_INVALID_SELECTION = 2;
-    public static final int VALIDATION_VALID_FORM = 3;
-    
-    // 2 constants to identify if "save" is an insert or update
-    public static final String SAVE_MODE_UPDATE = "UPDATE";
-    public static final String SAVE_MODE_INSERT = "INSERT";
-    
-    private String currentSaveMode = "INSERT";
+	private  int currentSaveMode = Constants.SAVE_MODE_INSERT;
     
 	private IColleagueService colleagueService;
 	
@@ -75,59 +65,75 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	private Button saveButton;
 	
 	private Button cancelButton;
-    
-    public MissionColleagueContent(){
+	
+	private HorizontalLayout missionFormButtonLayout;
+	
+	private MissionDTO missionDTO;
+
+	/**
+	 * Default constructor
+	 */
+	public MissionColleagueContent(){
     	super();
     	setSpacing(true);
     	setWidth("800px");
     	addStyleName("missionColleagueView");
+    	missionDTO = MissionDTO.builder().build();	
     }
-
     
-    
-    
+	/**
+	 * Build colleague's mission view
+	 * @return VerticalLayout
+	 */
     public VerticalLayout buildViewMissionColleagueContent() {
     	removeAllComponents();
     	addMissionButton.setCaption(MissionFieldLabel.ADD_MISSION_LABEL);
     	addMissionButton.addClickListener(this);
-    	addMissionPanel.removeAllComponents();
-    	missionForm.setMissionFormLayout(formLayout);
-    	addMissionPanel.addComponent(missionForm.buildMissionFormView());
-    	
-    	HorizontalLayout buttonLayout = new HorizontalLayout();
-		
-		saveButton.setCaption("Save");
-		saveButton.addClickListener(this);
-		
-		cancelButton.setCaption("Cancel");
-		cancelButton.addClickListener(this);
-		
-		buttonLayout.addComponent(saveButton);
-		
-		buttonLayout.addComponent(cancelButton);
-		
-		addMissionPanel.addComponent(buttonLayout);
-		
+    	buildAddMissionPanel();
     	addComponent(addMissionButton);
     	addComponent(addMissionPanel);
     	buildListMissionPanel();
     	addComponent(listMissionPanel);
-    	buildAddMissionPanel();
+    	disableddMissionPanel();
     	return this;
     }
     
+    /**
+     * Build layout Button of mission form
+     */
+    private void builMissionFormButton(){
+    	missionFormButtonLayout.removeAllComponents();
+    	missionFormButtonLayout.setSpacing(true);
+    	missionFormButtonLayout.addStyleName("containerButton");
+    	saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
+		saveButton.addClickListener(this);
+		cancelButton.setCaption(Constants.CANCEL_BUTTON_LABEL);
+		cancelButton.addClickListener(this);
+		missionFormButtonLayout.addComponent(saveButton);
+		missionFormButtonLayout.addComponent(cancelButton);
+    }
     
-    private void buildAddMissionPanel(){
+    /**
+     * Disable Add Mission Panel
+     */
+    private void disableddMissionPanel(){
     	if(listMission.size() > 0){
     		addMissionPanel.setVisible(false);
     		addMissionButton.setEnabled(true);
     	}
-//    	else {
-//    		addMissionPanel.setVisible(true);
-//    		addMissionButton.setEnabled(false);
-//		}
     }
     
+    private void buildAddMissionPanel(){
+    	addMissionPanel.removeAllComponents();
+		missionForm.setMissionFormLayout(formLayout);
+		addMissionPanel.addComponent(missionForm.buildMissionForm(missionDTO));
+		builMissionFormButton();
+		addMissionPanel.addComponent(missionFormButtonLayout);
+    }
+    
+    /**
+     * Build list mission panel
+     */
 	private void buildListMissionPanel(){
 		listMission.fillAllColleagueMission();
     	listMission.addValueChangeListener(this);
@@ -136,7 +142,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	if(listMission.size() > 0){
     		listMissionPanel.removeAllComponents();
     		listMissionPanel.addComponent(listMission);
-    		buildFooterMissionButton();
+    		buildFooterListMission();
     		listMissionPanel.addComponent(footerLayoutMissionButton);
     		listMissionPanel.setVisible(true);
     	} else {
@@ -146,9 +152,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     }
     
     
-    private void buildFooterMissionButton(){
+    private void buildFooterListMission(){
     	footerLayoutMissionButton.removeAllComponents();
-    	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton");
+    	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton containerButton");
     	editMissionButton.setCaption(MissionFieldLabel.EDIT_MISSION_LABEL);
     	editMissionButton.addClickListener(this);
     	deleteMissionButton.setCaption(MissionFieldLabel.DELETE_MISSION_LABEL);
@@ -166,13 +172,19 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     		buildConfirmWindow();
     		getUI().addWindow(windowConfirm);
     	}else if (event.getButton().equals(editMissionButton)) {
+    		currentSaveMode = Constants.SAVE_MODE_UPDATE;
     		addMissionButton.setEnabled(false);
+    		addMissionPanel.setVisible(true);
     		enableButton(false);
     		Mission selectedMission = (Mission) listMission.getValue();
-    		
+    		missionDTO = colleagueService.createMissionDTO(selectedMission);
+    		buildAddMissionPanel();
 		} else if (event.getButton().equals(addMissionButton)) {
+			currentSaveMode = Constants.SAVE_MODE_INSERT;
+			addMissionButton.setEnabled(false);
+			missionDTO = MissionDTO.builder().build();
+			buildAddMissionPanel();
 			addMissionPanel.setVisible(true);
-    		addMissionButton.setEnabled(false);
     		enableButton(false);
 		} else if (event.getButton().equals(yesButton)) {
 			windowConfirm.close();
@@ -183,43 +195,79 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 			} else {
 				Notification.show(MissionFieldLabel.ERROR_DELETE_MISSION_LABEL, Type.ERROR_MESSAGE);
 			}
-		}else if (event.getButton().equals(noButton)) {
+		} else if (event.getButton().equals(noButton)) {
 			windowConfirm.close();
-		}
-		else if(event.getButton().equals(cancelButton)){
-				addMissionPanel.setVisible(false);
-				addMissionButton.setEnabled(true);
-		}else if(event.getButton().equals(saveButton)){
+		} else if(event.getButton().equals(cancelButton)){
 			addMissionButton.setEnabled(true);
-			
-			int formValidation = validatedMissionForm(missionForm.getMissionDTO());
+			addMissionPanel.setVisible(false);
+		} else if(event.getButton().equals(saveButton)){
+			int formValidation = checkMissionForm(missionDTO);
     
 			switch (formValidation) {
-				case VALIDATION_FIELD_MISSING:
+				case Constants.VALIDATION_FIELD_MISSING: {
 					Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
 					break;
-				case VALIDATION_INVALID_PERIOD:
+				}
+				case Constants.VALIDATION_INVALID_PERIOD:{
 					Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
 					break;
-				case VALIDATION_INVALID_SELECTION:
+				}
+				case Constants.VALIDATION_INVALID_SELECTION:{
 					Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
 					break;
-				case VALIDATION_VALID_FORM:
-					// Form's data are valid
-					if (SAVE_MODE_INSERT == getCurrentSaveMode()) {
-						Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
-						missionForm.getMissionDTO().setColleagueId(authentication.getColleagueId());
-						insertMission(missionForm.getMissionDTO());
-						buildViewMissionColleagueContent();
-//						addMissionPanel.setVisible(false);	
+				}
+				case Constants.VALIDATION_VALID_FORM:{
+					Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+					missionDTO.setColleagueId(authentication.getColleagueId());
+					if (currentSaveMode == Constants.SAVE_MODE_INSERT) {
+						insertMission(missionDTO);
+					} else {
+						updateMission(missionDTO);
 					}
-					if (SAVE_MODE_UPDATE == getCurrentSaveMode()) {
-						updateMission(missionForm.getMissionDTO());
-					}
+					refreshListMission();
 					break;
+				}
 			}
 		}
 	}
+    
+    /**
+     * Refresh list mission
+     */
+    private void refreshListMission(){
+    	addMissionButton.setEnabled(true);
+		addMissionPanel.setVisible(false);
+		listMissionPanel.removeAllComponents();
+		buildListMissionPanel();
+		listMissionPanel.addComponent(listMission);
+		buildFooterListMission();
+		listMissionPanel.addComponent(footerLayoutMissionButton);
+		listMissionPanel.setVisible(true);
+    }
+    
+    /**
+     * Insert mission 
+     * @param missionToInsert mission to insert
+     */
+    private void insertMission(MissionDTO missionToInsert) {
+    	try {
+    		int result = this.colleagueService.addMission(missionToInsert);
+    		if (result == 0) {
+    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.ERROR_MESSAGE);
+    		}
+    	} catch (DataAccessException e) {
+    		Notification.show(Constants.MISSION_MSG_DATA_INSERTED_ERROR,Notification.Type.WARNING_MESSAGE);
+    	}
+    }
+    
+    /**
+     * Update mission
+     * @param missionToUpdate mission to update
+     */
+    private void updateMission(MissionDTO missionToUpdate) {
+    	colleagueService.saveMission(missionToUpdate);
+    }
+    
     
     
     private void buildConfirmWindow(){
@@ -230,9 +278,12 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	windowConfirm.setReadOnly(true);
     	confirmDeleteLabel.setCaption(MissionFieldLabel.CONFIRM_DELETE_MESSAGE_MISSION);
     	confirmButtonContainer.setSpacing(true);
+    	confirmButtonContainer.addStyleName("containerButton");
     	yesButton.setCaption(MissionFieldLabel.CONFIRM_DELETE_MISSION_LABEL);
+    	yesButton.addStyleName("styleButton");
     	yesButton.addClickListener(this);
     	noButton.setCaption(MissionFieldLabel.CANCEL_DELETE_MISSION_LABEL);
+    	noButton.addStyleName("styleButton");
     	noButton.addClickListener(this);
     	confirmButtonContainer.addComponent(yesButton);
     	confirmButtonContainer.addComponent(noButton);
@@ -265,20 +316,21 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
      * @return int : VALIDATION_FIELD_MISSING or VALIDATION_INVALID_PERIOD or
      *         VALIDATION_VALID_FORM
      */
-    private int validatedMissionForm(MissionDTO mission) {
+    private int checkMissionForm(MissionDTO mission) {
 
     	if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
     			|| !isNotEmpty(mission.getPlace())
     			|| !isNotEmpty(mission.getClient())
     			|| !isNotEmpty(mission.getStartDate()))
-    		return VALIDATION_FIELD_MISSING;
+    		return Constants.VALIDATION_FIELD_MISSING;
     	if (!isAValidPeriod(mission.getStartDate(), mission.getEndDate()))
-    		return VALIDATION_INVALID_PERIOD;
+    		return Constants.VALIDATION_INVALID_PERIOD;
     	if (!isAValidSelection(mission.getTools()))
-    		return VALIDATION_INVALID_SELECTION;
+    		return Constants.VALIDATION_INVALID_SELECTION;
 
-    	return VALIDATION_VALID_FORM;
+    	return Constants.VALIDATION_VALID_FORM;
     }
+    
     
     /**
      * Check null values
@@ -324,37 +376,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	return false;
     }
     
-    /**
-     * Calls the CollaboratorService to insert the mission in Data Base. After
-     * the insert the list of missions in the table is updated with fresh data.
-     * 
-     * @param missionToInsert
-     */
-    private void insertMission(MissionDTO missionToInsert) {
-    	try {
-    		int result = this.colleagueService.addMission(missionToInsert);
-    		if (result != 0) {
-//    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_OK,Notification.Type.WARNING_MESSAGE);
-    		} else {
-    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.ERROR_MESSAGE);
-    		}
-
-    	} catch (DataAccessException e) {
-    		Notification.show(Constants.MISSION_MSG_DATA_INSERTED_ERROR,Notification.Type.WARNING_MESSAGE);
-    	}
-
-    }
     
-    /**
-     * Calls the CollaboratorService to update the mission in Data Base. After
-     * the insert the list of missions in the table is updated with fresh data.
-     * 
-     * @param missionToUpdate
-     */
-    private void updateMission(MissionDTO missionToUpdate) {
-	
-
-    }
+    
     
 	public IColleagueService getColleagueService() {
 		return colleagueService;
@@ -493,12 +516,13 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		this.cancelButton = cancelButton;
 	}
 
-	public String getCurrentSaveMode() {
-		return currentSaveMode;
+	public HorizontalLayout getMissionFormButtonLayout() {
+		return missionFormButtonLayout;
 	}
 
-	public void setCurrentSaveMode(String currentSaveMode) {
-		this.currentSaveMode = currentSaveMode;
+	public void setMissionFormButtonLayout(HorizontalLayout missionFormButtonLayout) {
+		this.missionFormButtonLayout = missionFormButtonLayout;
 	}
 
+	
 }

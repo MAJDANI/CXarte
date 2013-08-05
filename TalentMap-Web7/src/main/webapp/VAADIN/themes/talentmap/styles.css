@@ -98,12 +98,14 @@
 
 #logInButton .v-button-wrap,
 .logInButton .v-button-wrap,
+.styleButton .v-button-wrap,
 #saveButton .v-button-wrap{
 	padding: 4px 8px 0 0px;
 	background-image:none;
 }
 
 #logInButton.v-button,
+.styleButton.v-button,
 #saveButton.v-button{
 	background-image:none;
 	background-color:#009cda;
@@ -121,6 +123,7 @@
 }
 
 #logInButton span.v-button-caption,
+.styleButton span.v-button-caption,
 #saveButton span.v-button-caption {
 	color : #fff !important;
 	font-weight:normal;
@@ -314,4 +317,11 @@
 
 .table {
 	text-align: center;
+}
+
+.containerButton {
+	text-align: center;
+}
+.footerLayoutMissionButton{
+	margin-top:  15px;
 }
