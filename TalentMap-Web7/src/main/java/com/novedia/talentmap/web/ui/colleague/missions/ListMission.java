@@ -13,6 +13,7 @@ import com.novedia.talentmap.web.utils.MissionFieldLabel;
 @SuppressWarnings("serial")
 public class ListMission extends PagedTable {
 	
+	private static final int PAGE_LENGTH = 5;
 	private MissionContainer missionContainer;
 	
 	
@@ -80,6 +81,12 @@ public class ListMission extends PagedTable {
     		    dateDebut, dateFin, notes, toolNames[0], toolNames[1],
     		    toolNames[2] }, mission);
     	}
+    	if(listMission.size()<PAGE_LENGTH){
+    		setPageLength(listMission.size());
+    	} else {
+    		setPageLength(PAGE_LENGTH);
+    	}
+
     }
 
     
