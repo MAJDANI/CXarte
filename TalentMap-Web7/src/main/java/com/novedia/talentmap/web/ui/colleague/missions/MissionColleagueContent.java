@@ -145,7 +145,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	
     }
     
-    
     private void buildFooterMissionButton(){
     	footerLayoutMissionButton.removeAllComponents();
     	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton");

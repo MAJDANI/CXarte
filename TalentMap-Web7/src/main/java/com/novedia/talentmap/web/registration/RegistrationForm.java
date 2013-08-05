@@ -122,7 +122,7 @@ public class RegistrationForm extends FormLayout {
 		title.addStyleName("horizontal");
 		title.setId(ComponentsId.TITLE_ID);
 		registrationFormLayout.addComponent(title);
-
+		
 		loginField.setCaption(Constants.CHOOSE_LOGIN);
 		loginField.setRequired(true);
 		loginField.setRequiredError(Constants.GIVE_LOGIN);
