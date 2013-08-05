@@ -97,6 +97,7 @@
 }
 
 #logInButton .v-button-wrap,
+.logInButton .v-button-wrap,
 .styleButton .v-button-wrap,
 #saveButton .v-button-wrap{
 	padding: 4px 8px 0 0px;
