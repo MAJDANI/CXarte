@@ -89,6 +89,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		gridLayout.addComponent(eaePanel);
 		gridLayout.addComponent(formationPanel);
 		
+		profilePopIn.addStyleName("popinStyle");
+		
 	}
 	
 	@Override

@@ -116,6 +116,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		nameField
 				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		nameField.setId(ComponentsId.LAST_NAME_ID);
+		nameField.setWidth("190px");
 		colleagueFormLayout.addComponent(nameField);
 
 		firstNameField.setCaption(Constants.FIRST_NAME);
@@ -129,6 +130,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		firstNameField
 				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
+		firstNameField.setWidth("190px");
+		firstNameField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(firstNameField);
 
 		jobField.setCaption(Constants.JOB_TITLE);
@@ -142,6 +145,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		jobField.addBlurListener(this);
 		jobField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
 		jobField.setId(ComponentsId.PROFILE_ID);
+		jobField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(jobField);
 
 		emailField.setCaption(Constants.EMAIL);
@@ -155,6 +159,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		emailField
 				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		emailField.setId(ComponentsId.EMAIL_ID);
+		emailField.setWidth("190px");
+		emailField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(emailField);
 
 		phoneField.setCaption(Constants.PHONE);
@@ -164,6 +170,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		phoneField
 				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		phoneField.setId(ComponentsId.PHONE_ID);
+		phoneField.setWidth("190px");
+		phoneField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(phoneField);
 
 		dateField.setCaption(Constants.DATE_OF_HIRE);
@@ -175,6 +183,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		dateField.setValidationVisible(true);
 		dateField.addBlurListener(this);
 		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
+		dateField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(dateField);
 
 		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
@@ -189,6 +198,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		experienceField
 				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		experienceField.setId(ComponentsId.EXPERIENCE_ID);
+		experienceField.setWidth("50px");
+		experienceField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(experienceField);
 
 		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
@@ -197,6 +208,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		businessEngineerField
 				.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
 		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
+		businessEngineerField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(businessEngineerField);
 
 		managerField.setCaption(Constants.MANAGER);
@@ -205,6 +217,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		managerField
 				.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
 		managerField.setId(ComponentsId.MANAGER_ID);
+		managerField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(managerField);
 		Authentication authentication = TalentMapApplication.getCurrent()
 				.getAuthentication();

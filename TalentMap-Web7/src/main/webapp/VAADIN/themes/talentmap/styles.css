@@ -97,11 +97,10 @@
 }
 
 #logInButton .v-button-wrap,
-.logInButton .v-button-wrap,
 .styleButton .v-button-wrap,
 #saveButton .v-button-wrap{
 	padding: 4px 8px 0 0px;
-	background-image:none;
+	background-image:none !important;
 }
 
 #logInButton.v-button,
@@ -324,4 +323,59 @@
 }
 .footerLayoutMissionButton{
 	margin-top:  15px;
+}
+
+
+.popinStyle .popupContent .v-window-contents{
+	border-top:solid 1px #009cda;
+}
+
+.panelLeft .v-verticallayout{
+	padding:0;
+}
+
+.panelLeft .v-panel-content{
+	border:none;
+}
+
+.panelLeft .v-button-caption{
+	color: #009cda;
+	font-size: 15px;
+	text-decoration:none;
+	line-height:25px;
+	border:none;
+}
+
+.panelLeft .v-button-caption:hover,
+.panelLeft .focus .v-button-caption{
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+.panelLeft .focus .v-button-caption{
+	text-transform:uppercase;
+}
+
+.panelRight .v-panel-content{
+	border-right:none;
+}
+
+.panelRight .v-panel-content .v-formlayout{
+	text-align:center;
+}
+
+.panelRight .v-caption-spacerInfo {
+	left:10px !important;
+}
+
+.panelRight .spacerInfo{
+	margin-left:10px;
+}
+
+.panelRight .v-caption-spacerTop {
+	top:10px !important;
+}
+
+.panelRight .spacerTop{
+	margin-top:10px;
 }
