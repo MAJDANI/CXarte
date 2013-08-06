@@ -1,20 +1,25 @@
 package com.novedia.talentmap.web.ui.ia;
 
+import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class IaView extends VerticalLayout {
+public class IaView extends VerticalLayout implements ClickListener {
 	
 	private GridLayout gridLayout;
 	
 	private Panel searchPanel;
 	
 	private Button searchButton;
+	
+	private SearchPopIn searchPopIn;
 	
 	/**
 	 * Default constructor
@@ -45,10 +50,21 @@ public class IaView extends VerticalLayout {
 		searchPanel.removeAllComponents();
 		searchButton.setCaption(Constants.SEARCH_LABEL);
 		searchButton.setId(ComponentsId.SEARCH_BUTTON_ID);
+		searchButton.addClickListener(this);
 		searchPanel.addComponent(searchButton);
 		
 		gridLayout.addComponent(searchPanel);
 	}
+	
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if(event.getButton().equals(searchButton)){
+			getUI().addWindow(searchPopIn.buildSearchPopIn());
+		}
+		
+	}
+	
 
 	public GridLayout getGridLayout() {
 		return gridLayout;
@@ -73,5 +89,13 @@ public class IaView extends VerticalLayout {
 	public void setSearchButton(Button searchButton) {
 		this.searchButton = searchButton;
 	}
-	
+
+	public SearchPopIn getSearchPopIn() {
+		return searchPopIn;
+	}
+
+	public void setSearchPopIn(SearchPopIn searchPopIn) {
+		this.searchPopIn = searchPopIn;
+	}
+
 }
