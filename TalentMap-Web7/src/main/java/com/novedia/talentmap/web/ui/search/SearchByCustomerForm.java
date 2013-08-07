@@ -2,10 +2,7 @@ package com.novedia.talentmap.web.ui.search;
 
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.services.IClientService;
-import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.VerticalLayout;

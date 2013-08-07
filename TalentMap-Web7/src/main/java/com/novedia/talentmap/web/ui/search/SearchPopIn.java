@@ -2,9 +2,12 @@ package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -164,15 +167,30 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	@Override
 	public void textChange(TextChangeEvent event) {
+		
+		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+		
 		if(event.getComponent().equals(searchByNameForm.getNameField())){
 			String valueField = event.getText();
 			valueField = valueField.trim();
-			listCollab = collabService.getAllColleaguesByName(valueField);
+			searchResults.setRoleId((authentication.getAuthorization().getRoleId()));
+			
+			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
+				
+				int managerId = authentication.getColleagueId();
+				listCollab = collabService.getCmColleaguesByName(valueField, managerId);
+				
+			} else {
+				
+				listCollab = collabService.getAllColleaguesByName(valueField);
+				
+			}
+			
 			if(listCollab.isEmpty()){
 				searchResultsPanelNoResult.setVisible(true);
 				searchResultsPanel.setVisible(false);
 				
-			}else{
+			} else {
 				searchResultsPanel.removeAllComponents();
 				searchResultsPanelNoResult.setVisible(false);
 				searchResultsPanel.setVisible(true);
