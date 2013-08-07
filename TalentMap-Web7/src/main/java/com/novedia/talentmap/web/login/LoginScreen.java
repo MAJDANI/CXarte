@@ -90,6 +90,8 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	 */
 	private AuthenticatedScreen authenticatedScreen;
 	
+	private VerticalLayout content;
+	
 	
 	/**
 	 * Default constructor
@@ -119,8 +121,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		
 		loginPanel.addStyleName("loginPanel");
 		
-		VerticalLayout content = new VerticalLayout();
-		
+		content.removeAllComponents();
 		content.addComponent(errorLogin);
 		errorLogin.setCaption(Constants.ERROR_LOGIN_MSG);
 		errorLogin.setVisible(false);
@@ -392,6 +393,16 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public void setRegistrationScreen(RegistrationScreen registrationScreen) {
 		this.registrationScreen = registrationScreen;
 	}
+
+	public VerticalLayout getContent() {
+		return content;
+	}
+
+	public void setContent(VerticalLayout content) {
+		this.content = content;
+	}
+	
+	
 
 
 }

@@ -18,7 +18,6 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -60,7 +59,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private MissionForm missionForm;
     
-    private GridLayout formLayout;
+//    private GridLayout formLayout;
     
 	private Button saveButton;
 	
@@ -125,7 +124,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private void buildAddMissionPanel(){
     	addMissionPanel.removeAllComponents();
-		missionForm.setMissionFormLayout(formLayout);
+//		missionForm.setMissionFormLayout(formLayout);
 		addMissionPanel.addComponent(missionForm.buildMissionForm(missionDTO));
 		builMissionFormButton();
 		addMissionPanel.addComponent(missionFormButtonLayout);
@@ -492,13 +491,13 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		this.missionForm = missionForm;
 	}
 
-	public GridLayout getFormLayout() {
-		return formLayout;
-	}
-
-	public void setFormLayout(GridLayout formLayout) {
-		this.formLayout = formLayout;
-	}
+//	public GridLayout getFormLayout() {
+//		return formLayout;
+//	}
+//
+//	public void setFormLayout(GridLayout formLayout) {
+//		this.formLayout = formLayout;
+//	}
 
 	public Button getSaveButton() {
 		return saveButton;

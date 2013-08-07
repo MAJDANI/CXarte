@@ -50,7 +50,7 @@ public class Constants {
 	
 	public static final String MISSION_MSG_INVALID_PERIOD = "The period is invalid";
 	
-	public static final String MISSION_MSG_INVALID_SELECTION = "The tools selection is invalid";
+	public static final String MISSION_MSG_INVALID_SELECTION = "Please select at least one tool";
 	
 	public static final String MISSION_MSG_DATA_INSERTED_OK = "The mission has been added";
 	

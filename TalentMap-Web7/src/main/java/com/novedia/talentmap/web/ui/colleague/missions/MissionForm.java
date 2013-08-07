@@ -14,15 +14,15 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.TwinColSelect;
 
 @SuppressWarnings("serial")
-public class MissionForm extends FormLayout{
+public class MissionForm extends HorizontalLayout{
 	
 	private IClientService clientService;
 
@@ -33,7 +33,9 @@ public class MissionForm extends FormLayout{
 	 */
 	private BeanFieldGroup<MissionDTO> binder;
 
-	private GridLayout MissionFormLayout;
+	private GridLayout missionFormLayout;
+	
+	private GridLayout missionToolLayout;
 	
 	@PropertyId(ComponentsId.TITLE_ID)
 	private TextField titleField;
@@ -61,13 +63,21 @@ public class MissionForm extends FormLayout{
 	 */
 	public MissionForm() {
 		super();
+		setSpacing(true);
 	}
 	
 	public MissionForm buildMissionForm(MissionDTO missionDto) {
 		removeAllComponents();
-		MissionFormLayout.removeAllComponents();
-		MissionFormLayout.setColumns(3);
-		MissionFormLayout.setRows(3);
+		missionFormLayout.removeAllComponents();
+		missionFormLayout.setSpacing(true);
+		missionFormLayout.setColumns(2);
+		missionFormLayout.setRows(2);
+		
+		missionToolLayout.removeAllComponents();
+		missionToolLayout.setSpacing(true);
+		missionToolLayout.setRows(1);
+		missionToolLayout.setColumns(1);
+		
 		titleField.setCaption(Constants.TITLE_CAPTION);
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
@@ -78,7 +88,7 @@ public class MissionForm extends FormLayout{
 		titleField.setValidationVisible(true);
 		titleField.setInputPrompt(Constants.TYPE_TITLE);
 		titleField.setNullRepresentation("");
-		MissionFormLayout.addComponent(titleField);
+		missionFormLayout.addComponent(titleField);
 		
 		clientField.setCaption(Constants.CLIENT);
 		clientField.setId(ComponentsId.CLIENT_ID);
@@ -90,7 +100,7 @@ public class MissionForm extends FormLayout{
 		clientField.setValidationVisible(true);
 		clientField.setInputPrompt(Constants.SELECT_CLIENT);
 		buildClientList();
-		MissionFormLayout.addComponent(clientField);
+		missionFormLayout.addComponent(clientField);
 		
 		placeField.setCaption(Constants.PLACE);
 		placeField.setId(ComponentsId.PLACE_ID);
@@ -102,7 +112,7 @@ public class MissionForm extends FormLayout{
 		placeField.setValidationVisible(true);
 		placeField.setInputPrompt(Constants.TYPE_PLACE);
 		placeField.setNullRepresentation("");
-		MissionFormLayout.addComponent(placeField);
+		missionFormLayout.addComponent(placeField);
 		
 		startDateField.setCaption(Constants.START_DATE);
 		startDateField.setId(ComponentsId.START_DATE_ID);
@@ -113,18 +123,18 @@ public class MissionForm extends FormLayout{
 		startDateField.setImmediate(true);
 		startDateField.setValidationVisible(true);
 		startDateField.setInputPrompt(Constants.DATE_FORMAT);
-		MissionFormLayout.addComponent(startDateField);
+		missionFormLayout.addComponent(startDateField);
 		
 		endDateField.setCaption(Constants.END_DATE);
 		endDateField.setId(ComponentsId.END_DATE_ID);
 		endDateField.setInputPrompt(Constants.DATE_FORMAT);
-		MissionFormLayout.addComponent(endDateField);
+		missionFormLayout.addComponent(endDateField);
 		
 		commentField.setCaption(Constants.COMMENT);
 		commentField.setId(ComponentsId.COMMENT_ID);
 		commentField.setInputPrompt(Constants.TYPE_COMMENT);
 		commentField.setNullRepresentation("");
-		MissionFormLayout.addComponent(commentField);
+		missionFormLayout.addComponent(commentField);
 		
 		toolsField.setCaption(Constants.TOOLS);
 		toolsField.setId(ComponentsId.TOOLS_ID);
@@ -139,7 +149,7 @@ public class MissionForm extends FormLayout{
 		toolsField.setLeftColumnCaption("Available tools");
 		toolsField.setRightColumnCaption("Selected tools");
 		buildToolsList();
-		MissionFormLayout.addComponent(toolsField);
+		missionToolLayout.addComponent(toolsField);
 		
 		binder = new BeanFieldGroup<MissionDTO>(
 				MissionDTO.class);
@@ -147,7 +157,8 @@ public class MissionForm extends FormLayout{
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 		
-		addComponent(MissionFormLayout);
+		addComponent(missionFormLayout);
+		addComponent(missionToolLayout);
 		
 		return this;
 		
@@ -182,11 +193,11 @@ public class MissionForm extends FormLayout{
 	}
 
 	public GridLayout getMissionFormLayout() {
-		return MissionFormLayout;
+		return missionFormLayout;
 	}
 
 	public void setMissionFormLayout(GridLayout missionFormLayout) {
-		MissionFormLayout = missionFormLayout;
+		this.missionFormLayout = missionFormLayout;
 	}
 
 	public TextField getTitleField() {
@@ -260,5 +271,15 @@ public class MissionForm extends FormLayout{
 	public void setSkillService(ISkillService skillService) {
 		this.skillService = skillService;
 	}
+
+	public GridLayout getMissionToolLayout() {
+		return missionToolLayout;
+	}
+
+	public void setMissionToolLayout(GridLayout missionToolLayout) {
+		this.missionToolLayout = missionToolLayout;
+	}
+	
+	
 
 }
