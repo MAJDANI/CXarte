@@ -59,8 +59,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private MissionForm missionForm;
     
-//    private GridLayout formLayout;
-    
 	private Button saveButton;
 	
 	private Button cancelButton;
@@ -124,7 +122,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private void buildAddMissionPanel(){
     	addMissionPanel.removeAllComponents();
-//		missionForm.setMissionFormLayout(formLayout);
 		addMissionPanel.addComponent(missionForm.buildMissionForm(missionDTO));
 		builMissionFormButton();
 		addMissionPanel.addComponent(missionFormButtonLayout);
@@ -490,14 +487,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	public void setMissionForm(MissionForm missionForm) {
 		this.missionForm = missionForm;
 	}
-
-//	public GridLayout getFormLayout() {
-//		return formLayout;
-//	}
-//
-//	public void setFormLayout(GridLayout formLayout) {
-//		this.formLayout = formLayout;
-//	}
 
 	public Button getSaveButton() {
 		return saveButton;
