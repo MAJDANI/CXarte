@@ -76,8 +76,8 @@
 		(c.COLLEAGUE_ID =
 		AUTH.COLLEAGUE_ID)
 		WHERE (UPPER(c.LAST_NAME) LIKE
-		UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
-		UPPER('$name$%'))
+		UPPER('%$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		UPPER('%$name$%'))
 		AND
 		(AUTH.ROLE_ID != ${admin.role}) AND (c.MANAGER_ID = #managerId#)
 	</statement>
@@ -100,8 +100,8 @@
 		SELECT c.* FROM COLLEAGUE c JOIN
 		AUTHENTICATION AUTH ON (c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
 		WHERE
-		(UPPER(c.LAST_NAME) LIKE UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
-		UPPER('$name$%'))
+		(UPPER(c.LAST_NAME) LIKE UPPER('%$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		UPPER('%$name$%'))
 		AND AUTH.ROLE_ID != ${admin.role}
 	</select>
 
@@ -123,8 +123,8 @@
 		SELECT c.* FROM COLLEAGUE c JOIN AUTHENTICATION AUTH ON
 		(c.COLLEAGUE_ID = AUTH.COLLEAGUE_ID)
 		WHERE (UPPER(c.LAST_NAME) LIKE
-		UPPER('$name$%') OR UPPER(c.FIRST_NAME) LIKE
-		UPPER('$name$%'))
+		UPPER('%$name$%') OR UPPER(c.FIRST_NAME) LIKE
+		UPPER('%$name$%'))
 		AND
 		AUTH.ROLE_ID != ${admin.role}
 	</select>

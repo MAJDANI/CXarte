@@ -2,6 +2,21 @@ package com.novedia.talentmap.web.utils;
 
 public class Constants {
 	
+	public static final int NB_ROWS_DEFAULT = 10;
+	
+	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
+	
+	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
+	
+	public static final String DELETE_BUTTON_LABEL = "Delete";
+	
+	public static final String WINDOW_CONFIRM_DELETE_TITLE = "Confirm Delete";
+	
+	public static final String DELETE_COLLEAGUE_MSG = "Are you sure you want to delete these colleagues ?";
+	
+	public static final String CONFIRM_DELETE_MISSION_LABEL = "Yes";
+	
+	public static final String CANCEL_DELETE_MISSION_LABEL = "No";
 	
 	// 3 constants to validate fields in MissionForm
     public static final int VALIDATION_FIELD_MISSING = 0;
@@ -177,7 +192,12 @@ public class Constants {
      * Constant for Admin View
      */
 	
-	public static final String COLLABORATOR_AND_SKILL_MANAGE_LABEL = "Manage collaborators and skills";
+	public static final String DELETE_COLLEAGUE_LABEL = "Delete Collab";
+	
+	public static final String MANAGE_TOOL_LABEL = "Manage Tool";
+	
+	public static final String[] VISIBLE_COlUMN = { "First Name", "Last Name","Email", "Phone" };
+	
 	
 	/**
      * Constant for Collaborator and skill manage Pop-In
@@ -189,7 +209,7 @@ public class Constants {
 	
 	public static final String ADD_SKILL_ELEMENT_LABEL = "Add Category/Concept/Tool";
 	
-	public static final String DELETE_COLLABORATOR_LABEL = "Delete collaborator";
+	
 	
 	/**
      * Constant for Profile Pop-In

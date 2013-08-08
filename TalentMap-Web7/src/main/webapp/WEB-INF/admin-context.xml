@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+                           
+     <import resource="classpath:services-spring-context.xml" />
+	<import resource="classpath:model-spring-context.xml" /> 
+                           
+    <bean id="gridLayoutAdminViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="manageColleaguePanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="manageToolPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="deleteColleagueButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="manageToolButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" >
+		<property name="gridLayout" ref ="gridLayoutAdminViewBean" />
+		<property name="manageColleaguePanel" ref ="manageColleaguePanelBean" />
+		<property name="manageToolPanel" ref ="manageToolPanelBean" />
+		<property name="deleteColleagueButton" ref ="deleteColleagueButtonBean" />
+		<property name="manageToolButton" ref ="manageToolButtonBean" />
+		<property name="manageColleaguePopIn" ref ="manageColleaguePopInBean" />
+	</bean>
+	
+	<bean id="contentManageColleaguePopInBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="searchPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="colleagueNameFieldBean" class="com.vaadin.ui.TextField" scope="session" />
+	<bean id="colleagueListTableBean" class="com.vaadin.ui.Table" scope="session" />
+	<bean id="deleteColleagueButtondBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="containerButtonBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
+	
+	<bean id="noButtonAdminDeleteColleagueBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="yesButtonAdminDeleteColleagueBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="confirmDeleteLabelAdminDeleteColleagueBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="confirmButtonContainerAdminDeleteColleagueBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
+	<bean id="windowConfirmAdminDeleteColleagueBean" class="com.vaadin.ui.Window" scope="session" />
+	
+	<bean id="manageColleaguePopInBean" class="com.novedia.talentmap.web.ui.admin.ManageColleaguePopIn" scope="session" >
+		<property name="content" ref ="contentManageColleaguePopInBean" />
+		<property name="searchPanel" ref ="searchPanelAdminBean" />
+		<property name="searchResultPanel" ref ="searchResultPanelAdminBean" />
+		<property name="colleagueNameField" ref ="colleagueNameFieldBean" />
+		<property name="colleagueTableList" ref ="colleagueListTableBean" />
+		<property name="colleagueContainer" ref ="ColleagueContainerBean" />
+		<property name="deleteColleagueButton" ref ="deleteColleagueButtondBean" />
+		<property name="containerButton" ref ="containerButtonBean" />
+		<property name="windowConfirm" ref ="windowConfirmAdminDeleteColleagueBean" />
+		<property name="confirmDeleteLabel" ref ="confirmDeleteLabelAdminDeleteColleagueBean" />
+		<property name="confirmButtonContainer" ref ="confirmButtonContainerAdminDeleteColleagueBean" />
+		<property name="yesButton" ref ="yesButtonAdminDeleteColleagueBean" />
+		<property name="noButton" ref ="noButtonAdminDeleteColleagueBean" />
+		<property name="adminService" ref ="adminService" />
+	</bean>
+	
+	<bean id="ColleagueContainerBean" class="com.novedia.talentmap.web.ui.admin.ColleagueContainer" scope="session" >
+		<property name="colleagueService" ref ="collaboratorService" />
+	</bean>
+	
+	
+</beans>                           

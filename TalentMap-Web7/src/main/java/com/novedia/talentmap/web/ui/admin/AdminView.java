@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -8,6 +7,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class AdminView extends VerticalLayout implements ClickListener {
@@ -17,17 +17,22 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	*/
 	private GridLayout gridLayout;
 	
-	private Panel collaboratorAndSkillManagePanel;
+	private Panel manageColleaguePanel;
 	
-	private Button collaboratorAndSkillManageButton;
+	private Panel manageToolPanel;
 	
-	private CollaboratorAndSkillManagePopIn collaboratorAndSkillManagePopIn;
+	private Button deleteColleagueButton;
+	
+	private Button manageToolButton;
+	
+	private ManageColleaguePopIn manageColleaguePopIn;
 	
 	/**
 	 * Default constructor
 	 */
 	public AdminView(){
 		super();
+		addStyleName("centerPanel adminPanel");
 	}
 	
 	
@@ -49,19 +54,28 @@ public class AdminView extends VerticalLayout implements ClickListener {
 		gridLayout.setRows(2);
 		gridLayout.setColumns(2);
 		
-		collaboratorAndSkillManagePanel.removeAllComponents();
-		collaboratorAndSkillManageButton.setCaption(Constants.COLLABORATOR_AND_SKILL_MANAGE_LABEL);
-		collaboratorAndSkillManageButton.setId(ComponentsId.COLLABORATOR_AND_SKILL_MANAGE_ID);
-		collaboratorAndSkillManageButton.addClickListener(this);
-		collaboratorAndSkillManagePanel.addComponent(collaboratorAndSkillManageButton);
+		manageColleaguePanel.removeAllComponents();
+		deleteColleagueButton.setCaption(Constants.DELETE_COLLEAGUE_LABEL);
+		deleteColleagueButton.addStyleName(Reindeer.BUTTON_LINK);
+		deleteColleagueButton.addClickListener(this);
+		deleteColleagueButton.addStyleName("labelBtnDashboard");
+		manageColleaguePanel.addComponent(deleteColleagueButton);
 		
-		gridLayout.addComponent(collaboratorAndSkillManagePanel);
+		manageToolPanel.removeAllComponents();
+		manageToolButton.setCaption(Constants.MANAGE_TOOL_LABEL);
+		manageToolButton.addStyleName(Reindeer.BUTTON_LINK);
+		manageToolButton.addClickListener(this);
+		manageToolButton.addStyleName("labelBtnDashboard");
+		manageToolPanel.addComponent(manageToolButton);
+		
+		gridLayout.addComponent(manageColleaguePanel);
+		gridLayout.addComponent(manageToolPanel);
 	}
 	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		if(event.getButton().equals(collaboratorAndSkillManageButton)){
-			getUI().addWindow(collaboratorAndSkillManagePopIn.buildCollaboratorAndSkillManagePopIn());
+		if(event.getButton().equals(deleteColleagueButton)){
+			getUI().addWindow(manageColleaguePopIn.buildManageColleagueView());
 		}
 		
 	}
@@ -77,36 +91,53 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	}
 
 
-	public Panel getCollaboratorAndSkillManagePanel() {
-		return collaboratorAndSkillManagePanel;
+	public Panel getManageColleaguePanel() {
+		return manageColleaguePanel;
 	}
 
 
-	public void setCollaboratorAndSkillManagePanel(
-			Panel collaboratorAndSkillManagePanel) {
-		this.collaboratorAndSkillManagePanel = collaboratorAndSkillManagePanel;
+	public void setManageColleaguePanel(Panel manageColleaguePanel) {
+		this.manageColleaguePanel = manageColleaguePanel;
 	}
 
 
-	public Button getCollaboratorAndSkillManageButton() {
-		return collaboratorAndSkillManageButton;
+	public Panel getManageToolPanel() {
+		return manageToolPanel;
 	}
 
 
-	public void setCollaboratorAndSkillManageButton(
-			Button collaboratorAndSkillManageButton) {
-		this.collaboratorAndSkillManageButton = collaboratorAndSkillManageButton;
+	public void setManageToolPanel(Panel manageToolPanel) {
+		this.manageToolPanel = manageToolPanel;
 	}
 
 
-	public CollaboratorAndSkillManagePopIn getCollaboratorAndSkillManagePopIn() {
-		return collaboratorAndSkillManagePopIn;
+	public Button getDeleteColleagueButton() {
+		return deleteColleagueButton;
 	}
 
 
-	public void setCollaboratorAndSkillManagePopIn(
-			CollaboratorAndSkillManagePopIn collaboratorAndSkillManagePopIn) {
-		this.collaboratorAndSkillManagePopIn = collaboratorAndSkillManagePopIn;
+	public void setDeleteColleagueButton(Button deleteColleagueButton) {
+		this.deleteColleagueButton = deleteColleagueButton;
 	}
 
+
+	public Button getManageToolButton() {
+		return manageToolButton;
+	}
+
+
+	public void setManageToolButton(Button manageToolButton) {
+		this.manageToolButton = manageToolButton;
+	}
+
+
+	public ManageColleaguePopIn getManageColleaguePopIn() {
+		return manageColleaguePopIn;
+	}
+
+
+	public void setManageColleaguePopIn(ManageColleaguePopIn manageColleaguePopIn) {
+		this.manageColleaguePopIn = manageColleaguePopIn;
+	}
+	
 }
