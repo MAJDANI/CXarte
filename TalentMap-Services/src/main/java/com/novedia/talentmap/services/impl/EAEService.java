@@ -81,7 +81,8 @@ public class EAEService implements IEAEService {
     @Override
     public EAEGeneralityDTO getEAEGenerality(Integer idEAE) {
 	EAEDao eaeDao = (EAEDao) this.eaeDao;
-	return eaeDao.getEAEGenerality(idEAE);
+	EAEGeneralityDTO e = eaeDao.getEAEGenerality(idEAE); 
+	return e;
     }
 
 

@@ -21,7 +21,7 @@ public class EAEGeneralityDTO {
     /**
      * Colleague's name (Last + First)
      */
-//    private String colleagueName;
+    private String collabLastAndFirstName;
 
     /**
      * Colleague profile
@@ -31,9 +31,16 @@ public class EAEGeneralityDTO {
     /**
      * Manager's name (Last + First)
      */
+    private String managerLastAndFirstName;
+
+    /**
+     * Manager's last name
+     */
     private String managerLastName;
+    /**
+     * Manager's first name
+     */
     private String managerFirstName;
-//    private String managerName;
     /**
      * EAE's date
      */
@@ -51,10 +58,12 @@ public class EAEGeneralityDTO {
      * The State of the EAE
      */
     private Integer eaeStateId;
+    
+    
     /**
-     * 
+     * The salary of the colleague at the date of the EAE
      */
-//    private Integer salary;
+    private Integer salary;
     
     /**
      * @return the id
@@ -189,6 +198,20 @@ public class EAEGeneralityDTO {
     }
 
     /**
+	 * @return the collabLastAndFirstName
+	 */
+	public String getCollabLastAndFirstName() {
+		return this.collabLastName + " " + this.collabFirstName;
+	}
+
+	/**
+	 * @param collabLastAndFirstName the collabLastAndFirstName to set
+	 */
+	public void setCollabLastAndFirstName(String collabLastAndFirstName) {
+		this.collabLastAndFirstName = collabLastAndFirstName;
+	}
+
+	/**
      * @return the managerLastName
      */
     public String getManagerLastName() {
@@ -216,7 +239,35 @@ public class EAEGeneralityDTO {
         this.managerFirstName = managerFirstName;
     }
 
-    @Override
+    /**
+	 * @return the managerLastAndFirstName
+	 */
+	public String getManagerLastAndFirstName() {
+		return this.managerLastName + " " + this.managerFirstName;
+	}
+
+	/**
+	 * @param managerLastAndFirstName the managerLastAndFirstName to set
+	 */
+	public void setManagerLastAndFirstName(String managerLastAndFirstName) {
+		this.managerLastAndFirstName = managerLastAndFirstName;
+	}
+
+	/**
+	 * @return the salary
+	 */
+	public Integer getSalary() {
+		return salary;
+	}
+
+	/**
+	 * @param salary the salary to set
+	 */
+	public void setSalary(Integer salary) {
+		this.salary = salary;
+	}
+
+	@Override
     public String toString() {
 	StringBuilder strBld = new StringBuilder();
 	strBld.append("[id=").append(getId()).append(", ");

@@ -62,7 +62,7 @@
 		<result property="employmentDate" column="EMPLOYMENT_DATE" />
 		<result property="previousEaeDate" column="PREV_EAE_DATE" />
 		<result property="eaeStateId" column="EAE_STATE_ID" />
-<!-- 		<result property="salary" column="SALARY" /> -->
+		<result property="salary" column="SALARY" />
 	</resultMap>
 
 
@@ -166,9 +166,11 @@
 	
 	
 	<select id="getEAEGenerality" resultMap="eaeGeneralityResult" parameterClass="Integer">
-		SELECT eae.EAE_ID as "EAE_ID", col.LAST_NAME as "C_LAST_NAME", col.FIRST_NAME as "C_FIRST_NAME", prof.PROFILE_TYPE as "PROFILE",
+		SELECT eae.EAE_ID as "EAE_ID", col.LAST_NAME as "C_LAST_NAME", col.FIRST_NAME as "C_FIRST_NAME", 
+		prof.PROFILE_TYPE as "PROFILE",
 		man.LAST_NAME as "M_LAST_NAME", man.FIRST_NAME as "M_FIRST_NAME", eae.EAE_STATE_ID as "EAE_STATE_ID",
-		eae.EAE_DATE as "EAE_DATE", col.EMPLOYMENT_DATE as "EMPLOYMENT_DATE", prevEae.EAE_DATE as "PREV_EAE_DATE"
+		eae.EAE_DATE as "EAE_DATE", col.EMPLOYMENT_DATE as "EMPLOYMENT_DATE", prevEae.EAE_DATE as "PREV_EAE_DATE",
+		eae.SALARY as "SALARY"
 		FROM EAE eae
 			LEFT JOIN EAE prevEae ON eae.PREVIOUS_EAE_ID = prevEae.EAE_ID,
 		COLLEAGUE col, PROFILE prof, COLLEAGUE man

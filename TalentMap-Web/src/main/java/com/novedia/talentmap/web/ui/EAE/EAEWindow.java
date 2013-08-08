@@ -38,6 +38,7 @@ public class EAEWindow extends Window {
      * @return
      */
     private void buildCaption() {
+    	//TODO : finaliser
 	String caption = ConstantsEnglish.EAE_WINDOW_TITLE_1_COLLEAGUE
 		+ eaeForSynthesisDTO.getLastName() + " "
 		+ eaeForSynthesisDTO.getFirstName()
