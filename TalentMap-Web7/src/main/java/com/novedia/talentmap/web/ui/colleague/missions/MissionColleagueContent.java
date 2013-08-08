@@ -73,7 +73,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	public MissionColleagueContent(){
     	super();
     	setSpacing(true);
-    	//setWidth("800px");
     	addStyleName("missionColleagueView");
     	missionDTO = MissionDTO.builder().build();	
     }
@@ -143,6 +142,11 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     		buildFooterListMission();
     		listMissionPanel.addComponent(footerLayoutMissionButton);
     		listMissionPanel.setVisible(true);
+    		if(listMission.size() < Constants.NB_ROWS_DEFAULT){
+    			listMission.setPageLength(listMission.size());
+        	} else {
+        		listMission.setPageLength(Constants.NB_ROWS_DEFAULT);
+        	}
     	} else {
     		listMissionPanel.setVisible(false);
     	}
@@ -155,7 +159,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	editMissionButton.setCaption(MissionFieldLabel.EDIT_MISSION_LABEL);
     	editMissionButton.addClickListener(this);
     	editMissionButton.addStyleName("styleButton");
-    	deleteMissionButton.setCaption(MissionFieldLabel.DELETE_MISSION_LABEL);
+    	deleteMissionButton.setCaption(Constants.DELETE_BUTTON_LABEL);
     	deleteMissionButton.addClickListener(this);
     	deleteMissionButton.addStyleName("delBtn");
     	enableButton(false);
@@ -283,17 +287,17 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private void buildConfirmWindow(){
     	windowConfirm.removeAllComponents();
-    	windowConfirm.setCaption(MissionFieldLabel.WINDOW_CONFIRM_DELETE_TITLE);
+    	windowConfirm.setCaption(Constants.WINDOW_CONFIRM_DELETE_TITLE);
     	windowConfirm.center();
     	windowConfirm.setModal(true);
     	windowConfirm.setReadOnly(true);
     	confirmDeleteLabel.setCaption(MissionFieldLabel.CONFIRM_DELETE_MESSAGE_MISSION);
     	confirmButtonContainer.setSpacing(true);
     	confirmButtonContainer.addStyleName("containerButton");
-    	yesButton.setCaption(MissionFieldLabel.CONFIRM_DELETE_MISSION_LABEL);
+    	yesButton.setCaption(Constants.CONFIRM_DELETE_MISSION_LABEL);
     	yesButton.addStyleName("styleButton");
     	yesButton.addClickListener(this);
-    	noButton.setCaption(MissionFieldLabel.CANCEL_DELETE_MISSION_LABEL);
+    	noButton.setCaption(Constants.CANCEL_DELETE_MISSION_LABEL);
     	noButton.addStyleName("styleButton");
     	noButton.addClickListener(this);
     	confirmButtonContainer.addComponent(yesButton);

@@ -278,22 +278,26 @@
 	overflow:hidden;
 }
 
-.v-panel-labelBtnDashboard {
+.v-panel-labelBtnDashboard,
+.v-button-labelBtnDashboard{
 	cursor:pointer;
 }
 
-.v-panel-content-labelBtnDashboard .v-button-caption{
+.v-panel-content-labelBtnDashboard .v-button-caption,
+.v-button-labelBtnDashboard .v-button-caption{
 	font-size:22px;
 	color: #009cda;
 	font-weight:bold;
 	text-decoration:none;
 }
 
-.v-panel-content-labelBtnDashboard .v-button-caption:hover{
+.v-panel-content-labelBtnDashboard .v-button-caption:hover,
+.v-button-labelBtnDashboard .v-button-caption:hover{
 	text-decoration:underline;
 }
 
-.v-panel-labelBtnDashboard .v-verticallayout{
+.v-panel-labelBtnDashboard .v-verticallayout,
+.v-button-labelBtnDashboard .v-verticallayout{
 	text-align:center;
 	/*top:50%;
 	margin-top:-25px;*/
