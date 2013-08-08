@@ -98,6 +98,8 @@
 
 #logInButton .v-button-wrap,
 .styleButton .v-button-wrap,
+.addBtn .v-button-wrap,
+.delBtn .v-button-wrap,
 #saveButton .v-button-wrap{
 	padding: 4px 8px 0 0px;
 	background-image:none !important;
@@ -105,6 +107,8 @@
 
 #logInButton.v-button,
 .styleButton.v-button,
+.addBtn.v-button,
+.delBtn.v-button,
 #saveButton.v-button{
 	background-image:none;
 	background-color:#009cda;
@@ -116,6 +120,14 @@
 	cursor:pointer;
 }
 
+.addBtn.v-button{
+	background-color:#00c400;
+}
+
+.delBtn.v-button{
+	background-color:red;
+}
+
 #saveButton.v-button{
 	margin-top: 15px;
 	margin-left: 110px;
@@ -123,6 +135,8 @@
 
 #logInButton span.v-button-caption,
 .styleButton span.v-button-caption,
+.addBtn span.v-button-caption,
+.delBtn span.v-button-caption,
 #saveButton span.v-button-caption {
 	color : #fff !important;
 	font-weight:normal;
@@ -378,4 +392,19 @@
 
 .panelRight .spacerTop{
 	margin-top:10px;
+}
+
+.v-table .v-selected, 
+.black .v-table .v-selected {
+	background: #009cda;
+	color: #fff;
+	text-shadow: #3b5a7a 0 1px 0;
+}
+
+.addMission{
+	margin-left:20px;
+}
+
+.listMissionPanel .v-panel-content{
+	border:none;
 }

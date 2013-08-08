@@ -73,7 +73,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	public MissionColleagueContent(){
     	super();
     	setSpacing(true);
-    	setWidth("800px");
+    	//setWidth("800px");
     	addStyleName("missionColleagueView");
     	missionDTO = MissionDTO.builder().build();	
     }
@@ -86,10 +86,12 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	removeAllComponents();
     	addMissionButton.setCaption(MissionFieldLabel.ADD_MISSION_LABEL);
     	addMissionButton.addClickListener(this);
+    	addMissionButton.addStyleName("styleButton addMission");
     	buildAddMissionPanel();
     	addComponent(addMissionButton);
     	addComponent(addMissionPanel);
     	buildListMissionPanel();
+    	listMissionPanel.addStyleName("listMissionPanel");
     	addComponent(listMissionPanel);
     	disableddMissionPanel();
     	return this;
@@ -152,8 +154,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton containerButton");
     	editMissionButton.setCaption(MissionFieldLabel.EDIT_MISSION_LABEL);
     	editMissionButton.addClickListener(this);
+    	editMissionButton.addStyleName("styleButton");
     	deleteMissionButton.setCaption(MissionFieldLabel.DELETE_MISSION_LABEL);
     	deleteMissionButton.addClickListener(this);
+    	deleteMissionButton.addStyleName("delBtn");
     	enableButton(false);
     	footerLayoutMissionButton.setSpacing(true);
     	footerLayoutMissionButton.addComponent(editMissionButton);
