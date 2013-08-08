@@ -167,9 +167,8 @@ public class CollaboratorAndSkillManagePopIn extends Window implements ClickList
 					searchResultsPanel.removeAllComponents();
 					searchResultsPanelNoResult.setVisible(false);
 					searchResultsPanel.setVisible(true);
-//					searchResults.buildSearchResultsView();
-//					searchResults.buildResultsTable(listCollab);
-//					searchResultsPanel.addComponent(searchResults);
+					searchResults.buildResultsTable(listCollab);
+					searchResultsPanel.addComponent(searchResults);
 					
 				}
 			}
