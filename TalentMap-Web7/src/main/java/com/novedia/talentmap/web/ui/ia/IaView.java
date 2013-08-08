@@ -6,6 +6,7 @@ import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -51,6 +52,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 		searchPanel.removeAllComponents();
 		searchButton.setCaption(Constants.SEARCH_LABEL);
 		searchButton.setId(ComponentsId.SEARCH_BUTTON_ID);
+		searchButton.addStyleName(Reindeer.BUTTON_LINK);
 		searchButton.addClickListener(this);
 		searchButton.addStyleName("labelBtnDashboard");
 		searchPanel.addComponent(searchButton);
