@@ -147,7 +147,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	
     }
     
-    
     private void buildFooterListMission(){
     	footerLayoutMissionButton.removeAllComponents();
     	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton containerButton");
@@ -168,20 +167,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     		buildConfirmWindow();
     		getUI().addWindow(windowConfirm);
     	}else if (event.getButton().equals(editMissionButton)) {
-    		currentSaveMode = Constants.SAVE_MODE_UPDATE;
-    		addMissionButton.setEnabled(false);
-    		addMissionPanel.setVisible(true);
-    		enableButton(false);
-    		Mission selectedMission = (Mission) listMission.getValue();
-    		missionDTO = colleagueService.createMissionDTO(selectedMission);
-    		buildAddMissionPanel();
+    		showEditMissionPanel();
 		} else if (event.getButton().equals(addMissionButton)) {
-			currentSaveMode = Constants.SAVE_MODE_INSERT;
-			addMissionButton.setEnabled(false);
-			missionDTO = MissionDTO.builder().build();
-			buildAddMissionPanel();
-			addMissionPanel.setVisible(true);
-    		enableButton(false);
+			showAddMissionPanel();
 		} else if (event.getButton().equals(yesButton)) {
 			windowConfirm.close();
 			Mission selectedMission = (Mission) listMission.getValue();
@@ -197,35 +185,58 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 			addMissionButton.setEnabled(true);
 			addMissionPanel.setVisible(false);
 		} else if(event.getButton().equals(saveButton)){
-			int formValidation = checkMissionForm(missionDTO);
-    
-			switch (formValidation) {
-				case Constants.VALIDATION_FIELD_MISSING: {
-					Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
-					break;
-				}
-				case Constants.VALIDATION_INVALID_PERIOD:{
-					Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
-					break;
-				}
-				case Constants.VALIDATION_INVALID_SELECTION:{
-					Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
-					break;
-				}
-				case Constants.VALIDATION_VALID_FORM:{
-					Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
-					missionDTO.setColleagueId(authentication.getColleagueId());
-					if (currentSaveMode == Constants.SAVE_MODE_INSERT) {
-						insertMission(missionDTO);
-					} else {
-						updateMission(missionDTO);
-					}
-					refreshListMission();
-					break;
-				}
-			}
+			saveMission();
 		}
 	}
+    
+    private void showEditMissionPanel(){
+    	currentSaveMode = Constants.SAVE_MODE_UPDATE;
+		addMissionButton.setEnabled(false);
+		addMissionPanel.setVisible(true);
+		enableButton(false);
+		Mission selectedMission = (Mission) listMission.getValue();
+		missionDTO = colleagueService.createMissionDTO(selectedMission);
+		buildAddMissionPanel();
+    }
+    
+    private void showAddMissionPanel(){
+    	currentSaveMode = Constants.SAVE_MODE_INSERT;
+		addMissionButton.setEnabled(false);
+		missionDTO = MissionDTO.builder().build();
+		buildAddMissionPanel();
+		addMissionPanel.setVisible(true);
+		enableButton(false);
+    }
+    
+    private void saveMission(){
+    	int formValidation = checkMissionForm(missionDTO);
+        
+		switch (formValidation) {
+			case Constants.VALIDATION_FIELD_MISSING: {
+				Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+				break;
+			}
+			case Constants.VALIDATION_INVALID_PERIOD:{
+				Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
+				break;
+			}
+			case Constants.VALIDATION_INVALID_SELECTION:{
+				Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
+				break;
+			}
+			case Constants.VALIDATION_VALID_FORM:{
+				Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+				missionDTO.setColleagueId(authentication.getColleagueId());
+				if (currentSaveMode == Constants.SAVE_MODE_INSERT) {
+					insertMission(missionDTO);
+				} else {
+					updateMission(missionDTO);
+				}
+				refreshListMission();
+				break;
+			}
+		}
+    }
     
     /**
      * Refresh list mission

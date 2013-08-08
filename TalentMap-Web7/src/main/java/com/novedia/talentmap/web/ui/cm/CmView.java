@@ -1,4 +1,4 @@
-package com.novedia.talentmap.web.ui.rh;
+package com.novedia.talentmap.web.ui.cm;
 
 import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
@@ -11,7 +11,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class RhView extends VerticalLayout  implements ClickListener {
+public class CmView extends VerticalLayout  implements ClickListener {
 	
 	
 	private GridLayout gridLayout;
@@ -26,15 +26,15 @@ public class RhView extends VerticalLayout  implements ClickListener {
 	/**
 	 * Default constructor
 	 */
-	public RhView(){
+	public CmView(){
 		super();
 	}
 	
 	/**
-	 * Build RH's content view
+	 * Build CM's content view
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout buildRhContent(){
+	public VerticalLayout buildCmContent(){
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);

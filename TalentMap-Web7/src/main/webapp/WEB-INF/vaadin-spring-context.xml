@@ -102,6 +102,34 @@
 		<property name="missionColleagueContent" ref ="missionColleagueContentBean" />
 	</bean>
 	
+	<bean id="searchByCustomerButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchByNameButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchBySkillButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="hLayoutBean2" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="menuPanelBean2" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="menuContentBean2" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="contentPanelBean2" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsPanelNoResultBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsLabelNoResultBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="searchResultsPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	
+	<bean id="searchPopInBean" class="com.novedia.talentmap.web.ui.search.SearchPopIn" scope="session">
+		<property name="collabService" ref ="collaboratorService" />
+		<property name="searchByNameForm" ref ="searchByNameForm" />
+		<property name="searchByCustomerForm" ref ="searchByCustomerForm" />
+		<property name="searchResults" ref ="searchResults" />
+		<property name="searchByCustomer" ref ="searchByCustomerButtonBean" />
+		<property name="searchByName" ref ="searchByNameButtonBean" />
+		<property name="searchBySkill" ref ="searchBySkillButtonBean" />
+		<property name="hLayout" ref ="hLayoutBean2" />
+		<property name="panelLeft" ref ="menuPanelBean2" />
+		<property name="menuContent" ref ="menuContentBean2" />
+		<property name="panelRight" ref ="contentPanelBean2" />
+		<property name="searchResultsPanelNoResult" ref ="searchResultsPanelNoResultBean" />
+		<property name="searchResultsLabelNoResult" ref ="searchResultsLabelNoResultBean" />
+		<property name="searchResultsPanel" ref ="searchResultsPanelBean" />
+	</bean>
+	
 	
 	<bean id="listMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="addMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
@@ -156,19 +184,20 @@
 		<property name="profilePopIn" ref ="profilePopIn" />
 	</bean>
 	
-	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" />
 	
 	<bean id="gridLayoutIAViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	<bean id="searchPanel" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="searchButton" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="iaViewBean" class="com.novedia.talentmap.web.ui.ia.IaView" scope="session" >
+		<property name="searchPopIn" ref ="searchPopInBean" />
 		<property name="gridLayout" ref ="gridLayoutIAViewBean" />
 		<property name="searchPanel" ref ="searchPanel" />
 		<property name="searchButton" ref ="searchButton" />
 	</bean>
 	
-	<bean id="rhViewBean" class="com.novedia.talentmap.web.ui.rh.RhView" scope="session" />
+	
+	
 	
 	
 	<bean id="oldPasswordFieldBean" class="com.vaadin.ui.PasswordField" scope="session" />
@@ -204,6 +233,7 @@
 		<property name="colleagueView" ref="colleagueViewBean" />
 		<property name="adminView" ref="adminViewBean" />
 		<property name="iaView" ref="iaViewBean" />
+		<property name="cmView" ref="cmViewBean" />
 		<property name="rhView" ref="rhViewBean" />
 		<property name="settingsLayout" ref="settingsLayout" />
 		<property name="logoTalentMap" ref="logoTalentMap" />
@@ -297,5 +327,186 @@
 		<property name="missionToolLayout" ref="missionToolLayoutBean" />
 	</bean>
 	
+	<bean id="nameFieldSearchBean" class="com.vaadin.ui.TextField" scope="session" />
+	
+	<bean id="searchByNameForm" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">
+		<property name="nameField" ref="nameFieldSearchBean" />
+	</bean>
+	
+	<bean id="customerFieldSearchBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	
+	<bean id="searchByCustomerForm" class="com.novedia.talentmap.web.ui.search.SearchByCustomerForm" scope="session">
+		<property name="clientService" ref="clientService" />
+		<property name="customerField" ref="customerFieldSearchBean" />
+	</bean>
+	
+	
+	<bean id="searchResults" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session" />
+	
+	<!-- Beans for Admin -->
+	
+	<bean id="gridLayoutAdminViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="collaboratorAndSkillManagePanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="collaboratorAndSkillManageButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" >
+		<property name="collaboratorAndSkillManagePopIn" ref ="CollaboratorAndSkillManagePopInBean" />
+		<property name="gridLayout" ref ="gridLayoutAdminViewBean" />
+		<property name="collaboratorAndSkillManagePanel" ref ="collaboratorAndSkillManagePanelBean" />
+		<property name="collaboratorAndSkillManageButton" ref ="collaboratorAndSkillManageButtonBean" />
+	</bean>
+	
+	<bean id="modifyAndDeleteSkillElementButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="addSkillElementButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="deleteCollaboratorButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="hLayoutAdminBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="menuPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="menuContentAdminBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="contentPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsPanelNoResultAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsLabelNoResultAdminBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="searchResultsPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
+	
+	<bean id="CollaboratorAndSkillManagePopInBean" class="com.novedia.talentmap.web.ui.admin.CollaboratorAndSkillManagePopIn" scope="session">
+		<property name="collabService" ref ="collaboratorService" />
+		<property name="searchByNameForm" ref ="searchByNameFormAdmin" />
+		<property name="searchResults" ref ="searchResultsAdmin" />
+		<property name="modifyAndDeleteSkillElement" ref ="modifyAndDeleteSkillElementButtonBean" />
+		<property name="addSkillElement" ref ="addSkillElementButtonBean" />
+		<property name="deleteCollaborator" ref ="deleteCollaboratorButtonBean" />
+		<property name="hLayout" ref ="hLayoutAdminBean" />
+		<property name="panelLeft" ref ="menuPanelAdminBean" />
+		<property name="menuContent" ref ="menuContentAdminBean" />
+		<property name="panelRight" ref ="contentPanelAdminBean" />
+		<property name="searchResultsPanelNoResult" ref ="searchResultsPanelNoResultAdminBean" />
+		<property name="searchResultsLabelNoResult" ref ="searchResultsLabelNoResultAdminBean" />
+		<property name="searchResultsPanel" ref ="searchResultsPanelAdminBean" />
+	</bean>
+	
+	<bean id="nameFieldSearchAdminBean" class="com.vaadin.ui.TextField" scope="session" />
+	
+	<bean id="searchByNameFormAdmin" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">
+		<property name="nameField" ref="nameFieldSearchAdminBean" />
+	</bean>
+	
+	
+	<bean id="searchResultsAdmin" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+	</bean>
+	
+	<!-- Beans for CM -->
+	
+	<bean id="gridLayoutCMViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="searchPanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="cmViewBean" class="com.novedia.talentmap.web.ui.cm.CmView" scope="session" >
+		<property name="searchPopIn" ref ="searchPopInCMBean" />
+		<property name="gridLayout" ref ="gridLayoutCMViewBean" />
+		<property name="searchPanel" ref ="searchPanelCMBean" />
+		<property name="searchButton" ref ="searchButtonCMBean" />
+	</bean>
+	
+	<bean id="searchByCustomerButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchByNameButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchBySkillButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="hLayoutCMBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="menuPanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="menuContentCMBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="contentPanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsPanelNoResultCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsLabelNoResultCMBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="searchResultsPanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	
+	<bean id="searchPopInCMBean" class="com.novedia.talentmap.web.ui.search.SearchPopIn" scope="session">
+		<property name="collabService" ref ="collaboratorService" />
+		<property name="searchByNameForm" ref ="searchByNameFormCM" />
+		<property name="searchByCustomerForm" ref ="searchByCustomerFormCM" />
+		<property name="searchResults" ref ="searchResultsCM" />
+		<property name="searchByCustomer" ref ="searchByCustomerButtonCMBean" />
+		<property name="searchByName" ref ="searchByNameButtonCMBean" />
+		<property name="searchBySkill" ref ="searchBySkillButtonCMBean" />
+		<property name="hLayout" ref ="hLayoutCMBean" />
+		<property name="panelLeft" ref ="menuPanelCMBean" />
+		<property name="menuContent" ref ="menuContentCMBean" />
+		<property name="panelRight" ref ="contentPanelCMBean" />
+		<property name="searchResultsPanelNoResult" ref ="searchResultsPanelNoResultCMBean" />
+		<property name="searchResultsLabelNoResult" ref ="searchResultsLabelNoResultCMBean" />
+		<property name="searchResultsPanel" ref ="searchResultsPanelCMBean" />
+	</bean>
+	
+	<bean id="nameFieldSearchCMBean" class="com.vaadin.ui.TextField" scope="session" />
+	
+	<bean id="searchByNameFormCM" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">
+		<property name="nameField" ref="nameFieldSearchCMBean" />
+	</bean>
+	
+	<bean id="customerFieldSearchCMBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	
+	<bean id="searchByCustomerFormCM" class="com.novedia.talentmap.web.ui.search.SearchByCustomerForm" scope="session">
+		<property name="clientService" ref="clientService" />
+		<property name="customerField" ref="customerFieldSearchCMBean" />
+	</bean>
+	
+	
+	<bean id="searchResultsCM" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+	</bean>
+	
+	<!-- Beans for RH -->
+	
+	<bean id="gridLayoutRHViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="searchPanelRHBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchButtonRHBean" class="com.vaadin.ui.Button" scope="session" />
+	
+	<bean id="rhViewBean" class="com.novedia.talentmap.web.ui.rh.RhView" scope="session" >
+		<property name="searchPopIn" ref ="searchPopInRHBean" />
+		<property name="gridLayout" ref ="gridLayoutRHViewBean" />
+		<property name="searchPanel" ref ="searchPanelRHBean" />
+		<property name="searchButton" ref ="searchButtonRHBean" />
+	</bean>
+	
+	<bean id="searchByCustomerButtonRHBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchByNameButtonRHBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="searchBySkillButtonRHBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="hLayoutRHBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="menuPanelRHBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="menuContentRHBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
+	<bean id="contentPanelRHBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsPanelNoResultRHBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchResultsLabelNoResultRHBean" class="com.vaadin.ui.Label" scope="session" />
+	<bean id="searchResultsPanelRHBean" class="com.vaadin.ui.Panel" scope="session" />
+	
+	<bean id="searchPopInRHBean" class="com.novedia.talentmap.web.ui.search.SearchPopIn" scope="session">
+		<property name="collabService" ref ="collaboratorService" />
+		<property name="searchByNameForm" ref ="searchByNameFormRH" />
+		<property name="searchByCustomerForm" ref ="searchByCustomerFormRH" />
+		<property name="searchResults" ref ="searchResultsRH" />
+		<property name="searchByCustomer" ref ="searchByCustomerButtonRHBean" />
+		<property name="searchByName" ref ="searchByNameButtonRHBean" />
+		<property name="searchBySkill" ref ="searchBySkillButtonRHBean" />
+		<property name="hLayout" ref ="hLayoutRHBean" />
+		<property name="panelLeft" ref ="menuPanelRHBean" />
+		<property name="menuContent" ref ="menuContentRHBean" />
+		<property name="panelRight" ref ="contentPanelRHBean" />
+		<property name="searchResultsPanelNoResult" ref ="searchResultsPanelNoResultRHBean" />
+		<property name="searchResultsLabelNoResult" ref ="searchResultsLabelNoResultRHBean" />
+		<property name="searchResultsPanel" ref ="searchResultsPanelRHBean" />
+	</bean>
+	
+	<bean id="nameFieldSearchRHBean" class="com.vaadin.ui.TextField" scope="session" />
+	
+	<bean id="searchByNameFormRH" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">
+		<property name="nameField" ref="nameFieldSearchRHBean" />
+	</bean>
+	
+	<bean id="customerFieldSearchRHBean" class="com.vaadin.ui.ComboBox" scope="session" />
+	
+	<bean id="searchByCustomerFormRH" class="com.novedia.talentmap.web.ui.search.SearchByCustomerForm" scope="session">
+		<property name="clientService" ref="clientService" />
+		<property name="customerField" ref="customerFieldSearchRHBean" />
+	</bean>
+	
+	
+	<bean id="searchResultsRH" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
+	</bean>
 	
 </beans>

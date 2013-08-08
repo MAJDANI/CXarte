@@ -84,6 +84,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		
 		administrativeDataButton.setCaption(Constants.PERSONAL_DATA_LABEL);
 		administrativeDataButton.addStyleName(Reindeer.BUTTON_LINK);
+		administrativeDataButton.addStyleName("focus");
 		administrativeDataButton.addClickListener(this);
 		
 		skillsButton.setCaption(Constants.SKILL_BUTTON_LABEL);
@@ -116,10 +117,19 @@ public class ProfilePopIn extends Window implements ClickListener{
 		VerticalLayout v = new VerticalLayout();
 		v.addComponent(new Label(event.getButton().getCaption()));
 		if (event.getButton().equals(administrativeDataButton)) { 
+			administrativeDataButton.addStyleName("focus");
+			skillsButton.removeStyleName("focus");
+			missionsHistoryButton.removeStyleName("focus");
 			panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		} else if (event.getButton().equals(skillsButton)) {
 //			panelRight.setContent(missionForm.buildMissionFormView());
+			administrativeDataButton.removeStyleName("focus");
+			skillsButton.addStyleName("focus");
+			missionsHistoryButton.removeStyleName("");
 		} else if(event.getButton().equals(missionsHistoryButton)) {
+			administrativeDataButton.removeStyleName("focus");
+			skillsButton.removeStyleName("focus");
+			missionsHistoryButton.addStyleName("focus");
 			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		}
 	}

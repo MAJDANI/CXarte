@@ -56,6 +56,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 
 	public RegistrationScreen() {
 		super();
+		addStyleName("containerPrincipal");
 	}
 
 	public HorizontalLayout buildRegistrationScreenView() {

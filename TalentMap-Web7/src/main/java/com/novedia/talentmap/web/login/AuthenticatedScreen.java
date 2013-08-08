@@ -6,6 +6,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.admin.AdminView;
+import com.novedia.talentmap.web.ui.cm.CmView;
 import com.novedia.talentmap.web.ui.colleague.ColleagueView;
 import com.novedia.talentmap.web.ui.ia.IaView;
 import com.novedia.talentmap.web.ui.rh.RhView;
@@ -76,6 +77,11 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	private IaView iaView;
 	
 	/**
+	 * the cmView
+	 */
+	private CmView cmView;
+	
+	/**
 	 * the rhView
 	 */
 	private RhView rhView; 
@@ -112,7 +118,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.AD.getId())) { // Admin
 			addComponent(adminView.buildAdminContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())) { // CM
-			
+			addComponent(cmView.buildCmContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.IA.getId())) { // IA
 			addComponent(iaView.buildIaContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.RH.getId())) { // RH
@@ -345,6 +351,16 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 */
 	public void setIaView(IaView iaView) {
 		this.iaView = iaView;
+	}
+
+
+	public CmView getCmView() {
+		return cmView;
+	}
+
+
+	public void setCmView(CmView cmView) {
+		this.cmView = cmView;
 	}
 
 
