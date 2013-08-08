@@ -3,17 +3,16 @@ package com.novedia.talentmap.web.ui.colleague.missions;
 import java.util.Date;
 import java.util.List;
 
-import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.MissionFieldLabel;
+import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class ListMission extends PagedTable {
+public class ListMission extends Table {
 	
-	private static final int PAGE_LENGTH = 5;
 	private MissionContainer missionContainer;
 	
 	
@@ -47,7 +46,7 @@ public class ListMission extends PagedTable {
      * Fill all colleague mission in table
      * @return PagedTable
      */
-    public PagedTable fillAllColleagueMission(){
+    public Table fillAllColleagueMission(){
     	removeAllItems();
     	int colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
     	missionContainer.fillContainer(colleagueId);
@@ -81,11 +80,7 @@ public class ListMission extends PagedTable {
     		    dateDebut, dateFin, notes, toolNames[0], toolNames[1],
     		    toolNames[2] }, mission);
     	}
-    	if(listMission.size()<PAGE_LENGTH){
-    		setPageLength(listMission.size());
-    	} else {
-    		setPageLength(PAGE_LENGTH);
-    	}
+    	
 
     }
     
