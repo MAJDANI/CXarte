@@ -174,6 +174,24 @@ public class Constants {
 	public static final String DASHBOARD_LABEL = "My DASHBOARD"; 
 	
 	/**
+     * Constant for Admin View
+     */
+	
+	public static final String COLLABORATOR_AND_SKILL_MANAGE_LABEL = "Manage collaborators and skills";
+	
+	/**
+     * Constant for Collaborator and skill manage Pop-In
+     */
+	
+	public static final String COLLABORATOR_AND_SKILL_MANAGE_POP_IN_TITLE = "Administration";
+	
+	public static final String MODIFY_OR_DELETE_SKILL_ELEMENT_LABEL = "View Category/Concept/Tool";
+	
+	public static final String ADD_SKILL_ELEMENT_LABEL = "Add Category/Concept/Tool";
+	
+	public static final String DELETE_COLLABORATOR_LABEL = "Delete collaborator";
+	
+	/**
      * Constant for Profile Pop-In
      */
 	

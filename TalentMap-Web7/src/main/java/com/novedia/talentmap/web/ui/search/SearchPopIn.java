@@ -62,6 +62,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	private Label searchResultsLabelNoResult;
 	
+	
 	 /**
      * POJO
      */
@@ -194,8 +195,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 				searchResultsPanel.removeAllComponents();
 				searchResultsPanelNoResult.setVisible(false);
 				searchResultsPanel.setVisible(true);
-				searchResults.buildSearchResultsView();
-				searchResults.buildResultsTable(listCollab);
+				searchResults = searchResults.buildSearchResultsView(listCollab);
 				searchResultsPanel.addComponent(searchResults);
 				
 			}
@@ -218,9 +218,10 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 				searchResultsPanel.removeAllComponents();
 				searchResultsPanelNoResult.setVisible(false);
 				searchResultsPanel.setVisible(true);
-				searchResults.buildSearchResultsView();
-				searchResults.buildResultsTable(listCollab);
-				searchResultsPanel.addComponent(searchResults);
+//				searchResults.buildSearchResultsView();
+//				searchResults.buildResultsTable(listCollab);
+//				searchResultsPanel.addComponent(searchResults);
+				searchResultsPanel.addComponent(searchResults.buildSearchResultsView(listCollab));
 				
 			}
 		}

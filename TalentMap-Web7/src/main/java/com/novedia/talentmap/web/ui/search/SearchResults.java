@@ -6,12 +6,10 @@ import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Button.ClickListener;
 
 @SuppressWarnings("serial")
-public class SearchResults extends PagedTable implements ClickListener {
+public class SearchResults extends PagedTable {
 
 	private Integer roleId;
 
@@ -21,10 +19,12 @@ public class SearchResults extends PagedTable implements ClickListener {
 	/**
 	 * Vaadin components
 	 */
+	
+	
 
-	private Button visualizeProfile;
-
-	private Button visualizeMissionHistory;
+//	private Button visualizeProfile;
+//
+//	private Button visualizeMissionHistory;
 
 	/**
 	 * Default constructor
@@ -38,9 +38,10 @@ public class SearchResults extends PagedTable implements ClickListener {
 	 * 
 	 * @return
 	 */
-	public SearchResults buildSearchResultsView() {
+	public SearchResults buildSearchResultsView(List<Colleague> listCollab) {
 		removeAllItems();
 		mainBuild();
+		buildResultsTable(listCollab);
 		return this;
 	}
 
@@ -57,20 +58,23 @@ public class SearchResults extends PagedTable implements ClickListener {
 	}
 
 	public void buildResultsTable(List<Colleague> listCollab) {
-
+		
 		addColumns();
 		fillResultsTable(listCollab);
 	}
 
 	public void fillResultsTable(List<Colleague> listCollab) {
+		
 		int idResultsTable = 1;
 		for (Colleague collab : listCollab) {
 
 			HorizontalLayout hLayout = new HorizontalLayout();
 			hLayout.setMargin(true);
 
-			buildButton();
-			buildListeners();
+//			buildButton();
+//			buildListeners();
+			Button visualizeProfile = new Button(VISUALIZE_PROFILE_NAME);
+			Button visualizeMissionHistory = new Button(VISUALIZE_MISSION_HISTORY_NAME);
 
 			// Afficher le profil
 			visualizeProfile.setData(collab.getId());
@@ -89,91 +93,7 @@ public class SearchResults extends PagedTable implements ClickListener {
 
 	}
 
-	private void buildButton() {
-		visualizeProfile.setCaption(VISUALIZE_PROFILE_NAME);
-		
-		if (Authorization.Role.RH.getId().equals(roleId) || Authorization.Role.CM.getId().equals(roleId) || Authorization.Role.IA.getId().equals(roleId)) {
-			visualizeMissionHistory.setCaption(VISUALIZE_MISSION_HISTORY_NAME);
-		}
 
-	}
-
-	private void buildListeners() {
-		visualizeProfile.addClickListener(this);
-		visualizeMissionHistory.addClickListener(this);
-	}
-
-	// private Button buildButton(Button button) {
-	// if (button.getCaption().equals(VISUALIZE_PROFILE_NAME)) {
-	// btnProfileEvent(button);
-	// }
-	// if (button.getCaption().equals(VISUALIZE_MISSION_HISTORY_NAME)) {
-	// btnMissionHistoryEvent(button);
-	// }
-	// return button;
-	// }
-
-	// private void btnProfileEvent(Button button) {
-	//
-	// button.addClickListener(this);
-	//
-	// }
-
-	// @Override
-	// public void buttonClick(ClickEvent event) {
-	//
-	// Button btnListener = event.getButton();
-	// int idCollab = (Integer) btnListener.getData();
-	//
-	// SearchResults.this.profileCollabWindow.setCOLLAB_ID(idCollab);
-	//
-	// SearchResults.this.profileCollabWindow.mainBuild();
-	//
-	// getWindow().addWindow(SearchResults.this.profileCollabWindow);
-	// }
-	// });
-	// }
-
-//	private void btnMissionHistoryEvent(Button button) {
-//		button.addListener(new ClickListener() {
-//
-//			@Override
-//			public void buttonClick(ClickEvent event) {
-//
-//				Button btnListener = event.getButton();
-//				Colleague currentColleague = (Colleague) btnListener.getData();
-//
-//				SearchResults.this.listMissionWindow
-//						.setCurrentColleague(currentColleague);
-//				SearchResults.this.listMissionWindow.setRole(getRoleId());
-//				SearchResults.this.listMissionWindow.mainBuild();
-//
-//				getWindow().addWindow(SearchResults.this.listMissionWindow);
-//			}
-//		});
-//	}
-
-	@Override
-	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Button getVisualizeProfile() {
-		return visualizeProfile;
-	}
-
-	public void setVisualizeProfile(Button visualizeProfile) {
-		this.visualizeProfile = visualizeProfile;
-	}
-
-	public Button getVisualizeMissionHistory() {
-		return visualizeMissionHistory;
-	}
-
-	public void setVisualizeMissionHistory(Button visualizeMissionHistory) {
-		this.visualizeMissionHistory = visualizeMissionHistory;
-	}
 
 	public Integer getRoleId() {
 		return roleId;
