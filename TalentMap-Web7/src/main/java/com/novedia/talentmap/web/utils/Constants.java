@@ -192,7 +192,7 @@ public class Constants {
      * Constant for Admin View
      */
 	
-	public static final String DELETE_COLLEAGUE_LABEL = "Delete Colleague";
+	public static final String DELETE_COLLEAGUE_LABEL = "Delete Collab";
 	
 	public static final String MANAGE_TOOL_LABEL = "Manage Tool";
 	

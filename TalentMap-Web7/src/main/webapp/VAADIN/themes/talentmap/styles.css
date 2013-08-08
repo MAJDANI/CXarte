@@ -297,7 +297,8 @@
 }
 
 .v-panel-labelBtnDashboard .v-verticallayout,
-.v-button-labelBtnDashboard .v-verticallayout{
+.iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
+.adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
 	text-align:center;
 	/*top:50%;
 	margin-top:-25px;*/

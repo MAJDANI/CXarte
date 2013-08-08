@@ -27,7 +27,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 	 */
 	public IaView(){
 		super();
-		addStyleName("centerPanel");
+		addStyleName("centerPanel iaPanel");
 	}
 	
 	/**
