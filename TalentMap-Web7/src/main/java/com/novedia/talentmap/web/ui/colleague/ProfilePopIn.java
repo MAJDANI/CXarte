@@ -47,7 +47,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 	 */
      public ProfilePopIn(){
     	 super();
-//    	 setWidth("1100px");
     	 setCaption(Constants.PROFILE_POP_IN_TITLE);
     	 setModal(true);
      }

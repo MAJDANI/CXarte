@@ -317,18 +317,18 @@ public class ConstantsEnglish {
     public static final String EAE_WINDOW_TITLE_1_COLLEAGUE = "EAE for Colleague : ";
     public static final String EAE_WINDOW_TITLE_2_DATE = " Date : ";
 
-    public static final String FIELD_COLLEAGUE = "collabLastName";
+    public static final String FIELD_COLLEAGUE = "collabLastAndFirstName";
     public static final String FIELD_PROFILE = "profile";
-    public static final String FIELD_MANAGER = "managerLastName";
+    public static final String FIELD_MANAGER = "managerLastAndFirstName";
     public static final String FIELD_EAE_DATE = "eaeDate";
     public static final String FIELD_INCOME_DATE = "employmentDate";
     public static final String FIELD_LAST_EAE_DATE = "previousEaeDate";
-    public static final String FIELD_SALARY = "Salary";
+    public static final String FIELD_SALARY = "salary";
     public static final Object[] FIELD_ORDER_EAE_GENERALITY = new Object[] {
 	    FIELD_COLLEAGUE, FIELD_PROFILE, FIELD_MANAGER,
 	    FIELD_EAE_DATE, FIELD_INCOME_DATE,
-	    FIELD_LAST_EAE_DATE};
+	    FIELD_LAST_EAE_DATE, FIELD_SALARY};
     public static final Object[] NAME_FIELD_EAE_GENERALITY = new Object[] { "Nom du colleague",
-	"Profile", "Nom du manager", "Date eae", "Incoming date in Novedia", "Last EAE date"};
+	"Profile", "Nom du manager", "Date eae", "Incoming date in Novedia", "Last EAE date", "Salary"};
 
 }

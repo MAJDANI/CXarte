@@ -27,6 +27,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 	 */
 	public IaView(){
 		super();
+		addStyleName("centerPanel iaPanel");
 	}
 	
 	/**
@@ -53,6 +54,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 		searchButton.setId(ComponentsId.SEARCH_BUTTON_ID);
 		searchButton.addStyleName(Reindeer.BUTTON_LINK);
 		searchButton.addClickListener(this);
+		searchButton.addStyleName("labelBtnDashboard");
 		searchPanel.addComponent(searchButton);
 		
 		gridLayout.addComponent(searchPanel);

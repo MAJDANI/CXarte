@@ -32,6 +32,7 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	 */
 	public AdminView(){
 		super();
+		addStyleName("centerPanel adminPanel");
 	}
 	
 	
@@ -57,12 +58,14 @@ public class AdminView extends VerticalLayout implements ClickListener {
 		deleteColleagueButton.setCaption(Constants.DELETE_COLLEAGUE_LABEL);
 		deleteColleagueButton.addStyleName(Reindeer.BUTTON_LINK);
 		deleteColleagueButton.addClickListener(this);
+		deleteColleagueButton.addStyleName("labelBtnDashboard");
 		manageColleaguePanel.addComponent(deleteColleagueButton);
 		
 		manageToolPanel.removeAllComponents();
 		manageToolButton.setCaption(Constants.MANAGE_TOOL_LABEL);
 		manageToolButton.addStyleName(Reindeer.BUTTON_LINK);
 		manageToolButton.addClickListener(this);
+		manageToolButton.addStyleName("labelBtnDashboard");
 		manageToolPanel.addComponent(manageToolButton);
 		
 		gridLayout.addComponent(manageColleaguePanel);
