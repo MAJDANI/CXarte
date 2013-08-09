@@ -31,6 +31,7 @@ public class SearchResults extends PagedTable {
 	 */
 	public SearchResults() {
 		super();
+		addStyleName("searchResult");
 	}
 
 	/**
@@ -74,8 +75,10 @@ public class SearchResults extends PagedTable {
 //			buildButton();
 //			buildListeners();
 			Button visualizeProfile = new Button(VISUALIZE_PROFILE_NAME);
+			visualizeProfile.addStyleName("styleButton");
 			Button visualizeMissionHistory = new Button(VISUALIZE_MISSION_HISTORY_NAME);
-
+			visualizeMissionHistory.addStyleName("styleButton visualizeMissionHistory");
+			
 			// Afficher le profil
 			visualizeProfile.setData(collab.getId());
 			hLayout.addComponent(visualizeProfile);

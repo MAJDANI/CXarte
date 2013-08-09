@@ -100,6 +100,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
 		searchResultsPanel.removeAllComponents();
+		searchResultsPanel.addStyleName("searchResultsPanel");
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
 		searchResultsPanelNoResult.addComponent(searchResultsLabelNoResult);
@@ -127,6 +128,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		
 		searchByName.setCaption(Constants.SEARCH_BY_NAME_LABEL);
 		searchByName.addStyleName(Reindeer.BUTTON_LINK);
+		searchByName.addStyleName("focus");
 		searchByName.addClickListener(this);
 		
 		searchBySkill.setCaption(Constants.SEARCH_BY_SKILL_LABEL);
@@ -154,12 +156,21 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	public void buttonClick(ClickEvent event) {
 		panelRight.removeAllComponents();
 		if (event.getButton().equals(searchByName)) { 
+			searchByName.addStyleName("focus");
+			searchByCustomer.removeStyleName("focus");
+			searchBySkill.removeStyleName("focus");
 			panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
 			buildResultsPanel();
 		} else if (event.getButton().equals(searchByCustomer)) {
+			searchByName.removeStyleName("focus");
+			searchByCustomer.addStyleName("focus");
+			searchBySkill.removeStyleName("focus");
 			panelRight.setContent(searchByCustomerForm.buildSearchByCustomerFormView());
 			buildResultsPanel();
 		} else if(event.getButton().equals(searchBySkill)) {
+			searchByName.removeStyleName("focus");
+			searchByCustomer.removeStyleName("focus");
+			searchBySkill.addStyleName("focus");
 //			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		}
 		
