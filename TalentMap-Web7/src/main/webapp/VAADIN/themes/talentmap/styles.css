@@ -297,7 +297,8 @@
 }
 
 .v-panel-labelBtnDashboard .v-verticallayout,
-.v-button-labelBtnDashboard .v-verticallayout{
+.iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
+.adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
 	text-align:center;
 	/*top:50%;
 	margin-top:-25px;*/
@@ -411,4 +412,20 @@
 
 .listMissionPanel .v-panel-content{
 	border:none;
+}
+
+.v-panel-content-searchResultsPanel{
+	border:none;
+}
+
+.v-panel-content-searchResultsPanel .v-verticallayout{
+	padding-left:0;
+}
+
+.visualizeMissionHistory{
+	margin-left:10px;
+}
+
+.v-panel-content-searchResultsPanel .v-table-cell-content {
+	vertical-align: middle !important;
 }

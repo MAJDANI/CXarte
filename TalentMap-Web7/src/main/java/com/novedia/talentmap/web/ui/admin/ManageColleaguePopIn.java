@@ -143,6 +143,7 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 		containerButton.addStyleName("containerButton");
 		deleteColleagueButton.setCaption(Constants.DELETE_BUTTON_LABEL);
 		deleteColleagueButton.addClickListener(this);
+		deleteColleagueButton.addStyleName("delBtn");
 		containerButton.addComponent(deleteColleagueButton);
 	}
 	

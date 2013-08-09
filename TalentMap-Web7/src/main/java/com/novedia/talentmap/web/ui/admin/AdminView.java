@@ -32,7 +32,7 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	 */
 	public AdminView(){
 		super();
-		addStyleName("centerPanel");
+		addStyleName("centerPanel adminPanel");
 	}
 	
 	
