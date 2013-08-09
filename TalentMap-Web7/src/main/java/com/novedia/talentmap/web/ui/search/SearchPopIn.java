@@ -124,6 +124,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		
 		searchByCustomer.setCaption(Constants.SEARCH_BY_CUSTOMER_LABEL);
 		searchByCustomer.addStyleName(Reindeer.BUTTON_LINK);
+		searchByCustomer.removeStyleName("focus");
 		searchByCustomer.addClickListener(this);
 		
 		searchByName.setCaption(Constants.SEARCH_BY_NAME_LABEL);
@@ -133,6 +134,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		
 		searchBySkill.setCaption(Constants.SEARCH_BY_SKILL_LABEL);
 		searchBySkill.addStyleName(Reindeer.BUTTON_LINK);
+		searchBySkill.removeStyleName("focus");
 		searchBySkill.addClickListener(this);
 		
 		searchResultsLabelNoResult.setValue(Constants.NO_COLLEAGUE_FOUND);
