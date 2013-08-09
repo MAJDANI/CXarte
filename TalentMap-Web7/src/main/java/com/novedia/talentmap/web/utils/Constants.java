@@ -4,6 +4,8 @@ public class Constants {
 	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
+	public static final String MANAGE_TOOLS_VIEW_TITLE = "Manage tools View";
+	
 	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
 	
 	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
