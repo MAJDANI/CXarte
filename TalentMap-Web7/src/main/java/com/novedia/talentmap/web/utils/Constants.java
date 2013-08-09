@@ -2,6 +2,14 @@ package com.novedia.talentmap.web.utils;
 
 public class Constants {
 	
+	public static final int CATEGORY_VIEW = -1;
+
+	public static final int CONCEPT_VIEW = -2;
+
+	public static final int TOOL_VIEW = -3;
+	
+	public static final String FIL_ARIANE_SEPARATOR_LABEL = " > ";
+	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
 	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
@@ -286,5 +294,5 @@ public class Constants {
 	public static final String TYPE_PLACE = "Type a place";
 	
 	public static final String TYPE_COMMENT = "Type a comment";
-	
+
 }

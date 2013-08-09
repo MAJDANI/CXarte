@@ -100,7 +100,19 @@
 		<property name="menuContent" ref ="menuContentBean" />
 		<property name="panelRight" ref ="contentPanelBean" />
 		<property name="missionColleagueContent" ref ="missionColleagueContentBean" />
+		<property name="skillColleagueContent" ref ="skillColleagueContentBean" />
 	</bean>
+	
+	
+	<bean id="filArianeLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="skillColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent" scope="session">
+		<property name="skillService" ref ="skillService" />
+		<property name="filArianeLayout" ref ="filArianeLayoutBean" />
+	</bean>
+	
+	
+	
+	
 	
 	<bean id="searchByCustomerButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="searchByNameButtonBean" class="com.vaadin.ui.Button" scope="session" />
