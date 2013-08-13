@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.colleague;
 
 import com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent;
 import com.novedia.talentmap.web.ui.colleague.missions.MissionForm;
+import com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -35,6 +36,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 	private Panel panelRight;
 	
 	private MissionColleagueContent missionColleagueContent;
+	
+	private SkillColleagueContent skillColleagueContent;
 	
 	private GridLayout formLayout;
 	
@@ -75,7 +78,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		colleagueDataForm.setColleagueFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
-		panelRight.setWidth("800px");
+//		panelRight.setWidth("800px");
 	}
 
 	private void buildButtons() {
@@ -87,10 +90,12 @@ public class ProfilePopIn extends Window implements ClickListener{
 		
 		skillsButton.setCaption(Constants.SKILL_BUTTON_LABEL);
 		skillsButton.addStyleName(Reindeer.BUTTON_LINK);
+		skillsButton.removeStyleName("focus");
 		skillsButton.addClickListener(this);
 		
 		missionsHistoryButton.setCaption(Constants.MISSION_LABEL);
 		missionsHistoryButton.addStyleName(Reindeer.BUTTON_LINK);
+		missionsHistoryButton.removeStyleName("focus");
 		missionsHistoryButton.addClickListener(this);
 		
 	}
@@ -122,7 +127,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 		} else if (event.getButton().equals(skillsButton)) {
 			administrativeDataButton.removeStyleName("focus");
 			skillsButton.addStyleName("focus");
-			missionsHistoryButton.removeStyleName("");
+			missionsHistoryButton.removeStyleName("focus");
+			panelRight.setContent(skillColleagueContent.buildSkillColleagueContent());
 		} else if(event.getButton().equals(missionsHistoryButton)) {
 			administrativeDataButton.removeStyleName("focus");
 			skillsButton.removeStyleName("focus");
@@ -239,5 +245,17 @@ public class ProfilePopIn extends Window implements ClickListener{
 	public void setMissionForm(MissionForm missionForm) {
 		this.missionForm = missionForm;
 	}
+
+
+	public SkillColleagueContent getSkillColleagueContent() {
+		return skillColleagueContent;
+	}
+
+
+	public void setSkillColleagueContent(SkillColleagueContent skillColleagueContent) {
+		this.skillColleagueContent = skillColleagueContent;
+	}
+	
+	
 
 }
