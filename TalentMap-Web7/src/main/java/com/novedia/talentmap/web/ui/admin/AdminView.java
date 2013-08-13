@@ -27,6 +27,8 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	
 	private ManageColleaguePopIn manageColleaguePopIn;
 	
+	private ManageToolsPopIn manageToolsPopIn;
+	
 	/**
 	 * Default constructor
 	 */
@@ -75,7 +77,13 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	@Override
 	public void buttonClick(ClickEvent event) {
 		if(event.getButton().equals(deleteColleagueButton)){
+			
 			getUI().addWindow(manageColleaguePopIn.buildManageColleagueView());
+			
+		}else if (event.getButton().equals(manageToolButton)){
+			
+			getUI().addWindow(manageToolsPopIn.buildManageToolsView());
+			
 		}
 		
 	}
@@ -138,6 +146,16 @@ public class AdminView extends VerticalLayout implements ClickListener {
 
 	public void setManageColleaguePopIn(ManageColleaguePopIn manageColleaguePopIn) {
 		this.manageColleaguePopIn = manageColleaguePopIn;
+	}
+
+
+	public ManageToolsPopIn getManageToolsPopIn() {
+		return manageToolsPopIn;
+	}
+
+
+	public void setManageToolsPopIn(ManageToolsPopIn manageToolsPopIn) {
+		this.manageToolsPopIn = manageToolsPopIn;
 	}
 	
 }
