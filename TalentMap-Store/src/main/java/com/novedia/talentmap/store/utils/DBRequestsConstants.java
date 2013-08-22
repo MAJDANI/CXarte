@@ -108,6 +108,11 @@ public final class DBRequestsConstants {
 	// "businessEngineer.get";
 
 	/**
+	 * This constant is used to retrieve a category.
+	 */
+	public static final String GET_CATEGORY = "category.getCategory";
+	
+	/**
 	 * This constant is used to retrieve all category.
 	 */
 	public static final String GET_ALL_CATEGORY = "category.getAll";

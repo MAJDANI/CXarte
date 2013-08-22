@@ -71,12 +71,29 @@ public class AdminService implements IAdminService {
      */
     private Map<String, Object> mapNotification;
 
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Category getCategory(Integer categoryId) throws DataAccessException {
+    	return categoryDao.get(categoryId);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Concept getConcept(Integer conceptId) throws DataAccessException {
+    	return conceptDao.get(conceptId);
+    }
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public Tool getTool(Integer toolId) throws DataAccessException {
-	return toolDao.get(toolId);
+    	return toolDao.get(toolId);
     }
 
     /**

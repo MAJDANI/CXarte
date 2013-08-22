@@ -71,6 +71,13 @@
 			<version>${talentmap.services.version}</version>
 		</dependency>
 		
+		<!-- Vaadin Add Ons dependency -->
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>ratingstars</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
 		<!-- Pagedtable dependency -->
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>

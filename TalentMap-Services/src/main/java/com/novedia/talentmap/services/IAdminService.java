@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -20,6 +19,20 @@ import com.novedia.talentmap.model.entity.Tool;
  */
 public interface IAdminService {
 
+	/**
+     * Get a category by its id.
+     * 
+     * @return a category.
+     */
+	Category getCategory(Integer categoryId) throws DataAccessException;
+	
+	/**
+     * Get a concept by its id.
+     * 
+     * @return a concept.
+     */
+	Concept getConcept(Integer conceptId) throws DataAccessException;
+	
     /**
      * Get a tool by its id.
      * 
@@ -191,5 +204,9 @@ public interface IAdminService {
     Map<String, Object> deleteColleague(Set<Colleague> Colleagues);
 
     void updateManagerColleague(int ColleagueID);
+
+	
+
+	
 
 }
