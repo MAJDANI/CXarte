@@ -10,6 +10,8 @@ public class Constants {
 	
 	public static final String FIL_ARIANE_SEPARATOR_LABEL = " > ";
 	
+	public static final String ALL_SKILL_LABEL = " All Categories ";
+	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
 	public static final String MANAGE_TOOLS_VIEW_TITLE = "Manage tools View";
@@ -19,6 +21,8 @@ public class Constants {
 	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
 	
 	public static final String DELETE_BUTTON_LABEL = "Delete";
+	
+	public static final String EDIT_BUTTON_LABEL = "Edit";
 	
 	public static final String WINDOW_CONFIRM_DELETE_TITLE = "Confirm Delete";
 	

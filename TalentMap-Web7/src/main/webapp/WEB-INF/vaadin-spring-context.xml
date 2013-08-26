@@ -109,8 +109,10 @@
 	<bean id="saveButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="cancelButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="modifyButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	
+	<bean id="conceptTableBean" class="com.vaadin.ui.Table" scope="session" />
+	<bean id="toolTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="filArianeLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	
 	<bean id="skillColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent" scope="session">
 		<property name="adminService" ref ="adminService" />
 		<property name="skillService" ref ="skillService" />
@@ -118,6 +120,8 @@
 		<property name="addSkillButton" ref ="addSkillButtonBean" />
 		<property name="addSkillPanel" ref ="addSkillPanelBean" />
 		<property name="skillContentPanel" ref ="skillContentPanelBean" />
+		<property name="toolTable" ref ="toolTableBean" />
+		<property name="conceptTable" ref ="conceptTableBean" />
 		<property name="addSkillForm" ref ="addSkillFormBean" />
 		<property name="saveButton" ref ="saveButtonBean" />
 		<property name="cancelButton" ref ="cancelButtonBean" />
