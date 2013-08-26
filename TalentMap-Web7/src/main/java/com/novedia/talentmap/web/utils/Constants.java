@@ -12,6 +12,8 @@ public class Constants {
 	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
+	public static final String MANAGE_TOOLS_VIEW_TITLE = "Manage tools View";
+	
 	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
 	
 	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
@@ -217,6 +219,12 @@ public class Constants {
 	
 	public static final String ADD_SKILL_ELEMENT_LABEL = "Add Category/Concept/Tool";
 	
+	public static final String CATEGORY_CAPTION = "Category";
+	
+	public static final String CONCEPT_CAPTION = "Concept";
+	
+	public static final String TOOL_CAPTION = "Tool";
+	
 	
 	
 	/**
@@ -254,6 +262,15 @@ public class Constants {
 	public static final String SEARCH_BY_SKILL_LABEL = "By skill";
 	
 	public static final String NO_COLLEAGUE_FOUND = "No colleague found";
+	
+	/**
+	* Constant for Search by skill tree admin
+	*/
+	  public static final int TYPE_CATEGORY = 1;
+	  
+	  public static final int TYPE_CONCEPT = 2;
+	  
+	  public static final int TYPE_TOOL = 3;
 	
 	/**
     * Constant for Search Forms
