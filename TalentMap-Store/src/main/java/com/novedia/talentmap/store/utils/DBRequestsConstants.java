@@ -306,7 +306,8 @@ public final class DBRequestsConstants {
 	/**
 	 * Constant request to update a skill.
 	 */
-	public static final String SAVE_SKILL = "skill.save";
+//	public static final String SAVE_SKILL = "skill.save";
+	public static final String SAVE_SKILL = "skill.replace";
 
 	/**
 	 * Constant request to get all collaborators by a tool.

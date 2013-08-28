@@ -55,6 +55,11 @@
 		WHERE COLLEAGUE_ID =
 		#colleagueId# AND TOOL_ID = #tool_id#
 	</update>
+	
+	<statement id="replace" parameterClass="Skill">
+		replace into SKILL set COLLEAGUE_ID = #colleagueId#, TOOL_ID = #tool_id#,
+		SCORE = #score#, USE_FREQUENCY = #use_frequency#, NO_USING_TIME = #no_using_time#
+	</statement>
 
 	<select id="getAllColleagueIdByToolId" resultMap="collabIdResult"
 		parameterClass="java.lang.Integer">

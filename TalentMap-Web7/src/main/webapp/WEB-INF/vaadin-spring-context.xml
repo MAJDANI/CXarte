@@ -108,10 +108,11 @@
 	<bean id="skillContentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="saveButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="cancelButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="modifyButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="editSkillButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="conceptTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="toolTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="filArianeLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="skillFormButtonLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
 	
 	<bean id="skillColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent" scope="session">
 		<property name="adminService" ref ="adminService" />
@@ -125,7 +126,8 @@
 		<property name="addSkillForm" ref ="addSkillFormBean" />
 		<property name="saveButton" ref ="saveButtonBean" />
 		<property name="cancelButton" ref ="cancelButtonBean" />
-		<property name="modifyButton" ref ="modifyButtonBean" />
+		<property name="editSkillButton" ref ="editSkillButtonBean" />
+		<property name="skillFormButtonLayout" ref ="skillFormButtonLayoutBean" />
 	</bean>
 	
 	<bean id="categoryLabelBean" class="com.vaadin.ui.Label" scope="session" />
@@ -133,8 +135,7 @@
 	<bean id="toolSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="frequencyUseSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="noUsingTimeSelectBean" class="com.vaadin.ui.Select" scope="session" />
-	<bean id="validSkillBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="valueOptionsBean" class="java.util.HashMap" scope="session" />
+<!-- 	<bean id="valueOptionsBean" class="java.util.HashMap" scope="session" /> -->
 	<bean id="starsBean" class="org.vaadin.teemu.ratingstars.RatingStars" scope="session" />
 	
 	<bean id="addSkillFormBean" class="com.novedia.talentmap.web.ui.colleague.skills.AddSkillForm" scope="session">
@@ -144,8 +145,7 @@
 		<property name="toolSelect" ref ="toolSelectBean" />
 		<property name="frequencyUseSelect" ref ="frequencyUseSelectBean" />
 		<property name="noUsingTimeSelect" ref ="noUsingTimeSelectBean" />
-		<property name="validSkill" ref ="validSkillBean" />
-		<property name="valueOptions" ref="valueOptionsBean" />
+<!-- 		<property name="valueOptions" ref="valueOptionsBean" /> -->
 		<property name="stars" ref ="starsBean" />
 	</bean>
 	

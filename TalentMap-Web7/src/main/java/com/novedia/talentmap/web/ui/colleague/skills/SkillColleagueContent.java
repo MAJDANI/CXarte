@@ -2,6 +2,8 @@ package com.novedia.talentmap.web.ui.colleague.skills;
 
 import java.util.Map;
 
+import org.vaadin.teemu.ratingstars.RatingStars;
+
 import com.novedia.talentmap.model.dto.CategoryMapDTO;
 import com.novedia.talentmap.model.dto.ConceptMapDTO;
 import com.novedia.talentmap.model.dto.ToolSkillMap;
@@ -22,6 +24,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
@@ -56,11 +60,13 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private Button cancelButton;
 	
-	private Button modifyButton;
+	private Button editSkillButton;
 	
 	private Table conceptTable;
 	
 	private Table toolTable;
+	
+	private HorizontalLayout skillFormButtonLayout;
 	
 	/**
 	 * Default constructor
@@ -76,7 +82,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		initToolTable();
 		initConceptTable();
 		getAllSkillColleague();
-//		buildAddSkillPanel();
+		buildAddSkillPanel();
 		buildSkillContentPanel();
 		return this;
 	}
@@ -96,7 +102,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	private void initConceptTable(){
 		conceptTable.addStyleName("table");
 		conceptTable.addContainerProperty("Concept Name", Component.class, null);
-		conceptTable.addContainerProperty("Level", Integer.class, null);
+		conceptTable.addContainerProperty("Level", Component.class, null);
 	}
 	
 	/**
@@ -111,52 +117,44 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.addContainerProperty("Note", Integer.class, null);
 	}
 	
-//	private void buildAddSkillPanel(){
-//		addSkillPanel.removeAllComponents();
-//		
-//		buildButtons();
-//		
-//		addSkillPanel.addComponent(addSkillButton);
-//		addSkillPanel.addComponent(addSkillForm.buildAddSkillForm());
-//		
-//		HorizontalLayout hLayout = new HorizontalLayout();
-//		hLayout.addComponent(saveButton);
-//		hLayout.addComponent(cancelButton);
-//		
-//		
-//		addSkillPanel.addComponent(hLayout);
-//		addSkillForm.setVisible(false);
-//		
-//		addComponent(addSkillPanel);
-//	}
+	private void buildAddSkillPanel(){
+		addSkillPanel.removeAllComponents();
+		addSkillButton.setCaption("Add skill");
+		addSkillButton.setEnabled(true);
+		addSkillButton.addClickListener(this);
+		addSkillPanel.addComponent(addSkillButton);
+		
+		skillFormButtonLayout.removeAllComponents();
+		skillFormButtonLayout.setSpacing(true);
+		skillFormButtonLayout.addStyleName("containerButton");
+		saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
+		saveButton.addClickListener(this);
+		cancelButton.setCaption(Constants.CANCEL_BUTTON_LABEL);
+		cancelButton.addClickListener(this);
+		skillFormButtonLayout.addComponent(saveButton);
+		skillFormButtonLayout.addComponent(cancelButton);
+		
+		addSkillPanel.addComponent(addSkillForm);
+		addSkillPanel.addComponent(skillFormButtonLayout);
+		addSkillForm.setVisible(false);
+		skillFormButtonLayout.setVisible(false);
+		addComponent(addSkillPanel);
+	}
 	
+	/**
+	 * Build list skill view
+	 */
 	private void buildSkillContentPanel(){
 		skillContentPanel.removeAllComponents();
-		
 		buildCategoryView();
 		addComponent(skillContentPanel);
 	}
-	
-//	private void buildButtons(){
-//		addSkillButton.setCaption("Add skill");
-//		addSkillButton.addClickListener(this);
-//		
-//		saveButton.setCaption("Save");
-//		saveButton.addClickListener(this);
-//		saveButton.setVisible(false);
-//		
-//		cancelButton.setCaption("Cancel");
-//		cancelButton.addClickListener(this);
-//		cancelButton.setVisible(false);
-//		
-//		
-//	}
 	
 	/**
 	 * Display list of category
 	 * @return
 	 */
-	private VerticalLayout buildCategoryView(){
+	private void buildCategoryView(){
 		skillContentPanel.removeAllComponents();
 		skillContentPanel.addComponent(new Label("List of Skill : Categories"));
 		currentView = Constants.CATEGORY_VIEW;
@@ -169,7 +167,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				skillContentPanel.addComponent(categButton);
 			}
 		}
-		return this;
 	}
 	
 	/**
@@ -177,7 +174,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 * @param categoryId  
 	 * @return
 	 */
-	private VerticalLayout buildConceptView(Integer categoryId){
+	private void buildConceptView(Integer categoryId){
 		skillContentPanel.removeAllComponents();
 		skillContentPanel.addComponent(new Label("List of Skill : Concepts"));
 		currentView = Constants.CONCEPT_VIEW;
@@ -193,10 +190,17 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			conceptButton.addStyleName(Reindeer.BUTTON_LINK);
 			conceptButton.setData(conceptMap.getKey().getId());
 			int scoreConcept = (int) Math.round(conceptMap.getKey().getScore());
-			conceptTable.addItem(new Object[]{conceptButton,scoreConcept},conceptButton);
+			RatingStars rateConcept ;
+			if (scoreConcept != 0) {
+				rateConcept = new RatingStars();
+				rateConcept.setMaxValue(scoreConcept);
+				rateConcept.setReadOnly(true);
+			} else {
+				rateConcept = null;
+			}
+			conceptTable.addItem(new Object[]{conceptButton,rateConcept},conceptButton);
 		}
 		skillContentPanel.addComponent(conceptTable);
-		return this;
 	}
 	
 	/**
@@ -204,7 +208,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 * @param conceptId
 	 * @return
 	 */
-	private VerticalLayout buildToolView(Integer conceptId){
+	private void buildToolView(Integer conceptId){
 		skillContentPanel.removeAllComponents();
 		currentView = Constants.TOOL_VIEW;
 		skillContentPanel.addComponent(new Label("List of Skill : Tools"));
@@ -221,15 +225,14 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
 			toolTable.addItem(new Object[]{eTool.getKey().getName(), 
 					eTool.getValue().getAverageScore(),},
-					eTool.getKey());
+					eTool.getValue());
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
-		modifyButton.setCaption(Constants.EDIT_BUTTON_LABEL);
-		modifyButton.addClickListener(this);
-		modifyButton.setEnabled(false);
-		skillContentPanel.addComponent(modifyButton);
-		return this;
+		editSkillButton.setCaption(Constants.EDIT_BUTTON_LABEL);
+		editSkillButton.addClickListener(this);
+		editSkillButton.setEnabled(false);
+		skillContentPanel.addComponent(editSkillButton);
 		
 	}
 	
@@ -270,28 +273,50 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		}
 	}
 	
+	
+	private void enabledSkillForm(boolean state){
+		addSkillButton.setEnabled(!state);
+		addSkillForm.setVisible(state);
+		skillFormButtonLayout.setVisible(state);
+	}
+	
+	
+	private boolean checkSkillForm(){
+		if(addSkillForm.getToolSelect().getValue() != null && addSkillForm.getFrequencyUseSelect().getValue() != null 
+				&& addSkillForm.getNoUsingTimeSelect().getValue() != null && addSkillForm.getStars().getValue() != null ){
+			return true;
+		} else{
+			return false;
+		}
+			
+	}
+	
 	@Override
 	public void buttonClick(ClickEvent event) {
 		Button button = event.getButton();
 		
 		if(button.equals(addSkillButton)){
-			addSkillForm.setVisible(true);
-			addSkillButton.setEnabled(false);
-			saveButton.setVisible(true);
-			cancelButton.setVisible(true);
-			modifyButton.setEnabled(false);
-			
+			addSkillForm.buildAddSkillForm(new Skill());
+			enabledSkillForm(true);
 		} else if(button.equals(cancelButton)){
-			addSkillForm.setVisible(false);
-			saveButton.setVisible(false);
-			cancelButton.setVisible(false);
-			addSkillButton.setEnabled(true);
-		} else if(button.equals(modifyButton)){
-			addSkillForm.setVisible(true);
-			addSkillButton.setEnabled(false);
-			saveButton.setVisible(true);
-			cancelButton.setVisible(true);
-			modifyButton.setEnabled(false);
+			enabledSkillForm(false);
+		}else if (button.equals(saveButton)) {
+			if (checkSkillForm()) {
+				Skill currentSkill = addSkillForm.getBinder().getItemDataSource().getBean();
+				currentSkill.setScore(addSkillForm.getStars().getValue().intValue());
+				currentSkill.setColleagueId(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
+				skillService.saveSkill(currentSkill);
+//				addSkillButton.setEnabled(true);
+				buildSkillColleagueContent();
+				addSkillButton.setEnabled(true);
+			} else {
+				Notification.show("All fields are required", Type.WARNING_MESSAGE);
+			}
+		} else if(button.equals(editSkillButton)){
+			Skill currentSkill = (Skill) toolTable.getValue();
+			addSkillForm.buildAddSkillForm(currentSkill);
+			addSkillForm.getToolSelect().setReadOnly(true);
+			enabledSkillForm(true);
 		} else {
 		
 			switch (currentView) {
@@ -329,11 +354,11 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	@Override
 	public void valueChange(ValueChangeEvent event) {
-		Tool selectedTool = (Tool) toolTable.getValue();
-		if (selectedTool != null) {
-			modifyButton.setEnabled(true);
+		Skill selectedSkill = (Skill) toolTable.getValue();
+		if (selectedSkill != null) {
+			editSkillButton.setEnabled(true);
 		} else {
-			modifyButton.setEnabled(false);
+			editSkillButton.setEnabled(false);
 		}
 	}
 
@@ -442,12 +467,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		this.cancelButton = cancelButton;
 	}
 
-	public Button getModifyButton() {
-		return modifyButton;
+	public Button getEditSkillButton() {
+		return editSkillButton;
 	}
 
-	public void setModifyButton(Button modifyButton) {
-		this.modifyButton = modifyButton;
+	public void setEditSkillButton(Button editSkillButton) {
+		this.editSkillButton = editSkillButton;
 	}
 
 	public Table getConceptTable() {
@@ -467,4 +492,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	}
 
 	
+	public HorizontalLayout getSkillFormButtonLayout() {
+		return skillFormButtonLayout;
+	}
+
+	public void setSkillFormButtonLayout(HorizontalLayout skillFormButtonLayout) {
+		this.skillFormButtonLayout = skillFormButtonLayout;
+	}
+
 }
