@@ -83,6 +83,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	 */
     public VerticalLayout buildViewMissionColleagueContent() {
     	removeAllComponents();
+    	listMissionPanel.addStyleName("contentPanel");
+    	addMissionPanel.addStyleName("contentPanel");
     	addMissionButton.setCaption(MissionFieldLabel.ADD_MISSION_LABEL);
     	addMissionButton.addClickListener(this);
     	addMissionButton.addStyleName("styleButton addMission");

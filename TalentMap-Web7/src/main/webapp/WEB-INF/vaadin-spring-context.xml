@@ -135,7 +135,7 @@
 	<bean id="toolSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="frequencyUseSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="noUsingTimeSelectBean" class="com.vaadin.ui.Select" scope="session" />
-<!-- 	<bean id="valueOptionsBean" class="java.util.HashMap" scope="session" /> -->
+	<bean id="categoryAndConceptLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	<bean id="starsBean" class="org.vaadin.teemu.ratingstars.RatingStars" scope="session" />
 	
 	<bean id="addSkillFormBean" class="com.novedia.talentmap.web.ui.colleague.skills.AddSkillForm" scope="session">
@@ -145,7 +145,7 @@
 		<property name="toolSelect" ref ="toolSelectBean" />
 		<property name="frequencyUseSelect" ref ="frequencyUseSelectBean" />
 		<property name="noUsingTimeSelect" ref ="noUsingTimeSelectBean" />
-<!-- 		<property name="valueOptions" ref="valueOptionsBean" /> -->
+		<property name="categoryAndConceptLayout" ref="categoryAndConceptLayoutBean" />
 		<property name="stars" ref ="starsBean" />
 	</bean>
 	

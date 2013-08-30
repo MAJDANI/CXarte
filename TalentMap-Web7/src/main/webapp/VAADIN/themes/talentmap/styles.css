@@ -376,7 +376,7 @@
 }
 
 .panelRight .v-panel-content{
-	border-right:none;
+/* 	border-right:none; */
 }
 
 .panelRight .v-panel-content .v-formlayout{
@@ -397,6 +397,13 @@
 
 .panelRight .spacerTop{
 	margin-top:10px;
+}
+
+.contentPanel .v-panel-content{
+	border: none;
+}
+.v-panel-nocaption-contentPanel{
+	border: none;
 }
 
 .v-table .v-selected, 
@@ -429,3 +436,9 @@
 .v-panel-content-searchResultsPanel .v-table-cell-content {
 	vertical-align: middle !important;
 }
+
+.v-ratingstars-wrapper{
+	border: none !important;
+}
+
+
