@@ -80,4 +80,28 @@ public class ComponentsId {
 	
 	public static final String TOOL_ID = "tool";
 	
+	public static final String COLLAB_LAST_NAME_ID = "collabLastName";
+	
+	public static final String COLLAB_FIRST_NAME_ID = "collabFirstName";
+	
+	public static final String MANAGER_LAST_NAME_ID = "managerLastName";
+	
+	public static final String MANAGER_FIRST_NAME_ID = "managerFirstName";
+	
+	public static final String EAE_DATE_ID = "eaeDate";
+	
+	public static final String EAE_PREV_DATE_ID = "previousEaeDate";
+	
+	public static final String EAE_SALARY_ID = "salary";
+	
+	public static final String EAE_PROFILE_NAME_ID = "profile";
+	
+	public static final String EAE_YEAR_SYNTHESES_ID = "yearSynthesis";
+	
+	public static final String EAE_COLLAB_STRENGTHS_ID = "collabStrenghts";
+	
+	public static final String EAE_COLLAB_WEAKNESSES_ID = "collabWeaknesses";
+	
+	public static final String EAE_MEANS_TO_PROGRESS_ID = "meansToProgress";
+	
 }

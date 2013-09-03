@@ -86,7 +86,9 @@ public class Constants {
     public static final String MISSION_MSG_DATA_INSERTED_KO = "Be careful , the mission has not been added";
     
     public static final String MISSION_MSG_DATA_INSERTED_ERROR = "Thecnical error, please try again later";
-	
+
+    public static final String EAE_MSG_ERROR_GENERALITY_FORM = "Missing or invalid field";
+
 	/**
      * Constant for RegistrationForm and ColleagueDataForm
      */
@@ -315,5 +317,51 @@ public class Constants {
 	public static final String TYPE_PLACE = "Type a place";
 	
 	public static final String TYPE_COMMENT = "Type a comment";
+	
+	/**
+     * Constant for Personel EAE Pop-In
+     */
+	
+	public static final String PERSONAL_EAE_POP_IN_TITLE = "Personal EAE";
+	
+	public static final String CURRENT_EAE_BUTTON_LABEL = "Current EAE";
+
+	public static final String HISTORY_EAE_BUTTON_LABEL = "EAE History";
+
+	public static final String GENERALITY_EAE_BUTTON_LABEL = "Generality";
+	
+	public static final String RESULTS_EAE_BUTTON_LABEL = "Results";
+	
+	public static final String OBJECTIVES_EAE_BUTTON_LABEL = "Objectives";
+	
+	public static final String SYNTHESIS_EAE_BUTTON_LABEL = "Synthesis";
+
+	/**
+     * Constant for Personel EAE Pop-In => Current EAE => Generality
+     */
+	public static final String MANAGER_LAST_NAME = "Manager's last name";
+	
+	public static final String MANAGER_FIRST_NAME = "Manager's first name";
+	
+	public static final String DATE_OF_EAE = "EAE's date";
+	
+	public static final String DATE_OF_PREV_EAE = "Previous EAE's date";
+	
+	public static final String EAE_SALARY = "Salary";
+
+	public static final String GIVE_SALARY = "Give a salary";
+	
+	public static final String CURRENT_EAE_TITLE_1 = "EAE for : ";
+    
+    public static final String CURRENT_EAE_TITLE_2 = " on date : ";
+
+	/**
+     * Constant for Personel EAE Pop-In => Current EAE => Results
+     */
+	public static final String EAE_YEAR_SYNTHESIS = "Summary of the past year :";
+	public static final String EAE_COLLAB_STRENGHTS = "My Highlights :";
+	public static final String EAE_COLLAB_WEAKNESSES = "My areas of improvement :";
+	public static final String EAE_RESULTS_TITLE_3 = "3 Overall assessment of my work within the organization :";
+
 
 }
