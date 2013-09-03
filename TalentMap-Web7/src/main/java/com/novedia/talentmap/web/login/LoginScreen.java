@@ -153,9 +153,9 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		loginFormLayout.setRows(1);
 		loginFormLayout.setSpacing(true);
 		
-		loginField.setCaption(resourceBundle.getString("login.field.loabel"));
+		loginField.setCaption(resourceBundle.getString("login.field.label"));
 		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
-		passwordField.setCaption(resourceBundle.getString("password.field.loabel"));
+		passwordField.setCaption(resourceBundle.getString("password.field.label"));
 		passwordField.setId(ComponentsId.PASSWORD_ID);
 		
 		sigIn.setStyleName(Reindeer.BUTTON_LINK);
