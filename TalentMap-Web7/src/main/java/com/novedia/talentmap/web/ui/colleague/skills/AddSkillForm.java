@@ -6,7 +6,10 @@ import org.vaadin.teemu.ratingstars.RatingStars;
 
 import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ISkillService;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.ui.ComboBox;
@@ -14,7 +17,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 
 @SuppressWarnings("serial")
-public class AddSkillForm extends HorizontalLayout{
+public class AddSkillForm extends HorizontalLayout implements ValueChangeListener{
 	
 	public static final String[] OPTIONS = new String[] { "Beginner", "middle","professional", "Master", "Expert" };
 	
@@ -45,11 +48,7 @@ public class AddSkillForm extends HorizontalLayout{
      */
     private RatingStars stars;
     
-
-    /**
-     * Object JAVA
-     */
-//    private static Map<Integer, String> valueOptions;
+    private HorizontalLayout categoryAndConceptLayout ;
     
     /**
      * Default constructor
@@ -64,18 +63,26 @@ public class AddSkillForm extends HorizontalLayout{
      * 
      * @return AddSkillForm
      */
-    public AddSkillForm buildAddSkillForm(Skill skill) {
+    public void buildAddSkillForm(Skill skill) {
     	removeAllComponents();
     	setImmediate(true);
 		buildForm(skill);
-    	return this;
     }
     
     
     private void buildForm(Skill skill){
+    	
+    	categoryLabel.setCaption("Category:");
+    	conceptLabel.setCaption("Concept:");
+    	categoryAndConceptLayout.removeAllComponents();
+    	categoryAndConceptLayout.setSpacing(true);
+    	categoryAndConceptLayout.addComponent(categoryLabel);
+    	categoryAndConceptLayout.addComponent(conceptLabel);
+    	
     	toolSelect.setCaption("Tool:");
 		toolSelect.setNullSelectionAllowed(false);
 		toolSelect.setImmediate(true);
+		toolSelect.addValueChangeListener(this);
 		
 		stars.setCaption("Tool Score: ");
 		stars.setImmediate(true);
@@ -104,13 +111,29 @@ public class AddSkillForm extends HorizontalLayout{
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 		
+		if(toolSelect.getValue() != null){
+			categoryAndConceptLayout.setVisible(true);
+		} else{
+			categoryAndConceptLayout.setVisible(false);
+		}
+		
+		addComponent(categoryAndConceptLayout);
 		addComponent(toolSelect);
 		addComponent(stars);
 		addComponent(frequencyUseSelect);
 		addComponent(noUsingTimeSelect);
-		
-	
     }
+    
+    
+    @Override
+	public void valueChange(ValueChangeEvent event) {
+    	if(toolSelect.getValue() != null){
+    		VSkill vSkill = skillService.getSkillByTool(toolSelect.getItemCaption(toolSelect.getValue()));
+    		categoryAndConceptLayout.setVisible(true);
+    		categoryLabel.setValue(vSkill.getCategoryName());
+    		conceptLabel.setValue(vSkill.getConceptName());
+    	}
+	}
     
   
     /**
@@ -201,15 +224,16 @@ public class AddSkillForm extends HorizontalLayout{
 	public void setBinder(BeanFieldGroup<Skill> binder) {
 		this.binder = binder;
 	}
+
+	public HorizontalLayout getCategoryAndConceptLayout() {
+		return categoryAndConceptLayout;
+	}
+
+	public void setCategoryAndConceptLayout(
+			HorizontalLayout categoryAndConceptLayout) {
+		this.categoryAndConceptLayout = categoryAndConceptLayout;
+	}
 	
 	
-
-//	public static Map<Integer, String> getValueOptions() {
-//		return valueOptions;
-//	}
-
-//	public static void setValueOptions(Map<Integer, String> valueOptions) {
-//		AddSkillForm.valueOptions = valueOptions;
-//	}
 
 }

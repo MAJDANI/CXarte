@@ -79,6 +79,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	public VerticalLayout buildSkillColleagueContent(){
 		removeAllComponents();
+		skillContentPanel.addStyleName("contentPanel");	
 		initToolTable();
 		initConceptTable();
 		getAllSkillColleague();
@@ -119,9 +120,11 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private void buildAddSkillPanel(){
 		addSkillPanel.removeAllComponents();
+		addSkillPanel.addStyleName("contentPanel");
 		addSkillButton.setCaption("Add skill");
-		addSkillButton.setEnabled(true);
 		addSkillButton.addClickListener(this);
+		addSkillButton.addStyleName("styleButton addMission");
+		addSkillButton.setVisible(true);
 		addSkillPanel.addComponent(addSkillButton);
 		
 		skillFormButtonLayout.removeAllComponents();
@@ -230,6 +233,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
 		editSkillButton.setCaption(Constants.EDIT_BUTTON_LABEL);
+		editSkillButton.addStyleName("styleButton");
 		editSkillButton.addClickListener(this);
 		editSkillButton.setEnabled(false);
 		skillContentPanel.addComponent(editSkillButton);
@@ -275,7 +279,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	
 	private void enabledSkillForm(boolean state){
-		addSkillButton.setEnabled(!state);
+		addSkillButton.setVisible(!state);
 		addSkillForm.setVisible(state);
 		skillFormButtonLayout.setVisible(state);
 	}
@@ -288,7 +292,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		} else{
 			return false;
 		}
-			
 	}
 	
 	@Override
@@ -306,9 +309,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				currentSkill.setScore(addSkillForm.getStars().getValue().intValue());
 				currentSkill.setColleagueId(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
 				skillService.saveSkill(currentSkill);
-//				addSkillButton.setEnabled(true);
 				buildSkillColleagueContent();
-				addSkillButton.setEnabled(true);
 			} else {
 				Notification.show("All fields are required", Type.WARNING_MESSAGE);
 			}

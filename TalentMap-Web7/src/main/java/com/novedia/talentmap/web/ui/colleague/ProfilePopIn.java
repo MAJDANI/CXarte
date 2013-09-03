@@ -61,7 +61,7 @@ public class ProfilePopIn extends Window implements ClickListener{
       */
 	public Window buildProfilePopIn(){
 		removeAllComponents();
-		hLayout.setSpacing(true);
+//		hLayout.setSpacing(true);
 		hLayout.removeAllComponents();
 		buildButtons();
 		buildMenu();
@@ -75,7 +75,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
 		panelRight.addStyleName("panelRight");
-		panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
 		colleagueDataForm.setColleagueFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		panelRight.setWidth("800px");
