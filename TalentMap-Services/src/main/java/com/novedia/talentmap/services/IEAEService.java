@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
+import com.novedia.talentmap.model.dto.EAEResultsDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -66,6 +67,7 @@ public interface IEAEService {
      * @return List<EAE> : a list of EAE which state is OPEN or VALIDATED
      * 
      */
+    @Deprecated
     List<EAEForSynthesisDTO> getOngoingEAEForCM(Integer idManager);
 
     /**
@@ -79,6 +81,7 @@ public interface IEAEService {
      * @return List<Colleague> : a list of Colleague
      * @throws DataAccessException
      */
+    @Deprecated
     List<Colleague> getCollabWithoutOngoingEAEForManager(Integer idManager);
 
     /**
@@ -104,4 +107,46 @@ public interface IEAEService {
      * @throws DataAccessException
      */
     EAEGeneralityDTO getEAEGenerality(Integer idEAE);
+    
+    /**
+     * Gets Results informations corresponding to the given EAE's id
+     * 
+     * @param id
+     *            : the id of the EAE which we want results datas
+     * 
+     * @return EAEResultsDTO : an object EAEResultsDTO containing results informations of the EAE
+     * @throws DataAccessException
+     */
+	EAEResultsDTO getEAEResults(Integer idEAE);
+	
+	/**
+	 * Gets the id of the EAE Open for the Colleague's id given. If no EAE Open
+	 * is found, returns null
+	 * 
+	 * @param id
+	 *            : the id of the colleague which we want to count open EAE
+	 * 
+	 * @return Integer : the id or null
+	 */
+	Integer getOpenEAEIdForColleague(Integer idCollab);
+
+	/**
+	 * Saves the salary for the EAE given.
+	 * 
+	 * @param eae
+	 *            : the EAEGeneralityDTO to save
+	 * 
+	 */
+	int saveEAESalary(EAEGeneralityDTO eae);
+	
+	/**
+	 * Saves the "Results" data for the EAE given. 
+	 * 
+	 * @param eae
+	 *            : the EAEResultsDTO to save
+	 * 
+	 */
+	int saveEAEResults(EAEResultsDTO eae);
+
+
 }

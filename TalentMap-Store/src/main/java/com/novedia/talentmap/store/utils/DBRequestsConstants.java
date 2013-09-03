@@ -467,4 +467,13 @@ public final class DBRequestsConstants {
 	public static final String GET_WITHOUT_ONGOING_EAE_FOR_CM = "eae.getCollabWithoutOngoingEAEForManager";
 	public static final String GET_HISTORY_EAE_FOR_COLLAB = "eae.getHistoryEAEForCollab";
 	public static final String GET_EAE_GENERALITY = "eae.getEAEGenerality";
+	public static final String GET_EAE_RESULTS = "eae.getEAEResults";
+	public static final String GET_OPEN_EAE_ID = "eae.getOpenEAEIdForColleague";
+	public static final String SAVE_EAE_SALARY = "eae.saveEAESalary";
+	public static final String SAVE_EAE_RESULTS = "eae.saveEAEResults";
+	
+	
+	// OBJECTIVE REQUEST
+	public static final String GET_OBJECTIVES_FOR_EAE = "objective.getObjectivesByEAEId";
+	
 }

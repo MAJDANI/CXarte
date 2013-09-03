@@ -10,6 +10,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
+import com.novedia.talentmap.model.dto.EAEResultsDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.store.IDao;
@@ -102,6 +103,7 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
      * @return List<Colleague> : a list of Colleague
      * @throws DataAccessException
      */
+	@Deprecated
     public List<Colleague> getCollabWithoutOngoingEAEForManager(Integer id)
 	    throws DataAccessException {
 	return (List<Colleague>) this.getSqlMapClientTemplate().queryForList(
@@ -140,6 +142,61 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 	return (EAEGeneralityDTO) this.getSqlMapClientTemplate().queryForObject(
 		DBRequestsConstants.GET_EAE_GENERALITY, id);
     }
+
+    /**
+     * Gets Results informations corresponding to the given EAE's id
+     * 
+     * @param id
+     *            : the id of the EAE which we want results datas
+     * 
+     * @return EAEResultsDTO : an object EAEResultsDTO containing results informations of the EAE
+     * @throws DataAccessException
+     */
+	public EAEResultsDTO getEAEResults(Integer id)
+			throws DataAccessException {
+		return (EAEResultsDTO) this.getSqlMapClientTemplate()
+				.queryForObject(DBRequestsConstants.GET_EAE_RESULTS, id);
+	}
+
+	/**
+	 * Gets the id of the EAE Open for the Colleague's id given. If no EAE Open
+	 * is found, returns null
+	 * 
+	 * @param id
+	 *            : the id of the colleague which we want to count open EAE
+	 * 
+	 * @return Integer : the id or null
+	 */
+	public Integer getOpenEAEIdForColleague(Integer id)
+			throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_OPEN_EAE_ID, id);
+	}
+
+	/**
+	 * Saves the salary for the EAE given. 
+	 * 
+	 * @param eae
+	 *            : the EAEGeneralityDTO to save
+	 * 
+	 */
+	public int saveEAESalary(EAEGeneralityDTO eae) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().update(
+				DBRequestsConstants.SAVE_EAE_SALARY, eae);
+	}
+
+
+	/**
+	 * Saves the "Results" data for the EAE given. 
+	 * 
+	 * @param eae
+	 *            : the EAEResultsDTO to save
+	 * 
+	 */
+	public int saveEAEResults(EAEResultsDTO eae) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().update(
+				DBRequestsConstants.SAVE_EAE_RESULTS, eae);
+	}
 
     /**
      * {@inheritDoc}

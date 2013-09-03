@@ -8,7 +8,8 @@
 	<typeAlias alias="eae" type="com.novedia.talentmap.model.entity.EAE" />
 	<typeAlias alias="eaeForSynthesis" type="com.novedia.talentmap.model.dto.EAEForSynthesisDTO" />
 	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague" />
-	<typeAlias alias="eaeGenerality" type="com.novedia.talentmap.model.dto.EAEGeneralityDTO" />
+	<typeAlias alias="eaeGeneralityDTO" type="com.novedia.talentmap.model.dto.EAEGeneralityDTO" />
+	<typeAlias alias="eaeResultsDTO" type="com.novedia.talentmap.model.dto.EAEResultsDTO" />
 
 	<resultMap id="eaeResult" class="eae">
 		<result property="id" column="EAE_ID" />
@@ -51,7 +52,7 @@
 			select="colleague.selectMissionsByColleagueId" />
 	</resultMap>
 
-	<resultMap id="eaeGeneralityResult" class="eaeGenerality">
+	<resultMap id="eaeGeneralityResult" class="eaeGeneralityDTO">
 		<result property="id" column="EAE_ID" />
 		<result property="collabLastName" column="C_LAST_NAME" />
 		<result property="collabFirstName" column="C_FIRST_NAME" />
@@ -63,6 +64,14 @@
 		<result property="previousEaeDate" column="PREV_EAE_DATE" />
 		<result property="eaeStateId" column="EAE_STATE_ID" />
 		<result property="salary" column="SALARY" />
+	</resultMap>
+
+	<resultMap id="eaeResultsResult" class="eaeResultsDTO">
+		<result property="id" column="EAE_ID" />
+		<result property="yearSynthesis" column="YEAR_SYNTHESIS" />
+		<result property="collabStrenghts" column="COLLEAGUES_STRENGTHS" />
+		<result property="collabWeaknesses" column="COLLEAGUES_WEAKNESSES" />
+		<result property="meansToProgress" column="MEANS_TO_PROGRESS" />
 	</resultMap>
 
 
@@ -123,6 +132,22 @@
 		WHERE EAE_ID = #id#
 	</update>
 
+
+	<update id="saveEAESalary" parameterClass="eaeGeneralityDTO">
+		UPDATE EAE SET 
+			SALARY = #salary#
+		WHERE EAE_ID = #id#
+	</update>
+
+	<update id="saveEAEResults" parameterClass="eaeResultsDTO">
+		UPDATE EAE SET 
+			YEAR_SYNTHESIS = #yearSynthesis#,
+			COLLEAGUES_STRENGTHS = #collabStrenghts#,
+			COLLEAGUES_WEAKNESSES = #collabWeaknesses#,
+			MEANS_TO_PROGRESS = #meansToProgress#
+		WHERE EAE_ID = #id#
+	</update>
+
 	<delete id="delete" parameterClass="eae">
 		DELETE FROM EAE WHERE EAE_ID = #id#
 	</delete>
@@ -180,6 +205,17 @@
 		AND col.MANAGER_ID = man.COLLEAGUE_ID	;
 	</select>
 	
+	<select id="getEAEResults" resultMap="eaeResultsResult" parameterClass="Integer">
+		SELECT EAE_ID, YEAR_SYNTHESIS, COLLEAGUES_STRENGTHS, COLLEAGUES_WEAKNESSES,
+			MEANS_TO_PROGRESS
+		FROM EAE 
+		WHERE EAE_ID = #id#
+	</select>
 	
+	
+	<select id="getOpenEAEIdForColleague" resultClass="Integer" parameterClass="Integer">
+		SELECT EAE_ID FROM EAE WHERE COLLEAGUE_ID=#id#
+		AND EAE_STATE_ID=1;
+	</select>	
 	
 </sqlMap>

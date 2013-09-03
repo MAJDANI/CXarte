@@ -31,7 +31,10 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private Button formationButton;
 	
 	private Panel formationPanel;
-	
+
+	private PersonalEAEPopIn personalEAEPopIn;
+
+
 	/**
 	 * Default constructor
 	 */
@@ -74,6 +77,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		eaePanel.removeAllComponents();
 		eaeButton.setCaption(Constants.EAE_LABEL);
 		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
+		eaeButton.addClickListener(this);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
 		eaePanel.addComponent(eaeButton);
 		eaePanel.addStyleName("labelBtnDashboard eaePanel");
@@ -90,6 +94,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		gridLayout.addComponent(formationPanel);
 		
 		profilePopIn.addStyleName("popinStyle");
+		personalEAEPopIn.addStyleName("popinStyle");
 		
 	}
 	
@@ -97,6 +102,9 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		if(event.getButton().equals(profilButton)){
 			getUI().addWindow(profilePopIn.buildProfilePopIn());
+		}
+		else if(event.getButton().equals(eaeButton)){
+			getUI().addWindow(personalEAEPopIn.buildPersonalEAEPopIn());
 		}
 		
 	}
@@ -180,4 +188,19 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		this.profilePopIn = profilePopIn;
 	}
 
+
+	/**
+	 * @return the personalEAEPopIn
+	 */
+	public PersonalEAEPopIn getPersonalEAEPopIn() {
+		return personalEAEPopIn;
+	}
+
+
+	/**
+	 * @param personalEAEPopIn the personalEAEPopIn to set
+	 */
+	public void setPersonalEAEPopIn(PersonalEAEPopIn personalEAEPopIn) {
+		this.personalEAEPopIn = personalEAEPopIn;
+	}
 }

@@ -451,3 +451,4 @@ public class RegistrationForm extends FormLayout {
 	}
 
 }
+
