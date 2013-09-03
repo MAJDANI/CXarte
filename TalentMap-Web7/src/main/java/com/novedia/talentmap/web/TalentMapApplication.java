@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web;
 
+import java.util.Locale;
+
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.login.LoginScreen;
 import com.novedia.talentmap.web.utils.Constants;
@@ -34,14 +36,18 @@ public class TalentMapApplication extends UI {
 	 */
 	private Authentication authentication;
 	
-
+	private Locale locale ;
+	
 	@Override
 	protected void init(VaadinRequest request) {
+		Locale l = request.getLocale();
+		if(!l.getLanguage().equalsIgnoreCase(locale.getLanguage())){
+			locale = l;
+		}
 		view.setSizeFull();
 		getPage().setTitle(Constants.TITLE);
 		view.addComponent(loginScreen.buildLoginView());
 	    setContent(view);
-	    
 	}
 	
 	/**
@@ -103,6 +109,14 @@ public class TalentMapApplication extends UI {
 	 */
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 	
 	

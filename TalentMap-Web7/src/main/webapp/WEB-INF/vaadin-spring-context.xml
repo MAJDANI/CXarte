@@ -12,6 +12,11 @@
 	<import resource="classpath:services-spring-context.xml" />
 	<import resource="classpath:model-spring-context.xml" />
 	<import resource="admin-context.xml" />
+	
+	
+	<bean id="localeBean" class="java.util.Locale" scope="session" > 
+		<constructor-arg value="fr" />
+	</bean>
 
 	<bean id="view" class="com.vaadin.ui.VerticalLayout" scope="session" />
 
@@ -19,6 +24,7 @@
 		<property name="view" ref="view" />
 		<property name="loginScreen" ref ="loginScreen" />
 		<property name="authentication" ref ="authentication" />
+		<property name="locale" ref ="localeBean" />
 	</bean>	
 	
 	

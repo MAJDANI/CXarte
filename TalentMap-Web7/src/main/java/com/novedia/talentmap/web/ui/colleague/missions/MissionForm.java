@@ -81,7 +81,7 @@ public class MissionForm extends HorizontalLayout{
 		titleField.setCaption(Constants.TITLE_CAPTION);
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
-		titleField.setRequiredError(Constants.GIVE_TITLE);
+		titleField.setRequiredError("GIVE_TITLE");
 		titleField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.TITLE_ID));
 		titleField.setImmediate(true);

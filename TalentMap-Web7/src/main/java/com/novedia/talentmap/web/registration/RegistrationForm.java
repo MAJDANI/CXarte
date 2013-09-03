@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.registration;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -9,8 +11,10 @@ import com.novedia.talentmap.model.entity.Registration;
 import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
@@ -79,7 +83,9 @@ public class RegistrationForm extends FormLayout {
 	private ComboBox managerField;
 	
 	private GridLayout registrationFormLayout;
-
+	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
@@ -113,70 +119,72 @@ public class RegistrationForm extends FormLayout {
 	}
 
 	public void buildRegistrationForm() {
-		title.setCaption(Constants.TITLE_CAPTION);
-		title.addItem(Constants.TITLE_MR);
-		title.addItem(Constants.TITLE_MRS);
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.REGISTRATION_FORM_PROPERTIES, locale);
+		title.setCaption(resourceBundle.getString("title.caption"));
+		title.addItem(resourceBundle.getString("title.mr"));
+		title.addItem(resourceBundle.getString("title.mrs"));
 		title.setMultiSelect(false);
 		title.setRequired(true);
-		title.setRequiredError(Constants.GIVE_TITLE);
+		title.setRequiredError(resourceBundle.getString("error.missing.title"));
 		title.addStyleName("horizontal");
 		title.setId(ComponentsId.TITLE_ID);
 		registrationFormLayout.addComponent(title);
 		
-		loginField.setCaption(Constants.CHOOSE_LOGIN);
+		loginField.setCaption(resourceBundle.getString("login.field.caption"));
 		loginField.setRequired(true);
-		loginField.setRequiredError(Constants.GIVE_LOGIN);
+		loginField.setRequiredError(resourceBundle.getString("error.missing.login.field"));
 		loginField.addValidator(new BeanValidator(Registration.class, ComponentsId.LOGIN_ID));
 		loginField.setImmediate(true);
 		loginField.setValidationVisible(true);
-		loginField.setInputPrompt(Constants.TYPE_LOGIN);
+		loginField.setInputPrompt(resourceBundle.getString("login.field.default.value"));
 		loginField.setNullRepresentation("");
 		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
 		registrationFormLayout.addComponent(loginField);
 		
-		nameField.setCaption(Constants.NAME);
+		nameField.setCaption(resourceBundle.getString("name.field.caption"));
 		nameField.setRequired(true);
-		nameField.setRequiredError(Constants.GIVE_LAST_NAME);
+		nameField.setRequiredError(resourceBundle.getString("error.name.missing.msg"));
 		nameField.addValidator(new BeanValidator(Registration.class, ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
-		nameField.setInputPrompt(Constants.TYPE_NAME);
+		nameField.setInputPrompt(resourceBundle.getString("name.field.default.value"));
 		nameField.setNullRepresentation("");
 		nameField.setId(ComponentsId.LAST_NAME_ID);
 		registrationFormLayout.addComponent(nameField);
 
-		firstNameField.setCaption(Constants.FIRST_NAME);
+		firstNameField.setCaption(resourceBundle.getString("firstName.field.caption"));
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError(Constants.GIVE_FIRST_NAME);
+		firstNameField.setRequiredError(resourceBundle.getString("error.firstName.missing.msg"));
 		firstNameField.addValidator(new BeanValidator(Registration.class,
 				ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
-		firstNameField.setInputPrompt(Constants.TYPE_FIRST_NAME);
+		firstNameField.setInputPrompt(resourceBundle.getString("firstName.field.default.value"));
 		firstNameField.setNullRepresentation("");
 		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
 		registrationFormLayout.addComponent(firstNameField);
 
-		passwordField.setCaption(Constants.PASSWORD);
+		passwordField.setCaption(resourceBundle.getString("password.field.caption"));
 		passwordField.setRequired(true);
-		passwordField.setRequiredError(Constants.GIVE_PASSWORD);
+		passwordField.setRequiredError(resourceBundle.getString("error.password.missing.msg"));
 		passwordField.addValidator(new BeanValidator(Registration.class,
 				ComponentsId.PASSWORD_ID));
 		passwordField.setImmediate(true);
 		passwordField.setValidationVisible(true);
-		passwordField.setInputPrompt(Constants.TYPE_PASSWORD);
+		passwordField.setInputPrompt(resourceBundle.getString("password.field.default.value"));
 		passwordField.setNullRepresentation("");
 		passwordField.setId(ComponentsId.PASSWORD_ID);
 		registrationFormLayout.addComponent(passwordField);
 
-		confirmPasswordField.setCaption(Constants.CONFIRM_PASSWORD);
+		confirmPasswordField.setCaption(resourceBundle.getString("confirm.password.field.caption"));
 		confirmPasswordField.setRequired(true);
-		confirmPasswordField.setRequiredError(Constants.GIVE_CONFIRMED_PASSWORD);
+		confirmPasswordField.setRequiredError(resourceBundle.getString("error.confirm.password.missing.msg"));
 		confirmPasswordField.addValidator(new BeanValidator(Registration.class,
 				ComponentsId.PASSWORD_CONFIRM_ID));
 		confirmPasswordField.setImmediate(true);
 		confirmPasswordField.setValidationVisible(true);
-		confirmPasswordField.setInputPrompt(Constants.CONFIRM_PASSWORD);
+		confirmPasswordField.setInputPrompt(resourceBundle.getString("confirm.password.field.caption"));
 		confirmPasswordField.setNullRepresentation("");
 		confirmPasswordField.setId(ComponentsId.PASSWORD_CONFIRM_ID);
 		registrationFormLayout.addComponent(confirmPasswordField);
@@ -244,7 +252,7 @@ public class RegistrationForm extends FormLayout {
 		managerField.setId(ComponentsId.MANAGER_ID);
 		registrationFormLayout.addComponent(managerField);
 
-		registration = Registration.Builder.builder().title(Constants.TITLE_MR).build();
+		registration = Registration.Builder.builder().title(resourceBundle.getString("title.mr")).build();
 
 		binder = new BeanFieldGroup<Registration>(
 				Registration.class);

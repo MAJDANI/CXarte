@@ -46,17 +46,17 @@ public class Constants {
     
     public static final int SAVE_MODE_INSERT = 1;
     
-	public static final String  lOGIN_FIELD_LABEL ="Login";
+//	public static final String  lOGIN_FIELD_LABEL ="Login";
+//	
+//	public static final String  PASSWORD_FIELD_LABEL ="Password";
 	
-	public static final String  PASSWORD_FIELD_LABEL ="Password";
+//	public static final String  lOGIN_BUTTON_LABEL ="Log In";
 	
-	public static final String  lOGIN_BUTTON_LABEL ="Log In";
+//	public static final String  SIGN_IN_BUTTON_LABEL ="SIgn In";
 	
-	public static final String  SIGN_IN_BUTTON_LABEL ="SIgn In";
+//	public static final String  WELCOME ="Welcome";
 	
-	public static final String  WELCOME ="Welcome";
-	
-	public static final String ERROR_LOGIN_MSG = "The Login or password was incorrect.";
+//	public static final String ERROR_LOGIN_MSG = "The Login or password was incorrect.";
 	
 	public static final String TITLE = "Log In Talent Map";
 
@@ -105,13 +105,13 @@ public class Constants {
 
 	public static final String EMAIL = "Email";
 
-	public static final String CONFIRM_PASSWORD = "Confirm password";
+//	public static final String CONFIRM_PASSWORD = "Confirm password";
 
-	public static final String PASSWORD = "Password";
+//	public static final String PASSWORD = "Password";
 
-	public static final String FIRST_NAME = "First name";
+//	public static final String FIRST_NAME = "First name";
 
-	public static final String NAME = "Name";
+//	public static final String NAME = "Name";
 
 	public static final String TITLE_CAPTION = "Title";
 	
@@ -137,33 +137,33 @@ public class Constants {
 
 	public static final String GIVE_EMAIL = "Give your email";
 
-	public static final String CONFIRM_PASSWORD_TEXT = "Confirm your password";
+//	public static final String CONFIRM_PASSWORD_TEXT = "Confirm your password";
+	
+//	public static final String TYPE_PASSWORD = "Type your password";
 
-	public static final String TYPE_PASSWORD = "Type your password";
+//	public static final String GIVE_PASSWORD = "Give your password";
 
-	public static final String GIVE_PASSWORD = "Give your password";
+//	public static final String GIVE_CONFIRMED_PASSWORD = "Give your confirmed password";
 
-	public static final String GIVE_CONFIRMED_PASSWORD = "Give your confirmed password";
+//	public static final String TYPE_FIRST_NAME = "Type your first name";
+//
+//	public static final String GIVE_FIRST_NAME = "Give your first name";
 
-	public static final String TYPE_FIRST_NAME = "Type your first name";
+//	public static final String TYPE_NAME = "Type your name";
 
-	public static final String GIVE_FIRST_NAME = "Give your first name";
+//	public static final String GIVE_LAST_NAME = "Give your last name";
 
-	public static final String TYPE_NAME = "Type your name";
+//	public static final String TYPE_LOGIN = "Type your login";
 
-	public static final String GIVE_LAST_NAME = "Give your last name";
+//	public static final String GIVE_LOGIN = "Give your login";
 
-	public static final String TYPE_LOGIN = "Type your login";
+//	public static final String CHOOSE_LOGIN = "Choose a login";
 
-	public static final String GIVE_LOGIN = "Give your login";
+//	public static final String GIVE_TITLE = "Give title";
 
-	public static final String CHOOSE_LOGIN = "Choose a login";
+//	public static final String TITLE_MRS = "Mrs.";
 
-	public static final String GIVE_TITLE = "Give title";
-
-	public static final String TITLE_MRS = "Mrs.";
-
-	public static final String TITLE_MR = "Mr.";
+//	public static final String TITLE_MR = "Mr.";
 	
 
 	public static final String HELLO_LABEL = "Hello ";

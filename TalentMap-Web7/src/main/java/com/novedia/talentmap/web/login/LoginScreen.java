@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.login;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -11,7 +14,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.registration.RegistrationScreen;
 import com.novedia.talentmap.web.util.exceptions.TalentMapSecurityException;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -92,6 +95,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	
 	private VerticalLayout content;
 	
+	private ResourceBundle resourceBundle;
 	
 	/**
 	 * Default constructor
@@ -101,29 +105,30 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		addStyleName("containerPrincipal");
 	}
 	
+	
 	/**
 	 * Build home page
 	 * @return an HorizontalLayout
 	 */
 	public HorizontalLayout buildLoginView(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.LOGIN_SCREEN_PROPERTIES, locale);
 		removeAllComponents();
-		
 		loginPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 		Label welcomeLabel = new Label();
-		welcomeLabel.setCaption(Constants.WELCOME);
+		welcomeLabel.setCaption(resourceBundle.getString("welcome"));
 		welcomeLabel.addStyleName("titleStyle");
 		header.addComponent(welcomeLabel);
 		
 		loginPanel.removeAllComponents();
 		loginPanel.addComponent(header);
 		loginPanel.setWidth(null);
-		
 		loginPanel.addStyleName("loginPanel");
 		
 		content.removeAllComponents();
 		content.addComponent(errorLogin);
-		errorLogin.setCaption(Constants.ERROR_LOGIN_MSG);
+		errorLogin.setCaption(resourceBundle.getString("error.login.msg"));
 		errorLogin.setVisible(false);
 		errorLogin.addStyleName("errorStyle");
 		
@@ -137,7 +142,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		
 		return this;
 	}
-
+   
 	
 	/**
 	 * Build the login form view
@@ -148,17 +153,17 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		loginFormLayout.setRows(1);
 		loginFormLayout.setSpacing(true);
 		
-		loginField.setCaption(Constants.lOGIN_FIELD_LABEL);
+		loginField.setCaption(resourceBundle.getString("login.field.loabel"));
 		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
-		passwordField.setCaption(Constants.PASSWORD_FIELD_LABEL);
+		passwordField.setCaption(resourceBundle.getString("password.field.loabel"));
 		passwordField.setId(ComponentsId.PASSWORD_ID);
 		
 		sigIn.setStyleName(Reindeer.BUTTON_LINK);
-		logInButton.setCaption(Constants.lOGIN_BUTTON_LABEL);
+		logInButton.setCaption(resourceBundle.getString("login.button.label"));
 		logInButton.setId(ComponentsId.LOGIN_BUTTON_ID);
 		logInButton.addClickListener(this);
 		
-		sigIn.setCaption(Constants.SIGN_IN_BUTTON_LABEL);
+		sigIn.setCaption(resourceBundle.getString("signIn.button.label"));
 		sigIn.addClickListener(this);
 		sigIn.setId(ComponentsId.SIG_IN_BUTTON_ID);
 		
@@ -217,9 +222,9 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		    }
 		} catch (DataAccessException ex) {
 		    if (LOGGER.isErrorEnabled()) {
-			LOGGER.error("Technical Exception : ", ex.getMessage());
+		    	LOGGER.error("Technical Exception : ", ex.getMessage());
 		    }
-		    Notification.show("Technical Exception, try later", Type.ERROR_MESSAGE);
+		    Notification.show(resourceBundle.getString("technical.exception"), Type.ERROR_MESSAGE);
 		}
 
 		return authentication;
@@ -401,8 +406,5 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	public void setContent(VerticalLayout content) {
 		this.content = content;
 	}
-	
-	
-
 
 }

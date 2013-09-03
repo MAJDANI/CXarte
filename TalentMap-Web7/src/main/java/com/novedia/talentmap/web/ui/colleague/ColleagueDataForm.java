@@ -105,9 +105,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 
 	private void buildColleagueDataForm() {
 		removeAllComponents();
-		nameField.setCaption(Constants.NAME);
+		nameField.setCaption("name");
 		nameField.setRequired(true);
-		nameField.setRequiredError(Constants.GIVE_LAST_NAME);
+		nameField.setRequiredError("Give your Name");
 		nameField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
@@ -119,9 +119,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		nameField.setWidth("190px");
 		colleagueFormLayout.addComponent(nameField);
 
-		firstNameField.setCaption(Constants.FIRST_NAME);
+		firstNameField.setCaption("First name");
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError(Constants.GIVE_FIRST_NAME);
+		firstNameField.setRequiredError("Give your first name");
 		firstNameField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
