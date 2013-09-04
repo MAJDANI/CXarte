@@ -78,7 +78,7 @@ public class MissionForm extends HorizontalLayout{
 		missionToolLayout.setRows(1);
 		missionToolLayout.setColumns(1);
 		
-		titleField.setCaption(Constants.TITLE_CAPTION);
+		titleField.setCaption("Title");
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
 		titleField.setRequiredError("GIVE_TITLE");

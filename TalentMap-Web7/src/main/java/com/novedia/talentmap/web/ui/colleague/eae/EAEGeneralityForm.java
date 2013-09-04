@@ -108,7 +108,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// PROFILE
 		// -----------------------------
-		jobField.setCaption(Constants.JOB_TITLE);
+		jobField.setCaption("Job title");
 		jobField.setStyleName("TODO");
 		jobField.setId(ComponentsId.EAE_PROFILE_NAME_ID);
 		jobField.addStyleName("spacerInfo");
@@ -137,7 +137,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// EMPLOYMENT'S DATE
 		// -----------------------------
-		employmentDateField.setCaption(Constants.DATE_OF_HIRE);
+		employmentDateField.setCaption("Date of hire");
 		employmentDateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		employmentDateField.addStyleName("spacerInfo spacerTop");
 		eaeGeneralityFormLayout.addComponent(employmentDateField);

@@ -189,26 +189,26 @@ public class RegistrationForm extends FormLayout {
 		confirmPasswordField.setId(ComponentsId.PASSWORD_CONFIRM_ID);
 		registrationFormLayout.addComponent(confirmPasswordField);
 
-		emailField.setCaption(Constants.EMAIL);
+		emailField.setCaption(resourceBundle.getString("email.field.caption"));
 		emailField.setRequired(true);
-		emailField.setRequiredError(Constants.GIVE_EMAIL);
+		emailField.setRequiredError(resourceBundle.getString("error.email.missing.msg"));
 		emailField.addValidator(new BeanValidator(Registration.class, ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
-		emailField.setInputPrompt(Constants.TYPE_EMAIL);
+		emailField.setInputPrompt(resourceBundle.getString("email.field.default.value"));
 		emailField.setNullRepresentation("");
 		emailField.setId(ComponentsId.EMAIL_ID);
 		registrationFormLayout.addComponent(emailField);
 
-		phoneField.setCaption(Constants.PHONE);
-		phoneField.setInputPrompt(Constants.TYPE_PHONE_NUMBER);
+		phoneField.setCaption(resourceBundle.getString("phone.field.caption"));
+		phoneField.setInputPrompt(resourceBundle.getString("phone.field.default.value"));
 		phoneField.setNullRepresentation("");
 		phoneField.setId(ComponentsId.PHONE_ID);
 		registrationFormLayout.addComponent(phoneField);
 
-		dateField.setCaption(Constants.DATE_OF_HIRE);
+		dateField.setCaption(resourceBundle.getString("date.entry.caption"));
 		dateField.setRequired(true);
-		dateField.setRequiredError(Constants.GIVE_EMPLOYEMENT_DATE);
+		dateField.setRequiredError(resourceBundle.getString("error.date.entry.missing.msg"));
 		dateField.addValidator(new BeanValidator(Registration.class,
 				ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
@@ -217,20 +217,20 @@ public class RegistrationForm extends FormLayout {
 		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		registrationFormLayout.addComponent(dateField);
 
-		jobField.setCaption(Constants.JOB_TITLE);
+		jobField.setCaption(resourceBundle.getString("job.field.caption"));
 		jobField.setRequired(true);
-		jobField.setRequiredError(Constants.GIVE_JOB_TITLE);
+		jobField.setRequiredError(resourceBundle.getString("error.job.field.missing.msg"));
 		jobField.addValidator(new BeanValidator(Registration.class, ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
-		jobField.setInputPrompt(Constants.SELECT_JOB_TITLE);
+		jobField.setInputPrompt(resourceBundle.getString("job.field.default.value"));
 		buildJobList();
 		jobField.setId(ComponentsId.PROFILE_ID);
 		registrationFormLayout.addComponent(jobField);
 
-		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
+		experienceField.setCaption(resourceBundle.getString("experience.field.caption"));
 		experienceField.setRequired(true);
-		experienceField.setRequiredError(Constants.GIVE_EXPERIENCE);
+		experienceField.setRequiredError(resourceBundle.getString("experience.field.missing.msg"));
 		experienceField.addValidator(new BeanValidator(Registration.class,
 				ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
@@ -240,14 +240,14 @@ public class RegistrationForm extends FormLayout {
 		experienceField.setId(ComponentsId.EXPERIENCE_ID);
 		registrationFormLayout.addComponent(experienceField);
 
-		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
-		businessEngineerField.setInputPrompt(Constants.SELECT_BUSINESS_ENGINEER);
+		businessEngineerField.setCaption(resourceBundle.getString("businessEngineer.field.caption"));
+		businessEngineerField.setInputPrompt(resourceBundle.getString("businessEngineer.field.default.value"));
 		buildEngineerList();
 		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
 		registrationFormLayout.addComponent(businessEngineerField);
 
-		managerField.setCaption(Constants.MANAGER);
-		managerField.setInputPrompt(Constants.SELECT_MANAGER);
+		managerField.setCaption(resourceBundle.getString("manager.field.caption"));
+		managerField.setInputPrompt(resourceBundle.getString("manager.field.value"));
 		buildManagerList();
 		managerField.setId(ComponentsId.MANAGER_ID);
 		registrationFormLayout.addComponent(managerField);

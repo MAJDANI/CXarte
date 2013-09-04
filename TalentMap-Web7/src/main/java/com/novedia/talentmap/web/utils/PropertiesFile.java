@@ -6,6 +6,8 @@ public class PropertiesFile {
 	
 	public static final String REGISTRATION_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.resgistration.RegistrationForm";
 	
+	public static final String REGISTRATION_SCREEN_PROPERTIES = "com.novedia.talentmap.web.properties.resgistration.RegistrationScreen";
+	
 	
 
 }

@@ -134,10 +134,10 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		firstNameField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(firstNameField);
 
-		jobField.setCaption(Constants.JOB_TITLE);
+		jobField.setCaption("Job title");
 		buildJobList();
 		jobField.setRequired(true);
-		jobField.setRequiredError(Constants.GIVE_JOB_TITLE);
+		jobField.setRequiredError("Give your job title");
 		jobField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
@@ -148,9 +148,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		jobField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(jobField);
 
-		emailField.setCaption(Constants.EMAIL);
+		emailField.setCaption("email");
 		emailField.setRequired(true);
-		emailField.setRequiredError(Constants.GIVE_EMAIL);
+		emailField.setRequiredError("Give your email");
 		emailField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
@@ -163,8 +163,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		emailField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(emailField);
 
-		phoneField.setCaption(Constants.PHONE);
-		phoneField.setInputPrompt(Constants.TYPE_PHONE_NUMBER);
+		phoneField.setCaption("Phone");
+		phoneField.setInputPrompt("Type your phone number");
 		phoneField.setNullRepresentation("");
 		phoneField.addBlurListener(this);
 		phoneField
@@ -174,9 +174,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		phoneField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(phoneField);
 
-		dateField.setCaption(Constants.DATE_OF_HIRE);
+		dateField.setCaption("Date of hire");
 		dateField.setRequired(true);
-		dateField.setRequiredError(Constants.GIVE_EMPLOYEMENT_DATE);
+		dateField.setRequiredError("Give your date of employement");
 		dateField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
@@ -186,9 +186,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		dateField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(dateField);
 
-		experienceField.setCaption(Constants.YEARS_OF_EXPERIENCE);
+		experienceField.setCaption("Years of experience");
 		experienceField.setRequired(true);
-		experienceField.setRequiredError(Constants.GIVE_EXPERIENCE);
+		experienceField.setRequiredError("Give your years of experience");
 		experienceField.addValidator(new BeanValidator(Colleague.class,
 				ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
@@ -202,7 +202,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		experienceField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(experienceField);
 
-		businessEngineerField.setCaption(Constants.BUSINESS_ENGINEER);
+		businessEngineerField.setCaption("Business engineer");
 		buildEngineerList();
 		businessEngineerField.addBlurListener(this);
 		businessEngineerField
@@ -211,7 +211,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		businessEngineerField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(businessEngineerField);
 
-		managerField.setCaption(Constants.MANAGER);
+		managerField.setCaption("Manager");
 		buildManagerList();
 		managerField.addBlurListener(this);
 		managerField

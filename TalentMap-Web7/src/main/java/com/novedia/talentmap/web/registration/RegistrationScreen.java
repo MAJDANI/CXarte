@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.registration;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -15,6 +18,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.login.AuthenticatedScreen;
 import com.novedia.talentmap.web.login.LoginScreen;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -53,6 +57,8 @@ public class RegistrationScreen extends HorizontalLayout implements
 	private AuthenticatedScreen authenticatedScreen;
 
 	private LoginScreen loginScreen;
+	
+	private ResourceBundle resourceBundle;
 
 	public RegistrationScreen() {
 		super();
@@ -60,18 +66,21 @@ public class RegistrationScreen extends HorizontalLayout implements
 	}
 
 	public HorizontalLayout buildRegistrationScreenView() {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.REGISTRATION_SCREEN_PROPERTIES, locale);
+		
 		registrationPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 
 		Label registrationLabel = new Label();
-		registrationLabel.setCaption("Registration");
+		registrationLabel.setCaption(resourceBundle.getString("registration.label.caption"));
 		registrationLabel.addStyleName("titleStyle");
 		header.addComponent(registrationLabel);
 
 		// components initialisation
 		registrationFormLayout = new GridLayout();
-		save = new Button("Save");
-		logIn = new Button("Log In");
+		save = new Button(resourceBundle.getString("save.button.caption"));
+		logIn = new Button(resourceBundle.getString("logIn.button.caption"));
 
 		registrationForm.setRegistrationFormLayout(registrationFormLayout);
 

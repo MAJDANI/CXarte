@@ -93,19 +93,19 @@ public class Constants {
      * Constant for RegistrationForm and ColleagueDataForm
      */
 	
-	public static final String MANAGER = "Manager";
+//	public static final String MANAGER = "Manager";
 
-	public static final String BUSINESS_ENGINEER = "Business engineer";
+//	public static final String BUSINESS_ENGINEER = "Business engineer";
 
-	public static final String YEARS_OF_EXPERIENCE = "Years of experience";
+//	public static final String YEARS_OF_EXPERIENCE = "Years of experience";
 
-	public static final String JOB_TITLE = "Job title";
+//	public static final String JOB_TITLE = "Job title";
 
-	public static final String DATE_OF_HIRE = "Date of hire";
+//	public static final String DATE_OF_HIRE = "Date of hire";
 
-	public static final String PHONE = "Phone";
+//	public static final String PHONE = "Phone";
 
-	public static final String EMAIL = "Email";
+//	public static final String EMAIL = "Email";
 
 //	public static final String CONFIRM_PASSWORD = "Confirm password";
 
@@ -115,29 +115,29 @@ public class Constants {
 
 //	public static final String NAME = "Name";
 
-	public static final String TITLE_CAPTION = "Title";
+//	public static final String TITLE_CAPTION = "Title";
 	
-	public static final String SELECT_MANAGER = "Select your manager";
+//	public static final String SELECT_MANAGER = "Select your manager";
 
-	public static final String SELECT_BUSINESS_ENGINEER = "Select your business engineer";
+//	public static final String SELECT_BUSINESS_ENGINEER = "Select your business engineer";
 
 	public static final String EXPERIENCE_FORMAT = "ex : 2";
 
-	public static final String GIVE_EXPERIENCE = "Give your years of experience";
+//	public static final String GIVE_EXPERIENCE = "Give your years of experience";
 
-	public static final String SELECT_JOB_TITLE = "Select your job title";
+//	public static final String SELECT_JOB_TITLE = "Select your job title";
 
-	public static final String GIVE_JOB_TITLE = "Give your job title";
+//	public static final String GIVE_JOB_TITLE = "Give your job title";
 
 	public static final String DATE_FORMAT = "DD/MM/YY";
 
-	public static final String GIVE_EMPLOYEMENT_DATE = "Give your date of employement";
+//	public static final String GIVE_EMPLOYEMENT_DATE = "Give your date of employement";
 
-	public static final String TYPE_PHONE_NUMBER = "Type your phone number";
+//	public static final String TYPE_PHONE_NUMBER = "Type your phone number";
 
-	public static final String TYPE_EMAIL = "Type your Email";
+//	public static final String TYPE_EMAIL = "Type your Email";
 
-	public static final String GIVE_EMAIL = "Give your email";
+//	public static final String GIVE_EMAIL = "Give your email";
 
 //	public static final String CONFIRM_PASSWORD_TEXT = "Confirm your password";
 	
