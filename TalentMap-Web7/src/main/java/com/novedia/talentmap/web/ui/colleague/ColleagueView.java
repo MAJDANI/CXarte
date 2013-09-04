@@ -1,7 +1,11 @@
 package com.novedia.talentmap.web.ui.colleague;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -33,6 +37,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private Panel formationPanel;
 
 	private PersonalEAEPopIn personalEAEPopIn;
+	
+	private ResourceBundle resourceBundle;
 
 
 	/**
@@ -50,6 +56,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	 * @return VerticalLayout
 	 */
 	public VerticalLayout builColleagueContent(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.COLLEAGUE_VIEW_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
@@ -67,7 +75,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		gridLayout.setId("gridLayout");
 		
 		profilPanel.removeAllComponents();
-		profilButton.setCaption(Constants.PROFILE_LABEL);
+		profilButton.setCaption(resourceBundle.getString("profil.button.caption"));
 		profilButton.addStyleName(Reindeer.BUTTON_LINK);
 		profilButton.addClickListener(this);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
@@ -75,7 +83,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		profilPanel.addStyleName("labelBtnDashboard profilPanel");
 		
 		eaePanel.removeAllComponents();
-		eaeButton.setCaption(Constants.EAE_LABEL);
+		eaeButton.setCaption(resourceBundle.getString("eae.button.caption"));
 		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
 		eaeButton.addClickListener(this);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
@@ -83,7 +91,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		eaePanel.addStyleName("labelBtnDashboard eaePanel");
 		
 		formationPanel.removeAllComponents();
-		formationButton.setCaption(Constants.FORMATION_LABEL);
+		formationButton.setCaption(resourceBundle.getString("formation.button.caption"));
 		formationButton.addStyleName(Reindeer.BUTTON_LINK);
 		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
 		formationPanel.addComponent(formationButton);

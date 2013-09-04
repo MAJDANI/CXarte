@@ -1,12 +1,15 @@
 package com.novedia.talentmap.web.login;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.CredentialToken;
 import com.novedia.talentmap.services.IAuthenticationService;
 import com.novedia.talentmap.services.IChangePasswordService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -60,13 +63,14 @@ public class ChangePasswordScreen extends Window implements ClickListener {
       * the saveButton
       */
      private Button saveButton;
+     
+     private ResourceBundle resourceBundle;
 	
 	/**
 	 * Deafault constructor
 	 */
      public ChangePasswordScreen(){
     	 super();
-    	 setCaption(Constants.CHANGE_PASSWORD_FORM_TITLE);
     	 setModal(true);
      }
 	
@@ -76,10 +80,13 @@ public class ChangePasswordScreen extends Window implements ClickListener {
       * @return Window
       */
 	public Window buildChangePasswordForm(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.CHANGE_PASSWORD_FORM_PROPERTIES, locale);
+		setCaption(resourceBundle.getString("password.form.view.title"));
 		removeAllComponents();
 		buildForm();
-		errorLabelOldPassword.setCaption(Constants.ERROR_OLD_PASSWORD);
-		errorLabelNewPassword.setCaption(Constants.ERROR_NEW_PASSWORD);
+		errorLabelOldPassword.setCaption(resourceBundle.getString("error.label.old.password"));
+		errorLabelNewPassword.setCaption(resourceBundle.getString("error.label.new.password"));
 		errorLabelOldPassword.setVisible(false);
 		errorLabelNewPassword.setVisible(false);
 		
@@ -96,19 +103,19 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 	private void buildForm(){
 		changePasswordFormLayout.removeAllComponents();
 		
-		oldPasswordField.setCaption(Constants.OLD_PASSWORD_LABEL);
+		oldPasswordField.setCaption(resourceBundle.getString("old.password.field.caption"));
 		oldPasswordField.setId(ComponentsId.OLD_PASSWORD_FIELD_ID);
 		oldPasswordField.setRequired(true);
 		
-		newPasswordField.setCaption(Constants.NEW_PASSWORD_LABEL);
+		newPasswordField.setCaption(resourceBundle.getString("new.password.field.caption"));
 		newPasswordField.setId(ComponentsId.NEW_PASSWORD_FIELD_ID);
 		newPasswordField.setRequired(true);
 		
-		confirmPasswordField.setCaption(Constants.CONFIRM_PASSWORD_LABEL);
+		confirmPasswordField.setCaption(resourceBundle.getString("confirm.password.field"));
 		confirmPasswordField.setId(ComponentsId.CONFIRM_PASSWORD_FIELD_ID);
 		confirmPasswordField.setRequired(true);
 		
-		saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
+		saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
 		saveButton.setId(ComponentsId.SAVE_BTN_ID);
 		changePasswordFormLayout.addComponent(oldPasswordField);
@@ -126,7 +133,7 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 			String newPassword = (String) newPasswordField.getValue();
 			String confirmPassword = (String) confirmPasswordField.getValue();
 			if(oldPassword.length() == 0 || newPassword.length() == 0 || confirmPassword.length() == 0){
-				Notification.show(Constants.MISSING_FIELD_MSG, Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("missing.all.fields.msg"), Type.WARNING_MESSAGE);
 				return;
 			}
 			
@@ -145,9 +152,9 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 					if (result != 0) {
 						TalentMapApplication.getCurrent().getAuthentication().getToken().setPassword(encodeNewPassword);
 						close();
-						Notification.show(Constants.UPADTE_SUCCESS_MSG, Type.TRAY_NOTIFICATION);
+						Notification.show(resourceBundle.getString("update.successful.msg"), Type.TRAY_NOTIFICATION);
 					} else {
-						Notification.show(Constants.UPDATE_ERROR_MSG, Type.ERROR_MESSAGE);
+						Notification.show(resourceBundle.getString("update.error.msg"), Type.ERROR_MESSAGE);
 					}
 					
 				} else {

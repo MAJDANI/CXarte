@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.login;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -11,7 +14,7 @@ import com.novedia.talentmap.web.ui.colleague.ColleagueView;
 import com.novedia.talentmap.web.ui.ia.IaView;
 import com.novedia.talentmap.web.ui.rh.RhView;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
@@ -93,6 +96,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	
 	private ChangePasswordScreen changePasswordScreen;
 	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
@@ -108,6 +113,8 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 * @return a VerticalLayout
 	 */
 	public VerticalLayout selectedViewAccordingToUserRoles(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.AUTHENTICATED_SCREEN_PROPERTIES, locale);
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		removeAllComponents();
 		buildHeaderLayout();
@@ -145,6 +152,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 */
 	private void buildHeaderLayout(){
 		Colleague currentColleague = colleagueService.getColleague(TalentMapApplication.getCurrent().getAuthentication().getColleagueId());
+		TalentMapApplication.getCurrent().getPage().setTitle(currentColleague.getFirstName() + " - Talent Map NovediaGroup");
 		headerLayout.removeAllComponents();
 		headerLayout.setId(ComponentsId.HEADER_LAYOUT_ID);
 		
@@ -160,14 +168,14 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		settingsLayout.setId(ComponentsId.SETTINGS_LAYOUT_ID);
 		
 		Label helloLabel = new Label();
-		helloLabel.setCaption(Constants.HELLO_LABEL +currentColleague.getFirstName() +", ");
+		helloLabel.setCaption(resourceBundle.getString("hello.label") +currentColleague.getFirstName() +", ");
 		
-		changePasswordButton.setCaption(Constants.CHANGE_PASSWORD_LABEL);
+		changePasswordButton.setCaption(resourceBundle.getString("change.password.button.caption"));
 		changePasswordButton.addStyleName(Reindeer.BUTTON_LINK);
 		changePasswordButton.addClickListener(this);
 		
 		logOutButton.addStyleName(Reindeer.BUTTON_LINK);
-		logOutButton.setCaption(Constants.LOG_OUT_BUTTON_LABEL);
+		logOutButton.setCaption(resourceBundle.getString("logOut.button.caption"));
 		logOutButton.addClickListener(this);
 		
 		settingsLayout.addComponent(helloLabel);
@@ -184,7 +192,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		logoTalentMap.addComponent(new Label("Logo Talentmap"));
 		
 		dashBoardLayout.removeAllComponents();
-		dashBoardLayout.addComponent(new Label(Constants.DASHBOARD_LABEL));
+		dashBoardLayout.addComponent(new Label(resourceBundle.getString("dashBoard.layout.label")));
 		dashBoardLayout.setId(ComponentsId.DASHBOARD_ID);
 		
 		headerLayout.addComponent(helloLayout);

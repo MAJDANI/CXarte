@@ -338,7 +338,7 @@ public class ManageToolsPopIn extends Window implements ItemClickListener,
 		if (modifyCategoryForm.isVisible()) {
 			
 			if (skillFieldAreEmpty()) {
-				Notification.show(Constants.MISSING_FIELD_MSG);
+				Notification.show("All fields are required");
 			} else {
 				String categoryName = modifyCategoryForm.getCategoryField()
 						.getValue();
@@ -349,7 +349,7 @@ public class ManageToolsPopIn extends Window implements ItemClickListener,
 		} else if (modifyConceptForm.isVisible()) {
 			
 			if (skillFieldAreEmpty()) {
-				Notification.show(Constants.MISSING_FIELD_MSG);
+				Notification.show("All fields are required");
 			} else {
 				String categoryName = modifyConceptForm.getCategoryField()
 						.getValue();
@@ -362,7 +362,7 @@ public class ManageToolsPopIn extends Window implements ItemClickListener,
 		} else if (modifyToolForm.isVisible()) {
 			
 			if (skillFieldAreEmpty()) {
-				Notification.show(Constants.MISSING_FIELD_MSG);
+				Notification.show("All fields are required");
 			} else {
 				String categoryName = modifyToolForm.getCategoryField()
 						.getValue();

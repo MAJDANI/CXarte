@@ -17,7 +17,6 @@ import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.login.AuthenticatedScreen;
 import com.novedia.talentmap.web.login.LoginScreen;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -53,6 +52,9 @@ public class RegistrationScreen extends HorizontalLayout implements
 	private RegistrationForm registrationForm;
 	private Button save;
 	private Button logIn;
+	private VerticalLayout bottomRegistrationScreenLayout;
+	private HorizontalLayout backLoginScreenLayout;
+	private Label alreadyHaveAccountLabel;
 	
 	private AuthenticatedScreen authenticatedScreen;
 
@@ -68,28 +70,19 @@ public class RegistrationScreen extends HorizontalLayout implements
 	public HorizontalLayout buildRegistrationScreenView() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.REGISTRATION_SCREEN_PROPERTIES, locale);
-		
 		registrationPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
-
 		Label registrationLabel = new Label();
 		registrationLabel.setCaption(resourceBundle.getString("registration.label.caption"));
 		registrationLabel.addStyleName("titleStyle");
 		header.addComponent(registrationLabel);
-
-		// components initialisation
-		registrationFormLayout = new GridLayout();
-		save = new Button(resourceBundle.getString("save.button.caption"));
-		logIn = new Button(resourceBundle.getString("logIn.button.caption"));
-
+		registrationFormLayout.removeAllComponents();
 		registrationForm.setRegistrationFormLayout(registrationFormLayout);
-
 		registrationPanel.addComponent(header);
 		registrationForm = registrationForm.buildRegistrationFormView();
 		registrationPanel.addComponent(registrationForm);
 		buildButton();
 		registrationPanel.setWidth(null);
-
 		registrationPanel.addStyleName("registrationPanel");
 		addComponent(registrationPanel);
 		setComponentAlignment(registrationPanel, Alignment.MIDDLE_CENTER);
@@ -102,29 +95,27 @@ public class RegistrationScreen extends HorizontalLayout implements
 	 * Build the buttons of the screen
 	 */
 	public void buildButton() {
-
-		VerticalLayout vLayout = new VerticalLayout();
-
 		save.setId("saveButton");
-		save.setCaption(Constants.SAVE_BUTTON_NAME);
+		save.setCaption(resourceBundle.getString("save.button.caption"));
 		save.addClickListener(this);
-		vLayout.addComponent(save);
-		vLayout.setComponentAlignment(save, Alignment.BOTTOM_RIGHT);
+		bottomRegistrationScreenLayout.removeAllComponents();
+		bottomRegistrationScreenLayout.addComponent(save);
+		bottomRegistrationScreenLayout.setComponentAlignment(save, Alignment.BOTTOM_RIGHT);
 
 		logIn.setStyleName(Reindeer.BUTTON_LINK);
-		logIn.setCaption("Log In");
+		logIn.setCaption(resourceBundle.getString("logIn.button.caption"));
 		logIn.addClickListener(this);
 		logIn.setId("logIn");
 
-		HorizontalLayout hLayout = new HorizontalLayout();
-		hLayout.setSpacing(true);
-		Label label = new Label(Constants.ALREADY_HAVE_AN_ACCOUNT_LABEL);
-		label.addStyleName("haveAccountLabel");
-		hLayout.addComponent(label);
-		hLayout.addComponent(logIn);
-		vLayout.addComponent(hLayout);
-		vLayout.setComponentAlignment(hLayout, Alignment.BOTTOM_RIGHT);
-		registrationPanel.addComponent(vLayout);
+		backLoginScreenLayout.setSpacing(true);
+		backLoginScreenLayout.removeAllComponents();
+		alreadyHaveAccountLabel.setCaption(resourceBundle.getString("already.have.account.caption"));
+		alreadyHaveAccountLabel.addStyleName("haveAccountLabel");
+		backLoginScreenLayout.addComponent(alreadyHaveAccountLabel);
+		backLoginScreenLayout.addComponent(logIn);
+		bottomRegistrationScreenLayout.addComponent(backLoginScreenLayout);
+		bottomRegistrationScreenLayout.setComponentAlignment(backLoginScreenLayout, Alignment.BOTTOM_RIGHT);
+		registrationPanel.addComponent(bottomRegistrationScreenLayout);
 
 	}
 
@@ -137,9 +128,9 @@ public class RegistrationScreen extends HorizontalLayout implements
 		
 		if (event.getButton().equals(save)) {
 			if (!validateRegistrationForm()) {
-				Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 			} else if ((!validatePassword())) {
-				Notification.show(Constants.REGISTRATION_PANEL_PASSWORD_ERROR,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("password.confirm.error.msg"),Notification.Type.WARNING_MESSAGE);
 			}
 			Registration registration = registrationForm.getRegistration();
 			authentication = register(registration);
@@ -149,7 +140,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
 				}
 			} else {
-				Notification.show(Constants.REGISTRATION_PANEL_USER_CREATION_ERROR,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("error.create.user.msg"),Notification.Type.WARNING_MESSAGE);
 			}
 			if(logger.isDebugEnabled()){
 				logger.debug(registrationForm.getRegistration().getLastName());
@@ -290,5 +281,40 @@ public class RegistrationScreen extends HorizontalLayout implements
 	public void setAuthenticatedScreen(AuthenticatedScreen authenticatedScreen) {
 		this.authenticatedScreen = authenticatedScreen;
 	}
+
+	public Button getLogIn() {
+		return logIn;
+	}
+
+	public void setLogIn(Button logIn) {
+		this.logIn = logIn;
+	}
+
+	public VerticalLayout getBottomRegistrationScreenLayout() {
+		return bottomRegistrationScreenLayout;
+	}
+
+	public void setBottomRegistrationScreenLayout(
+			VerticalLayout bottomRegistrationScreenLayout) {
+		this.bottomRegistrationScreenLayout = bottomRegistrationScreenLayout;
+	}
+
+	public HorizontalLayout getBackLoginScreenLayout() {
+		return backLoginScreenLayout;
+	}
+
+	public void setBackLoginScreenLayout(HorizontalLayout backLoginScreenLayout) {
+		this.backLoginScreenLayout = backLoginScreenLayout;
+	}
+
+	public Label getAlreadyHaveAccountLabel() {
+		return alreadyHaveAccountLabel;
+	}
+
+	public void setAlreadyHaveAccountLabel(Label alreadyHaveAccountLabel) {
+		this.alreadyHaveAccountLabel = alreadyHaveAccountLabel;
+	}
+	
+	
 
 }

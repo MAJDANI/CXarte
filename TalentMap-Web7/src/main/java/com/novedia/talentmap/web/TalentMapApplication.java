@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.login.LoginScreen;
-import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
@@ -45,7 +44,6 @@ public class TalentMapApplication extends UI {
 			locale = l;
 		}
 		view.setSizeFull();
-		getPage().setTitle(Constants.TITLE);
 		view.addComponent(loginScreen.buildLoginView());
 	    setContent(view);
 	}
