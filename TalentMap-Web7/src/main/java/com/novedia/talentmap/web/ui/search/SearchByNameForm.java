@@ -1,6 +1,10 @@
 package com.novedia.talentmap.web.ui.search;
 
-import com.novedia.talentmap.web.utils.Constants;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -14,6 +18,8 @@ public class SearchByNameForm extends VerticalLayout {
 	 */
 	
 	private TextField nameField;
+	
+	private ResourceBundle resourceBundle;
 	
 	
 	 /**
@@ -29,6 +35,8 @@ public class SearchByNameForm extends VerticalLayout {
      * @return
      */
     public SearchByNameForm buildSearchByNameFormView() {
+    	Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_POP_IN_PROPERTIES , locale);
     	removeAllComponents();
     	buildMain();
     	return this;
@@ -41,7 +49,7 @@ public class SearchByNameForm extends VerticalLayout {
 	}
 
 	private void buildField() {
-		nameField.setCaption(Constants.COLLABORATOR_NAME_LABEL);
+		nameField.setCaption(resourceBundle.getString("name.Field.textfield.caption"));
 		addComponent(nameField);
 		
 	}

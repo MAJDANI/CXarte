@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
@@ -9,6 +11,7 @@ import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
@@ -62,6 +65,8 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	private Label searchResultsLabelNoResult;
 	
+	private ResourceBundle resourceBundle;
+	
 	
 	 /**
      * POJO
@@ -74,7 +79,6 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
      public SearchPopIn(){
     	 super();
     	 setWidth("1100px");
-    	 setCaption("Profile");
     	 setModal(true);
      }
      
@@ -84,6 +88,9 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
       * @return Window
       */
 	public Window buildSearchPopIn(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_POP_IN_PROPERTIES , locale);
+		setCaption(resourceBundle.getString("window.search.popin.title"));
 		removeAllComponents();
 		hLayout.setSpacing(true);
 		hLayout.removeAllComponents();
@@ -121,23 +128,22 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	}
 	
 	private void buildComponents() {
-		
-		searchByCustomer.setCaption(Constants.SEARCH_BY_CUSTOMER_LABEL);
+		searchByCustomer.setCaption(resourceBundle.getString("search.by.customer.caption"));
 		searchByCustomer.addStyleName(Reindeer.BUTTON_LINK);
 		searchByCustomer.removeStyleName("focus");
 		searchByCustomer.addClickListener(this);
 		
-		searchByName.setCaption(Constants.SEARCH_BY_NAME_LABEL);
+		searchByName.setCaption(resourceBundle.getString("search.by.name.caption"));
 		searchByName.addStyleName(Reindeer.BUTTON_LINK);
 		searchByName.addStyleName("focus");
 		searchByName.addClickListener(this);
 		
-		searchBySkill.setCaption(Constants.SEARCH_BY_SKILL_LABEL);
+		searchBySkill.setCaption(resourceBundle.getString("search.by.skill.caption"));
 		searchBySkill.addStyleName(Reindeer.BUTTON_LINK);
 		searchBySkill.removeStyleName("focus");
 		searchBySkill.addClickListener(this);
 		
-		searchResultsLabelNoResult.setValue(Constants.NO_COLLEAGUE_FOUND);
+		searchResultsLabelNoResult.setValue(resourceBundle.getString("search.results.panel.no.result.label"));
 		
 	}
 
@@ -181,36 +187,32 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	@Override
 	public void textChange(TextChangeEvent event) {
-		
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
-		
 		if(event.getComponent().equals(searchByNameForm.getNameField())){
 			String valueField = event.getText();
 			valueField = valueField.trim();
 			searchResults.setRoleId((authentication.getAuthorization().getRoleId()));
-			
 			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
-				
 				int managerId = authentication.getColleagueId();
 				listCollab = collabService.getCmColleaguesByName(valueField, managerId);
-				
 			} else {
-				
 				listCollab = collabService.getAllColleaguesByName(valueField);
-				
 			}
 			
 			if(listCollab.isEmpty()){
 				searchResultsPanelNoResult.setVisible(true);
 				searchResultsPanel.setVisible(false);
-				
 			} else {
 				searchResultsPanel.removeAllComponents();
 				searchResultsPanelNoResult.setVisible(false);
 				searchResultsPanel.setVisible(true);
 				searchResults = searchResults.buildSearchResultsView(listCollab);
+				if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
+					searchResults.setPageLength(searchResults.size());
+				} else{
+					searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
+				}
 				searchResultsPanel.addComponent(searchResults);
-				
 			}
 		}
 	}
@@ -226,15 +228,17 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			if(listCollab.isEmpty()){
 				searchResultsPanelNoResult.setVisible(true);
 				searchResultsPanel.setVisible(false);
-				
 			}else{
 				searchResultsPanel.removeAllComponents();
 				searchResultsPanelNoResult.setVisible(false);
 				searchResultsPanel.setVisible(true);
-//				searchResults.buildSearchResultsView();
-//				searchResults.buildResultsTable(listCollab);
-//				searchResultsPanel.addComponent(searchResults);
-				searchResultsPanel.addComponent(searchResults.buildSearchResultsView(listCollab));
+				searchResults.buildSearchResultsView(listCollab);
+				if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
+					searchResults.setPageLength(searchResults.size());
+				} else{
+					searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
+				}
+				searchResultsPanel.addComponent(searchResults);
 				
 			}
 		}

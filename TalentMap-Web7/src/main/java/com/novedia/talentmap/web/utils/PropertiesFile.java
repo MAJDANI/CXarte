@@ -22,5 +22,11 @@ public class PropertiesFile {
 	
 	public static final String ADD_SKILL_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.skills.AddSkillForm";
 	
+	public static final String IA_VIEW_PROPERTIES = "com.novedia.talentmap.web.properties.ui.ia.IaView";
+	
+	public static final String SEARCH_POP_IN_PROPERTIES = "com.novedia.talentmap.web.properties.ui.search.SearchPopIn";
+	
+	public static final String SEARCH_RESULTS_PROPERTIES = "com.novedia.talentmap.web.properties.ui.search.SearchResults";
+	
 
 }

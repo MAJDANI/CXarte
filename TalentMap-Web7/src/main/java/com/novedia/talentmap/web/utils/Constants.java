@@ -125,13 +125,13 @@ public class Constants {
     * Constant for Search Pop-In
     */
 	
-	public static final String SEARCH_BY_NAME_LABEL = "By name";
+//	public static final String SEARCH_BY_NAME_LABEL = "By name";
 	
-	public static final String SEARCH_BY_CUSTOMER_LABEL = "By customer";
+//	public static final String SEARCH_BY_CUSTOMER_LABEL = "By customer";
 	
-	public static final String SEARCH_BY_SKILL_LABEL = "By skill";
+//	public static final String SEARCH_BY_SKILL_LABEL = "By skill";
 	
-	public static final String NO_COLLEAGUE_FOUND = "No colleague found";
+//	public static final String NO_COLLEAGUE_FOUND = "No colleague found";
 	
 	/**
 	* Constant for Search by skill tree admin
@@ -146,9 +146,9 @@ public class Constants {
     * Constant for Search Forms
     */
 	
-	public static final String COLLABORATOR_NAME_LABEL = "Name of the employee";
+//	public static final String COLLABORATOR_NAME_LABEL = "Name of the employee";
 	
-	public static final String CUSTOMER_NAME_LABEL = "Customer";
+//	public static final String CUSTOMER_NAME_LABEL = "Customer";
 	
 	/**
      * Constant for MissionForm

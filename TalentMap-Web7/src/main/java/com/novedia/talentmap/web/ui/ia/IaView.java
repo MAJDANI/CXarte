@@ -1,15 +1,19 @@
 package com.novedia.talentmap.web.ui.ia;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class IaView extends VerticalLayout implements ClickListener {
@@ -21,6 +25,8 @@ public class IaView extends VerticalLayout implements ClickListener {
 	private Button searchButton;
 	
 	private SearchPopIn searchPopIn;
+	
+	private ResourceBundle resourceBundle;
 	
 	/**
 	 * Default constructor
@@ -35,6 +41,8 @@ public class IaView extends VerticalLayout implements ClickListener {
 	 * @return VerticalLayout
 	 */
 	public VerticalLayout buildIaContent(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.IA_VIEW_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
@@ -50,7 +58,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 		gridLayout.setColumns(2);
 		
 		searchPanel.removeAllComponents();
-		searchButton.setCaption(Constants.SEARCH_LABEL);
+		searchButton.setCaption(resourceBundle.getString("search.button.caption"));
 		searchButton.setId(ComponentsId.SEARCH_BUTTON_ID);
 		searchButton.addStyleName(Reindeer.BUTTON_LINK);
 		searchButton.addClickListener(this);

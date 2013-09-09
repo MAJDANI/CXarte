@@ -1,37 +1,30 @@
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-import com.jensjansson.pagedtable.PagedTable;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class SearchResults extends PagedTable {
+public class SearchResults extends Table {
 
 	private Integer roleId;
 
-	public static final String VISUALIZE_PROFILE_NAME = "Display profile";
-	public static final String VISUALIZE_MISSION_HISTORY_NAME = "Display missions";
-
-	/**
-	 * Vaadin components
-	 */
+	private ResourceBundle resourceBundle;
 	
-	
-
-//	private Button visualizeProfile;
-//
-//	private Button visualizeMissionHistory;
-
 	/**
 	 * Default constructor
 	 */
 	public SearchResults() {
 		super();
-		addStyleName("searchResult");
+		addStyleName("searchResult table");
 	}
 
 	/**
@@ -40,6 +33,8 @@ public class SearchResults extends PagedTable {
 	 * @return
 	 */
 	public SearchResults buildSearchResultsView(List<Colleague> listCollab) {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_RESULTS_PROPERTIES , locale);
 		removeAllItems();
 		mainBuild();
 		buildResultsTable(listCollab);
@@ -52,10 +47,10 @@ public class SearchResults extends PagedTable {
 
 	public void addColumns() {
 
-		addContainerProperty("Name", String.class, null);
-		addContainerProperty("First name", String.class, null);
-		addContainerProperty("Email", String.class, null);
-		addContainerProperty("Actions", HorizontalLayout.class, null);
+		addContainerProperty(resourceBundle.getString("name.table.header.caption"), String.class, null);
+		addContainerProperty(resourceBundle.getString("firstName.table.header.caption"), String.class, null);
+		addContainerProperty(resourceBundle.getString("email.table.header.caption"), String.class, null);
+		addContainerProperty(resourceBundle.getString("actions.table.header.caption"), HorizontalLayout.class, null);
 	}
 
 	public void buildResultsTable(List<Colleague> listCollab) {
@@ -71,14 +66,10 @@ public class SearchResults extends PagedTable {
 
 			HorizontalLayout hLayout = new HorizontalLayout();
 			hLayout.setMargin(true);
-
-//			buildButton();
-//			buildListeners();
-			Button visualizeProfile = new Button(VISUALIZE_PROFILE_NAME);
+			Button visualizeProfile = new Button(resourceBundle.getString("visualizeProfile.button.caption"));
 			visualizeProfile.addStyleName("styleButton");
-			Button visualizeMissionHistory = new Button(VISUALIZE_MISSION_HISTORY_NAME);
+			Button visualizeMissionHistory = new Button(resourceBundle.getString("visualizeMissionHistory.button.caption"));
 			visualizeMissionHistory.addStyleName("styleButton visualizeMissionHistory");
-			
 			// Afficher le profil
 			visualizeProfile.setData(collab.getId());
 			hLayout.addComponent(visualizeProfile);
@@ -88,7 +79,6 @@ public class SearchResults extends PagedTable {
 				 visualizeMissionHistory.setData(collab);
 				 hLayout.addComponent(visualizeMissionHistory);
 			 }
-
 			addItem(new Object[] { collab.getLastName(), collab.getFirstName(),
 					collab.getEmail(), hLayout }, idResultsTable);
 			idResultsTable++;

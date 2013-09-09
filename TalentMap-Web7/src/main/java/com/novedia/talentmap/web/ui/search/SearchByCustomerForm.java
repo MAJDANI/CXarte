@@ -1,8 +1,12 @@
 package com.novedia.talentmap.web.ui.search;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.services.IClientService;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.VerticalLayout;
@@ -22,6 +26,8 @@ public class SearchByCustomerForm extends VerticalLayout {
 	
 	private ComboBox customerField;
 	
+	private ResourceBundle resourceBundle;
+	
 	
 	 /**
      * Constructeur par défaut
@@ -36,6 +42,8 @@ public class SearchByCustomerForm extends VerticalLayout {
      * @return
      */
     public SearchByCustomerForm buildSearchByCustomerFormView() {
+    	Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_POP_IN_PROPERTIES , locale);
     	removeAllComponents();
     	buildMain();
     	return this;
@@ -49,7 +57,7 @@ public class SearchByCustomerForm extends VerticalLayout {
 	}
 
 	private void buildField() {
-		customerField.setCaption(Constants.CUSTOMER_NAME_LABEL);
+		customerField.setCaption(resourceBundle.getString("customer.field.combobox.caption"));
 		customerField.setImmediate(true);
 		addComponent(customerField);
 		
