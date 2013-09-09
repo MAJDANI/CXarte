@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.ui.colleague.skills;
 
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.vaadin.teemu.ratingstars.RatingStars;
 
@@ -16,6 +18,7 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
@@ -68,6 +71,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private HorizontalLayout skillFormButtonLayout;
 	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
@@ -78,6 +83,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	}
 	
 	public VerticalLayout buildSkillColleagueContent(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SKILL_COLLEAGUE_CONTENT_PROPERTIES , locale);
 		removeAllComponents();
 		skillContentPanel.addStyleName("contentPanel");	
 		initToolTable();
@@ -102,8 +109,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void initConceptTable(){
 		conceptTable.addStyleName("table");
-		conceptTable.addContainerProperty("Concept Name", Component.class, null);
-		conceptTable.addContainerProperty("Level", Component.class, null);
+		conceptTable.addContainerProperty(resourceBundle.getString("concept.name.caption"), Component.class, null);
+		conceptTable.addContainerProperty(resourceBundle.getString("concept.level.caption"), Component.class, null);
 	}
 	
 	/**
@@ -114,14 +121,14 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.setSelectable(true);
 		toolTable.setNullSelectionAllowed(true);
 		toolTable.setImmediate(true);
-		toolTable.addContainerProperty("Tool Name", String.class, null);
-		toolTable.addContainerProperty("Note", Integer.class, null);
+		toolTable.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
+		toolTable.addContainerProperty(resourceBundle.getString("tool.level"), Integer.class, null);
 	}
 	
 	private void buildAddSkillPanel(){
 		addSkillPanel.removeAllComponents();
 		addSkillPanel.addStyleName("contentPanel");
-		addSkillButton.setCaption("Add skill");
+		addSkillButton.setCaption(resourceBundle.getString("add.skill.button.caption"));
 		addSkillButton.addClickListener(this);
 		addSkillButton.addStyleName("styleButton addMission");
 		addSkillButton.setVisible(true);
@@ -130,9 +137,9 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		skillFormButtonLayout.removeAllComponents();
 		skillFormButtonLayout.setSpacing(true);
 		skillFormButtonLayout.addStyleName("containerButton");
-		saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
+		saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
-		cancelButton.setCaption(Constants.CANCEL_BUTTON_LABEL);
+		cancelButton.setCaption(resourceBundle.getString("cancel.button.caption"));
 		cancelButton.addClickListener(this);
 		skillFormButtonLayout.addComponent(saveButton);
 		skillFormButtonLayout.addComponent(cancelButton);
@@ -159,7 +166,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void buildCategoryView(){
 		skillContentPanel.removeAllComponents();
-		skillContentPanel.addComponent(new Label("List of Skill : Categories"));
+		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.categories.label")));
 		currentView = Constants.CATEGORY_VIEW;
 		if(categoryMapDto != null&& !categoryMapDto.getMapCategory().isEmpty()){
 			for (Map.Entry<Category, ConceptMapDTO> categoryMap : categoryMapDto.getMapCategory().entrySet()) {
@@ -179,7 +186,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void buildConceptView(Integer categoryId){
 		skillContentPanel.removeAllComponents();
-		skillContentPanel.addComponent(new Label("List of Skill : Concepts"));
+		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.concept.label")));
 		currentView = Constants.CONCEPT_VIEW;
 		buildFilAriane();
 		skillContentPanel.addComponent(filArianeLayout);
@@ -214,7 +221,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	private void buildToolView(Integer conceptId){
 		skillContentPanel.removeAllComponents();
 		currentView = Constants.TOOL_VIEW;
-		skillContentPanel.addComponent(new Label("List of Skill : Tools"));
+		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.tools.label")));
 		buildFilAriane();
 		skillContentPanel.addComponent(filArianeLayout);
 		Concept currentConcept = Concept.builder().id(conceptId).build();
@@ -232,7 +239,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
-		editSkillButton.setCaption(Constants.EDIT_BUTTON_LABEL);
+		editSkillButton.setCaption(resourceBundle.getString("edit.skill.button.caption"));
 		editSkillButton.addStyleName("styleButton");
 		editSkillButton.addClickListener(this);
 		editSkillButton.setEnabled(false);
@@ -246,7 +253,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	private void buildFilAriane(){
 		filArianeLayout.removeAllComponents();
 		filArianeLayout.setSpacing(true);
-		Button homeButton = new Button(Constants.ALL_SKILL_LABEL);
+		Button homeButton = new Button(resourceBundle.getString("home.button.caption"));
 		homeButton.addStyleName(Reindeer.BUTTON_LINK);
 		homeButton.addClickListener(this);
 		homeButton.setData(Constants.CATEGORY_VIEW);
@@ -311,7 +318,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				skillService.saveSkill(currentSkill);
 				buildSkillColleagueContent();
 			} else {
-				Notification.show("All fields are required", Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("error.missing.fields.msg"), Type.WARNING_MESSAGE);
 			}
 		} else if(button.equals(editSkillButton)){
 			Skill currentSkill = (Skill) toolTable.getValue();

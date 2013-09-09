@@ -10,7 +10,7 @@ public class Constants {
 	
 	public static final String FIL_ARIANE_SEPARATOR_LABEL = " > ";
 	
-	public static final String ALL_SKILL_LABEL = " All Categories ";
+//	public static final String ALL_SKILL_LABEL = " All Categories ";
 	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
@@ -22,7 +22,7 @@ public class Constants {
 	
 	public static final String DELETE_BUTTON_LABEL = "Delete";
 	
-	public static final String EDIT_BUTTON_LABEL = "Edit";
+//	public static final String EDIT_BUTTON_LABEL = "Edit";
 	
 	public static final String WINDOW_CONFIRM_DELETE_TITLE = "Confirm Delete";
 	
@@ -108,19 +108,6 @@ public class Constants {
 	
 	public static final String TOOL_CAPTION = "Tool";
 	
-	
-	
-	/**
-     * Constant for Profile Pop-In
-     */
-	
-	public static final String PROFILE_POP_IN_TITLE = "Profile";
-	
-	public static final String PERSONAL_DATA_LABEL = "Administrative data";
-	
-	public static final String SKILL_BUTTON_LABEL = "Skills";
-	
-	public static final String MISSION_LABEL = "Missions";
 	
 	public static final String PROFILE_VIEW = "profileView";
 	

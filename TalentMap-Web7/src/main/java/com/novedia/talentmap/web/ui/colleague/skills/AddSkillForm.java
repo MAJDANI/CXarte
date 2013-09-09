@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.ui.colleague.skills;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.vaadin.teemu.ratingstars.RatingStars;
 
@@ -8,6 +10,8 @@ import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -19,7 +23,7 @@ import com.vaadin.ui.Label;
 @SuppressWarnings("serial")
 public class AddSkillForm extends HorizontalLayout implements ValueChangeListener{
 	
-	public static final String[] OPTIONS = new String[] { "Beginner", "middle","professional", "Master", "Expert" };
+	public String[] OPTIONS ;
 	
 	
 	private BeanFieldGroup<Skill> binder;
@@ -50,6 +54,8 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
     
     private HorizontalLayout categoryAndConceptLayout ;
     
+    private ResourceBundle resourceBundle;
+    
     /**
      * Default constructor
      */
@@ -64,6 +70,10 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
      * @return AddSkillForm
      */
     public void buildAddSkillForm(Skill skill) {
+    	Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.ADD_SKILL_FORM_PROPERTIES , locale);
+		OPTIONS = new String[] { resourceBundle.getString("beginner"), resourceBundle.getString("middle"),resourceBundle.getString("professional"),
+				resourceBundle.getString("master"), resourceBundle.getString("expert") };
     	removeAllComponents();
     	setImmediate(true);
 		buildForm(skill);
@@ -72,19 +82,19 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
     
     private void buildForm(Skill skill){
     	
-    	categoryLabel.setCaption("Category:");
-    	conceptLabel.setCaption("Concept:");
+    	categoryLabel.setCaption(resourceBundle.getString("category.label"));
+    	conceptLabel.setCaption(resourceBundle.getString("concept.label"));
     	categoryAndConceptLayout.removeAllComponents();
     	categoryAndConceptLayout.setSpacing(true);
     	categoryAndConceptLayout.addComponent(categoryLabel);
     	categoryAndConceptLayout.addComponent(conceptLabel);
     	
-    	toolSelect.setCaption("Tool:");
+    	toolSelect.setCaption(resourceBundle.getString("tool.select.caption"));
 		toolSelect.setNullSelectionAllowed(false);
 		toolSelect.setImmediate(true);
 		toolSelect.addValueChangeListener(this);
 		
-		stars.setCaption("Tool Score: ");
+		stars.setCaption(resourceBundle.getString("stars.caption"));
 		stars.setImmediate(true);
 		stars.setAnimated(true);
 		stars.setMaxValue(5);
@@ -96,12 +106,12 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
 			stars.setValue(skill.getScore().doubleValue());
 		}
 		
-		frequencyUseSelect.setCaption("Used Frequency:");
+		frequencyUseSelect.setCaption(resourceBundle.getString("frequency.use.select.caption"));
 		frequencyUseSelect.setNullSelectionAllowed(false);
 		frequencyUseSelect.setImmediate(true);
 	
 		// We build the No Using Time Select
-		noUsingTimeSelect.setCaption("Not used time:");
+		noUsingTimeSelect.setCaption(resourceBundle.getString("no.using.time.select.caption"));
 		noUsingTimeSelect.setNullSelectionAllowed(false);
 		noUsingTimeSelect.setImmediate(true);
 		fillSelect();
@@ -152,12 +162,12 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
 		// We fill the Frequency Use
 		for (FrequencyUse fu : FrequencyUse.values()) {
 		    frequencyUseSelect.addItem(fu.getId());
-		    frequencyUseSelect.setItemCaption(fu.getId(), fu.getValue());
+		    frequencyUseSelect.setItemCaption(fu.getId(), resourceBundle.getString(fu.getValue()));
 		}
 		// We fill the No Using Time
 		for (TimeUse tu : TimeUse.values()) {
 			noUsingTimeSelect.addItem(tu.getId());
-			noUsingTimeSelect.setItemCaption(tu.getId(),tu.getValue());
+			noUsingTimeSelect.setItemCaption(tu.getId(),resourceBundle.getString(tu.getValue()));
 		}
     }
 

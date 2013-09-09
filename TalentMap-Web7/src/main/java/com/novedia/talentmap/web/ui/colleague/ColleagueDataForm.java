@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.ui.colleague;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.BusinessEngineer;
@@ -13,6 +15,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsClass;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
@@ -73,6 +76,9 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	@PropertyId(ComponentsId.MANAGER_ID)
 	private ComboBox managerField;
 
+	private ResourceBundle resourceBundle;
+	
+	
 	/**
 	 * Default constructor
 	 */
@@ -81,7 +87,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	}
 
 	public ColleagueDataForm buildColleagueDataFormView() {
-
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.COLLEAGUE_DATA_FORM_PROPERTIES , locale);
 		removeAllComponents();
 		buildMain();
 		return this;
@@ -105,41 +112,36 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 
 	private void buildColleagueDataForm() {
 		removeAllComponents();
-		nameField.setCaption("name");
+		nameField.setCaption(resourceBundle.getString("name.field.caption"));
 		nameField.setRequired(true);
-		nameField.setRequiredError("Give your Name");
-		nameField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.LAST_NAME_ID));
+		nameField.setRequiredError(resourceBundle.getString("name.field.error.caption"));
+		nameField.addValidator(new BeanValidator(Colleague.class,ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
 		nameField.addBlurListener(this);
-		nameField
-				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		nameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		nameField.setId(ComponentsId.LAST_NAME_ID);
 		nameField.setWidth("190px");
 		colleagueFormLayout.addComponent(nameField);
 
-		firstNameField.setCaption("First name");
+		firstNameField.setCaption(resourceBundle.getString("firstName.field.caption"));
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError("Give your first name");
-		firstNameField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.FIRST_NAME_ID));
+		firstNameField.setRequiredError(resourceBundle.getString("firstName.field.error.caption"));
+		firstNameField.addValidator(new BeanValidator(Colleague.class,ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
 		firstNameField.addBlurListener(this);
-		firstNameField
-				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		firstNameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
 		firstNameField.setWidth("190px");
 		firstNameField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(firstNameField);
 
-		jobField.setCaption("Job title");
+		jobField.setCaption(resourceBundle.getString("job.field.caption"));
 		buildJobList();
 		jobField.setRequired(true);
-		jobField.setRequiredError("Give your job title");
-		jobField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.PROFILE_ID));
+		jobField.setRequiredError(resourceBundle.getString("job.field.error.caption"));
+		jobField.addValidator(new BeanValidator(Colleague.class,ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
 		jobField.addBlurListener(this);
@@ -148,37 +150,33 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		jobField.addStyleName("spacerInfo");
 		colleagueFormLayout.addComponent(jobField);
 
-		emailField.setCaption("email");
+		emailField.setCaption(resourceBundle.getString("email.field.caption"));
 		emailField.setRequired(true);
-		emailField.setRequiredError("Give your email");
-		emailField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.EMAIL_ID));
+		emailField.setRequiredError(resourceBundle.getString("email.field.error.caption"));
+		emailField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
 		emailField.addBlurListener(this);
-		emailField
-				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		emailField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		emailField.setId(ComponentsId.EMAIL_ID);
 		emailField.setWidth("190px");
 		emailField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(emailField);
 
-		phoneField.setCaption("Phone");
-		phoneField.setInputPrompt("Type your phone number");
+		phoneField.setCaption(resourceBundle.getString("phone.field.caption"));
+		phoneField.setInputPrompt(resourceBundle.getString("phone.field.default"));
 		phoneField.setNullRepresentation("");
 		phoneField.addBlurListener(this);
-		phoneField
-				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		phoneField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		phoneField.setId(ComponentsId.PHONE_ID);
 		phoneField.setWidth("190px");
 		phoneField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(phoneField);
 
-		dateField.setCaption("Date of hire");
+		dateField.setCaption(resourceBundle.getString("date.field.caption"));
 		dateField.setRequired(true);
-		dateField.setRequiredError("Give your date of employement");
-		dateField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.EMPLOYMENT_DATE_ID));
+		dateField.setRequiredError(resourceBundle.getString("date.field.error.caption"));
+		dateField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.addBlurListener(this);
@@ -186,45 +184,38 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		dateField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(dateField);
 
-		experienceField.setCaption("Years of experience");
+		experienceField.setCaption(resourceBundle.getString("experience.field.caption"));
 		experienceField.setRequired(true);
-		experienceField.setRequiredError("Give your years of experience");
-		experienceField.addValidator(new BeanValidator(Colleague.class,
-				ComponentsId.EXPERIENCE_ID));
+		experienceField.setRequiredError(resourceBundle.getString("experience.field.error.caption"));
+		experienceField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
 		experienceField.addBlurListener(this);
-		experienceField
-				.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
+		experienceField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		experienceField.setId(ComponentsId.EXPERIENCE_ID);
 		experienceField.setWidth("50px");
 		experienceField.addStyleName("spacerTop");
 		colleagueFormLayout.addComponent(experienceField);
 
-		businessEngineerField.setCaption("Business engineer");
+		businessEngineerField.setCaption(resourceBundle.getString("businessEngineer.field.caption"));
 		buildEngineerList();
 		businessEngineerField.addBlurListener(this);
-		businessEngineerField
-				.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
+		businessEngineerField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
 		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
 		businessEngineerField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(businessEngineerField);
 
-		managerField.setCaption("Manager");
+		managerField.setCaption(resourceBundle.getString("manager.field.caption"));
 		buildManagerList();
 		managerField.addBlurListener(this);
-		managerField
-				.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
+		managerField.addStyleName(ComponentsClass.SELECT_COLLEAGUE_DATA_FORM_CLASS);
 		managerField.setId(ComponentsId.MANAGER_ID);
 		managerField.addStyleName("spacerInfo spacerTop");
 		colleagueFormLayout.addComponent(managerField);
-		Authentication authentication = TalentMapApplication.getCurrent()
-				.getAuthentication();
-		colleagueTmp = colleagueService.getColleague(authentication
-				.getColleagueId());
-		colleague = colleagueService.getColleague(authentication
-				.getColleagueId());
+		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+		colleagueTmp = colleagueService.getColleague(authentication.getColleagueId());
+		colleague = colleagueService.getColleague(authentication.getColleagueId());
 		binder = new BeanFieldGroup<Colleague>(Colleague.class);
 		binder.setItemDataSource(colleagueTmp);
 		binder.setBuffered(false);
@@ -236,9 +227,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	@Override
 	public void blur(BlurEvent event) {
 		if (!validateColleagueDataForm()) {
-			Notification.show(
-					Constants.PANEL_MISSING_FIELDS,
-					Notification.Type.WARNING_MESSAGE);
+			Notification.show(resourceBundle.getString("error.fields.missing.msg"),Notification.Type.WARNING_MESSAGE);
 		} else {
 			colleagueTmp.setTitle(colleague.getTitle());
 			colleagueTmp.setId(colleague.getId());

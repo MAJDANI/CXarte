@@ -74,7 +74,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
      public SearchPopIn(){
     	 super();
     	 setWidth("1100px");
-    	 setCaption(Constants.PROFILE_POP_IN_TITLE);
+    	 setCaption("Profile");
     	 setModal(true);
      }
      

@@ -14,6 +14,13 @@ public class PropertiesFile {
 	
 	public static final String REGISTRATION_SCREEN_PROPERTIES = "com.novedia.talentmap.web.properties.resgistration.RegistrationScreen";
 	
+	public static final String PROFILE_POP_IN_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.ProfilePopIn";
+	
+	public static final String COLLEAGUE_DATA_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.ColleagueDataForm";
+	
+	public static final String SKILL_COLLEAGUE_CONTENT_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.skills.SkillColleagueContent";
+	
+	public static final String ADD_SKILL_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.skills.AddSkillForm";
 	
 
 }

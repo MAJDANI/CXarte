@@ -10,8 +10,8 @@ package com.novedia.talentmap.web.ui.colleague.skills;
  * @created 21 mai 2012
  */
 public enum TimeUse {
-    LESS_1_YEAR(1, "Less than 1 year"), LESS_2_YEAR(2, "Between 1 and 2 years"), LESS_3_YEAR(
-	    3, "Between 2 and 3 years "), LESS_4_YEAR(4, "More than 3 years");
+    LESS_1_YEAR(1, "time.use.less.1.year"), LESS_2_YEAR(2, "time.use.less.2.year"), LESS_3_YEAR(
+	    3, "time.use.less.3.year"), LESS_4_YEAR(4, "time.use.less.4.year");
 
     private int id;
     private String value;
