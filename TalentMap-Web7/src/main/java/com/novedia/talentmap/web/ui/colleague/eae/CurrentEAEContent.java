@@ -7,6 +7,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -93,8 +94,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 */
 	private CurrentEAEDetailedContent currentEAEDetailedContent;
 
-	private final String PANEL_LEFT_WIDTH = "150px";
-	private final String PANEL_RIGHT_WIDTH = "600px";
+	private final String PANEL_LEFT_WIDTH = "120px";
+	private final String PANEL_RIGHT_WIDTH = "680px";
 
 	private Integer currentEAEId = null;
 
@@ -161,11 +162,6 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		hLayoutCurrentEAE.removeAllComponents();
 		buildButtons(mode);
 		buildMenu(mode);
-//		if(mode == EAEConsultationMode.CLOSED) {
-//			panelRightCurrentEAE.removeAllComponents();
-//		} else {
-//			buildPanelRightContentEAEExists();
-//		}
 		buildPanelRightContentEAEExists();
 		hLayoutCurrentEAE.addComponent(panelRightCurrentEAE);
 		hLayoutCurrentEAE.setExpandRatio(panelRightCurrentEAE, 1.0f);
@@ -184,7 +180,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		resultsButton.removeStyleName("focus");
 		resultsButton.addClickListener(this);
 
-		if (mode == EAEConsultationMode.CLOSED) {
+		if (mode == EAEConsultationMode.CLOSED || mode == EAEConsultationMode.VALIDATED_MANAGER) {
 			objectivesButton.setCaption(Constants.OBJECTIVES_EAE_BUTTON_LABEL);
 			objectivesButton.addStyleName(Reindeer.BUTTON_LINK);
 			objectivesButton.removeStyleName("focus");
@@ -231,6 +227,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
 				.buildViewEAEGenerality(this.currentEAEId, this.currentMode));
 		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
+		panelRightCurrentEAE.setSizeFull();
 	}
 
 	@Override
@@ -256,7 +253,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 				synthesisButton.removeStyleName("focus");
 			}
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
-					.buildViewEAEResults(currentEAEId));
+					.buildViewEAEResults(currentEAEId, this.currentMode));
 
 		} else if (event.getButton().equals(objectivesButton)) {
 			generalityButton.removeStyleName("focus");

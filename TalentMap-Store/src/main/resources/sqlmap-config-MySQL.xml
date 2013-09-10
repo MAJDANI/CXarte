@@ -19,4 +19,5 @@
 	<sqlMap resource="maps/MySQL/sqlmap-mission_tool-MySQL.xml" />
 	<sqlMap resource="maps/MySQL/sqlmap-user_notification-MySQL.xml" />
 	<sqlMap resource="maps/MySQL/sqlmap-eae-MySQL.xml" />
+	<sqlMap resource="maps/MySQL/sqlmap-objective-MySQL.xml" />
 </sqlMapConfig>

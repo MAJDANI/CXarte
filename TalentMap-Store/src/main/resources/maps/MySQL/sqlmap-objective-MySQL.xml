@@ -12,15 +12,16 @@
 		<result property="id" column="OBJECTIVE_ID" />
 		<result property="colleague.id" column="COLLEAGUE_ID" />
 		<result property="manager.id" column="MANAGER_ID" />
-		<result property="EAE.id" column="EAE_ID" />
+		<result property="eae.id" column="EAE_ID" />
 		<result property="title" column="TITLE" />
 		<result property="goal" column="GOAL" />
 		<result property="targetDate" column="TARGET_DATE" />
 		<result property="indicators" column="INDICATORS" />
 		<result property="means" column="MEANS" />
-		<result property="colleagueScore.id" column="COL_OBJ_SCORE_ID" />
-		<result property="managerScore.id" column="MAN_OBJ_SCORE_ID" />
+		<result property="colleaguesScore.id" column="COL_OBJ_SCORE_ID" />
+		<result property="managersScore.id" column="MAN_OBJ_SCORE_ID" />
 		<result property="motivesOrRestraints" column="MOTIVES_OR_RESTRAINTS" />
+		<result property="comments" column="COMMENTS" />
 	</resultMap>
 
 	<select id="getObjective" resultMap="objectiveResult"
@@ -32,7 +33,7 @@
 		SELECT DISTINCT * FROM OBJECTIVE
 	</select>
 
-	<insert id="add" parameterClass="Category">
+	<insert id="add" parameterClass="Objective">
 		INSERT INTO OBJECTIVE (
 			OBJECTIVE_ID,
 			COLLEAGUE_ID,
@@ -45,20 +46,22 @@
 			MEANS,
 			COL_OBJ_SCORE_ID,
 			MAN_OBJ_SCORE_ID,
-			MOTIVES_OR_RESTRAINTS
+			MOTIVES_OR_RESTRAINTS,
+			COMMENTS
 		)values (
 			#id#,
-			#colleague.id#
+			#colleague.id#,
 			#manager.id#,
-			#EAE.id#,
+			#eae.id#,
 			#title#,
 			#goal#,
 			#targetDate#,
 			#indicators#,
 			#means#,
-			#colleagueScore.id#,
-			#managerScore.id#,
-			#motivesOrRestraints#
+			#colleaguesScore.id#,
+			#managersScore.id#,
+			#motivesOrRestraints#,
+			#comments#
 		)
 		<selectKey keyProperty="id" resultClass="Integer">
 			SELECT
@@ -68,7 +71,7 @@
 
 	<select id="checkObject" resultMap="objectiveResult"
 		parameterClass="objective">
-<!-- 		SELECT * FROM OBJECTIVE WHERE upper(CATEGORY_NAME) = -->
+<!-- 		SELECT * FROM OBJECTIVE WHERE upper(OBJECTIVE_NAME) = -->
 <!-- 		upper(#name#) -->
 	</select>
 
@@ -76,15 +79,16 @@
 		UPDATE OBJECTIVE SET
 			COLLEAGUE_ID = #colleague.id# ,
 			MANAGER_ID = #manager.id# ,
-			EAE_ID = #EAE.id# ,
+			EAE_ID = #eae.id# ,
 			TITLE = #title# ,
 			GOAL = #goal# ,
 			TARGET_DATE = #targetDate# ,
 			INDICATORS = #indicators# ,
 			MEANS = #means# ,
-			COL_OBJ_SCORE_ID = #colleagueScore.id# ,
-			MAN_OBJ_SCORE_ID = #managerScore.id# ,
-			MOTIVES_OR_RESTRAINTS = #motivesOrRestraints#
+			COL_OBJ_SCORE_ID = #colleaguesScore.id# ,
+			MAN_OBJ_SCORE_ID = #managersScore.id# ,
+			MOTIVES_OR_RESTRAINTS = #motivesOrRestraints#,
+			COMMENTS = #comments#
 		WHERE OBJECTIVE_ID = #id#
 	</update>
 
@@ -92,5 +96,10 @@
 		DELETE FROM OBJECTIVE WHERE
 		OBJECTIVE_ID = #id#
 	</delete>
+
+	<select id="getObjectivesByEAEId" resultMap="objectiveResult"
+		parameterClass="Integer">
+		SELECT * FROM OBJECTIVE WHERE EAE_ID = #id#
+	</select>
 
 </sqlMap>

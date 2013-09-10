@@ -1,8 +1,13 @@
 package com.novedia.talentmap.web.ui.colleague;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent;
 import com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -73,27 +78,36 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	/**
 	 * Taille en largeur du panel de gauche
 	 */
-	private final String PANEL_LEFT_WIDTH = "200px";
+	private final String PANEL_LEFT_WIDTH = "180px";
 	/**
 	 * Taille en largeur du panel de droite
 	 */
-	private final String PANEL_RIGHT_WIDTH = "800px";
+	private final String PANEL_RIGHT_WIDTH = "850px";
+
+	private ResourceBundle resourceBundle;
 
 	/**
 	 * Default constructor
 	 */
 	public PersonalEAEPopIn() {
 		super();
-		setCaption(Constants.PERSONAL_EAE_POP_IN_TITLE);
 		setModal(true);
 	}
-
+	
+	private void initResourceBundle() {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.PERSONAL_EAE_POP_IN_PROPERTIES, locale);
+	}
+	
 	/**
 	 * Build PersonalEAEPopIn View
 	 * 
 	 * @return Window
 	 */
 	public Window buildPersonalEAEPopIn() {
+		initResourceBundle();
+		setCaption(resourceBundle.getString("personal.eae.pop.in.title"));
+
 		removeAllComponents();
 		hLayoutPersoEAE.setSpacing(true);
 		hLayoutPersoEAE.removeAllComponents();
@@ -107,21 +121,20 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	}
 
 	private void buildPanelRightContent() {
-		panelRightPersoEAE.removeAllComponents(); // TODO : Vérifier si c'est utile
 		panelRightPersoEAE.addStyleName("panelRight");
 		panelRightPersoEAE.setContent(currentEAEContent.buildViewCurrentEAEContent());
-		panelRightPersoEAE.setCaption("Current EAE Content");
+		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 		panelRightPersoEAE.setWidth(PANEL_RIGHT_WIDTH);
 	}
 
 	private void buildButtons() {
 
-		currentEAEButton.setCaption(Constants.CURRENT_EAE_BUTTON_LABEL);
+		currentEAEButton.setCaption(resourceBundle.getString("current.eae.button.label"));
 		currentEAEButton.addStyleName(Reindeer.BUTTON_LINK);
 		currentEAEButton.addStyleName("focus");
 		currentEAEButton.addClickListener(this);
 
-		historyEAEButton.setCaption(Constants.HISTORY_EAE_BUTTON_LABEL);
+		historyEAEButton.setCaption(resourceBundle.getString("history.eae.button.label"));
 		historyEAEButton.addStyleName(Reindeer.BUTTON_LINK);
 		historyEAEButton.addClickListener(this);
 
@@ -146,17 +159,17 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 			historyEAEButton.removeStyleName("focus");
 			panelRightPersoEAE.setContent(currentEAEContent
 					.buildViewCurrentEAEContent());
-			panelRightPersoEAE.setCaption("Current EAE Content");
+			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 
 		} else if (event.getButton().equals(historyEAEButton)) {
 			currentEAEButton.removeStyleName("focus");
 			historyEAEButton.addStyleName("focus");
 			panelRightPersoEAE.setContent(historyEAEContent
 					.buildViewHistoryEAEContent());
-			panelRightPersoEAE.setCaption("History EAE Content");
+			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.history.title"));
 		}
 	}
-
+	
 
 	/**
 	 * @return the currentEAEButton

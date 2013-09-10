@@ -104,4 +104,14 @@ public class ComponentsId {
 	
 	public static final String EAE_MEANS_TO_PROGRESS_ID = "meansToProgress";
 	
+	public static final String OBJECTIVE_TITLE_ID = "title";
+
+	public static final String OBJECTIVE_GOAL_ID = "goal";
+
+	public static final String OBJECTIVE_TARGET_DATE_ID = "targetDate";
+
+	public static final String OBJECTIVE_INDICATORS_ID = "indicators";
+
+	public static final String OBJECTIVE_MEANS_ID = "means";
+
 }

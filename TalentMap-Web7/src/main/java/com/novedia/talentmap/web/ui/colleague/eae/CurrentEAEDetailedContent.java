@@ -20,6 +20,7 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 		super();
 		setSpacing(true);
 		addStyleName("TODO");
+		setWidth("630px");
 	}
 
 	/**
@@ -39,10 +40,10 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 	 * 
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout buildViewEAEResults(Integer currentEAEId) {
+	public VerticalLayout buildViewEAEResults(Integer currentEAEId, EAEConsultationMode currentMode) {
 		removeAllComponents();
 		eaeResultsForm.addStyleName("TODO");
-		addComponent(eaeResultsForm.buildEAEResultsFormView(currentEAEId));
+		addComponent(eaeResultsForm.buildEAEResultsFormView(currentEAEId, currentMode));
 		return this;
 	}
 

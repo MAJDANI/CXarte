@@ -199,12 +199,6 @@ public class Constants {
      * Constant for Personel EAE Pop-In
      */
 	
-	public static final String PERSONAL_EAE_POP_IN_TITLE = "Personal EAE";
-	
-	public static final String CURRENT_EAE_BUTTON_LABEL = "Current EAE";
-
-	public static final String HISTORY_EAE_BUTTON_LABEL = "EAE History";
-
 	public static final String GENERALITY_EAE_BUTTON_LABEL = "Generality";
 	
 	public static final String RESULTS_EAE_BUTTON_LABEL = "Results";

@@ -3,6 +3,10 @@
  */
 package com.novedia.talentmap.model.dto;
 
+import java.util.List;
+
+import com.novedia.talentmap.model.entity.Objective;
+
 
 /**
  * @author v.guillemain
@@ -19,6 +23,10 @@ public class EAEResultsDTO {
 	 */
 	private String yearSynthesis;
 	/**
+	 * The list of objectives defines for this EAE
+	 */
+	private List<Objective> listOjectives;
+	/**
 	 * The colleague's strengths, given by the colleague
 	 */
 	private String collabStrenghts;
@@ -31,7 +39,10 @@ public class EAEResultsDTO {
 	 * by the manager
 	 */
 	private String meansToProgress;
-
+	/**
+	 * The comments that will be given by the colleague about this objective
+	 */
+	private String comments;
 	/**
 	 * @return the id
 	 */
@@ -60,6 +71,21 @@ public class EAEResultsDTO {
 	 */
 	public void setYearSynthesis(String yearSynthesis) {
 		this.yearSynthesis = yearSynthesis;
+	}
+
+	/**
+	 * @return the listOjectives
+	 */
+	public List<Objective> getListOjectives() {
+		return listOjectives;
+	}
+
+	/**
+	 * @param listOjectives
+	 *            the listOjectives to set
+	 */
+	public void setListOjectives(List<Objective> listOjectives) {
+		this.listOjectives = listOjectives;
 	}
 
 	/**
@@ -112,9 +138,21 @@ public class EAEResultsDTO {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ");
 		strBld.append("yearSynthesis=").append(getYearSynthesis()).append(", ");
+		strBld.append("[");
+		if(listOjectives != null) {
+			int i = 0;
+			for(Objective o : listOjectives) {
+				i++;
+				strBld.append("- Objective" + i + "=").append(o.getTitle()).append(", ");
+			}
+		} else {
+			strBld.append("listOjectives est null");
+		}
+		strBld.append("]");
 		strBld.append("collabStrenghts=").append(getCollabStrenghts()).append(", ");
 		strBld.append("collabWeaknesses=").append(getCollabWeaknesses()).append(", ");
-		strBld.append("meansToProgress=").append(getMeansToProgress()).append("]");
+		strBld.append("meansToProgress=").append(getMeansToProgress()).append(", ");
+		strBld.append("comments=").append(getMeansToProgress()).append("]");
 
 		return strBld.toString();
 	}

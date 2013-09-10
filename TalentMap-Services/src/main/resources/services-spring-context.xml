@@ -85,5 +85,8 @@
 		<property name="eaeDao" ref="eaeDao" />
 	</bean>
 
+	<bean id="objectiveService" class="com.novedia.talentmap.services.impl.ObjectiveService">
+		<property name="objectiveDao" ref="objectiveDao" />
+	</bean>
 
 </beans>
