@@ -42,7 +42,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 	 */
 	public VerticalLayout buildIaContent(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.IA_VIEW_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);

@@ -43,7 +43,7 @@ public class SearchByCustomerForm extends VerticalLayout {
      */
     public SearchByCustomerForm buildSearchByCustomerFormView() {
     	Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_POP_IN_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
     	removeAllComponents();
     	buildMain();
     	return this;

@@ -88,7 +88,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 
 	public ColleagueDataForm buildColleagueDataFormView() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.COLLEAGUE_DATA_FORM_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildMain();
 		return this;

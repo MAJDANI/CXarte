@@ -66,7 +66,7 @@ public class ProfilePopIn extends Window implements ClickListener{
       */
 	public Window buildProfilePopIn(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.PROFILE_POP_IN_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		setCaption(resourceBundle.getString("window.profile.title"));
 //		hLayout.setSpacing(true);

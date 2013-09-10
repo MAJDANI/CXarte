@@ -57,7 +57,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	 */
 	public VerticalLayout builColleagueContent(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.COLLEAGUE_VIEW_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);

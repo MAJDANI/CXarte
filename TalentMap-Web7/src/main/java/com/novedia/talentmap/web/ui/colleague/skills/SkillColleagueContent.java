@@ -84,7 +84,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	public VerticalLayout buildSkillColleagueContent(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SKILL_COLLEAGUE_CONTENT_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		skillContentPanel.addStyleName("contentPanel");	
 		initToolTable();
@@ -239,7 +239,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
-		editSkillButton.setCaption(resourceBundle.getString("edit.skill.button.caption"));
+		editSkillButton.setCaption(resourceBundle.getString("edit.button.caption"));
 		editSkillButton.addStyleName("styleButton");
 		editSkillButton.addClickListener(this);
 		editSkillButton.setEnabled(false);

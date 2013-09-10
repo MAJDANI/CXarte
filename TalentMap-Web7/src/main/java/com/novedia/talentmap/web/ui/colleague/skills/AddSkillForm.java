@@ -71,7 +71,7 @@ public class AddSkillForm extends HorizontalLayout implements ValueChangeListene
      */
     public void buildAddSkillForm(Skill skill) {
     	Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.ADD_SKILL_FORM_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		OPTIONS = new String[] { resourceBundle.getString("beginner"), resourceBundle.getString("middle"),resourceBundle.getString("professional"),
 				resourceBundle.getString("master"), resourceBundle.getString("expert") };
     	removeAllComponents();

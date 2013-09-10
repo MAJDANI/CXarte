@@ -141,7 +141,7 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 		containerButton.removeAllComponents();
 		containerButton.setSpacing(true);
 		containerButton.addStyleName("containerButton");
-		deleteColleagueButton.setCaption(Constants.DELETE_BUTTON_LABEL);
+		deleteColleagueButton.setCaption("Delete");
 		deleteColleagueButton.addClickListener(this);
 		deleteColleagueButton.addStyleName("delBtn");
 		containerButton.addComponent(deleteColleagueButton);
@@ -169,17 +169,17 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	
 	private void buildConfirmWindow(){
 		windowConfirm.removeAllComponents();
-		windowConfirm.setCaption(Constants.WINDOW_CONFIRM_DELETE_TITLE);
+		windowConfirm.setCaption("Confirm Delete");
 		windowConfirm.center();
 		windowConfirm.setModal(true);
 		windowConfirm.setReadOnly(true);
 		confirmDeleteLabel.setCaption(Constants.DELETE_COLLEAGUE_MSG);
 		confirmButtonContainer.setSpacing(true);
 		confirmButtonContainer.addStyleName("containerButton");
-		yesButton.setCaption(Constants.CONFIRM_DELETE_MISSION_LABEL);
+		yesButton.setCaption("Yes");
 		yesButton.addStyleName("styleButton");
 		yesButton.addClickListener(this);
-		noButton.setCaption(Constants.CANCEL_DELETE_MISSION_LABEL);
+		noButton.setCaption("No");
 		noButton.addStyleName("styleButton");
 		noButton.addClickListener(this);
 		confirmButtonContainer.addComponent(yesButton);

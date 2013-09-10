@@ -120,7 +120,7 @@ public class RegistrationForm extends FormLayout {
 
 	public void buildRegistrationForm() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.REGISTRATION_FORM_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		title.setCaption(resourceBundle.getString("title.caption"));
 		title.addItem(resourceBundle.getString("title.mr"));
 		title.addItem(resourceBundle.getString("title.mrs"));
