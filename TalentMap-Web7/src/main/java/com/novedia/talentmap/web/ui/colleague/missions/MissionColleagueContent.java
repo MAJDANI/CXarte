@@ -14,7 +14,6 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
-import com.novedia.talentmap.web.utils.MissionFieldLabel;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -194,7 +193,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 			if(result != 0){
 				buildViewMissionColleagueContent();
 			} else {
-				Notification.show(MissionFieldLabel.ERROR_DELETE_MISSION_LABEL, Type.ERROR_MESSAGE);
+				Notification.show(resourceBundle.getString("mission.delete.error.msg"), Type.ERROR_MESSAGE);
 			}
 		} else if (event.getButton().equals(noButton)) {
 			windowConfirm.close();
@@ -230,15 +229,15 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
         
 		switch (formValidation) {
 			case Constants.VALIDATION_FIELD_MISSING: {
-				Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_INVALID_PERIOD:{
-				Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("date.period.invalid.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_INVALID_SELECTION:{
-				Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("tool.select.error.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_VALID_FORM:{
@@ -277,10 +276,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	try {
     		int result = this.colleagueService.addMission(missionToInsert);
     		if (result == 0) {
-    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.ERROR_MESSAGE);
+    			Notification.show(resourceBundle.getString("error.create.mission.msg"),Notification.Type.ERROR_MESSAGE);
     		}
     	} catch (DataAccessException e) {
-    		Notification.show(Constants.MISSION_MSG_DATA_INSERTED_ERROR,Notification.Type.WARNING_MESSAGE);
+    		Notification.show(resourceBundle.getString("technical.exception"),Notification.Type.WARNING_MESSAGE);
     	}
     }
     
