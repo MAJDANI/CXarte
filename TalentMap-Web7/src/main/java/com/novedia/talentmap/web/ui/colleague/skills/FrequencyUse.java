@@ -10,7 +10,7 @@ package com.novedia.talentmap.web.ui.colleague.skills;
  */
 public enum FrequencyUse {
 
-    FEW(1, "very little"), OFTEN(2, "Often enough"), REGULARLY(3, "Regularly");
+    FEW(1, "use.frequency.very.little"), OFTEN(2, "use.frequency.often.enough"), REGULARLY(3, "use.frequency.regularly");
 
     private int id;
     private String value;

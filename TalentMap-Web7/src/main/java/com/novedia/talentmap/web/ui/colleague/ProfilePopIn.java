@@ -1,19 +1,23 @@
 package com.novedia.talentmap.web.ui.colleague;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent;
 import com.novedia.talentmap.web.ui.colleague.missions.MissionForm;
 import com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class ProfilePopIn extends Window implements ClickListener{
@@ -45,12 +49,13 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	private MissionForm missionForm; 
 	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
      public ProfilePopIn(){
     	 super();
-    	 setCaption(Constants.PROFILE_POP_IN_TITLE);
     	 setModal(true);
      }
      
@@ -60,7 +65,10 @@ public class ProfilePopIn extends Window implements ClickListener{
       * @return Window
       */
 	public Window buildProfilePopIn(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.PROFILE_POP_IN_PROPERTIES , locale);
 		removeAllComponents();
+		setCaption(resourceBundle.getString("window.profile.title"));
 //		hLayout.setSpacing(true);
 		hLayout.removeAllComponents();
 		buildButtons();
@@ -82,17 +90,17 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 	private void buildButtons() {
 		
-		administrativeDataButton.setCaption(Constants.PERSONAL_DATA_LABEL);
+		administrativeDataButton.setCaption(resourceBundle.getString("administrative.data.button.caption"));
 		administrativeDataButton.addStyleName(Reindeer.BUTTON_LINK);
 		administrativeDataButton.addStyleName("focus");
 		administrativeDataButton.addClickListener(this);
 		
-		skillsButton.setCaption(Constants.SKILL_BUTTON_LABEL);
+		skillsButton.setCaption(resourceBundle.getString("skills.button.caption"));
 		skillsButton.addStyleName(Reindeer.BUTTON_LINK);
 		skillsButton.removeStyleName("focus");
 		skillsButton.addClickListener(this);
 		
-		missionsHistoryButton.setCaption(Constants.MISSION_LABEL);
+		missionsHistoryButton.setCaption(resourceBundle.getString("missions.history.button.caption"));
 		missionsHistoryButton.addStyleName(Reindeer.BUTTON_LINK);
 		missionsHistoryButton.removeStyleName("focus");
 		missionsHistoryButton.addClickListener(this);
@@ -101,7 +109,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 
 	private void buildMenu() {
-	    panelLeft.setWidth("200px");
+	    panelLeft.setWidth("220px");
 	    panelLeft.addStyleName("panelLeft");
 	    menuContent.setSpacing(true);
 	    menuContent.setMargin(true);

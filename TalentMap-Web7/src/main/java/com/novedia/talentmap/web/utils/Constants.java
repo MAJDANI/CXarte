@@ -10,7 +10,7 @@ public class Constants {
 	
 	public static final String FIL_ARIANE_SEPARATOR_LABEL = " > ";
 	
-	public static final String ALL_SKILL_LABEL = " All Categories ";
+//	public static final String ALL_SKILL_LABEL = " All Categories ";
 	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
@@ -22,7 +22,7 @@ public class Constants {
 	
 	public static final String DELETE_BUTTON_LABEL = "Delete";
 	
-	public static final String EDIT_BUTTON_LABEL = "Edit";
+//	public static final String EDIT_BUTTON_LABEL = "Edit";
 	
 	public static final String WINDOW_CONFIRM_DELETE_TITLE = "Confirm Delete";
 	
@@ -138,13 +138,13 @@ public class Constants {
     * Constant for Search Pop-In
     */
 	
-	public static final String SEARCH_BY_NAME_LABEL = "By name";
+//	public static final String SEARCH_BY_NAME_LABEL = "By name";
 	
-	public static final String SEARCH_BY_CUSTOMER_LABEL = "By customer";
+//	public static final String SEARCH_BY_CUSTOMER_LABEL = "By customer";
 	
-	public static final String SEARCH_BY_SKILL_LABEL = "By skill";
+//	public static final String SEARCH_BY_SKILL_LABEL = "By skill";
 	
-	public static final String NO_COLLEAGUE_FOUND = "No colleague found";
+//	public static final String NO_COLLEAGUE_FOUND = "No colleague found";
 	
 	/**
 	* Constant for Search by skill tree admin
@@ -159,9 +159,9 @@ public class Constants {
     * Constant for Search Forms
     */
 	
-	public static final String COLLABORATOR_NAME_LABEL = "Name of the employee";
+//	public static final String COLLABORATOR_NAME_LABEL = "Name of the employee";
 	
-	public static final String CUSTOMER_NAME_LABEL = "Customer";
+//	public static final String CUSTOMER_NAME_LABEL = "Customer";
 	
 	/**
      * Constant for MissionForm
@@ -198,6 +198,11 @@ public class Constants {
 	/**
      * Constant for Personel EAE Pop-In
      */
+	public static final String PERSONAL_EAE_POP_IN_TITLE = "Personal EAE";
+	
+	public static final String CURRENT_EAE_BUTTON_LABEL = "Current EAE";
+
+	public static final String HISTORY_EAE_BUTTON_LABEL = "EAE History";
 	
 	public static final String GENERALITY_EAE_BUTTON_LABEL = "Generality";
 	

@@ -13,6 +13,20 @@ public class PropertiesFile {
 	public static final String REGISTRATION_FORM_PROPERTIES = "properties.resgistration.RegistrationForm";
 	
 	public static final String REGISTRATION_SCREEN_PROPERTIES = "properties.resgistration.RegistrationScreen";
+
+	public static final String PROFILE_POP_IN_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.ProfilePopIn";
+	
+	public static final String COLLEAGUE_DATA_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.ColleagueDataForm";
+	
+	public static final String SKILL_COLLEAGUE_CONTENT_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.skills.SkillColleagueContent";
+	
+	public static final String ADD_SKILL_FORM_PROPERTIES = "com.novedia.talentmap.web.properties.ui.colleague.skills.AddSkillForm";
+	
+	public static final String IA_VIEW_PROPERTIES = "com.novedia.talentmap.web.properties.ui.ia.IaView";
+	
+	public static final String SEARCH_POP_IN_PROPERTIES = "com.novedia.talentmap.web.properties.ui.search.SearchPopIn";
+	
+	public static final String SEARCH_RESULTS_PROPERTIES = "com.novedia.talentmap.web.properties.ui.search.SearchResults";
 	
 	public static final String PERSONAL_EAE_POP_IN_PROPERTIES = "properties.eae.PersonalEAEPopIn";
 
