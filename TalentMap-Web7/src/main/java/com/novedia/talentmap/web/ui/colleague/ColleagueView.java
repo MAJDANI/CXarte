@@ -21,68 +21,67 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	 * Vaadin components
 	 */
 	private GridLayout gridLayout;
-
+	
 	private Panel profilPanel;
-
+	
 	private Button profilButton;
-
+	
 	private Button eaeButton;
-
+	
 	private Panel eaePanel;
-
+	
 	private ProfilePopIn profilePopIn;
-
+	
 	private Button formationButton;
-
+	
 	private Panel formationPanel;
 
 	private PersonalEAEPopIn personalEAEPopIn;
-
+	
 	private ResourceBundle resourceBundle;
+
 
 	/**
 	 * Default constructor
 	 */
-	public ColleagueView() {
+	public ColleagueView(){
 		super();
 		addStyleName("centerPanel");
-
+	
 	}
-
+	
+	
 	/**
 	 * Build colleague's content view
-	 * 
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout builColleagueContent() {
+	public VerticalLayout builColleagueContent(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(
-				PropertiesFile.COLLEAGUE_VIEW_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
 		return this;
 	}
-
+	
 	/**
 	 * Build content
 	 */
-	private void buildContent() {
+	private void buildContent(){
 		gridLayout.removeAllComponents();
 		gridLayout.setSpacing(true);
 		gridLayout.setRows(2);
 		gridLayout.setColumns(3);
 		gridLayout.setId("gridLayout");
-
+		
 		profilPanel.removeAllComponents();
-		profilButton.setCaption(resourceBundle
-				.getString("profil.button.caption"));
+		profilButton.setCaption(resourceBundle.getString("profil.button.caption"));
 		profilButton.addStyleName(Reindeer.BUTTON_LINK);
 		profilButton.addClickListener(this);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
 		profilPanel.addComponent(profilButton);
 		profilPanel.addStyleName("labelBtnDashboard profilPanel");
-
+		
 		eaePanel.removeAllComponents();
 		eaeButton.setCaption(resourceBundle.getString("eae.button.caption"));
 		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
@@ -90,19 +89,18 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
 		eaePanel.addComponent(eaeButton);
 		eaePanel.addStyleName("labelBtnDashboard eaePanel");
-
+		
 		formationPanel.removeAllComponents();
-		formationButton.setCaption(resourceBundle
-				.getString("formation.button.caption"));
+		formationButton.setCaption(resourceBundle.getString("formation.button.caption"));
 		formationButton.addStyleName(Reindeer.BUTTON_LINK);
 		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
 		formationPanel.addComponent(formationButton);
 		formationPanel.addStyleName("labelBtnDashboard formationPanel");
-
+		
 		gridLayout.addComponent(profilPanel);
 		gridLayout.addComponent(eaePanel);
 		gridLayout.addComponent(formationPanel);
-
+		
 		profilePopIn.addStyleName("popinStyle");
 		personalEAEPopIn.addStyleName("popinStyle");
 		// La popIn des EAE est haute, alors on positionne une coordonnée Y plus
@@ -111,80 +109,97 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		personalEAEPopIn.setPositionX(100);
 
 	}
-
+	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		if (event.getButton().equals(profilButton)) {
+		if(event.getButton().equals(profilButton)){
 			getUI().addWindow(profilePopIn.buildProfilePopIn());
-		} else if (event.getButton().equals(eaeButton)) {
+		}
+		else if(event.getButton().equals(eaeButton)){
 			getUI().addWindow(personalEAEPopIn.buildPersonalEAEPopIn());
 		}
-
+		
 	}
+
 
 	public GridLayout getGridLayout() {
 		return gridLayout;
 	}
 
+
 	public void setGridLayout(GridLayout gridLayout) {
 		this.gridLayout = gridLayout;
 	}
+
 
 	public Panel getProfilPanel() {
 		return profilPanel;
 	}
 
+
 	public void setProfilPanel(Panel profilPanel) {
 		this.profilPanel = profilPanel;
 	}
+
 
 	public Panel getEaePanel() {
 		return eaePanel;
 	}
 
+
 	public void setEaePanel(Panel eaePanel) {
 		this.eaePanel = eaePanel;
 	}
+
 
 	public Button getProfilButton() {
 		return profilButton;
 	}
 
+
 	public void setProfilButton(Button profilButton) {
 		this.profilButton = profilButton;
 	}
+
 
 	public Button getEaeButton() {
 		return eaeButton;
 	}
 
+
 	public void setEaeButton(Button eaeButton) {
 		this.eaeButton = eaeButton;
 	}
+
 
 	public Button getFormationButton() {
 		return formationButton;
 	}
 
+
 	public void setFormationButton(Button formationButton) {
 		this.formationButton = formationButton;
 	}
+
 
 	public Panel getFormationPanel() {
 		return formationPanel;
 	}
 
+
 	public void setFormationPanel(Panel formationPanel) {
 		this.formationPanel = formationPanel;
 	}
-
+	
 	public ProfilePopIn getProfilePopIn() {
 		return profilePopIn;
 	}
 
+
 	public void setProfilePopIn(ProfilePopIn profilePopIn) {
 		this.profilePopIn = profilePopIn;
 	}
+
 
 	/**
 	 * @return the personalEAEPopIn
@@ -193,9 +208,9 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		return personalEAEPopIn;
 	}
 
+
 	/**
-	 * @param personalEAEPopIn
-	 *            the personalEAEPopIn to set
+	 * @param personalEAEPopIn the personalEAEPopIn to set
 	 */
 	public void setPersonalEAEPopIn(PersonalEAEPopIn personalEAEPopIn) {
 		this.personalEAEPopIn = personalEAEPopIn;

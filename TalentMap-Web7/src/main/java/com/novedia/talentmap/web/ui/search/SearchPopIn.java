@@ -89,7 +89,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
       */
 	public Window buildSearchPopIn(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.SEARCH_POP_IN_PROPERTIES , locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		setCaption(resourceBundle.getString("window.search.popin.title"));
 		removeAllComponents();
 		hLayout.setSpacing(true);

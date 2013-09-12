@@ -68,7 +68,6 @@
 		<property name="authenticatedScreen" ref="authenticatedScreen" />
 		<property name="registrationScreen" ref ="registrationScreen" />
 		<property name="content" ref ="contentBean" />
-		
 	</bean>
 	
 	<bean id="logOutButtonBean" class="com.vaadin.ui.Button" scope="session" />

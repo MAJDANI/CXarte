@@ -1,6 +1,8 @@
 package com.novedia.talentmap.web.ui.colleague.missions;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
@@ -12,7 +14,7 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
-import com.novedia.talentmap.web.utils.MissionFieldLabel;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
@@ -66,6 +68,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	private HorizontalLayout missionFormButtonLayout;
 	
 	private MissionDTO missionDTO;
+	
+	private ResourceBundle resourceBundle;
 
 	/**
 	 * Default constructor
@@ -82,10 +86,12 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	 * @return VerticalLayout
 	 */
     public VerticalLayout buildViewMissionColleagueContent() {
+    	Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
     	removeAllComponents();
     	listMissionPanel.addStyleName("contentPanel");
     	addMissionPanel.addStyleName("contentPanel");
-    	addMissionButton.setCaption(MissionFieldLabel.ADD_MISSION_LABEL);
+    	addMissionButton.setCaption(resourceBundle.getString("button.add.mission.caption"));
     	addMissionButton.addClickListener(this);
     	addMissionButton.addStyleName("styleButton addMission");
     	buildAddMissionPanel();
@@ -105,9 +111,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	missionFormButtonLayout.removeAllComponents();
     	missionFormButtonLayout.setSpacing(true);
     	missionFormButtonLayout.addStyleName("containerButton");
-    	saveButton.setCaption(Constants.SAVE_BUTTON_LABEL);
+    	saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
-		cancelButton.setCaption(Constants.CANCEL_BUTTON_LABEL);
+		cancelButton.setCaption(resourceBundle.getString("cancel.button.caption"));
 		cancelButton.addClickListener(this);
 		missionFormButtonLayout.addComponent(saveButton);
 		missionFormButtonLayout.addComponent(cancelButton);
@@ -158,10 +164,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     private void buildFooterListMission(){
     	footerLayoutMissionButton.removeAllComponents();
     	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton containerButton");
-    	editMissionButton.setCaption(MissionFieldLabel.EDIT_MISSION_LABEL);
+    	editMissionButton.setCaption(resourceBundle.getString("edit.button.caption"));
     	editMissionButton.addClickListener(this);
     	editMissionButton.addStyleName("styleButton");
-    	deleteMissionButton.setCaption(Constants.DELETE_BUTTON_LABEL);
+    	deleteMissionButton.setCaption(resourceBundle.getString("delete.button.caption"));
     	deleteMissionButton.addClickListener(this);
     	deleteMissionButton.addStyleName("delBtn");
     	enableButton(false);
@@ -187,7 +193,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 			if(result != 0){
 				buildViewMissionColleagueContent();
 			} else {
-				Notification.show(MissionFieldLabel.ERROR_DELETE_MISSION_LABEL, Type.ERROR_MESSAGE);
+				Notification.show(resourceBundle.getString("mission.delete.error.msg"), Type.ERROR_MESSAGE);
 			}
 		} else if (event.getButton().equals(noButton)) {
 			windowConfirm.close();
@@ -223,15 +229,15 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
         
 		switch (formValidation) {
 			case Constants.VALIDATION_FIELD_MISSING: {
-				Notification.show(Constants.PANEL_MISSING_FIELDS,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_INVALID_PERIOD:{
-				Notification.show(Constants.MISSION_MSG_INVALID_PERIOD,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("date.period.invalid.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_INVALID_SELECTION:{
-				Notification.show(Constants.MISSION_MSG_INVALID_SELECTION,Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("tool.select.error.msg"),Notification.Type.WARNING_MESSAGE);
 				break;
 			}
 			case Constants.VALIDATION_VALID_FORM:{
@@ -270,10 +276,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	try {
     		int result = this.colleagueService.addMission(missionToInsert);
     		if (result == 0) {
-    			Notification.show(Constants.MISSION_MSG_DATA_INSERTED_KO,Notification.Type.ERROR_MESSAGE);
+    			Notification.show(resourceBundle.getString("error.create.mission.msg"),Notification.Type.ERROR_MESSAGE);
     		}
     	} catch (DataAccessException e) {
-    		Notification.show(Constants.MISSION_MSG_DATA_INSERTED_ERROR,Notification.Type.WARNING_MESSAGE);
+    		Notification.show(resourceBundle.getString("technical.exception"),Notification.Type.WARNING_MESSAGE);
     	}
     }
     
@@ -289,17 +295,17 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private void buildConfirmWindow(){
     	windowConfirm.removeAllComponents();
-    	windowConfirm.setCaption(Constants.WINDOW_CONFIRM_DELETE_TITLE);
+    	windowConfirm.setCaption(resourceBundle.getString("window.confirm.delete.title"));
     	windowConfirm.center();
     	windowConfirm.setModal(true);
     	windowConfirm.setReadOnly(true);
-    	confirmDeleteLabel.setCaption(MissionFieldLabel.CONFIRM_DELETE_MESSAGE_MISSION);
+    	confirmDeleteLabel.setCaption(resourceBundle.getString("msg.confirm.delete.mission"));
     	confirmButtonContainer.setSpacing(true);
     	confirmButtonContainer.addStyleName("containerButton");
-    	yesButton.setCaption(Constants.CONFIRM_DELETE_MISSION_LABEL);
+    	yesButton.setCaption(resourceBundle.getString("yes.confirm.button.caption"));
     	yesButton.addStyleName("styleButton");
     	yesButton.addClickListener(this);
-    	noButton.setCaption(Constants.CANCEL_DELETE_MISSION_LABEL);
+    	noButton.setCaption(resourceBundle.getString("no.confirm.button.caption"));
     	noButton.addStyleName("styleButton");
     	noButton.addClickListener(this);
     	confirmButtonContainer.addComponent(yesButton);

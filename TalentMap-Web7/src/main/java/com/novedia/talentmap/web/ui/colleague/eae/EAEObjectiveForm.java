@@ -103,7 +103,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.EAE_OBJECTIVE_FORM_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 	}
 
 	/**

@@ -114,7 +114,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 */
 	public VerticalLayout selectedViewAccordingToUserRoles(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.AUTHENTICATED_SCREEN_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		removeAllComponents();
 		buildHeaderLayout();

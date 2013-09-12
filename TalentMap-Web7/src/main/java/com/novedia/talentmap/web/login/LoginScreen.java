@@ -112,7 +112,7 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 	 */
 	public HorizontalLayout buildLoginView(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.LOGIN_SCREEN_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		TalentMapApplication.getCurrent().getPage().setTitle(resourceBundle.getString("page.title"));
 		removeAllComponents();
 		loginPanel.removeAllComponents();

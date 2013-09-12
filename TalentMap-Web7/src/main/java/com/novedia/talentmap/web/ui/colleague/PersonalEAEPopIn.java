@@ -96,7 +96,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.PERSONAL_EAE_POP_IN_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 	}
 	
 	/**

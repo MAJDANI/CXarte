@@ -81,7 +81,7 @@ public class ChangePasswordScreen extends Window implements ClickListener {
       */
 	public Window buildChangePasswordForm(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.CHANGE_PASSWORD_FORM_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		setCaption(resourceBundle.getString("password.form.view.title"));
 		removeAllComponents();
 		buildForm();

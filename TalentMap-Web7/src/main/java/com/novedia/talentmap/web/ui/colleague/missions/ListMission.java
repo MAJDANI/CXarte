@@ -2,12 +2,14 @@ package com.novedia.talentmap.web.ui.colleague.missions;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
-import com.novedia.talentmap.web.utils.MissionFieldLabel;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
@@ -15,38 +17,28 @@ public class ListMission extends Table {
 	
 	private MissionContainer missionContainer;
 	
+	private ResourceBundle resourceBundle;
+	
 	
 	 /**
      * Default constructor
      */
     public ListMission() {
 		super();
-		addColumns();
+//		addColumns();
 		setSelectable(true);
 		setImmediate(true);
 		setNullSelectionAllowed(true);
     }
     
-    /**
-     * Builds Headers of the Table ListMission
-     */
-    private void addColumns() {
-		addContainerProperty(MissionFieldLabel.INTITULE, String.class, null);
-		addContainerProperty(MissionFieldLabel.CLIENT, String.class, null);
-		addContainerProperty(MissionFieldLabel.LIEU, String.class, null);
-		addContainerProperty(MissionFieldLabel.DATE_DEBUT, String.class, null);
-		addContainerProperty(MissionFieldLabel.DATE_FIN, String.class, null);
-		addContainerProperty(MissionFieldLabel.COMMENTAIRE, String.class, null);
-		addContainerProperty(MissionFieldLabel.OUTIL1, String.class, null);
-		addContainerProperty(MissionFieldLabel.OUTIL2, String.class, null);
-		addContainerProperty(MissionFieldLabel.OUTIL3, String.class, null);
-    }
     
     /**
      * Fill all colleague mission in table
      * @return PagedTable
      */
     public Table fillAllColleagueMission(){
+    	Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
     	removeAllItems();
     	int colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
     	missionContainer.fillContainer(colleagueId);
@@ -55,9 +47,26 @@ public class ListMission extends Table {
     }
     
     /**
+     * Builds Headers of the Table ListMission
+     */
+    private void addColumns() {
+		addContainerProperty(resourceBundle.getString("table.header.title"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.client"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.place"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.date.debut"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.date.fin"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.comment"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.tool1"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.tool2"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.tool3"), String.class, null);
+    }
+    
+    
+    /**
      * Build mission table
      */
     private void buildTable(){
+    	addColumns();
     	List<Mission> listMission = missionContainer.getItemIds();
     	
     	for (Mission mission : listMission) {

@@ -69,7 +69,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 
 	public HorizontalLayout buildRegistrationScreenView() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.REGISTRATION_SCREEN_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		registrationPanel.removeAllComponents();
 		HorizontalLayout header = new HorizontalLayout();
 		Label registrationLabel = new Label();

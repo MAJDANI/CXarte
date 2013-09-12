@@ -1,14 +1,18 @@
 package com.novedia.talentmap.web.ui.colleague.missions;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.ISkillService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
@@ -58,6 +62,8 @@ public class MissionForm extends HorizontalLayout{
 	@PropertyId(ComponentsId.TOOLS_ID)
 	private TwinColSelect toolsField;
 	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
@@ -67,6 +73,8 @@ public class MissionForm extends HorizontalLayout{
 	}
 	
 	public MissionForm buildMissionForm(MissionDTO missionDto) {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		missionFormLayout.removeAllComponents();
 		missionFormLayout.setSpacing(true);
@@ -78,46 +86,46 @@ public class MissionForm extends HorizontalLayout{
 		missionToolLayout.setRows(1);
 		missionToolLayout.setColumns(1);
 		
-		titleField.setCaption("Title");
+		titleField.setCaption(resourceBundle.getString("form.mission.title.caption"));
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
-		titleField.setRequiredError("GIVE_TITLE");
+		titleField.setRequiredError(resourceBundle.getString("form.mission.title.error.msg"));
 		titleField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.TITLE_ID));
 		titleField.setImmediate(true);
 		titleField.setValidationVisible(true);
-		titleField.setInputPrompt(Constants.TYPE_TITLE);
+		titleField.setInputPrompt(resourceBundle.getString("form.mission.title.default.value"));
 		titleField.setNullRepresentation("");
 		missionFormLayout.addComponent(titleField);
 		
-		clientField.setCaption(Constants.CLIENT);
+		clientField.setCaption(resourceBundle.getString("form.mission.client.caption"));
 		clientField.setId(ComponentsId.CLIENT_ID);
 		clientField.setRequired(true);
-		clientField.setRequiredError(Constants.CHOOSE_CLIENT);
+		clientField.setRequiredError(resourceBundle.getString("form.mission.client.error.msg"));
 		clientField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.CLIENT_ID));
 		clientField.setImmediate(true);
 		clientField.setValidationVisible(true);
-		clientField.setInputPrompt(Constants.SELECT_CLIENT);
+		clientField.setInputPrompt(resourceBundle.getString("form.mission.client.default.value"));
 		buildClientList();
 		missionFormLayout.addComponent(clientField);
 		
-		placeField.setCaption(Constants.PLACE);
+		placeField.setCaption(resourceBundle.getString("form.mission.lieu.caption"));
 		placeField.setId(ComponentsId.PLACE_ID);
 		placeField.setRequired(true);
-		placeField.setRequiredError(Constants.GIVE_PLACE);
+		placeField.setRequiredError(resourceBundle.getString("form.mission.lieu.error.msg"));
 		placeField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.PLACE_ID));
 		placeField.setImmediate(true);
 		placeField.setValidationVisible(true);
-		placeField.setInputPrompt(Constants.TYPE_PLACE);
+		placeField.setInputPrompt(resourceBundle.getString("form.mission.lieu.default.value"));
 		placeField.setNullRepresentation("");
 		missionFormLayout.addComponent(placeField);
 		
-		startDateField.setCaption(Constants.START_DATE);
+		startDateField.setCaption(resourceBundle.getString("form.mission.start.date.caption"));
 		startDateField.setId(ComponentsId.START_DATE_ID);
 		startDateField.setRequired(true);
-		startDateField.setRequiredError(Constants.GIVE_START_DATE);
+		startDateField.setRequiredError(resourceBundle.getString("form.mission.start.date.error.msg"));
 		startDateField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.START_DATE_ID));
 		startDateField.setImmediate(true);
@@ -125,29 +133,29 @@ public class MissionForm extends HorizontalLayout{
 		startDateField.setInputPrompt(Constants.DATE_FORMAT);
 		missionFormLayout.addComponent(startDateField);
 		
-		endDateField.setCaption(Constants.END_DATE);
+		endDateField.setCaption(resourceBundle.getString("form.mission.end.date.caption"));
 		endDateField.setId(ComponentsId.END_DATE_ID);
 		endDateField.setInputPrompt(Constants.DATE_FORMAT);
 		missionFormLayout.addComponent(endDateField);
 		
-		commentField.setCaption(Constants.COMMENT);
+		commentField.setCaption(resourceBundle.getString("form.mission.comment.caption"));
 		commentField.setId(ComponentsId.COMMENT_ID);
-		commentField.setInputPrompt(Constants.TYPE_COMMENT);
+		commentField.setInputPrompt(resourceBundle.getString("form.mission.comment.default.value"));
 		commentField.setNullRepresentation("");
 		missionFormLayout.addComponent(commentField);
 		
-		toolsField.setCaption(Constants.TOOLS);
+		toolsField.setCaption(resourceBundle.getString("form.mission.tool.caption"));
 		toolsField.setId(ComponentsId.TOOLS_ID);
 		toolsField.setRequired(true);
-		toolsField.setRequiredError(Constants.CHOOSE_TOOLS);
+		toolsField.setRequiredError(resourceBundle.getString("form.mission.tool.error.msg"));
 		toolsField.addValidator(new BeanValidator(MissionDTO.class,
 				ComponentsId.TOOLS_ID));
 		toolsField.setImmediate(true);
 		toolsField.setValidationVisible(true);
 		toolsField.setNullSelectionAllowed(false);
 		toolsField.setMultiSelect(true);
-		toolsField.setLeftColumnCaption("Available tools");
-		toolsField.setRightColumnCaption("Selected tools");
+		toolsField.setLeftColumnCaption(resourceBundle.getString("form.mission.tool.msg.available"));
+		toolsField.setRightColumnCaption(resourceBundle.getString("form.mission.tool.msg.selected"));
 		buildToolsList();
 		missionToolLayout.addComponent(toolsField);
 		
