@@ -19,7 +19,6 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.ui.Accordion;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
@@ -60,7 +59,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 	private final String WIDTH = "550px";
 	private final String HEIGHT_APPRECIATION = "100px";
 	private final String WIDTH_APP_GLOBALE = "450px";
-	private final String HEIGHT_FORM = "600px";
+	private final String HEIGHT_FORM = "700px";
 
 	private ResourceBundle resourceBundle;
 
@@ -93,7 +92,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 		eaeResultsFormLayout.removeAllComponents();
 		this.eaeResultsFormLayout.setColumns(1);
 		this.eaeResultsFormLayout.setRows(6);
-
+		this.eaeResultsFormLayout.setId(ComponentsId.EAE_RESULTS_FORM_LAYOUT_ID);
 	}
 
 	private void buildEAEResultsForm() {
@@ -197,6 +196,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 			}
 		}
 		accordionObjectives.addStyleName("spacerTop");
+		accordionObjectives.setId(ComponentsId.EAE_RESULTS_ACCORDION_OBJ_ID);
 		
 		
 		// ---------------------------------
@@ -213,6 +213,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 		accordionAppreciation.addTab(collabStrenghts, Constants.EAE_COLLAB_STRENGHTS, null);
 		accordionAppreciation.addTab(collabWeaknesses, Constants.EAE_COLLAB_WEAKNESSES, null);
 		accordionAppreciation.addStyleName("spacerTop");
+		accordionAppreciation.setId(ComponentsId.EAE_RESULTS_ACCORDION_APPREC_ID);
 
 		// --------------------------------------
 		// Désactivations

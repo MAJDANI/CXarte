@@ -445,4 +445,21 @@
 	border: none !important;
 }
 
+/* FOR HORIZONTAL OPTION GROUP */
+/* Lay the options horizontally */
+.v-select-optiongroup-horizontal .v-select-option {
+    display: inline-block;
+}
 
+/* FOR HORIZONTAL OPTION GROUP */
+/* Avoid wrapping if the layout is too tight */
+.v-select-optiongroup-horizontal {
+    white-space: nowrap;
+}
+
+/* FOR HORIZONTAL OPTION GROUP */
+/* Some extra spacing is needed */
+.v-select-optiongroup-horizontal
+  .v-select-option.v-radiobutton {
+    padding-right: 10px;
+}

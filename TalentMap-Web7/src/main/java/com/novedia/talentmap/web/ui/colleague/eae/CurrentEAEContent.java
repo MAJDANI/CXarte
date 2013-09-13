@@ -4,10 +4,10 @@ import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.impl.EAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -124,7 +124,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		// Check if the colleague has a current EAE Open
 		Integer colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
 		Integer currentEAEId = eaeService.getOpenEAEIdForColleague(colleagueId);
-
+		hLayoutCurrentEAE.setId(ComponentsId.EAE_HLAYOUT_CURRENT_EAE_ID);
+		
 		if (currentEAEId == null) {
 			buildViewCurrentEAEContentDoesntExists();
 		} else {
@@ -211,7 +212,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 
 	private void buildPanelRightContentEAEExists() {
 		panelRightCurrentEAE.removeAllComponents();
-
+		
+		panelRightCurrentEAE.setId(ComponentsId.EAE_PANEL_RIGHT_CURRENT_EAE_ID);
+		
 		EAEService eaeServicePlus = (EAEService) eaeService;
 		EAEGeneralityDTO eaeGeneralityDTO = eaeServicePlus
 				.getEAEGenerality(currentEAEId);

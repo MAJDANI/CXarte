@@ -1,12 +1,16 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Objective;
+import com.novedia.talentmap.model.entity.ObjectiveScoreEnum;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.PropertiesFile;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.event.FieldEvents.BlurEvent;
@@ -15,6 +19,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.TextField;
 
 /**
@@ -25,7 +30,7 @@ import com.vaadin.ui.TextField;
  * @author v.guillemain
  * 
  */
-public class EAEObjectiveForm extends FormLayout implements BlurListener {
+public class EAEObjectiveForm extends FormLayout implements BlurListener, Property.ValueChangeListener {
 
 	/**
 	 * Titre de l'objectif
@@ -57,6 +62,18 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 	 */
 	@PropertyId(ComponentsId.OBJECTIVE_MEANS_ID)
 	private TextField means;
+
+	/**
+	 * Note que se donne le collaborateur sur l'atteinte de son objectif
+	 */
+	@PropertyId(ComponentsId.OBJECTIVE_COLL_SCORE_ID)
+	private OptionGroup colleagueScore;
+
+	/**
+	 * Note que donne le manager au collaboarteur collaborateur sur l'atteinte de son objectif
+	 */
+	@PropertyId(ComponentsId.OBJECTIVE_MAN_SCORE_ID)
+	private OptionGroup managerScore;
 
 	/**
 	 * Formulaire parent qui sera chargé de la sauvegarde des modifications.
@@ -101,6 +118,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 
 	private ResourceBundle resourceBundle;
 
+	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
@@ -111,6 +129,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 	 */
 	@Override
 	public void blur(BlurEvent event) {
+		System.out.println("Blur event sur Objective");
 		myFormParent.saveObjective(currentObjective);
 	}
 
@@ -153,6 +172,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 
 	private void buildLayout() {
 		eaeObjectivesFormLayout.removeAllComponents();
+		eaeObjectivesFormLayout.setId(ComponentsId.EAE_OBJECTIVES_FORM_LAYOUT_ID);
 		this.eaeObjectivesFormLayout.setColumns(1);
 		this.eaeObjectivesFormLayout.setRows(7);
 	}
@@ -183,8 +203,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 				&& objectifForBilan == true) {
 			goal.setImmediate(true);
 			goal.addBlurListener(this);
-//			goal.setWordwrap(true); //passage à la ligne automatique TODO
 		}
+		eaeObjectivesFormLayout.addComponent(goal, 0, 0);
 		// -----------------------------
 		// targetDate
 		// -----------------------------
@@ -200,6 +220,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 			targetDate.setImmediate(true);
 			targetDate.addBlurListener(this);
 		}
+		eaeObjectivesFormLayout.addComponent(targetDate, 0, 1);
 		// -----------------------------
 		// indicators
 		// -----------------------------
@@ -215,7 +236,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 			indicators.setImmediate(true);
 			indicators.addBlurListener(this);
 		}
-
+		eaeObjectivesFormLayout.addComponent(indicators, 0, 2);
 		// -----------------------------
 		// means
 		// -----------------------------
@@ -231,7 +252,37 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 			means.setImmediate(true);
 			means.addBlurListener(this);
 		}
+		eaeObjectivesFormLayout.addComponent(means, 0, 3);
 
+		// -----------------------------
+		// colleagueScore
+		// -----------------------------
+		// N'est affiché que pour l'onglet BILAN/RESULTS
+		if (objectifForBilan == true) {
+			if (currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				colleagueScore = new OptionGroup("Ma note");
+				colleagueScore.addItem(ObjectiveScoreEnum.NOT_ACHIEVED.getId());
+				colleagueScore.setItemCaption(ObjectiveScoreEnum.NOT_ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.NOT_ACHIEVED.getLabel()));
+				
+				colleagueScore.addItem(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId());
+				colleagueScore.setItemCaption(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.PARTLY_ACHIEVED.getLabel()));
+		
+				colleagueScore.addItem(ObjectiveScoreEnum.ACHIEVED.getId());
+				colleagueScore.setItemCaption(ObjectiveScoreEnum.ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.ACHIEVED.getLabel()));
+		
+				colleagueScore.addItem(ObjectiveScoreEnum.EXCEEDED.getId());
+				colleagueScore.setItemCaption(ObjectiveScoreEnum.EXCEEDED.getId(), resourceBundle.getString(ObjectiveScoreEnum.EXCEEDED.getLabel()));
+		
+				colleagueScore.addStyleName("horizontal");
+				
+				colleagueScore.addValueChangeListener(this);
+				if (currentMode == EAEConsultationMode.OPEN_COLLAB) {
+					colleagueScore.setImmediate(true);
+					colleagueScore.addValueChangeListener(this);
+				}
+				eaeObjectivesFormLayout.addComponent(colleagueScore, 0, 4);
+			}	  
+		}
 		// -----------------------------------
 		// Binding des éléments du formulaire
 		// -----------------------------------
@@ -240,17 +291,9 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 
-		// ---------------------------------
-		// Intégration
-		// ---------------------------------
-		eaeObjectivesFormLayout.addComponent(goal, 0, 0);
-		eaeObjectivesFormLayout.addComponent(targetDate, 0, 1);
-		eaeObjectivesFormLayout.addComponent(indicators, 0, 2);
-		eaeObjectivesFormLayout.addComponent(means, 0, 3);
-
-		// ---------------------------------
-		// Désactivation si nécessaire
-		// ---------------------------------
+		// ----------------------------------------------------------
+		// ReadOnly si nécessaire : goal, target, indicators et means
+		// ----------------------------------------------------------
 		if (!(currentMode == EAEConsultationMode.VALIDATED_MANAGER && objectifForBilan == true)) {
 			for (int col = 0; col < 4; col++) {
 				Component theComponent = eaeObjectivesFormLayout.getComponent(
@@ -258,7 +301,18 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 				theComponent.setReadOnly(true);
 			}
 		}
-
+		// ----------------------------------------------------------
+		// ReadOnly si nécessaire : colleagueScore
+		// ----------------------------------------------------------
+		if (objectifForBilan == true) {
+			if (currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				if (currentMode == EAEConsultationMode.VALIDATED_MANAGER || currentMode == EAEConsultationMode.VALIDATED_COLLAB) {
+					Component theComponent = eaeObjectivesFormLayout.getComponent(
+							0, 4);
+					theComponent.setReadOnly(true);
+				}
+			}
+		}
 		addComponent(eaeObjectivesFormLayout);
 
 	}
@@ -309,6 +363,41 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener {
 
 	public void setMyFormParent(EAEResultsForm myFormParent) {
 		this.myFormParent = myFormParent;
+	}
+
+	/**
+	 * @return the colleagueScore
+	 */
+	public OptionGroup getColleagueScore() {
+		return colleagueScore;
+	}
+
+	/**
+	 * @param colleagueScore the colleagueScore to set
+	 */
+	public void setColleagueScore(OptionGroup colleagueScore) {
+		this.colleagueScore = colleagueScore;
+	}
+
+	/**
+	 * @return the managerScore
+	 */
+	public OptionGroup getManagerScore() {
+		return managerScore;
+	}
+
+	/**
+	 * @param managerScore the managerScore to set
+	 */
+	public void setManagerScore(OptionGroup managerScore) {
+		this.managerScore = managerScore;
+	}
+
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		// TODO Auto-generated method stub
+		System.out.println("event.getProperty()=" + event.getProperty());
+		System.out.println("colleagueScore.getValue()=" + colleagueScore.getValue());
 	}
 
 }

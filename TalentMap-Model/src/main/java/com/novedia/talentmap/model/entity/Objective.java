@@ -68,12 +68,12 @@ public class Objective implements Serializable {
 	 * The Score the Colleague gives to the fulfillment of the Objective, the
 	 * year after the definition of the objective.
 	 */
-	private ObjectiveScore colleaguesScore;
+	private Integer colleaguesScore;
 	/**
 	 * The Score the Manager gives to the fulfillment of the Objective, the year
 	 * after the definition of the objective.
 	 */
-	private ObjectiveScore managersScore;
+	private Integer managersScore;
 	/**
 	 * The Colleague may indicate the elements during the year that either
 	 * motived or retrained the achievement of the Objective.
@@ -231,7 +231,7 @@ public class Objective implements Serializable {
 	/**
 	 * @return colleaguesScore : the colleaguesScore of the Objective
 	 */
-	public ObjectiveScore getColleaguesScore() {
+	public Integer getColleaguesScore() {
 		return colleaguesScore;
 	}
 
@@ -239,14 +239,14 @@ public class Objective implements Serializable {
 	 * @param colleaguesScore
 	 *            : the colleaguesScore of the Objective
 	 */
-	public void setColleaguesScore(ObjectiveScore colleaguesScore) {
+	public void setColleaguesScore(Integer colleaguesScore) {
 		this.colleaguesScore = colleaguesScore;
 	}
 
 	/**
 	 * @return managersScore : the managersScore of the Objective
 	 */
-	public ObjectiveScore getManagersScore() {
+	public Integer getManagersScore() {
 		return managersScore;
 	}
 
@@ -254,7 +254,7 @@ public class Objective implements Serializable {
 	 * @param managersScore
 	 *            : the managersScore of the Objective
 	 */
-	public void setManagersScore(ObjectiveScore managersScore) {
+	public void setManagersScore(Integer managersScore) {
 		this.managersScore = managersScore;
 	}
 

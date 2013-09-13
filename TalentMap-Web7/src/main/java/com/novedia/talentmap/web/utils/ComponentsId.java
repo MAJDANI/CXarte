@@ -103,7 +103,25 @@ public class ComponentsId {
 	public static final String EAE_COLLAB_WEAKNESSES_ID = "collabWeaknesses";
 	
 	public static final String EAE_MEANS_TO_PROGRESS_ID = "meansToProgress";
+
+	public static final String EAE_RESULTS_FORM_LAYOUT_ID = "eaeResultsFormLayout";
+
+	public static final String EAE_RESULTS_ACCORDION_OBJ_ID = "accordionObjectives";
+
+	public static final String EAE_RESULTS_ACCORDION_APPREC_ID = "accordionAppreciation";
 	
+	public static final String EAE_CURRENT_EAE_DETAILED_C_ID = "CurrentEAEDetailedContent";
+
+	public static final String EAE_GENERALITY_FORM_ID = "eaeGeneralityForm";
+
+	public static final String EAE_RESULTS_FORM_ID = "eaeResultsForm";
+	
+	public static final String EAE_HLAYOUT_CURRENT_EAE_ID = "hLayoutCurrentEAE";
+
+	public static final String EAE_PANEL_RIGHT_CURRENT_EAE_ID = "panelRightCurrentEAE";
+	
+	public static final String EAE_OBJECTIVES_FORM_LAYOUT_ID = "eaeObjectivesFormLayout";
+
 	public static final String OBJECTIVE_TITLE_ID = "title";
 
 	public static final String OBJECTIVE_GOAL_ID = "goal";
@@ -113,5 +131,9 @@ public class ComponentsId {
 	public static final String OBJECTIVE_INDICATORS_ID = "indicators";
 
 	public static final String OBJECTIVE_MEANS_ID = "means";
+
+	public static final String OBJECTIVE_COLL_SCORE_ID = "colleaguesScore";
+
+	public static final String OBJECTIVE_MAN_SCORE_ID = "managersScore";
 
 }

@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
 
-<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN" 
-	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL MAP 2.0//EN"  -->
+<!-- 	"http://www.ibatis.com/dtd/sql-map-2.dtd"> -->
 
-<sqlMap namespace="objectiveScore">
+<!-- <sqlMap namespace="objectiveScore"> -->
 
-	<typeAlias alias="objectiveScore"
-		type="com.novedia.talentmap.model.entity.ObjectiveScore" />
+<!-- 	<typeAlias alias="objectiveScore" -->
+<!-- 		type="com.novedia.talentmap.model.entity.ObjectiveScore" /> -->
 
-	<resultMap id="objectiveScoreResult" class="objectiveScore">
-		<result property="id" column="OBJECTIVE_SCORE_ID" />
-		<result property="label" column="OBJECTIVE_SCORE_LABEL" />
-	</resultMap>
+<!-- 	<resultMap id="objectiveScoreResult" class="objectiveScore"> -->
+<!-- 		<result property="id" column="OBJECTIVE_SCORE_ID" /> -->
+<!-- 		<result property="label" column="OBJECTIVE_SCORE_LABEL" /> -->
+<!-- 	</resultMap> -->
 
-	<select id="getEaeState" resultMap="objectiveScoreResult"
-		parameterClass="Integer">
-		SELECT * FROM OBJECTIVE_SCORE WHERE OBJECTIVE_SCORE_ID = #id#
-	</select>
+<!-- 	<select id="getEaeState" resultMap="objectiveScoreResult" -->
+<!-- 		parameterClass="Integer"> -->
+<!-- 		SELECT * FROM OBJECTIVE_SCORE WHERE OBJECTIVE_SCORE_ID = #id# -->
+<!-- 	</select> -->
 
-	<select id="getAll" resultMap="objectiveScoreResult">
-		SELECT DISTINCT * FROM OBJECTIVE_SCORE
-	</select>
+<!-- 	<select id="getAll" resultMap="objectiveScoreResult"> -->
+<!-- 		SELECT DISTINCT * FROM OBJECTIVE_SCORE -->
+<!-- 	</select> -->
 
-	<select id="checkObject" resultMap="objectiveScoreResult"
-		parameterClass="eaeState">
-		SELECT * FROM OBJECTIVE_SCORE WHERE upper(OBJECTIVE_SCORE_LABEL) =
-		upper(#label#)
-	</select>
+<!-- 	<select id="checkObject" resultMap="objectiveScoreResult" -->
+<!-- 		parameterClass="eaeState"> -->
+<!-- 		SELECT * FROM OBJECTIVE_SCORE WHERE upper(OBJECTIVE_SCORE_LABEL) = -->
+<!-- 		upper(#label#) -->
+<!-- 	</select> -->
 
 
-</sqlMap>
+<!-- </sqlMap> -->
