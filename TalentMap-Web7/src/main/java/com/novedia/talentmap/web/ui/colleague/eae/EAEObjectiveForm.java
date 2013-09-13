@@ -1,6 +1,5 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
-import java.util.Hashtable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -8,6 +7,8 @@ import com.novedia.talentmap.model.entity.Objective;
 import com.novedia.talentmap.model.entity.ObjectiveScoreEnum;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
+import com.novedia.talentmap.web.utils.EAETabEnum;
+import com.novedia.talentmap.web.utils.ObjUtils;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -30,7 +31,8 @@ import com.vaadin.ui.TextField;
  * @author v.guillemain
  * 
  */
-public class EAEObjectiveForm extends FormLayout implements BlurListener, Property.ValueChangeListener {
+public class EAEObjectiveForm extends FormLayout implements BlurListener,
+		Property.ValueChangeListener {
 
 	/**
 	 * Titre de l'objectif
@@ -70,7 +72,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	private OptionGroup colleagueScore;
 
 	/**
-	 * Note que donne le manager au collaboarteur collaborateur sur l'atteinte de son objectif
+	 * Note que donne le manager au collaboarteur collaborateur sur l'atteinte
+	 * de son objectif
 	 */
 	@PropertyId(ComponentsId.OBJECTIVE_MAN_SCORE_ID)
 	private OptionGroup managerScore;
@@ -101,7 +104,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	 * L'affichage d'uhn objectif dans l'onglet "Bilan" est différent de
 	 * l'afichage d'un objectif dans l'onglet "Objectifs"
 	 */
-	private Boolean objectifForBilan;
+	// private Boolean objectifForBilan;
+	private EAETabEnum currentTab;
 	/**
 	 * Binder des données dans le formulaire
 	 */
@@ -118,10 +122,10 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 
 	private ResourceBundle resourceBundle;
 
-	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
+		resourceBundle = ResourceBundle.getBundle(
+				PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 	}
 
 	/**
@@ -150,11 +154,12 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	 */
 	public EAEObjectiveForm buildEAEObjectiveFormView(
 			Objective currentObjective, EAEConsultationMode currentMode,
-			Boolean forBilan) {
+			EAETabEnum currentTab, EAEResultsForm formParent) {
 		initResourceBundle();
 		this.currentObjective = currentObjective;
 		this.currentMode = currentMode;
-		this.objectifForBilan = forBilan;
+		this.currentTab = currentTab;
+		this.myFormParent = formParent;
 		removeAllComponents();
 		buildMain();
 
@@ -172,14 +177,16 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 
 	private void buildLayout() {
 		eaeObjectivesFormLayout.removeAllComponents();
-		eaeObjectivesFormLayout.setId(ComponentsId.EAE_OBJECTIVES_FORM_LAYOUT_ID);
-		this.eaeObjectivesFormLayout.setColumns(1);
+		eaeObjectivesFormLayout
+				.setId(ComponentsId.EAE_OBJECTIVES_FORM_LAYOUT_ID);
+		this.eaeObjectivesFormLayout.setColumns(2);
 		this.eaeObjectivesFormLayout.setRows(7);
 	}
 
 	private void buildEAEObjectiveForm() {
 		removeAllComponents();
-
+		ObjUtils objUtils = ObjUtils.getInstance();
+		
 		// -----------------------------
 		// Instanciations
 		// -----------------------------
@@ -192,97 +199,119 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 		// -----------------------------
 		// GOAL
 		// -----------------------------
-		goal.setCaption(resourceBundle.getString("goal.caption"));
-		goal.setStyleName("TODO");
-		goal.setNullRepresentation("");
-		goal.setId(ComponentsId.OBJECTIVE_GOAL_ID);
-		goal.setHeight(ELEMENT_HEIGHT);
-		goal.setWidth(ELEMENT_WIDTH);
-		goal.setMaxLength(200);
-		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER
-				&& objectifForBilan == true) {
-			goal.setImmediate(true);
-			goal.addBlurListener(this);
+		String goalDisplayMode = objUtils.getMode(
+				ComponentsId.OBJECTIVE_GOAL_ID, currentTab, currentMode);
+		if (goalDisplayMode != ObjUtils.HIDDEN) {
+			goal.setStyleName("TODO");
+			goal.setNullRepresentation("");
+			goal.setId(ComponentsId.OBJECTIVE_GOAL_ID);
+			goal.setHeight(ELEMENT_HEIGHT);
+			goal.setWidth(ELEMENT_WIDTH);
+			goal.setMaxLength(200);
+			goal.setCaption(resourceBundle.getString("goal.caption"));
+			if (goalDisplayMode == ObjUtils.UPDATE) {
+				goal.setImmediate(true);
+				goal.addBlurListener(this);
+			} 
+			eaeObjectivesFormLayout.addComponent(goal, 0, 0);
 		}
-		eaeObjectivesFormLayout.addComponent(goal, 0, 0);
 		// -----------------------------
 		// targetDate
 		// -----------------------------
-		targetDate.setCaption(resourceBundle.getString("targetDate.caption"));
-		targetDate.setStyleName("TODO");
-		targetDate.setNullRepresentation("");
-		targetDate.setId(ComponentsId.OBJECTIVE_TARGET_DATE_ID);
-		targetDate.setHeight(ELEMENT_HEIGHT);
-		targetDate.setWidth(ELEMENT_WIDTH);
-		targetDate.setMaxLength(200);
-		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER
-				&& objectifForBilan == true) {
-			targetDate.setImmediate(true);
-			targetDate.addBlurListener(this);
+		String targetDisplayMode = objUtils.getMode(
+				ComponentsId.OBJECTIVE_TARGET_DATE_ID, currentTab, currentMode);
+		if (targetDisplayMode != ObjUtils.HIDDEN) {
+			targetDate.setStyleName("TODO");
+			targetDate.setNullRepresentation("");
+			targetDate.setId(ComponentsId.OBJECTIVE_TARGET_DATE_ID);
+			targetDate.setHeight(ELEMENT_HEIGHT);
+			targetDate.setWidth(ELEMENT_WIDTH);
+			targetDate.setMaxLength(200);
+			targetDate.setCaption(resourceBundle
+					.getString("targetDate.caption"));
+			if (targetDisplayMode == ObjUtils.UPDATE) {
+				targetDate.setImmediate(true);
+				targetDate.addBlurListener(this);
+			}
+			eaeObjectivesFormLayout.addComponent(targetDate, 0, 1);
 		}
-		eaeObjectivesFormLayout.addComponent(targetDate, 0, 1);
 		// -----------------------------
 		// indicators
 		// -----------------------------
-		indicators.setCaption(resourceBundle.getString("indicators.caption"));
-		indicators.setStyleName("TODO");
-		indicators.setNullRepresentation("");
-		indicators.setId(ComponentsId.OBJECTIVE_INDICATORS_ID);
-		indicators.setHeight(ELEMENT_HEIGHT);
-		indicators.setWidth(ELEMENT_WIDTH);
-		indicators.setMaxLength(200);
-		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER
-				&& objectifForBilan == true) {
-			indicators.setImmediate(true);
-			indicators.addBlurListener(this);
+		String indicDisplayMode = objUtils.getMode(
+				ComponentsId.OBJECTIVE_INDICATORS_ID, currentTab, currentMode);
+		if (indicDisplayMode != ObjUtils.HIDDEN) {
+			indicators.setStyleName("TODO");
+			indicators.setNullRepresentation("");
+			indicators.setId(ComponentsId.OBJECTIVE_INDICATORS_ID);
+			indicators.setHeight(ELEMENT_HEIGHT);
+			indicators.setWidth(ELEMENT_WIDTH);
+			indicators.setMaxLength(200);
+			indicators.setCaption(resourceBundle
+					.getString("indicators.caption"));
+			if (indicDisplayMode == ObjUtils.UPDATE) {
+				indicators.setImmediate(true);
+				indicators.addBlurListener(this);
+			}
+			eaeObjectivesFormLayout.addComponent(indicators, 0, 2);
 		}
-		eaeObjectivesFormLayout.addComponent(indicators, 0, 2);
 		// -----------------------------
 		// means
 		// -----------------------------
-		means.setCaption(resourceBundle.getString("means.caption"));
-		means.setStyleName("TODO");
-		means.setNullRepresentation("");
-		means.setId(ComponentsId.OBJECTIVE_MEANS_ID);
-		means.setHeight(ELEMENT_HEIGHT);
-		means.setWidth(ELEMENT_WIDTH);
-		means.setMaxLength(200);
-		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER
-				&& objectifForBilan == true) {
-			means.setImmediate(true);
-			means.addBlurListener(this);
+		String meansDisplayMode = objUtils.getMode(
+				ComponentsId.OBJECTIVE_MEANS_ID, currentTab, currentMode);
+		if (meansDisplayMode != ObjUtils.HIDDEN) {
+			means.setStyleName("TODO");
+			means.setNullRepresentation("");
+			means.setId(ComponentsId.OBJECTIVE_MEANS_ID);
+			means.setHeight(ELEMENT_HEIGHT);
+			means.setWidth(ELEMENT_WIDTH);
+			means.setMaxLength(200);
+			means.setCaption(resourceBundle.getString("means.caption"));
+			if (meansDisplayMode == ObjUtils.UPDATE) {
+				means.setImmediate(true);
+				means.addBlurListener(this);
+			}
+			eaeObjectivesFormLayout.addComponent(means, 0, 3);
 		}
-		eaeObjectivesFormLayout.addComponent(means, 0, 3);
-
 		// -----------------------------
 		// colleagueScore
 		// -----------------------------
 		// N'est affiché que pour l'onglet BILAN/RESULTS
-		if (objectifForBilan == true) {
-			if (currentMode != EAEConsultationMode.OPEN_MANAGER) {
-				colleagueScore = new OptionGroup("Ma note");
-				colleagueScore.addItem(ObjectiveScoreEnum.NOT_ACHIEVED.getId());
-				colleagueScore.setItemCaption(ObjectiveScoreEnum.NOT_ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.NOT_ACHIEVED.getLabel()));
-				
-				colleagueScore.addItem(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId());
-				colleagueScore.setItemCaption(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.PARTLY_ACHIEVED.getLabel()));
-		
-				colleagueScore.addItem(ObjectiveScoreEnum.ACHIEVED.getId());
-				colleagueScore.setItemCaption(ObjectiveScoreEnum.ACHIEVED.getId(), resourceBundle.getString(ObjectiveScoreEnum.ACHIEVED.getLabel()));
-		
-				colleagueScore.addItem(ObjectiveScoreEnum.EXCEEDED.getId());
-				colleagueScore.setItemCaption(ObjectiveScoreEnum.EXCEEDED.getId(), resourceBundle.getString(ObjectiveScoreEnum.EXCEEDED.getLabel()));
-		
-				colleagueScore.addStyleName("horizontal");
-				
+		String colleagueScoreDisplayMode = objUtils.getMode(
+				ComponentsId.OBJECTIVE_COLL_SCORE_ID, currentTab, currentMode);
+		if (colleagueScoreDisplayMode != ObjUtils.HIDDEN) {
+			colleagueScore = new OptionGroup("Ma note");
+			colleagueScore.addItem(ObjectiveScoreEnum.NOT_ACHIEVED.getId());
+			colleagueScore.setItemCaption(ObjectiveScoreEnum.NOT_ACHIEVED
+					.getId(), resourceBundle
+					.getString(ObjectiveScoreEnum.NOT_ACHIEVED.getLabel()));
+
+			colleagueScore.addItem(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId());
+			colleagueScore.setItemCaption(ObjectiveScoreEnum.PARTLY_ACHIEVED
+					.getId(), resourceBundle
+					.getString(ObjectiveScoreEnum.PARTLY_ACHIEVED.getLabel()));
+
+			colleagueScore.addItem(ObjectiveScoreEnum.ACHIEVED.getId());
+			colleagueScore.setItemCaption(ObjectiveScoreEnum.ACHIEVED.getId(),
+					resourceBundle.getString(ObjectiveScoreEnum.ACHIEVED
+							.getLabel()));
+
+			colleagueScore.addItem(ObjectiveScoreEnum.EXCEEDED.getId());
+			colleagueScore.setItemCaption(ObjectiveScoreEnum.EXCEEDED.getId(),
+					resourceBundle.getString(ObjectiveScoreEnum.EXCEEDED
+							.getLabel()));
+
+			colleagueScore.addStyleName("horizontal");
+
+			colleagueScore.addValueChangeListener(this);
+			if (colleagueScoreDisplayMode == ObjUtils.UPDATE) {
+				colleagueScore.setImmediate(true);
 				colleagueScore.addValueChangeListener(this);
-				if (currentMode == EAEConsultationMode.OPEN_COLLAB) {
-					colleagueScore.setImmediate(true);
-					colleagueScore.addValueChangeListener(this);
-				}
-				eaeObjectivesFormLayout.addComponent(colleagueScore, 0, 4);
-			}	  
+			}
+			eaeObjectivesFormLayout.addComponent(colleagueScore, 0, 4);
 		}
+
 		// -----------------------------------
 		// Binding des éléments du formulaire
 		// -----------------------------------
@@ -294,25 +323,32 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 		// ----------------------------------------------------------
 		// ReadOnly si nécessaire : goal, target, indicators et means
 		// ----------------------------------------------------------
-		if (!(currentMode == EAEConsultationMode.VALIDATED_MANAGER && objectifForBilan == true)) {
-			for (int col = 0; col < 4; col++) {
-				Component theComponent = eaeObjectivesFormLayout.getComponent(
-						0, col);
-				theComponent.setReadOnly(true);
-			}
+		if (goalDisplayMode == ObjUtils.READONLY) {
+			Component theComponent = eaeObjectivesFormLayout.getComponent(
+					0, 0);
+			theComponent.setReadOnly(true);
 		}
-		// ----------------------------------------------------------
-		// ReadOnly si nécessaire : colleagueScore
-		// ----------------------------------------------------------
-		if (objectifForBilan == true) {
-			if (currentMode != EAEConsultationMode.OPEN_MANAGER) {
-				if (currentMode == EAEConsultationMode.VALIDATED_MANAGER || currentMode == EAEConsultationMode.VALIDATED_COLLAB) {
-					Component theComponent = eaeObjectivesFormLayout.getComponent(
-							0, 4);
-					theComponent.setReadOnly(true);
-				}
-			}
+		if (targetDisplayMode == ObjUtils.READONLY) {
+			Component theComponent = eaeObjectivesFormLayout.getComponent(
+					0, 1);
+			theComponent.setReadOnly(true);
 		}
+		if (indicDisplayMode == ObjUtils.READONLY) {
+			Component theComponent = eaeObjectivesFormLayout.getComponent(
+					0, 2);
+			theComponent.setReadOnly(true);
+		}
+		if (meansDisplayMode == ObjUtils.READONLY) {
+			Component theComponent = eaeObjectivesFormLayout.getComponent(
+					0, 3);
+			theComponent.setReadOnly(true);
+		}
+		if (colleagueScoreDisplayMode == ObjUtils.READONLY) {
+			Component theComponent = eaeObjectivesFormLayout.getComponent(
+					0, 4);
+			theComponent.setReadOnly(true);
+		}
+
 		addComponent(eaeObjectivesFormLayout);
 
 	}
@@ -373,7 +409,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	}
 
 	/**
-	 * @param colleagueScore the colleagueScore to set
+	 * @param colleagueScore
+	 *            the colleagueScore to set
 	 */
 	public void setColleagueScore(OptionGroup colleagueScore) {
 		this.colleagueScore = colleagueScore;
@@ -387,7 +424,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	}
 
 	/**
-	 * @param managerScore the managerScore to set
+	 * @param managerScore
+	 *            the managerScore to set
 	 */
 	public void setManagerScore(OptionGroup managerScore) {
 		this.managerScore = managerScore;
@@ -396,8 +434,9 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener, Proper
 	@Override
 	public void valueChange(ValueChangeEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println("event.getProperty()=" + event.getProperty());
-		System.out.println("colleagueScore.getValue()=" + colleagueScore.getValue());
+		System.out.println("colleagueScore.getValue()="
+				+ colleagueScore.getValue());
+		myFormParent.saveObjective(currentObjective);
 	}
 
 }

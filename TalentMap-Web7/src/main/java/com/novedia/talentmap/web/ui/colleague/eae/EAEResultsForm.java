@@ -13,6 +13,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
+import com.novedia.talentmap.web.utils.EAETabEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -190,8 +191,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 			for(Objective o : listObjectives){
 				System.out.println("obj=" + o);
 				EAEObjectiveForm oF = new EAEObjectiveForm();
-				oF = oF.buildEAEObjectiveFormView(o, currentMode, false);
-				oF.setMyFormParent(this);
+				oF = oF.buildEAEObjectiveFormView(o, currentMode, EAETabEnum.RESULTS_TAB, this);
 				accordionObjectives.addTab(oF, resourceBundle.getString("objective.title") + o.getTitle(), null);
 			}
 		}
