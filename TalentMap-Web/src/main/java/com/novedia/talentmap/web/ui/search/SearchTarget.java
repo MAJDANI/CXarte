@@ -455,8 +455,7 @@ public class SearchTarget extends VerticalLayout implements ClickListener,
     public Boolean parseList(List<Integer> listColleagueId) {
 	Boolean atLeastOneIsSelected = false;
 	List<Integer> listColleagueIdTemp = new ArrayList<Integer>();
-	Collection<Object> lesItemId = (Collection<Object>) this.treeSkills
-		.getContainerDataSource().getItemIds();
+	Collection<Object> lesItemId = (Collection<Object>) this.treeSkills.getContainerDataSource().getItemIds();
 
 	Boucle: for (Object item : lesItemId) {
 

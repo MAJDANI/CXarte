@@ -1,15 +1,24 @@
 package com.novedia.talentmap.web.ui.search;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
+import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Client;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Concept;
+import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -22,9 +31,9 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class SearchPopIn extends Window implements ClickListener,TextChangeListener,ValueChangeListener{
@@ -61,11 +70,18 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	private Panel searchResultsPanel;
 	
-	private Panel searchResultsPanelNoResult;
-	
 	private Label searchResultsLabelNoResult;
 	
 	private ResourceBundle resourceBundle;
+	
+	
+	private Panel skillPanel;
+	
+	private Button searchButton;
+	
+	private Tree treeSkills;
+	
+	private ISkillService skillService;
 	
 	
 	 /**
@@ -106,20 +122,17 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
-		searchResultsPanel.removeAllComponents();
 		searchResultsPanel.addStyleName("searchResultsPanel");
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
-		searchResultsPanelNoResult.addComponent(searchResultsLabelNoResult);
-		buildResultsPanel();
 		panelRight.setWidth("800px");
 	}
 	
 	private void buildResultsPanel(){
-		panelRight.addComponent(searchResultsPanelNoResult);
+		searchResultsPanel.removeAllComponents();
+		searchResultsPanel.addComponent(searchResultsLabelNoResult);
+		searchResultsPanel.addComponent(searchResults);
 		panelRight.addComponent(searchResultsPanel);
-		searchResultsPanelNoResult.setVisible(false);
-		searchResultsPanel.setVisible(false);
 	}
 
 	public void initListeners(){
@@ -129,20 +142,16 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	private void buildComponents() {
 		searchByCustomer.setCaption(resourceBundle.getString("search.by.customer.caption"));
-		searchByCustomer.addStyleName(Reindeer.BUTTON_LINK);
-		searchByCustomer.removeStyleName("focus");
 		searchByCustomer.addClickListener(this);
 		
 		searchByName.setCaption(resourceBundle.getString("search.by.name.caption"));
-		searchByName.addStyleName(Reindeer.BUTTON_LINK);
-		searchByName.addStyleName("focus");
 		searchByName.addClickListener(this);
 		
 		searchBySkill.setCaption(resourceBundle.getString("search.by.skill.caption"));
-		searchBySkill.addStyleName(Reindeer.BUTTON_LINK);
-		searchBySkill.removeStyleName("focus");
 		searchBySkill.addClickListener(this);
 		
+		CUtils.decorateButton(searchByName, searchByCustomer, searchBySkill);
+		CUtils.decorateButtonAsLink(searchByCustomer,searchByName,searchBySkill);
 		searchResultsLabelNoResult.setValue(resourceBundle.getString("search.results.panel.no.result.label"));
 		
 	}
@@ -160,28 +169,101 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	    hLayout.addComponent(panelLeft);
 	}
 
+	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		panelRight.removeAllComponents();
 		if (event.getButton().equals(searchByName)) { 
-			searchByName.addStyleName("focus");
-			searchByCustomer.removeStyleName("focus");
-			searchBySkill.removeStyleName("focus");
+			CUtils.decorateButton(searchByName, searchByCustomer, searchBySkill);
 			panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
-			buildResultsPanel();
-		} else if (event.getButton().equals(searchByCustomer)) {
-			searchByName.removeStyleName("focus");
-			searchByCustomer.addStyleName("focus");
-			searchBySkill.removeStyleName("focus");
+		} 
+		else if (event.getButton().equals(searchByCustomer)) {
+			CUtils.decorateButton(searchByCustomer, searchByName, searchBySkill);
 			panelRight.setContent(searchByCustomerForm.buildSearchByCustomerFormView());
-			buildResultsPanel();
-		} else if(event.getButton().equals(searchBySkill)) {
-			searchByName.removeStyleName("focus");
-			searchByCustomer.removeStyleName("focus");
-			searchBySkill.addStyleName("focus");
-//			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
+		} 
+		else if(event.getButton().equals(searchBySkill)) {
+			CUtils.decorateButton(searchBySkill, searchByCustomer, searchByName);
+			skillPanel.removeAllComponents();
+			treeSkills.removeAllItems();
+			treeSkills.setImmediate(true);
+			CUtils.buildTreeSkills(treeSkills, skillService);
+			skillPanel.addComponent(treeSkills);
+			searchButton.setCaption(resourceBundle.getString("search.button.caption"));
+			searchButton.addClickListener(this);
+			skillPanel.addComponent(searchButton);
+			panelRight.setContent(skillPanel);
+		} 
+		else if (event.getButton().equals(searchButton)) {
+			Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
+			List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
+			List<Integer> colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+			listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
+			displayResult(listCollab);
+				
 		}
 		
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public Set<Integer> buildToolListOfTreeSkills(Tree treeSkills){
+		
+		Set<Integer> toolIdSelectedSet = new HashSet<Integer>();
+		Collection<?> itemIds = treeSkills.getItemIds();
+		for (Object itemId : itemIds) {
+			
+			if(itemId instanceof Category){
+				if(treeSkills.isSelected(itemId)){
+					Collection<Concept> allConceptOfCategory =  (Collection<Concept>) treeSkills.getChildren(itemId);
+					for (Concept concept : allConceptOfCategory) {
+						List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,concept);
+						toolIdSelectedSet.addAll(allToolIdOfConcept);
+					}
+				}
+			}
+			else if(itemId instanceof Concept){
+				if(treeSkills.isSelected(itemId)){
+					List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,itemId);
+					toolIdSelectedSet.addAll(allToolIdOfConcept);
+				}
+			} else if (itemId instanceof Tool) {
+				if(treeSkills.isSelected(itemId)){
+					Tool currentTool = (Tool) itemId;
+					toolIdSelectedSet.add(currentTool.getId());
+				}
+			}
+		}
+		
+		return toolIdSelectedSet;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Integer> getAllItemIdChildrensOfConcept(Tree treeSkills, Object itemId){
+		Collection<Tool> childrens =  (Collection<Tool>) treeSkills.getChildren(itemId);
+		List<Integer> toolId = new ArrayList<Integer>();
+		for (Tool tool : childrens) {
+			toolId.add(tool.getId());
+		}
+		return toolId;
+	}
+	
+	
+	
+	public void displayResult(List<Colleague> listCollab){
+		buildResultsPanel();
+		if(listCollab == null || listCollab.isEmpty()){
+			searchResultsLabelNoResult.setVisible(true);
+			searchResults.setVisible(false);
+		} else {
+			searchResultsLabelNoResult.setVisible(false);
+			searchResults = searchResults.buildSearchResultsView(listCollab);
+			if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
+				searchResults.setPageLength(searchResults.size());
+			} else{
+				searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
+			}
+			searchResults.setVisible(true);
+		}
 	}
 	
 	
@@ -198,52 +280,21 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			} else {
 				listCollab = collabService.getAllColleaguesByName(valueField);
 			}
-			
-			if(listCollab.isEmpty()){
-				searchResultsPanelNoResult.setVisible(true);
-				searchResultsPanel.setVisible(false);
-			} else {
-				searchResultsPanel.removeAllComponents();
-				searchResultsPanelNoResult.setVisible(false);
-				searchResultsPanel.setVisible(true);
-				searchResults = searchResults.buildSearchResultsView(listCollab);
-				if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
-					searchResults.setPageLength(searchResults.size());
-				} else{
-					searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
-				}
-				searchResultsPanel.addComponent(searchResults);
-			}
+			displayResult(listCollab);
 		}
 	}
 	
 	@Override
 	public void valueChange(ValueChangeEvent event) {
 		if (event.getProperty().getValue() == null){
-			searchResultsPanelNoResult.setVisible(true);
-			searchResultsPanel.setVisible(false);
+			searchResultsLabelNoResult.setVisible(true);
+			searchResults.setVisible(false);
 		}else {
 			Client client = (Client)event.getProperty().getValue();
 			listCollab = collabService.getAllColleaguesByClient(client);
-			if(listCollab.isEmpty()){
-				searchResultsPanelNoResult.setVisible(true);
-				searchResultsPanel.setVisible(false);
-			}else{
-				searchResultsPanel.removeAllComponents();
-				searchResultsPanelNoResult.setVisible(false);
-				searchResultsPanel.setVisible(true);
-				searchResults.buildSearchResultsView(listCollab);
-				if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
-					searchResults.setPageLength(searchResults.size());
-				} else{
-					searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
-				}
-				searchResultsPanel.addComponent(searchResults);
-				
-			}
+			displayResult(listCollab);
 		}
 	}
-	
 	
 	public Panel getPanelLeft() {
 		return panelLeft;
@@ -354,17 +405,6 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		this.searchResults = searchResults;
 	}
 
-
-	public Panel getSearchResultsPanelNoResult() {
-		return searchResultsPanelNoResult;
-	}
-
-
-	public void setSearchResultsPanelNoResult(Panel searchResultsPanelNoResult) {
-		this.searchResultsPanelNoResult = searchResultsPanelNoResult;
-	}
-
-
 	public Label getSearchResultsLabelNoResult() {
 		return searchResultsLabelNoResult;
 	}
@@ -394,4 +434,45 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		this.searchByCustomerForm = searchByCustomerForm;
 	}
 
+	public Panel getSkillPanel() {
+		return skillPanel;
+	}
+
+
+	public void setSkillPanel(Panel skillPanel) {
+		this.skillPanel = skillPanel;
+	}
+
+
+	public Button getSearchButton() {
+		return searchButton;
+	}
+
+
+	public void setSearchButton(Button searchButton) {
+		this.searchButton = searchButton;
+	}
+
+
+	public Tree getTreeSkills() {
+		return treeSkills;
+	}
+
+
+	public void setTreeSkills(Tree treeSkills) {
+		this.treeSkills = treeSkills;
+	}
+
+
+	public ISkillService getSkillService() {
+		return skillService;
+	}
+
+
+	public void setSkillService(ISkillService skillService) {
+		this.skillService = skillService;
+	}
+
+
+	
 }
