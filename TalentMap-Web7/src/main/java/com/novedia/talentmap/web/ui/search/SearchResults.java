@@ -35,14 +35,14 @@ public class SearchResults extends Table implements ClickListener {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllItems();
-		mainBuild();
+//		mainBuild();
 		buildResultsTable(listCollab);
 		return this;
 	}
 
-	public void mainBuild() {
-		addColumns();
-	}
+//	public void mainBuild() {
+//		addColumns();
+//	}
 
 	public void addColumns() {
 		addContainerProperty(resourceBundle.getString("name.table.header.caption"), String.class, null);

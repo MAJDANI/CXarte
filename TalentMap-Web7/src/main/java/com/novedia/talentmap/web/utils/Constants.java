@@ -12,14 +12,6 @@ public class Constants {
 	
 	public static final int NB_ROWS_DEFAULT = 10;
 	
-	public static final String MANAGE_TOOLS_VIEW_TITLE = "Manage tools View";
-	
-	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
-	
-	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
-	
-	public static final String DELETE_COLLEAGUE_MSG = "Are you sure you want to delete these colleagues ?";
-	
 	// 3 constants to validate fields in MissionForm
     public static final int VALIDATION_FIELD_MISSING = 0;
     
@@ -46,16 +38,6 @@ public class Constants {
 	public static final String DATE_FORMAT = "DD/MM/YY";
 
 	public static final String SEARCH_LABEL = "Search";
-	
-	/**
-     * Constant for Admin View
-     */
-	
-	public static final String DELETE_COLLEAGUE_LABEL = "Delete Collab";
-	
-	public static final String MANAGE_TOOL_LABEL = "Manage Tool";
-	
-	public static final String[] VISIBLE_COlUMN = { "First Name", "Last Name","Email", "Phone" };
 	
 	
 	/**

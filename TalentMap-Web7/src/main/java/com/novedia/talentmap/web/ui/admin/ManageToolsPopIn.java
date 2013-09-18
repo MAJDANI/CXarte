@@ -1,14 +1,18 @@
 package com.novedia.talentmap.web.ui.admin;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Category;
 import com.novedia.talentmap.model.entity.Concept;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Button;
@@ -70,17 +74,22 @@ public class ManageToolsPopIn extends Window implements ItemClickListener,
 	private Integer currentConceptId;
 	
 	private Integer currentToolId;
+	
+	private ResourceBundle resourceBundle;
 
 	/**
 	 * Default constructor
 	 */
 	public ManageToolsPopIn() {
 		super();
-		setCaption(Constants.MANAGE_TOOLS_VIEW_TITLE);
 		setModal(true);
+		setWidth("500px");
 	}
 
 	public Window buildManageToolsView() {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+		setCaption(resourceBundle.getString("manage.tool.view.title"));
 		removeAllComponents();
 		buildContent();
 
@@ -88,19 +97,16 @@ public class ManageToolsPopIn extends Window implements ItemClickListener,
 	}
 
 	public void buildContent() {
-		
 		buildButtons();
 		buildAddSkillPanel();
 		buildTreeSkillsPanel();
 		buildSkillFormPanel();
 		buildManageContentPanel();
 		buildContentPanel();
-
 	}
 
 	private void buildAddSkillPanel(){
 		addSkillPanel.removeAllComponents();
-		
 		addSkillPanel.addComponent(addSkillButton);
 	}
 	

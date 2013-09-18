@@ -1,6 +1,10 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import com.novedia.talentmap.web.utils.Constants;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -29,6 +33,8 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	
 	private ManageToolsPopIn manageToolsPopIn;
 	
+	private ResourceBundle resourceBundle;
+	
 	/**
 	 * Default constructor
 	 */
@@ -43,6 +49,8 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	 * @return VerticalLayout
 	 */
 	public VerticalLayout buildAdminContent(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
@@ -57,14 +65,14 @@ public class AdminView extends VerticalLayout implements ClickListener {
 		gridLayout.setColumns(2);
 		
 		manageColleaguePanel.removeAllComponents();
-		deleteColleagueButton.setCaption(Constants.DELETE_COLLEAGUE_LABEL);
+		deleteColleagueButton.setCaption(resourceBundle.getString("delete.button.colleague.caption"));
 		deleteColleagueButton.addStyleName(Reindeer.BUTTON_LINK);
 		deleteColleagueButton.addClickListener(this);
 		deleteColleagueButton.addStyleName("labelBtnDashboard");
 		manageColleaguePanel.addComponent(deleteColleagueButton);
 		
 		manageToolPanel.removeAllComponents();
-		manageToolButton.setCaption(Constants.MANAGE_TOOL_LABEL);
+		manageToolButton.setCaption(resourceBundle.getString("manage.button.tool.caption"));
 		manageToolButton.addStyleName(Reindeer.BUTTON_LINK);
 		manageToolButton.addClickListener(this);
 		manageToolButton.addStyleName("labelBtnDashboard");
@@ -77,13 +85,9 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	@Override
 	public void buttonClick(ClickEvent event) {
 		if(event.getButton().equals(deleteColleagueButton)){
-			
 			getUI().addWindow(manageColleaguePopIn.buildManageColleagueView());
-			
 		}else if (event.getButton().equals(manageToolButton)){
-			
 			getUI().addWindow(manageToolsPopIn.buildManageToolsView());
-			
 		}
 		
 	}

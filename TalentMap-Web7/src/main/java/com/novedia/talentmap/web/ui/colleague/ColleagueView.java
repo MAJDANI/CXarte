@@ -117,7 +117,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 			searchButtonCm.addClickListener(this);
 			searchButtonCm.addStyleName(Reindeer.BUTTON_LINK);
 			searchCmPanel.addComponent(searchButtonCm);
-			searchCmPanel.addStyleName("labelBtnDashboard eaePanel");
+			searchCmPanel.addStyleName("labelBtnDashboard recherchePanel");
 			gridLayout.addComponent(searchCmPanel);
 		}
 		

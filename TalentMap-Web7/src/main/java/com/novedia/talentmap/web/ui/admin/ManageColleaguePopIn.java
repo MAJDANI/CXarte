@@ -1,11 +1,17 @@
 package com.novedia.talentmap.web.ui.admin;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IAdminService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.PropertiesFile;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
@@ -20,7 +26,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
-public class ManageColleaguePopIn extends Window implements TextChangeListener, ClickListener {
+public class ManageColleaguePopIn extends Window implements TextChangeListener, ClickListener, ValueChangeListener {
 	
 	private IAdminService adminService;
 	
@@ -49,16 +55,21 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
     private Button yesButton;
     
     private Button noButton;
+    
+    private ResourceBundle resourceBundle;
 	
 	
 	
 	public ManageColleaguePopIn(){
 		super();
-		setCaption(Constants.DELETE_COLLEAGUE_VIEW_TITLE);
 		setModal(true);
+		setWidth("500px");
 	}
 	
 	public Window buildManageColleagueView(){
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+		setCaption(resourceBundle.getString("delete.colleague.view.title"));
 		initColleagueListProperty();
 		content.removeAllComponents();
 		content.setSpacing(true);
@@ -69,14 +80,14 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 		content.addComponent(searchResultPanel);
 		searchResultPanel.addComponent(containerButton);
 		addComponent(content);
-		searchResultPanel.setVisible(false);
+		enableOrDisableSearchResultPanel();
 		return this;
 	}
 	
 	
 	private void buildSearchPanel(){
 		searchPanel.removeAllComponents();
-		colleagueNameField.setCaption(Constants.TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL);
+		colleagueNameField.setCaption(resourceBundle.getString("name.Field.textfield.caption"));
 		colleagueNameField.addTextChangeListener(this);
 		searchPanel.addComponent(colleagueNameField);
 	}
@@ -107,14 +118,15 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	}
 	
 	private void initColleagueListProperty(){
-		for (String property : Constants.VISIBLE_COlUMN) {
-		    colleagueTableList.addContainerProperty(property, String.class, "");
-		}
+		colleagueTableList.addContainerProperty(resourceBundle.getString("name.table.header.caption"), String.class, null);
+		colleagueTableList.addContainerProperty(resourceBundle.getString("firstName.table.header.caption"), String.class, null);
+		colleagueTableList.addContainerProperty(resourceBundle.getString("email.table.header.caption"), String.class, null);
 		colleagueTableList.addStyleName("table");
 		colleagueTableList.setSelectable(true);
 		colleagueTableList.setImmediate(true);
 		colleagueTableList.setNullSelectionAllowed(true);
 		colleagueTableList.setMultiSelect(true);
+		colleagueTableList.addValueChangeListener(this);
 	}
 	
 	private void fillResultPanel(String value){
@@ -125,8 +137,7 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 			for (Colleague colleague : colleagueResult) {
 				colleagueTableList.addItem(
 					    new Object[] { colleague.getFirstName(),
-						    colleague.getLastName(), colleague.getEmail(),
-						    colleague.getPhone() }, colleague);
+						    colleague.getLastName(), colleague.getEmail() }, colleague);
 			}
 		}
 		if (colleagueTableList.size() < Constants.NB_ROWS_DEFAULT) {
@@ -141,8 +152,9 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 		containerButton.removeAllComponents();
 		containerButton.setSpacing(true);
 		containerButton.addStyleName("containerButton");
-		deleteColleagueButton.setCaption("Delete");
+		deleteColleagueButton.setCaption(resourceBundle.getString("delete.button.caption"));
 		deleteColleagueButton.addClickListener(this);
+		deleteColleagueButton.setEnabled(false);
 		deleteColleagueButton.addStyleName("delBtn");
 		containerButton.addComponent(deleteColleagueButton);
 	}
@@ -161,6 +173,17 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		Set<Colleague> setItemSelected = (Set<Colleague>) colleagueTableList.getValue();
+		if (setItemSelected != null && setItemSelected.size() != 0) {
+			deleteColleagueButton.setEnabled(true);
+		} else {
+			deleteColleagueButton.setEnabled(false);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	private void delecteColleague(){
 		Set<Colleague> colleagueSelected = (Set<Colleague>) colleagueTableList.getValue();
 		adminService.deleteColleague(colleagueSelected);
@@ -169,17 +192,17 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	
 	private void buildConfirmWindow(){
 		windowConfirm.removeAllComponents();
-		windowConfirm.setCaption("Confirm Delete");
+		windowConfirm.setCaption(resourceBundle.getString("window.confirm.delete.title"));
 		windowConfirm.center();
 		windowConfirm.setModal(true);
 		windowConfirm.setReadOnly(true);
-		confirmDeleteLabel.setCaption(Constants.DELETE_COLLEAGUE_MSG);
+		confirmDeleteLabel.setCaption(resourceBundle.getString("msg.confirm.delete.colleague"));
 		confirmButtonContainer.setSpacing(true);
 		confirmButtonContainer.addStyleName("containerButton");
-		yesButton.setCaption("Yes");
+		yesButton.setCaption(resourceBundle.getString("yes.confirm.button.caption"));
 		yesButton.addStyleName("styleButton");
 		yesButton.addClickListener(this);
-		noButton.setCaption("No");
+		noButton.setCaption(resourceBundle.getString("no.confirm.button.caption"));
 		noButton.addStyleName("styleButton");
 		noButton.addClickListener(this);
 		confirmButtonContainer.addComponent(yesButton);
@@ -301,5 +324,6 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	public void setAdminService(IAdminService adminService) {
 		this.adminService = adminService;
 	}
+
 
 }

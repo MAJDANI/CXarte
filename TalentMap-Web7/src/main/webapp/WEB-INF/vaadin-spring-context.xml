@@ -423,7 +423,7 @@
 	</bean>
 	
 	
-	<bean id="searchResultsAdmin" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session">
-	</bean>
+<!-- 	<bean id="searchResultsAdmin" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session"> -->
+<!-- 	</bean> -->
 	
 </beans>

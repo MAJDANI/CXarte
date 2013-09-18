@@ -64,6 +64,7 @@ public class IaView extends VerticalLayout implements ClickListener {
 		searchButton.addClickListener(this);
 		searchButton.addStyleName("labelBtnDashboard");
 		searchPanel.addComponent(searchButton);
+		searchPanel.addStyleName("labelBtnDashboard recherchePanel");
 		
 		gridLayout.addComponent(searchPanel);
 	}

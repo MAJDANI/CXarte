@@ -333,6 +333,11 @@
 	background-size:200px;
 }
 
+.labelBtnDashboard.recherchePanel{
+	background:url(img/recherche.jpg) center no-repeat;
+	background-size:200px;
+}
+
 .table {
 	text-align: center;
 }
