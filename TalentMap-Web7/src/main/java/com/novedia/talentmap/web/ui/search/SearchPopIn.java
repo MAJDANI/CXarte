@@ -88,6 +88,9 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
      * POJO
      */
     private List<Colleague> listCollab;
+    
+    
+    Authentication authentication ;
 	
 	/**
 	 * Default constructor
@@ -104,6 +107,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
       * @return Window
       */
 	public Window buildSearchPopIn(){
+		authentication = TalentMapApplication.getCurrent().getAuthentication();
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		setCaption(resourceBundle.getString("window.search.popin.title"));
@@ -195,7 +199,13 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		else if (event.getButton().equals(searchButton)) {
 			Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
 			List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
-			List<Integer> colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+			List<Integer> colleaguesIdList;
+			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
+				int managerId = authentication.getColleagueId();
+				colleaguesIdList = skillService.getCmColleagueIdByListToolId(skillsIdListToSearch, managerId);
+			}else {
+				colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+			}
 			listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
 			displayResult(listCollab);
 				
@@ -269,11 +279,9 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	
 	@Override
 	public void textChange(TextChangeEvent event) {
-		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		if(event.getComponent().equals(searchByNameForm.getNameField())){
 			String valueField = event.getText();
 			valueField = valueField.trim();
-			searchResults.setRoleId((authentication.getAuthorization().getRoleId()));
 			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
 				int managerId = authentication.getColleagueId();
 				listCollab = collabService.getCmColleaguesByName(valueField, managerId);
@@ -291,7 +299,12 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			searchResults.setVisible(false);
 		}else {
 			Client client = (Client)event.getProperty().getValue();
-			listCollab = collabService.getAllColleaguesByClient(client);
+			if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())) {
+				int managerId = authentication.getColleagueId();
+				listCollab = collabService.getCmColleaguesByClient(client.getId(), managerId);
+			} else {
+				listCollab = collabService.getAllColleaguesByClient(client);
+			}
 			displayResult(listCollab);
 		}
 	}

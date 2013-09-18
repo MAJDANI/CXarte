@@ -16,8 +16,6 @@ import com.vaadin.ui.Table;
 @SuppressWarnings("serial")
 public class SearchResults extends Table implements ClickListener {
 
-	private Integer roleId;
-
 	private ResourceBundle resourceBundle;
 	
 	/**
@@ -84,14 +82,6 @@ public class SearchResults extends Table implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public Integer getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 
 }

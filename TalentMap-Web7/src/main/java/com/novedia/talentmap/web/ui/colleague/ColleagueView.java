@@ -3,7 +3,10 @@ package com.novedia.talentmap.web.ui.colleague;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.novedia.talentmap.model.entity.Authentication;
+import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
@@ -39,6 +42,12 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private PersonalEAEPopIn personalEAEPopIn;
 	
 	private ResourceBundle resourceBundle;
+	
+	private SearchPopIn searchPopIn;
+	
+	private Panel searchCmPanel;
+	
+	private Button searchButtonCm;
 
 
 	/**
@@ -101,6 +110,18 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		gridLayout.addComponent(eaePanel);
 		gridLayout.addComponent(formationPanel);
 		
+		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
+		if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
+			searchCmPanel.removeAllComponents();
+			searchButtonCm.setCaption(resourceBundle.getString("search.button.caption"));
+			searchButtonCm.addClickListener(this);
+			searchButtonCm.addStyleName(Reindeer.BUTTON_LINK);
+			searchCmPanel.addComponent(searchButtonCm);
+			searchCmPanel.addStyleName("labelBtnDashboard eaePanel");
+			gridLayout.addComponent(searchCmPanel);
+		}
+		
+		
 		profilePopIn.addStyleName("popinStyle");
 		personalEAEPopIn.addStyleName("popinStyle");
 		
@@ -113,6 +134,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		}
 		else if(event.getButton().equals(eaeButton)){
 			getUI().addWindow(personalEAEPopIn.buildPersonalEAEPopIn());
+		} else if (event.getButton().equals(searchButtonCm)) {
+			getUI().addWindow(searchPopIn.buildSearchPopIn());
 		}
 		
 	}
@@ -211,4 +234,36 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	public void setPersonalEAEPopIn(PersonalEAEPopIn personalEAEPopIn) {
 		this.personalEAEPopIn = personalEAEPopIn;
 	}
+
+
+	public SearchPopIn getSearchPopIn() {
+		return searchPopIn;
+	}
+
+
+	public void setSearchPopIn(SearchPopIn searchPopIn) {
+		this.searchPopIn = searchPopIn;
+	}
+
+
+	public Panel getSearchCmPanel() {
+		return searchCmPanel;
+	}
+
+
+	public void setSearchCmPanel(Panel searchCmPanel) {
+		this.searchCmPanel = searchCmPanel;
+	}
+
+
+	public Button getSearchButtonCm() {
+		return searchButtonCm;
+	}
+
+
+	public void setSearchButtonCm(Button searchButtonCm) {
+		this.searchButtonCm = searchButtonCm;
+	}
+	
+	
 }
