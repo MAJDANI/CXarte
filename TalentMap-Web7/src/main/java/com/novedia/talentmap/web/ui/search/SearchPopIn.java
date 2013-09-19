@@ -190,6 +190,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			treeSkills.removeAllItems();
 			treeSkills.setImmediate(true);
 			CUtils.buildTreeSkills(treeSkills, skillService);
+			treeSkills.setMultiSelect(true);
 			skillPanel.addComponent(treeSkills);
 			searchButton.setCaption(resourceBundle.getString("search.button.caption"));
 			searchButton.addClickListener(this);

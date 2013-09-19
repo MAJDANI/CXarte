@@ -40,8 +40,6 @@ public abstract class CUtils {
      * @return 
      */
     public static void buildTreeSkills(Tree treeSkills,ISkillService skillService){
-		treeSkills.setMultiSelect(true);
-    	
 		List<VSkill> listVSkill = skillService.getAllVSkillOrdered();
 		
 		for (VSkill vSkill : listVSkill) {

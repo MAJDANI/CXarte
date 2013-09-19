@@ -416,11 +416,11 @@
 	
 	<bean id="searchResults" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session" />
 
-	<bean id="nameFieldSearchAdminBean" class="com.vaadin.ui.TextField" scope="session" />
+<!-- 	<bean id="nameFieldSearchAdminBean" class="com.vaadin.ui.TextField" scope="session" /> -->
 	
-	<bean id="searchByNameFormAdmin" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">
-		<property name="nameField" ref="nameFieldSearchAdminBean" />
-	</bean>
+<!-- 	<bean id="searchByNameFormAdmin" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session"> -->
+<!-- 		<property name="nameField" ref="nameFieldSearchAdminBean" /> -->
+<!-- 	</bean> -->
 	
 	
 <!-- 	<bean id="searchResultsAdmin" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session"> -->
