@@ -116,4 +116,21 @@ public class ObjectiveDao extends SqlMapClientDaoSupport implements
 				DBRequestsConstants.GET_OBJECTIVES_FOR_EAE, idEAE);
 	}
 
+    /**
+	 * Gets, for a given EAE id, the list of precedent objectives related, i.e.
+	 * the objectives of the precedent EAE. These objectives are displayed
+	 * in the part "Results" of an EAE
+	 * 
+	 * @param idEAE
+	 *            : the id of the EAE we search Precedent Objectives related
+	 * @return List<Objective> : a list of Precedent Objective attached to the
+	 *         EAE
+     * 
+     */
+	public List<Objective> getPrecedentObjectivesByEAEId(Integer idEAE)
+			throws DataAccessException {
+		return (List<Objective>) this.getSqlMapClientTemplate().queryForList(
+				DBRequestsConstants.GET_PRECEDENT_OBJECTIVES_FOR_EAE, idEAE);
+	}
+
 }

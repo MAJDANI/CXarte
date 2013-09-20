@@ -1,11 +1,16 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.impl.EAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.EAEConsultationMode;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
@@ -105,6 +110,14 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 */
 	private EAEConsultationMode currentMode;
 
+	private ResourceBundle resourceBundle;
+
+	private void initResourceBundle() {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(
+				PropertiesFile.TALENT_MAP_PROPERTIES, locale);
+	}
+
 	/**
 	 * Default constructor
 	 */
@@ -141,8 +154,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 */
 	public void buildViewCurrentEAEContentDoesntExists() {
 		removeAllComponents();
+		initResourceBundle();
 		hLayoutCurrentEAE.removeAllComponents();
-		Label text = new Label("No current EAE");
+		Label text = new Label(resourceBundle.getString("eae.no.current.eae.message"));
 		hLayoutCurrentEAE.addComponent(text);
 		hLayoutCurrentEAE.setExpandRatio(text, 1.0f);
 		addComponent(hLayoutCurrentEAE);
@@ -156,6 +170,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 */
 	public void buildViewCurrentEAEContentExists(Integer currentEAEId, EAEConsultationMode mode) {
 		removeAllComponents();
+		initResourceBundle();
 		this.currentEAEId = currentEAEId;
 		this.currentMode = mode;
 
@@ -222,9 +237,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		panelRightCurrentEAE.addStyleName("panelRight");
 
 		panelRightCurrentEAE
-				.setCaption(Constants.CURRENT_EAE_TITLE_1
+				.setCaption(resourceBundle.getString("current.eae.title.part1")
 						+ eaeGeneralityDTO.getCollabLastAndFirstName()
-						+ Constants.CURRENT_EAE_TITLE_2
+						+ resourceBundle.getString("current.eae.title.part2")
 						+ eaeGeneralityDTO.getEaeDate());
 
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
@@ -265,7 +280,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 				objectivesButton.addStyleName("focus");
 				synthesisButton.removeStyleName("focus");
 			}
-			panelRightCurrentEAE.setContent(null);
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAEObjectives(currentEAEId, this.currentMode));
 		} else if (event.getButton().equals(synthesisButton)) {
 			generalityButton.removeStyleName("focus");
 			resultsButton.removeStyleName("focus");
@@ -273,7 +289,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 				objectivesButton.removeStyleName("focus");
 				synthesisButton.addStyleName("focus");
 			}
-			panelRightCurrentEAE.setContent(null);
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAESynthesis(currentEAEId, this.currentMode));
 		}
 
 	}

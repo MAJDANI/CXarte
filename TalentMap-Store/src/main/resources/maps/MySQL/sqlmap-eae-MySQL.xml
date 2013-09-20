@@ -10,6 +10,8 @@
 	<typeAlias alias="colleague" type="com.novedia.talentmap.model.entity.Colleague" />
 	<typeAlias alias="eaeGeneralityDTO" type="com.novedia.talentmap.model.dto.EAEGeneralityDTO" />
 	<typeAlias alias="eaeResultsDTO" type="com.novedia.talentmap.model.dto.EAEResultsDTO" />
+	<typeAlias alias="eaeSynthesisDTO" type="com.novedia.talentmap.model.dto.EAESynthesisDTO" />
+	<typeAlias alias="eaeColleagueResumeForCMDTO" type="com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO" />
 
 	<resultMap id="eaeResult" class="eae">
 		<result property="id" column="EAE_ID" />
@@ -27,7 +29,7 @@
 <!-- 		<result property="salary" column="SALARY" /> -->
 	</resultMap>
 
-	<resultMap id="eaeSynthesisResult" class="eaeForSynthesis">
+	<resultMap id="eaeForSynthesisResult" class="eaeForSynthesis">
 		<result property="id" column="EAE_ID" />
 		<result property="lastName" column="LAST_NAME" />
 		<result property="firstName" column="FIRST_NAME" />
@@ -74,7 +76,25 @@
 		<result property="meansToProgress" column="MEANS_TO_PROGRESS" />
 	</resultMap>
 
+	<resultMap id="eaeSynthesisResult" class="eaeSynthesisDTO">
+		<result property="id" column="EAE_ID" />
+		<result property="colleaguesSynthesis" column="COLLEAGUES_SYNTHESIS" />
+		<result property="managersSynthesis" column="MANAGERS_SYNTHESIS" />
+		<result property="other" column="OTHER" />
+	</resultMap>
 
+	<resultMap id="eaeColleagueResumeForCMResult" class="eaeColleagueResumeForCMDTO">
+		<result property="idColleague" column="COLLEAGUE_ID" />
+		<result property="idEAE" column="EAE_ID" />
+		<result property="collabLastName" column="C_LAST_NAME" />
+		<result property="collabFirstName" column="C_FIRST_NAME" />
+		<result property="eaeDate" column="EAE_DATE" />
+		<result property="eaeStateId" column="EAE_STATE_ID" />
+		<result property="title" column="TITLE_ID" />
+	</resultMap>
+
+	
+	
 	<select id="get" resultMap="eaeResult" parameterClass="Integer">
 		SELECT * FROM EAE 
 		WHERE EAE_ID = #id#
@@ -148,12 +168,20 @@
 		WHERE EAE_ID = #id#
 	</update>
 
+	<update id="saveEAESynthesis" parameterClass="eaeSynthesisDTO">
+		UPDATE EAE SET 
+			COLLEAGUES_SYNTHESIS = #colleaguesSynthesis#,
+			MANAGERS_SYNTHESIS = #managersSynthesis#,
+			OTHER = #other#,
+		WHERE EAE_ID = #id#
+	</update>
+
 	<delete id="delete" parameterClass="eae">
 		DELETE FROM EAE WHERE EAE_ID = #id#
 	</delete>
 
 
-	<select id="getOngoingEAEForManager" resultMap="eaeSynthesisResult" parameterClass="Integer">
+	<select id="getOngoingEAEForManager" resultMap="eaeForSynthesisResult" parameterClass="Integer">
 		SELECT eae.EAE_ID  as "EAE_ID",
 		c.LAST_NAME as "LAST_NAME",
 		c.FIRST_NAME as "FIRST_NAME",
@@ -177,7 +205,7 @@
 		where EAE.MANAGER_ID=#id# and EAE.EAE_STATE_ID in (1,2));	
 	</select>
 
-	<select id="getHistoryEAEForCollab" resultMap="eaeSynthesisResult" parameterClass="Integer">
+	<select id="getHistoryEAEForCollab" resultMap="eaeForSynthesisResult" parameterClass="Integer">
 		SELECT EAE.EAE_ID, 
 		"" as "LAST_NAME",
 		"" as "FIRST_NAME",
@@ -212,10 +240,27 @@
 		WHERE EAE_ID = #id#
 	</select>
 	
+	<select id="getEAESynthesis" resultMap="eaeSynthesisResult" parameterClass="Integer">
+		SELECT EAE_ID, COLLEAGUES_SYNTHESIS, MANAGERS_SYNTHESIS, OTHER
+		FROM EAE 
+		WHERE EAE_ID = #id#
+	</select>
 	
 	<select id="getOpenEAEIdForColleague" resultClass="Integer" parameterClass="Integer">
 		SELECT EAE_ID FROM EAE WHERE COLLEAGUE_ID=#id#
 		AND EAE_STATE_ID=1;
 	</select>	
-	
+
+	<select id="getEAEColleagueResumeForCM" resultMap="eaeColleagueResumeForCMResult" parameterClass="Integer">
+		SELECT C.COLLEAGUE_ID AS "COLLEAGUE_ID", C.LAST_NAME AS "C_LAST_NAME", C.FIRST_NAME AS "C_FIRST_NAME" , 
+				E.EAE_ID AS "EAE_ID", E.EAE_STATE_ID AS "EAE_STATE_ID", 
+				C.TITLE as "TITLE_ID", MAX(E.EAE_DATE) AS EAE_DATE
+		FROM EAE E, COLLEAGUE C
+		WHERE C.COLLEAGUE_ID =  E.COLLEAGUE_ID
+		AND C.MANAGER_ID=#id#
+		GROUP BY C.COLLEAGUE_ID;
+	</select>
+
+
+
 </sqlMap>

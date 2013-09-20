@@ -1,4 +1,4 @@
-package com.novedia.talentmap.web.ui.colleague.eae;
+package com.novedia.talentmap.web.utils;
 
 import java.util.Hashtable;
 
@@ -62,18 +62,15 @@ import java.util.Hashtable;
  * |			|				|Points forts collab			|Modification	|Consultation	|Consultation	|	
  * |			|				|Points faibles collab			|Modification	|Consultation	|Consultation	|
  * |			|				|Moyens à fournir				|Absent			|Absent			|Consultation	|		
-
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * |			| Objectifs		|Bouton création				|Onglet Absent	|Onglet Absent	|
- * |			|				|Formulaire de saisie			|Onglet Absent	|Onglet Absent	|	
- * |			| Synthèse		|Formulaire de saisie			|Onglet Absent	|Onglet Absent	|	
- * _____________________________________________________________________________________________|
+  * |			| Objectifs		|Bouton création				|				|				|				|
+ * |			|				|Formulaire de saisie :			|				|				|				|
+ * |			|				|  (But,date,indicateurs,Moyens)|				|				|Consultation	|
+ * |			|				|   Résults obj Note collab		|				|				|Consultation	|	
+ * |			|				|   Résults obj Note Manager	|				|				|Consultation	|	
+ * |			|				|   Eléments freins ou moteurs	|				|				|Consultation	|	
+ * |			|				|   Commentaires Obj			|				|				|Consultation	|	
+ * |			| Synthèse		|Formulaire de saisie			|				|				|Consultation	|	
+* ______________________________________________________________________________________________________________|
  * 
  * 
  * @author v.guillemain

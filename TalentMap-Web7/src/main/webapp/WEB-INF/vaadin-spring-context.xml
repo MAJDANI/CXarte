@@ -421,13 +421,23 @@
 	
 	<bean id="gridLayoutCMViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	<bean id="searchPanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="eaePanelCMBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="eaeCMPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="searchButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="eaeButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="eaeCMButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="cmViewBean" class="com.novedia.talentmap.web.ui.cm.CmView" scope="session" >
 		<property name="searchPopIn" ref ="searchPopInCMBean" />
+		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />
+		<property name="cmEAEPopIn" ref ="cmEAEPopInBean" />
 		<property name="gridLayout" ref ="gridLayoutCMViewBean" />
 		<property name="searchPanel" ref ="searchPanelCMBean" />
+		<property name="eaePanel" ref ="eaePanelCMBean" />
+		<property name="eaeCMPanel" ref ="eaeCMPanelBean" />
 		<property name="searchButton" ref ="searchButtonCMBean" />
+		<property name="eaeButton" ref ="eaeButtonCMBean" />
+		<property name="eaeCMButton" ref ="eaeCMButtonBean" />
 	</bean>
 	
 	<bean id="searchByCustomerButtonCMBean" class="com.vaadin.ui.Button" scope="session" />

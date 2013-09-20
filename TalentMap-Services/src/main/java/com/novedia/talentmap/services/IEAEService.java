@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO;
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
+import com.novedia.talentmap.model.dto.EAESynthesisDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -118,7 +120,18 @@ public interface IEAEService {
      * @throws DataAccessException
      */
 	EAEResultsDTO getEAEResults(Integer idEAE);
-	
+
+    /**
+     * Gets Synthesis informations corresponding to the given EAE's id
+     * 
+     * @param id
+     *            : the id of the EAE which we want synthesis data
+     * 
+     * @return EAESynthesisDTO : an object EAESynthesisDTO containing synthesis informations of the EAE
+     * @throws DataAccessException
+     */
+	EAESynthesisDTO getEAESynthesis(Integer idEAE);
+
 	/**
 	 * Gets the id of the EAE Open for the Colleague's id given. If no EAE Open
 	 * is found, returns null
@@ -130,6 +143,20 @@ public interface IEAEService {
 	 */
 	Integer getOpenEAEIdForColleague(Integer idCollab);
 
+	/**
+	 * Gets the list of informations about the last EAE for each colleague
+	 * attached to the Manager. This information will be displayed on the
+	 * manager's board for his colleague's EAEs
+	 * 
+	 * @param idManager
+	 *            : the id of the manager who want to get his colleagues' EAE
+	 *            informations
+	 * 
+	 * @return List<EAEColleagueResumeForCMDTO> : the list of
+	 *         EAEColleagueResumeForCMDTO found
+	 */
+	List<EAEColleagueResumeForCMDTO> getEAEColleagueResumeForCM(Integer idManager);
+	
 	/**
 	 * Saves the salary for the EAE given.
 	 * 
@@ -148,5 +175,13 @@ public interface IEAEService {
 	 */
 	int saveEAEResults(EAEResultsDTO eae);
 
+	/**
+	 * Saves the "Synthesis" data for the EAE given. 
+	 * 
+	 * @param eae
+	 *            : the EAESynthesisDTO to save
+	 * 
+	 */
+	int saveEAESynthesis(EAESynthesisDTO eae);
 
 }

@@ -2,6 +2,7 @@ package com.novedia.talentmap.web.ui.colleague.eae;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button.ClickEvent;
@@ -94,7 +95,7 @@ public class HistoryEAEContent extends VerticalLayout implements ClickListener,
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		System.out.println("Button click ");
+		//
 	}
 
 	@Override

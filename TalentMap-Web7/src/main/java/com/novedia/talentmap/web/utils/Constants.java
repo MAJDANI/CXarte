@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.utils;
 
+import com.vaadin.server.ThemeResource;
+
 public class Constants {
 	
 	public static final int CATEGORY_VIEW = -1;
@@ -57,7 +59,7 @@ public class Constants {
     
 //    public static final String MISSION_MSG_DATA_INSERTED_ERROR = "Thecnical error, please try again later";
     
-    public static final String EAE_MSG_ERROR_GENERALITY_FORM = "Missing or invalid field";
+//    public static final String EAE_MSG_ERROR_GENERALITY_FORM = "Missing or invalid field";
 	
 	public static final String EXPERIENCE_FORMAT = "ex : 2";
 
@@ -134,30 +136,17 @@ public class Constants {
 	public static final String SYNTHESIS_EAE_BUTTON_LABEL = "Synthesis";
 
 	/**
-     * Constant for Personel EAE Pop-In => Current EAE => Generality
-     */
-	public static final String MANAGER_LAST_NAME = "Manager's last name";
-	
-	public static final String MANAGER_FIRST_NAME = "Manager's first name";
-	
-	public static final String DATE_OF_EAE = "EAE's date";
-	
-	public static final String DATE_OF_PREV_EAE = "Previous EAE's date";
-	
-	public static final String EAE_SALARY = "Salary";
-
-	public static final String GIVE_SALARY = "Give a salary";
-	
-	public static final String CURRENT_EAE_TITLE_1 = "EAE for : ";
-    
-    public static final String CURRENT_EAE_TITLE_2 = " on date : ";
-
-	/**
      * Constant for Personel EAE Pop-In => Current EAE => Results
      */
 	public static final String EAE_YEAR_SYNTHESIS = "Summary of the past year :";
 	public static final String EAE_COLLAB_STRENGHTS = "My Highlights :";
 	public static final String EAE_COLLAB_WEAKNESSES = "My areas of improvement :";
 	public static final String EAE_RESULTS_TITLE_3 = "3 Overall assessment of my work within the organization :";
+
+	/**
+     * Constant for CM EAE Pop-In 
+     */
+	public static final String IMG_NO_PHOTO_BOY = "img/nophotoBoy.png";
+	public static final String IMG_NO_PHOTO_GIRL = "img/nophotoGirl.png";
 
 }

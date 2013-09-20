@@ -91,7 +91,17 @@
 }
 
 .v-textfield-focus, .v-filterselect-input-focus {
-/*                 border : solid 1px #009cda !important; */
+                border : solid 1px #009cda !important;
+/*                 border : none !important; */
+/* 				outline : none !important; */
+/*                 background: rgba(255,255,255,1); */
+}
+
+.v-textfield-focus, .v-filterselect-input-focus {
+                border : solid 1px #009cda !important;
+}
+
+.monStyleBorderNone {
                 border : none !important;
 				outline : none !important;
                 background: rgba(255,255,255,1);
@@ -337,6 +347,13 @@
 .labelBtnDashboard.eaePanel{
                 background:url(img/eae.png) center no-repeat;
 }
+.labelBtnDashboard.searchPanel{
+                background:url(img/search.png) center no-repeat;
+}
+
+.labelBtnDashboard.eaeCMPanel{
+                background:url(img/eaeCM.png) center no-repeat;
+}
 
 .labelBtnDashboard.formationPanel{
                 background:url(img/param.png) center no-repeat;
@@ -412,6 +429,9 @@
 .panelRight .spacerTop{
                 margin-top:10px;
 }
+.panelRight .spacerBottom{
+                margin-bottom:10px;
+}
 
 .contentPanel .v-panel-content{
                 border: none;
@@ -467,6 +487,33 @@
 }
 
 .monStyleGras {
-	                font-weight:bold;
-	                text-decoration:underline;
+				font-weight:bold;
+	    		text-decoration:underline;
+}
+
+
+#eaeResultsFormLayout .v-accordion-item-caption .v-caption {
+	 background: #a4cc1a;
+}
+
+/* eaeObjectivesFormLayout */
+
+.styleDeTest {
+				position:static;
+                left:10px;
+}
+
+.borderRed{
+	border-style : solid;
+  border-color : red;
+}
+
+.borderOrange{
+	border-style : solid;
+  border-color : orange;
+}
+
+.borderGreen{
+	border-style : solid;
+  border-color : green;
 }
