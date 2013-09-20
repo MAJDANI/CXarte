@@ -81,11 +81,8 @@
 	<bean id="changePasswordButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="gridLayoutColleagueViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
-	<bean id="profilPannelBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="eaePannelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="profilButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="eaeButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="formationPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="formationButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="colleagueDataFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
@@ -239,11 +236,8 @@
 	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
 		<property name="gridLayout" ref ="gridLayoutColleagueViewBean" />
-		<property name="profilPanel" ref ="profilPannelBean" />
-		<property name="eaePanel" ref ="eaePannelBean" />
 		<property name="profilButton" ref ="profilButtonBean" />
 		<property name="eaeButton" ref ="eaeButtonBean" />
-		<property name="formationPanel" ref ="formationPanelBean" />
 		<property name="formationButton" ref ="formationButtonBean" />
 		<property name="profilePopIn" ref ="profilePopIn" />
 		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />

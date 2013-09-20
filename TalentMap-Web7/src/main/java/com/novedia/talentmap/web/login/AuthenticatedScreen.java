@@ -109,11 +109,11 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		addComponent(headerLayout);
 		
 		if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.CL.getId())){ //Collaborator
-			addComponent(colleagueView.builColleagueContent());
+			addComponent(colleagueView.buildColleagueContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.AD.getId())) { // Admin
 			addComponent(adminView.buildAdminContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())) { // CM
-			addComponent(colleagueView.builColleagueContent());
+			addComponent(colleagueView.buildColleagueContent());
 		}  else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.IA.getId())) { // IA
 			addComponent(iaView.buildIaContent());
 		} else if (authentication.getAuthorization().getRoleId().equals(Authorization.Role.RH.getId())) { // RH

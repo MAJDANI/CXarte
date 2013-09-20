@@ -3,8 +3,8 @@
 @import  "../reindeer/styles.css";
 
 @font-face {
-  	font-family: "Myriad";
- 	src: url(font/Myriad.ttf) format("truetype");
+	font-family: "Myriad";
+	src: url(font/Myriad.ttf) format("truetype");
 }
 
 
@@ -15,7 +15,7 @@
 }
 
 .v-app {
-	background: #fff;
+	background:url(img/layer.png);
 	font-family:"Myriad";
 	color: #464f52;
 	font-size: 13px;
@@ -26,17 +26,10 @@
 	background: #242424 url(img/octicons-bg.png) repeat-x !important;
 }
 
-#headerLayout{
-	border-bottom : solid 3px #009cda;
-}
-
-#footerLayer{
-	border-top : solid 3px #009cda;
-}
 
 .headerContent{
 	position:static;
-	background:#fff;
+	background:url(img/layer.png);
 }
 
 #footerLayer{
@@ -92,8 +85,6 @@
 
 .v-textfield-focus, .v-filterselect-input-focus {
 	border : solid 1px #009cda !important;
-	outline : none !important;
-	background: rgba(255,255,255,1);
 }
 
 #logInButton .v-button-wrap,
@@ -112,11 +103,9 @@
 #saveButton.v-button{
 	background-image:none;
 	background-color:#009cda;
-	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	
 	cursor:pointer;
 }
 
@@ -168,22 +157,21 @@
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	
 	background : rgba(255, 0, 0, 0.5);
 	padding:5px 57px;
 }
 
 .v-caption-errorStyle span{
 	color: #B40404;
-
 }
 
 #settingsLayout{
 	position: absolute;
-	right: 0;
-	
+	right: 136px;
+	top:65px;
 	color:#fff;
 	font-size:15px;
+	z-index:5;
 }
 
 #settingsLayout .v-button-caption{
@@ -198,24 +186,21 @@
 
 #logoNovedia{
 	background:url(img/logoNovedia.jpg) no-repeat;
-	
 	width:225px;
 	height:89px;
-	
+	display:none;
+                
 }
 
 #logoTalentMap{
-	background:url(img/logoNovedia.jpg) no-repeat;
-	
-	width:225px;
-	height:89px;
-	
-	margin-left:40%;
-	
-	text-align:center
+	background:url(img/logo_Talent.png) no-repeat;
+	width:932px;
+	height:108px;
+	Margin-left:100px;
+	text-indent:-9999px;
 }
 
-#logoNovedia .v-label{	
+#logoNovedia .v-label{
 	text-indent:-9999px;
 }
 
@@ -235,42 +220,29 @@
 
 .centerPanel{
 	text-align:center;
-	padding:25px;
-	background:#fff;
-	
+	padding: 100px 25px 0 25px;
+	background:url(img/layer.png);
+                
 }
 
 #dashboardLabel{
-	background:url(img/home.png) 0 center no-repeat;
-	background-size: 25px;
-	margin-left:50px;
-	margin-top:50px;
-	cursor:pointer;
+   position: absolute;
+   top:150px;
+   left: 70px;
+   z-index:5;
 }
 
 #dashboardLabel .v-label{
-	font-size:40px;
-	color:#fff;
+	font-size:25px;
+	color:#242424;
 	line-height:normal !important;
-	margin-top:4px;
-	margin-left:35px;
 }
 
 .v-gridlayout-slot .v-panel{
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
-	/*-moz-box-shadow: 0px 0px 25px 5px #888;
-	-webkit-box-shadow: 0px 0px 25px 5px #888;
-	box-shadow: 0px 0px 25px 5px #888;*/
-	border: solid 3px #009cda;
-	
-	overflow:hidden;
-	margin-left:20px;
-	
-	width:200px;
-	height:200px;
+    overflow:hidden;
+    margin-left:20px;
+    width:158px;
+    height:211px;
 }
 
 .v-gridlayout-slot .v-panel-content{
@@ -278,35 +250,20 @@
 	overflow:hidden;
 }
 
-.v-panel-labelBtnDashboard,
 .v-button-labelBtnDashboard{
 	cursor:pointer;
 }
 
-.v-panel-content-labelBtnDashboard .v-button-caption,
-.v-button-labelBtnDashboard .v-button-caption{
-	font-size:22px;
-	color: #009cda;
-	font-weight:bold;
-	text-decoration:none;
-}
-
-.v-panel-content-labelBtnDashboard .v-button-caption:hover,
-.v-button-labelBtnDashboard .v-button-caption:hover{
-	text-decoration:underline;
-}
 
 .v-panel-labelBtnDashboard .v-verticallayout,
 .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
 .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
-	text-align:center;
-	/*top:50%;
-	margin-top:-25px;*/
-	margin-top:145px;
+    margin-top:145px;
+                
 }
 
 .top25{
-	margin-top:25px;
+	argin-top:25px;
 }
 
 /* Lay the options horizontally */
@@ -314,28 +271,36 @@
     display: inline-block;
 }
 
-.labelBtnDashboard .v-panel-content{
-	background:none;
+
+.labelBtnDashboard.profilButton{
+	background:url(img/profil.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.profilPanel{
-	background:url(img/stock-photo-17200729-team-forming-skill-word.jpg) center no-repeat;
-	background-size:200px;
+
+.labelBtnDashboard.eaeButton{
+	background:url(img/eae.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.eaePanel{
-	background:url(img/stock-photo-14344775-positive-or-negative.jpg) center no-repeat;
-	background-size:200px;
+
+.labelBtnDashboard.formationButton{
+	background:url(img/param.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.formationPanel{
-	background:url(img/stock-photo-18656792-back-to-school.jpg) center no-repeat;
-	background-size:200px;
+.labelBtnDashboard.searchButton{
+	background:url(img/search.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.recherchePanel{
-	background:url(img/recherche.jpg) center no-repeat;
-	background-size:200px;
+.v-button-labelBtnDashboard .v-button-wrap{
+	height: 0px !important;
+    padding: 0px !important;
 }
 
 .table {
@@ -354,96 +319,115 @@
 	border-top:solid 1px #009cda;
 }
 
+.mystyleTitleBilanTODO {
+                /*font-style: italic;*/
+                font-size: 16px;
+                color:#a4cc1a;
+}
 .panelLeft .v-verticallayout{
-	padding:0;
+                padding:0;
 }
 
 .panelLeft .v-panel-content{
-	border:none;
+                border:none;
 }
 
 .panelLeft .v-button-caption{
-	color: #009cda;
-	font-size: 15px;
-	text-decoration:none;
-	line-height:25px;
-	border:none;
+                color: #009cda;
+                font-size: 15px;
+                text-decoration:none;
+                line-height:25px;
+                border:none;
 }
 
 .panelLeft .v-button-caption:hover,
 .panelLeft .focus .v-button-caption{
-	text-decoration:underline;
-	font-weight:bold;
+                text-decoration:underline;
+                font-weight:bold;
 }
 
 .panelLeft .focus .v-button-caption{
-	text-transform:uppercase;
+                text-transform:uppercase;
 }
 
 .panelRight .v-panel-content{
-/* 	border-right:none; */
+/*           border-right:none; */
 }
 
 .panelRight .v-panel-content .v-formlayout{
-	text-align:center;
+                text-align:center;
 }
 
 .panelRight .v-caption-spacerInfo {
-	left:10px !important;
+                left:10px !important;
 }
 
 .panelRight .spacerInfo{
-	margin-left:10px;
+                margin-left:10px;
 }
 
 .panelRight .v-caption-spacerTop {
-	top:10px !important;
+                top:10px !important;
 }
 
 .panelRight .spacerTop{
-	margin-top:10px;
+                margin-top:10px;
 }
 
 .contentPanel .v-panel-content{
-	border: none;
+                border: none;
 }
 .v-panel-nocaption-contentPanel{
-	border: none;
+                border: none;
 }
 
 .v-table .v-selected, 
 .black .v-table .v-selected {
-	background: #009cda;
-	color: #fff;
-	text-shadow: #3b5a7a 0 1px 0;
+                background: #009cda;
+                color: #fff;
+                text-shadow: #3b5a7a 0 1px 0;
 }
 
 .addMission{
-	margin-left:20px;
+                margin-left:20px;
 }
 
 .listMissionPanel .v-panel-content{
-	border:none;
+                border:none;
 }
 
 .v-panel-content-searchResultsPanel{
-	border:none;
+                border:none;
 }
 
 .v-panel-content-searchResultsPanel .v-verticallayout{
-	padding-left:0;
+                padding-left:0;
 }
 
 .visualizeMissionHistory{
-	margin-left:10px;
+                margin-left:10px;
 }
 
 .v-panel-content-searchResultsPanel .v-table-cell-content {
-	vertical-align: middle !important;
+                vertical-align: middle !important;
 }
 
 .v-ratingstars-wrapper{
-	border: none !important;
+                border: none !important;
 }
 
+.v-formlayout-contentcell,
+.v-formlayout-captioncell, 
+.v-formlayout-errorcell{
+                padding: 0 !important;
+}
 
+.v-formlayout-captioncell, 
+.v-formlayout-errorcell{
+                display:none;
+}
+
+.monStyleGras {
+	                font-weight:bold;
+	                text-decoration:underline;
+}

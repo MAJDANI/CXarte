@@ -474,6 +474,10 @@ public final class DBRequestsConstants {
 	
 	
 	// OBJECTIVE REQUEST
+	public static final String GET_OBJECTIVE = "objective.get";
+	public static final String ADD_OBJECTIVE = "objective.add";
+	public static final String SAVE_OBJECTIVE = "objective.save";
+	public static final String DELETE_OBJECTIVE = "objective.delete";
 	public static final String GET_OBJECTIVES_FOR_EAE = "objective.getObjectivesByEAEId";
 	
 }

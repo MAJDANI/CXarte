@@ -100,5 +100,9 @@
 	<bean id="eaeDao" class="com.novedia.talentmap.store.impl.EAEDao">
 		<constructor-arg ref="sqlMapClient" />
 	</bean>
+	
+	<bean id="objectiveDao" class="com.novedia.talentmap.store.impl.ObjectiveDao">
+		<constructor-arg ref="sqlMapClient" />
+	</bean>
 
 </beans>

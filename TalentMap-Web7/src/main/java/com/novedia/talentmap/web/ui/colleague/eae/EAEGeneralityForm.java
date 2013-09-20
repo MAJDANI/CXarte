@@ -81,6 +81,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		eaeGeneralityFormLayout.removeAllComponents();
 		this.eaeGeneralityFormLayout.setColumns(3);
 		this.eaeGeneralityFormLayout.setRows(3);
+		this.eaeGeneralityFormLayout.setSizeFull();
 
 	}
 

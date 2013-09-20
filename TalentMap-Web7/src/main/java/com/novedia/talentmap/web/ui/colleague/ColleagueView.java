@@ -1,21 +1,16 @@
 package com.novedia.talentmap.web.ui.colleague;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class ColleagueView extends VerticalLayout implements ClickListener {
@@ -25,23 +20,15 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	 */
 	private GridLayout gridLayout;
 	
-	private Panel profilPanel;
-	
 	private Button profilButton;
 	
 	private Button eaeButton;
-	
-	private Panel eaePanel;
 	
 	private ProfilePopIn profilePopIn;
 	
 	private Button formationButton;
 	
-	private Panel formationPanel;
-
 	private PersonalEAEPopIn personalEAEPopIn;
-	
-	private ResourceBundle resourceBundle;
 	
 	private SearchPopIn searchPopIn;
 	
@@ -64,9 +51,7 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	 * Build colleague's content view
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout builColleagueContent(){
-		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+	public VerticalLayout buildColleagueContent(){
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
@@ -83,42 +68,26 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		gridLayout.setColumns(3);
 		gridLayout.setId("gridLayout");
 		
-		profilPanel.removeAllComponents();
-		profilButton.setCaption(resourceBundle.getString("profil.button.caption"));
-		profilButton.addStyleName(Reindeer.BUTTON_LINK);
+		profilButton.addStyleName("labelBtnDashboard profilButton");
 		profilButton.addClickListener(this);
 		profilButton.setId(ComponentsId.PROFILE_BUTTON_ID);
-		profilPanel.addComponent(profilButton);
-		profilPanel.addStyleName("labelBtnDashboard profilPanel");
 		
-		eaePanel.removeAllComponents();
-		eaeButton.setCaption(resourceBundle.getString("eae.button.caption"));
-		eaeButton.addStyleName(Reindeer.BUTTON_LINK);
+		eaeButton.addStyleName("labelBtnDashboard eaeButton");
 		eaeButton.addClickListener(this);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
-		eaePanel.addComponent(eaeButton);
-		eaePanel.addStyleName("labelBtnDashboard eaePanel");
 		
-		formationPanel.removeAllComponents();
-		formationButton.setCaption(resourceBundle.getString("formation.button.caption"));
-		formationButton.addStyleName(Reindeer.BUTTON_LINK);
+		formationButton.addStyleName("labelBtnDashboard formationButton");
 		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
-		formationPanel.addComponent(formationButton);
-		formationPanel.addStyleName("labelBtnDashboard formationPanel");
 		
-		gridLayout.addComponent(profilPanel);
-		gridLayout.addComponent(eaePanel);
-		gridLayout.addComponent(formationPanel);
+		gridLayout.addComponent(profilButton);
+		gridLayout.addComponent(eaeButton);
+		gridLayout.addComponent(formationButton);
 		
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
-			searchCmPanel.removeAllComponents();
-			searchButtonCm.setCaption(resourceBundle.getString("search.button.caption"));
 			searchButtonCm.addClickListener(this);
-			searchButtonCm.addStyleName(Reindeer.BUTTON_LINK);
-			searchCmPanel.addComponent(searchButtonCm);
-			searchCmPanel.addStyleName("labelBtnDashboard recherchePanel");
-			gridLayout.addComponent(searchCmPanel);
+			searchButtonCm.addStyleName("labelBtnDashboard searchButton");
+			gridLayout.addComponent(searchButtonCm);
 		}
 		
 		
@@ -151,26 +120,6 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	}
 
 
-	public Panel getProfilPanel() {
-		return profilPanel;
-	}
-
-
-	public void setProfilPanel(Panel profilPanel) {
-		this.profilPanel = profilPanel;
-	}
-
-
-	public Panel getEaePanel() {
-		return eaePanel;
-	}
-
-
-	public void setEaePanel(Panel eaePanel) {
-		this.eaePanel = eaePanel;
-	}
-
-
 	public Button getProfilButton() {
 		return profilButton;
 	}
@@ -198,16 +147,6 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 
 	public void setFormationButton(Button formationButton) {
 		this.formationButton = formationButton;
-	}
-
-
-	public Panel getFormationPanel() {
-		return formationPanel;
-	}
-
-
-	public void setFormationPanel(Panel formationPanel) {
-		this.formationPanel = formationPanel;
 	}
 	
 	public ProfilePopIn getProfilePopIn() {

@@ -1,5 +1,6 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
+import com.novedia.talentmap.web.utils.ComponentsId;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button.ClickEvent;
@@ -20,6 +21,8 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 		super();
 		setSpacing(true);
 		addStyleName("TODO");
+		this.setId(ComponentsId.EAE_CURRENT_EAE_DETAILED_C_ID);
+		setWidth("630px");
 	}
 
 	/**
@@ -30,6 +33,7 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 	public VerticalLayout buildViewEAEGenerality(Integer currentEAEId, EAEConsultationMode currentMode) {
 		removeAllComponents();
 		eaeGeneralityForm.addStyleName("TODO");
+		eaeGeneralityForm.setId(ComponentsId.EAE_GENERALITY_FORM_ID);
 		addComponent(eaeGeneralityForm.buildEAEGeneralityFormView(currentEAEId, currentMode));
 		return this;
 	}
@@ -39,10 +43,11 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 	 * 
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout buildViewEAEResults(Integer currentEAEId) {
+	public VerticalLayout buildViewEAEResults(Integer currentEAEId, EAEConsultationMode currentMode) {
 		removeAllComponents();
 		eaeResultsForm.addStyleName("TODO");
-		addComponent(eaeResultsForm.buildEAEResultsFormView(currentEAEId));
+		eaeResultsForm.setId(ComponentsId.EAE_RESULTS_FORM_ID);
+		addComponent(eaeResultsForm.buildEAEResultsFormView(currentEAEId, currentMode));
 		return this;
 	}
 

@@ -5,3 +5,5 @@
 *.project
 *.classpath
 *.gitignore
+*/gwt-unitCache/*
+*/widgetsets/*

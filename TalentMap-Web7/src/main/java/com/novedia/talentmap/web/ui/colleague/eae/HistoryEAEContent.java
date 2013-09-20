@@ -102,11 +102,8 @@ public class HistoryEAEContent extends VerticalLayout implements ClickListener,
 		EAEForSynthesisDTO selectedEAE = (EAEForSynthesisDTO) listEAE
 				.getValue();
 		if (selectedEAE != null) {
-			System.out.println("Value change EAE=" + selectedEAE);
 			buildViewHistoryEAEContentDetail(selectedEAE.getId());
-		} else {
-			System.out.println("Value change EAE= null");
-		}
+		} 
 	}
 
 	/**

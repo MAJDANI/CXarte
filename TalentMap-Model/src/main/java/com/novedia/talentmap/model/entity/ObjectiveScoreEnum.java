@@ -1,7 +1,5 @@
 package com.novedia.talentmap.model.entity;
 
-import java.io.Serializable;
-
 
 /**
  * This enum represents the score of an Objective. An Objective may have 4 scores : 
@@ -13,8 +11,10 @@ import java.io.Serializable;
  * @author v.guillemain
  * 
  */
-public class ObjectiveScore implements Serializable {
+public enum ObjectiveScoreEnum {
 
+	NOT_ACHIEVED(1, "objective.score.not.achieved"), PARTLY_ACHIEVED(2, "objective.score.partly.achieved"), ACHIEVED(
+			3, "objective.score.achieved"), EXCEEDED(4, "objective.score.exceeded");
 
     /**
      * the identifier of the ObjectiveScore
@@ -28,7 +28,7 @@ public class ObjectiveScore implements Serializable {
     /**
      * Builds an Object ObjectiveScore
      */
-	private ObjectiveScore(Integer id, String label) {
+	private ObjectiveScoreEnum(Integer id, String label) {
 		this.id = id;
 		this.label = label;
 	}

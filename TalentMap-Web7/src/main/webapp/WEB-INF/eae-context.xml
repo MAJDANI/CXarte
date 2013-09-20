@@ -60,10 +60,21 @@
 	<bean id="collabStrenghtsBean" class="com.vaadin.ui.TextArea" scope="session"/>
 	<bean id="collabWeaknessesBean" class="com.vaadin.ui.TextArea" scope="session"/>
 	<bean id="meansToProgressBean" class="com.vaadin.ui.TextArea" scope="session"/>
+	
+	<!-- 	Beans de ObjectiveFormBean -->
+	<bean id="goalBean" class="com.vaadin.ui.TextField" scope="session"/>
+	<bean id="targetDateBean" class="com.vaadin.ui.TextField" scope="session"/>
+	<bean id="indicatorsBean" class="com.vaadin.ui.TextField" scope="session"/>
+	<bean id="meansBean" class="com.vaadin.ui.TextField" scope="session"/>
+
+
+	<bean id="objectiveFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectiveForm" scope="session"/>
+
 
 	<!-- TODO VERIFIER SI CA FONCTIONNE EN DECLARANT DIRECTEMENT -->
 	<bean id="EAEResultsFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
 		<property name="eaeService" ref ="eaeService" />
+		<property name="objectiveService" ref ="objectiveService" />
 		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutBean" />
 		<property name="yearSynthesis" ref="yearSynthesisBean" />
 		<property name="collabStrenghts" ref="collabStrenghtsBean" />
@@ -118,6 +129,7 @@
 
 	<bean id="EAEResultsFormBean_H" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
 		<property name="eaeService" ref ="eaeService" />
+		<property name="objectiveService" ref ="objectiveService" />
 		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutBean_H" />
 		<property name="yearSynthesis" ref="yearSynthesisBean_H" />
 		<property name="collabStrenghts" ref="collabStrenghtsBean_H" />

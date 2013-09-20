@@ -408,5 +408,4 @@ public class LoginScreen extends HorizontalLayout implements ClickListener{
 		this.content = content;
 	}
 
-
 }
