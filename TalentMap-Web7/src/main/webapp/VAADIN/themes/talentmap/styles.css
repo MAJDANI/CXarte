@@ -3,102 +3,95 @@
 @import  "../reindeer/styles.css";
 
 @font-face {
-                font-family: "Myriad";
-               src: url(font/Myriad.ttf) format("truetype");
+	font-family: "Myriad";
+	src: url(font/Myriad.ttf) format("truetype");
 }
 
 
 .v-captiontext{
-                font-weight: bold;
-                font-family:"Myriad";
+	font-weight: bold;
+	font-family:"Myriad";
 
 }
 
 .v-app {
-                background:url(img/layer.png);
-                font-family:"Myriad";
-                color: #464f52;
-                font-size: 13px;
-                line-height: 18px;
+	background:url(img/layer.png);
+	font-family:"Myriad";
+	color: #464f52;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 .containerPrincipal, #headerLayout, #footerLayer{
-                background: #242424 url(img/octicons-bg.png) repeat-x !important;
+	background: #242424 url(img/octicons-bg.png) repeat-x !important;
 }
 
 /*#headerLayout{
-                border-bottom : solid 3px #009cda;
+    border-bottom : solid 3px #009cda;
 }
 
 #footerLayer{
-                border-top : solid 3px #009cda;
+    border-top : solid 3px #009cda;
 }*/
 
 .headerContent{
-                position:static;
-                background:url(img/layer.png);
+	position:static;
+	background:url(img/layer.png);
 }
 
 #footerLayer{
-                padding: 20px;
-                position:absolute;
-                bottom:0;
-                width:100%;
+	padding: 20px;
+	position:absolute;
+	bottom:0;
+	width:100%;
 }
 
 .footerStyle{
-                width:300px;
+	width:300px;
 }
 
 .footerStyle.spacer{
-                margin : 0 10px;
+	margin : 0 10px;
 }
 
 .loginPanel, .registrationPanel {
-                box-shadow: 1px 1px 12px #fff;
-                -webkit-border-radius: 12px;
-                -moz-border-radius: 12px;
-                border-radius: 12px;
+	box-shadow: 1px 1px 12px #fff;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
 }
 
 .v-panel-deco, .white .v-panel-deco {
-                height: 0;
-                border-top: none;
-                background: #e2e2e2;
-                overflow: hidden;
-                display:none;
+	height: 0;
+	border-top: none;
+	background: #e2e2e2;
+	overflow: hidden;
+	display:none;
 }
 
 .v-webkit .v-panel-nocaption{
-                border:none;
+	border:none;
 }
 
 .v-caption-titleStyle{
-                text-transform:uppercase;
-                color: #009cda;
-                font-size: 22px;
-                font-weight:normal !important;
+	text-transform:uppercase;
+	color: #009cda;
+	font-size: 22px;
+	font-weight:normal !important;
 }
 
 .v-textfield {
-                background: rgba(147, 147, 147,0.2);
-                border: 1px solid #b6b6b6;
-                border-top-color: #9d9d9d;
-                border-bottom-color: #d6d6d6;
-                border-right-color: #d6d6d6;
-                margin: 0;
-                line-height: 14px;
+	background: rgba(147, 147, 147,0.2);
+	border: 1px solid #b6b6b6;
+	border-top-color: #9d9d9d;
+	border-bottom-color: #d6d6d6;
+	border-right-color: #d6d6d6;
+	margin: 0;
+	line-height: 14px;
 }
 
 .v-textfield-focus, .v-filterselect-input-focus {
-                border : solid 1px #009cda !important;
-/*                 border : none !important; */
-/* 				outline : none !important; */
-/*                 background: rgba(255,255,255,1); */
-}
-
-.v-textfield-focus, .v-filterselect-input-focus {
-                border : solid 1px #009cda !important;
+	border : solid 1px #009cda !important;
 }
 
 .monStyleBorderNone {
@@ -112,8 +105,8 @@
 .addBtn .v-button-wrap,
 .delBtn .v-button-wrap,
 #saveButton .v-button-wrap{
-                padding: 4px 8px 0 0px;
-                background-image:none !important;
+	padding: 4px 8px 0 0px;
+	background-image:none !important;
 }
 
 #logInButton.v-button,
@@ -121,27 +114,25 @@
 .addBtn.v-button,
 .delBtn.v-button,
 #saveButton.v-button{
-                background-image:none;
-                background-color:#009cda;
-                
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-                border-radius: 5px;
-                
-                cursor:pointer;
+	background-image:none;
+	background-color:#009cda;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	cursor:pointer;
 }
 
 .addBtn.v-button{
-                background-color:#00c400;
+	background-color:#00c400;
 }
 
 .delBtn.v-button{
-                background-color:red;
+	background-color:red;
 }
 
 #saveButton.v-button{
-                margin-top: 15px;
-                margin-left: 110px;
+	margin-top: 15px;
+	margin-left: 110px;
 }
 
 #logInButton span.v-button-caption,
@@ -149,129 +140,117 @@
 .addBtn span.v-button-caption,
 .delBtn span.v-button-caption,
 #saveButton span.v-button-caption {
-                color : #fff !important;
-                font-weight:normal;
-                font-size:15px;
+	color : #fff !important;
+	font-weight:normal;
+	font-size:15px;
 }
 
 #sigIn{
-                padding :10px 0 0 10px;
+	padding :10px 0 0 10px;
 }
 
 #sigIn span.v-button-caption,
 #logIn span.v-button-caption{
-                color:#009cda;
-                text-decoration:none;
+	color:#009cda;
+	text-decoration:none;
 }
 
 #sigIn span.v-button-caption:hover,
 #logIn span.v-button-caption:hover{
-                text-decoration:underline;
+	text-decoration:underline;
 }
 
 #sigIn span.v-button-caption:visited,
 #logIn span.v-button-caption:visited{
-                color:#009cda;
+	color:#009cda;
 }
 
 .v-caption-errorStyle{
-                border: solid 1px red;
-                -webkit-border-radius: 5px;
-                -moz-border-radius: 5px;
-                border-radius: 5px;
-                
-                background : rgba(255, 0, 0, 0.5);
-                padding:5px 57px;
+	border: solid 1px red;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background : rgba(255, 0, 0, 0.5);
+	padding:5px 57px;
 }
 
 .v-caption-errorStyle span{
-                color: #B40404;
+	color: #B40404;
 
 }
 
 #settingsLayout{
-                position: absolute;
-                right: 136px;
-                top:65px;
-                
-                color:#fff;
-                font-size:15px;
-                
-                z-index:5;
+	position: absolute;
+	right: 136px;
+	top:65px;
+	color:#fff;
+	font-size:15px;
+	z-index:5;
+
 }
 
 #settingsLayout .v-button-caption{
-                color:#009cda;
-                font-size:15px;
-                text-decoration:none;
+	color:#009cda;
+	font-size:15px;
+	text-decoration:none;
 }
 
 #settingsLayout .v-button-caption:hover{
-                text-decoration:underline;
+	text-decoration:underline;
 }
 
 #logoNovedia{
-                background:url(img/logoNovedia.jpg) no-repeat;
-                
-                width:225px;
-                height:89px;
-                
-                display:none;
-                
+ 	background:url(img/logoNovedia.jpg) no-repeat;
+	width:225px;
+	height:89px;
+	display:none;
+               
 }
 
 #logoTalentMap{
-                background:url(img/logo_Talent.png) no-repeat;
-                
-                width:932px;
-                height:108px;
-                
-                Margin-left:100px;
-                
-                text-indent:-9999px;
+	background:url(img/logo_Talent.png) no-repeat;
+	width:932px;
+	height:108px;
+	Margin-left:100px;
+	text-indent:-9999px;
 }
 
 #logoNovedia .v-label{ 
-                text-indent:-9999px;
+	text-indent:-9999px;
 }
 
 
 .v-window-outerheader {
-                background:#009cda repeat-x !important;
-                border-bottom: solid 1px #009cda;
-                padding-bottom:12px !important;
-                height:50px !important;
+	background:#009cda repeat-x !important;
+	border-bottom: solid 1px #009cda;
+	padding-bottom:12px !important;
+	height:50px !important;
 }
 
 .v-window-header {
-                font-weight: normal !important;
-                font-size: 22px !important;
-                text-shadow: none !important;
+	font-weight: normal !important;
+	font-size: 22px !important;
+	text-shadow: none !important;
 }
 
 .centerPanel{
-                text-align:center;
-                padding: 100px 25px 0 25px;
-                background:url(img/layer.png);
+	text-align:center;
+	padding: 100px 25px 0 25px;
+	background:url(img/layer.png);
                 
 }
 
 #dashboardLabel{
-                /*background:url(img/home.png) 0 center no-repeat;
-                background-size: 25px;
-                margin-left:50px;
-                margin-top:50px;
-                cursor:pointer;*/
-                position: absolute;
-                top:150px;
-                left: 70px;
-                z-index:5;
+   position: absolute;
+   top:150px;
+   left: 70px;
+   z-index:5;
 }
 
 #dashboardLabel .v-label{
-                font-size:25px;
-                color:#242424;
-                line-height:normal !important;
+	font-size:25px;
+	color:#242424;
+	line-height:normal !important;
 }
 
 .labelBtnDashboard .v-panel-content{
@@ -279,32 +258,22 @@
 }
 
 .v-gridlayout-slot .v-panel{
-                /*-webkit-border-radius: 20px;
-                -moz-border-radius: 20px;
-                border-radius: 20px;
-                
-                -moz-box-shadow: 0px 0px 25px 5px #888;
-                -webkit-box-shadow: 0px 0px 25px 5px #888;
-                box-shadow: 0px 0px 25px 5px #888;
-                border: solid 3px #009cda;*/
-                
-                overflow:hidden;
-                margin-left:20px;
-                
-                width:158px;
-                height:211px;
+    overflow:hidden;
+    margin-left:20px;
+    width:158px;
+    height:211px;
 }
 
 .v-gridlayout-slot .v-panel-content{
-                height:200px;
-                overflow:hidden;
+	height:200px;
+	overflow:hidden;
 }
 
-.v-panel-labelBtnDashboard,
 .v-button-labelBtnDashboard{
                 cursor:pointer;
 }
 
+<!-- commenter -->
 .v-panel-content-labelBtnDashboard .v-button-caption,
 .v-button-labelBtnDashboard .v-button-caption{
                 font-size:22px;
@@ -324,11 +293,18 @@
                 /*top:50%;
                 margin-top:-25px;*/
                 margin-top:145px;
+}
+<!-- fin commenter -->
+.v-panel-labelBtnDashboard .v-verticallayout,
+.iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
+.adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
+    margin-top:145px;
                 
 }
 
+
 .top25{
-                margin-top:25px;
+	argin-top:25px;
 }
 
 /* Lay the options horizontally */
@@ -336,43 +312,55 @@
     display: inline-block;
 }
 
-.labelBtnDashboard .v-panel-content{
-                background:none;
+.labelBtnDashboard.profilButton{
+	background:url(img/profil.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.profilPanel{
-                background:url(img/profil.png) center no-repeat;
+
+.labelBtnDashboard.eaeButton{
+	background:url(img/eae.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.eaePanel{
-                background:url(img/eae.png) center no-repeat;
-}
-.labelBtnDashboard.searchPanel{
-                background:url(img/search.png) center no-repeat;
+
+.labelBtnDashboard.formationButton{
+	background:url(img/param.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.eaeCMPanel{
-                background:url(img/eaeCM.png) center no-repeat;
+.labelBtnDashboard.searchButton{
+	background:url(img/search.png) center no-repeat;
+	height: 211px;
+    width: 158px;
 }
 
-.labelBtnDashboard.formationPanel{
-                background:url(img/param.png) center no-repeat;
+.v-button-labelBtnDashboard .v-button-wrap{
+	height: 0px !important;
+    padding: 0px !important;
+}
+
+.labelBtnDashboard.eaeCMButton{
+    background:url(img/eaeCM.png) center no-repeat;
 }
 
 .table {
-                text-align: center;
+	text-align: center;
 }
 
 .containerButton {
-                text-align: center;
+	text-align: center;
 }
 .footerLayoutMissionButton{
-                margin-top:  15px;
+	margin-top:  15px;
 }
 
 
 .popinStyle .popupContent .v-window-contents{
-                border-top:solid 1px #009cda;
+	border-top:solid 1px #009cda;
 }
 
 .mystyleTitleBilanTODO {

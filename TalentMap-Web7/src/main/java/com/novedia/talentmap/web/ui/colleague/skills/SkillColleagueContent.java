@@ -166,9 +166,9 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void buildCategoryView(){
 		skillContentPanel.removeAllComponents();
-		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.categories.label")));
 		currentView = Constants.CATEGORY_VIEW;
-		if(categoryMapDto != null&& !categoryMapDto.getMapCategory().isEmpty()){
+		if(categoryMapDto != null && !categoryMapDto.getMapCategory().isEmpty()){
+			skillContentPanel.addComponent(new Label(resourceBundle.getString("list.categories.label")));
 			for (Map.Entry<Category, ConceptMapDTO> categoryMap : categoryMapDto.getMapCategory().entrySet()) {
 				Button categButton = new Button(categoryMap.getKey().getName());
 				categButton.addClickListener(this);

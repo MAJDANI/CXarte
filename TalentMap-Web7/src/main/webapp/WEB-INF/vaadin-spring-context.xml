@@ -81,11 +81,11 @@
 	<bean id="changePasswordButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="gridLayoutColleagueViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
-	<bean id="profilPannelBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="eaePannelBean" class="com.vaadin.ui.Panel" scope="session" />
+
+
 	<bean id="profilButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="eaeButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="formationPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+
 	<bean id="formationButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="colleagueDataFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
@@ -165,9 +165,11 @@
 	<bean id="menuPanelBean2" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="menuContentBean2" class="com.vaadin.ui.VerticalLayout" scope="session"/>
 	<bean id="contentPanelBean2" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="searchResultsPanelNoResultBean" class="com.vaadin.ui.Panel" scope="session" />
+
 	<bean id="searchResultsLabelNoResultBean" class="com.vaadin.ui.Label" scope="session" />
 	<bean id="searchResultsPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="skillPanelBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="searchButtonSkillsBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="searchPopInBean" class="com.novedia.talentmap.web.ui.search.SearchPopIn" scope="session">
 		<property name="collabService" ref ="collaboratorService" />
@@ -181,11 +183,16 @@
 		<property name="panelLeft" ref ="menuPanelBean2" />
 		<property name="menuContent" ref ="menuContentBean2" />
 		<property name="panelRight" ref ="contentPanelBean2" />
-		<property name="searchResultsPanelNoResult" ref ="searchResultsPanelNoResultBean" />
+
 		<property name="searchResultsLabelNoResult" ref ="searchResultsLabelNoResultBean" />
 		<property name="searchResultsPanel" ref ="searchResultsPanelBean" />
+		<property name="skillService" ref="skillService" />
+		<property name="treeSkills" ref="treeSkillsBean" />
+		<property name="skillPanel" ref="skillPanelBean" />
+		<property name="searchButton" ref="searchButtonSkillsBean" />
 	</bean>
 	
+	<bean id="treeSkillsBean" class="com.vaadin.ui.Tree" scope="session" />
 	
 	<bean id="listMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="addMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
@@ -229,16 +236,22 @@
 		<property name="colleagueService" ref ="collaboratorService" />
 	</bean>
 	
+	<bean id="searchButtonCmBean" class="com.vaadin.ui.Button" scope="session" />
+	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
 		<property name="gridLayout" ref ="gridLayoutColleagueViewBean" />
-		<property name="profilPanel" ref ="profilPannelBean" />
-		<property name="eaePanel" ref ="eaePannelBean" />
+
+
 		<property name="profilButton" ref ="profilButtonBean" />
 		<property name="eaeButton" ref ="eaeButtonBean" />
+		<property name="eaeCMButton" ref ="TODO-VAN" />
 		<property name="formationPanel" ref ="formationPanelBean" />
 		<property name="formationButton" ref ="formationButtonBean" />
 		<property name="profilePopIn" ref ="profilePopIn" />
 		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />
+		<property name="searchButtonCm" ref ="searchButtonCmBean" />
+		<property name="searchPopIn" ref ="searchPopInBean" />
+		<property name="cmEAEPopIn" ref ="TODO-VAN" />
 	</bean>
 	
 	<bean id="gridLayoutIAViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
@@ -285,8 +298,6 @@
 		<property name="colleagueView" ref="colleagueViewBean" />
 		<property name="adminView" ref="adminViewBean" />
 		<property name="iaView" ref="iaViewBean" />
-		<property name="cmView" ref="cmViewBean" />
-		<property name="rhView" ref="rhViewBean" />
 		<property name="settingsLayout" ref="settingsLayout" />
 		<property name="logoTalentMap" ref="logoTalentMap" />
 		<property name="logoNovedia" ref="logoNovedia" />
@@ -407,6 +418,7 @@
 	
 	<bean id="searchResults" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session" />
 
+<!-- TOUT CE QUI SUIT N'EST PAS SUR LE SERVEUR, VERIFIER POURQUOI-->
 	<bean id="nameFieldSearchAdminBean" class="com.vaadin.ui.TextField" scope="session" />
 	
 	<bean id="searchByNameFormAdmin" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session">

@@ -16,8 +16,6 @@ import com.vaadin.ui.Table;
 @SuppressWarnings("serial")
 public class SearchResults extends Table implements ClickListener {
 
-	private Integer roleId;
-
 	private ResourceBundle resourceBundle;
 	
 	/**
@@ -37,14 +35,14 @@ public class SearchResults extends Table implements ClickListener {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllItems();
-		mainBuild();
+//		mainBuild();
 		buildResultsTable(listCollab);
 		return this;
 	}
 
-	public void mainBuild() {
-		addColumns();
-	}
+//	public void mainBuild() {
+//		addColumns();
+//	}
 
 	public void addColumns() {
 		addContainerProperty(resourceBundle.getString("name.table.header.caption"), String.class, null);
@@ -84,14 +82,6 @@ public class SearchResults extends Table implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public Integer getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 
 }

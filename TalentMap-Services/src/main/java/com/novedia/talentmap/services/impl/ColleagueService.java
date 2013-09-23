@@ -210,10 +210,13 @@ public class ColleagueService implements IColleagueService {
      * {@inheritDoc}
      */
     @Override
-    public List<Colleague> getAllColleagueByColleagueIdList(
-	    List<Integer> listColleagueId) throws DataAccessException {
-	return ((ColleagueDao) colleagueDao)
-		.getAllColleagueByColleagueIdList(listColleagueId);
+    public List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId) throws DataAccessException {
+    	if(listColleagueId == null || listColleagueId.isEmpty()){
+    		return null;
+    	}else{
+    		return ((ColleagueDao) colleagueDao)
+    				.getAllColleagueByColleagueIdList(listColleagueId);
+    	}
     }
 
     /**

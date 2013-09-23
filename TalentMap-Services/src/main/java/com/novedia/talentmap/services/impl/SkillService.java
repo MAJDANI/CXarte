@@ -160,9 +160,12 @@ public class SkillService implements ISkillService {
      * @throws DataAccessException
      */
     @Override
-    public List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId)
-	    throws DataAccessException {
-	return this.skillDao.getAllColleagueIdByListToolId(listToolId);
+    public List<Integer> getAllColleagueIdByListToolId(List<Integer> listToolId)throws DataAccessException {
+    	if(listToolId == null  || listToolId.isEmpty()){
+    		return null;
+    	}else{
+    		return this.skillDao.getAllColleagueIdByListToolId(listToolId);
+    	}
     }
     
     

@@ -8,8 +8,8 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
                            
-    <import resource="classpath:services-spring-context.xml" />
-	<import resource="classpath:model-spring-context.xml" /> 
+<!--     <import resource="classpath:services-spring-context.xml" /> -->
+<!-- 	<import resource="classpath:model-spring-context.xml" />  -->
                            
     <bean id="gridLayoutAdminViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	<bean id="manageColleaguePanelBean" class="com.vaadin.ui.Panel" scope="session" />
@@ -41,6 +41,10 @@
 	<bean id="confirmButtonContainerAdminDeleteColleagueBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	<bean id="windowConfirmAdminDeleteColleagueBean" class="com.vaadin.ui.Window" scope="session" />
 	
+	<bean id="ColleagueContainerBean" class="com.novedia.talentmap.web.ui.admin.ColleagueContainer" scope="session" >
+		<property name="colleagueService" ref ="collaboratorService" />
+	</bean>
+	
 	<bean id="manageColleaguePopInBean" class="com.novedia.talentmap.web.ui.admin.ManageColleaguePopIn" scope="session" >
 		<property name="content" ref ="contentManageColleaguePopInBean" />
 		<property name="searchPanel" ref ="searchPanelAdminBean" />
@@ -58,61 +62,65 @@
 		<property name="adminService" ref ="adminService" />
 	</bean>
 	
-	<bean id="manageContentPanelManageToolsPopInBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelManageToolsPopInBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="addSkillPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="treeSkillsPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="modifySkillFormPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="modifyButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="deleteButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="addSkillButtonBean" class="com.vaadin.ui.Button" scope="session" />
+<!-- 	<bean id="manageContentPanelManageToolsPopInBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/> -->
+<!-- 	<bean id="contentPanelManageToolsPopInBean" class="com.vaadin.ui.VerticalLayout" scope="session"/> -->
+<!-- 	<bean id="addSkillPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" /> -->
+<!-- 	<bean id="treeSkillsPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" /> -->
+<!-- 	<bean id="modifySkillFormPanelAdminBean" class="com.vaadin.ui.Panel" scope="session" /> -->
+<!-- 	<bean id="modifyButtonBean" class="com.vaadin.ui.Button" scope="session" /> -->
+<!-- 	<bean id="deleteButtonBean" class="com.vaadin.ui.Button" scope="session" /> -->
+<!-- 	<bean id="addSkillButtonBean" class="com.vaadin.ui.Button" scope="session" /> -->
+
+	<bean id="treeSkillsAdminBean" class="com.vaadin.ui.Tree" scope="session" />
 	
 	<bean id="manageToolsPopInBean" class="com.novedia.talentmap.web.ui.admin.ManageToolsPopIn" scope="session" >
 		<property name="adminService" ref ="adminService" />
-		<property name="manageContentPanel" ref ="manageContentPanelManageToolsPopInBean" />
-		<property name="contentPanel" ref ="contentPanelManageToolsPopInBean" />
-		<property name="addSkillPanel" ref ="addSkillPanelAdminBean" />
-		<property name="treeSkillsPanel" ref ="treeSkillsPanelAdminBean" />
-		<property name="modifySkillFormPanel" ref ="modifySkillFormPanelAdminBean" />
-		<property name="searchBySkillTree" ref ="searchBySkillTreeBean" />
-		<property name="modifyToolForm" ref ="modifyToolFormBean" />
-		<property name="modifyConceptForm" ref ="modifyConceptFormBean" />
-		<property name="modifyCategoryForm" ref ="modifyCategoryFormBean" />
-		<property name="addSkillButton" ref ="addSkillButtonBean" />
-		<property name="modifyButton" ref ="modifyButtonBean" />
-		<property name="deleteButton" ref ="deleteButtonBean" />
+		<property name="skillService" ref="skillService" />
+		<property name="treeSkills" ref="treeSkillsAdminBean" />
+		
+		
+<!-- 		<property name="manageContentPanel" ref ="manageContentPanelManageToolsPopInBean" /> -->
+<!-- 		<property name="contentPanel" ref ="contentPanelManageToolsPopInBean" /> -->
+<!-- 		<property name="addSkillPanel" ref ="addSkillPanelAdminBean" /> -->
+<!-- 		<property name="treeSkillsPanel" ref ="treeSkillsPanelAdminBean" /> -->
+<!-- 		<property name="modifySkillFormPanel" ref ="modifySkillFormPanelAdminBean" /> -->
+<!-- 		<property name="searchBySkillTree" ref ="searchBySkillTreeBean" /> -->
+<!-- 		<property name="modifyToolForm" ref ="modifyToolFormBean" /> -->
+<!-- 		<property name="modifyConceptForm" ref ="modifyConceptFormBean" /> -->
+<!-- 		<property name="modifyCategoryForm" ref ="modifyCategoryFormBean" /> -->
+<!-- 		<property name="addSkillButton" ref ="addSkillButtonBean" /> -->
+<!-- 		<property name="modifyButton" ref ="modifyButtonBean" /> -->
+<!-- 		<property name="deleteButton" ref ="deleteButtonBean" /> -->
 	</bean>
 	
-	<bean id="ColleagueContainerBean" class="com.novedia.talentmap.web.ui.admin.ColleagueContainer" scope="session" >
-		<property name="colleagueService" ref ="collaboratorService" />
-	</bean>
 	
-	<bean id="searchBySkillTreeBean" class="com.novedia.talentmap.web.ui.admin.SearchBySkillTree" scope="session" >
-		<property name="adminService" ref ="adminService" />
-	</bean>
 	
-	<bean id="categoryFieldBean" class="com.vaadin.ui.TextField" scope="session" />
-	<bean id="conceptFieldBean" class="com.vaadin.ui.TextField" scope="session" />
-	<bean id="toolFieldBean" class="com.vaadin.ui.TextField" scope="session" />
+<!-- 	<bean id="searchBySkillTreeBean" class="com.novedia.talentmap.web.ui.admin.SearchBySkillTree" scope="session" > -->
+<!-- 		<property name="adminService" ref ="adminService" /> -->
+<!-- 	</bean> -->
 	
-	<bean id="modifyToolFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyToolForm" scope="session" >
-		<property name="categoryField" ref ="categoryFieldBean" />
-		<property name="conceptField" ref ="conceptFieldBean" />
-		<property name="toolField" ref ="toolFieldBean" />
-	</bean>
+<!-- 	<bean id="categoryFieldBean" class="com.vaadin.ui.TextField" scope="session" /> -->
+<!-- 	<bean id="conceptFieldBean" class="com.vaadin.ui.TextField" scope="session" /> -->
+<!-- 	<bean id="toolFieldBean" class="com.vaadin.ui.TextField" scope="session" /> -->
 	
-	<bean id="categoryFieldBean2" class="com.vaadin.ui.TextField" scope="session" />
-	<bean id="conceptFieldBean2" class="com.vaadin.ui.TextField" scope="session" />
+<!-- 	<bean id="modifyToolFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyToolForm" scope="session" > -->
+<!-- 		<property name="categoryField" ref ="categoryFieldBean" /> -->
+<!-- 		<property name="conceptField" ref ="conceptFieldBean" /> -->
+<!-- 		<property name="toolField" ref ="toolFieldBean" /> -->
+<!-- 	</bean> -->
 	
-	<bean id="modifyConceptFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyConceptForm" scope="session" >
-		<property name="categoryField" ref ="categoryFieldBean2" />
-		<property name="conceptField" ref ="conceptFieldBean2" />
-	</bean>
+<!-- 	<bean id="categoryFieldBean2" class="com.vaadin.ui.TextField" scope="session" /> -->
+<!-- 	<bean id="conceptFieldBean2" class="com.vaadin.ui.TextField" scope="session" /> -->
 	
-	<bean id="categoryFieldBean3" class="com.vaadin.ui.TextField" scope="session" />
+<!-- 	<bean id="modifyConceptFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyConceptForm" scope="session" > -->
+<!-- 		<property name="categoryField" ref ="categoryFieldBean2" /> -->
+<!-- 		<property name="conceptField" ref ="conceptFieldBean2" /> -->
+<!-- 	</bean> -->
 	
-	<bean id="modifyCategoryFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyCategoryForm" scope="session" >
-		<property name="categoryField" ref ="categoryFieldBean3" />
-	</bean>
+<!-- 	<bean id="categoryFieldBean3" class="com.vaadin.ui.TextField" scope="session" /> -->
+	
+<!-- 	<bean id="modifyCategoryFormBean" class="com.novedia.talentmap.web.ui.admin.ModifyCategoryForm" scope="session" > -->
+<!-- 		<property name="categoryField" ref ="categoryFieldBean3" /> -->
+<!-- 	</bean> -->
 	
 </beans>                           
