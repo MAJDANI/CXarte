@@ -164,8 +164,10 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		} else if (event.getButton().equals(historyEAEButton)) {
 			currentEAEButton.removeStyleName("focus");
 			historyEAEButton.addStyleName("focus");
+	    	Integer colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
+			
 			panelRightPersoEAE.setContent(historyEAEContent
-					.buildViewHistoryEAEContent());
+					.buildViewHistoryEAEContent(colleagueId));
 			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.history.title"));
 		}
 	}

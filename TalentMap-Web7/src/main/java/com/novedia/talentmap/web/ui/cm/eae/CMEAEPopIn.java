@@ -91,7 +91,6 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 		ThemeResource resourceGirl = new ThemeResource(Constants.IMG_NO_PHOTO_GIRL);
 
 		for (EAEColleagueResumeForCMDTO eaDTO : list) {
-			System.out.println("eaDTO = " + eaDTO);
 			String name = eaDTO.getCollabFirstName() + " " + eaDTO.getCollabLastName();
 			String titleM = resourceBundle.getString("title.mr");
 			Image imageTest ;
@@ -184,18 +183,14 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 
 	@Override
 	public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
-		// TODO Auto-generated method stub
-		System.out.println("event = " + event);
-		System.out.println("event.getComponent() = " + event.getComponent());
-		System.out.println("event.getComponent().getId() = " + event.getComponent().getId());
-		System.out.println("event.getComponent().getCaption() = " + event.getComponent().getCaption());
-			String name = event.getComponent().getCaption();
+		String name = event.getComponent().getCaption();
+    	Integer colleagueId = new Integer(event.getComponent().getId());
 		
+    	hLayoutCMEAE.removeAllComponents();
 		hLayoutCMEAE.addComponent(historyEAEContent
-				.buildViewHistoryEAEContent());
+				.buildViewHistoryEAEContent(colleagueId));
 
 		hLayoutCMEAE.setCaption("Les EAE de " + name);
-
 		
 	}
 

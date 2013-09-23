@@ -20,9 +20,11 @@ import java.util.Hashtable;
  * 
  * VALIDATED_MANAGER ; quand le manager consulte un EAE d'un de ses collaborateurs
  * qui est dans l'état VALIDATED. 
-
+ *
  * CLOSED : quand le collaborateur ou le manager consulte un EAE CLOSED : aucun
  * champ n'est disponible à la saisie.
+ *
+ * MANAGER : quand le manager consulte les EAE de ses collaborateurs
  * 
  * 
  *                                                _______________________________________________________________
@@ -80,7 +82,7 @@ public enum EAEConsultationMode {
 
 	OPEN_COLLAB(1, "OPEN_COLLAB"), OPEN_MANAGER(2, "OPEN_MANAGER"), VALIDATED_COLLAB(
 			3, "VALIDATED_COLLAB"), VALIDATED_MANAGER(3, "VALIDATED_MANAGER"), CLOSED(
-			4, "CLOSED");
+			4, "CLOSED"), MANAGER(5, "MANAGER");
 
 	private int id;
 	private String value;
@@ -100,6 +102,7 @@ public enum EAEConsultationMode {
 		if (this == VALIDATED_COLLAB || this == VALIDATED_MANAGER) return true;
 		else return false;
 	}
+
 
 	/**
 	 * Get the id value

@@ -49,9 +49,9 @@ public class HistoryEAEContent extends VerticalLayout implements ClickListener,
 	 * 
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout buildViewHistoryEAEContent() {
+	public VerticalLayout buildViewHistoryEAEContent(Integer colleagueId) {
 		removeAllComponents();
-		buildListEAEPanel();
+		buildListEAEPanel(colleagueId);
 		listEAEPanel.addStyleName("listEAEPanel");
 		addComponent(listEAEPanel);
 		return this;
@@ -72,9 +72,9 @@ public class HistoryEAEContent extends VerticalLayout implements ClickListener,
 	/**
 	 * Build list EAE panel
 	 */
-	private void buildListEAEPanel() {
+	private void buildListEAEPanel(Integer colleagueId) {
 
-		listEAE.fillAllColleagueEAE();
+		listEAE.fillAllColleagueEAE(colleagueId);
 		listEAE.addValueChangeListener(this);
 		listEAE.addStyleName("table");
 		listEAEPanel.addStyleName("listEAEPanel");
