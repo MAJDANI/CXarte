@@ -92,9 +92,8 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 
 		for (EAEColleagueResumeForCMDTO eaDTO : list) {
 			String name = eaDTO.getCollabFirstName() + " " + eaDTO.getCollabLastName();
-			String titleM = resourceBundle.getString("title.mr");
 			Image imageTest ;
-			if(eaDTO.getTitle().toUpperCase() != "MRS") {
+			if("M".equals(eaDTO.getTitle().toUpperCase())) {
 				imageTest = new Image( name, resourceBoy);
 			} else {
 				imageTest = new Image( name, resourceGirl);

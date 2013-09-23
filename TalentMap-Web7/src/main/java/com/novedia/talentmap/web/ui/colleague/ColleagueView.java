@@ -78,9 +78,6 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		eaeButton.addClickListener(this);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
 	
-		eaeCMButton.addStyleName("labelBtnDashboard eaeCMButton");
-		eaeCMButton.addClickListener(this);
-		eaeCMButton.setId(ComponentsId.EAE_CM_BUTTON_ID);
 	
 		formationButton.addStyleName("labelBtnDashboard formationButton");
 		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
@@ -94,6 +91,12 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 			searchButtonCm.addClickListener(this);
 			searchButtonCm.addStyleName("labelBtnDashboard searchButton");
 			gridLayout.addComponent(searchButtonCm);
+
+			eaeCMButton.addStyleName("labelBtnDashboard eaeCMButton");
+			eaeCMButton.addClickListener(this);
+			eaeCMButton.setId(ComponentsId.EAE_CM_BUTTON_ID);
+			gridLayout.addComponent(eaeCMButton);
+
 		}
 		
 		

@@ -273,28 +273,28 @@
                 cursor:pointer;
 }
 
-<!-- commenter -->
-.v-panel-content-labelBtnDashboard .v-button-caption,
-.v-button-labelBtnDashboard .v-button-caption{
-                font-size:22px;
-                color: transparent;
-                font-weight:bold;
-                text-decoration:none;
-}
+/*  commenter  */
+/* .v-panel-content-labelBtnDashboard .v-button-caption, */
+/* .v-button-labelBtnDashboard .v-button-caption{ */
+/*                 font-size:22px; */
+/*                 color: transparent; */
+/*                 font-weight:bold; */
+/*                 text-decoration:none; */
+/* } */
 
-.v-panel-content-labelBtnDashboard .v-button-caption:hover,
-.v-button-labelBtnDashboard .v-button-caption:hover{
-                text-decoration:underline;
-}
+/* .v-panel-content-labelBtnDashboard .v-button-caption:hover, */
+/* .v-button-labelBtnDashboard .v-button-caption:hover{ */
+/*                 text-decoration:underline; */
+/* } */
 
-.v-panel-labelBtnDashboard .v-verticallayout,
-.iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
-.adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
-                /*top:50%;
-                margin-top:-25px;*/
-                margin-top:145px;
-}
-<!-- fin commenter -->
+/* .v-panel-labelBtnDashboard .v-verticallayout, */
+/* .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout, */
+/* .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{ */
+/*                 /*top:50%; */
+/*                 margin-top:-25px;*/ */
+/*                 margin-top:145px; */
+/* } */
+/*  fin commenter  */
 .v-panel-labelBtnDashboard .v-verticallayout,
 .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
 .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
@@ -338,14 +338,17 @@
     width: 158px;
 }
 
+.labelBtnDashboard.eaeCMButton{
+    background:url(img/eaeCM.png) center no-repeat;
+	height: 211px;
+    width: 158px;
+}
+
 .v-button-labelBtnDashboard .v-button-wrap{
 	height: 0px !important;
     padding: 0px !important;
 }
 
-.labelBtnDashboard.eaeCMButton{
-    background:url(img/eaeCM.png) center no-repeat;
-}
 
 .table {
 	text-align: center;

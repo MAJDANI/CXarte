@@ -240,18 +240,15 @@
 	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
 		<property name="gridLayout" ref ="gridLayoutColleagueViewBean" />
-
-
 		<property name="profilButton" ref ="profilButtonBean" />
 		<property name="eaeButton" ref ="eaeButtonBean" />
-		<property name="eaeCMButton" ref ="TODO-VAN" />
-		<property name="formationPanel" ref ="formationPanelBean" />
+		<property name="eaeCMButton" ref ="eaeCMButtonBean" />
 		<property name="formationButton" ref ="formationButtonBean" />
 		<property name="profilePopIn" ref ="profilePopIn" />
 		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />
 		<property name="searchButtonCm" ref ="searchButtonCmBean" />
 		<property name="searchPopIn" ref ="searchPopInBean" />
-		<property name="cmEAEPopIn" ref ="TODO-VAN" />
+		<property name="cmEAEPopIn" ref ="cmEAEPopInBean" />
 	</bean>
 	
 	<bean id="gridLayoutIAViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
@@ -439,18 +436,18 @@
 	<bean id="eaeButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="eaeCMButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
-	<bean id="cmViewBean" class="com.novedia.talentmap.web.ui.cm.CmView" scope="session" >
-		<property name="searchPopIn" ref ="searchPopInCMBean" />
-		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />
-		<property name="cmEAEPopIn" ref ="cmEAEPopInBean" />
-		<property name="gridLayout" ref ="gridLayoutCMViewBean" />
-		<property name="searchPanel" ref ="searchPanelCMBean" />
-		<property name="eaePanel" ref ="eaePanelCMBean" />
-		<property name="eaeCMPanel" ref ="eaeCMPanelBean" />
-		<property name="searchButton" ref ="searchButtonCMBean" />
-		<property name="eaeButton" ref ="eaeButtonCMBean" />
-		<property name="eaeCMButton" ref ="eaeCMButtonBean" />
-	</bean>
+<!-- 	<bean id="cmViewBean" class="com.novedia.talentmap.web.ui.cm.CmView" scope="session" > -->
+<!-- 		<property name="searchPopIn" ref ="searchPopInCMBean" /> -->
+<!-- 		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" /> -->
+<!-- 		<property name="cmEAEPopIn" ref ="cmEAEPopInBean" /> -->
+<!-- 		<property name="gridLayout" ref ="gridLayoutCMViewBean" /> -->
+<!-- 		<property name="searchPanel" ref ="searchPanelCMBean" /> -->
+<!-- 		<property name="eaePanel" ref ="eaePanelCMBean" /> -->
+<!-- 		<property name="eaeCMPanel" ref ="eaeCMPanelBean" /> -->
+<!-- 		<property name="searchButton" ref ="searchButtonCMBean" /> -->
+<!-- 		<property name="eaeButton" ref ="eaeButtonCMBean" /> -->
+<!-- 		<property name="eaeCMButton" ref ="eaeCMButtonBean" /> -->
+<!-- 	</bean> -->
 	
 	<bean id="searchByCustomerButtonCMBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="searchByNameButtonCMBean" class="com.vaadin.ui.Button" scope="session" />

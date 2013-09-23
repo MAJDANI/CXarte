@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -8,80 +7,114 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-                           
-    <import resource="classpath:services-spring-context.xml" />
-	<import resource="classpath:model-spring-context.xml" /> 
-                           
-<!-- 	BEAN EAE -->
-	
-	<bean id="currentEAEButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="historyEAEButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="generalityButtonBean" class="com.vaadin.ui.Button" scope="session" />
+
+	<import resource="classpath:services-spring-context.xml" />
+	<import resource="classpath:model-spring-context.xml" />
+
+	<!-- BEAN EAE -->
+
+	<bean id="currentEAEButtonBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="historyEAEButtonBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="generalityButtonBean" class="com.vaadin.ui.Button"
+		scope="session" />
 	<bean id="resultsButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="objectivesButtonBean" class="com.vaadin.ui.Button" scope="session" />
+	<bean id="objectivesButtonBean" class="com.vaadin.ui.Button"
+		scope="session" />
 	<bean id="synthesisButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="hLayoutCurrentEAEBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelCurrentEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuPanelCurrentEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentCurrentEAEBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="eaeGeneralityFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
+	<bean id="hLayoutCurrentEAEBean" class="com.vaadin.ui.HorizontalLayout"
+		scope="session" />
+	<bean id="contentPanelCurrentEAEBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuPanelCurrentEAEBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuContentCurrentEAEBean" class="com.vaadin.ui.VerticalLayout"
+		scope="session" />
+	<bean id="eaeGeneralityFormLayoutBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
 
-	<bean id="eaeObjectivesFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
+	<bean id="eaeObjectivesFormLayoutBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
 
-	<bean id="EAEObjectivesFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
+	<bean id="EAEObjectivesFormBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="objectiveService" ref="objectiveService" />
 		<property name="eaeObjectivesFormLayout" ref="eaeObjectivesFormLayoutBean" />
 	</bean>
 
-	<bean id="eaeSynthesisFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="EAESynthesisFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
+	<bean id="eaeSynthesisFormLayoutBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="EAESynthesisFormBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
 		<property name="eaeSynthesisFormLayout" ref="eaeSynthesisFormLayoutBean" />
 	</bean>
 
-	
-	<bean id="currentEAEDetailedContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent" scope="session">
-		<property name="eaeGeneralityForm" ref ="EAEGeneralityFormBean" />
-		<property name="eaeResultsForm" ref ="EAEResultsFormBean" />
-		<property name="eaeObjectivesForm" ref ="EAEObjectivesFormBean" />
-		<property name="eaeSynthesisForm" ref ="EAESynthesisFormBean" />
+
+	<bean id="currentEAEDetailedContentBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent"
+		scope="session">
+		<property name="eaeGeneralityForm" ref="EAEGeneralityFormBean" />
+		<property name="eaeResultsForm" ref="EAEResultsFormBean" />
+		<property name="eaeObjectivesForm" ref="EAEObjectivesFormBean" />
+		<property name="eaeSynthesisForm" ref="EAESynthesisFormBean" />
 	</bean>
 
-	<bean id="lastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="firstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerLastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerFirstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="jobFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="eaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="prevEaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="employmentDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="salaryFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
+	<bean id="lastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="firstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerLastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerFirstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="jobFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="eaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="prevEaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="employmentDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="salaryFieldEAEGeneralityBean" class="com.vaadin.ui.TextField"
+		scope="session" />
 
-	<bean id="EAEGeneralityFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="eaeGeneralityFormLayout" ref ="eaeGeneralityFormLayoutBean" />
-		<property name="lastNameField" ref ="lastNameFieldEAEGeneralityBean" />
-		<property name="firstNameField" ref ="firstNameFieldEAEGeneralityBean" />
-		<property name="managerLastNameField" ref ="managerLastNameFieldEAEGeneralityBean" />
-		<property name="managerFirstNameField" ref ="managerFirstNameFieldEAEGeneralityBean" />
-		<property name="jobField" ref ="jobFieldEAEGeneralityBean" />
-		<property name="eaeDateField" ref ="eaeDateFieldEAEGeneralityBean" />
-		<property name="prevEaeDateField" ref ="prevEaeDateFieldEAEGeneralityBean" />
-		<property name="employmentDateField" ref ="employmentDateFieldEAEGeneralityBean" />
-		<property name="salaryField" ref ="salaryFieldEAEGeneralityBean" />
+	<bean id="EAEGeneralityFormBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="eaeGeneralityFormLayout" ref="eaeGeneralityFormLayoutBean" />
+		<property name="lastNameField" ref="lastNameFieldEAEGeneralityBean" />
+		<property name="firstNameField" ref="firstNameFieldEAEGeneralityBean" />
+		<property name="managerLastNameField" ref="managerLastNameFieldEAEGeneralityBean" />
+		<property name="managerFirstNameField" ref="managerFirstNameFieldEAEGeneralityBean" />
+		<property name="jobField" ref="jobFieldEAEGeneralityBean" />
+		<property name="eaeDateField" ref="eaeDateFieldEAEGeneralityBean" />
+		<property name="prevEaeDateField" ref="prevEaeDateFieldEAEGeneralityBean" />
+		<property name="employmentDateField" ref="employmentDateFieldEAEGeneralityBean" />
+		<property name="salaryField" ref="salaryFieldEAEGeneralityBean" />
 	</bean>
 
-	<bean id="eaeResultsFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="yearSynthesisBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabStrenghtsBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabWeaknessesBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="meansToProgressBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	
+	<bean id="eaeResultsFormLayoutBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="yearSynthesisBean" class="com.vaadin.ui.TextArea" scope="session" />
+	<bean id="collabStrenghtsBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="collabWeaknessesBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="meansToProgressBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
 
-	<bean id="EAEResultsFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
+
+	<bean id="EAEResultsFormBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="objectiveService" ref="objectiveService" />
 		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutBean" />
 		<property name="yearSynthesis" ref="yearSynthesisBean" />
 		<property name="collabStrenghts" ref="collabStrenghtsBean" />
@@ -90,53 +123,74 @@
 	</bean>
 
 
-	<bean id="currentEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="generalityButton" ref ="generalityButtonBean" />
-		<property name="resultsButton" ref ="resultsButtonBean" />
-		<property name="objectivesButton" ref ="objectivesButtonBean" />
-		<property name="synthesisButton" ref ="synthesisButtonBean" />
-		<property name="hLayoutCurrentEAE" ref ="hLayoutCurrentEAEBean" />
-		<property name="panelRightCurrentEAE" ref ="contentPanelCurrentEAEBean" />
-		<property name="panelLeftCurrentEAE" ref ="menuPanelCurrentEAEBean" />
-		<property name="menuContentCurrentEAE" ref ="menuContentCurrentEAEBean" />
-		<property name="currentEAEDetailedContent" ref ="currentEAEDetailedContentBean" />
+	<bean id="currentEAEContentBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="generalityButton" ref="generalityButtonBean" />
+		<property name="resultsButton" ref="resultsButtonBean" />
+		<property name="objectivesButton" ref="objectivesButtonBean" />
+		<property name="synthesisButton" ref="synthesisButtonBean" />
+		<property name="hLayoutCurrentEAE" ref="hLayoutCurrentEAEBean" />
+		<property name="panelRightCurrentEAE" ref="contentPanelCurrentEAEBean" />
+		<property name="panelLeftCurrentEAE" ref="menuPanelCurrentEAEBean" />
+		<property name="menuContentCurrentEAE" ref="menuContentCurrentEAEBean" />
+		<property name="currentEAEDetailedContent" ref="currentEAEDetailedContentBean" />
 	</bean>
 
-	<bean id="eaeGeneralityFormLayoutHistoBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="lastNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="firstNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerLastNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerFirstNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="jobFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="eaeDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="prevEaeDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="employmentDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="salaryFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField" scope="session"/>
+	<bean id="eaeGeneralityFormLayoutHistoBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="lastNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="firstNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerLastNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerFirstNameFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="jobFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="eaeDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="prevEaeDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="employmentDateFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="salaryFieldEAEGeneralityHistoBean" class="com.vaadin.ui.TextField"
+		scope="session" />
 
-	<bean id="EAEGeneralityFormHistoBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="eaeGeneralityFormLayout" ref ="eaeGeneralityFormLayoutHistoBean" />
-		<property name="lastNameField" ref ="lastNameFieldEAEGeneralityHistoBean" />
-		<property name="firstNameField" ref ="firstNameFieldEAEGeneralityHistoBean" />
-		<property name="managerLastNameField" ref ="managerLastNameFieldEAEGeneralityHistoBean" />
-		<property name="managerFirstNameField" ref ="managerFirstNameFieldEAEGeneralityHistoBean" />
-		<property name="jobField" ref ="jobFieldEAEGeneralityHistoBean" />
-		<property name="eaeDateField" ref ="eaeDateFieldEAEGeneralityHistoBean" />
-		<property name="prevEaeDateField" ref ="prevEaeDateFieldEAEGeneralityHistoBean" />
-		<property name="employmentDateField" ref ="employmentDateFieldEAEGeneralityHistoBean" />
-		<property name="salaryField" ref ="salaryFieldEAEGeneralityHistoBean" />
+	<bean id="EAEGeneralityFormHistoBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="eaeGeneralityFormLayout" ref="eaeGeneralityFormLayoutHistoBean" />
+		<property name="lastNameField" ref="lastNameFieldEAEGeneralityHistoBean" />
+		<property name="firstNameField" ref="firstNameFieldEAEGeneralityHistoBean" />
+		<property name="managerLastNameField" ref="managerLastNameFieldEAEGeneralityHistoBean" />
+		<property name="managerFirstNameField" ref="managerFirstNameFieldEAEGeneralityHistoBean" />
+		<property name="jobField" ref="jobFieldEAEGeneralityHistoBean" />
+		<property name="eaeDateField" ref="eaeDateFieldEAEGeneralityHistoBean" />
+		<property name="prevEaeDateField" ref="prevEaeDateFieldEAEGeneralityHistoBean" />
+		<property name="employmentDateField" ref="employmentDateFieldEAEGeneralityHistoBean" />
+		<property name="salaryField" ref="salaryFieldEAEGeneralityHistoBean" />
 	</bean>
 
-	<bean id="eaeResultsFormLayoutHistoBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="yearSynthesisHistoBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabStrenghtsHistoBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabWeaknessesHistoBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="meansToProgressHistoBean" class="com.vaadin.ui.TextArea" scope="session"/>
+	<bean id="eaeResultsFormLayoutHistoBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="yearSynthesisHistoBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="collabStrenghtsHistoBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="collabWeaknessesHistoBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="meansToProgressHistoBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
 
-	<bean id="EAEResultsFormHistoBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
+	<bean id="EAEResultsFormHistoBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="objectiveService" ref="objectiveService" />
 		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutHistoBean" />
 		<property name="yearSynthesis" ref="yearSynthesisHistoBean" />
 		<property name="collabStrenghts" ref="collabStrenghtsHistoBean" />
@@ -144,402 +198,305 @@
 		<property name="meansToProgress" ref="meansToProgressHistoBean" />
 	</bean>
 
-	<bean id="eaeObjectivesFormLayoutHistoBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="EAEObjectivesFormHistoBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
+	<bean id="eaeObjectivesFormLayoutHistoBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="EAEObjectivesFormHistoBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="objectiveService" ref="objectiveService" />
 		<property name="eaeObjectivesFormLayout" ref="eaeObjectivesFormLayoutHistoBean" />
 	</bean>
 
-	<bean id="eaeSynthesisFormLayoutHistoBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="EAESynthesisFormHistoBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
+	<bean id="eaeSynthesisFormLayoutHistoBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="EAESynthesisFormHistoBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
 		<property name="eaeSynthesisFormLayout" ref="eaeSynthesisFormLayoutHistoBean" />
 	</bean>
 
-	<bean id="hLayoutCurrentEAEHistoBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelCurrentEAEHistoBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuPanelCurrentEAEHistoBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentCurrentEAEHistoBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="currentEAEDetailedContentHistoBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent" scope="session">
-		<property name="eaeGeneralityForm" ref ="EAEGeneralityFormHistoBean" />
-		<property name="eaeResultsForm" ref ="EAEResultsFormHistoBean" />
-		<property name="eaeObjectivesForm" ref ="EAEObjectivesFormHistoBean" />
-		<property name="eaeSynthesisForm" ref ="EAESynthesisFormHistoBean" />
+	<bean id="hLayoutCurrentEAEHistoBean" class="com.vaadin.ui.HorizontalLayout"
+		scope="session" />
+	<bean id="contentPanelCurrentEAEHistoBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuPanelCurrentEAEHistoBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuContentCurrentEAEHistoBean" class="com.vaadin.ui.VerticalLayout"
+		scope="session" />
+	<bean id="currentEAEDetailedContentHistoBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent"
+		scope="session">
+		<property name="eaeGeneralityForm" ref="EAEGeneralityFormHistoBean" />
+		<property name="eaeResultsForm" ref="EAEResultsFormHistoBean" />
+		<property name="eaeObjectivesForm" ref="EAEObjectivesFormHistoBean" />
+		<property name="eaeSynthesisForm" ref="EAESynthesisFormHistoBean" />
 	</bean>
-<!-- FIN POUR TEST -->	
-	<bean id="generalityButtonHistoBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="resultsButtonHistoBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="objectivesButtonHistoBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="synthesisButtonHistoBean" class="com.vaadin.ui.Button" scope="session" />
+	<!-- FIN POUR TEST -->
+	<bean id="generalityButtonHistoBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="resultsButtonHistoBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="objectivesButtonHistoBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="synthesisButtonHistoBean" class="com.vaadin.ui.Button"
+		scope="session" />
 
-	<bean id="historicalEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="generalityButton" ref ="generalityButtonHistoBean" />
-		<property name="resultsButton" ref ="resultsButtonHistoBean" />
-		<property name="objectivesButton" ref ="objectivesButtonHistoBean" />
-		<property name="synthesisButton" ref ="synthesisButtonHistoBean" />
-		<property name="hLayoutCurrentEAE" ref ="hLayoutCurrentEAEHistoBean" />
-		<property name="panelRightCurrentEAE" ref ="contentPanelCurrentEAEHistoBean" />
-		<property name="panelLeftCurrentEAE" ref ="menuPanelCurrentEAEHistoBean" />
-		<property name="menuContentCurrentEAE" ref ="menuContentCurrentEAEHistoBean" />
-		<property name="currentEAEDetailedContent" ref ="currentEAEDetailedContentHistoBean" />
+	<bean id="historicalEAEContentBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="generalityButton" ref="generalityButtonHistoBean" />
+		<property name="resultsButton" ref="resultsButtonHistoBean" />
+		<property name="objectivesButton" ref="objectivesButtonHistoBean" />
+		<property name="synthesisButton" ref="synthesisButtonHistoBean" />
+		<property name="hLayoutCurrentEAE" ref="hLayoutCurrentEAEHistoBean" />
+		<property name="panelRightCurrentEAE" ref="contentPanelCurrentEAEHistoBean" />
+		<property name="panelLeftCurrentEAE" ref="menuPanelCurrentEAEHistoBean" />
+		<property name="menuContentCurrentEAE" ref="menuContentCurrentEAEHistoBean" />
+		<property name="currentEAEDetailedContent" ref="currentEAEDetailedContentHistoBean" />
 	</bean>
-<!-- FIN POUR TEST -->	
+	<!-- FIN POUR TEST -->
 
-	<bean id="listEAEPanelBean" class="com.vaadin.ui.Panel" scope="session"/>
+	<bean id="listEAEPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 
-	<bean id="eaeDTOContainerBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer" scope="session">
-		<property name="eaeService" ref ="eaeService" />
+	<bean id="eaeDTOContainerBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
 	</bean>
 
-	<bean id="listEAEBean" class="com.novedia.talentmap.web.ui.colleague.eae.ListEAEDTO" scope="session">
-		<property name="eaeDTOContainer" ref ="eaeDTOContainerBean" />
+	<bean id="listEAEBean" class="com.novedia.talentmap.web.ui.colleague.eae.ListEAEDTO"
+		scope="session">
+		<property name="eaeDTOContainer" ref="eaeDTOContainerBean" />
 	</bean>
-	
-	<bean id="historyEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent" scope="session">
-		<property name="listEAEPanel" ref ="listEAEPanelBean" />
-		<property name="listEAE" ref ="listEAEBean" />
-		<property name="historicalEAEContent" ref ="historicalEAEContentBean" />
+
+	<bean id="historyEAEContentBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent"
+		scope="session">
+		<property name="listEAEPanel" ref="listEAEPanelBean" />
+		<property name="listEAE" ref="listEAEBean" />
+		<property name="historicalEAEContent" ref="historicalEAEContentBean" />
 	</bean>
-	
-	
-	
+
+
+
 	<!-- POUR CM -->
-	
-	<bean id="eaeGeneralityFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="lastNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="firstNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerLastNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerFirstNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="jobFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="eaeDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="prevEaeDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="employmentDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="salaryFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField" scope="session"/>
-	
-	
-	<bean id="EAEGeneralityFormHistoForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm" scope="session">
-		<property name="eaeService" ref ="eaeService" /><!-- OK -->
-		<property name="eaeGeneralityFormLayout" ref ="eaeGeneralityFormLayoutHistoForCMBean" /><!-- OK -->
-		<property name="lastNameField" ref ="lastNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="firstNameField" ref ="firstNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="managerLastNameField" ref ="managerLastNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="managerFirstNameField" ref ="managerFirstNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="jobField" ref ="jobFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="eaeDateField" ref ="eaeDateFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="prevEaeDateField" ref ="prevEaeDateFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="employmentDateField" ref ="employmentDateFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-		<property name="salaryField" ref ="salaryFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
-	</bean>
+	<bean id="eaeCMButtonBean" class="com.vaadin.ui.Button" scope="session" />
 
-	<bean id="eaeResultsFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="yearSynthesisHistoForCMBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabStrenghtsHistoForCMBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabWeaknessesHistoForCMBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="meansToProgressHistoForCMBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	
-	<bean id="EAEResultsFormHistoForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
-		<property name="eaeService" ref ="eaeService" /><!-- OK -->
-		<property name="objectiveService" ref ="objectiveService" /><!-- OK -->
-		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutHistoForCMBean" /><!-- OK -->
-		<property name="yearSynthesis" ref="yearSynthesisHistoForCMBean" /><!-- OK -->
-		<property name="collabStrenghts" ref="collabStrenghtsHistoForCMBean" /><!-- OK -->
-		<property name="collabWeaknesses" ref="collabWeaknessesHistoForCMBean" /><!-- OK -->
-		<property name="meansToProgress" ref="meansToProgressHistoForCMBean" /><!-- OK -->
-	</bean>
-	
-	<bean id="eaeObjectivesFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="EAEObjectivesFormHistoForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
-		<property name="eaeObjectivesFormLayout" ref="eaeObjectivesFormLayoutHistoForCMBean" /><!-- OK -->
-	</bean>
-	<bean id="eaeSynthesisFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="EAESynthesisFormHistoForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="eaeSynthesisFormLayout" ref="eaeSynthesisFormLayoutHistoForCMBean" /><!-- OK -->
-	</bean>
-
-	
-
-	<bean id="generalityButtonHistoForCMBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="resultsButtonHistoForCMBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="objectivesButtonHistoForCMBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="synthesisButtonHistoForCMBean" class="com.vaadin.ui.Button" scope="session" />
-
-	<bean id="hLayoutCurrentEAEHistoForCMBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelCurrentEAEHistoForCMBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuPanelCurrentEAEHistoForCMBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentCurrentEAEHistoForCMBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="currentEAEDetailedContentHistoForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent" scope="session">
-		<property name="eaeGeneralityForm" ref ="EAEGeneralityFormHistoForCMBean" /><!-- OK -->
-		<property name="eaeResultsForm" ref ="EAEResultsFormHistoForCMBean" /><!-- OK -->
-		<property name="eaeObjectivesForm" ref ="EAEObjectivesFormHistoForCMBean" /><!-- OK -->
-		<property name="eaeSynthesisForm" ref ="EAESynthesisFormHistoForCMBean" /><!-- OK -->
-	</bean>
+	<bean id="eaeGeneralityFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="lastNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="firstNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerLastNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="managerFirstNameFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="jobFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="eaeDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="prevEaeDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="employmentDateFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
+	<bean id="salaryFieldEAEGeneralityHistoForCMBean" class="com.vaadin.ui.TextField"
+		scope="session" />
 
 
-	<bean id="historicalEAEContentForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent" scope="session">
-		<property name="eaeService" ref ="eaeService" /><!-- OK -->
-		<property name="generalityButton" ref ="generalityButtonHistoForCMBean" /><!-- OK -->
-		<property name="resultsButton" ref ="resultsButtonHistoForCMBean" /><!-- OK -->
-		<property name="objectivesButton" ref ="objectivesButtonHistoForCMBean" /><!-- OK -->
-		<property name="synthesisButton" ref ="synthesisButtonHistoForCMBean" /><!-- OK -->
-		<property name="hLayoutCurrentEAE" ref ="hLayoutCurrentEAEHistoForCMBean" /><!-- OK -->
-		<property name="panelRightCurrentEAE" ref ="contentPanelCurrentEAEHistoForCMBean" /><!-- OK -->
-		<property name="panelLeftCurrentEAE" ref ="menuPanelCurrentEAEHistoForCMBean" /><!-- OK -->
-		<property name="menuContentCurrentEAE" ref ="menuContentCurrentEAEHistoForCMBean" /><!-- OK -->
-		<property name="currentEAEDetailedContent" ref ="currentEAEDetailedContentHistoForCMBean" /><!-- OK -->
-	</bean>
-	
-	<bean id="listEAEPanelForCMBean" class="com.vaadin.ui.Panel" scope="session"/>
-	<bean id="eaeDTOContainerForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer" scope="session">
-		<property name="eaeService" ref ="eaeService" /><!-- OK -->
+	<bean id="EAEGeneralityFormHistoForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" /><!-- OK -->
+		<property name="eaeGeneralityFormLayout" ref="eaeGeneralityFormLayoutHistoForCMBean" /><!-- 
+			OK -->
+		<property name="lastNameField" ref="lastNameFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
+		<property name="firstNameField" ref="firstNameFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
+		<property name="managerLastNameField"
+			ref="managerLastNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
+		<property name="managerFirstNameField"
+			ref="managerFirstNameFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
+		<property name="jobField" ref="jobFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
+		<property name="eaeDateField" ref="eaeDateFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
+		<property name="prevEaeDateField" ref="prevEaeDateFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
+		<property name="employmentDateField"
+			ref="employmentDateFieldEAEGeneralityHistoForCMBean" /><!-- OK -->
+		<property name="salaryField" ref="salaryFieldEAEGeneralityHistoForCMBean" /><!-- 
+			OK -->
 	</bean>
 
-	<bean id="listEAEForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.ListEAEDTO" scope="session">
-		<property name="eaeDTOContainer" ref ="eaeDTOContainerForCMBean" /><!-- OK -->
+	<bean id="eaeResultsFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="yearSynthesisHistoForCMBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="collabStrenghtsHistoForCMBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="collabWeaknessesHistoForCMBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+	<bean id="meansToProgressHistoForCMBean" class="com.vaadin.ui.TextArea"
+		scope="session" />
+
+	<bean id="EAEResultsFormHistoForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" /><!-- OK -->
+		<property name="objectiveService" ref="objectiveService" /><!-- 
+			OK -->
+		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutHistoForCMBean" /><!-- 
+			OK -->
+		<property name="yearSynthesis" ref="yearSynthesisHistoForCMBean" /><!-- 
+			OK -->
+		<property name="collabStrenghts" ref="collabStrenghtsHistoForCMBean" /><!-- 
+			OK -->
+		<property name="collabWeaknesses" ref="collabWeaknessesHistoForCMBean" /><!-- 
+			OK -->
+		<property name="meansToProgress" ref="meansToProgressHistoForCMBean" /><!-- 
+			OK -->
 	</bean>
 
-	<bean id="historyEAEContentForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent" scope="session">
-		<property name="listEAEPanel" ref ="listEAEPanelForCMBean" /><!-- OK -->
-		<property name="listEAE" ref ="listEAEForCMBean" /><!-- OK -->
-		<property name="historicalEAEContent" ref ="historicalEAEContentForCMBean" /><!-- OK -->
+	<bean id="eaeObjectivesFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="EAEObjectivesFormHistoForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectivesForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="objectiveService" ref="objectiveService" />
+		<property name="eaeObjectivesFormLayout" ref="eaeObjectivesFormLayoutHistoForCMBean" /><!-- 
+			OK -->
+	</bean>
+	<bean id="eaeSynthesisFormLayoutHistoForCMBean" class="com.vaadin.ui.GridLayout"
+		scope="session" />
+	<bean id="EAESynthesisFormHistoForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAESynthesisForm"
+		scope="session">
+		<property name="eaeService" ref="eaeService" />
+		<property name="eaeSynthesisFormLayout" ref="eaeSynthesisFormLayoutHistoForCMBean" /><!-- 
+			OK -->
+	</bean>
+
+
+
+	<bean id="generalityButtonHistoForCMBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="resultsButtonHistoForCMBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="objectivesButtonHistoForCMBean" class="com.vaadin.ui.Button"
+		scope="session" />
+	<bean id="synthesisButtonHistoForCMBean" class="com.vaadin.ui.Button"
+		scope="session" />
+
+	<bean id="hLayoutCurrentEAEHistoForCMBean" class="com.vaadin.ui.HorizontalLayout"
+		scope="session" />
+	<bean id="contentPanelCurrentEAEHistoForCMBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuPanelCurrentEAEHistoForCMBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuContentCurrentEAEHistoForCMBean" class="com.vaadin.ui.VerticalLayout"
+		scope="session" />
+	<bean id="currentEAEDetailedContentHistoForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent"
+		scope="session">
+		<property name="eaeGeneralityForm" ref="EAEGeneralityFormHistoForCMBean" /><!-- 
+			OK -->
+		<property name="eaeResultsForm" ref="EAEResultsFormHistoForCMBean" /><!-- 
+			OK -->
+		<property name="eaeObjectivesForm" ref="EAEObjectivesFormHistoForCMBean" /><!-- 
+			OK -->
+		<property name="eaeSynthesisForm" ref="EAESynthesisFormHistoForCMBean" /><!-- 
+			OK -->
+	</bean>
+
+
+	<bean id="historicalEAEContentForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent"
+		scope="session">
+		<property name="eaeService" ref="eaeService" /><!-- OK -->
+		<property name="generalityButton" ref="generalityButtonHistoForCMBean" /><!-- 
+			OK -->
+		<property name="resultsButton" ref="resultsButtonHistoForCMBean" /><!-- 
+			OK -->
+		<property name="objectivesButton" ref="objectivesButtonHistoForCMBean" /><!-- 
+			OK -->
+		<property name="synthesisButton" ref="synthesisButtonHistoForCMBean" /><!-- 
+			OK -->
+		<property name="hLayoutCurrentEAE" ref="hLayoutCurrentEAEHistoForCMBean" /><!-- 
+			OK -->
+		<property name="panelRightCurrentEAE" ref="contentPanelCurrentEAEHistoForCMBean" /><!-- 
+			OK -->
+		<property name="panelLeftCurrentEAE" ref="menuPanelCurrentEAEHistoForCMBean" /><!-- 
+			OK -->
+		<property name="menuContentCurrentEAE" ref="menuContentCurrentEAEHistoForCMBean" /><!-- 
+			OK -->
+		<property name="currentEAEDetailedContent" ref="currentEAEDetailedContentHistoForCMBean" /><!-- 
+			OK -->
+	</bean>
+
+	<bean id="listEAEPanelForCMBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="eaeDTOContainerForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer"
+		scope="session">
+		<property name="eaeService" ref="eaeService" /><!-- OK -->
+	</bean>
+
+	<bean id="listEAEForCMBean" class="com.novedia.talentmap.web.ui.colleague.eae.ListEAEDTO"
+		scope="session">
+		<property name="eaeDTOContainer" ref="eaeDTOContainerForCMBean" /><!-- 
+			OK -->
+	</bean>
+
+	<bean id="historyEAEContentForCMBean"
+		class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent"
+		scope="session">
+		<property name="listEAEPanel" ref="listEAEPanelForCMBean" /><!-- 
+			OK -->
+		<property name="listEAE" ref="listEAEForCMBean" /><!-- OK -->
+		<property name="historicalEAEContent" ref="historicalEAEContentForCMBean" /><!-- 
+			OK -->
 	</bean>
 	<!-- FIN POUR CM -->
 
-	<bean id="hLayoutPersoEAEBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="panelLeftPersoEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentPersoEAEBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="panelRightPersoEAEBean" class="com.vaadin.ui.Panel" scope="session" />
+	<bean id="hLayoutPersoEAEBean" class="com.vaadin.ui.HorizontalLayout"
+		scope="session" />
+	<bean id="panelLeftPersoEAEBean" class="com.vaadin.ui.Panel"
+		scope="session" />
+	<bean id="menuContentPersoEAEBean" class="com.vaadin.ui.VerticalLayout"
+		scope="session" />
+	<bean id="panelRightPersoEAEBean" class="com.vaadin.ui.Panel"
+		scope="session" />
 
-	<bean id="personalEAEPopInBean" class="com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn" scope="session">
-		<property name="currentEAEButton" ref ="currentEAEButtonBean" />
-		<property name="historyEAEButton" ref ="historyEAEButtonBean" />
-		<property name="hLayoutPersoEAE" ref ="hLayoutPersoEAEBean" />
-		<property name="panelLeftPersoEAE" ref ="panelLeftPersoEAEBean" />
-		<property name="menuContentPersoEAE" ref ="menuContentPersoEAEBean" />
-		<property name="panelRightPersoEAE" ref ="panelRightPersoEAEBean" />
-		<property name="currentEAEContent" ref ="currentEAEContentBean" />
-		<property name="historyEAEContent" ref ="historyEAEContentBean" />
+	<bean id="personalEAEPopInBean" class="com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn"
+		scope="session">
+		<property name="currentEAEButton" ref="currentEAEButtonBean" />
+		<property name="historyEAEButton" ref="historyEAEButtonBean" />
+		<property name="hLayoutPersoEAE" ref="hLayoutPersoEAEBean" />
+		<property name="panelLeftPersoEAE" ref="panelLeftPersoEAEBean" />
+		<property name="menuContentPersoEAE" ref="menuContentPersoEAEBean" />
+		<property name="panelRightPersoEAE" ref="panelRightPersoEAEBean" />
+		<property name="currentEAEContent" ref="currentEAEContentBean" />
+		<property name="historyEAEContent" ref="historyEAEContentBean" />
 	</bean>
 
 
-	<bean id="hLayoutCMEAEBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="cmEAEPopInBean" class="com.novedia.talentmap.web.ui.cm.eae.CMEAEPopIn" scope="session">
-		<property name="hLayoutCMEAE" ref ="hLayoutCMEAEBean" />
-		<property name="eaeService" ref ="eaeService" />
-		<property name="historyEAEContent" ref ="historyEAEContentForCMBean" />
+	<bean id="hLayoutCMEAEBean" class="com.vaadin.ui.HorizontalLayout"
+		scope="session" />
+	<bean id="cmEAEPopInBean" class="com.novedia.talentmap.web.ui.cm.eae.CMEAEPopIn"
+		scope="session">
+		<property name="hLayoutCMEAE" ref="hLayoutCMEAEBean" />
+		<property name="eaeService" ref="eaeService" />
+		<property name="historyEAEContent" ref="historyEAEContentForCMBean" />
 	</bean>
 
 	<!-- ********************************************************** -->
-	<!-- 						PROFILE CM 							-->
+	<!-- PROFILE CM -->
 	<!-- ********************************************************** -->
-	
 
-	
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-                           http://www.springframework.org/schema/context 
-                           http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-                           
-    <import resource="classpath:services-spring-context.xml" />
-	<import resource="classpath:model-spring-context.xml" /> 
-                           
-<!-- 	BEAN EAE -->
-	
-	<bean id="currentEAEButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="historyEAEButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="generalityButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="resultsButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="objectivesButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="synthesisButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="hLayoutCurrentEAEBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelCurrentEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuPanelCurrentEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentCurrentEAEBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="eaeGeneralityFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-
-	
-	<bean id="currentEAEDetailedContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent" scope="session">
-		<property name="eaeGeneralityForm" ref ="EAEGeneralityFormBean" />
-		<property name="eaeResultsForm" ref ="EAEResultsFormBean" />
-	</bean>
-
-	<bean id="lastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="firstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerLastNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerFirstNameFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="jobFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="eaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="prevEaeDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="employmentDateFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="salaryFieldEAEGeneralityBean" class="com.vaadin.ui.TextField" scope="session"/>
-
-	<bean id="EAEGeneralityFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="eaeGeneralityFormLayout" ref ="eaeGeneralityFormLayoutBean" />
-		<property name="lastNameField" ref ="lastNameFieldEAEGeneralityBean" />
-		<property name="firstNameField" ref ="firstNameFieldEAEGeneralityBean" />
-		<property name="managerLastNameField" ref ="managerLastNameFieldEAEGeneralityBean" />
-		<property name="managerFirstNameField" ref ="managerFirstNameFieldEAEGeneralityBean" />
-		<property name="jobField" ref ="jobFieldEAEGeneralityBean" />
-		<property name="eaeDateField" ref ="eaeDateFieldEAEGeneralityBean" />
-		<property name="prevEaeDateField" ref ="prevEaeDateFieldEAEGeneralityBean" />
-		<property name="employmentDateField" ref ="employmentDateFieldEAEGeneralityBean" />
-		<property name="salaryField" ref ="salaryFieldEAEGeneralityBean" />
-	</bean>
-
-	<bean id="eaeResultsFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="yearSynthesisBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabStrenghtsBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabWeaknessesBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="meansToProgressBean" class="com.vaadin.ui.TextArea" scope="session"/>
-	
-	<!-- 	Beans de ObjectiveFormBean -->
-	<bean id="goalBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="targetDateBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="indicatorsBean" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="meansBean" class="com.vaadin.ui.TextField" scope="session"/>
-
-
-	<bean id="objectiveFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEObjectiveForm" scope="session"/>
-
-
-	<!-- TODO VERIFIER SI CA FONCTIONNE EN DECLARANT DIRECTEMENT -->
-	<bean id="EAEResultsFormBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
-		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutBean" />
-		<property name="yearSynthesis" ref="yearSynthesisBean" />
-		<property name="collabStrenghts" ref="collabStrenghtsBean" />
-		<property name="collabWeaknesses" ref="collabWeaknessesBean" />
-		<property name="meansToProgress" ref="meansToProgressBean" />
-	</bean>
-
-	<bean id="currentEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="generalityButton" ref ="generalityButtonBean" />
-		<property name="resultsButton" ref ="resultsButtonBean" />
-		<property name="objectivesButton" ref ="objectivesButtonBean" />
-		<property name="synthesisButton" ref ="synthesisButtonBean" />
-		<property name="hLayoutCurrentEAE" ref ="hLayoutCurrentEAEBean" />
-		<property name="panelRightCurrentEAE" ref ="contentPanelCurrentEAEBean" />
-		<property name="panelLeftCurrentEAE" ref ="menuPanelCurrentEAEBean" />
-		<property name="menuContentCurrentEAE" ref ="menuContentCurrentEAEBean" />
-		<property name="currentEAEDetailedContent" ref ="currentEAEDetailedContentBean" />
-	</bean>
-
-<!-- POUR TEST -->	
-	<bean id="eaeGeneralityFormLayoutBean_H" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="lastNameFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="firstNameFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerLastNameFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="managerFirstNameFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="jobFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="eaeDateFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="prevEaeDateFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="employmentDateFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-	<bean id="salaryFieldEAEGeneralityBean_H" class="com.vaadin.ui.TextField" scope="session"/>
-
-	<bean id="EAEGeneralityFormBean_H" class="com.novedia.talentmap.web.ui.colleague.eae.EAEGeneralityForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="eaeGeneralityFormLayout" ref ="eaeGeneralityFormLayoutBean_H" />
-		<property name="lastNameField" ref ="lastNameFieldEAEGeneralityBean_H" />
-		<property name="firstNameField" ref ="firstNameFieldEAEGeneralityBean_H" />
-		<property name="managerLastNameField" ref ="managerLastNameFieldEAEGeneralityBean_H" />
-		<property name="managerFirstNameField" ref ="managerFirstNameFieldEAEGeneralityBean_H" />
-		<property name="jobField" ref ="jobFieldEAEGeneralityBean_H" />
-		<property name="eaeDateField" ref ="eaeDateFieldEAEGeneralityBean_H" />
-		<property name="prevEaeDateField" ref ="prevEaeDateFieldEAEGeneralityBean_H" />
-		<property name="employmentDateField" ref ="employmentDateFieldEAEGeneralityBean_H" />
-		<property name="salaryField" ref ="salaryFieldEAEGeneralityBean_H" />
-	</bean>
-
-	<bean id="eaeResultsFormLayoutBean_H" class="com.vaadin.ui.GridLayout" scope="session"/>
-	<bean id="yearSynthesisBean_H" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabStrenghtsBean_H" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="collabWeaknessesBean_H" class="com.vaadin.ui.TextArea" scope="session"/>
-	<bean id="meansToProgressBean_H" class="com.vaadin.ui.TextArea" scope="session"/>
-
-	<bean id="EAEResultsFormBean_H" class="com.novedia.talentmap.web.ui.colleague.eae.EAEResultsForm" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="objectiveService" ref ="objectiveService" />
-		<property name="eaeResultsFormLayout" ref="eaeResultsFormLayoutBean_H" />
-		<property name="yearSynthesis" ref="yearSynthesisBean_H" />
-		<property name="collabStrenghts" ref="collabStrenghtsBean_H" />
-		<property name="collabWeaknesses" ref="collabWeaknessesBean_H" />
-		<property name="meansToProgress" ref="meansToProgressBean_H" />
-	</bean>
-
-	<bean id="hLayoutCurrentEAEBean_H" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="contentPanelCurrentEAEBean_H" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuPanelCurrentEAEBean_H" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentCurrentEAEBean_H" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="currentEAEDetailedContentBean_H" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEDetailedContent" scope="session">
-		<property name="eaeGeneralityForm" ref ="EAEGeneralityFormBean_H" />
-		<property name="eaeResultsForm" ref ="EAEResultsFormBean_H" />
-	</bean>
-<!-- FIN POUR TEST -->	
-	<bean id="generalityButtonBean_H" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="resultsButtonBean_H" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="objectivesButtonBean_H" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="synthesisButtonBean_H" class="com.vaadin.ui.Button" scope="session" />
-
-	<bean id="historicalEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-		<property name="generalityButton" ref ="generalityButtonBean_H" />
-		<property name="resultsButton" ref ="resultsButtonBean_H" />
-		<property name="objectivesButton" ref ="objectivesButtonBean_H" />
-		<property name="synthesisButton" ref ="synthesisButtonBean_H" />
-		<property name="hLayoutCurrentEAE" ref ="hLayoutCurrentEAEBean_H" />
-		<property name="panelRightCurrentEAE" ref ="contentPanelCurrentEAEBean_H" />
-		<property name="panelLeftCurrentEAE" ref ="menuPanelCurrentEAEBean_H" />
-		<property name="menuContentCurrentEAE" ref ="menuContentCurrentEAEBean_H" />
-		<property name="currentEAEDetailedContent" ref ="currentEAEDetailedContentBean_H" />
-	</bean>
-<!-- FIN POUR TEST -->	
-
-	<bean id="listEAEPanelBean" class="com.vaadin.ui.Panel" scope="session"/>
-
-	<bean id="eaeDTOContainerBean" class="com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer" scope="session">
-		<property name="eaeService" ref ="eaeService" />
-	</bean>
-
-	<bean id="listEAEBean" class="com.novedia.talentmap.web.ui.colleague.eae.ListEAEDTO" scope="session">
-		<property name="eaeDTOContainer" ref ="eaeDTOContainerBean" />
-	</bean>
-	
-	<bean id="historyEAEContentBean" class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent" scope="session">
-		<property name="listEAEPanel" ref ="listEAEPanelBean" />
-		<property name="listEAE" ref ="listEAEBean" />
-		<property name="historicalEAEContent" ref ="historicalEAEContentBean" />
-	</bean>
-
-	<bean id="hLayoutPersoEAEBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
-	<bean id="panelLeftPersoEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="menuContentPersoEAEBean" class="com.vaadin.ui.VerticalLayout" scope="session"/>
-	<bean id="panelRightPersoEAEBean" class="com.vaadin.ui.Panel" scope="session" />
-
-	<bean id="personalEAEPopInBean" class="com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn" scope="session">
-		<property name="currentEAEButton" ref ="currentEAEButtonBean" />
-		<property name="historyEAEButton" ref ="historyEAEButtonBean" />
-		<property name="hLayoutPersoEAE" ref ="hLayoutPersoEAEBean" />
-		<property name="panelLeftPersoEAE" ref ="panelLeftPersoEAEBean" />
-		<property name="menuContentPersoEAE" ref ="menuContentPersoEAEBean" />
-		<property name="panelRightPersoEAE" ref ="panelRightPersoEAEBean" />
-		<property name="currentEAEContent" ref ="currentEAEContentBean" />
-		<property name="historyEAEContent" ref ="historyEAEContentBean" />
-	</bean>
-	
-<!-- 	FIN BEAN EAE -->
-	
->>>>>>> branch 'master' of https://github.com/Jean-Max/NovTalentMap.git
 </beans>                           

@@ -1,4 +1,3 @@
-//<<<<<<< HEAD
 package com.novedia.talentmap.web.ui.search;
 
 import java.util.ArrayList;
