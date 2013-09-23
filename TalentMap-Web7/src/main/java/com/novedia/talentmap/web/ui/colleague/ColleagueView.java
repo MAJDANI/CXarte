@@ -9,7 +9,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -31,8 +30,6 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private PersonalEAEPopIn personalEAEPopIn;
 	
 	private SearchPopIn searchPopIn;
-	
-	private Panel searchCmPanel;
 	
 	private Button searchButtonCm;
 
@@ -183,17 +180,6 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	public void setSearchPopIn(SearchPopIn searchPopIn) {
 		this.searchPopIn = searchPopIn;
 	}
-
-
-	public Panel getSearchCmPanel() {
-		return searchCmPanel;
-	}
-
-
-	public void setSearchCmPanel(Panel searchCmPanel) {
-		this.searchCmPanel = searchCmPanel;
-	}
-
 
 	public Button getSearchButtonCm() {
 		return searchButtonCm;

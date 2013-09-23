@@ -122,8 +122,10 @@ public class RegistrationForm extends FormLayout {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		title.setCaption(resourceBundle.getString("title.caption"));
-		title.addItem(resourceBundle.getString("title.mr"));
-		title.addItem(resourceBundle.getString("title.mrs"));
+		title.addItem(resourceBundle.getString("title.masculin.value"));
+		title.setItemCaption(resourceBundle.getString("title.masculin.value"), resourceBundle.getString("title.masculin.caption"));
+		title.addItem(resourceBundle.getString("title.feminin.value"));
+		title.setItemCaption(resourceBundle.getString("title.feminin.value"), resourceBundle.getString("title.feminin.caption"));
 		title.setMultiSelect(false);
 		title.setRequired(true);
 		title.setRequiredError(resourceBundle.getString("error.missing.title"));
@@ -252,7 +254,7 @@ public class RegistrationForm extends FormLayout {
 		managerField.setId(ComponentsId.MANAGER_ID);
 		registrationFormLayout.addComponent(managerField);
 
-		registration = Registration.Builder.builder().title(resourceBundle.getString("title.mr")).build();
+		registration = Registration.Builder.builder().title(resourceBundle.getString("title.masculin.value")).build();
 
 		binder = new BeanFieldGroup<Registration>(
 				Registration.class);

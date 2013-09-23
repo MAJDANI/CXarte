@@ -231,7 +231,6 @@
 		<property name="colleagueService" ref ="collaboratorService" />
 	</bean>
 	
-	<bean id="searchCmPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="searchButtonCmBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="colleagueViewBean" class="com.novedia.talentmap.web.ui.colleague.ColleagueView" scope="session" >
@@ -241,7 +240,6 @@
 		<property name="formationButton" ref ="formationButtonBean" />
 		<property name="profilePopIn" ref ="profilePopIn" />
 		<property name="personalEAEPopIn" ref ="personalEAEPopInBean" />
-		<property name="searchCmPanel" ref ="searchCmPanelBean" />
 		<property name="searchButtonCm" ref ="searchButtonCmBean" />
 		<property name="searchPopIn" ref ="searchPopInBean" />
 	</bean>
@@ -410,14 +408,4 @@
 	
 	<bean id="searchResults" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session" />
 
-<!-- 	<bean id="nameFieldSearchAdminBean" class="com.vaadin.ui.TextField" scope="session" /> -->
-	
-<!-- 	<bean id="searchByNameFormAdmin" class="com.novedia.talentmap.web.ui.search.SearchByNameForm" scope="session"> -->
-<!-- 		<property name="nameField" ref="nameFieldSearchAdminBean" /> -->
-<!-- 	</bean> -->
-	
-	
-<!-- 	<bean id="searchResultsAdmin" class="com.novedia.talentmap.web.ui.search.SearchResults" scope="session"> -->
-<!-- 	</bean> -->
-	
 </beans>
