@@ -55,17 +55,19 @@ public abstract class CUtils {
 		    }
 		    
 		    // Ajout d'un nouveau concept à l'arbre
-		    if (!treeSkills.containsId(concept)) {
+		    if (concept.getId() != null && !treeSkills.containsId(concept)) {
 				treeSkills.addItem(concept);
 				treeSkills.setItemCaption(concept, concept.getName());
 				treeSkills.setParent(concept, categorie);
 		    }
 		    
 		    // Ajout de l'outil courant
-		    treeSkills.addItem(tool);
-		    treeSkills.setItemCaption(tool, tool.getName());
-		    treeSkills.setParent(tool, concept);
-		    treeSkills.setChildrenAllowed(tool, false);
+		    if(tool.getId() != null){
+		    	treeSkills.addItem(tool);
+		    	treeSkills.setItemCaption(tool, tool.getName());
+		    	treeSkills.setParent(tool, concept);
+		    	treeSkills.setChildrenAllowed(tool, false);
+		    }
 		}
 	}
     

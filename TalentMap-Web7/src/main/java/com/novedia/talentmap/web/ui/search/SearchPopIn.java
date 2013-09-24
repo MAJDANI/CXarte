@@ -227,9 +227,12 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			if(itemId instanceof Category){
 				if(treeSkills.isSelected(itemId)){
 					Collection<Concept> allConceptOfCategory =  (Collection<Concept>) treeSkills.getChildren(itemId);
-					for (Concept concept : allConceptOfCategory) {
-						List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,concept);
-						toolIdSelectedSet.addAll(allToolIdOfConcept);
+					if(allConceptOfCategory != null){
+						for (Concept concept : allConceptOfCategory) {
+							List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,concept);
+							toolIdSelectedSet.addAll(allToolIdOfConcept);
+						}
+						
 					}
 				}
 			}
@@ -253,8 +256,11 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	public List<Integer> getAllItemIdChildrensOfConcept(Tree treeSkills, Object itemId){
 		Collection<Tool> childrens =  (Collection<Tool>) treeSkills.getChildren(itemId);
 		List<Integer> toolId = new ArrayList<Integer>();
-		for (Tool tool : childrens) {
-			toolId.add(tool.getId());
+		if(childrens != null){
+			for (Tool tool : childrens) {
+				toolId.add(tool.getId());
+			}
+			
 		}
 		return toolId;
 	}
