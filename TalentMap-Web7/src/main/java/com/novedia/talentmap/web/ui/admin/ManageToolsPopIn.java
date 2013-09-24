@@ -41,27 +41,27 @@ public class ManageToolsPopIn extends Window implements  ClickListener, ValueCha
 
 	private ResourceBundle resourceBundle;
 	
-	private HorizontalLayout buttonContainer = new HorizontalLayout();
+	private HorizontalLayout buttonContainer;
 	
-	private HorizontalLayout skillsContainer = new HorizontalLayout();
+	private HorizontalLayout skillsContainer;
 	
-	private VerticalLayout editSkillLayout = new VerticalLayout();
+	private VerticalLayout editSkillLayout;
 	
-	private TextField textField = new TextField();
+	private TextField textField;
 	
-	private Button saveButton = new Button();
+	private Button saveButton;
 	
 	private Tree treeSkills;
 	
 	private ISkillService skillService;
 	
-	private Button deleteButton = new Button();
+	private Button deleteButton;
 	
-	private Button addConceptButton = new Button();
+	private Button addConceptButton;
 	
-	private Button addToolButton = new Button();
+	private Button addToolButton;
 	
-	private Button addCategoryButton = new Button();
+	private Button addCategoryButton;
 	
 	
 
@@ -292,11 +292,6 @@ public class ManageToolsPopIn extends Window implements  ClickListener, ValueCha
 	}
 
 	
-	
-	
-	
-	
-	
 	public IAdminService getAdminService() {
 		return adminService;
 	}
@@ -326,8 +321,93 @@ public class ManageToolsPopIn extends Window implements  ClickListener, ValueCha
 	}
 
 
-	
+	public HorizontalLayout getButtonContainer() {
+		return buttonContainer;
+	}
 
 
+	public void setButtonContainer(HorizontalLayout buttonContainer) {
+		this.buttonContainer = buttonContainer;
+	}
+
+
+	public HorizontalLayout getSkillsContainer() {
+		return skillsContainer;
+	}
+
+
+	public void setSkillsContainer(HorizontalLayout skillsContainer) {
+		this.skillsContainer = skillsContainer;
+	}
+
+
+	public VerticalLayout getEditSkillLayout() {
+		return editSkillLayout;
+	}
+
+
+	public void setEditSkillLayout(VerticalLayout editSkillLayout) {
+		this.editSkillLayout = editSkillLayout;
+	}
+
+
+	public TextField getTextField() {
+		return textField;
+	}
+
+
+	public void setTextField(TextField textField) {
+		this.textField = textField;
+	}
+
+
+	public Button getSaveButton() {
+		return saveButton;
+	}
+
+
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
+	}
+
+
+	public Button getDeleteButton() {
+		return deleteButton;
+	}
+
+
+	public void setDeleteButton(Button deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+
+	public Button getAddConceptButton() {
+		return addConceptButton;
+	}
+
+
+	public void setAddConceptButton(Button addConceptButton) {
+		this.addConceptButton = addConceptButton;
+	}
+
+
+	public Button getAddToolButton() {
+		return addToolButton;
+	}
+
+
+	public void setAddToolButton(Button addToolButton) {
+		this.addToolButton = addToolButton;
+	}
+
+
+	public Button getAddCategoryButton() {
+		return addCategoryButton;
+	}
+
+
+	public void setAddCategoryButton(Button addCategoryButton) {
+		this.addCategoryButton = addCategoryButton;
+	}
 
 }
