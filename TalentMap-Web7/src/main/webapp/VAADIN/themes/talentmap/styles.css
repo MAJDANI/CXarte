@@ -26,6 +26,13 @@
 	background: #242424 url(img/octicons-bg.png) repeat-x !important;
 }
 
+/*#headerLayout{
+    border-bottom : solid 3px #009cda;
+}
+
+#footerLayer{
+    border-top : solid 3px #009cda;
+}*/
 
 .headerContent{
 	position:static;
@@ -85,6 +92,12 @@
 
 .v-textfield-focus, .v-filterselect-input-focus {
 	border : solid 1px #009cda !important;
+}
+
+.monStyleBorderNone {
+                border : none !important;
+				outline : none !important;
+                background: rgba(255,255,255,1);
 }
 
 #logInButton .v-button-wrap,
@@ -163,6 +176,7 @@
 
 .v-caption-errorStyle span{
 	color: #B40404;
+
 }
 
 #settingsLayout{
@@ -172,6 +186,7 @@
 	color:#fff;
 	font-size:15px;
 	z-index:5;
+
 }
 
 #settingsLayout .v-button-caption{
@@ -185,11 +200,11 @@
 }
 
 #logoNovedia{
-	background:url(img/logoNovedia.jpg) no-repeat;
+ 	background:url(img/logoNovedia.jpg) no-repeat;
 	width:225px;
 	height:89px;
 	display:none;
-                
+               
 }
 
 #logoTalentMap{
@@ -200,7 +215,7 @@
 	text-indent:-9999px;
 }
 
-#logoNovedia .v-label{
+#logoNovedia .v-label{ 
 	text-indent:-9999px;
 }
 
@@ -238,6 +253,10 @@
 	line-height:normal !important;
 }
 
+.labelBtnDashboard .v-panel-content{
+                border:none !important;
+}
+
 .v-gridlayout-slot .v-panel{
     overflow:hidden;
     margin-left:20px;
@@ -251,16 +270,38 @@
 }
 
 .v-button-labelBtnDashboard{
-	cursor:pointer;
+                cursor:pointer;
 }
 
+/*  commenter  */
+/* .v-panel-content-labelBtnDashboard .v-button-caption, */
+/* .v-button-labelBtnDashboard .v-button-caption{ */
+/*                 font-size:22px; */
+/*                 color: transparent; */
+/*                 font-weight:bold; */
+/*                 text-decoration:none; */
+/* } */
 
+/* .v-panel-content-labelBtnDashboard .v-button-caption:hover, */
+/* .v-button-labelBtnDashboard .v-button-caption:hover{ */
+/*                 text-decoration:underline; */
+/* } */
+
+/* .v-panel-labelBtnDashboard .v-verticallayout, */
+/* .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout, */
+/* .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{ */
+/*                 /*top:50%; */
+/*                 margin-top:-25px;*/ */
+/*                 margin-top:145px; */
+/* } */
+/*  fin commenter  */
 .v-panel-labelBtnDashboard .v-verticallayout,
 .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
 .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
     margin-top:145px;
                 
 }
+
 
 .top25{
 	argin-top:25px;
@@ -270,7 +311,6 @@
 .v-select-optiongroup-horizontal .v-select-option {
     display: inline-block;
 }
-
 
 .labelBtnDashboard.profilButton{
 	background:url(img/profil.png) center no-repeat;
@@ -298,10 +338,17 @@
     width: 158px;
 }
 
+.labelBtnDashboard.eaeCMButton{
+    background:url(img/eaeCM.png) center no-repeat;
+	height: 211px;
+    width: 158px;
+}
+
 .v-button-labelBtnDashboard .v-button-wrap{
 	height: 0px !important;
     padding: 0px !important;
 }
+
 
 .table {
 	text-align: center;
@@ -373,6 +420,9 @@
 .panelRight .spacerTop{
                 margin-top:10px;
 }
+.panelRight .spacerBottom{
+                margin-bottom:10px;
+}
 
 .contentPanel .v-panel-content{
                 border: none;
@@ -428,6 +478,33 @@
 }
 
 .monStyleGras {
-	                font-weight:bold;
-	                text-decoration:underline;
+				font-weight:bold;
+	    		text-decoration:underline;
+}
+
+
+#eaeResultsFormLayout .v-accordion-item-caption .v-caption {
+	 background: #a4cc1a;
+}
+
+/* eaeObjectivesFormLayout */
+
+.styleDeTest {
+				position:static;
+                left:10px;
+}
+
+.borderRed{
+	border-style : solid;
+  border-color : red;
+}
+
+.borderOrange{
+	border-style : solid;
+  border-color : orange;
+}
+
+.borderGreen{
+	border-style : solid;
+  border-color : green;
 }

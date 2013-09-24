@@ -1,7 +1,6 @@
 package com.novedia.talentmap.web.ui.cm;
 
 import com.novedia.talentmap.model.entity.Authentication;
-import com.novedia.talentmap.web.ui.admin.AdminView;
 import com.novedia.talentmap.web.ui.role.CmContentLayout;
 import com.vaadin.ui.VerticalLayout;
 

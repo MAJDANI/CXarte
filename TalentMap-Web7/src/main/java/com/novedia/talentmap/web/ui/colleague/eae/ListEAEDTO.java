@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
-import com.novedia.talentmap.web.TalentMapApplication;
-import com.novedia.talentmap.web.utils.EaeState;
 import com.novedia.talentmap.web.utils.Images;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Table;
+import com.novedia.talentmap.web.utils.EAEStateEnum;
 
 @SuppressWarnings("serial")
 public class ListEAEDTO extends Table {
@@ -42,9 +41,8 @@ public class ListEAEDTO extends Table {
 	 * @return
 	 */
 	
-    public Table fillAllColleagueEAE(){
+    public Table fillAllColleagueEAE(Integer colleagueId){
     	removeAllItems();
-    	int colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
 		this.eaeDTOContainer.fillEAEContainer(colleagueId);
 		fillTable();
     	return this;
@@ -63,13 +61,13 @@ public class ListEAEDTO extends Table {
 		for (EAEForSynthesisDTO eae : collectionEAE) {
 			String date = formatterDate(eae.getDateEae());
 
-			if (eae.getEaeStateId() == EaeState.OPEN) {
+			if (eae.getEaeStateId() == EAEStateEnum.OPEN.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
 						Images.getImgFeuVert() }, eae);
-			} else if (eae.getEaeStateId() == EaeState.VALIDATED) {
+			} else if (eae.getEaeStateId() == EAEStateEnum.VALIDATED.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
 						Images.getImgFeuOrange() }, eae);
-			} else if (eae.getEaeStateId() == EaeState.CLOSED) {
+			} else if (eae.getEaeStateId() == EAEStateEnum.CLOSED.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
 						Images.getImgFeuRouge() }, eae);
 			}

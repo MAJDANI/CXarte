@@ -1,5 +1,7 @@
 package com.novedia.talentmap.web.utils;
 
+import com.vaadin.server.ThemeResource;
+
 public class Constants {
 	
 	public static final int CATEGORY_VIEW = -1;
@@ -11,6 +13,14 @@ public class Constants {
 	public static final String FIL_ARIANE_SEPARATOR_LABEL = " > ";
 	
 	public static final int NB_ROWS_DEFAULT = 10;
+	
+	public static final String MANAGE_TOOLS_VIEW_TITLE = "Manage tools View";
+	
+	public static final String DELETE_COLLEAGUE_VIEW_TITLE = "Delete Colleague View";
+	
+	public static final String TEXT_FIELD_SEARCH_COLLEAGUE_NAME_LABEL = "Colleague Name : ";
+	
+	public static final String DELETE_COLLEAGUE_MSG = "Are you sure you want to delete these colleagues ?";
 	
 	// 3 constants to validate fields in MissionForm
     public static final int VALIDATION_FIELD_MISSING = 0;
@@ -31,13 +41,41 @@ public class Constants {
      * Constant for error messages
      */
 	
-    public static final String EAE_MSG_ERROR_GENERALITY_FORM = "Missing or invalid field";
+	public static final String SAVE_BUTTON_NAME = "Save";
+	
+	public static final String REGISTRATION_PANEL_PASSWORD_ERROR = "Error on your password confirmation";
+	
+//	public static final String PANEL_MISSING_FIELDS = "Error one or many fields are missing";
+	
+	public static final String REGISTRATION_PANEL_USER_CREATION_ERROR = "Error while creating user";
+	
+//	public static final String MISSION_MSG_INVALID_PERIOD = "The period is invalid";
+	
+//	public static final String MISSION_MSG_INVALID_SELECTION = "Please select at least one tool";
+	
+	public static final String MISSION_MSG_DATA_INSERTED_OK = "The mission has been added";
+	
+//    public static final String MISSION_MSG_DATA_INSERTED_KO = "Be careful , the mission has not been added";
+    
+//    public static final String MISSION_MSG_DATA_INSERTED_ERROR = "Thecnical error, please try again later";
+    
+//    public static final String EAE_MSG_ERROR_GENERALITY_FORM = "Missing or invalid field";
 	
 	public static final String EXPERIENCE_FORMAT = "ex : 2";
 
 	public static final String DATE_FORMAT = "DD/MM/YY";
 
 	public static final String SEARCH_LABEL = "Search";
+	
+	/**
+     * Constant for Admin View
+     */
+	
+	public static final String DELETE_COLLEAGUE_LABEL = "Delete Collab";
+	
+	public static final String MANAGE_TOOL_LABEL = "Manage Tool";
+	
+	public static final String[] VISIBLE_COlUMN = { "First Name", "Last Name","Email", "Phone" };
 	
 	
 	/**
@@ -98,30 +136,17 @@ public class Constants {
 	public static final String SYNTHESIS_EAE_BUTTON_LABEL = "Synthesis";
 
 	/**
-     * Constant for Personel EAE Pop-In => Current EAE => Generality
-     */
-	public static final String MANAGER_LAST_NAME = "Manager's last name";
-	
-	public static final String MANAGER_FIRST_NAME = "Manager's first name";
-	
-	public static final String DATE_OF_EAE = "EAE's date";
-	
-	public static final String DATE_OF_PREV_EAE = "Previous EAE's date";
-	
-	public static final String EAE_SALARY = "Salary";
-
-	public static final String GIVE_SALARY = "Give a salary";
-	
-	public static final String CURRENT_EAE_TITLE_1 = "EAE for : ";
-    
-    public static final String CURRENT_EAE_TITLE_2 = " on date : ";
-
-	/**
      * Constant for Personel EAE Pop-In => Current EAE => Results
      */
 	public static final String EAE_YEAR_SYNTHESIS = "Summary of the past year :";
 	public static final String EAE_COLLAB_STRENGHTS = "My Highlights :";
 	public static final String EAE_COLLAB_WEAKNESSES = "My areas of improvement :";
 	public static final String EAE_RESULTS_TITLE_3 = "3 Overall assessment of my work within the organization :";
+
+	/**
+     * Constant for CM EAE Pop-In 
+     */
+	public static final String IMG_NO_PHOTO_BOY = "img/nophotoBoy.png";
+	public static final String IMG_NO_PHOTO_GIRL = "img/nophotoGirl.png";
 
 }

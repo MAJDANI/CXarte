@@ -1,6 +1,7 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
 import com.novedia.talentmap.web.utils.ComponentsId;
+import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button.ClickEvent;
@@ -13,6 +14,8 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 
 	private EAEGeneralityForm eaeGeneralityForm;
 	private EAEResultsForm eaeResultsForm;
+	private EAEObjectivesForm eaeObjectivesForm;
+	private EAESynthesisForm eaeSynthesisForm;
 
 	/**
 	 * Default constructor
@@ -48,6 +51,32 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 		eaeResultsForm.addStyleName("TODO");
 		eaeResultsForm.setId(ComponentsId.EAE_RESULTS_FORM_ID);
 		addComponent(eaeResultsForm.buildEAEResultsFormView(currentEAEId, currentMode));
+		return this;
+	}
+
+	/**
+	 * Build buildViewEAEObjectives
+	 * 
+	 * @return VerticalLayout
+	 */
+	public VerticalLayout buildViewEAEObjectives(Integer currentEAEId, EAEConsultationMode currentMode) {
+		removeAllComponents();
+		eaeObjectivesForm.addStyleName("TODO");
+		eaeObjectivesForm.setId(ComponentsId.EAE_OBJECTIVES_FORM_ID);
+		addComponent(eaeObjectivesForm.buildEAEObjectivesFormView(currentEAEId, currentMode));
+		return this;
+	}
+
+	/**
+	 * Build buildViewEAESynthesis
+	 * 
+	 * @return VerticalLayout
+	 */
+	public VerticalLayout buildViewEAESynthesis(Integer currentEAEId, EAEConsultationMode currentMode) {
+		removeAllComponents();
+		eaeSynthesisForm.addStyleName("TODO");
+		eaeSynthesisForm.setId(ComponentsId.EAE_SYNTHESIS_FORM_ID);
+		addComponent(eaeSynthesisForm.buildEAESynthesisFormView(currentEAEId, currentMode));
 		return this;
 	}
 
@@ -89,6 +118,34 @@ public class CurrentEAEDetailedContent extends VerticalLayout implements
 	 */
 	public void setEaeResultsForm(EAEResultsForm eaeResultsForm) {
 		this.eaeResultsForm = eaeResultsForm;
+	}
+
+	/**
+	 * @return the eaeObjectivesForm
+	 */
+	public EAEObjectivesForm getEaeObjectivesForm() {
+		return eaeObjectivesForm;
+	}
+
+	/**
+	 * @param eaeObjectivesForm the eaeObjectivesForm to set
+	 */
+	public void setEaeObjectivesForm(EAEObjectivesForm eaeObjectivesForm) {
+		this.eaeObjectivesForm = eaeObjectivesForm;
+	}
+
+	/**
+	 * @return the eaeSynthesisForm
+	 */
+	public EAESynthesisForm getEaeSynthesisForm() {
+		return eaeSynthesisForm;
+	}
+
+	/**
+	 * @param eaeSynthesisForm the eaeSynthesisForm to set
+	 */
+	public void setEaeSynthesisForm(EAESynthesisForm eaeSynthesisForm) {
+		this.eaeSynthesisForm = eaeSynthesisForm;
 	}
 
 }

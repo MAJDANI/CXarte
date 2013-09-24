@@ -23,13 +23,6 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- sqlMapClient for ORACLE sqlmaps -->
-	<!-- <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"> -->
-	<!-- <property name="configLocation" value="classpath:sqlmap-config-ORACLE.xml" 
-		/> -->
-	<!-- <property name="dataSource" ref="dataSource" /> -->
-	<!-- </bean> -->
-
 	<!-- sqlMapClient for MySQL sqlmaps -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap-config-MySQL.xml" />

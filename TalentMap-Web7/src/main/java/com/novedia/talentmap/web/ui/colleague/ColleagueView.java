@@ -3,6 +3,7 @@ package com.novedia.talentmap.web.ui.colleague;
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.model.entity.Authorization;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.ui.cm.eae.CMEAEPopIn;
 import com.novedia.talentmap.web.ui.search.SearchPopIn;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.vaadin.ui.Button;
@@ -22,7 +23,9 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private Button profilButton;
 	
 	private Button eaeButton;
-	
+
+	private Button eaeCMButton;
+
 	private ProfilePopIn profilePopIn;
 	
 	private Button formationButton;
@@ -30,7 +33,9 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 	private PersonalEAEPopIn personalEAEPopIn;
 	
 	private SearchPopIn searchPopIn;
-	
+
+	private CMEAEPopIn cmEAEPopIn;
+
 	private Button searchButtonCm;
 
 
@@ -72,7 +77,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		eaeButton.addStyleName("labelBtnDashboard eaeButton");
 		eaeButton.addClickListener(this);
 		eaeButton.setId(ComponentsId.EAE_BUTTON_ID);
-		
+	
+	
 		formationButton.addStyleName("labelBtnDashboard formationButton");
 		formationButton.setId(ComponentsId.FORMATION_BUTTON_ID);
 		
@@ -85,6 +91,12 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 			searchButtonCm.addClickListener(this);
 			searchButtonCm.addStyleName("labelBtnDashboard searchButton");
 			gridLayout.addComponent(searchButtonCm);
+
+			eaeCMButton.addStyleName("labelBtnDashboard eaeCMButton");
+			eaeCMButton.addClickListener(this);
+			eaeCMButton.setId(ComponentsId.EAE_CM_BUTTON_ID);
+			gridLayout.addComponent(eaeCMButton);
+
 		}
 		
 		
@@ -102,6 +114,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 			getUI().addWindow(personalEAEPopIn.buildPersonalEAEPopIn());
 		} else if (event.getButton().equals(searchButtonCm)) {
 			getUI().addWindow(searchPopIn.buildSearchPopIn());
+		}else if(event.getButton().equals(eaeCMButton)){
+			getUI().addWindow(cmEAEPopIn.buildCMEAEPopIn());
 		}
 		
 	}
@@ -188,6 +202,38 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 
 	public void setSearchButtonCm(Button searchButtonCm) {
 		this.searchButtonCm = searchButtonCm;
+	}
+
+
+	/**
+	 * @return the eaeCMButton
+	 */
+	public Button getEaeCMButton() {
+		return eaeCMButton;
+	}
+
+
+	/**
+	 * @param eaeCMButton the eaeCMButton to set
+	 */
+	public void setEaeCMButton(Button eaeCMButton) {
+		this.eaeCMButton = eaeCMButton;
+	}
+
+
+	/**
+	 * @return the cmEAEPopIn
+	 */
+	public CMEAEPopIn getCmEAEPopIn() {
+		return cmEAEPopIn;
+	}
+
+
+	/**
+	 * @param cmEAEPopIn the cmEAEPopIn to set
+	 */
+	public void setCmEAEPopIn(CMEAEPopIn cmEAEPopIn) {
+		this.cmEAEPopIn = cmEAEPopIn;
 	}
 	
 	

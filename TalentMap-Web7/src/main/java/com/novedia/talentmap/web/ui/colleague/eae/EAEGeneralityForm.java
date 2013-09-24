@@ -1,10 +1,15 @@
 package com.novedia.talentmap.web.ui.colleague.eae;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.impl.EAEService;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.EAEConsultationMode;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
@@ -60,7 +65,15 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 	@PropertyId(ComponentsId.EAE_SALARY_ID)
 	private TextField salaryField;
 
+	private ResourceBundle resourceBundle;
+
+	private void initResourceBundle() {
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
+	}
+
 	public EAEGeneralityForm buildEAEGeneralityFormView(Integer currentEAEId, EAEConsultationMode currentMode) {
+		initResourceBundle();
 		this.currentEAEId = currentEAEId;
 		this.currentMode = currentMode;
 		removeAllComponents();
@@ -91,7 +104,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// LAST NAME
 		// -----------------------------
-		lastNameField.setCaption("Name");
+		lastNameField.setCaption(resourceBundle.getString("name.field.caption"));
 		lastNameField.setId(ComponentsId.COLLAB_LAST_NAME_ID);
 		lastNameField.setWidth("190px");
 		eaeGeneralityFormLayout.addComponent(lastNameField);
@@ -99,7 +112,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// FIRST NAME
 		// -----------------------------
-		firstNameField.setCaption("First Name");
+		firstNameField.setCaption(resourceBundle.getString("firstName.field.caption"));
 		firstNameField.setStyleName("TODO");
 		firstNameField.setId(ComponentsId.COLLAB_FIRST_NAME_ID);
 		firstNameField.setWidth("190px");
@@ -109,7 +122,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// PROFILE
 		// -----------------------------
-		jobField.setCaption("Job title");
+		jobField.setCaption(resourceBundle.getString("job.field.caption"));
 		jobField.setStyleName("TODO");
 		jobField.setId(ComponentsId.EAE_PROFILE_NAME_ID);
 		jobField.addStyleName("spacerInfo");
@@ -118,7 +131,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// MANAGER'S LAST NAME
 		// -----------------------------
-		managerLastNameField.setCaption(Constants.MANAGER_LAST_NAME);
+		managerLastNameField.setCaption(resourceBundle.getString("manager.last.name.field.caption"));
 		managerLastNameField.setStyleName("TODO");
 		managerLastNameField.setId(ComponentsId.MANAGER_LAST_NAME_ID);
 		managerLastNameField.setWidth("190px");
@@ -128,7 +141,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// MANAGER'S FIRST NAME
 		// -----------------------------
-		managerFirstNameField.setCaption(Constants.MANAGER_FIRST_NAME);
+		managerFirstNameField.setCaption(resourceBundle.getString("manager.first.name.field.caption"));
 		managerFirstNameField.setStyleName("TODO");
 		managerFirstNameField.setId(ComponentsId.MANAGER_LAST_NAME_ID);
 		managerFirstNameField.setWidth("190px");
@@ -138,7 +151,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// EMPLOYMENT'S DATE
 		// -----------------------------
-		employmentDateField.setCaption("Date of hire");
+		employmentDateField.setCaption(resourceBundle.getString("date.entry.caption"));
 		employmentDateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		employmentDateField.addStyleName("spacerInfo spacerTop");
 		eaeGeneralityFormLayout.addComponent(employmentDateField);
@@ -146,7 +159,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// EAE'S DATE
 		// -----------------------------
-		eaeDateField.setCaption(Constants.DATE_OF_EAE);
+		eaeDateField.setCaption(resourceBundle.getString("eae.date.caption"));
 		eaeDateField.setId(ComponentsId.EAE_DATE_ID);
 		eaeDateField.addStyleName("spacerTop");
 		eaeGeneralityFormLayout.addComponent(eaeDateField);
@@ -154,7 +167,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// PREVIOUS EAE'S DATE
 		// -----------------------------
-		prevEaeDateField.setCaption(Constants.DATE_OF_PREV_EAE);
+		prevEaeDateField.setCaption(resourceBundle.getString("eae.previous.date.caption"));
 		prevEaeDateField.setId(ComponentsId.EAE_PREV_DATE_ID);
 		prevEaeDateField.addStyleName("spacerInfo spacerTop");
 		eaeGeneralityFormLayout.addComponent(prevEaeDateField);
@@ -162,13 +175,13 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		// SALARY
 		// -----------------------------
-		salaryField.setCaption(Constants.EAE_SALARY);
+		salaryField.setCaption(resourceBundle.getString("eae.salary.caption"));
 		salaryField.setNullRepresentation("");
 		salaryField.setId(ComponentsId.EAE_SALARY_ID);
 		salaryField.addStyleName("spacerInfo spacerTop");
 		if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
 			salaryField.setRequired(true);
-			salaryField.setRequiredError(Constants.GIVE_SALARY);
+			salaryField.setRequiredError(resourceBundle.getString("eae.salary.error.message"));
 			salaryField.addValidator(new BeanValidator(EAEGeneralityDTO.class,
 					ComponentsId.EAE_SALARY_ID));
 			salaryField.setImmediate(true);
@@ -213,10 +226,9 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 	@Override
 	public void blur(BlurEvent event) {
 		if (!validateEAEGeneralityForm()) {
-			Notification.show(Constants.EAE_MSG_ERROR_GENERALITY_FORM,
+			Notification.show(resourceBundle.getString("missing.or.invalid.field.msg"),
 					Notification.Type.WARNING_MESSAGE);
 		} else {
-			System.out.println("eaeGeneralityDTO=" + eaeGeneralityDTO);
 			EAEService eaeS = (EAEService)this.eaeService;
 			eaeS.saveEAESalary(eaeGeneralityDTO);
 		}

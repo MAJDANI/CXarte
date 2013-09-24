@@ -468,9 +468,12 @@ public final class DBRequestsConstants {
 	public static final String GET_HISTORY_EAE_FOR_COLLAB = "eae.getHistoryEAEForCollab";
 	public static final String GET_EAE_GENERALITY = "eae.getEAEGenerality";
 	public static final String GET_EAE_RESULTS = "eae.getEAEResults";
+	public static final String GET_EAE_SYNTHESIS = "eae.getEAESynthesis";
 	public static final String GET_OPEN_EAE_ID = "eae.getOpenEAEIdForColleague";
 	public static final String SAVE_EAE_SALARY = "eae.saveEAESalary";
 	public static final String SAVE_EAE_RESULTS = "eae.saveEAEResults";
+	public static final String SAVE_EAE_SYNTHESIS = "eae.saveEAESynthesis";
+	public static final String GET_EAE_COLL_RESUME_FOR_CM = "eae.getEAEColleagueResumeForCM";
 	
 	
 	// OBJECTIVE REQUEST
@@ -479,5 +482,5 @@ public final class DBRequestsConstants {
 	public static final String SAVE_OBJECTIVE = "objective.save";
 	public static final String DELETE_OBJECTIVE = "objective.delete";
 	public static final String GET_OBJECTIVES_FOR_EAE = "objective.getObjectivesByEAEId";
-	
+	public static final String GET_PRECEDENT_OBJECTIVES_FOR_EAE = "objective.getPrecedentObjectivesByEAEId";
 }

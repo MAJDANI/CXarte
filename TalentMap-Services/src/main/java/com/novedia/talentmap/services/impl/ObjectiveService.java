@@ -48,4 +48,10 @@ public class ObjectiveService implements IObjectiveService {
 		this.objectiveDao = objectiveDao;
 	}
 
+	@Override
+	public List<Objective> getPrecedentObjectivesByEAEId(Integer idEAE) {
+		ObjectiveDao objDao = (ObjectiveDao)this.objectiveDao;
+		return objDao.getPrecedentObjectivesByEAEId(idEAE);
+	}
+
 }

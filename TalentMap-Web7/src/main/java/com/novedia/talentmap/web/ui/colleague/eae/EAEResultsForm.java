@@ -13,6 +13,7 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
+import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.novedia.talentmap.web.utils.EAETabEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -26,7 +27,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextArea;
 
-public class EAEResultsForm extends FormLayout implements BlurListener {
+public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveObjectiveForm {
 
 	/**
 	 * 
@@ -94,6 +95,8 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 		this.eaeResultsFormLayout.setColumns(1);
 		this.eaeResultsFormLayout.setRows(6);
 		this.eaeResultsFormLayout.setId(ComponentsId.EAE_RESULTS_FORM_LAYOUT_ID);
+		this.eaeResultsFormLayout.addStyleName("styleDeTest");
+
 	}
 
 	private void buildEAEResultsForm() {
@@ -167,7 +170,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener {
 		// BIND DES DONNEES EAEResultsDTO
 		// ---------------------------------
 		eaeResultsDTO = eaeService.getEAEResults(currentEAEId);
-		List<Objective> listObjectives = objectiveService.getObjectivesByEAEId(currentEAEId);
+		List<Objective> listObjectives = objectiveService.getPrecedentObjectivesByEAEId(currentEAEId);
 		eaeResultsDTO.setListOjectives(listObjectives);
 		
 		binder = new BeanFieldGroup<EAEResultsDTO>(EAEResultsDTO.class);

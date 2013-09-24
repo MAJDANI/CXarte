@@ -5,11 +5,11 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
+import com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO;
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
+import com.novedia.talentmap.model.dto.EAESynthesisDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.services.IEAEService;
@@ -143,12 +143,36 @@ public class EAEService implements IEAEService {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.novedia.talentmap.services.IEAEervice#getEAESynthesis(java.lang
+	 * .Integer)
+	 */
+	@Override
+	public EAESynthesisDTO getEAESynthesis(Integer idEAE) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		EAESynthesisDTO e = eaeDao.getEAESynthesis(idEAE);
+		return e;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 */
 	@Override
 	public Integer getOpenEAEIdForColleague(Integer idCollab) {
 		EAEDao eaeDao = (EAEDao) this.eaeDao;
 		Integer eaeId = eaeDao.getOpenEAEIdForColleague(idCollab);
 		return eaeId;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 */
+	@Override
+	public List<EAEColleagueResumeForCMDTO> getEAEColleagueResumeForCM(Integer idManager) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		List<EAEColleagueResumeForCMDTO> list = eaeDao.getEAEColleagueResumeForCM(idManager);
+		return list;
 	}
 
 	/*
@@ -171,6 +195,18 @@ public class EAEService implements IEAEService {
 	public int saveEAEResults(EAEResultsDTO eae) {
 		EAEDao eaeDao = (EAEDao) this.eaeDao;
 		return eaeDao.saveEAEResults(eae);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.novedia.talentmap.services.IEAEervice#saveEAESynthesis(com.novedia.talentmap
+	 * .model.dto.EAESynthesisDTO)
+	 */
+	@Override
+	public int saveEAESynthesis(EAESynthesisDTO eae) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.saveEAESynthesis(eae);
 	}
 
 	/**

@@ -13,6 +13,8 @@ public class ComponentsId {
 	public static final String PROFILE_BUTTON_ID = "profileButton";
 	
 	public static final String EAE_BUTTON_ID = "eaeButton";
+
+	public static final String EAE_CM_BUTTON_ID = "eaeCMButton";
 	
 	public static final String FORMATION_BUTTON_ID = "formationButton";
 	
@@ -106,7 +108,9 @@ public class ComponentsId {
 
 	public static final String EAE_RESULTS_FORM_LAYOUT_ID = "eaeResultsFormLayout";
 
-	public static final String EAE_RESULTS_ACCORDION_OBJ_ID = "accordionObjectives";
+	public static final String EAE_RESULTS_ACCORDION_OBJ_ID = "accordionObjectivesForResults";
+	
+	public static final String EAE_OBJECTIVES_ACCORDION_OBJ_ID = "accordionObjectivesForObjectives";
 
 	public static final String EAE_RESULTS_ACCORDION_APPREC_ID = "accordionAppreciation";
 	
@@ -115,12 +119,24 @@ public class ComponentsId {
 	public static final String EAE_GENERALITY_FORM_ID = "eaeGeneralityForm";
 
 	public static final String EAE_RESULTS_FORM_ID = "eaeResultsForm";
-	
+
+	public static final String EAE_OBJECTIVES_FORM_ID = "eaeObjectivesForm";
+
+	public static final String EAE_SYNTHESIS_FORM_ID = "eaeSynthesisForm";
+
 	public static final String EAE_HLAYOUT_CURRENT_EAE_ID = "hLayoutCurrentEAE";
 
 	public static final String EAE_PANEL_RIGHT_CURRENT_EAE_ID = "panelRightCurrentEAE";
 	
 	public static final String EAE_OBJECTIVES_FORM_LAYOUT_ID = "eaeObjectivesFormLayout";
+
+	public static final String EAE_SYNTHESIS_FORM_LAYOUT_ID = "eaeSynthesisFormLayout";
+
+	public static final String EAE_COLLEAGUES_SYNTHESIS_ID = "colleaguesSynthesis";
+	
+	public static final String EAE_MANAGERS_SYNTHESIS_ID = "managersSynthesis";
+	
+	public static final String EAE_OTHER_ID = "other";
 
 	public static final String OBJECTIVE_TITLE_ID = "title";
 
@@ -135,5 +151,11 @@ public class ComponentsId {
 	public static final String OBJECTIVE_COLL_SCORE_ID = "colleaguesScore";
 
 	public static final String OBJECTIVE_MAN_SCORE_ID = "managersScore";
+	
+	public static final String OBJECTIVE_MOTIVES_OR_RESTRAINTS_ID = "motivesOrRestraints";
+	
+	public static final String OBJECTIVE_COMMENT_ID = "comments";
+
+	public static final String NEW_OBJECTIVE_BUTTON_ID = "newObjectiveButton";
 
 }
