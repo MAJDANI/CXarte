@@ -9,15 +9,11 @@
                            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
                            
     <bean id="gridLayoutAdminViewBean" class="com.vaadin.ui.GridLayout" scope="session" />
-	<bean id="manageColleaguePanelBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="manageToolPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="deleteColleagueButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="manageToolButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	
 	<bean id="adminViewBean" class="com.novedia.talentmap.web.ui.admin.AdminView" scope="session" >
 		<property name="gridLayout" ref ="gridLayoutAdminViewBean" />
-		<property name="manageColleaguePanel" ref ="manageColleaguePanelBean" />
-		<property name="manageToolPanel" ref ="manageToolPanelBean" />
 		<property name="deleteColleagueButton" ref ="deleteColleagueButtonBean" />
 		<property name="manageToolButton" ref ="manageToolButtonBean" />
 		<property name="manageColleaguePopIn" ref ="manageColleaguePopInBean" />

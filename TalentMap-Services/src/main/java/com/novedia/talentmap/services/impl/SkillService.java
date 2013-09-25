@@ -176,10 +176,12 @@ public class SkillService implements ISkillService {
      * @throws DataAccessException
      */
     @Override
-    public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,
-	    int managerId) throws DataAccessException {
-	return this.skillDao
-		.getCmColleagueIdByListToolId(listToolId, managerId);
+    public List<Integer> getCmColleagueIdByListToolId(List<Integer> listToolId,int managerId) throws DataAccessException {
+    	if(listToolId == null  || listToolId.isEmpty()){
+    		return null;
+    	}else {
+    		return this.skillDao.getCmColleagueIdByListToolId(listToolId, managerId);
+		}
     }
 
     /**

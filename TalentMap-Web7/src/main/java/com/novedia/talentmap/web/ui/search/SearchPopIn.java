@@ -30,6 +30,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
@@ -193,25 +194,45 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			treeSkills.setMultiSelect(true);
 			skillPanel.addComponent(treeSkills);
 			searchButton.setCaption(resourceBundle.getString("search.button.caption"));
+			searchButton.addStyleName("styleButton");
 			searchButton.addClickListener(this);
 			skillPanel.addComponent(searchButton);
 			panelRight.setContent(skillPanel);
 		} 
 		else if (event.getButton().equals(searchButton)) {
-			Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
-			List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
-			List<Integer> colleaguesIdList;
-			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
-				int managerId = authentication.getColleagueId();
-				colleaguesIdList = skillService.getCmColleagueIdByListToolId(skillsIdListToSearch, managerId);
-			}else {
-				colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+			if (!checkSelectedTreeSkill(treeSkills)) {
+				Notification.show(resourceBundle.getString("notification.tree.skill.empty"));
+			} else {
+
+				Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
+				List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
+				if(skillsIdSetToSearch.isEmpty()){
+					skillsIdListToSearch = null;
+				}
+				List<Integer> colleaguesIdList;
+				if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
+					int managerId = authentication.getColleagueId();
+					colleaguesIdList = skillService.getCmColleagueIdByListToolId(skillsIdListToSearch, managerId);
+				}else {
+					colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+				}
+				listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
+				displayResult(listCollab);
 			}
-			listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
-			displayResult(listCollab);
 				
 		}
 		
+	}
+	
+	
+	private boolean checkSelectedTreeSkill(Tree treeSkills){
+		Collection<?> itemIds = treeSkills.getItemIds();
+		for (Object itemId : itemIds) {
+			if(treeSkills.isSelected(itemId)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	

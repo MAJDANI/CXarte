@@ -349,6 +349,18 @@
     padding: 0px !important;
 }
 
+.labelBtnDashboard.deleteColleagueButton{
+	background:url(img/delete_collab.png) center no-repeat;
+	height: 211px;
+    width: 158px;
+}
+
+.labelBtnDashboard.manageToolButton{
+	background:url(img/manage_tool.png) center no-repeat;
+	height: 211px;
+    width: 158px;
+}
+
 
 .table {
 	text-align: center;
