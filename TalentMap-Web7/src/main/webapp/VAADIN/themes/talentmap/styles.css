@@ -26,13 +26,6 @@
 	background: #242424 url(img/octicons-bg.png) repeat-x !important;
 }
 
-/*#headerLayout{
-    border-bottom : solid 3px #009cda;
-}
-
-#footerLayer{
-    border-top : solid 3px #009cda;
-}*/
 
 .headerContent{
 	position:static;
@@ -139,7 +132,7 @@
 .styleButton span.v-button-caption,
 .addBtn span.v-button-caption,
 .delBtn span.v-button-caption,
-#saveButton span.v-button-caption {
+#saveButton span.v-button-caption{
 	color : #fff !important;
 	font-weight:normal;
 	font-size:15px;
@@ -253,48 +246,17 @@
 	line-height:normal !important;
 }
 
-.labelBtnDashboard .v-panel-content{
-                border:none !important;
+.girdLayoutResult .v-panel-content{
+	width: 350px;
+	border-style: solid;
+	border-radius: 20px;
 }
 
-.v-gridlayout-slot .v-panel{
-    overflow:hidden;
-    margin-left:20px;
-    width:158px;
-    height:211px;
+
+.image{
+	 cursor:pointer;
 }
 
-.v-gridlayout-slot .v-panel-content{
-	height:200px;
-	overflow:hidden;
-}
-
-.v-button-labelBtnDashboard{
-                cursor:pointer;
-}
-
-/*  commenter  */
-/* .v-panel-content-labelBtnDashboard .v-button-caption, */
-/* .v-button-labelBtnDashboard .v-button-caption{ */
-/*                 font-size:22px; */
-/*                 color: transparent; */
-/*                 font-weight:bold; */
-/*                 text-decoration:none; */
-/* } */
-
-/* .v-panel-content-labelBtnDashboard .v-button-caption:hover, */
-/* .v-button-labelBtnDashboard .v-button-caption:hover{ */
-/*                 text-decoration:underline; */
-/* } */
-
-/* .v-panel-labelBtnDashboard .v-verticallayout, */
-/* .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout, */
-/* .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{ */
-/*                 /*top:50%; */
-/*                 margin-top:-25px;*/ */
-/*                 margin-top:145px; */
-/* } */
-/*  fin commenter  */
 .v-panel-labelBtnDashboard .v-verticallayout,
 .iaPanel .v-gridlayout-slot .v-panel-content .v-verticallayout,
 .adminPanel .v-gridlayout-slot .v-panel-content .v-verticallayout{
@@ -384,63 +346,72 @@
                 color:#a4cc1a;
 }
 .panelLeft .v-verticallayout{
-                padding:0;
+	padding:0;
 }
 
-.panelLeft .v-panel-content{
-                border:none;
+
+.v-panel-content{
+	border-style: none;
 }
+
+.panelLeft .v-panel-content, 
+.panelLeft .v-panel-captionwrap{
+	border:none;
+}
+
 
 .panelLeft .v-button-caption{
-                color: #009cda;
-                font-size: 15px;
-                text-decoration:none;
-                line-height:25px;
-                border:none;
+	color: #009cda;
+	font-size: 15px;
+	text-decoration:none;
+	line-height:25px;
+	border:none;
 }
 
 .panelLeft .v-button-caption:hover,
 .panelLeft .focus .v-button-caption{
-                text-decoration:underline;
-                font-weight:bold;
+	text-decoration:underline;
+	font-weight:bold;
 }
 
 .panelLeft .focus .v-button-caption{
-                text-transform:uppercase;
+	text-transform:uppercase;
 }
 
-.panelRight .v-panel-content{
-/*           border-right:none; */
+.v-panel-nocaption{
+	border-bottom: 0px ;
+	border-top: none !important;
 }
+
 
 .panelRight .v-panel-content .v-formlayout{
-                text-align:center;
+	text-align:center;
 }
 
 .panelRight .v-caption-spacerInfo {
-                left:10px !important;
+	left:10px !important;
 }
 
 .panelRight .spacerInfo{
-                margin-left:10px;
+	margin-left:10px;
 }
 
 .panelRight .v-caption-spacerTop {
-                top:10px !important;
+	top:10px !important;
 }
 
 .panelRight .spacerTop{
-                margin-top:10px;
+	margin-top:10px;
 }
 .panelRight .spacerBottom{
-                margin-bottom:10px;
+	margin-bottom:10px;
 }
 
 .contentPanel .v-panel-content{
-                border: none;
+	border: none;
 }
 .v-panel-nocaption-contentPanel{
-                border: none;
+	border: none;
 }
 
 .v-table .v-selected, 
@@ -458,36 +429,16 @@
                 border:none;
 }
 
-.v-panel-content-searchResultsPanel{
-                border:none;
-}
-
-.v-panel-content-searchResultsPanel .v-verticallayout{
-                padding-left:0;
-}
 
 .visualizeMissionHistory{
                 margin-left:10px;
 }
 
-.v-panel-content-searchResultsPanel .v-table-cell-content {
-                vertical-align: middle !important;
-}
 
 .v-ratingstars-wrapper{
                 border: none !important;
 }
 
-.v-formlayout-contentcell,
-.v-formlayout-captioncell, 
-.v-formlayout-errorcell{
-                padding: 0 !important;
-}
-
-.v-formlayout-captioncell, 
-.v-formlayout-errorcell{
-                display:none;
-}
 
 .monStyleGras {
 				font-weight:bold;

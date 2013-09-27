@@ -97,7 +97,7 @@ public class ManageToolsPopIn extends Window implements  ClickListener, ValueCha
 		buttonContainer.addComponent(addCategoryButton);
 		treeSkills.addValueChangeListener(this);
 		treeSkills.removeAllItems();
-		CUtils.buildTreeSkills(treeSkills, skillService);
+		CUtils.buildTreeSkills(treeSkills, skillService.getAllVSkillOrdered());
 		treeSkills.setImmediate(true);
 		skillsContainer.removeAllComponents();
 		skillsContainer.addComponent(treeSkills);

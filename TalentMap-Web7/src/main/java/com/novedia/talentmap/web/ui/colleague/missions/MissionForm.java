@@ -90,8 +90,7 @@ public class MissionForm extends HorizontalLayout{
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
 		titleField.setRequiredError(resourceBundle.getString("form.mission.title.error.msg"));
-		titleField.addValidator(new BeanValidator(MissionDTO.class,
-				ComponentsId.TITLE_ID));
+		titleField.addValidator(new BeanValidator(MissionDTO.class,	ComponentsId.TITLE_ID));
 		titleField.setImmediate(true);
 		titleField.setValidationVisible(true);
 		titleField.setInputPrompt(resourceBundle.getString("form.mission.title.default.value"));
@@ -102,8 +101,7 @@ public class MissionForm extends HorizontalLayout{
 		clientField.setId(ComponentsId.CLIENT_ID);
 		clientField.setRequired(true);
 		clientField.setRequiredError(resourceBundle.getString("form.mission.client.error.msg"));
-		clientField.addValidator(new BeanValidator(MissionDTO.class,
-				ComponentsId.CLIENT_ID));
+		clientField.addValidator(new BeanValidator(MissionDTO.class, ComponentsId.CLIENT_ID));
 		clientField.setImmediate(true);
 		clientField.setValidationVisible(true);
 		clientField.setInputPrompt(resourceBundle.getString("form.mission.client.default.value"));
@@ -142,14 +140,15 @@ public class MissionForm extends HorizontalLayout{
 		commentField.setId(ComponentsId.COMMENT_ID);
 		commentField.setInputPrompt(resourceBundle.getString("form.mission.comment.default.value"));
 		commentField.setNullRepresentation("");
+		commentField.setRequired(true);
+		commentField.setRequiredError("form.mission.comment.error.msg");
 		missionFormLayout.addComponent(commentField);
 		
 		toolsField.setCaption(resourceBundle.getString("form.mission.tool.caption"));
 		toolsField.setId(ComponentsId.TOOLS_ID);
 		toolsField.setRequired(true);
 		toolsField.setRequiredError(resourceBundle.getString("form.mission.tool.error.msg"));
-		toolsField.addValidator(new BeanValidator(MissionDTO.class,
-				ComponentsId.TOOLS_ID));
+		toolsField.addValidator(new BeanValidator(MissionDTO.class, ComponentsId.TOOLS_ID));
 		toolsField.setImmediate(true);
 		toolsField.setValidationVisible(true);
 		toolsField.setNullSelectionAllowed(false);
@@ -159,8 +158,7 @@ public class MissionForm extends HorizontalLayout{
 		buildToolsList();
 		missionToolLayout.addComponent(toolsField);
 		
-		binder = new BeanFieldGroup<MissionDTO>(
-				MissionDTO.class);
+		binder = new BeanFieldGroup<MissionDTO>(MissionDTO.class);
 		binder.setItemDataSource(missionDto);
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);

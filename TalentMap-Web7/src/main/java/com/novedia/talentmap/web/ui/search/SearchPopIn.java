@@ -19,7 +19,6 @@ import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -131,6 +130,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
 		panelRight.setWidth("800px");
+		panelRight.setHeight("500px");
 	}
 	
 	private void buildResultsPanel(){
@@ -190,7 +190,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			skillPanel.removeAllComponents();
 			treeSkills.removeAllItems();
 			treeSkills.setImmediate(true);
-			CUtils.buildTreeSkills(treeSkills, skillService);
+			CUtils.buildTreeSkills(treeSkills, skillService.getAllVSkillOrdered());
 			treeSkills.setMultiSelect(true);
 			skillPanel.addComponent(treeSkills);
 			searchButton.setCaption(resourceBundle.getString("search.button.caption"));
@@ -294,20 +294,17 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			searchResults.setVisible(false);
 		} else {
 			searchResultsLabelNoResult.setVisible(false);
-			searchResults = searchResults.buildSearchResultsView(listCollab);
-			if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
-				searchResults.setPageLength(searchResults.size());
-			} else{
-				searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
-			}
 			searchResults.setVisible(true);
+			searchResultsPanel.removeAllComponents();
+			searchResultsPanel.addComponent(searchResults.buildResultView(listCollab));
+			
 		}
 	}
 	
 	
 	@Override
 	public void textChange(TextChangeEvent event) {
-		if(event.getComponent().equals(searchByNameForm.getNameField())){
+		if(event.getComponent().equals(searchByNameForm.getNameField()) && event.getText().length() != 0){
 			String valueField = event.getText();
 			valueField = valueField.trim();
 			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){

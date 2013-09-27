@@ -113,8 +113,12 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	missionFormButtonLayout.addStyleName("containerButton");
     	saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
+		saveButton.addStyleName("styleButton");
+		
 		cancelButton.setCaption(resourceBundle.getString("cancel.button.caption"));
 		cancelButton.addClickListener(this);
+		cancelButton.addStyleName("styleButton");
+		
 		missionFormButtonLayout.addComponent(saveButton);
 		missionFormButtonLayout.addComponent(cancelButton);
     }
@@ -182,11 +186,14 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	if(event.getButton().equals(deleteMissionButton)){
     		buildConfirmWindow();
     		getUI().addWindow(windowConfirm);
-    	}else if (event.getButton().equals(editMissionButton)) {
+    	}
+    	else if (event.getButton().equals(editMissionButton)) {
     		showEditMissionPanel();
-		} else if (event.getButton().equals(addMissionButton)) {
+		}
+    	else if (event.getButton().equals(addMissionButton)) {
 			showAddMissionPanel();
-		} else if (event.getButton().equals(yesButton)) {
+		} 
+    	else if (event.getButton().equals(yesButton)) {
 			windowConfirm.close();
 			Mission selectedMission = (Mission) listMission.getValue();
 			int result = colleagueService.deleteMission(selectedMission);
@@ -195,12 +202,15 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 			} else {
 				Notification.show(resourceBundle.getString("mission.delete.error.msg"), Type.ERROR_MESSAGE);
 			}
-		} else if (event.getButton().equals(noButton)) {
+		} 
+    	else if (event.getButton().equals(noButton)) {
 			windowConfirm.close();
-		} else if(event.getButton().equals(cancelButton)){
+		} 
+    	else if(event.getButton().equals(cancelButton)){
 			addMissionButton.setEnabled(true);
 			addMissionPanel.setVisible(false);
-		} else if(event.getButton().equals(saveButton)){
+		} 
+    	else if(event.getButton().equals(saveButton)){
 			saveMission();
 		}
 	}
@@ -344,13 +354,20 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
     			|| !isNotEmpty(mission.getPlace())
     			|| !isNotEmpty(mission.getClient())
-    			|| !isNotEmpty(mission.getStartDate()))
+    			|| !isNotEmpty(mission.getStartDate())
+    			|| !isNotEmpty(mission.getNotes())){
     		return Constants.VALIDATION_FIELD_MISSING;
-    	if (!isAValidPeriod(mission.getStartDate(), mission.getEndDate()))
+    		
+    	}
+    	
+    	if (!isAValidPeriod(mission.getStartDate(), mission.getEndDate())){
     		return Constants.VALIDATION_INVALID_PERIOD;
-    	if (!isAValidSelection(mission.getTools()))
+    	}
+    	
+    	if (!isAValidSelection(mission.getTools())){
     		return Constants.VALIDATION_INVALID_SELECTION;
-
+    	}
+    	
     	return Constants.VALIDATION_VALID_FORM;
     }
     

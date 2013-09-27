@@ -138,8 +138,10 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		skillFormButtonLayout.setSpacing(true);
 		skillFormButtonLayout.addStyleName("containerButton");
 		saveButton.setCaption(resourceBundle.getString("save.button.caption"));
+		saveButton.addStyleName("styleButton");
 		saveButton.addClickListener(this);
 		cancelButton.setCaption(resourceBundle.getString("cancel.button.caption"));
+		cancelButton.addStyleName("styleButton");
 		cancelButton.addClickListener(this);
 		skillFormButtonLayout.addComponent(saveButton);
 		skillFormButtonLayout.addComponent(cancelButton);
@@ -227,9 +229,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		Concept currentConcept = Concept.builder().id(conceptId).build();
 		Category currentCategory = Category.builder().id(currentCategoryId).build();
 		ConceptMapDTO conceptMapDto1 = categoryMapDto.getMapCategory().get(currentCategory);
-		Map<Tool, Skill> mapTool =  conceptMapDto1.getMapConcept()
-				.get(currentConcept).
-				getMapTool();
+		Map<Tool, Skill> mapTool =  conceptMapDto1.getMapConcept().get(currentConcept).getMapTool();
 		toolTable.removeAllItems();
 		toolTable.setPageLength(mapTool.size());
 		for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
