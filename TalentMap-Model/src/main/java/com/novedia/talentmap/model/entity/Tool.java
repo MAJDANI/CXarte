@@ -97,7 +97,7 @@ public class Tool implements Serializable, Comparable {
      * @param name
      *            the name to set
      */
-    private void setName(String name) {
+    public void setName(String name) {
 	this.name = name;
     }
 

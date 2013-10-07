@@ -1,17 +1,10 @@
 package com.novedia.talentmap.web.ui.admin;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import com.novedia.talentmap.web.TalentMapApplication;
-import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
 public class AdminView extends VerticalLayout implements ClickListener {
@@ -21,10 +14,6 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	*/
 	private GridLayout gridLayout;
 	
-	private Panel manageColleaguePanel;
-	
-	private Panel manageToolPanel;
-	
 	private Button deleteColleagueButton;
 	
 	private Button manageToolButton;
@@ -33,7 +22,6 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	
 	private ManageToolsPopIn manageToolsPopIn;
 	
-	private ResourceBundle resourceBundle;
 	
 	/**
 	 * Default constructor
@@ -49,8 +37,6 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	 * @return VerticalLayout
 	 */
 	public VerticalLayout buildAdminContent(){
-		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		buildContent();
 		addComponent(gridLayout);
@@ -64,22 +50,14 @@ public class AdminView extends VerticalLayout implements ClickListener {
 		gridLayout.setRows(2);
 		gridLayout.setColumns(2);
 		
-		manageColleaguePanel.removeAllComponents();
-		deleteColleagueButton.setCaption(resourceBundle.getString("delete.button.colleague.caption"));
-		deleteColleagueButton.addStyleName(Reindeer.BUTTON_LINK);
 		deleteColleagueButton.addClickListener(this);
-		deleteColleagueButton.addStyleName("labelBtnDashboard");
-		manageColleaguePanel.addComponent(deleteColleagueButton);
+		deleteColleagueButton.addStyleName("labelBtnDashboard deleteColleagueButton");
 		
-		manageToolPanel.removeAllComponents();
-		manageToolButton.setCaption(resourceBundle.getString("manage.button.tool.caption"));
-		manageToolButton.addStyleName(Reindeer.BUTTON_LINK);
 		manageToolButton.addClickListener(this);
-		manageToolButton.addStyleName("labelBtnDashboard");
-		manageToolPanel.addComponent(manageToolButton);
+		manageToolButton.addStyleName("labelBtnDashboard manageToolButton");
 		
-		gridLayout.addComponent(manageColleaguePanel);
-		gridLayout.addComponent(manageToolPanel);
+		gridLayout.addComponent(deleteColleagueButton);
+		gridLayout.addComponent(manageToolButton);
 	}
 	
 	@Override
@@ -101,27 +79,6 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	public void setGridLayout(GridLayout gridLayout) {
 		this.gridLayout = gridLayout;
 	}
-
-
-	public Panel getManageColleaguePanel() {
-		return manageColleaguePanel;
-	}
-
-
-	public void setManageColleaguePanel(Panel manageColleaguePanel) {
-		this.manageColleaguePanel = manageColleaguePanel;
-	}
-
-
-	public Panel getManageToolPanel() {
-		return manageToolPanel;
-	}
-
-
-	public void setManageToolPanel(Panel manageToolPanel) {
-		this.manageToolPanel = manageToolPanel;
-	}
-
 
 	public Button getDeleteColleagueButton() {
 		return deleteColleagueButton;
@@ -146,7 +103,6 @@ public class AdminView extends VerticalLayout implements ClickListener {
 	public ManageColleaguePopIn getManageColleaguePopIn() {
 		return manageColleaguePopIn;
 	}
-
 
 	public void setManageColleaguePopIn(ManageColleaguePopIn manageColleaguePopIn) {
 		this.manageColleaguePopIn = manageColleaguePopIn;

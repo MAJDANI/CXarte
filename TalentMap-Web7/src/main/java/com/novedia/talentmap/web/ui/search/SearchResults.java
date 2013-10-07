@@ -4,84 +4,184 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.novedia.talentmap.model.dto.MissionDTO;
 import com.novedia.talentmap.model.entity.Colleague;
+import com.novedia.talentmap.model.entity.Tool;
+import com.novedia.talentmap.services.IColleagueService;
+import com.novedia.talentmap.services.impl.ProfileService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.CUtils;
+import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.event.MouseEvents.ClickEvent;
+import com.vaadin.event.MouseEvents.ClickListener;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class SearchResults extends Table implements ClickListener {
+public class SearchResults extends VerticalLayout implements ClickListener {
 
 	private ResourceBundle resourceBundle;
+	
+	private GridLayout gridLayout;
+	
+	private IColleagueService colleagueService;
+	
+	private ProfileService profileService;
+	
+	private ThemeResource resourceBoy = new ThemeResource(Constants.IMG_NO_PHOTO_BOY);
+	
+	private ThemeResource resourceGirl = new ThemeResource(Constants.IMG_NO_PHOTO_GIRL);
+	
+	private ProfileColleagueWindow profileColleagueWindow; 
 	
 	/**
 	 * Default constructor
 	 */
 	public SearchResults() {
 		super();
-		addStyleName("searchResult table");
-	}
-
-	/**
-	 * Build SearchResults view
-	 * 
-	 * @return
-	 */
-	public SearchResults buildSearchResultsView(List<Colleague> listCollab) {
-		Locale locale = TalentMapApplication.getCurrent().getLocale();
-		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
-		removeAllItems();
-//		mainBuild();
-		buildResultsTable(listCollab);
-		return this;
-	}
-
-//	public void mainBuild() {
-//		addColumns();
-//	}
-
-	public void addColumns() {
-		addContainerProperty(resourceBundle.getString("name.table.header.caption"), String.class, null);
-		addContainerProperty(resourceBundle.getString("firstName.table.header.caption"), String.class, null);
-		addContainerProperty(resourceBundle.getString("email.table.header.caption"), String.class, null);
-		addContainerProperty(resourceBundle.getString("actions.table.header.caption"), HorizontalLayout.class, null);
-	}
-
-	public void buildResultsTable(List<Colleague> listCollab) {
-		addColumns();
-		fillResultsTable(listCollab);
-	}
-
-	public void fillResultsTable(List<Colleague> listCollab) {
-		for (Colleague collab : listCollab) {
-			HorizontalLayout hLayout = new HorizontalLayout();
-			Button visualizeProfile = new Button(resourceBundle.getString("visualizeProfile.button.caption"));
-			visualizeProfile.addStyleName("styleButton");
-//			Button visualizeMissionHistory = new Button(resourceBundle.getString("visualizeMissionHistory.button.caption"));
-//			visualizeMissionHistory.addStyleName("styleButton visualizeMissionHistory");
-			// Afficher le profil
-			visualizeProfile.setData(collab.getId());
-			visualizeProfile.addClickListener(this);
-			hLayout.addComponent(visualizeProfile);
-			// Afficher l'historique des missions pour les roles autorisés RH, CM et IA
-//			 if (Authorization.Role.RH.getId().equals(roleId) || Authorization.Role.CM.getId().equals(roleId) || Authorization.Role.IA.getId().equals(roleId)) {
-//				 visualizeMissionHistory.setData(collab);
-//				 hLayout.addComponent(visualizeMissionHistory);
-//			 }
-			addItem(new Object[] { collab.getLastName(), collab.getFirstName(),
-					collab.getEmail(), hLayout }, collab);
-		}
-
 	}
 	
+	
+
+	public VerticalLayout buildResultView(List<Colleague> listCollab){
+		removeAllComponents();
+		Locale locale = TalentMapApplication.getCurrent().getLocale();
+		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+		
+		if(listCollab != null){
+			int nbRows = (int) Math.round(listCollab.size()/2.0);
+			gridLayout.removeAllComponents();
+			gridLayout.setRows(nbRows);
+			gridLayout.setColumns(2);
+			gridLayout.addStyleName("girdLayoutResult");
+			gridLayout.setSpacing(true);
+			
+			for (Colleague colleague : listCollab) {
+				Image photo;
+				if(colleague.getTitle().equalsIgnoreCase(resourceBundle.getString("title.masculin.value"))) {
+					photo = new Image(colleague.getFirstName(), resourceBoy);
+				} else {
+					photo = new Image(colleague.getFirstName(), resourceGirl);
+				}
+				
+				photo.addStyleName("image");
+				photo.addClickListener(this);
+				photo.setId(colleague.getId().toString());
+				
+				Panel p = new Panel();
+//				p.addStyleName("resultPanel");
+				HorizontalLayout horizontalLayout = new HorizontalLayout();
+				horizontalLayout.setSpacing(true);
+				
+				VerticalLayout secondBloc = new VerticalLayout();
+				secondBloc.setSpacing(true);
+				
+				secondBloc.addComponent(new Label(profileService.getProfile(colleague.getProfileId()).getType()));
+				secondBloc.addComponent(new Label(colleague.getEmail()));
+				secondBloc.addComponent(new Label(colleague.getExperience() + resourceBundle.getString("experince.label.msg")));
+				
+				horizontalLayout.addComponent(photo);
+				horizontalLayout.addComponent(secondBloc);
+				p.addComponent(horizontalLayout);
+
+				
+				MissionDTO lastMission =  colleagueService.getLastMission(colleague.getId());
+				if(lastMission != null){
+					p.addComponent(buildLastMissionLayout(lastMission));
+				}
+				
+				gridLayout.addComponent(p);
+			}
+		}
+		addComponent(gridLayout);
+		return this;
+	}
+	
+	public VerticalLayout buildLastMissionLayout(MissionDTO lastMission){
+		VerticalLayout lastMissionLayout = new VerticalLayout();
+		lastMissionLayout.setSpacing(true);
+		Label lastMissionLabel = new Label(resourceBundle.getString("last.mission.msg") +lastMission.getTitle());
+		lastMissionLayout.addComponent(lastMissionLabel);
+		lastMissionLayout.addComponent(new Label(resourceBundle.getString("customer.field.combobox.caption") +lastMission.getClient().getName()));
+		String date = CUtils.DATE_FORMAT.format(lastMission.getStartDate());
+		
+		if(lastMission.getEndDate() != null){
+			date += " "+resourceBundle.getString("until.msg") + " " + CUtils.DATE_FORMAT.format(lastMission.getEndDate());
+			lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.date.msg") +date));
+		}
+		else{
+			date += " "+resourceBundle.getString("today.msg");
+			lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.date.msg") +date));
+		}
+		
+		if(lastMission.getNotes() != null){
+			lastMissionLayout.addComponent(new Label(resourceBundle.getString("form.mission.comment.caption") +lastMission.getNotes()));
+		}
+		
+		String toolSet = new String();
+		for (Tool tool : lastMission.getTools()) {
+			toolSet += tool.getName() +", ";
+		}
+		
+		lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.techno.msg") +toolSet));
+		
+		return lastMissionLayout;
+	}
+	
+	
 	@Override
-	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
+	public void click(ClickEvent event) {
+		Integer colleagueId = new Integer (event.getComponent().getId());
+		getUI().addWindow(profileColleagueWindow.buildProfileColleagueWindow(colleagueId));
 		
 	}
+	
+	
+
+
+	public IColleagueService getColleagueService() {
+		return colleagueService;
+	}
+
+	public void setColleagueService(IColleagueService colleagueService) {
+		this.colleagueService = colleagueService;
+	}
+
+	public ProfileService getProfileService() {
+		return profileService;
+	}
+
+	public void setProfileService(ProfileService profileService) {
+		this.profileService = profileService;
+	}
+
+	public GridLayout getGridLayout() {
+		return gridLayout;
+	}
+
+	public void setGridLayout(GridLayout gridLayout) {
+		this.gridLayout = gridLayout;
+	}
+
+
+
+	public ProfileColleagueWindow getProfileColleagueWindow() {
+		return profileColleagueWindow;
+	}
+
+
+
+	public void setProfileColleagueWindow(
+			ProfileColleagueWindow profileColleagueWindow) {
+		this.profileColleagueWindow = profileColleagueWindow;
+	}
+	
+	
 
 }

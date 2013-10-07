@@ -11,8 +11,12 @@ import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.event.ItemClickEvent;
-import com.vaadin.event.ItemClickEvent.ItemClickListener;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.BlurListener;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -23,32 +27,42 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
-public class ManageToolsPopIn extends Window implements ItemClickListener, ClickListener  {
+public class ManageToolsPopIn extends Window implements  ClickListener, ValueChangeListener, BlurListener, TextChangeListener {
 
+	private final int addCategoryView = 1;
+	
+	private final  int addConceptView = 2;
+	
+	private final int addToolView = 3;
+	
+	private int currentView ;
 
 	private IAdminService adminService;
 
 	private ResourceBundle resourceBundle;
 	
-	private HorizontalLayout buttonContainer = new HorizontalLayout();
+	private HorizontalLayout buttonContainer;
 	
-	private HorizontalLayout skillsContainer = new HorizontalLayout();
+	private HorizontalLayout skillsContainer;
 	
-	private VerticalLayout editSkillLayout = new VerticalLayout();
+	private VerticalLayout editSkillLayout;
 	
-	private TextField textField = new TextField();
+	private TextField textField;
 	
-	private Button saveButton = new Button();
+	private Button saveButton;
 	
 	private Tree treeSkills;
 	
 	private ISkillService skillService;
 	
-	private Button deleteButton = new Button();
+	private Button deleteButton;
 	
-	private Button addButton = new Button();
+	private Button addConceptButton;
 	
-	private Button addCategoryButton = new Button();
+	private Button addToolButton;
+	
+	private Button addCategoryButton;
+	
 	
 
 	
@@ -67,17 +81,31 @@ public class ManageToolsPopIn extends Window implements ItemClickListener, Click
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		setCaption(resourceBundle.getString("manage.tool.view.title"));
 		removeAllComponents();
+		
+		deleteButton.addClickListener(this);
+		deleteButton.addStyleName("delBtn");
+		addConceptButton.addClickListener(this);
+		addConceptButton.addStyleName("styleButton");
+		addToolButton.addClickListener(this);
+		addToolButton.addStyleName("styleButton");
+		
 		buttonContainer.removeAllComponents();
+		buttonContainer.setSpacing(true);
 		addCategoryButton.setCaption(resourceBundle.getString("add.category.button.caption"));
 		addCategoryButton.addClickListener(this);
+		addCategoryButton.addStyleName("styleButton");
 		buttonContainer.addComponent(addCategoryButton);
-		CUtils.buildTreeSkills(treeSkills, skillService);
+		treeSkills.addValueChangeListener(this);
+		treeSkills.removeAllItems();
+		CUtils.buildTreeSkills(treeSkills, skillService.getAllVSkillOrdered());
 		treeSkills.setImmediate(true);
-		treeSkills.addItemClickListener(this);
 		skillsContainer.removeAllComponents();
 		skillsContainer.addComponent(treeSkills);
+		editSkillLayout.removeAllComponents();
 		skillsContainer.addComponent(editSkillLayout);
 		saveButton.setCaption(resourceBundle.getString("save.button.caption"));
+		saveButton.addStyleName("styleButton");
+		saveButton.addClickListener(this);
 		addComponent(buttonContainer);
 		addComponent(skillsContainer);
 		return this;
@@ -85,94 +113,184 @@ public class ManageToolsPopIn extends Window implements ItemClickListener, Click
 	
 	
 	
-	
-	
-	@Override
-	public void itemClick(ItemClickEvent event) {
-		Object item =  event.getItemId();
+
+	public void builLayout(Object item){
+		buttonContainer.removeAllComponents();
+		
 		editSkillLayout.removeAllComponents();
 		editSkillLayout.setSpacing(true);
-		editSkillLayout.addComponent(textField);
-//		editSkillLayout.addComponent(saveButton);
-		if (item instanceof Category) {
-			textField.setCaption(resourceBundle.getString("add.category.textfield.caption"));
-			Category categ = (Category) item;
-			textField.setValue(categ.getName());
-			
-		} else if (item instanceof Concept) {
-			textField.setCaption(resourceBundle.getString("add.concept.textfield.caption"));
-			Concept concept = (Concept) item;
-			textField.setValue(concept.getName());
-			
-		} else if (item instanceof Tool) {
-			Tool tool = (Tool) item;
-			textField.setCaption(resourceBundle.getString("add.tool.textfield.caption"));
-			textField.setValue(tool.getName());
-		}
 		
-		builButtonContainer(item);
-		
-	}
-
-	public void builButtonContainer(Object item){
-		buttonContainer.removeAllComponents();
 		buttonContainer.setSpacing(true);
 		buttonContainer.addComponent(addCategoryButton);
 		
-		
-		if (item instanceof Category) {
-			addButton.setCaption(resourceBundle.getString("add.concept.button.caption"));
-			buttonContainer.addComponent(addButton);
-		} else if (item instanceof Concept) {
-			addButton.setCaption(resourceBundle.getString("add.tool.button.caption"));
-			buttonContainer.addComponent(addButton);
-		}
-		
-		deleteButton.setCaption(resourceBundle.getString("delete.button.caption"));
-		deleteButton.addClickListener(this);
-		addButton.addClickListener(this);
-		buttonContainer.addComponent(deleteButton);
+		if (item != null) {
 			
-		
-	}
-	
-	
-	@Override
-	public void buttonClick(ClickEvent event) {
-		if (event.getButton().equals(addCategoryButton)) {
-			editSkillLayout.removeAllComponents();
-			editSkillLayout.setSpacing(true);
-			editSkillLayout.addComponent(textField);
-			editSkillLayout.addComponent(saveButton);
-			textField.setValue("");
-			textField.setCaption(resourceBundle.getString("add.category.textfield.caption"));
-		} 
-		else if (event.getButton().equals(deleteButton)) {
-			Object item = treeSkills.getValue();
 			if (item instanceof Category) {
+				addConceptButton.setCaption(resourceBundle.getString("add.concept.button.caption"));
+				buttonContainer.addComponent(addConceptButton);
+				
 				textField.setCaption(resourceBundle.getString("add.category.textfield.caption"));
 				Category categ = (Category) item;
 				textField.setValue(categ.getName());
 				
 			} else if (item instanceof Concept) {
+				addToolButton.setCaption(resourceBundle.getString("add.tool.button.caption"));
+				buttonContainer.addComponent(addToolButton);
+				
 				textField.setCaption(resourceBundle.getString("add.concept.textfield.caption"));
 				Concept concept = (Concept) item;
 				textField.setValue(concept.getName());
 				
 			} else if (item instanceof Tool) {
-				Tool tool = (Tool) item;
 				textField.setCaption(resourceBundle.getString("add.tool.textfield.caption"));
+				Tool tool = (Tool) item;
 				textField.setValue(tool.getName());
 			}
+			
+			textField.addBlurListener(this);
+			textField.removeTextChangeListener(this);
+			editSkillLayout.addComponent(textField);
+			
+			deleteButton.setCaption(resourceBundle.getString("delete.button.caption"));
+			buttonContainer.addComponent(deleteButton);
 		}
 		
+	}
+	
+	
+	
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		Object itemSelected = treeSkills.getValue();
+		builLayout(itemSelected);
+	}
+	
+	
+	@Override
+	public void textChange(TextChangeEvent event) {
+		String value = event.getText();
+		value = value.trim();
+		if(value.length() != 0){
+			saveButton.setEnabled(true);
+		}else {
+			saveButton.setEnabled(false);
+		}
+		
+	}
+	
+	
+	@Override
+	public void blur(BlurEvent event) {
+		
+		if(textField.getValue().length()  !=  0){
+			Object itemSelected = treeSkills.getValue();
+			String newValue = textField.getValue();
+			newValue = newValue.trim();
+			if (itemSelected instanceof Category) {
+				Category categ = (Category) itemSelected;
+				categ.setName(newValue.toUpperCase());
+				adminService.updateASkill(categ, null, null);
+				treeSkills.setItemCaption(itemSelected, newValue.toUpperCase());
+			} else if (itemSelected instanceof Concept) {
+				Concept concept = (Concept) itemSelected;
+				Category categParent =  (Category) treeSkills.getParent(itemSelected);
+				concept.setName(newValue.toUpperCase());
+				concept.setCategory(categParent);
+				adminService.saveConcept(concept);
+				treeSkills.setItemCaption(itemSelected, newValue.toUpperCase());
+				
+			} else if (itemSelected instanceof Tool) {
+				Concept conceptParent =  (Concept) treeSkills.getParent(itemSelected);
+				Tool tool = (Tool) itemSelected;
+				tool.setName(newValue);
+				tool.setConcept(conceptParent);
+				adminService.updateTool(tool);
+				treeSkills.setItemCaption(itemSelected, newValue);
+			} 
+		}
+		
+	}
+	
+	
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if (event.getButton().equals(addCategoryButton) || event.getButton().equals(addConceptButton) || event.getButton().equals(addToolButton)) {
+			editSkillLayout.removeAllComponents();
+			editSkillLayout.setSpacing(true);
+			editSkillLayout.addComponent(textField);
+			editSkillLayout.addComponent(saveButton);
+			saveButton.setEnabled(false);
+			textField.setValue("");
+			textField.removeBlurListener(this);
+			textField.addTextChangeListener(this);
+			if (event.getButton().equals(addCategoryButton)) {
+				textField.setCaption(resourceBundle.getString("add.category.textfield.caption"));
+				currentView = addCategoryView;
+			} else if (event.getButton().equals(addConceptButton)) {
+				textField.setCaption(resourceBundle.getString("add.concept.textfield.caption"));
+				currentView = addConceptView;
+			} else {
+				textField.setCaption(resourceBundle.getString("add.tool.textfield.caption"));
+				currentView = addToolView;
+			}
+			
+		} 
+		else if (event.getButton().equals(deleteButton)) {
+			Object itemSelected = treeSkills.getValue();
+			//TODO fenetre de confirmation
+			if (itemSelected instanceof Category) {
+				Category category = (Category) itemSelected;
+				try {
+					adminService.deleteCategory(category.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (itemSelected instanceof Concept) {
+				Concept concept = (Concept) itemSelected;
+				adminService.deleteConcept(concept.getId());
+				
+			} else if (itemSelected instanceof Tool) {
+				Tool tool = (Tool) itemSelected;
+				adminService.deleteTool(tool.getId());
+			}
+			
+			buildManageToolsView();
+			
+		} else if (event.getButton().equals(saveButton)) {
+			Object itemSelected = treeSkills.getValue();
+			String newSkill = textField.getValue();
+			newSkill = newSkill.trim();
+			switch (currentView) {
+			
+				case addCategoryView :
+				{
+					Category newCategory = Category.builder().name(newSkill.toUpperCase()).build();
+					adminService.addCategory(newCategory);
+					break;
+				}
+				case addConceptView :
+				{
+					Category category = (Category) itemSelected;
+					Concept newConcept = Concept.builder().name(newSkill.toUpperCase()).category(category).build();
+					adminService.addConcept(newConcept);
+					break;
+				}
+				case addToolView :
+				{
+					Concept concept = (Concept) itemSelected;
+					Tool newTool = Tool.builder().name(newSkill).concept(concept).build();
+					adminService.addTool(newTool);
+					break;
+				}
+	
+			}
+			buildManageToolsView();
+			
+		}
 		
 	}
 
-	
-	
-	
-	
 	
 	public IAdminService getAdminService() {
 		return adminService;
@@ -203,7 +321,93 @@ public class ManageToolsPopIn extends Window implements ItemClickListener, Click
 	}
 
 
-	
+	public HorizontalLayout getButtonContainer() {
+		return buttonContainer;
+	}
 
+
+	public void setButtonContainer(HorizontalLayout buttonContainer) {
+		this.buttonContainer = buttonContainer;
+	}
+
+
+	public HorizontalLayout getSkillsContainer() {
+		return skillsContainer;
+	}
+
+
+	public void setSkillsContainer(HorizontalLayout skillsContainer) {
+		this.skillsContainer = skillsContainer;
+	}
+
+
+	public VerticalLayout getEditSkillLayout() {
+		return editSkillLayout;
+	}
+
+
+	public void setEditSkillLayout(VerticalLayout editSkillLayout) {
+		this.editSkillLayout = editSkillLayout;
+	}
+
+
+	public TextField getTextField() {
+		return textField;
+	}
+
+
+	public void setTextField(TextField textField) {
+		this.textField = textField;
+	}
+
+
+	public Button getSaveButton() {
+		return saveButton;
+	}
+
+
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
+	}
+
+
+	public Button getDeleteButton() {
+		return deleteButton;
+	}
+
+
+	public void setDeleteButton(Button deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+
+	public Button getAddConceptButton() {
+		return addConceptButton;
+	}
+
+
+	public void setAddConceptButton(Button addConceptButton) {
+		this.addConceptButton = addConceptButton;
+	}
+
+
+	public Button getAddToolButton() {
+		return addToolButton;
+	}
+
+
+	public void setAddToolButton(Button addToolButton) {
+		this.addToolButton = addToolButton;
+	}
+
+
+	public Button getAddCategoryButton() {
+		return addCategoryButton;
+	}
+
+
+	public void setAddCategoryButton(Button addCategoryButton) {
+		this.addCategoryButton = addCategoryButton;
+	}
 
 }

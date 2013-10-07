@@ -19,7 +19,6 @@ import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -30,6 +29,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
@@ -130,6 +130,7 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
 		panelRight.setWidth("800px");
+		panelRight.setHeight("500px");
 	}
 	
 	private void buildResultsPanel(){
@@ -189,29 +190,49 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			skillPanel.removeAllComponents();
 			treeSkills.removeAllItems();
 			treeSkills.setImmediate(true);
-			CUtils.buildTreeSkills(treeSkills, skillService);
+			CUtils.buildTreeSkills(treeSkills, skillService.getAllVSkillOrdered());
 			treeSkills.setMultiSelect(true);
 			skillPanel.addComponent(treeSkills);
 			searchButton.setCaption(resourceBundle.getString("search.button.caption"));
+			searchButton.addStyleName("styleButton");
 			searchButton.addClickListener(this);
 			skillPanel.addComponent(searchButton);
 			panelRight.setContent(skillPanel);
 		} 
 		else if (event.getButton().equals(searchButton)) {
-			Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
-			List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
-			List<Integer> colleaguesIdList;
-			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
-				int managerId = authentication.getColleagueId();
-				colleaguesIdList = skillService.getCmColleagueIdByListToolId(skillsIdListToSearch, managerId);
-			}else {
-				colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+			if (!checkSelectedTreeSkill(treeSkills)) {
+				Notification.show(resourceBundle.getString("notification.tree.skill.empty"));
+			} else {
+
+				Set<Integer> skillsIdSetToSearch = buildToolListOfTreeSkills(treeSkills);
+				List<Integer> skillsIdListToSearch = new ArrayList<Integer>(skillsIdSetToSearch);
+				if(skillsIdSetToSearch.isEmpty()){
+					skillsIdListToSearch = null;
+				}
+				List<Integer> colleaguesIdList;
+				if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){
+					int managerId = authentication.getColleagueId();
+					colleaguesIdList = skillService.getCmColleagueIdByListToolId(skillsIdListToSearch, managerId);
+				}else {
+					colleaguesIdList = skillService.getAllColleagueIdByListToolId(skillsIdListToSearch);
+				}
+				listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
+				displayResult(listCollab);
 			}
-			listCollab = collabService.getAllColleagueByColleagueIdList(colleaguesIdList);
-			displayResult(listCollab);
 				
 		}
 		
+	}
+	
+	
+	private boolean checkSelectedTreeSkill(Tree treeSkills){
+		Collection<?> itemIds = treeSkills.getItemIds();
+		for (Object itemId : itemIds) {
+			if(treeSkills.isSelected(itemId)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -226,9 +247,12 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			if(itemId instanceof Category){
 				if(treeSkills.isSelected(itemId)){
 					Collection<Concept> allConceptOfCategory =  (Collection<Concept>) treeSkills.getChildren(itemId);
-					for (Concept concept : allConceptOfCategory) {
-						List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,concept);
-						toolIdSelectedSet.addAll(allToolIdOfConcept);
+					if(allConceptOfCategory != null){
+						for (Concept concept : allConceptOfCategory) {
+							List<Integer> allToolIdOfConcept =  getAllItemIdChildrensOfConcept(treeSkills,concept);
+							toolIdSelectedSet.addAll(allToolIdOfConcept);
+						}
+						
 					}
 				}
 			}
@@ -252,8 +276,11 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 	public List<Integer> getAllItemIdChildrensOfConcept(Tree treeSkills, Object itemId){
 		Collection<Tool> childrens =  (Collection<Tool>) treeSkills.getChildren(itemId);
 		List<Integer> toolId = new ArrayList<Integer>();
-		for (Tool tool : childrens) {
-			toolId.add(tool.getId());
+		if(childrens != null){
+			for (Tool tool : childrens) {
+				toolId.add(tool.getId());
+			}
+			
 		}
 		return toolId;
 	}
@@ -267,20 +294,17 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 			searchResults.setVisible(false);
 		} else {
 			searchResultsLabelNoResult.setVisible(false);
-			searchResults = searchResults.buildSearchResultsView(listCollab);
-			if(searchResults.size() < Constants.NB_ROWS_DEFAULT){
-				searchResults.setPageLength(searchResults.size());
-			} else{
-				searchResults.setPageLength(Constants.NB_ROWS_DEFAULT);
-			}
 			searchResults.setVisible(true);
+			searchResultsPanel.removeAllComponents();
+			searchResultsPanel.addComponent(searchResults.buildResultView(listCollab));
+			
 		}
 	}
 	
 	
 	@Override
 	public void textChange(TextChangeEvent event) {
-		if(event.getComponent().equals(searchByNameForm.getNameField())){
+		if(event.getComponent().equals(searchByNameForm.getNameField()) && event.getText().length() != 0){
 			String valueField = event.getText();
 			valueField = valueField.trim();
 			if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){

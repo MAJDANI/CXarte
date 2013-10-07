@@ -86,9 +86,12 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		removeAllComponents();
 		buildForm();
 		errorLabelOldPassword.setCaption(resourceBundle.getString("error.label.old.password"));
+		errorLabelOldPassword.addStyleName("errorStyle");
 		errorLabelNewPassword.setCaption(resourceBundle.getString("error.label.new.password"));
+		errorLabelNewPassword.addStyleName("errorStyle");
 		errorLabelOldPassword.setVisible(false);
 		errorLabelNewPassword.setVisible(false);
+		changePasswordFormLayout.setSpacing(true);
 		
 		addComponent(errorLabelOldPassword);
 		addComponent(errorLabelNewPassword);
@@ -104,14 +107,17 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		changePasswordFormLayout.removeAllComponents();
 		
 		oldPasswordField.setCaption(resourceBundle.getString("old.password.field.caption"));
+		oldPasswordField.setValue("");
 		oldPasswordField.setId(ComponentsId.OLD_PASSWORD_FIELD_ID);
 		oldPasswordField.setRequired(true);
 		
 		newPasswordField.setCaption(resourceBundle.getString("new.password.field.caption"));
+		newPasswordField.setValue("");
 		newPasswordField.setId(ComponentsId.NEW_PASSWORD_FIELD_ID);
 		newPasswordField.setRequired(true);
 		
 		confirmPasswordField.setCaption(resourceBundle.getString("confirm.password.field"));
+		confirmPasswordField.setValue("");
 		confirmPasswordField.setId(ComponentsId.CONFIRM_PASSWORD_FIELD_ID);
 		confirmPasswordField.setRequired(true);
 		
