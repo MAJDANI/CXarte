@@ -108,7 +108,6 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	 * @return Window
 	 */
 	public Window buildPersonalEAEPopIn() {
-		System.out.println("PASSE ICI");
 		initResourceBundle();
 		setCaption(resourceBundle.getString("personal.eae.pop.in.title"));
 		removeAllComponents();
