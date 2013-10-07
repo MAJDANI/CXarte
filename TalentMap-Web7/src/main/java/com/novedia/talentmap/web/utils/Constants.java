@@ -120,27 +120,13 @@ public class Constants {
 	/**
      * Constant for Personel EAE Pop-In
      */
+	public static final Integer POSITION_X_EAE_POP_IN = 70;
 	
-	public static final String PERSONAL_EAE_POP_IN_TITLE = "Personal EAE";
-	
-	public static final String CURRENT_EAE_BUTTON_LABEL = "Current EAE";
-
-	public static final String HISTORY_EAE_BUTTON_LABEL = "EAE History";
-
-	public static final String GENERALITY_EAE_BUTTON_LABEL = "Generality";
-	
-	public static final String RESULTS_EAE_BUTTON_LABEL = "Results";
-	
-	public static final String OBJECTIVES_EAE_BUTTON_LABEL = "Objectives";
-	
-	public static final String SYNTHESIS_EAE_BUTTON_LABEL = "Synthesis";
+	public static final Integer POSITION_Y_EAE_POP_IN = 70;
 
 	/**
      * Constant for Personel EAE Pop-In => Current EAE => Results
      */
-	public static final String EAE_YEAR_SYNTHESIS = "Summary of the past year :";
-	public static final String EAE_COLLAB_STRENGHTS = "My Highlights :";
-	public static final String EAE_COLLAB_WEAKNESSES = "My areas of improvement :";
 	public static final String EAE_RESULTS_TITLE_3 = "3 Overall assessment of my work within the organization :";
 
 	/**
@@ -148,5 +134,11 @@ public class Constants {
      */
 	public static final String IMG_NO_PHOTO_BOY = "img/nophotoBoy.png";
 	public static final String IMG_NO_PHOTO_GIRL = "img/nophotoGirl.png";
+	public static final String IMG_BACK_BLUE = "img/backBlue.png";
+
+	public static final String IMG_CADRE_GREEN = "img/cadreVert.png";
+	public static final String IMG_CADRE_ORANGE = "img/cadreOrange.png";
+	public static final String IMG_CADRE_RED = "img/cadreRouge.png";
+	public static final String IMG_CADRE_GREY = "img/cadreGris.png";
 
 }

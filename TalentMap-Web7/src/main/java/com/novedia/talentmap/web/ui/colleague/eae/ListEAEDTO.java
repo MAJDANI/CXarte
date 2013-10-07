@@ -22,7 +22,7 @@ public class ListEAEDTO extends Table {
 	 */
 	public static final String DATE_EAE = "EAE's Date";
 	public static final String STATE_EAE = "EAE's State";
-	public static final String STATE_EAE_IMG = "EAE's Icon";
+	public static final String STATE_EAE_IMG = "";
 
 	/**
 	 * Default constructor
@@ -63,13 +63,13 @@ public class ListEAEDTO extends Table {
 
 			if (eae.getEaeStateId() == EAEStateEnum.OPEN.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
-						Images.getImgFeuVert() }, eae);
+						Images.getImgButtonGreen() }, eae);
 			} else if (eae.getEaeStateId() == EAEStateEnum.VALIDATED.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
-						Images.getImgFeuOrange() }, eae);
+						Images.getImgButtonOrange() }, eae);
 			} else if (eae.getEaeStateId() == EAEStateEnum.CLOSED.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
-						Images.getImgFeuRouge() }, eae);
+						Images.getImgButtonRed() }, eae);
 			}
 		}
 

@@ -20,7 +20,9 @@ import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
+import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 /**
@@ -57,7 +59,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	 * Date d'échéance de l'objectif
 	 */
 	@PropertyId(ComponentsId.OBJECTIVE_TARGET_DATE_ID)
-	private TextField targetDate;
+	private PopupDateField targetDate;
 
 	/**
 	 * Indicateurs permattant de mesure l'atteinte de l'objectif
@@ -121,11 +123,9 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	 */
 	private EAEConsultationMode currentMode;
 	/**
-	 * A positionner par le formulaire qui englobe l'EAEObjectiveForm ici.
-	 * L'affichage d'uhn objectif dans l'onglet "Bilan" est différent de
-	 * l'afichage d'un objectif dans l'onglet "Objectifs"
+	 * Pour permettre de savoir qi on affiche les objectifs dans l'onglet
+	 * Results ou Objectives
 	 */
-	// private Boolean objectifForBilan;
 	private EAETabEnum currentTab;
 	/**
 	 * Binder des données dans le formulaire
@@ -135,7 +135,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	/**
 	 * Largeur de chaque élément du formulaire
 	 */
-	private final String ELEMENT_WIDTH = "450px";
+	private final String ELEMENT_WIDTH = "580px";
 	/**
 	 * Hauteur de chaque élément du formulaire
 	 */
@@ -154,8 +154,32 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	 */
 	@Override
 	public void blur(BlurEvent event) {
-		System.out.println("Blur event sur Objective");
+		if (!validateEAEObjectiveForm()) {
+			Notification.show(
+					resourceBundle.getString("missing.or.invalid.field.msg"),
+					Notification.Type.WARNING_MESSAGE);
+		}
 		myFormParent.saveObjective(currentObjective);
+
+	}
+
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		System.out.println("valueChange dans EAEObjectiveForm");
+		myFormParent.saveObjective(currentObjective);
+	}
+
+	/**
+	 * Test the EAEObjectiveForm validity
+	 * 
+	 * @return boolean
+	 */
+	private boolean validateEAEObjectiveForm() {
+		boolean isValidGenerality = true;
+		if (!this.binder.isValid()) {
+			isValidGenerality = false;
+		}
+		return isValidGenerality;
 	}
 
 	/**
@@ -202,20 +226,21 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 				.setId(ComponentsId.EAE_OBJECTIVES_FORM_LAYOUT_ID);
 		this.eaeObjectiveFormLayout.setColumns(1);
 		this.eaeObjectiveFormLayout.setRows(9);
+		this.eaeObjectiveFormLayout.setMargin(true);
 		this.eaeObjectiveFormLayout.addStyleName("styleDeTest");
 	}
 
 	private void buildEAEObjectiveForm() {
 		removeAllComponents();
 		ObjUtils objUtils = ObjUtils.getInstance();
-		
+
 		// -----------------------------
 		// Instanciations
 		// -----------------------------
 		title = new Label();
 		titleField = new TextField();
 		goal = new TextField();
-		targetDate = new TextField();
+		targetDate = new PopupDateField();
 		indicators = new TextField();
 		means = new TextField();
 		motivesOrRestraints = new TextField();
@@ -233,7 +258,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 			titleField.setHeight(ELEMENT_HEIGHT);
 			titleField.setWidth(ELEMENT_WIDTH);
 			titleField.setMaxLength(200);
-			titleField.setCaption(resourceBundle.getString("objective.title.caption"));
+			titleField.setCaption(resourceBundle
+					.getString("objective.title.caption"));
 			if (titleDisplayMode == ObjUtils.UPDATE) {
 				titleField.setImmediate(true);
 				titleField.addBlurListener(this);
@@ -271,11 +297,9 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 				ComponentsId.OBJECTIVE_TARGET_DATE_ID, currentTab, currentMode);
 		if (targetDisplayMode != ObjUtils.HIDDEN) {
 			targetDate.setStyleName("TODO");
-			targetDate.setNullRepresentation("");
 			targetDate.setId(ComponentsId.OBJECTIVE_TARGET_DATE_ID);
 			targetDate.setHeight(ELEMENT_HEIGHT);
 			targetDate.setWidth(ELEMENT_WIDTH);
-			targetDate.setMaxLength(200);
 			targetDate.setCaption(resourceBundle
 					.getString("objective.targetDate.caption"));
 			if (targetDisplayMode == ObjUtils.UPDATE) {
@@ -320,7 +344,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 			means.setHeight(ELEMENT_HEIGHT);
 			means.setWidth(ELEMENT_WIDTH);
 			means.setMaxLength(200);
-			means.setCaption(resourceBundle.getString("objective.means.caption"));
+			means.setCaption(resourceBundle
+					.getString("objective.means.caption"));
 			if (meansDisplayMode == ObjUtils.UPDATE) {
 				means.setImmediate(true);
 				means.addBlurListener(this);
@@ -336,7 +361,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 		String colleagueScoreDisplayMode = objUtils.getMode(
 				ComponentsId.OBJECTIVE_COLL_SCORE_ID, currentTab, currentMode);
 		if (colleagueScoreDisplayMode != ObjUtils.HIDDEN) {
-			colleagueScore = new OptionGroup("Ma note");
+			colleagueScore = new OptionGroup(resourceBundle.getString("objective.score.colleague.caption"));
 			colleagueScore.addItem(ObjectiveScoreEnum.NOT_ACHIEVED.getId());
 			colleagueScore.setItemCaption(ObjectiveScoreEnum.NOT_ACHIEVED
 					.getId(), resourceBundle
@@ -361,6 +386,9 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 
 			colleagueScore.addValueChangeListener(this);
 			if (colleagueScoreDisplayMode == ObjUtils.UPDATE) {
+				colleagueScore.setRequired(true);
+				colleagueScore.setRequiredError(resourceBundle
+						.getString("objective.colleaguescore.error.message"));
 				colleagueScore.setImmediate(true);
 				colleagueScore.addValueChangeListener(this);
 			}
@@ -373,11 +401,12 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 		String managerScoreDisplayMode = objUtils.getMode(
 				ComponentsId.OBJECTIVE_MAN_SCORE_ID, currentTab, currentMode);
 		if (managerScoreDisplayMode != ObjUtils.HIDDEN) {
-			managerScore = new OptionGroup("Ma note");
+			managerScore = new OptionGroup(resourceBundle.getString("objective.score.manager.caption"));
 			managerScore.addItem(ObjectiveScoreEnum.NOT_ACHIEVED.getId());
-			managerScore.setItemCaption(ObjectiveScoreEnum.NOT_ACHIEVED
-					.getId(), resourceBundle
-					.getString(ObjectiveScoreEnum.NOT_ACHIEVED.getLabel()));
+			managerScore.setItemCaption(
+					ObjectiveScoreEnum.NOT_ACHIEVED.getId(), resourceBundle
+							.getString(ObjectiveScoreEnum.NOT_ACHIEVED
+									.getLabel()));
 
 			managerScore.addItem(ObjectiveScoreEnum.PARTLY_ACHIEVED.getId());
 			managerScore.setItemCaption(ObjectiveScoreEnum.PARTLY_ACHIEVED
@@ -408,16 +437,22 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 		// motivesOrRestraints
 		// -----------------------------
 		String motivesOrRestraintsDisplayMode = objUtils.getMode(
-				ComponentsId.OBJECTIVE_MOTIVES_OR_RESTRAINTS_ID, currentTab, currentMode);
+				ComponentsId.OBJECTIVE_MOTIVES_OR_RESTRAINTS_ID, currentTab,
+				currentMode);
 		if (motivesOrRestraintsDisplayMode != ObjUtils.HIDDEN) {
 			motivesOrRestraints.setStyleName("TODO");
 			motivesOrRestraints.setNullRepresentation("");
-			motivesOrRestraints.setId(ComponentsId.OBJECTIVE_MOTIVES_OR_RESTRAINTS_ID);
+			motivesOrRestraints
+					.setId(ComponentsId.OBJECTIVE_MOTIVES_OR_RESTRAINTS_ID);
 			motivesOrRestraints.setHeight(ELEMENT_HEIGHT);
 			motivesOrRestraints.setWidth(ELEMENT_WIDTH);
 			motivesOrRestraints.setMaxLength(200);
-			motivesOrRestraints.setCaption(resourceBundle.getString("objective.motivesOrRestraints.caption"));
+			motivesOrRestraints.setCaption(resourceBundle
+					.getString("objective.motivesOrRestraints.caption"));
 			if (motivesOrRestraintsDisplayMode == ObjUtils.UPDATE) {
+				motivesOrRestraints.setRequired(true);
+				motivesOrRestraints.setRequiredError(resourceBundle
+						.getString("objective.motives.error.message"));
 				motivesOrRestraints.setImmediate(true);
 				motivesOrRestraints.addBlurListener(this);
 			} else {
@@ -439,7 +474,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 			comments.setHeight(ELEMENT_HEIGHT);
 			comments.setWidth(ELEMENT_WIDTH);
 			comments.setMaxLength(200);
-			comments.setCaption(resourceBundle.getString("objective.comments.caption"));
+			comments.setCaption(resourceBundle
+					.getString("objective.comments.caption"));
 			if (motivesOrRestraintsDisplayMode == ObjUtils.UPDATE) {
 				comments.setImmediate(true);
 				comments.addBlurListener(this);
@@ -538,7 +574,8 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	}
 
 	/**
-	 * @param motivesOrRestraints the motivesOrRestraints to set
+	 * @param motivesOrRestraints
+	 *            the motivesOrRestraints to set
 	 */
 	public void setMotivesOrRestraints(TextField motivesOrRestraints) {
 		this.motivesOrRestraints = motivesOrRestraints;
@@ -552,15 +589,11 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	}
 
 	/**
-	 * @param comments the comments to set
+	 * @param comments
+	 *            the comments to set
 	 */
 	public void setComments(TextField comments) {
 		this.comments = comments;
-	}
-
-	@Override
-	public void valueChange(ValueChangeEvent event) {
-		myFormParent.saveObjective(currentObjective);
 	}
 
 }

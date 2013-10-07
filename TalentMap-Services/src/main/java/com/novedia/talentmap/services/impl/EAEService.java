@@ -10,6 +10,7 @@ import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
 import com.novedia.talentmap.model.dto.EAESynthesisDTO;
+import com.novedia.talentmap.model.dto.NewEAEDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.services.IEAEService;
@@ -48,6 +49,7 @@ public class EAEService implements IEAEService {
 	public int addEAE(EAE eae) {
 		return eaeDao.add(eae);
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -175,6 +177,18 @@ public class EAEService implements IEAEService {
 		return list;
 	}
 
+	@Override
+	public Integer getNbEmptyFieldsByEAE(Integer id) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.getNbEmptyFieldsByEAE(id);
+	}
+
+	@Override
+	public Integer validateEAEById(Integer id) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.validateEAEById(id);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -207,6 +221,15 @@ public class EAEService implements IEAEService {
 	public int saveEAESynthesis(EAESynthesisDTO eae) {
 		EAEDao eaeDao = (EAEDao) this.eaeDao;
 		return eaeDao.saveEAESynthesis(eae);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.novedia.talentmap.services.IEAEService#addNewEAEDTO(com.novedia.talentmap.model.dto.NewEAEDTO)
+	 */
+	@Override
+	public int addNewEAEDTO(NewEAEDTO eae) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.addNewEAEDTO(eae);
 	}
 
 	/**

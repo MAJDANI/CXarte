@@ -244,7 +244,6 @@ public class MissionCollaboratorContent extends VerticalLayout implements
 
     @Override
     public void buttonClick(ClickEvent event) {
-	// System.out.println("MissionCollaboratorContent.buttonClick()");
 	Button button = event.getButton();
 	// ADD NEW MISSION
 	if (button == this.btnAddMission) {

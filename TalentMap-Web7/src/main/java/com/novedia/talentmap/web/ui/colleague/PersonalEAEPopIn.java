@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent;
 import com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.ProfilConnectedEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -15,7 +17,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.Reindeer;
 
 /**
  * La PopIn qui permet la gestion des EAE personnels. Cette PopIn contient un
@@ -92,6 +93,8 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	public PersonalEAEPopIn() {
 		super();
 		setModal(true);
+		this.setPositionY(70);
+		this.setPositionX(70);
 	}
 	
 	private void initResourceBundle() {
@@ -105,9 +108,9 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	 * @return Window
 	 */
 	public Window buildPersonalEAEPopIn() {
+		System.out.println("PASSE ICI");
 		initResourceBundle();
 		setCaption(resourceBundle.getString("personal.eae.pop.in.title"));
-
 		removeAllComponents();
 		hLayoutPersoEAE.setSpacing(true);
 		hLayoutPersoEAE.removeAllComponents();
@@ -130,14 +133,13 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	private void buildButtons() {
 
 		currentEAEButton.setCaption(resourceBundle.getString("current.eae.button.label"));
-		currentEAEButton.addStyleName(Reindeer.BUTTON_LINK);
-		currentEAEButton.addStyleName("focus");
 		currentEAEButton.addClickListener(this);
+		currentEAEButton.addStyleName("focus");
 
 		historyEAEButton.setCaption(resourceBundle.getString("history.eae.button.label"));
-		historyEAEButton.addStyleName(Reindeer.BUTTON_LINK);
 		historyEAEButton.addClickListener(this);
-
+		CUtils.decorateButtonAsLink(currentEAEButton, historyEAEButton);
+		CUtils.decorateButton(currentEAEButton, historyEAEButton);
 	}
 
 	private void buildMenu() {
@@ -155,23 +157,29 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		panelRightPersoEAE.removeAllComponents();
 		if (event.getButton().equals(currentEAEButton)) {
-			currentEAEButton.addStyleName("focus");
-			historyEAEButton.removeStyleName("focus");
+			CUtils.decorateButton(currentEAEButton, historyEAEButton);
 			panelRightPersoEAE.setContent(currentEAEContent
 					.buildViewCurrentEAEContent());
 			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 
 		} else if (event.getButton().equals(historyEAEButton)) {
-			currentEAEButton.removeStyleName("focus");
-			historyEAEButton.addStyleName("focus");
+			CUtils.decorateButton(historyEAEButton, currentEAEButton );
 	    	Integer colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
 			
 			panelRightPersoEAE.setContent(historyEAEContent
-					.buildViewHistoryEAEContent(colleagueId));
+					.buildViewHistoryEAEContent(colleagueId, ProfilConnectedEnum.COLLEAGUE, null));
 			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.history.title"));
 		}
 	}
 	
+	public void refreshContent() {
+		System.out.println("-*- refreshContent");
+		CUtils.decorateButton(currentEAEButton, historyEAEButton);
+		panelRightPersoEAE.setContent(currentEAEContent
+				.buildViewCurrentEAEContent());
+		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
+		
+	}
 
 	/**
 	 * @return the currentEAEButton

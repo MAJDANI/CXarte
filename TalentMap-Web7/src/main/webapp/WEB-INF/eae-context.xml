@@ -271,6 +271,8 @@
 		scope="session">
 		<property name="eaeDTOContainer" ref="eaeDTOContainerBean" />
 	</bean>
+	<bean id="newEAEDTOBean" class="com.novedia.talentmap.model.dto.NewEAEDTO" scope="session"/>
+	<bean id="newEAEDTOForCMBean" class="com.novedia.talentmap.model.dto.NewEAEDTO" scope="session"/>
 
 	<bean id="historyEAEContentBean"
 		class="com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent"
@@ -278,6 +280,9 @@
 		<property name="listEAEPanel" ref="listEAEPanelBean" />
 		<property name="listEAE" ref="listEAEBean" />
 		<property name="historicalEAEContent" ref="historicalEAEContentBean" />
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="eaeService" ref="eaeService" />
+		<property name="newEAEDTO" ref="newEAEDTOBean" />
 	</bean>
 
 
@@ -461,6 +466,10 @@
 		<property name="listEAE" ref="listEAEForCMBean" /><!-- OK -->
 		<property name="historicalEAEContent" ref="historicalEAEContentForCMBean" /><!-- 
 			OK -->
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="eaeService" ref="eaeService" />
+		<property name="newEAEDTO" ref="newEAEDTOForCMBean" />
+			
 	</bean>
 	<!-- FIN POUR CM -->
 
@@ -486,7 +495,7 @@
 	</bean>
 
 
-	<bean id="hLayoutCMEAEBean" class="com.vaadin.ui.HorizontalLayout"
+	<bean id="hLayoutCMEAEBean" class="com.vaadin.ui.GridLayout"
 		scope="session" />
 	<bean id="cmEAEPopInBean" class="com.novedia.talentmap.web.ui.cm.eae.CMEAEPopIn"
 		scope="session">

@@ -16,6 +16,12 @@ public class Images {
 			"./img/FeuVert.jpg");
 	private static final Resource resImgFeuRouge = new ThemeResource(
 			"./img/FeuRouge.jpg");
+	private static final Resource resImgButtonGreen = new ThemeResource(
+			"./img/buttonGreen.png");
+	private static final Resource resImgButtonRed = new ThemeResource(
+			"./img/buttonRed.png");
+	private static final Resource resImgButtonOrange = new ThemeResource(
+			"./img/buttonOrange.png");
 
 	public static Embedded getImgFeuVert() {
 		return new Embedded("", resImgFeuVert);
@@ -36,4 +42,14 @@ public class Images {
 	public static Embedded getImgFeuJaune() {
 		return new Embedded("", resImgFeuJaune);
 	}
+	public static Embedded getImgButtonGreen() {
+		return new Embedded("", resImgButtonGreen);
+	}
+	public static Embedded getImgButtonRed() {
+		return new Embedded("", resImgButtonRed);
+	}
+	public static Embedded getImgButtonOrange() {
+		return new Embedded("", resImgButtonOrange);
+	}
+
 }

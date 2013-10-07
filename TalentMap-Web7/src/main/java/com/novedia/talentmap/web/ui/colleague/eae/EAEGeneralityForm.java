@@ -15,6 +15,7 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
@@ -37,6 +38,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 
 	private Integer currentEAEId;
 	private EAEConsultationMode currentMode;
+	private CurrentEAEContent currentEAEContent;
 
 	@PropertyId(ComponentsId.COLLAB_LAST_NAME_ID)
 	private TextField lastNameField;
@@ -65,6 +67,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 	@PropertyId(ComponentsId.EAE_SALARY_ID)
 	private TextField salaryField;
 
+	private final String HEIGHT_FORM = "200px";
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {
@@ -72,12 +75,14 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 	}
 
-	public EAEGeneralityForm buildEAEGeneralityFormView(Integer currentEAEId, EAEConsultationMode currentMode) {
+	public EAEGeneralityForm buildEAEGeneralityFormView(Integer currentEAEId, EAEConsultationMode currentMode, CurrentEAEContent currentEAEContent) {
 		initResourceBundle();
 		this.currentEAEId = currentEAEId;
 		this.currentMode = currentMode;
+		this.currentEAEContent = currentEAEContent;
 		removeAllComponents();
 		buildMain();
+		setHeight(HEIGHT_FORM);
 		return this;
 	}
 
@@ -92,9 +97,10 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 
 	private void buildLayout() {
 		eaeGeneralityFormLayout.removeAllComponents();
-		this.eaeGeneralityFormLayout.setColumns(3);
-		this.eaeGeneralityFormLayout.setRows(3);
-		this.eaeGeneralityFormLayout.setSizeFull();
+		eaeGeneralityFormLayout.setColumns(3);
+		eaeGeneralityFormLayout.setRows(3);
+		eaeGeneralityFormLayout.setSizeFull();
+		eaeGeneralityFormLayout.setMargin(true);
 
 	}
 
@@ -107,6 +113,8 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		lastNameField.setCaption(resourceBundle.getString("name.field.caption"));
 		lastNameField.setId(ComponentsId.COLLAB_LAST_NAME_ID);
 		lastNameField.setWidth("190px");
+		lastNameField.setStyleName("fontFamilyMyriad");
+//		lastNameField.addStyleName("spacerInfo");
 		eaeGeneralityFormLayout.addComponent(lastNameField);
 
 		// -----------------------------
@@ -116,7 +124,8 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		firstNameField.setStyleName("TODO");
 		firstNameField.setId(ComponentsId.COLLAB_FIRST_NAME_ID);
 		firstNameField.setWidth("190px");
-		firstNameField.addStyleName("spacerInfo");
+		firstNameField.setStyleName("fontFamilyMyriad");
+//		firstNameField.addStyleName("spacerInfo");
 		eaeGeneralityFormLayout.addComponent(firstNameField);
 
 		// -----------------------------
@@ -125,7 +134,8 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		jobField.setCaption(resourceBundle.getString("job.field.caption"));
 		jobField.setStyleName("TODO");
 		jobField.setId(ComponentsId.EAE_PROFILE_NAME_ID);
-		jobField.addStyleName("spacerInfo");
+		jobField.setStyleName("fontFamilyMyriad");
+//		jobField.addStyleName("spacerInfo");
 		eaeGeneralityFormLayout.addComponent(jobField);
 
 		// -----------------------------
@@ -170,6 +180,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		prevEaeDateField.setCaption(resourceBundle.getString("eae.previous.date.caption"));
 		prevEaeDateField.setId(ComponentsId.EAE_PREV_DATE_ID);
 		prevEaeDateField.addStyleName("spacerInfo spacerTop");
+		prevEaeDateField.setNullRepresentation("");
 		eaeGeneralityFormLayout.addComponent(prevEaeDateField);
 
 		// -----------------------------
@@ -231,6 +242,8 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		} else {
 			EAEService eaeS = (EAEService)this.eaeService;
 			eaeS.saveEAESalary(eaeGeneralityDTO);
+			System.out.println("appel à refreshValidateButton dans EAEGeneralityForm");
+			currentEAEContent.refreshValidateButton();
 		}
 
 	}

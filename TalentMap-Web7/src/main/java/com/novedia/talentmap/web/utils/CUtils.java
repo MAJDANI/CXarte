@@ -16,8 +16,9 @@ import com.vaadin.ui.themes.Reindeer;
 
 public abstract class CUtils {
 
+	public static final String STRING_DATE_FORMAT = "dd/MM/yyyy";
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-		    "dd/MM/yyyy");
+			STRING_DATE_FORMAT);
 	
 	/**
      * MANAGE ERROR MESSAGE
@@ -90,8 +91,6 @@ public abstract class CUtils {
 			button.addStyleName(Reindeer.BUTTON_LINK);
 		}
 	}
-	
-	
     
     
 

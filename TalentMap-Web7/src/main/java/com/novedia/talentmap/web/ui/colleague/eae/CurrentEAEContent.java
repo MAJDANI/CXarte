@@ -7,12 +7,13 @@ import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.impl.EAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.EAEConsultationMode;
+import com.novedia.talentmap.web.utils.ProfilConnectedEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -20,7 +21,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.Reindeer;
+import com.vaadin.ui.Window;
 
 /**
  * Partie d'écran dédiée à l'affichage des informations d'un EAE. Soit on
@@ -34,8 +35,8 @@ import com.vaadin.ui.themes.Reindeer;
  * 
  */
 @SuppressWarnings("serial")
-public class CurrentEAEContent extends VerticalLayout implements ClickListener,
-		ValueChangeListener {
+public class CurrentEAEContent extends VerticalLayout implements ClickListener
+		 {
 	/**
 	 * TalentMap service
 	 */
@@ -110,6 +111,15 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 */
 	private EAEConsultationMode currentMode;
 
+	private Integer nbEmptyFields = Integer.MAX_VALUE;
+	/**
+	 * These elements are not injected by Spring
+	 */
+	private Button validateEAEButton = new Button();
+	private Button buttonYes = new Button();
+	private Button buttonNo = new Button();
+	private Window windowConfirm = new Window();
+
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {
@@ -135,14 +145,17 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	public VerticalLayout buildViewCurrentEAEContent() {
 		removeAllComponents();
 		// Check if the colleague has a current EAE Open
-		Integer colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
+//		initResourceBundle();
+		Integer colleagueId = TalentMapApplication.getCurrent()
+				.getAuthentication().getColleagueId();
 		Integer currentEAEId = eaeService.getOpenEAEIdForColleague(colleagueId);
 		hLayoutCurrentEAE.setId(ComponentsId.EAE_HLAYOUT_CURRENT_EAE_ID);
-		
 		if (currentEAEId == null) {
 			buildViewCurrentEAEContentDoesntExists();
 		} else {
-			buildViewCurrentEAEContentExists(currentEAEId,	EAEConsultationMode.OPEN_COLLAB);
+			buildViewCurrentEAEContentExists(currentEAEId,
+					EAEConsultationMode.OPEN_COLLAB,
+					ProfilConnectedEnum.COLLEAGUE);
 		}
 		return this;
 	}
@@ -156,7 +169,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		removeAllComponents();
 		initResourceBundle();
 		hLayoutCurrentEAE.removeAllComponents();
-		Label text = new Label(resourceBundle.getString("eae.no.current.eae.message"));
+		Label text = new Label(
+				resourceBundle.getString("eae.no.current.eae.message"));
 		hLayoutCurrentEAE.addComponent(text);
 		hLayoutCurrentEAE.setExpandRatio(text, 1.0f);
 		addComponent(hLayoutCurrentEAE);
@@ -168,17 +182,23 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	 * 
 	 * @return Window
 	 */
-	public void buildViewCurrentEAEContentExists(Integer currentEAEId, EAEConsultationMode mode) {
+	public void buildViewCurrentEAEContentExists(Integer currentEAEId,
+			EAEConsultationMode mode, ProfilConnectedEnum profilConnected) {
 		removeAllComponents();
 		initResourceBundle();
+
 		this.currentEAEId = currentEAEId;
 		this.currentMode = mode;
-
+		if (mode == EAEConsultationMode.OPEN_COLLAB) {
+			nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
+			System.out.println("nbEmptyFields" + nbEmptyFields);
+		}
 		hLayoutCurrentEAE.setSpacing(true);
 		hLayoutCurrentEAE.removeAllComponents();
 		buildButtons(mode);
 		buildMenu(mode);
-		buildPanelRightContentEAEExists();
+		
+		buildPanelRightContentEAEExists(profilConnected);
 		hLayoutCurrentEAE.addComponent(panelRightCurrentEAE);
 		hLayoutCurrentEAE.setExpandRatio(panelRightCurrentEAE, 1.0f);
 		addComponent(hLayoutCurrentEAE);
@@ -186,26 +206,30 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 
 	private void buildButtons(EAEConsultationMode mode) {
 
-		generalityButton.setCaption(Constants.GENERALITY_EAE_BUTTON_LABEL);
-		generalityButton.addStyleName(Reindeer.BUTTON_LINK);
-		generalityButton.addStyleName("focus");
+		generalityButton.setCaption(resourceBundle.getString("eae.generality.button.label"));
 		generalityButton.addClickListener(this);
 
-		resultsButton.setCaption(Constants.RESULTS_EAE_BUTTON_LABEL);
-		resultsButton.addStyleName(Reindeer.BUTTON_LINK);
-		resultsButton.removeStyleName("focus");
+		resultsButton.setCaption(resourceBundle.getString("eae.results.button.label"));
 		resultsButton.addClickListener(this);
 
-		if (mode == EAEConsultationMode.CLOSED || mode == EAEConsultationMode.VALIDATED_MANAGER) {
-			objectivesButton.setCaption(Constants.OBJECTIVES_EAE_BUTTON_LABEL);
-			objectivesButton.addStyleName(Reindeer.BUTTON_LINK);
-			objectivesButton.removeStyleName("focus");
+		validateEAEButton.setCaption(resourceBundle.getString("current.eae.button.validate.caption"));
+		validateEAEButton.addStyleName("styleButton");
+		validateEAEButton.addClickListener(this);
+
+		if (mode == EAEConsultationMode.CLOSED
+				|| mode == EAEConsultationMode.VALIDATED_MANAGER) {
+			objectivesButton.setCaption(resourceBundle.getString("eae.objectives.button.label"));
 			objectivesButton.addClickListener(this);
 
-			synthesisButton.setCaption(Constants.SYNTHESIS_EAE_BUTTON_LABEL);
-			synthesisButton.addStyleName(Reindeer.BUTTON_LINK);
-			synthesisButton.removeStyleName("focus");
+			synthesisButton.setCaption(resourceBundle.getString("eae.synthesis.button.label"));
 			synthesisButton.addClickListener(this);
+			CUtils.decorateButton(generalityButton, resultsButton,
+					objectivesButton, synthesisButton);
+			CUtils.decorateButtonAsLink(generalityButton, resultsButton,
+					objectivesButton, synthesisButton);
+		} else {
+			CUtils.decorateButton(generalityButton, resultsButton);
+			CUtils.decorateButtonAsLink(generalityButton, resultsButton);
 		}
 	}
 
@@ -217,33 +241,50 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 		menuContentCurrentEAE.setMargin(true);
 		menuContentCurrentEAE.addComponent(generalityButton);
 		menuContentCurrentEAE.addComponent(resultsButton);
-		if (mode == EAEConsultationMode.CLOSED) {
+		menuContentCurrentEAE.addComponent(validateEAEButton);
+		
+		if (mode == EAEConsultationMode.CLOSED
+				|| mode == EAEConsultationMode.VALIDATED_MANAGER) {
 			menuContentCurrentEAE.addComponent(objectivesButton);
 			menuContentCurrentEAE.addComponent(synthesisButton);
+		} 
+		if (mode == EAEConsultationMode.OPEN_COLLAB && nbEmptyFields == 0) {
+			validateEAEButton.setVisible(true);
+		} else {
+			validateEAEButton.setVisible(false);
 		}
+
 		panelLeftCurrentEAE.setContent(menuContentCurrentEAE);
 		hLayoutCurrentEAE.addComponent(panelLeftCurrentEAE);
 	}
 
-	private void buildPanelRightContentEAEExists() {
+	private void buildPanelRightContentEAEExists(
+			ProfilConnectedEnum profilConnected) {
 		panelRightCurrentEAE.removeAllComponents();
-		
+
 		panelRightCurrentEAE.setId(ComponentsId.EAE_PANEL_RIGHT_CURRENT_EAE_ID);
-		
+
 		EAEService eaeServicePlus = (EAEService) eaeService;
 		EAEGeneralityDTO eaeGeneralityDTO = eaeServicePlus
 				.getEAEGenerality(currentEAEId);
 
 		panelRightCurrentEAE.addStyleName("panelRight");
 
-		panelRightCurrentEAE
-				.setCaption(resourceBundle.getString("current.eae.title.part1")
-						+ eaeGeneralityDTO.getCollabLastAndFirstName()
-						+ resourceBundle.getString("current.eae.title.part2")
-						+ eaeGeneralityDTO.getEaeDate());
+		String caption;
+		if (profilConnected == ProfilConnectedEnum.COLLEAGUE) {
+			caption = resourceBundle.getString("current.eae.title.part0")
+					+ eaeGeneralityDTO.getEaeDate();
+		} else {
+			caption = resourceBundle.getString("current.eae.title.part1")
+					+ eaeGeneralityDTO.getCollabLastAndFirstName() + " "
+					+ resourceBundle.getString("current.eae.title.part2")
+					+ eaeGeneralityDTO.getEaeDate();
+		}
+
+		panelRightCurrentEAE.setCaption(caption);
 
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
-				.buildViewEAEGenerality(this.currentEAEId, this.currentMode));
+				.buildViewEAEGenerality(this.currentEAEId, this.currentMode, this));
 		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
 		panelRightCurrentEAE.setSizeFull();
 	}
@@ -252,53 +293,101 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener,
 	public void buttonClick(ClickEvent event) {
 		panelRightCurrentEAE.removeAllComponents();
 		if (event.getButton().equals(generalityButton)) {
-			generalityButton.addStyleName("focus");
-			resultsButton.removeStyleName("focus");
-			if (currentMode == EAEConsultationMode.CLOSED) {
-				objectivesButton.removeStyleName("focus");
-				synthesisButton.removeStyleName("focus");
+			if (currentMode == EAEConsultationMode.CLOSED
+					|| currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
+				CUtils.decorateButton(generalityButton, resultsButton,
+						objectivesButton, synthesisButton);
+			} else {
+				CUtils.decorateButton(generalityButton, resultsButton);
 			}
 			panelRightCurrentEAE
 					.setContent(currentEAEDetailedContent
 							.buildViewEAEGenerality(this.currentEAEId,
-									this.currentMode));
+									this.currentMode, this));
 
 		} else if (event.getButton().equals(resultsButton)) {
-			generalityButton.removeStyleName("focus");
-			resultsButton.addStyleName("focus");
-			if (currentMode == EAEConsultationMode.CLOSED) {
-				objectivesButton.removeStyleName("focus");
-				synthesisButton.removeStyleName("focus");
+			if (currentMode == EAEConsultationMode.CLOSED
+					|| currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
+				CUtils.decorateButton(resultsButton, generalityButton,
+						objectivesButton, synthesisButton);
+			} else {
+				CUtils.decorateButton(resultsButton, generalityButton);
 			}
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
-					.buildViewEAEResults(currentEAEId, this.currentMode));
+					.buildViewEAEResults(currentEAEId, this.currentMode, this));
 
 		} else if (event.getButton().equals(objectivesButton)) {
-			generalityButton.removeStyleName("focus");
-			resultsButton.removeStyleName("focus");
-			if (currentMode == EAEConsultationMode.CLOSED) {
-				objectivesButton.addStyleName("focus");
-				synthesisButton.removeStyleName("focus");
-			}
+			CUtils.decorateButton(objectivesButton, resultsButton,
+					generalityButton, synthesisButton);
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
 					.buildViewEAEObjectives(currentEAEId, this.currentMode));
 		} else if (event.getButton().equals(synthesisButton)) {
-			generalityButton.removeStyleName("focus");
-			resultsButton.removeStyleName("focus");
-			if (currentMode == EAEConsultationMode.CLOSED) {
-				objectivesButton.removeStyleName("focus");
-				synthesisButton.addStyleName("focus");
-			}
+			CUtils.decorateButton(synthesisButton, objectivesButton,
+					resultsButton, generalityButton);
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
 					.buildViewEAESynthesis(currentEAEId, this.currentMode));
 		}
-
+		
+		else if (event.getButton().equals(validateEAEButton)) {
+			buildConfirmWindow();
+			this.getParent().getParent().getParent().getParent().getParent().getUI().addWindow(windowConfirm);
+			PersonalEAEPopIn p = (PersonalEAEPopIn)this.getParent().getParent().getParent().getParent();
+			p.refreshContent();
+		} 
+		
+		else if (event.getButton().equals(buttonNo)) {
+			windowConfirm.close();
+		}
+		else if (event.getButton().equals(buttonYes)) {
+			PersonalEAEPopIn p = (PersonalEAEPopIn)this.getParent().getParent().getParent().getParent();
+			eaeService.validateEAEById(currentEAEId);
+			p.refreshContent();
+			windowConfirm.close();
+		}
 	}
 
-	@Override
-	public void valueChange(ValueChangeEvent event) {
+	public void refreshObjectives() {
+		CUtils.decorateButton(objectivesButton, resultsButton,
+				generalityButton, synthesisButton);
+		panelRightCurrentEAE.setContent(currentEAEDetailedContent
+				.buildViewEAEObjectives(currentEAEId, this.currentMode));
 	}
+	
+	private void buildConfirmWindow(){
+		windowConfirm.removeAllComponents();
+		windowConfirm.setCaption(resourceBundle.getString("window.confirm.validate.title"));
+		windowConfirm.center();
+		windowConfirm.setModal(true);
+		windowConfirm.setReadOnly(true);
+		Label confirmValidateLabel = new Label(resourceBundle.getString("msg.confirm.validate.eae"));
+		HorizontalLayout hLayout = new HorizontalLayout();
+		hLayout.setSpacing(true);
+		hLayout.addStyleName("containerButton");
+		buttonYes.setCaption(resourceBundle.getString("yes.confirm.button.caption"));
+		buttonYes.addStyleName("styleButton");
+		buttonYes.addClickListener(this);
+		buttonNo.setCaption(resourceBundle.getString("no.confirm.button.caption"));
+		buttonNo.addStyleName("styleButton");
+		buttonNo.addClickListener(this);
+		hLayout.addComponent(buttonYes);
+		hLayout.addComponent(buttonNo);
+		windowConfirm.addComponent(confirmValidateLabel);
+		windowConfirm.addComponent(hLayout);
+	 }
 
+	
+	public void refreshValidateButton() {
+		if (currentMode == EAEConsultationMode.OPEN_COLLAB) {
+			nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
+			System.out.println("nbEmptyFields" + nbEmptyFields);
+			if(nbEmptyFields == 0) {
+				validateEAEButton.setVisible(true);
+			} else {
+				validateEAEButton.setVisible(false);
+			}
+		}
+	}
+	
 	/**
 	 * @return the generalityButton
 	 */

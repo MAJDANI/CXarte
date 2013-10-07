@@ -1,5 +1,8 @@
 package com.novedia.talentmap.web.ui.cm.eae;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -9,15 +12,21 @@ import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent;
 import com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.EAEStateEnum;
+import com.novedia.talentmap.web.utils.ProfilConnectedEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-
 /**
  * La PopIn qui permet la gestion des EAE des collaborateurs rattachés au CM.
  * 
@@ -34,8 +43,10 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	 * Layout Principal de la PopIn, contenant un panel de gauche
 	 * (panelLeftPersoEAE) et un panel de droite (panelRightPersoEAE)
 	 */
-	private HorizontalLayout hLayoutCMEAE;
-
+	private GridLayout hLayoutCMEAE;
+	private VerticalLayout mainLayout = new VerticalLayout();
+	private HorizontalLayout hLayoutLegendes = new HorizontalLayout();
+	private HorizontalLayout hLayoutHisto = new HorizontalLayout();
 	private HistoryEAEContent historyEAEContent;
 
 	/**
@@ -43,14 +54,19 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	 */
 	private CurrentEAEContent currentEAEContent;
 
+	private List<EAEColleagueResumeForCMDTO> listEAEColleagueResumeForCMDTO;
+
 	private ResourceBundle resourceBundle;
 
+	
 	/**
 	 * Default constructor
 	 */
 	public CMEAEPopIn() {
 		super();
 		setModal(true);
+		setWidth("750px");
+		setHeight("475px");
 	}
 
 	private void initResourceBundle() {
@@ -67,60 +83,140 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	public Window buildCMEAEPopIn() {
 		initResourceBundle();
 		setCaption(resourceBundle.getString("cm.eae.pop.in.title"));
-
-		removeAllComponents();
-		hLayoutCMEAE.setSpacing(true);
-		hLayoutCMEAE.removeAllComponents();
+		
+		buildLayouts();
+		buildLegendes();
 		buildColleaguesButtons();
-		addComponent(hLayoutCMEAE);
+		mainLayout.addComponent(hLayoutLegendes);
+		mainLayout.addComponent(hLayoutCMEAE);
+		addComponent(mainLayout);
 		return this;
 	}
 
-	private void buildPanelRightContent() {
+	private void buildLayouts() {
+		removeAllComponents();
+		hLayoutLegendes.setSpacing(true);
+		hLayoutCMEAE.setSpacing(true);
+		hLayoutCMEAE.setVisible(true);
+		hLayoutCMEAE.removeAllComponents();
+		hLayoutCMEAE.setColumns(5);
+		hLayoutCMEAE.setRows(2);
+		hLayoutCMEAE.setSizeFull();
 		
 	}
+	private void buildLegendes() {
+		hLayoutLegendes.removeAllComponents();
+		TextField legendeVert = new TextField();
+		legendeVert.setIcon(new ThemeResource(Constants.IMG_CADRE_GREEN));
+		legendeVert.setCaption(resourceBundle.getString("eae.legende.open.caption"));
+		legendeVert.setReadOnly(true);
 
+		TextField legendeGris = new TextField();
+		legendeGris.setIcon(new ThemeResource(Constants.IMG_CADRE_GREY));
+		legendeGris.setCaption(resourceBundle.getString("eae.legende.no.eae.caption"));
+		legendeGris.setReadOnly(true);
+		
+		
+		TextField legendeRouge = new TextField();
+		legendeRouge.setIcon(new ThemeResource(Constants.IMG_CADRE_RED));
+		legendeRouge.setCaption(resourceBundle.getString("eae.legende.closed.caption"));
+		legendeRouge.setReadOnly(true);
+		
+		TextField legendeOrange = new TextField();
+		legendeOrange.setIcon(new ThemeResource(Constants.IMG_CADRE_ORANGE));
+		legendeOrange.setCaption(resourceBundle.getString("eae.legende.validated.caption"));
+		legendeOrange.setReadOnly(true);
+		
+		hLayoutLegendes.addComponent(legendeVert);
+		hLayoutLegendes.addComponent(legendeGris);
+		hLayoutLegendes.addComponent(legendeRouge);
+		hLayoutLegendes.addComponent(legendeOrange);
+		hLayoutLegendes.setVisible(true);
+		
+	}
+	
 	private void buildColleaguesButtons() {
 		/**
 		 * Id du manager connecté
 		 */
     	int colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
-		List<EAEColleagueResumeForCMDTO> list = eaeService.getEAEColleagueResumeForCM(colleagueId);
-		
+    	listEAEColleagueResumeForCMDTO = eaeService.getEAEColleagueResumeForCM(colleagueId);
 		ThemeResource resourceBoy = new ThemeResource(Constants.IMG_NO_PHOTO_BOY);
 		ThemeResource resourceGirl = new ThemeResource(Constants.IMG_NO_PHOTO_GIRL);
 
-		for (EAEColleagueResumeForCMDTO eaDTO : list) {
+		for (EAEColleagueResumeForCMDTO eaDTO : listEAEColleagueResumeForCMDTO) {
+			// -----------------------------
+			// NOM ET IMAGE COLLABORATEUR
+			// -----------------------------
 			String name = eaDTO.getCollabFirstName() + " " + eaDTO.getCollabLastName();
 			Image imageTest ;
-			if("M".equals(eaDTO.getTitle().toUpperCase())) {
+			String typeMasculin = resourceBundle.getString("title.masculin.value");
+			if(typeMasculin != null && typeMasculin.equals(eaDTO.getTitle().toUpperCase())) {
 				imageTest = new Image( name, resourceBoy);
 			} else {
 				imageTest = new Image( name, resourceGirl);
 			}
 			imageTest.addClickListener(this);
 			imageTest.setId(eaDTO.getIdColleague().toString());
-			String date = resourceBundle.getString("cm.eae.date.caption") + eaDTO.getEaeDate();
-			imageTest.setAlternateText(date);
-			imageTest.setDescription(date);
+			imageTest.addStyleName("image");
 			
+			// -----------------------------
+			// DATE EAE
+			// -----------------------------
+			String captionDate;
+			Date dateEAE = eaDTO.getEaeDate();
+			if(dateEAE == null) {
+				captionDate = resourceBundle.getString("cm.eae.date.null.caption");
+			} else {
+				String date = CUtils.DATE_FORMAT.format(dateEAE);
+				captionDate = resourceBundle.getString("cm.eae.date.caption") + date;
+			}
+			imageTest.setAlternateText(captionDate);
+			imageTest.setDescription(captionDate);
+			
+			// -----------------------------
+			// On affiche le code couleur de l'état du dernier EAE
+			// -----------------------------
 			Integer state = eaDTO.getEaeStateId();
-			if(3 == state) {
+			if(null == state) {
+				imageTest.addStyleName("borderGrey");
+			} else if(EAEStateEnum.CLOSED.getId() == state) {
 				imageTest.addStyleName("borderRed");
-			}
-			if(2 == state) {
+			} else if(EAEStateEnum.VALIDATED.getId() == state) {
 				imageTest.addStyleName("borderOrange");
-			}
-			if(1 == state) {
+			} else if(EAEStateEnum.OPEN.getId() == state) {
 				imageTest.addStyleName("borderGreen");
 			}
 			hLayoutCMEAE.addComponent(imageTest);
+			
 		}
 		
 		
 	}
 
 
+
+	@Override
+	public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
+		String name = event.getComponent().getCaption();
+		Integer colleagueId = new Integer(event.getComponent().getId());
+		
+		hLayoutLegendes.setVisible(false);
+		hLayoutCMEAE.setVisible(false);
+		hLayoutHisto.setVisible(true);
+		
+	    hLayoutHisto.addComponent(historyEAEContent
+				.buildViewHistoryEAEContent(colleagueId, ProfilConnectedEnum.MANAGER, this));
+	    hLayoutHisto.setCaption(resourceBundle.getString("cm.eae.pop.in.collab.eae.title") + name);
+	    
+	    addComponent(hLayoutHisto);
+		
+	}
+
+	public void reloadColleaguesButtons() {
+		hLayoutHisto.setVisible(false);
+		buildCMEAEPopIn();
+	}
 
 	/**
 	 * @return the currentEAEContent
@@ -140,7 +236,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	/**
 	 * @return the hLayoutCMEAE
 	 */
-	public HorizontalLayout gethLayoutCMEAE() {
+	public GridLayout gethLayoutCMEAE() {
 		return hLayoutCMEAE;
 	}
 
@@ -148,7 +244,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	 * @param hLayoutCMEAE
 	 *            the hLayoutCMEAE to set
 	 */
-	public void sethLayoutCMEAE(HorizontalLayout hLayoutCMEAE) {
+	public void sethLayoutCMEAE(GridLayout hLayoutCMEAE) {
 		this.hLayoutCMEAE = hLayoutCMEAE;
 	}
 
@@ -178,19 +274,6 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	 */
 	public void setHistoryEAEContent(HistoryEAEContent historyEAEContent) {
 		this.historyEAEContent = historyEAEContent;
-	}
-
-	@Override
-	public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
-		String name = event.getComponent().getCaption();
-    	Integer colleagueId = new Integer(event.getComponent().getId());
-		
-    	hLayoutCMEAE.removeAllComponents();
-		hLayoutCMEAE.addComponent(historyEAEContent
-				.buildViewHistoryEAEContent(colleagueId));
-
-		hLayoutCMEAE.setCaption("Les EAE de " + name);
-		
 	}
 
 }

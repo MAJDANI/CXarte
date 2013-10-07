@@ -12,6 +12,7 @@
 	<typeAlias alias="eaeResultsDTO" type="com.novedia.talentmap.model.dto.EAEResultsDTO" />
 	<typeAlias alias="eaeSynthesisDTO" type="com.novedia.talentmap.model.dto.EAESynthesisDTO" />
 	<typeAlias alias="eaeColleagueResumeForCMDTO" type="com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO" />
+	<typeAlias alias="newEAEDTO" type="com.novedia.talentmap.model.dto.NewEAEDTO" />
 
 	<resultMap id="eaeResult" class="eae">
 		<result property="id" column="EAE_ID" />
@@ -136,6 +137,29 @@
 		</selectKey>
 	</insert>
 
+	<insert id="addNewEAEDTO" parameterClass="newEAEDTO">
+
+		INSERT INTO EAE (
+			EAE_ID,
+			COLLEAGUE_ID,
+			MANAGER_ID,
+			EAE_DATE,
+			EAE_STATE_ID,
+			PREVIOUS_EAE_ID
+		)values (
+			#id# ,
+			#colleagueId# ,
+			#managerId# ,
+			#eaeDate#,
+			#eaeStateId#,
+			#previousEaeId#
+		)
+		<selectKey resultClass="Integer" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID() AS EAE_ID
+		</selectKey>
+	</insert>
+
 	<update id="save" parameterClass="EAE">
 		UPDATE EAE SET 
 			COLLEAGUE_ID = #colleague.id#, 
@@ -214,7 +238,8 @@
 		EAE_STATE.EAE_STATE_LABEL
 		FROM EAE , EAE_STATE
 		where EAE.COLLEAGUE_ID = #id#
-		and EAE.EAE_STATE_ID = EAE_STATE.EAE_STATE_ID  ;
+		and EAE.EAE_STATE_ID = EAE_STATE.EAE_STATE_ID
+		order by  EAE.EAE_DATE DESC ;
 	</select>
 	
 	
@@ -252,14 +277,41 @@
 	</select>	
 
 	<select id="getEAEColleagueResumeForCM" resultMap="eaeColleagueResumeForCMResult" parameterClass="Integer">
-		SELECT C.COLLEAGUE_ID AS "COLLEAGUE_ID", C.LAST_NAME AS "C_LAST_NAME", C.FIRST_NAME AS "C_FIRST_NAME" , 
-				E.EAE_ID AS "EAE_ID", E.EAE_STATE_ID AS "EAE_STATE_ID", 
-				C.TITLE as "TITLE_ID", MAX(E.EAE_DATE) AS EAE_DATE
-		FROM EAE E, COLLEAGUE C
-		WHERE C.COLLEAGUE_ID =  E.COLLEAGUE_ID
-		AND C.MANAGER_ID=#id#
-		GROUP BY C.COLLEAGUE_ID;
+			SELECT C.COLLEAGUE_ID AS "COLLEAGUE_ID", C.LAST_NAME AS "C_LAST_NAME", C.FIRST_NAME AS "C_FIRST_NAME" , 
+					E.EAE_ID AS "EAE_ID", E.EAE_STATE_ID AS "EAE_STATE_ID", 
+					C.TITLE as "TITLE_ID", MAX(E.EAE_DATE) AS EAE_DATE
+			FROM COLLEAGUE C LEFT OUTER JOIN EAE E
+			ON C.COLLEAGUE_ID =  E.COLLEAGUE_ID
+			WHERE C.MANAGER_ID=#id#
+			AND E.EAE_DATE = (SELECT MAX(E2.eae_date)
+	               FROM EAE E2 
+	               WHERE E.colleague_id = E2.colleague_id) 
+	               group by C.COLLEAGUE_ID
+    	UNION
+			SELECT C.COLLEAGUE_ID AS "COLLEAGUE_ID", C.LAST_NAME AS "C_LAST_NAME", C.FIRST_NAME AS "C_FIRST_NAME" ,
+					null AS "EAE_ID", null AS "EAE_STATE_ID",
+					C.TITLE as "TITLE_ID", null as "EAE_DATE"
+			FROM COLLEAGUE C LEFT JOIN EAE E USING (COLLEAGUE_ID)
+			where C.MANAGER_ID = #id#
+	  		and E.COLLEAGUE_ID is null;
+		
 	</select>
 
 
+	<select id="getNbEmptyFieldsByEAE" resultClass="Integer" parameterClass="Integer">
+		SELECT count(*) from EAE E, OBJECTIVE O
+		WHERE E.EAE_ID=#id#
+		AND E.PREVIOUS_EAE_ID = O.EAE_ID
+		AND (E.salary is null OR E.salary = ""
+			OR E.COLLEAGUES_STRENGTHS is null OR E.COLLEAGUES_STRENGTHS = ""
+			OR E.COLLEAGUEs_WEAKNESSES is null OR E.COLLEAGUEs_WEAKNESSES = ""
+			OR O.COL_OBJ_SCORE_ID is null 
+			OR O.MOTIVES_OR_RESTRAINTS is null OR O.MOTIVES_OR_RESTRAINTS = "");
+	</select>
+
+	<update id="validateEAEById" parameterClass="Integer">
+		UPDATE EAE
+		SET EAE_STATE_ID=2 
+		WHERE EAE_ID=#id# ;
+	</update>
 </sqlMap>

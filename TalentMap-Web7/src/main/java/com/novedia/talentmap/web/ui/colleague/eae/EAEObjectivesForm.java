@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
+import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.model.entity.Objective;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.IObjectiveService;
@@ -21,6 +22,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveForm, ClickListener {
 
@@ -39,10 +42,13 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	private Integer currentEAEId;
 	private EAEConsultationMode currentMode;
 
-	private final String WIDTH_APP_GLOBALE = "500px";
+	private final String WIDTH_ACCORDION_OBECTIVES = "640px";
 	private final String HEIGHT_FORM = "550px";
 
 	private Button newObjectiveButton;
+	private Window windowNewObjective;
+	private Button saveNewObjective;
+	private Objective newObjective;
 	
 	private ResourceBundle resourceBundle;
 
@@ -56,6 +62,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		initResourceBundle();
 		this.currentEAEId = currentEAEId;
 		this.currentMode = currentMode;
+		
 		removeAllComponents();
 		buildMain();
 		setHeight(HEIGHT_FORM);
@@ -75,6 +82,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		eaeObjectivesFormLayout.removeAllComponents();
 		this.eaeObjectivesFormLayout.setColumns(1);
 		this.eaeObjectivesFormLayout.setRows(6);
+		this.eaeObjectivesFormLayout.setMargin(true);
 		this.eaeObjectivesFormLayout.setId(ComponentsId.EAE_OBJECTIVES_FORM_LAYOUT_ID);
 		this.eaeObjectivesFormLayout.addStyleName("styleDeTest");
 
@@ -97,7 +105,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		// Create the Accordion.
 		Accordion accordionObjectives = new Accordion();
 		accordionObjectives.setSizeFull();
-		accordionObjectives.setWidth(WIDTH_APP_GLOBALE);
+		accordionObjectives.setWidth(WIDTH_ACCORDION_OBECTIVES);
 
 		if(listObjectives != null) {
 			for(Objective o : listObjectives){
@@ -109,8 +117,6 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		accordionObjectives.addStyleName("spacerTop");
 		accordionObjectives.setId(ComponentsId.EAE_OBJECTIVES_ACCORDION_OBJ_ID);
 		
-		
-
 		// --------------------------------------
 		// Insertion des éléments dans le Layout
 		// --------------------------------------
@@ -120,7 +126,9 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		if(listObjectives != null && !listObjectives.isEmpty()) {
 			eaeObjectivesFormLayout.addComponent(accordionObjectives);
 		} else {
-			eaeObjectivesFormLayout.addComponent(new Label(resourceBundle.getString("no.objectives.label")));
+			Label noObjFound = new Label(resourceBundle.getString("no.objectives.label"));
+			noObjFound.setWidth("300px");
+			eaeObjectivesFormLayout.addComponent(noObjFound);
 		}
 		
 		addComponent(eaeObjectivesFormLayout);
@@ -128,6 +136,48 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	}
 
 
+	@Override
+	public void buttonClick(ClickEvent event) {
+		if(newObjectiveButton == event.getSource()) {
+			buildWindowNewObjective();
+		}
+		if(saveNewObjective == event.getSource()) {
+			EAE currentEAE = eaeService.getEAEById(currentEAEId);
+			Integer collId = currentEAE.getColleague().getId();
+			Integer manId = currentEAE.getManager().getId();
+			
+			newObjective.setColleagueId(collId);
+			newObjective.setManagerId(manId);
+		
+			objectiveService.addObjective(newObjective);
+			windowNewObjective.close();
+			
+			CurrentEAEContent currentEAEContent = (CurrentEAEContent)this.getParent().getParent().getParent().getParent();
+			currentEAEContent.refreshObjectives();
+		}
+		
+	}
+
+	private void buildWindowNewObjective() {
+		windowNewObjective = new Window(resourceBundle.getString("new.obective.window.title"));
+		VerticalLayout vLayout = new VerticalLayout();
+		
+		EAEObjectiveForm objectiveForm = new EAEObjectiveForm();
+		newObjective = new Objective();
+		newObjective.setEaeId(currentEAEId);
+		objectiveForm = objectiveForm.buildEAEObjectiveFormView(newObjective, currentMode, EAETabEnum.OBJECTIVE_TAB, this);
+		vLayout.addComponent(objectiveForm);
+		
+		saveNewObjective = new Button(resourceBundle.getString("new.obective.button.caption"));
+		saveNewObjective.addClickListener(this);
+		vLayout.addComponent(saveNewObjective);
+		
+		windowNewObjective.addComponent(vLayout);
+		this.getUI().addWindow(windowNewObjective);
+		windowNewObjective.setModal(true);
+	}
+	
+	
 	public void saveObjective(Objective objective) {
 		objectiveService.saveObjective(objective);
 	}
@@ -182,12 +232,6 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	 */
 	public void setEaeObjectivesFormLayout(GridLayout eaeObjectivesFormLayout) {
 		this.eaeObjectivesFormLayout = eaeObjectivesFormLayout;
-	}
-
-	@Override
-	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

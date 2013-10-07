@@ -29,18 +29,21 @@ public class Objective implements Serializable {
 	 * identifier of the Objective
 	 */
 	private Integer id;
-	/**
-	 * The Colleague that must achieve this Objective
-	 */
-	private Colleague colleague;
-	/**
-	 * The manager with who the colleague defined this Objective.
-	 */
-	private Colleague manager;
-	/**
-	 * The Eae during what the Objective was defined.
-	 */
-	private EAE eae;
+//	/**
+//	 * The Colleague that must achieve this Objective
+//	 */
+//	private Colleague colleague;
+//	/**
+//	 * The manager with who the colleague defined this Objective.
+//	 */
+//	private Colleague manager;
+//	/**
+//	 * The Eae during what the Objective was defined.
+//	 */
+//	private EAE eae;
+	private Integer colleagueId;
+	private Integer managerId;
+	private Integer eaeId;
 	/**
 	 * The title of the Objective
 	 */
@@ -106,51 +109,51 @@ public class Objective implements Serializable {
 		this.id = id;
 	}
 
-	/**
-	 * @return colleague the colleague concerned by the Objective
-	 */
-	public Colleague getColleague() {
-		return colleague;
-	}
-
-	/**
-	 * @param colleague
-	 *            : the colleague concerned by the Objective to set.
-	 */
-	public void setColleague(Colleague colleague) {
-		this.colleague = colleague;
-	}
-
-	/**
-	 * @return manager the manager of the colleague when the Objective was
-	 *         defined
-	 */
-	public Colleague getManager() {
-		return manager;
-	}
-
-	/**
-	 * @param manager
-	 *            : the manager of the colleague when the Objective was defined
-	 */
-	public void setManager(Colleague manager) {
-		this.manager = manager;
-	}
-
-	/**
-	 * @return eae the EAE in which the Objective was defined
-	 */
-	public EAE getEae() {
-		return eae;
-	}
-
-	/**
-	 * @param eae
-	 *            : the EAE in which the Objective was defined
-	 */
-	public void setEae(EAE eae) {
-		this.eae = eae;
-	}
+//	/**
+//	 * @return colleague the colleague concerned by the Objective
+//	 */
+//	public Colleague getColleague() {
+//		return colleague;
+//	}
+//
+//	/**
+//	 * @param colleague
+//	 *            : the colleague concerned by the Objective to set.
+//	 */
+//	public void setColleague(Colleague colleague) {
+//		this.colleague = colleague;
+//	}
+//
+//	/**
+//	 * @return manager the manager of the colleague when the Objective was
+//	 *         defined
+//	 */
+//	public Colleague getManager() {
+//		return manager;
+//	}
+//
+//	/**
+//	 * @param manager
+//	 *            : the manager of the colleague when the Objective was defined
+//	 */
+//	public void setManager(Colleague manager) {
+//		this.manager = manager;
+//	}
+//
+//	/**
+//	 * @return eae the EAE in which the Objective was defined
+//	 */
+//	public EAE getEae() {
+//		return eae;
+//	}
+//
+//	/**
+//	 * @param eae
+//	 *            : the EAE in which the Objective was defined
+//	 */
+//	public void setEae(EAE eae) {
+//		this.eae = eae;
+//	}
 
 	/**
 	 * 
@@ -158,6 +161,48 @@ public class Objective implements Serializable {
 	 */
 	public String getTitle() {
 		return title;
+	}
+
+	/**
+	 * @return the colleagueId
+	 */
+	public Integer getColleagueId() {
+		return colleagueId;
+	}
+
+	/**
+	 * @param colleagueId the colleagueId to set
+	 */
+	public void setColleagueId(Integer colleagueId) {
+		this.colleagueId = colleagueId;
+	}
+
+	/**
+	 * @return the managerId
+	 */
+	public Integer getManagerId() {
+		return managerId;
+	}
+
+	/**
+	 * @param managerId the managerId to set
+	 */
+	public void setManagerId(Integer managerId) {
+		this.managerId = managerId;
+	}
+
+	/**
+	 * @return the eaeId
+	 */
+	public Integer getEaeId() {
+		return eaeId;
+	}
+
+	/**
+	 * @param eaeId the eaeId to set
+	 */
+	public void setEaeId(Integer eaeId) {
+		this.eaeId = eaeId;
 	}
 
 	/**
@@ -288,9 +333,12 @@ public class Objective implements Serializable {
     public String toString() {
 		StringBuilder strBld = new StringBuilder();
 		strBld.append("[id=").append(getId()).append(", ");
-		strBld.append("colleague=").append(getColleague()).append(", ");
-		strBld.append("manager=").append(getManager()).append(", ");
-		strBld.append("eae=").append(getEae()).append(", ");
+//		strBld.append("colleague=").append(getColleague()).append(", ");
+//		strBld.append("manager=").append(getManager()).append(", ");
+//		strBld.append("eae=").append(getEae()).append(", ");
+		strBld.append("colleagueId=").append(getColleagueId()).append(", ");
+		strBld.append("managerId=").append(getManagerId()).append(", ");
+		strBld.append("eaeId=").append(getEaeId()).append(", ");
 		strBld.append("title=").append(getTitle()).append(", ");
 		strBld.append("goal=").append(getGoal()).append(", ");
 		strBld.append("targetDate=").append(getTargetDate()).append(", ");

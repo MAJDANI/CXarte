@@ -9,6 +9,7 @@ import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
 import com.novedia.talentmap.model.dto.EAESynthesisDTO;
+import com.novedia.talentmap.model.dto.NewEAEDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 
@@ -39,6 +40,16 @@ public interface IEAEService {
      * @return an integer, result of the request
      */
     int addEAE(EAE eae);
+
+    /**
+     * Adds the NewEAEDTO.
+     * 
+     * @class IEAEService.java
+     * @param eae
+     *            the NewEAEDTO to add
+     * @return an integer, result of the request
+     */
+    int addNewEAEDTO(NewEAEDTO eae);
 
     /**
      * Updates the EAE.
@@ -158,6 +169,30 @@ public interface IEAEService {
 	List<EAEColleagueResumeForCMDTO> getEAEColleagueResumeForCM(Integer idManager);
 	
 	/**
+	 * Gets the number of empty fields for an eae id. The empty fields we look
+	 * for are the fields the colleague has to fill before validating the EAE.
+	 * These fields are the SALARY, COLLEAGUES_STRENGTHS, COLLEAGUES_WEAKNESSES, 
+	 * and for each objective attached to the eae COL_OBJ_SCORE_ID (the score)
+	 * and MOTIVES_OR_RESTRAINTS. If the number returned is 0, the colleague
+	 * is allowed to validate his EAE.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the number of empty fields
+	 * 
+	 * @return Integer : the number of empty fields found.
+	 */
+	Integer getNbEmptyFieldsByEAE(Integer id) ;
+	
+	/**
+	 * Sets the EAE to VALIDATE state.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to validate
+	 * 
+	 */
+	Integer validateEAEById(Integer id);
+
+	/**
 	 * Saves the salary for the EAE given.
 	 * 
 	 * @param eae
@@ -183,4 +218,5 @@ public interface IEAEService {
 	 * 
 	 */
 	int saveEAESynthesis(EAESynthesisDTO eae);
+
 }

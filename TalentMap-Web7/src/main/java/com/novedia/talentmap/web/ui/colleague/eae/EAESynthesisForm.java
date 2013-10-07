@@ -39,7 +39,6 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 	private Integer currentEAEId;
 	private EAEConsultationMode currentMode;
 
-	private final String HEIGHT_FORM = "400px";
 
 	@PropertyId(ComponentsId.EAE_COLLEAGUES_SYNTHESIS_ID)
 	private TextArea eaeColSynthesis;
@@ -52,6 +51,7 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 
 	private final String HEIGHT = "30px";
 	private final String WIDTH = "550px";
+	private final String HEIGHT_FORM = "400px";
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {

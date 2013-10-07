@@ -4,11 +4,6 @@
 package com.novedia.talentmap.model.dto;
 
 import java.util.Date;
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
-import com.novedia.talentmap.model.entity.Objective;
 
 
 /**

@@ -13,6 +13,7 @@ import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.model.dto.EAEResultsDTO;
 import com.novedia.talentmap.model.dto.EAESynthesisDTO;
+import com.novedia.talentmap.model.dto.NewEAEDTO;
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.store.IDao;
@@ -59,6 +60,19 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 	public int add(final EAE eae) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().insert(
 				DBRequestsConstants.ADD_EAE, eae);
+	}
+
+	/**
+	 * Adds the NewEAEDTO.
+	 * 
+	 * @class IEAEService.java
+	 * @param eae
+	 *            the NewEAEDTO to add
+	 * @return an integer, result of the request
+	 */
+	public int addNewEAEDTO(NewEAEDTO eae) {
+		return (Integer) this.getSqlMapClientTemplate().insert(
+				DBRequestsConstants.ADD_NEW_EAE_DTO, eae);
 	}
 
 	/**
@@ -209,6 +223,36 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 		return (List<EAEColleagueResumeForCMDTO>) this
 				.getSqlMapClientTemplate().queryForList(
 						DBRequestsConstants.GET_EAE_COLL_RESUME_FOR_CM, id);
+	}
+
+	/**
+	 * Gets the number of empty fields for an eae id. The empty fields we look
+	 * for are the fields the colleague has to fill before validating the EAE.
+	 * These fields are the SALARY, COLLEAGUES_STRENGTHS, COLLEAGUES_WEAKNESSES, 
+	 * and for each objective attached to the eae COL_OBJ_SCORE_ID (the score)
+	 * and MOTIVES_OR_RESTRAINTS. If the number returned is 0, the colleague
+	 * is allowed to validate his EAE.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the number of empty fields
+	 * 
+	 * @return Integer : the number of empty fields found.
+	 */
+	public Integer getNbEmptyFieldsByEAE(Integer id) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_NB_EMPTY_FIELDS_BY_EAE_ID, id);
+	}
+
+	/**
+	 * Sets the EAE to VALIDATE state.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to validate
+	 * 
+	 */
+	public Integer validateEAEById(Integer id) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().update(
+				DBRequestsConstants.VALIDATE_EAE_BY_EAE_ID, id);
 	}
 
 	/**

@@ -10,16 +10,14 @@
 
 	<resultMap id="objectiveResult" class="objective">
 		<result property="id" column="OBJECTIVE_ID" />
-		<result property="colleague.id" column="COLLEAGUE_ID" />
-		<result property="manager.id" column="MANAGER_ID" />
-		<result property="eae.id" column="EAE_ID" />
+		<result property="colleagueId" column="COLLEAGUE_ID" />
+		<result property="managerId" column="MANAGER_ID" />
+		<result property="eaeId" column="EAE_ID" />
 		<result property="title" column="TITLE" />
 		<result property="goal" column="GOAL" />
 		<result property="targetDate" column="TARGET_DATE" />
 		<result property="indicators" column="INDICATORS" />
 		<result property="means" column="MEANS" />
-<!-- 		<result property="colleaguesScore.id" column="COL_OBJ_SCORE_ID" /> -->
-<!-- 		<result property="managersScore.id" column="MAN_OBJ_SCORE_ID" /> -->
 		<result property="colleaguesScore" column="COL_OBJ_SCORE_ID" />
 		<result property="managersScore" column="MAN_OBJ_SCORE_ID" />
 		<result property="motivesOrRestraints" column="MOTIVES_OR_RESTRAINTS" />
@@ -52,16 +50,14 @@
 			COMMENTS
 		)values (
 			#id#,
-			#colleague.id#,
-			#manager.id#,
-			#eae.id#,
+			#colleagueId#,
+			#managerId#,
+			#eaeId#,
 			#title#,
 			#goal#,
 			#targetDate#,
 			#indicators#,
 			#means#,
-<!-- 			#colleaguesScore.id#, -->
-<!-- 			#managersScore.id#, -->
 			#colleaguesScore#,
 			#managersScore#,
 			#motivesOrRestraints#,
@@ -81,9 +77,9 @@
 
 	<update id="save" parameterClass="Objective">
 		UPDATE OBJECTIVE SET
-			COLLEAGUE_ID = #colleague.id# ,
-			MANAGER_ID = #manager.id# ,
-			EAE_ID = #eae.id# ,
+			COLLEAGUE_ID = #colleagueId# ,
+			MANAGER_ID = #managerId# ,
+			EAE_ID = #eaeId# ,
 			TITLE = #title# ,
 			GOAL = #goal# ,
 			TARGET_DATE = #targetDate# ,

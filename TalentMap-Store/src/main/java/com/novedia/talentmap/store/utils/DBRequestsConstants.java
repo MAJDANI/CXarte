@@ -470,11 +470,14 @@ public final class DBRequestsConstants {
 	public static final String GET_EAE_RESULTS = "eae.getEAEResults";
 	public static final String GET_EAE_SYNTHESIS = "eae.getEAESynthesis";
 	public static final String GET_OPEN_EAE_ID = "eae.getOpenEAEIdForColleague";
+	public static final String GET_NB_EMPTY_FIELDS_BY_EAE_ID = "eae.getNbEmptyFieldsByEAE";
+	public static final String VALIDATE_EAE_BY_EAE_ID = "eae.validateEAEById";
 	public static final String SAVE_EAE_SALARY = "eae.saveEAESalary";
 	public static final String SAVE_EAE_RESULTS = "eae.saveEAEResults";
 	public static final String SAVE_EAE_SYNTHESIS = "eae.saveEAESynthesis";
 	public static final String GET_EAE_COLL_RESUME_FOR_CM = "eae.getEAEColleagueResumeForCM";
-	
+	public static final String ADD_NEW_EAE_DTO = "eae.addNewEAEDTO";
+
 	
 	// OBJECTIVE REQUEST
 	public static final String GET_OBJECTIVE = "objective.get";

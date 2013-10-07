@@ -94,6 +94,8 @@ public class ComponentsId {
 	
 	public static final String EAE_PREV_DATE_ID = "previousEaeDate";
 	
+	public static final String EAE_PREV_EAE_ID = "previousEaeId";
+	
 	public static final String EAE_SALARY_ID = "salary";
 	
 	public static final String EAE_PROFILE_NAME_ID = "profile";
