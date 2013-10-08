@@ -493,10 +493,15 @@
 /* eaeObjectivesFormLayout */
 
 .styleDeTest {
-				position:static;
-                margin-left:10px;
+	position:static;
+	margin-left:10px;
+	overflow-x:hidden;
 }
 
+.marginEAEGenerality{
+	margin-left:10px;
+	margin-top:10px;
+}
 .styleMargin {
 	margin-left:25px;
 /* 		border-style : solid; */

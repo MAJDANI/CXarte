@@ -103,7 +103,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 		this.eaeResultsFormLayout.setId(ComponentsId.EAE_RESULTS_FORM_LAYOUT_ID);
 		this.eaeResultsFormLayout.addStyleName("styleDeTest");
 		this.eaeResultsFormLayout.setMargin(true);
-		eaeResultsFormLayout.setSizeFull();
+		eaeResultsFormLayout.setWidth("90%");
 	}
 
 	private void buildEAEResultsForm() {
