@@ -243,7 +243,6 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 		} else {
 			EAEService eaeS = (EAEService)this.eaeService;
 			eaeS.saveEAESalary(eaeGeneralityDTO);
-			System.out.println("appel à refreshValidateButton dans EAEGeneralityForm");
 			currentEAEContent.refreshValidateButton();
 		}
 

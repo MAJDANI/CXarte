@@ -5,6 +5,8 @@ package com.novedia.talentmap.services.impl;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO;
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
 import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
@@ -16,6 +18,7 @@ import com.novedia.talentmap.model.entity.EAE;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.impl.EAEDao;
+import com.novedia.talentmap.store.utils.DBRequestsConstants;
 
 /**
  * @author v.guillemain
@@ -182,11 +185,30 @@ public class EAEService implements IEAEService {
 		EAEDao eaeDao = (EAEDao) this.eaeDao;
 		return eaeDao.getNbEmptyFieldsByEAE(id);
 	}
+	
+	@Override
+	public Integer getPreviousEAEID(Integer id) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.getPreviousEAEID(id);
+	}
+
+
+	@Override
+	public Integer getSalaryByEAEID(Integer id) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.getSalaryByEAEID(id);
+	}
 
 	@Override
 	public Integer validateEAEById(Integer id) {
 		EAEDao eaeDao = (EAEDao) this.eaeDao;
 		return eaeDao.validateEAEById(id);
+	}
+
+	@Override
+	public Integer closeEAEById(Integer id) {
+		EAEDao eaeDao = (EAEDao) this.eaeDao;
+		return eaeDao.closeEAEById(id);
 	}
 
 	/*

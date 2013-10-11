@@ -244,6 +244,32 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 	}
 
 	/**
+	 * Gets the previous EAE_ID of the EAE concerned.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the previous EAE_ID
+	 * 
+	 * @return Integer : the previous EAE_ID.
+	 */
+	public Integer getPreviousEAEID(Integer id) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_PREVIOUS_EAE_ID, id);
+	}
+
+	/**
+	 * Gets the SALARY for the EAE concerned.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the SALARY
+	 * 
+	 * @return Integer : the SALARY
+	 */
+	public Integer getSalaryByEAEID(Integer id) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.GET_SALARY_BY_EAE_ID, id);
+	}
+
+	/**
 	 * Sets the EAE to VALIDATE state.
 	 * 
 	 * @param id
@@ -253,6 +279,18 @@ public class EAEDao extends SqlMapClientDaoSupport implements IDao<EAE> {
 	public Integer validateEAEById(Integer id) throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().update(
 				DBRequestsConstants.VALIDATE_EAE_BY_EAE_ID, id);
+	}
+
+	/**
+	 * Sets the EAE to CLOSE state.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to close
+	 * 
+	 */
+	public Integer closeEAEById(Integer id) throws DataAccessException {
+		return (Integer) this.getSqlMapClientTemplate().update(
+				DBRequestsConstants.CLOSE_EAE_BY_EAE_ID, id);
 	}
 
 	/**

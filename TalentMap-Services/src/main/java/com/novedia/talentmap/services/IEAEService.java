@@ -184,6 +184,26 @@ public interface IEAEService {
 	Integer getNbEmptyFieldsByEAE(Integer id) ;
 	
 	/**
+	 * Gets the previous EAE_ID of the EAE concerned.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the previous EAE_ID
+	 * 
+	 * @return Integer : the previous EAE_ID.
+	 */
+	Integer getPreviousEAEID(Integer id);
+
+	/**
+	 * Gets the SALARY for the EAE concerned.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to get the SALARY
+	 * 
+	 * @return Integer : the SALARY
+	 */
+	Integer getSalaryByEAEID(Integer id);
+
+	/**
 	 * Sets the EAE to VALIDATE state.
 	 * 
 	 * @param id
@@ -191,6 +211,15 @@ public interface IEAEService {
 	 * 
 	 */
 	Integer validateEAEById(Integer id);
+
+	/**
+	 * Sets the EAE to CLOSE state.
+	 * 
+	 * @param id
+	 *            : the id of the EAE we want to close
+	 * 
+	 */
+	Integer closeEAEById(Integer id);
 
 	/**
 	 * Saves the salary for the EAE given.

@@ -172,12 +172,10 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	}
 	
 	public void refreshContent() {
-		System.out.println("-*- refreshContent");
 		CUtils.decorateButton(currentEAEButton, historyEAEButton);
 		panelRightPersoEAE.setContent(currentEAEContent
 				.buildViewCurrentEAEContent());
 		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
-		
 	}
 
 	/**

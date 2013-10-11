@@ -56,8 +56,6 @@ public class CmEAEContentSynthesis extends VerticalLayout implements ClickListen
     public void itemClick(ItemClickEvent event) {
         EAEForSynthesisDTO eae = (EAEForSynthesisDTO)event.getItemId();
         EAEGeneralityDTO eG = this.eaeService.getEAEGenerality(eae.getId());
-        //TODO temporaire
-        System.out.println(eG);
     }
 
     @Override

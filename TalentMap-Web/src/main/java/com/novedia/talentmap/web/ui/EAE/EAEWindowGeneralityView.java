@@ -27,13 +27,6 @@ public class EAEWindowGeneralityView extends VerticalLayout {
     }
     
     
-    private void retrieveEaeGeneralityDTO() {
-//	this.eaeGeneralityDTO = this.eaeService.getEAEGenerality(eaeId);
-	// TODO temporaire
-//	System.out.println(eaeGeneralityDTO);
-
-    }
-
     /**
      * @return the eaeId
      */

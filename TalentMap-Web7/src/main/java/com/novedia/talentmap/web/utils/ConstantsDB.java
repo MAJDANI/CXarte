@@ -19,6 +19,7 @@ public class ConstantsDB {
 	public static final Integer EAE_COLLEAGUES_SYNTHESIS_MAX_LENGTH = 65536;
 	public static final Integer EAE_MANAGERS_SYNTHESIS_MAX_LENGTH = 65536;
 	public static final Integer EAE_OTHER_MAX_LENGTH = 65536;
+	public static final Integer EAE_MEANS_TO_PROGRESS_MAX_LENGTH = 65536;
 
 
 	

@@ -196,7 +196,7 @@
 		UPDATE EAE SET 
 			COLLEAGUES_SYNTHESIS = #colleaguesSynthesis#,
 			MANAGERS_SYNTHESIS = #managersSynthesis#,
-			OTHER = #other#,
+			OTHER = #other#
 		WHERE EAE_ID = #id#
 	</update>
 
@@ -299,9 +299,9 @@
 
 
 	<select id="getNbEmptyFieldsByEAE" resultClass="Integer" parameterClass="Integer">
-		SELECT count(*) from EAE E, OBJECTIVE O
+		SELECT count(*) 
+		from EAE E left outer join OBJECTIVE O on E.PREVIOUS_EAE_ID = O.EAE_ID
 		WHERE E.EAE_ID=#id#
-		AND E.PREVIOUS_EAE_ID = O.EAE_ID
 		AND (E.salary is null OR E.salary = ""
 			OR E.COLLEAGUES_STRENGTHS is null OR E.COLLEAGUES_STRENGTHS = ""
 			OR E.COLLEAGUEs_WEAKNESSES is null OR E.COLLEAGUEs_WEAKNESSES = ""
@@ -309,9 +309,25 @@
 			OR O.MOTIVES_OR_RESTRAINTS is null OR O.MOTIVES_OR_RESTRAINTS = "");
 	</select>
 
+	<select id="getPreviousEAEID" resultClass="Integer" parameterClass="Integer">
+		SELECT PREVIOUS_EAE_ID from EAE E
+		WHERE E.EAE_ID=#id#
+	</select>
+
+	<select id="getSalaryByEAEID" resultClass="Integer" parameterClass="Integer">
+		SELECT SALARY from EAE
+		WHERE EAE_ID=#id#
+	</select>
+
 	<update id="validateEAEById" parameterClass="Integer">
 		UPDATE EAE
 		SET EAE_STATE_ID=2 
+		WHERE EAE_ID=#id# ;
+	</update>
+	
+	<update id="closeEAEById" parameterClass="Integer">
+		UPDATE EAE
+		SET EAE_STATE_ID=3 
 		WHERE EAE_ID=#id# ;
 	</update>
 </sqlMap>

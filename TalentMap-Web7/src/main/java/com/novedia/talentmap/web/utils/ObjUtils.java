@@ -83,13 +83,10 @@ public class ObjUtils {
 	/**
 	 * Les différents mode de consulattion régissant les pages des EAE
 	 */
-	public static final String O_M = EAEConsultationMode.OPEN_MANAGER
-			.getValue();
-	public static final String V_M = EAEConsultationMode.VALIDATED_MANAGER
-			.getValue();
+	public static final String O_M = EAEConsultationMode.OPEN_MANAGER.getValue();
+	public static final String V_M = EAEConsultationMode.VALIDATED_MANAGER.getValue();
 	public static final String O_C = EAEConsultationMode.OPEN_COLLAB.getValue();
-	public static final String V_C = EAEConsultationMode.VALIDATED_COLLAB
-			.getValue();
+	public static final String V_C = EAEConsultationMode.VALIDATED_COLLAB.getValue();
 	public static final String CL = EAEConsultationMode.CLOSED.getValue();
 
 	/**
@@ -173,7 +170,7 @@ public class ObjUtils {
 		ht.put(COL_SCORE + TAB_RES + O_C, UPDATE);
 		ht.put(COL_SCORE + TAB_RES + V_C, READONLY);
 		ht.put(COL_SCORE + TAB_OBJ + V_M, HIDDEN);
-		ht.put(COL_SCORE + TAB_OBJ + CL, READONLY);
+		ht.put(COL_SCORE + TAB_OBJ + CL, HIDDEN);
 
 		ht.put(MAN_SCORE + TAB_RES + O_M, HIDDEN);
 		ht.put(MAN_SCORE + TAB_RES + V_M, UPDATE);
@@ -181,7 +178,7 @@ public class ObjUtils {
 		ht.put(MAN_SCORE + TAB_RES + O_C, HIDDEN);
 		ht.put(MAN_SCORE + TAB_RES + V_C, HIDDEN);
 		ht.put(MAN_SCORE + TAB_OBJ + V_M, HIDDEN);
-		ht.put(MAN_SCORE + TAB_OBJ + CL, READONLY);
+		ht.put(MAN_SCORE + TAB_OBJ + CL, HIDDEN);
 
 		ht.put(MOT_RESTR + TAB_RES + O_M, HIDDEN);
 		ht.put(MOT_RESTR + TAB_RES + V_M, READONLY);
@@ -189,7 +186,7 @@ public class ObjUtils {
 		ht.put(MOT_RESTR + TAB_RES + O_C, UPDATE);
 		ht.put(MOT_RESTR + TAB_RES + V_C, READONLY);
 		ht.put(MOT_RESTR + TAB_OBJ + V_M, HIDDEN);
-		ht.put(MOT_RESTR + TAB_OBJ + CL, READONLY);
+		ht.put(MOT_RESTR + TAB_OBJ + CL, HIDDEN);
 
 		ht.put(COMMENTS + TAB_RES + O_M, HIDDEN);
 		ht.put(COMMENTS + TAB_RES + V_M, READONLY);
@@ -197,7 +194,7 @@ public class ObjUtils {
 		ht.put(COMMENTS + TAB_RES + O_C, UPDATE);
 		ht.put(COMMENTS + TAB_RES + V_C, READONLY);
 		ht.put(COMMENTS + TAB_OBJ + V_M, HIDDEN);
-		ht.put(COMMENTS + TAB_OBJ + CL, READONLY);
+		ht.put(COMMENTS + TAB_OBJ + CL, HIDDEN);
 
 	}
 

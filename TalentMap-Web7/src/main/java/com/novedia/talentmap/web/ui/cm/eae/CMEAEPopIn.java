@@ -58,6 +58,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 
 	private ResourceBundle resourceBundle;
 
+	private Integer currentColleagueId;
 	
 	/**
 	 * Default constructor
@@ -199,18 +200,23 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	@Override
 	public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
 		String name = event.getComponent().getCaption();
-		Integer colleagueId = new Integer(event.getComponent().getId());
-		
+		currentColleagueId = new Integer(event.getComponent().getId());
 		hLayoutLegendes.setVisible(false);
 		hLayoutCMEAE.setVisible(false);
 		hLayoutHisto.setVisible(true);
 		
 	    hLayoutHisto.addComponent(historyEAEContent
-				.buildViewHistoryEAEContent(colleagueId, ProfilConnectedEnum.MANAGER, this));
+				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this));
 	    hLayoutHisto.setCaption(resourceBundle.getString("cm.eae.pop.in.collab.eae.title") + name);
 	    
 	    addComponent(hLayoutHisto);
 		
+	}
+
+	public void refreshHistoContent() {
+		//rafraichir l'historique
+	    hLayoutHisto.addComponent(historyEAEContent
+				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this));
 	}
 
 	public void reloadColleaguesButtons() {

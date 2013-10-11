@@ -92,8 +92,12 @@ public class HistoryEAEContent extends VerticalLayout implements
 	private final String HEIGHT_NEW_EAE_WINDOW = "350px";
 	private final String WIDTH_NEW_EAE_WINDOW = "400px";
 
+	private Window subWindowEAEContent = new Window();
+	private Integer currentColleagueId;
+	
 	private ResourceBundle resourceBundle;
 
+	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(
@@ -118,6 +122,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 			ProfilConnectedEnum profilConnected, CMEAEPopIn parent) {
 		removeAllComponents();
 		initResourceBundle();
+		this.currentColleagueId = colleagueId;
 		imageBack = new Image("", resourceBack);
 		buildListEAEPanel(colleagueId);
 		this.profilConnected = profilConnected;
@@ -278,11 +283,10 @@ public class HistoryEAEContent extends VerticalLayout implements
 			EAEForSynthesisDTO selectedEAE) {
 		EAEConsultationMode mode = EAEConsultationMode
 				.computeEAEConsultationMode(selectedEAE, profilConnected);
-
+		//The History is for a Consultant Manager viewing the EAE of one of his colleague
 		if (null != windowParent
 				&& ProfilConnectedEnum.MANAGER == profilConnected) {
-			Window subWindowEAEContent = new Window(
-					resourceBundle.getString("eae.content.title"));
+			subWindowEAEContent.setCaption(resourceBundle.getString("eae.content.title"));
 			VerticalLayout subEAEContent = new VerticalLayout();
 			subWindowEAEContent.setContent(subEAEContent);
 			subEAEContent.setMargin(true);
@@ -294,19 +298,33 @@ public class HistoryEAEContent extends VerticalLayout implements
 			// Open it in the UI
 			this.getUI().addWindow(subWindowEAEContent);
 			historicalEAEContent.buildViewCurrentEAEContentExists(
-					selectedEAE.getId(), mode, profilConnected);
+					selectedEAE.getId(), mode, profilConnected, this);
 			subEAEContent.addComponent(historicalEAEContent);
 			return this;
 
-		} else {
+		} 
+		//The History is for a colleague
+		else {
 			removeAllComponents();
 			historicalEAEContent.buildViewCurrentEAEContentExists(
-					selectedEAE.getId(), mode, profilConnected);
+					selectedEAE.getId(), mode, profilConnected, null);
 			addComponent(historicalEAEContent);
 			return this;
 		}
 	}
 
+	/**
+	 * Close the detailed EAE window opened from the History
+	 */
+	public void closeWindowDetailEAE() {
+		subWindowEAEContent.close();
+	}
+	
+	
+	public void refreshListHistoEAE() {
+		buildListEAEPanel(currentColleagueId);
+	}
+	
 	/**
 	 * Build list EAE panel
 	 */
@@ -329,7 +347,6 @@ public class HistoryEAEContent extends VerticalLayout implements
 			listEAEPanel.addComponent(new Label(resourceBundle
 					.getString("history.eae.no.history.msg")));
 		}
-
 	}
 
 	/**
@@ -383,7 +400,11 @@ public class HistoryEAEContent extends VerticalLayout implements
 				Notification.show(resourceBundle.getString("missing.or.invalid.field.msg"),
 						Notification.Type.WARNING_MESSAGE);
 			} else {
-				newEAEDTO.setEaeStateId(EAEStateEnum.OPEN.getId());
+//				if(newEAEDTO.getPreviousEaeId() == null) {
+//					newEAEDTO.setEaeStateId(EAEStateEnum.VALIDATED.getId());
+//				} else {
+					newEAEDTO.setEaeStateId(EAEStateEnum.OPEN.getId());
+//				}
 				eaeService.addNewEAEDTO(newEAEDTO);
 				subWindowNewEAE.close();
 				refreshViewHistoryEAEContent();

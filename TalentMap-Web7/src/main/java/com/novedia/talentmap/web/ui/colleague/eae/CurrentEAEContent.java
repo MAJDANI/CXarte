@@ -10,7 +10,6 @@ import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.novedia.talentmap.web.utils.ProfilConnectedEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
@@ -19,6 +18,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -35,8 +35,7 @@ import com.vaadin.ui.Window;
  * 
  */
 @SuppressWarnings("serial")
-public class CurrentEAEContent extends VerticalLayout implements ClickListener
-		 {
+public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	/**
 	 * TalentMap service
 	 */
@@ -111,15 +110,29 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 	 */
 	private EAEConsultationMode currentMode;
 
+	/**
+	 * Permits to know which part of the EAE is actually displayed : Generality,
+	 * Results, Objectives or Synthesis
+	 */
+	private Button currentButtonActivated = new Button();
+
 	private Integer nbEmptyFields = Integer.MAX_VALUE;
+	private Integer previousEaeId;
+
 	/**
 	 * These elements are not injected by Spring
 	 */
 	private Button validateEAEButton = new Button();
-	private Button buttonYes = new Button();
-	private Button buttonNo = new Button();
-	private Window windowConfirm = new Window();
+	private Button closeEAEButton = new Button();
+	private Button buttonYesValidate = new Button();
+	private Button buttonNoValidate = new Button();
+	private Button buttonYesClose = new Button();
+	private Button buttonNoClose = new Button();
+	private Window windowConfirmValidate = new Window();
+	private Window windowConfirmClose = new Window();
 
+	private HistoryEAEContent histoEAEContentCalling = new HistoryEAEContent();
+	
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {
@@ -145,7 +158,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 	public VerticalLayout buildViewCurrentEAEContent() {
 		removeAllComponents();
 		// Check if the colleague has a current EAE Open
-//		initResourceBundle();
+		// initResourceBundle();
 		Integer colleagueId = TalentMapApplication.getCurrent()
 				.getAuthentication().getColleagueId();
 		Integer currentEAEId = eaeService.getOpenEAEIdForColleague(colleagueId);
@@ -155,7 +168,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 		} else {
 			buildViewCurrentEAEContentExists(currentEAEId,
 					EAEConsultationMode.OPEN_COLLAB,
-					ProfilConnectedEnum.COLLEAGUE);
+					ProfilConnectedEnum.COLLEAGUE, null);
 		}
 		return this;
 	}
@@ -183,21 +196,27 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 	 * @return Window
 	 */
 	public void buildViewCurrentEAEContentExists(Integer currentEAEId,
-			EAEConsultationMode mode, ProfilConnectedEnum profilConnected) {
+			EAEConsultationMode mode, ProfilConnectedEnum profilConnected, HistoryEAEContent histoEAEContentCalling) {
 		removeAllComponents();
 		initResourceBundle();
-
+		this.histoEAEContentCalling = histoEAEContentCalling;
 		this.currentEAEId = currentEAEId;
 		this.currentMode = mode;
 		if (mode == EAEConsultationMode.OPEN_COLLAB) {
-			nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
-			System.out.println("nbEmptyFields" + nbEmptyFields);
+			previousEaeId= eaeService.getPreviousEAEID(currentEAEId);
+			if (previousEaeId != null) {
+				nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
+			} else {
+				Integer salary = eaeService.getSalaryByEAEID(currentEAEId);
+				if (salary == null) nbEmptyFields = 1;
+				else nbEmptyFields = 0;
+			}
 		}
 		hLayoutCurrentEAE.setSpacing(true);
 		hLayoutCurrentEAE.removeAllComponents();
 		buildButtons(mode);
 		buildMenu(mode);
-		
+
 		buildPanelRightContentEAEExists(profilConnected);
 		hLayoutCurrentEAE.addComponent(panelRightCurrentEAE);
 		hLayoutCurrentEAE.setExpandRatio(panelRightCurrentEAE, 1.0f);
@@ -206,22 +225,32 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 
 	private void buildButtons(EAEConsultationMode mode) {
 
-		generalityButton.setCaption(resourceBundle.getString("eae.generality.button.label"));
+		generalityButton.setCaption(resourceBundle
+				.getString("eae.generality.button.label"));
 		generalityButton.addClickListener(this);
 
-		resultsButton.setCaption(resourceBundle.getString("eae.results.button.label"));
+		resultsButton.setCaption(resourceBundle
+				.getString("eae.results.button.label"));
 		resultsButton.addClickListener(this);
 
-		validateEAEButton.setCaption(resourceBundle.getString("current.eae.button.validate.caption"));
+		validateEAEButton.setCaption(resourceBundle
+				.getString("current.eae.button.validate.caption"));
 		validateEAEButton.addStyleName("styleButton");
 		validateEAEButton.addClickListener(this);
 
+		closeEAEButton.setCaption(resourceBundle
+				.getString("current.eae.button.close.caption"));
+		closeEAEButton.addStyleName("styleButton");
+		closeEAEButton.addClickListener(this);
+
 		if (mode == EAEConsultationMode.CLOSED
 				|| mode == EAEConsultationMode.VALIDATED_MANAGER) {
-			objectivesButton.setCaption(resourceBundle.getString("eae.objectives.button.label"));
+			objectivesButton.setCaption(resourceBundle
+					.getString("eae.objectives.button.label"));
 			objectivesButton.addClickListener(this);
 
-			synthesisButton.setCaption(resourceBundle.getString("eae.synthesis.button.label"));
+			synthesisButton.setCaption(resourceBundle
+					.getString("eae.synthesis.button.label"));
 			synthesisButton.addClickListener(this);
 			CUtils.decorateButton(generalityButton, resultsButton,
 					objectivesButton, synthesisButton);
@@ -242,18 +271,23 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 		menuContentCurrentEAE.addComponent(generalityButton);
 		menuContentCurrentEAE.addComponent(resultsButton);
 		menuContentCurrentEAE.addComponent(validateEAEButton);
-		
+
 		if (mode == EAEConsultationMode.CLOSED
 				|| mode == EAEConsultationMode.VALIDATED_MANAGER) {
 			menuContentCurrentEAE.addComponent(objectivesButton);
 			menuContentCurrentEAE.addComponent(synthesisButton);
-		} 
+		}
+		menuContentCurrentEAE.addComponent(closeEAEButton);
 		if (mode == EAEConsultationMode.OPEN_COLLAB && nbEmptyFields == 0) {
 			validateEAEButton.setVisible(true);
 		} else {
 			validateEAEButton.setVisible(false);
 		}
-
+		if (mode == EAEConsultationMode.VALIDATED_MANAGER) {
+			closeEAEButton.setVisible(true);
+		} else {
+			closeEAEButton.setVisible(false);
+		}
 		panelLeftCurrentEAE.setContent(menuContentCurrentEAE);
 		hLayoutCurrentEAE.addComponent(panelLeftCurrentEAE);
 	}
@@ -284,7 +318,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 		panelRightCurrentEAE.setCaption(caption);
 
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
-				.buildViewEAEGenerality(this.currentEAEId, this.currentMode, this));
+				.buildViewEAEGenerality(this.currentEAEId, this.currentMode,
+						this));
 		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
 		panelRightCurrentEAE.setSizeFull();
 	}
@@ -293,6 +328,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 	public void buttonClick(ClickEvent event) {
 		panelRightCurrentEAE.removeAllComponents();
 		if (event.getButton().equals(generalityButton)) {
+			currentButtonActivated = generalityButton;
 			if (currentMode == EAEConsultationMode.CLOSED
 					|| currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
 				CUtils.decorateButton(generalityButton, resultsButton,
@@ -300,12 +336,12 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 			} else {
 				CUtils.decorateButton(generalityButton, resultsButton);
 			}
-			panelRightCurrentEAE
-					.setContent(currentEAEDetailedContent
-							.buildViewEAEGenerality(this.currentEAEId,
-									this.currentMode, this));
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAEGenerality(this.currentEAEId,
+							this.currentMode, this));
 
 		} else if (event.getButton().equals(resultsButton)) {
+			currentButtonActivated = resultsButton;
 			if (currentMode == EAEConsultationMode.CLOSED
 					|| currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
 				CUtils.decorateButton(resultsButton, generalityButton,
@@ -317,33 +353,70 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 					.buildViewEAEResults(currentEAEId, this.currentMode, this));
 
 		} else if (event.getButton().equals(objectivesButton)) {
+			currentButtonActivated = objectivesButton;
 			CUtils.decorateButton(objectivesButton, resultsButton,
 					generalityButton, synthesisButton);
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
 					.buildViewEAEObjectives(currentEAEId, this.currentMode));
 		} else if (event.getButton().equals(synthesisButton)) {
+			currentButtonActivated = synthesisButton;
 			CUtils.decorateButton(synthesisButton, objectivesButton,
 					resultsButton, generalityButton);
 			panelRightCurrentEAE.setContent(currentEAEDetailedContent
 					.buildViewEAESynthesis(currentEAEId, this.currentMode));
 		}
-		
+
 		else if (event.getButton().equals(validateEAEButton)) {
-			buildConfirmWindow();
-			this.getParent().getParent().getParent().getParent().getParent().getUI().addWindow(windowConfirm);
-			PersonalEAEPopIn p = (PersonalEAEPopIn)this.getParent().getParent().getParent().getParent();
-			p.refreshContent();
-		} 
-		
-		else if (event.getButton().equals(buttonNo)) {
-			windowConfirm.close();
+			buildConfirmValidateWindow();
+			this.getUI().addWindow(windowConfirmValidate);
+			refreshCurrentTab();
+		} else if (event.getButton().equals(closeEAEButton)) {
+			buildConfirmCloseWindow();
+			this.getUI().addWindow(windowConfirmClose);
+			refreshCurrentTab();
 		}
-		else if (event.getButton().equals(buttonYes)) {
-			PersonalEAEPopIn p = (PersonalEAEPopIn)this.getParent().getParent().getParent().getParent();
+
+		else if (event.getButton().equals(buttonNoValidate)) {
+			windowConfirmValidate.close();
+			refreshCurrentTab();
+		} else if (event.getButton().equals(buttonYesValidate)) {
 			eaeService.validateEAEById(currentEAEId);
-			p.refreshContent();
-			windowConfirm.close();
+			refreshCurrentTab();
+			Notification.show("EAE validé");
+			windowConfirmValidate.close();
+			buildViewCurrentEAEContentDoesntExists();
+		} else if (event.getButton().equals(buttonNoClose)) {
+			windowConfirmClose.close();
+			refreshCurrentTab();
+		} else if (event.getButton().equals(buttonYesClose)) {
+			eaeService.closeEAEById(currentEAEId);
+			Notification.show(resourceBundle.getString("notification.eae.closed"));
+			windowConfirmClose.close();
+			histoEAEContentCalling.closeWindowDetailEAE();
+			histoEAEContentCalling.refreshListHistoEAE();
 		}
+	}
+	
+	/**
+	 * When opening the confirmation window, the content of panel Right
+	 * vanishes => whe recall the diplay here
+	 */
+	private void refreshCurrentTab() {
+		if (resultsButton == currentButtonActivated) {
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAEResults(currentEAEId, this.currentMode, this));
+		} else  if (objectivesButton == currentButtonActivated) {
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAEObjectives(currentEAEId, this.currentMode));
+		} else if (synthesisButton == currentButtonActivated) {
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAESynthesis(currentEAEId, this.currentMode));
+		} else {
+			panelRightCurrentEAE.setContent(currentEAEDetailedContent
+					.buildViewEAEGenerality(this.currentEAEId,
+							this.currentMode, this));
+		}
+		
 	}
 
 	public void refreshObjectives() {
@@ -352,42 +425,78 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
 				.buildViewEAEObjectives(currentEAEId, this.currentMode));
 	}
-	
-	private void buildConfirmWindow(){
-		windowConfirm.removeAllComponents();
-		windowConfirm.setCaption(resourceBundle.getString("window.confirm.validate.title"));
-		windowConfirm.center();
-		windowConfirm.setModal(true);
-		windowConfirm.setReadOnly(true);
-		Label confirmValidateLabel = new Label(resourceBundle.getString("msg.confirm.validate.eae"));
+
+	private void buildConfirmValidateWindow() {
+		windowConfirmValidate.removeAllComponents();
+		windowConfirmValidate.setCaption(resourceBundle
+				.getString("window.confirm.validate.title"));
+		windowConfirmValidate.center();
+		windowConfirmValidate.setModal(true);
+		windowConfirmValidate.setReadOnly(true);
+		Label confirmValidateLabel = new Label(
+				resourceBundle.getString("msg.confirm.validate.eae"));
 		HorizontalLayout hLayout = new HorizontalLayout();
 		hLayout.setSpacing(true);
 		hLayout.addStyleName("containerButton");
-		buttonYes.setCaption(resourceBundle.getString("yes.confirm.button.caption"));
-		buttonYes.addStyleName("styleButton");
-		buttonYes.addClickListener(this);
-		buttonNo.setCaption(resourceBundle.getString("no.confirm.button.caption"));
-		buttonNo.addStyleName("styleButton");
-		buttonNo.addClickListener(this);
-		hLayout.addComponent(buttonYes);
-		hLayout.addComponent(buttonNo);
-		windowConfirm.addComponent(confirmValidateLabel);
-		windowConfirm.addComponent(hLayout);
-	 }
+		buttonYesValidate.setCaption(resourceBundle
+				.getString("yes.confirm.button.caption"));
+		buttonYesValidate.addStyleName("styleButton");
+		buttonYesValidate.addClickListener(this);
+		buttonNoValidate.setCaption(resourceBundle
+				.getString("no.confirm.button.caption"));
+		buttonNoValidate.addStyleName("styleButton");
+		buttonNoValidate.addClickListener(this);
+		hLayout.addComponent(buttonYesValidate);
+		hLayout.addComponent(buttonNoValidate);
+		windowConfirmValidate.addComponent(confirmValidateLabel);
+		windowConfirmValidate.addComponent(hLayout);
+	}
 
-	
+	private void buildConfirmCloseWindow() {
+		windowConfirmClose.removeAllComponents();
+		windowConfirmClose.setCaption(resourceBundle
+				.getString("window.confirm.close.title"));
+		windowConfirmClose.center();
+		windowConfirmClose.setModal(true);
+		windowConfirmClose.setReadOnly(true);
+		Label confirmCloseLabel = new Label(
+				resourceBundle.getString("msg.confirm.close.eae"));
+		HorizontalLayout hLayout = new HorizontalLayout();
+		hLayout.setSpacing(true);
+		hLayout.addStyleName("containerButton");
+		buttonYesClose.setCaption(resourceBundle
+				.getString("yes.confirm.button.caption"));
+		buttonYesClose.addStyleName("styleButton");
+		buttonYesClose.addClickListener(this);
+		buttonNoClose.setCaption(resourceBundle
+				.getString("no.confirm.button.caption"));
+		buttonNoClose.addStyleName("styleButton");
+		buttonNoClose.addClickListener(this);
+		hLayout.addComponent(buttonYesClose);
+		hLayout.addComponent(buttonNoClose);
+		windowConfirmClose.addComponent(confirmCloseLabel);
+		windowConfirmClose.addComponent(hLayout);
+	}
+
 	public void refreshValidateButton() {
 		if (currentMode == EAEConsultationMode.OPEN_COLLAB) {
-			nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
-			System.out.println("nbEmptyFields" + nbEmptyFields);
-			if(nbEmptyFields == 0) {
+			
+			previousEaeId= eaeService.getPreviousEAEID(currentEAEId);
+			if (previousEaeId != null) {
+				nbEmptyFields = eaeService.getNbEmptyFieldsByEAE(currentEAEId);
+			} else {
+				Integer salary = eaeService.getSalaryByEAEID(currentEAEId);
+				if (salary == null) nbEmptyFields = 1;
+				else nbEmptyFields = 0;
+			}
+			if (nbEmptyFields == 0) {
 				validateEAEButton.setVisible(true);
 			} else {
 				validateEAEButton.setVisible(false);
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the generalityButton
 	 */

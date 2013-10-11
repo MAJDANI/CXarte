@@ -11,7 +11,6 @@ import com.novedia.talentmap.services.IObjectiveService;
 import com.novedia.talentmap.services.impl.EAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.novedia.talentmap.web.utils.EAETabEnum;
@@ -21,13 +20,13 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.ui.Accordion;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextArea;
-import com.vaadin.ui.VerticalLayout;
 
 public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveObjectiveForm {
 
@@ -83,7 +82,6 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 		this.currentEAEContent = currentEAEContent;
 		removeAllComponents();
 		buildMain();
-		setHeight(HEIGHT_FORM);
 		return this;
 	}
 
@@ -99,7 +97,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 	private void buildLayout() {
 		eaeResultsFormLayout.removeAllComponents();
 		this.eaeResultsFormLayout.setColumns(1);
-		this.eaeResultsFormLayout.setRows(6);
+		this.eaeResultsFormLayout.setRows(8);
 		this.eaeResultsFormLayout.setId(ComponentsId.EAE_RESULTS_FORM_LAYOUT_ID);
 		this.eaeResultsFormLayout.addStyleName("styleDeTest");
 		this.eaeResultsFormLayout.setMargin(true);
@@ -108,151 +106,182 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 
 	private void buildEAEResultsForm() {
 		removeAllComponents();
-		 
+		Integer row = 0; 
 		
-		// -----------------------------
-		// YEAR SYNTHESIS
-		// -----------------------------
-		Label titreYearSynthesis = new Label(resourceBundle.getString("year.synthesis.label"));
-		titreYearSynthesis.setStyleName("mystyleTitleBilanTODO");
-		// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
-		if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
-			yearSynthesis.setCaption(resourceBundle.getString("results.eae.year.synthesis"));
-			yearSynthesis.setStyleName("TODO");
-			yearSynthesis.setNullRepresentation(resourceBundle.getString("null.field.representation"));
-			yearSynthesis.setId(ComponentsId.EAE_YEAR_SYNTHESES_ID);
-			yearSynthesis.setHeight(HEIGHT);
-			yearSynthesis.setWidth(WIDTH);
-			yearSynthesis.setMaxLength(ConstantsDB.EAE_YEAR_SYNTHESIS_MAX_LENGTH);
-			yearSynthesis.addStyleName("spacerTop");
-			if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
-				yearSynthesis.setImmediate(true);
-				yearSynthesis.addBlurListener(this);
-			} 
-			eaeResultsFormLayout.addComponent(titreYearSynthesis);
-			eaeResultsFormLayout.addComponent(yearSynthesis);
-		}
-
-		// -----------------------------
-		// COLLAB STRENGHTS
-		// -----------------------------
-		// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
-		if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
-			collabStrenghts.setCaption(resourceBundle.getString("results.eae.collab.strenghts"));
-			collabStrenghts.setStyleName("TODO");
-			collabStrenghts.setNullRepresentation(resourceBundle.getString("null.field.representation"));
-			collabStrenghts.setId(ComponentsId.EAE_COLLAB_STRENGTHS_ID);
-			collabStrenghts.setHeight(HEIGHT);
-			collabStrenghts.setWidth(WIDTH_APPRECIATION_GLOBALE);
-			collabStrenghts.setMaxLength(ConstantsDB.EAE_COLLEAGUES_STRENGTHS_MAX_LENGTH);
-			collabStrenghts.addStyleName("spacerTop styleMargin");
-			if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
-				collabStrenghts.setRequired(true);
-				collabStrenghts.setRequiredError(resourceBundle.getString("results.collabstrenghts.error.message"));
-				collabStrenghts.setImmediate(true);
-				collabStrenghts.addBlurListener(this);
-			} 
-		}	
-		// -----------------------------
-		// COLLAB WEAKNESSES
-		// -----------------------------
-		// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
-		if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
-			collabWeaknesses.setCaption(resourceBundle.getString("results.eae.collab.weaknesses"));
-			collabWeaknesses.setStyleName("TODO");
-			collabWeaknesses.setNullRepresentation(resourceBundle.getString("null.field.representation"));
-			collabWeaknesses.setId(ComponentsId.EAE_COLLAB_WEAKNESSES_ID);
-			collabWeaknesses.setHeight(HEIGHT);
-			collabWeaknesses.setWidth(WIDTH_APPRECIATION_GLOBALE);
-			collabWeaknesses.setMaxLength(ConstantsDB.EAE_COLLEAGUES_WEAKNESSES_MAX_LENGTH);
-			collabWeaknesses.addStyleName("spacerTop styleMargin");
-			if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
-				collabWeaknesses.setRequired(true);
-				collabWeaknesses.setRequiredError(resourceBundle.getString("results.collabweaknesses.error.message"));
-				collabWeaknesses.setImmediate(true);
-				collabWeaknesses.addBlurListener(this);
-			} 
-		}
-		// ---------------------------------
-		// MEANS TO PROGRESS // MANAGER PART
-		// ---------------------------------
-		// TODO
-
-		// ---------------------------------
-		// BIND DES DONNEES EAEResultsDTO
-		// ---------------------------------
-		eaeResultsDTO = eaeService.getEAEResults(currentEAEId);
-		List<Objective> listObjectives = objectiveService.getPrecedentObjectivesByEAEId(currentEAEId);
-		eaeResultsDTO.setListOjectives(listObjectives);
+		Integer previousEaeId= eaeService.getPreviousEAEID(currentEAEId);
 		
-		binder = new BeanFieldGroup<EAEResultsDTO>(EAEResultsDTO.class);
-		binder.setItemDataSource(eaeResultsDTO);
-		binder.setBuffered(false);
-		binder.bindMemberFields(this);
-
-		
-		// ---------------------------------
-		// OBJECTIFS
-		// ---------------------------------
-		Label titreObjectifs = new Label(resourceBundle.getString("objectives.label"));
-		titreObjectifs.setStyleName("mystyleTitleBilanTODO");
-		titreObjectifs.addStyleName("spacerTop");
-		eaeResultsFormLayout.addComponent(titreObjectifs);
-
-		// Create the Accordion.
-		Accordion accordionObjectives = new Accordion();
-//		accordionObjectives.setSizeFull();
-		accordionObjectives.setWidth(WIDTH_ACCORDION_OBECTIVES);
-
-		if(listObjectives != null) {
-			for(Objective o : listObjectives){
-				EAEObjectiveForm oF = new EAEObjectiveForm();
-				oF = oF.buildEAEObjectiveFormView(o, currentMode, EAETabEnum.RESULTS_TAB, this);
-				accordionObjectives.addTab(oF, resourceBundle.getString("objective.title") + o.getTitle(), null);
-			}
-		}
-		accordionObjectives.addStyleName("spacerTop");
-		accordionObjectives.setId(ComponentsId.EAE_RESULTS_ACCORDION_OBJ_ID);
-		
-		if(listObjectives != null && !listObjectives.isEmpty()) {
-			eaeResultsFormLayout.addComponent(accordionObjectives);
+		if(null == previousEaeId) {
+			Label noBilan = new Label(resourceBundle.getString("results.no.previous.eae.message"));
+			eaeResultsFormLayout.addComponent(noBilan);
 		} else {
-			Label noObjFound = new Label(resourceBundle.getString("no.objectives.label"));
-			noObjFound.setWidth("300px");
-			eaeResultsFormLayout.addComponent(noObjFound);
-		}
-	
-		// ---------------------------------
-		// Appréciation Globale
-		// ---------------------------------
-		// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
-		if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
-			Label titreAppreciations = new Label(resourceBundle.getString("appreciations.label"));
-			titreAppreciations.setStyleName("mystyleTitleBilanTODO");
-			titreAppreciations.addStyleName("spacerTop");
-			eaeResultsFormLayout.addComponent(titreAppreciations);
-
-			Accordion accordionAppreciation = new Accordion();
-			accordionAppreciation.setSizeFull();
-			accordionAppreciation.setHeight(HEIGHT_APPRECIATION);
-			accordionAppreciation.setWidth(WIDTH_ACCORDION_APPRECIATION);
-			accordionAppreciation.addTab(collabStrenghts, resourceBundle.getString("results.eae.collab.strenghts"), null);
-			accordionAppreciation.addTab(collabWeaknesses, resourceBundle.getString("results.eae.collab.weaknesses"), null);
-			accordionAppreciation.addStyleName("spacerTop");
-			accordionAppreciation.setId(ComponentsId.EAE_RESULTS_ACCORDION_APPREC_ID);
-		
-			// --------------------------------------
-			// Désactivations
-			// --------------------------------------
-			if(currentMode != EAEConsultationMode.OPEN_COLLAB) {
-				yearSynthesis.setReadOnly(true);
-				Tab myTabCollabStrenghts = accordionAppreciation.getTab(collabStrenghts);
-				myTabCollabStrenghts.getComponent().setReadOnly(true);
-				Tab myTabCollabWeaknesses = accordionAppreciation.getTab(collabWeaknesses);
-				myTabCollabWeaknesses.getComponent().setReadOnly(true);
+			setHeight(HEIGHT_FORM);
+			// -----------------------------
+			// YEAR SYNTHESIS
+			// -----------------------------
+			Label titreYearSynthesis = new Label(resourceBundle.getString("year.synthesis.label"));
+			titreYearSynthesis.setStyleName("mystyleTitleBilanTODO");
+			// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
+			if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				yearSynthesis.setCaption(resourceBundle.getString("results.eae.year.synthesis"));
+				yearSynthesis.setStyleName("TODO");
+				yearSynthesis.setNullRepresentation(resourceBundle.getString("null.field.representation"));
+				yearSynthesis.setId(ComponentsId.EAE_YEAR_SYNTHESES_ID);
+				yearSynthesis.setHeight(HEIGHT);
+				yearSynthesis.setWidth(WIDTH);
+				yearSynthesis.setMaxLength(ConstantsDB.EAE_YEAR_SYNTHESIS_MAX_LENGTH);
+				yearSynthesis.addStyleName("spacerTop");
+				if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
+					yearSynthesis.setImmediate(true);
+					yearSynthesis.addBlurListener(this);
+				} 
+				eaeResultsFormLayout.addComponent(titreYearSynthesis);
+				eaeResultsFormLayout.addComponent(yearSynthesis);
+				row +=2;
 			}
-			eaeResultsFormLayout.addComponent(accordionAppreciation);
 
+			// ---------------------------------
+			// OBJECTIFS
+			// ---------------------------------
+			eaeResultsDTO = eaeService.getEAEResults(currentEAEId);
+			List<Objective> listObjectives = objectiveService.getPrecedentObjectivesByEAEId(currentEAEId);
+			eaeResultsDTO.setListOjectives(listObjectives);
+	
+			Label titreObjectifs = new Label(resourceBundle.getString("objectives.label"));
+			titreObjectifs.setStyleName("mystyleTitleBilanTODO");
+			titreObjectifs.addStyleName("spacerTop");
+			eaeResultsFormLayout.addComponent(titreObjectifs);
+			row +=1;
+
+			// Create the Accordion.
+			Accordion accordionObjectives = new Accordion();
+			accordionObjectives.setWidth(WIDTH_ACCORDION_OBECTIVES);
+	
+			if(listObjectives != null) {
+				for(Objective o : listObjectives){
+					EAEObjectiveForm oF = new EAEObjectiveForm();
+					oF = oF.buildEAEObjectiveFormView(o, currentMode, EAETabEnum.RESULTS_TAB, this);
+					accordionObjectives.addTab(oF, resourceBundle.getString("objective.title") + o.getTitle(), null);
+				}
+			}
+			accordionObjectives.addStyleName("spacerTop");
+			accordionObjectives.setId(ComponentsId.EAE_RESULTS_ACCORDION_OBJ_ID);
+			
+			if(listObjectives != null && !listObjectives.isEmpty()) {
+				eaeResultsFormLayout.addComponent(accordionObjectives);
+				row +=1;
+	
+			} else {
+				Label noObjFound = new Label(resourceBundle.getString("no.objectives.label"));
+				noObjFound.setWidth("300px");
+				eaeResultsFormLayout.addComponent(noObjFound);
+				row +=1;
+			}
+
+			// ---------------------------------
+			// BIND DES DONNEES EAEResultsDTO
+			// ---------------------------------
+			binder = new BeanFieldGroup<EAEResultsDTO>(EAEResultsDTO.class);
+			binder.setItemDataSource(eaeResultsDTO);
+			binder.setBuffered(false);
+			binder.bindMemberFields(this);
+
+			// ---------------------------------
+			// Appréciation Globale
+			// ---------------------------------
+			// -----------------------------
+			// COLLAB STRENGHTS
+			// -----------------------------
+			// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
+			if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				collabStrenghts.setCaption(resourceBundle.getString("results.eae.collab.strenghts"));
+				collabStrenghts.setStyleName("TODO");
+				collabStrenghts.setNullRepresentation(resourceBundle.getString("null.field.representation"));
+				collabStrenghts.setId(ComponentsId.EAE_COLLAB_STRENGTHS_ID);
+				collabStrenghts.setHeight(HEIGHT);
+				collabStrenghts.setWidth(WIDTH_APPRECIATION_GLOBALE);
+				collabStrenghts.setMaxLength(ConstantsDB.EAE_COLLEAGUES_STRENGTHS_MAX_LENGTH);
+				collabStrenghts.addStyleName("spacerTop styleMargin");
+				if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
+					collabStrenghts.setImmediate(true);
+					collabStrenghts.addBlurListener(this);
+				} 
+			}	
+			// -----------------------------
+			// COLLAB WEAKNESSES
+			// -----------------------------
+			// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
+			if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				collabWeaknesses.setCaption(resourceBundle.getString("results.eae.collab.weaknesses"));
+				collabWeaknesses.setStyleName("TODO");
+				collabWeaknesses.setNullRepresentation(resourceBundle.getString("null.field.representation"));
+				collabWeaknesses.setId(ComponentsId.EAE_COLLAB_WEAKNESSES_ID);
+				collabWeaknesses.setHeight(HEIGHT);
+				collabWeaknesses.setWidth(WIDTH_APPRECIATION_GLOBALE);
+				collabWeaknesses.setMaxLength(ConstantsDB.EAE_COLLEAGUES_WEAKNESSES_MAX_LENGTH);
+				collabWeaknesses.addStyleName("spacerTop styleMargin");
+				if(currentMode == EAEConsultationMode.OPEN_COLLAB) {
+					collabWeaknesses.setImmediate(true);
+					collabWeaknesses.addBlurListener(this);
+				} 
+			}
+
+			// Cette donnée n'est pas affichée dans le mode OPEN_MANAGER
+			if(currentMode != EAEConsultationMode.OPEN_MANAGER) {
+				Label titreAppreciations = new Label(resourceBundle.getString("appreciations.label"));
+				titreAppreciations.setStyleName("mystyleTitleBilanTODO");
+				titreAppreciations.addStyleName("spacerTop");
+				eaeResultsFormLayout.addComponent(titreAppreciations);
+				row +=1;
+	
+				Accordion accordionAppreciation = new Accordion();
+				accordionAppreciation.setSizeFull();
+				accordionAppreciation.setHeight(HEIGHT_APPRECIATION);
+				accordionAppreciation.setWidth(WIDTH_ACCORDION_APPRECIATION);
+				accordionAppreciation.addTab(collabStrenghts, resourceBundle.getString("results.eae.collab.strenghts"), null);
+				accordionAppreciation.addTab(collabWeaknesses, resourceBundle.getString("results.eae.collab.weaknesses"), null);
+				accordionAppreciation.addStyleName("spacerTop");
+				accordionAppreciation.setId(ComponentsId.EAE_RESULTS_ACCORDION_APPREC_ID);
+			
+				// --------------------------------------
+				// Désactivations
+				// --------------------------------------
+				if(currentMode != EAEConsultationMode.OPEN_COLLAB) {
+					yearSynthesis.setReadOnly(true);
+					Tab myTabCollabStrenghts = accordionAppreciation.getTab(collabStrenghts);
+					myTabCollabStrenghts.getComponent().setReadOnly(true);
+					Tab myTabCollabWeaknesses = accordionAppreciation.getTab(collabWeaknesses);
+					myTabCollabWeaknesses.getComponent().setReadOnly(true);
+				}
+				eaeResultsFormLayout.addComponent(accordionAppreciation);
+				row +=1;
+	
+			}
+		
+			// ---------------------------------
+			// MEANS TO PROGRESS // MANAGER PART
+			// ---------------------------------
+			// Cette donnée n'est pas affichée dans le mode OPEN_COLLAB
+			if(currentMode != EAEConsultationMode.OPEN_COLLAB && currentMode != EAEConsultationMode.OPEN_MANAGER && currentMode != EAEConsultationMode.VALIDATED_COLLAB) {
+				meansToProgress.setCaption(resourceBundle.getString("means.to.progress.label"));
+				meansToProgress.setStyleName("TODO");
+				meansToProgress.setNullRepresentation(resourceBundle.getString("null.field.representation"));
+				meansToProgress.setId(ComponentsId.EAE_MEANS_TO_PROGRESS_ID);
+				meansToProgress.setHeight(HEIGHT);
+				meansToProgress.setWidth(WIDTH);
+				meansToProgress.setMaxLength(ConstantsDB.EAE_MEANS_TO_PROGRESS_MAX_LENGTH);
+				meansToProgress.addStyleName("spacerTop");
+				if(currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
+					meansToProgress.setImmediate(true);
+					meansToProgress.addBlurListener(this);
+				} 
+				eaeResultsFormLayout.addComponent(meansToProgress);
+				row +=1;
+				//MODE READONLY si nécessaire
+				if(currentMode != EAEConsultationMode.VALIDATED_MANAGER) {
+					Component c = eaeResultsFormLayout.getComponent(0, row-1);
+					c.setReadOnly(true);
+				}
+			}
 		}
 		
 		addComponent(eaeResultsFormLayout);
@@ -261,35 +290,14 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 
 	@Override
 	public void blur(BlurEvent event) {
-		System.out.println("EAEResultsForm event.getSource() = " + event.getSource());
-		System.out.println("EAEResultsForm event.getComponent() = " + event.getComponent());
-		System.out.println("EAEResultsForm event.getClass() = " + event.getClass());
-		if (!validateEAEResultsForm()) {
-			Notification.show(resourceBundle.getString("missing.or.invalid.field.msg"),
-					Notification.Type.WARNING_MESSAGE);
-			System.out.println("INVALIDE dans EAEResultsForm");
-		}		
 		EAEService eaeS = (EAEService) this.eaeService;
 		eaeS.saveEAEResults(eaeResultsDTO);
+		currentEAEContent.refreshValidateButton();
 	}
 
-	/**
-	 * Test the EAEResultsForm validity
-	 * 
-	 * @return boolean
-	 */
-	private boolean validateEAEResultsForm() {
-		boolean isValidGenerality = true;
-		if (!this.binder.isValid()) {
-			isValidGenerality = false;
-		}
-		return isValidGenerality;
-	}
 
 	public void saveObjective(Objective objective) {
-		System.out.println("saveObjective dans EAEResultsForm obj=" + objective);
 		objectiveService.saveObjective(objective);
-		System.out.println("appel à refreshValidateButton dans EAEResultsForm");
 		currentEAEContent.refreshValidateButton();
 	}
 

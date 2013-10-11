@@ -107,7 +107,6 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		// -----------------------------
 		eaeColSynthesis.setCaption(resourceBundle
 				.getString("eae.colleague.synthesis.label"));
-		eaeColSynthesis.setStyleName("TODO");
 		eaeColSynthesis.setNullRepresentation(resourceBundle
 				.getString("null.field.representation"));
 		eaeColSynthesis.setId(ComponentsId.EAE_COLLEAGUES_SYNTHESIS_ID);
@@ -115,7 +114,7 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		eaeColSynthesis.setWidth(WIDTH);
 		eaeColSynthesis.setMaxLength(ConstantsDB.EAE_COLLEAGUES_SYNTHESIS_MAX_LENGTH);
 		eaeColSynthesis.addStyleName("spacerTop");
-		eaeColSynthesis.addStyleName("monStyleBorderNone");
+//		eaeColSynthesis.addStyleName("monStyleBorderNone");
 		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
 			eaeColSynthesis.setImmediate(true);
 			eaeColSynthesis.addBlurListener(this);
@@ -128,7 +127,6 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 
 		eaeManSynthesis.setCaption(resourceBundle
 				.getString("eae.manager.synthesis.label"));
-		eaeManSynthesis.setStyleName("TODO");
 		eaeManSynthesis.setNullRepresentation(resourceBundle
 				.getString("null.field.representation"));
 		eaeManSynthesis.setId(ComponentsId.EAE_MANAGERS_SYNTHESIS_ID);
@@ -136,7 +134,7 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		eaeManSynthesis.setWidth(WIDTH);
 		eaeManSynthesis.setMaxLength(ConstantsDB.EAE_MANAGERS_SYNTHESIS_MAX_LENGTH);
 		eaeManSynthesis.addStyleName("spacerTop");
-		eaeManSynthesis.addStyleName("monStyleBorderNone");
+//		eaeManSynthesis.addStyleName("monStyleBorderNone");
 		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
 			eaeManSynthesis.setImmediate(true);
 			eaeManSynthesis.addBlurListener(this);
@@ -148,7 +146,6 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		eaeOther = new TextArea();
 		eaeOther.setCaption(resourceBundle
 				.getString("eae.synthesis.other.label"));
-		eaeOther.setStyleName("TODO");
 		eaeOther.setNullRepresentation(resourceBundle
 				.getString("null.field.representation"));
 		eaeOther.setId(ComponentsId.EAE_OTHER_ID);
@@ -156,7 +153,7 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		eaeOther.setWidth(WIDTH);
 		eaeOther.setMaxLength(ConstantsDB.EAE_OTHER_MAX_LENGTH);
 		eaeOther.addStyleName("spacerTop");
-		eaeOther.addStyleName("monStyleBorderNone");
+//		eaeOther.addStyleName("monStyleBorderNone");
 		if (currentMode == EAEConsultationMode.VALIDATED_MANAGER) {
 			eaeOther.setImmediate(true);
 			eaeOther.addBlurListener(this);
@@ -183,15 +180,22 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 		addComponent(eaeSynthesisFormLayout);
 		
 		// ---------------------------------------
-		// DESACTIVATION DES CHAMPS, SAUF SALARY
+		// DESACTIVATION DES CHAMPS
 		// ---------------------------------------
 		if (currentMode != EAEConsultationMode.VALIDATED_MANAGER) {
 			for(int ligne = 0; ligne <4 ; ligne++) {
 				Component c = eaeSynthesisFormLayout.getComponent(0, ligne);
 				c.setReadOnly(true);
+				c.addStyleName("monStyleBorderNone");
 			}
 		}
 
+	}
+
+	@Override
+	public void blur(BlurEvent event) {
+		EAEService eaeS = (EAEService)this.eaeService;
+		eaeS.saveEAESynthesis(eaeSynthesisDTO);
 	}
 
 	/**
@@ -237,12 +241,6 @@ public class EAESynthesisForm extends FormLayout implements BlurListener {
 	 */
 	public void setEaeSynthesisFormLayout(GridLayout eaeSynthesisFormLayout) {
 		this.eaeSynthesisFormLayout = eaeSynthesisFormLayout;
-	}
-
-	@Override
-	public void blur(BlurEvent event) {
-		EAEService eaeS = (EAEService)this.eaeService;
-		eaeS.saveEAESynthesis(eaeSynthesisDTO);
 	}
 
 	/**

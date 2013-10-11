@@ -471,7 +471,10 @@ public final class DBRequestsConstants {
 	public static final String GET_EAE_SYNTHESIS = "eae.getEAESynthesis";
 	public static final String GET_OPEN_EAE_ID = "eae.getOpenEAEIdForColleague";
 	public static final String GET_NB_EMPTY_FIELDS_BY_EAE_ID = "eae.getNbEmptyFieldsByEAE";
+	public static final String GET_PREVIOUS_EAE_ID = "eae.getPreviousEAEID";
+	public static final String GET_SALARY_BY_EAE_ID = "eae.getSalaryByEAEID";
 	public static final String VALIDATE_EAE_BY_EAE_ID = "eae.validateEAEById";
+	public static final String CLOSE_EAE_BY_EAE_ID = "eae.closeEAEById";
 	public static final String SAVE_EAE_SALARY = "eae.saveEAESalary";
 	public static final String SAVE_EAE_RESULTS = "eae.saveEAEResults";
 	public static final String SAVE_EAE_SYNTHESIS = "eae.saveEAESynthesis";
