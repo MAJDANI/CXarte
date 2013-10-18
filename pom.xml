@@ -64,8 +64,8 @@
 		<module>TalentMap-Store</module>
 		<module>TalentMap-Resources</module>
 		<module>TalentMap-Rest</module>
-    <module>TalentMap-Web7</module>
-  </modules>
+                <module>TalentMap-Web7</module>
+       </modules>
 
 	<!-- Dependencies version -->
 	<properties>
@@ -237,8 +237,8 @@
 						<optimize>true</optimize>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
-				        <source>1.7</source>
-				        <target>1.7</target>
+				        <source>1.6</source>
+				        <target>1.6</target>
 					</configuration>
 				</plugin>
 
