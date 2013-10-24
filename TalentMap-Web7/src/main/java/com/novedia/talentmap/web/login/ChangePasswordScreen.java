@@ -18,6 +18,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
@@ -84,17 +85,16 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
 		setCaption(resourceBundle.getString("password.form.view.title"));
 		removeAllComponents();
-		buildForm();
 		errorLabelOldPassword.setCaption(resourceBundle.getString("error.label.old.password"));
 		errorLabelOldPassword.addStyleName("errorStyle");
 		errorLabelNewPassword.setCaption(resourceBundle.getString("error.label.new.password"));
 		errorLabelNewPassword.addStyleName("errorStyle");
 		errorLabelOldPassword.setVisible(false);
 		errorLabelNewPassword.setVisible(false);
-		changePasswordFormLayout.setSpacing(true);
 		
 		addComponent(errorLabelOldPassword);
 		addComponent(errorLabelNewPassword);
+		buildForm();
 		addComponent(changePasswordFormLayout);
 		return this;
 		
@@ -105,7 +105,7 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 	 */
 	private void buildForm(){
 		changePasswordFormLayout.removeAllComponents();
-		
+		VerticalLayout vLayout = new VerticalLayout();
 		oldPasswordField.setCaption(resourceBundle.getString("old.password.field.caption"));
 		oldPasswordField.setValue("");
 		oldPasswordField.setId(ComponentsId.OLD_PASSWORD_FIELD_ID);
@@ -124,10 +124,13 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
 		saveButton.setId(ComponentsId.SAVE_BTN_ID);
-		changePasswordFormLayout.addComponent(oldPasswordField);
-		changePasswordFormLayout.addComponent(newPasswordField);
-		changePasswordFormLayout.addComponent(confirmPasswordField);
-		changePasswordFormLayout.addComponent(saveButton);
+		
+		vLayout.addComponent(oldPasswordField);
+		vLayout.addComponent(newPasswordField);
+		vLayout.addComponent(confirmPasswordField);
+		vLayout.addComponent(saveButton);
+		vLayout.setSpacing(true);
+		changePasswordFormLayout.addComponent(vLayout);
 		
 	}
 	

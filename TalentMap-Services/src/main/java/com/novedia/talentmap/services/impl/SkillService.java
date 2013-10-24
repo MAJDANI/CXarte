@@ -236,6 +236,7 @@ public class SkillService implements ISkillService {
 		sum += tool.getValue().getAverageScore();
 	    }
 	}
+
 	return sum;
     }
 
@@ -253,7 +254,7 @@ public class SkillService implements ISkillService {
      */
     public double computeToolAverage(final double toolNote,
 	    final double usingFrequencyTool, final double timeNotUsingTool) {
-
+    	
 	double noUsingTimeValue = 0;
 	int intTimeNotUsingTool = (int) timeNotUsingTool;
 	switch (intTimeNotUsingTool) {
@@ -413,20 +414,21 @@ public class SkillService implements ISkillService {
      * @throws DataAccessException
      */
     public List<VSkill> getAllVSkillOrdered() throws DataAccessException {
-	VSkillDao vSkillDao = (VSkillDao) this.vSkillDao;
-	return vSkillDao.getAllVSkillOrdered();
+    	VSkillDao vSkillDao = (VSkillDao) this.vSkillDao;
+    	return vSkillDao.getAllVSkillOrdered();
     }
 
     /**
-     * This method allow to get all tools.
+     * This method allow to get a VSkill corresponding to a tool.
      * 
-     * @return a list of Tool
+     * @return a VSkill
      * @param toolName
      * @throws DataAccessException
      */
     @Override
     public VSkill getSkillByTool(final String toolName)
 	    throws DataAccessException {
+    	//TODO DEBUG changer l'appel par ID et plus par String name
 	return vSkillDao.getSkillByTool(toolName);
     }
 

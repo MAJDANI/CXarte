@@ -27,47 +27,52 @@ import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
  * MANAGER : quand le manager consulte les EAE de ses collaborateurs
  * 
  * 
- * _______________________________________________________________
- * _______________________________________________| Etat EAE | OPEN | VALIDATED
- * | CLOSED | |PROFIL | ONGLET | Elément | | | |
- * _____________________________________________________________________________________________
- * |_______________| |Manager | Généralités |Généralités |Consultation
- * |Consultation |Consultation | | | |Salaire |Absent |Consultation
- * |Consultation | | | Bilan/Results |Résumé année |Absent |Consultation
- * |Consultation | | | |Données objectif : | | | | | | |
- * (But,date,indicateurs,Moyens)|Consultation |Consultation |Consultation | | |
- * | Résults obj Note collab |Absent |Consultation |Consultation | | | | Résults
- * obj Note Manager |Absent |Modification |Consultation | | | | Eléments freins
- * ou moteurs |Absent |Consultation |Consultation | | | | Commentaires Obj
- * |Absent |Consultation |Consultation | | | |Points forts collab |Absent
- * |Consultation |Consultation | | | |Points faibles collab |Absent
- * |Consultation |Consultation | | | |Moyens à fournir |Absent |Modification
- * |Consultation | | | Objectifs |Bouton création | |Actif | | | | |Formulaire
- * de saisie : | | | | | | | (But,date,indicateurs,Moyens)| |Actif |Consultation
- * | | | | Résults obj Note collab | |Absent |Consultation | | | | Résults obj
- * Note Manager | |Absent |Consultation | | | | Eléments freins ou moteurs |
- * |Absent |Consultation | | | | Commentaires Obj | |Absent |Consultation | | |
- * Synthèse |Formulaire de saisie | |Actif |Consultation |
- * _____________________________________________________________________________________________
- * |_______________| |Collab | Généralités |Généralités |Consultation
- * |Consultation |Consultation | | | |Salaire |Modification |Consultation
- * |Consultation | | | Bilan/Results |Résumé année |Modification |Consultation
- * |Consultation | | | |Données objectif | | | | | | |
- * (But,date,indicateurs,Moyens)|Consultation |Consultation |Consultation | | |
- * | Résults obj Note collab |Modification |Consultation |Consultation | | | |
- * Résults obj Note Manager |Absent |Absent |Consultation | | | | Eléments
- * freins ou moteurs |Modification |Consultation |Consultation | | | |
- * Commentaires Obj |Modification |Consultation |Consultation | | | |Points
- * forts collab |Modification |Consultation |Consultation | | | |Points faibles
- * collab |Modification |Consultation |Consultation | | | |Moyens à fournir
- * |Absent |Absent |Consultation | | | Objectifs |Bouton création | | | | | |
- * |Formulaire de saisie : | | | | | | | (But,date,indicateurs,Moyens)| |
- * |Consultation | | | | Résults obj Note collab | | |Consultation | | | |
- * Résults obj Note Manager | | |Consultation | | | | Eléments freins ou moteurs
- * | | |Consultation | | | | Commentaires Obj | | |Consultation | | | Synthèse
- * |Formulaire de saisie | | |Consultation |
- * ______________________________________________________________________________________________________________
- * |
+ * __________________________________________________________________________________________________________
+ * |		|				|                    Etat EAE 	| OPEN 			| VALIDATED 	| CLOSED 		| 
+ * |PROFIL 	| ONGLET 		| Elément 						| 				| 				| 				|
+ * |________|_______________|_______________________________|_______________|_______________|_______________| 
+ * |Manager | Généralités 	|Généralités 					|Consultation 	|Consultation 	|Consultation 	| 	
+ * | 		| 				|Salaire 						|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| Bilan/Results |Résumé année 					|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				|Données objectif : 			| 				| 				| 				|
+ * | 		| 				| (But,date,indicateurs,Moyens)	|Consultation 	|Consultation 	|Consultation 	| 
+ * | 		|			 	| Résults obj Note collab 		|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				| Résults obj Note Manager 		|Absent 		|Modification 	|Consultation 	| 
+ * | 		| 				| Eléments freins ou moteurs 	|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				| Commentaires Obj  			|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				|Points forts collab 			|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				|Points faibles collab 			|Absent 		|Consultation 	|Consultation 	| 
+ * | 		| 				|Moyens à fournir 				|Absent 		|Modification 	|Consultation 	| 
+ * | 		| Objectifs 	|Bouton création 				| 				|Actif 			| 				| 
+ * | 		| 				|Formulaire de saisie : 		| 				| 				| 				| 
+ * | 		| 				| (But,date,indicateurs,Moyens)	| 				|Actif 			|Consultation  	| 
+ * | 		| 				| Résults obj Note collab 		| 				|Absent 		|Consultation 	| 
+ * | 		| 				| Résults obj Note Manager 		| 				|Absent 		|Consultation 	| 
+ * | 		| 				| Eléments freins ou moteurs 	|				|Absent 		|Consultation 	| 
+ * | 		| 				| Commentaires Obj 				| 				|Absent 		|Consultation 	| 
+ * | 		| Synthèse 		|Formulaire de saisie 			| 				|Actif 			|Consultation 	|
+ * |________|_______________|_______________________________|_______________|_______________|_______________| 
+ * |Collab 	| Généralités 	|Généralités 					|Consultation	|Consultation 	|Consultation 	| 				
+ * |		| 				|Salaire 						|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| Bilan/Results |Résumé année 					|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				|Données objectif 				| 				| 				| 				| 
+ * | 		| 				| (But,date,indicateurs,Moyens)	|Consultation 	|Consultation 	|Consultation 	| 
+ * | 		|				| Résults obj Note collab 		|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				| Résults obj Note Manager 		|Absent 		|Absent 		|Consultation 	| 
+ * | 		| 				| Eléments freins ou moteurs 	|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				| Commentaires Obj 				|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				|Points forts collab 			|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				|Points faibles	collab 			|Modification 	|Consultation 	|Consultation 	| 
+ * | 		| 				|Moyens à fournir 				|Absent 		|Absent 		|Consultation	| 		
+ * | 		| Objectifs 	|Bouton création 				| 				| 				| 				| 
+ * | 		|				|Formulaire de saisie : 		| 				| 				| 				| 
+ * | 		| 				| (But,date,indicateurs,Moyens)	| 				|				|Consultation 	| 
+ * | 		| 				| Résults obj Note collab 		| 				| 				|Consultation 	| 
+ * | 		| 				| Résults obj Note Manager 		| 				| 				|Consultation 	| 
+ * | 		| 				| Eléments freins ou moteurs	| 				| 				|Consultation 	| 
+ * | 		| 				| Commentaires Obj 				| 				| 				|Consultation 	| 
+ * | 		| Synthèse 		|Formulaire de saisie 			| 				| 				|Consultation 	|
+ * |________|_______________|_______________________________|_______________|_______________|_______________| 
  * 
  * 
  * @author v.guillemain

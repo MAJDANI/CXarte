@@ -13,7 +13,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class CmEAEContentSynthesis extends VerticalLayout implements ClickListener, ItemClickListener {
+public class CmEAEContentSynthesis extends VerticalLayout implements ItemClickListener {
 
     private Authentication authentication;
     private CmEAEOngoingPageTable cmEAEOngoingPageTable;
@@ -30,26 +30,26 @@ public class CmEAEContentSynthesis extends VerticalLayout implements ClickListen
     }
 
     public CmEAEContentSynthesis buildViewSynthesis() {
-	removeAllComponents();
-	///****************************
-	// Ongoing EAE
-	///***************************
-	
-	this.addComponent(new Label(TAB_ONGOING_TITLE));
-	cmEAEOngoingPageTable.buildAll(getAuthentication().getColleagueId());
-	cmEAEOngoingPageTable.addListener(this);
-	
-	this.addComponent(cmEAEOngoingPageTable);
-	///***************************
-	// Colleagues without Ongoing EAE
-	///***************************
-	this.addComponent(new Label(TAB_NO_ONGOING_TITLE));
-	cmEAENotOngoingPageTable.buildAll(getAuthentication().getColleagueId());
-	this.addComponent(cmEAENotOngoingPageTable);
-	setSizeFull();
-	setMargin(true);
-	setSpacing(true);
-	return this;
+		removeAllComponents();
+		///****************************
+		// Ongoing EAE
+		///***************************
+		
+		this.addComponent(new Label(TAB_ONGOING_TITLE));
+		cmEAEOngoingPageTable.buildAll(getAuthentication().getColleagueId());
+		cmEAEOngoingPageTable.addListener(this);
+		
+		this.addComponent(cmEAEOngoingPageTable);
+		///***************************
+		// Colleagues without Ongoing EAE
+		///***************************
+		this.addComponent(new Label(TAB_NO_ONGOING_TITLE));
+		cmEAENotOngoingPageTable.buildAll(getAuthentication().getColleagueId());
+		this.addComponent(cmEAENotOngoingPageTable);
+		setSizeFull();
+		setMargin(true);
+		setSpacing(true);
+		return this;
     }
 
     @Override
@@ -58,11 +58,6 @@ public class CmEAEContentSynthesis extends VerticalLayout implements ClickListen
         EAEGeneralityDTO eG = this.eaeService.getEAEGenerality(eae.getId());
     }
 
-    @Override
-    public void buttonClick(ClickEvent event) {
-	// TODO Auto-generated method stub
-
-    }
 
     public Authentication getAuthentication() {
 	return authentication;

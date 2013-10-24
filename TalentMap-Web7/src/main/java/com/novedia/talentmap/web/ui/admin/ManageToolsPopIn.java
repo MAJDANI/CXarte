@@ -10,6 +10,7 @@ import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
+import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -226,12 +227,15 @@ public class ManageToolsPopIn extends Window implements  ClickListener, ValueCha
 			textField.addTextChangeListener(this);
 			if (event.getButton().equals(addCategoryButton)) {
 				textField.setCaption(resourceBundle.getString("add.category.textfield.caption"));
+				textField.setMaxLength(ConstantsDB.CATEGORY_NAME_MAX_LENGTH);
 				currentView = addCategoryView;
 			} else if (event.getButton().equals(addConceptButton)) {
 				textField.setCaption(resourceBundle.getString("add.concept.textfield.caption"));
+				textField.setMaxLength(ConstantsDB.CONCEPT_NAME_MAX_LENGTH);
 				currentView = addConceptView;
 			} else {
 				textField.setCaption(resourceBundle.getString("add.tool.textfield.caption"));
+				textField.setMaxLength(ConstantsDB.TOOL_NAME_MAX_LENGTH);
 				currentView = addToolView;
 			}
 			

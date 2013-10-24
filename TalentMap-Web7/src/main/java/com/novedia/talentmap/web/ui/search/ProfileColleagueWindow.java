@@ -82,7 +82,7 @@ public class ProfileColleagueWindow extends Window {
 		
 		secondBloc.addComponent(new Label(profileService.getProfile(colleague.getProfileId()).getType()));
 		secondBloc.addComponent(new Label(colleague.getEmail()));
-		secondBloc.addComponent(new Label(colleague.getExperience() + resourceBundle.getString("experince.label.msg")));
+		secondBloc.addComponent(new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg")));
 		
 		horizontalLayout.addComponent(photo);
 		horizontalLayout.addComponent(secondBloc);

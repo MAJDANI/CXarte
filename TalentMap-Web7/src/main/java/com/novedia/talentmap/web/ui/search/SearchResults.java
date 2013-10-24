@@ -84,7 +84,7 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 				
 				secondBloc.addComponent(new Label(profileService.getProfile(colleague.getProfileId()).getType()));
 				secondBloc.addComponent(new Label(colleague.getEmail()));
-				secondBloc.addComponent(new Label(colleague.getExperience() + resourceBundle.getString("experince.label.msg")));
+				secondBloc.addComponent(new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg")));
 				
 				horizontalLayout.addComponent(photo);
 				horizontalLayout.addComponent(secondBloc);
@@ -125,8 +125,15 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 		}
 		
 		String toolSet = new String();
+		int count = 0;
 		for (Tool tool : lastMission.getTools()) {
-			toolSet += tool.getName() +", ";
+			count += 1;
+			if(count==1) { 
+				toolSet += tool.getName();
+			}
+			else {
+				toolSet +=", " + tool.getName();
+			}
 		}
 		
 		lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.techno.msg") +toolSet));

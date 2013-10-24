@@ -255,7 +255,7 @@
 		WHERE eae.EAE_ID = #id#
     	AND eae.COLLEAGUE_ID = col.COLLEAGUE_ID
 		AND col.PROFILE_ID = prof.PROFILE_ID
-		AND col.MANAGER_ID = man.COLLEAGUE_ID	;
+		AND eae.MANAGER_ID = man.COLLEAGUE_ID	;
 	</select>
 	
 	<select id="getEAEResults" resultMap="eaeResultsResult" parameterClass="Integer">
