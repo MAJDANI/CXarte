@@ -189,6 +189,14 @@
 		COLLEAGUE_ID != #id#
 	</select>
 
+	<select id="countMailForColleagueNames" parameterClass="com.novedia.talentmap.model.entity.Colleague"
+		resultClass="Integer">
+		SELECT count(*) FROM COLLEAGUE WHERE EMAIL = #email#
+		AND UPPER(LAST_NAME) != UPPER(#lastName#) 
+		AND UPPER(FIRST_NAME) != UPPER(#firstName#)
+	</select>
+
+
 	<insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
 
 		INSERT INTO COLLEAGUE (

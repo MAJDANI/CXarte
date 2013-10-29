@@ -108,6 +108,28 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 				DBRequestsConstants.COUNT_COLLEAGUE_BY_MAIL_AND_ID, colleague);
 	}
 
+    /**
+     * Counts colleagues in DB that have already the mail, with a different
+     * colleague's last and first name. Used to check, during the registration, if
+     * his email is not already use by someone else.
+     * 
+     * @param email : the email to check
+     * @param colleagueFirstName : first name of the colleague who wants to register
+     * @param colleagueLastName : last name of the colleague who wants to register
+     * @return The count found.
+     */
+	public Integer countMailForColleagueNames(String email, String colleagueFirstName,
+			String colleagueLastName)
+			throws DataAccessException {
+		Colleague colleague = new Colleague();
+		colleague.setEmail(email);
+		colleague.setLastName(colleagueLastName);
+		colleague.setFirstName(colleagueFirstName);
+		
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.COUNT_COLLEAGUE_BY_MAIL_AND_NAMES, colleague);
+	}
+
 	public Integer addColleagueFromRegistration(Registration registration)
 			throws DataAccessException {
 		return (Integer) this.getSqlMapClientTemplate().insert(

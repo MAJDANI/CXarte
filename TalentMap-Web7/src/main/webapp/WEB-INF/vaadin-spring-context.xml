@@ -303,7 +303,7 @@
 		<property name="changePasswordScreen" ref="changePasswordScreenBean" />
 	</bean>
 	
-	<bean id="registrationFormLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
+	<bean id="registrationGridLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
 	<bean id="saveButtonRegistrationBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="logInButtonRegistrationBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="alreadyHaveAccountLabelRegistrationBean" class="com.vaadin.ui.Label" scope="session" />
@@ -316,7 +316,7 @@
 		<property name="authenticationService" ref="authenticationService" />
 		<property name="registrationService" ref="registrationService" />
 		<property name="authenticatedScreen" ref="authenticatedScreen" />
-		<property name="registrationFormLayout" ref="registrationFormLayoutBean" />
+		<property name="registrationGridLayout" ref="registrationGridLayoutBean" />
 		<property name="save" ref="saveButtonRegistrationBean" />
 		<property name="logIn" ref="logInButtonRegistrationBean" />
 		<property name="bottomRegistrationScreenLayout" ref="bottomRegistrationScreenLayoutBean" />
@@ -342,6 +342,7 @@
 		<property name="experienceField" ref="experienceField" />
 		<property name="businessEngineerField" ref="businessEngineerField" />
 		<property name="managerField" ref="managerField" />
+		<property name="dataValidationHelper" ref="dataValidationHelperBean" />
 	</bean>
 	
 	<bean id="nameFieldColleagueBean" class="com.vaadin.ui.TextField" scope="session" />
@@ -370,6 +371,7 @@
 		<property name="experienceField" ref="experienceFieldColleagueBean" />
 		<property name="businessEngineerField" ref="businessEngineerFieldColleagueBean" />
 		<property name="managerField" ref="managerFieldColleagueBean" />
+		<property name="dataValidationHelper" ref="dataValidationHelperBean" />
 	</bean>
 	
 	<bean id="titleFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
@@ -429,5 +431,9 @@
 		<property name="accordionSkill" ref ="accordionSkillsColleagueBean" />
 	</bean>
 
-
+	<bean id="dataValidationHelperBean" class="com.novedia.talentmap.web.helpers.DataValidationHelper" scope="session">
+		<property name="colleagueService" ref="collaboratorService" />
+		<property name="registrationService" ref="registrationService" />
+		<property name="businessEngineerService" ref="businessEngineerService" />
+	</bean>
 </beans>

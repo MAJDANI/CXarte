@@ -44,11 +44,12 @@ public class ConstantsDB {
     // TABLE AUTHENTICATION
     public static final int REGISTRATION_LOGIN_MAX_LENGTH = 50;
     public static final int REGISTRATION_PASSWORD_MAX_LENGTH = 50;
+    
     // TABLE COLLEAGUE
-    public static final int COLLEAGUE_LAST_NAME_MAX_LENGTH = 30;
-    public static final int COLLEAGUE_FIRST_NAME_MAX_LENGTH = 30;
-    public static final int COLLEAGUE_EMAIL_MAX_LENGTH = 50;
-    public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;
+    public static final int COLLEAGUE_LAST_NAME_MAX_LENGTH = 30;//OK 2013/10/18
+    public static final int COLLEAGUE_FIRST_NAME_MAX_LENGTH = 30;//OK 2013/10/18
+    public static final int COLLEAGUE_EMAIL_MAX_LENGTH = 50;//OK 2013/10/18
+    public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;//OK 2013/10/18
     public static final int COLLEAGUE_EXPERIENCE_MAX_LENGTH = 2;
 
 }

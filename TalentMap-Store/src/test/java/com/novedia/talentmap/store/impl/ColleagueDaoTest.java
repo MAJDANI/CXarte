@@ -55,7 +55,7 @@ public class ColleagueDaoTest {
 	Registration registration = Registration.Builder.builder().profileId(1)
 		.lastName("colleaguetest").firstName("colleaguetest")
 		.email("t.colleaguetest@novediagroup.com")
-		.employmentDate(new Date()).experience(2).build();
+		.employmentDate(new Date()).experience("2").build();
 	Integer expectedResult = 1;
 	// When
 	Integer currentResult = null;
@@ -74,7 +74,7 @@ public class ColleagueDaoTest {
 	Registration registration = Registration.Builder.builder().profileId(1)
 		.lastName("colleaguetest").firstName("colleaguetest")
 		.email("collab1@gmail.com").employmentDate(new Date())
-		.experience(2).build();
+		.experience("2").build();
 
 	colleagueDao.addColleagueFromRegistration(registration);
 
@@ -137,7 +137,7 @@ public class ColleagueDaoTest {
 	BusinessEngineer businessEngineer = BusinessEngineer.builder().id(1)
 		.firstName("Julie").lastName("Vigneron").build();
 	Colleague colleague = Colleague.builder().id(1).profileId(1)
-		.phone("6020202020").experience(7)
+		.phone("6020202020").experience("7")
 		.firstName("modifiedColleague").lastName("modifiedLastName")
 		.businessEngineer(businessEngineer)
 		.email("modifiedemail@novediagroup.com")

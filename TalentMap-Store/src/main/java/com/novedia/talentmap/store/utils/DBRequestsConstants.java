@@ -74,9 +74,15 @@ public final class DBRequestsConstants {
 
 	/**
 	 * Constant request to count mail already existing in db for other
-	 * colleagues
+	 * colleagues. Search by Id
 	 */
 	public static final String COUNT_COLLEAGUE_BY_MAIL_AND_ID = "colleague.countMailForColleagueId";
+
+	/**
+	 * Constant request to count mail already existing in db for other
+	 * colleagues. Search by first and last names
+	 */
+	public static final String COUNT_COLLEAGUE_BY_MAIL_AND_NAMES = "colleague.countMailForColleagueNames";
 
 	/**
 	 * Constant request to add a colleague from a registration

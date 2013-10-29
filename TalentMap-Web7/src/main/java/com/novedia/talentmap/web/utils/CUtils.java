@@ -203,5 +203,10 @@ public abstract class CUtils {
 		}
 	}
 	
+	public static String buildMessageSizeBetween(ResourceBundle res, String codeMessage, Integer min, Integer max) {
+		String result = res.getString(codeMessage) + " " + min + " ";
+		result += res.getString("and.et") + " " + max;
+		return result;
+	}
 
 }

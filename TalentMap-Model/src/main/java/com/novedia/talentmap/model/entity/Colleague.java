@@ -80,7 +80,7 @@ public class Colleague implements Serializable {
      * Colleague experience
      */
     @NotNull
-    protected Integer experience;
+    protected String experience;
 
     /**
      * Colleague business Engineer
@@ -250,7 +250,7 @@ public class Colleague implements Serializable {
      * 
      * @return the experience
      */
-    public Integer getExperience() {
+    public String getExperience() {
 	return experience;
     }
 
@@ -260,7 +260,7 @@ public class Colleague implements Serializable {
      * @param experience
      *            the experience to set
      */
-    public void setExperience(Integer experience) {
+    public void setExperience(String experience) {
 	this.experience = experience;
     }
 
@@ -483,7 +483,7 @@ public class Colleague implements Serializable {
 	/**
 	 * Colleague experience
 	 */
-	private Integer experience;
+	private String experience;
 
 	/**
 	 * Colleague manager id
@@ -581,7 +581,7 @@ public class Colleague implements Serializable {
 	 *            the colleague's experience
 	 * @return the builder
 	 */
-	public Builder experience(final Integer experience) {
+	public Builder experience(final String experience) {
 	    this.experience = experience;
 	    return this;
 	}

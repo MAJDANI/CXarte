@@ -3,6 +3,8 @@ package com.novedia.talentmap.web.registration;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -12,22 +14,30 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.ConstantsDB;
+import com.novedia.talentmap.web.utils.ObjUtils;
 import com.novedia.talentmap.web.utils.PropertiesFile;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.server.UserError;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
-public class RegistrationForm extends FormLayout {
+public class RegistrationForm extends FormLayout implements ValueChangeListener{
 
 	private Registration registration;
 
@@ -82,8 +92,8 @@ public class RegistrationForm extends FormLayout {
 	@PropertyId(ComponentsId.MANAGER_ID)
 	private ComboBox managerField;
 	
-	private GridLayout registrationFormLayout;
-	
+	private GridLayout registrationGridLayout;
+	private DataValidationHelper dataValidationHelper;
 	private ResourceBundle resourceBundle;
 	
 	/**
@@ -105,22 +115,29 @@ public class RegistrationForm extends FormLayout {
 		try {
 			buildSignInLayout();
 			buildRegistrationForm();
+//			initDataValidateur();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+//	public void initDataValidateur() {
+//		dataValidation= new DataValidation();
+//	}
 	/**
 	 * Build the registrationForm Layout
 	 */
 	public void buildSignInLayout() {
-		this.registrationFormLayout.setColumns(2);
-		this.registrationFormLayout.setRows(8);
+		this.registrationGridLayout.setColumns(2);
+		this.registrationGridLayout.setRows(8);
 	}
 
 	public void buildRegistrationForm() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
+		//--------------------------------------
+		// TITLE
+		//--------------------------------------
 		title.setCaption(resourceBundle.getString("title.caption"));
 		title.addItem(resourceBundle.getString("title.masculin.value"));
 		title.setItemCaption(resourceBundle.getString("title.masculin.value"), resourceBundle.getString("title.masculin.caption"));
@@ -131,128 +148,160 @@ public class RegistrationForm extends FormLayout {
 		title.setRequiredError(resourceBundle.getString("error.missing.title"));
 		title.addStyleName("horizontal");
 		title.setId(ComponentsId.TITLE_ID);
-		registrationFormLayout.addComponent(title);
+		registrationGridLayout.addComponent(title);
 		
+		//--------------------------------------
+		// LOGIN
+		//--------------------------------------
 		loginField.setCaption(resourceBundle.getString("login.field.caption"));
 		loginField.setRequired(true);
-		loginField.setRequiredError(resourceBundle.getString("error.missing.login.field"));
-		loginField.addValidator(new BeanValidator(Registration.class, ComponentsId.LOGIN_ID));
 		loginField.setImmediate(true);
 		loginField.setValidationVisible(true);
 		loginField.setInputPrompt(resourceBundle.getString("login.field.default.value"));
 		loginField.setNullRepresentation("");
 		loginField.setId(ComponentsId.LOGIN_FIELD_ID);
-		registrationFormLayout.addComponent(loginField);
+		loginField.setMaxLength(ConstantsDB.REGISTRATION_LOGIN_MAX_LENGTH);
+		loginField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(loginField);
 		
+		//--------------------------------------
+		// NAME
+		//--------------------------------------
 		nameField.setCaption(resourceBundle.getString("name.field.caption"));
 		nameField.setRequired(true);
-		nameField.setRequiredError(resourceBundle.getString("error.name.missing.msg"));
-		nameField.addValidator(new BeanValidator(Registration.class, ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
 		nameField.setInputPrompt(resourceBundle.getString("name.field.default.value"));
 		nameField.setNullRepresentation("");
 		nameField.setId(ComponentsId.LAST_NAME_ID);
-		registrationFormLayout.addComponent(nameField);
+		nameField.setMaxLength(ConstantsDB.COLLEAGUE_LAST_NAME_MAX_LENGTH);
+		nameField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(nameField);
 
+		//--------------------------------------
+		// FIRST NAME
+		//--------------------------------------
 		firstNameField.setCaption(resourceBundle.getString("firstName.field.caption"));
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError(resourceBundle.getString("error.firstName.missing.msg"));
-		firstNameField.addValidator(new BeanValidator(Registration.class,
-				ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
 		firstNameField.setInputPrompt(resourceBundle.getString("firstName.field.default.value"));
 		firstNameField.setNullRepresentation("");
 		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
-		registrationFormLayout.addComponent(firstNameField);
+		firstNameField.setMaxLength(ConstantsDB.COLLEAGUE_FIRST_NAME_MAX_LENGTH);
+		firstNameField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(firstNameField);
 
+		//--------------------------------------
+		// PASSWORD
+		//--------------------------------------
 		passwordField.setCaption(resourceBundle.getString("password.field.caption"));
 		passwordField.setRequired(true);
-		passwordField.setRequiredError(resourceBundle.getString("error.password.missing.msg"));
-		passwordField.addValidator(new BeanValidator(Registration.class,
-				ComponentsId.PASSWORD_ID));
 		passwordField.setImmediate(true);
 		passwordField.setValidationVisible(true);
 		passwordField.setInputPrompt(resourceBundle.getString("password.field.default.value"));
 		passwordField.setNullRepresentation("");
 		passwordField.setId(ComponentsId.PASSWORD_ID);
-		registrationFormLayout.addComponent(passwordField);
+		passwordField.setMaxLength(ConstantsDB.REGISTRATION_PASSWORD_MAX_LENGTH);
+		passwordField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(passwordField);
 
+		//--------------------------------------
+		// CONFIRM PASSWORD
+		//--------------------------------------
 		confirmPasswordField.setCaption(resourceBundle.getString("confirm.password.field.caption"));
 		confirmPasswordField.setRequired(true);
-		confirmPasswordField.setRequiredError(resourceBundle.getString("error.confirm.password.missing.msg"));
-		confirmPasswordField.addValidator(new BeanValidator(Registration.class,
-				ComponentsId.PASSWORD_CONFIRM_ID));
 		confirmPasswordField.setImmediate(true);
 		confirmPasswordField.setValidationVisible(true);
 		confirmPasswordField.setInputPrompt(resourceBundle.getString("confirm.password.field.caption"));
 		confirmPasswordField.setNullRepresentation("");
 		confirmPasswordField.setId(ComponentsId.PASSWORD_CONFIRM_ID);
-		registrationFormLayout.addComponent(confirmPasswordField);
+		confirmPasswordField.setMaxLength(ConstantsDB.REGISTRATION_PASSWORD_MAX_LENGTH);
+		confirmPasswordField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(confirmPasswordField);
 
+		//--------------------------------------
+		// EMAIL
+		//--------------------------------------
 		emailField.setCaption(resourceBundle.getString("email.field.caption"));
 		emailField.setRequired(true);
-		emailField.setRequiredError(resourceBundle.getString("error.email.missing.msg"));
-		emailField.addValidator(new BeanValidator(Registration.class, ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
 		emailField.setInputPrompt(resourceBundle.getString("email.field.default.value"));
 		emailField.setNullRepresentation("");
 		emailField.setId(ComponentsId.EMAIL_ID);
-		registrationFormLayout.addComponent(emailField);
+		emailField.setMaxLength(ConstantsDB.COLLEAGUE_EMAIL_MAX_LENGTH);
+		emailField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(emailField);
 
+		//--------------------------------------
+		// PHONE
+		//--------------------------------------
 		phoneField.setCaption(resourceBundle.getString("phone.field.caption"));
 		phoneField.setInputPrompt(resourceBundle.getString("phone.field.default.value"));
+		phoneField.setImmediate(true);
 		phoneField.setNullRepresentation("");
 		phoneField.setId(ComponentsId.PHONE_ID);
-		registrationFormLayout.addComponent(phoneField);
+		phoneField.setMaxLength(ConstantsDB.COLLEAGUE_PHONE_MAX_LENGTH);
+		phoneField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(phoneField);
 
+		//--------------------------------------
+		// DATE
+		//--------------------------------------
 		dateField.setCaption(resourceBundle.getString("date.entry.caption"));
 		dateField.setRequired(true);
 		dateField.setRequiredError(resourceBundle.getString("error.date.entry.missing.msg"));
-		dateField.addValidator(new BeanValidator(Registration.class,
-				ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.setInputPrompt(Constants.DATE_FORMAT);
 		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
-		registrationFormLayout.addComponent(dateField);
+		registrationGridLayout.addComponent(dateField);
 
+		//--------------------------------------
+		// JOB/PROFILE
+		//--------------------------------------
 		jobField.setCaption(resourceBundle.getString("job.field.caption"));
 		jobField.setRequired(true);
 		jobField.setRequiredError(resourceBundle.getString("error.job.field.missing.msg"));
-		jobField.addValidator(new BeanValidator(Registration.class, ComponentsId.PROFILE_ID));
 		jobField.setImmediate(true);
 		jobField.setValidationVisible(true);
 		jobField.setInputPrompt(resourceBundle.getString("job.field.default.value"));
 		buildJobList();
 		jobField.setId(ComponentsId.PROFILE_ID);
-		registrationFormLayout.addComponent(jobField);
+		registrationGridLayout.addComponent(jobField);
 
+		//--------------------------------------
+		// EXPERIENCE
+		//--------------------------------------
 		experienceField.setCaption(resourceBundle.getString("experience.field.caption"));
 		experienceField.setRequired(true);
-		experienceField.setRequiredError(resourceBundle.getString("experience.field.missing.msg"));
-		experienceField.addValidator(new BeanValidator(Registration.class,
-				ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
 		experienceField.setNullRepresentation("");
 		experienceField.setId(ComponentsId.EXPERIENCE_ID);
-		registrationFormLayout.addComponent(experienceField);
+		experienceField.setMaxLength(ConstantsDB.COLLEAGUE_EXPERIENCE_MAX_LENGTH);
+		experienceField.addValueChangeListener(this);
+		registrationGridLayout.addComponent(experienceField);
 
+		//--------------------------------------
+		// BUSINESS ENGINEER
+		//--------------------------------------
 		businessEngineerField.setCaption(resourceBundle.getString("businessEngineer.field.caption"));
 		businessEngineerField.setInputPrompt(resourceBundle.getString("businessEngineer.field.default.value"));
 		buildEngineerList();
 		businessEngineerField.setId(ComponentsId.BUSINESS_ENGINEER_ID);
-		registrationFormLayout.addComponent(businessEngineerField);
+		registrationGridLayout.addComponent(businessEngineerField);
 
+		//--------------------------------------
+		// MANAGER
+		//--------------------------------------
 		managerField.setCaption(resourceBundle.getString("manager.field.caption"));
 		managerField.setInputPrompt(resourceBundle.getString("manager.field.value"));
 		buildManagerList();
 		managerField.setId(ComponentsId.MANAGER_ID);
-		registrationFormLayout.addComponent(managerField);
+		registrationGridLayout.addComponent(managerField);
 
 		registration = Registration.Builder.builder().title(resourceBundle.getString("title.masculin.value")).build();
 
@@ -262,7 +311,7 @@ public class RegistrationForm extends FormLayout {
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
 		
-		addComponent(this.registrationFormLayout);
+		addComponent(this.registrationGridLayout);
 
 	}
 
@@ -297,14 +346,35 @@ public class RegistrationForm extends FormLayout {
 		}
 	}
 	
-	
-
-	public GridLayout getRegistrationFormLayout() {
-		return registrationFormLayout;
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		Property p = event.getProperty();
+		if(loginField.equals(p)) {
+			dataValidationHelper.validateLogin(loginField);
+		} else if(nameField.equals(p)) {
+			dataValidationHelper.validateLastName(nameField);
+		} else if(firstNameField.equals(p)) {
+			dataValidationHelper.validateFirstName(firstNameField);
+		} else if(phoneField.equals(p)) {
+			dataValidationHelper.validatePhone(phoneField);
+		} else if(passwordField.equals(p)) {
+			dataValidationHelper.validatePassword(passwordField);
+		} else if(confirmPasswordField.equals(p)) {
+			dataValidationHelper.validateConfirmPassword(confirmPasswordField);
+		} else if(emailField.equals(p)) {
+			dataValidationHelper.validateEmail(emailField);
+		} else if(experienceField.equals(p)) {
+			dataValidationHelper.validateExperience(experienceField);
+		}
 	}
 
-	public void setRegistrationFormLayout(GridLayout registrationFormLayout) {
-		this.registrationFormLayout = registrationFormLayout;
+
+	public GridLayout getRegistrationGridLayout() {
+		return registrationGridLayout;
+	}
+
+	public void setRegistrationGridLayout(GridLayout registrationGridLayout) {
+		this.registrationGridLayout = registrationGridLayout;
 	}
 
 	public OptionGroup getTitle() {
@@ -451,6 +521,21 @@ public class RegistrationForm extends FormLayout {
 			IBusinessEngineerService businessEngineerService) {
 		this.businessEngineerService = businessEngineerService;
 	}
+
+	/**
+	 * @return the dataValidationHelper
+	 */
+	public DataValidationHelper getDataValidationHelper() {
+		return dataValidationHelper;
+	}
+
+	/**
+	 * @param dataValidationHelper the dataValidationHelper to set
+	 */
+	public void setDataValidationHelper(DataValidationHelper dataValidationHelper) {
+		this.dataValidationHelper = dataValidationHelper;
+	}
+
 
 }
 

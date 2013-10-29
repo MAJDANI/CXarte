@@ -2,11 +2,6 @@ package com.novedia.talentmap.model.entity;
 
 import java.util.Date;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
 /**
  * This entity represents a registration on TalentMap
  * 
@@ -28,28 +23,32 @@ public class Registration {
     /**
      * Sex
      */
-    @NotNull
+//    @NotNull
     private String title;
 
     /**
      * First Name
      */
-    @NotNull
-    @javax.validation.constraints.Size(min = 2, max=20)
+    //Validation enlevée parce que pas trouvé comment empêcher le message de validation de
+    //s'afficher 2 fois
+//    @NotNull
+//    @javax.validation.constraints.Size(min = 2, max=30)
     private String firstName;
 
     /**
      * Last Name
      */
-    @NotNull
-    @javax.validation.constraints.Size(min = 2, max=20)
+    //Validation enlevée parce que pas trouvé comment empêcher le message de validation de
+    //s'afficher 2 fois
+//    @NotNull
+//    @javax.validation.constraints.Size(min = 2, max=30)
     private String lastName;
 
     /**
      * mail
      */
-    @NotNull
-    @Email
+//    @NotNull
+//    @Email
     private String email;
 
     /**
@@ -60,15 +59,15 @@ public class Registration {
     /**
      * User password
      */
-    @NotNull
-    @javax.validation.constraints.Size(min = 4, max=20)
+//    @NotNull
+//    @javax.validation.constraints.Size(min = 4, max=50)
     private String password;
 
     /**
      * User confirm password
      */
-    @NotNull
-    @javax.validation.constraints.Size(min = 4, max=20)
+//    @NotNull
+//    @javax.validation.constraints.Size(min = 4, max=50)
     private String passwordConfirm;
 
     /**
@@ -79,15 +78,16 @@ public class Registration {
     /**
      * Employment Date
      */
-    @NotNull
+//    @NotNull
     private Date employmentDate;
 
     /**
      * Experience (unit : years)
      */
-    @NotNull
-    @Max(20)
-    private Integer experience;
+//    @NotNull
+//    @Max(20)
+//    private Integer experience;
+    private String experience;
 
     /**
      * The business Engineer
@@ -97,7 +97,7 @@ public class Registration {
     /**
      * Profile id
      */
-    @NotNull
+//    @NotNull
     private Integer profileId;
 
     /**
@@ -128,6 +128,7 @@ public class Registration {
 	this.setPassword(builder.password);
 	this.setPasswordConfirm(builder.passwordConfirm);
 	this.setEmploymentDate(builder.employmentDate);
+//	this.setExperience(builder.experience);
 	this.setExperience(builder.experience);
 	this.setBusinessEngineer(builder.businessEngineer);
 	this.setProfileId(builder.profileId);
@@ -166,7 +167,7 @@ public class Registration {
 
 	private Date employmentDate;
 
-	private Integer experience;
+	private String experience;
 
 	private BusinessEngineer businessEngineer;
 
@@ -288,7 +289,7 @@ public class Registration {
 	 *            the coworker's experience
 	 * @return the builder
 	 */
-	public Builder experience(final Integer experience) {
+	public Builder experience(final String experience) {
 	    this.experience = experience;
 	    return this;
 	}
@@ -467,7 +468,7 @@ public class Registration {
     /**
      * @return the experience
      */
-    public Integer getExperience() {
+    public String getExperience() {
 	return experience;
     }
     
@@ -475,7 +476,7 @@ public class Registration {
      * @param experience
      *            the experience to set
      */
-    public void setExperience(Integer experience) {
+    public void setExperience(String experience) {
 	this.experience = experience;
     }
 

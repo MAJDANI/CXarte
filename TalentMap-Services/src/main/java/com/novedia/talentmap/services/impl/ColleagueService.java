@@ -319,6 +319,22 @@ public class ColleagueService implements IColleagueService {
     }
 
     /**
+     * Counts colleagues in DB that have already the mail, with a different
+     * colleague's last and first name. Used to check, during the registration, if
+     * his email is not already use by someone else.
+     * 
+     * @param email : the email to check
+     * @param colleagueFirstName : first name of the colleague who wants to register
+     * @param colleagueLastName : last name of the colleague who wants to register
+     * @return The count found.
+     */
+    @Override
+	public Integer countMailForColleagueNames(String email, String colleagueFirstName,
+			String colleagueLastName) {
+    	return ((ColleagueDao) colleagueDao).countMailForColleagueNames(email, colleagueFirstName, colleagueLastName);
+	}
+
+	/**
      * This method allows to make the spring injection.
      * 
      * @param missionDao

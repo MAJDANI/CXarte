@@ -158,7 +158,7 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	@ResponseBody
 	public Authentication addColleague(@PathVariable final String name, @PathVariable final String firstName,@PathVariable final String title,
 			@PathVariable final String login, @PathVariable final String password,@PathVariable final String email,@PathVariable final String employemtDate,
-			@PathVariable final Integer profileId, @PathVariable final Integer experience,@PathVariable final String phone,
+			@PathVariable final Integer profileId, @PathVariable final /*Integer*/ String experience,@PathVariable final String phone,
 			@PathVariable final Integer bEngineerID, @PathVariable final Integer managerId) throws ParseException, DataAccessException{
 		
 		Authentication authentication = null;
@@ -230,7 +230,7 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 	@ResponseBody
 	public Colleague updateColleague(@PathVariable final Integer colleagueId,@PathVariable final String name, @PathVariable final String firstName,
 			@PathVariable final String email,@PathVariable final String employemtDate,@PathVariable final Integer profileId,
-			@PathVariable final Integer experience,@PathVariable final String phone,@PathVariable final Integer bEngineerID,
+			@PathVariable final String experience,@PathVariable final String phone,@PathVariable final Integer bEngineerID,
 			@PathVariable final Integer managerId) throws ParseException, DataAccessException{
 		
 		Colleague colleague = colleagueService.getColleague(colleagueId);

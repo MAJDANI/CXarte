@@ -48,7 +48,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 	 * Vaadin component
 	 */
 	private Panel registrationPanel;
-	private GridLayout registrationFormLayout;
+	private GridLayout registrationGridLayout;
 	private RegistrationForm registrationForm;
 	private Button save;
 	private Button logIn;
@@ -76,8 +76,8 @@ public class RegistrationScreen extends HorizontalLayout implements
 		registrationLabel.setCaption(resourceBundle.getString("registration.label.caption"));
 		registrationLabel.addStyleName("titleStyle");
 		header.addComponent(registrationLabel);
-		registrationFormLayout.removeAllComponents();
-		registrationForm.setRegistrationFormLayout(registrationFormLayout);
+		registrationGridLayout.removeAllComponents();
+		registrationForm.setRegistrationGridLayout(registrationGridLayout);
 		registrationPanel.addComponent(header);
 		registrationForm = registrationForm.buildRegistrationFormView();
 		registrationPanel.addComponent(registrationForm);
@@ -131,21 +131,21 @@ public class RegistrationScreen extends HorizontalLayout implements
 				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 			} else if ((!validatePassword())) {
 				Notification.show(resourceBundle.getString("password.confirm.error.msg"),Notification.Type.WARNING_MESSAGE);
-			}
-			Registration registration = registrationForm.getRegistration();
-			authentication = register(registration);
-			if (authentication != null) {
-				if(authentication != null){
-					TalentMapApplication.getCurrent().setAuthentication(authentication);
-					getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
-				}
 			} else {
-				Notification.show(resourceBundle.getString("error.create.user.msg"),Notification.Type.WARNING_MESSAGE);
+				Registration registration = registrationForm.getRegistration();
+				authentication = register(registration);
+				if (authentication != null) {
+					if(authentication != null){
+						TalentMapApplication.getCurrent().setAuthentication(authentication);
+						getParent().getUI().setContent(authenticatedScreen.selectedViewAccordingToUserRoles());
+					}
+				} else {
+					Notification.show(resourceBundle.getString("error.create.user.msg"),Notification.Type.WARNING_MESSAGE);
+				}
+				if(logger.isDebugEnabled()){
+					logger.debug(registrationForm.getRegistration().getLastName());
+				}
 			}
-			if(logger.isDebugEnabled()){
-				logger.debug(registrationForm.getRegistration().getLastName());
-			}
-
 		}
 	}
 
@@ -241,12 +241,12 @@ public class RegistrationScreen extends HorizontalLayout implements
 		this.loginScreen = loginScreen;
 	}
 
-	public GridLayout getRegistrationFormLayout() {
-		return registrationFormLayout;
+	public GridLayout getRegistrationGridLayout() {
+		return registrationGridLayout;
 	}
 
-	public void setRegistrationFormLayout(GridLayout registrationFormLayout) {
-		this.registrationFormLayout = registrationFormLayout;
+	public void setRegistrationGridLayout(GridLayout registrationGridLayout) {
+		this.registrationGridLayout = registrationGridLayout;
 	}
 
 	public RegistrationForm getRegistrationForm() {

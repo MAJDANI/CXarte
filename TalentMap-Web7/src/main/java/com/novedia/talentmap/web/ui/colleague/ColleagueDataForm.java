@@ -12,16 +12,22 @@ import com.novedia.talentmap.services.IBusinessEngineerService;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
 import com.novedia.talentmap.web.utils.ComponentsClass;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.PropertiesFile;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Notification;
@@ -29,7 +35,7 @@ import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
-public class ColleagueDataForm extends FormLayout implements BlurListener {
+public class ColleagueDataForm extends FormLayout implements BlurListener,  ValueChangeListener {
 
 	private Colleague colleagueTmp;
 
@@ -77,6 +83,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	private ComboBox managerField;
 
 	private ResourceBundle resourceBundle;
+	private DataValidationHelper dataValidationHelper;
 	
 	
 	/**
@@ -114,27 +121,25 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 		removeAllComponents();
 		nameField.setCaption(resourceBundle.getString("name.field.caption"));
 		nameField.setRequired(true);
-		nameField.setRequiredError(resourceBundle.getString("name.field.error.caption"));
-		nameField.addValidator(new BeanValidator(Colleague.class,ComponentsId.LAST_NAME_ID));
 		nameField.setImmediate(true);
 		nameField.setValidationVisible(true);
-		nameField.addBlurListener(this);
 		nameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		nameField.setId(ComponentsId.LAST_NAME_ID);
 		nameField.setWidth("190px");
+		nameField.setMaxLength(ConstantsDB.COLLEAGUE_LAST_NAME_MAX_LENGTH);
+		nameField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(nameField);
 
 		firstNameField.setCaption(resourceBundle.getString("firstName.field.caption"));
 		firstNameField.setRequired(true);
-		firstNameField.setRequiredError(resourceBundle.getString("firstName.field.error.caption"));
-		firstNameField.addValidator(new BeanValidator(Colleague.class,ComponentsId.FIRST_NAME_ID));
 		firstNameField.setImmediate(true);
 		firstNameField.setValidationVisible(true);
-		firstNameField.addBlurListener(this);
 		firstNameField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		firstNameField.setId(ComponentsId.FIRST_NAME_ID);
 		firstNameField.setWidth("190px");
+		firstNameField.setMaxLength(ConstantsDB.COLLEAGUE_FIRST_NAME_MAX_LENGTH);
 		firstNameField.addStyleName("spacerInfo");
+		firstNameField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(firstNameField);
 
 		jobField.setCaption(resourceBundle.getString("job.field.caption"));
@@ -152,50 +157,51 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 
 		emailField.setCaption(resourceBundle.getString("email.field.caption"));
 		emailField.setRequired(true);
-		emailField.setRequiredError(resourceBundle.getString("email.field.error.caption"));
-		emailField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMAIL_ID));
 		emailField.setImmediate(true);
 		emailField.setValidationVisible(true);
-		emailField.addBlurListener(this);
 		emailField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		emailField.setId(ComponentsId.EMAIL_ID);
 		emailField.setWidth("190px");
+		emailField.setMaxLength(ConstantsDB.COLLEAGUE_EMAIL_MAX_LENGTH);
 		emailField.addStyleName("spacerTop");
+		emailField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(emailField);
 
 		phoneField.setCaption(resourceBundle.getString("phone.field.caption"));
 		phoneField.setInputPrompt(resourceBundle.getString("phone.field.default"));
 		phoneField.setNullRepresentation("");
-		phoneField.addBlurListener(this);
+		phoneField.setImmediate(true);
 		phoneField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		phoneField.setId(ComponentsId.PHONE_ID);
 		phoneField.setWidth("190px");
 		phoneField.addStyleName("spacerInfo spacerTop");
+		phoneField.setMaxLength(ConstantsDB.COLLEAGUE_PHONE_MAX_LENGTH);
+		phoneField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(phoneField);
 
 		dateField.setCaption(resourceBundle.getString("date.field.caption"));
 		dateField.setRequired(true);
-		dateField.setRequiredError(resourceBundle.getString("date.field.error.caption"));
-		dateField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMPLOYMENT_DATE_ID));
+//		dateField.setRequiredError(resourceBundle.getString("date.field.error.caption"));
+//		dateField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.addBlurListener(this);
 		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
 		dateField.addStyleName("spacerInfo spacerTop");
+		dateField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(dateField);
 
 		experienceField.setCaption(resourceBundle.getString("experience.field.caption"));
 		experienceField.setRequired(true);
-		experienceField.setRequiredError(resourceBundle.getString("experience.field.error.caption"));
-		experienceField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EXPERIENCE_ID));
 		experienceField.setImmediate(true);
 		experienceField.setValidationVisible(true);
 		experienceField.setInputPrompt(Constants.EXPERIENCE_FORMAT);
-		experienceField.addBlurListener(this);
 		experienceField.setStyleName(ComponentsClass.TEXTFIELD_COLLEAGUE_DATA_FORM_CLASS);
 		experienceField.setId(ComponentsId.EXPERIENCE_ID);
 		experienceField.setWidth("50px");
+		experienceField.setMaxLength(ConstantsDB.COLLEAGUE_EXPERIENCE_MAX_LENGTH);
 		experienceField.addStyleName("spacerTop");
+		experienceField.addValueChangeListener(this);
 		colleagueFormLayout.addComponent(experienceField);
 
 		businessEngineerField.setCaption(resourceBundle.getString("businessEngineer.field.caption"));
@@ -226,14 +232,40 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	
 	@Override
 	public void blur(BlurEvent event) {
-		if (!validateColleagueDataForm()) {
-			Notification.show(resourceBundle.getString("error.fields.missing.msg"),Notification.Type.WARNING_MESSAGE);
+		Component p = event.getComponent();
+		if (dateField.equals(p)) {
+			dataValidationHelper.validateDateField(dateField);
 		} else {
-			colleagueTmp.setTitle(colleague.getTitle());
-			colleagueTmp.setId(colleague.getId());
+			if (!validateColleagueDataForm()) {
+				Notification.show(resourceBundle.getString("error.fields.missing.msg"),Notification.Type.WARNING_MESSAGE);
+			} else {
+				colleagueTmp.setTitle(colleague.getTitle());
+				colleagueTmp.setId(colleague.getId());
+				this.colleagueService.saveColleague(colleagueTmp);
+			}
+		}
+	}
+
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		Property p = event.getProperty();
+		boolean isValid = false;
+		if(nameField.equals(p)) {
+			isValid = dataValidationHelper.validateLastName(nameField);
+		} else if(firstNameField.equals(p)) {
+			isValid = dataValidationHelper.validateFirstName(firstNameField);
+		} else if(phoneField.equals(p)) {
+			isValid = dataValidationHelper.validatePhone(phoneField);
+		} else if(emailField.equals(p)) {
+			isValid = dataValidationHelper.validateEmailForOtherCO(emailField, colleague);
+		} else if(experienceField.equals(p)) {
+			isValid = dataValidationHelper.validateExperience(experienceField);
+		} else if(dateField.equals(p)) {
+			isValid = dataValidationHelper.validateDateField(dateField);
+		}
+		if(isValid) {
 			this.colleagueService.saveColleague(colleagueTmp);
 		}
-		
 	}
 
 	/**
@@ -395,6 +427,20 @@ public class ColleagueDataForm extends FormLayout implements BlurListener {
 	public void setBusinessEngineerService(
 			IBusinessEngineerService businessEngineerService) {
 		this.businessEngineerService = businessEngineerService;
+	}
+
+	/**
+	 * @return the dataValidationHelper
+	 */
+	public DataValidationHelper getDataValidationHelper() {
+		return dataValidationHelper;
+	}
+
+	/**
+	 * @param dataValidationHelper the dataValidationHelper to set
+	 */
+	public void setDataValidationHelper(DataValidationHelper dataValidationHelper) {
+		this.dataValidationHelper = dataValidationHelper;
 	}
 
 }

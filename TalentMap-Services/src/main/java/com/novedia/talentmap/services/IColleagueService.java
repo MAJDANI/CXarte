@@ -196,7 +196,19 @@ public interface IColleagueService {
      * @return The count found.
      */
     Integer countMailForColleagueId(Colleague colleague);
-    
+
+    /**
+     * Counts colleagues in DB that have already the mail, with a different
+     * colleague's last and first name. Used to check, during the registration, if
+     * his email is not already use by someone else.
+     * 
+     * @param email : the email to check
+     * @param colleagueFirstName : first name of the colleague who wants to register
+     * @param colleagueLastName : last name of the colleague who wants to register
+     * @return The count found.
+     */
+    Integer countMailForColleagueNames(String email, String colleagueFirstName, String colleagueLastName );
+  
     MissionDTO createMissionDTO(Mission m);
     
     Mission createEntity(MissionDTO mDTO);

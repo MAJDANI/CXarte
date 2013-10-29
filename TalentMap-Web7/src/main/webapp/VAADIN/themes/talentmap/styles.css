@@ -476,7 +476,7 @@
 
 .v-formlayout-captioncell, 
 .v-formlayout-errorcell{
-                display:none;
+/*                 display:none; */
 }
 
 .monStyleGras {

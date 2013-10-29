@@ -130,4 +130,19 @@ public class Constants {
 	public static final String IMG_CADRE_RED = "img/cadreRouge.png";
 	public static final String IMG_CADRE_GREY = "img/cadreGris.png";
 
+	/**
+	 * Constants for MIN and MAX sizes in forms
+	 */
+    public static final int COLLEAGUE_LAST_NAME_MIN_LENGTH = 2;
+    public static final int COLLEAGUE_FIRST_NAME_MIN_LENGTH = 2;
+    public static final int COLLEAGUE_PASSWORD_MIN_LENGTH = 4;
+    public static final int COLLEAGUE_EXPERIENCE_MAX_YEARS = 40;
+    
+    /**
+     * REGEX Validations
+     */
+    public static final String REGEX_EMAIL_VALIDATION = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    public static final String REGEX_PHONE_VALIDATION = "^[0-9]{10}$";
+    public static final String REGEX_EXPERIENCE_VALIDATION = "^[0-9]{1,2}";
+//    public static final String REGEX_DATE_VALIDATION = "[0-9]{1,2}/[0-9]{1,2}/[0-9]{2}";
 }

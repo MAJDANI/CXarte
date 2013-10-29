@@ -18,7 +18,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
@@ -105,7 +104,6 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 	 */
 	private void buildForm(){
 		changePasswordFormLayout.removeAllComponents();
-		VerticalLayout vLayout = new VerticalLayout();
 		oldPasswordField.setCaption(resourceBundle.getString("old.password.field.caption"));
 		oldPasswordField.setValue("");
 		oldPasswordField.setId(ComponentsId.OLD_PASSWORD_FIELD_ID);
@@ -125,12 +123,19 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		saveButton.addClickListener(this);
 		saveButton.setId(ComponentsId.SAVE_BTN_ID);
 		
-		vLayout.addComponent(oldPasswordField);
-		vLayout.addComponent(newPasswordField);
-		vLayout.addComponent(confirmPasswordField);
-		vLayout.addComponent(saveButton);
-		vLayout.setSpacing(true);
-		changePasswordFormLayout.addComponent(vLayout);
+		//TODO : a supprimer car corriger dans la feuille de style.  		
+//		VerticalLayout vLayout = new VerticalLayout();
+//		vLayout.addComponent(oldPasswordField);
+//		vLayout.addComponent(newPasswordField);
+//		vLayout.addComponent(confirmPasswordField);
+//		vLayout.addComponent(saveButton);
+//		changePasswordFormLayout.addComponent(vLayout);
+		
+		changePasswordFormLayout.addComponent(oldPasswordField);
+		changePasswordFormLayout.addComponent(newPasswordField);
+		changePasswordFormLayout.addComponent(confirmPasswordField);
+		changePasswordFormLayout.addComponent(saveButton);
+		changePasswordFormLayout.setSpacing(true);
 		
 	}
 	
