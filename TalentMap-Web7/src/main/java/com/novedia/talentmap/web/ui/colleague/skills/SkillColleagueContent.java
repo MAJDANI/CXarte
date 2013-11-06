@@ -254,11 +254,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
-//		editSkillButton.setCaption(resourceBundle.getString("edit.button.caption"));
-//		editSkillButton.addStyleName("styleButton");
-//		editSkillButton.addClickListener(this);
-//		editSkillButton.setEnabled(false);
-//		skillContentPanel.addComponent(editSkillButton);
 		
 	}
 	
