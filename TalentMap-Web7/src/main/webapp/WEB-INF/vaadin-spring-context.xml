@@ -117,7 +117,6 @@
 	<bean id="skillContentPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="saveButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="cancelButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="editSkillButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="conceptTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="toolTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="filArianeLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
@@ -135,7 +134,6 @@
 		<property name="addSkillForm" ref ="addSkillFormBean" />
 		<property name="saveButton" ref ="saveButtonBean" />
 		<property name="cancelButton" ref ="cancelButtonBean" />
-		<property name="editSkillButton" ref ="editSkillButtonBean" />
 		<property name="skillFormButtonLayout" ref ="skillFormButtonLayoutBean" />
 	</bean>
 	
@@ -145,6 +143,7 @@
 	<bean id="frequencyUseSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="noUsingTimeSelectBean" class="com.vaadin.ui.Select" scope="session" />
 	<bean id="categoryAndConceptLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
+	<bean id="toolAndScoreLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	<bean id="starsBean" class="org.vaadin.teemu.ratingstars.RatingStars" scope="session" />
 	
 	<bean id="addSkillFormBean" class="com.novedia.talentmap.web.ui.colleague.skills.AddSkillForm" scope="session">
@@ -155,6 +154,7 @@
 		<property name="frequencyUseSelect" ref ="frequencyUseSelectBean" />
 		<property name="noUsingTimeSelect" ref ="noUsingTimeSelectBean" />
 		<property name="categoryAndConceptLayout" ref="categoryAndConceptLayoutBean" />
+		<property name="toolAndScoreLayout" ref="toolAndScoreLayoutBean" />
 		<property name="stars" ref ="starsBean" />
 	</bean>
 	

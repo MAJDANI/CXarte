@@ -25,6 +25,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -63,8 +64,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private Button cancelButton;
 	
-	private Button editSkillButton;
-	
 	private Table conceptTable;
 	
 	private Table toolTable;
@@ -73,25 +72,31 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private ResourceBundle resourceBundle;
 	
+	private GridLayout allCategoriesLayout = new GridLayout();
+	
+	public static final int NB_CATEGORIES_BY_LINE = 6; 
+	
+	public static final int COLUMN_WiDTH = 300;
 	/**
 	 * Default constructor
 	 */
 	public SkillColleagueContent(){
 		super();
-		setSpacing(true);
-		setMargin(true);
 	}
 	
 	public VerticalLayout buildSkillColleagueContent(){
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
+		allCategoriesLayout.setColumns(NB_CATEGORIES_BY_LINE);
+		allCategoriesLayout.setSpacing(true);
+		
 		skillContentPanel.addStyleName("contentPanel");	
 		initToolTable();
 		initConceptTable();
 		getAllSkillColleague();
-		buildAddSkillPanel();
 		buildSkillContentPanel();
+		buildAddSkillPanel();
 		return this;
 	}
 	
@@ -109,8 +114,14 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void initConceptTable(){
 		conceptTable.addStyleName("table");
-		conceptTable.addContainerProperty(resourceBundle.getString("concept.name.caption"), Component.class, null);
-		conceptTable.addContainerProperty(resourceBundle.getString("concept.level.caption"), Component.class, null);
+		conceptTable.setSelectable(true);
+		conceptTable.setNullSelectionAllowed(true);
+		conceptTable.setImmediate(true);
+		conceptTable.addContainerProperty(resourceBundle.getString("concept.name.caption"), String.class, null);
+		conceptTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
+		conceptTable.setColumnWidth(resourceBundle.getString("concept.name.caption"), COLUMN_WiDTH);
+		conceptTable.setColumnWidth(resourceBundle.getString("skill.level.caption"), COLUMN_WiDTH);
+		
 	}
 	
 	/**
@@ -122,15 +133,18 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.setNullSelectionAllowed(true);
 		toolTable.setImmediate(true);
 		toolTable.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
-		toolTable.addContainerProperty(resourceBundle.getString("tool.level"), Integer.class, null);
+		toolTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
+		toolTable.setColumnWidth(resourceBundle.getString("tool.name.caption"), COLUMN_WiDTH);
+		toolTable.setColumnWidth(resourceBundle.getString("skill.level.caption"), COLUMN_WiDTH);
 	}
 	
 	private void buildAddSkillPanel(){
 		addSkillPanel.removeAllComponents();
+		addSkillPanel.setCaption(resourceBundle.getString("add.skill.panel.caption"));
 		addSkillPanel.addStyleName("contentPanel");
 		addSkillButton.setCaption(resourceBundle.getString("add.skill.button.caption"));
 		addSkillButton.addClickListener(this);
-		addSkillButton.addStyleName("styleButton addMission");
+		addSkillButton.addStyleName("styleButton");
 		addSkillButton.setVisible(true);
 		addSkillPanel.addComponent(addSkillButton);
 		
@@ -166,18 +180,22 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 * Display list of category
 	 * @return
 	 */
+	
+	
 	private void buildCategoryView(){
 		skillContentPanel.removeAllComponents();
+		allCategoriesLayout.removeAllComponents();
 		currentView = Constants.CATEGORY_VIEW;
 		if(categoryMapDto != null && !categoryMapDto.getMapCategory().isEmpty()){
-			skillContentPanel.addComponent(new Label(resourceBundle.getString("list.categories.label")));
+			skillContentPanel.setCaption(resourceBundle.getString("list.categories.label"));
 			for (Map.Entry<Category, ConceptMapDTO> categoryMap : categoryMapDto.getMapCategory().entrySet()) {
 				Button categButton = new Button(categoryMap.getKey().getName());
 				categButton.addClickListener(this);
-				categButton.addStyleName(Reindeer.BUTTON_LINK);
+				categButton.addStyleName("styleButton");
 				categButton.setData(categoryMap.getKey().getId());
-				skillContentPanel.addComponent(categButton);
-			}
+				allCategoriesLayout.addComponent(categButton);
+ 			}
+			skillContentPanel.addComponent(allCategoriesLayout);
 		}
 	}
 	
@@ -188,19 +206,14 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void buildConceptView(Integer categoryId){
 		skillContentPanel.removeAllComponents();
-		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.concept.label")));
 		currentView = Constants.CONCEPT_VIEW;
-		buildFilAriane();
-		skillContentPanel.addComponent(filArianeLayout);
+		skillContentPanel.addComponent(buildFilAriane());
+		
 		Category currentCategory = Category.builder().id(categoryId).build();
 		ConceptMapDTO conceptMapDto = categoryMapDto.getMapCategory().get(currentCategory);
 		conceptTable.removeAllItems();
 		conceptTable.setPageLength(conceptMapDto.getMapConcept().size());
 		for (Map.Entry<Concept, ToolSkillMap> conceptMap : conceptMapDto.getMapConcept().entrySet()) {
-			Button conceptButton = new Button(conceptMap.getKey().getName());
-			conceptButton.addClickListener(this);
-			conceptButton.addStyleName(Reindeer.BUTTON_LINK);
-			conceptButton.setData(conceptMap.getKey().getId());
 			int scoreConcept = (int) Math.round(conceptMap.getKey().getScore());
 			RatingStars rateConcept ;
 			if (scoreConcept != 0) {
@@ -210,9 +223,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			} else {
 				rateConcept = null;
 			}
-			conceptTable.addItem(new Object[]{conceptButton,rateConcept},conceptButton);
+			conceptTable.addItem(new Object[]{conceptMap.getKey().getName(),rateConcept},conceptMap.getKey().getId());
+			conceptTable.addValueChangeListener(this);
 		}
 		skillContentPanel.addComponent(conceptTable);
+		
+		
 	}
 	
 	/**
@@ -223,9 +239,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	private void buildToolView(Integer conceptId){
 		skillContentPanel.removeAllComponents();
 		currentView = Constants.TOOL_VIEW;
-		skillContentPanel.addComponent(new Label(resourceBundle.getString("list.tools.label")));
-		buildFilAriane();
-		skillContentPanel.addComponent(filArianeLayout);
+		skillContentPanel.addComponent(buildFilAriane());
 		Concept currentConcept = Concept.builder().id(conceptId).build();
 		Category currentCategory = Category.builder().id(currentCategoryId).build();
 		ConceptMapDTO conceptMapDto1 = categoryMapDto.getMapCategory().get(currentCategory);
@@ -233,24 +247,25 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.removeAllItems();
 		toolTable.setPageLength(mapTool.size());
 		for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
-			toolTable.addItem(new Object[]{eTool.getKey().getName(), 
-					eTool.getValue().getAverageScore(),},
-					eTool.getValue());
+			RatingStars rateTool = new RatingStars();
+			rateTool.setMaxValue(eTool.getValue().getAverageScore());
+			rateTool.setReadOnly(true);
+			toolTable.addItem(new Object[]{eTool.getKey().getName(),rateTool},eTool.getValue());
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
-		editSkillButton.setCaption(resourceBundle.getString("edit.button.caption"));
-		editSkillButton.addStyleName("styleButton");
-		editSkillButton.addClickListener(this);
-		editSkillButton.setEnabled(false);
-		skillContentPanel.addComponent(editSkillButton);
+//		editSkillButton.setCaption(resourceBundle.getString("edit.button.caption"));
+//		editSkillButton.addStyleName("styleButton");
+//		editSkillButton.addClickListener(this);
+//		editSkillButton.setEnabled(false);
+//		skillContentPanel.addComponent(editSkillButton);
 		
 	}
 	
 	/**
 	 * Build fil ariane layout
 	 */
-	private void buildFilAriane(){
+	private HorizontalLayout buildFilAriane(){
 		filArianeLayout.removeAllComponents();
 		filArianeLayout.setSpacing(true);
 		Button homeButton = new Button(resourceBundle.getString("home.button.caption"));
@@ -282,6 +297,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				break;
 			}
 		}
+		return filArianeLayout;
 	}
 	
 	
@@ -309,6 +325,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			addSkillForm.buildAddSkillForm(new Skill());
 			enabledSkillForm(true);
 		} else if(button.equals(cancelButton)){
+			toolTable.setValue(null);
+			
 			enabledSkillForm(false);
 		}else if (button.equals(saveButton)) {
 			if (checkSkillForm()) {
@@ -320,13 +338,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			} else {
 				Notification.show(resourceBundle.getString("error.missing.fields.msg"), Type.WARNING_MESSAGE);
 			}
-		} else if(button.equals(editSkillButton)){
-			Skill currentSkill = (Skill) toolTable.getValue();
-			addSkillForm.buildAddSkillForm(currentSkill);
-			addSkillForm.getToolSelect().setReadOnly(true);
-			enabledSkillForm(true);
 		} else {
-		
+			enabledSkillForm(false);
 			switch (currentView) {
 				case Constants.CATEGORY_VIEW:{
 					currentCategoryId = (Integer) button.getData();
@@ -337,10 +350,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 					Integer value = (Integer) button.getData();
 					if (value.equals(Constants.CATEGORY_VIEW)) {
 						buildCategoryView();
-					} else {
-						currentConceptId = value;
-						buildToolView(currentConceptId);
-					}
+					} 
 					break;
 				}	
 				case Constants.TOOL_VIEW:{
@@ -362,15 +372,28 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	@Override
 	public void valueChange(ValueChangeEvent event) {
-		Skill selectedSkill = (Skill) toolTable.getValue();
-		if (selectedSkill != null) {
-			editSkillButton.setEnabled(true);
-		} else {
-			editSkillButton.setEnabled(false);
-		}
+		if (event.getProperty().equals(conceptTable)) {
+			if(conceptTable.getValue() != null){
+				currentConceptId =  (Integer) conceptTable.getValue();
+				buildToolView(currentConceptId);
+			}
+				
+		} else if (event.getProperty().equals(toolTable)) {
+			Skill currentSkill = (Skill) toolTable.getValue();
+			if(currentSkill != null){
+				addSkillForm.buildAddSkillForm(currentSkill);
+				addSkillForm.getToolSelect().setReadOnly(true);
+				enabledSkillForm(true);
+			}else {
+				enabledSkillForm(false);
+			}
+		} 
+		
+		
+		
 	}
-
-
+	
+	
 	public ISkillService getSkillService() {
 		return skillService;
 	}
@@ -475,14 +498,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		this.cancelButton = cancelButton;
 	}
 
-	public Button getEditSkillButton() {
-		return editSkillButton;
-	}
-
-	public void setEditSkillButton(Button editSkillButton) {
-		this.editSkillButton = editSkillButton;
-	}
-
 	public Table getConceptTable() {
 		return conceptTable;
 	}
@@ -507,5 +522,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	public void setSkillFormButtonLayout(HorizontalLayout skillFormButtonLayout) {
 		this.skillFormButtonLayout = skillFormButtonLayout;
 	}
+
+	
 
 }

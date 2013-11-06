@@ -61,7 +61,8 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
     private RatingStars stars;
     
     private HorizontalLayout categoryAndConceptLayout;
-    private HorizontalLayout toolAndScoreLayout = new HorizontalLayout() ;
+    
+    private HorizontalLayout toolAndScoreLayout;
     
     //TODO : à charger à l'instanciation avec une méthode afterpropertieSet
     private ResourceBundle resourceBundle;
@@ -73,7 +74,6 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
      */
     public AddSkillForm() {
     	super();
-    	setSpacing(true);
     }
     
     /**
@@ -102,6 +102,7 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
     	conceptLabel.setCaption(resourceBundle.getString("concept.label"));
     	categoryAndConceptLayout.removeAllComponents();
     	toolAndScoreLayout.removeAllComponents();
+    	toolAndScoreLayout.setSpacing(true);
     	categoryAndConceptLayout.setSpacing(true);
     	categoryAndConceptLayout.addComponent(categoryLabel);
     	categoryAndConceptLayout.addComponent(conceptLabel);
@@ -124,11 +125,11 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
 			categoryAndConceptLayout.setVisible(false);
 		}
 		
+		toolAndScoreLayout.addComponent(categoryAndConceptLayout);
 		toolAndScoreLayout.addComponent(toolSelect);
 		toolAndScoreLayout.addComponent(stars);
 		toolAndScoreLayout.addComponent(frequencyUseSelect);
 		toolAndScoreLayout.addComponent(noUsingTimeSelect);
-		addComponent(categoryAndConceptLayout);
 		addComponent(toolAndScoreLayout);
     }
     
@@ -388,6 +389,16 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
 	public void setCategoryAndConceptLayout(HorizontalLayout categoryAndConceptLayout) {
 		this.categoryAndConceptLayout = categoryAndConceptLayout;
 	}
+
+	public HorizontalLayout getToolAndScoreLayout() {
+		return toolAndScoreLayout;
+	}
+
+	public void setToolAndScoreLayout(HorizontalLayout toolAndScoreLayout) {
+		this.toolAndScoreLayout = toolAndScoreLayout;
+	}
+	
+	
 	
 	
 }
