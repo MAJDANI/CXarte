@@ -69,7 +69,6 @@ public class ProfilePopIn extends Window implements ClickListener{
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
 		removeAllComponents();
 		setCaption(resourceBundle.getString("window.profile.title"));
-//		hLayout.setSpacing(true);
 		hLayout.removeAllComponents();
 		buildButtons();
 		buildMenu();
@@ -86,7 +85,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 		colleagueDataForm.setColleagueFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
 		panelRight.setWidth("800px");
-		panelRight.setHeight("300px");
+		panelRight.setHeight("400px");
 	}
 
 	private void buildButtons() {

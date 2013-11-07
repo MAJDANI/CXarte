@@ -246,9 +246,6 @@
 	line-height:normal !important;
 }
 
-/*.labelBtnDashboard .v-panel-content{
-                border:none !important;
-}*/
 .girdLayoutResult .v-panel-content{
 	width: 350px;
 /* 	border-style: solid; */
@@ -256,23 +253,11 @@
 	overflow:hidden;
 }
 
-/* A GARDER OU PAS?
-.v-gridlayout-slot .v-panel{
-    overflow:hidden;
-    margin-left:20px;
-    width:158px;
-    height:211px;
-}
-
-.v-gridlayout-slot .v-panel-content{
-	height:200px;
-	overflow:hidden;
-}
-
-.v-button-labelBtnDashboard{
-                cursor:pointer;
-}*/
 .image{
+	 cursor:pointer;
+}
+
+.labelBtnDashboard{
 	 cursor:pointer;
 }
 
@@ -347,8 +332,32 @@
 	text-align: center;
 }
 
+.v-table-cell-content {
+	height: 25px;
+	border-right: 0 none;
+}
+
+
+.v-table-row-odd, .v-table-row-odd {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+
+.v-table-cell-content .v-ratingstars-wrapper {
+	float: none;
+}
+
+.v-table-body, .v-table-header-wrap, .v-table-resizer {
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.v-table-cell-content .v-ratingstars-star {
+	background-color: #009CDA;
+}
+
 .containerButton {
-	text-align: center;
+	margin-left: 200px;
+    margin-top: 15px;
 }
 .footerLayoutMissionButton{
 	margin-top:  15px;
@@ -398,6 +407,8 @@
 
 .panelRight .v-panel-content{
 	overflow-x:hidden;
+	border-left: 1px solid #009CDA;
+    padding-left: 10px;
 
 }
 .v-panel-nocaption{
@@ -446,9 +457,6 @@
                 text-shadow: #3b5a7a 0 1px 0;
 }
 
-.addMission{
-                margin-left:20px;
-}
 
 .listMissionPanel .v-panel-content{
                 border:none;
