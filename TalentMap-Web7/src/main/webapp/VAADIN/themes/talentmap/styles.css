@@ -97,7 +97,8 @@
 .styleButton .v-button-wrap,
 .addBtn .v-button-wrap,
 .delBtn .v-button-wrap,
-#saveButton .v-button-wrap{
+#saveButton .v-button-wrap,
+.v-select-twincol-buttons .v-button-wrap{
 	padding: 4px 8px 0 0px;
 	background-image:none !important;
 }
@@ -106,13 +107,18 @@
 .styleButton.v-button,
 .addBtn.v-button,
 .delBtn.v-button,
-#saveButton.v-button{
+#saveButton.v-button,
+.v-select-twincol-buttons .v-button{
 	background-image:none;
 	background-color:#009cda;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	cursor:pointer;
+}
+
+.v-select-twincol-buttons .v-button, .v-select-twincol-buttons{
+	margin-bottom: 5px;	
 }
 
 .addBtn.v-button{
@@ -132,7 +138,8 @@
 .styleButton span.v-button-caption,
 .addBtn span.v-button-caption,
 .delBtn span.v-button-caption,
-#saveButton span.v-button-caption{
+#saveButton span.v-button-caption,
+.v-select-twincol-buttons span.v-button-caption{
 	color : #fff !important;
 	font-weight:normal;
 	font-size:15px;
