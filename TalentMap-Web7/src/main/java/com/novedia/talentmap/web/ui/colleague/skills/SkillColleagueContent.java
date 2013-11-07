@@ -72,11 +72,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private ResourceBundle resourceBundle;
 	
-	private GridLayout allCategoriesLayout = new GridLayout();
+	private Label noSkillLabel;
+	
+	private GridLayout allCategoriesLayout;
 	
 	public static final int NB_CATEGORIES_BY_LINE = 6; 
 	
-	public static final int COLUMN_WiDTH = 300;
 	/**
 	 * Default constructor
 	 */
@@ -92,6 +93,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		allCategoriesLayout.setSpacing(true);
 		
 		skillContentPanel.addStyleName("contentPanel");	
+		noSkillLabel.setCaption(resourceBundle.getString("no.skill.label.msg"));
+		
 		initToolTable();
 		initConceptTable();
 		getAllSkillColleague();
@@ -114,13 +117,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void initConceptTable(){
 		conceptTable.addStyleName("table");
+		conceptTable.setWidth("100%");
 		conceptTable.setSelectable(true);
 		conceptTable.setNullSelectionAllowed(true);
 		conceptTable.setImmediate(true);
 		conceptTable.addContainerProperty(resourceBundle.getString("concept.name.caption"), String.class, null);
 		conceptTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
-		conceptTable.setColumnWidth(resourceBundle.getString("concept.name.caption"), COLUMN_WiDTH);
-		conceptTable.setColumnWidth(resourceBundle.getString("skill.level.caption"), COLUMN_WiDTH);
 		
 	}
 	
@@ -129,13 +131,12 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	 */
 	private void initToolTable(){
 		toolTable.addStyleName("table");
+		toolTable.setWidth("100%");
 		toolTable.setSelectable(true);
 		toolTable.setNullSelectionAllowed(true);
 		toolTable.setImmediate(true);
 		toolTable.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
 		toolTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
-		toolTable.setColumnWidth(resourceBundle.getString("tool.name.caption"), COLUMN_WiDTH);
-		toolTable.setColumnWidth(resourceBundle.getString("skill.level.caption"), COLUMN_WiDTH);
 	}
 	
 	private void buildAddSkillPanel(){
@@ -196,6 +197,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				allCategoriesLayout.addComponent(categButton);
  			}
 			skillContentPanel.addComponent(allCategoriesLayout);
+		}else {
+			skillContentPanel.addComponent(noSkillLabel);
 		}
 	}
 	
@@ -518,6 +521,21 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		this.skillFormButtonLayout = skillFormButtonLayout;
 	}
 
-	
+	public GridLayout getAllCategoriesLayout() {
+		return allCategoriesLayout;
+	}
+
+	public void setAllCategoriesLayout(GridLayout allCategoriesLayout) {
+		this.allCategoriesLayout = allCategoriesLayout;
+	}
+
+	public Label getNoSkillLabel() {
+		return noSkillLabel;
+	}
+
+	public void setNoSkillLabel(Label noSkillLabel) {
+		this.noSkillLabel = noSkillLabel;
+	}
+
 
 }

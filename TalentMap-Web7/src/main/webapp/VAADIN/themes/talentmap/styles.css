@@ -404,7 +404,7 @@
 	text-transform:uppercase;
 }
 
-.panelRight .v-panel-content{
+.v-panel-panelRight {
 	border-left: 1px solid #009CDA;
     padding-left: 10px;
 }
@@ -413,7 +413,7 @@
 	border-top: none !important;
 }
 
-.panelRight .v-panel-content .v-formlayout{
+.panelRight .v-panel-content .v-formlayout, .missionForm {
 	text-align:center;
 }
 
@@ -451,9 +451,9 @@
 }
 
 
-.listMissionPanel .v-panel-content{
-                border:none;
-}
+/* .listMissionPanel .v-panel-content{ */
+/*                 border:none; */
+/* } */
 
 .v-panel-content-searchResultsPanel{
                 border:none;

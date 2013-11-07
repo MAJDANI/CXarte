@@ -121,6 +121,8 @@
 	<bean id="toolTableBean" class="com.vaadin.ui.Table" scope="session" />
 	<bean id="filArianeLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
 	<bean id="skillFormButtonLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session"/>
+	<bean id="allCategoriesLayoutBean" class="com.vaadin.ui.GridLayout" scope="session"/>
+	<bean id="noSkillLabelBean" class="com.vaadin.ui.Label" scope="session"/>
 	
 	<bean id="skillColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.skills.SkillColleagueContent" scope="session">
 		<property name="adminService" ref ="adminService" />
@@ -135,6 +137,8 @@
 		<property name="saveButton" ref ="saveButtonBean" />
 		<property name="cancelButton" ref ="cancelButtonBean" />
 		<property name="skillFormButtonLayout" ref ="skillFormButtonLayoutBean" />
+		<property name="allCategoriesLayout" ref ="allCategoriesLayoutBean" />
+		<property name="noSkillLabel" ref ="noSkillLabelBean" />
 	</bean>
 	
 	<bean id="categoryLabelBean" class="com.vaadin.ui.Label" scope="session" />
@@ -196,15 +200,8 @@
 	
 	<bean id="listMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
 	<bean id="addMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="footerLayoutMissionButtonBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
-	<bean id="editMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="deleteMissionButtonBean" class="com.vaadin.ui.Button" scope="session" />
 	<bean id="addMissionPanelBean" class="com.vaadin.ui.Panel" scope="session" />
-	<bean id="noButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="yesButtonBean" class="com.vaadin.ui.Button" scope="session" />
-	<bean id="confirmDeleteLabelBean" class="com.vaadin.ui.Label" scope="session" />
-	<bean id="confirmButtonContainerBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
-	<bean id="windowConfirmBean" class="com.vaadin.ui.Window" scope="session" />
+	<bean id="noMissionLabelBean" class="com.vaadin.ui.Label" scope="session" />
 	<bean id="missionFormButtonLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
 	
 	<bean id="missionColleagueContentBean" class="com.novedia.talentmap.web.ui.colleague.missions.MissionColleagueContent" scope="session" >
@@ -212,18 +209,11 @@
 		<property name="listMission" ref ="listMissionBean" />
 		<property name="addMissionButton" ref ="addMissionButtonBean" />
 		<property name="listMissionPanel" ref ="listMissionPanelBean" />
-		<property name="footerLayoutMissionButton" ref ="footerLayoutMissionButtonBean" />
-		<property name="deleteMissionButton" ref ="deleteMissionButtonBean" />
-		<property name="editMissionButton" ref ="editMissionButtonBean" />
 		<property name="addMissionPanel" ref ="addMissionPanelBean" />
-		<property name="windowConfirm" ref ="windowConfirmBean" />
-		<property name="confirmDeleteLabel" ref ="confirmDeleteLabelBean" />
-		<property name="confirmButtonContainer" ref ="confirmButtonContainerBean" />
-		<property name="yesButton" ref ="yesButtonBean" />
-		<property name="noButton" ref ="noButtonBean" />
 		<property name="missionForm" ref ="missionForm" />
 		<property name="saveButton" ref ="saveButtonMissionFormBean" />
 		<property name="cancelButton" ref ="cancelButtonMissionFormBean" />
+		<property name="noMissionLabel" ref ="noMissionLabelBean" />
 		<property name="missionFormButtonLayout" ref ="missionFormButtonLayoutBean" />
 	</bean>
 	

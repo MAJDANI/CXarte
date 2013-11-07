@@ -70,6 +70,7 @@ public class MissionForm extends HorizontalLayout{
 	public MissionForm() {
 		super();
 		setSpacing(true);
+		addStyleName("missionForm");
 	}
 	
 	public MissionForm buildMissionForm(MissionDTO missionDto) {

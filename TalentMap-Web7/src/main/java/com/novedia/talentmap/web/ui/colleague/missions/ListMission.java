@@ -25,10 +25,10 @@ public class ListMission extends Table {
      */
     public ListMission() {
 		super();
-//		addColumns();
 		setSelectable(true);
 		setImmediate(true);
 		setNullSelectionAllowed(true);
+		setWidth("100%");
     }
     
     
