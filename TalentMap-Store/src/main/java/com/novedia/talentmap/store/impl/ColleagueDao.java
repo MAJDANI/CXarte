@@ -63,8 +63,32 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Copies Colleague, EAEs, Objectives and Missions related to the colleague in parameter
+	 * @param colleague the colleague we want to hitorize
+	 * @return the number of (EAEs + Missions) found attached to the colleague
+	 * @throws DataAccessException
+	 */
+	public int historize(Colleague colleague) throws DataAccessException {
+		//If the colleague has no mission and no EAE we don't historize
+		Integer nbEAE = (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.COUNT_COLLEAGUES_EAES, colleague);
+		Integer nbMissions = (Integer) this.getSqlMapClientTemplate().queryForObject(
+				DBRequestsConstants.COUNT_COLLEAGUES_MISSIONS, colleague);
+		Integer nbEAEAndMissions = nbEAE + nbMissions;
+		if((nbEAEAndMissions) > 0) {
+			this.getSqlMapClientTemplate().insert(DBRequestsConstants.HISTORIZE_COLLEAGUE, colleague);
+			this.getSqlMapClientTemplate().insert(DBRequestsConstants.HISTORIZE_COLLEAGUES_EAES, colleague);
+			this.getSqlMapClientTemplate().insert(DBRequestsConstants.HISTORIZE_COLLEAGUES_EAES_OBJECTIVES, colleague);
+			this.getSqlMapClientTemplate().insert(DBRequestsConstants.HISTORIZE_COLLEAGUES_MISSIONS,colleague);
+		}
+		return nbEAEAndMissions;
+	}
+
+	
 	@Override
 	public int delete(Colleague colleague) throws DataAccessException {
+		System.out.println("ICI----------------------");
 		if (logger.isDebugEnabled()) {
 			logger.debug("Delete colleague ID :" + colleague.getId());
 		}
@@ -75,7 +99,6 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 					DBRequestsConstants.ERASE_MANAGER_COLLEAGUE, colleague);
 		}
 		return DeletResult;
-		// throw new UnsupportedOperationException();
 	}
 
 	@Override

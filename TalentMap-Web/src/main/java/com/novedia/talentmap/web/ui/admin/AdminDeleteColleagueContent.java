@@ -28,6 +28,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.Window.Notification;
 
 public class AdminDeleteColleagueContent extends VerticalLayout implements
 	ClickListener, ValueChangeListener, TextChangeListener {
@@ -265,6 +266,7 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements
 
     @SuppressWarnings("unchecked")
     @Override
+    @Deprecated
     public void buttonClick(ClickEvent event) {
 	if (event.getButton().getCaption().equals(LABEL_BUTTON_DELETE)) { // delete
 	    // button
@@ -283,9 +285,10 @@ public class AdminDeleteColleagueContent extends VerticalLayout implements
 	    Set<Colleague> colleagueSelected = (Set<Colleague>) colleagueList
 		    .getValue();
 	    Map<String, Object> mapNotification = null;
-	    mapNotification = adminService.deleteColleague(colleagueSelected);
+//	    mapNotification = adminService.deleteColleague(colleagueSelected);
+	    mapNotification = adminService.historizeAndDeleteColleague(colleagueSelected);
 	    if (mapNotification != null) {
-		CUtils.showMessage(mapNotification, getWindow());
+	    	CUtils.showMessage(mapNotification, getWindow());
 	    }
 	    buildResultPanel((String) searchField.getValue());
 

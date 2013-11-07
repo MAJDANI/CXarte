@@ -144,7 +144,7 @@
 
 	<update id="eraseManager" parameterClass="com.novedia.talentmap.model.entity.Colleague">
 		UPDATE COLLEAGUE SET
-		MANAGER_ID = '' WHERE MANAGER_ID = #id#
+		MANAGER_ID = null WHERE MANAGER_ID = #id#
 	</update>
 
 	<select id="getAllColleaguesByListToolId" resultMap="colleagueResult"
@@ -196,7 +196,6 @@
 		AND UPPER(FIRST_NAME) != UPPER(#firstName#)
 	</select>
 
-
 	<insert id="addColleagueFromRegistration" parameterClass="com.novedia.talentmap.model.entity.Registration">
 
 		INSERT INTO COLLEAGUE (
@@ -233,5 +232,36 @@
 			#listCollaborators[]#
 		</iterate>
 	</statement>
+
+
+	<select id="countHistorizeColleague" parameterClass="com.novedia.talentmap.model.entity.Colleague" resultClass="Integer">
+		SELECT COUNT(*) FROM COLLEAGUE WHERE COLLEAGUE_ID=#id# 
+	</select>
+
+	<insert id="historizeColleague" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		INSERT INTO COLLEAGUE_H (SELECT * FROM COLLEAGUE WHERE COLLEAGUE_ID=#id# )
+	</insert>
+
+	<select id="countColleaguesEAEs" parameterClass="com.novedia.talentmap.model.entity.Colleague" resultClass="Integer">
+		SELECT COUNT(*) FROM EAE WHERE COLLEAGUE_ID=#id# 
+	</select>
+	
+	<select id="countColleaguesMissions" parameterClass="com.novedia.talentmap.model.entity.Colleague" resultClass="Integer">
+		SELECT COUNT(*) FROM MISSION WHERE COLLEAGUE_ID=#id#
+	</select>
+
+	<insert id="historizeColleaguesEAEs" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		INSERT INTO EAE_H (SELECT * FROM EAE WHERE COLLEAGUE_ID=#id# )
+	</insert>
+
+	<insert id="historizeColleaguesEAEsObjectives" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		INSERT INTO OBJECTIVE_H 
+			(SELECT * FROM OBJECTIVE 
+				WHERE EAE_ID IN (SELECT EAE_ID FROM EAE_H WHERE COLLEAGUE_ID=#id#) )
+	</insert>
+
+	<insert id="historizeColleaguesMissions" parameterClass="com.novedia.talentmap.model.entity.Colleague">
+		INSERT INTO MISSION_H (SELECT * FROM MISSION WHERE COLLEAGUE_ID=#id# )
+	</insert>
 
 </sqlMap>

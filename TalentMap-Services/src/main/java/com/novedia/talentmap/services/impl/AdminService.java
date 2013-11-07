@@ -17,6 +17,7 @@ import com.novedia.talentmap.services.utils.Constants;
 import com.novedia.talentmap.store.IDao;
 import com.novedia.talentmap.store.IVSkillDao;
 import com.novedia.talentmap.store.impl.CategoryDao;
+import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.store.impl.ConceptDao;
 import com.novedia.talentmap.store.impl.ToolDao;
 
@@ -357,19 +358,38 @@ public class AdminService implements IAdminService {
 
     @Override
     @Transactional
-    public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
-	try {
-	    for (Colleague colleague : Colleagues) {
-		colleagueDao.delete(colleague);
+    public Map<String, Object> historizeAndDeleteColleague(Set<Colleague> colleagues) {
+    	//HISTORIZE
+	    for (Colleague colleague : colleagues) {
+	    	ColleagueDao dao = (ColleagueDao) colleagueDao;
+	    	try {
+	    		dao.historize(colleague);
+	    	} catch (Exception e) {
+	    		System.out.println("Exception occured : " + e);
+	    	}
 	    }
-	    this.mapNotification.put("typeError", 1);
-	    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
+	
+    	//DELETE
+	    Map<String, Object> map = deleteColleague(colleagues);
+	    System.out.println("map=" + map);
+	    return map;
+    }
 
-	} catch (DataAccessException e) {
-	    this.mapNotification.put("typeError", 3);
-	    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
-	}
-	return mapNotification;
+    @Override
+    @Transactional
+    public Map<String, Object> deleteColleague(Set<Colleague> Colleagues) {
+		try {
+		    for (Colleague colleague : Colleagues) {
+		    	colleagueDao.delete(colleague);
+		    }
+		    this.mapNotification.put("typeError", 1);
+		    this.mapNotification.put(Constants.MSG_ERROR, Constants.SUCCESSFUL_DELETE);
+		    System.out.println("SUCCESSFUL_DELETE");
+		} catch (DataAccessException e) {
+		    this.mapNotification.put("typeError", 3);
+		    this.mapNotification.put(Constants.MSG_ERROR, Constants.UNSUCCESSFUL_DELETE);
+		}
+		return mapNotification;
     }
 
     @Override

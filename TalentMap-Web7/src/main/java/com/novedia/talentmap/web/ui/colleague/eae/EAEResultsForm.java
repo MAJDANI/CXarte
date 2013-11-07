@@ -59,12 +59,12 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 	private TextArea meansToProgress;
 
 	private final String HEIGHT = "30px";
-	private final String WIDTH = "640px";//OK
-	private final String HEIGHT_APPRECIATION = "100px";
-	private final String WIDTH_ACCORDION_OBECTIVES = "640px";
-	private final String WIDTH_ACCORDION_APPRECIATION = "640px";
-	private final String WIDTH_APPRECIATION_GLOBALE = "580px";
 	private final String HEIGHT_FORM = "450px";
+	private final String HEIGHT_APPRECIATION = "100px";
+
+	private final String WIDTH = "570px";//OK
+	private final String WIDTH_ACCORDION_APPRECIATION = "575px";
+	private final String WIDTH_APPRECIATION_GLOBALE = "465px";
 
 	private ResourceBundle resourceBundle;
 	private CurrentEAEContent currentEAEContent;
@@ -95,13 +95,15 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 	}
 
 	private void buildLayout() {
+		this.setWidth("100%");
 		eaeResultsFormLayout.removeAllComponents();
 		this.eaeResultsFormLayout.setColumns(1);
 		this.eaeResultsFormLayout.setRows(8);
 		this.eaeResultsFormLayout.setId(ComponentsId.EAE_RESULTS_FORM_LAYOUT_ID);
 		this.eaeResultsFormLayout.addStyleName("styleDeTest");
 		this.eaeResultsFormLayout.setMargin(true);
-		eaeResultsFormLayout.setWidth("90%");
+		eaeResultsFormLayout.setWidth("100%"); 
+		
 	}
 
 	private void buildEAEResultsForm() {
@@ -150,11 +152,12 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 			titreObjectifs.setStyleName("mystyleTitleBilanTODO");
 			titreObjectifs.addStyleName("spacerTop");
 			eaeResultsFormLayout.addComponent(titreObjectifs);
+			eaeResultsFormLayout.addStyleName("monSuperStyle");
 			row +=1;
 
 			// Create the Accordion.
 			Accordion accordionObjectives = new Accordion();
-			accordionObjectives.setWidth(WIDTH_ACCORDION_OBECTIVES);
+			accordionObjectives.setWidth("100px");
 	
 			if(listObjectives != null) {
 				for(Objective o : listObjectives){
@@ -165,7 +168,7 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 			}
 			accordionObjectives.addStyleName("spacerTop");
 			accordionObjectives.setId(ComponentsId.EAE_RESULTS_ACCORDION_OBJ_ID);
-			
+			accordionObjectives.setSizeUndefined();
 			if(listObjectives != null && !listObjectives.isEmpty()) {
 				eaeResultsFormLayout.addComponent(accordionObjectives);
 				row +=1;
@@ -283,7 +286,6 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 				}
 			}
 		}
-		
 		addComponent(eaeResultsFormLayout);
 		
 	}

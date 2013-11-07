@@ -15,6 +15,7 @@ import com.novedia.talentmap.services.IAuthenticationService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.store.impl.ColleagueDao;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
 import com.novedia.talentmap.web.login.AuthenticatedScreen;
 import com.novedia.talentmap.web.login.LoginScreen;
 import com.novedia.talentmap.web.utils.PropertiesFile;
@@ -55,7 +56,8 @@ public class RegistrationScreen extends HorizontalLayout implements
 	private VerticalLayout bottomRegistrationScreenLayout;
 	private HorizontalLayout backLoginScreenLayout;
 	private Label alreadyHaveAccountLabel;
-	
+	private DataValidationHelper dataValidationHelper;
+
 	private AuthenticatedScreen authenticatedScreen;
 
 	private LoginScreen loginScreen;
@@ -119,6 +121,17 @@ public class RegistrationScreen extends HorizontalLayout implements
 
 	}
 
+	private boolean validateFields() {
+			if(!dataValidationHelper.validateLogin(registrationForm.getLoginField())) return false;
+			else if(!dataValidationHelper.validateLastName(registrationForm.getNameField())) return false;
+			else if(!dataValidationHelper.validateFirstName(registrationForm.getFirstNameField())) return false;
+			else if(!dataValidationHelper.validatePhone(registrationForm.getPhoneField())) return false;
+			else if(!dataValidationHelper.validatePassword(registrationForm.getPasswordField())) return false;
+			else if(!dataValidationHelper.validateConfirmPassword(registrationForm.getConfirmPasswordField())) return false;
+			else if(!dataValidationHelper.validateEmail(registrationForm.getEmailField())) return false;
+			else if(!dataValidationHelper.validateExperience(registrationForm.getExperienceField())) return false;
+			return true;
+	}
 	@Override
 	public void buttonClick(ClickEvent event) {
 		
@@ -131,7 +144,7 @@ public class RegistrationScreen extends HorizontalLayout implements
 				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 			} else if ((!validatePassword())) {
 				Notification.show(resourceBundle.getString("password.confirm.error.msg"),Notification.Type.WARNING_MESSAGE);
-			} else {
+			} else if(validateFields()) {
 				Registration registration = registrationForm.getRegistration();
 				authentication = register(registration);
 				if (authentication != null) {
@@ -313,6 +326,20 @@ public class RegistrationScreen extends HorizontalLayout implements
 
 	public void setAlreadyHaveAccountLabel(Label alreadyHaveAccountLabel) {
 		this.alreadyHaveAccountLabel = alreadyHaveAccountLabel;
+	}
+
+	/**
+	 * @return the dataValidationHelper
+	 */
+	public DataValidationHelper getDataValidationHelper() {
+		return dataValidationHelper;
+	}
+
+	/**
+	 * @param dataValidationHelper the dataValidationHelper to set
+	 */
+	public void setDataValidationHelper(DataValidationHelper dataValidationHelper) {
+		this.dataValidationHelper = dataValidationHelper;
 	}
 	
 	

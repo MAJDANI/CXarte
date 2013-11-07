@@ -13,5 +13,8 @@ public class Constants {
 	
 	public static final String UNSUCCESSFUL_UPDATE = "No skill update";
 	
+	public static final String SUCCESSFUL_HISTORIZE = "successful historize";
+
+	public static final String UNSUCCESSFUL_HISTORIZE = "unsuccessful historize";
 
 }

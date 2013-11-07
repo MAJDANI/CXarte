@@ -195,6 +195,15 @@ public interface IAdminService {
     Map<String, Object> deleteTool(int toolId);
 
     /**
+     * Historize and delete all colleague given in the set
+     * 
+     * @param colleagues
+     *            a set of colleague to historize and delete
+     * @return a map object
+     */
+    Map<String, Object> historizeAndDeleteColleague(Set<Colleague> colleagues);
+
+    /**
      * Delete all colleague given in the set
      * 
      * @param Colleagues
@@ -204,6 +213,7 @@ public interface IAdminService {
     Map<String, Object> deleteColleague(Set<Colleague> Colleagues);
 
     void updateManagerColleague(int ColleagueID);
+
 
 	
 

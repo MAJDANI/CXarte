@@ -52,4 +52,8 @@ public class ConstantsDB {
     public static final int COLLEAGUE_PHONE_MAX_LENGTH = 10;//OK 2013/10/18
     public static final int COLLEAGUE_EXPERIENCE_MAX_LENGTH = 2;
 
+    // TABLE MISSION
+    public static final int MISSION_TITLE_MAX_LENGTH = 60;//OK 2013/11/05
+    public static final int MISSION_PLACE_MAX_LENGTH = 60;//OK 2013/11/05
+
 }

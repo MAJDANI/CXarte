@@ -135,7 +135,7 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 	/**
 	 * Largeur de chaque élément du formulaire
 	 */
-	private final String ELEMENT_WIDTH = "580px";
+	private final String ELEMENT_WIDTH = "500px";//580
 	/**
 	 * Hauteur de chaque élément du formulaire
 	 */

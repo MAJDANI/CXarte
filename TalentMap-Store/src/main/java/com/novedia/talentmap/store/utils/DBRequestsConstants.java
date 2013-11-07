@@ -42,6 +42,41 @@ public final class DBRequestsConstants {
 
 	public static final String ERASE_MANAGER_COLLEAGUE = "colleague.eraseManager";
 
+
+	/**
+	 * Counts the collegues to Historize
+	 */
+	public static final String COUNT_HISTORIZE_COLLEAGUE = "colleague.countHistorizeColleague";
+
+	/**
+	 * Historizes the colleague
+	 */
+	public static final String HISTORIZE_COLLEAGUE = "colleague.historizeColleague";
+
+	/**
+	 * Counts the EAE 
+	 */
+	public static final String COUNT_COLLEAGUES_EAES = "colleague.countColleaguesEAEs";
+	/**
+	 * Counts the Missions
+	 */
+	public static final String COUNT_COLLEAGUES_MISSIONS = "colleague.countColleaguesMissions";
+
+	/**
+	 * Historizes the colleague's EAEs 
+	 */
+	public static final String HISTORIZE_COLLEAGUES_EAES = "colleague.historizeColleaguesEAEs";
+
+	/**
+	 * Historizes the colleague's EAEs' objectives 
+	 */
+	public static final String HISTORIZE_COLLEAGUES_EAES_OBJECTIVES = "colleague.historizeColleaguesEAEsObjectives";
+
+	/**
+	 * Historizes the colleague's missions
+	 */
+	public static final String HISTORIZE_COLLEAGUES_MISSIONS = "colleague.historizeColleaguesMissions";
+
 	/**
 	 * Constant request to get a colleague by lastName.
 	 */

@@ -123,7 +123,9 @@ public class ColleagueController extends TalentMapRestHandlerException implement
 		Colleague colleague = Colleague.builder().id(colleagueId).build();
 		Set<Colleague> colleagues = new HashSet<Colleague>();
 		colleagues.add(colleague);
+		//TODO Vérifier si on doit historiser avant de supprimer
 		Map<String, Object> result = adminService.deleteColleague(colleagues);
+//		Map<String, Object> result = adminService.historizeAndDeleteColleague(colleagues);
 		
 		if(result.get(Constants.MSG_ERROR).equals((String)Constants.UNSUCCESSFUL_DELETE)){
 			response.setMessage(ConstantsValue.UNSUCCESSFUL_DELETE_MSG);

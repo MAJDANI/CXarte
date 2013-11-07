@@ -137,6 +137,7 @@ public class Constants {
     public static final int COLLEAGUE_FIRST_NAME_MIN_LENGTH = 2;
     public static final int COLLEAGUE_PASSWORD_MIN_LENGTH = 4;
     public static final int COLLEAGUE_EXPERIENCE_MAX_YEARS = 40;
+    public static final int MISSION_TITLE_MIN_LENGTH = 0;
     
     /**
      * REGEX Validations

@@ -2,12 +2,14 @@ package com.novedia.talentmap.web.ui.admin;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 import com.novedia.talentmap.model.entity.Colleague;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -186,8 +188,14 @@ public class ManageColleaguePopIn extends Window implements TextChangeListener, 
 	@SuppressWarnings("unchecked")
 	private void delecteColleague(){
 		Set<Colleague> colleagueSelected = (Set<Colleague>) colleagueTableList.getValue();
-		adminService.deleteColleague(colleagueSelected);
+//		adminService.deleteColleague(colleagueSelected);
+		Map<String, Object> mapNotification = null;
+		mapNotification = adminService.historizeAndDeleteColleague(colleagueSelected);
+	    if (mapNotification != null) {
+	    	CUtils.showMessage(mapNotification);
+	    }
 		refreshResultPanel(colleagueNameField.getValue());
+		
 	}
 	
 	private void buildConfirmWindow(){
