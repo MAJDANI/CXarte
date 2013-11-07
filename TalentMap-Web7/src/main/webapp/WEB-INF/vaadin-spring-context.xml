@@ -322,6 +322,7 @@
 		<property name="bottomRegistrationScreenLayout" ref="bottomRegistrationScreenLayoutBean" />
 		<property name="backLoginScreenLayout" ref="backLoginScreenLayoutRegistrationBean" />
 		<property name="alreadyHaveAccountLabel" ref="alreadyHaveAccountLabelRegistrationBean" />
+		<property name="dataValidationHelper" ref="dataValidationHelperBean" />
 	</bean>
 	
 	

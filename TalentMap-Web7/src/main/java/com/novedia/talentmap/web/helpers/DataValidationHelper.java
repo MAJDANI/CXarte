@@ -280,10 +280,10 @@ public class DataValidationHelper {
 				}
 			}
 		} else {
-			String message = resourceBundle.getString("experience.field.missing.msg");
-			Notification.show(message);
-			field.setComponentError(new UserError(message));
-			isValid = false;
+//			String message = resourceBundle.getString("experience.field.missing.msg");
+//			Notification.show(message);
+//			field.setComponentError(new UserError(message));
+//			isValid = false;
 		}
 		return isValid;
    }
@@ -361,7 +361,29 @@ public class DataValidationHelper {
 		return isValid;
   }
 
-   
+   /**
+    * If the field is not empty, checks the size is between MIN and MAX defined. If not, a 
+    * Notification is sent to the user.
+    */
+  public boolean validateMissionTitle(TextField field){
+	   	initResourceBundle();
+	   	boolean isValid = true;
+		field.setComponentError(null);
+		int min = 0;
+		int max = ConstantsDB.MISSION_TITLE_MAX_LENGTH;
+		if (field != null && field.getValue() != "" && field.getValue() != null) {
+			int size = field.getValue().length();
+			if(size < min || size > max) {
+				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.name.field", 
+						 min, max);
+				 Notification.show(message);
+				 field.setComponentError(new UserError(message));
+				 isValid = false;
+			}
+		}
+		return isValid;
+   }
+
 	/**
 	 * @return the registrationService
 	 */

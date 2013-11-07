@@ -84,7 +84,8 @@ public class ColleagueView extends VerticalLayout implements ClickListener {
 		
 		gridLayout.addComponent(profilButton);
 		gridLayout.addComponent(eaeButton);
-		gridLayout.addComponent(formationButton);
+		//There is nothing to display yet
+		//gridLayout.addComponent(formationButton);
 		
 		Authentication authentication = TalentMapApplication.getCurrent().getAuthentication();
 		if(authentication.getAuthorization().getRoleId().equals(Authorization.Role.CM.getId())){

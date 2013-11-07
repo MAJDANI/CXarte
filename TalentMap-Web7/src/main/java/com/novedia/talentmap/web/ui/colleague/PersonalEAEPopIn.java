@@ -83,7 +83,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	/**
 	 * Taille en largeur du panel de droite
 	 */
-	private final String PANEL_RIGHT_WIDTH = "850px";
+	private final String PANEL_RIGHT_WIDTH = "850px";//"850px";
 
 	private ResourceBundle resourceBundle;
 
@@ -95,6 +95,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		setModal(true);
 		this.setPositionY(70);
 		this.setPositionX(70);
+		this.setWidth("1030px");
 	}
 	
 	private void initResourceBundle() {
@@ -116,6 +117,9 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		buildButtons();
 		buildMenu();
 		buildPanelRightContent();
+		//AJOUT 05/11/2013
+		panelRightPersoEAE.setWidth("100%");
+		//FIN AJOUT
 		hLayoutPersoEAE.addComponent(panelRightPersoEAE);
 		hLayoutPersoEAE.setExpandRatio(panelRightPersoEAE, 1.0f);
 		addComponent(hLayoutPersoEAE);
@@ -126,7 +130,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		panelRightPersoEAE.addStyleName("panelRight");
 		panelRightPersoEAE.setContent(currentEAEContent.buildViewCurrentEAEContent());
 		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
-		panelRightPersoEAE.setWidth(PANEL_RIGHT_WIDTH);
+		//panelRightPersoEAE.setWidth(PANEL_RIGHT_WIDTH);
 	}
 
 	private void buildButtons() {

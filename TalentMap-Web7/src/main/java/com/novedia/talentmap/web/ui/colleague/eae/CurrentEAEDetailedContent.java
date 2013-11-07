@@ -20,7 +20,8 @@ public class CurrentEAEDetailedContent extends VerticalLayout {
 		setSpacing(true);
 		addStyleName("TODO");
 		this.setId(ComponentsId.EAE_CURRENT_EAE_DETAILED_C_ID);
-		setWidth("700px");//OK
+//		setWidth("700px");//OK
+		setWidth("100%");
 	}
 
 	/**

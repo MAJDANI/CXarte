@@ -251,8 +251,9 @@
 }*/
 .girdLayoutResult .v-panel-content{
 	width: 350px;
-	border-style: solid;
+/* 	border-style: solid; */
 	border-radius: 20px;
+	overflow:hidden;
 }
 
 /* A GARDER OU PAS?
@@ -396,13 +397,18 @@
 }
 
 .panelRight .v-panel-content{
-/*           border-right:none; */
+	overflow-x:hidden;
+
 }
 .v-panel-nocaption{
 	border-bottom: 0px ;
 	border-top: none !important;
 }
 
+.monSuperStyle{
+/* 	scrollable:none !important; */
+	
+}
 .panelRight .v-panel-content .v-formlayout{
 	text-align:center;
 }

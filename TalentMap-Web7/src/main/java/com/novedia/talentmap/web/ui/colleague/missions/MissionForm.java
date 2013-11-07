@@ -12,6 +12,7 @@ import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
+import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -95,6 +96,7 @@ public class MissionForm extends HorizontalLayout{
 		titleField.setValidationVisible(true);
 		titleField.setInputPrompt(resourceBundle.getString("form.mission.title.default.value"));
 		titleField.setNullRepresentation("");
+		titleField.setMaxLength(ConstantsDB.MISSION_TITLE_MAX_LENGTH);
 		missionFormLayout.addComponent(titleField);
 		
 		clientField.setCaption(resourceBundle.getString("form.mission.client.caption"));
@@ -118,6 +120,7 @@ public class MissionForm extends HorizontalLayout{
 		placeField.setValidationVisible(true);
 		placeField.setInputPrompt(resourceBundle.getString("form.mission.lieu.default.value"));
 		placeField.setNullRepresentation("");
+		placeField.setMaxLength(ConstantsDB.MISSION_PLACE_MAX_LENGTH);
 		missionFormLayout.addComponent(placeField);
 		
 		startDateField.setCaption(resourceBundle.getString("form.mission.start.date.caption"));

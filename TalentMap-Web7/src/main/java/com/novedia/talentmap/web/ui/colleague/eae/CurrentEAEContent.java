@@ -100,7 +100,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	private CurrentEAEDetailedContent currentEAEDetailedContent;
 
 	private final String PANEL_LEFT_WIDTH = "120px";
-	private final String PANEL_RIGHT_WIDTH = "680px";
+	private final String PANEL_RIGHT_WIDTH = "95%";
+//	private final String PANEL_RIGHT_WIDTH = "880px";
 
 	private Integer currentEAEId = null;
 
@@ -219,6 +220,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 
 		buildPanelRightContentEAEExists(profilConnected);
 		hLayoutCurrentEAE.addComponent(panelRightCurrentEAE);
+		panelRightCurrentEAE.setWidth("100%"); //05/11/2013
 		hLayoutCurrentEAE.setExpandRatio(panelRightCurrentEAE, 1.0f);
 		addComponent(hLayoutCurrentEAE);
 	}
@@ -317,11 +319,14 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 
 		panelRightCurrentEAE.setCaption(caption);
 
+		//05/11/2013
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
 				.buildViewEAEGenerality(this.currentEAEId, this.currentMode,
 						this));
-		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
-		panelRightCurrentEAE.setSizeFull();
+//		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
+//		panelRightCurrentEAE.setSizeFull();
+//		panelRightCurrentEAE.addComponent(new Label("COucou"));//avec ça, pas de débordement
+
 	}
 
 	@Override

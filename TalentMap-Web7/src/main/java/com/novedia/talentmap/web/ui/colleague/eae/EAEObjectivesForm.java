@@ -42,7 +42,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	private Integer currentEAEId;
 	private EAEConsultationMode currentMode;
 
-	private final String WIDTH_ACCORDION_OBECTIVES = "640px";
+	private final String WIDTH_ACCORDION_OBECTIVES = "590px";
 	private final String HEIGHT_FORM = "450px";
 
 	private Button newObjectiveButton;
