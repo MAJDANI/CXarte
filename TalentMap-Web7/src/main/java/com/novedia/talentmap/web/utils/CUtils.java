@@ -144,7 +144,7 @@ public abstract class CUtils {
 				Map<Tool, Skill> mapTool = concept.getValue().getMapTool();
 				tableTools.addStyleName("table");
 				tableTools.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
-				tableTools.addContainerProperty(resourceBundle.getString("tool.level"), Integer.class, null);
+				tableTools.addContainerProperty(resourceBundle.getString("skill.level.caption"), Integer.class, null);
 				tableTools.setPageLength(mapTool.size());
 				
 				for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
@@ -157,7 +157,7 @@ public abstract class CUtils {
 				if (noteconcept != 0) {
 					rateConcept.setMaxValue(noteconcept);
 					rateConcept.setReadOnly(true);
-					hLayoutConcept.addComponent(new Label(resourceBundle.getString("concept.level.caption") + " : "));
+					hLayoutConcept.addComponent(new Label(resourceBundle.getString("skill.level.caption") + " : "));
 					hLayoutConcept.addComponent(rateConcept);
 					
 				} else {

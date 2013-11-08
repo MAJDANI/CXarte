@@ -167,7 +167,6 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		
 		settingsLayout.addComponent(helloLabel);
 		settingsLayout.addComponent(changePasswordButton);
-		settingsLayout.addComponent(new Label("/"));
 		settingsLayout.addComponent(logOutButton);
 		
 		helloLayout.addComponent(logoNovedia);
