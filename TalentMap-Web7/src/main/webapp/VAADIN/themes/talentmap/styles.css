@@ -98,9 +98,20 @@
 .addBtn .v-button-wrap,
 .delBtn .v-button-wrap,
 #saveButton .v-button-wrap,
-.v-select-twincol-buttons .v-button-wrap{
+.v-select-twincol-buttons .v-button-wrap {
 	padding: 4px 8px 0 0px;
 	background-image:none !important;
+}
+
+.logOutButton .v-button-wrap {
+	background-image:none !important;
+}
+
+.logOutButton, .logOutButton.v-button:active, .logOutButton.v-button:focus {
+	background:url(img/deconnexion.png) no-repeat;
+	width: 15px;
+	height: 20px;
+	cursor: pointer;
 }
 
 #logInButton.v-button,
@@ -108,7 +119,7 @@
 .addBtn.v-button,
 .delBtn.v-button,
 #saveButton.v-button,
-.v-select-twincol-buttons .v-button{
+.v-select-twincol-buttons .v-button {
 	background-image:none;
 	background-color:#009cda;
 	-webkit-border-radius: 5px;

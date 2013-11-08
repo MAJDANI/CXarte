@@ -162,8 +162,7 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		changePasswordButton.addStyleName(Reindeer.BUTTON_LINK);
 		changePasswordButton.addClickListener(this);
 		
-		logOutButton.addStyleName(Reindeer.BUTTON_LINK);
-		logOutButton.setCaption(resourceBundle.getString("logOut.button.caption"));
+		logOutButton.addStyleName("logOutButton");
 		logOutButton.addClickListener(this);
 		
 		settingsLayout.addComponent(helloLabel);
