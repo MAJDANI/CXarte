@@ -10,11 +10,13 @@ import com.novedia.talentmap.model.entity.Objective;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.IObjectiveService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.EAEConsultationMode;
 import com.novedia.talentmap.web.utils.EAETabEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.server.UserError;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -22,10 +24,11 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
-public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveForm, ClickListener {
+public class EAEObjectivesForm extends FormLayout implements EAEObjectiveFormSavable, ClickListener {
 
 	/**
 	 * 
@@ -43,13 +46,14 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	private EAEConsultationMode currentMode;
 
 	private final String WIDTH_ACCORDION_OBECTIVES = "590px";
-	private final String HEIGHT_FORM = "450px";
+	private final String HEIGHT_FORM = "450px";//"450px";
 
 	private Button newObjectiveButton;
 	private Window windowNewObjective;
 	private Button saveNewObjective;
 	private Objective newObjective;
-	
+	private DataValidationHelper dataValidationHelper;
+
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {
@@ -60,6 +64,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	public EAEObjectivesForm buildEAEObjectivesFormView(Integer currentEAEId,
 			EAEConsultationMode currentMode) {
 		initResourceBundle();
+		dataValidationHelper = new DataValidationHelper();
 		this.currentEAEId = currentEAEId;
 		this.currentMode = currentMode;
 		
@@ -79,6 +84,7 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	}
 
 	private void buildLayout() {
+		System.out.println("buildLayout");
 		eaeObjectivesFormLayout.removeAllComponents();
 		this.eaeObjectivesFormLayout.setColumns(1);
 		this.eaeObjectivesFormLayout.setRows(6);
@@ -88,7 +94,15 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 
 	}
 
+	@Override
+	public void refreshAccordion() {
+		System.out.println("refreshAccordion");
+		buildLayout();
+		buildEAEObjectivesForm();
+	}
+	
 	private void buildEAEObjectivesForm() {
+		System.out.println("buildEAEObjectivesForm");
 		removeAllComponents();
 		 
 		List<Objective> listObjectives = objectiveService.getObjectivesByEAEId(currentEAEId);
@@ -135,6 +149,22 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		
 	}
 
+	private boolean validateForm () {
+		boolean isValid = true;
+		
+		String title = newObjective.getTitle();
+		String goal = newObjective.getGoal();
+		if(title == null || title == "") {
+			String message = "Title obligatoire";
+			Notification.show(message);
+			isValid = false;
+		} else if (goal == null || goal == "") {
+			String message = "Goal obligatoire";
+			Notification.show(message);
+			isValid = false;
+		}
+		return isValid;
+	}
 
 	@Override
 	public void buttonClick(ClickEvent event) {
@@ -143,17 +173,19 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 		}
 		if(saveNewObjective == event.getSource()) {
 			EAE currentEAE = eaeService.getEAEById(currentEAEId);
-			Integer collId = currentEAE.getColleague().getId();
-			Integer manId = currentEAE.getManager().getId();
+			if (validateForm ()) {
+				Integer collId = currentEAE.getColleague().getId();
+				Integer manId = currentEAE.getManager().getId();
+				
+				newObjective.setColleagueId(collId);
+				newObjective.setManagerId(manId);
 			
-			newObjective.setColleagueId(collId);
-			newObjective.setManagerId(manId);
-		
-			objectiveService.addObjective(newObjective);
-			windowNewObjective.close();
-			
-			CurrentEAEContent currentEAEContent = (CurrentEAEContent)this.getParent().getParent().getParent().getParent();
-			currentEAEContent.refreshObjectives();
+				objectiveService.addObjective(newObjective);
+				windowNewObjective.close();
+				
+				CurrentEAEContent currentEAEContent = (CurrentEAEContent)this.getParent().getParent().getParent().getParent();
+				currentEAEContent.refreshObjectives();
+			}
 		}
 		
 	}
@@ -233,5 +265,19 @@ public class EAEObjectivesForm extends FormLayout implements EAESaveObjectiveFor
 	public void setEaeObjectivesFormLayout(GridLayout eaeObjectivesFormLayout) {
 		this.eaeObjectivesFormLayout = eaeObjectivesFormLayout;
 	}
+
+//	/**
+//	 * @return the dataValidationHelper
+//	 */
+//	public DataValidationHelper getDataValidationHelper() {
+//		return dataValidationHelper;
+//	}
+//
+//	/**
+//	 * @param dataValidationHelper the dataValidationHelper to set
+//	 */
+//	public void setDataValidationHelper(DataValidationHelper dataValidationHelper) {
+//		this.dataValidationHelper = dataValidationHelper;
+//	}
 
 }

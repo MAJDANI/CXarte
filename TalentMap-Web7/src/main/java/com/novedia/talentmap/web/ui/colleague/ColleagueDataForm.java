@@ -181,8 +181,6 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 
 		dateField.setCaption(resourceBundle.getString("date.field.caption"));
 		dateField.setRequired(true);
-//		dateField.setRequiredError(resourceBundle.getString("date.field.error.caption"));
-//		dateField.addValidator(new BeanValidator(Colleague.class,ComponentsId.EMPLOYMENT_DATE_ID));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.addBlurListener(this);
@@ -232,9 +230,10 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 	
 	@Override
 	public void blur(BlurEvent event) {
+		System.out.println("blurEvent");
 		Component p = event.getComponent();
 		if (dateField.equals(p)) {
-			dataValidationHelper.validateDateField(dateField);
+			dataValidationHelper.validatePastDateField(dateField);
 		} else {
 			if (!validateColleagueDataForm()) {
 				Notification.show(resourceBundle.getString("error.fields.missing.msg"),Notification.Type.WARNING_MESSAGE);
@@ -261,7 +260,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 		} else if(experienceField.equals(p)) {
 			isValid = dataValidationHelper.validateExperience(experienceField);
 		} else if(dateField.equals(p)) {
-			isValid = dataValidationHelper.validateDateField(dateField);
+			isValid = dataValidationHelper.validatePastDateField(dateField);
 		}
 		if(isValid) {
 			this.colleagueService.saveColleague(colleagueTmp);

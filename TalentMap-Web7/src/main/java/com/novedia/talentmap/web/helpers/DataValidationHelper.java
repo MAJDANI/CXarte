@@ -279,12 +279,7 @@ public class DataValidationHelper {
 					 isValid = false;
 				}
 			}
-		} else {
-//			String message = resourceBundle.getString("experience.field.missing.msg");
-//			Notification.show(message);
-//			field.setComponentError(new UserError(message));
-//			isValid = false;
-		}
+		} 
 		return isValid;
    }
 
@@ -293,10 +288,13 @@ public class DataValidationHelper {
     * @param field : the date to check
     * @return true if the format of the date is OK
     */
-   public boolean validateDateField(PopupDateField field) {
+   public boolean validatePastDateField(PopupDateField field) {
+	   	System.out.println("validatePastDateField : field = "+ field);
 	   	initResourceBundle();
 	   	boolean isValid = true;
 		field.setComponentError(null);
+		//if the format of the date is not valid, field will be null
+		//so it is just necessary to check if it's null
 		if (field != null && field.getValue() != null ) {
 			Date date = field.getValue();
 			Date today = Calendar.getInstance().getTime();
@@ -315,6 +313,33 @@ public class DataValidationHelper {
 		return isValid;
    }
  
+   /**
+    * Checks if the date given has a date format
+    * @param field : the date to check
+    * @param mandatory : true if the field is mandatory 
+    * @return true if the format of the date is OK
+    */
+   public boolean validateFutureDateField(PopupDateField field, boolean mandatory) {
+	   	initResourceBundle();
+	   	System.out.println("validateFutureDateField : field = "+ field);
+	   	boolean isValid = true;
+		field.setComponentError(null);
+		//if the format of the date is not valid, field will be null
+		//so it is just necessary to check if it's null
+		if (field == null || field.getValue() == null ) {
+			String message ="";
+			if(mandatory) {
+				message = resourceBundle.getString("error.date.entry.invalid.mandatory.msg");
+			} else {
+				message = resourceBundle.getString("error.date.entry.invalid.msg");
+			}
+			Notification.show(message);
+			field.setComponentError(new UserError(message));
+			isValid = false;
+		}
+		return isValid;
+   }
+
    /**
     * Validates the size is between MIN and MAX defined. If not, a 
     * Notification is sent to the user.

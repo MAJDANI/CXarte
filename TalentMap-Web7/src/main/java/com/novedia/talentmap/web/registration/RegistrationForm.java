@@ -3,8 +3,6 @@ package com.novedia.talentmap.web.registration;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.novedia.talentmap.model.entity.BusinessEngineer;
 import com.novedia.talentmap.model.entity.Colleague;
@@ -15,29 +13,28 @@ import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.IRegistrationService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.helpers.DataValidationHelper;
-import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
-import com.novedia.talentmap.web.utils.ObjUtils;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
-import com.vaadin.server.UserError;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
-public class RegistrationForm extends FormLayout implements ValueChangeListener{
+public class RegistrationForm extends FormLayout implements BlurListener, ValueChangeListener{
 
 	private Registration registration;
 
@@ -115,15 +112,11 @@ public class RegistrationForm extends FormLayout implements ValueChangeListener{
 		try {
 			buildSignInLayout();
 			buildRegistrationForm();
-//			initDataValidateur();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-//	public void initDataValidateur() {
-//		dataValidation= new DataValidation();
-//	}
 	/**
 	 * Build the registrationForm Layout
 	 */
@@ -251,11 +244,12 @@ public class RegistrationForm extends FormLayout implements ValueChangeListener{
 		//--------------------------------------
 		dateField.setCaption(resourceBundle.getString("date.entry.caption"));
 		dateField.setRequired(true);
-		dateField.setRequiredError(resourceBundle.getString("error.date.entry.missing.msg"));
 		dateField.setImmediate(true);
 		dateField.setValidationVisible(true);
 		dateField.setInputPrompt(Constants.DATE_FORMAT);
 		dateField.setId(ComponentsId.EMPLOYMENT_DATE_ID);
+		dateField.addValueChangeListener(this);
+		dateField.addBlurListener(this);
 		registrationGridLayout.addComponent(dateField);
 
 		//--------------------------------------
@@ -347,6 +341,16 @@ public class RegistrationForm extends FormLayout implements ValueChangeListener{
 	}
 	
 	@Override
+	public void blur(BlurEvent event) {
+		System.out.println("blurEvent RegistrationForm");
+		Component p = event.getComponent();
+		if (dateField.equals(p)) {
+			dataValidationHelper.validatePastDateField(dateField);
+		} 
+	}
+
+	
+	@Override
 	public void valueChange(ValueChangeEvent event) {
 		Property p = event.getProperty();
 		if(loginField.equals(p)) {
@@ -365,6 +369,9 @@ public class RegistrationForm extends FormLayout implements ValueChangeListener{
 			dataValidationHelper.validateEmail(emailField);
 		} else if(experienceField.equals(p)) {
 			dataValidationHelper.validateExperience(experienceField);
+		} else if(dateField.equals(p)) {
+			System.out.println("dateField value change");
+			dataValidationHelper.validatePastDateField(dateField);
 		}
 	}
 

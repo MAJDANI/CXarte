@@ -67,7 +67,7 @@ public class EAEGeneralityForm extends FormLayout implements BlurListener {
 	@PropertyId(ComponentsId.EAE_SALARY_ID)
 	private TextField salaryField;
 
-	private final String HEIGHT_FORM = "200px";
+	private final String HEIGHT_FORM = "200px"; // "200px";
 	private ResourceBundle resourceBundle;
 
 	private void initResourceBundle() {

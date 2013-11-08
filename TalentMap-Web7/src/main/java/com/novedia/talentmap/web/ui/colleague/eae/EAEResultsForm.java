@@ -28,7 +28,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.TextArea;
 
-public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveObjectiveForm {
+public class EAEResultsForm extends FormLayout implements BlurListener, EAEObjectiveFormSavable {
 
 	/**
 	 * 
@@ -429,6 +429,12 @@ public class EAEResultsForm extends FormLayout implements BlurListener, EAESaveO
 
 	public void setObjectiveService(IObjectiveService objectiveService) {
 		this.objectiveService = objectiveService;
+	}
+
+	@Override
+	public void refreshAccordion() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -378,7 +378,7 @@
 	padding:0;
 }
 
-.v-panel-content{
+.v-panel-content {
 	border-style: none;
 }
 
@@ -405,7 +405,15 @@
 	text-transform:uppercase;
 }
 
-.panelRight .v-panel-content{
+.v-panel-content-panelLeft {
+	overflow-y:hidden;
+}
+
+.v-panel-content-panelRight {
+	overflow-x:hidden;
+}
+
+.v-panel-panelRight {
 	overflow-x:hidden;
 	border-left: 1px solid #009CDA;
     padding-left: 10px;

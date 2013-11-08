@@ -95,7 +95,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		setModal(true);
 		this.setPositionY(70);
 		this.setPositionX(70);
-		this.setWidth("1030px");
+		this.setWidth("1070px");//OK firefox et Chrome
 	}
 	
 	private void initResourceBundle() {

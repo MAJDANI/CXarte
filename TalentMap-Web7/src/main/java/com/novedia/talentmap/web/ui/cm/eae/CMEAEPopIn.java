@@ -66,7 +66,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	public CMEAEPopIn() {
 		super();
 		setModal(true);
-		setWidth("750px");
+		setWidth("750px"); //OK
 		setHeight("475px");
 	}
 

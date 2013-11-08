@@ -89,8 +89,10 @@ public class HistoryEAEContent extends VerticalLayout implements
 	 */
 	private NewEAEDTO newEAEDTO;
 
+	private final String WIDTH_EAE_WINDOW = "900px";
+
 	private final String HEIGHT_NEW_EAE_WINDOW = "350px";
-	private final String WIDTH_NEW_EAE_WINDOW = "400px";
+	private final String WIDTH_NEW_EAE_WINDOW = "1000px";//"400px";
 
 	private Window subWindowEAEContent = new Window();
 	private Integer currentColleagueId;
@@ -293,7 +295,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 			subWindowEAEContent.setModal(true);
 			subWindowEAEContent.setPositionX(Constants.POSITION_X_EAE_POP_IN);
 			subWindowEAEContent.setPositionY(Constants.POSITION_Y_EAE_POP_IN);
-			subWindowEAEContent.setWidth("850px");
+			subWindowEAEContent.setWidth(WIDTH_EAE_WINDOW);
 			
 			// Open it in the UI
 			this.getUI().addWindow(subWindowEAEContent);

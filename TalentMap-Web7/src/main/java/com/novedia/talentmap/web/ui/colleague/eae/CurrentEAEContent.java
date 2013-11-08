@@ -99,8 +99,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	 */
 	private CurrentEAEDetailedContent currentEAEDetailedContent;
 
-	private final String PANEL_LEFT_WIDTH = "120px";
-	private final String PANEL_RIGHT_WIDTH = "95%";
+	private final String PANEL_LEFT_WIDTH = "160px";//"120px";
+	private final String PANEL_RIGHT_WIDTH = "100%";//"95%";
 //	private final String PANEL_RIGHT_WIDTH = "880px";
 
 	private Integer currentEAEId = null;
@@ -267,6 +267,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	private void buildMenu(EAEConsultationMode mode) {
 		panelLeftCurrentEAE.removeAllComponents();
 		panelLeftCurrentEAE.setWidth(PANEL_LEFT_WIDTH);
+		panelLeftCurrentEAE.setHeight("100%");
+		
 		panelLeftCurrentEAE.addStyleName("panelLeft");
 		menuContentCurrentEAE.setSpacing(true);
 		menuContentCurrentEAE.setMargin(true);
