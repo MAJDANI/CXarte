@@ -23,7 +23,8 @@
 }
 
 .containerPrincipal, #headerLayout, #footerLayer{
-	background: #242424 url(img/octicons-bg.png) repeat-x !important;
+	background: #242424 url(img/backGroundHeader.png) repeat-x !important;
+	background-position: left;
 }
 
 
@@ -95,6 +96,7 @@
 
 #logInButton .v-button-wrap,
 .styleButton .v-button-wrap,
+.styleButtonCateg .v-button-wrap,
 .addBtn .v-button-wrap,
 .delBtn .v-button-wrap,
 #saveButton .v-button-wrap,
@@ -127,6 +129,14 @@
 	border-radius: 5px;
 	cursor:pointer;
 }
+.styleButtonCateg.v-button{
+	background-image:none;
+	background-color:#0073a0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	cursor:pointer;
+}
 
 .v-select-twincol-buttons .v-button, .v-select-twincol-buttons{
 	margin-bottom: 5px;	
@@ -147,6 +157,7 @@
 
 #logInButton span.v-button-caption,
 .styleButton span.v-button-caption,
+.styleButtonCateg span.v-button-caption,
 .addBtn span.v-button-caption,
 .delBtn span.v-button-caption,
 #saveButton span.v-button-caption,
@@ -264,11 +275,53 @@
 	line-height:normal !important;
 }
 
-.girdLayoutResult .v-panel-content{
-	width: 350px;
-/* 	border-style: solid; */
-	border-radius: 20px;
-	overflow:hidden;
+.profilLayoutResult {
+	height: 70px;
+	cursor: pointer;
+}
+
+.resultBloc {
+	height: 227px;
+    width: 292px;
+	background:url(img/backgroundBlockResult.png) center no-repeat;
+	padding: 10px;
+	background-size: 100% 100%
+}
+
+.photoResultLayout {
+	width: 55px;
+	height: 65px;
+	border: 2px solid #808080;
+	background: url(img/photoResult.png) bottom no-repeat;
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.colleagueName {
+	color: #009CDA;
+	font-size: 18px;
+	font-family: myriad pro;
+}
+
+.profileColleague, .lastMissionLabel {
+	color: #333333;
+	font-size: 14px;
+	font-family: myriad pro;
+    font-weight: bold;
+}
+
+.emailColleague, .colleagueExperience, .lastMissionLabelValue {
+	color: #333333;
+	font-size: 14px;
+	font-family: myriad pro;
+}
+
+
+
+.lastMissionLayout {
+	height: 129px;
+	border: 1px solid #808080;
+	padding: 10px;
 }
 
 .image{
@@ -345,9 +398,10 @@
     width: 158px;
 }
 
-
 .table {
 	text-align: center;
+	margin-bottom: 25px;
+    margin-top: 25px;
 }
 
 .v-table-cell-content {
@@ -372,6 +426,7 @@
 .v-table-cell-content .v-ratingstars-star {
 	background-color: #009CDA;
 }
+
 
 .containerButton {
 	margin-left: 200px;
@@ -405,12 +460,18 @@
 	border:none;
 }
 
-.panelLeft .v-button-caption{
+.panelLeft .v-button-caption {
 	color: #009cda;
 	font-size: 15px;
 	text-decoration:none;
 	line-height:25px;
 	border:none;
+}
+
+.v-panel-caption span {
+	color: #009cda;
+	font-size: 15px;
+	text-transform: uppercase;
 }
 
 .panelLeft .v-button-caption:hover,
@@ -466,31 +527,16 @@
 
 .v-table .v-selected, 
 .black .v-table .v-selected {
-                background: #009cda;
+                background: #0073A0;
                 color: #fff;
                 text-shadow: #3b5a7a 0 1px 0;
 }
 
 
-/* .listMissionPanel .v-panel-content{ */
-/*                 border:none; */
-/* } */
-
-.v-panel-content-searchResultsPanel{
-                border:none;
-}
-
-.v-panel-content-searchResultsPanel .v-verticallayout{
-                padding-left:0;
-}
-
 .visualizeMissionHistory{
                 margin-left:10px;
 }
 
-.v-panel-content-searchResultsPanel .v-table-cell-content {
-                vertical-align: middle !important;
-}
 
 .v-ratingstars-wrapper{
                 border: none !important;

@@ -76,7 +76,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private GridLayout allCategoriesLayout;
 	
-	public static final int NB_CATEGORIES_BY_LINE = 6; 
+	public static final int NB_CATEGORIES_BY_LINE = 6;
 	
 	/**
 	 * Default constructor
@@ -192,7 +192,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			for (Map.Entry<Category, ConceptMapDTO> categoryMap : categoryMapDto.getMapCategory().entrySet()) {
 				Button categButton = new Button(categoryMap.getKey().getName());
 				categButton.addClickListener(this);
-				categButton.addStyleName("styleButton");
+//				categButton.addStyleName("styleButton");
+				categButton.addStyleName("styleButtonCateg");
 				categButton.setData(categoryMap.getKey().getId());
 				allCategoriesLayout.addComponent(categButton);
  			}

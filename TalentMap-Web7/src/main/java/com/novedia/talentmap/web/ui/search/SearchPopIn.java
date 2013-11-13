@@ -126,7 +126,6 @@ public class SearchPopIn extends Window implements ClickListener,TextChangeListe
 
 	private void buildPanelRightContent() {
 		panelRight.removeAllComponents();
-		searchResultsPanel.addStyleName("searchResultsPanel");
 		panelRight.addStyleName("panelRight");
 		panelRight.setContent(searchByNameForm.buildSearchByNameFormView());
 		panelRight.setWidth("800px");

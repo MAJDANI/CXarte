@@ -123,14 +123,6 @@ public class ChangePasswordScreen extends Window implements ClickListener {
 		saveButton.addClickListener(this);
 		saveButton.setId(ComponentsId.SAVE_BTN_ID);
 		
-		//TODO : a supprimer car corriger dans la feuille de style.  		
-//		VerticalLayout vLayout = new VerticalLayout();
-//		vLayout.addComponent(oldPasswordField);
-//		vLayout.addComponent(newPasswordField);
-//		vLayout.addComponent(confirmPasswordField);
-//		vLayout.addComponent(saveButton);
-//		changePasswordFormLayout.addComponent(vLayout);
-		
 		changePasswordFormLayout.addComponent(oldPasswordField);
 		changePasswordFormLayout.addComponent(newPasswordField);
 		changePasswordFormLayout.addComponent(confirmPasswordField);

@@ -11,20 +11,16 @@ import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.services.impl.ProfileService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.event.MouseEvents.ClickEvent;
-import com.vaadin.event.MouseEvents.ClickListener;
-import com.vaadin.server.ThemeResource;
+import com.vaadin.event.LayoutEvents.LayoutClickEvent;
+import com.vaadin.event.LayoutEvents.LayoutClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class SearchResults extends VerticalLayout implements ClickListener {
+public class SearchResults extends VerticalLayout implements LayoutClickListener {
 
 	private ResourceBundle resourceBundle;
 	
@@ -33,10 +29,6 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 	private IColleagueService colleagueService;
 	
 	private ProfileService profileService;
-	
-	private ThemeResource resourceBoy = new ThemeResource(Constants.IMG_NO_PHOTO_BOY);
-	
-	private ThemeResource resourceGirl = new ThemeResource(Constants.IMG_NO_PHOTO_GIRL);
 	
 	private ProfileColleagueWindow profileColleagueWindow; 
 	
@@ -59,44 +51,46 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 			gridLayout.removeAllComponents();
 			gridLayout.setRows(nbRows);
 			gridLayout.setColumns(2);
-			gridLayout.addStyleName("girdLayoutResult");
 			gridLayout.setSpacing(true);
 			
 			for (Colleague colleague : listCollab) {
-				Image photo;
-				if(colleague.getTitle().equalsIgnoreCase(resourceBundle.getString("title.masculin.value"))) {
-					photo = new Image(colleague.getFirstName(), resourceBoy);
-				} else {
-					photo = new Image(colleague.getFirstName(), resourceGirl);
-				}
+				VerticalLayout v = new VerticalLayout();
+				v.addStyleName("resultBloc");
 				
-				photo.addStyleName("image");
-				photo.addClickListener(this);
-				photo.setId(colleague.getId().toString());
+				HorizontalLayout profilLayout = new HorizontalLayout();
+				profilLayout.addLayoutClickListener(this);
+				profilLayout.setId(colleague.getId().toString());
+				profilLayout.addStyleName("profilLayoutResult");
+				VerticalLayout photoLayout = new VerticalLayout();
+				photoLayout.addStyleName("photoResultLayout");
+				VerticalLayout personnalDataResultLayout = new VerticalLayout();
 				
-				Panel p = new Panel();
-//				p.addStyleName("resultPanel");
-				HorizontalLayout horizontalLayout = new HorizontalLayout();
-				horizontalLayout.setSpacing(true);
+				Label colleagueName = new Label(colleague.getFirstName() + " " + colleague.getLastName());
+				colleagueName.addStyleName("colleagueName");
 				
-				VerticalLayout secondBloc = new VerticalLayout();
-				secondBloc.setSpacing(true);
+				Label profileColleague = new Label(profileService.getProfile(colleague.getProfileId()).getType());
+				profileColleague.addStyleName("profileColleague");
 				
-				secondBloc.addComponent(new Label(profileService.getProfile(colleague.getProfileId()).getType()));
-				secondBloc.addComponent(new Label(colleague.getEmail()));
-				secondBloc.addComponent(new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg")));
+				Label emailColleague = new Label(colleague.getEmail());
+				emailColleague.addStyleName("emailColleague");
 				
-				horizontalLayout.addComponent(photo);
-				horizontalLayout.addComponent(secondBloc);
-				p.addComponent(horizontalLayout);
-
+				Label colleagueExperience = new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg"));
+				colleagueExperience.addStyleName("colleagueExperience");
+				
+				personnalDataResultLayout.addComponent(colleagueName);
+				personnalDataResultLayout.addComponent(profileColleague);
+				personnalDataResultLayout.addComponent(emailColleague);
+				personnalDataResultLayout.addComponent(colleagueExperience);
+				profilLayout.addComponent(photoLayout);
+				profilLayout.addComponent(personnalDataResultLayout);
+				v.addComponent(profilLayout);
 				
 				MissionDTO lastMission =  colleagueService.getLastMission(colleague.getId());
 				if(lastMission != null){
-					p.addComponent(buildLastMissionLayout(lastMission));
+					v.addComponent(buildLastMissionLayout(lastMission));
 				}
 				
-				gridLayout.addComponent(p);
+				gridLayout.addComponent(v);
 			}
 		}
 		addComponent(gridLayout);
@@ -105,23 +99,60 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 	
 	public VerticalLayout buildLastMissionLayout(MissionDTO lastMission){
 		VerticalLayout lastMissionLayout = new VerticalLayout();
-		lastMissionLayout.setSpacing(true);
-		Label lastMissionLabel = new Label(resourceBundle.getString("last.mission.msg") +lastMission.getTitle());
-		lastMissionLayout.addComponent(lastMissionLabel);
-		lastMissionLayout.addComponent(new Label(resourceBundle.getString("customer.field.combobox.caption") +lastMission.getClient().getName()));
-		String date = CUtils.DATE_FORMAT.format(lastMission.getStartDate());
+		lastMissionLayout.addStyleName("lastMissionLayout");
 		
+		HorizontalLayout lastMissionTitleLayout = new HorizontalLayout();
+		lastMissionTitleLayout.setSpacing(true);
+		Label lastMissionTitleLabel = new Label(resourceBundle.getString("last.mission.msg"));
+		lastMissionTitleLabel.addStyleName("lastMissionLabel");
+		Label lastMissionTitleValue = new Label(lastMission.getTitle());
+		lastMissionTitleValue.addStyleName("lastMissionLabelValue");
+		lastMissionTitleLayout.addComponent(lastMissionTitleLabel);
+		lastMissionTitleLayout.addComponent(lastMissionTitleValue);
+		lastMissionLayout.addComponent(lastMissionTitleLayout);
+		
+		HorizontalLayout lastMissionClientLayout = new HorizontalLayout();
+		lastMissionClientLayout.setSpacing(true);
+		Label lastMissionClientLabel = new Label(resourceBundle.getString("customer.field.combobox.caption"));
+		lastMissionClientLabel.addStyleName("lastMissionLabel");
+		Label lastMissionClientValue = new Label(lastMission.getClient().getName());
+		lastMissionClientValue.addStyleName("lastMissionLabelValue");
+		lastMissionClientLayout.addComponent(lastMissionClientLabel);
+		lastMissionClientLayout.addComponent(lastMissionClientValue);
+		lastMissionLayout.addComponent(lastMissionClientLayout);
+		
+		String date = CUtils.DATE_FORMAT.format(lastMission.getStartDate());
 		if(lastMission.getEndDate() != null){
 			date += " "+resourceBundle.getString("until.msg") + " " + CUtils.DATE_FORMAT.format(lastMission.getEndDate());
-			lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.date.msg") +date));
 		}
 		else{
 			date += " "+resourceBundle.getString("today.msg");
-			lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.date.msg") +date));
 		}
+		HorizontalLayout lastMissionDateLayout = new HorizontalLayout();
+		lastMissionDateLayout.setSpacing(true);
+		Label lastMissionDateLabel = new Label(resourceBundle.getString("form.mission.comment.caption"));
+		lastMissionDateLabel.addStyleName("lastMissionLabel");
+		Label lastMissionDateValue = new Label(date);
+		lastMissionDateValue.addStyleName("lastMissionLabelValue");
+		lastMissionDateLayout.addComponent(lastMissionDateLabel);
+		lastMissionDateLayout.addComponent(lastMissionDateValue);
+		lastMissionLayout.addComponent(lastMissionDateLayout);
 		
 		if(lastMission.getNotes() != null){
-			lastMissionLayout.addComponent(new Label(resourceBundle.getString("form.mission.comment.caption") +lastMission.getNotes()));
+			String description = lastMission.getNotes();
+    	    if (description != null && description.length() >= 25) {
+    	    	description = description.substring(0, 25) + "...";
+    	    }
+    	    HorizontalLayout lastMissionDescriptionLayout = new HorizontalLayout();
+    	    lastMissionDescriptionLayout.setSpacing(true);
+    	    Label lastMissionDescriptiontLabel = new Label(resourceBundle.getString("form.mission.comment.caption"));
+    	    lastMissionDescriptiontLabel.addStyleName("lastMissionLabel");
+    		Label lastMissionDescriptionTitle = new Label(description);
+    		lastMissionDescriptionTitle.addStyleName("lastMissionLabelValue");
+    		lastMissionDescriptionLayout.addComponent(lastMissionDescriptiontLabel);
+    		lastMissionDescriptionLayout.addComponent(lastMissionDescriptionTitle);
+    		lastMissionLayout.addComponent(lastMissionDescriptionLayout);
+    	    
 		}
 		
 		String toolSet = new String();
@@ -135,15 +166,22 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 				toolSet +=", " + tool.getName();
 			}
 		}
-		
-		lastMissionLayout.addComponent(new Label(resourceBundle.getString("label.techno.msg") +toolSet));
+		HorizontalLayout lastMissionTechnoLayout = new HorizontalLayout();
+		lastMissionTechnoLayout.setSpacing(true);
+		Label lastMissionToolsLabel = new Label(resourceBundle.getString("label.techno.msg"));
+		lastMissionToolsLabel.addStyleName("lastMissionLabel");
+		Label lastMissionToolsTitle = new Label(toolSet);
+		lastMissionToolsTitle.addStyleName("lastMissionLabelValue");
+		lastMissionTechnoLayout.addComponent(lastMissionToolsLabel);
+		lastMissionTechnoLayout.addComponent(lastMissionToolsTitle);
+		lastMissionLayout.addComponent(lastMissionTechnoLayout);
 		
 		return lastMissionLayout;
 	}
 	
 	
 	@Override
-	public void click(ClickEvent event) {
+	public void layoutClick(LayoutClickEvent event) {
 		Integer colleagueId = new Integer (event.getComponent().getId());
 		getUI().addWindow(profileColleagueWindow.buildProfileColleagueWindow(colleagueId));
 		
@@ -188,7 +226,5 @@ public class SearchResults extends VerticalLayout implements ClickListener {
 			ProfileColleagueWindow profileColleagueWindow) {
 		this.profileColleagueWindow = profileColleagueWindow;
 	}
-	
-	
 
 }

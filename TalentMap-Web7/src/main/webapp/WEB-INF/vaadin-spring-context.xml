@@ -258,8 +258,6 @@
 	<bean id="errorLabelNewPasswordChangePasswordFormBean" class="com.vaadin.ui.Label" scope="session" />
 	<bean id="changePasswordFormLayoutBean" class="com.vaadin.ui.FormLayout" scope="session" />
 	<bean id="footerLayoutBean" class="com.vaadin.ui.HorizontalLayout" scope="session" />
-	<bean id="footerGridLayoutBean" class="com.vaadin.ui.GridLayout" scope="session" />
-	
 	
 	<bean id="changePasswordScreenBean" class="com.novedia.talentmap.web.login.ChangePasswordScreen" scope="session">
 		<property name="authenticationService" ref ="authenticationService" />
@@ -289,7 +287,6 @@
 		<property name="helloLayout" ref="helloLayout" />
 		<property name="dashBoardLayout" ref="dashBoardLayout" />
 		<property name="footerLayout" ref="footerLayoutBean" />
-		<property name="footerGridLayout" ref="footerGridLayoutBean" />
 		<property name="changePasswordScreen" ref="changePasswordScreenBean" />
 	</bean>
 	

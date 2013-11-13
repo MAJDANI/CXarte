@@ -18,7 +18,6 @@ import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -61,8 +60,6 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	 * the colleagueView
 	 */
 	private ColleagueView colleagueView;
-	
-	private GridLayout footerGridLayout;
 	
 	private HorizontalLayout footerLayout;
 	
@@ -190,27 +187,6 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 	private void buildFooterLayout(){
 		footerLayout.removeAllComponents();
 		footerLayout.setId("footerLayer");
-		footerGridLayout.removeAllComponents();
-		footerGridLayout.setRows(1);
-		footerGridLayout.setColumns(3);
-		VerticalLayout bloc1 = new VerticalLayout();
-		bloc1.addComponent(new Label("eeeeeee"));
-		VerticalLayout bloc2 = new VerticalLayout();
-		bloc2.addComponent(new Label("eeeeeee2"));
-		VerticalLayout bloc3 = new VerticalLayout();
-		bloc3.addComponent(new Label("eeeeeee3"));
-		
-		bloc1.addStyleName("footerStyle");
-		bloc2.addStyleName("footerStyle spacer");
-		bloc3.addStyleName("footerStyle");
-		
-		footerGridLayout.addComponent(bloc1);
-		footerGridLayout.addComponent(bloc2);
-		footerGridLayout.addComponent(bloc3);
-		
-		footerLayout.addComponent(footerGridLayout);
-		
-		
 	}
 	
 
@@ -416,14 +392,5 @@ public class AuthenticatedScreen extends VerticalLayout implements ClickListener
 		this.footerLayout = footerLayout;
 	}
 
-
-	public GridLayout getFooterGridLayout() {
-		return footerGridLayout;
-	}
-
-
-	public void setFooterGridLayout(GridLayout footerGridLayout) {
-		this.footerGridLayout = footerGridLayout;
-	}
 	
 }
