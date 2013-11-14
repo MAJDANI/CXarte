@@ -19,6 +19,7 @@ import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
@@ -143,13 +144,16 @@ public abstract class CUtils {
 				Table tableTools = new Table();
 				Map<Tool, Skill> mapTool = concept.getValue().getMapTool();
 				tableTools.addStyleName("table");
+				tableTools.setWidth("100%");
 				tableTools.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
-				tableTools.addContainerProperty(resourceBundle.getString("tool.level"), Integer.class, null);
+				tableTools.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
 				tableTools.setPageLength(mapTool.size());
 				
 				for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
-					tableTools.addItem(new Object[] { eTool.getKey().getName(), 
-							eTool.getValue().getAverageScore()}, eTool.getKey());
+					RatingStars rateTool = new RatingStars();
+					rateTool.setMaxValue(eTool.getValue().getAverageScore());
+					rateTool.setReadOnly(true);
+					tableTools.addItem(new Object[] { eTool.getKey().getName(),rateTool}, eTool.getKey());
 				}
 				vLayoutTool.addComponent(tableTools);
 				
@@ -157,7 +161,7 @@ public abstract class CUtils {
 				if (noteconcept != 0) {
 					rateConcept.setMaxValue(noteconcept);
 					rateConcept.setReadOnly(true);
-					hLayoutConcept.addComponent(new Label(resourceBundle.getString("concept.level.caption") + " : "));
+					hLayoutConcept.addComponent(new Label(resourceBundle.getString("skill.level.caption") + " : "));
 					hLayoutConcept.addComponent(rateConcept);
 					
 				} else {

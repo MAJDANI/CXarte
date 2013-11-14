@@ -10,12 +10,9 @@ import com.novedia.talentmap.services.IProfileService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.CUtils;
-import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
@@ -32,10 +29,6 @@ public class ProfileColleagueWindow extends Window {
     
     private IColleagueService colleagueService;
     
-    private ThemeResource resourceBoy = new ThemeResource(Constants.IMG_NO_PHOTO_BOY);
-	
-	private ThemeResource resourceGirl = new ThemeResource(Constants.IMG_NO_PHOTO_GIRL);
-	
 	private Tree treeSkills;
 	
 	private Accordion accordionSkill;
@@ -58,7 +51,7 @@ public class ProfileColleagueWindow extends Window {
 		setCaption(colleague.getFirstName() + " " + colleague.getLastName());
 		addComponent(buildDataLayout(colleague));
 		CategoryMapDTO categoryMapDTO =  skillService.getAllCollaboratorSkill(colleagueId);
-		treeSkills.removeAllItems();
+//		treeSkills.removeAllItems();
 //		addComponent(CUtils.buildTreeSkillsColleague(categoryMapDTO,treeSkills));
 		accordionSkill.removeAllComponents();
 		if(categoryMapDTO != null && !categoryMapDTO.getMapCategory().isEmpty()){
@@ -68,25 +61,31 @@ public class ProfileColleagueWindow extends Window {
 	}
 	
 	public HorizontalLayout buildDataLayout(Colleague colleague){
-		HorizontalLayout horizontalLayout = new HorizontalLayout();
-		horizontalLayout.setSpacing(true);
-		Image photo;
-		if(colleague.getTitle().equalsIgnoreCase(resourceBundle.getString("title.masculin.value"))) {
-			photo = new Image(colleague.getFirstName(), resourceBoy);
-		} else {
-			photo = new Image(colleague.getFirstName(), resourceGirl);
-		}
+		HorizontalLayout profilLayout = new HorizontalLayout();
+		profilLayout.addStyleName("profileLayoutColleagueWindow");
+		VerticalLayout photoLayout = new VerticalLayout();
+		photoLayout.addStyleName("photoResultLayout");
+		VerticalLayout personnalDataResultLayout = new VerticalLayout();
 		
-		VerticalLayout secondBloc = new VerticalLayout();
-		secondBloc.setSpacing(true);
+		Label colleagueName = new Label(colleague.getFirstName() + " " + colleague.getLastName());
+		colleagueName.addStyleName("colleagueName");
 		
-		secondBloc.addComponent(new Label(profileService.getProfile(colleague.getProfileId()).getType()));
-		secondBloc.addComponent(new Label(colleague.getEmail()));
-		secondBloc.addComponent(new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg")));
+		Label profileColleague = new Label(profileService.getProfile(colleague.getProfileId()).getType());
+		profileColleague.addStyleName("profileColleague");
 		
-		horizontalLayout.addComponent(photo);
-		horizontalLayout.addComponent(secondBloc);
-		return horizontalLayout;
+		Label emailColleague = new Label(colleague.getEmail());
+		emailColleague.addStyleName("emailColleague");
+		
+		Label colleagueExperience = new Label(colleague.getExperience() + " " + resourceBundle.getString("experince.label.msg"));
+		colleagueExperience.addStyleName("colleagueExperience");
+		
+		personnalDataResultLayout.addComponent(colleagueName);
+		personnalDataResultLayout.addComponent(profileColleague);
+		personnalDataResultLayout.addComponent(emailColleague);
+		personnalDataResultLayout.addComponent(colleagueExperience);
+		profilLayout.addComponent(photoLayout);
+		profilLayout.addComponent(personnalDataResultLayout);
+		return profilLayout;
 		
 	}
 

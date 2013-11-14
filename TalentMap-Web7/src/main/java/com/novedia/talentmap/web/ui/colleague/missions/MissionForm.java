@@ -82,6 +82,7 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 	public MissionForm() {
 		super();
 		setSpacing(true);
+		addStyleName("missionForm");
 	}
 	
 	public MissionForm buildMissionForm(MissionDTO missionDto) {

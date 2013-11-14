@@ -24,10 +24,8 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class MissionColleagueContent extends VerticalLayout implements ClickListener, ValueChangeListener {
@@ -38,27 +36,11 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	
 	private Button addMissionButton;
 	
-    private Button editMissionButton;
-    
-    private Button deleteMissionButton;
-    
     private Panel addMissionPanel;
     
     private Panel listMissionPanel;
     
     private ListMission listMission;
-    
-    private HorizontalLayout footerLayoutMissionButton;
-    
-    private Window windowConfirm;
-    
-    private Label confirmDeleteLabel;
-    
-    private HorizontalLayout confirmButtonContainer;
-    
-    private Button yesButton;
-    
-    private Button noButton;
     
     private MissionForm missionForm;
     
@@ -72,6 +54,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	private DataValidationHelper dataValidationHelper;
 
 	private ResourceBundle resourceBundle;
+	
+	private Label noMissionLabel;
 
 	/**
 	 * Default constructor
@@ -92,28 +76,28 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
     	removeAllComponents();
-    	listMissionPanel.addStyleName("contentPanel");
-    	addMissionPanel.addStyleName("contentPanel");
-    	addMissionButton.setCaption(resourceBundle.getString("button.add.mission.caption"));
-    	addMissionButton.addClickListener(this);
-    	addMissionButton.addStyleName("styleButton");
-    	buildAddMissionPanel();
-    	addComponent(addMissionButton);
-    	addComponent(addMissionPanel);
+    	initComponnents();
     	buildListMissionPanel();
-    	listMissionPanel.addStyleName("listMissionPanel");
-    	addComponent(listMissionPanel);
-    	disableddMissionPanel();
+    	buildAddMissionPanel();
     	return this;
     }
     
-    /**
-     * Build layout Button of mission form
-     */
-    private void builMissionFormButton(){
+    
+    private void initComponnents(){
+    	listMissionPanel.addStyleName("contentPanel");
+    	listMissionPanel.setCaption("Mes Missions");
+    	
+    	addMissionPanel.addStyleName("contentPanel");
+    	addMissionPanel.setCaption("Ajouter une nouvelle mission");
+    	
+    	addMissionButton.setCaption(resourceBundle.getString("button.add.mission.caption"));
+    	addMissionButton.addClickListener(this);
+    	addMissionButton.addStyleName("styleButton");
+    	
     	missionFormButtonLayout.removeAllComponents();
     	missionFormButtonLayout.setSpacing(true);
     	missionFormButtonLayout.addStyleName("containerButton");
+    	
     	saveButton.setCaption(resourceBundle.getString("save.button.caption"));
 		saveButton.addClickListener(this);
 		saveButton.addStyleName("styleButton");
@@ -122,26 +106,37 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		cancelButton.addClickListener(this);
 		cancelButton.addStyleName("styleButton");
 		
-		missionFormButtonLayout.addComponent(saveButton);
-		missionFormButtonLayout.addComponent(cancelButton);
+		noMissionLabel.setCaption(resourceBundle.getString("no.mission.label.msg"));
+    	
     }
     
+    
     /**
-     * Disable Add Mission Panel
+     * Build layout Button of mission form
      */
-    private void disableddMissionPanel(){
-    	if(listMission.size() > 0){
-    		addMissionPanel.setVisible(false);
-    		addMissionButton.setEnabled(true);
-    	}
+    private HorizontalLayout buildMissionFormButton(){
+    	missionFormButtonLayout.removeAllComponents();
+		missionFormButtonLayout.addComponent(saveButton);
+		missionFormButtonLayout.addComponent(cancelButton);
+		return missionFormButtonLayout;
     }
+    
     
     private void buildAddMissionPanel(){
     	addMissionPanel.removeAllComponents();
+    	addMissionPanel.addComponent(addMissionButton);
 		addMissionPanel.addComponent(missionForm.buildMissionForm(missionDTO));
-		builMissionFormButton();
-		addMissionPanel.addComponent(missionFormButtonLayout);
+		addMissionPanel.addComponent(buildMissionFormButton());
+		enableMissionForm(false);
+		addComponent(addMissionPanel);
     }
+    
+    private void enableMissionForm(boolean state){
+    	addMissionButton.setVisible(!state);
+    	missionForm.setVisible(state);
+    	missionFormButtonLayout.setVisible(state);
+    }
+    
     
     /**
      * Build list mission panel
@@ -150,92 +145,38 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		listMission.fillAllColleagueMission();
     	listMission.addValueChangeListener(this);
     	listMission.addStyleName("table");
-    	listMissionPanel.addStyleName("listMissionPanel");
+    	listMissionPanel.removeAllComponents();
     	if(listMission.size() > 0){
-    		listMissionPanel.removeAllComponents();
     		listMissionPanel.addComponent(listMission);
-    		buildFooterListMission();
-    		listMissionPanel.addComponent(footerLayoutMissionButton);
-    		listMissionPanel.setVisible(true);
     		if(listMission.size() < Constants.NB_ROWS_DEFAULT){
     			listMission.setPageLength(listMission.size());
         	} else {
         		listMission.setPageLength(Constants.NB_ROWS_DEFAULT);
         	}
     	} else {
-    		listMissionPanel.setVisible(false);
+    		listMissionPanel.addComponent(noMissionLabel);
     	}
-    	
+    	addComponent(listMissionPanel);
     }
     
-    private void buildFooterListMission(){
-    	footerLayoutMissionButton.removeAllComponents();
-    	footerLayoutMissionButton.addStyleName("footerLayoutMissionButton containerButton");
-    	editMissionButton.setCaption(resourceBundle.getString("edit.button.caption"));
-    	editMissionButton.addClickListener(this);
-    	editMissionButton.addStyleName("styleButton");
-    	deleteMissionButton.setCaption(resourceBundle.getString("delete.button.caption"));
-    	deleteMissionButton.addClickListener(this);
-    	deleteMissionButton.addStyleName("delBtn");
-    	enableButton(false);
-    	footerLayoutMissionButton.setSpacing(true);
-    	footerLayoutMissionButton.addComponent(editMissionButton);
-    	footerLayoutMissionButton.addComponent(deleteMissionButton);
-    }
     
     @Override
 	public void buttonClick(ClickEvent event) {
-
-    	if(event.getButton().equals(deleteMissionButton)){
-    		buildConfirmWindow();
-    		getUI().addWindow(windowConfirm);
-    	}
-    	else if (event.getButton().equals(editMissionButton)) {
-    		showEditMissionPanel();
-		}
-    	else if (event.getButton().equals(addMissionButton)) {
-			showAddMissionPanel();
-		} 
-    	else if (event.getButton().equals(yesButton)) {
-			windowConfirm.close();
-			Mission selectedMission = (Mission) listMission.getValue();
-			int result = colleagueService.deleteMission(selectedMission);
-			if(result != 0){
-				buildViewMissionColleagueContent();
-			} else {
-				Notification.show(resourceBundle.getString("mission.delete.error.msg"), Type.ERROR_MESSAGE);
-			}
-		} 
-    	else if (event.getButton().equals(noButton)) {
-			windowConfirm.close();
+		if (event.getButton().equals(addMissionButton)) {
+    		currentSaveMode = Constants.SAVE_MODE_INSERT;
+    		missionDTO = MissionDTO.builder().build();
+    		missionForm.buildMissionForm(missionDTO);
+    		enableMissionForm(true);
 		} 
     	else if(event.getButton().equals(cancelButton)){
-			addMissionButton.setEnabled(true);
-			addMissionPanel.setVisible(false);
+    		listMission.setValue(null);
+			enableMissionForm(false);
 		} 
     	else if(event.getButton().equals(saveButton)){
 			saveMission();
 		}
 	}
     
-    private void showEditMissionPanel(){
-    	currentSaveMode = Constants.SAVE_MODE_UPDATE;
-		addMissionButton.setEnabled(false);
-		addMissionPanel.setVisible(true);
-		enableButton(false);
-		Mission selectedMission = (Mission) listMission.getValue();
-		missionDTO = colleagueService.createMissionDTO(selectedMission);
-		buildAddMissionPanel();
-    }
-    
-    private void showAddMissionPanel(){
-    	currentSaveMode = Constants.SAVE_MODE_INSERT;
-		addMissionButton.setEnabled(false);
-		missionDTO = MissionDTO.builder().build();
-		buildAddMissionPanel();
-		addMissionPanel.setVisible(true);
-		enableButton(false);
-    }
     
     private void saveMission(){
     	int formValidation = checkMissionForm(missionDTO);
@@ -274,14 +215,15 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
      * Refresh list mission
      */
     private void refreshListMission(){
-    	addMissionButton.setEnabled(true);
-		addMissionPanel.setVisible(false);
+    	enableMissionForm(false);
 		listMissionPanel.removeAllComponents();
-		buildListMissionPanel();
+		listMission.fillAllColleagueMission();
+		if(listMission.size() < Constants.NB_ROWS_DEFAULT){
+			listMission.setPageLength(listMission.size());
+    	} else {
+    		listMission.setPageLength(Constants.NB_ROWS_DEFAULT);
+    	}
 		listMissionPanel.addComponent(listMission);
-		buildFooterListMission();
-		listMissionPanel.addComponent(footerLayoutMissionButton);
-		listMissionPanel.setVisible(true);
     }
     
     /**
@@ -307,45 +249,19 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	colleagueService.saveMission(missionToUpdate);
     }
     
-    
-    
-    private void buildConfirmWindow(){
-    	windowConfirm.removeAllComponents();
-    	windowConfirm.setCaption(resourceBundle.getString("window.confirm.delete.title"));
-    	windowConfirm.center();
-    	windowConfirm.setModal(true);
-    	windowConfirm.setReadOnly(true);
-    	confirmDeleteLabel.setCaption(resourceBundle.getString("msg.confirm.delete.mission"));
-    	confirmButtonContainer.setSpacing(true);
-    	confirmButtonContainer.addStyleName("containerButton");
-    	yesButton.setCaption(resourceBundle.getString("yes.confirm.button.caption"));
-    	yesButton.addStyleName("styleButton");
-    	yesButton.addClickListener(this);
-    	noButton.setCaption(resourceBundle.getString("no.confirm.button.caption"));
-    	noButton.addStyleName("styleButton");
-    	noButton.addClickListener(this);
-    	confirmButtonContainer.addComponent(yesButton);
-    	confirmButtonContainer.addComponent(noButton);
-    	windowConfirm.addComponent(confirmDeleteLabel);
-    	windowConfirm.addComponent(confirmButtonContainer);
-    }
-    
-    
 	@Override
 	public void valueChange(ValueChangeEvent event) {
     	Mission selectedMission = (Mission) listMission.getValue();
     	if(selectedMission != null){
-    		enableButton(true);
+    		enableMissionForm(true);
+    		currentSaveMode = Constants.SAVE_MODE_UPDATE;
+    		missionDTO = colleagueService.createMissionDTO(selectedMission);
+    		missionForm.buildMissionForm(missionDTO);
     	}else{
-    		enableButton(false);
+    		enableMissionForm(false);
     	}
 	}
     
-    
-    private void enableButton(boolean state){
-    	editMissionButton.setEnabled(state);
-		deleteMissionButton.setEnabled(state);
-    }
     
     /**
      * Checks all mandatory mission's fields are not null and period is valid
@@ -442,22 +358,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		this.addMissionButton = addMissionButton;
 	}
 
-	public Button getEditMissionButton() {
-		return editMissionButton;
-	}
-
-	public void setEditMissionButton(Button editMissionButton) {
-		this.editMissionButton = editMissionButton;
-	}
-
-	public Button getDeleteMissionButton() {
-		return deleteMissionButton;
-	}
-
-	public void setDeleteMissionButton(Button deleteMissionButton) {
-		this.deleteMissionButton = deleteMissionButton;
-	}
-
 	public Panel getListMissionPanel() {
 		return listMissionPanel;
 	}
@@ -480,55 +380,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 
 	public void setAddMissionPanel(Panel addMissionPanel) {
 		this.addMissionPanel = addMissionPanel;
-	}
-
-	public HorizontalLayout getFooterLayoutMissionButton() {
-		return footerLayoutMissionButton;
-	}
-
-	public void setFooterLayoutMissionButton(
-			HorizontalLayout footerLayoutMissionButton) {
-		this.footerLayoutMissionButton = footerLayoutMissionButton;
-	}
-
-	public Window getWindowConfirm() {
-		return windowConfirm;
-	}
-
-	public void setWindowConfirm(Window windowConfirm) {
-		this.windowConfirm = windowConfirm;
-	}
-
-	public Label getConfirmDeleteLabel() {
-		return confirmDeleteLabel;
-	}
-
-	public void setConfirmDeleteLabel(Label confirmDeleteLabel) {
-		this.confirmDeleteLabel = confirmDeleteLabel;
-	}
-
-	public HorizontalLayout getConfirmButtonContainer() {
-		return confirmButtonContainer;
-	}
-
-	public void setConfirmButtonContainer(HorizontalLayout confirmButtonContainer) {
-		this.confirmButtonContainer = confirmButtonContainer;
-	}
-
-	public Button getYesButton() {
-		return yesButton;
-	}
-
-	public void setYesButton(Button yesButton) {
-		this.yesButton = yesButton;
-	}
-
-	public Button getNoButton() {
-		return noButton;
-	}
-
-	public void setNoButton(Button noButton) {
-		this.noButton = noButton;
 	}
 
 	public MissionForm getMissionForm() {
@@ -563,5 +414,13 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 		this.missionFormButtonLayout = missionFormButtonLayout;
 	}
 
+	public Label getNoMissionLabel() {
+		return noMissionLabel;
+	}
+
+	public void setNoMissionLabel(Label noMissionLabel) {
+		this.noMissionLabel = noMissionLabel;
+	}
+	
 	
 }
