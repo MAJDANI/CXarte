@@ -192,7 +192,6 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			for (Map.Entry<Category, ConceptMapDTO> categoryMap : categoryMapDto.getMapCategory().entrySet()) {
 				Button categButton = new Button(categoryMap.getKey().getName());
 				categButton.addClickListener(this);
-//				categButton.addStyleName("styleButton");
 				categButton.addStyleName("styleButtonCateg");
 				categButton.setData(categoryMap.getKey().getId());
 				allCategoriesLayout.addComponent(categButton);

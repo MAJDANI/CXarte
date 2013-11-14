@@ -280,6 +280,11 @@
 	cursor: pointer;
 }
 
+.profileLayoutColleagueWindow {
+	margin-bottom: 10px;
+	height: 70px;
+}
+
 .resultBloc {
 	height: 227px;
     width: 292px;
@@ -404,6 +409,12 @@
     margin-top: 25px;
 }
 
+.v-accordion .table {
+	text-align: center;
+	margin-bottom: 0px;
+    margin-top: 0px;
+}
+
 .v-table-cell-content {
 	height: 25px;
 	border-right: 0 none;
@@ -423,7 +434,7 @@
 	border-right-width: 0px;
 }
 
-.v-table-cell-content .v-ratingstars-star {
+.v-table-cell-content .v-ratingstars-star, .v-accordion .v-ratingstars-star {
 	background-color: #009CDA;
 }
 
