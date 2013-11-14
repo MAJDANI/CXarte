@@ -153,7 +153,6 @@ public abstract class CUtils {
      */
     public static void showMessage(Map<String, Object> mapNotification,
 	    Window mainWindow) {
-    	System.out.println("showMessage");
     	Message msg = new Message(mapNotification, mainWindow);
     	msg.show();
     }

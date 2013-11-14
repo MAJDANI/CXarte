@@ -88,7 +88,6 @@ public class ColleagueDao extends SqlMapClientDaoSupport implements
 	
 	@Override
 	public int delete(Colleague colleague) throws DataAccessException {
-		System.out.println("ICI----------------------");
 		if (logger.isDebugEnabled()) {
 			logger.debug("Delete colleague ID :" + colleague.getId());
 		}

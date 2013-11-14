@@ -28,8 +28,10 @@ public class Constants {
     public static final int VALIDATION_INVALID_PERIOD = 1;
     
     public static final int VALIDATION_INVALID_SELECTION = 2;
+
+    public static final int VALIDATION_INVALID_START_DATE = 3;
     
-    public static final int VALIDATION_VALID_FORM = 3;
+    public static final int VALIDATION_VALID_FORM = 4;
     
     // 2 constants to identify if "save" is an insert or update
     public static final int SAVE_MODE_UPDATE = 0;

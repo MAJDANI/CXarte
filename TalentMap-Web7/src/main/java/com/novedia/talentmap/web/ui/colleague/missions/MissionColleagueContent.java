@@ -13,6 +13,7 @@ import com.novedia.talentmap.model.entity.Mission;
 import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IColleagueService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -68,7 +69,8 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	private HorizontalLayout missionFormButtonLayout;
 	
 	private MissionDTO missionDTO;
-	
+	private DataValidationHelper dataValidationHelper;
+
 	private ResourceBundle resourceBundle;
 
 	/**
@@ -76,6 +78,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	 */
 	public MissionColleagueContent(){
     	super();
+    	dataValidationHelper = new DataValidationHelper();
     	setSpacing(true);
     	addStyleName("missionColleagueView");
     	missionDTO = MissionDTO.builder().build();	
@@ -261,6 +264,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 				refreshListMission();
 				break;
 			}
+			case Constants.VALIDATION_INVALID_START_DATE:{
+				break;
+			}
 		}
     }
     
@@ -350,16 +356,17 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
      *         VALIDATION_VALID_FORM
      */
     private int checkMissionForm(MissionDTO mission) {
-
     	if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
     			|| !isNotEmpty(mission.getPlace())
     			|| !isNotEmpty(mission.getClient())
-    			|| !isNotEmpty(mission.getStartDate())
+    			|| !isNotEmpty(mission.getTools())
     			|| !isNotEmpty(mission.getNotes())){
     		return Constants.VALIDATION_FIELD_MISSING;
     		
     	}
-    	
+    	if(!missionForm.validateStartDate()) {
+    		return Constants.VALIDATION_INVALID_START_DATE;
+    	}
     	if (!isAValidPeriod(mission.getStartDate(), mission.getEndDate())){
     		return Constants.VALIDATION_INVALID_PERIOD;
     	}

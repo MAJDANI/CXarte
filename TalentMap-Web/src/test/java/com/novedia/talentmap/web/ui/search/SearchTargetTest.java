@@ -192,7 +192,6 @@ public class SearchTargetTest {
 		Collection<Object> lesItemId = (Collection<Object>) treeSkills
 				.getContainerDataSource().getItemIds();
 
-		System.out.println("lesItemId.isEmpty()=" + lesItemId.isEmpty());
 		Boucle: for (Object item : lesItemId) {
 			if (item instanceof Concept) {
 				Concept concept = (Concept) item;
@@ -228,7 +227,6 @@ public class SearchTargetTest {
 				.thenReturn(expectedColleagueList);
 		Boolean atLeastOneIsSelected = searchTarget
 				.parseList(listColleagueIdResult);
-		System.out.println("atLeastOneIsSelected=" + atLeastOneIsSelected);
 		// --------------
 		// Then
 		// --------------

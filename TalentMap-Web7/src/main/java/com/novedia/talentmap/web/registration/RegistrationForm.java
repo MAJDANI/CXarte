@@ -342,7 +342,6 @@ public class RegistrationForm extends FormLayout implements BlurListener, ValueC
 	
 	@Override
 	public void blur(BlurEvent event) {
-		System.out.println("blurEvent RegistrationForm");
 		Component p = event.getComponent();
 		if (dateField.equals(p)) {
 			dataValidationHelper.validatePastDateField(dateField);
@@ -370,7 +369,6 @@ public class RegistrationForm extends FormLayout implements BlurListener, ValueC
 		} else if(experienceField.equals(p)) {
 			dataValidationHelper.validateExperience(experienceField);
 		} else if(dateField.equals(p)) {
-			System.out.println("dateField value change");
 			dataValidationHelper.validatePastDateField(dateField);
 		}
 	}

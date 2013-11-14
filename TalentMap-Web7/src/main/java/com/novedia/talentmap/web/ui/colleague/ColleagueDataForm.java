@@ -230,7 +230,6 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 	
 	@Override
 	public void blur(BlurEvent event) {
-		System.out.println("blurEvent");
 		Component p = event.getComponent();
 		if (dateField.equals(p)) {
 			dataValidationHelper.validatePastDateField(dateField);

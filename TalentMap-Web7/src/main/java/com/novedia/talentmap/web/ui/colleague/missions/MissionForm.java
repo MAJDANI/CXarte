@@ -10,24 +10,34 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.helpers.DataValidationHelper;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.PropertiesFile;
+import com.vaadin.data.Property;
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.BeanValidator;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.BlurListener;
+import com.vaadin.server.UserError;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.TwinColSelect;
 
 @SuppressWarnings("serial")
-public class MissionForm extends HorizontalLayout{
+public class MissionForm extends HorizontalLayout implements BlurListener {
 	
 	private IClientService clientService;
 
@@ -63,6 +73,7 @@ public class MissionForm extends HorizontalLayout{
 	@PropertyId(ComponentsId.TOOLS_ID)
 	private TwinColSelect toolsField;
 	
+	private DataValidationHelper dataValidationHelper;
 	private ResourceBundle resourceBundle;
 	
 	/**
@@ -76,6 +87,7 @@ public class MissionForm extends HorizontalLayout{
 	public MissionForm buildMissionForm(MissionDTO missionDto) {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+		dataValidationHelper = new DataValidationHelper();
 		removeAllComponents();
 		missionFormLayout.removeAllComponents();
 		missionFormLayout.setSpacing(true);
@@ -90,13 +102,12 @@ public class MissionForm extends HorizontalLayout{
 		titleField.setCaption(resourceBundle.getString("form.mission.title.caption"));
 		titleField.setId(ComponentsId.TITLE_ID);
 		titleField.setRequired(true);
-		titleField.setRequiredError(resourceBundle.getString("form.mission.title.error.msg"));
-		titleField.addValidator(new BeanValidator(MissionDTO.class,	ComponentsId.TITLE_ID));
 		titleField.setImmediate(true);
 		titleField.setValidationVisible(true);
 		titleField.setInputPrompt(resourceBundle.getString("form.mission.title.default.value"));
 		titleField.setNullRepresentation("");
 		titleField.setMaxLength(ConstantsDB.MISSION_TITLE_MAX_LENGTH);
+		titleField.addBlurListener(this);
 		missionFormLayout.addComponent(titleField);
 		
 		clientField.setCaption(resourceBundle.getString("form.mission.client.caption"));
@@ -113,30 +124,32 @@ public class MissionForm extends HorizontalLayout{
 		placeField.setCaption(resourceBundle.getString("form.mission.lieu.caption"));
 		placeField.setId(ComponentsId.PLACE_ID);
 		placeField.setRequired(true);
-		placeField.setRequiredError(resourceBundle.getString("form.mission.lieu.error.msg"));
-		placeField.addValidator(new BeanValidator(MissionDTO.class,
-				ComponentsId.PLACE_ID));
 		placeField.setImmediate(true);
 		placeField.setValidationVisible(true);
 		placeField.setInputPrompt(resourceBundle.getString("form.mission.lieu.default.value"));
 		placeField.setNullRepresentation("");
 		placeField.setMaxLength(ConstantsDB.MISSION_PLACE_MAX_LENGTH);
+		placeField.addBlurListener(this);
 		missionFormLayout.addComponent(placeField);
 		
 		startDateField.setCaption(resourceBundle.getString("form.mission.start.date.caption"));
 		startDateField.setId(ComponentsId.START_DATE_ID);
 		startDateField.setRequired(true);
-		startDateField.setRequiredError(resourceBundle.getString("form.mission.start.date.error.msg"));
-		startDateField.addValidator(new BeanValidator(MissionDTO.class,
-				ComponentsId.START_DATE_ID));
 		startDateField.setImmediate(true);
 		startDateField.setValidationVisible(true);
 		startDateField.setInputPrompt(Constants.DATE_FORMAT);
+//		startDateField.addValueChangeListener(this);
+		startDateField.addBlurListener(this);
 		missionFormLayout.addComponent(startDateField);
 		
 		endDateField.setCaption(resourceBundle.getString("form.mission.end.date.caption"));
 		endDateField.setId(ComponentsId.END_DATE_ID);
 		endDateField.setInputPrompt(Constants.DATE_FORMAT);
+		endDateField.setImmediate(true);
+		endDateField.setValidationVisible(true);
+		endDateField.setInputPrompt(Constants.DATE_FORMAT);
+//		endDateField.addValueChangeListener(this);
+		endDateField.addBlurListener(this);
 		missionFormLayout.addComponent(endDateField);
 		
 		commentField.setCaption(resourceBundle.getString("form.mission.comment.caption"));
@@ -144,7 +157,8 @@ public class MissionForm extends HorizontalLayout{
 		commentField.setInputPrompt(resourceBundle.getString("form.mission.comment.default.value"));
 		commentField.setNullRepresentation("");
 		commentField.setRequired(true);
-		commentField.setRequiredError("form.mission.comment.error.msg");
+		commentField.setMaxLength(ConstantsDB.MISSION_COMMENT_MAX_LENGTH);
+		commentField.addBlurListener(this);
 		missionFormLayout.addComponent(commentField);
 		
 		toolsField.setCaption(resourceBundle.getString("form.mission.tool.caption"));
@@ -193,6 +207,32 @@ public class MissionForm extends HorizontalLayout{
 		clientField.setItemCaptionPropertyId("name");
 	}
 
+	public boolean validateStartDate() {
+		return dataValidationHelper.validateFutureDateField(startDateField, true);
+	}
+	
+	@Override
+	public void blur(BlurEvent event) {
+		Component p = event.getComponent();
+		validate(p);
+	}
+
+
+	private void validate(Object p) {
+		if (startDateField.equals(p)) {
+			dataValidationHelper.validateFutureDateField(startDateField, true);
+		} else if (endDateField.equals(p)) {
+			dataValidationHelper.validateFutureDateField(endDateField, false);
+		}  else if (titleField.equals(p)) {
+			dataValidationHelper.validateMissionTitle(titleField);
+		} else if (placeField.equals(p)) {
+			dataValidationHelper.validateMissionPlace(placeField);
+		} else if (commentField.equals(p)) {
+			dataValidationHelper.validateMissionComment(commentField);
+		} 
+		
+	}
+	
 	public BeanFieldGroup<MissionDTO> getBinder() {
 		return binder;
 	}

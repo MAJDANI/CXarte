@@ -20,6 +20,7 @@ import com.vaadin.server.UserError;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.PopupDateField;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 
 public class DataValidationHelper {
@@ -52,7 +53,7 @@ public class DataValidationHelper {
 	   	boolean isValid = true;
 		String login;
 		fieldLogin.setComponentError(null);
-		if (fieldLogin != null && fieldLogin.getValue() != "") {
+		if (fieldLogin != null && fieldLogin.getValue() != null && !fieldLogin.getValue().equals("")) {
 			//Size control
 		    login = (String) fieldLogin.getValue();
 		    try {
@@ -83,7 +84,7 @@ public class DataValidationHelper {
 		field.setComponentError(null);
 		int min = Constants.COLLEAGUE_LAST_NAME_MIN_LENGTH;
 		int max = ConstantsDB.COLLEAGUE_LAST_NAME_MAX_LENGTH;
-		if (field != null && field.getValue() != "" && field.getValue() != null) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			int size = field.getValue().length();
 			if(size < min || size > max) {
 				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.name.field", 
@@ -106,7 +107,7 @@ public class DataValidationHelper {
 		field.setComponentError(null);
 		int min = Constants.COLLEAGUE_FIRST_NAME_MIN_LENGTH;
 		int max = ConstantsDB.COLLEAGUE_FIRST_NAME_MAX_LENGTH;
-		if (field != null && field.getValue() != "" && field.getValue() != null) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			int size = field.getValue().length();
 			if(size < min || size > max) {
 				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.first.name.field", 
@@ -289,13 +290,12 @@ public class DataValidationHelper {
     * @return true if the format of the date is OK
     */
    public boolean validatePastDateField(PopupDateField field) {
-	   	System.out.println("validatePastDateField : field = "+ field);
 	   	initResourceBundle();
 	   	boolean isValid = true;
 		field.setComponentError(null);
 		//if the format of the date is not valid, field will be null
 		//so it is just necessary to check if it's null
-		if (field != null && field.getValue() != null ) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			Date date = field.getValue();
 			Date today = Calendar.getInstance().getTime();
 			if (date.after(today)) {
@@ -308,6 +308,7 @@ public class DataValidationHelper {
 			String message = resourceBundle.getString("error.date.entry.invalid.msg");
 			Notification.show(message);
 			field.setComponentError(new UserError(message));
+			field.setValue(null);
 			isValid = false;
 		}
 		return isValid;
@@ -321,7 +322,6 @@ public class DataValidationHelper {
     */
    public boolean validateFutureDateField(PopupDateField field, boolean mandatory) {
 	   	initResourceBundle();
-	   	System.out.println("validateFutureDateField : field = "+ field);
 	   	boolean isValid = true;
 		field.setComponentError(null);
 		//if the format of the date is not valid, field will be null
@@ -330,11 +330,12 @@ public class DataValidationHelper {
 			String message ="";
 			if(mandatory) {
 				message = resourceBundle.getString("error.date.entry.invalid.mandatory.msg");
+				field.setComponentError(new UserError(message));
 			} else {
 				message = resourceBundle.getString("error.date.entry.invalid.msg");
 			}
 			Notification.show(message);
-			field.setComponentError(new UserError(message));
+			field.setValue(null);
 			isValid = false;
 		}
 		return isValid;
@@ -350,7 +351,7 @@ public class DataValidationHelper {
 		field.setComponentError(null);
 		int min = Constants.COLLEAGUE_PASSWORD_MIN_LENGTH;
 		int max = ConstantsDB.REGISTRATION_PASSWORD_MAX_LENGTH;
-		if (field != null && field.getValue() != "" && field.getValue() != null) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			int size = field.getValue().length();
 			if(size < min || size > max) {
 				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.password.field", 
@@ -373,7 +374,7 @@ public class DataValidationHelper {
 		field.setComponentError(null);
 		int min = Constants.COLLEAGUE_PASSWORD_MIN_LENGTH;
 		int max = ConstantsDB.REGISTRATION_PASSWORD_MAX_LENGTH;
-		if (field != null && field.getValue() != "" && field.getValue() != null) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			int size = field.getValue().length();
 			if(size < min || size > max) {
 				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.password.field", 
@@ -396,18 +397,80 @@ public class DataValidationHelper {
 		field.setComponentError(null);
 		int min = 0;
 		int max = ConstantsDB.MISSION_TITLE_MAX_LENGTH;
-		if (field != null && field.getValue() != "" && field.getValue() != null) {
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
 			int size = field.getValue().length();
 			if(size < min || size > max) {
-				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.name.field", 
+				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.title.field", 
 						 min, max);
 				 Notification.show(message);
 				 field.setComponentError(new UserError(message));
 				 isValid = false;
 			}
+		} else {
+			String message = resourceBundle.getString("form.mission.title.error.msg");
+			Notification.show(message);
+			field.setComponentError(new UserError(message));
+			isValid = false;
 		}
 		return isValid;
    }
+
+  /**
+   * If the field is not empty, checks the size is between MIN and MAX defined. If not, a 
+   * Notification is sent to the user.
+   */
+  public boolean validateMissionPlace(TextField field){
+	   	initResourceBundle();
+	   	boolean isValid = true;
+		field.setComponentError(null);
+		int min = 0;
+		int max = ConstantsDB.MISSION_PLACE_MAX_LENGTH;
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
+			int size = field.getValue().length();
+			if(size < min || size > max) {
+				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.place.field", 
+						 min, max);
+				 Notification.show(message);
+				 field.setComponentError(new UserError(message));
+				 isValid = false;
+			}
+		} else {
+			String message = resourceBundle.getString("form.mission.lieu.error.msg");
+			Notification.show(message);
+			field.setComponentError(new UserError(message));
+			isValid = false;
+		}
+		return isValid;
+ }
+
+  /**
+   * If the field is not empty, checks the size is between MIN and MAX defined. If not, a 
+   * Notification is sent to the user.
+   */
+  public boolean validateMissionComment(TextArea field){
+	   	initResourceBundle();
+	   	boolean isValid = true;
+		field.setComponentError(null);
+		int min = 0;
+		int max = ConstantsDB.MISSION_COMMENT_MAX_LENGTH;
+		if (field != null &&  field.getValue() != null && !field.getValue().equals("")) {
+			int size = field.getValue().length();
+			if(size < min || size > max) {
+				 String message = CUtils.buildMessageSizeBetween(resourceBundle, "error.size.comment.field", 
+						 min, max);
+				 Notification.show(message);
+				 field.setComponentError(new UserError(message));
+				 isValid = false;
+			}
+		} else {
+			String message = resourceBundle.getString("form.mission.comment.error.msg");
+			Notification.show(message);
+			field.setComponentError(new UserError(message));
+			isValid = false;
+		}
+		return isValid;
+ }
+
 
 	/**
 	 * @return the registrationService

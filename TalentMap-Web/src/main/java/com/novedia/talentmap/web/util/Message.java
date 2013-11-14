@@ -101,7 +101,6 @@ public class Message {
      * @class Message.java
      */
     public void show() {
-    	System.out.println("this.typeError=" + this.typeError);
 	switch (this.typeError) {
 	case 1:
 

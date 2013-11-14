@@ -176,7 +176,6 @@ public class EAEObjectiveForm extends FormLayout implements BlurListener,
 
 	@Override
 	public void valueChange(ValueChangeEvent event) {
-		System.out.println("VALUE CHANGE");
 		Property p = event.getProperty();
 		validate(p);
 	}

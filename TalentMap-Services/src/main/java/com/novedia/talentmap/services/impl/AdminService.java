@@ -371,7 +371,6 @@ public class AdminService implements IAdminService {
 	
     	//DELETE
 	    Map<String, Object> map = deleteColleague(colleagues);
-	    System.out.println("map=" + map);
 	    return map;
     }
 

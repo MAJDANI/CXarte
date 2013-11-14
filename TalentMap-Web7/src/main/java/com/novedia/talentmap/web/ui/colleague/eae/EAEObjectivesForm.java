@@ -84,7 +84,6 @@ public class EAEObjectivesForm extends FormLayout implements EAEObjectiveFormSav
 	}
 
 	private void buildLayout() {
-		System.out.println("buildLayout");
 		eaeObjectivesFormLayout.removeAllComponents();
 		this.eaeObjectivesFormLayout.setColumns(1);
 		this.eaeObjectivesFormLayout.setRows(6);
@@ -96,13 +95,11 @@ public class EAEObjectivesForm extends FormLayout implements EAEObjectiveFormSav
 
 	@Override
 	public void refreshAccordion() {
-		System.out.println("refreshAccordion");
 		buildLayout();
 		buildEAEObjectivesForm();
 	}
 	
 	private void buildEAEObjectivesForm() {
-		System.out.println("buildEAEObjectivesForm");
 		removeAllComponents();
 		 
 		List<Objective> listObjectives = objectiveService.getObjectivesByEAEId(currentEAEId);
