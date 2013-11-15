@@ -131,7 +131,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 		this.colleagueIdHistory = colleagueId;
 		this.windowParent = parent;
 		imageBack.addClickListener(this);
-
+		imageBack.addStyleName("image");
 		if (profilConnected == ProfilConnectedEnum.MANAGER) {
 			addComponent(imageBack);
 		}
@@ -158,6 +158,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 		imageBack = new Image("", resourceBack);
 		buildListEAEPanel(colleagueIdHistory);
 		imageBack.addClickListener(this);
+		imageBack.addStyleName("image");
 		addComponent(imageBack);
 		listEAEPanel.addStyleName("listEAEPanel");
 		addComponent(listEAEPanel);
@@ -331,7 +332,8 @@ public class HistoryEAEContent extends VerticalLayout implements
 	 * Build list EAE panel
 	 */
 	private void buildListEAEPanel(Integer colleagueId) {
-
+		listEAE.setColDateCaption(resourceBundle.getString("history.eae.col.date.caption"));
+		listEAE.setColStateCaption(resourceBundle.getString("history.eae.col.state.caption"));
 		listEAE.fillAllColleagueEAE(colleagueId);
 		listEAE.addValueChangeListener(this);
 		listEAE.addStyleName("table");

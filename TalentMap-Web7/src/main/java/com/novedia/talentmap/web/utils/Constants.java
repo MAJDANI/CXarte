@@ -125,6 +125,8 @@ public class Constants {
      */
 	public static final String IMG_NO_PHOTO_BOY = "img/nophotoBoy.png";
 	public static final String IMG_NO_PHOTO_GIRL = "img/nophotoGirl.png";
+//	public static final String IMG_NO_PHOTO_BOY = "img/photoResult.png";
+//	public static final String IMG_NO_PHOTO_GIRL = "img/photoResult.png";
 	public static final String IMG_BACK_BLUE = "img/backBlue.png";
 
 	public static final String IMG_CADRE_GREEN = "img/cadreVert.png";

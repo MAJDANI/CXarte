@@ -11,6 +11,7 @@ import com.novedia.talentmap.model.dto.EAEColleagueResumeForCMDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.ui.colleague.eae.CurrentEAEContent;
+import com.novedia.talentmap.web.ui.colleague.eae.EAEDTOContainer;
 import com.novedia.talentmap.web.ui.colleague.eae.HistoryEAEContent;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
@@ -149,17 +150,19 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 			// -----------------------------
 			// NOM ET IMAGE COLLABORATEUR
 			// -----------------------------
-			String name = eaDTO.getCollabFirstName() + " " + eaDTO.getCollabLastName();
-			Image imageTest ;
+			String firstName = eaDTO.getCollabFirstName() ;
+			String lastName = eaDTO.getCollabLastName() ;
+			
+			Image photoColleague ;
 			String typeMasculin = resourceBundle.getString("title.masculin.value");
 			if(typeMasculin != null && typeMasculin.equals(eaDTO.getTitle().toUpperCase())) {
-				imageTest = new Image( name, resourceBoy);
+				photoColleague = new Image( firstName, resourceBoy);
 			} else {
-				imageTest = new Image( name, resourceGirl);
+				photoColleague = new Image( firstName, resourceGirl);
 			}
-			imageTest.addClickListener(this);
-			imageTest.setId(eaDTO.getIdColleague().toString());
-			imageTest.addStyleName("image");
+			photoColleague.addClickListener(this);
+			photoColleague.setId(eaDTO.getIdColleague().toString());
+			photoColleague.addStyleName("image");
 			
 			// -----------------------------
 			// DATE EAE
@@ -172,23 +175,28 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 				String date = CUtils.DATE_FORMAT.format(dateEAE);
 				captionDate = resourceBundle.getString("cm.eae.date.caption") + date;
 			}
-			imageTest.setAlternateText(captionDate);
-			imageTest.setDescription(captionDate);
+			
+			
+			String nameDesc = "<h3>"+ firstName + "&nbsp;" + lastName +
+				    "</h3>"+captionDate;
+
+			photoColleague.setAlternateText(nameDesc);
+			photoColleague.setDescription(nameDesc);
 			
 			// -----------------------------
 			// On affiche le code couleur de l'état du dernier EAE
 			// -----------------------------
 			Integer state = eaDTO.getEaeStateId();
 			if(null == state) {
-				imageTest.addStyleName("borderGrey");
+				photoColleague.addStyleName("borderGrey");
 			} else if(EAEStateEnum.CLOSED.getId() == state) {
-				imageTest.addStyleName("borderRed");
+				photoColleague.addStyleName("borderRed");
 			} else if(EAEStateEnum.VALIDATED.getId() == state) {
-				imageTest.addStyleName("borderOrange");
+				photoColleague.addStyleName("borderOrange");
 			} else if(EAEStateEnum.OPEN.getId() == state) {
-				imageTest.addStyleName("borderGreen");
+				photoColleague.addStyleName("borderGreen");
 			}
-			hLayoutCMEAE.addComponent(imageTest);
+			hLayoutCMEAE.addComponent(photoColleague);
 			
 		}
 		
@@ -204,6 +212,18 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 		hLayoutLegendes.setVisible(false);
 		hLayoutCMEAE.setVisible(false);
 		hLayoutHisto.setVisible(true);
+//		System.out.println("currentColleagueId=" + currentColleagueId);
+//
+//		for (EAEColleagueResumeForCMDTO eaeDTO : listEAEColleagueResumeForCMDTO) {
+//			Integer idC = eaeDTO.getIdColleague();
+//			System.out.println("idC=" + idC);
+//			if(idC.equals(currentColleagueId)) {
+//				name = name + " " + eaeDTO.getCollabLastName();
+//				System.out.println("name=" + name);
+//				
+//			}
+//		}		
+//		System.out.println("currentColleagueId=" + currentColleagueId);
 		
 	    hLayoutHisto.addComponent(historyEAEContent
 				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this));

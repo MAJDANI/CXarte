@@ -3,9 +3,13 @@ package com.novedia.talentmap.web.ui.colleague.eae;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.dto.EAEForSynthesisDTO;
+import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.utils.Images;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Table;
 import com.novedia.talentmap.web.utils.EAEStateEnum;
@@ -24,12 +28,14 @@ public class ListEAEDTO extends Table {
 	public static final String STATE_EAE = "EAE's State";
 	public static final String STATE_EAE_IMG = "";
 
+	private String colDateCaption ="";
+	private String colStateCaption ="";
+	
 	/**
 	 * Default constructor
 	 */
 	public ListEAEDTO() {
 		super();
-		addColumns();
 		setSelectable(true);
 		setImmediate(true);
 		setNullSelectionAllowed(true);
@@ -42,6 +48,7 @@ public class ListEAEDTO extends Table {
 	 */
 	
     public Table fillAllColleagueEAE(Integer colleagueId){
+		addColumns();
     	removeAllItems();
 		this.eaeDTOContainer.fillEAEContainer(colleagueId);
 		fillTable();
@@ -69,7 +76,10 @@ public class ListEAEDTO extends Table {
 						Images.getImgButtonOrange() }, eae);
 			} else if (eae.getEaeStateId() == EAEStateEnum.CLOSED.getId()) {
 				addItem(new Object[] { date, eae.getEaeStateLabel(),
-						Images.getImgButtonRed() }, eae);
+						Images.getImgButtonRed()}, eae);
+			} else {
+				addItem(new Object[] { date, eae.getEaeStateLabel(),
+						null }, eae);
 			}
 		}
 
@@ -79,8 +89,8 @@ public class ListEAEDTO extends Table {
 	 * Builds Headers of the Table ListEAEDTO
 	 */
 	public void addColumns() {
-		addContainerProperty(DATE_EAE, String.class, null);
-		addContainerProperty(STATE_EAE, String.class, null);
+		addContainerProperty(colDateCaption, String.class, null);
+		addContainerProperty(colStateCaption, String.class, null);
 		addContainerProperty(STATE_EAE_IMG, Embedded.class, null);
 	}
 
@@ -110,6 +120,34 @@ public class ListEAEDTO extends Table {
 	 */
 	public void setEaeDTOContainer(EAEDTOContainer eaeDTOContainer) {
 		this.eaeDTOContainer = eaeDTOContainer;
+	}
+
+	/**
+	 * @return the colDateCaption
+	 */
+	public String getColDateCaption() {
+		return colDateCaption;
+	}
+
+	/**
+	 * @param colDateCaption the colDateCaption to set
+	 */
+	public void setColDateCaption(String colDateCaption) {
+		this.colDateCaption = colDateCaption;
+	}
+
+	/**
+	 * @return the colStateCaption
+	 */
+	public String getColStateCaption() {
+		return colStateCaption;
+	}
+
+	/**
+	 * @param colStateCaption the colStateCaption to set
+	 */
+	public void setColStateCaption(String colStateCaption) {
+		this.colStateCaption = colStateCaption;
 	}
 
 
