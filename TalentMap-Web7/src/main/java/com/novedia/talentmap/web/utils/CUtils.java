@@ -33,8 +33,8 @@ public abstract class CUtils {
 	public static final String STRING_DATE_FORMAT = "dd/MM/yyyy";
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
 			STRING_DATE_FORMAT);
-	
-    /**
+
+	/**
      * 
      * @class CUtils.java
      * @param mapNotification
@@ -146,7 +146,7 @@ public abstract class CUtils {
 				tableTools.addStyleName("table");
 				tableTools.setWidth("100%");
 				tableTools.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
-				tableTools.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
+				tableTools.addContainerProperty(resourceBundle.getString("skill.score.caption"), Component.class, null);
 				tableTools.setPageLength(mapTool.size());
 				
 				for (Map.Entry<Tool, Skill> eTool : mapTool.entrySet()) {
@@ -161,7 +161,7 @@ public abstract class CUtils {
 				if (noteconcept != 0) {
 					rateConcept.setMaxValue(noteconcept);
 					rateConcept.setReadOnly(true);
-					hLayoutConcept.addComponent(new Label(resourceBundle.getString("skill.level.caption") + " : "));
+					hLayoutConcept.addComponent(new Label(resourceBundle.getString("skill.score.caption") + " : "));
 					hLayoutConcept.addComponent(rateConcept);
 					
 				} else {
@@ -213,4 +213,35 @@ public abstract class CUtils {
 		return result;
 	}
 
+	public static String[] buildOPTIONS(ResourceBundle res) {
+		String[] OPTIONS = new String[] {
+				res.getString("beginner"),
+				res.getString("middle"),
+				res.getString("confirmed"),
+				res.getString("professional"),
+				res.getString("expert") };
+		return OPTIONS;
+	}
+	
+	public static String getLevelOfScore(Integer score, ResourceBundle res) {
+		String level = "";
+		switch (score) {
+		case 1:
+			level = res.getString("beginner");
+		    break;
+		case 2:
+			level = res.getString("middle");
+		    break;
+		case 3:
+			level = res.getString("confirmed");
+		    break;
+		case 4:
+			level = res.getString("professional");
+		    break;
+		case 5:
+			level = res.getString("expert");
+		    break;
+		}
+		return level;
+	}
 }

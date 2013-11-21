@@ -50,7 +50,7 @@ public class ListMission extends Table {
      * Builds Headers of the Table ListMission
      */
     private void addColumns() {
-		addContainerProperty(resourceBundle.getString("table.header.title"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.project.name"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.client"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.place"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.date.debut"), String.class, null);

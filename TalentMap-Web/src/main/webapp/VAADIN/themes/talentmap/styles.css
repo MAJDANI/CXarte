@@ -432,6 +432,7 @@
 
 .category-tab .v-accordion-item-caption .v-captiontext {
 	font-size: 14px;
+/* 	font-size: 50px; */
 }
 
 .concept-tab .v-accordion-item-caption {
@@ -445,11 +446,15 @@
 
 .tool-table .v-table-header-cell-asc,.tool-table .v-table-header-cell {
 	background: rgba(221, 221, 221, 0.3);
+/* 	font-size: 50px; */
+/* 	font-color: red; */
 }
 
 .tool-table .v-table-cell-wrapper,.tool-table .v-table-caption-container
 	{
 	text-align: center;
+/* 	font-size: 50px; */
+/* 	font-color: red; */
 }
 
 /* HORIZONTAL LAYOUT FOR SKILL LABEL */

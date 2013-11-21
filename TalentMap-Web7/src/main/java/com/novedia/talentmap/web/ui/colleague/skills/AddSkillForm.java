@@ -12,6 +12,7 @@ import com.novedia.talentmap.model.entity.Skill;
 import com.novedia.talentmap.model.entity.VSkill;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -82,12 +83,13 @@ public class AddSkillForm extends VerticalLayout implements ValueChangeListener{
     public void buildAddSkillForm(Skill skill) {
     	Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);
-		OPTIONS = new String[] { resourceBundle.getString("beginner"),
-				resourceBundle.getString("middle"),
-				resourceBundle.getString("professional"),
-				resourceBundle.getString("master"),
-				resourceBundle.getString("expert") };
-    	
+//		OPTIONS = new String[] { resourceBundle.getString("beginner"),
+//				resourceBundle.getString("middle"),
+//				resourceBundle.getString("confirmed"),
+//				resourceBundle.getString("professional"),
+//				resourceBundle.getString("expert") };
+		OPTIONS = CUtils.buildOPTIONS(resourceBundle);
+		
 		removeAllComponents();
     	setImmediate(true);
 		buildForm(skill);

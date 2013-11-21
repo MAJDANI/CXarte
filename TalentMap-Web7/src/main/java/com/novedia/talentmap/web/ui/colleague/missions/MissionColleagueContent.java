@@ -85,10 +85,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     
     private void initComponnents(){
     	listMissionPanel.addStyleName("contentPanel");
-    	listMissionPanel.setCaption("Mes Missions");
+    	listMissionPanel.setCaption(resourceBundle.getString("mission.content.panel.caption"));
     	
     	addMissionPanel.addStyleName("contentPanel");
-    	addMissionPanel.setCaption("Ajouter une nouvelle mission");
+    	addMissionPanel.setCaption(resourceBundle.getString("add.mission.panel.caption"));
     	
     	addMissionButton.setCaption(resourceBundle.getString("button.add.mission.caption"));
     	addMissionButton.addClickListener(this);
@@ -257,8 +257,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     		currentSaveMode = Constants.SAVE_MODE_UPDATE;
     		missionDTO = colleagueService.createMissionDTO(selectedMission);
     		missionForm.buildMissionForm(missionDTO);
+    		addMissionPanel.setCaption(resourceBundle.getString("modify.mission.panel.caption"));//VGU
     	}else{
     		enableMissionForm(false);
+    		addMissionPanel.setCaption(resourceBundle.getString("add.mission.panel.caption"));//VGU
     	}
 	}
     
@@ -272,7 +274,9 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
      *         VALIDATION_VALID_FORM
      */
     private int checkMissionForm(MissionDTO mission) {
-    	if (!isNotEmpty(mission.getClient()) || !isNotEmpty(mission.getTitle())
+    	if (!isNotEmpty(mission.getClient()) 
+    			//Title is no longer MANDATORY
+//    			|| !isNotEmpty(mission.getTitle())
     			|| !isNotEmpty(mission.getPlace())
     			|| !isNotEmpty(mission.getClient())
     			|| !isNotEmpty(mission.getTools())

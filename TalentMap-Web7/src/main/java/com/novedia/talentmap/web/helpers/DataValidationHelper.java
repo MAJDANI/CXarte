@@ -406,11 +406,12 @@ public class DataValidationHelper {
 				 field.setComponentError(new UserError(message));
 				 isValid = false;
 			}
-		} else {
-			String message = resourceBundle.getString("form.mission.title.error.msg");
-			Notification.show(message);
-			field.setComponentError(new UserError(message));
-			isValid = false;
+			//Title is no more Mandatory
+//		} else {
+//			String message = resourceBundle.getString("form.mission.title.error.msg");
+//			Notification.show(message);
+//			field.setComponentError(new UserError(message));
+//			isValid = false;
 		}
 		return isValid;
    }

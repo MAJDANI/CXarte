@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.swing.text.html.Option;
+
 import org.vaadin.teemu.ratingstars.RatingStars;
 
 import com.novedia.talentmap.model.dto.CategoryMapDTO;
@@ -17,6 +19,7 @@ import com.novedia.talentmap.model.entity.Tool;
 import com.novedia.talentmap.services.IAdminService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
+import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -122,7 +125,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		conceptTable.setNullSelectionAllowed(true);
 		conceptTable.setImmediate(true);
 		conceptTable.addContainerProperty(resourceBundle.getString("concept.name.caption"), String.class, null);
-		conceptTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
+		conceptTable.addContainerProperty(resourceBundle.getString("skill.score.caption"), Component.class, null);
 		
 	}
 	
@@ -136,7 +139,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 		toolTable.setNullSelectionAllowed(true);
 		toolTable.setImmediate(true);
 		toolTable.addContainerProperty(resourceBundle.getString("tool.name.caption"), String.class, null);
-		toolTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), Component.class, null);
+		toolTable.addContainerProperty(resourceBundle.getString("skill.score.caption"), Component.class, null);
+		toolTable.addContainerProperty(resourceBundle.getString("skill.level.caption"), String.class, null);
 	}
 	
 	private void buildAddSkillPanel(){
@@ -253,7 +257,8 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 			RatingStars rateTool = new RatingStars();
 			rateTool.setMaxValue(eTool.getValue().getAverageScore());
 			rateTool.setReadOnly(true);
-			toolTable.addItem(new Object[]{eTool.getKey().getName(),rateTool},eTool.getValue());
+			String level = CUtils.getLevelOfScore(eTool.getValue().getAverageScore(), resourceBundle);
+			toolTable.addItem(new Object[]{eTool.getKey().getName(),rateTool, level},eTool.getValue());
 		}
 		toolTable.addValueChangeListener(this);
 		skillContentPanel.addComponent(toolTable);
@@ -308,7 +313,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	
 	private boolean checkSkillForm(){
 		if(addSkillForm.getToolSelect().getValue() != null && addSkillForm.getFrequencyUseSelect().getValue() != null 
-				&& addSkillForm.getNoUsingTimeSelect().getValue() != null && addSkillForm.getStars().getValue() != null ){
+				&& addSkillForm.getNoUsingTimeSelect().getValue() != null && addSkillForm.getStars().getValue() != null && addSkillForm.getStars().getValue() != 0.0 ){
 			return true;
 		} else{
 			return false;
@@ -382,8 +387,10 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 				addSkillForm.buildAddSkillForm(currentSkill);
 				addSkillForm.getToolSelect().setReadOnly(true);
 				enabledSkillForm(true);
+				addSkillPanel.setCaption(resourceBundle.getString("modify.skill.panel.caption"));//VGU
 			}else {
 				enabledSkillForm(false);
+				addSkillPanel.setCaption(resourceBundle.getString("add.skill.panel.caption"));//VGU
 			}
 		} 
 		

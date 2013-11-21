@@ -100,9 +100,8 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 		missionToolLayout.setRows(1);
 		missionToolLayout.setColumns(1);
 		
-		titleField.setCaption(resourceBundle.getString("form.mission.title.caption"));
+		titleField.setCaption(resourceBundle.getString("form.mission.project.name.caption"));
 		titleField.setId(ComponentsId.TITLE_ID);
-		titleField.setRequired(true);
 		titleField.setImmediate(true);
 		titleField.setValidationVisible(true);
 		titleField.setInputPrompt(resourceBundle.getString("form.mission.title.default.value"));

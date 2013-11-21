@@ -31,6 +31,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextField;
 
@@ -85,6 +86,8 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 	private ResourceBundle resourceBundle;
 	private DataValidationHelper dataValidationHelper;
 	
+	private Panel personalDataContentPanel = new Panel();
+
 	
 	/**
 	 * Default constructor
@@ -111,9 +114,13 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 	}
 
 	private void buildLayout() {
+		personalDataContentPanel.removeAllComponents();
+		personalDataContentPanel.addStyleName("contentPanel");	
 		colleagueFormLayout.removeAllComponents();
+		colleagueFormLayout.setSpacing(true);
 		this.colleagueFormLayout.setColumns(3);
 		this.colleagueFormLayout.setRows(3);
+		this.personalDataContentPanel.setCaption(resourceBundle.getString("personal.data.content.panel.caption"));
 
 	}
 
@@ -224,8 +231,10 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 		binder.setItemDataSource(colleagueTmp);
 		binder.setBuffered(false);
 		binder.bindMemberFields(this);
-
-		addComponent(colleagueFormLayout);
+		//ICI
+		personalDataContentPanel.addComponent(colleagueFormLayout);
+//		addComponent(colleagueFormLayout);
+		addComponent(personalDataContentPanel);
 	}
 	
 	@Override
@@ -235,7 +244,7 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 			dataValidationHelper.validatePastDateField(dateField);
 		} else {
 			if (!validateColleagueDataForm()) {
-				Notification.show(resourceBundle.getString("error.fields.missing.msg"),Notification.Type.WARNING_MESSAGE);
+				Notification.show(resourceBundle.getString("missing.fields.msg"),Notification.Type.WARNING_MESSAGE);
 			} else {
 				colleagueTmp.setTitle(colleague.getTitle());
 				colleagueTmp.setId(colleague.getId());
