@@ -98,6 +98,7 @@ public class SearchResults extends VerticalLayout implements LayoutClickListener
 	}
 	
 	public VerticalLayout buildLastMissionLayout(MissionDTO lastMission){
+		//TODO ROLE MISSION ?
 		VerticalLayout lastMissionLayout = new VerticalLayout();
 		lastMissionLayout.addStyleName("lastMissionLayout");
 		
@@ -110,7 +111,17 @@ public class SearchResults extends VerticalLayout implements LayoutClickListener
 		lastMissionTitleLayout.addComponent(lastMissionTitleLabel);
 		lastMissionTitleLayout.addComponent(lastMissionTitleValue);
 		lastMissionLayout.addComponent(lastMissionTitleLayout);
-		
+
+		HorizontalLayout lastMissionRoleLayout = new HorizontalLayout();
+		lastMissionRoleLayout.setSpacing(true);
+		Label lastMissionRoleLabel = new Label(resourceBundle.getString("form.mission.role.caption"));
+		lastMissionRoleLabel.addStyleName("lastMissionLabel");
+		Label lastMissionRoleValue = new Label(lastMission.getRole());
+		lastMissionTitleValue.addStyleName("lastMissionLabelValue");
+		lastMissionRoleLayout.addComponent(lastMissionRoleLabel);
+		lastMissionRoleLayout.addComponent(lastMissionRoleValue);
+		lastMissionLayout.addComponent(lastMissionRoleLayout);
+
 		HorizontalLayout lastMissionClientLayout = new HorizontalLayout();
 		lastMissionClientLayout.setSpacing(true);
 		Label lastMissionClientLabel = new Label(resourceBundle.getString("customer.field.combobox.caption"));
@@ -130,7 +141,7 @@ public class SearchResults extends VerticalLayout implements LayoutClickListener
 		}
 		HorizontalLayout lastMissionDateLayout = new HorizontalLayout();
 		lastMissionDateLayout.setSpacing(true);
-		Label lastMissionDateLabel = new Label(resourceBundle.getString("form.mission.comment.caption"));
+		Label lastMissionDateLabel = new Label(resourceBundle.getString("form.mission.dates.caption"));
 		lastMissionDateLabel.addStyleName("lastMissionLabel");
 		Label lastMissionDateValue = new Label(date);
 		lastMissionDateValue.addStyleName("lastMissionLabelValue");
@@ -165,6 +176,10 @@ public class SearchResults extends VerticalLayout implements LayoutClickListener
 			else {
 				toolSet +=", " + tool.getName();
 			}
+    	    if (toolSet != null && toolSet.length() >= 22) {
+    	    	toolSet = toolSet.substring(0, 22) + "...";
+    	    }
+
 		}
 		HorizontalLayout lastMissionTechnoLayout = new HorizontalLayout();
 		lastMissionTechnoLayout.setSpacing(true);

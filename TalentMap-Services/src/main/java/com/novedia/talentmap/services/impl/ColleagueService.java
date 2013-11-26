@@ -248,6 +248,7 @@ public class ColleagueService implements IColleagueService {
 	    m.setClient(mDTO.getClient());
 	    m.setStartDate(mDTO.getStartDate());
 	    m.setEndDate(mDTO.getEndDate());
+	    m.setRole(mDTO.getRole());
 	    m.setTitle(mDTO.getTitle());
 	    m.setPlace(mDTO.getPlace());
 	    m.setNotes(mDTO.getNotes());
@@ -284,6 +285,7 @@ public class ColleagueService implements IColleagueService {
 			mDTO.setClient(m.getClient());
 			mDTO.setStartDate(m.getStartDate());
 			mDTO.setEndDate(m.getEndDate());
+			mDTO.setRole(m.getRole());
 			mDTO.setTitle(m.getTitle());
 			mDTO.setPlace(m.getPlace());
 			mDTO.setNotes(m.getNotes());

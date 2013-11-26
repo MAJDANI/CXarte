@@ -62,7 +62,12 @@ public class Mission implements Serializable {
      * End date of the mission
      */
     private Date endDate;
-
+    
+    /**
+     * Role of the colleague during this mission
+     */
+    private String role;
+    
     /**
      * Tools of the mission
      */
@@ -172,7 +177,22 @@ public class Mission implements Serializable {
 	this.endDate = endDate;
     }
 
+     
     /**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
      * Get the name value
      * 
      * @return the name
@@ -257,8 +277,15 @@ public class Mission implements Serializable {
     @Override
     public String toString() {
 	StringBuilder strBld = new StringBuilder();
-	strBld.append("[name=").append(getTitle()).append(", ");
-	strBld.append("[client=").append(getClient()).append("]");
+	strBld.append("[id=").append(getId()).append(", ");
+	strBld.append("colleagueId=").append(getColleagueId()).append(", ");
+	strBld.append("title=").append(getTitle()).append(", ");
+	strBld.append("place=").append(getPlace()).append(", ");
+	strBld.append("client=").append(getClient()).append(", ");
+	strBld.append("notes=").append(getNotes()).append(", ");
+	strBld.append("startDate=").append(getStartDate()).append(", ");
+	strBld.append("endDate=").append(getEndDate()).append(", ");
+	strBld.append("role=").append(getRole()).append("]");
 	return strBld.toString();
     }
 
@@ -323,6 +350,7 @@ public class Mission implements Serializable {
 	this.notes = builder.notes;
 	this.startDate = builder.startDate;
 	this.endDate = builder.endDate;
+	this.role = builder.role;
 	this.tools = builder.tools;
     }
 
@@ -372,6 +400,11 @@ public class Mission implements Serializable {
 	 * End date of the mission
 	 */
 	private Date endDate;
+
+    /**
+     * Role of the colleague during this mission
+     */
+    private String role;
 
 	/**
 	 * tools of the mission
@@ -476,6 +509,18 @@ public class Mission implements Serializable {
 	 */
 	public Builder endDate(final Date endDate) {
 	    this.endDate = endDate;
+	    return this;
+	}
+
+	/**
+	 * The role
+	 * 
+	 * @param role
+	 *            the colleague's role in the mission
+	 * @return the builder
+	 */
+	public Builder role(final String role) {
+	    this.role = role;
 	    return this;
 	}
 

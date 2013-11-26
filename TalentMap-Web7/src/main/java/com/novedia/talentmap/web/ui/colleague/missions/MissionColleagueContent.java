@@ -275,8 +275,6 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
      */
     private int checkMissionForm(MissionDTO mission) {
     	if (!isNotEmpty(mission.getClient()) 
-    			//Title is no longer MANDATORY
-//    			|| !isNotEmpty(mission.getTitle())
     			|| !isNotEmpty(mission.getPlace())
     			|| !isNotEmpty(mission.getClient())
     			|| !isNotEmpty(mission.getTools())

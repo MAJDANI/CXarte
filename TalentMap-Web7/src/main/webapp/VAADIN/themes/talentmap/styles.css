@@ -543,7 +543,10 @@
 .v-panel-nocaption-contentPanel{
 	border: none;
 }
-
+.v-table-header {
+	font-size:13px;
+	font-weight:bold;
+}
 .v-table .v-selected, 
 .black .v-table .v-selected {
                 background: #0073A0;

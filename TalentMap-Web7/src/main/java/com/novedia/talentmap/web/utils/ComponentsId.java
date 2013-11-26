@@ -75,6 +75,8 @@ public class ComponentsId {
 	public static final String START_DATE_ID = "startDate";
 
 	public static final String PLACE_ID = "place";
+
+	public static final String ROLE_ID = "role";
 	
 	public static final String CATEGORY_ID = "category";
 	

@@ -52,13 +52,14 @@ public class ListMission extends Table {
     private void addColumns() {
 		addContainerProperty(resourceBundle.getString("table.header.project.name"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.client"), String.class, null);
-		addContainerProperty(resourceBundle.getString("table.header.place"), String.class, null);
+//		addContainerProperty(resourceBundle.getString("table.header.place"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.date.debut"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.date.fin"), String.class, null);
+		addContainerProperty(resourceBundle.getString("table.header.role"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.comment"), String.class, null);
 		addContainerProperty(resourceBundle.getString("table.header.tool1"), String.class, null);
-		addContainerProperty(resourceBundle.getString("table.header.tool2"), String.class, null);
-		addContainerProperty(resourceBundle.getString("table.header.tool3"), String.class, null);
+//		addContainerProperty(resourceBundle.getString("table.header.tool2"), String.class, null);
+//		addContainerProperty(resourceBundle.getString("table.header.tool3"), String.class, null);
     }
     
     
@@ -85,9 +86,9 @@ public class ListMission extends Table {
     	    	notes = notes.substring(0, 25) + "[...]";
     	    }
     	    addItem(new Object[] { mission.getTitle(),
-    		    mission.getClient().getName(), mission.getPlace(),
-    		    dateDebut, dateFin, notes, toolNames[0], toolNames[1],
-    		    toolNames[2] }, mission);
+    		    mission.getClient().getName(),/* mission.getPlace(),*/
+    		    dateDebut, dateFin, mission.getRole(), notes, toolNames[0]/*, toolNames[1],*/
+    		    /*toolNames[2]*/ }, mission);
     	}
     	
 

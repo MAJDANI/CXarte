@@ -11,26 +11,20 @@ import com.novedia.talentmap.services.IClientService;
 import com.novedia.talentmap.services.ISkillService;
 import com.novedia.talentmap.web.TalentMapApplication;
 import com.novedia.talentmap.web.helpers.DataValidationHelper;
-import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.Constants;
 import com.novedia.talentmap.web.utils.ConstantsDB;
 import com.novedia.talentmap.web.utils.PropertiesFile;
-import com.vaadin.data.Property;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
-import com.vaadin.server.UserError;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -66,7 +60,10 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 	
 	@PropertyId(ComponentsId.END_DATE_ID)
 	private PopupDateField endDateField;
-	
+
+	@PropertyId(ComponentsId.ROLE_ID)
+	private TextField roleField;
+
 	@PropertyId(ComponentsId.COMMENT_ID)
 	private TextArea commentField;
 	
@@ -151,6 +148,19 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 //		endDateField.addValueChangeListener(this);
 		endDateField.addBlurListener(this);
 		missionFormLayout.addComponent(endDateField);
+		
+		//TODO ROLE MISSION
+		roleField.setCaption("Role");
+		roleField.setId(ComponentsId.ROLE_ID);
+//		roleField.setRequired(false);
+//		roleField.setImmediate(true);
+//		roleField.setValidationVisible(true);
+		roleField.setInputPrompt(resourceBundle.getString("form.mission.role.default.value"));
+		roleField.setNullRepresentation("");
+		roleField.setMaxLength(ConstantsDB.MISSION_ROLE_MAX_LENGTH);
+//		roleField.addBlurListener(this);
+		missionFormLayout.addComponent(roleField);
+		//TODO
 		
 		commentField.setCaption(resourceBundle.getString("form.mission.comment.caption"));
 		commentField.setId(ComponentsId.COMMENT_ID);
@@ -327,6 +337,20 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 
 	public void setMissionToolLayout(GridLayout missionToolLayout) {
 		this.missionToolLayout = missionToolLayout;
+	}
+
+	/**
+	 * @return the roleField
+	 */
+	public TextField getRoleField() {
+		return roleField;
+	}
+
+	/**
+	 * @param roleField the roleField to set
+	 */
+	public void setRoleField(TextField roleField) {
+		this.roleField = roleField;
 	}
 	
 	

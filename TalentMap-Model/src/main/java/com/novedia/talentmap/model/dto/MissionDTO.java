@@ -63,6 +63,11 @@ public class MissionDTO {
     private Date endDate;
 
     /**
+     * Role of the colleague during this mission
+     */
+    private String role;
+
+    /**
      * Tools of the missionDto
      */
     private Set<Tool> tools;
@@ -219,6 +224,20 @@ public class MissionDTO {
     }
 
     /**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
      * Get the Set of tool
      * 
      * @return tools
@@ -265,6 +284,7 @@ public class MissionDTO {
 	this.notes = builder.notes;
 	this.startDate = builder.startDate;
 	this.endDate = builder.endDate;
+	this.role = builder.role;
 	this.tools = builder.tools;
     }
 
@@ -315,6 +335,11 @@ public class MissionDTO {
 	 */
 	private Date endDate;
 
+    /**
+     * Role of the colleague during this mission
+     */
+    private String role;
+
 	/**
 	 * tools of the missionDto
 	 */
@@ -329,6 +354,7 @@ public class MissionDTO {
 	    this.notes = mission.getNotes();
 	    this.startDate = mission.getStartDate();
 	    this.endDate = mission.getEndDate();
+	    this.role = mission.getRole();
 	    Set<Tool> toolsSet = new HashSet<Tool>();
 	    List<Tool> tools = mission.getTools();
 	    if (tools.size() > 0) {
@@ -438,6 +464,18 @@ public class MissionDTO {
 	 */
 	public Builder endDate(final Date endDate) {
 	    this.endDate = endDate;
+	    return this;
+	}
+	
+	/**
+	 * The role
+	 * 
+	 * @param role
+	 *            the colleague's role in the mission
+	 * @return the builder
+	 */
+	public Builder role(final String role) {
+	    this.role = role;
 	    return this;
 	}
 

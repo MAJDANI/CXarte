@@ -55,5 +55,6 @@ public class ConstantsDB {
     // TABLE MISSION
     public static final int MISSION_TITLE_MAX_LENGTH = 60;//OK 2013/11/05
     public static final int MISSION_PLACE_MAX_LENGTH = 60;//OK 2013/11/05
+    public static final int MISSION_ROLE_MAX_LENGTH = 60;//OK 2013/11/22
     public static final int MISSION_COMMENT_MAX_LENGTH = 65536;
 }

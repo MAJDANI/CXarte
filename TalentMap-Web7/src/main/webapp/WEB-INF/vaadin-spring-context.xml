@@ -367,6 +367,7 @@
 	<bean id="placeFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
 	<bean id="startDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
 	<bean id="endDateFieldMissionBean" class="com.vaadin.ui.PopupDateField" scope="session" />
+	<bean id="roleFieldMissionBean" class="com.vaadin.ui.TextField" scope="session" />
 	<bean id="commentFieldMissionBean" class="com.vaadin.ui.TextArea" scope="session" />
 	<bean id="toolsFieldMissionBean" class="com.vaadin.ui.TwinColSelect" scope="session" />
 	<bean id="saveButtonMissionFormBean" class="com.vaadin.ui.Button" scope="session" />
@@ -382,6 +383,7 @@
 		<property name="placeField" ref="placeFieldMissionBean" />
 		<property name="startDateField" ref="startDateFieldMissionBean" />
 		<property name="endDateField" ref="endDateFieldMissionBean" />
+		<property name="roleField" ref="roleFieldMissionBean" />
 		<property name="commentField" ref="commentFieldMissionBean" />
 		<property name="toolsField" ref="toolsFieldMissionBean" />
 		<property name="missionFormLayout" ref="missionFormLayoutBean" />

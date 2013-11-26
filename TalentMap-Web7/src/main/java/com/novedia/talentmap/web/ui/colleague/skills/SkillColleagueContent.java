@@ -373,6 +373,7 @@ public class SkillColleagueContent extends VerticalLayout implements ClickListen
 	}
 	
 	
+	
 	@Override
 	public void valueChange(ValueChangeEvent event) {
 		if (event.getProperty().equals(conceptTable)) {
