@@ -135,4 +135,16 @@ public class Client implements Serializable, Comparable<Client> {
 		    .getName()));
 	}
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+	StringBuilder strBld = new StringBuilder();
+	strBld.append("[id=").append(getId()).append(", ");
+	strBld.append("name=").append(getName()).append("]");
+	return strBld.toString();
+    }
+
 }

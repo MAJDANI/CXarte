@@ -152,13 +152,9 @@ public class MissionForm extends HorizontalLayout implements BlurListener {
 		//TODO ROLE MISSION
 		roleField.setCaption("Role");
 		roleField.setId(ComponentsId.ROLE_ID);
-//		roleField.setRequired(false);
-//		roleField.setImmediate(true);
-//		roleField.setValidationVisible(true);
 		roleField.setInputPrompt(resourceBundle.getString("form.mission.role.default.value"));
 		roleField.setNullRepresentation("");
 		roleField.setMaxLength(ConstantsDB.MISSION_ROLE_MAX_LENGTH);
-//		roleField.addBlurListener(this);
 		missionFormLayout.addComponent(roleField);
 		//TODO
 		

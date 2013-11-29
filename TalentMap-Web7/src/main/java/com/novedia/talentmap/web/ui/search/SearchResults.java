@@ -166,6 +166,7 @@ public class SearchResults extends VerticalLayout implements LayoutClickListener
     	    
 		}
 		
+		
 		String toolSet = new String();
 		int count = 0;
 		for (Tool tool : lastMission.getTools()) {

@@ -418,6 +418,7 @@
 .v-table-cell-content {
 	height: 25px;
 	border-right: 0 none;
+	font-size: 11px;
 }
 
 
@@ -547,6 +548,11 @@
 	font-size:13px;
 	font-weight:bold;
 }
+.erreurConnection {
+	font-size:25px;
+	font-weight:bold;
+}
+
 .v-table .v-selected, 
 .black .v-table .v-selected {
                 background: #0073A0;

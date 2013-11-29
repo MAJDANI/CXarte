@@ -7,7 +7,6 @@ import com.novedia.talentmap.model.dto.EAEGeneralityDTO;
 import com.novedia.talentmap.services.IEAEService;
 import com.novedia.talentmap.services.impl.EAEService;
 import com.novedia.talentmap.web.TalentMapApplication;
-import com.novedia.talentmap.web.ui.colleague.PersonalEAEPopIn;
 import com.novedia.talentmap.web.utils.CUtils;
 import com.novedia.talentmap.web.utils.ComponentsId;
 import com.novedia.talentmap.web.utils.EAEConsultationMode;
@@ -101,7 +100,6 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 
 	private final String PANEL_LEFT_WIDTH = "160px";//"120px";
 	private final String PANEL_RIGHT_WIDTH = "100%";//"95%";
-//	private final String PANEL_RIGHT_WIDTH = "880px";
 
 	private Integer currentEAEId = null;
 
@@ -136,6 +134,8 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	
 	private ResourceBundle resourceBundle;
 
+	private Window windowParent;
+	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(
@@ -156,8 +156,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	 * 
 	 * @return VerticalLayout
 	 */
-	public VerticalLayout buildViewCurrentEAEContent() {
+	public VerticalLayout buildViewCurrentEAEContent(Window parent) {
 		removeAllComponents();
+		this.windowParent = parent;
 		// Check if the colleague has a current EAE Open
 		// initResourceBundle();
 		Integer colleagueId = TalentMapApplication.getCurrent()
@@ -169,7 +170,7 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 		} else {
 			buildViewCurrentEAEContentExists(currentEAEId,
 					EAEConsultationMode.OPEN_COLLAB,
-					ProfilConnectedEnum.COLLEAGUE, null);
+					ProfilConnectedEnum.COLLEAGUE, null, parent);
 		}
 		return this;
 	}
@@ -197,9 +198,11 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 	 * @return Window
 	 */
 	public void buildViewCurrentEAEContentExists(Integer currentEAEId,
-			EAEConsultationMode mode, ProfilConnectedEnum profilConnected, HistoryEAEContent histoEAEContentCalling) {
+			EAEConsultationMode mode, ProfilConnectedEnum profilConnected, 
+			HistoryEAEContent histoEAEContentCalling, Window parent) {
 		removeAllComponents();
 		initResourceBundle();
+		this.windowParent = parent;
 		this.histoEAEContentCalling = histoEAEContentCalling;
 		this.currentEAEId = currentEAEId;
 		this.currentMode = mode;
@@ -321,13 +324,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 
 		panelRightCurrentEAE.setCaption(caption);
 
-		//05/11/2013
 		panelRightCurrentEAE.setContent(currentEAEDetailedContent
 				.buildViewEAEGenerality(this.currentEAEId, this.currentMode,
 						this));
-//		panelRightCurrentEAE.setWidth(PANEL_RIGHT_WIDTH);
-//		panelRightCurrentEAE.setSizeFull();
-//		panelRightCurrentEAE.addComponent(new Label("COucou"));//avec ça, pas de débordement
 
 	}
 
@@ -401,7 +400,9 @@ public class CurrentEAEContent extends VerticalLayout implements ClickListener {
 			windowConfirmClose.close();
 			histoEAEContentCalling.closeWindowDetailEAE();
 			histoEAEContentCalling.refreshListHistoEAE();
+			windowParent.center();
 		}
+		windowParent.center();
 	}
 	
 	/**

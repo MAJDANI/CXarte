@@ -51,6 +51,9 @@ public class ProfilePopIn extends Window implements ClickListener{
 	
 	private ResourceBundle resourceBundle;
 	
+	private final String WIDTH_PANEL_LEFT = "220px";
+	private final String WIDTH_PANEL_RIGHT = "920px";
+	
 	/**
 	 * Default constructor
 	 */
@@ -84,8 +87,8 @@ public class ProfilePopIn extends Window implements ClickListener{
 		panelRight.addStyleName("panelRight");
 		colleagueDataForm.setColleagueFormLayout(formLayout);
 		panelRight.setContent(colleagueDataForm.buildColleagueDataFormView());
-		panelRight.setWidth("900px");
-		panelRight.setHeight("400px");
+		panelRight.setWidth(WIDTH_PANEL_RIGHT);
+		panelRight.setHeight("100%");
 	}
 
 	private void buildButtons() {
@@ -106,7 +109,7 @@ public class ProfilePopIn extends Window implements ClickListener{
 
 
 	private void buildMenu() {
-	    panelLeft.setWidth("220px");
+	    panelLeft.setWidth(WIDTH_PANEL_LEFT);
 	    panelLeft.addStyleName("panelLeft");
 	    menuContent.setSpacing(true);
 	    menuContent.setMargin(true);
@@ -131,8 +134,9 @@ public class ProfilePopIn extends Window implements ClickListener{
 			panelRight.setContent(skillColleagueContent.buildSkillColleagueContent());
 		} else if(event.getButton().equals(missionsHistoryButton)) {
 			CUtils.decorateButton(missionsHistoryButton,administrativeDataButton, skillsButton);
-			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent());
+			panelRight.setContent(missionColleagueContent.buildViewMissionColleagueContent(this));
 		}
+		this.center();
 	}
 	
 	

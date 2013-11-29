@@ -20,6 +20,7 @@ import com.novedia.talentmap.web.utils.ProfilConnectedEnum;
 import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -41,8 +42,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	private IEAEService eaeService;
 
 	/**
-	 * Layout Principal de la PopIn, contenant un panel de gauche
-	 * (panelLeftPersoEAE) et un panel de droite (panelRightPersoEAE)
+	 * Layout contenant les photos des collaborateurs
 	 */
 	private GridLayout hLayoutCMEAE;
 	private VerticalLayout mainLayout = new VerticalLayout();
@@ -50,16 +50,14 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	private HorizontalLayout hLayoutHisto = new HorizontalLayout();
 	private HistoryEAEContent historyEAEContent;
 
-	/**
-	 * Contenu affiché dans le Panel de droite : EAE courant
-	 */
-	private CurrentEAEContent currentEAEContent;
-
 	private List<EAEColleagueResumeForCMDTO> listEAEColleagueResumeForCMDTO;
 
 	private ResourceBundle resourceBundle;
 
 	private Integer currentColleagueId;
+	
+	private final String WIDTH_HISTO_EAE = "350px"; //"350px";
+	private final String WIDTH_PHOTOS_COLLAB = "750px";
 	
 	/**
 	 * Default constructor
@@ -67,7 +65,7 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 	public CMEAEPopIn() {
 		super();
 		setModal(true);
-		setWidth("750px"); //OK
+		setWidth(WIDTH_PHOTOS_COLLAB); //OK
 		setHeight("475px");
 	}
 
@@ -92,6 +90,8 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 		mainLayout.addComponent(hLayoutLegendes);
 		mainLayout.addComponent(hLayoutCMEAE);
 		addComponent(mainLayout);
+		setWidth("750px"); //OK
+		this.center();
 		return this;
 	}
 
@@ -212,51 +212,22 @@ public class CMEAEPopIn extends Window implements MouseEvents.ClickListener {
 		hLayoutLegendes.setVisible(false);
 		hLayoutCMEAE.setVisible(false);
 		hLayoutHisto.setVisible(true);
-//		System.out.println("currentColleagueId=" + currentColleagueId);
-//
-//		for (EAEColleagueResumeForCMDTO eaeDTO : listEAEColleagueResumeForCMDTO) {
-//			Integer idC = eaeDTO.getIdColleague();
-//			System.out.println("idC=" + idC);
-//			if(idC.equals(currentColleagueId)) {
-//				name = name + " " + eaeDTO.getCollabLastName();
-//				System.out.println("name=" + name);
-//				
-//			}
-//		}		
-//		System.out.println("currentColleagueId=" + currentColleagueId);
 		
 	    hLayoutHisto.addComponent(historyEAEContent
-				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this));
+				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this, this));
 	    hLayoutHisto.setCaption(resourceBundle.getString("cm.eae.pop.in.collab.eae.title") + name);
-	    
 	    addComponent(hLayoutHisto);
+		setWidth(WIDTH_HISTO_EAE); 
+		this.center();
+
 		
 	}
 
-	public void refreshHistoContent() {
-		//rafraichir l'historique
-	    hLayoutHisto.addComponent(historyEAEContent
-				.buildViewHistoryEAEContent(currentColleagueId, ProfilConnectedEnum.MANAGER, this));
-	}
 
 	public void reloadColleaguesButtons() {
 		hLayoutHisto.setVisible(false);
 		buildCMEAEPopIn();
-	}
-
-	/**
-	 * @return the currentEAEContent
-	 */
-	public CurrentEAEContent getCurrentEAEContent() {
-		return currentEAEContent;
-	}
-
-	/**
-	 * @param currentEAEContent
-	 *            the currentEAEContent to set
-	 */
-	public void setCurrentEAEContent(CurrentEAEContent currentEAEContent) {
-		this.currentEAEContent = currentEAEContent;
+		this.center();
 	}
 
 	/**

@@ -27,6 +27,7 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -38,6 +39,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupDateField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.Window.CloseEvent;
 
 /**
  * Classe permettant l'affichage du tableau d l'historique des EAE du
@@ -49,7 +51,7 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class HistoryEAEContent extends VerticalLayout implements
-		ValueChangeListener, MouseEvents.ClickListener, ClickListener {
+		ValueChangeListener, MouseEvents.ClickListener, ClickListener, Window.CloseListener {
 
 	private Panel listEAEPanel;
 
@@ -66,7 +68,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 	 */
 	private CurrentEAEContent historicalEAEContent;
 
-	private CMEAEPopIn windowParent;
+	private CMEAEPopIn cmEAEParent;
 	ThemeResource resourceBack = new ThemeResource(Constants.IMG_BACK_BLUE);
 	private Image imageBack;
 	private Button newEAEButton;
@@ -91,14 +93,15 @@ public class HistoryEAEContent extends VerticalLayout implements
 
 	private final String WIDTH_EAE_WINDOW = "900px";
 
-	private final String HEIGHT_NEW_EAE_WINDOW = "350px";
-	private final String WIDTH_NEW_EAE_WINDOW = "1000px";//"400px";
+	private final String HEIGHT_NEW_EAE_WINDOW = "280px";
+	private final String WIDTH_NEW_EAE_WINDOW = "320px";//"400px";
 
 	private Window subWindowEAEContent = new Window();
 	private Integer currentColleagueId;
 	
 	private ResourceBundle resourceBundle;
 
+	private Window windowParent;
 	
 	private void initResourceBundle() {
 		Locale locale = TalentMapApplication.getCurrent().getLocale();
@@ -121,15 +124,17 @@ public class HistoryEAEContent extends VerticalLayout implements
 	 * @return VerticalLayout
 	 */
 	public VerticalLayout buildViewHistoryEAEContent(Integer colleagueId,
-			ProfilConnectedEnum profilConnected, CMEAEPopIn parent) {
+			ProfilConnectedEnum profilConnected, CMEAEPopIn cmEAEparent, Window windowParent) {
 		removeAllComponents();
 		initResourceBundle();
+		this.windowParent = windowParent;
+		
 		this.currentColleagueId = colleagueId;
 		imageBack = new Image("", resourceBack);
 		buildListEAEPanel(colleagueId);
 		this.profilConnected = profilConnected;
 		this.colleagueIdHistory = colleagueId;
-		this.windowParent = parent;
+		this.cmEAEParent = cmEAEparent;
 		imageBack.addClickListener(this);
 		imageBack.addStyleName("image");
 		if (profilConnected == ProfilConnectedEnum.MANAGER) {
@@ -145,6 +150,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 			newEAEButton.addStyleName("styleButton");
 			newEAEButton.addClickListener(this);
 			addComponent(newEAEButton);
+			setComponentAlignment(newEAEButton, Alignment.MIDDLE_CENTER);
 			if (existsOpenEAE()) {
 				newEAEButton.setEnabled(false);
 			}
@@ -168,6 +174,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 		newEAEButton.addStyleName("styleButton");
 		newEAEButton.addClickListener(this);
 		addComponent(newEAEButton);
+		setComponentAlignment(newEAEButton, Alignment.MIDDLE_CENTER);
 		if (existsOpenEAE()) {
 			newEAEButton.setEnabled(false);
 		}
@@ -287,7 +294,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 		EAEConsultationMode mode = EAEConsultationMode
 				.computeEAEConsultationMode(selectedEAE, profilConnected);
 		//The History is for a Consultant Manager viewing the EAE of one of his colleague
-		if (null != windowParent
+		if (null != cmEAEParent
 				&& ProfilConnectedEnum.MANAGER == profilConnected) {
 			subWindowEAEContent.setCaption(resourceBundle.getString("eae.content.title"));
 			VerticalLayout subEAEContent = new VerticalLayout();
@@ -297,11 +304,12 @@ public class HistoryEAEContent extends VerticalLayout implements
 			subWindowEAEContent.setPositionX(Constants.POSITION_X_EAE_POP_IN);
 			subWindowEAEContent.setPositionY(Constants.POSITION_Y_EAE_POP_IN);
 			subWindowEAEContent.setWidth(WIDTH_EAE_WINDOW);
-			
+			subWindowEAEContent.center();
+			subWindowEAEContent.addCloseListener(this);
 			// Open it in the UI
 			this.getUI().addWindow(subWindowEAEContent);
 			historicalEAEContent.buildViewCurrentEAEContentExists(
-					selectedEAE.getId(), mode, profilConnected, this);
+					selectedEAE.getId(), mode, profilConnected, this , subWindowEAEContent);
 			subEAEContent.addComponent(historicalEAEContent);
 			return this;
 
@@ -310,7 +318,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 		else {
 			removeAllComponents();
 			historicalEAEContent.buildViewCurrentEAEContentExists(
-					selectedEAE.getId(), mode, profilConnected, null);
+					selectedEAE.getId(), mode, profilConnected, null, windowParent);
 			addComponent(historicalEAEContent);
 			return this;
 		}
@@ -389,11 +397,12 @@ public class HistoryEAEContent extends VerticalLayout implements
 		if (selectedEAE != null) {
 			buildViewHistoryEAEContentDetail(selectedEAE);
 		}
+		this.windowParent.center();
 	}
 
 	@Override
 	public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
-		this.windowParent.reloadColleaguesButtons();
+		this.cmEAEParent.reloadColleaguesButtons();
 	}
 
 	@Override
@@ -404,11 +413,7 @@ public class HistoryEAEContent extends VerticalLayout implements
 				Notification.show(resourceBundle.getString("missing.or.invalid.field.msg"),
 						Notification.Type.WARNING_MESSAGE);
 			} else {
-//				if(newEAEDTO.getPreviousEaeId() == null) {
-//					newEAEDTO.setEaeStateId(EAEStateEnum.VALIDATED.getId());
-//				} else {
-					newEAEDTO.setEaeStateId(EAEStateEnum.OPEN.getId());
-//				}
+				newEAEDTO.setEaeStateId(EAEStateEnum.OPEN.getId());
 				eaeService.addNewEAEDTO(newEAEDTO);
 				subWindowNewEAE.close();
 				refreshViewHistoryEAEContent();
@@ -417,6 +422,11 @@ public class HistoryEAEContent extends VerticalLayout implements
 		} else if (event.getSource() == newEAEButton) {
 			buildViewNewEAE();
 		}
+	}
+
+	@Override
+	public void windowClose(CloseEvent e) {
+		windowParent.center();
 	}
 
 	/**

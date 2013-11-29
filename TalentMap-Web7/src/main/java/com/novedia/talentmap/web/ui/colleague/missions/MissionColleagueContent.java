@@ -26,6 +26,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class MissionColleagueContent extends VerticalLayout implements ClickListener, ValueChangeListener {
@@ -56,6 +57,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	private ResourceBundle resourceBundle;
 	
 	private Label noMissionLabel;
+	private Window windowParent;
 
 	/**
 	 * Default constructor
@@ -72,9 +74,10 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
 	 * Build colleague's mission view
 	 * @return VerticalLayout
 	 */
-    public VerticalLayout buildViewMissionColleagueContent() {
+    public VerticalLayout buildViewMissionColleagueContent(Window parent) {
     	Locale locale = TalentMapApplication.getCurrent().getLocale();
 		resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES , locale);
+		this.windowParent = parent;
     	removeAllComponents();
     	initComponnents();
     	buildListMissionPanel();
@@ -175,6 +178,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     	else if(event.getButton().equals(saveButton)){
 			saveMission();
 		}
+		windowParent.center();
 	}
     
     

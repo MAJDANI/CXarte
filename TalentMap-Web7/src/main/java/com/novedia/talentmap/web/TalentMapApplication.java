@@ -1,12 +1,21 @@
 package com.novedia.talentmap.web;
 
+import java.util.Collection;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import com.novedia.talentmap.model.entity.Authentication;
 import com.novedia.talentmap.web.login.LoginScreen;
+import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -48,7 +57,81 @@ public class TalentMapApplication extends UI {
 	    setContent(view);
 	}
 	
-	/**
+	
+    /**
+     * Internal initialization method, should not be overridden. This method is
+     * not declared as final because that would break compatibility with e.g.
+     * CDI.
+     * 
+     * @param request
+     *            the initialization request
+     * @param uiId
+     *            the id of the new ui
+     */
+	//TODO doInit()
+//	@Override
+//    public void doInit(VaadinRequest request, int uiId) {
+//        if (super.getUIId() != -1) {
+//        	buildErrorMessage(request);
+//        	return;
+//        }
+//        super.doInit(request, uiId);
+// 
+//    }
+
+	private void buildErrorMessage(VaadinRequest request){
+		Locale l = request.getLocale();
+		if(!l.getLanguage().equalsIgnoreCase(locale.getLanguage())){
+			locale = l;
+		}
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);;
+		Collection<UI> col = getSession().getUIs();
+		System.out.println("col=" + col);
+		//l'appel à invalidate() peut être fait avant ou après, cela ne change pas le comportement
+//		getSession().getSession().invalidate();
+ 	
+		view.setSizeFull();
+    	view.removeAllComponents();
+    	
+    	GridLayout gridLayout = new GridLayout();
+    	
+    	Label label0 = new Label(resourceBundle.getString("connection.error.message1"));
+    	System.out.println(resourceBundle.getString("connection.error.message1"));
+    	label0.setHeight("50px");
+    	label0.setWidth("1000px");
+    	label0.setStyleName("erreurConnection");
+    	gridLayout.addComponent(label0);
+    	gridLayout.setComponentAlignment(label0, Alignment.MIDDLE_CENTER);
+
+    	Label label1 = new Label(resourceBundle.getString("connection.error.message2"));
+    	label1.setHeight("50px");
+    	label1.setWidth("1000px");
+    	label1.setStyleName("erreurConnection");
+    	gridLayout.addComponent(label1);
+    	gridLayout.setComponentAlignment(label1, Alignment.MIDDLE_CENTER);
+
+    	Label label2 = new Label(resourceBundle.getString("connection.error.message3"));
+    	label2.setHeight("50px");
+    	label2.setWidth("1000px");
+    	label2.setStyleName("erreurConnection");
+    	gridLayout.addComponent(label2);
+    	gridLayout.setComponentAlignment(label2, Alignment.MIDDLE_CENTER);
+    	
+    	Label label3 = new Label(resourceBundle.getString("connection.error.message4"));
+    	label3.setHeight("50px");
+    	label3.setWidth("1000px");
+    	label3.setStyleName("erreurConnection");
+    	gridLayout.addComponent(label3);
+    	gridLayout.setComponentAlignment(label3, Alignment.MIDDLE_CENTER);
+    	
+		view.addComponent(gridLayout);
+    	view.setComponentAlignment(gridLayout,  Alignment.MIDDLE_CENTER);
+	    setContent(view);
+		getSession().getSession().invalidate();
+		
+	}
+	
+	/** 
 	 * Get the current Application
 	 * @return TalentMapApplication
 	 */

@@ -26,6 +26,7 @@ import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.event.FieldEvents.BlurEvent;
 import com.vaadin.event.FieldEvents.BlurListener;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
@@ -233,8 +234,10 @@ public class ColleagueDataForm extends FormLayout implements BlurListener,  Valu
 		binder.bindMemberFields(this);
 		//ICI
 		personalDataContentPanel.addComponent(colleagueFormLayout);
-//		addComponent(colleagueFormLayout);
+		personalDataContentPanel.setWidth("100%");
+		colleagueFormLayout.setWidth("100%");
 		addComponent(personalDataContentPanel);
+		setComponentAlignment(personalDataContentPanel, Alignment.MIDDLE_CENTER);
 	}
 	
 	@Override

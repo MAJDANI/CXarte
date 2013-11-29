@@ -19,6 +19,9 @@ public class ListMission extends Table {
 	
 	private ResourceBundle resourceBundle;
 	
+	private final int TAILLE_MAX_ROLE = 10;
+	
+	private final int TAILLE_MAX_NOTES = 20;
 	
 	 /**
      * Default constructor
@@ -82,12 +85,16 @@ public class ListMission extends Table {
 	    		}
     	    }
     	    String notes = mission.getNotes();
-    	    if (notes != null && notes.length() >= 25) {
-    	    	notes = notes.substring(0, 25) + "[...]";
+    	    if (notes != null && notes.length() >= TAILLE_MAX_NOTES) {
+    	    	notes = notes.substring(0, TAILLE_MAX_NOTES) + "[..]";
+    	    }
+    	    String role = mission.getRole();
+    	    if (role != null && role.length() >= TAILLE_MAX_ROLE) {
+    	    	role = role.substring(0, TAILLE_MAX_ROLE) + "[..]";
     	    }
     	    addItem(new Object[] { mission.getTitle(),
     		    mission.getClient().getName(),/* mission.getPlace(),*/
-    		    dateDebut, dateFin, mission.getRole(), notes, toolNames[0]/*, toolNames[1],*/
+    		    dateDebut, dateFin, role, notes, toolNames[0]/*, toolNames[1],*/
     		    /*toolNames[2]*/ }, mission);
     	}
     	

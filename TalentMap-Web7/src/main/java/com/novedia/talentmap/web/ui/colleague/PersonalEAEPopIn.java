@@ -93,8 +93,8 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	public PersonalEAEPopIn() {
 		super();
 		setModal(true);
-		this.setPositionY(70);
-		this.setPositionX(70);
+//		this.setPositionY(70);
+//		this.setPositionX(70);
 		this.setWidth("1070px");//OK firefox et Chrome
 	}
 	
@@ -128,7 +128,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 
 	private void buildPanelRightContent() {
 		panelRightPersoEAE.addStyleName("panelRight");
-		panelRightPersoEAE.setContent(currentEAEContent.buildViewCurrentEAEContent());
+		panelRightPersoEAE.setContent(currentEAEContent.buildViewCurrentEAEContent(this));
 		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 		//panelRightPersoEAE.setWidth(PANEL_RIGHT_WIDTH);
 	}
@@ -162,7 +162,7 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 		if (event.getButton().equals(currentEAEButton)) {
 			CUtils.decorateButton(currentEAEButton, historyEAEButton);
 			panelRightPersoEAE.setContent(currentEAEContent
-					.buildViewCurrentEAEContent());
+					.buildViewCurrentEAEContent(this));
 			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 
 		} else if (event.getButton().equals(historyEAEButton)) {
@@ -170,15 +170,16 @@ public class PersonalEAEPopIn extends Window implements ClickListener {
 	    	Integer colleagueId = TalentMapApplication.getCurrent().getAuthentication().getColleagueId();
 			
 			panelRightPersoEAE.setContent(historyEAEContent
-					.buildViewHistoryEAEContent(colleagueId, ProfilConnectedEnum.COLLEAGUE, null));
+					.buildViewHistoryEAEContent(colleagueId, ProfilConnectedEnum.COLLEAGUE, null, this));
 			panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.history.title"));
 		}
+		this.center();
 	}
 	
 	public void refreshContent() {
 		CUtils.decorateButton(currentEAEButton, historyEAEButton);
 		panelRightPersoEAE.setContent(currentEAEContent
-				.buildViewCurrentEAEContent());
+				.buildViewCurrentEAEContent(this));
 		panelRightPersoEAE.setCaption(resourceBundle.getString("panel.right.perso.eae.content.title"));
 	}
 
