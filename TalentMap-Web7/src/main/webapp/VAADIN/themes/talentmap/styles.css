@@ -423,7 +423,8 @@
 
 
 .v-table-row-odd, .v-table-row-odd {
-    background: none repeat scroll 0 0 #FFFFFF;
+/*     background: none repeat scroll 0 0 #FFFFFF; */
+    background: none repeat 0 0 #FFFFFF;
 }
 
 .v-table-cell-content .v-ratingstars-wrapper {
@@ -433,6 +434,8 @@
 .v-table-body, .v-table-header-wrap, .v-table-resizer {
 	border-left-width: 0px;
 	border-right-width: 0px;
+	overflow-x:hidden;
+	overflow-y:hidden;
 }
 
 .v-table-cell-content .v-ratingstars-star, .v-accordion .v-ratingstars-star {
@@ -551,6 +554,7 @@
 .erreurConnection {
 	font-size:25px;
 	font-weight:bold;
+	font-style:comics;
 }
 
 .v-table .v-selected, 
@@ -558,6 +562,7 @@
                 background: #0073A0;
                 color: #fff;
                 text-shadow: #3b5a7a 0 1px 0;
+                
 }
 
 

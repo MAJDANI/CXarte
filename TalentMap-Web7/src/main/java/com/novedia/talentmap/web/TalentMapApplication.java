@@ -10,11 +10,11 @@ import com.novedia.talentmap.web.utils.PropertiesFile;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -49,11 +49,19 @@ public class TalentMapApplication extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		Locale l = request.getLocale();
+		WebBrowser b = getSession().getBrowser();
 		if(!l.getLanguage().equalsIgnoreCase(locale.getLanguage())){
 			locale = l;
 		}
 		view.setSizeFull();
-		view.addComponent(loginScreen.buildLoginView());
+		Component mainPage; 
+		if(b != null && b.isIE() &&(b.getBrowserMajorVersion() == 10)) {
+			mainPage = buildNavigatorErrorMessage();
+			view.addComponent(mainPage);
+		} else {
+			mainPage = loginScreen.buildLoginView();
+			view.addComponent(mainPage);
+		}
 	    setContent(view);
 	}
 	
@@ -68,17 +76,35 @@ public class TalentMapApplication extends UI {
      * @param uiId
      *            the id of the new ui
      */
-	//TODO doInit()
-//	@Override
-//    public void doInit(VaadinRequest request, int uiId) {
-//        if (super.getUIId() != -1) {
-//        	buildErrorMessage(request);
-//        	return;
-//        }
-//        super.doInit(request, uiId);
-// 
-//    }
+	@Override
+    public void doInit(VaadinRequest request, int uiId) {
+        if (super.getUIId() != -1) {
+        	buildErrorMessage(request);
+        	return;
+        }
+        super.doInit(request, uiId);
+ 
+    }
 
+	private VerticalLayout buildNavigatorErrorMessage() {
+    	VerticalLayout hLayout = new VerticalLayout();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);;
+    	Label label1 = new Label("");
+    	label1.setHeight("100px");
+    	label1.setWidth("1000px");
+    	Label label2 = new Label(resourceBundle.getString("navigator.error.message1"));
+    	label2.setHeight("50px");
+    	label2.setWidth("1000px");
+    	label2.setStyleName("erreurConnection");
+    	hLayout.addComponent(label1);
+    	hLayout.addComponent(label2);
+    	hLayout.setComponentAlignment(label2, Alignment.MIDDLE_CENTER);
+    	hLayout.setMargin(true);
+    	hLayout.setWidth("100%");
+    	return hLayout;
+	}
+	
+	
 	private void buildErrorMessage(VaadinRequest request){
 		Locale l = request.getLocale();
 		if(!l.getLanguage().equalsIgnoreCase(locale.getLanguage())){
@@ -87,8 +113,6 @@ public class TalentMapApplication extends UI {
 		ResourceBundle resourceBundle = ResourceBundle.getBundle(PropertiesFile.TALENT_MAP_PROPERTIES, locale);;
 		Collection<UI> col = getSession().getUIs();
 		System.out.println("col=" + col);
-		//l'appel à invalidate() peut être fait avant ou après, cela ne change pas le comportement
-//		getSession().getSession().invalidate();
  	
 		view.setSizeFull();
     	view.removeAllComponents();

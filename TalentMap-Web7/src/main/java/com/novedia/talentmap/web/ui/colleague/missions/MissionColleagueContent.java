@@ -266,6 +266,7 @@ public class MissionColleagueContent extends VerticalLayout implements ClickList
     		enableMissionForm(false);
     		addMissionPanel.setCaption(resourceBundle.getString("add.mission.panel.caption"));//VGU
     	}
+		windowParent.center();
 	}
     
     
