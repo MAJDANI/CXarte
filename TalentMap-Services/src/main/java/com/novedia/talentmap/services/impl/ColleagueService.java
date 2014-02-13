@@ -27,243 +27,244 @@ import com.novedia.talentmap.store.impl.MissionDao;
  */
 public class ColleagueService implements IColleagueService {
 
-    /**
-     * The colleague DAO.
-     */
-    private IDao<Colleague> colleagueDao;
+	/**
+	 * The colleague DAO.
+	 */
+	private IDao<Colleague> colleagueDao;
 
-    /**
-     * The mission DAO.
-     */
-    private IDao<Mission> missionDao;
+	/**
+	 * The mission DAO.
+	 */
+	private IDao<Mission> missionDao;
 
-    /**
-     * The manager DAO.
-     */
-    private IDao<Manager> managerDao;
+	/**
+	 * The manager DAO.
+	 */
+	private IDao<Manager> managerDao;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Colleague> getAllColleagues() throws DataAccessException {
-	return colleagueDao.getAll();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Colleague getColleague(Integer id) throws DataAccessException {
-	return colleagueDao.get(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Integer saveColleague(Colleague colleague)
-	    throws DataAccessException {
-	return colleagueDao.save(colleague);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Integer deleteMission(Mission mission) throws DataAccessException {
-	return missionDao.delete(mission);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Transactional(rollbackFor = { DataAccessException.class })
-    public Integer addMission(final MissionDTO missionDto)
-	    throws DataAccessException {
-	Mission mission = createEntity(missionDto);
-	return missionDao.add(mission);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Transactional(rollbackFor = { DataAccessException.class })
-    public Integer saveMission(final MissionDTO missionDto)
-	    throws DataAccessException {
-	Mission mission = createEntity(missionDto);
-	return missionDao.save(mission);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Mission getMission(Integer missionId) throws DataAccessException {
-	return missionDao.get(missionId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Mission> getAllMissions(final Integer colleagueId)
-	    throws DataAccessException {
-	MissionDao missionDao = (MissionDao) this.missionDao;
-	return missionDao.getAllByColleagueId(colleagueId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MissionDTO getLastMission(final Integer colleagueId)
-	    throws DataAccessException {
-	MissionDao missionDao = (MissionDao) this.missionDao;
-	Mission m = missionDao.getLastMissionByColleagueId(colleagueId);
-	return createMissionDTO(m);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Manager getManager(final Integer managerId)
-	    throws DataAccessException {
-	return managerDao.get(managerId);
-    }
-
-    /**
-     * Get all managers
-     */
-    @Override
-    public List<Colleague> getAllConsultantManager() {
-	return ((ColleagueDao) colleagueDao).getAllConsultantManager();
-    }
-    
-    /**
-     * Get all business engineers
-     */
-    @Override
-    public List<Colleague> getAllBusinessEngineers() {
-	return ((ColleagueDao) colleagueDao).getAllBusinessEngineers();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Colleague> getAllColleaguesByName(String name)
-	    throws DataAccessException {
-	return ((ColleagueDao) colleagueDao).getAllColleaguesByName(name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<Colleague> getAllColleaguesByClient(Client client)
-	    throws DataAccessException {
-	return ((ColleagueDao) colleagueDao).getAllColleaguesByClient(client);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<Colleague> getCmColleaguesByClient(int clientId, int managerId)
-	    throws DataAccessException {
-	return ((ColleagueDao) colleagueDao).getCmColleaguesByClient(clientId,
-		managerId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<Colleague> getCmColleaguesByName(String name, int managerId)
-	    throws DataAccessException {
-	return ((ColleagueDao) colleagueDao).getCmColleaguesByName(name,
-		managerId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Colleague> getAllCollaboratorsByToolId(Integer toolId)
-	    throws DataAccessException {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Colleague> getAllColleaguesByListToolId(Map toolIdMap)
-	    throws DataAccessException {
-	return ((ColleagueDao) colleagueDao)
-		.getAllColleaguesByListToolId(toolIdMap);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Colleague> getAllColleagueByColleagueIdList(List<Integer> listColleagueId) throws DataAccessException {
-    	if(listColleagueId == null || listColleagueId.isEmpty()){
-    		return null;
-    	}else{
-    		return ((ColleagueDao) colleagueDao)
-    				.getAllColleagueByColleagueIdList(listColleagueId);
-    	}
-    }
-
-    /**
-     * This method allow to create a Mission with a MissionDto
-     * 
-     * @param MissionDto
-     * @return a mission
-     */
-    @Override
-    public Mission createEntity(MissionDTO mDTO) {
-
-	Mission m = null;
-
-	if (mDTO != null) {
-	    m = new Mission();
-	    List<Tool> toolsList = new ArrayList<Tool>();
-
-	    Set<Tool> tools = mDTO.getTools();
-
-	    if (tools.size() > 0) {
-		for (Tool t : tools) {
-		    toolsList.add(t);
-		}
-
-		m.setTools(toolsList);
-	    }
-
-	    m.setId(mDTO.getId());
-	    m.setClient(mDTO.getClient());
-	    m.setStartDate(mDTO.getStartDate());
-	    m.setEndDate(mDTO.getEndDate());
-	    m.setRole(mDTO.getRole());
-	    m.setTitle(mDTO.getTitle());
-	    m.setPlace(mDTO.getPlace());
-	    m.setNotes(mDTO.getNotes());
-	    m.setColleagueId(mDTO.getColleagueId());
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Colleague> getAllColleagues() throws DataAccessException {
+		return colleagueDao.getAll();
 	}
-	return m;
-    }
 
-    /**
-     * This method allow to create a MissionDto with a Mission
-     * 
-     * @param Mission
-     * @return a missionDto
-     */
-    @Override
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Colleague getColleague(Integer id) throws DataAccessException {
+		return colleagueDao.get(id);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer saveColleague(Colleague colleague)
+			throws DataAccessException {
+		return colleagueDao.save(colleague);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer deleteMission(Mission mission) throws DataAccessException {
+		return missionDao.delete(mission);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Transactional(rollbackFor = { DataAccessException.class })
+	public Integer addMission(final MissionDTO missionDto)
+			throws DataAccessException {
+		Mission mission = createEntity(missionDto);
+		return missionDao.add(mission);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Transactional(rollbackFor = { DataAccessException.class })
+	public Integer saveMission(final MissionDTO missionDto)
+			throws DataAccessException {
+		Mission mission = createEntity(missionDto);
+		return missionDao.save(mission);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Mission getMission(Integer missionId) throws DataAccessException {
+		return missionDao.get(missionId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Mission> getAllMissions(final Integer colleagueId)
+			throws DataAccessException {
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		return missionDao.getAllByColleagueId(colleagueId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MissionDTO getLastMission(final Integer colleagueId)
+			throws DataAccessException {
+		MissionDao missionDao = (MissionDao) this.missionDao;
+		Mission m = missionDao.getLastMissionByColleagueId(colleagueId);
+		return createMissionDTO(m);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Manager getManager(final Integer managerId)
+			throws DataAccessException {
+		return managerDao.get(managerId);
+	}
+
+	/**
+	 * Get all managers
+	 */
+	@Override
+	public List<Colleague> getAllConsultantManager() {
+		return ((ColleagueDao) colleagueDao).getAllConsultantManager();
+	}
+
+	/**
+	 * Get all business engineers
+	 */
+	@Override
+	public List<Colleague> getAllBusinessEngineers() {
+		return ((ColleagueDao) colleagueDao).getAllBusinessEngineers();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Colleague> getAllColleaguesByName(String name)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByName(name);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Colleague> getAllColleaguesByClient(Client client)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getAllColleaguesByClient(client);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Colleague> getCmColleaguesByClient(int clientId, int managerId)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByClient(clientId,
+				managerId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Colleague> getCmColleaguesByName(String name, int managerId)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao).getCmColleaguesByName(name,
+				managerId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Colleague> getAllCollaboratorsByToolId(Integer toolId)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Colleague> getAllColleaguesByListToolId(Map toolIdMap)
+			throws DataAccessException {
+		return ((ColleagueDao) colleagueDao)
+				.getAllColleaguesByListToolId(toolIdMap);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Colleague> getAllColleagueByColleagueIdList(
+			List<Integer> listColleagueId) throws DataAccessException {
+		if (listColleagueId == null || listColleagueId.isEmpty()) {
+			return null;
+		} else {
+			return ((ColleagueDao) colleagueDao)
+					.getAllColleagueByColleagueIdList(listColleagueId);
+		}
+	}
+
+	/**
+	 * This method allow to create a Mission with a MissionDto
+	 * 
+	 * @param MissionDto
+	 * @return a mission
+	 */
+	@Override
+	public Mission createEntity(MissionDTO mDTO) {
+
+		Mission m = null;
+
+		if (mDTO != null) {
+			m = new Mission();
+			List<Tool> toolsList = new ArrayList<Tool>();
+
+			Set<Tool> tools = mDTO.getTools();
+
+			if (tools.size() > 0) {
+				for (Tool t : tools) {
+					toolsList.add(t);
+				}
+
+				m.setTools(toolsList);
+			}
+
+			m.setId(mDTO.getId());
+			m.setClient(mDTO.getClient());
+			m.setStartDate(mDTO.getStartDate());
+			m.setEndDate(mDTO.getEndDate());
+			m.setRole(mDTO.getRole());
+			m.setTitle(mDTO.getTitle());
+			m.setPlace(mDTO.getPlace());
+			m.setNotes(mDTO.getNotes());
+			m.setColleagueId(mDTO.getColleagueId());
+		}
+		return m;
+	}
+
+	/**
+	 * This method allow to create a MissionDto with a Mission
+	 * 
+	 * @param Mission
+	 * @return a missionDto
+	 */
+	@Override
 	public MissionDTO createMissionDTO(Mission m) {
 
 		MissionDTO mDTO = null;
@@ -297,61 +298,65 @@ public class ColleagueService implements IColleagueService {
 		return mDTO;
 	}
 
-    /**
-     * This method allows to make the spring injection.
-     * 
-     * @param colleagueDao
-     */
-    public void setColleagueDao(IDao<Colleague> colleagueDao) {
-	this.colleagueDao = colleagueDao;
-    }
-
-    /**
-     * Counts colleagues in DB that have already the mail, with a different
-     * colleagueId. Used to check when a colleague wants to modify his email, if
-     * this email is not already use by someone else.
-     * 
-     * @param the
-     *            colleague who wants to change his email
-     * @return The count found.
-     */
-    @Override
-    public Integer countMailForColleagueId(Colleague colleague) {
-	return ((ColleagueDao) colleagueDao).countMailForColleagueId(colleague);
-    }
-
-    /**
-     * Counts colleagues in DB that have already the mail, with a different
-     * colleague's last and first name. Used to check, during the registration, if
-     * his email is not already use by someone else.
-     * 
-     * @param email : the email to check
-     * @param colleagueFirstName : first name of the colleague who wants to register
-     * @param colleagueLastName : last name of the colleague who wants to register
-     * @return The count found.
-     */
-    @Override
-	public Integer countMailForColleagueNames(String email, String colleagueFirstName,
-			String colleagueLastName) {
-    	return ((ColleagueDao) colleagueDao).countMailForColleagueNames(email, colleagueFirstName, colleagueLastName);
+	/**
+	 * This method allows to make the spring injection.
+	 * 
+	 * @param colleagueDao
+	 */
+	public void setColleagueDao(IDao<Colleague> colleagueDao) {
+		this.colleagueDao = colleagueDao;
 	}
 
 	/**
-     * This method allows to make the spring injection.
-     * 
-     * @param missionDao
-     */
-    public void setMissionDao(IDao<Mission> missionDao) {
-	this.missionDao = missionDao;
-    }
+	 * Counts colleagues in DB that have already the mail, with a different
+	 * colleagueId. Used to check when a colleague wants to modify his email, if
+	 * this email is not already use by someone else.
+	 * 
+	 * @param the
+	 *            colleague who wants to change his email
+	 * @return The count found.
+	 */
+	@Override
+	public Integer countMailForColleagueId(Colleague colleague) {
+		return ((ColleagueDao) colleagueDao).countMailForColleagueId(colleague);
+	}
 
-    /**
-     * This method allows to make the spring injection.
-     * 
-     * @param managerDao
-     */
-    public void setManagerDao(IDao<Manager> managerDao) {
-	this.managerDao = managerDao;
-    }
+	/**
+	 * Counts colleagues in DB that have already the mail, with a different
+	 * colleague's last and first name. Used to check, during the registration,
+	 * if his email is not already use by someone else.
+	 * 
+	 * @param email
+	 *            : the email to check
+	 * @param colleagueFirstName
+	 *            : first name of the colleague who wants to register
+	 * @param colleagueLastName
+	 *            : last name of the colleague who wants to register
+	 * @return The count found.
+	 */
+	@Override
+	public Integer countMailForColleagueNames(String email,
+			String colleagueFirstName, String colleagueLastName) {
+		return ((ColleagueDao) colleagueDao).countMailForColleagueNames(email,
+				colleagueFirstName, colleagueLastName);
+	}
+
+	/**
+	 * This method allows to make the spring injection.
+	 * 
+	 * @param missionDao
+	 */
+	public void setMissionDao(IDao<Mission> missionDao) {
+		this.missionDao = missionDao;
+	}
+
+	/**
+	 * This method allows to make the spring injection.
+	 * 
+	 * @param managerDao
+	 */
+	public void setManagerDao(IDao<Manager> managerDao) {
+		this.managerDao = managerDao;
+	}
 
 }
